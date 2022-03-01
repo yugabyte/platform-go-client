@@ -1,0 +1,114 @@
+# AlertConfigurationPagedResponse
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Entities** | [**[]AlertConfiguration**](AlertConfiguration.md) |  | 
+**HasNext** | **bool** |  | 
+**HasPrev** | **bool** |  | 
+**TotalCount** | **int32** |  | 
+
+## Methods
+
+### NewAlertConfigurationPagedResponse
+
+`func NewAlertConfigurationPagedResponse(entities []AlertConfiguration, hasNext bool, hasPrev bool, totalCount int32, ) *AlertConfigurationPagedResponse`
+
+NewAlertConfigurationPagedResponse instantiates a new AlertConfigurationPagedResponse object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewAlertConfigurationPagedResponseWithDefaults
+
+`func NewAlertConfigurationPagedResponseWithDefaults() *AlertConfigurationPagedResponse`
+
+NewAlertConfigurationPagedResponseWithDefaults instantiates a new AlertConfigurationPagedResponse object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetEntities
+
+`func (o *AlertConfigurationPagedResponse) GetEntities() []AlertConfiguration`
+
+GetEntities returns the Entities field if non-nil, zero value otherwise.
+
+### GetEntitiesOk
+
+`func (o *AlertConfigurationPagedResponse) GetEntitiesOk() (*[]AlertConfiguration, bool)`
+
+GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntities
+
+`func (o *AlertConfigurationPagedResponse) SetEntities(v []AlertConfiguration)`
+
+SetEntities sets Entities field to given value.
+
+
+### GetHasNext
+
+`func (o *AlertConfigurationPagedResponse) GetHasNext() bool`
+
+GetHasNext returns the HasNext field if non-nil, zero value otherwise.
+
+### GetHasNextOk
+
+`func (o *AlertConfigurationPagedResponse) GetHasNextOk() (*bool, bool)`
+
+GetHasNextOk returns a tuple with the HasNext field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasNext
+
+`func (o *AlertConfigurationPagedResponse) SetHasNext(v bool)`
+
+SetHasNext sets HasNext field to given value.
+
+
+### GetHasPrev
+
+`func (o *AlertConfigurationPagedResponse) GetHasPrev() bool`
+
+GetHasPrev returns the HasPrev field if non-nil, zero value otherwise.
+
+### GetHasPrevOk
+
+`func (o *AlertConfigurationPagedResponse) GetHasPrevOk() (*bool, bool)`
+
+GetHasPrevOk returns a tuple with the HasPrev field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasPrev
+
+`func (o *AlertConfigurationPagedResponse) SetHasPrev(v bool)`
+
+SetHasPrev sets HasPrev field to given value.
+
+
+### GetTotalCount
+
+`func (o *AlertConfigurationPagedResponse) GetTotalCount() int32`
+
+GetTotalCount returns the TotalCount field if non-nil, zero value otherwise.
+
+### GetTotalCountOk
+
+`func (o *AlertConfigurationPagedResponse) GetTotalCountOk() (*int32, bool)`
+
+GetTotalCountOk returns a tuple with the TotalCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalCount
+
+`func (o *AlertConfigurationPagedResponse) SetTotalCount(v int32)`
+
+SetTotalCount sets TotalCount field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
