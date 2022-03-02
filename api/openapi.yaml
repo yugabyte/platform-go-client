@@ -3504,10 +3504,6 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  exampleSetFlag: true
-                  properties: {}
-                  type: object
                 exampleSetFlag: true
                 type: object
           description: successful operation

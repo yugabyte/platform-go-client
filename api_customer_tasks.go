@@ -406,7 +406,7 @@ type CustomerTasksApiApiTaskStatusRequest struct {
 }
 
 
-func (r CustomerTasksApiApiTaskStatusRequest) Execute() (map[string]map[string]interface{}, *_nethttp.Response, error) {
+func (r CustomerTasksApiApiTaskStatusRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.TaskStatusExecute(r)
 }
 
@@ -428,16 +428,16 @@ func (a *CustomerTasksApiService) TaskStatus(ctx _context.Context, cUUID string,
 
 /*
  * Execute executes the request
- * @return map[string]map[string]interface{}
+ * @return map[string]interface{}
  */
-func (a *CustomerTasksApiService) TaskStatusExecute(r CustomerTasksApiApiTaskStatusRequest) (map[string]map[string]interface{}, *_nethttp.Response, error) {
+func (a *CustomerTasksApiService) TaskStatusExecute(r CustomerTasksApiApiTaskStatusRequest) (map[string]interface{}, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarReturnValue  map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksApiService.TaskStatus")

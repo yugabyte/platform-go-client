@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## TaskStatus
 
-> map[string]map[string]interface{} TaskStatus(ctx, cUUID, tUUID).Execute()
+> map[string]interface{} TaskStatus(ctx, cUUID, tUUID).Execute()
 
 Get a task's status
 
@@ -258,7 +258,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerTasksApi.TaskStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TaskStatus`: map[string]map[string]interface{}
+    // response from `TaskStatus`: map[string]interface{}
     fmt.Fprintf(os.Stdout, "Response from `CustomerTasksApi.TaskStatus`: %v\n", resp)
 }
 ```
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]map[string]interface{}**
+**map[string]interface{}**
 
 ### Authorization
 
