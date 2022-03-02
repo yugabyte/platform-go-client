@@ -1,4 +1,4 @@
-module github.com/yugabyte/go-platform-client
+module github.com/yugabyte/platform-go-client
 
 go 1.13
 
