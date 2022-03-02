@@ -1,4 +1,4 @@
-module github.com/GIT_USER_ID/GIT_REPO_ID
+module github.com/yugabyte/go-platform-client
 
 go 1.13
 
