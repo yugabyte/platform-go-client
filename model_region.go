@@ -17,6 +17,7 @@ import (
 // Region Region within a given provider. Typically, this maps to a single cloud provider region.
 type Region struct {
 	Active *bool `json:"active,omitempty"`
+	Architecture *string `json:"architecture,omitempty"`
 	// Cloud provider region code
 	Code *string `json:"code,omitempty"`
 	Config *map[string]string `json:"config,omitempty"`
@@ -85,6 +86,38 @@ func (o *Region) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *Region) SetActive(v bool) {
 	o.Active = &v
+}
+
+// GetArchitecture returns the Architecture field value if set, zero value otherwise.
+func (o *Region) GetArchitecture() string {
+	if o == nil || o.Architecture == nil {
+		var ret string
+		return ret
+	}
+	return *o.Architecture
+}
+
+// GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Region) GetArchitectureOk() (*string, bool) {
+	if o == nil || o.Architecture == nil {
+		return nil, false
+	}
+	return o.Architecture, true
+}
+
+// HasArchitecture returns a boolean if a field has been set.
+func (o *Region) HasArchitecture() bool {
+	if o != nil && o.Architecture != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
+func (o *Region) SetArchitecture(v string) {
+	o.Architecture = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
@@ -435,6 +468,9 @@ func (o Region) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
+	}
+	if o.Architecture != nil {
+		toSerialize["architecture"] = o.Architecture
 	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code

@@ -14,8 +14,10 @@ Name | Type | Description | Notes
 **OnDemand** | **bool** |  | 
 **ResponseList** | [**[]KeyspaceTablesList**](KeyspaceTablesList.md) |  | 
 **ScheduleUUID** | **string** |  | 
+**Sse** | **bool** |  | 
 **State** | **string** |  | 
 **StorageConfigUUID** | **string** |  | 
+**TotalBackupSizeInBytes** | **int64** |  | 
 **UniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
 **UpdateTime** | **time.Time** |  | 
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, state string, storageConfigUUID string, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp`
+`func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -239,6 +241,26 @@ and a boolean to check if the value has been set.
 SetScheduleUUID sets ScheduleUUID field to given value.
 
 
+### GetSse
+
+`func (o *BackupResp) GetSse() bool`
+
+GetSse returns the Sse field if non-nil, zero value otherwise.
+
+### GetSseOk
+
+`func (o *BackupResp) GetSseOk() (*bool, bool)`
+
+GetSseOk returns a tuple with the Sse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSse
+
+`func (o *BackupResp) SetSse(v bool)`
+
+SetSse sets Sse field to given value.
+
+
 ### GetState
 
 `func (o *BackupResp) GetState() string`
@@ -277,6 +299,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetStorageConfigUUID(v string)`
 
 SetStorageConfigUUID sets StorageConfigUUID field to given value.
+
+
+### GetTotalBackupSizeInBytes
+
+`func (o *BackupResp) GetTotalBackupSizeInBytes() int64`
+
+GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field if non-nil, zero value otherwise.
+
+### GetTotalBackupSizeInBytesOk
+
+`func (o *BackupResp) GetTotalBackupSizeInBytesOk() (*int64, bool)`
+
+GetTotalBackupSizeInBytesOk returns a tuple with the TotalBackupSizeInBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalBackupSizeInBytes
+
+`func (o *BackupResp) SetTotalBackupSizeInBytes(v int64)`
+
+SetTotalBackupSizeInBytes sets TotalBackupSizeInBytes field to given value.
 
 
 ### GetUniverseName

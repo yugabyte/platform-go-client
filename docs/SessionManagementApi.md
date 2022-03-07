@@ -328,7 +328,7 @@ Other parameters are passed through a pointer to a apiGetSessionInfoRequest stru
 
 ## RegisterCustomer
 
-> SessionInfo RegisterCustomer(ctx).CustomerRegisterFormData(customerRegisterFormData).Execute()
+> SessionInfo RegisterCustomer(ctx).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Execute()
 
 Register a customer
 
@@ -348,10 +348,11 @@ import (
 
 func main() {
     customerRegisterFormData := *openapiclient.NewCustomerRegisterFormData("Code_example", "Email_example", "Name_example", "Password_example") // CustomerRegisterFormData | 
+    generateApiToken := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionManagementApi.RegisterCustomer(context.Background()).CustomerRegisterFormData(customerRegisterFormData).Execute()
+    resp, r, err := api_client.SessionManagementApi.RegisterCustomer(context.Background()).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.RegisterCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -373,6 +374,7 @@ Other parameters are passed through a pointer to a apiRegisterCustomerRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerRegisterFormData** | [**CustomerRegisterFormData**](CustomerRegisterFormData.md) |  | 
+ **generateApiToken** | **bool** |  | [default to false]
 
 ### Return type
 

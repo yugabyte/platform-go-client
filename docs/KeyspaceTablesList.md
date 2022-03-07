@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BackupSizeInBytes** | **int64** |  | 
 **Keyspace** | **string** |  | 
 **StorageLocation** | **string** |  | 
 **TablesList** | **[]string** |  | 
@@ -12,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewKeyspaceTablesList
 
-`func NewKeyspaceTablesList(keyspace string, storageLocation string, tablesList []string, ) *KeyspaceTablesList`
+`func NewKeyspaceTablesList(backupSizeInBytes int64, keyspace string, storageLocation string, tablesList []string, ) *KeyspaceTablesList`
 
 NewKeyspaceTablesList instantiates a new KeyspaceTablesList object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +27,26 @@ will change when the set of required properties is changed
 NewKeyspaceTablesListWithDefaults instantiates a new KeyspaceTablesList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBackupSizeInBytes
+
+`func (o *KeyspaceTablesList) GetBackupSizeInBytes() int64`
+
+GetBackupSizeInBytes returns the BackupSizeInBytes field if non-nil, zero value otherwise.
+
+### GetBackupSizeInBytesOk
+
+`func (o *KeyspaceTablesList) GetBackupSizeInBytesOk() (*int64, bool)`
+
+GetBackupSizeInBytesOk returns a tuple with the BackupSizeInBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupSizeInBytes
+
+`func (o *KeyspaceTablesList) SetBackupSizeInBytes(v int64)`
+
+SetBackupSizeInBytes sets BackupSizeInBytes field to given value.
+
 
 ### GetKeyspace
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AzUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 **CloudInfo** | Pointer to [**CloudSpecificInfo**](CloudSpecificInfo.md) |  | [optional] 
 **CronsActive** | Pointer to **bool** | True if cron jobs were properly configured for this node | [optional] 
+**DisksAreMountedByUUID** | Pointer to **bool** | Disks are mounted by uuid | [optional] 
 **IsMaster** | Pointer to **bool** | True if this node is a master | [optional] 
 **IsRedisServer** | Pointer to **bool** | True if this node is a REDIS server | [optional] 
 **IsTserver** | Pointer to **bool** | True if this node is a Tablet server | [optional] 
@@ -125,6 +126,31 @@ SetCronsActive sets CronsActive field to given value.
 `func (o *NodeDetails) HasCronsActive() bool`
 
 HasCronsActive returns a boolean if a field has been set.
+
+### GetDisksAreMountedByUUID
+
+`func (o *NodeDetails) GetDisksAreMountedByUUID() bool`
+
+GetDisksAreMountedByUUID returns the DisksAreMountedByUUID field if non-nil, zero value otherwise.
+
+### GetDisksAreMountedByUUIDOk
+
+`func (o *NodeDetails) GetDisksAreMountedByUUIDOk() (*bool, bool)`
+
+GetDisksAreMountedByUUIDOk returns a tuple with the DisksAreMountedByUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisksAreMountedByUUID
+
+`func (o *NodeDetails) SetDisksAreMountedByUUID(v bool)`
+
+SetDisksAreMountedByUUID sets DisksAreMountedByUUID field to given value.
+
+### HasDisksAreMountedByUUID
+
+`func (o *NodeDetails) HasDisksAreMountedByUUID() bool`
+
+HasDisksAreMountedByUUID returns a boolean if a field has been set.
 
 ### GetIsMaster
 

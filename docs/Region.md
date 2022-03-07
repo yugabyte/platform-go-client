@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** |  | [optional] [readonly] 
+**Architecture** | Pointer to **string** |  | [optional] 
 **Code** | Pointer to **string** | Cloud provider region code | [optional] [readonly] 
 **Config** | Pointer to **map[string]string** |  | [optional] 
 **Latitude** | Pointer to **float64** | The region&#39;s latitude | [optional] [readonly] 
@@ -60,6 +61,31 @@ SetActive sets Active field to given value.
 `func (o *Region) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetArchitecture
+
+`func (o *Region) GetArchitecture() string`
+
+GetArchitecture returns the Architecture field if non-nil, zero value otherwise.
+
+### GetArchitectureOk
+
+`func (o *Region) GetArchitectureOk() (*string, bool)`
+
+GetArchitectureOk returns a tuple with the Architecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArchitecture
+
+`func (o *Region) SetArchitecture(v string)`
+
+SetArchitecture sets Architecture field to given value.
+
+### HasArchitecture
+
+`func (o *Region) HasArchitecture() bool`
+
+HasArchitecture returns a boolean if a field has been set.
 
 ### GetCode
 

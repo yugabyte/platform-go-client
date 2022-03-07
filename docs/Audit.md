@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Payload** | Pointer to **map[string]interface{}** | Audit UUID | [optional] [readonly] 
 **Target** | Pointer to **string** | Target | [optional] [readonly] 
-**TargetUUID** | Pointer to **string** | Target UUID | [optional] [readonly] 
+**TargetID** | Pointer to **string** | Target ID | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] [readonly] 
 **Timestamp** | **time.Time** |  | 
 **UserEmail** | Pointer to **string** | User Email | [optional] [readonly] 
@@ -206,30 +206,30 @@ SetTarget sets Target field to given value.
 
 HasTarget returns a boolean if a field has been set.
 
-### GetTargetUUID
+### GetTargetID
 
-`func (o *Audit) GetTargetUUID() string`
+`func (o *Audit) GetTargetID() string`
 
-GetTargetUUID returns the TargetUUID field if non-nil, zero value otherwise.
+GetTargetID returns the TargetID field if non-nil, zero value otherwise.
 
-### GetTargetUUIDOk
+### GetTargetIDOk
 
-`func (o *Audit) GetTargetUUIDOk() (*string, bool)`
+`func (o *Audit) GetTargetIDOk() (*string, bool)`
 
-GetTargetUUIDOk returns a tuple with the TargetUUID field if it's non-nil, zero value otherwise
+GetTargetIDOk returns a tuple with the TargetID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTargetUUID
+### SetTargetID
 
-`func (o *Audit) SetTargetUUID(v string)`
+`func (o *Audit) SetTargetID(v string)`
 
-SetTargetUUID sets TargetUUID field to given value.
+SetTargetID sets TargetID field to given value.
 
-### HasTargetUUID
+### HasTargetID
 
-`func (o *Audit) HasTargetUUID() bool`
+`func (o *Audit) HasTargetID() bool`
 
-HasTargetUUID returns a boolean if a field has been set.
+HasTargetID returns a boolean if a field has been set.
 
 ### GetTaskUUID
 

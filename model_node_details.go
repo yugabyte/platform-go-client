@@ -21,6 +21,8 @@ type NodeDetails struct {
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
 	// True if cron jobs were properly configured for this node
 	CronsActive *bool `json:"cronsActive,omitempty"`
+	// Disks are mounted by uuid
+	DisksAreMountedByUUID *bool `json:"disksAreMountedByUUID,omitempty"`
 	// True if this node is a master
 	IsMaster *bool `json:"isMaster,omitempty"`
 	// True if this node is a REDIS server
@@ -182,6 +184,38 @@ func (o *NodeDetails) HasCronsActive() bool {
 // SetCronsActive gets a reference to the given bool and assigns it to the CronsActive field.
 func (o *NodeDetails) SetCronsActive(v bool) {
 	o.CronsActive = &v
+}
+
+// GetDisksAreMountedByUUID returns the DisksAreMountedByUUID field value if set, zero value otherwise.
+func (o *NodeDetails) GetDisksAreMountedByUUID() bool {
+	if o == nil || o.DisksAreMountedByUUID == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DisksAreMountedByUUID
+}
+
+// GetDisksAreMountedByUUIDOk returns a tuple with the DisksAreMountedByUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetDisksAreMountedByUUIDOk() (*bool, bool) {
+	if o == nil || o.DisksAreMountedByUUID == nil {
+		return nil, false
+	}
+	return o.DisksAreMountedByUUID, true
+}
+
+// HasDisksAreMountedByUUID returns a boolean if a field has been set.
+func (o *NodeDetails) HasDisksAreMountedByUUID() bool {
+	if o != nil && o.DisksAreMountedByUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisksAreMountedByUUID gets a reference to the given bool and assigns it to the DisksAreMountedByUUID field.
+func (o *NodeDetails) SetDisksAreMountedByUUID(v bool) {
+	o.DisksAreMountedByUUID = &v
 }
 
 // GetIsMaster returns the IsMaster field value if set, zero value otherwise.
@@ -954,6 +988,9 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.CronsActive != nil {
 		toSerialize["cronsActive"] = o.CronsActive
+	}
+	if o.DisksAreMountedByUUID != nil {
+		toSerialize["disksAreMountedByUUID"] = o.DisksAreMountedByUUID
 	}
 	if o.IsMaster != nil {
 		toSerialize["isMaster"] = o.IsMaster

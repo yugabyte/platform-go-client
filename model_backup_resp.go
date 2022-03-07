@@ -27,8 +27,10 @@ type BackupResp struct {
 	OnDemand bool `json:"onDemand"`
 	ResponseList []KeyspaceTablesList `json:"responseList"`
 	ScheduleUUID string `json:"scheduleUUID"`
+	Sse bool `json:"sse"`
 	State string `json:"state"`
 	StorageConfigUUID string `json:"storageConfigUUID"`
+	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
 	UniverseName string `json:"universeName"`
 	UniverseUUID string `json:"universeUUID"`
 	UpdateTime time.Time `json:"updateTime"`
@@ -38,7 +40,7 @@ type BackupResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, state string, storageConfigUUID string, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp {
+func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.BackupUUID = backupUUID
@@ -50,8 +52,10 @@ func NewBackupResp(backupType string, backupUUID string, createTime time.Time, c
 	this.OnDemand = onDemand
 	this.ResponseList = responseList
 	this.ScheduleUUID = scheduleUUID
+	this.Sse = sse
 	this.State = state
 	this.StorageConfigUUID = storageConfigUUID
+	this.TotalBackupSizeInBytes = totalBackupSizeInBytes
 	this.UniverseName = universeName
 	this.UniverseUUID = universeUUID
 	this.UpdateTime = updateTime
@@ -306,6 +310,30 @@ func (o *BackupResp) SetScheduleUUID(v string) {
 	o.ScheduleUUID = v
 }
 
+// GetSse returns the Sse field value
+func (o *BackupResp) GetSse() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.Sse
+}
+
+// GetSseOk returns a tuple with the Sse field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetSseOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Sse, true
+}
+
+// SetSse sets field value
+func (o *BackupResp) SetSse(v bool) {
+	o.Sse = v
+}
+
 // GetState returns the State field value
 func (o *BackupResp) GetState() string {
 	if o == nil  {
@@ -352,6 +380,30 @@ func (o *BackupResp) GetStorageConfigUUIDOk() (*string, bool) {
 // SetStorageConfigUUID sets field value
 func (o *BackupResp) SetStorageConfigUUID(v string) {
 	o.StorageConfigUUID = v
+}
+
+// GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field value
+func (o *BackupResp) GetTotalBackupSizeInBytes() int64 {
+	if o == nil  {
+		var ret int64
+		return ret
+	}
+
+	return o.TotalBackupSizeInBytes
+}
+
+// GetTotalBackupSizeInBytesOk returns a tuple with the TotalBackupSizeInBytes field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetTotalBackupSizeInBytesOk() (*int64, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TotalBackupSizeInBytes, true
+}
+
+// SetTotalBackupSizeInBytes sets field value
+func (o *BackupResp) SetTotalBackupSizeInBytes(v int64) {
+	o.TotalBackupSizeInBytes = v
 }
 
 // GetUniverseName returns the UniverseName field value
@@ -459,10 +511,16 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID
 	}
 	if true {
+		toSerialize["sse"] = o.Sse
+	}
+	if true {
 		toSerialize["state"] = o.State
 	}
 	if true {
 		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if true {
+		toSerialize["totalBackupSizeInBytes"] = o.TotalBackupSizeInBytes
 	}
 	if true {
 		toSerialize["universeName"] = o.UniverseName

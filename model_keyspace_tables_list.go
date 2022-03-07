@@ -16,6 +16,7 @@ import (
 
 // KeyspaceTablesList struct for KeyspaceTablesList
 type KeyspaceTablesList struct {
+	BackupSizeInBytes int64 `json:"backupSizeInBytes"`
 	Keyspace string `json:"keyspace"`
 	StorageLocation string `json:"storageLocation"`
 	TablesList []string `json:"tablesList"`
@@ -25,8 +26,9 @@ type KeyspaceTablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyspaceTablesList(keyspace string, storageLocation string, tablesList []string, ) *KeyspaceTablesList {
+func NewKeyspaceTablesList(backupSizeInBytes int64, keyspace string, storageLocation string, tablesList []string, ) *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
+	this.BackupSizeInBytes = backupSizeInBytes
 	this.Keyspace = keyspace
 	this.StorageLocation = storageLocation
 	this.TablesList = tablesList
@@ -39,6 +41,30 @@ func NewKeyspaceTablesList(keyspace string, storageLocation string, tablesList [
 func NewKeyspaceTablesListWithDefaults() *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
 	return &this
+}
+
+// GetBackupSizeInBytes returns the BackupSizeInBytes field value
+func (o *KeyspaceTablesList) GetBackupSizeInBytes() int64 {
+	if o == nil  {
+		var ret int64
+		return ret
+	}
+
+	return o.BackupSizeInBytes
+}
+
+// GetBackupSizeInBytesOk returns a tuple with the BackupSizeInBytes field value
+// and a boolean to check if the value has been set.
+func (o *KeyspaceTablesList) GetBackupSizeInBytesOk() (*int64, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.BackupSizeInBytes, true
+}
+
+// SetBackupSizeInBytes sets field value
+func (o *KeyspaceTablesList) SetBackupSizeInBytes(v int64) {
+	o.BackupSizeInBytes = v
 }
 
 // GetKeyspace returns the Keyspace field value
@@ -115,6 +141,9 @@ func (o *KeyspaceTablesList) SetTablesList(v []string) {
 
 func (o KeyspaceTablesList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["backupSizeInBytes"] = o.BackupSizeInBytes
+	}
 	if true {
 		toSerialize["keyspace"] = o.Keyspace
 	}

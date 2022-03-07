@@ -197,6 +197,7 @@ Class | Method | HTTP request | Description
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 *ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 *ReleaseManagementApi* | [**DeleteRelease**](docs/ReleaseManagementApi.md#deleterelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
+*ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/releases | List all releases valid in region
 *ReleaseManagementApi* | [**GetListOfReleases**](docs/ReleaseManagementApi.md#getlistofreleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 *ReleaseManagementApi* | [**Refresh**](docs/ReleaseManagementApi.md#refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 *ReleaseManagementApi* | [**UpdateRelease**](docs/ReleaseManagementApi.md#updaterelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
@@ -270,6 +271,14 @@ Class | Method | HTTP request | Description
 *UniverseNodeMetadataMetamasterApi* | [**GetUniverseMasterNodes**](docs/UniverseNodeMetadataMetamasterApi.md#getuniversemasternodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
 *UniverseNodeMetadataMetamasterApi* | [**GetYQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getyqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetYSQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getysqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | List a YSQL server&#39;s addresses
+*UniverseUpgradesManagementApi* | [**ResizeNode**](docs/UniverseUpgradesManagementApi.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
+*UniverseUpgradesManagementApi* | [**RestartUniverse**](docs/UniverseUpgradesManagementApi.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
+*UniverseUpgradesManagementApi* | [**UpgradeCerts**](docs/UniverseUpgradesManagementApi.md#upgradecerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
+*UniverseUpgradesManagementApi* | [**UpgradeGFlags**](docs/UniverseUpgradesManagementApi.md#upgradegflags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
+*UniverseUpgradesManagementApi* | [**UpgradeSoftware**](docs/UniverseUpgradesManagementApi.md#upgradesoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade Software
+*UniverseUpgradesManagementApi* | [**UpgradeSystemd**](docs/UniverseUpgradesManagementApi.md#upgradesystemd) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/systemd | Upgrade Systemd
+*UniverseUpgradesManagementApi* | [**UpgradeTls**](docs/UniverseUpgradesManagementApi.md#upgradetls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls | Upgrade TLS
+*UniverseUpgradesManagementApi* | [**UpgradeVMImage**](docs/UniverseUpgradesManagementApi.md#upgradevmimage) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/vm | Upgrade VM Image
 *UserManagementApi* | [**CreateUser**](docs/UserManagementApi.md#createuser) | **Post** /api/v1/customers/{cUUID}/users | Create a user
 *UserManagementApi* | [**DeleteUser**](docs/UserManagementApi.md#deleteuser) | **Delete** /api/v1/customers/{cUUID}/users/{uUUID} | Delete a user
 *UserManagementApi* | [**GetUserDetails**](docs/UserManagementApi.md#getuserdetails) | **Get** /api/v1/customers/{cUUID}/users/{uUUID} | Get a user&#39;s details
@@ -331,6 +340,7 @@ Class | Method | HTTP request | Description
  - [CertificateDetails](docs/CertificateDetails.md)
  - [CertificateInfo](docs/CertificateInfo.md)
  - [CertificateParams](docs/CertificateParams.md)
+ - [CertsRotateParams](docs/CertsRotateParams.md)
  - [ClientCertParams](docs/ClientCertParams.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
  - [Cluster](docs/Cluster.md)
@@ -355,6 +365,7 @@ Class | Method | HTTP request | Description
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [GCSLocation](docs/GCSLocation.md)
+ - [GFlagsUpgradeParams](docs/GFlagsUpgradeParams.md)
  - [HashicorpVaultConfigParams](docs/HashicorpVaultConfigParams.md)
  - [HttpLocation](docs/HttpLocation.md)
  - [ImportUniverseFormData](docs/ImportUniverseFormData.md)
@@ -379,6 +390,7 @@ Class | Method | HTTP request | Description
  - [NodeInstance](docs/NodeInstance.md)
  - [NodeInstanceData](docs/NodeInstanceData.md)
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
+ - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementCloud](docs/PlacementCloud.md)
@@ -390,6 +402,7 @@ Class | Method | HTTP request | Description
  - [RegionFormData](docs/RegionFormData.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
+ - [ResizeNodeParams](docs/ResizeNodeParams.md)
  - [RestoreBackupParams](docs/RestoreBackupParams.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
@@ -401,21 +414,26 @@ Class | Method | HTTP request | Description
  - [ScopedConfig](docs/ScopedConfig.md)
  - [SessionInfo](docs/SessionInfo.md)
  - [SmtpData](docs/SmtpData.md)
+ - [SoftwareUpgradeParams](docs/SoftwareUpgradeParams.md)
  - [SupportBundle](docs/SupportBundle.md)
+ - [SystemdUpgradeParams](docs/SystemdUpgradeParams.md)
  - [TableDefinitionTaskParams](docs/TableDefinitionTaskParams.md)
  - [TableDetails](docs/TableDetails.md)
  - [TableInfoResp](docs/TableInfoResp.md)
+ - [TlsToggleParams](docs/TlsToggleParams.md)
  - [UniverseConfigureTaskParams](docs/UniverseConfigureTaskParams.md)
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
+ - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
  - [UserIntent](docs/UserIntent.md)
  - [UserProfileData](docs/UserProfileData.md)
  - [UserRegistrationData](docs/UserRegistrationData.md)
  - [UserWithFeatures](docs/UserWithFeatures.md)
  - [Users](docs/Users.md)
+ - [VMImageUpgradeParams](docs/VMImageUpgradeParams.md)
  - [VolumeDetails](docs/VolumeDetails.md)
  - [XClusterConfig](docs/XClusterConfig.md)
  - [XClusterConfigCreateFormData](docs/XClusterConfigCreateFormData.md)

@@ -578,10 +578,15 @@ type SessionManagementApiApiRegisterCustomerRequest struct {
 	ctx _context.Context
 	ApiService *SessionManagementApiService
 	customerRegisterFormData *CustomerRegisterFormData
+	generateApiToken *bool
 }
 
 func (r SessionManagementApiApiRegisterCustomerRequest) CustomerRegisterFormData(customerRegisterFormData CustomerRegisterFormData) SessionManagementApiApiRegisterCustomerRequest {
 	r.customerRegisterFormData = &customerRegisterFormData
+	return r
+}
+func (r SessionManagementApiApiRegisterCustomerRequest) GenerateApiToken(generateApiToken bool) SessionManagementApiApiRegisterCustomerRequest {
+	r.generateApiToken = &generateApiToken
 	return r
 }
 
@@ -630,6 +635,9 @@ func (a *SessionManagementApiService) RegisterCustomerExecute(r SessionManagemen
 		return localVarReturnValue, nil, reportError("customerRegisterFormData is required and must be specified")
 	}
 
+	if r.generateApiToken != nil {
+		localVarQueryParams.Add("generateApiToken", parameterToString(*r.generateApiToken, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

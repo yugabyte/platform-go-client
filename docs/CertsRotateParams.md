@@ -1,0 +1,1056 @@
+# CertsRotateParams
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**AllowInsecure** | Pointer to **bool** |  | [optional] 
+**BackupInProgress** | Pointer to **bool** |  | [optional] 
+**Capability** | Pointer to **string** |  | [optional] 
+**ClientRootCA** | **string** |  | 
+**Clusters** | [**[]Cluster**](Cluster.md) |  | 
+**CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
+**CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CurrentClusterType** | Pointer to **string** |  | [optional] 
+**DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
+**ErrorString** | Pointer to **string** | Error message | [optional] 
+**ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
+**ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
+**ImportedState** | Pointer to **string** |  | [optional] 
+**ItestS3PackagePath** | Pointer to **string** |  | [optional] 
+**KubernetesUpgradeSupported** | **bool** |  | 
+**NextClusterIndex** | Pointer to **int32** |  | [optional] 
+**NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
+**NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
+**NodePrefix** | Pointer to **string** |  | [optional] 
+**NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**RemotePackagePath** | Pointer to **string** |  | [optional] 
+**ResetAZConfig** | Pointer to **bool** |  | [optional] 
+**RootAndClientRootCASame** | **bool** |  | 
+**RootCA** | **string** |  | 
+**SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
+**SleepAfterMasterRestartMillis** | **int32** |  | 
+**SleepAfterTServerRestartMillis** | **int32** |  | 
+**SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**UniversePaused** | Pointer to **bool** |  | [optional] 
+**UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
+**UpdateInProgress** | Pointer to **bool** |  | [optional] 
+**UpdateSucceeded** | Pointer to **bool** |  | [optional] 
+**UpdatingTask** | Pointer to **string** |  | [optional] 
+**UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
+**UpgradeOption** | **string** |  | 
+**UserAZSelected** | Pointer to **bool** |  | [optional] 
+**YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+
+## Methods
+
+### NewCertsRotateParams
+
+`func NewCertsRotateParams(clientRootCA string, clusters []Cluster, kubernetesUpgradeSupported bool, rootAndClientRootCASame bool, rootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *CertsRotateParams`
+
+NewCertsRotateParams instantiates a new CertsRotateParams object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewCertsRotateParamsWithDefaults
+
+`func NewCertsRotateParamsWithDefaults() *CertsRotateParams`
+
+NewCertsRotateParamsWithDefaults instantiates a new CertsRotateParams object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetAllowInsecure
+
+`func (o *CertsRotateParams) GetAllowInsecure() bool`
+
+GetAllowInsecure returns the AllowInsecure field if non-nil, zero value otherwise.
+
+### GetAllowInsecureOk
+
+`func (o *CertsRotateParams) GetAllowInsecureOk() (*bool, bool)`
+
+GetAllowInsecureOk returns a tuple with the AllowInsecure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowInsecure
+
+`func (o *CertsRotateParams) SetAllowInsecure(v bool)`
+
+SetAllowInsecure sets AllowInsecure field to given value.
+
+### HasAllowInsecure
+
+`func (o *CertsRotateParams) HasAllowInsecure() bool`
+
+HasAllowInsecure returns a boolean if a field has been set.
+
+### GetBackupInProgress
+
+`func (o *CertsRotateParams) GetBackupInProgress() bool`
+
+GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
+
+### GetBackupInProgressOk
+
+`func (o *CertsRotateParams) GetBackupInProgressOk() (*bool, bool)`
+
+GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupInProgress
+
+`func (o *CertsRotateParams) SetBackupInProgress(v bool)`
+
+SetBackupInProgress sets BackupInProgress field to given value.
+
+### HasBackupInProgress
+
+`func (o *CertsRotateParams) HasBackupInProgress() bool`
+
+HasBackupInProgress returns a boolean if a field has been set.
+
+### GetCapability
+
+`func (o *CertsRotateParams) GetCapability() string`
+
+GetCapability returns the Capability field if non-nil, zero value otherwise.
+
+### GetCapabilityOk
+
+`func (o *CertsRotateParams) GetCapabilityOk() (*string, bool)`
+
+GetCapabilityOk returns a tuple with the Capability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapability
+
+`func (o *CertsRotateParams) SetCapability(v string)`
+
+SetCapability sets Capability field to given value.
+
+### HasCapability
+
+`func (o *CertsRotateParams) HasCapability() bool`
+
+HasCapability returns a boolean if a field has been set.
+
+### GetClientRootCA
+
+`func (o *CertsRotateParams) GetClientRootCA() string`
+
+GetClientRootCA returns the ClientRootCA field if non-nil, zero value otherwise.
+
+### GetClientRootCAOk
+
+`func (o *CertsRotateParams) GetClientRootCAOk() (*string, bool)`
+
+GetClientRootCAOk returns a tuple with the ClientRootCA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientRootCA
+
+`func (o *CertsRotateParams) SetClientRootCA(v string)`
+
+SetClientRootCA sets ClientRootCA field to given value.
+
+
+### GetClusters
+
+`func (o *CertsRotateParams) GetClusters() []Cluster`
+
+GetClusters returns the Clusters field if non-nil, zero value otherwise.
+
+### GetClustersOk
+
+`func (o *CertsRotateParams) GetClustersOk() (*[]Cluster, bool)`
+
+GetClustersOk returns a tuple with the Clusters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusters
+
+`func (o *CertsRotateParams) SetClusters(v []Cluster)`
+
+SetClusters sets Clusters field to given value.
+
+
+### GetCmkArn
+
+`func (o *CertsRotateParams) GetCmkArn() string`
+
+GetCmkArn returns the CmkArn field if non-nil, zero value otherwise.
+
+### GetCmkArnOk
+
+`func (o *CertsRotateParams) GetCmkArnOk() (*string, bool)`
+
+GetCmkArnOk returns a tuple with the CmkArn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCmkArn
+
+`func (o *CertsRotateParams) SetCmkArn(v string)`
+
+SetCmkArn sets CmkArn field to given value.
+
+### HasCmkArn
+
+`func (o *CertsRotateParams) HasCmkArn() bool`
+
+HasCmkArn returns a boolean if a field has been set.
+
+### GetCommunicationPorts
+
+`func (o *CertsRotateParams) GetCommunicationPorts() CommunicationPorts`
+
+GetCommunicationPorts returns the CommunicationPorts field if non-nil, zero value otherwise.
+
+### GetCommunicationPortsOk
+
+`func (o *CertsRotateParams) GetCommunicationPortsOk() (*CommunicationPorts, bool)`
+
+GetCommunicationPortsOk returns a tuple with the CommunicationPorts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommunicationPorts
+
+`func (o *CertsRotateParams) SetCommunicationPorts(v CommunicationPorts)`
+
+SetCommunicationPorts sets CommunicationPorts field to given value.
+
+### HasCommunicationPorts
+
+`func (o *CertsRotateParams) HasCommunicationPorts() bool`
+
+HasCommunicationPorts returns a boolean if a field has been set.
+
+### GetCurrentClusterType
+
+`func (o *CertsRotateParams) GetCurrentClusterType() string`
+
+GetCurrentClusterType returns the CurrentClusterType field if non-nil, zero value otherwise.
+
+### GetCurrentClusterTypeOk
+
+`func (o *CertsRotateParams) GetCurrentClusterTypeOk() (*string, bool)`
+
+GetCurrentClusterTypeOk returns a tuple with the CurrentClusterType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentClusterType
+
+`func (o *CertsRotateParams) SetCurrentClusterType(v string)`
+
+SetCurrentClusterType sets CurrentClusterType field to given value.
+
+### HasCurrentClusterType
+
+`func (o *CertsRotateParams) HasCurrentClusterType() bool`
+
+HasCurrentClusterType returns a boolean if a field has been set.
+
+### GetDeviceInfo
+
+`func (o *CertsRotateParams) GetDeviceInfo() DeviceInfo`
+
+GetDeviceInfo returns the DeviceInfo field if non-nil, zero value otherwise.
+
+### GetDeviceInfoOk
+
+`func (o *CertsRotateParams) GetDeviceInfoOk() (*DeviceInfo, bool)`
+
+GetDeviceInfoOk returns a tuple with the DeviceInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeviceInfo
+
+`func (o *CertsRotateParams) SetDeviceInfo(v DeviceInfo)`
+
+SetDeviceInfo sets DeviceInfo field to given value.
+
+### HasDeviceInfo
+
+`func (o *CertsRotateParams) HasDeviceInfo() bool`
+
+HasDeviceInfo returns a boolean if a field has been set.
+
+### GetEncryptionAtRestConfig
+
+`func (o *CertsRotateParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
+
+GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field if non-nil, zero value otherwise.
+
+### GetEncryptionAtRestConfigOk
+
+`func (o *CertsRotateParams) GetEncryptionAtRestConfigOk() (*EncryptionAtRestConfig, bool)`
+
+GetEncryptionAtRestConfigOk returns a tuple with the EncryptionAtRestConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionAtRestConfig
+
+`func (o *CertsRotateParams) SetEncryptionAtRestConfig(v EncryptionAtRestConfig)`
+
+SetEncryptionAtRestConfig sets EncryptionAtRestConfig field to given value.
+
+### HasEncryptionAtRestConfig
+
+`func (o *CertsRotateParams) HasEncryptionAtRestConfig() bool`
+
+HasEncryptionAtRestConfig returns a boolean if a field has been set.
+
+### GetErrorString
+
+`func (o *CertsRotateParams) GetErrorString() string`
+
+GetErrorString returns the ErrorString field if non-nil, zero value otherwise.
+
+### GetErrorStringOk
+
+`func (o *CertsRotateParams) GetErrorStringOk() (*string, bool)`
+
+GetErrorStringOk returns a tuple with the ErrorString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorString
+
+`func (o *CertsRotateParams) SetErrorString(v string)`
+
+SetErrorString sets ErrorString field to given value.
+
+### HasErrorString
+
+`func (o *CertsRotateParams) HasErrorString() bool`
+
+HasErrorString returns a boolean if a field has been set.
+
+### GetExpectedUniverseVersion
+
+`func (o *CertsRotateParams) GetExpectedUniverseVersion() int32`
+
+GetExpectedUniverseVersion returns the ExpectedUniverseVersion field if non-nil, zero value otherwise.
+
+### GetExpectedUniverseVersionOk
+
+`func (o *CertsRotateParams) GetExpectedUniverseVersionOk() (*int32, bool)`
+
+GetExpectedUniverseVersionOk returns a tuple with the ExpectedUniverseVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpectedUniverseVersion
+
+`func (o *CertsRotateParams) SetExpectedUniverseVersion(v int32)`
+
+SetExpectedUniverseVersion sets ExpectedUniverseVersion field to given value.
+
+### HasExpectedUniverseVersion
+
+`func (o *CertsRotateParams) HasExpectedUniverseVersion() bool`
+
+HasExpectedUniverseVersion returns a boolean if a field has been set.
+
+### GetExtraDependencies
+
+`func (o *CertsRotateParams) GetExtraDependencies() ExtraDependencies`
+
+GetExtraDependencies returns the ExtraDependencies field if non-nil, zero value otherwise.
+
+### GetExtraDependenciesOk
+
+`func (o *CertsRotateParams) GetExtraDependenciesOk() (*ExtraDependencies, bool)`
+
+GetExtraDependenciesOk returns a tuple with the ExtraDependencies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtraDependencies
+
+`func (o *CertsRotateParams) SetExtraDependencies(v ExtraDependencies)`
+
+SetExtraDependencies sets ExtraDependencies field to given value.
+
+### HasExtraDependencies
+
+`func (o *CertsRotateParams) HasExtraDependencies() bool`
+
+HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFirstTry
+
+`func (o *CertsRotateParams) GetFirstTry() bool`
+
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
+
+### GetFirstTryOk
+
+`func (o *CertsRotateParams) GetFirstTryOk() (*bool, bool)`
+
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstTry
+
+`func (o *CertsRotateParams) SetFirstTry(v bool)`
+
+SetFirstTry sets FirstTry field to given value.
+
+### HasFirstTry
+
+`func (o *CertsRotateParams) HasFirstTry() bool`
+
+HasFirstTry returns a boolean if a field has been set.
+
+### GetImportedState
+
+`func (o *CertsRotateParams) GetImportedState() string`
+
+GetImportedState returns the ImportedState field if non-nil, zero value otherwise.
+
+### GetImportedStateOk
+
+`func (o *CertsRotateParams) GetImportedStateOk() (*string, bool)`
+
+GetImportedStateOk returns a tuple with the ImportedState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImportedState
+
+`func (o *CertsRotateParams) SetImportedState(v string)`
+
+SetImportedState sets ImportedState field to given value.
+
+### HasImportedState
+
+`func (o *CertsRotateParams) HasImportedState() bool`
+
+HasImportedState returns a boolean if a field has been set.
+
+### GetItestS3PackagePath
+
+`func (o *CertsRotateParams) GetItestS3PackagePath() string`
+
+GetItestS3PackagePath returns the ItestS3PackagePath field if non-nil, zero value otherwise.
+
+### GetItestS3PackagePathOk
+
+`func (o *CertsRotateParams) GetItestS3PackagePathOk() (*string, bool)`
+
+GetItestS3PackagePathOk returns a tuple with the ItestS3PackagePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetItestS3PackagePath
+
+`func (o *CertsRotateParams) SetItestS3PackagePath(v string)`
+
+SetItestS3PackagePath sets ItestS3PackagePath field to given value.
+
+### HasItestS3PackagePath
+
+`func (o *CertsRotateParams) HasItestS3PackagePath() bool`
+
+HasItestS3PackagePath returns a boolean if a field has been set.
+
+### GetKubernetesUpgradeSupported
+
+`func (o *CertsRotateParams) GetKubernetesUpgradeSupported() bool`
+
+GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field if non-nil, zero value otherwise.
+
+### GetKubernetesUpgradeSupportedOk
+
+`func (o *CertsRotateParams) GetKubernetesUpgradeSupportedOk() (*bool, bool)`
+
+GetKubernetesUpgradeSupportedOk returns a tuple with the KubernetesUpgradeSupported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesUpgradeSupported
+
+`func (o *CertsRotateParams) SetKubernetesUpgradeSupported(v bool)`
+
+SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
+
+
+### GetNextClusterIndex
+
+`func (o *CertsRotateParams) GetNextClusterIndex() int32`
+
+GetNextClusterIndex returns the NextClusterIndex field if non-nil, zero value otherwise.
+
+### GetNextClusterIndexOk
+
+`func (o *CertsRotateParams) GetNextClusterIndexOk() (*int32, bool)`
+
+GetNextClusterIndexOk returns a tuple with the NextClusterIndex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextClusterIndex
+
+`func (o *CertsRotateParams) SetNextClusterIndex(v int32)`
+
+SetNextClusterIndex sets NextClusterIndex field to given value.
+
+### HasNextClusterIndex
+
+`func (o *CertsRotateParams) HasNextClusterIndex() bool`
+
+HasNextClusterIndex returns a boolean if a field has been set.
+
+### GetNodeDetailsSet
+
+`func (o *CertsRotateParams) GetNodeDetailsSet() []NodeDetails`
+
+GetNodeDetailsSet returns the NodeDetailsSet field if non-nil, zero value otherwise.
+
+### GetNodeDetailsSetOk
+
+`func (o *CertsRotateParams) GetNodeDetailsSetOk() (*[]NodeDetails, bool)`
+
+GetNodeDetailsSetOk returns a tuple with the NodeDetailsSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeDetailsSet
+
+`func (o *CertsRotateParams) SetNodeDetailsSet(v []NodeDetails)`
+
+SetNodeDetailsSet sets NodeDetailsSet field to given value.
+
+### HasNodeDetailsSet
+
+`func (o *CertsRotateParams) HasNodeDetailsSet() bool`
+
+HasNodeDetailsSet returns a boolean if a field has been set.
+
+### GetNodeExporterUser
+
+`func (o *CertsRotateParams) GetNodeExporterUser() string`
+
+GetNodeExporterUser returns the NodeExporterUser field if non-nil, zero value otherwise.
+
+### GetNodeExporterUserOk
+
+`func (o *CertsRotateParams) GetNodeExporterUserOk() (*string, bool)`
+
+GetNodeExporterUserOk returns a tuple with the NodeExporterUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeExporterUser
+
+`func (o *CertsRotateParams) SetNodeExporterUser(v string)`
+
+SetNodeExporterUser sets NodeExporterUser field to given value.
+
+### HasNodeExporterUser
+
+`func (o *CertsRotateParams) HasNodeExporterUser() bool`
+
+HasNodeExporterUser returns a boolean if a field has been set.
+
+### GetNodePrefix
+
+`func (o *CertsRotateParams) GetNodePrefix() string`
+
+GetNodePrefix returns the NodePrefix field if non-nil, zero value otherwise.
+
+### GetNodePrefixOk
+
+`func (o *CertsRotateParams) GetNodePrefixOk() (*string, bool)`
+
+GetNodePrefixOk returns a tuple with the NodePrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodePrefix
+
+`func (o *CertsRotateParams) SetNodePrefix(v string)`
+
+SetNodePrefix sets NodePrefix field to given value.
+
+### HasNodePrefix
+
+`func (o *CertsRotateParams) HasNodePrefix() bool`
+
+HasNodePrefix returns a boolean if a field has been set.
+
+### GetNodesResizeAvailable
+
+`func (o *CertsRotateParams) GetNodesResizeAvailable() bool`
+
+GetNodesResizeAvailable returns the NodesResizeAvailable field if non-nil, zero value otherwise.
+
+### GetNodesResizeAvailableOk
+
+`func (o *CertsRotateParams) GetNodesResizeAvailableOk() (*bool, bool)`
+
+GetNodesResizeAvailableOk returns a tuple with the NodesResizeAvailable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodesResizeAvailable
+
+`func (o *CertsRotateParams) SetNodesResizeAvailable(v bool)`
+
+SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
+
+### HasNodesResizeAvailable
+
+`func (o *CertsRotateParams) HasNodesResizeAvailable() bool`
+
+HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetPreviousTaskUUID
+
+`func (o *CertsRotateParams) GetPreviousTaskUUID() string`
+
+GetPreviousTaskUUID returns the PreviousTaskUUID field if non-nil, zero value otherwise.
+
+### GetPreviousTaskUUIDOk
+
+`func (o *CertsRotateParams) GetPreviousTaskUUIDOk() (*string, bool)`
+
+GetPreviousTaskUUIDOk returns a tuple with the PreviousTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreviousTaskUUID
+
+`func (o *CertsRotateParams) SetPreviousTaskUUID(v string)`
+
+SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
+
+### HasPreviousTaskUUID
+
+`func (o *CertsRotateParams) HasPreviousTaskUUID() bool`
+
+HasPreviousTaskUUID returns a boolean if a field has been set.
+
+### GetRemotePackagePath
+
+`func (o *CertsRotateParams) GetRemotePackagePath() string`
+
+GetRemotePackagePath returns the RemotePackagePath field if non-nil, zero value otherwise.
+
+### GetRemotePackagePathOk
+
+`func (o *CertsRotateParams) GetRemotePackagePathOk() (*string, bool)`
+
+GetRemotePackagePathOk returns a tuple with the RemotePackagePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRemotePackagePath
+
+`func (o *CertsRotateParams) SetRemotePackagePath(v string)`
+
+SetRemotePackagePath sets RemotePackagePath field to given value.
+
+### HasRemotePackagePath
+
+`func (o *CertsRotateParams) HasRemotePackagePath() bool`
+
+HasRemotePackagePath returns a boolean if a field has been set.
+
+### GetResetAZConfig
+
+`func (o *CertsRotateParams) GetResetAZConfig() bool`
+
+GetResetAZConfig returns the ResetAZConfig field if non-nil, zero value otherwise.
+
+### GetResetAZConfigOk
+
+`func (o *CertsRotateParams) GetResetAZConfigOk() (*bool, bool)`
+
+GetResetAZConfigOk returns a tuple with the ResetAZConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResetAZConfig
+
+`func (o *CertsRotateParams) SetResetAZConfig(v bool)`
+
+SetResetAZConfig sets ResetAZConfig field to given value.
+
+### HasResetAZConfig
+
+`func (o *CertsRotateParams) HasResetAZConfig() bool`
+
+HasResetAZConfig returns a boolean if a field has been set.
+
+### GetRootAndClientRootCASame
+
+`func (o *CertsRotateParams) GetRootAndClientRootCASame() bool`
+
+GetRootAndClientRootCASame returns the RootAndClientRootCASame field if non-nil, zero value otherwise.
+
+### GetRootAndClientRootCASameOk
+
+`func (o *CertsRotateParams) GetRootAndClientRootCASameOk() (*bool, bool)`
+
+GetRootAndClientRootCASameOk returns a tuple with the RootAndClientRootCASame field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootAndClientRootCASame
+
+`func (o *CertsRotateParams) SetRootAndClientRootCASame(v bool)`
+
+SetRootAndClientRootCASame sets RootAndClientRootCASame field to given value.
+
+
+### GetRootCA
+
+`func (o *CertsRotateParams) GetRootCA() string`
+
+GetRootCA returns the RootCA field if non-nil, zero value otherwise.
+
+### GetRootCAOk
+
+`func (o *CertsRotateParams) GetRootCAOk() (*string, bool)`
+
+GetRootCAOk returns a tuple with the RootCA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootCA
+
+`func (o *CertsRotateParams) SetRootCA(v string)`
+
+SetRootCA sets RootCA field to given value.
+
+
+### GetSetTxnTableWaitCountFlag
+
+`func (o *CertsRotateParams) GetSetTxnTableWaitCountFlag() bool`
+
+GetSetTxnTableWaitCountFlag returns the SetTxnTableWaitCountFlag field if non-nil, zero value otherwise.
+
+### GetSetTxnTableWaitCountFlagOk
+
+`func (o *CertsRotateParams) GetSetTxnTableWaitCountFlagOk() (*bool, bool)`
+
+GetSetTxnTableWaitCountFlagOk returns a tuple with the SetTxnTableWaitCountFlag field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSetTxnTableWaitCountFlag
+
+`func (o *CertsRotateParams) SetSetTxnTableWaitCountFlag(v bool)`
+
+SetSetTxnTableWaitCountFlag sets SetTxnTableWaitCountFlag field to given value.
+
+### HasSetTxnTableWaitCountFlag
+
+`func (o *CertsRotateParams) HasSetTxnTableWaitCountFlag() bool`
+
+HasSetTxnTableWaitCountFlag returns a boolean if a field has been set.
+
+### GetSleepAfterMasterRestartMillis
+
+`func (o *CertsRotateParams) GetSleepAfterMasterRestartMillis() int32`
+
+GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterMasterRestartMillisOk
+
+`func (o *CertsRotateParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterMasterRestartMillis
+
+`func (o *CertsRotateParams) SetSleepAfterMasterRestartMillis(v int32)`
+
+SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
+
+
+### GetSleepAfterTServerRestartMillis
+
+`func (o *CertsRotateParams) GetSleepAfterTServerRestartMillis() int32`
+
+GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterTServerRestartMillisOk
+
+`func (o *CertsRotateParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterTServerRestartMillis
+
+`func (o *CertsRotateParams) SetSleepAfterTServerRestartMillis(v int32)`
+
+SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
+
+
+### GetSourceXClusterConfigs
+
+`func (o *CertsRotateParams) GetSourceXClusterConfigs() []string`
+
+GetSourceXClusterConfigs returns the SourceXClusterConfigs field if non-nil, zero value otherwise.
+
+### GetSourceXClusterConfigsOk
+
+`func (o *CertsRotateParams) GetSourceXClusterConfigsOk() (*[]string, bool)`
+
+GetSourceXClusterConfigsOk returns a tuple with the SourceXClusterConfigs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceXClusterConfigs
+
+`func (o *CertsRotateParams) SetSourceXClusterConfigs(v []string)`
+
+SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
+
+### HasSourceXClusterConfigs
+
+`func (o *CertsRotateParams) HasSourceXClusterConfigs() bool`
+
+HasSourceXClusterConfigs returns a boolean if a field has been set.
+
+### GetTargetXClusterConfigs
+
+`func (o *CertsRotateParams) GetTargetXClusterConfigs() []string`
+
+GetTargetXClusterConfigs returns the TargetXClusterConfigs field if non-nil, zero value otherwise.
+
+### GetTargetXClusterConfigsOk
+
+`func (o *CertsRotateParams) GetTargetXClusterConfigsOk() (*[]string, bool)`
+
+GetTargetXClusterConfigsOk returns a tuple with the TargetXClusterConfigs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetXClusterConfigs
+
+`func (o *CertsRotateParams) SetTargetXClusterConfigs(v []string)`
+
+SetTargetXClusterConfigs sets TargetXClusterConfigs field to given value.
+
+### HasTargetXClusterConfigs
+
+`func (o *CertsRotateParams) HasTargetXClusterConfigs() bool`
+
+HasTargetXClusterConfigs returns a boolean if a field has been set.
+
+### GetUniversePaused
+
+`func (o *CertsRotateParams) GetUniversePaused() bool`
+
+GetUniversePaused returns the UniversePaused field if non-nil, zero value otherwise.
+
+### GetUniversePausedOk
+
+`func (o *CertsRotateParams) GetUniversePausedOk() (*bool, bool)`
+
+GetUniversePausedOk returns a tuple with the UniversePaused field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniversePaused
+
+`func (o *CertsRotateParams) SetUniversePaused(v bool)`
+
+SetUniversePaused sets UniversePaused field to given value.
+
+### HasUniversePaused
+
+`func (o *CertsRotateParams) HasUniversePaused() bool`
+
+HasUniversePaused returns a boolean if a field has been set.
+
+### GetUniverseUUID
+
+`func (o *CertsRotateParams) GetUniverseUUID() string`
+
+GetUniverseUUID returns the UniverseUUID field if non-nil, zero value otherwise.
+
+### GetUniverseUUIDOk
+
+`func (o *CertsRotateParams) GetUniverseUUIDOk() (*string, bool)`
+
+GetUniverseUUIDOk returns a tuple with the UniverseUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseUUID
+
+`func (o *CertsRotateParams) SetUniverseUUID(v string)`
+
+SetUniverseUUID sets UniverseUUID field to given value.
+
+### HasUniverseUUID
+
+`func (o *CertsRotateParams) HasUniverseUUID() bool`
+
+HasUniverseUUID returns a boolean if a field has been set.
+
+### GetUpdateInProgress
+
+`func (o *CertsRotateParams) GetUpdateInProgress() bool`
+
+GetUpdateInProgress returns the UpdateInProgress field if non-nil, zero value otherwise.
+
+### GetUpdateInProgressOk
+
+`func (o *CertsRotateParams) GetUpdateInProgressOk() (*bool, bool)`
+
+GetUpdateInProgressOk returns a tuple with the UpdateInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateInProgress
+
+`func (o *CertsRotateParams) SetUpdateInProgress(v bool)`
+
+SetUpdateInProgress sets UpdateInProgress field to given value.
+
+### HasUpdateInProgress
+
+`func (o *CertsRotateParams) HasUpdateInProgress() bool`
+
+HasUpdateInProgress returns a boolean if a field has been set.
+
+### GetUpdateSucceeded
+
+`func (o *CertsRotateParams) GetUpdateSucceeded() bool`
+
+GetUpdateSucceeded returns the UpdateSucceeded field if non-nil, zero value otherwise.
+
+### GetUpdateSucceededOk
+
+`func (o *CertsRotateParams) GetUpdateSucceededOk() (*bool, bool)`
+
+GetUpdateSucceededOk returns a tuple with the UpdateSucceeded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateSucceeded
+
+`func (o *CertsRotateParams) SetUpdateSucceeded(v bool)`
+
+SetUpdateSucceeded sets UpdateSucceeded field to given value.
+
+### HasUpdateSucceeded
+
+`func (o *CertsRotateParams) HasUpdateSucceeded() bool`
+
+HasUpdateSucceeded returns a boolean if a field has been set.
+
+### GetUpdatingTask
+
+`func (o *CertsRotateParams) GetUpdatingTask() string`
+
+GetUpdatingTask returns the UpdatingTask field if non-nil, zero value otherwise.
+
+### GetUpdatingTaskOk
+
+`func (o *CertsRotateParams) GetUpdatingTaskOk() (*string, bool)`
+
+GetUpdatingTaskOk returns a tuple with the UpdatingTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatingTask
+
+`func (o *CertsRotateParams) SetUpdatingTask(v string)`
+
+SetUpdatingTask sets UpdatingTask field to given value.
+
+### HasUpdatingTask
+
+`func (o *CertsRotateParams) HasUpdatingTask() bool`
+
+HasUpdatingTask returns a boolean if a field has been set.
+
+### GetUpdatingTaskUUID
+
+`func (o *CertsRotateParams) GetUpdatingTaskUUID() string`
+
+GetUpdatingTaskUUID returns the UpdatingTaskUUID field if non-nil, zero value otherwise.
+
+### GetUpdatingTaskUUIDOk
+
+`func (o *CertsRotateParams) GetUpdatingTaskUUIDOk() (*string, bool)`
+
+GetUpdatingTaskUUIDOk returns a tuple with the UpdatingTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatingTaskUUID
+
+`func (o *CertsRotateParams) SetUpdatingTaskUUID(v string)`
+
+SetUpdatingTaskUUID sets UpdatingTaskUUID field to given value.
+
+### HasUpdatingTaskUUID
+
+`func (o *CertsRotateParams) HasUpdatingTaskUUID() bool`
+
+HasUpdatingTaskUUID returns a boolean if a field has been set.
+
+### GetUpgradeOption
+
+`func (o *CertsRotateParams) GetUpgradeOption() string`
+
+GetUpgradeOption returns the UpgradeOption field if non-nil, zero value otherwise.
+
+### GetUpgradeOptionOk
+
+`func (o *CertsRotateParams) GetUpgradeOptionOk() (*string, bool)`
+
+GetUpgradeOptionOk returns a tuple with the UpgradeOption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradeOption
+
+`func (o *CertsRotateParams) SetUpgradeOption(v string)`
+
+SetUpgradeOption sets UpgradeOption field to given value.
+
+
+### GetUserAZSelected
+
+`func (o *CertsRotateParams) GetUserAZSelected() bool`
+
+GetUserAZSelected returns the UserAZSelected field if non-nil, zero value otherwise.
+
+### GetUserAZSelectedOk
+
+`func (o *CertsRotateParams) GetUserAZSelectedOk() (*bool, bool)`
+
+GetUserAZSelectedOk returns a tuple with the UserAZSelected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserAZSelected
+
+`func (o *CertsRotateParams) SetUserAZSelected(v bool)`
+
+SetUserAZSelected sets UserAZSelected field to given value.
+
+### HasUserAZSelected
+
+`func (o *CertsRotateParams) HasUserAZSelected() bool`
+
+HasUserAZSelected returns a boolean if a field has been set.
+
+### GetYbPrevSoftwareVersion
+
+`func (o *CertsRotateParams) GetYbPrevSoftwareVersion() string`
+
+GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbPrevSoftwareVersionOk
+
+`func (o *CertsRotateParams) GetYbPrevSoftwareVersionOk() (*string, bool)`
+
+GetYbPrevSoftwareVersionOk returns a tuple with the YbPrevSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbPrevSoftwareVersion
+
+`func (o *CertsRotateParams) SetYbPrevSoftwareVersion(v string)`
+
+SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
+
+### HasYbPrevSoftwareVersion
+
+`func (o *CertsRotateParams) HasYbPrevSoftwareVersion() bool`
+
+HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

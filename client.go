@@ -110,6 +110,8 @@ type APIClient struct {
 
 	UniverseNodeMetadataMetamasterApi *UniverseNodeMetadataMetamasterApiService
 
+	UniverseUpgradesManagementApi *UniverseUpgradesManagementApiService
+
 	UserManagementApi *UserManagementApiService
 }
 
@@ -160,6 +162,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniverseInformationApi = (*UniverseInformationApiService)(&c.common)
 	c.UniverseManagementApi = (*UniverseManagementApiService)(&c.common)
 	c.UniverseNodeMetadataMetamasterApi = (*UniverseNodeMetadataMetamasterApiService)(&c.common)
+	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
 
 	return c

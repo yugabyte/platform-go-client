@@ -26,6 +26,8 @@ type ReleaseMetadata struct {
 	ImageTag *string `json:"imageTag,omitempty"`
 	// Release notes
 	Notes *[]string `json:"notes,omitempty"`
+	// Release packages
+	Packages *[]Package `json:"packages,omitempty"`
 	S3 *S3Location `json:"s3,omitempty"`
 	// Release state
 	State *string `json:"state,omitempty"`
@@ -240,6 +242,38 @@ func (o *ReleaseMetadata) SetNotes(v []string) {
 	o.Notes = &v
 }
 
+// GetPackages returns the Packages field value if set, zero value otherwise.
+func (o *ReleaseMetadata) GetPackages() []Package {
+	if o == nil || o.Packages == nil {
+		var ret []Package
+		return ret
+	}
+	return *o.Packages
+}
+
+// GetPackagesOk returns a tuple with the Packages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReleaseMetadata) GetPackagesOk() (*[]Package, bool) {
+	if o == nil || o.Packages == nil {
+		return nil, false
+	}
+	return o.Packages, true
+}
+
+// HasPackages returns a boolean if a field has been set.
+func (o *ReleaseMetadata) HasPackages() bool {
+	if o != nil && o.Packages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPackages gets a reference to the given []Package and assigns it to the Packages field.
+func (o *ReleaseMetadata) SetPackages(v []Package) {
+	o.Packages = &v
+}
+
 // GetS3 returns the S3 field value if set, zero value otherwise.
 func (o *ReleaseMetadata) GetS3() S3Location {
 	if o == nil || o.S3 == nil {
@@ -323,6 +357,9 @@ func (o ReleaseMetadata) MarshalJSON() ([]byte, error) {
 	}
 	if o.Notes != nil {
 		toSerialize["notes"] = o.Notes
+	}
+	if o.Packages != nil {
+		toSerialize["packages"] = o.Packages
 	}
 	if o.S3 != nil {
 		toSerialize["s3"] = o.S3

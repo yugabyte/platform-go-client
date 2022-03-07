@@ -30,8 +30,8 @@ type Audit struct {
 	Payload *map[string]interface{} `json:"payload,omitempty"`
 	// Target
 	Target *string `json:"target,omitempty"`
-	// Target UUID
-	TargetUUID *string `json:"targetUUID,omitempty"`
+	// Target ID
+	TargetID *string `json:"targetID,omitempty"`
 	// Task UUID
 	TaskUUID *string `json:"taskUUID,omitempty"`
 	Timestamp time.Time `json:"timestamp"`
@@ -276,36 +276,36 @@ func (o *Audit) SetTarget(v string) {
 	o.Target = &v
 }
 
-// GetTargetUUID returns the TargetUUID field value if set, zero value otherwise.
-func (o *Audit) GetTargetUUID() string {
-	if o == nil || o.TargetUUID == nil {
+// GetTargetID returns the TargetID field value if set, zero value otherwise.
+func (o *Audit) GetTargetID() string {
+	if o == nil || o.TargetID == nil {
 		var ret string
 		return ret
 	}
-	return *o.TargetUUID
+	return *o.TargetID
 }
 
-// GetTargetUUIDOk returns a tuple with the TargetUUID field value if set, nil otherwise
+// GetTargetIDOk returns a tuple with the TargetID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Audit) GetTargetUUIDOk() (*string, bool) {
-	if o == nil || o.TargetUUID == nil {
+func (o *Audit) GetTargetIDOk() (*string, bool) {
+	if o == nil || o.TargetID == nil {
 		return nil, false
 	}
-	return o.TargetUUID, true
+	return o.TargetID, true
 }
 
-// HasTargetUUID returns a boolean if a field has been set.
-func (o *Audit) HasTargetUUID() bool {
-	if o != nil && o.TargetUUID != nil {
+// HasTargetID returns a boolean if a field has been set.
+func (o *Audit) HasTargetID() bool {
+	if o != nil && o.TargetID != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetUUID gets a reference to the given string and assigns it to the TargetUUID field.
-func (o *Audit) SetTargetUUID(v string) {
-	o.TargetUUID = &v
+// SetTargetID gets a reference to the given string and assigns it to the TargetID field.
+func (o *Audit) SetTargetID(v string) {
+	o.TargetID = &v
 }
 
 // GetTaskUUID returns the TaskUUID field value if set, zero value otherwise.
@@ -451,8 +451,8 @@ func (o Audit) MarshalJSON() ([]byte, error) {
 	if o.Target != nil {
 		toSerialize["target"] = o.Target
 	}
-	if o.TargetUUID != nil {
-		toSerialize["targetUUID"] = o.TargetUUID
+	if o.TargetID != nil {
+		toSerialize["targetID"] = o.TargetID
 	}
 	if o.TaskUUID != nil {
 		toSerialize["taskUUID"] = o.TaskUUID

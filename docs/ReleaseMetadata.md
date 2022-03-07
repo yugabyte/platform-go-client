@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Http** | Pointer to [**HttpLocation**](HttpLocation.md) |  | [optional] 
 **ImageTag** | Pointer to **string** | Release image tag | [optional] 
 **Notes** | Pointer to **[]string** | Release notes | [optional] 
+**Packages** | Pointer to [**[]Package**](Package.md) | Release packages | [optional] 
 **S3** | Pointer to [**S3Location**](S3Location.md) |  | [optional] 
 **State** | Pointer to **string** | Release state | [optional] 
 
@@ -181,6 +182,31 @@ SetNotes sets Notes field to given value.
 `func (o *ReleaseMetadata) HasNotes() bool`
 
 HasNotes returns a boolean if a field has been set.
+
+### GetPackages
+
+`func (o *ReleaseMetadata) GetPackages() []Package`
+
+GetPackages returns the Packages field if non-nil, zero value otherwise.
+
+### GetPackagesOk
+
+`func (o *ReleaseMetadata) GetPackagesOk() (*[]Package, bool)`
+
+GetPackagesOk returns a tuple with the Packages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackages
+
+`func (o *ReleaseMetadata) SetPackages(v []Package)`
+
+SetPackages sets Packages field to given value.
+
+### HasPackages
+
+`func (o *ReleaseMetadata) HasPackages() bool`
+
+HasPackages returns a boolean if a field has been set.
 
 ### GetS3
 
