@@ -7,13 +7,13 @@ Method | HTTP request | Description
 [**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 [**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
 [**DeleteBackupsv2**](BackupsApi.md#DeleteBackupsv2) | **Delete** /api/v1/customers/{cUUID}/delete_backups | Delete backups V2
-[**EditBackup**](BackupsApi.md#EditBackup) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup
+[**EditBackupV2**](BackupsApi.md#EditBackupV2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 [**FetchBackupsByTaskUUID**](BackupsApi.md#FetchBackupsByTaskUUID) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
-[**Get**](BackupsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup
+[**GetBackupV2**](BackupsApi.md#GetBackupV2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
+[**ListBackupsV2**](BackupsApi.md#ListBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 [**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
-[**PageBackupList**](BackupsApi.md#PageBackupList) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated)
 [**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
-[**RestoreBackup**](BackupsApi.md#RestoreBackup) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup
+[**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 [**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 
@@ -228,11 +228,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## EditBackup
+## EditBackupV2
 
-> Backup EditBackup(ctx, cUUID, backupUUID).Backup(backup).Execute()
+> Backup EditBackupV2(ctx, cUUID, backupUUID).Backup(backup).Execute()
 
-Edit a backup
+Edit a backup V2
 
 
 
@@ -255,13 +255,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BackupsApi.EditBackup(context.Background(), cUUID, backupUUID).Backup(backup).Execute()
+    resp, r, err := api_client.BackupsApi.EditBackupV2(context.Background(), cUUID, backupUUID).Backup(backup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.EditBackup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.EditBackupV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EditBackup`: Backup
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.EditBackup`: %v\n", resp)
+    // response from `EditBackupV2`: Backup
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.EditBackupV2`: %v\n", resp)
 }
 ```
 
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiEditBackupRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiEditBackupV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -377,11 +377,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## Get
+## GetBackupV2
 
-> Backup Get(ctx, cUUID, backupUUID).Execute()
+> Backup GetBackupV2(ctx, cUUID, backupUUID).Execute()
 
-Get Backup
+Get Backup V2
 
 ### Example
 
@@ -401,13 +401,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BackupsApi.Get(context.Background(), cUUID, backupUUID).Execute()
+    resp, r, err := api_client.BackupsApi.GetBackupV2(context.Background(), cUUID, backupUUID).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.GetBackupV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `Get`: Backup
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.Get`: %v\n", resp)
+    // response from `GetBackupV2`: Backup
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.GetBackupV2`: %v\n", resp)
 }
 ```
 
@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetBackupV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -441,6 +441,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListBackupsV2
+
+> BackupPagedApiResponse ListBackupsV2(ctx, cUUID).PageBackupsRequest(pageBackupsRequest).Execute()
+
+List Backups (paginated) V2
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter(time.Now(), time.Now(), []string{"KeyspaceList_example"}, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.ListBackupsV2(context.Background(), cUUID).PageBackupsRequest(pageBackupsRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.ListBackupsV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListBackupsV2`: BackupPagedApiResponse
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.ListBackupsV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListBackupsV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageBackupsRequest** | [**BackupPagedApiQuery**](BackupPagedApiQuery.md) |  | 
+
+### Return type
+
+[**BackupPagedApiResponse**](BackupPagedApiResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -512,77 +583,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PageBackupList
-
-> BackupPagedApiResponse PageBackupList(ctx, cUUID).PageBackupsRequest(pageBackupsRequest).Execute()
-
-List Backups (paginated)
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter(time.Now(), time.Now(), []string{"KeyspaceList_example"}, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BackupsApi.PageBackupList(context.Background(), cUUID).PageBackupsRequest(pageBackupsRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.PageBackupList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PageBackupList`: BackupPagedApiResponse
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.PageBackupList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPageBackupListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **pageBackupsRequest** | [**BackupPagedApiQuery**](BackupPagedApiQuery.md) |  | 
-
-### Return type
-
-[**BackupPagedApiResponse**](BackupPagedApiResponse.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -663,11 +663,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## RestoreBackup
+## RestoreBackupV2
 
-> YBPTask RestoreBackup(ctx, cUUID).Backup(backup).Execute()
+> YBPTask RestoreBackupV2(ctx, cUUID).Backup(backup).Execute()
 
-Restore from a backup
+Restore from a backup V2
 
 ### Example
 
@@ -687,13 +687,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BackupsApi.RestoreBackup(context.Background(), cUUID).Backup(backup).Execute()
+    resp, r, err := api_client.BackupsApi.RestoreBackupV2(context.Background(), cUUID).Backup(backup).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.RestoreBackup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.RestoreBackupV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RestoreBackup`: YBPTask
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.RestoreBackup`: %v\n", resp)
+    // response from `RestoreBackupV2`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.RestoreBackupV2`: %v\n", resp)
 }
 ```
 
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRestoreBackupRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRestoreBackupV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

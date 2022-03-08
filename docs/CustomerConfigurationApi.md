@@ -33,7 +33,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    config := map[string]interface{}(Object) // map[string]interface{} | Configuration data to be created
+    config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiCreateCustomerConfigReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **config** | **map[string]interface{}** | Configuration data to be created | 
+ **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be created | 
 
 ### Return type
 
@@ -250,7 +250,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
-    config := map[string]interface{}(Object) // map[string]interface{} | Configuration data to be updated
+    config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be updated
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **config** | **map[string]interface{}** | Configuration data to be updated | 
+ **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
 
 ### Return type
 
@@ -323,7 +323,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
-    config := map[string]interface{}(Object) // map[string]interface{} | Configuration data to be updated
+    config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be updated
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **config** | **map[string]interface{}** | Configuration data to be updated | 
+ **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
 
 ### Return type
 

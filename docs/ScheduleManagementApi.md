@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteSchedule**](ScheduleManagementApi.md#DeleteSchedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Delete a schedule
 [**DeleteScheduleV2**](ScheduleManagementApi.md#DeleteScheduleV2) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete | Delete a schedule V2
-[**EditBackupSchedule**](ScheduleManagementApi.md#EditBackupSchedule) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule
+[**EditBackupScheduleV2**](ScheduleManagementApi.md#EditBackupScheduleV2) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule V2
 [**GetSchedule**](ScheduleManagementApi.md#GetSchedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
 [**ListSchedules**](ScheduleManagementApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules
-[**PageScheduleList**](ScheduleManagementApi.md#PageScheduleList) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules
+[**ListSchedulesV2**](ScheduleManagementApi.md#ListSchedulesV2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
 
 
 
@@ -155,11 +155,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## EditBackupSchedule
+## EditBackupScheduleV2
 
-> Schedule EditBackupSchedule(ctx, cUUID, sUUID).Body(body).Execute()
+> Schedule EditBackupScheduleV2(ctx, cUUID, sUUID).Body(body).Execute()
 
-Edit a backup schedule
+Edit a backup schedule V2
 
 ### Example
 
@@ -180,13 +180,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.EditBackupSchedule(context.Background(), cUUID, sUUID).Body(body).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.EditBackupScheduleV2(context.Background(), cUUID, sUUID).Body(body).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.EditBackupSchedule``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.EditBackupScheduleV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EditBackupSchedule`: Schedule
-    fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementApi.EditBackupSchedule`: %v\n", resp)
+    // response from `EditBackupScheduleV2`: Schedule
+    fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementApi.EditBackupScheduleV2`: %v\n", resp)
 }
 ```
 
@@ -201,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiEditBackupScheduleRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiEditBackupScheduleV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -367,11 +367,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PageScheduleList
+## ListSchedulesV2
 
-> SchedulePagedResponse PageScheduleList(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
+> SchedulePagedResponse ListSchedulesV2(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
 
-List schedules
+List schedules V2
 
 ### Example
 
@@ -391,13 +391,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.PageScheduleList(context.Background(), cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.ListSchedulesV2(context.Background(), cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.PageScheduleList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.ListSchedulesV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PageScheduleList`: SchedulePagedResponse
-    fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementApi.PageScheduleList`: %v\n", resp)
+    // response from `ListSchedulesV2`: SchedulePagedResponse
+    fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementApi.ListSchedulesV2`: %v\n", resp)
 }
 ```
 
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPageScheduleListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListSchedulesV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

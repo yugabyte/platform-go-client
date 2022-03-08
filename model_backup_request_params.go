@@ -16,6 +16,8 @@ import (
 
 // BackupRequestParams Backup table parameters
 type BackupRequestParams struct {
+	// Alter load balancer state
+	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
@@ -89,6 +91,38 @@ func NewBackupRequestParams(storageConfigUUID string, universeUUID string, ) *Ba
 func NewBackupRequestParamsWithDefaults() *BackupRequestParams {
 	this := BackupRequestParams{}
 	return &this
+}
+
+// GetAlterLoadBalancer returns the AlterLoadBalancer field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetAlterLoadBalancer() bool {
+	if o == nil || o.AlterLoadBalancer == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AlterLoadBalancer
+}
+
+// GetAlterLoadBalancerOk returns a tuple with the AlterLoadBalancer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetAlterLoadBalancerOk() (*bool, bool) {
+	if o == nil || o.AlterLoadBalancer == nil {
+		return nil, false
+	}
+	return o.AlterLoadBalancer, true
+}
+
+// HasAlterLoadBalancer returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasAlterLoadBalancer() bool {
+	if o != nil && o.AlterLoadBalancer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlterLoadBalancer gets a reference to the given bool and assigns it to the AlterLoadBalancer field.
+func (o *BackupRequestParams) SetAlterLoadBalancer(v bool) {
+	o.AlterLoadBalancer = &v
 }
 
 // GetBackupType returns the BackupType field value if set, zero value otherwise.
@@ -1005,6 +1039,9 @@ func (o *BackupRequestParams) SetYbPrevSoftwareVersion(v string) {
 
 func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AlterLoadBalancer != nil {
+		toSerialize["alterLoadBalancer"] = o.AlterLoadBalancer
+	}
 	if o.BackupType != nil {
 		toSerialize["backupType"] = o.BackupType
 	}

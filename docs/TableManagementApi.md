@@ -6,11 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AlterTable**](TableManagementApi.md#AlterTable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
 [**BulkImportData**](TableManagementApi.md#BulkImportData) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
+[**CreateBackupScheduleV2**](TableManagementApi.md#CreateBackupScheduleV2) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule V2
+[**CreateBackupV2**](TableManagementApi.md#CreateBackupV2) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
 [**CreateMultiTableBackup**](TableManagementApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 [**CreateSingleTableBackup**](TableManagementApi.md#CreateSingleTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
 [**CreateTable**](TableManagementApi.md#CreateTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
-[**Createbackup**](TableManagementApi.md#Createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
-[**CreatebackupSchedule**](TableManagementApi.md#CreatebackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 [**DescribeTable**](TableManagementApi.md#DescribeTable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
 [**DropTable**](TableManagementApi.md#DropTable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
 [**GetAllTables**](TableManagementApi.md#GetAllTables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | List all tables
@@ -151,6 +151,146 @@ Name | Type | Description  | Notes
 
 
  **bulkImport** | [**BulkImportParams**](BulkImportParams.md) | Bulk data to be imported | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateBackupScheduleV2
+
+> Schedule CreateBackupScheduleV2(ctx, cUUID).Backup(backup).Execute()
+
+Create Backup Schedule V2
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TableManagementApi.CreateBackupScheduleV2(context.Background(), cUUID).Backup(backup).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateBackupScheduleV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateBackupScheduleV2`: Schedule
+    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.CreateBackupScheduleV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateBackupScheduleV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **backup** | [**BackupRequestParams**](BackupRequestParams.md) | Parameters of the backup to be restored | 
+
+### Return type
+
+[**Schedule**](Schedule.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateBackupV2
+
+> YBPTask CreateBackupV2(ctx, cUUID).Backup(backup).Execute()
+
+Create a backup V2
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TableManagementApi.CreateBackupV2(context.Background(), cUUID).Backup(backup).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateBackupV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateBackupV2`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.CreateBackupV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateBackupV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **backup** | [**BackupRequestParams**](BackupRequestParams.md) | Backup data to be created | 
 
 ### Return type
 
@@ -377,146 +517,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Createbackup
-
-> YBPTask Createbackup(ctx, cUUID).Backup(backup).Execute()
-
-Create a backup
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.Createbackup(context.Background(), cUUID).Backup(backup).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.Createbackup``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Createbackup`: YBPTask
-    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.Createbackup`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreatebackupRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **backup** | [**BackupRequestParams**](BackupRequestParams.md) | Backup data to be created | 
-
-### Return type
-
-[**YBPTask**](YBPTask.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreatebackupSchedule
-
-> Schedule CreatebackupSchedule(ctx, cUUID).Backup(backup).Execute()
-
-Create Backup Schedule
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.CreatebackupSchedule(context.Background(), cUUID).Backup(backup).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreatebackupSchedule``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreatebackupSchedule`: Schedule
-    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.CreatebackupSchedule`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreatebackupScheduleRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **backup** | [**BackupRequestParams**](BackupRequestParams.md) | Parameters of the backup to be restored | 
-
-### Return type
-
-[**Schedule**](Schedule.md)
 
 ### Authorization
 

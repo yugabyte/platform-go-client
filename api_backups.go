@@ -398,7 +398,7 @@ func (a *BackupsApiService) DeleteBackupsv2Execute(r BackupsApiApiDeleteBackupsv
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type BackupsApiApiEditBackupRequest struct {
+type BackupsApiApiEditBackupV2Request struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
@@ -406,25 +406,25 @@ type BackupsApiApiEditBackupRequest struct {
 	backup *EditBackupParams
 }
 
-func (r BackupsApiApiEditBackupRequest) Backup(backup EditBackupParams) BackupsApiApiEditBackupRequest {
+func (r BackupsApiApiEditBackupV2Request) Backup(backup EditBackupParams) BackupsApiApiEditBackupV2Request {
 	r.backup = &backup
 	return r
 }
 
-func (r BackupsApiApiEditBackupRequest) Execute() (Backup, *_nethttp.Response, error) {
-	return r.ApiService.EditBackupExecute(r)
+func (r BackupsApiApiEditBackupV2Request) Execute() (Backup, *_nethttp.Response, error) {
+	return r.ApiService.EditBackupV2Execute(r)
 }
 
 /*
- * EditBackup Edit a backup
+ * EditBackupV2 Edit a backup V2
  * Edit a backup
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param backupUUID
- * @return BackupsApiApiEditBackupRequest
+ * @return BackupsApiApiEditBackupV2Request
  */
-func (a *BackupsApiService) EditBackup(ctx _context.Context, cUUID string, backupUUID string) BackupsApiApiEditBackupRequest {
-	return BackupsApiApiEditBackupRequest{
+func (a *BackupsApiService) EditBackupV2(ctx _context.Context, cUUID string, backupUUID string) BackupsApiApiEditBackupV2Request {
+	return BackupsApiApiEditBackupV2Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -436,7 +436,7 @@ func (a *BackupsApiService) EditBackup(ctx _context.Context, cUUID string, backu
  * Execute executes the request
  * @return Backup
  */
-func (a *BackupsApiService) EditBackupExecute(r BackupsApiApiEditBackupRequest) (Backup, *_nethttp.Response, error) {
+func (a *BackupsApiService) EditBackupV2Execute(r BackupsApiApiEditBackupV2Request) (Backup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -446,7 +446,7 @@ func (a *BackupsApiService) EditBackupExecute(r BackupsApiApiEditBackupRequest) 
 		localVarReturnValue  Backup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.EditBackup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.EditBackupV2")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -668,7 +668,7 @@ func (a *BackupsApiService) FetchBackupsByTaskUUIDExecute(r BackupsApiApiFetchBa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type BackupsApiApiGetRequest struct {
+type BackupsApiApiGetBackupV2Request struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
@@ -676,19 +676,19 @@ type BackupsApiApiGetRequest struct {
 }
 
 
-func (r BackupsApiApiGetRequest) Execute() (Backup, *_nethttp.Response, error) {
-	return r.ApiService.GetExecute(r)
+func (r BackupsApiApiGetBackupV2Request) Execute() (Backup, *_nethttp.Response, error) {
+	return r.ApiService.GetBackupV2Execute(r)
 }
 
 /*
- * Get Get Backup
+ * GetBackupV2 Get Backup V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param backupUUID
- * @return BackupsApiApiGetRequest
+ * @return BackupsApiApiGetBackupV2Request
  */
-func (a *BackupsApiService) Get(ctx _context.Context, cUUID string, backupUUID string) BackupsApiApiGetRequest {
-	return BackupsApiApiGetRequest{
+func (a *BackupsApiService) GetBackupV2(ctx _context.Context, cUUID string, backupUUID string) BackupsApiApiGetBackupV2Request {
+	return BackupsApiApiGetBackupV2Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -700,7 +700,7 @@ func (a *BackupsApiService) Get(ctx _context.Context, cUUID string, backupUUID s
  * Execute executes the request
  * @return Backup
  */
-func (a *BackupsApiService) GetExecute(r BackupsApiApiGetRequest) (Backup, *_nethttp.Response, error) {
+func (a *BackupsApiService) GetBackupV2Execute(r BackupsApiApiGetBackupV2Request) (Backup, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -710,7 +710,7 @@ func (a *BackupsApiService) GetExecute(r BackupsApiApiGetRequest) (Backup, *_net
 		localVarReturnValue  Backup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.Get")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.GetBackupV2")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -740,6 +740,135 @@ func (a *BackupsApiService) GetExecute(r BackupsApiApiGetRequest) (Backup, *_net
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupsApiApiListBackupsV2Request struct {
+	ctx _context.Context
+	ApiService *BackupsApiService
+	cUUID string
+	pageBackupsRequest *BackupPagedApiQuery
+}
+
+func (r BackupsApiApiListBackupsV2Request) PageBackupsRequest(pageBackupsRequest BackupPagedApiQuery) BackupsApiApiListBackupsV2Request {
+	r.pageBackupsRequest = &pageBackupsRequest
+	return r
+}
+
+func (r BackupsApiApiListBackupsV2Request) Execute() (BackupPagedApiResponse, *_nethttp.Response, error) {
+	return r.ApiService.ListBackupsV2Execute(r)
+}
+
+/*
+ * ListBackupsV2 List Backups (paginated) V2
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return BackupsApiApiListBackupsV2Request
+ */
+func (a *BackupsApiService) ListBackupsV2(ctx _context.Context, cUUID string) BackupsApiApiListBackupsV2Request {
+	return BackupsApiApiListBackupsV2Request{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return BackupPagedApiResponse
+ */
+func (a *BackupsApiService) ListBackupsV2Execute(r BackupsApiApiListBackupsV2Request) (BackupPagedApiResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  BackupPagedApiResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.ListBackupsV2")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/backups/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.pageBackupsRequest == nil {
+		return localVarReturnValue, nil, reportError("pageBackupsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.pageBackupsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -923,135 +1052,6 @@ func (a *BackupsApiService) ListOfBackupsExecute(r BackupsApiApiListOfBackupsReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type BackupsApiApiPageBackupListRequest struct {
-	ctx _context.Context
-	ApiService *BackupsApiService
-	cUUID string
-	pageBackupsRequest *BackupPagedApiQuery
-}
-
-func (r BackupsApiApiPageBackupListRequest) PageBackupsRequest(pageBackupsRequest BackupPagedApiQuery) BackupsApiApiPageBackupListRequest {
-	r.pageBackupsRequest = &pageBackupsRequest
-	return r
-}
-
-func (r BackupsApiApiPageBackupListRequest) Execute() (BackupPagedApiResponse, *_nethttp.Response, error) {
-	return r.ApiService.PageBackupListExecute(r)
-}
-
-/*
- * PageBackupList List Backups (paginated)
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @return BackupsApiApiPageBackupListRequest
- */
-func (a *BackupsApiService) PageBackupList(ctx _context.Context, cUUID string) BackupsApiApiPageBackupListRequest {
-	return BackupsApiApiPageBackupListRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return BackupPagedApiResponse
- */
-func (a *BackupsApiService) PageBackupListExecute(r BackupsApiApiPageBackupListRequest) (BackupPagedApiResponse, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BackupPagedApiResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.PageBackupList")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/backups/page"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.pageBackupsRequest == nil {
-		return localVarReturnValue, nil, reportError("pageBackupsRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.pageBackupsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type BackupsApiApiRestoreRequest struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
@@ -1185,30 +1185,30 @@ func (a *BackupsApiService) RestoreExecute(r BackupsApiApiRestoreRequest) (YBPTa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type BackupsApiApiRestoreBackupRequest struct {
+type BackupsApiApiRestoreBackupV2Request struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
 	backup *RestoreBackupParams
 }
 
-func (r BackupsApiApiRestoreBackupRequest) Backup(backup RestoreBackupParams) BackupsApiApiRestoreBackupRequest {
+func (r BackupsApiApiRestoreBackupV2Request) Backup(backup RestoreBackupParams) BackupsApiApiRestoreBackupV2Request {
 	r.backup = &backup
 	return r
 }
 
-func (r BackupsApiApiRestoreBackupRequest) Execute() (YBPTask, *_nethttp.Response, error) {
-	return r.ApiService.RestoreBackupExecute(r)
+func (r BackupsApiApiRestoreBackupV2Request) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.RestoreBackupV2Execute(r)
 }
 
 /*
- * RestoreBackup Restore from a backup
+ * RestoreBackupV2 Restore from a backup V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
- * @return BackupsApiApiRestoreBackupRequest
+ * @return BackupsApiApiRestoreBackupV2Request
  */
-func (a *BackupsApiService) RestoreBackup(ctx _context.Context, cUUID string) BackupsApiApiRestoreBackupRequest {
-	return BackupsApiApiRestoreBackupRequest{
+func (a *BackupsApiService) RestoreBackupV2(ctx _context.Context, cUUID string) BackupsApiApiRestoreBackupV2Request {
+	return BackupsApiApiRestoreBackupV2Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -1219,7 +1219,7 @@ func (a *BackupsApiService) RestoreBackup(ctx _context.Context, cUUID string) Ba
  * Execute executes the request
  * @return YBPTask
  */
-func (a *BackupsApiService) RestoreBackupExecute(r BackupsApiApiRestoreBackupRequest) (YBPTask, *_nethttp.Response, error) {
+func (a *BackupsApiService) RestoreBackupV2Execute(r BackupsApiApiRestoreBackupV2Request) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1229,7 +1229,7 @@ func (a *BackupsApiService) RestoreBackupExecute(r BackupsApiApiRestoreBackupReq
 		localVarReturnValue  YBPTask
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.RestoreBackup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.RestoreBackupV2")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

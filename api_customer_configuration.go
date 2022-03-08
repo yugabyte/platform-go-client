@@ -31,10 +31,10 @@ type CustomerConfigurationApiApiCreateCustomerConfigRequest struct {
 	ctx _context.Context
 	ApiService *CustomerConfigurationApiService
 	cUUID string
-	config *map[string]interface{}
+	config *CustomerConfig
 }
 
-func (r CustomerConfigurationApiApiCreateCustomerConfigRequest) Config(config map[string]interface{}) CustomerConfigurationApiApiCreateCustomerConfigRequest {
+func (r CustomerConfigurationApiApiCreateCustomerConfigRequest) Config(config CustomerConfig) CustomerConfigurationApiApiCreateCustomerConfigRequest {
 	r.config = &config
 	return r
 }
@@ -423,10 +423,10 @@ type CustomerConfigurationApiApiGetCustomerConfigRequest struct {
 	ApiService *CustomerConfigurationApiService
 	cUUID string
 	configUUID string
-	config *map[string]interface{}
+	config *CustomerConfig
 }
 
-func (r CustomerConfigurationApiApiGetCustomerConfigRequest) Config(config map[string]interface{}) CustomerConfigurationApiApiGetCustomerConfigRequest {
+func (r CustomerConfigurationApiApiGetCustomerConfigRequest) Config(config CustomerConfig) CustomerConfigurationApiApiGetCustomerConfigRequest {
 	r.config = &config
 	return r
 }
@@ -556,10 +556,10 @@ type CustomerConfigurationApiApiGetCustomerConfig_0Request struct {
 	ApiService *CustomerConfigurationApiService
 	cUUID string
 	configUUID string
-	config *map[string]interface{}
+	config *CustomerConfig
 }
 
-func (r CustomerConfigurationApiApiGetCustomerConfig_0Request) Config(config map[string]interface{}) CustomerConfigurationApiApiGetCustomerConfig_0Request {
+func (r CustomerConfigurationApiApiGetCustomerConfig_0Request) Config(config CustomerConfig) CustomerConfigurationApiApiGetCustomerConfig_0Request {
 	r.config = &config
 	return r
 }

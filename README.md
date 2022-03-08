@@ -121,13 +121,13 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**CreateMultiTableBackup**](docs/BackupsApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 *BackupsApi* | [**DeleteBackups**](docs/BackupsApi.md#deletebackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
 *BackupsApi* | [**DeleteBackupsv2**](docs/BackupsApi.md#deletebackupsv2) | **Delete** /api/v1/customers/{cUUID}/delete_backups | Delete backups V2
-*BackupsApi* | [**EditBackup**](docs/BackupsApi.md#editbackup) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup
+*BackupsApi* | [**EditBackupV2**](docs/BackupsApi.md#editbackupv2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 *BackupsApi* | [**FetchBackupsByTaskUUID**](docs/BackupsApi.md#fetchbackupsbytaskuuid) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
-*BackupsApi* | [**Get**](docs/BackupsApi.md#get) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup
+*BackupsApi* | [**GetBackupV2**](docs/BackupsApi.md#getbackupv2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
+*BackupsApi* | [**ListBackupsV2**](docs/BackupsApi.md#listbackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 *BackupsApi* | [**ListOfBackups**](docs/BackupsApi.md#listofbackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
-*BackupsApi* | [**PageBackupList**](docs/BackupsApi.md#pagebackuplist) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated)
 *BackupsApi* | [**Restore**](docs/BackupsApi.md#restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
-*BackupsApi* | [**RestoreBackup**](docs/BackupsApi.md#restorebackup) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup
+*BackupsApi* | [**RestoreBackupV2**](docs/BackupsApi.md#restorebackupv2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 *BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 *BackupsApi* | [**StopBackup**](docs/BackupsApi.md#stopbackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 *CertificateInfoApi* | [**CreateSelfSignedCert**](docs/CertificateInfoApi.md#createselfsignedcert) | **Post** /api/v1/customers/{cUUID}/certificates/create_self_signed_cert | Create a self signed certificate
@@ -209,10 +209,10 @@ Class | Method | HTTP request | Description
 *RuntimeConfigurationApi* | [**SetKey**](docs/RuntimeConfigurationApi.md#setkey) | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Update a configuration key
 *ScheduleManagementApi* | [**DeleteSchedule**](docs/ScheduleManagementApi.md#deleteschedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Delete a schedule
 *ScheduleManagementApi* | [**DeleteScheduleV2**](docs/ScheduleManagementApi.md#deleteschedulev2) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete | Delete a schedule V2
-*ScheduleManagementApi* | [**EditBackupSchedule**](docs/ScheduleManagementApi.md#editbackupschedule) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule
+*ScheduleManagementApi* | [**EditBackupScheduleV2**](docs/ScheduleManagementApi.md#editbackupschedulev2) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule V2
 *ScheduleManagementApi* | [**GetSchedule**](docs/ScheduleManagementApi.md#getschedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
 *ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules
-*ScheduleManagementApi* | [**PageScheduleList**](docs/ScheduleManagementApi.md#pageschedulelist) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules
+*ScheduleManagementApi* | [**ListSchedulesV2**](docs/ScheduleManagementApi.md#listschedulesv2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
 *SessionManagementApi* | [**AppVersion**](docs/SessionManagementApi.md#appversion) | **Get** /api/v1/app_version | appVersion
 *SessionManagementApi* | [**CustomerCount**](docs/SessionManagementApi.md#customercount) | **Get** /api/v1/customer_count | customerCount
 *SessionManagementApi* | [**GetFilteredLogs**](docs/SessionManagementApi.md#getfilteredlogs) | **Get** /api/v1/logs | getFilteredLogs
@@ -226,11 +226,11 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 *TableManagementApi* | [**AlterTable**](docs/TableManagementApi.md#altertable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
 *TableManagementApi* | [**BulkImportData**](docs/TableManagementApi.md#bulkimportdata) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
+*TableManagementApi* | [**CreateBackupScheduleV2**](docs/TableManagementApi.md#createbackupschedulev2) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule V2
+*TableManagementApi* | [**CreateBackupV2**](docs/TableManagementApi.md#createbackupv2) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
 *TableManagementApi* | [**CreateMultiTableBackup**](docs/TableManagementApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 *TableManagementApi* | [**CreateSingleTableBackup**](docs/TableManagementApi.md#createsingletablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
 *TableManagementApi* | [**CreateTable**](docs/TableManagementApi.md#createtable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
-*TableManagementApi* | [**Createbackup**](docs/TableManagementApi.md#createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
-*TableManagementApi* | [**CreatebackupSchedule**](docs/TableManagementApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 *TableManagementApi* | [**DescribeTable**](docs/TableManagementApi.md#describetable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
 *TableManagementApi* | [**DropTable**](docs/TableManagementApi.md#droptable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
 *TableManagementApi* | [**GetAllTables**](docs/TableManagementApi.md#getalltables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | List all tables

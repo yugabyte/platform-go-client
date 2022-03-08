@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActionType** | Pointer to **string** | Action type | [optional] 
+**AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupStorageInfoList** | Pointer to [**[]BackupStorageInfo**](BackupStorageInfo.md) | Backup&#39;s storage info to restore | [optional] 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
@@ -73,6 +74,31 @@ SetActionType sets ActionType field to given value.
 `func (o *RestoreBackupParams) HasActionType() bool`
 
 HasActionType returns a boolean if a field has been set.
+
+### GetAlterLoadBalancer
+
+`func (o *RestoreBackupParams) GetAlterLoadBalancer() bool`
+
+GetAlterLoadBalancer returns the AlterLoadBalancer field if non-nil, zero value otherwise.
+
+### GetAlterLoadBalancerOk
+
+`func (o *RestoreBackupParams) GetAlterLoadBalancerOk() (*bool, bool)`
+
+GetAlterLoadBalancerOk returns a tuple with the AlterLoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlterLoadBalancer
+
+`func (o *RestoreBackupParams) SetAlterLoadBalancer(v bool)`
+
+SetAlterLoadBalancer sets AlterLoadBalancer field to given value.
+
+### HasAlterLoadBalancer
+
+`func (o *RestoreBackupParams) HasAlterLoadBalancer() bool`
+
+HasAlterLoadBalancer returns a boolean if a field has been set.
 
 ### GetBackupStorageInfoList
 

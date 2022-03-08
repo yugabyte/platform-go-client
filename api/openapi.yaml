@@ -954,7 +954,7 @@ paths:
       tags:
       - Backups
     post:
-      operationId: createbackup
+      operationId: createBackupV2
       parameters:
       - in: path
         name: cUUID
@@ -979,13 +979,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Create a backup
+      summary: Create a backup V2
       tags:
       - Table management
       x-codegen-request-body-name: Backup
   /api/v1/customers/{cUUID}/backups/page:
     post:
-      operationId: pageBackupList
+      operationId: listBackupsV2
       parameters:
       - in: path
         name: cUUID
@@ -1009,13 +1009,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: List Backups (paginated)
+      summary: List Backups (paginated) V2
       tags:
       - Backups
       x-codegen-request-body-name: PageBackupsRequest
   /api/v1/customers/{cUUID}/backups/{backupUUID}:
     get:
-      operationId: get
+      operationId: getBackupV2
       parameters:
       - in: path
         name: cUUID
@@ -1040,12 +1040,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Get Backup
+      summary: Get Backup V2
       tags:
       - Backups
     put:
       description: Edit a backup
-      operationId: editBackup
+      operationId: editBackupV2
       parameters:
       - in: path
         name: cUUID
@@ -1077,7 +1077,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Edit a backup
+      summary: Edit a backup V2
       tags:
       - Backups
       x-codegen-request-body-name: backup
@@ -1439,8 +1439,7 @@ paths:
         content:
           application/json:
             schema:
-              exampleSetFlag: false
-              type: object
+              $ref: '#/components/schemas/CustomerConfig'
         description: Configuration data to be created
         required: true
       responses:
@@ -1513,8 +1512,7 @@ paths:
         content:
           application/json:
             schema:
-              exampleSetFlag: false
-              type: object
+              $ref: '#/components/schemas/CustomerConfig'
         description: Configuration data to be updated
         required: true
       responses:
@@ -1588,8 +1586,7 @@ paths:
         content:
           application/json:
             schema:
-              exampleSetFlag: false
-              type: object
+              $ref: '#/components/schemas/CustomerConfig'
         description: Configuration data to be updated
         required: true
       responses:
@@ -1633,7 +1630,7 @@ paths:
       - Universe information
   /api/v1/customers/{cUUID}/create_backup_schedule:
     post:
-      operationId: createbackupSchedule
+      operationId: createBackupScheduleV2
       parameters:
       - in: path
         name: cUUID
@@ -1658,7 +1655,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Create Backup Schedule
+      summary: Create Backup Schedule V2
       tags:
       - Table management
       x-codegen-request-body-name: backup
@@ -3139,7 +3136,7 @@ paths:
       x-codegen-request-body-name: Release
   /api/v1/customers/{cUUID}/restore:
     post:
-      operationId: restoreBackup
+      operationId: restoreBackupV2
       parameters:
       - in: path
         name: cUUID
@@ -3164,7 +3161,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Restore from a backup
+      summary: Restore from a backup V2
       tags:
       - Backups
       x-codegen-request-body-name: backup
@@ -3377,7 +3374,7 @@ paths:
       - Schedule management
   /api/v1/customers/{cUUID}/schedules/page:
     post:
-      operationId: pageScheduleList
+      operationId: listSchedulesV2
       parameters:
       - in: path
         name: cUUID
@@ -3401,7 +3398,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: List schedules
+      summary: List schedules V2
       tags:
       - Schedule management
       x-codegen-request-body-name: PageScheduleRequest
@@ -3465,7 +3462,7 @@ paths:
       tags:
       - Schedule management
     put:
-      operationId: editBackupSchedule
+      operationId: editBackupScheduleV2
       parameters:
       - in: path
         name: cUUID
@@ -3496,7 +3493,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Edit a backup schedule
+      summary: Edit a backup schedule V2
       tags:
       - Schedule management
       x-codegen-request-body-name: body
@@ -8666,6 +8663,7 @@ components:
           tableName: tableName
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           firstTry: true
+          alterLoadBalancer: true
           customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           extraDependencies:
             installNodeExporter: true
@@ -9155,6 +9153,7 @@ components:
         backupType: YQL_TABLE_TYPE
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         firstTry: true
+        alterLoadBalancer: true
         extraDependencies:
           installNodeExporter: true
         enableVerboseLogs: true
@@ -9295,6 +9294,10 @@ components:
         previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       exampleSetFlag: true
       properties:
+        alterLoadBalancer:
+          description: Alter load balancer state
+          exampleSetFlag: true
+          type: boolean
         backupType:
           description: Backup type
           enum:
@@ -9637,6 +9640,7 @@ components:
         tableName: tableName
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         firstTry: true
+        alterLoadBalancer: true
         customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         extraDependencies:
           installNodeExporter: true
@@ -9784,6 +9788,10 @@ components:
           - DELETE
           exampleSetFlag: true
           type: string
+        alterLoadBalancer:
+          description: Alter load balancer state
+          exampleSetFlag: true
+          type: boolean
         backupList:
           description: Backups
           exampleSetFlag: false
@@ -14363,6 +14371,7 @@ components:
           tableName: tableName
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           firstTry: true
+          alterLoadBalancer: true
           customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           extraDependencies:
             installNodeExporter: true
@@ -14523,6 +14532,7 @@ components:
           tableName: tableName
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           firstTry: true
+          alterLoadBalancer: true
           customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           extraDependencies:
             installNodeExporter: true
@@ -14663,6 +14673,7 @@ components:
         tableName: tableName
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         firstTry: true
+        alterLoadBalancer: true
         customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         extraDependencies:
           installNodeExporter: true
@@ -14811,6 +14822,10 @@ components:
           - DELETE
           exampleSetFlag: true
           type: string
+        alterLoadBalancer:
+          description: Alter load balancer state
+          exampleSetFlag: true
+          type: boolean
         backupList:
           description: Backups
           exampleSetFlag: false
@@ -17273,6 +17288,7 @@ components:
         newOwner: newOwner
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         firstTry: true
+        alterLoadBalancer: true
         extraDependencies:
           installNodeExporter: true
         enableVerboseLogs: true
@@ -17403,6 +17419,10 @@ components:
           - RESTORE_KEYS
           exampleSetFlag: true
           type: string
+        alterLoadBalancer:
+          description: Alter load balancer state
+          exampleSetFlag: true
+          type: boolean
         backupStorageInfoList:
           description: Backup's storage info to restore
           exampleSetFlag: false

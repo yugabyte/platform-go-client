@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActionType** | Pointer to **string** | Action type | [optional] 
+**AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupList** | Pointer to [**[]BackupTableParams**](BackupTableParams.md) | Backups | [optional] 
 **BackupSizeInBytes** | Pointer to **int64** | Backup size in bytes | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
@@ -92,6 +93,31 @@ SetActionType sets ActionType field to given value.
 `func (o *MultiTableBackupRequestParams) HasActionType() bool`
 
 HasActionType returns a boolean if a field has been set.
+
+### GetAlterLoadBalancer
+
+`func (o *MultiTableBackupRequestParams) GetAlterLoadBalancer() bool`
+
+GetAlterLoadBalancer returns the AlterLoadBalancer field if non-nil, zero value otherwise.
+
+### GetAlterLoadBalancerOk
+
+`func (o *MultiTableBackupRequestParams) GetAlterLoadBalancerOk() (*bool, bool)`
+
+GetAlterLoadBalancerOk returns a tuple with the AlterLoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlterLoadBalancer
+
+`func (o *MultiTableBackupRequestParams) SetAlterLoadBalancer(v bool)`
+
+SetAlterLoadBalancer sets AlterLoadBalancer field to given value.
+
+### HasAlterLoadBalancer
+
+`func (o *MultiTableBackupRequestParams) HasAlterLoadBalancer() bool`
+
+HasAlterLoadBalancer returns a boolean if a field has been set.
 
 ### GetBackupList
 

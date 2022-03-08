@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
@@ -52,6 +53,31 @@ will change when the set of required properties is changed
 NewBackupRequestParamsWithDefaults instantiates a new BackupRequestParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAlterLoadBalancer
+
+`func (o *BackupRequestParams) GetAlterLoadBalancer() bool`
+
+GetAlterLoadBalancer returns the AlterLoadBalancer field if non-nil, zero value otherwise.
+
+### GetAlterLoadBalancerOk
+
+`func (o *BackupRequestParams) GetAlterLoadBalancerOk() (*bool, bool)`
+
+GetAlterLoadBalancerOk returns a tuple with the AlterLoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlterLoadBalancer
+
+`func (o *BackupRequestParams) SetAlterLoadBalancer(v bool)`
+
+SetAlterLoadBalancer sets AlterLoadBalancer field to given value.
+
+### HasAlterLoadBalancer
+
+`func (o *BackupRequestParams) HasAlterLoadBalancer() bool`
+
+HasAlterLoadBalancer returns a boolean if a field has been set.
 
 ### GetBackupType
 

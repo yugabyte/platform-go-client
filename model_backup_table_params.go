@@ -18,6 +18,8 @@ import (
 type BackupTableParams struct {
 	// Action type
 	ActionType *string `json:"actionType,omitempty"`
+	// Alter load balancer state
+	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backups
 	BackupList *[]BackupTableParams `json:"backupList,omitempty"`
 	// Backup size in bytes
@@ -148,6 +150,38 @@ func (o *BackupTableParams) HasActionType() bool {
 // SetActionType gets a reference to the given string and assigns it to the ActionType field.
 func (o *BackupTableParams) SetActionType(v string) {
 	o.ActionType = &v
+}
+
+// GetAlterLoadBalancer returns the AlterLoadBalancer field value if set, zero value otherwise.
+func (o *BackupTableParams) GetAlterLoadBalancer() bool {
+	if o == nil || o.AlterLoadBalancer == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AlterLoadBalancer
+}
+
+// GetAlterLoadBalancerOk returns a tuple with the AlterLoadBalancer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetAlterLoadBalancerOk() (*bool, bool) {
+	if o == nil || o.AlterLoadBalancer == nil {
+		return nil, false
+	}
+	return o.AlterLoadBalancer, true
+}
+
+// HasAlterLoadBalancer returns a boolean if a field has been set.
+func (o *BackupTableParams) HasAlterLoadBalancer() bool {
+	if o != nil && o.AlterLoadBalancer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAlterLoadBalancer gets a reference to the given bool and assigns it to the AlterLoadBalancer field.
+func (o *BackupTableParams) SetAlterLoadBalancer(v bool) {
+	o.AlterLoadBalancer = &v
 }
 
 // GetBackupList returns the BackupList field value if set, zero value otherwise.
@@ -1490,6 +1524,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ActionType != nil {
 		toSerialize["actionType"] = o.ActionType
+	}
+	if o.AlterLoadBalancer != nil {
+		toSerialize["alterLoadBalancer"] = o.AlterLoadBalancer
 	}
 	if o.BackupList != nil {
 		toSerialize["backupList"] = o.BackupList

@@ -273,7 +273,7 @@ func (a *ScheduleManagementApiService) DeleteScheduleV2Execute(r ScheduleManagem
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ScheduleManagementApiApiEditBackupScheduleRequest struct {
+type ScheduleManagementApiApiEditBackupScheduleV2Request struct {
 	ctx _context.Context
 	ApiService *ScheduleManagementApiService
 	cUUID string
@@ -281,24 +281,24 @@ type ScheduleManagementApiApiEditBackupScheduleRequest struct {
 	body *EditBackupScheduleParams
 }
 
-func (r ScheduleManagementApiApiEditBackupScheduleRequest) Body(body EditBackupScheduleParams) ScheduleManagementApiApiEditBackupScheduleRequest {
+func (r ScheduleManagementApiApiEditBackupScheduleV2Request) Body(body EditBackupScheduleParams) ScheduleManagementApiApiEditBackupScheduleV2Request {
 	r.body = &body
 	return r
 }
 
-func (r ScheduleManagementApiApiEditBackupScheduleRequest) Execute() (Schedule, *_nethttp.Response, error) {
-	return r.ApiService.EditBackupScheduleExecute(r)
+func (r ScheduleManagementApiApiEditBackupScheduleV2Request) Execute() (Schedule, *_nethttp.Response, error) {
+	return r.ApiService.EditBackupScheduleV2Execute(r)
 }
 
 /*
- * EditBackupSchedule Edit a backup schedule
+ * EditBackupScheduleV2 Edit a backup schedule V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param sUUID
- * @return ScheduleManagementApiApiEditBackupScheduleRequest
+ * @return ScheduleManagementApiApiEditBackupScheduleV2Request
  */
-func (a *ScheduleManagementApiService) EditBackupSchedule(ctx _context.Context, cUUID string, sUUID string) ScheduleManagementApiApiEditBackupScheduleRequest {
-	return ScheduleManagementApiApiEditBackupScheduleRequest{
+func (a *ScheduleManagementApiService) EditBackupScheduleV2(ctx _context.Context, cUUID string, sUUID string) ScheduleManagementApiApiEditBackupScheduleV2Request {
+	return ScheduleManagementApiApiEditBackupScheduleV2Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -310,7 +310,7 @@ func (a *ScheduleManagementApiService) EditBackupSchedule(ctx _context.Context, 
  * Execute executes the request
  * @return Schedule
  */
-func (a *ScheduleManagementApiService) EditBackupScheduleExecute(r ScheduleManagementApiApiEditBackupScheduleRequest) (Schedule, *_nethttp.Response, error) {
+func (a *ScheduleManagementApiService) EditBackupScheduleV2Execute(r ScheduleManagementApiApiEditBackupScheduleV2Request) (Schedule, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -320,7 +320,7 @@ func (a *ScheduleManagementApiService) EditBackupScheduleExecute(r ScheduleManag
 		localVarReturnValue  Schedule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementApiService.EditBackupSchedule")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementApiService.EditBackupScheduleV2")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -648,30 +648,30 @@ func (a *ScheduleManagementApiService) ListSchedulesExecute(r ScheduleManagement
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ScheduleManagementApiApiPageScheduleListRequest struct {
+type ScheduleManagementApiApiListSchedulesV2Request struct {
 	ctx _context.Context
 	ApiService *ScheduleManagementApiService
 	cUUID string
 	pageScheduleRequest *SchedulePagedApiQuery
 }
 
-func (r ScheduleManagementApiApiPageScheduleListRequest) PageScheduleRequest(pageScheduleRequest SchedulePagedApiQuery) ScheduleManagementApiApiPageScheduleListRequest {
+func (r ScheduleManagementApiApiListSchedulesV2Request) PageScheduleRequest(pageScheduleRequest SchedulePagedApiQuery) ScheduleManagementApiApiListSchedulesV2Request {
 	r.pageScheduleRequest = &pageScheduleRequest
 	return r
 }
 
-func (r ScheduleManagementApiApiPageScheduleListRequest) Execute() (SchedulePagedResponse, *_nethttp.Response, error) {
-	return r.ApiService.PageScheduleListExecute(r)
+func (r ScheduleManagementApiApiListSchedulesV2Request) Execute() (SchedulePagedResponse, *_nethttp.Response, error) {
+	return r.ApiService.ListSchedulesV2Execute(r)
 }
 
 /*
- * PageScheduleList List schedules
+ * ListSchedulesV2 List schedules V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
- * @return ScheduleManagementApiApiPageScheduleListRequest
+ * @return ScheduleManagementApiApiListSchedulesV2Request
  */
-func (a *ScheduleManagementApiService) PageScheduleList(ctx _context.Context, cUUID string) ScheduleManagementApiApiPageScheduleListRequest {
-	return ScheduleManagementApiApiPageScheduleListRequest{
+func (a *ScheduleManagementApiService) ListSchedulesV2(ctx _context.Context, cUUID string) ScheduleManagementApiApiListSchedulesV2Request {
+	return ScheduleManagementApiApiListSchedulesV2Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -682,7 +682,7 @@ func (a *ScheduleManagementApiService) PageScheduleList(ctx _context.Context, cU
  * Execute executes the request
  * @return SchedulePagedResponse
  */
-func (a *ScheduleManagementApiService) PageScheduleListExecute(r ScheduleManagementApiApiPageScheduleListRequest) (SchedulePagedResponse, *_nethttp.Response, error) {
+func (a *ScheduleManagementApiService) ListSchedulesV2Execute(r ScheduleManagementApiApiListSchedulesV2Request) (SchedulePagedResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -692,7 +692,7 @@ func (a *ScheduleManagementApiService) PageScheduleListExecute(r ScheduleManagem
 		localVarReturnValue  SchedulePagedResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementApiService.PageScheduleList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementApiService.ListSchedulesV2")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
