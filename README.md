@@ -146,8 +146,8 @@ Class | Method | HTTP request | Description
 *CustomerConfigurationApi* | [**CreateCustomerConfig**](docs/CustomerConfigurationApi.md#createcustomerconfig) | **Post** /api/v1/customers/{cUUID}/configs | Create a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfig**](docs/CustomerConfigurationApi.md#deletecustomerconfig) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID} | Delete a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfigV2**](docs/CustomerConfigurationApi.md#deletecustomerconfigv2) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete | Delete a customer configuration V2
-*CustomerConfigurationApi* | [**GetCustomerConfig**](docs/CustomerConfigurationApi.md#getcustomerconfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
-*CustomerConfigurationApi* | [**GetCustomerConfig_0**](docs/CustomerConfigurationApi.md#getcustomerconfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
+*CustomerConfigurationApi* | [**EditCustomerConfig**](docs/CustomerConfigurationApi.md#editcustomerconfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
+*CustomerConfigurationApi* | [**GetCustomerConfig**](docs/CustomerConfigurationApi.md#getcustomerconfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
 *CustomerConfigurationApi* | [**GetListOfCustomerConfig**](docs/CustomerConfigurationApi.md#getlistofcustomerconfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
 *CustomerManagementApi* | [**CustomerDetail**](docs/CustomerManagementApi.md#customerdetail) | **Get** /api/v1/customers/{cUUID} | Get a customer&#39;s details
 *CustomerManagementApi* | [**DeleteCustomer**](docs/CustomerManagementApi.md#deletecustomer) | **Delete** /api/v1/customers/{cUUID} | Delete a customer

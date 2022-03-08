@@ -1492,7 +1492,7 @@ paths:
       tags:
       - Customer Configuration
     put:
-      operationId: getCustomerConfig
+      operationId: editCustomerConfig
       parameters:
       - in: path
         name: cUUID
