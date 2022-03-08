@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DeleteCustomerConfig**](CustomerConfigurationApi.md#DeleteCustomerConfig) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID} | Delete a customer configuration
 [**DeleteCustomerConfigV2**](CustomerConfigurationApi.md#DeleteCustomerConfigV2) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete | Delete a customer configuration V2
 [**EditCustomerConfig**](CustomerConfigurationApi.md#EditCustomerConfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
-[**GetCustomerConfig**](CustomerConfigurationApi.md#GetCustomerConfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
+[**EditCustomerConfig_0**](CustomerConfigurationApi.md#EditCustomerConfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
 [**GetListOfCustomerConfig**](CustomerConfigurationApi.md#GetListOfCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
 
 
@@ -302,9 +302,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetCustomerConfig
+## EditCustomerConfig_0
 
-> CustomerConfig GetCustomerConfig(ctx, cUUID, configUUID).Config(config).Execute()
+> CustomerConfig EditCustomerConfig_0(ctx, cUUID, configUUID).Config(config).Execute()
 
 Update a customer configuration V2
 
@@ -327,13 +327,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.GetCustomerConfig(context.Background(), cUUID, configUUID).Config(config).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.EditCustomerConfig_0(context.Background(), cUUID, configUUID).Config(config).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.GetCustomerConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.EditCustomerConfig_0``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetCustomerConfig`: CustomerConfig
-    fmt.Fprintf(os.Stdout, "Response from `CustomerConfigurationApi.GetCustomerConfig`: %v\n", resp)
+    // response from `EditCustomerConfig_0`: CustomerConfig
+    fmt.Fprintf(os.Stdout, "Response from `CustomerConfigurationApi.EditCustomerConfig_0`: %v\n", resp)
 }
 ```
 
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetCustomerConfigRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiEditCustomerConfig_1Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes

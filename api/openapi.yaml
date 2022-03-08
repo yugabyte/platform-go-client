@@ -1566,7 +1566,7 @@ paths:
       - Customer Configuration
   /api/v1/customers/{cUUID}/configs/{configUUID}/edit:
     put:
-      operationId: getCustomerConfig
+      operationId: editCustomerConfig
       parameters:
       - in: path
         name: cUUID

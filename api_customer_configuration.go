@@ -551,7 +551,7 @@ func (a *CustomerConfigurationApiService) EditCustomerConfigExecute(r CustomerCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CustomerConfigurationApiApiGetCustomerConfigRequest struct {
+type CustomerConfigurationApiApiEditCustomerConfig_0Request struct {
 	ctx _context.Context
 	ApiService *CustomerConfigurationApiService
 	cUUID string
@@ -559,24 +559,24 @@ type CustomerConfigurationApiApiGetCustomerConfigRequest struct {
 	config *CustomerConfig
 }
 
-func (r CustomerConfigurationApiApiGetCustomerConfigRequest) Config(config CustomerConfig) CustomerConfigurationApiApiGetCustomerConfigRequest {
+func (r CustomerConfigurationApiApiEditCustomerConfig_0Request) Config(config CustomerConfig) CustomerConfigurationApiApiEditCustomerConfig_0Request {
 	r.config = &config
 	return r
 }
 
-func (r CustomerConfigurationApiApiGetCustomerConfigRequest) Execute() (CustomerConfig, *_nethttp.Response, error) {
-	return r.ApiService.GetCustomerConfigExecute(r)
+func (r CustomerConfigurationApiApiEditCustomerConfig_0Request) Execute() (CustomerConfig, *_nethttp.Response, error) {
+	return r.ApiService.EditCustomerConfig_1Execute(r)
 }
 
 /*
- * GetCustomerConfig Update a customer configuration V2
+ * EditCustomerConfig_0 Update a customer configuration V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configUUID
- * @return CustomerConfigurationApiApiGetCustomerConfigRequest
+ * @return CustomerConfigurationApiApiEditCustomerConfig_0Request
  */
-func (a *CustomerConfigurationApiService) GetCustomerConfig(ctx _context.Context, cUUID string, configUUID string) CustomerConfigurationApiApiGetCustomerConfigRequest {
-	return CustomerConfigurationApiApiGetCustomerConfigRequest{
+func (a *CustomerConfigurationApiService) EditCustomerConfig_1(ctx _context.Context, cUUID string, configUUID string) CustomerConfigurationApiApiEditCustomerConfig_0Request {
+	return CustomerConfigurationApiApiEditCustomerConfig_0Request{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -588,7 +588,7 @@ func (a *CustomerConfigurationApiService) GetCustomerConfig(ctx _context.Context
  * Execute executes the request
  * @return CustomerConfig
  */
-func (a *CustomerConfigurationApiService) GetCustomerConfigExecute(r CustomerConfigurationApiApiGetCustomerConfigRequest) (CustomerConfig, *_nethttp.Response, error) {
+func (a *CustomerConfigurationApiService) EditCustomerConfig_1Execute(r CustomerConfigurationApiApiEditCustomerConfig_0Request) (CustomerConfig, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
@@ -598,7 +598,7 @@ func (a *CustomerConfigurationApiService) GetCustomerConfigExecute(r CustomerCon
 		localVarReturnValue  CustomerConfig
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationApiService.GetCustomerConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationApiService.EditCustomerConfig_1")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
