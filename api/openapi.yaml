@@ -27,6 +27,7 @@ tags:
 - name: Customer Tasks
 - name: Customer management
 - name: Encryption at rest
+- name: Grafana Dashboard
 - name: Instance types
 - name: LoggingConfig
 - name: Maintenance windows
@@ -954,7 +955,7 @@ paths:
       tags:
       - Backups
     post:
-      operationId: createBackupV2
+      operationId: createbackup
       parameters:
       - in: path
         name: cUUID
@@ -979,10 +980,33 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Create a backup V2
+      summary: Create a backup
       tags:
-      - Table management
+      - Backups
       x-codegen-request-body-name: Backup
+  /api/v1/customers/{cUUID}/backups/delete:
+    post:
+      operationId: deleteBackupsv2
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTasks'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Delete backups V2
+      tags:
+      - Backups
   /api/v1/customers/{cUUID}/backups/page:
     post:
       operationId: listBackupsV2
@@ -1630,7 +1654,7 @@ paths:
       - Universe information
   /api/v1/customers/{cUUID}/create_backup_schedule:
     post:
-      operationId: createBackupScheduleV2
+      operationId: createbackupSchedule
       parameters:
       - in: path
         name: cUUID
@@ -1655,33 +1679,10 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Create Backup Schedule V2
-      tags:
-      - Table management
-      x-codegen-request-body-name: backup
-  /api/v1/customers/{cUUID}/delete_backups:
-    delete:
-      operationId: deleteBackupsv2
-      parameters:
-      - in: path
-        name: cUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YBPTasks'
-          description: successful operation
-      security:
-      - apiKeyAuth: []
-      summary: Delete backups V2
+      summary: Create Backup Schedule
       tags:
       - Backups
+      x-codegen-request-body-name: backup
   /api/v1/customers/{cUUID}/host_info:
     get:
       operationId: getHostInfo
@@ -6470,6 +6471,22 @@ paths:
       summary: List all of a zone's node instances
       tags:
       - Node instances
+  /api/v1/grafana_dashboard:
+    get:
+      operationId: GrafanaDashboard
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: true
+                type: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get Grafana Dashboard
+      tags:
+      - Grafana Dashboard
   /api/v1/logging_config:
     post:
       operationId: setLoggingSettings
@@ -8357,6 +8374,7 @@ components:
           - Alter
           - Drop
           - Stop
+          - Validate
           - SyncXClusterConfig
           - Login
           - Promote
@@ -8365,7 +8383,6 @@ components:
           - RefreshPricing
           - UpgradeSoftware
           - UpgradeGFlags
-          - ValidateGFlags
           - UpgradeCerts
           - UpgradeTLS
           - UpgradeVmImage
@@ -8400,6 +8417,9 @@ components:
           - DeleteReadOnlyCluster
           - RunYsqlQuery
           - BulkImport
+          - CreateBackup
+          - RestoreBackup
+          - CreateSingleTableBackup
           - CreateMultiTableBackup
           - CreateBackupSchedule
           - EditBackupSchedule
@@ -8482,7 +8502,7 @@ components:
           - HABackup
           - ScheduledScript
           - SupportBundle
-          - GFlagsValidation
+          - GFlags
           example: User
           exampleSetFlag: true
           readOnly: true
@@ -8630,6 +8650,7 @@ components:
         taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         version: V1
         backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        completionTime: 2000-01-23T04:56:07.000+00:00
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8729,6 +8750,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -8771,6 +8793,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -8817,6 +8840,11 @@ components:
           - YB_BACKUP_SCRIPT
           - YB_CONTROLLER
           exampleSetFlag: true
+          type: string
+        completionTime:
+          description: Backup completion time
+          exampleSetFlag: true
+          format: date-time
           type: string
         createTime:
           exampleSetFlag: true
@@ -9052,8 +9080,10 @@ components:
         entities:
         - sse: true
           updateTime: 2000-01-23T04:56:07.000+00:00
+          taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupType: YQL_TABLE_TYPE
+          completionTime: 2000-01-23T04:56:07.000+00:00
           isUniversePresent: true
           onDemand: true
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9081,8 +9111,10 @@ components:
           universeName: universeName
         - sse: true
           updateTime: 2000-01-23T04:56:07.000+00:00
+          taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupType: YQL_TABLE_TYPE
+          completionTime: 2000-01-23T04:56:07.000+00:00
           isUniversePresent: true
           onDemand: true
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9227,6 +9259,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -9269,6 +9302,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -9291,6 +9325,7 @@ components:
           redisServerHttpPort: 5
           redisServerRpcPort: 5
         cmkArn: cmkArn
+        useTablespaces: true
         previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       exampleSetFlag: true
       properties:
@@ -9434,6 +9469,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        useTablespaces:
+          description: Is tablespaces information included
+          exampleSetFlag: true
+          type: boolean
         ybPrevSoftwareVersion:
           description: Previous software version
           exampleSetFlag: true
@@ -9446,8 +9485,10 @@ components:
       example:
         sse: true
         updateTime: 2000-01-23T04:56:07.000+00:00
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         backupType: YQL_TABLE_TYPE
+        completionTime: 2000-01-23T04:56:07.000+00:00
         isUniversePresent: true
         onDemand: true
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9486,6 +9527,10 @@ components:
         backupUUID:
           exampleSetFlag: true
           format: uuid
+          type: string
+        completionTime:
+          exampleSetFlag: true
+          format: date-time
           type: string
         createTime:
           exampleSetFlag: true
@@ -9538,6 +9583,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        taskUUID:
+          exampleSetFlag: true
+          format: uuid
+          type: string
         totalBackupSizeInBytes:
           exampleSetFlag: true
           format: int64
@@ -9556,6 +9605,7 @@ components:
       required:
       - backupType
       - backupUUID
+      - completionTime
       - createTime
       - customerUUID
       - expiryTime
@@ -9567,6 +9617,7 @@ components:
       - sse
       - state
       - storageConfigUUID
+      - taskUUID
       - totalBackupSizeInBytes
       - universeName
       - universeUUID
@@ -9706,6 +9757,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -9748,6 +9800,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -10065,6 +10118,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -10107,6 +10161,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -10569,9 +10624,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -10593,17 +10650,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -10625,12 +10681,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -10764,9 +10817,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -10788,17 +10843,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -10820,12 +10874,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -10934,6 +10985,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -10976,6 +11028,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -11514,9 +11567,11 @@ components:
             defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         regions:
-        - code: us-west-2
-          ybPrebuiltAmi: true
+        - securityGroupId: securityGroupId
+          code: us-west-2
+          ybImage: TODO
           latitude: 37.22
+          name: US West (Oregon)
           active: true
           vnetName: vnetName
           zones:
@@ -11538,17 +11593,16 @@ components:
               key: config
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             secondarySubnet: secondary subnet id
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          securityGroupId: securityGroupId
-          ybImage: TODO
-          name: US West (Oregon)
           config:
             key: config
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           architecture: x86_64
           longitude: -120.01
-        - code: us-west-2
-          ybPrebuiltAmi: true
+        - securityGroupId: securityGroupId
+          code: us-west-2
+          ybImage: TODO
           latitude: 37.22
+          name: US West (Oregon)
           active: true
           vnetName: vnetName
           zones:
@@ -11570,12 +11624,9 @@ components:
               key: config
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             secondarySubnet: secondary subnet id
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          securityGroupId: securityGroupId
-          ybImage: TODO
-          name: US West (Oregon)
           config:
             key: config
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           architecture: x86_64
           longitude: -120.01
         userIntent:
@@ -12698,9 +12749,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -12722,17 +12775,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -12754,12 +12806,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -12893,9 +12942,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -12917,17 +12968,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -12949,12 +12999,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -13063,6 +13110,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -13105,6 +13153,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -13630,9 +13679,11 @@ components:
           code: code
           destVpcId: destVpcId
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -13654,17 +13705,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -13686,12 +13736,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           customHostCidrs:
@@ -14437,6 +14484,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -14479,6 +14527,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -14598,6 +14647,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -14640,6 +14690,7 @@ components:
             tserverHttpPort: 8
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -14740,6 +14791,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -14782,6 +14834,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -15094,6 +15147,7 @@ components:
         tserverHttpPort: 8
         disksAreMountedByUUID: true
         isRedisServer: true
+        ybPrebuiltAmi: true
         isTserver: true
         nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         isYsqlServer: true
@@ -15240,6 +15294,10 @@ components:
           exampleSetFlag: true
           format: int32
           type: integer
+        ybPrebuiltAmi:
+          description: True if this a custom YB AMI
+          exampleSetFlag: true
+          type: boolean
         yqlServerHttpPort:
           description: YCQL HTTP port
           exampleSetFlag: true
@@ -15302,6 +15360,7 @@ components:
         tserverHttpPort: 1
         disksAreMountedByUUID: true
         isRedisServer: true
+        ybPrebuiltAmi: true
         isTserver: true
         nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         isYsqlServer: true
@@ -15466,6 +15525,10 @@ components:
           exampleSetFlag: true
           format: int32
           type: integer
+        ybPrebuiltAmi:
+          description: True if this a custom YB AMI
+          exampleSetFlag: true
+          type: boolean
         yqlServerHttpPort:
           description: YCQL HTTP port
           exampleSetFlag: true
@@ -15952,9 +16015,11 @@ components:
         code: code
         destVpcId: destVpcId
         regions:
-        - code: us-west-2
-          ybPrebuiltAmi: true
+        - securityGroupId: securityGroupId
+          code: us-west-2
+          ybImage: TODO
           latitude: 37.22
+          name: US West (Oregon)
           active: true
           vnetName: vnetName
           zones:
@@ -15976,17 +16041,16 @@ components:
               key: config
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             secondarySubnet: secondary subnet id
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          securityGroupId: securityGroupId
-          ybImage: TODO
-          name: US West (Oregon)
           config:
             key: config
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           architecture: x86_64
           longitude: -120.01
-        - code: us-west-2
-          ybPrebuiltAmi: true
+        - securityGroupId: securityGroupId
+          code: us-west-2
+          ybImage: TODO
           latitude: 37.22
+          name: US West (Oregon)
           active: true
           vnetName: vnetName
           zones:
@@ -16008,12 +16072,9 @@ components:
               key: config
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             secondarySubnet: secondary subnet id
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          securityGroupId: securityGroupId
-          ybImage: TODO
-          name: US West (Oregon)
           config:
             key: config
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           architecture: x86_64
           longitude: -120.01
         customHostCidrs:
@@ -16128,9 +16189,11 @@ components:
       description: "Region within a given provider. Typically, this maps to a single\
         \ cloud provider region."
       example:
+        securityGroupId: securityGroupId
         code: us-west-2
-        ybPrebuiltAmi: true
+        ybImage: TODO
         latitude: 37.22
+        name: US West (Oregon)
         active: true
         vnetName: vnetName
         zones:
@@ -16152,12 +16215,9 @@ components:
             key: config
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           secondarySubnet: secondary subnet id
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        securityGroupId: securityGroupId
-        ybImage: TODO
-        name: US West (Oregon)
         config:
           key: config
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         architecture: x86_64
         longitude: -120.01
       exampleSetFlag: true
@@ -16220,11 +16280,6 @@ components:
           example: TODO
           exampleSetFlag: true
           type: string
-        ybPrebuiltAmi:
-          description: Indicates whether to use YB Prebuilt AMI flow or not for the
-            supplied AMI ID
-          exampleSetFlag: true
-          type: boolean
         zones:
           exampleSetFlag: false
           items:
@@ -16495,9 +16550,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -16519,17 +16576,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -16551,12 +16607,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -16690,9 +16743,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -16714,17 +16769,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -16746,12 +16800,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -16860,6 +16911,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -16902,6 +16954,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -17345,6 +17398,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -17387,6 +17441,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -18309,9 +18364,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -18333,17 +18390,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -18365,12 +18421,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -18504,9 +18557,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -18528,17 +18583,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -18560,12 +18614,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -18675,6 +18726,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -18717,6 +18769,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -19233,9 +19286,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -19257,17 +19312,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -19289,12 +19343,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -19428,9 +19479,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -19452,17 +19505,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -19484,12 +19536,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -19598,6 +19647,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -19640,6 +19690,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -20054,6 +20105,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -20096,6 +20148,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -20450,9 +20503,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -20474,17 +20529,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -20506,12 +20560,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -20645,9 +20696,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -20669,17 +20722,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -20701,12 +20753,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -20815,6 +20864,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -20857,6 +20907,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -21331,9 +21382,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -21355,17 +21408,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -21387,12 +21439,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -21526,9 +21575,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -21550,17 +21601,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -21582,12 +21632,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -21695,6 +21742,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -21737,6 +21785,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -22184,9 +22233,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -22208,17 +22259,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -22240,12 +22290,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -22379,9 +22426,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -22403,17 +22452,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -22435,12 +22483,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -22547,6 +22592,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -22589,6 +22635,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -23026,9 +23073,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -23050,17 +23099,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -23082,12 +23130,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -23221,9 +23266,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -23245,17 +23292,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -23277,12 +23323,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -23392,6 +23435,7 @@ components:
           tserverHttpPort: 1
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -23437,6 +23481,7 @@ components:
           tserverHttpPort: 1
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -23988,9 +24033,11 @@ components:
                 defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             regions:
-            - code: us-west-2
-              ybPrebuiltAmi: true
+            - securityGroupId: securityGroupId
+              code: us-west-2
+              ybImage: TODO
               latitude: 37.22
+              name: US West (Oregon)
               active: true
               vnetName: vnetName
               zones:
@@ -24012,17 +24059,16 @@ components:
                   key: config
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 secondarySubnet: secondary subnet id
-              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              securityGroupId: securityGroupId
-              ybImage: TODO
-              name: US West (Oregon)
               config:
                 key: config
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               architecture: x86_64
               longitude: -120.01
-            - code: us-west-2
-              ybPrebuiltAmi: true
+            - securityGroupId: securityGroupId
+              code: us-west-2
+              ybImage: TODO
               latitude: 37.22
+              name: US West (Oregon)
               active: true
               vnetName: vnetName
               zones:
@@ -24044,12 +24090,9 @@ components:
                   key: config
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 secondarySubnet: secondary subnet id
-              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              securityGroupId: securityGroupId
-              ybImage: TODO
-              name: US West (Oregon)
               config:
                 key: config
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               architecture: x86_64
               longitude: -120.01
             userIntent:
@@ -24183,9 +24226,11 @@ components:
                 defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             regions:
-            - code: us-west-2
-              ybPrebuiltAmi: true
+            - securityGroupId: securityGroupId
+              code: us-west-2
+              ybImage: TODO
               latitude: 37.22
+              name: US West (Oregon)
               active: true
               vnetName: vnetName
               zones:
@@ -24207,17 +24252,16 @@ components:
                   key: config
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 secondarySubnet: secondary subnet id
-              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              securityGroupId: securityGroupId
-              ybImage: TODO
-              name: US West (Oregon)
               config:
                 key: config
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               architecture: x86_64
               longitude: -120.01
-            - code: us-west-2
-              ybPrebuiltAmi: true
+            - securityGroupId: securityGroupId
+              code: us-west-2
+              ybImage: TODO
               latitude: 37.22
+              name: US West (Oregon)
               active: true
               vnetName: vnetName
               zones:
@@ -24239,12 +24283,9 @@ components:
                   key: config
                 uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 secondarySubnet: secondary subnet id
-              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              securityGroupId: securityGroupId
-              ybImage: TODO
-              name: US West (Oregon)
               config:
                 key: config
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               architecture: x86_64
               longitude: -120.01
             userIntent:
@@ -24354,6 +24395,7 @@ components:
             tserverHttpPort: 1
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -24399,6 +24441,7 @@ components:
             tserverHttpPort: 1
             disksAreMountedByUUID: true
             isRedisServer: true
+            ybPrebuiltAmi: true
             isTserver: true
             nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             isYsqlServer: true
@@ -24605,9 +24648,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -24629,17 +24674,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -24661,12 +24705,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -24800,9 +24841,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -24824,17 +24867,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -24856,12 +24898,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -24970,6 +25009,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -25012,6 +25052,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -25893,9 +25934,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -25917,17 +25960,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -25949,12 +25991,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -26088,9 +26127,11 @@ components:
               defaultRegion: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regions:
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -26112,17 +26153,16 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
-          - code: us-west-2
-            ybPrebuiltAmi: true
+          - securityGroupId: securityGroupId
+            code: us-west-2
+            ybImage: TODO
             latitude: 37.22
+            name: US West (Oregon)
             active: true
             vnetName: vnetName
             zones:
@@ -26144,12 +26184,9 @@ components:
                 key: config
               uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               secondarySubnet: secondary subnet id
-            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            securityGroupId: securityGroupId
-            ybImage: TODO
-            name: US West (Oregon)
             config:
               key: config
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             architecture: x86_64
             longitude: -120.01
           userIntent:
@@ -26258,6 +26295,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true
@@ -26300,6 +26338,7 @@ components:
           tserverHttpPort: 8
           disksAreMountedByUUID: true
           isRedisServer: true
+          ybPrebuiltAmi: true
           isTserver: true
           nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           isYsqlServer: true

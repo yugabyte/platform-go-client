@@ -33,8 +33,6 @@ type Region struct {
 	VnetName *string `json:"vnetName,omitempty"`
 	// The AMI to be used in this region.
 	YbImage *string `json:"ybImage,omitempty"`
-	// Indicates whether to use YB Prebuilt AMI flow or not for the supplied AMI ID
-	YbPrebuiltAmi *bool `json:"ybPrebuiltAmi,omitempty"`
 	Zones []AvailabilityZone `json:"zones"`
 }
 
@@ -408,38 +406,6 @@ func (o *Region) SetYbImage(v string) {
 	o.YbImage = &v
 }
 
-// GetYbPrebuiltAmi returns the YbPrebuiltAmi field value if set, zero value otherwise.
-func (o *Region) GetYbPrebuiltAmi() bool {
-	if o == nil || o.YbPrebuiltAmi == nil {
-		var ret bool
-		return ret
-	}
-	return *o.YbPrebuiltAmi
-}
-
-// GetYbPrebuiltAmiOk returns a tuple with the YbPrebuiltAmi field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Region) GetYbPrebuiltAmiOk() (*bool, bool) {
-	if o == nil || o.YbPrebuiltAmi == nil {
-		return nil, false
-	}
-	return o.YbPrebuiltAmi, true
-}
-
-// HasYbPrebuiltAmi returns a boolean if a field has been set.
-func (o *Region) HasYbPrebuiltAmi() bool {
-	if o != nil && o.YbPrebuiltAmi != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbPrebuiltAmi gets a reference to the given bool and assigns it to the YbPrebuiltAmi field.
-func (o *Region) SetYbPrebuiltAmi(v bool) {
-	o.YbPrebuiltAmi = &v
-}
-
 // GetZones returns the Zones field value
 func (o *Region) GetZones() []AvailabilityZone {
 	if o == nil  {
@@ -498,9 +464,6 @@ func (o Region) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbImage != nil {
 		toSerialize["ybImage"] = o.YbImage
-	}
-	if o.YbPrebuiltAmi != nil {
-		toSerialize["ybPrebuiltAmi"] = o.YbPrebuiltAmi
 	}
 	if true {
 		toSerialize["zones"] = o.Zones

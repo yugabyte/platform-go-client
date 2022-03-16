@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupType** | **string** |  | 
 **BackupUUID** | **string** |  | 
+**CompletionTime** | **time.Time** |  | 
 **CreateTime** | **time.Time** |  | 
 **CustomerUUID** | **string** |  | 
 **ExpiryTime** | **time.Time** |  | 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **Sse** | **bool** |  | 
 **State** | **string** |  | 
 **StorageConfigUUID** | **string** |  | 
+**TaskUUID** | **string** |  | 
 **TotalBackupSizeInBytes** | **int64** |  | 
 **UniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
@@ -26,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp`
+`func NewBackupResp(backupType string, backupUUID string, completionTime time.Time, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -79,6 +81,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetBackupUUID(v string)`
 
 SetBackupUUID sets BackupUUID field to given value.
+
+
+### GetCompletionTime
+
+`func (o *BackupResp) GetCompletionTime() time.Time`
+
+GetCompletionTime returns the CompletionTime field if non-nil, zero value otherwise.
+
+### GetCompletionTimeOk
+
+`func (o *BackupResp) GetCompletionTimeOk() (*time.Time, bool)`
+
+GetCompletionTimeOk returns a tuple with the CompletionTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompletionTime
+
+`func (o *BackupResp) SetCompletionTime(v time.Time)`
+
+SetCompletionTime sets CompletionTime field to given value.
 
 
 ### GetCreateTime
@@ -299,6 +321,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetStorageConfigUUID(v string)`
 
 SetStorageConfigUUID sets StorageConfigUUID field to given value.
+
+
+### GetTaskUUID
+
+`func (o *BackupResp) GetTaskUUID() string`
+
+GetTaskUUID returns the TaskUUID field if non-nil, zero value otherwise.
+
+### GetTaskUUIDOk
+
+`func (o *BackupResp) GetTaskUUIDOk() (*string, bool)`
+
+GetTaskUUIDOk returns a tuple with the TaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskUUID
+
+`func (o *BackupResp) SetTaskUUID(v string)`
+
+SetTaskUUID sets TaskUUID field to given value.
 
 
 ### GetTotalBackupSizeInBytes

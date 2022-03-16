@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 **UniverseUUID** | **string** | Universe UUID | 
+**UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
 
 ## Methods
@@ -768,6 +769,31 @@ and a boolean to check if the value has been set.
 
 SetUniverseUUID sets UniverseUUID field to given value.
 
+
+### GetUseTablespaces
+
+`func (o *BackupRequestParams) GetUseTablespaces() bool`
+
+GetUseTablespaces returns the UseTablespaces field if non-nil, zero value otherwise.
+
+### GetUseTablespacesOk
+
+`func (o *BackupRequestParams) GetUseTablespacesOk() (*bool, bool)`
+
+GetUseTablespacesOk returns a tuple with the UseTablespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTablespaces
+
+`func (o *BackupRequestParams) SetUseTablespaces(v bool)`
+
+SetUseTablespaces sets UseTablespaces field to given value.
+
+### HasUseTablespaces
+
+`func (o *BackupRequestParams) HasUseTablespaces() bool`
+
+HasUseTablespaces returns a boolean if a field has been set.
 
 ### GetYbPrevSoftwareVersion
 

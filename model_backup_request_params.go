@@ -70,6 +70,8 @@ type BackupRequestParams struct {
 	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
 	// Universe UUID
 	UniverseUUID string `json:"universeUUID"`
+	// Is tablespaces information included
+	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
 }
@@ -1005,6 +1007,38 @@ func (o *BackupRequestParams) SetUniverseUUID(v string) {
 	o.UniverseUUID = v
 }
 
+// GetUseTablespaces returns the UseTablespaces field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetUseTablespaces() bool {
+	if o == nil || o.UseTablespaces == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseTablespaces
+}
+
+// GetUseTablespacesOk returns a tuple with the UseTablespaces field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetUseTablespacesOk() (*bool, bool) {
+	if o == nil || o.UseTablespaces == nil {
+		return nil, false
+	}
+	return o.UseTablespaces, true
+}
+
+// HasUseTablespaces returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasUseTablespaces() bool {
+	if o != nil && o.UseTablespaces != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseTablespaces gets a reference to the given bool and assigns it to the UseTablespaces field.
+func (o *BackupRequestParams) SetUseTablespaces(v bool) {
+	o.UseTablespaces = &v
+}
+
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetYbPrevSoftwareVersion() string {
 	if o == nil || o.YbPrevSoftwareVersion == nil {
@@ -1125,6 +1159,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID
+	}
+	if o.UseTablespaces != nil {
+		toSerialize["useTablespaces"] = o.UseTablespaces
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion

@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** | Region UUID | [optional] [readonly] 
 **VnetName** | Pointer to **string** |  | [optional] 
 **YbImage** | Pointer to **string** | The AMI to be used in this region. | [optional] 
-**YbPrebuiltAmi** | Pointer to **bool** | Indicates whether to use YB Prebuilt AMI flow or not for the supplied AMI ID | [optional] 
 **Zones** | [**[]AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
@@ -311,31 +310,6 @@ SetYbImage sets YbImage field to given value.
 `func (o *Region) HasYbImage() bool`
 
 HasYbImage returns a boolean if a field has been set.
-
-### GetYbPrebuiltAmi
-
-`func (o *Region) GetYbPrebuiltAmi() bool`
-
-GetYbPrebuiltAmi returns the YbPrebuiltAmi field if non-nil, zero value otherwise.
-
-### GetYbPrebuiltAmiOk
-
-`func (o *Region) GetYbPrebuiltAmiOk() (*bool, bool)`
-
-GetYbPrebuiltAmiOk returns a tuple with the YbPrebuiltAmi field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbPrebuiltAmi
-
-`func (o *Region) SetYbPrebuiltAmi(v bool)`
-
-SetYbPrebuiltAmi sets YbPrebuiltAmi field to given value.
-
-### HasYbPrebuiltAmi
-
-`func (o *Region) HasYbPrebuiltAmi() bool`
-
-HasYbPrebuiltAmi returns a boolean if a field has been set.
 
 ### GetZones
 

@@ -14,6 +14,7 @@ api_customer_configuration.go
 api_customer_management.go
 api_customer_tasks.go
 api_encryption_at_rest.go
+api_grafana_dashboard.go
 api_instance_types.go
 api_logging_config.go
 api_maintenance_windows_.go
@@ -125,6 +126,7 @@ docs/EncryptionAtRestConfig.md
 docs/ExtraDependencies.md
 docs/GCSLocation.md
 docs/GFlagsUpgradeParams.md
+docs/GrafanaDashboardApi.md
 docs/HashicorpVaultConfigParams.md
 docs/HttpLocation.md
 docs/ImportUniverseFormData.md

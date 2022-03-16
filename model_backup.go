@@ -22,6 +22,8 @@ type Backup struct {
 	BackupUUID *string `json:"backupUUID,omitempty"`
 	// Category of the backup
 	Category *string `json:"category,omitempty"`
+	// Backup completion time
+	CompletionTime *time.Time `json:"completionTime,omitempty"`
 	CreateTime time.Time `json:"createTime"`
 	// Customer UUID that owns this backup
 	CustomerUUID *string `json:"customerUUID,omitempty"`
@@ -157,6 +159,38 @@ func (o *Backup) HasCategory() bool {
 // SetCategory gets a reference to the given string and assigns it to the Category field.
 func (o *Backup) SetCategory(v string) {
 	o.Category = &v
+}
+
+// GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
+func (o *Backup) GetCompletionTime() time.Time {
+	if o == nil || o.CompletionTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletionTime
+}
+
+// GetCompletionTimeOk returns a tuple with the CompletionTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Backup) GetCompletionTimeOk() (*time.Time, bool) {
+	if o == nil || o.CompletionTime == nil {
+		return nil, false
+	}
+	return o.CompletionTime, true
+}
+
+// HasCompletionTime returns a boolean if a field has been set.
+func (o *Backup) HasCompletionTime() bool {
+	if o != nil && o.CompletionTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionTime gets a reference to the given time.Time and assigns it to the CompletionTime field.
+func (o *Backup) SetCompletionTime(v time.Time) {
+	o.CompletionTime = &v
 }
 
 // GetCreateTime returns the CreateTime field value
@@ -505,6 +539,9 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	}
 	if o.Category != nil {
 		toSerialize["category"] = o.Category
+	}
+	if o.CompletionTime != nil {
+		toSerialize["completionTime"] = o.CompletionTime
 	}
 	if true {
 		toSerialize["createTime"] = o.CreateTime

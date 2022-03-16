@@ -19,6 +19,7 @@ import (
 type BackupResp struct {
 	BackupType string `json:"backupType"`
 	BackupUUID string `json:"backupUUID"`
+	CompletionTime time.Time `json:"completionTime"`
 	CreateTime time.Time `json:"createTime"`
 	CustomerUUID string `json:"customerUUID"`
 	ExpiryTime time.Time `json:"expiryTime"`
@@ -30,6 +31,7 @@ type BackupResp struct {
 	Sse bool `json:"sse"`
 	State string `json:"state"`
 	StorageConfigUUID string `json:"storageConfigUUID"`
+	TaskUUID string `json:"taskUUID"`
 	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
 	UniverseName string `json:"universeName"`
 	UniverseUUID string `json:"universeUUID"`
@@ -40,10 +42,11 @@ type BackupResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, backupUUID string, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp {
+func NewBackupResp(backupType string, backupUUID string, completionTime time.Time, createTime time.Time, customerUUID string, expiryTime time.Time, isStorageConfigPresent bool, isUniversePresent bool, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.BackupUUID = backupUUID
+	this.CompletionTime = completionTime
 	this.CreateTime = createTime
 	this.CustomerUUID = customerUUID
 	this.ExpiryTime = expiryTime
@@ -55,6 +58,7 @@ func NewBackupResp(backupType string, backupUUID string, createTime time.Time, c
 	this.Sse = sse
 	this.State = state
 	this.StorageConfigUUID = storageConfigUUID
+	this.TaskUUID = taskUUID
 	this.TotalBackupSizeInBytes = totalBackupSizeInBytes
 	this.UniverseName = universeName
 	this.UniverseUUID = universeUUID
@@ -116,6 +120,30 @@ func (o *BackupResp) GetBackupUUIDOk() (*string, bool) {
 // SetBackupUUID sets field value
 func (o *BackupResp) SetBackupUUID(v string) {
 	o.BackupUUID = v
+}
+
+// GetCompletionTime returns the CompletionTime field value
+func (o *BackupResp) GetCompletionTime() time.Time {
+	if o == nil  {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CompletionTime
+}
+
+// GetCompletionTimeOk returns a tuple with the CompletionTime field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetCompletionTimeOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CompletionTime, true
+}
+
+// SetCompletionTime sets field value
+func (o *BackupResp) SetCompletionTime(v time.Time) {
+	o.CompletionTime = v
 }
 
 // GetCreateTime returns the CreateTime field value
@@ -382,6 +410,30 @@ func (o *BackupResp) SetStorageConfigUUID(v string) {
 	o.StorageConfigUUID = v
 }
 
+// GetTaskUUID returns the TaskUUID field value
+func (o *BackupResp) GetTaskUUID() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.TaskUUID
+}
+
+// GetTaskUUIDOk returns a tuple with the TaskUUID field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetTaskUUIDOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TaskUUID, true
+}
+
+// SetTaskUUID sets field value
+func (o *BackupResp) SetTaskUUID(v string) {
+	o.TaskUUID = v
+}
+
 // GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field value
 func (o *BackupResp) GetTotalBackupSizeInBytes() int64 {
 	if o == nil  {
@@ -487,6 +539,9 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 		toSerialize["backupUUID"] = o.BackupUUID
 	}
 	if true {
+		toSerialize["completionTime"] = o.CompletionTime
+	}
+	if true {
 		toSerialize["createTime"] = o.CreateTime
 	}
 	if true {
@@ -518,6 +573,9 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if true {
+		toSerialize["taskUUID"] = o.TaskUUID
 	}
 	if true {
 		toSerialize["totalBackupSizeInBytes"] = o.TotalBackupSizeInBytes

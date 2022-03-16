@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **BackupInfo** | Pointer to [**BackupTableParams**](BackupTableParams.md) |  | [optional] 
 **BackupUUID** | Pointer to **string** | Backup UUID | [optional] [readonly] 
 **Category** | Pointer to **string** | Category of the backup | [optional] 
+**CompletionTime** | Pointer to **time.Time** | Backup completion time | [optional] 
 **CreateTime** | **time.Time** |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID that owns this backup | [optional] 
 **Expiry** | Pointer to **time.Time** | Expiry time (unix timestamp) of the backup | [optional] 
@@ -112,6 +113,31 @@ SetCategory sets Category field to given value.
 `func (o *Backup) HasCategory() bool`
 
 HasCategory returns a boolean if a field has been set.
+
+### GetCompletionTime
+
+`func (o *Backup) GetCompletionTime() time.Time`
+
+GetCompletionTime returns the CompletionTime field if non-nil, zero value otherwise.
+
+### GetCompletionTimeOk
+
+`func (o *Backup) GetCompletionTimeOk() (*time.Time, bool)`
+
+GetCompletionTimeOk returns a tuple with the CompletionTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompletionTime
+
+`func (o *Backup) SetCompletionTime(v time.Time)`
+
+SetCompletionTime sets CompletionTime field to given value.
+
+### HasCompletionTime
+
+`func (o *Backup) HasCompletionTime() bool`
+
+HasCompletionTime returns a boolean if a field has been set.
 
 ### GetCreateTime
 

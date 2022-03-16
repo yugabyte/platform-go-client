@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | Node state | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
 **TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] 
+**YbPrebuiltAmi** | Pointer to **bool** | True if this a custom YB AMI | [optional] 
 **YqlServerHttpPort** | Pointer to **int32** | YCQL HTTP port | [optional] 
 **YqlServerRpcPort** | Pointer to **int32** | YCQL RPC port | [optional] 
 **YsqlServerHttpPort** | Pointer to **int32** | YSQL HTTP port | [optional] 
@@ -672,6 +673,31 @@ SetTserverRpcPort sets TserverRpcPort field to given value.
 `func (o *NodeDetailsResp) HasTserverRpcPort() bool`
 
 HasTserverRpcPort returns a boolean if a field has been set.
+
+### GetYbPrebuiltAmi
+
+`func (o *NodeDetailsResp) GetYbPrebuiltAmi() bool`
+
+GetYbPrebuiltAmi returns the YbPrebuiltAmi field if non-nil, zero value otherwise.
+
+### GetYbPrebuiltAmiOk
+
+`func (o *NodeDetailsResp) GetYbPrebuiltAmiOk() (*bool, bool)`
+
+GetYbPrebuiltAmiOk returns a tuple with the YbPrebuiltAmi field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbPrebuiltAmi
+
+`func (o *NodeDetailsResp) SetYbPrebuiltAmi(v bool)`
+
+SetYbPrebuiltAmi sets YbPrebuiltAmi field to given value.
+
+### HasYbPrebuiltAmi
+
+`func (o *NodeDetailsResp) HasYbPrebuiltAmi() bool`
+
+HasYbPrebuiltAmi returns a boolean if a field has been set.
 
 ### GetYqlServerHttpPort
 

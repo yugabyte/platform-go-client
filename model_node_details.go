@@ -62,6 +62,8 @@ type NodeDetails struct {
 	TserverHttpPort *int32 `json:"tserverHttpPort,omitempty"`
 	// Tablet server RPC port
 	TserverRpcPort *int32 `json:"tserverRpcPort,omitempty"`
+	// True if this a custom YB AMI
+	YbPrebuiltAmi *bool `json:"ybPrebuiltAmi,omitempty"`
 	// YCQL HTTP port
 	YqlServerHttpPort *int32 `json:"yqlServerHttpPort,omitempty"`
 	// YCQL RPC port
@@ -850,6 +852,38 @@ func (o *NodeDetails) SetTserverRpcPort(v int32) {
 	o.TserverRpcPort = &v
 }
 
+// GetYbPrebuiltAmi returns the YbPrebuiltAmi field value if set, zero value otherwise.
+func (o *NodeDetails) GetYbPrebuiltAmi() bool {
+	if o == nil || o.YbPrebuiltAmi == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbPrebuiltAmi
+}
+
+// GetYbPrebuiltAmiOk returns a tuple with the YbPrebuiltAmi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetYbPrebuiltAmiOk() (*bool, bool) {
+	if o == nil || o.YbPrebuiltAmi == nil {
+		return nil, false
+	}
+	return o.YbPrebuiltAmi, true
+}
+
+// HasYbPrebuiltAmi returns a boolean if a field has been set.
+func (o *NodeDetails) HasYbPrebuiltAmi() bool {
+	if o != nil && o.YbPrebuiltAmi != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbPrebuiltAmi gets a reference to the given bool and assigns it to the YbPrebuiltAmi field.
+func (o *NodeDetails) SetYbPrebuiltAmi(v bool) {
+	o.YbPrebuiltAmi = &v
+}
+
 // GetYqlServerHttpPort returns the YqlServerHttpPort field value if set, zero value otherwise.
 func (o *NodeDetails) GetYqlServerHttpPort() int32 {
 	if o == nil || o.YqlServerHttpPort == nil {
@@ -1051,6 +1085,9 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.TserverRpcPort != nil {
 		toSerialize["tserverRpcPort"] = o.TserverRpcPort
+	}
+	if o.YbPrebuiltAmi != nil {
+		toSerialize["ybPrebuiltAmi"] = o.YbPrebuiltAmi
 	}
 	if o.YqlServerHttpPort != nil {
 		toSerialize["yqlServerHttpPort"] = o.YqlServerHttpPort

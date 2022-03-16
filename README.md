@@ -119,8 +119,10 @@ Class | Method | HTTP request | Description
 *AvailabilityZonesApi* | [**DeleteAZ**](docs/AvailabilityZonesApi.md#deleteaz) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
 *AvailabilityZonesApi* | [**ListOfAZ**](docs/AvailabilityZonesApi.md#listofaz) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 *BackupsApi* | [**CreateMultiTableBackup**](docs/BackupsApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
+*BackupsApi* | [**Createbackup**](docs/BackupsApi.md#createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
+*BackupsApi* | [**CreatebackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 *BackupsApi* | [**DeleteBackups**](docs/BackupsApi.md#deletebackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
-*BackupsApi* | [**DeleteBackupsv2**](docs/BackupsApi.md#deletebackupsv2) | **Delete** /api/v1/customers/{cUUID}/delete_backups | Delete backups V2
+*BackupsApi* | [**DeleteBackupsv2**](docs/BackupsApi.md#deletebackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 *BackupsApi* | [**EditBackupV2**](docs/BackupsApi.md#editbackupv2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 *BackupsApi* | [**FetchBackupsByTaskUUID**](docs/BackupsApi.md#fetchbackupsbytaskuuid) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
 *BackupsApi* | [**GetBackupV2**](docs/BackupsApi.md#getbackupv2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
@@ -169,6 +171,7 @@ Class | Method | HTTP request | Description
 *EncryptionAtRestApi* | [**ListKMSConfigs**](docs/EncryptionAtRestApi.md#listkmsconfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
 *EncryptionAtRestApi* | [**RemoveKeyRefHistory**](docs/EncryptionAtRestApi.md#removekeyrefhistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Remove a universe&#39;s key reference history
 *EncryptionAtRestApi* | [**RetrieveKey**](docs/EncryptionAtRestApi.md#retrievekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Retrive a universe&#39;s KMS key
+*GrafanaDashboardApi* | [**GrafanaDashboard**](docs/GrafanaDashboardApi.md#grafanadashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
 *InstanceTypesApi* | [**CreateInstanceType**](docs/InstanceTypesApi.md#createinstancetype) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | Create an instance type
 *InstanceTypesApi* | [**DeleteInstanceType**](docs/InstanceTypesApi.md#deleteinstancetype) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Delete an instance type
 *InstanceTypesApi* | [**GetAZUTypes**](docs/InstanceTypesApi.md#getazutypes) | **Get** /api/v1/metadata/azu_types | List supported Azure disk types
@@ -226,8 +229,6 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 *TableManagementApi* | [**AlterTable**](docs/TableManagementApi.md#altertable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
 *TableManagementApi* | [**BulkImportData**](docs/TableManagementApi.md#bulkimportdata) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
-*TableManagementApi* | [**CreateBackupScheduleV2**](docs/TableManagementApi.md#createbackupschedulev2) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule V2
-*TableManagementApi* | [**CreateBackupV2**](docs/TableManagementApi.md#createbackupv2) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
 *TableManagementApi* | [**CreateMultiTableBackup**](docs/TableManagementApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 *TableManagementApi* | [**CreateSingleTableBackup**](docs/TableManagementApi.md#createsingletablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
 *TableManagementApi* | [**CreateTable**](docs/TableManagementApi.md#createtable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
