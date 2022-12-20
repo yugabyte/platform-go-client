@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**SetUniverseHelm3Compatible**](UniverseManagementApi.md#SetUniverseHelm3Compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
 [**SetUniverseKey**](UniverseManagementApi.md#SetUniverseKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
 [**ToggleUniverseTLS**](UniverseManagementApi.md#ToggleUniverseTLS) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/toggle_tls | Toggle a universe&#39;s TLS state
+[**UpdateLoadBalancerConfig**](UniverseManagementApi.md#UpdateLoadBalancerConfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 
 
 
@@ -793,6 +794,77 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UniverseResp**](UniverseResp.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateLoadBalancerConfig
+
+> UpdateLoadBalancerConfig UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).Execute()
+
+Update load balancer config
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseManagementApi.UpdateLoadBalancerConfig(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.UpdateLoadBalancerConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateLoadBalancerConfig`: UpdateLoadBalancerConfig
+    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.UpdateLoadBalancerConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateLoadBalancerConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**UpdateLoadBalancerConfig**](UpdateLoadBalancerConfig.md)
 
 ### Authorization
 

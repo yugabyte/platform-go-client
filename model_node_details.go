@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -21,6 +21,8 @@ type NodeDetails struct {
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
 	// True if cron jobs were properly configured for this node
 	CronsActive *bool `json:"cronsActive,omitempty"`
+	// Used for configurations where each node can have only one process
+	DedicatedTo *string `json:"dedicatedTo,omitempty"`
 	// Disks are mounted by uuid
 	DisksAreMountedByUUID *bool `json:"disksAreMountedByUUID,omitempty"`
 	// True if this node is a master
@@ -37,7 +39,7 @@ type NodeDetails struct {
 	MachineImage *string `json:"machineImage,omitempty"`
 	// Master HTTP port
 	MasterHttpPort *int32 `json:"masterHttpPort,omitempty"`
-	// Master RCP port
+	// Master RPC port
 	MasterRpcPort *int32 `json:"masterRpcPort,omitempty"`
 	// Master state
 	MasterState *string `json:"masterState,omitempty"`
@@ -47,7 +49,6 @@ type NodeDetails struct {
 	NodeIdx *int32 `json:"nodeIdx,omitempty"`
 	// Node name
 	NodeName *string `json:"nodeName,omitempty"`
-	NodeUUID string `json:"nodeUUID"`
 	// Node UUID
 	NodeUuid *string `json:"nodeUuid,omitempty"`
 	// UUID of the cluster to which this node belongs
@@ -62,6 +63,10 @@ type NodeDetails struct {
 	TserverHttpPort *int32 `json:"tserverHttpPort,omitempty"`
 	// Tablet server RPC port
 	TserverRpcPort *int32 `json:"tserverRpcPort,omitempty"`
+	// Yb controller HTTP port
+	YbControllerHttpPort *int32 `json:"ybControllerHttpPort,omitempty"`
+	// Yb controller RPC port
+	YbControllerRpcPort *int32 `json:"ybControllerRpcPort,omitempty"`
 	// True if this a custom YB AMI
 	YbPrebuiltAmi *bool `json:"ybPrebuiltAmi,omitempty"`
 	// YCQL HTTP port
@@ -78,9 +83,8 @@ type NodeDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeDetails(nodeUUID string, ) *NodeDetails {
+func NewNodeDetails() *NodeDetails {
 	this := NodeDetails{}
-	this.NodeUUID = nodeUUID
 	return &this
 }
 
@@ -186,6 +190,38 @@ func (o *NodeDetails) HasCronsActive() bool {
 // SetCronsActive gets a reference to the given bool and assigns it to the CronsActive field.
 func (o *NodeDetails) SetCronsActive(v bool) {
 	o.CronsActive = &v
+}
+
+// GetDedicatedTo returns the DedicatedTo field value if set, zero value otherwise.
+func (o *NodeDetails) GetDedicatedTo() string {
+	if o == nil || o.DedicatedTo == nil {
+		var ret string
+		return ret
+	}
+	return *o.DedicatedTo
+}
+
+// GetDedicatedToOk returns a tuple with the DedicatedTo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetDedicatedToOk() (*string, bool) {
+	if o == nil || o.DedicatedTo == nil {
+		return nil, false
+	}
+	return o.DedicatedTo, true
+}
+
+// HasDedicatedTo returns a boolean if a field has been set.
+func (o *NodeDetails) HasDedicatedTo() bool {
+	if o != nil && o.DedicatedTo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDedicatedTo gets a reference to the given string and assigns it to the DedicatedTo field.
+func (o *NodeDetails) SetDedicatedTo(v string) {
+	o.DedicatedTo = &v
 }
 
 // GetDisksAreMountedByUUID returns the DisksAreMountedByUUID field value if set, zero value otherwise.
@@ -604,30 +640,6 @@ func (o *NodeDetails) SetNodeName(v string) {
 	o.NodeName = &v
 }
 
-// GetNodeUUID returns the NodeUUID field value
-func (o *NodeDetails) GetNodeUUID() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.NodeUUID
-}
-
-// GetNodeUUIDOk returns a tuple with the NodeUUID field value
-// and a boolean to check if the value has been set.
-func (o *NodeDetails) GetNodeUUIDOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.NodeUUID, true
-}
-
-// SetNodeUUID sets field value
-func (o *NodeDetails) SetNodeUUID(v string) {
-	o.NodeUUID = v
-}
-
 // GetNodeUuid returns the NodeUuid field value if set, zero value otherwise.
 func (o *NodeDetails) GetNodeUuid() string {
 	if o == nil || o.NodeUuid == nil {
@@ -852,6 +864,70 @@ func (o *NodeDetails) SetTserverRpcPort(v int32) {
 	o.TserverRpcPort = &v
 }
 
+// GetYbControllerHttpPort returns the YbControllerHttpPort field value if set, zero value otherwise.
+func (o *NodeDetails) GetYbControllerHttpPort() int32 {
+	if o == nil || o.YbControllerHttpPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.YbControllerHttpPort
+}
+
+// GetYbControllerHttpPortOk returns a tuple with the YbControllerHttpPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetYbControllerHttpPortOk() (*int32, bool) {
+	if o == nil || o.YbControllerHttpPort == nil {
+		return nil, false
+	}
+	return o.YbControllerHttpPort, true
+}
+
+// HasYbControllerHttpPort returns a boolean if a field has been set.
+func (o *NodeDetails) HasYbControllerHttpPort() bool {
+	if o != nil && o.YbControllerHttpPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbControllerHttpPort gets a reference to the given int32 and assigns it to the YbControllerHttpPort field.
+func (o *NodeDetails) SetYbControllerHttpPort(v int32) {
+	o.YbControllerHttpPort = &v
+}
+
+// GetYbControllerRpcPort returns the YbControllerRpcPort field value if set, zero value otherwise.
+func (o *NodeDetails) GetYbControllerRpcPort() int32 {
+	if o == nil || o.YbControllerRpcPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.YbControllerRpcPort
+}
+
+// GetYbControllerRpcPortOk returns a tuple with the YbControllerRpcPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetYbControllerRpcPortOk() (*int32, bool) {
+	if o == nil || o.YbControllerRpcPort == nil {
+		return nil, false
+	}
+	return o.YbControllerRpcPort, true
+}
+
+// HasYbControllerRpcPort returns a boolean if a field has been set.
+func (o *NodeDetails) HasYbControllerRpcPort() bool {
+	if o != nil && o.YbControllerRpcPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbControllerRpcPort gets a reference to the given int32 and assigns it to the YbControllerRpcPort field.
+func (o *NodeDetails) SetYbControllerRpcPort(v int32) {
+	o.YbControllerRpcPort = &v
+}
+
 // GetYbPrebuiltAmi returns the YbPrebuiltAmi field value if set, zero value otherwise.
 func (o *NodeDetails) GetYbPrebuiltAmi() bool {
 	if o == nil || o.YbPrebuiltAmi == nil {
@@ -1023,6 +1099,9 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	if o.CronsActive != nil {
 		toSerialize["cronsActive"] = o.CronsActive
 	}
+	if o.DedicatedTo != nil {
+		toSerialize["dedicatedTo"] = o.DedicatedTo
+	}
 	if o.DisksAreMountedByUUID != nil {
 		toSerialize["disksAreMountedByUUID"] = o.DisksAreMountedByUUID
 	}
@@ -1062,9 +1141,6 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	if o.NodeName != nil {
 		toSerialize["nodeName"] = o.NodeName
 	}
-	if true {
-		toSerialize["nodeUUID"] = o.NodeUUID
-	}
 	if o.NodeUuid != nil {
 		toSerialize["nodeUuid"] = o.NodeUuid
 	}
@@ -1085,6 +1161,12 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.TserverRpcPort != nil {
 		toSerialize["tserverRpcPort"] = o.TserverRpcPort
+	}
+	if o.YbControllerHttpPort != nil {
+		toSerialize["ybControllerHttpPort"] = o.YbControllerHttpPort
+	}
+	if o.YbControllerRpcPort != nil {
+		toSerialize["ybControllerRpcPort"] = o.YbControllerRpcPort
 	}
 	if o.YbPrebuiltAmi != nil {
 		toSerialize["ybPrebuiltAmi"] = o.YbPrebuiltAmi

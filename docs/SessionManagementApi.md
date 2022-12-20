@@ -133,7 +133,7 @@ No authorization required
 
 ## GetFilteredLogs
 
-> string GetFilteredLogs(ctx).MaxLines(maxLines).UniverseName(universeName).QueryRegex(queryRegex).Execute()
+> string GetFilteredLogs(ctx).MaxLines(maxLines).UniverseName(universeName).QueryRegex(queryRegex).StartDate(startDate).EndDate(endDate).Execute()
 
 getFilteredLogs
 
@@ -153,10 +153,12 @@ func main() {
     maxLines := int32(56) // int32 |  (optional) (default to 10000)
     universeName := "universeName_example" // string |  (optional) (default to "null")
     queryRegex := "queryRegex_example" // string |  (optional) (default to "null")
+    startDate := "startDate_example" // string |  (optional) (default to "null")
+    endDate := "endDate_example" // string |  (optional) (default to "null")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionManagementApi.GetFilteredLogs(context.Background()).MaxLines(maxLines).UniverseName(universeName).QueryRegex(queryRegex).Execute()
+    resp, r, err := api_client.SessionManagementApi.GetFilteredLogs(context.Background()).MaxLines(maxLines).UniverseName(universeName).QueryRegex(queryRegex).StartDate(startDate).EndDate(endDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.GetFilteredLogs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -180,6 +182,8 @@ Name | Type | Description  | Notes
  **maxLines** | **int32** |  | [default to 10000]
  **universeName** | **string** |  | [default to &quot;null&quot;]
  **queryRegex** | **string** |  | [default to &quot;null&quot;]
+ **startDate** | **string** |  | [default to &quot;null&quot;]
+ **endDate** | **string** |  | [default to &quot;null&quot;]
 
 ### Return type
 

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateRelease**](ReleaseManagementApi.md#CreateRelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 [**DeleteRelease**](ReleaseManagementApi.md#DeleteRelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
-[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/releases | List all releases valid in region
+[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List all releases valid in region
 [**GetListOfReleases**](ReleaseManagementApi.md#GetListOfReleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 [**Refresh**](ReleaseManagementApi.md#Refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 [**UpdateRelease**](ReleaseManagementApi.md#UpdateRelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ## GetListOfRegionReleases
 
-> map[string]map[string]interface{} GetListOfRegionReleases(ctx, cUUID, pUUID, rUUID).IncludeMetadata(includeMetadata).Execute()
+> map[string]map[string]interface{} GetListOfRegionReleases(ctx, cUUID, pUUID).IncludeMetadata(includeMetadata).Execute()
 
 List all releases valid in region
 
@@ -175,12 +175,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
-    rUUID := TODO // string | 
     includeMetadata := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.GetListOfRegionReleases(context.Background(), cUUID, pUUID, rUUID).IncludeMetadata(includeMetadata).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.GetListOfRegionReleases(context.Background(), cUUID, pUUID).IncludeMetadata(includeMetadata).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.GetListOfRegionReleases``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,7 +197,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **cUUID** | [**string**](.md) |  | 
 **pUUID** | [**string**](.md) |  | 
-**rUUID** | [**string**](.md) |  | 
 
 ### Other Parameters
 
@@ -207,7 +205,6 @@ Other parameters are passed through a pointer to a apiGetListOfRegionReleasesReq
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
  **includeMetadata** | **bool** |  | [default to false]

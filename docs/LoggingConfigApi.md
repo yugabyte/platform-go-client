@@ -4,8 +4,73 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**SetAuditLoggingSettings**](LoggingConfigApi.md#SetAuditLoggingSettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level
 [**SetLoggingSettings**](LoggingConfigApi.md#SetLoggingSettings) | **Post** /api/v1/logging_config | Set Logging Level
 
+
+
+## SetAuditLoggingSettings
+
+> AuditLoggingConfig SetAuditLoggingSettings(ctx).AuditLoggingConfig(auditLoggingConfig).Execute()
+
+Set Audit Logging Level
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    auditLoggingConfig := *openapiclient.NewAuditLoggingConfig(false, false) // AuditLoggingConfig | Audit Logging config to be updated
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.LoggingConfigApi.SetAuditLoggingSettings(context.Background()).AuditLoggingConfig(auditLoggingConfig).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LoggingConfigApi.SetAuditLoggingSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetAuditLoggingSettings`: AuditLoggingConfig
+    fmt.Fprintf(os.Stdout, "Response from `LoggingConfigApi.SetAuditLoggingSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetAuditLoggingSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **auditLoggingConfig** | [**AuditLoggingConfig**](AuditLoggingConfig.md) | Audit Logging config to be updated | 
+
+### Return type
+
+[**AuditLoggingConfig**](AuditLoggingConfig.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## SetLoggingSettings

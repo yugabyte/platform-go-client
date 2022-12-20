@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -14,24 +14,26 @@ import (
 	"encoding/json"
 )
 
-// AlertChannel struct for AlertChannel
+// AlertChannel Alert notification channel
 type AlertChannel struct {
+	// Customer UUID
 	CustomerUuid string `json:"customer_uuid"`
+	// Name
 	Name string `json:"name"`
 	Params AlertChannelParams `json:"params"`
-	Uuid string `json:"uuid"`
+	// Channel UUID
+	Uuid *string `json:"uuid,omitempty"`
 }
 
 // NewAlertChannel instantiates a new AlertChannel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannel(customerUuid string, name string, params AlertChannelParams, uuid string, ) *AlertChannel {
+func NewAlertChannel(customerUuid string, name string, params AlertChannelParams, ) *AlertChannel {
 	this := AlertChannel{}
 	this.CustomerUuid = customerUuid
 	this.Name = name
 	this.Params = params
-	this.Uuid = uuid
 	return &this
 }
 
@@ -115,28 +117,36 @@ func (o *AlertChannel) SetParams(v AlertChannelParams) {
 	o.Params = v
 }
 
-// GetUuid returns the Uuid field value
+// GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *AlertChannel) GetUuid() string {
-	if o == nil  {
+	if o == nil || o.Uuid == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Uuid
+	return *o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannel) GetUuidOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Uuid == nil {
 		return nil, false
 	}
-	return &o.Uuid, true
+	return o.Uuid, true
 }
 
-// SetUuid sets field value
+// HasUuid returns a boolean if a field has been set.
+func (o *AlertChannel) HasUuid() bool {
+	if o != nil && o.Uuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
 func (o *AlertChannel) SetUuid(v string) {
-	o.Uuid = v
+	o.Uuid = &v
 }
 
 func (o AlertChannel) MarshalJSON() ([]byte, error) {
@@ -150,7 +160,7 @@ func (o AlertChannel) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["params"] = o.Params
 	}
-	if true {
+	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid
 	}
 	return json.Marshal(toSerialize)

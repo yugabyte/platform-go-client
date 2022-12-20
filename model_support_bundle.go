@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -19,7 +19,9 @@ import (
 type SupportBundle struct {
 	BundleDetails BundleDetails `json:"bundleDetails"`
 	BundleUUID string `json:"bundleUUID"`
+	CreationDate time.Time `json:"creationDate"`
 	EndDate time.Time `json:"endDate"`
+	ExpirationDate time.Time `json:"expirationDate"`
 	Path string `json:"path"`
 	ScopeUUID string `json:"scopeUUID"`
 	StartDate time.Time `json:"startDate"`
@@ -30,11 +32,13 @@ type SupportBundle struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, endDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle {
+func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, creationDate time.Time, endDate time.Time, expirationDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle {
 	this := SupportBundle{}
 	this.BundleDetails = bundleDetails
 	this.BundleUUID = bundleUUID
+	this.CreationDate = creationDate
 	this.EndDate = endDate
+	this.ExpirationDate = expirationDate
 	this.Path = path
 	this.ScopeUUID = scopeUUID
 	this.StartDate = startDate
@@ -98,6 +102,30 @@ func (o *SupportBundle) SetBundleUUID(v string) {
 	o.BundleUUID = v
 }
 
+// GetCreationDate returns the CreationDate field value
+func (o *SupportBundle) GetCreationDate() time.Time {
+	if o == nil  {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreationDate
+}
+
+// GetCreationDateOk returns a tuple with the CreationDate field value
+// and a boolean to check if the value has been set.
+func (o *SupportBundle) GetCreationDateOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreationDate, true
+}
+
+// SetCreationDate sets field value
+func (o *SupportBundle) SetCreationDate(v time.Time) {
+	o.CreationDate = v
+}
+
 // GetEndDate returns the EndDate field value
 func (o *SupportBundle) GetEndDate() time.Time {
 	if o == nil  {
@@ -120,6 +148,30 @@ func (o *SupportBundle) GetEndDateOk() (*time.Time, bool) {
 // SetEndDate sets field value
 func (o *SupportBundle) SetEndDate(v time.Time) {
 	o.EndDate = v
+}
+
+// GetExpirationDate returns the ExpirationDate field value
+func (o *SupportBundle) GetExpirationDate() time.Time {
+	if o == nil  {
+		var ret time.Time
+		return ret
+	}
+
+	return o.ExpirationDate
+}
+
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value
+// and a boolean to check if the value has been set.
+func (o *SupportBundle) GetExpirationDateOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ExpirationDate, true
+}
+
+// SetExpirationDate sets field value
+func (o *SupportBundle) SetExpirationDate(v time.Time) {
+	o.ExpirationDate = v
 }
 
 // GetPath returns the Path field value
@@ -227,7 +279,13 @@ func (o SupportBundle) MarshalJSON() ([]byte, error) {
 		toSerialize["bundleUUID"] = o.BundleUUID
 	}
 	if true {
+		toSerialize["creationDate"] = o.CreationDate
+	}
+	if true {
 		toSerialize["endDate"] = o.EndDate
+	}
+	if true {
+		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if true {
 		toSerialize["path"] = o.Path

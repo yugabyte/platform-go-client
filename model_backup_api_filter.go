@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -20,6 +20,8 @@ type BackupApiFilter struct {
 	DateRangeEnd time.Time `json:"dateRangeEnd"`
 	DateRangeStart time.Time `json:"dateRangeStart"`
 	KeyspaceList []string `json:"keyspaceList"`
+	OnlyShowDeletedConfigs bool `json:"onlyShowDeletedConfigs"`
+	OnlyShowDeletedUniverses bool `json:"onlyShowDeletedUniverses"`
 	ScheduleUUIDList []string `json:"scheduleUUIDList"`
 	States []string `json:"states"`
 	StorageConfigUUIDList []string `json:"storageConfigUUIDList"`
@@ -31,11 +33,13 @@ type BackupApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter {
+func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter {
 	this := BackupApiFilter{}
 	this.DateRangeEnd = dateRangeEnd
 	this.DateRangeStart = dateRangeStart
 	this.KeyspaceList = keyspaceList
+	this.OnlyShowDeletedConfigs = onlyShowDeletedConfigs
+	this.OnlyShowDeletedUniverses = onlyShowDeletedUniverses
 	this.ScheduleUUIDList = scheduleUUIDList
 	this.States = states
 	this.StorageConfigUUIDList = storageConfigUUIDList
@@ -122,6 +126,54 @@ func (o *BackupApiFilter) GetKeyspaceListOk() (*[]string, bool) {
 // SetKeyspaceList sets field value
 func (o *BackupApiFilter) SetKeyspaceList(v []string) {
 	o.KeyspaceList = v
+}
+
+// GetOnlyShowDeletedConfigs returns the OnlyShowDeletedConfigs field value
+func (o *BackupApiFilter) GetOnlyShowDeletedConfigs() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.OnlyShowDeletedConfigs
+}
+
+// GetOnlyShowDeletedConfigsOk returns a tuple with the OnlyShowDeletedConfigs field value
+// and a boolean to check if the value has been set.
+func (o *BackupApiFilter) GetOnlyShowDeletedConfigsOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.OnlyShowDeletedConfigs, true
+}
+
+// SetOnlyShowDeletedConfigs sets field value
+func (o *BackupApiFilter) SetOnlyShowDeletedConfigs(v bool) {
+	o.OnlyShowDeletedConfigs = v
+}
+
+// GetOnlyShowDeletedUniverses returns the OnlyShowDeletedUniverses field value
+func (o *BackupApiFilter) GetOnlyShowDeletedUniverses() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.OnlyShowDeletedUniverses
+}
+
+// GetOnlyShowDeletedUniversesOk returns a tuple with the OnlyShowDeletedUniverses field value
+// and a boolean to check if the value has been set.
+func (o *BackupApiFilter) GetOnlyShowDeletedUniversesOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.OnlyShowDeletedUniverses, true
+}
+
+// SetOnlyShowDeletedUniverses sets field value
+func (o *BackupApiFilter) SetOnlyShowDeletedUniverses(v bool) {
+	o.OnlyShowDeletedUniverses = v
 }
 
 // GetScheduleUUIDList returns the ScheduleUUIDList field value
@@ -254,6 +306,12 @@ func (o BackupApiFilter) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["keyspaceList"] = o.KeyspaceList
+	}
+	if true {
+		toSerialize["onlyShowDeletedConfigs"] = o.OnlyShowDeletedConfigs
+	}
+	if true {
+		toSerialize["onlyShowDeletedUniverses"] = o.OnlyShowDeletedUniverses
 	}
 	if true {
 		toSerialize["scheduleUUIDList"] = o.ScheduleUUIDList

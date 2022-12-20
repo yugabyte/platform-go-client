@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | **[]string** |  | 
 **TaskTypes** | **[]string** |  | 
+**UniverseUUIDList** | **[]string** |  | 
 
 ## Methods
 
 ### NewScheduleApiFilter
 
-`func NewScheduleApiFilter(status []string, taskTypes []string, ) *ScheduleApiFilter`
+`func NewScheduleApiFilter(status []string, taskTypes []string, universeUUIDList []string, ) *ScheduleApiFilter`
 
 NewScheduleApiFilter instantiates a new ScheduleApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *ScheduleApiFilter) SetTaskTypes(v []string)`
 
 SetTaskTypes sets TaskTypes field to given value.
+
+
+### GetUniverseUUIDList
+
+`func (o *ScheduleApiFilter) GetUniverseUUIDList() []string`
+
+GetUniverseUUIDList returns the UniverseUUIDList field if non-nil, zero value otherwise.
+
+### GetUniverseUUIDListOk
+
+`func (o *ScheduleApiFilter) GetUniverseUUIDListOk() (*[]string, bool)`
+
+GetUniverseUUIDListOk returns a tuple with the UniverseUUIDList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseUUIDList
+
+`func (o *ScheduleApiFilter) SetUniverseUUIDList(v []string)`
+
+SetUniverseUUIDList sets UniverseUUIDList field to given value.
 
 
 

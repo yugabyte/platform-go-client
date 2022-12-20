@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -17,15 +17,16 @@ import (
 // GFlagsUpgradeParams struct for GFlagsUpgradeParams
 type GFlagsUpgradeParams struct {
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
-	BackupInProgress *bool `json:"backupInProgress,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	ClientRootCA *string `json:"clientRootCA,omitempty"`
 	Clusters []Cluster `json:"clusters"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	CreatingUser Users `json:"creatingUser"`
 	CurrentClusterType *string `json:"currentClusterType,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
@@ -35,9 +36,11 @@ type GFlagsUpgradeParams struct {
 	// Whether this task has been tried before
 	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
+	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
 	MasterGFlags map[string]string `json:"masterGFlags"`
+	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
@@ -45,7 +48,8 @@ type GFlagsUpgradeParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
-	// Previous task UUID only if this task is a retry
+	PlatformUrl string `json:"platformUrl"`
+	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
@@ -63,24 +67,31 @@ type GFlagsUpgradeParams struct {
 	// Associated universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
+	UpdateOptions *[]string `json:"updateOptions,omitempty"`
 	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
 	UpdatingTask *string `json:"updatingTask,omitempty"`
 	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
 	UpgradeOption string `json:"upgradeOption"`
+	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
 	UserAZSelected *bool `json:"userAZSelected,omitempty"`
+	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
+	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewGFlagsUpgradeParams instantiates a new GFlagsUpgradeParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGFlagsUpgradeParams(clusters []Cluster, kubernetesUpgradeSupported bool, masterGFlags map[string]string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams {
+func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams {
 	this := GFlagsUpgradeParams{}
 	this.Clusters = clusters
+	this.CreatingUser = creatingUser
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.MasterGFlags = masterGFlags
+	this.PlatformUrl = platformUrl
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.TserverGFlags = tserverGFlags
@@ -126,38 +137,6 @@ func (o *GFlagsUpgradeParams) HasAllowInsecure() bool {
 // SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *GFlagsUpgradeParams) SetAllowInsecure(v bool) {
 	o.AllowInsecure = &v
-}
-
-// GetBackupInProgress returns the BackupInProgress field value if set, zero value otherwise.
-func (o *GFlagsUpgradeParams) GetBackupInProgress() bool {
-	if o == nil || o.BackupInProgress == nil {
-		var ret bool
-		return ret
-	}
-	return *o.BackupInProgress
-}
-
-// GetBackupInProgressOk returns a tuple with the BackupInProgress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GFlagsUpgradeParams) GetBackupInProgressOk() (*bool, bool) {
-	if o == nil || o.BackupInProgress == nil {
-		return nil, false
-	}
-	return o.BackupInProgress, true
-}
-
-// HasBackupInProgress returns a boolean if a field has been set.
-func (o *GFlagsUpgradeParams) HasBackupInProgress() bool {
-	if o != nil && o.BackupInProgress != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBackupInProgress gets a reference to the given bool and assigns it to the BackupInProgress field.
-func (o *GFlagsUpgradeParams) SetBackupInProgress(v bool) {
-	o.BackupInProgress = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -312,6 +291,30 @@ func (o *GFlagsUpgradeParams) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
 }
 
+// GetCreatingUser returns the CreatingUser field value
+func (o *GFlagsUpgradeParams) GetCreatingUser() Users {
+	if o == nil  {
+		var ret Users
+		return ret
+	}
+
+	return o.CreatingUser
+}
+
+// GetCreatingUserOk returns a tuple with the CreatingUser field value
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetCreatingUserOk() (*Users, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatingUser, true
+}
+
+// SetCreatingUser sets field value
+func (o *GFlagsUpgradeParams) SetCreatingUser(v Users) {
+	o.CreatingUser = v
+}
+
 // GetCurrentClusterType returns the CurrentClusterType field value if set, zero value otherwise.
 func (o *GFlagsUpgradeParams) GetCurrentClusterType() string {
 	if o == nil || o.CurrentClusterType == nil {
@@ -374,6 +377,38 @@ func (o *GFlagsUpgradeParams) HasDeviceInfo() bool {
 // SetDeviceInfo gets a reference to the given DeviceInfo and assigns it to the DeviceInfo field.
 func (o *GFlagsUpgradeParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
+}
+
+// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetEnableYbc() bool {
+	if o == nil || o.EnableYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableYbc
+}
+
+// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetEnableYbcOk() (*bool, bool) {
+	if o == nil || o.EnableYbc == nil {
+		return nil, false
+	}
+	return o.EnableYbc, true
+}
+
+// HasEnableYbc returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasEnableYbc() bool {
+	if o != nil && o.EnableYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
+func (o *GFlagsUpgradeParams) SetEnableYbc(v bool) {
+	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -568,6 +603,38 @@ func (o *GFlagsUpgradeParams) SetImportedState(v string) {
 	o.ImportedState = &v
 }
 
+// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetInstallYbc() bool {
+	if o == nil || o.InstallYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallYbc
+}
+
+// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetInstallYbcOk() (*bool, bool) {
+	if o == nil || o.InstallYbc == nil {
+		return nil, false
+	}
+	return o.InstallYbc, true
+}
+
+// HasInstallYbc returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasInstallYbc() bool {
+	if o != nil && o.InstallYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
+func (o *GFlagsUpgradeParams) SetInstallYbc(v bool) {
+	o.InstallYbc = &v
+}
+
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
 func (o *GFlagsUpgradeParams) GetItestS3PackagePath() string {
 	if o == nil || o.ItestS3PackagePath == nil {
@@ -646,6 +713,38 @@ func (o *GFlagsUpgradeParams) GetMasterGFlagsOk() (*map[string]string, bool) {
 // SetMasterGFlags sets field value
 func (o *GFlagsUpgradeParams) SetMasterGFlags(v map[string]string) {
 	o.MasterGFlags = v
+}
+
+// GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetMastersInDefaultRegion() bool {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MastersInDefaultRegion
+}
+
+// GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool) {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		return nil, false
+	}
+	return o.MastersInDefaultRegion, true
+}
+
+// HasMastersInDefaultRegion returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasMastersInDefaultRegion() bool {
+	if o != nil && o.MastersInDefaultRegion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMastersInDefaultRegion gets a reference to the given bool and assigns it to the MastersInDefaultRegion field.
+func (o *GFlagsUpgradeParams) SetMastersInDefaultRegion(v bool) {
+	o.MastersInDefaultRegion = &v
 }
 
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
@@ -806,6 +905,30 @@ func (o *GFlagsUpgradeParams) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *GFlagsUpgradeParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetPlatformUrl returns the PlatformUrl field value
+func (o *GFlagsUpgradeParams) GetPlatformUrl() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformUrl
+}
+
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetPlatformUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformUrl, true
+}
+
+// SetPlatformUrl sets field value
+func (o *GFlagsUpgradeParams) SetPlatformUrl(v string) {
+	o.PlatformUrl = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1232,6 +1355,38 @@ func (o *GFlagsUpgradeParams) SetUpdateInProgress(v bool) {
 	o.UpdateInProgress = &v
 }
 
+// GetUpdateOptions returns the UpdateOptions field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetUpdateOptions() []string {
+	if o == nil || o.UpdateOptions == nil {
+		var ret []string
+		return ret
+	}
+	return *o.UpdateOptions
+}
+
+// GetUpdateOptionsOk returns a tuple with the UpdateOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetUpdateOptionsOk() (*[]string, bool) {
+	if o == nil || o.UpdateOptions == nil {
+		return nil, false
+	}
+	return o.UpdateOptions, true
+}
+
+// HasUpdateOptions returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasUpdateOptions() bool {
+	if o != nil && o.UpdateOptions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateOptions gets a reference to the given []string and assigns it to the UpdateOptions field.
+func (o *GFlagsUpgradeParams) SetUpdateOptions(v []string) {
+	o.UpdateOptions = &v
+}
+
 // GetUpdateSucceeded returns the UpdateSucceeded field value if set, zero value otherwise.
 func (o *GFlagsUpgradeParams) GetUpdateSucceeded() bool {
 	if o == nil || o.UpdateSucceeded == nil {
@@ -1352,6 +1507,38 @@ func (o *GFlagsUpgradeParams) SetUpgradeOption(v string) {
 	o.UpgradeOption = v
 }
 
+// GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetUseNewHelmNamingStyle() bool {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseNewHelmNamingStyle
+}
+
+// GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool) {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		return nil, false
+	}
+	return o.UseNewHelmNamingStyle, true
+}
+
+// HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasUseNewHelmNamingStyle() bool {
+	if o != nil && o.UseNewHelmNamingStyle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNewHelmNamingStyle gets a reference to the given bool and assigns it to the UseNewHelmNamingStyle field.
+func (o *GFlagsUpgradeParams) SetUseNewHelmNamingStyle(v bool) {
+	o.UseNewHelmNamingStyle = &v
+}
+
 // GetUserAZSelected returns the UserAZSelected field value if set, zero value otherwise.
 func (o *GFlagsUpgradeParams) GetUserAZSelected() bool {
 	if o == nil || o.UserAZSelected == nil {
@@ -1382,6 +1569,38 @@ func (o *GFlagsUpgradeParams) HasUserAZSelected() bool {
 // SetUserAZSelected gets a reference to the given bool and assigns it to the UserAZSelected field.
 func (o *GFlagsUpgradeParams) SetUserAZSelected(v bool) {
 	o.UserAZSelected = &v
+}
+
+// GetXclusterInfo returns the XclusterInfo field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetXclusterInfo() XClusterInfo {
+	if o == nil || o.XclusterInfo == nil {
+		var ret XClusterInfo
+		return ret
+	}
+	return *o.XclusterInfo
+}
+
+// GetXclusterInfoOk returns a tuple with the XclusterInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool) {
+	if o == nil || o.XclusterInfo == nil {
+		return nil, false
+	}
+	return o.XclusterInfo, true
+}
+
+// HasXclusterInfo returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasXclusterInfo() bool {
+	if o != nil && o.XclusterInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetXclusterInfo gets a reference to the given XClusterInfo and assigns it to the XclusterInfo field.
+func (o *GFlagsUpgradeParams) SetXclusterInfo(v XClusterInfo) {
+	o.XclusterInfo = &v
 }
 
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
@@ -1416,13 +1635,74 @@ func (o *GFlagsUpgradeParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
+// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetYbcInstalled() bool {
+	if o == nil || o.YbcInstalled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbcInstalled
+}
+
+// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetYbcInstalledOk() (*bool, bool) {
+	if o == nil || o.YbcInstalled == nil {
+		return nil, false
+	}
+	return o.YbcInstalled, true
+}
+
+// HasYbcInstalled returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasYbcInstalled() bool {
+	if o != nil && o.YbcInstalled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
+func (o *GFlagsUpgradeParams) SetYbcInstalled(v bool) {
+	o.YbcInstalled = &v
+}
+
+// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
+func (o *GFlagsUpgradeParams) GetYbcSoftwareVersion() string {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.YbcSoftwareVersion
+}
+
+// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagsUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool) {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		return nil, false
+	}
+	return o.YbcSoftwareVersion, true
+}
+
+// HasYbcSoftwareVersion returns a boolean if a field has been set.
+func (o *GFlagsUpgradeParams) HasYbcSoftwareVersion() bool {
+	if o != nil && o.YbcSoftwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
+func (o *GFlagsUpgradeParams) SetYbcSoftwareVersion(v string) {
+	o.YbcSoftwareVersion = &v
+}
+
 func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
-	}
-	if o.BackupInProgress != nil {
-		toSerialize["backupInProgress"] = o.BackupInProgress
 	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
@@ -1439,11 +1719,17 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
 	}
+	if true {
+		toSerialize["creatingUser"] = o.CreatingUser
+	}
 	if o.CurrentClusterType != nil {
 		toSerialize["currentClusterType"] = o.CurrentClusterType
 	}
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
+	}
+	if o.EnableYbc != nil {
+		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1463,6 +1749,9 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
+	if o.InstallYbc != nil {
+		toSerialize["installYbc"] = o.InstallYbc
+	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
 	}
@@ -1471,6 +1760,9 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["masterGFlags"] = o.MasterGFlags
+	}
+	if o.MastersInDefaultRegion != nil {
+		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
@@ -1486,6 +1778,9 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if true {
+		toSerialize["platformUrl"] = o.PlatformUrl
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
@@ -1529,6 +1824,9 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.UpdateInProgress != nil {
 		toSerialize["updateInProgress"] = o.UpdateInProgress
 	}
+	if o.UpdateOptions != nil {
+		toSerialize["updateOptions"] = o.UpdateOptions
+	}
 	if o.UpdateSucceeded != nil {
 		toSerialize["updateSucceeded"] = o.UpdateSucceeded
 	}
@@ -1541,11 +1839,23 @@ func (o GFlagsUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["upgradeOption"] = o.UpgradeOption
 	}
+	if o.UseNewHelmNamingStyle != nil {
+		toSerialize["useNewHelmNamingStyle"] = o.UseNewHelmNamingStyle
+	}
 	if o.UserAZSelected != nil {
 		toSerialize["userAZSelected"] = o.UserAZSelected
 	}
+	if o.XclusterInfo != nil {
+		toSerialize["xclusterInfo"] = o.XclusterInfo
+	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
+	}
+	if o.YbcInstalled != nil {
+		toSerialize["ybcInstalled"] = o.YbcInstalled
+	}
+	if o.YbcSoftwareVersion != nil {
+		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

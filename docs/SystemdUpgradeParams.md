@@ -5,28 +5,32 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
-**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
+**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
+**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**PlatformUrl** | **string** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
@@ -39,18 +43,23 @@ Name | Type | Description | Notes
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
+**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
+**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
+**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+**YbcInstalled** | Pointer to **bool** |  | [optional] 
+**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewSystemdUpgradeParams
 
-`func NewSystemdUpgradeParams(clusters []Cluster, kubernetesUpgradeSupported bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *SystemdUpgradeParams`
+`func NewSystemdUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *SystemdUpgradeParams`
 
 NewSystemdUpgradeParams instantiates a new SystemdUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -89,31 +98,6 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *SystemdUpgradeParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
-
-### GetBackupInProgress
-
-`func (o *SystemdUpgradeParams) GetBackupInProgress() bool`
-
-GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
-
-### GetBackupInProgressOk
-
-`func (o *SystemdUpgradeParams) GetBackupInProgressOk() (*bool, bool)`
-
-GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBackupInProgress
-
-`func (o *SystemdUpgradeParams) SetBackupInProgress(v bool)`
-
-SetBackupInProgress sets BackupInProgress field to given value.
-
-### HasBackupInProgress
-
-`func (o *SystemdUpgradeParams) HasBackupInProgress() bool`
-
-HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -235,6 +219,26 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 
 HasCommunicationPorts returns a boolean if a field has been set.
 
+### GetCreatingUser
+
+`func (o *SystemdUpgradeParams) GetCreatingUser() Users`
+
+GetCreatingUser returns the CreatingUser field if non-nil, zero value otherwise.
+
+### GetCreatingUserOk
+
+`func (o *SystemdUpgradeParams) GetCreatingUserOk() (*Users, bool)`
+
+GetCreatingUserOk returns a tuple with the CreatingUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatingUser
+
+`func (o *SystemdUpgradeParams) SetCreatingUser(v Users)`
+
+SetCreatingUser sets CreatingUser field to given value.
+
+
 ### GetCurrentClusterType
 
 `func (o *SystemdUpgradeParams) GetCurrentClusterType() string`
@@ -284,6 +288,31 @@ SetDeviceInfo sets DeviceInfo field to given value.
 `func (o *SystemdUpgradeParams) HasDeviceInfo() bool`
 
 HasDeviceInfo returns a boolean if a field has been set.
+
+### GetEnableYbc
+
+`func (o *SystemdUpgradeParams) GetEnableYbc() bool`
+
+GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
+
+### GetEnableYbcOk
+
+`func (o *SystemdUpgradeParams) GetEnableYbcOk() (*bool, bool)`
+
+GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableYbc
+
+`func (o *SystemdUpgradeParams) SetEnableYbc(v bool)`
+
+SetEnableYbc sets EnableYbc field to given value.
+
+### HasEnableYbc
+
+`func (o *SystemdUpgradeParams) HasEnableYbc() bool`
+
+HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -435,6 +464,31 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
+### GetInstallYbc
+
+`func (o *SystemdUpgradeParams) GetInstallYbc() bool`
+
+GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+
+### GetInstallYbcOk
+
+`func (o *SystemdUpgradeParams) GetInstallYbcOk() (*bool, bool)`
+
+GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallYbc
+
+`func (o *SystemdUpgradeParams) SetInstallYbc(v bool)`
+
+SetInstallYbc sets InstallYbc field to given value.
+
+### HasInstallYbc
+
+`func (o *SystemdUpgradeParams) HasInstallYbc() bool`
+
+HasInstallYbc returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *SystemdUpgradeParams) GetItestS3PackagePath() string`
@@ -479,6 +533,31 @@ and a boolean to check if the value has been set.
 
 SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
 
+
+### GetMastersInDefaultRegion
+
+`func (o *SystemdUpgradeParams) GetMastersInDefaultRegion() bool`
+
+GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
+
+### GetMastersInDefaultRegionOk
+
+`func (o *SystemdUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool)`
+
+GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMastersInDefaultRegion
+
+`func (o *SystemdUpgradeParams) SetMastersInDefaultRegion(v bool)`
+
+SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
+
+### HasMastersInDefaultRegion
+
+`func (o *SystemdUpgradeParams) HasMastersInDefaultRegion() bool`
+
+HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -604,6 +683,26 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *SystemdUpgradeParams) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetPlatformUrl
+
+`func (o *SystemdUpgradeParams) GetPlatformUrl() string`
+
+GetPlatformUrl returns the PlatformUrl field if non-nil, zero value otherwise.
+
+### GetPlatformUrlOk
+
+`func (o *SystemdUpgradeParams) GetPlatformUrlOk() (*string, bool)`
+
+GetPlatformUrlOk returns a tuple with the PlatformUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformUrl
+
+`func (o *SystemdUpgradeParams) SetPlatformUrl(v string)`
+
+SetPlatformUrl sets PlatformUrl field to given value.
+
 
 ### GetPreviousTaskUUID
 
@@ -920,6 +1019,31 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
+### GetUpdateOptions
+
+`func (o *SystemdUpgradeParams) GetUpdateOptions() []string`
+
+GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
+
+### GetUpdateOptionsOk
+
+`func (o *SystemdUpgradeParams) GetUpdateOptionsOk() (*[]string, bool)`
+
+GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateOptions
+
+`func (o *SystemdUpgradeParams) SetUpdateOptions(v []string)`
+
+SetUpdateOptions sets UpdateOptions field to given value.
+
+### HasUpdateOptions
+
+`func (o *SystemdUpgradeParams) HasUpdateOptions() bool`
+
+HasUpdateOptions returns a boolean if a field has been set.
+
 ### GetUpdateSucceeded
 
 `func (o *SystemdUpgradeParams) GetUpdateSucceeded() bool`
@@ -1015,6 +1139,31 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
+### GetUseNewHelmNamingStyle
+
+`func (o *SystemdUpgradeParams) GetUseNewHelmNamingStyle() bool`
+
+GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
+
+### GetUseNewHelmNamingStyleOk
+
+`func (o *SystemdUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
+
+GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseNewHelmNamingStyle
+
+`func (o *SystemdUpgradeParams) SetUseNewHelmNamingStyle(v bool)`
+
+SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
+
+### HasUseNewHelmNamingStyle
+
+`func (o *SystemdUpgradeParams) HasUseNewHelmNamingStyle() bool`
+
+HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+
 ### GetUserAZSelected
 
 `func (o *SystemdUpgradeParams) GetUserAZSelected() bool`
@@ -1040,6 +1189,31 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
+### GetXclusterInfo
+
+`func (o *SystemdUpgradeParams) GetXclusterInfo() XClusterInfo`
+
+GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
+
+### GetXclusterInfoOk
+
+`func (o *SystemdUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
+
+GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXclusterInfo
+
+`func (o *SystemdUpgradeParams) SetXclusterInfo(v XClusterInfo)`
+
+SetXclusterInfo sets XclusterInfo field to given value.
+
+### HasXclusterInfo
+
+`func (o *SystemdUpgradeParams) HasXclusterInfo() bool`
+
+HasXclusterInfo returns a boolean if a field has been set.
+
 ### GetYbPrevSoftwareVersion
 
 `func (o *SystemdUpgradeParams) GetYbPrevSoftwareVersion() string`
@@ -1064,6 +1238,56 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *SystemdUpgradeParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+### GetYbcInstalled
+
+`func (o *SystemdUpgradeParams) GetYbcInstalled() bool`
+
+GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
+
+### GetYbcInstalledOk
+
+`func (o *SystemdUpgradeParams) GetYbcInstalledOk() (*bool, bool)`
+
+GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcInstalled
+
+`func (o *SystemdUpgradeParams) SetYbcInstalled(v bool)`
+
+SetYbcInstalled sets YbcInstalled field to given value.
+
+### HasYbcInstalled
+
+`func (o *SystemdUpgradeParams) HasYbcInstalled() bool`
+
+HasYbcInstalled returns a boolean if a field has been set.
+
+### GetYbcSoftwareVersion
+
+`func (o *SystemdUpgradeParams) GetYbcSoftwareVersion() string`
+
+GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbcSoftwareVersionOk
+
+`func (o *SystemdUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool)`
+
+GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcSoftwareVersion
+
+`func (o *SystemdUpgradeParams) SetYbcSoftwareVersion(v string)`
+
+SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
+
+### HasYbcSoftwareVersion
+
+`func (o *SystemdUpgradeParams) HasYbcSoftwareVersion() bool`
+
+HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

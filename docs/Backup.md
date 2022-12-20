@@ -4,13 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BackupCategory** | **string** |  | 
 **BackupInfo** | Pointer to [**BackupTableParams**](BackupTableParams.md) |  | [optional] 
 **BackupUUID** | Pointer to **string** | Backup UUID | [optional] [readonly] 
+**BaseBackupUUID** | Pointer to **string** | Base backup UUID | [optional] [readonly] 
 **Category** | Pointer to **string** | Category of the backup | [optional] 
-**CompletionTime** | Pointer to **time.Time** | Backup completion time | [optional] 
+**CompletionTime** | Pointer to **time.Time** | Backup completion time | [optional] [readonly] 
 **CreateTime** | **time.Time** |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID that owns this backup | [optional] 
 **Expiry** | Pointer to **time.Time** | Expiry time (unix timestamp) of the backup | [optional] 
+**ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
+**IncrementalBackup** | **bool** |  | 
+**ParentBackup** | **bool** |  | 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID, if this backup is part of a schedule | [optional] 
 **State** | Pointer to **string** | State of the backup | [optional] [readonly] 
 **StorageConfigUUID** | Pointer to **string** | Storage Config UUID that created this backup | [optional] 
@@ -24,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewBackup
 
-`func NewBackup(createTime time.Time, updateTime time.Time, ) *Backup`
+`func NewBackup(backupCategory string, createTime time.Time, incrementalBackup bool, parentBackup bool, updateTime time.Time, ) *Backup`
 
 NewBackup instantiates a new Backup object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +43,26 @@ will change when the set of required properties is changed
 NewBackupWithDefaults instantiates a new Backup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBackupCategory
+
+`func (o *Backup) GetBackupCategory() string`
+
+GetBackupCategory returns the BackupCategory field if non-nil, zero value otherwise.
+
+### GetBackupCategoryOk
+
+`func (o *Backup) GetBackupCategoryOk() (*string, bool)`
+
+GetBackupCategoryOk returns a tuple with the BackupCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupCategory
+
+`func (o *Backup) SetBackupCategory(v string)`
+
+SetBackupCategory sets BackupCategory field to given value.
+
 
 ### GetBackupInfo
 
@@ -88,6 +113,31 @@ SetBackupUUID sets BackupUUID field to given value.
 `func (o *Backup) HasBackupUUID() bool`
 
 HasBackupUUID returns a boolean if a field has been set.
+
+### GetBaseBackupUUID
+
+`func (o *Backup) GetBaseBackupUUID() string`
+
+GetBaseBackupUUID returns the BaseBackupUUID field if non-nil, zero value otherwise.
+
+### GetBaseBackupUUIDOk
+
+`func (o *Backup) GetBaseBackupUUIDOk() (*string, bool)`
+
+GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBaseBackupUUID
+
+`func (o *Backup) SetBaseBackupUUID(v string)`
+
+SetBaseBackupUUID sets BaseBackupUUID field to given value.
+
+### HasBaseBackupUUID
+
+`func (o *Backup) HasBaseBackupUUID() bool`
+
+HasBaseBackupUUID returns a boolean if a field has been set.
 
 ### GetCategory
 
@@ -208,6 +258,71 @@ SetExpiry sets Expiry field to given value.
 `func (o *Backup) HasExpiry() bool`
 
 HasExpiry returns a boolean if a field has been set.
+
+### GetExpiryTimeUnit
+
+`func (o *Backup) GetExpiryTimeUnit() string`
+
+GetExpiryTimeUnit returns the ExpiryTimeUnit field if non-nil, zero value otherwise.
+
+### GetExpiryTimeUnitOk
+
+`func (o *Backup) GetExpiryTimeUnitOk() (*string, bool)`
+
+GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryTimeUnit
+
+`func (o *Backup) SetExpiryTimeUnit(v string)`
+
+SetExpiryTimeUnit sets ExpiryTimeUnit field to given value.
+
+### HasExpiryTimeUnit
+
+`func (o *Backup) HasExpiryTimeUnit() bool`
+
+HasExpiryTimeUnit returns a boolean if a field has been set.
+
+### GetIncrementalBackup
+
+`func (o *Backup) GetIncrementalBackup() bool`
+
+GetIncrementalBackup returns the IncrementalBackup field if non-nil, zero value otherwise.
+
+### GetIncrementalBackupOk
+
+`func (o *Backup) GetIncrementalBackupOk() (*bool, bool)`
+
+GetIncrementalBackupOk returns a tuple with the IncrementalBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncrementalBackup
+
+`func (o *Backup) SetIncrementalBackup(v bool)`
+
+SetIncrementalBackup sets IncrementalBackup field to given value.
+
+
+### GetParentBackup
+
+`func (o *Backup) GetParentBackup() bool`
+
+GetParentBackup returns the ParentBackup field if non-nil, zero value otherwise.
+
+### GetParentBackupOk
+
+`func (o *Backup) GetParentBackupOk() (*bool, bool)`
+
+GetParentBackupOk returns a tuple with the ParentBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentBackup
+
+`func (o *Backup) SetParentBackup(v bool)`
+
+SetParentBackup sets ParentBackup field to given value.
+
 
 ### GetScheduleUUID
 

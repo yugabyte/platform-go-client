@@ -387,7 +387,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageScheduleRequest := *openapiclient.NewSchedulePagedApiQuery("Direction_example", *openapiclient.NewScheduleApiFilter([]string{"Status_example"}, []string{"TaskTypes_example"}), int32(123), false, int32(123), "SortBy_example") // SchedulePagedApiQuery | 
+    pageScheduleRequest := *openapiclient.NewSchedulePagedApiQuery("Direction_example", *openapiclient.NewScheduleApiFilter([]string{"Status_example"}, []string{"TaskTypes_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // SchedulePagedApiQuery | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **MaintenanceWindowUuids** | Pointer to **[]string** | Maintenance window UUIDs, applied to this alert config | [optional] [readonly] 
 **Name** | **string** | Name | 
 **Target** | [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | 
-**TargetType** | **string** | Target type | [readonly] 
-**Template** | **string** | Template name | [readonly] 
-**ThresholdUnit** | **string** | Threshold unit | [readonly] 
+**TargetType** | **string** | Target type | 
+**Template** | **string** | Template name | 
+**ThresholdUnit** | **string** | Threshold unit | 
 **Thresholds** | [**map[string]AlertConfigurationThreshold**](AlertConfigurationThreshold.md) | Thresholds | 
 **Uuid** | Pointer to **string** | Configuration UUID | [optional] [readonly] 
 

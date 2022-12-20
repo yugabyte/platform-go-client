@@ -15,14 +15,14 @@ Name | Type | Description | Notes
 **MaintenanceWindowUuids** | Pointer to **[]string** | Maintenance window UUIDs, applied to this alert config | [optional] [readonly] 
 **Name** | **string** | Name | 
 **Target** | [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | 
-**TargetType** | **string** | Target type | [readonly] 
-**Template** | **string** | Template name | [readonly] 
+**TargetType** | **string** | Target type | 
+**Template** | **string** | Template name | 
 **ThresholdConditionReadOnly** | Pointer to **bool** | Is alert threshold condition read-only or configurable | [optional] [readonly] 
 **ThresholdInteger** | Pointer to **bool** | Is alert threshold integer or floating point | [optional] [readonly] 
 **ThresholdMaxValue** | Pointer to **float64** | Alert threshold maximal value | [optional] [readonly] 
 **ThresholdMinValue** | Pointer to **float64** | Alert threshold minimal value | [optional] [readonly] 
 **ThresholdReadOnly** | Pointer to **bool** | Is alert threshold read-only or configurable | [optional] [readonly] 
-**ThresholdUnit** | **string** | Threshold unit | [readonly] 
+**ThresholdUnit** | **string** | Threshold unit | 
 **ThresholdUnitName** | Pointer to **string** | Threshold unit name | [optional] [readonly] 
 **Thresholds** | [**map[string]AlertConfigurationThreshold**](AlertConfigurationThreshold.md) | Thresholds | 
 **Uuid** | Pointer to **string** | Configuration UUID | [optional] [readonly] 

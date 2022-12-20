@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -284,7 +284,6 @@ type ReleaseManagementApiApiGetListOfRegionReleasesRequest struct {
 	ApiService *ReleaseManagementApiService
 	cUUID string
 	pUUID string
-	rUUID string
 	includeMetadata *bool
 }
 
@@ -302,16 +301,14 @@ func (r ReleaseManagementApiApiGetListOfRegionReleasesRequest) Execute() (map[st
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
- * @param rUUID
  * @return ReleaseManagementApiApiGetListOfRegionReleasesRequest
  */
-func (a *ReleaseManagementApiService) GetListOfRegionReleases(ctx _context.Context, cUUID string, pUUID string, rUUID string) ReleaseManagementApiApiGetListOfRegionReleasesRequest {
+func (a *ReleaseManagementApiService) GetListOfRegionReleases(ctx _context.Context, cUUID string, pUUID string) ReleaseManagementApiApiGetListOfRegionReleasesRequest {
 	return ReleaseManagementApiApiGetListOfRegionReleasesRequest{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
 		pUUID: pUUID,
-		rUUID: rUUID,
 	}
 }
 
@@ -334,10 +331,9 @@ func (a *ReleaseManagementApiService) GetListOfRegionReleasesExecute(r ReleaseMa
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/releases"
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/releases"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"rUUID"+"}", _neturl.PathEscape(parameterToString(r.rUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

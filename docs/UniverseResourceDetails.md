@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NumCores** | Pointer to **float64** | Numbers of cores | [optional] 
 **NumNodes** | Pointer to **int32** | Numbers of node | [optional] 
 **PricePerHour** | Pointer to **float64** | Price per hour | [optional] 
+**PricingKnown** | Pointer to **bool** | Known pricing info | [optional] 
 **VolumeCount** | Pointer to **int32** | Volume count | [optional] 
 **VolumeSizeGB** | Pointer to **int32** | Volume in GB | [optional] 
 
@@ -233,6 +234,31 @@ SetPricePerHour sets PricePerHour field to given value.
 `func (o *UniverseResourceDetails) HasPricePerHour() bool`
 
 HasPricePerHour returns a boolean if a field has been set.
+
+### GetPricingKnown
+
+`func (o *UniverseResourceDetails) GetPricingKnown() bool`
+
+GetPricingKnown returns the PricingKnown field if non-nil, zero value otherwise.
+
+### GetPricingKnownOk
+
+`func (o *UniverseResourceDetails) GetPricingKnownOk() (*bool, bool)`
+
+GetPricingKnownOk returns a tuple with the PricingKnown field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPricingKnown
+
+`func (o *UniverseResourceDetails) SetPricingKnown(v bool)`
+
+SetPricingKnown sets PricingKnown field to given value.
+
+### HasPricingKnown
+
+`func (o *UniverseResourceDetails) HasPricingKnown() bool`
+
+HasPricingKnown returns a boolean if a field has been set.
 
 ### GetVolumeCount
 

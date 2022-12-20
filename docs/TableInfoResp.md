@@ -5,11 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **KeySpace** | Pointer to **string** | Keyspace | [optional] 
+**NameSpace** | Pointer to **string** | Namespace or Schema | [optional] 
+**ParentTableUUID** | Pointer to **string** | Parent Table UUID | [optional] 
+**PgSchemaName** | Pointer to **string** | Postgres schema name of the table | [optional] 
 **RelationType** | Pointer to **string** | Relation type | [optional] 
-**SizeBytes** | Pointer to **float64** | Size in bytes | [optional] [readonly] 
+**SizeBytes** | Pointer to **float64** | SST size in bytes | [optional] [readonly] 
 **TableName** | Pointer to **string** | Table name | [optional] 
+**TableSpace** | Pointer to **string** | Table space | [optional] 
 **TableType** | Pointer to **string** | Table type | [optional] 
 **TableUUID** | Pointer to **string** | Table UUID | [optional] [readonly] 
+**WalSizeBytes** | Pointer to **float64** | WAL size in bytes | [optional] [readonly] 
 
 ## Methods
 
@@ -54,6 +59,81 @@ SetKeySpace sets KeySpace field to given value.
 `func (o *TableInfoResp) HasKeySpace() bool`
 
 HasKeySpace returns a boolean if a field has been set.
+
+### GetNameSpace
+
+`func (o *TableInfoResp) GetNameSpace() string`
+
+GetNameSpace returns the NameSpace field if non-nil, zero value otherwise.
+
+### GetNameSpaceOk
+
+`func (o *TableInfoResp) GetNameSpaceOk() (*string, bool)`
+
+GetNameSpaceOk returns a tuple with the NameSpace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNameSpace
+
+`func (o *TableInfoResp) SetNameSpace(v string)`
+
+SetNameSpace sets NameSpace field to given value.
+
+### HasNameSpace
+
+`func (o *TableInfoResp) HasNameSpace() bool`
+
+HasNameSpace returns a boolean if a field has been set.
+
+### GetParentTableUUID
+
+`func (o *TableInfoResp) GetParentTableUUID() string`
+
+GetParentTableUUID returns the ParentTableUUID field if non-nil, zero value otherwise.
+
+### GetParentTableUUIDOk
+
+`func (o *TableInfoResp) GetParentTableUUIDOk() (*string, bool)`
+
+GetParentTableUUIDOk returns a tuple with the ParentTableUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParentTableUUID
+
+`func (o *TableInfoResp) SetParentTableUUID(v string)`
+
+SetParentTableUUID sets ParentTableUUID field to given value.
+
+### HasParentTableUUID
+
+`func (o *TableInfoResp) HasParentTableUUID() bool`
+
+HasParentTableUUID returns a boolean if a field has been set.
+
+### GetPgSchemaName
+
+`func (o *TableInfoResp) GetPgSchemaName() string`
+
+GetPgSchemaName returns the PgSchemaName field if non-nil, zero value otherwise.
+
+### GetPgSchemaNameOk
+
+`func (o *TableInfoResp) GetPgSchemaNameOk() (*string, bool)`
+
+GetPgSchemaNameOk returns a tuple with the PgSchemaName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPgSchemaName
+
+`func (o *TableInfoResp) SetPgSchemaName(v string)`
+
+SetPgSchemaName sets PgSchemaName field to given value.
+
+### HasPgSchemaName
+
+`func (o *TableInfoResp) HasPgSchemaName() bool`
+
+HasPgSchemaName returns a boolean if a field has been set.
 
 ### GetRelationType
 
@@ -130,6 +210,31 @@ SetTableName sets TableName field to given value.
 
 HasTableName returns a boolean if a field has been set.
 
+### GetTableSpace
+
+`func (o *TableInfoResp) GetTableSpace() string`
+
+GetTableSpace returns the TableSpace field if non-nil, zero value otherwise.
+
+### GetTableSpaceOk
+
+`func (o *TableInfoResp) GetTableSpaceOk() (*string, bool)`
+
+GetTableSpaceOk returns a tuple with the TableSpace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableSpace
+
+`func (o *TableInfoResp) SetTableSpace(v string)`
+
+SetTableSpace sets TableSpace field to given value.
+
+### HasTableSpace
+
+`func (o *TableInfoResp) HasTableSpace() bool`
+
+HasTableSpace returns a boolean if a field has been set.
+
 ### GetTableType
 
 `func (o *TableInfoResp) GetTableType() string`
@@ -179,6 +284,31 @@ SetTableUUID sets TableUUID field to given value.
 `func (o *TableInfoResp) HasTableUUID() bool`
 
 HasTableUUID returns a boolean if a field has been set.
+
+### GetWalSizeBytes
+
+`func (o *TableInfoResp) GetWalSizeBytes() float64`
+
+GetWalSizeBytes returns the WalSizeBytes field if non-nil, zero value otherwise.
+
+### GetWalSizeBytesOk
+
+`func (o *TableInfoResp) GetWalSizeBytesOk() (*float64, bool)`
+
+GetWalSizeBytesOk returns a tuple with the WalSizeBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWalSizeBytes
+
+`func (o *TableInfoResp) SetWalSizeBytes(v float64)`
+
+SetWalSizeBytes sets WalSizeBytes field to given value.
+
+### HasWalSizeBytes
+
+`func (o *TableInfoResp) HasWalSizeBytes() bool`
+
+HasWalSizeBytes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

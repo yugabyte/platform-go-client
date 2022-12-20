@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -17,6 +17,7 @@ import (
 // PlacementAZ struct for PlacementAZ
 type PlacementAZ struct {
 	IsAffinitized *bool `json:"isAffinitized,omitempty"`
+	LbName *string `json:"lbName,omitempty"`
 	Name *string `json:"name,omitempty"`
 	NumNodesInAZ *int32 `json:"numNodesInAZ,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
@@ -72,6 +73,38 @@ func (o *PlacementAZ) HasIsAffinitized() bool {
 // SetIsAffinitized gets a reference to the given bool and assigns it to the IsAffinitized field.
 func (o *PlacementAZ) SetIsAffinitized(v bool) {
 	o.IsAffinitized = &v
+}
+
+// GetLbName returns the LbName field value if set, zero value otherwise.
+func (o *PlacementAZ) GetLbName() string {
+	if o == nil || o.LbName == nil {
+		var ret string
+		return ret
+	}
+	return *o.LbName
+}
+
+// GetLbNameOk returns a tuple with the LbName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlacementAZ) GetLbNameOk() (*string, bool) {
+	if o == nil || o.LbName == nil {
+		return nil, false
+	}
+	return o.LbName, true
+}
+
+// HasLbName returns a boolean if a field has been set.
+func (o *PlacementAZ) HasLbName() bool {
+	if o != nil && o.LbName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLbName gets a reference to the given string and assigns it to the LbName field.
+func (o *PlacementAZ) SetLbName(v string) {
+	o.LbName = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -270,6 +303,9 @@ func (o PlacementAZ) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.IsAffinitized != nil {
 		toSerialize["isAffinitized"] = o.IsAffinitized
+	}
+	if o.LbName != nil {
+		toSerialize["lbName"] = o.LbName
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

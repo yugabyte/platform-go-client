@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *AccessKeysApi* | [**DeleteAccesskey**](docs/AccessKeysApi.md#deleteaccesskey) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Delete an access key
 *AccessKeysApi* | [**Index**](docs/AccessKeysApi.md#index) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Get an access key
 *AccessKeysApi* | [**List**](docs/AccessKeysApi.md#list) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | List access keys for a specific provider
+*AccessKeysApi* | [**ListAllForCustomer**](docs/AccessKeysApi.md#listallforcustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
 *AlertsApi* | [**Acknowledge**](docs/AlertsApi.md#acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
 *AlertsApi* | [**AcknowledgeByFilter**](docs/AlertsApi.md#acknowledgebyfilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts
 *AlertsApi* | [**CountAlerts**](docs/AlertsApi.md#countalerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
@@ -91,6 +92,8 @@ Class | Method | HTTP request | Description
 *AlertsApi* | [**DeleteAlertChannel**](docs/AlertsApi.md#deletealertchannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
 *AlertsApi* | [**DeleteAlertConfiguration**](docs/AlertsApi.md#deletealertconfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
 *AlertsApi* | [**DeleteAlertDestination**](docs/AlertsApi.md#deletealertdestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
+*AlertsApi* | [**DeleteAlertTemplateSettings**](docs/AlertsApi.md#deletealerttemplatesettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings
+*AlertsApi* | [**EditAlertTemplateSettings**](docs/AlertsApi.md#editalerttemplatesettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Crete or update alert template settings list
 *AlertsApi* | [**Get**](docs/AlertsApi.md#get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
 *AlertsApi* | [**GetAlertChannel**](docs/AlertsApi.md#getalertchannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
 *AlertsApi* | [**GetAlertConfiguration**](docs/AlertsApi.md#getalertconfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
@@ -99,6 +102,7 @@ Class | Method | HTTP request | Description
 *AlertsApi* | [**ListAlertChannels**](docs/AlertsApi.md#listalertchannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
 *AlertsApi* | [**ListAlertConfigurations**](docs/AlertsApi.md#listalertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
 *AlertsApi* | [**ListAlertDestinations**](docs/AlertsApi.md#listalertdestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
+*AlertsApi* | [**ListAlertTemplateSettings**](docs/AlertsApi.md#listalerttemplatesettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings
 *AlertsApi* | [**ListAlertTemplates**](docs/AlertsApi.md#listalerttemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
 *AlertsApi* | [**ListOfAlerts**](docs/AlertsApi.md#listofalerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
 *AlertsApi* | [**PageAlertConfigurations**](docs/AlertsApi.md#pagealertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
@@ -111,25 +115,33 @@ Class | Method | HTTP request | Description
 *AsynchronousReplicationApi* | [**DeleteXClusterConfig**](docs/AsynchronousReplicationApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Delete xcluster config
 *AsynchronousReplicationApi* | [**EditXClusterConfig**](docs/AsynchronousReplicationApi.md#editxclusterconfig) | **Put** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Edit xcluster config
 *AsynchronousReplicationApi* | [**GetXClusterConfig**](docs/AsynchronousReplicationApi.md#getxclusterconfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Get xcluster config
+*AsynchronousReplicationApi* | [**NeedBootstrapTable**](docs/AsynchronousReplicationApi.md#needbootstraptable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | Whether tables need bootstrap before setting up cross cluster replication
+*AsynchronousReplicationApi* | [**NeedBootstrapXClusterConfig**](docs/AsynchronousReplicationApi.md#needbootstrapxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/need_bootstrap | Whether tables in an xCluster replication config have fallen far behind and need bootstrap
+*AsynchronousReplicationApi* | [**RestartXClusterConfig**](docs/AsynchronousReplicationApi.md#restartxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Restart xcluster config
 *AsynchronousReplicationApi* | [**SyncXClusterConfig**](docs/AsynchronousReplicationApi.md#syncxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Sync xcluster config
 *AuditApi* | [**GetTaskAudit**](docs/AuditApi.md#gettaskaudit) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info | Get audit info for a task
 *AuditApi* | [**GetUserFromTask**](docs/AuditApi.md#getuserfromtask) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user | Get the user associated with a task
 *AuditApi* | [**ListOfAudit**](docs/AuditApi.md#listofaudit) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail | List a user&#39;s audit entries
 *AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Create an availability zone
 *AvailabilityZonesApi* | [**DeleteAZ**](docs/AvailabilityZonesApi.md#deleteaz) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
+*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Modify an availability zone
 *AvailabilityZonesApi* | [**ListOfAZ**](docs/AvailabilityZonesApi.md#listofaz) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 *BackupsApi* | [**CreateMultiTableBackup**](docs/BackupsApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 *BackupsApi* | [**Createbackup**](docs/BackupsApi.md#createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
 *BackupsApi* | [**CreatebackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 *BackupsApi* | [**DeleteBackups**](docs/BackupsApi.md#deletebackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
-*BackupsApi* | [**DeleteBackupsv2**](docs/BackupsApi.md#deletebackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
+*BackupsApi* | [**DeleteBackupsV2**](docs/BackupsApi.md#deletebackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 *BackupsApi* | [**EditBackupV2**](docs/BackupsApi.md#editbackupv2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 *BackupsApi* | [**FetchBackupsByTaskUUID**](docs/BackupsApi.md#fetchbackupsbytaskuuid) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
 *BackupsApi* | [**GetBackupV2**](docs/BackupsApi.md#getbackupv2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
+*BackupsApi* | [**GetThrottleParams**](docs/BackupsApi.md#getthrottleparams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Get throttle params from YB-Controller
+*BackupsApi* | [**ListBackupRestoresV2**](docs/BackupsApi.md#listbackuprestoresv2) | **Post** /api/v1/customers/{cUUID}/restore/page | List Backup Restores (paginated)
 *BackupsApi* | [**ListBackupsV2**](docs/BackupsApi.md#listbackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
+*BackupsApi* | [**ListIncrementalBackups**](docs/BackupsApi.md#listincrementalbackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
 *BackupsApi* | [**ListOfBackups**](docs/BackupsApi.md#listofbackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
 *BackupsApi* | [**Restore**](docs/BackupsApi.md#restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
 *BackupsApi* | [**RestoreBackupV2**](docs/BackupsApi.md#restorebackupv2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
+*BackupsApi* | [**SetThrottleParams**](docs/BackupsApi.md#setthrottleparams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 *BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 *BackupsApi* | [**StopBackup**](docs/BackupsApi.md#stopbackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 *CertificateInfoApi* | [**CreateSelfSignedCert**](docs/CertificateInfoApi.md#createselfsignedcert) | **Post** /api/v1/customers/{cUUID}/certificates/create_self_signed_cert | Create a self signed certificate
@@ -141,16 +153,23 @@ Class | Method | HTTP request | Description
 *CertificateInfoApi* | [**GetRootCert**](docs/CertificateInfoApi.md#getrootcert) | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download | Get a customer&#39;s root certificate
 *CertificateInfoApi* | [**UpdateEmptyCustomCert**](docs/CertificateInfoApi.md#updateemptycustomcert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/update_empty_cert | Update an empty certificate
 *CertificateInfoApi* | [**Upload**](docs/CertificateInfoApi.md#upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
+*CloudProvidersApi* | [**AccessKeyRotation**](docs/CloudProvidersApi.md#accesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | Rotate access key for a provider
 *CloudProvidersApi* | [**CreateProviders**](docs/CloudProvidersApi.md#createproviders) | **Post** /api/v1/customers/{cUUID}/providers | Create a provider
+*CloudProvidersApi* | [**EditAccessKeyRotationSchedule**](docs/CloudProvidersApi.md#editaccesskeyrotationschedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | Edit a access key rotation schedule
 *CloudProvidersApi* | [**EditProvider**](docs/CloudProvidersApi.md#editprovider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 *CloudProvidersApi* | [**GetListOfProviders**](docs/CloudProvidersApi.md#getlistofproviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
+*CloudProvidersApi* | [**GetProvider**](docs/CloudProvidersApi.md#getprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
+*CloudProvidersApi* | [**ListSchedules**](docs/CloudProvidersApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
+*CloudProvidersApi* | [**PatchProvider**](docs/CloudProvidersApi.md#patchprovider) | **Patch** /api/v1/customers/{cUUID}/providers/{pUUID} | Patch a provider
 *CloudProvidersApi* | [**RefreshPricing**](docs/CloudProvidersApi.md#refreshpricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
+*CloudProvidersApi* | [**ScheduledAccessKeyRotation**](docs/CloudProvidersApi.md#scheduledaccesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
 *CustomerConfigurationApi* | [**CreateCustomerConfig**](docs/CustomerConfigurationApi.md#createcustomerconfig) | **Post** /api/v1/customers/{cUUID}/configs | Create a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfig**](docs/CustomerConfigurationApi.md#deletecustomerconfig) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID} | Delete a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfigV2**](docs/CustomerConfigurationApi.md#deletecustomerconfigv2) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete | Delete a customer configuration V2
 *CustomerConfigurationApi* | [**EditCustomerConfig**](docs/CustomerConfigurationApi.md#editcustomerconfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
 *CustomerConfigurationApi* | [**EditCustomerConfig_0**](docs/CustomerConfigurationApi.md#editcustomerconfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
 *CustomerConfigurationApi* | [**GetListOfCustomerConfig**](docs/CustomerConfigurationApi.md#getlistofcustomerconfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
+*CustomerConfigurationApi* | [**ListBuckets**](docs/CustomerConfigurationApi.md#listbuckets) | **Post** /api/v1/customers/{cUUID}/cloud/{cloud}/buckets | List buckets with provided credentials
 *CustomerManagementApi* | [**CustomerDetail**](docs/CustomerManagementApi.md#customerdetail) | **Get** /api/v1/customers/{cUUID} | Get a customer&#39;s details
 *CustomerManagementApi* | [**DeleteCustomer**](docs/CustomerManagementApi.md#deletecustomer) | **Delete** /api/v1/customers/{cUUID} | Delete a customer
 *CustomerManagementApi* | [**GetHostInfo**](docs/CustomerManagementApi.md#gethostinfo) | **Get** /api/v1/customers/{cUUID}/host_info | Get a customer&#39;s host info
@@ -162,6 +181,9 @@ Class | Method | HTTP request | Description
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
+*DefaultApi* | [**CreateCdcStream**](docs/DefaultApi.md#createcdcstream) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams | Create CDC Stream for a cluster
+*DefaultApi* | [**DeleteCdcStream**](docs/DefaultApi.md#deletecdcstream) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId} | Delete a CDC stream for a cluster
+*DefaultApi* | [**ListCdcStreams**](docs/DefaultApi.md#listcdcstreams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams | List CDC Streams for a cluster
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 *EncryptionAtRestApi* | [**DeleteKMSConfig**](docs/EncryptionAtRestApi.md#deletekmsconfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 *EncryptionAtRestApi* | [**EditKMSConfig**](docs/EncryptionAtRestApi.md#editkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
@@ -179,6 +201,10 @@ Class | Method | HTTP request | Description
 *InstanceTypesApi* | [**GetGCPTypes**](docs/InstanceTypesApi.md#getgcptypes) | **Get** /api/v1/metadata/gcp_types | List supported GCP disk types
 *InstanceTypesApi* | [**InstanceTypeDetail**](docs/InstanceTypesApi.md#instancetypedetail) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Get details of an instance type
 *InstanceTypesApi* | [**ListOfInstanceType**](docs/InstanceTypesApi.md#listofinstancetype) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | List a provider&#39;s instance types
+*KubernetesOverridesControllerApi* | [**ValidateKubernetesOverrides**](docs/KubernetesOverridesControllerApi.md#validatekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides.
+*LicenseManagementApi* | [**DeleteLicense**](docs/LicenseManagementApi.md#deletelicense) | **Delete** /api/v1/customers/{cUUID}/licenses/{lUUID} | Delete a license
+*LicenseManagementApi* | [**UploadLicense**](docs/LicenseManagementApi.md#uploadlicense) | **Post** /api/v1/customers/{cUUID}/licenses | Uploads the license
+*LoggingConfigApi* | [**SetAuditLoggingSettings**](docs/LoggingConfigApi.md#setauditloggingsettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level
 *LoggingConfigApi* | [**SetLoggingSettings**](docs/LoggingConfigApi.md#setloggingsettings) | **Post** /api/v1/logging_config | Set Logging Level
 *MaintenanceWindowsApi* | [**Create**](docs/MaintenanceWindowsApi.md#create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | Create maintenance window
 *MaintenanceWindowsApi* | [**Delete**](docs/MaintenanceWindowsApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Delete maintenance window
@@ -190,23 +216,38 @@ Class | Method | HTTP request | Description
 *NodeInstancesApi* | [**CreateNodeInstance**](docs/NodeInstancesApi.md#createnodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes | Create a node instance
 *NodeInstancesApi* | [**DeleteInstance**](docs/NodeInstancesApi.md#deleteinstance) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Delete a node instance
 *NodeInstancesApi* | [**DetachedNodeAction**](docs/NodeInstancesApi.md#detachednodeaction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
+*NodeInstancesApi* | [**GetNodeDetails**](docs/NodeInstancesApi.md#getnodedetails) | **Get** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}/details | Get node details
 *NodeInstancesApi* | [**GetNodeInstance**](docs/NodeInstancesApi.md#getnodeinstance) | **Get** /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list | Get a node instance
 *NodeInstancesApi* | [**ListByProvider**](docs/NodeInstancesApi.md#listbyprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 *NodeInstancesApi* | [**ListByZone**](docs/NodeInstancesApi.md#listbyzone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
 *NodeInstancesApi* | [**NodeAction**](docs/NodeInstancesApi.md#nodeaction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Update a node
+*NodeInstancesApi* | [**ValidateNodeInstance**](docs/NodeInstancesApi.md#validatenodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
+*PITRManagementApi* | [**CreatePitrConfig**](docs/PITRManagementApi.md#createpitrconfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
+*PITRManagementApi* | [**DeletePitrConfig**](docs/PITRManagementApi.md#deletepitrconfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
+*PITRManagementApi* | [**ListOfPitrConfigs**](docs/PITRManagementApi.md#listofpitrconfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
+*PITRManagementApi* | [**PerformPitr**](docs/PITRManagementApi.md#performpitr) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr | Perform PITR on a universe
+*PackagesControllerApi* | [**FetchPackage**](docs/PackagesControllerApi.md#fetchpackage) | **Post** /api/v1/fetch_package | Fetch a package
+*PerformanceAdvisorApi* | [**Delete**](docs/PerformanceAdvisorApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | Delete performance recommendations
+*PerformanceAdvisorApi* | [**Get**](docs/PerformanceAdvisorApi.md#get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | Get performance recommendation details
+*PerformanceAdvisorApi* | [**Hide**](docs/PerformanceAdvisorApi.md#hide) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/hide | Hide performance recommendations
+*PerformanceAdvisorApi* | [**Page**](docs/PerformanceAdvisorApi.md#page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | List performance recommendations (paginated)
+*PerformanceAdvisorApi* | [**PageAuditInfo**](docs/PerformanceAdvisorApi.md#pageauditinfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | List performance recommendations state change audit events (paginated)
+*PerformanceAdvisorApi* | [**Resolve**](docs/PerformanceAdvisorApi.md#resolve) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/resolve | Resolve performance recommendations
 *RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create a new region
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
+*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Modify a region
 *RegionManagementApi* | [**GetRegion**](docs/RegionManagementApi.md#getregion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 *ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 *ReleaseManagementApi* | [**DeleteRelease**](docs/ReleaseManagementApi.md#deleterelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
-*ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/releases | List all releases valid in region
+*ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List all releases valid in region
 *ReleaseManagementApi* | [**GetListOfReleases**](docs/ReleaseManagementApi.md#getlistofreleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 *ReleaseManagementApi* | [**Refresh**](docs/ReleaseManagementApi.md#refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 *ReleaseManagementApi* | [**UpdateRelease**](docs/ReleaseManagementApi.md#updaterelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
 *RuntimeConfigurationApi* | [**DeleteKey**](docs/RuntimeConfigurationApi.md#deletekey) | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key
 *RuntimeConfigurationApi* | [**GetConfig**](docs/RuntimeConfigurationApi.md#getconfig) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope} | List configuration entries for a scope
 *RuntimeConfigurationApi* | [**GetConfigurationKey**](docs/RuntimeConfigurationApi.md#getconfigurationkey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Get a configuration key
+*RuntimeConfigurationApi* | [**ListKeyInfo**](docs/RuntimeConfigurationApi.md#listkeyinfo) | **Get** /api/v1/runtime_config/mutable_key_info | List mutable keys
 *RuntimeConfigurationApi* | [**ListKeys**](docs/RuntimeConfigurationApi.md#listkeys) | **Get** /api/v1/runtime_config/mutable_keys | List mutable keys
 *RuntimeConfigurationApi* | [**ListScopes**](docs/RuntimeConfigurationApi.md#listscopes) | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes | List configuration scopes
 *RuntimeConfigurationApi* | [**SetKey**](docs/RuntimeConfigurationApi.md#setkey) | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Update a configuration key
@@ -227,13 +268,17 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**DownloadSupportBundle**](docs/SupportBundleManagementApi.md#downloadsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
 *SupportBundleManagementApi* | [**GetSupportBundle**](docs/SupportBundleManagementApi.md#getsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
+*SupportBundleManagementApi* | [**ListSupportBundleComponents**](docs/SupportBundleManagementApi.md#listsupportbundlecomponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
 *TableManagementApi* | [**AlterTable**](docs/TableManagementApi.md#altertable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
 *TableManagementApi* | [**BulkImportData**](docs/TableManagementApi.md#bulkimportdata) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
 *TableManagementApi* | [**CreateMultiTableBackup**](docs/TableManagementApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 *TableManagementApi* | [**CreateSingleTableBackup**](docs/TableManagementApi.md#createsingletablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
 *TableManagementApi* | [**CreateTable**](docs/TableManagementApi.md#createtable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
+*TableManagementApi* | [**CreateTableSpaces**](docs/TableManagementApi.md#createtablespaces) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Create tableSpaces
 *TableManagementApi* | [**DescribeTable**](docs/TableManagementApi.md#describetable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
 *TableManagementApi* | [**DropTable**](docs/TableManagementApi.md#droptable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
+*TableManagementApi* | [**GetAllNamespaces**](docs/TableManagementApi.md#getallnamespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces | List all namespaces
+*TableManagementApi* | [**GetAllTableSpaces**](docs/TableManagementApi.md#getalltablespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | List all tablespaces
 *TableManagementApi* | [**GetAllTables**](docs/TableManagementApi.md#getalltables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | List all tables
 *TableManagementApi* | [**GetYQLDataTypes**](docs/TableManagementApi.md#getyqldatatypes) | **Get** /api/v1/metadata/yql_data_types | List column types
 *TabletServerManagementApi* | [**ListTabletServers**](docs/TabletServerManagementApi.md#listtabletservers) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablet-servers | List all tablet servers
@@ -255,6 +300,7 @@ Class | Method | HTTP request | Description
 *UniverseInformationApi* | [**GetUniverseCostForAll**](docs/UniverseInformationApi.md#getuniversecostforall) | **Get** /api/v1/customers/{cUUID}/cost | Get a cost estimate for all universes
 *UniverseInformationApi* | [**HealthCheckUniverse**](docs/UniverseInformationApi.md#healthcheckuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Run a universe health check
 *UniverseInformationApi* | [**ResetSlowQueries**](docs/UniverseInformationApi.md#resetslowqueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
+*UniverseInformationApi* | [**TriggerHealthCheck**](docs/UniverseInformationApi.md#triggerhealthcheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
 *UniverseInformationApi* | [**UniverseStatus**](docs/UniverseInformationApi.md#universestatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
 *UniverseManagementApi* | [**ConfigureUniverseAlerts**](docs/UniverseManagementApi.md#configureuniversealerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
 *UniverseManagementApi* | [**DeleteUniverse**](docs/UniverseManagementApi.md#deleteuniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
@@ -267,17 +313,24 @@ Class | Method | HTTP request | Description
 *UniverseManagementApi* | [**SetUniverseHelm3Compatible**](docs/UniverseManagementApi.md#setuniversehelm3compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
 *UniverseManagementApi* | [**SetUniverseKey**](docs/UniverseManagementApi.md#setuniversekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
 *UniverseManagementApi* | [**ToggleUniverseTLS**](docs/UniverseManagementApi.md#toggleuniversetls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/toggle_tls | Toggle a universe&#39;s TLS state
+*UniverseManagementApi* | [**UpdateLoadBalancerConfig**](docs/UniverseManagementApi.md#updateloadbalancerconfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 *UniverseNodeMetadataMetamasterApi* | [**GetMasterAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getmasteraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetRedisServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getredisserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetUniverseMasterNodes**](docs/UniverseNodeMetadataMetamasterApi.md#getuniversemasternodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
 *UniverseNodeMetadataMetamasterApi* | [**GetYQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getyqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetYSQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getysqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | List a YSQL server&#39;s addresses
+*UniversePerformanceSuggestionsApi* | [**GetQueryDistributionSuggestions**](docs/UniversePerformanceSuggestionsApi.md#getquerydistributionsuggestions) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions | Get query distribution improvement suggestion for a universe
+*UniversePerformanceSuggestionsApi* | [**GetRangeHash**](docs/UniversePerformanceSuggestionsApi.md#getrangehash) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash | Return list of hash indexes
+*UniversePerformanceSuggestionsApi* | [**GetUnusedIndexes**](docs/UniversePerformanceSuggestionsApi.md#getunusedindexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | Return list of each unused index across the universe
+*UniverseUpgradesManagementApi* | [**RebootUniverse**](docs/UniverseUpgradesManagementApi.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementApi* | [**ResizeNode**](docs/UniverseUpgradesManagementApi.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementApi* | [**RestartUniverse**](docs/UniverseUpgradesManagementApi.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
 *UniverseUpgradesManagementApi* | [**UpgradeCerts**](docs/UniverseUpgradesManagementApi.md#upgradecerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
 *UniverseUpgradesManagementApi* | [**UpgradeGFlags**](docs/UniverseUpgradesManagementApi.md#upgradegflags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
+*UniverseUpgradesManagementApi* | [**UpgradeKubernetesOverrides**](docs/UniverseUpgradesManagementApi.md#upgradekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/kubernetes_overrides | Upgrade KubernetesOverrides
 *UniverseUpgradesManagementApi* | [**UpgradeSoftware**](docs/UniverseUpgradesManagementApi.md#upgradesoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade Software
 *UniverseUpgradesManagementApi* | [**UpgradeSystemd**](docs/UniverseUpgradesManagementApi.md#upgradesystemd) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/systemd | Upgrade Systemd
+*UniverseUpgradesManagementApi* | [**UpgradeThirdpartySoftware**](docs/UniverseUpgradesManagementApi.md#upgradethirdpartysoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/thirdparty_software | Upgrade third-party software
 *UniverseUpgradesManagementApi* | [**UpgradeTls**](docs/UniverseUpgradesManagementApi.md#upgradetls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls | Upgrade TLS
 *UniverseUpgradesManagementApi* | [**UpgradeVMImage**](docs/UniverseUpgradesManagementApi.md#upgradevmimage) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/vm | Upgrade VM Image
 *UserManagementApi* | [**CreateUser**](docs/UserManagementApi.md#createuser) | **Post** /api/v1/customers/{cUUID}/users | Create a user
@@ -287,6 +340,9 @@ Class | Method | HTTP request | Description
 *UserManagementApi* | [**UpdateUserPassword**](docs/UserManagementApi.md#updateuserpassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change a user&#39;s password
 *UserManagementApi* | [**UpdateUserProfile**](docs/UserManagementApi.md#updateuserprofile) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/update_profile | Update a user&#39;s profile
 *UserManagementApi* | [**UpdateUserRole**](docs/UserManagementApi.md#updateuserrole) | **Put** /api/v1/customers/{cUUID}/users/{uUUID} | Change a user&#39;s role
+*YbcManagementApi* | [**Disable**](docs/YbcManagementApi.md#disable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/disable | 
+*YbcManagementApi* | [**Install**](docs/YbcManagementApi.md#install) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/install | 
+*YbcManagementApi* | [**Upgrade**](docs/YbcManagementApi.md#upgrade) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade | 
 
 
 ## Documentation For Models
@@ -323,8 +379,11 @@ Class | Method | HTTP request | Description
  - [AlertPagedApiQuery](docs/AlertPagedApiQuery.md)
  - [AlertPagedResponse](docs/AlertPagedResponse.md)
  - [AlertTemplateApiFilter](docs/AlertTemplateApiFilter.md)
+ - [AlertTemplateSettings](docs/AlertTemplateSettings.md)
+ - [AlertTemplateSettingsFormData](docs/AlertTemplateSettingsFormData.md)
  - [AlertingData](docs/AlertingData.md)
  - [Audit](docs/Audit.md)
+ - [AuditLoggingConfig](docs/AuditLoggingConfig.md)
  - [AvailabilityZone](docs/AvailabilityZone.md)
  - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
  - [AvailabilityZoneFormData](docs/AvailabilityZoneFormData.md)
@@ -336,6 +395,8 @@ Class | Method | HTTP request | Description
  - [BackupResp](docs/BackupResp.md)
  - [BackupStorageInfo](docs/BackupStorageInfo.md)
  - [BackupTableParams](docs/BackupTableParams.md)
+ - [BootstarpBackupParams](docs/BootstarpBackupParams.md)
+ - [BootstrapParams](docs/BootstrapParams.md)
  - [BulkImportParams](docs/BulkImportParams.md)
  - [BundleDetails](docs/BundleDetails.md)
  - [CertificateDetails](docs/CertificateDetails.md)
@@ -346,8 +407,14 @@ Class | Method | HTTP request | Description
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
  - [Cluster](docs/Cluster.md)
  - [ColumnDetails](docs/ColumnDetails.md)
+ - [CommonBackupInfo](docs/CommonBackupInfo.md)
  - [CommunicationPorts](docs/CommunicationPorts.md)
+ - [ConfDataType](docs/ConfDataType.md)
+ - [ConfDataTypeObject](docs/ConfDataTypeObject.md)
+ - [ConfKeyInfo](docs/ConfKeyInfo.md)
  - [ConfigEntry](docs/ConfigEntry.md)
+ - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
+ - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
  - [CustomCertInfo](docs/CustomCertInfo.md)
  - [CustomServerCertData](docs/CustomServerCertData.md)
  - [CustomServerCertInfo](docs/CustomServerCertInfo.md)
@@ -357,25 +424,31 @@ Class | Method | HTTP request | Description
  - [CustomerConfigUI](docs/CustomerConfigUI.md)
  - [CustomerCountResp](docs/CustomerCountResp.md)
  - [CustomerDetailsData](docs/CustomerDetailsData.md)
+ - [CustomerLicense](docs/CustomerLicense.md)
  - [CustomerRegisterFormData](docs/CustomerRegisterFormData.md)
  - [CustomerTaskData](docs/CustomerTaskData.md)
  - [DeviceInfo](docs/DeviceInfo.md)
+ - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
- - [EditProviderRequest](docs/EditProviderRequest.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [GCSLocation](docs/GCSLocation.md)
  - [GFlagsUpgradeParams](docs/GFlagsUpgradeParams.md)
+ - [HashedTimestampColumnFinderResponse](docs/HashedTimestampColumnFinderResponse.md)
  - [HashicorpVaultConfigParams](docs/HashicorpVaultConfigParams.md)
  - [HttpLocation](docs/HttpLocation.md)
  - [ImportUniverseFormData](docs/ImportUniverseFormData.md)
  - [InstanceType](docs/InstanceType.md)
  - [InstanceTypeDetails](docs/InstanceTypeDetails.md)
  - [InstanceTypeKey](docs/InstanceTypeKey.md)
+ - [InstanceTypeResp](docs/InstanceTypeResp.md)
  - [KeyInfo](docs/KeyInfo.md)
  - [KeyspaceTable](docs/KeyspaceTable.md)
  - [KeyspaceTablesList](docs/KeyspaceTablesList.md)
+ - [KubernetesOverrideError](docs/KubernetesOverrideError.md)
+ - [KubernetesOverridesResponse](docs/KubernetesOverridesResponse.md)
+ - [KubernetesOverridesUpgradeParams](docs/KubernetesOverridesUpgradeParams.md)
  - [LogData](docs/LogData.md)
  - [MaintenanceWindow](docs/MaintenanceWindow.md)
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
@@ -384,27 +457,50 @@ Class | Method | HTTP request | Description
  - [MasterNode](docs/MasterNode.md)
  - [MastersList](docs/MastersList.md)
  - [MetricQueryParams](docs/MetricQueryParams.md)
+ - [MetricSettings](docs/MetricSettings.md)
  - [MultiTableBackupRequestParams](docs/MultiTableBackupRequestParams.md)
+ - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
  - [NodeActionFormData](docs/NodeActionFormData.md)
+ - [NodeConfig](docs/NodeConfig.md)
  - [NodeDetails](docs/NodeDetails.md)
  - [NodeDetailsResp](docs/NodeDetailsResp.md)
  - [NodeInstance](docs/NodeInstance.md)
  - [NodeInstanceData](docs/NodeInstanceData.md)
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
+ - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
+ - [PackagesRequestParams](docs/PackagesRequestParams.md)
+ - [PerformanceRecommendation](docs/PerformanceRecommendation.md)
+ - [PerformanceRecommendationFilter](docs/PerformanceRecommendationFilter.md)
+ - [PerformanceRecommendationPagedQuery](docs/PerformanceRecommendationPagedQuery.md)
+ - [PerformanceRecommendationPagedResponse](docs/PerformanceRecommendationPagedResponse.md)
+ - [PitrConfig](docs/PitrConfig.md)
  - [PlacementAZ](docs/PlacementAZ.md)
+ - [PlacementBlock](docs/PlacementBlock.md)
  - [PlacementCloud](docs/PlacementCloud.md)
  - [PlacementInfo](docs/PlacementInfo.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PlatformLoggingConfig](docs/PlatformLoggingConfig.md)
  - [Provider](docs/Provider.md)
+ - [ProviderDetails](docs/ProviderDetails.md)
+ - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
  - [Region](docs/Region.md)
+ - [RegionEditFormData](docs/RegionEditFormData.md)
  - [RegionFormData](docs/RegionFormData.md)
+ - [RegionLocations](docs/RegionLocations.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
  - [ResizeNodeParams](docs/ResizeNodeParams.md)
+ - [RestartBootstrapParams](docs/RestartBootstrapParams.md)
+ - [RestartTaskParams](docs/RestartTaskParams.md)
+ - [RestoreApiFilter](docs/RestoreApiFilter.md)
  - [RestoreBackupParams](docs/RestoreBackupParams.md)
+ - [RestoreKeyspace](docs/RestoreKeyspace.md)
+ - [RestorePagedApiQuery](docs/RestorePagedApiQuery.md)
+ - [RestorePagedApiResponse](docs/RestorePagedApiResponse.md)
+ - [RestoreResp](docs/RestoreResp.md)
+ - [RestoreSnapshotScheduleParams](docs/RestoreSnapshotScheduleParams.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
  - [S3Location](docs/S3Location.md)
@@ -416,18 +512,28 @@ Class | Method | HTTP request | Description
  - [SessionInfo](docs/SessionInfo.md)
  - [SmtpData](docs/SmtpData.md)
  - [SoftwareUpgradeParams](docs/SoftwareUpgradeParams.md)
+ - [StateChangeAuditInfo](docs/StateChangeAuditInfo.md)
+ - [StateChangeAuditInfoFilter](docs/StateChangeAuditInfoFilter.md)
+ - [StateChangeAuditInfoPagedQuery](docs/StateChangeAuditInfoPagedQuery.md)
+ - [StateChangeAuditInfoPagedResponse](docs/StateChangeAuditInfoPagedResponse.md)
  - [SupportBundle](docs/SupportBundle.md)
+ - [SupportBundleFormData](docs/SupportBundleFormData.md)
  - [SystemdUpgradeParams](docs/SystemdUpgradeParams.md)
  - [TableDefinitionTaskParams](docs/TableDefinitionTaskParams.md)
  - [TableDetails](docs/TableDetails.md)
  - [TableInfoResp](docs/TableInfoResp.md)
+ - [TableSpaceInfo](docs/TableSpaceInfo.md)
+ - [ThirdpartySoftwareUpgradeParams](docs/ThirdpartySoftwareUpgradeParams.md)
  - [TlsToggleParams](docs/TlsToggleParams.md)
+ - [TriggerHealthCheckResult](docs/TriggerHealthCheckResult.md)
  - [UniverseConfigureTaskParams](docs/UniverseConfigureTaskParams.md)
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
+ - [UnusedIndexFinderResponse](docs/UnusedIndexFinderResponse.md)
+ - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
  - [UserIntent](docs/UserIntent.md)
  - [UserProfileData](docs/UserProfileData.md)
@@ -435,14 +541,20 @@ Class | Method | HTTP request | Description
  - [UserWithFeatures](docs/UserWithFeatures.md)
  - [Users](docs/Users.md)
  - [VMImageUpgradeParams](docs/VMImageUpgradeParams.md)
+ - [ValidationResult](docs/ValidationResult.md)
  - [VolumeDetails](docs/VolumeDetails.md)
  - [XClusterConfig](docs/XClusterConfig.md)
  - [XClusterConfigCreateFormData](docs/XClusterConfigCreateFormData.md)
  - [XClusterConfigEditFormData](docs/XClusterConfigEditFormData.md)
  - [XClusterConfigGetResp](docs/XClusterConfigGetResp.md)
+ - [XClusterConfigNeedBootstrapFormData](docs/XClusterConfigNeedBootstrapFormData.md)
+ - [XClusterConfigRestartFormData](docs/XClusterConfigRestartFormData.md)
+ - [XClusterInfo](docs/XClusterInfo.md)
+ - [XClusterTableConfig](docs/XClusterTableConfig.md)
  - [YBPError](docs/YBPError.md)
  - [YBPSuccess](docs/YBPSuccess.md)
  - [YBPTask](docs/YBPTask.md)
+ - [YbcThrottleParameters](docs/YbcThrottleParameters.md)
 
 
 ## Documentation For Authorization

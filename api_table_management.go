@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -695,6 +695,139 @@ func (a *TableManagementApiService) CreateTableExecute(r TableManagementApiApiCr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type TableManagementApiApiCreateTableSpacesRequest struct {
+	ctx _context.Context
+	ApiService *TableManagementApiService
+	cUUID string
+	uniUUID string
+	createTableSpacesRequest *CreateTablespaceParams
+}
+
+func (r TableManagementApiApiCreateTableSpacesRequest) CreateTableSpacesRequest(createTableSpacesRequest CreateTablespaceParams) TableManagementApiApiCreateTableSpacesRequest {
+	r.createTableSpacesRequest = &createTableSpacesRequest
+	return r
+}
+
+func (r TableManagementApiApiCreateTableSpacesRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.CreateTableSpacesExecute(r)
+}
+
+/*
+ * CreateTableSpaces Create tableSpaces
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return TableManagementApiApiCreateTableSpacesRequest
+ */
+func (a *TableManagementApiService) CreateTableSpaces(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiCreateTableSpacesRequest {
+	return TableManagementApiApiCreateTableSpacesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *TableManagementApiService) CreateTableSpacesExecute(r TableManagementApiApiCreateTableSpacesRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.CreateTableSpaces")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.createTableSpacesRequest == nil {
+		return localVarReturnValue, nil, reportError("createTableSpacesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createTableSpacesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type TableManagementApiApiDescribeTableRequest struct {
 	ctx _context.Context
 	ApiService *TableManagementApiService
@@ -949,13 +1082,274 @@ func (a *TableManagementApiService) DropTableExecute(r TableManagementApiApiDrop
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TableManagementApiApiGetAllTablesRequest struct {
+type TableManagementApiApiGetAllNamespacesRequest struct {
+	ctx _context.Context
+	ApiService *TableManagementApiService
+	cUUID string
+	uniUUID string
+	includeSystemNamespaces *bool
+}
+
+func (r TableManagementApiApiGetAllNamespacesRequest) IncludeSystemNamespaces(includeSystemNamespaces bool) TableManagementApiApiGetAllNamespacesRequest {
+	r.includeSystemNamespaces = &includeSystemNamespaces
+	return r
+}
+
+func (r TableManagementApiApiGetAllNamespacesRequest) Execute() ([]NamespaceInfoResp, *_nethttp.Response, error) {
+	return r.ApiService.GetAllNamespacesExecute(r)
+}
+
+/*
+ * GetAllNamespaces List all namespaces
+ * Get a list of all namespaces in the specified universe
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return TableManagementApiApiGetAllNamespacesRequest
+ */
+func (a *TableManagementApiService) GetAllNamespaces(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiGetAllNamespacesRequest {
+	return TableManagementApiApiGetAllNamespacesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []NamespaceInfoResp
+ */
+func (a *TableManagementApiService) GetAllNamespacesExecute(r TableManagementApiApiGetAllNamespacesRequest) ([]NamespaceInfoResp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []NamespaceInfoResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.GetAllNamespaces")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.includeSystemNamespaces != nil {
+		localVarQueryParams.Add("includeSystemNamespaces", parameterToString(*r.includeSystemNamespaces, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type TableManagementApiApiGetAllTableSpacesRequest struct {
 	ctx _context.Context
 	ApiService *TableManagementApiService
 	cUUID string
 	uniUUID string
 }
 
+
+func (r TableManagementApiApiGetAllTableSpacesRequest) Execute() ([]TableSpaceInfo, *_nethttp.Response, error) {
+	return r.ApiService.GetAllTableSpacesExecute(r)
+}
+
+/*
+ * GetAllTableSpaces List all tablespaces
+ * Get a list of all tablespaces of a given universe
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return TableManagementApiApiGetAllTableSpacesRequest
+ */
+func (a *TableManagementApiService) GetAllTableSpaces(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiGetAllTableSpacesRequest {
+	return TableManagementApiApiGetAllTableSpacesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []TableSpaceInfo
+ */
+func (a *TableManagementApiService) GetAllTableSpacesExecute(r TableManagementApiApiGetAllTableSpacesRequest) ([]TableSpaceInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TableSpaceInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.GetAllTableSpaces")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type TableManagementApiApiGetAllTablesRequest struct {
+	ctx _context.Context
+	ApiService *TableManagementApiService
+	cUUID string
+	uniUUID string
+	includeParentTableInfo *bool
+}
+
+func (r TableManagementApiApiGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementApiApiGetAllTablesRequest {
+	r.includeParentTableInfo = &includeParentTableInfo
+	return r
+}
 
 func (r TableManagementApiApiGetAllTablesRequest) Execute() ([]TableInfoResp, *_nethttp.Response, error) {
 	return r.ApiService.GetAllTablesExecute(r)
@@ -1005,6 +1399,9 @@ func (a *TableManagementApiService) GetAllTablesExecute(r TableManagementApiApiG
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.includeParentTableInfo != nil {
+		localVarQueryParams.Add("includeParentTableInfo", parameterToString(*r.includeParentTableInfo, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

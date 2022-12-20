@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -341,6 +341,133 @@ func (a *NodeInstancesApiService) DetachedNodeActionExecute(r NodeInstancesApiAp
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceIP"+"}", _neturl.PathEscape(parameterToString(r.instanceIP, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type NodeInstancesApiApiGetNodeDetailsRequest struct {
+	ctx _context.Context
+	ApiService *NodeInstancesApiService
+	cUUID string
+	universeUUID string
+	nodeName string
+}
+
+
+func (r NodeInstancesApiApiGetNodeDetailsRequest) Execute() (NodeDetailsResp, *_nethttp.Response, error) {
+	return r.ApiService.GetNodeDetailsExecute(r)
+}
+
+/*
+ * GetNodeDetails Get node details
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param universeUUID
+ * @param nodeName
+ * @return NodeInstancesApiApiGetNodeDetailsRequest
+ */
+func (a *NodeInstancesApiService) GetNodeDetails(ctx _context.Context, cUUID string, universeUUID string, nodeName string) NodeInstancesApiApiGetNodeDetailsRequest {
+	return NodeInstancesApiApiGetNodeDetailsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		universeUUID: universeUUID,
+		nodeName: nodeName,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return NodeDetailsResp
+ */
+func (a *NodeInstancesApiService) GetNodeDetailsExecute(r NodeInstancesApiApiGetNodeDetailsRequest) (NodeDetailsResp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  NodeDetailsResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesApiService.GetNodeDetails")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}/details"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"universeUUID"+"}", _neturl.PathEscape(parameterToString(r.universeUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"nodeName"+"}", _neturl.PathEscape(parameterToString(r.nodeName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -869,6 +996,129 @@ func (a *NodeInstancesApiService) NodeActionExecute(r NodeInstancesApiApiNodeAct
 	}
 	// body params
 	localVarPostBody = r.nodeAction
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type NodeInstancesApiApiValidateNodeInstanceRequest struct {
+	ctx _context.Context
+	ApiService *NodeInstancesApiService
+	cUUID string
+	azUUID string
+}
+
+
+func (r NodeInstancesApiApiValidateNodeInstanceRequest) Execute() (map[string]ValidationResult, *_nethttp.Response, error) {
+	return r.ApiService.ValidateNodeInstanceExecute(r)
+}
+
+/*
+ * ValidateNodeInstance Validate a node instance
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param azUUID
+ * @return NodeInstancesApiApiValidateNodeInstanceRequest
+ */
+func (a *NodeInstancesApiService) ValidateNodeInstance(ctx _context.Context, cUUID string, azUUID string) NodeInstancesApiApiValidateNodeInstanceRequest {
+	return NodeInstancesApiApiValidateNodeInstanceRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		azUUID: azUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return map[string]ValidationResult
+ */
+func (a *NodeInstancesApiService) ValidateNodeInstanceExecute(r NodeInstancesApiApiValidateNodeInstanceRequest) (map[string]ValidationResult, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  map[string]ValidationResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesApiService.ValidateNodeInstance")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"azUUID"+"}", _neturl.PathEscape(parameterToString(r.azUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -18,7 +18,6 @@ import (
 type UniverseConfigureTaskParams struct {
 	AllowGeoPartitioning *bool `json:"allowGeoPartitioning,omitempty"`
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
-	BackupInProgress *bool `json:"backupInProgress,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	ClientRootCA *string `json:"clientRootCA,omitempty"`
 	ClusterOperation *string `json:"clusterOperation,omitempty"`
@@ -26,8 +25,10 @@ type UniverseConfigureTaskParams struct {
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	CreatingUser Users `json:"creatingUser"`
 	CurrentClusterType *string `json:"currentClusterType,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
@@ -37,7 +38,9 @@ type UniverseConfigureTaskParams struct {
 	// Whether this task has been tried before
 	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
+	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
+	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
@@ -45,13 +48,17 @@ type UniverseConfigureTaskParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
-	// Previous task UUID only if this task is a retry
+	PlatformUrl string `json:"platformUrl"`
+	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
+	RegionsChanged *bool `json:"regionsChanged,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
 	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
 	RootCA *string `json:"rootCA,omitempty"`
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
+	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	// The target universe's xcluster replication relationships
@@ -60,21 +67,30 @@ type UniverseConfigureTaskParams struct {
 	// Associated universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
+	UpdateOptions *[]string `json:"updateOptions,omitempty"`
 	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
 	UpdatingTask *string `json:"updatingTask,omitempty"`
 	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
+	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
 	UserAZSelected *bool `json:"userAZSelected,omitempty"`
+	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
+	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewUniverseConfigureTaskParams instantiates a new UniverseConfigureTaskParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseConfigureTaskParams(clusters []Cluster, ) *UniverseConfigureTaskParams {
+func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams {
 	this := UniverseConfigureTaskParams{}
 	this.Clusters = clusters
+	this.CreatingUser = creatingUser
+	this.PlatformUrl = platformUrl
+	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
+	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
 }
 
@@ -148,38 +164,6 @@ func (o *UniverseConfigureTaskParams) HasAllowInsecure() bool {
 // SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *UniverseConfigureTaskParams) SetAllowInsecure(v bool) {
 	o.AllowInsecure = &v
-}
-
-// GetBackupInProgress returns the BackupInProgress field value if set, zero value otherwise.
-func (o *UniverseConfigureTaskParams) GetBackupInProgress() bool {
-	if o == nil || o.BackupInProgress == nil {
-		var ret bool
-		return ret
-	}
-	return *o.BackupInProgress
-}
-
-// GetBackupInProgressOk returns a tuple with the BackupInProgress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseConfigureTaskParams) GetBackupInProgressOk() (*bool, bool) {
-	if o == nil || o.BackupInProgress == nil {
-		return nil, false
-	}
-	return o.BackupInProgress, true
-}
-
-// HasBackupInProgress returns a boolean if a field has been set.
-func (o *UniverseConfigureTaskParams) HasBackupInProgress() bool {
-	if o != nil && o.BackupInProgress != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBackupInProgress gets a reference to the given bool and assigns it to the BackupInProgress field.
-func (o *UniverseConfigureTaskParams) SetBackupInProgress(v bool) {
-	o.BackupInProgress = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -366,6 +350,30 @@ func (o *UniverseConfigureTaskParams) SetCommunicationPorts(v CommunicationPorts
 	o.CommunicationPorts = &v
 }
 
+// GetCreatingUser returns the CreatingUser field value
+func (o *UniverseConfigureTaskParams) GetCreatingUser() Users {
+	if o == nil  {
+		var ret Users
+		return ret
+	}
+
+	return o.CreatingUser
+}
+
+// GetCreatingUserOk returns a tuple with the CreatingUser field value
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetCreatingUserOk() (*Users, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatingUser, true
+}
+
+// SetCreatingUser sets field value
+func (o *UniverseConfigureTaskParams) SetCreatingUser(v Users) {
+	o.CreatingUser = v
+}
+
 // GetCurrentClusterType returns the CurrentClusterType field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetCurrentClusterType() string {
 	if o == nil || o.CurrentClusterType == nil {
@@ -428,6 +436,38 @@ func (o *UniverseConfigureTaskParams) HasDeviceInfo() bool {
 // SetDeviceInfo gets a reference to the given DeviceInfo and assigns it to the DeviceInfo field.
 func (o *UniverseConfigureTaskParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
+}
+
+// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetEnableYbc() bool {
+	if o == nil || o.EnableYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableYbc
+}
+
+// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetEnableYbcOk() (*bool, bool) {
+	if o == nil || o.EnableYbc == nil {
+		return nil, false
+	}
+	return o.EnableYbc, true
+}
+
+// HasEnableYbc returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasEnableYbc() bool {
+	if o != nil && o.EnableYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
+func (o *UniverseConfigureTaskParams) SetEnableYbc(v bool) {
+	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -622,6 +662,38 @@ func (o *UniverseConfigureTaskParams) SetImportedState(v string) {
 	o.ImportedState = &v
 }
 
+// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetInstallYbc() bool {
+	if o == nil || o.InstallYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallYbc
+}
+
+// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetInstallYbcOk() (*bool, bool) {
+	if o == nil || o.InstallYbc == nil {
+		return nil, false
+	}
+	return o.InstallYbc, true
+}
+
+// HasInstallYbc returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasInstallYbc() bool {
+	if o != nil && o.InstallYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
+func (o *UniverseConfigureTaskParams) SetInstallYbc(v bool) {
+	o.InstallYbc = &v
+}
+
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetItestS3PackagePath() string {
 	if o == nil || o.ItestS3PackagePath == nil {
@@ -652,6 +724,38 @@ func (o *UniverseConfigureTaskParams) HasItestS3PackagePath() bool {
 // SetItestS3PackagePath gets a reference to the given string and assigns it to the ItestS3PackagePath field.
 func (o *UniverseConfigureTaskParams) SetItestS3PackagePath(v string) {
 	o.ItestS3PackagePath = &v
+}
+
+// GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetMastersInDefaultRegion() bool {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MastersInDefaultRegion
+}
+
+// GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetMastersInDefaultRegionOk() (*bool, bool) {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		return nil, false
+	}
+	return o.MastersInDefaultRegion, true
+}
+
+// HasMastersInDefaultRegion returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasMastersInDefaultRegion() bool {
+	if o != nil && o.MastersInDefaultRegion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMastersInDefaultRegion gets a reference to the given bool and assigns it to the MastersInDefaultRegion field.
+func (o *UniverseConfigureTaskParams) SetMastersInDefaultRegion(v bool) {
+	o.MastersInDefaultRegion = &v
 }
 
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
@@ -814,6 +918,30 @@ func (o *UniverseConfigureTaskParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
 }
 
+// GetPlatformUrl returns the PlatformUrl field value
+func (o *UniverseConfigureTaskParams) GetPlatformUrl() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformUrl
+}
+
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetPlatformUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformUrl, true
+}
+
+// SetPlatformUrl sets field value
+func (o *UniverseConfigureTaskParams) SetPlatformUrl(v string) {
+	o.PlatformUrl = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -844,6 +972,38 @@ func (o *UniverseConfigureTaskParams) HasPreviousTaskUUID() bool {
 // SetPreviousTaskUUID gets a reference to the given string and assigns it to the PreviousTaskUUID field.
 func (o *UniverseConfigureTaskParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
+}
+
+// GetRegionsChanged returns the RegionsChanged field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetRegionsChanged() bool {
+	if o == nil || o.RegionsChanged == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RegionsChanged
+}
+
+// GetRegionsChangedOk returns a tuple with the RegionsChanged field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetRegionsChangedOk() (*bool, bool) {
+	if o == nil || o.RegionsChanged == nil {
+		return nil, false
+	}
+	return o.RegionsChanged, true
+}
+
+// HasRegionsChanged returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasRegionsChanged() bool {
+	if o != nil && o.RegionsChanged != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionsChanged gets a reference to the given bool and assigns it to the RegionsChanged field.
+func (o *UniverseConfigureTaskParams) SetRegionsChanged(v bool) {
+	o.RegionsChanged = &v
 }
 
 // GetRemotePackagePath returns the RemotePackagePath field value if set, zero value otherwise.
@@ -1006,6 +1166,54 @@ func (o *UniverseConfigureTaskParams) SetSetTxnTableWaitCountFlag(v bool) {
 	o.SetTxnTableWaitCountFlag = &v
 }
 
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+func (o *UniverseConfigureTaskParams) GetSleepAfterMasterRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterMasterRestartMillis
+}
+
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterMasterRestartMillis, true
+}
+
+// SetSleepAfterMasterRestartMillis sets field value
+func (o *UniverseConfigureTaskParams) SetSleepAfterMasterRestartMillis(v int32) {
+	o.SleepAfterMasterRestartMillis = v
+}
+
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+func (o *UniverseConfigureTaskParams) GetSleepAfterTServerRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterTServerRestartMillis
+}
+
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterTServerRestartMillis, true
+}
+
+// SetSleepAfterTServerRestartMillis sets field value
+func (o *UniverseConfigureTaskParams) SetSleepAfterTServerRestartMillis(v int32) {
+	o.SleepAfterTServerRestartMillis = v
+}
+
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetSourceXClusterConfigs() []string {
 	if o == nil || o.SourceXClusterConfigs == nil {
@@ -1166,6 +1374,38 @@ func (o *UniverseConfigureTaskParams) SetUpdateInProgress(v bool) {
 	o.UpdateInProgress = &v
 }
 
+// GetUpdateOptions returns the UpdateOptions field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetUpdateOptions() []string {
+	if o == nil || o.UpdateOptions == nil {
+		var ret []string
+		return ret
+	}
+	return *o.UpdateOptions
+}
+
+// GetUpdateOptionsOk returns a tuple with the UpdateOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetUpdateOptionsOk() (*[]string, bool) {
+	if o == nil || o.UpdateOptions == nil {
+		return nil, false
+	}
+	return o.UpdateOptions, true
+}
+
+// HasUpdateOptions returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasUpdateOptions() bool {
+	if o != nil && o.UpdateOptions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateOptions gets a reference to the given []string and assigns it to the UpdateOptions field.
+func (o *UniverseConfigureTaskParams) SetUpdateOptions(v []string) {
+	o.UpdateOptions = &v
+}
+
 // GetUpdateSucceeded returns the UpdateSucceeded field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetUpdateSucceeded() bool {
 	if o == nil || o.UpdateSucceeded == nil {
@@ -1262,6 +1502,38 @@ func (o *UniverseConfigureTaskParams) SetUpdatingTaskUUID(v string) {
 	o.UpdatingTaskUUID = &v
 }
 
+// GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetUseNewHelmNamingStyle() bool {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseNewHelmNamingStyle
+}
+
+// GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetUseNewHelmNamingStyleOk() (*bool, bool) {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		return nil, false
+	}
+	return o.UseNewHelmNamingStyle, true
+}
+
+// HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasUseNewHelmNamingStyle() bool {
+	if o != nil && o.UseNewHelmNamingStyle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNewHelmNamingStyle gets a reference to the given bool and assigns it to the UseNewHelmNamingStyle field.
+func (o *UniverseConfigureTaskParams) SetUseNewHelmNamingStyle(v bool) {
+	o.UseNewHelmNamingStyle = &v
+}
+
 // GetUserAZSelected returns the UserAZSelected field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetUserAZSelected() bool {
 	if o == nil || o.UserAZSelected == nil {
@@ -1292,6 +1564,38 @@ func (o *UniverseConfigureTaskParams) HasUserAZSelected() bool {
 // SetUserAZSelected gets a reference to the given bool and assigns it to the UserAZSelected field.
 func (o *UniverseConfigureTaskParams) SetUserAZSelected(v bool) {
 	o.UserAZSelected = &v
+}
+
+// GetXclusterInfo returns the XclusterInfo field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetXclusterInfo() XClusterInfo {
+	if o == nil || o.XclusterInfo == nil {
+		var ret XClusterInfo
+		return ret
+	}
+	return *o.XclusterInfo
+}
+
+// GetXclusterInfoOk returns a tuple with the XclusterInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetXclusterInfoOk() (*XClusterInfo, bool) {
+	if o == nil || o.XclusterInfo == nil {
+		return nil, false
+	}
+	return o.XclusterInfo, true
+}
+
+// HasXclusterInfo returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasXclusterInfo() bool {
+	if o != nil && o.XclusterInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetXclusterInfo gets a reference to the given XClusterInfo and assigns it to the XclusterInfo field.
+func (o *UniverseConfigureTaskParams) SetXclusterInfo(v XClusterInfo) {
+	o.XclusterInfo = &v
 }
 
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
@@ -1326,6 +1630,70 @@ func (o *UniverseConfigureTaskParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
+// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetYbcInstalled() bool {
+	if o == nil || o.YbcInstalled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbcInstalled
+}
+
+// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetYbcInstalledOk() (*bool, bool) {
+	if o == nil || o.YbcInstalled == nil {
+		return nil, false
+	}
+	return o.YbcInstalled, true
+}
+
+// HasYbcInstalled returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasYbcInstalled() bool {
+	if o != nil && o.YbcInstalled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
+func (o *UniverseConfigureTaskParams) SetYbcInstalled(v bool) {
+	o.YbcInstalled = &v
+}
+
+// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
+func (o *UniverseConfigureTaskParams) GetYbcSoftwareVersion() string {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.YbcSoftwareVersion
+}
+
+// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetYbcSoftwareVersionOk() (*string, bool) {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		return nil, false
+	}
+	return o.YbcSoftwareVersion, true
+}
+
+// HasYbcSoftwareVersion returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasYbcSoftwareVersion() bool {
+	if o != nil && o.YbcSoftwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
+func (o *UniverseConfigureTaskParams) SetYbcSoftwareVersion(v string) {
+	o.YbcSoftwareVersion = &v
+}
+
 func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AllowGeoPartitioning != nil {
@@ -1333,9 +1701,6 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
-	}
-	if o.BackupInProgress != nil {
-		toSerialize["backupInProgress"] = o.BackupInProgress
 	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
@@ -1355,11 +1720,17 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
 	}
+	if true {
+		toSerialize["creatingUser"] = o.CreatingUser
+	}
 	if o.CurrentClusterType != nil {
 		toSerialize["currentClusterType"] = o.CurrentClusterType
 	}
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
+	}
+	if o.EnableYbc != nil {
+		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1379,8 +1750,14 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
+	if o.InstallYbc != nil {
+		toSerialize["installYbc"] = o.InstallYbc
+	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
+	}
+	if o.MastersInDefaultRegion != nil {
+		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
@@ -1397,8 +1774,14 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
 	}
+	if true {
+		toSerialize["platformUrl"] = o.PlatformUrl
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
+	}
+	if o.RegionsChanged != nil {
+		toSerialize["regionsChanged"] = o.RegionsChanged
 	}
 	if o.RemotePackagePath != nil {
 		toSerialize["remotePackagePath"] = o.RemotePackagePath
@@ -1415,6 +1798,12 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.SetTxnTableWaitCountFlag != nil {
 		toSerialize["setTxnTableWaitCountFlag"] = o.SetTxnTableWaitCountFlag
 	}
+	if true {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if true {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}
@@ -1430,6 +1819,9 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.UpdateInProgress != nil {
 		toSerialize["updateInProgress"] = o.UpdateInProgress
 	}
+	if o.UpdateOptions != nil {
+		toSerialize["updateOptions"] = o.UpdateOptions
+	}
 	if o.UpdateSucceeded != nil {
 		toSerialize["updateSucceeded"] = o.UpdateSucceeded
 	}
@@ -1439,11 +1831,23 @@ func (o UniverseConfigureTaskParams) MarshalJSON() ([]byte, error) {
 	if o.UpdatingTaskUUID != nil {
 		toSerialize["updatingTaskUUID"] = o.UpdatingTaskUUID
 	}
+	if o.UseNewHelmNamingStyle != nil {
+		toSerialize["useNewHelmNamingStyle"] = o.UseNewHelmNamingStyle
+	}
 	if o.UserAZSelected != nil {
 		toSerialize["userAZSelected"] = o.UserAZSelected
 	}
+	if o.XclusterInfo != nil {
+		toSerialize["xclusterInfo"] = o.XclusterInfo
+	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
+	}
+	if o.YbcInstalled != nil {
+		toSerialize["ybcInstalled"] = o.YbcInstalled
+	}
+	if o.YbcSoftwareVersion != nil {
+		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -19,6 +19,8 @@ import (
 type Audit struct {
 	// Action
 	Action *string `json:"action,omitempty"`
+	// Additional Details
+	AdditionalDetails *map[string]interface{} `json:"additionalDetails,omitempty"`
 	// API call
 	ApiCall *string `json:"apiCall,omitempty"`
 	// API method
@@ -35,6 +37,8 @@ type Audit struct {
 	// Task UUID
 	TaskUUID *string `json:"taskUUID,omitempty"`
 	Timestamp time.Time `json:"timestamp"`
+	// User IP Address
+	UserAddress *string `json:"userAddress,omitempty"`
 	// User Email
 	UserEmail *string `json:"userEmail,omitempty"`
 	// User UUID
@@ -90,6 +94,38 @@ func (o *Audit) HasAction() bool {
 // SetAction gets a reference to the given string and assigns it to the Action field.
 func (o *Audit) SetAction(v string) {
 	o.Action = &v
+}
+
+// GetAdditionalDetails returns the AdditionalDetails field value if set, zero value otherwise.
+func (o *Audit) GetAdditionalDetails() map[string]interface{} {
+	if o == nil || o.AdditionalDetails == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return *o.AdditionalDetails
+}
+
+// GetAdditionalDetailsOk returns a tuple with the AdditionalDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Audit) GetAdditionalDetailsOk() (*map[string]interface{}, bool) {
+	if o == nil || o.AdditionalDetails == nil {
+		return nil, false
+	}
+	return o.AdditionalDetails, true
+}
+
+// HasAdditionalDetails returns a boolean if a field has been set.
+func (o *Audit) HasAdditionalDetails() bool {
+	if o != nil && o.AdditionalDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalDetails gets a reference to the given map[string]interface{} and assigns it to the AdditionalDetails field.
+func (o *Audit) SetAdditionalDetails(v map[string]interface{}) {
+	o.AdditionalDetails = &v
 }
 
 // GetApiCall returns the ApiCall field value if set, zero value otherwise.
@@ -364,6 +400,38 @@ func (o *Audit) SetTimestamp(v time.Time) {
 	o.Timestamp = v
 }
 
+// GetUserAddress returns the UserAddress field value if set, zero value otherwise.
+func (o *Audit) GetUserAddress() string {
+	if o == nil || o.UserAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserAddress
+}
+
+// GetUserAddressOk returns a tuple with the UserAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Audit) GetUserAddressOk() (*string, bool) {
+	if o == nil || o.UserAddress == nil {
+		return nil, false
+	}
+	return o.UserAddress, true
+}
+
+// HasUserAddress returns a boolean if a field has been set.
+func (o *Audit) HasUserAddress() bool {
+	if o != nil && o.UserAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserAddress gets a reference to the given string and assigns it to the UserAddress field.
+func (o *Audit) SetUserAddress(v string) {
+	o.UserAddress = &v
+}
+
 // GetUserEmail returns the UserEmail field value if set, zero value otherwise.
 func (o *Audit) GetUserEmail() string {
 	if o == nil || o.UserEmail == nil {
@@ -433,6 +501,9 @@ func (o Audit) MarshalJSON() ([]byte, error) {
 	if o.Action != nil {
 		toSerialize["action"] = o.Action
 	}
+	if o.AdditionalDetails != nil {
+		toSerialize["additionalDetails"] = o.AdditionalDetails
+	}
 	if o.ApiCall != nil {
 		toSerialize["apiCall"] = o.ApiCall
 	}
@@ -459,6 +530,9 @@ func (o Audit) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["timestamp"] = o.Timestamp
+	}
+	if o.UserAddress != nil {
+		toSerialize["userAddress"] = o.UserAddress
 	}
 	if o.UserEmail != nil {
 		toSerialize["userEmail"] = o.UserEmail

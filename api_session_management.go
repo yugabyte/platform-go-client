@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -235,6 +235,8 @@ type SessionManagementApiApiGetFilteredLogsRequest struct {
 	maxLines *int32
 	universeName *string
 	queryRegex *string
+	startDate *string
+	endDate *string
 }
 
 func (r SessionManagementApiApiGetFilteredLogsRequest) MaxLines(maxLines int32) SessionManagementApiApiGetFilteredLogsRequest {
@@ -247,6 +249,14 @@ func (r SessionManagementApiApiGetFilteredLogsRequest) UniverseName(universeName
 }
 func (r SessionManagementApiApiGetFilteredLogsRequest) QueryRegex(queryRegex string) SessionManagementApiApiGetFilteredLogsRequest {
 	r.queryRegex = &queryRegex
+	return r
+}
+func (r SessionManagementApiApiGetFilteredLogsRequest) StartDate(startDate string) SessionManagementApiApiGetFilteredLogsRequest {
+	r.startDate = &startDate
+	return r
+}
+func (r SessionManagementApiApiGetFilteredLogsRequest) EndDate(endDate string) SessionManagementApiApiGetFilteredLogsRequest {
+	r.endDate = &endDate
 	return r
 }
 
@@ -299,6 +309,12 @@ func (a *SessionManagementApiService) GetFilteredLogsExecute(r SessionManagement
 	}
 	if r.queryRegex != nil {
 		localVarQueryParams.Add("queryRegex", parameterToString(*r.queryRegex, ""))
+	}
+	if r.startDate != nil {
+		localVarQueryParams.Add("startDate", parameterToString(*r.startDate, ""))
+	}
+	if r.endDate != nil {
+		localVarQueryParams.Add("endDate", parameterToString(*r.endDate, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

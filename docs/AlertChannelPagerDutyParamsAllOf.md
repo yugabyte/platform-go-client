@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiKey** | **string** |  | 
-**RoutingKey** | **string** |  | 
+**ApiKey** | **string** | API key | 
+**RoutingKey** | **string** | Routing key | 
 
 ## Methods
 

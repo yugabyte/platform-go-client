@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -17,21 +17,25 @@ import (
 
 // XClusterConfig xcluster config object
 type XClusterConfig struct {
-	// Create time
+	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
-	// Modify time
+	// Last modify time of the xCluster config
 	ModifyTime *time.Time `json:"modifyTime,omitempty"`
-	// Name
+	// XCluster config name
 	Name *string `json:"name,omitempty"`
+	// Whether this xCluster replication config is paused
+	Paused *bool `json:"paused,omitempty"`
+	// Replication group name in DB
+	ReplicationGroupName *string `json:"replicationGroupName,omitempty"`
 	// Source Universe UUID
 	SourceUniverseUUID *string `json:"sourceUniverseUUID,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
-	// Source Universe table IDs
+	TableDetails []XClusterTableConfig `json:"tableDetails"`
 	Tables *[]string `json:"tables,omitempty"`
 	// Target Universe UUID
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
-	// UUID
+	// XCluster config UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
 
@@ -39,8 +43,9 @@ type XClusterConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfig() *XClusterConfig {
+func NewXClusterConfig(tableDetails []XClusterTableConfig, ) *XClusterConfig {
 	this := XClusterConfig{}
+	this.TableDetails = tableDetails
 	return &this
 }
 
@@ -148,6 +153,70 @@ func (o *XClusterConfig) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPaused returns the Paused field value if set, zero value otherwise.
+func (o *XClusterConfig) GetPaused() bool {
+	if o == nil || o.Paused == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Paused
+}
+
+// GetPausedOk returns a tuple with the Paused field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetPausedOk() (*bool, bool) {
+	if o == nil || o.Paused == nil {
+		return nil, false
+	}
+	return o.Paused, true
+}
+
+// HasPaused returns a boolean if a field has been set.
+func (o *XClusterConfig) HasPaused() bool {
+	if o != nil && o.Paused != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaused gets a reference to the given bool and assigns it to the Paused field.
+func (o *XClusterConfig) SetPaused(v bool) {
+	o.Paused = &v
+}
+
+// GetReplicationGroupName returns the ReplicationGroupName field value if set, zero value otherwise.
+func (o *XClusterConfig) GetReplicationGroupName() string {
+	if o == nil || o.ReplicationGroupName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReplicationGroupName
+}
+
+// GetReplicationGroupNameOk returns a tuple with the ReplicationGroupName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetReplicationGroupNameOk() (*string, bool) {
+	if o == nil || o.ReplicationGroupName == nil {
+		return nil, false
+	}
+	return o.ReplicationGroupName, true
+}
+
+// HasReplicationGroupName returns a boolean if a field has been set.
+func (o *XClusterConfig) HasReplicationGroupName() bool {
+	if o != nil && o.ReplicationGroupName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplicationGroupName gets a reference to the given string and assigns it to the ReplicationGroupName field.
+func (o *XClusterConfig) SetReplicationGroupName(v string) {
+	o.ReplicationGroupName = &v
+}
+
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value if set, zero value otherwise.
 func (o *XClusterConfig) GetSourceUniverseUUID() string {
 	if o == nil || o.SourceUniverseUUID == nil {
@@ -210,6 +279,30 @@ func (o *XClusterConfig) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *XClusterConfig) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetTableDetails returns the TableDetails field value
+func (o *XClusterConfig) GetTableDetails() []XClusterTableConfig {
+	if o == nil  {
+		var ret []XClusterTableConfig
+		return ret
+	}
+
+	return o.TableDetails
+}
+
+// GetTableDetailsOk returns a tuple with the TableDetails field value
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetTableDetailsOk() (*[]XClusterTableConfig, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TableDetails, true
+}
+
+// SetTableDetails sets field value
+func (o *XClusterConfig) SetTableDetails(v []XClusterTableConfig) {
+	o.TableDetails = v
 }
 
 // GetTables returns the Tables field value if set, zero value otherwise.
@@ -319,11 +412,20 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.Paused != nil {
+		toSerialize["paused"] = o.Paused
+	}
+	if o.ReplicationGroupName != nil {
+		toSerialize["replicationGroupName"] = o.ReplicationGroupName
+	}
 	if o.SourceUniverseUUID != nil {
 		toSerialize["sourceUniverseUUID"] = o.SourceUniverseUUID
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if true {
+		toSerialize["tableDetails"] = o.TableDetails
 	}
 	if o.Tables != nil {
 		toSerialize["tables"] = o.Tables

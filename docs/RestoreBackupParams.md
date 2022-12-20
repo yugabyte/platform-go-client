@@ -7,35 +7,48 @@ Name | Type | Description | Notes
 **ActionType** | Pointer to **string** | Action type | [optional] 
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupStorageInfoList** | Pointer to [**[]BackupStorageInfo**](BackupStorageInfo.md) | Backup&#39;s storage info to restore | [optional] 
+**Category** | Pointer to **string** | Category of the backup | [optional] 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CreatingUser** | [**Users**](Users.md) |  | 
+**CurrentIdx** | **int32** |  | 
+**CurrentYbcTaskId** | **string** |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
+**DisableMultipart** | Pointer to **bool** | Disable multipart upload | [optional] 
 **EnableVerboseLogs** | Pointer to **bool** | Is verbose logging enabled | [optional] 
+**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
+**InstallYbc** | Pointer to **bool** |  | [optional] 
 **KmsConfigUUID** | Pointer to **string** | KMS configuration UUID | [optional] 
-**NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
-**OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**PlatformUrl** | **string** |  | 
+**PrefixUUID** | **string** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
+**SleepAfterMasterRestartMillis** | **int32** |  | 
+**SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **StorageConfigUUID** | Pointer to **string** | Storage config uuid | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniverseUUID** | **string** | Universe UUID | 
+**UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+**YbcInstalled** | Pointer to **bool** |  | [optional] 
+**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewRestoreBackupParams
 
-`func NewRestoreBackupParams(universeUUID string, ) *RestoreBackupParams`
+`func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
 
 NewRestoreBackupParams instantiates a new RestoreBackupParams object
 This constructor will assign default values to properties that have it defined,
@@ -125,6 +138,31 @@ SetBackupStorageInfoList sets BackupStorageInfoList field to given value.
 
 HasBackupStorageInfoList returns a boolean if a field has been set.
 
+### GetCategory
+
+`func (o *RestoreBackupParams) GetCategory() string`
+
+GetCategory returns the Category field if non-nil, zero value otherwise.
+
+### GetCategoryOk
+
+`func (o *RestoreBackupParams) GetCategoryOk() (*string, bool)`
+
+GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCategory
+
+`func (o *RestoreBackupParams) SetCategory(v string)`
+
+SetCategory sets Category field to given value.
+
+### HasCategory
+
+`func (o *RestoreBackupParams) HasCategory() bool`
+
+HasCategory returns a boolean if a field has been set.
+
 ### GetCmkArn
 
 `func (o *RestoreBackupParams) GetCmkArn() string`
@@ -174,6 +212,66 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 `func (o *RestoreBackupParams) HasCommunicationPorts() bool`
 
 HasCommunicationPorts returns a boolean if a field has been set.
+
+### GetCreatingUser
+
+`func (o *RestoreBackupParams) GetCreatingUser() Users`
+
+GetCreatingUser returns the CreatingUser field if non-nil, zero value otherwise.
+
+### GetCreatingUserOk
+
+`func (o *RestoreBackupParams) GetCreatingUserOk() (*Users, bool)`
+
+GetCreatingUserOk returns a tuple with the CreatingUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatingUser
+
+`func (o *RestoreBackupParams) SetCreatingUser(v Users)`
+
+SetCreatingUser sets CreatingUser field to given value.
+
+
+### GetCurrentIdx
+
+`func (o *RestoreBackupParams) GetCurrentIdx() int32`
+
+GetCurrentIdx returns the CurrentIdx field if non-nil, zero value otherwise.
+
+### GetCurrentIdxOk
+
+`func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool)`
+
+GetCurrentIdxOk returns a tuple with the CurrentIdx field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentIdx
+
+`func (o *RestoreBackupParams) SetCurrentIdx(v int32)`
+
+SetCurrentIdx sets CurrentIdx field to given value.
+
+
+### GetCurrentYbcTaskId
+
+`func (o *RestoreBackupParams) GetCurrentYbcTaskId() string`
+
+GetCurrentYbcTaskId returns the CurrentYbcTaskId field if non-nil, zero value otherwise.
+
+### GetCurrentYbcTaskIdOk
+
+`func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool)`
+
+GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentYbcTaskId
+
+`func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string)`
+
+SetCurrentYbcTaskId sets CurrentYbcTaskId field to given value.
+
 
 ### GetCustomerUUID
 
@@ -225,6 +323,56 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
+### GetDisableChecksum
+
+`func (o *RestoreBackupParams) GetDisableChecksum() bool`
+
+GetDisableChecksum returns the DisableChecksum field if non-nil, zero value otherwise.
+
+### GetDisableChecksumOk
+
+`func (o *RestoreBackupParams) GetDisableChecksumOk() (*bool, bool)`
+
+GetDisableChecksumOk returns a tuple with the DisableChecksum field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableChecksum
+
+`func (o *RestoreBackupParams) SetDisableChecksum(v bool)`
+
+SetDisableChecksum sets DisableChecksum field to given value.
+
+### HasDisableChecksum
+
+`func (o *RestoreBackupParams) HasDisableChecksum() bool`
+
+HasDisableChecksum returns a boolean if a field has been set.
+
+### GetDisableMultipart
+
+`func (o *RestoreBackupParams) GetDisableMultipart() bool`
+
+GetDisableMultipart returns the DisableMultipart field if non-nil, zero value otherwise.
+
+### GetDisableMultipartOk
+
+`func (o *RestoreBackupParams) GetDisableMultipartOk() (*bool, bool)`
+
+GetDisableMultipartOk returns a tuple with the DisableMultipart field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableMultipart
+
+`func (o *RestoreBackupParams) SetDisableMultipart(v bool)`
+
+SetDisableMultipart sets DisableMultipart field to given value.
+
+### HasDisableMultipart
+
+`func (o *RestoreBackupParams) HasDisableMultipart() bool`
+
+HasDisableMultipart returns a boolean if a field has been set.
+
 ### GetEnableVerboseLogs
 
 `func (o *RestoreBackupParams) GetEnableVerboseLogs() bool`
@@ -249,6 +397,31 @@ SetEnableVerboseLogs sets EnableVerboseLogs field to given value.
 `func (o *RestoreBackupParams) HasEnableVerboseLogs() bool`
 
 HasEnableVerboseLogs returns a boolean if a field has been set.
+
+### GetEnableYbc
+
+`func (o *RestoreBackupParams) GetEnableYbc() bool`
+
+GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
+
+### GetEnableYbcOk
+
+`func (o *RestoreBackupParams) GetEnableYbcOk() (*bool, bool)`
+
+GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableYbc
+
+`func (o *RestoreBackupParams) SetEnableYbc(v bool)`
+
+SetEnableYbc sets EnableYbc field to given value.
+
+### HasEnableYbc
+
+`func (o *RestoreBackupParams) HasEnableYbc() bool`
+
+HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -375,6 +548,31 @@ SetFirstTry sets FirstTry field to given value.
 
 HasFirstTry returns a boolean if a field has been set.
 
+### GetInstallYbc
+
+`func (o *RestoreBackupParams) GetInstallYbc() bool`
+
+GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+
+### GetInstallYbcOk
+
+`func (o *RestoreBackupParams) GetInstallYbcOk() (*bool, bool)`
+
+GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallYbc
+
+`func (o *RestoreBackupParams) SetInstallYbc(v bool)`
+
+SetInstallYbc sets InstallYbc field to given value.
+
+### HasInstallYbc
+
+`func (o *RestoreBackupParams) HasInstallYbc() bool`
+
+HasInstallYbc returns a boolean if a field has been set.
+
 ### GetKmsConfigUUID
 
 `func (o *RestoreBackupParams) GetKmsConfigUUID() string`
@@ -399,31 +597,6 @@ SetKmsConfigUUID sets KmsConfigUUID field to given value.
 `func (o *RestoreBackupParams) HasKmsConfigUUID() bool`
 
 HasKmsConfigUUID returns a boolean if a field has been set.
-
-### GetNewOwner
-
-`func (o *RestoreBackupParams) GetNewOwner() string`
-
-GetNewOwner returns the NewOwner field if non-nil, zero value otherwise.
-
-### GetNewOwnerOk
-
-`func (o *RestoreBackupParams) GetNewOwnerOk() (*string, bool)`
-
-GetNewOwnerOk returns a tuple with the NewOwner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNewOwner
-
-`func (o *RestoreBackupParams) SetNewOwner(v string)`
-
-SetNewOwner sets NewOwner field to given value.
-
-### HasNewOwner
-
-`func (o *RestoreBackupParams) HasNewOwner() bool`
-
-HasNewOwner returns a boolean if a field has been set.
 
 ### GetNodeDetailsSet
 
@@ -475,31 +648,6 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 
 HasNodeExporterUser returns a boolean if a field has been set.
 
-### GetOldOwner
-
-`func (o *RestoreBackupParams) GetOldOwner() string`
-
-GetOldOwner returns the OldOwner field if non-nil, zero value otherwise.
-
-### GetOldOwnerOk
-
-`func (o *RestoreBackupParams) GetOldOwnerOk() (*string, bool)`
-
-GetOldOwnerOk returns a tuple with the OldOwner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOldOwner
-
-`func (o *RestoreBackupParams) SetOldOwner(v string)`
-
-SetOldOwner sets OldOwner field to given value.
-
-### HasOldOwner
-
-`func (o *RestoreBackupParams) HasOldOwner() bool`
-
-HasOldOwner returns a boolean if a field has been set.
-
 ### GetParallelism
 
 `func (o *RestoreBackupParams) GetParallelism() int32`
@@ -524,6 +672,46 @@ SetParallelism sets Parallelism field to given value.
 `func (o *RestoreBackupParams) HasParallelism() bool`
 
 HasParallelism returns a boolean if a field has been set.
+
+### GetPlatformUrl
+
+`func (o *RestoreBackupParams) GetPlatformUrl() string`
+
+GetPlatformUrl returns the PlatformUrl field if non-nil, zero value otherwise.
+
+### GetPlatformUrlOk
+
+`func (o *RestoreBackupParams) GetPlatformUrlOk() (*string, bool)`
+
+GetPlatformUrlOk returns a tuple with the PlatformUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformUrl
+
+`func (o *RestoreBackupParams) SetPlatformUrl(v string)`
+
+SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPrefixUUID
+
+`func (o *RestoreBackupParams) GetPrefixUUID() string`
+
+GetPrefixUUID returns the PrefixUUID field if non-nil, zero value otherwise.
+
+### GetPrefixUUIDOk
+
+`func (o *RestoreBackupParams) GetPrefixUUIDOk() (*string, bool)`
+
+GetPrefixUUIDOk returns a tuple with the PrefixUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrefixUUID
+
+`func (o *RestoreBackupParams) SetPrefixUUID(v string)`
+
+SetPrefixUUID sets PrefixUUID field to given value.
+
 
 ### GetPreviousTaskUUID
 
@@ -574,6 +762,46 @@ SetRestoreTimeStamp sets RestoreTimeStamp field to given value.
 `func (o *RestoreBackupParams) HasRestoreTimeStamp() bool`
 
 HasRestoreTimeStamp returns a boolean if a field has been set.
+
+### GetSleepAfterMasterRestartMillis
+
+`func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillis() int32`
+
+GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterMasterRestartMillisOk
+
+`func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterMasterRestartMillis
+
+`func (o *RestoreBackupParams) SetSleepAfterMasterRestartMillis(v int32)`
+
+SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
+
+
+### GetSleepAfterTServerRestartMillis
+
+`func (o *RestoreBackupParams) GetSleepAfterTServerRestartMillis() int32`
+
+GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterTServerRestartMillisOk
+
+`func (o *RestoreBackupParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterTServerRestartMillis
+
+`func (o *RestoreBackupParams) SetSleepAfterTServerRestartMillis(v int32)`
+
+SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
+
 
 ### GetSourceXClusterConfigs
 
@@ -670,6 +898,31 @@ and a boolean to check if the value has been set.
 SetUniverseUUID sets UniverseUUID field to given value.
 
 
+### GetUseTablespaces
+
+`func (o *RestoreBackupParams) GetUseTablespaces() bool`
+
+GetUseTablespaces returns the UseTablespaces field if non-nil, zero value otherwise.
+
+### GetUseTablespacesOk
+
+`func (o *RestoreBackupParams) GetUseTablespacesOk() (*bool, bool)`
+
+GetUseTablespacesOk returns a tuple with the UseTablespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTablespaces
+
+`func (o *RestoreBackupParams) SetUseTablespaces(v bool)`
+
+SetUseTablespaces sets UseTablespaces field to given value.
+
+### HasUseTablespaces
+
+`func (o *RestoreBackupParams) HasUseTablespaces() bool`
+
+HasUseTablespaces returns a boolean if a field has been set.
+
 ### GetYbPrevSoftwareVersion
 
 `func (o *RestoreBackupParams) GetYbPrevSoftwareVersion() string`
@@ -694,6 +947,56 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *RestoreBackupParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+### GetYbcInstalled
+
+`func (o *RestoreBackupParams) GetYbcInstalled() bool`
+
+GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
+
+### GetYbcInstalledOk
+
+`func (o *RestoreBackupParams) GetYbcInstalledOk() (*bool, bool)`
+
+GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcInstalled
+
+`func (o *RestoreBackupParams) SetYbcInstalled(v bool)`
+
+SetYbcInstalled sets YbcInstalled field to given value.
+
+### HasYbcInstalled
+
+`func (o *RestoreBackupParams) HasYbcInstalled() bool`
+
+HasYbcInstalled returns a boolean if a field has been set.
+
+### GetYbcSoftwareVersion
+
+`func (o *RestoreBackupParams) GetYbcSoftwareVersion() string`
+
+GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbcSoftwareVersionOk
+
+`func (o *RestoreBackupParams) GetYbcSoftwareVersionOk() (*string, bool)`
+
+GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcSoftwareVersion
+
+`func (o *RestoreBackupParams) SetYbcSoftwareVersion(v string)`
+
+SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
+
+### HasYbcSoftwareVersion
+
+`func (o *RestoreBackupParams) HasYbcSoftwareVersion() bool`
+
+HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

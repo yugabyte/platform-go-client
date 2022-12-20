@@ -9,10 +9,13 @@ Name | Type | Description | Notes
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
+**NtpServers** | Pointer to **[]string** |  | [optional] 
 **PasswordlessSudoAccess** | Pointer to **bool** |  | [optional] 
 **PrivateKey** | Pointer to **string** |  | [optional] 
 **ProvisionInstanceScript** | Pointer to **string** |  | [optional] 
 **PublicKey** | Pointer to **string** |  | [optional] 
+**SetUpChrony** | Pointer to **bool** |  | [optional] 
+**ShowSetUpChrony** | Pointer to **bool** |  | [optional] 
 **SkipProvisioning** | Pointer to **bool** |  | [optional] 
 **SshPort** | Pointer to **int32** |  | [optional] 
 **SshUser** | Pointer to **string** |  | [optional] 
@@ -163,6 +166,31 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 
 HasNodeExporterUser returns a boolean if a field has been set.
 
+### GetNtpServers
+
+`func (o *KeyInfo) GetNtpServers() []string`
+
+GetNtpServers returns the NtpServers field if non-nil, zero value otherwise.
+
+### GetNtpServersOk
+
+`func (o *KeyInfo) GetNtpServersOk() (*[]string, bool)`
+
+GetNtpServersOk returns a tuple with the NtpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServers
+
+`func (o *KeyInfo) SetNtpServers(v []string)`
+
+SetNtpServers sets NtpServers field to given value.
+
+### HasNtpServers
+
+`func (o *KeyInfo) HasNtpServers() bool`
+
+HasNtpServers returns a boolean if a field has been set.
+
 ### GetPasswordlessSudoAccess
 
 `func (o *KeyInfo) GetPasswordlessSudoAccess() bool`
@@ -262,6 +290,56 @@ SetPublicKey sets PublicKey field to given value.
 `func (o *KeyInfo) HasPublicKey() bool`
 
 HasPublicKey returns a boolean if a field has been set.
+
+### GetSetUpChrony
+
+`func (o *KeyInfo) GetSetUpChrony() bool`
+
+GetSetUpChrony returns the SetUpChrony field if non-nil, zero value otherwise.
+
+### GetSetUpChronyOk
+
+`func (o *KeyInfo) GetSetUpChronyOk() (*bool, bool)`
+
+GetSetUpChronyOk returns a tuple with the SetUpChrony field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSetUpChrony
+
+`func (o *KeyInfo) SetSetUpChrony(v bool)`
+
+SetSetUpChrony sets SetUpChrony field to given value.
+
+### HasSetUpChrony
+
+`func (o *KeyInfo) HasSetUpChrony() bool`
+
+HasSetUpChrony returns a boolean if a field has been set.
+
+### GetShowSetUpChrony
+
+`func (o *KeyInfo) GetShowSetUpChrony() bool`
+
+GetShowSetUpChrony returns the ShowSetUpChrony field if non-nil, zero value otherwise.
+
+### GetShowSetUpChronyOk
+
+`func (o *KeyInfo) GetShowSetUpChronyOk() (*bool, bool)`
+
+GetShowSetUpChronyOk returns a tuple with the ShowSetUpChrony field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowSetUpChrony
+
+`func (o *KeyInfo) SetShowSetUpChrony(v bool)`
+
+SetShowSetUpChrony sets ShowSetUpChrony field to given value.
+
+### HasShowSetUpChrony
+
+`func (o *KeyInfo) HasShowSetUpChrony() bool`
+
+HasShowSetUpChrony returns a boolean if a field has been set.
 
 ### GetSkipProvisioning
 

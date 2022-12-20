@@ -11,13 +11,15 @@ Name | Type | Description | Notes
 **Latitude** | **float64** |  | 
 **Longitude** | **float64** |  | 
 **Name** | **string** |  | 
+**SecurityGroupId** | **string** |  | 
+**VnetName** | **string** |  | 
 **YbImage** | **string** |  | 
 
 ## Methods
 
 ### NewRegionFormData
 
-`func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, ybImage string, ) *RegionFormData`
+`func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, securityGroupId string, vnetName string, ybImage string, ) *RegionFormData`
 
 NewRegionFormData instantiates a new RegionFormData object
 This constructor will assign default values to properties that have it defined,
@@ -170,6 +172,46 @@ and a boolean to check if the value has been set.
 `func (o *RegionFormData) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetSecurityGroupId
+
+`func (o *RegionFormData) GetSecurityGroupId() string`
+
+GetSecurityGroupId returns the SecurityGroupId field if non-nil, zero value otherwise.
+
+### GetSecurityGroupIdOk
+
+`func (o *RegionFormData) GetSecurityGroupIdOk() (*string, bool)`
+
+GetSecurityGroupIdOk returns a tuple with the SecurityGroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityGroupId
+
+`func (o *RegionFormData) SetSecurityGroupId(v string)`
+
+SetSecurityGroupId sets SecurityGroupId field to given value.
+
+
+### GetVnetName
+
+`func (o *RegionFormData) GetVnetName() string`
+
+GetVnetName returns the VnetName field if non-nil, zero value otherwise.
+
+### GetVnetNameOk
+
+`func (o *RegionFormData) GetVnetNameOk() (*string, bool)`
+
+GetVnetNameOk returns a tuple with the VnetName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVnetName
+
+`func (o *RegionFormData) SetVnetName(v string)`
+
+SetVnetName sets VnetName field to given value.
 
 
 ### GetYbImage

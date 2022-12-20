@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,7 +16,9 @@ import (
 
 // AlertChannelPagerDutyParamsAllOf struct for AlertChannelPagerDutyParamsAllOf
 type AlertChannelPagerDutyParamsAllOf struct {
+	// API key
 	ApiKey string `json:"apiKey"`
+	// Routing key
 	RoutingKey string `json:"routingKey"`
 }
 

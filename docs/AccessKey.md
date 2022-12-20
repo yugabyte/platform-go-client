@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CreationDate** | Pointer to **time.Time** | Creation date of key | [optional] [readonly] 
+**ExpirationDate** | Pointer to **time.Time** | Expiration date of key | [optional] 
 **IdKey** | [**AccessKeyId**](AccessKeyId.md) |  | 
 **KeyInfo** | [**KeyInfo**](KeyInfo.md) |  | 
 
@@ -25,6 +27,56 @@ will change when the set of required properties is changed
 NewAccessKeyWithDefaults instantiates a new AccessKey object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCreationDate
+
+`func (o *AccessKey) GetCreationDate() time.Time`
+
+GetCreationDate returns the CreationDate field if non-nil, zero value otherwise.
+
+### GetCreationDateOk
+
+`func (o *AccessKey) GetCreationDateOk() (*time.Time, bool)`
+
+GetCreationDateOk returns a tuple with the CreationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationDate
+
+`func (o *AccessKey) SetCreationDate(v time.Time)`
+
+SetCreationDate sets CreationDate field to given value.
+
+### HasCreationDate
+
+`func (o *AccessKey) HasCreationDate() bool`
+
+HasCreationDate returns a boolean if a field has been set.
+
+### GetExpirationDate
+
+`func (o *AccessKey) GetExpirationDate() time.Time`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *AccessKey) GetExpirationDateOk() (*time.Time, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *AccessKey) SetExpirationDate(v time.Time)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+### HasExpirationDate
+
+`func (o *AccessKey) HasExpirationDate() bool`
+
+HasExpirationDate returns a boolean if a field has been set.
 
 ### GetIdKey
 

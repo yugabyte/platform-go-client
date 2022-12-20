@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **DateRangeEnd** | **time.Time** |  | 
 **DateRangeStart** | **time.Time** |  | 
 **KeyspaceList** | **[]string** |  | 
+**OnlyShowDeletedConfigs** | **bool** |  | 
+**OnlyShowDeletedUniverses** | **bool** |  | 
 **ScheduleUUIDList** | **[]string** |  | 
 **States** | **[]string** |  | 
 **StorageConfigUUIDList** | **[]string** |  | 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewBackupApiFilter
 
-`func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
+`func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
 
 NewBackupApiFilter instantiates a new BackupApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -90,6 +92,46 @@ and a boolean to check if the value has been set.
 `func (o *BackupApiFilter) SetKeyspaceList(v []string)`
 
 SetKeyspaceList sets KeyspaceList field to given value.
+
+
+### GetOnlyShowDeletedConfigs
+
+`func (o *BackupApiFilter) GetOnlyShowDeletedConfigs() bool`
+
+GetOnlyShowDeletedConfigs returns the OnlyShowDeletedConfigs field if non-nil, zero value otherwise.
+
+### GetOnlyShowDeletedConfigsOk
+
+`func (o *BackupApiFilter) GetOnlyShowDeletedConfigsOk() (*bool, bool)`
+
+GetOnlyShowDeletedConfigsOk returns a tuple with the OnlyShowDeletedConfigs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnlyShowDeletedConfigs
+
+`func (o *BackupApiFilter) SetOnlyShowDeletedConfigs(v bool)`
+
+SetOnlyShowDeletedConfigs sets OnlyShowDeletedConfigs field to given value.
+
+
+### GetOnlyShowDeletedUniverses
+
+`func (o *BackupApiFilter) GetOnlyShowDeletedUniverses() bool`
+
+GetOnlyShowDeletedUniverses returns the OnlyShowDeletedUniverses field if non-nil, zero value otherwise.
+
+### GetOnlyShowDeletedUniversesOk
+
+`func (o *BackupApiFilter) GetOnlyShowDeletedUniversesOk() (*bool, bool)`
+
+GetOnlyShowDeletedUniversesOk returns a tuple with the OnlyShowDeletedUniverses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnlyShowDeletedUniverses
+
+`func (o *BackupApiFilter) SetOnlyShowDeletedUniverses(v bool)`
+
+SetOnlyShowDeletedUniverses sets OnlyShowDeletedUniverses field to given value.
 
 
 ### GetScheduleUUIDList

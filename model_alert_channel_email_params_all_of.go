@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,22 +16,21 @@ import (
 
 // AlertChannelEmailParamsAllOf struct for AlertChannelEmailParamsAllOf
 type AlertChannelEmailParamsAllOf struct {
-	DefaultRecipients bool `json:"defaultRecipients"`
-	DefaultSmtpSettings bool `json:"defaultSmtpSettings"`
-	Recipients []string `json:"recipients"`
-	SmtpData SmtpData `json:"smtpData"`
+	// Use health check notification recipients
+	DefaultRecipients *bool `json:"defaultRecipients,omitempty"`
+	// Use health check notification SMTP settings
+	DefaultSmtpSettings *bool `json:"defaultSmtpSettings,omitempty"`
+	// List of recipients
+	Recipients *[]string `json:"recipients,omitempty"`
+	SmtpData *SmtpData `json:"smtpData,omitempty"`
 }
 
 // NewAlertChannelEmailParamsAllOf instantiates a new AlertChannelEmailParamsAllOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelEmailParamsAllOf(defaultRecipients bool, defaultSmtpSettings bool, recipients []string, smtpData SmtpData, ) *AlertChannelEmailParamsAllOf {
+func NewAlertChannelEmailParamsAllOf() *AlertChannelEmailParamsAllOf {
 	this := AlertChannelEmailParamsAllOf{}
-	this.DefaultRecipients = defaultRecipients
-	this.DefaultSmtpSettings = defaultSmtpSettings
-	this.Recipients = recipients
-	this.SmtpData = smtpData
 	return &this
 }
 
@@ -43,114 +42,146 @@ func NewAlertChannelEmailParamsAllOfWithDefaults() *AlertChannelEmailParamsAllOf
 	return &this
 }
 
-// GetDefaultRecipients returns the DefaultRecipients field value
+// GetDefaultRecipients returns the DefaultRecipients field value if set, zero value otherwise.
 func (o *AlertChannelEmailParamsAllOf) GetDefaultRecipients() bool {
-	if o == nil  {
+	if o == nil || o.DefaultRecipients == nil {
 		var ret bool
 		return ret
 	}
-
-	return o.DefaultRecipients
+	return *o.DefaultRecipients
 }
 
-// GetDefaultRecipientsOk returns a tuple with the DefaultRecipients field value
+// GetDefaultRecipientsOk returns a tuple with the DefaultRecipients field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannelEmailParamsAllOf) GetDefaultRecipientsOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil || o.DefaultRecipients == nil {
 		return nil, false
 	}
-	return &o.DefaultRecipients, true
+	return o.DefaultRecipients, true
 }
 
-// SetDefaultRecipients sets field value
+// HasDefaultRecipients returns a boolean if a field has been set.
+func (o *AlertChannelEmailParamsAllOf) HasDefaultRecipients() bool {
+	if o != nil && o.DefaultRecipients != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultRecipients gets a reference to the given bool and assigns it to the DefaultRecipients field.
 func (o *AlertChannelEmailParamsAllOf) SetDefaultRecipients(v bool) {
-	o.DefaultRecipients = v
+	o.DefaultRecipients = &v
 }
 
-// GetDefaultSmtpSettings returns the DefaultSmtpSettings field value
+// GetDefaultSmtpSettings returns the DefaultSmtpSettings field value if set, zero value otherwise.
 func (o *AlertChannelEmailParamsAllOf) GetDefaultSmtpSettings() bool {
-	if o == nil  {
+	if o == nil || o.DefaultSmtpSettings == nil {
 		var ret bool
 		return ret
 	}
-
-	return o.DefaultSmtpSettings
+	return *o.DefaultSmtpSettings
 }
 
-// GetDefaultSmtpSettingsOk returns a tuple with the DefaultSmtpSettings field value
+// GetDefaultSmtpSettingsOk returns a tuple with the DefaultSmtpSettings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannelEmailParamsAllOf) GetDefaultSmtpSettingsOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil || o.DefaultSmtpSettings == nil {
 		return nil, false
 	}
-	return &o.DefaultSmtpSettings, true
+	return o.DefaultSmtpSettings, true
 }
 
-// SetDefaultSmtpSettings sets field value
+// HasDefaultSmtpSettings returns a boolean if a field has been set.
+func (o *AlertChannelEmailParamsAllOf) HasDefaultSmtpSettings() bool {
+	if o != nil && o.DefaultSmtpSettings != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultSmtpSettings gets a reference to the given bool and assigns it to the DefaultSmtpSettings field.
 func (o *AlertChannelEmailParamsAllOf) SetDefaultSmtpSettings(v bool) {
-	o.DefaultSmtpSettings = v
+	o.DefaultSmtpSettings = &v
 }
 
-// GetRecipients returns the Recipients field value
+// GetRecipients returns the Recipients field value if set, zero value otherwise.
 func (o *AlertChannelEmailParamsAllOf) GetRecipients() []string {
-	if o == nil  {
+	if o == nil || o.Recipients == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Recipients
+	return *o.Recipients
 }
 
-// GetRecipientsOk returns a tuple with the Recipients field value
+// GetRecipientsOk returns a tuple with the Recipients field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannelEmailParamsAllOf) GetRecipientsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Recipients == nil {
 		return nil, false
 	}
-	return &o.Recipients, true
+	return o.Recipients, true
 }
 
-// SetRecipients sets field value
+// HasRecipients returns a boolean if a field has been set.
+func (o *AlertChannelEmailParamsAllOf) HasRecipients() bool {
+	if o != nil && o.Recipients != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRecipients gets a reference to the given []string and assigns it to the Recipients field.
 func (o *AlertChannelEmailParamsAllOf) SetRecipients(v []string) {
-	o.Recipients = v
+	o.Recipients = &v
 }
 
-// GetSmtpData returns the SmtpData field value
+// GetSmtpData returns the SmtpData field value if set, zero value otherwise.
 func (o *AlertChannelEmailParamsAllOf) GetSmtpData() SmtpData {
-	if o == nil  {
+	if o == nil || o.SmtpData == nil {
 		var ret SmtpData
 		return ret
 	}
-
-	return o.SmtpData
+	return *o.SmtpData
 }
 
-// GetSmtpDataOk returns a tuple with the SmtpData field value
+// GetSmtpDataOk returns a tuple with the SmtpData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannelEmailParamsAllOf) GetSmtpDataOk() (*SmtpData, bool) {
-	if o == nil  {
+	if o == nil || o.SmtpData == nil {
 		return nil, false
 	}
-	return &o.SmtpData, true
+	return o.SmtpData, true
 }
 
-// SetSmtpData sets field value
+// HasSmtpData returns a boolean if a field has been set.
+func (o *AlertChannelEmailParamsAllOf) HasSmtpData() bool {
+	if o != nil && o.SmtpData != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSmtpData gets a reference to the given SmtpData and assigns it to the SmtpData field.
 func (o *AlertChannelEmailParamsAllOf) SetSmtpData(v SmtpData) {
-	o.SmtpData = v
+	o.SmtpData = &v
 }
 
 func (o AlertChannelEmailParamsAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.DefaultRecipients != nil {
 		toSerialize["defaultRecipients"] = o.DefaultRecipients
 	}
-	if true {
+	if o.DefaultSmtpSettings != nil {
 		toSerialize["defaultSmtpSettings"] = o.DefaultSmtpSettings
 	}
-	if true {
+	if o.Recipients != nil {
 		toSerialize["recipients"] = o.Recipients
 	}
-	if true {
+	if o.SmtpData != nil {
 		toSerialize["smtpData"] = o.SmtpData
 	}
 	return json.Marshal(toSerialize)

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -17,15 +17,16 @@ import (
 // ResizeNodeParams struct for ResizeNodeParams
 type ResizeNodeParams struct {
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
-	BackupInProgress *bool `json:"backupInProgress,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	ClientRootCA *string `json:"clientRootCA,omitempty"`
 	Clusters []Cluster `json:"clusters"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	CreatingUser Users `json:"creatingUser"`
 	CurrentClusterType *string `json:"currentClusterType,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
@@ -36,8 +37,10 @@ type ResizeNodeParams struct {
 	FirstTry *bool `json:"firstTry,omitempty"`
 	ForceResizeNode bool `json:"forceResizeNode"`
 	ImportedState *string `json:"importedState,omitempty"`
+	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
+	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
@@ -45,7 +48,8 @@ type ResizeNodeParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
-	// Previous task UUID only if this task is a retry
+	PlatformUrl string `json:"platformUrl"`
+	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
@@ -62,24 +66,31 @@ type ResizeNodeParams struct {
 	// Associated universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
+	UpdateOptions *[]string `json:"updateOptions,omitempty"`
 	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
 	UpdatingTask *string `json:"updatingTask,omitempty"`
 	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
 	UpgradeOption string `json:"upgradeOption"`
+	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
 	UserAZSelected *bool `json:"userAZSelected,omitempty"`
+	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
+	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewResizeNodeParams instantiates a new ResizeNodeParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResizeNodeParams(clusters []Cluster, forceResizeNode bool, kubernetesUpgradeSupported bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ResizeNodeParams {
+func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ResizeNodeParams {
 	this := ResizeNodeParams{}
 	this.Clusters = clusters
+	this.CreatingUser = creatingUser
 	this.ForceResizeNode = forceResizeNode
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
+	this.PlatformUrl = platformUrl
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UpgradeOption = upgradeOption
@@ -124,38 +135,6 @@ func (o *ResizeNodeParams) HasAllowInsecure() bool {
 // SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *ResizeNodeParams) SetAllowInsecure(v bool) {
 	o.AllowInsecure = &v
-}
-
-// GetBackupInProgress returns the BackupInProgress field value if set, zero value otherwise.
-func (o *ResizeNodeParams) GetBackupInProgress() bool {
-	if o == nil || o.BackupInProgress == nil {
-		var ret bool
-		return ret
-	}
-	return *o.BackupInProgress
-}
-
-// GetBackupInProgressOk returns a tuple with the BackupInProgress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ResizeNodeParams) GetBackupInProgressOk() (*bool, bool) {
-	if o == nil || o.BackupInProgress == nil {
-		return nil, false
-	}
-	return o.BackupInProgress, true
-}
-
-// HasBackupInProgress returns a boolean if a field has been set.
-func (o *ResizeNodeParams) HasBackupInProgress() bool {
-	if o != nil && o.BackupInProgress != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBackupInProgress gets a reference to the given bool and assigns it to the BackupInProgress field.
-func (o *ResizeNodeParams) SetBackupInProgress(v bool) {
-	o.BackupInProgress = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -310,6 +289,30 @@ func (o *ResizeNodeParams) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
 }
 
+// GetCreatingUser returns the CreatingUser field value
+func (o *ResizeNodeParams) GetCreatingUser() Users {
+	if o == nil  {
+		var ret Users
+		return ret
+	}
+
+	return o.CreatingUser
+}
+
+// GetCreatingUserOk returns a tuple with the CreatingUser field value
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetCreatingUserOk() (*Users, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatingUser, true
+}
+
+// SetCreatingUser sets field value
+func (o *ResizeNodeParams) SetCreatingUser(v Users) {
+	o.CreatingUser = v
+}
+
 // GetCurrentClusterType returns the CurrentClusterType field value if set, zero value otherwise.
 func (o *ResizeNodeParams) GetCurrentClusterType() string {
 	if o == nil || o.CurrentClusterType == nil {
@@ -372,6 +375,38 @@ func (o *ResizeNodeParams) HasDeviceInfo() bool {
 // SetDeviceInfo gets a reference to the given DeviceInfo and assigns it to the DeviceInfo field.
 func (o *ResizeNodeParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
+}
+
+// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetEnableYbc() bool {
+	if o == nil || o.EnableYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableYbc
+}
+
+// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetEnableYbcOk() (*bool, bool) {
+	if o == nil || o.EnableYbc == nil {
+		return nil, false
+	}
+	return o.EnableYbc, true
+}
+
+// HasEnableYbc returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasEnableYbc() bool {
+	if o != nil && o.EnableYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
+func (o *ResizeNodeParams) SetEnableYbc(v bool) {
+	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -590,6 +625,38 @@ func (o *ResizeNodeParams) SetImportedState(v string) {
 	o.ImportedState = &v
 }
 
+// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetInstallYbc() bool {
+	if o == nil || o.InstallYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallYbc
+}
+
+// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetInstallYbcOk() (*bool, bool) {
+	if o == nil || o.InstallYbc == nil {
+		return nil, false
+	}
+	return o.InstallYbc, true
+}
+
+// HasInstallYbc returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasInstallYbc() bool {
+	if o != nil && o.InstallYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
+func (o *ResizeNodeParams) SetInstallYbc(v bool) {
+	o.InstallYbc = &v
+}
+
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
 func (o *ResizeNodeParams) GetItestS3PackagePath() string {
 	if o == nil || o.ItestS3PackagePath == nil {
@@ -644,6 +711,38 @@ func (o *ResizeNodeParams) GetKubernetesUpgradeSupportedOk() (*bool, bool) {
 // SetKubernetesUpgradeSupported sets field value
 func (o *ResizeNodeParams) SetKubernetesUpgradeSupported(v bool) {
 	o.KubernetesUpgradeSupported = v
+}
+
+// GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetMastersInDefaultRegion() bool {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MastersInDefaultRegion
+}
+
+// GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetMastersInDefaultRegionOk() (*bool, bool) {
+	if o == nil || o.MastersInDefaultRegion == nil {
+		return nil, false
+	}
+	return o.MastersInDefaultRegion, true
+}
+
+// HasMastersInDefaultRegion returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasMastersInDefaultRegion() bool {
+	if o != nil && o.MastersInDefaultRegion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMastersInDefaultRegion gets a reference to the given bool and assigns it to the MastersInDefaultRegion field.
+func (o *ResizeNodeParams) SetMastersInDefaultRegion(v bool) {
+	o.MastersInDefaultRegion = &v
 }
 
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
@@ -804,6 +903,30 @@ func (o *ResizeNodeParams) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *ResizeNodeParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetPlatformUrl returns the PlatformUrl field value
+func (o *ResizeNodeParams) GetPlatformUrl() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformUrl
+}
+
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetPlatformUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformUrl, true
+}
+
+// SetPlatformUrl sets field value
+func (o *ResizeNodeParams) SetPlatformUrl(v string) {
+	o.PlatformUrl = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1206,6 +1329,38 @@ func (o *ResizeNodeParams) SetUpdateInProgress(v bool) {
 	o.UpdateInProgress = &v
 }
 
+// GetUpdateOptions returns the UpdateOptions field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetUpdateOptions() []string {
+	if o == nil || o.UpdateOptions == nil {
+		var ret []string
+		return ret
+	}
+	return *o.UpdateOptions
+}
+
+// GetUpdateOptionsOk returns a tuple with the UpdateOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetUpdateOptionsOk() (*[]string, bool) {
+	if o == nil || o.UpdateOptions == nil {
+		return nil, false
+	}
+	return o.UpdateOptions, true
+}
+
+// HasUpdateOptions returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasUpdateOptions() bool {
+	if o != nil && o.UpdateOptions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateOptions gets a reference to the given []string and assigns it to the UpdateOptions field.
+func (o *ResizeNodeParams) SetUpdateOptions(v []string) {
+	o.UpdateOptions = &v
+}
+
 // GetUpdateSucceeded returns the UpdateSucceeded field value if set, zero value otherwise.
 func (o *ResizeNodeParams) GetUpdateSucceeded() bool {
 	if o == nil || o.UpdateSucceeded == nil {
@@ -1326,6 +1481,38 @@ func (o *ResizeNodeParams) SetUpgradeOption(v string) {
 	o.UpgradeOption = v
 }
 
+// GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetUseNewHelmNamingStyle() bool {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseNewHelmNamingStyle
+}
+
+// GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetUseNewHelmNamingStyleOk() (*bool, bool) {
+	if o == nil || o.UseNewHelmNamingStyle == nil {
+		return nil, false
+	}
+	return o.UseNewHelmNamingStyle, true
+}
+
+// HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasUseNewHelmNamingStyle() bool {
+	if o != nil && o.UseNewHelmNamingStyle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNewHelmNamingStyle gets a reference to the given bool and assigns it to the UseNewHelmNamingStyle field.
+func (o *ResizeNodeParams) SetUseNewHelmNamingStyle(v bool) {
+	o.UseNewHelmNamingStyle = &v
+}
+
 // GetUserAZSelected returns the UserAZSelected field value if set, zero value otherwise.
 func (o *ResizeNodeParams) GetUserAZSelected() bool {
 	if o == nil || o.UserAZSelected == nil {
@@ -1356,6 +1543,38 @@ func (o *ResizeNodeParams) HasUserAZSelected() bool {
 // SetUserAZSelected gets a reference to the given bool and assigns it to the UserAZSelected field.
 func (o *ResizeNodeParams) SetUserAZSelected(v bool) {
 	o.UserAZSelected = &v
+}
+
+// GetXclusterInfo returns the XclusterInfo field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetXclusterInfo() XClusterInfo {
+	if o == nil || o.XclusterInfo == nil {
+		var ret XClusterInfo
+		return ret
+	}
+	return *o.XclusterInfo
+}
+
+// GetXclusterInfoOk returns a tuple with the XclusterInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetXclusterInfoOk() (*XClusterInfo, bool) {
+	if o == nil || o.XclusterInfo == nil {
+		return nil, false
+	}
+	return o.XclusterInfo, true
+}
+
+// HasXclusterInfo returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasXclusterInfo() bool {
+	if o != nil && o.XclusterInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetXclusterInfo gets a reference to the given XClusterInfo and assigns it to the XclusterInfo field.
+func (o *ResizeNodeParams) SetXclusterInfo(v XClusterInfo) {
+	o.XclusterInfo = &v
 }
 
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
@@ -1390,13 +1609,74 @@ func (o *ResizeNodeParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
+// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetYbcInstalled() bool {
+	if o == nil || o.YbcInstalled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbcInstalled
+}
+
+// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetYbcInstalledOk() (*bool, bool) {
+	if o == nil || o.YbcInstalled == nil {
+		return nil, false
+	}
+	return o.YbcInstalled, true
+}
+
+// HasYbcInstalled returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasYbcInstalled() bool {
+	if o != nil && o.YbcInstalled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
+func (o *ResizeNodeParams) SetYbcInstalled(v bool) {
+	o.YbcInstalled = &v
+}
+
+// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
+func (o *ResizeNodeParams) GetYbcSoftwareVersion() string {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.YbcSoftwareVersion
+}
+
+// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResizeNodeParams) GetYbcSoftwareVersionOk() (*string, bool) {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		return nil, false
+	}
+	return o.YbcSoftwareVersion, true
+}
+
+// HasYbcSoftwareVersion returns a boolean if a field has been set.
+func (o *ResizeNodeParams) HasYbcSoftwareVersion() bool {
+	if o != nil && o.YbcSoftwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
+func (o *ResizeNodeParams) SetYbcSoftwareVersion(v string) {
+	o.YbcSoftwareVersion = &v
+}
+
 func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
-	}
-	if o.BackupInProgress != nil {
-		toSerialize["backupInProgress"] = o.BackupInProgress
 	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
@@ -1413,11 +1693,17 @@ func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
 	}
+	if true {
+		toSerialize["creatingUser"] = o.CreatingUser
+	}
 	if o.CurrentClusterType != nil {
 		toSerialize["currentClusterType"] = o.CurrentClusterType
 	}
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
+	}
+	if o.EnableYbc != nil {
+		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1440,11 +1726,17 @@ func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
+	if o.InstallYbc != nil {
+		toSerialize["installYbc"] = o.InstallYbc
+	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
 	}
 	if true {
 		toSerialize["kubernetesUpgradeSupported"] = o.KubernetesUpgradeSupported
+	}
+	if o.MastersInDefaultRegion != nil {
+		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
@@ -1460,6 +1752,9 @@ func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if true {
+		toSerialize["platformUrl"] = o.PlatformUrl
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
@@ -1500,6 +1795,9 @@ func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	if o.UpdateInProgress != nil {
 		toSerialize["updateInProgress"] = o.UpdateInProgress
 	}
+	if o.UpdateOptions != nil {
+		toSerialize["updateOptions"] = o.UpdateOptions
+	}
 	if o.UpdateSucceeded != nil {
 		toSerialize["updateSucceeded"] = o.UpdateSucceeded
 	}
@@ -1512,11 +1810,23 @@ func (o ResizeNodeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["upgradeOption"] = o.UpgradeOption
 	}
+	if o.UseNewHelmNamingStyle != nil {
+		toSerialize["useNewHelmNamingStyle"] = o.UseNewHelmNamingStyle
+	}
 	if o.UserAZSelected != nil {
 		toSerialize["userAZSelected"] = o.UserAZSelected
 	}
+	if o.XclusterInfo != nil {
+		toSerialize["xclusterInfo"] = o.XclusterInfo
+	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
+	}
+	if o.YbcInstalled != nil {
+		toSerialize["ybcInstalled"] = o.YbcInstalled
+	}
+	if o.YbcSoftwareVersion != nil {
+		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

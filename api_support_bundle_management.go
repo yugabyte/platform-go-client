@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -32,8 +32,13 @@ type SupportBundleManagementApiApiCreateSupportBundleRequest struct {
 	ApiService *SupportBundleManagementApiService
 	cUUID string
 	uniUUID string
+	supportBundle *SupportBundleFormData
 }
 
+func (r SupportBundleManagementApiApiCreateSupportBundleRequest) SupportBundle(supportBundle SupportBundleFormData) SupportBundleManagementApiApiCreateSupportBundleRequest {
+	r.supportBundle = &supportBundle
+	return r
+}
 
 func (r SupportBundleManagementApiApiCreateSupportBundleRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.CreateSupportBundleExecute(r)
@@ -81,9 +86,12 @@ func (a *SupportBundleManagementApiService) CreateSupportBundleExecute(r Support
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.supportBundle == nil {
+		return localVarReturnValue, nil, reportError("supportBundle is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -99,6 +107,8 @@ func (a *SupportBundleManagementApiService) CreateSupportBundleExecute(r Support
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.supportBundle
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -286,7 +296,7 @@ type SupportBundleManagementApiApiDownloadSupportBundleRequest struct {
 }
 
 
-func (r SupportBundleManagementApiApiDownloadSupportBundleRequest) Execute() (SupportBundle, *_nethttp.Response, error) {
+func (r SupportBundleManagementApiApiDownloadSupportBundleRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.DownloadSupportBundleExecute(r)
 }
 
@@ -310,16 +320,16 @@ func (a *SupportBundleManagementApiService) DownloadSupportBundle(ctx _context.C
 
 /*
  * Execute executes the request
- * @return SupportBundle
+ * @return string
  */
-func (a *SupportBundleManagementApiService) DownloadSupportBundleExecute(r SupportBundleManagementApiApiDownloadSupportBundleRequest) (SupportBundle, *_nethttp.Response, error) {
+func (a *SupportBundleManagementApiService) DownloadSupportBundleExecute(r SupportBundleManagementApiApiDownloadSupportBundleRequest) (string, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  SupportBundle
+		localVarReturnValue  string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementApiService.DownloadSupportBundle")
@@ -581,6 +591,125 @@ func (a *SupportBundleManagementApiService) ListSupportBundleExecute(r SupportBu
 	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type SupportBundleManagementApiApiListSupportBundleComponentsRequest struct {
+	ctx _context.Context
+	ApiService *SupportBundleManagementApiService
+	cUUID string
+}
+
+
+func (r SupportBundleManagementApiApiListSupportBundleComponentsRequest) Execute() ([]string, *_nethttp.Response, error) {
+	return r.ApiService.ListSupportBundleComponentsExecute(r)
+}
+
+/*
+ * ListSupportBundleComponents List all components available in support bundle
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return SupportBundleManagementApiApiListSupportBundleComponentsRequest
+ */
+func (a *SupportBundleManagementApiService) ListSupportBundleComponents(ctx _context.Context, cUUID string) SupportBundleManagementApiApiListSupportBundleComponentsRequest {
+	return SupportBundleManagementApiApiListSupportBundleComponentsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []string
+ */
+func (a *SupportBundleManagementApiService) ListSupportBundleComponentsExecute(r SupportBundleManagementApiApiListSupportBundleComponentsRequest) ([]string, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []string
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementApiService.ListSupportBundleComponents")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/support_bundle/components"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

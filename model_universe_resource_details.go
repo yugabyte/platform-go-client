@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -32,6 +32,8 @@ type UniverseResourceDetails struct {
 	NumNodes *int32 `json:"numNodes,omitempty"`
 	// Price per hour
 	PricePerHour *float64 `json:"pricePerHour,omitempty"`
+	// Known pricing info
+	PricingKnown *bool `json:"pricingKnown,omitempty"`
 	// Volume count
 	VolumeCount *int32 `json:"volumeCount,omitempty"`
 	// Volume in GB
@@ -311,6 +313,38 @@ func (o *UniverseResourceDetails) SetPricePerHour(v float64) {
 	o.PricePerHour = &v
 }
 
+// GetPricingKnown returns the PricingKnown field value if set, zero value otherwise.
+func (o *UniverseResourceDetails) GetPricingKnown() bool {
+	if o == nil || o.PricingKnown == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PricingKnown
+}
+
+// GetPricingKnownOk returns a tuple with the PricingKnown field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResourceDetails) GetPricingKnownOk() (*bool, bool) {
+	if o == nil || o.PricingKnown == nil {
+		return nil, false
+	}
+	return o.PricingKnown, true
+}
+
+// HasPricingKnown returns a boolean if a field has been set.
+func (o *UniverseResourceDetails) HasPricingKnown() bool {
+	if o != nil && o.PricingKnown != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPricingKnown gets a reference to the given bool and assigns it to the PricingKnown field.
+func (o *UniverseResourceDetails) SetPricingKnown(v bool) {
+	o.PricingKnown = &v
+}
+
 // GetVolumeCount returns the VolumeCount field value if set, zero value otherwise.
 func (o *UniverseResourceDetails) GetVolumeCount() int32 {
 	if o == nil || o.VolumeCount == nil {
@@ -400,6 +434,9 @@ func (o UniverseResourceDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.PricePerHour != nil {
 		toSerialize["pricePerHour"] = o.PricePerHour
+	}
+	if o.PricingKnown != nil {
+		toSerialize["pricingKnown"] = o.PricingKnown
 	}
 	if o.VolumeCount != nil {
 		toSerialize["volumeCount"] = o.VolumeCount
