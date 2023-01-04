@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,8 +16,11 @@ import (
 
 // AlertChannelSlackParamsAllOf struct for AlertChannelSlackParamsAllOf
 type AlertChannelSlackParamsAllOf struct {
-	IconUrl string `json:"iconUrl"`
+	// Slack icon URL
+	IconUrl *string `json:"iconUrl,omitempty"`
+	// Slack username
 	Username string `json:"username"`
+	// Slack webhook URL
 	WebhookUrl string `json:"webhookUrl"`
 }
 
@@ -25,9 +28,8 @@ type AlertChannelSlackParamsAllOf struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelSlackParamsAllOf(iconUrl string, username string, webhookUrl string, ) *AlertChannelSlackParamsAllOf {
+func NewAlertChannelSlackParamsAllOf(username string, webhookUrl string, ) *AlertChannelSlackParamsAllOf {
 	this := AlertChannelSlackParamsAllOf{}
-	this.IconUrl = iconUrl
 	this.Username = username
 	this.WebhookUrl = webhookUrl
 	return &this
@@ -41,28 +43,36 @@ func NewAlertChannelSlackParamsAllOfWithDefaults() *AlertChannelSlackParamsAllOf
 	return &this
 }
 
-// GetIconUrl returns the IconUrl field value
+// GetIconUrl returns the IconUrl field value if set, zero value otherwise.
 func (o *AlertChannelSlackParamsAllOf) GetIconUrl() string {
-	if o == nil  {
+	if o == nil || o.IconUrl == nil {
 		var ret string
 		return ret
 	}
-
-	return o.IconUrl
+	return *o.IconUrl
 }
 
-// GetIconUrlOk returns a tuple with the IconUrl field value
+// GetIconUrlOk returns a tuple with the IconUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertChannelSlackParamsAllOf) GetIconUrlOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.IconUrl == nil {
 		return nil, false
 	}
-	return &o.IconUrl, true
+	return o.IconUrl, true
 }
 
-// SetIconUrl sets field value
+// HasIconUrl returns a boolean if a field has been set.
+func (o *AlertChannelSlackParamsAllOf) HasIconUrl() bool {
+	if o != nil && o.IconUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIconUrl gets a reference to the given string and assigns it to the IconUrl field.
 func (o *AlertChannelSlackParamsAllOf) SetIconUrl(v string) {
-	o.IconUrl = v
+	o.IconUrl = &v
 }
 
 // GetUsername returns the Username field value
@@ -115,7 +125,7 @@ func (o *AlertChannelSlackParamsAllOf) SetWebhookUrl(v string) {
 
 func (o AlertChannelSlackParamsAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.IconUrl != nil {
 		toSerialize["iconUrl"] = o.IconUrl
 	}
 	if true {

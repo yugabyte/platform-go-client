@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -19,7 +19,9 @@ type BulkImportParams struct {
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	CreatingUser Users `json:"creatingUser"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
@@ -28,6 +30,7 @@ type BulkImportParams struct {
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	// Whether this task has been tried before
 	FirstTry *bool `json:"firstTry,omitempty"`
+	InstallYbc *bool `json:"installYbc,omitempty"`
 	// Instance count
 	InstanceCount *int32 `json:"instanceCount,omitempty"`
 	// Key space
@@ -36,10 +39,13 @@ type BulkImportParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	// Previous task UUID only if this task is a retry
+	PlatformUrl string `json:"platformUrl"`
+	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// S3 bucket URL
 	S3Bucket string `json:"s3Bucket"`
+	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -54,15 +60,21 @@ type BulkImportParams struct {
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
+	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewBulkImportParams instantiates a new BulkImportParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkImportParams(s3Bucket string, ) *BulkImportParams {
+func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams {
 	this := BulkImportParams{}
+	this.CreatingUser = creatingUser
+	this.PlatformUrl = platformUrl
 	this.S3Bucket = s3Bucket
+	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
+	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
 }
 
@@ -138,6 +150,30 @@ func (o *BulkImportParams) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
 }
 
+// GetCreatingUser returns the CreatingUser field value
+func (o *BulkImportParams) GetCreatingUser() Users {
+	if o == nil  {
+		var ret Users
+		return ret
+	}
+
+	return o.CreatingUser
+}
+
+// GetCreatingUserOk returns a tuple with the CreatingUser field value
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetCreatingUserOk() (*Users, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatingUser, true
+}
+
+// SetCreatingUser sets field value
+func (o *BulkImportParams) SetCreatingUser(v Users) {
+	o.CreatingUser = v
+}
+
 // GetDeviceInfo returns the DeviceInfo field value if set, zero value otherwise.
 func (o *BulkImportParams) GetDeviceInfo() DeviceInfo {
 	if o == nil || o.DeviceInfo == nil {
@@ -168,6 +204,38 @@ func (o *BulkImportParams) HasDeviceInfo() bool {
 // SetDeviceInfo gets a reference to the given DeviceInfo and assigns it to the DeviceInfo field.
 func (o *BulkImportParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
+}
+
+// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
+func (o *BulkImportParams) GetEnableYbc() bool {
+	if o == nil || o.EnableYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableYbc
+}
+
+// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetEnableYbcOk() (*bool, bool) {
+	if o == nil || o.EnableYbc == nil {
+		return nil, false
+	}
+	return o.EnableYbc, true
+}
+
+// HasEnableYbc returns a boolean if a field has been set.
+func (o *BulkImportParams) HasEnableYbc() bool {
+	if o != nil && o.EnableYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
+func (o *BulkImportParams) SetEnableYbc(v bool) {
+	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -330,6 +398,38 @@ func (o *BulkImportParams) SetFirstTry(v bool) {
 	o.FirstTry = &v
 }
 
+// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
+func (o *BulkImportParams) GetInstallYbc() bool {
+	if o == nil || o.InstallYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallYbc
+}
+
+// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetInstallYbcOk() (*bool, bool) {
+	if o == nil || o.InstallYbc == nil {
+		return nil, false
+	}
+	return o.InstallYbc, true
+}
+
+// HasInstallYbc returns a boolean if a field has been set.
+func (o *BulkImportParams) HasInstallYbc() bool {
+	if o != nil && o.InstallYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
+func (o *BulkImportParams) SetInstallYbc(v bool) {
+	o.InstallYbc = &v
+}
+
 // GetInstanceCount returns the InstanceCount field value if set, zero value otherwise.
 func (o *BulkImportParams) GetInstanceCount() int32 {
 	if o == nil || o.InstanceCount == nil {
@@ -458,6 +558,30 @@ func (o *BulkImportParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetPlatformUrl returns the PlatformUrl field value
+func (o *BulkImportParams) GetPlatformUrl() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformUrl
+}
+
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetPlatformUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformUrl, true
+}
+
+// SetPlatformUrl sets field value
+func (o *BulkImportParams) SetPlatformUrl(v string) {
+	o.PlatformUrl = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *BulkImportParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -512,6 +636,54 @@ func (o *BulkImportParams) GetS3BucketOk() (*string, bool) {
 // SetS3Bucket sets field value
 func (o *BulkImportParams) SetS3Bucket(v string) {
 	o.S3Bucket = v
+}
+
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+func (o *BulkImportParams) GetSleepAfterMasterRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterMasterRestartMillis
+}
+
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterMasterRestartMillis, true
+}
+
+// SetSleepAfterMasterRestartMillis sets field value
+func (o *BulkImportParams) SetSleepAfterMasterRestartMillis(v int32) {
+	o.SleepAfterMasterRestartMillis = v
+}
+
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+func (o *BulkImportParams) GetSleepAfterTServerRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterTServerRestartMillis
+}
+
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterTServerRestartMillis, true
+}
+
+// SetSleepAfterTServerRestartMillis sets field value
+func (o *BulkImportParams) SetSleepAfterTServerRestartMillis(v int32) {
+	o.SleepAfterTServerRestartMillis = v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -738,6 +910,70 @@ func (o *BulkImportParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
+// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
+func (o *BulkImportParams) GetYbcInstalled() bool {
+	if o == nil || o.YbcInstalled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbcInstalled
+}
+
+// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetYbcInstalledOk() (*bool, bool) {
+	if o == nil || o.YbcInstalled == nil {
+		return nil, false
+	}
+	return o.YbcInstalled, true
+}
+
+// HasYbcInstalled returns a boolean if a field has been set.
+func (o *BulkImportParams) HasYbcInstalled() bool {
+	if o != nil && o.YbcInstalled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
+func (o *BulkImportParams) SetYbcInstalled(v bool) {
+	o.YbcInstalled = &v
+}
+
+// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
+func (o *BulkImportParams) GetYbcSoftwareVersion() string {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.YbcSoftwareVersion
+}
+
+// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetYbcSoftwareVersionOk() (*string, bool) {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		return nil, false
+	}
+	return o.YbcSoftwareVersion, true
+}
+
+// HasYbcSoftwareVersion returns a boolean if a field has been set.
+func (o *BulkImportParams) HasYbcSoftwareVersion() bool {
+	if o != nil && o.YbcSoftwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
+func (o *BulkImportParams) SetYbcSoftwareVersion(v string) {
+	o.YbcSoftwareVersion = &v
+}
+
 func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CmkArn != nil {
@@ -746,8 +982,14 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
 	}
+	if true {
+		toSerialize["creatingUser"] = o.CreatingUser
+	}
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
+	}
+	if o.EnableYbc != nil {
+		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -764,6 +1006,9 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	if o.FirstTry != nil {
 		toSerialize["firstTry"] = o.FirstTry
 	}
+	if o.InstallYbc != nil {
+		toSerialize["installYbc"] = o.InstallYbc
+	}
 	if o.InstanceCount != nil {
 		toSerialize["instanceCount"] = o.InstanceCount
 	}
@@ -776,11 +1021,20 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
+	if true {
+		toSerialize["platformUrl"] = o.PlatformUrl
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
 	if true {
 		toSerialize["s3Bucket"] = o.S3Bucket
+	}
+	if true {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if true {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
@@ -802,6 +1056,12 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
+	}
+	if o.YbcInstalled != nil {
+		toSerialize["ybcInstalled"] = o.YbcInstalled
+	}
+	if o.YbcSoftwareVersion != nil {
+		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

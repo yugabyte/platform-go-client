@@ -8,14 +8,18 @@ Method | HTTP request | Description
 [**Createbackup**](BackupsApi.md#Createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
 [**CreatebackupSchedule**](BackupsApi.md#CreatebackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 [**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
-[**DeleteBackupsv2**](BackupsApi.md#DeleteBackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
+[**DeleteBackupsV2**](BackupsApi.md#DeleteBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 [**EditBackupV2**](BackupsApi.md#EditBackupV2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 [**FetchBackupsByTaskUUID**](BackupsApi.md#FetchBackupsByTaskUUID) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
 [**GetBackupV2**](BackupsApi.md#GetBackupV2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
+[**GetThrottleParams**](BackupsApi.md#GetThrottleParams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Get throttle params from YB-Controller
+[**ListBackupRestoresV2**](BackupsApi.md#ListBackupRestoresV2) | **Post** /api/v1/customers/{cUUID}/restore/page | List Backup Restores (paginated)
 [**ListBackupsV2**](BackupsApi.md#ListBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
+[**ListIncrementalBackups**](BackupsApi.md#ListIncrementalBackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
 [**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
 [**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
 [**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
+[**SetThrottleParams**](BackupsApi.md#SetThrottleParams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 [**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 
@@ -42,7 +46,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    tableBackup := *openapiclient.NewMultiTableBackupRequestParams("StorageConfigUUID_example") // MultiTableBackupRequestParams | Table backup data to be created
+    tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -114,7 +118,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -184,7 +188,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -302,9 +306,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteBackupsv2
+## DeleteBackupsV2
 
-> map[string]interface{} DeleteBackupsv2(ctx, cUUID).Execute()
+> map[string]interface{} DeleteBackupsV2(ctx, cUUID).Execute()
 
 Delete backups V2
 
@@ -325,13 +329,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BackupsApi.DeleteBackupsv2(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.BackupsApi.DeleteBackupsV2(context.Background(), cUUID).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.DeleteBackupsv2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.DeleteBackupsV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeleteBackupsv2`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.DeleteBackupsv2`: %v\n", resp)
+    // response from `DeleteBackupsV2`: map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.DeleteBackupsV2`: %v\n", resp)
 }
 ```
 
@@ -345,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteBackupsv2Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteBackupsV2Request struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -393,7 +397,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     backupUUID := TODO // string | 
-    backup := *openapiclient.NewEditBackupParams(int64(123)) // EditBackupParams | Parameters of the backup to be edited
+    backup := *openapiclient.NewEditBackupParams() // EditBackupParams | Parameters of the backup to be edited
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -590,6 +594,148 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetThrottleParams
+
+> map[string]map[string]interface{} GetThrottleParams(ctx, cUUID, uniUUID).Execute()
+
+Get throttle params from YB-Controller
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.GetThrottleParams(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.GetThrottleParams``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetThrottleParams`: map[string]map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.GetThrottleParams`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetThrottleParamsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListBackupRestoresV2
+
+> RestorePagedApiResponse ListBackupRestoresV2(ctx, cUUID).PageRestoresRequest(pageRestoresRequest).Execute()
+
+List Backup Restores (paginated)
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pageRestoresRequest := *openapiclient.NewRestorePagedApiQuery("Direction_example", *openapiclient.NewRestoreApiFilter(time.Now(), time.Now(), false, []string{"SourceUniverseNameList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // RestorePagedApiQuery | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.ListBackupRestoresV2(context.Background(), cUUID).PageRestoresRequest(pageRestoresRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.ListBackupRestoresV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListBackupRestoresV2`: RestorePagedApiResponse
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.ListBackupRestoresV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListBackupRestoresV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageRestoresRequest** | [**RestorePagedApiQuery**](RestorePagedApiQuery.md) |  | 
+
+### Return type
+
+[**RestorePagedApiResponse**](RestorePagedApiResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListBackupsV2
 
 > BackupPagedApiResponse ListBackupsV2(ctx, cUUID).PageBackupsRequest(pageBackupsRequest).Execute()
@@ -611,7 +757,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter(time.Now(), time.Now(), []string{"KeyspaceList_example"}, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
+    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter(time.Now(), time.Now(), []string{"KeyspaceList_example"}, false, false, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -654,6 +800,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListIncrementalBackups
+
+> []CommonBackupInfo ListIncrementalBackups(ctx, cUUID, backupUUID).Execute()
+
+List Incremental backups
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    backupUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.ListIncrementalBackups(context.Background(), cUUID, backupUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.ListIncrementalBackups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListIncrementalBackups`: []CommonBackupInfo
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.ListIncrementalBackups`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**backupUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListIncrementalBackupsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]CommonBackupInfo**](CommonBackupInfo.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -753,7 +970,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    backup := *openapiclient.NewBackupTableParams("StorageConfigUUID_example") // BackupTableParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Parameters of the backup to be restored
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -825,7 +1042,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewRestoreBackupParams("UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "PlatformUrl_example", "PrefixUUID_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -860,6 +1077,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetThrottleParams
+
+> YBPSuccess SetThrottleParams(ctx, cUUID, uniUUID).ThrottleParams(throttleParams).Execute()
+
+Set throttle params in YB-Controller
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    throttleParams := *openapiclient.NewYbcThrottleParameters() // YbcThrottleParameters | Parameters for YB-Controller throttling
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.SetThrottleParams(context.Background(), cUUID, uniUUID).ThrottleParams(throttleParams).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.SetThrottleParams``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetThrottleParams`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.SetThrottleParams`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetThrottleParamsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **throttleParams** | [**YbcThrottleParameters**](YbcThrottleParameters.md) | Parameters for YB-Controller throttling | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
 
 ### Authorization
 

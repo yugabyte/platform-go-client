@@ -9,8 +9,11 @@ Method | HTTP request | Description
 [**CreateMultiTableBackup**](TableManagementApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
 [**CreateSingleTableBackup**](TableManagementApi.md#CreateSingleTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
 [**CreateTable**](TableManagementApi.md#CreateTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
+[**CreateTableSpaces**](TableManagementApi.md#CreateTableSpaces) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Create tableSpaces
 [**DescribeTable**](TableManagementApi.md#DescribeTable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
 [**DropTable**](TableManagementApi.md#DropTable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
+[**GetAllNamespaces**](TableManagementApi.md#GetAllNamespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces | List all namespaces
+[**GetAllTableSpaces**](TableManagementApi.md#GetAllTableSpaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | List all tablespaces
 [**GetAllTables**](TableManagementApi.md#GetAllTables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | List all tables
 [**GetYQLDataTypes**](TableManagementApi.md#GetYQLDataTypes) | **Get** /api/v1/metadata/yql_data_types | List column types
 
@@ -114,7 +117,7 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
-    bulkImport := *openapiclient.NewBulkImportParams("S3Bucket_example") // BulkImportParams | Bulk data to be imported
+    bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "S3Bucket_example", int32(123), int32(123)) // BulkImportParams | Bulk data to be imported
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -189,7 +192,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    tableBackup := *openapiclient.NewMultiTableBackupRequestParams("StorageConfigUUID_example") // MultiTableBackupRequestParams | Table backup data to be created
+    tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -263,7 +266,7 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
-    backup := *openapiclient.NewBackupTableParams("StorageConfigUUID_example") // BackupTableParams | Backup data to be created
+    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -338,7 +341,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
+    table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", int32(123), int32(123), *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -371,6 +374,79 @@ Name | Type | Description  | Notes
 
 
  **table** | [**TableDefinitionTaskParams**](TableDefinitionTaskParams.md) | Table definition to be created | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateTableSpaces
+
+> YBPTask CreateTableSpaces(ctx, cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Execute()
+
+Create tableSpaces
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    createTableSpacesRequest := *openapiclient.NewCreateTablespaceParams([]openapiclient.TableSpaceInfo{*openapiclient.NewTableSpaceInfo("Name_example", []openapiclient.PlacementBlock{*openapiclient.NewPlacementBlock("Cloud_example", "Region_example", "Zone_example")})}) // CreateTablespaceParams | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TableManagementApi.CreateTableSpaces(context.Background(), cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateTableSpaces``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateTableSpaces`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.CreateTableSpaces`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTableSpacesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **createTableSpacesRequest** | [**CreateTablespaceParams**](CreateTablespaceParams.md) |  | 
 
 ### Return type
 
@@ -538,11 +614,86 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetAllTables
+## GetAllNamespaces
 
-> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).Execute()
+> []NamespaceInfoResp GetAllNamespaces(ctx, cUUID, uniUUID).IncludeSystemNamespaces(includeSystemNamespaces).Execute()
 
-List all tables
+List all namespaces
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    includeSystemNamespaces := true // bool |  (optional) (default to false)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TableManagementApi.GetAllNamespaces(context.Background(), cUUID, uniUUID).IncludeSystemNamespaces(includeSystemNamespaces).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.GetAllNamespaces``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetAllNamespaces`: []NamespaceInfoResp
+    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.GetAllNamespaces`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllNamespacesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **includeSystemNamespaces** | **bool** |  | [default to false]
+
+### Return type
+
+[**[]NamespaceInfoResp**](NamespaceInfoResp.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllTableSpaces
+
+> []TableSpaceInfo GetAllTableSpaces(ctx, cUUID, uniUUID).Execute()
+
+List all tablespaces
 
 
 
@@ -564,7 +715,81 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.TableManagementApi.GetAllTableSpaces(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.GetAllTableSpaces``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetAllTableSpaces`: []TableSpaceInfo
+    fmt.Fprintf(os.Stdout, "Response from `TableManagementApi.GetAllTableSpaces`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAllTableSpacesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]TableSpaceInfo**](TableSpaceInfo.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAllTables
+
+> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).Execute()
+
+List all tables
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    includeParentTableInfo := true // bool |  (optional) (default to false)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.GetAllTables``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -592,6 +817,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **includeParentTableInfo** | **bool** |  | [default to false]
 
 ### Return type
 

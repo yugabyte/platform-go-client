@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | Pointer to **string** | Action | [optional] [readonly] 
+**AdditionalDetails** | Pointer to **map[string]interface{}** | Additional Details | [optional] [readonly] 
 **ApiCall** | Pointer to **string** | API call | [optional] [readonly] 
 **ApiMethod** | Pointer to **string** | API method | [optional] [readonly] 
 **AuditID** | **int64** |  | 
@@ -14,6 +15,7 @@ Name | Type | Description | Notes
 **TargetID** | Pointer to **string** | Target ID | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] [readonly] 
 **Timestamp** | **time.Time** |  | 
+**UserAddress** | Pointer to **string** | User IP Address | [optional] [readonly] 
 **UserEmail** | Pointer to **string** | User Email | [optional] [readonly] 
 **UserUUID** | Pointer to **string** | User UUID | [optional] [readonly] 
 
@@ -60,6 +62,31 @@ SetAction sets Action field to given value.
 `func (o *Audit) HasAction() bool`
 
 HasAction returns a boolean if a field has been set.
+
+### GetAdditionalDetails
+
+`func (o *Audit) GetAdditionalDetails() map[string]interface{}`
+
+GetAdditionalDetails returns the AdditionalDetails field if non-nil, zero value otherwise.
+
+### GetAdditionalDetailsOk
+
+`func (o *Audit) GetAdditionalDetailsOk() (*map[string]interface{}, bool)`
+
+GetAdditionalDetailsOk returns a tuple with the AdditionalDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdditionalDetails
+
+`func (o *Audit) SetAdditionalDetails(v map[string]interface{})`
+
+SetAdditionalDetails sets AdditionalDetails field to given value.
+
+### HasAdditionalDetails
+
+`func (o *Audit) HasAdditionalDetails() bool`
+
+HasAdditionalDetails returns a boolean if a field has been set.
 
 ### GetApiCall
 
@@ -275,6 +302,31 @@ and a boolean to check if the value has been set.
 
 SetTimestamp sets Timestamp field to given value.
 
+
+### GetUserAddress
+
+`func (o *Audit) GetUserAddress() string`
+
+GetUserAddress returns the UserAddress field if non-nil, zero value otherwise.
+
+### GetUserAddressOk
+
+`func (o *Audit) GetUserAddressOk() (*string, bool)`
+
+GetUserAddressOk returns a tuple with the UserAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserAddress
+
+`func (o *Audit) SetUserAddress(v string)`
+
+SetUserAddress sets UserAddress field to given value.
+
+### HasUserAddress
+
+`func (o *Audit) HasUserAddress() bool`
+
+HasUserAddress returns a boolean if a field has been set.
 
 ### GetUserEmail
 

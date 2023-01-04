@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**GetUniverseCostForAll**](UniverseInformationApi.md#GetUniverseCostForAll) | **Get** /api/v1/customers/{cUUID}/cost | Get a cost estimate for all universes
 [**HealthCheckUniverse**](UniverseInformationApi.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Run a universe health check
 [**ResetSlowQueries**](UniverseInformationApi.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
+[**TriggerHealthCheck**](UniverseInformationApi.md#TriggerHealthCheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
 [**UniverseStatus**](UniverseInformationApi.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
 
 
@@ -573,6 +574,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 **map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TriggerHealthCheck
+
+> TriggerHealthCheckResult TriggerHealthCheck(ctx, cUUID, uniUUID).Execute()
+
+Trigger a universe health check
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseInformationApi.TriggerHealthCheck(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.TriggerHealthCheck``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `TriggerHealthCheck`: TriggerHealthCheckResult
+    fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.TriggerHealthCheck`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTriggerHealthCheckRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**TriggerHealthCheckResult**](TriggerHealthCheckResult.md)
 
 ### Authorization
 

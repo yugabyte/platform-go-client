@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -18,20 +18,14 @@ import (
 type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
-	// Transient property - only present in mutate API request
-	AirGapInstall *bool `json:"airGapInstall,omitempty"`
 	// Provider cloud code
 	Code *string `json:"code,omitempty"`
 	Config *map[string]string `json:"config,omitempty"`
-	// Transient property - only present in mutate API request
-	CustomHostCidrs *[]string `json:"customHostCidrs,omitempty"`
 	// Customer uuid
 	CustomerUUID *string `json:"customerUUID,omitempty"`
-	// Transient property - only present in mutate API request
 	DestVpcId *string `json:"destVpcId,omitempty"`
-	// Transient property - only present in mutate API request
+	Details ProviderDetails `json:"details"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
-	// Transient property - only present in mutate API request
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
 	HostedZoneId *string `json:"hostedZoneId,omitempty"`
 	HostedZoneName *string `json:"hostedZoneName,omitempty"`
@@ -39,25 +33,22 @@ type Provider struct {
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
-	// Transient property - only present in mutate API request
-	OverrideKeyValidate *bool `json:"overrideKeyValidate,omitempty"`
 	Regions []Region `json:"regions"`
 	// Transient property - only present in mutate API request
-	SshPort *int32 `json:"sshPort,omitempty"`
-	// Transient property - only present in mutate API request
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
-	// Transient property - only present in mutate API request
-	SshUser *string `json:"sshUser,omitempty"`
 	// Provider uuid
 	Uuid *string `json:"uuid,omitempty"`
+	// Provider version
+	Version *int64 `json:"version,omitempty"`
 }
 
 // NewProvider instantiates a new Provider object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProvider(regions []Region, ) *Provider {
+func NewProvider(details ProviderDetails, regions []Region, ) *Provider {
 	this := Provider{}
+	this.Details = details
 	this.Regions = regions
 	return &this
 }
@@ -100,38 +91,6 @@ func (o *Provider) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *Provider) SetActive(v bool) {
 	o.Active = &v
-}
-
-// GetAirGapInstall returns the AirGapInstall field value if set, zero value otherwise.
-func (o *Provider) GetAirGapInstall() bool {
-	if o == nil || o.AirGapInstall == nil {
-		var ret bool
-		return ret
-	}
-	return *o.AirGapInstall
-}
-
-// GetAirGapInstallOk returns a tuple with the AirGapInstall field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetAirGapInstallOk() (*bool, bool) {
-	if o == nil || o.AirGapInstall == nil {
-		return nil, false
-	}
-	return o.AirGapInstall, true
-}
-
-// HasAirGapInstall returns a boolean if a field has been set.
-func (o *Provider) HasAirGapInstall() bool {
-	if o != nil && o.AirGapInstall != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAirGapInstall gets a reference to the given bool and assigns it to the AirGapInstall field.
-func (o *Provider) SetAirGapInstall(v bool) {
-	o.AirGapInstall = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
@@ -198,38 +157,6 @@ func (o *Provider) SetConfig(v map[string]string) {
 	o.Config = &v
 }
 
-// GetCustomHostCidrs returns the CustomHostCidrs field value if set, zero value otherwise.
-func (o *Provider) GetCustomHostCidrs() []string {
-	if o == nil || o.CustomHostCidrs == nil {
-		var ret []string
-		return ret
-	}
-	return *o.CustomHostCidrs
-}
-
-// GetCustomHostCidrsOk returns a tuple with the CustomHostCidrs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetCustomHostCidrsOk() (*[]string, bool) {
-	if o == nil || o.CustomHostCidrs == nil {
-		return nil, false
-	}
-	return o.CustomHostCidrs, true
-}
-
-// HasCustomHostCidrs returns a boolean if a field has been set.
-func (o *Provider) HasCustomHostCidrs() bool {
-	if o != nil && o.CustomHostCidrs != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomHostCidrs gets a reference to the given []string and assigns it to the CustomHostCidrs field.
-func (o *Provider) SetCustomHostCidrs(v []string) {
-	o.CustomHostCidrs = &v
-}
-
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
 func (o *Provider) GetCustomerUUID() string {
 	if o == nil || o.CustomerUUID == nil {
@@ -292,6 +219,30 @@ func (o *Provider) HasDestVpcId() bool {
 // SetDestVpcId gets a reference to the given string and assigns it to the DestVpcId field.
 func (o *Provider) SetDestVpcId(v string) {
 	o.DestVpcId = &v
+}
+
+// GetDetails returns the Details field value
+func (o *Provider) GetDetails() ProviderDetails {
+	if o == nil  {
+		var ret ProviderDetails
+		return ret
+	}
+
+	return o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value
+// and a boolean to check if the value has been set.
+func (o *Provider) GetDetailsOk() (*ProviderDetails, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Details, true
+}
+
+// SetDetails sets field value
+func (o *Provider) SetDetails(v ProviderDetails) {
+	o.Details = v
 }
 
 // GetHostVpcId returns the HostVpcId field value if set, zero value otherwise.
@@ -486,38 +437,6 @@ func (o *Provider) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOverrideKeyValidate returns the OverrideKeyValidate field value if set, zero value otherwise.
-func (o *Provider) GetOverrideKeyValidate() bool {
-	if o == nil || o.OverrideKeyValidate == nil {
-		var ret bool
-		return ret
-	}
-	return *o.OverrideKeyValidate
-}
-
-// GetOverrideKeyValidateOk returns a tuple with the OverrideKeyValidate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetOverrideKeyValidateOk() (*bool, bool) {
-	if o == nil || o.OverrideKeyValidate == nil {
-		return nil, false
-	}
-	return o.OverrideKeyValidate, true
-}
-
-// HasOverrideKeyValidate returns a boolean if a field has been set.
-func (o *Provider) HasOverrideKeyValidate() bool {
-	if o != nil && o.OverrideKeyValidate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOverrideKeyValidate gets a reference to the given bool and assigns it to the OverrideKeyValidate field.
-func (o *Provider) SetOverrideKeyValidate(v bool) {
-	o.OverrideKeyValidate = &v
-}
-
 // GetRegions returns the Regions field value
 func (o *Provider) GetRegions() []Region {
 	if o == nil  {
@@ -540,38 +459,6 @@ func (o *Provider) GetRegionsOk() (*[]Region, bool) {
 // SetRegions sets field value
 func (o *Provider) SetRegions(v []Region) {
 	o.Regions = v
-}
-
-// GetSshPort returns the SshPort field value if set, zero value otherwise.
-func (o *Provider) GetSshPort() int32 {
-	if o == nil || o.SshPort == nil {
-		var ret int32
-		return ret
-	}
-	return *o.SshPort
-}
-
-// GetSshPortOk returns a tuple with the SshPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetSshPortOk() (*int32, bool) {
-	if o == nil || o.SshPort == nil {
-		return nil, false
-	}
-	return o.SshPort, true
-}
-
-// HasSshPort returns a boolean if a field has been set.
-func (o *Provider) HasSshPort() bool {
-	if o != nil && o.SshPort != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSshPort gets a reference to the given int32 and assigns it to the SshPort field.
-func (o *Provider) SetSshPort(v int32) {
-	o.SshPort = &v
 }
 
 // GetSshPrivateKeyContent returns the SshPrivateKeyContent field value if set, zero value otherwise.
@@ -606,38 +493,6 @@ func (o *Provider) SetSshPrivateKeyContent(v string) {
 	o.SshPrivateKeyContent = &v
 }
 
-// GetSshUser returns the SshUser field value if set, zero value otherwise.
-func (o *Provider) GetSshUser() string {
-	if o == nil || o.SshUser == nil {
-		var ret string
-		return ret
-	}
-	return *o.SshUser
-}
-
-// GetSshUserOk returns a tuple with the SshUser field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetSshUserOk() (*string, bool) {
-	if o == nil || o.SshUser == nil {
-		return nil, false
-	}
-	return o.SshUser, true
-}
-
-// HasSshUser returns a boolean if a field has been set.
-func (o *Provider) HasSshUser() bool {
-	if o != nil && o.SshUser != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSshUser gets a reference to the given string and assigns it to the SshUser field.
-func (o *Provider) SetSshUser(v string) {
-	o.SshUser = &v
-}
-
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *Provider) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -670,13 +525,42 @@ func (o *Provider) SetUuid(v string) {
 	o.Uuid = &v
 }
 
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *Provider) GetVersion() int64 {
+	if o == nil || o.Version == nil {
+		var ret int64
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetVersionOk() (*int64, bool) {
+	if o == nil || o.Version == nil {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *Provider) HasVersion() bool {
+	if o != nil && o.Version != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given int64 and assigns it to the Version field.
+func (o *Provider) SetVersion(v int64) {
+	o.Version = &v
+}
+
 func (o Provider) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
-	}
-	if o.AirGapInstall != nil {
-		toSerialize["airGapInstall"] = o.AirGapInstall
 	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code
@@ -684,14 +568,14 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
 	}
-	if o.CustomHostCidrs != nil {
-		toSerialize["customHostCidrs"] = o.CustomHostCidrs
-	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
 	}
 	if o.DestVpcId != nil {
 		toSerialize["destVpcId"] = o.DestVpcId
+	}
+	if true {
+		toSerialize["details"] = o.Details
 	}
 	if o.HostVpcId != nil {
 		toSerialize["hostVpcId"] = o.HostVpcId
@@ -711,23 +595,17 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if o.OverrideKeyValidate != nil {
-		toSerialize["overrideKeyValidate"] = o.OverrideKeyValidate
-	}
 	if true {
 		toSerialize["regions"] = o.Regions
-	}
-	if o.SshPort != nil {
-		toSerialize["sshPort"] = o.SshPort
 	}
 	if o.SshPrivateKeyContent != nil {
 		toSerialize["sshPrivateKeyContent"] = o.SshPrivateKeyContent
 	}
-	if o.SshUser != nil {
-		toSerialize["sshUser"] = o.SshUser
-	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid
+	}
+	if o.Version != nil {
+		toSerialize["version"] = o.Version
 	}
 	return json.Marshal(toSerialize)
 }

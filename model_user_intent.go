@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -21,10 +21,13 @@ type UserIntent struct {
 	// Whether to assign static public IP
 	AssignStaticPublicIP *bool `json:"assignStaticPublicIP,omitempty"`
 	AwsArnString *string `json:"awsArnString,omitempty"`
+	AzOverrides *map[string]string `json:"azOverrides,omitempty"`
+	DedicatedNodes *bool `json:"dedicatedNodes,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	EnableClientToNodeEncrypt *bool `json:"enableClientToNodeEncrypt,omitempty"`
 	EnableExposingService *string `json:"enableExposingService,omitempty"`
 	EnableIPV6 *bool `json:"enableIPV6,omitempty"`
+	EnableLB *bool `json:"enableLB,omitempty"`
 	EnableNodeToNodeEncrypt *bool `json:"enableNodeToNodeEncrypt,omitempty"`
 	EnableVolumeEncryption *bool `json:"enableVolumeEncryption,omitempty"`
 	EnableYCQL *bool `json:"enableYCQL,omitempty"`
@@ -34,7 +37,9 @@ type UserIntent struct {
 	EnableYSQLAuth *bool `json:"enableYSQLAuth,omitempty"`
 	InstanceTags *map[string]string `json:"instanceTags,omitempty"`
 	InstanceType *string `json:"instanceType,omitempty"`
+	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
+	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
 	NumNodes *int32 `json:"numNodes,omitempty"`
 	PreferredRegion *string `json:"preferredRegion,omitempty"`
 	Provider *string `json:"provider,omitempty"`
@@ -43,10 +48,12 @@ type UserIntent struct {
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
+	UniverseOverrides *string `json:"universeOverrides,omitempty"`
 	UseHostname *bool `json:"useHostname,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
+	YbcFlags *map[string]string `json:"ybcFlags,omitempty"`
 	YcqlPassword *string `json:"ycqlPassword,omitempty"`
 	YsqlPassword *string `json:"ysqlPassword,omitempty"`
 }
@@ -196,6 +203,70 @@ func (o *UserIntent) SetAwsArnString(v string) {
 	o.AwsArnString = &v
 }
 
+// GetAzOverrides returns the AzOverrides field value if set, zero value otherwise.
+func (o *UserIntent) GetAzOverrides() map[string]string {
+	if o == nil || o.AzOverrides == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.AzOverrides
+}
+
+// GetAzOverridesOk returns a tuple with the AzOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetAzOverridesOk() (*map[string]string, bool) {
+	if o == nil || o.AzOverrides == nil {
+		return nil, false
+	}
+	return o.AzOverrides, true
+}
+
+// HasAzOverrides returns a boolean if a field has been set.
+func (o *UserIntent) HasAzOverrides() bool {
+	if o != nil && o.AzOverrides != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzOverrides gets a reference to the given map[string]string and assigns it to the AzOverrides field.
+func (o *UserIntent) SetAzOverrides(v map[string]string) {
+	o.AzOverrides = &v
+}
+
+// GetDedicatedNodes returns the DedicatedNodes field value if set, zero value otherwise.
+func (o *UserIntent) GetDedicatedNodes() bool {
+	if o == nil || o.DedicatedNodes == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DedicatedNodes
+}
+
+// GetDedicatedNodesOk returns a tuple with the DedicatedNodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetDedicatedNodesOk() (*bool, bool) {
+	if o == nil || o.DedicatedNodes == nil {
+		return nil, false
+	}
+	return o.DedicatedNodes, true
+}
+
+// HasDedicatedNodes returns a boolean if a field has been set.
+func (o *UserIntent) HasDedicatedNodes() bool {
+	if o != nil && o.DedicatedNodes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDedicatedNodes gets a reference to the given bool and assigns it to the DedicatedNodes field.
+func (o *UserIntent) SetDedicatedNodes(v bool) {
+	o.DedicatedNodes = &v
+}
+
 // GetDeviceInfo returns the DeviceInfo field value if set, zero value otherwise.
 func (o *UserIntent) GetDeviceInfo() DeviceInfo {
 	if o == nil || o.DeviceInfo == nil {
@@ -322,6 +393,38 @@ func (o *UserIntent) HasEnableIPV6() bool {
 // SetEnableIPV6 gets a reference to the given bool and assigns it to the EnableIPV6 field.
 func (o *UserIntent) SetEnableIPV6(v bool) {
 	o.EnableIPV6 = &v
+}
+
+// GetEnableLB returns the EnableLB field value if set, zero value otherwise.
+func (o *UserIntent) GetEnableLB() bool {
+	if o == nil || o.EnableLB == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableLB
+}
+
+// GetEnableLBOk returns a tuple with the EnableLB field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetEnableLBOk() (*bool, bool) {
+	if o == nil || o.EnableLB == nil {
+		return nil, false
+	}
+	return o.EnableLB, true
+}
+
+// HasEnableLB returns a boolean if a field has been set.
+func (o *UserIntent) HasEnableLB() bool {
+	if o != nil && o.EnableLB != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableLB gets a reference to the given bool and assigns it to the EnableLB field.
+func (o *UserIntent) SetEnableLB(v bool) {
+	o.EnableLB = &v
 }
 
 // GetEnableNodeToNodeEncrypt returns the EnableNodeToNodeEncrypt field value if set, zero value otherwise.
@@ -612,6 +715,38 @@ func (o *UserIntent) SetInstanceType(v string) {
 	o.InstanceType = &v
 }
 
+// GetMasterDeviceInfo returns the MasterDeviceInfo field value if set, zero value otherwise.
+func (o *UserIntent) GetMasterDeviceInfo() DeviceInfo {
+	if o == nil || o.MasterDeviceInfo == nil {
+		var ret DeviceInfo
+		return ret
+	}
+	return *o.MasterDeviceInfo
+}
+
+// GetMasterDeviceInfoOk returns a tuple with the MasterDeviceInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetMasterDeviceInfoOk() (*DeviceInfo, bool) {
+	if o == nil || o.MasterDeviceInfo == nil {
+		return nil, false
+	}
+	return o.MasterDeviceInfo, true
+}
+
+// HasMasterDeviceInfo returns a boolean if a field has been set.
+func (o *UserIntent) HasMasterDeviceInfo() bool {
+	if o != nil && o.MasterDeviceInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterDeviceInfo gets a reference to the given DeviceInfo and assigns it to the MasterDeviceInfo field.
+func (o *UserIntent) SetMasterDeviceInfo(v DeviceInfo) {
+	o.MasterDeviceInfo = &v
+}
+
 // GetMasterGFlags returns the MasterGFlags field value if set, zero value otherwise.
 func (o *UserIntent) GetMasterGFlags() map[string]string {
 	if o == nil || o.MasterGFlags == nil {
@@ -642,6 +777,38 @@ func (o *UserIntent) HasMasterGFlags() bool {
 // SetMasterGFlags gets a reference to the given map[string]string and assigns it to the MasterGFlags field.
 func (o *UserIntent) SetMasterGFlags(v map[string]string) {
 	o.MasterGFlags = &v
+}
+
+// GetMasterInstanceType returns the MasterInstanceType field value if set, zero value otherwise.
+func (o *UserIntent) GetMasterInstanceType() string {
+	if o == nil || o.MasterInstanceType == nil {
+		var ret string
+		return ret
+	}
+	return *o.MasterInstanceType
+}
+
+// GetMasterInstanceTypeOk returns a tuple with the MasterInstanceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetMasterInstanceTypeOk() (*string, bool) {
+	if o == nil || o.MasterInstanceType == nil {
+		return nil, false
+	}
+	return o.MasterInstanceType, true
+}
+
+// HasMasterInstanceType returns a boolean if a field has been set.
+func (o *UserIntent) HasMasterInstanceType() bool {
+	if o != nil && o.MasterInstanceType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterInstanceType gets a reference to the given string and assigns it to the MasterInstanceType field.
+func (o *UserIntent) SetMasterInstanceType(v string) {
+	o.MasterInstanceType = &v
 }
 
 // GetNumNodes returns the NumNodes field value if set, zero value otherwise.
@@ -900,6 +1067,38 @@ func (o *UserIntent) SetUniverseName(v string) {
 	o.UniverseName = &v
 }
 
+// GetUniverseOverrides returns the UniverseOverrides field value if set, zero value otherwise.
+func (o *UserIntent) GetUniverseOverrides() string {
+	if o == nil || o.UniverseOverrides == nil {
+		var ret string
+		return ret
+	}
+	return *o.UniverseOverrides
+}
+
+// GetUniverseOverridesOk returns a tuple with the UniverseOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUniverseOverridesOk() (*string, bool) {
+	if o == nil || o.UniverseOverrides == nil {
+		return nil, false
+	}
+	return o.UniverseOverrides, true
+}
+
+// HasUniverseOverrides returns a boolean if a field has been set.
+func (o *UserIntent) HasUniverseOverrides() bool {
+	if o != nil && o.UniverseOverrides != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseOverrides gets a reference to the given string and assigns it to the UniverseOverrides field.
+func (o *UserIntent) SetUniverseOverrides(v string) {
+	o.UniverseOverrides = &v
+}
+
 // GetUseHostname returns the UseHostname field value if set, zero value otherwise.
 func (o *UserIntent) GetUseHostname() bool {
 	if o == nil || o.UseHostname == nil {
@@ -1028,6 +1227,38 @@ func (o *UserIntent) SetYbSoftwareVersion(v string) {
 	o.YbSoftwareVersion = &v
 }
 
+// GetYbcFlags returns the YbcFlags field value if set, zero value otherwise.
+func (o *UserIntent) GetYbcFlags() map[string]string {
+	if o == nil || o.YbcFlags == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.YbcFlags
+}
+
+// GetYbcFlagsOk returns a tuple with the YbcFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetYbcFlagsOk() (*map[string]string, bool) {
+	if o == nil || o.YbcFlags == nil {
+		return nil, false
+	}
+	return o.YbcFlags, true
+}
+
+// HasYbcFlags returns a boolean if a field has been set.
+func (o *UserIntent) HasYbcFlags() bool {
+	if o != nil && o.YbcFlags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcFlags gets a reference to the given map[string]string and assigns it to the YbcFlags field.
+func (o *UserIntent) SetYbcFlags(v map[string]string) {
+	o.YbcFlags = &v
+}
+
 // GetYcqlPassword returns the YcqlPassword field value if set, zero value otherwise.
 func (o *UserIntent) GetYcqlPassword() string {
 	if o == nil || o.YcqlPassword == nil {
@@ -1106,6 +1337,12 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.AwsArnString != nil {
 		toSerialize["awsArnString"] = o.AwsArnString
 	}
+	if o.AzOverrides != nil {
+		toSerialize["azOverrides"] = o.AzOverrides
+	}
+	if o.DedicatedNodes != nil {
+		toSerialize["dedicatedNodes"] = o.DedicatedNodes
+	}
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
 	}
@@ -1117,6 +1354,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.EnableIPV6 != nil {
 		toSerialize["enableIPV6"] = o.EnableIPV6
+	}
+	if o.EnableLB != nil {
+		toSerialize["enableLB"] = o.EnableLB
 	}
 	if o.EnableNodeToNodeEncrypt != nil {
 		toSerialize["enableNodeToNodeEncrypt"] = o.EnableNodeToNodeEncrypt
@@ -1145,8 +1385,14 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.InstanceType != nil {
 		toSerialize["instanceType"] = o.InstanceType
 	}
+	if o.MasterDeviceInfo != nil {
+		toSerialize["masterDeviceInfo"] = o.MasterDeviceInfo
+	}
 	if o.MasterGFlags != nil {
 		toSerialize["masterGFlags"] = o.MasterGFlags
+	}
+	if o.MasterInstanceType != nil {
+		toSerialize["masterInstanceType"] = o.MasterInstanceType
 	}
 	if o.NumNodes != nil {
 		toSerialize["numNodes"] = o.NumNodes
@@ -1172,6 +1418,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.UniverseName != nil {
 		toSerialize["universeName"] = o.UniverseName
 	}
+	if o.UniverseOverrides != nil {
+		toSerialize["universeOverrides"] = o.UniverseOverrides
+	}
 	if o.UseHostname != nil {
 		toSerialize["useHostname"] = o.UseHostname
 	}
@@ -1183,6 +1432,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbSoftwareVersion != nil {
 		toSerialize["ybSoftwareVersion"] = o.YbSoftwareVersion
+	}
+	if o.YbcFlags != nil {
+		toSerialize["ybcFlags"] = o.YbcFlags
 	}
 	if o.YcqlPassword != nil {
 		toSerialize["ycqlPassword"] = o.YcqlPassword

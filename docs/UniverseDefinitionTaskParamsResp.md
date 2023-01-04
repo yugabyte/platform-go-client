@@ -5,48 +5,59 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
-**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
+**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
+**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetailsResp**](NodeDetailsResp.md) |  | [optional] [readonly] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**PlatformUrl** | **string** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
 **RootCA** | Pointer to **string** |  | [optional] 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
+**SleepAfterMasterRestartMillis** | **int32** |  | 
+**SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
+**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
+**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
+**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+**YbcInstalled** | Pointer to **bool** |  | [optional] 
+**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewUniverseDefinitionTaskParamsResp
 
-`func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, ) *UniverseDefinitionTaskParamsResp`
+`func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParamsResp`
 
 NewUniverseDefinitionTaskParamsResp instantiates a new UniverseDefinitionTaskParamsResp object
 This constructor will assign default values to properties that have it defined,
@@ -85,31 +96,6 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
-
-### GetBackupInProgress
-
-`func (o *UniverseDefinitionTaskParamsResp) GetBackupInProgress() bool`
-
-GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
-
-### GetBackupInProgressOk
-
-`func (o *UniverseDefinitionTaskParamsResp) GetBackupInProgressOk() (*bool, bool)`
-
-GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBackupInProgress
-
-`func (o *UniverseDefinitionTaskParamsResp) SetBackupInProgress(v bool)`
-
-SetBackupInProgress sets BackupInProgress field to given value.
-
-### HasBackupInProgress
-
-`func (o *UniverseDefinitionTaskParamsResp) HasBackupInProgress() bool`
-
-HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -231,6 +217,26 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 
 HasCommunicationPorts returns a boolean if a field has been set.
 
+### GetCreatingUser
+
+`func (o *UniverseDefinitionTaskParamsResp) GetCreatingUser() Users`
+
+GetCreatingUser returns the CreatingUser field if non-nil, zero value otherwise.
+
+### GetCreatingUserOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetCreatingUserOk() (*Users, bool)`
+
+GetCreatingUserOk returns a tuple with the CreatingUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatingUser
+
+`func (o *UniverseDefinitionTaskParamsResp) SetCreatingUser(v Users)`
+
+SetCreatingUser sets CreatingUser field to given value.
+
+
 ### GetCurrentClusterType
 
 `func (o *UniverseDefinitionTaskParamsResp) GetCurrentClusterType() string`
@@ -280,6 +286,31 @@ SetDeviceInfo sets DeviceInfo field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasDeviceInfo() bool`
 
 HasDeviceInfo returns a boolean if a field has been set.
+
+### GetEnableYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) GetEnableYbc() bool`
+
+GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
+
+### GetEnableYbcOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetEnableYbcOk() (*bool, bool)`
+
+GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) SetEnableYbc(v bool)`
+
+SetEnableYbc sets EnableYbc field to given value.
+
+### HasEnableYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) HasEnableYbc() bool`
+
+HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -431,6 +462,31 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
+### GetInstallYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) GetInstallYbc() bool`
+
+GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+
+### GetInstallYbcOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetInstallYbcOk() (*bool, bool)`
+
+GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) SetInstallYbc(v bool)`
+
+SetInstallYbc sets InstallYbc field to given value.
+
+### HasInstallYbc
+
+`func (o *UniverseDefinitionTaskParamsResp) HasInstallYbc() bool`
+
+HasInstallYbc returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *UniverseDefinitionTaskParamsResp) GetItestS3PackagePath() string`
@@ -455,6 +511,31 @@ SetItestS3PackagePath sets ItestS3PackagePath field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasItestS3PackagePath() bool`
 
 HasItestS3PackagePath returns a boolean if a field has been set.
+
+### GetMastersInDefaultRegion
+
+`func (o *UniverseDefinitionTaskParamsResp) GetMastersInDefaultRegion() bool`
+
+GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
+
+### GetMastersInDefaultRegionOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetMastersInDefaultRegionOk() (*bool, bool)`
+
+GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMastersInDefaultRegion
+
+`func (o *UniverseDefinitionTaskParamsResp) SetMastersInDefaultRegion(v bool)`
+
+SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
+
+### HasMastersInDefaultRegion
+
+`func (o *UniverseDefinitionTaskParamsResp) HasMastersInDefaultRegion() bool`
+
+HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -580,6 +661,26 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetPlatformUrl
+
+`func (o *UniverseDefinitionTaskParamsResp) GetPlatformUrl() string`
+
+GetPlatformUrl returns the PlatformUrl field if non-nil, zero value otherwise.
+
+### GetPlatformUrlOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetPlatformUrlOk() (*string, bool)`
+
+GetPlatformUrlOk returns a tuple with the PlatformUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformUrl
+
+`func (o *UniverseDefinitionTaskParamsResp) SetPlatformUrl(v string)`
+
+SetPlatformUrl sets PlatformUrl field to given value.
+
 
 ### GetPreviousTaskUUID
 
@@ -731,6 +832,46 @@ SetSetTxnTableWaitCountFlag sets SetTxnTableWaitCountFlag field to given value.
 
 HasSetTxnTableWaitCountFlag returns a boolean if a field has been set.
 
+### GetSleepAfterMasterRestartMillis
+
+`func (o *UniverseDefinitionTaskParamsResp) GetSleepAfterMasterRestartMillis() int32`
+
+GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterMasterRestartMillisOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterMasterRestartMillis
+
+`func (o *UniverseDefinitionTaskParamsResp) SetSleepAfterMasterRestartMillis(v int32)`
+
+SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
+
+
+### GetSleepAfterTServerRestartMillis
+
+`func (o *UniverseDefinitionTaskParamsResp) GetSleepAfterTServerRestartMillis() int32`
+
+GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterTServerRestartMillisOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterTServerRestartMillis
+
+`func (o *UniverseDefinitionTaskParamsResp) SetSleepAfterTServerRestartMillis(v int32)`
+
+SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
+
+
 ### GetSourceXClusterConfigs
 
 `func (o *UniverseDefinitionTaskParamsResp) GetSourceXClusterConfigs() []string`
@@ -856,6 +997,31 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
+### GetUpdateOptions
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUpdateOptions() []string`
+
+GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
+
+### GetUpdateOptionsOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUpdateOptionsOk() (*[]string, bool)`
+
+GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateOptions
+
+`func (o *UniverseDefinitionTaskParamsResp) SetUpdateOptions(v []string)`
+
+SetUpdateOptions sets UpdateOptions field to given value.
+
+### HasUpdateOptions
+
+`func (o *UniverseDefinitionTaskParamsResp) HasUpdateOptions() bool`
+
+HasUpdateOptions returns a boolean if a field has been set.
+
 ### GetUpdateSucceeded
 
 `func (o *UniverseDefinitionTaskParamsResp) GetUpdateSucceeded() bool`
@@ -931,6 +1097,31 @@ SetUpdatingTaskUUID sets UpdatingTaskUUID field to given value.
 
 HasUpdatingTaskUUID returns a boolean if a field has been set.
 
+### GetUseNewHelmNamingStyle
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUseNewHelmNamingStyle() bool`
+
+GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
+
+### GetUseNewHelmNamingStyleOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUseNewHelmNamingStyleOk() (*bool, bool)`
+
+GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseNewHelmNamingStyle
+
+`func (o *UniverseDefinitionTaskParamsResp) SetUseNewHelmNamingStyle(v bool)`
+
+SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
+
+### HasUseNewHelmNamingStyle
+
+`func (o *UniverseDefinitionTaskParamsResp) HasUseNewHelmNamingStyle() bool`
+
+HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+
 ### GetUserAZSelected
 
 `func (o *UniverseDefinitionTaskParamsResp) GetUserAZSelected() bool`
@@ -956,6 +1147,31 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
+### GetXclusterInfo
+
+`func (o *UniverseDefinitionTaskParamsResp) GetXclusterInfo() XClusterInfo`
+
+GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
+
+### GetXclusterInfoOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetXclusterInfoOk() (*XClusterInfo, bool)`
+
+GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXclusterInfo
+
+`func (o *UniverseDefinitionTaskParamsResp) SetXclusterInfo(v XClusterInfo)`
+
+SetXclusterInfo sets XclusterInfo field to given value.
+
+### HasXclusterInfo
+
+`func (o *UniverseDefinitionTaskParamsResp) HasXclusterInfo() bool`
+
+HasXclusterInfo returns a boolean if a field has been set.
+
 ### GetYbPrevSoftwareVersion
 
 `func (o *UniverseDefinitionTaskParamsResp) GetYbPrevSoftwareVersion() string`
@@ -980,6 +1196,56 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+### GetYbcInstalled
+
+`func (o *UniverseDefinitionTaskParamsResp) GetYbcInstalled() bool`
+
+GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
+
+### GetYbcInstalledOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetYbcInstalledOk() (*bool, bool)`
+
+GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcInstalled
+
+`func (o *UniverseDefinitionTaskParamsResp) SetYbcInstalled(v bool)`
+
+SetYbcInstalled sets YbcInstalled field to given value.
+
+### HasYbcInstalled
+
+`func (o *UniverseDefinitionTaskParamsResp) HasYbcInstalled() bool`
+
+HasYbcInstalled returns a boolean if a field has been set.
+
+### GetYbcSoftwareVersion
+
+`func (o *UniverseDefinitionTaskParamsResp) GetYbcSoftwareVersion() string`
+
+GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbcSoftwareVersionOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetYbcSoftwareVersionOk() (*string, bool)`
+
+GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcSoftwareVersion
+
+`func (o *UniverseDefinitionTaskParamsResp) SetYbcSoftwareVersion(v string)`
+
+SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
+
+### HasYbcSoftwareVersion
+
+`func (o *UniverseDefinitionTaskParamsResp) HasYbcSoftwareVersion() bool`
+
+HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

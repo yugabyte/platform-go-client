@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BundleDetails** | [**BundleDetails**](BundleDetails.md) |  | 
 **BundleUUID** | **string** |  | 
+**CreationDate** | **time.Time** |  | 
 **EndDate** | **time.Time** |  | 
+**ExpirationDate** | **time.Time** |  | 
 **Path** | **string** |  | 
 **ScopeUUID** | **string** |  | 
 **StartDate** | **time.Time** |  | 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewSupportBundle
 
-`func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, endDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle`
+`func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, creationDate time.Time, endDate time.Time, expirationDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle`
 
 NewSupportBundle instantiates a new SupportBundle object
 This constructor will assign default values to properties that have it defined,
@@ -71,6 +73,26 @@ and a boolean to check if the value has been set.
 SetBundleUUID sets BundleUUID field to given value.
 
 
+### GetCreationDate
+
+`func (o *SupportBundle) GetCreationDate() time.Time`
+
+GetCreationDate returns the CreationDate field if non-nil, zero value otherwise.
+
+### GetCreationDateOk
+
+`func (o *SupportBundle) GetCreationDateOk() (*time.Time, bool)`
+
+GetCreationDateOk returns a tuple with the CreationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationDate
+
+`func (o *SupportBundle) SetCreationDate(v time.Time)`
+
+SetCreationDate sets CreationDate field to given value.
+
+
 ### GetEndDate
 
 `func (o *SupportBundle) GetEndDate() time.Time`
@@ -89,6 +111,26 @@ and a boolean to check if the value has been set.
 `func (o *SupportBundle) SetEndDate(v time.Time)`
 
 SetEndDate sets EndDate field to given value.
+
+
+### GetExpirationDate
+
+`func (o *SupportBundle) GetExpirationDate() time.Time`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *SupportBundle) GetExpirationDateOk() (*time.Time, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *SupportBundle) SetExpirationDate(v time.Time)`
+
+SetExpirationDate sets ExpirationDate field to given value.
 
 
 ### GetPath

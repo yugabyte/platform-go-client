@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -40,7 +40,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Yugabyte Platform APIs API vv1
+// APIClient manages communication with the YugabyteDB Anywhere APIs API vv1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -70,11 +70,17 @@ type APIClient struct {
 
 	CustomerTasksApi *CustomerTasksApiService
 
+	DefaultApi *DefaultApiService
+
 	EncryptionAtRestApi *EncryptionAtRestApiService
 
 	GrafanaDashboardApi *GrafanaDashboardApiService
 
 	InstanceTypesApi *InstanceTypesApiService
+
+	KubernetesOverridesControllerApi *KubernetesOverridesControllerApiService
+
+	LicenseManagementApi *LicenseManagementApiService
 
 	LoggingConfigApi *LoggingConfigApiService
 
@@ -83,6 +89,12 @@ type APIClient struct {
 	MetricsApi *MetricsApiService
 
 	NodeInstancesApi *NodeInstancesApiService
+
+	PITRManagementApi *PITRManagementApiService
+
+	PackagesControllerApi *PackagesControllerApiService
+
+	PerformanceAdvisorApi *PerformanceAdvisorApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -112,9 +124,13 @@ type APIClient struct {
 
 	UniverseNodeMetadataMetamasterApi *UniverseNodeMetadataMetamasterApiService
 
+	UniversePerformanceSuggestionsApi *UniversePerformanceSuggestionsApiService
+
 	UniverseUpgradesManagementApi *UniverseUpgradesManagementApiService
 
 	UserManagementApi *UserManagementApiService
+
+	YbcManagementApi *YbcManagementApiService
 }
 
 type service struct {
@@ -144,13 +160,19 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CustomerConfigurationApi = (*CustomerConfigurationApiService)(&c.common)
 	c.CustomerManagementApi = (*CustomerManagementApiService)(&c.common)
 	c.CustomerTasksApi = (*CustomerTasksApiService)(&c.common)
+	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
+	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)
+	c.LicenseManagementApi = (*LicenseManagementApiService)(&c.common)
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
+	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
+	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
+	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)
@@ -165,8 +187,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniverseInformationApi = (*UniverseInformationApiService)(&c.common)
 	c.UniverseManagementApi = (*UniverseManagementApiService)(&c.common)
 	c.UniverseNodeMetadataMetamasterApi = (*UniverseNodeMetadataMetamasterApiService)(&c.common)
+	c.UniversePerformanceSuggestionsApi = (*UniversePerformanceSuggestionsApiService)(&c.common)
 	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
+	c.YbcManagementApi = (*YbcManagementApiService)(&c.common)
 
 	return c
 }

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -20,6 +20,10 @@ type BackupStorageInfo struct {
 	BackupType *string `json:"backupType,omitempty"`
 	// Keyspace name
 	Keyspace *string `json:"keyspace,omitempty"`
+	// User name of the new tables owner
+	NewOwner *string `json:"newOwner,omitempty"`
+	// User name of the current tables owner
+	OldOwner *string `json:"oldOwner,omitempty"`
 	// Is SSE
 	Sse *bool `json:"sse,omitempty"`
 	// Storage location
@@ -107,6 +111,70 @@ func (o *BackupStorageInfo) HasKeyspace() bool {
 // SetKeyspace gets a reference to the given string and assigns it to the Keyspace field.
 func (o *BackupStorageInfo) SetKeyspace(v string) {
 	o.Keyspace = &v
+}
+
+// GetNewOwner returns the NewOwner field value if set, zero value otherwise.
+func (o *BackupStorageInfo) GetNewOwner() string {
+	if o == nil || o.NewOwner == nil {
+		var ret string
+		return ret
+	}
+	return *o.NewOwner
+}
+
+// GetNewOwnerOk returns a tuple with the NewOwner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupStorageInfo) GetNewOwnerOk() (*string, bool) {
+	if o == nil || o.NewOwner == nil {
+		return nil, false
+	}
+	return o.NewOwner, true
+}
+
+// HasNewOwner returns a boolean if a field has been set.
+func (o *BackupStorageInfo) HasNewOwner() bool {
+	if o != nil && o.NewOwner != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNewOwner gets a reference to the given string and assigns it to the NewOwner field.
+func (o *BackupStorageInfo) SetNewOwner(v string) {
+	o.NewOwner = &v
+}
+
+// GetOldOwner returns the OldOwner field value if set, zero value otherwise.
+func (o *BackupStorageInfo) GetOldOwner() string {
+	if o == nil || o.OldOwner == nil {
+		var ret string
+		return ret
+	}
+	return *o.OldOwner
+}
+
+// GetOldOwnerOk returns a tuple with the OldOwner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupStorageInfo) GetOldOwnerOk() (*string, bool) {
+	if o == nil || o.OldOwner == nil {
+		return nil, false
+	}
+	return o.OldOwner, true
+}
+
+// HasOldOwner returns a boolean if a field has been set.
+func (o *BackupStorageInfo) HasOldOwner() bool {
+	if o != nil && o.OldOwner != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOldOwner gets a reference to the given string and assigns it to the OldOwner field.
+func (o *BackupStorageInfo) SetOldOwner(v string) {
+	o.OldOwner = &v
 }
 
 // GetSse returns the Sse field value if set, zero value otherwise.
@@ -212,6 +280,12 @@ func (o BackupStorageInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.Keyspace != nil {
 		toSerialize["keyspace"] = o.Keyspace
+	}
+	if o.NewOwner != nil {
+		toSerialize["newOwner"] = o.NewOwner
+	}
+	if o.OldOwner != nil {
+		toSerialize["oldOwner"] = o.OldOwner
 	}
 	if o.Sse != nil {
 		toSerialize["sse"] = o.Sse

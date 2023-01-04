@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,6 +16,7 @@ import (
 
 // AlertChannelWebHookParamsAllOf struct for AlertChannelWebHookParamsAllOf
 type AlertChannelWebHookParamsAllOf struct {
+	// Webhook URL
 	WebhookUrl string `json:"webhookUrl"`
 }
 

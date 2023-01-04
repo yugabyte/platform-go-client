@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | **string** | AZ code | 
 **Name** | **string** | AZ name | 
+**SecondarySubnet** | Pointer to **string** | AZ subnet | [optional] 
 **Subnet** | Pointer to **string** | AZ subnet | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetSecondarySubnet
+
+`func (o *AvailabilityZoneData) GetSecondarySubnet() string`
+
+GetSecondarySubnet returns the SecondarySubnet field if non-nil, zero value otherwise.
+
+### GetSecondarySubnetOk
+
+`func (o *AvailabilityZoneData) GetSecondarySubnetOk() (*string, bool)`
+
+GetSecondarySubnetOk returns a tuple with the SecondarySubnet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecondarySubnet
+
+`func (o *AvailabilityZoneData) SetSecondarySubnet(v string)`
+
+SetSecondarySubnet sets SecondarySubnet field to given value.
+
+### HasSecondarySubnet
+
+`func (o *AvailabilityZoneData) HasSecondarySubnet() bool`
+
+HasSecondarySubnet returns a boolean if a field has been set.
 
 ### GetSubnet
 

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,28 +16,41 @@ import (
 
 // MetricQueryParams Metrics request data
 type MetricQueryParams struct {
+	// Availability zone code
+	AvailabilityZones *[]string `json:"availabilityZones,omitempty"`
+	// Cluster UUIDs
+	ClusterUuids *[]string `json:"clusterUuids,omitempty"`
 	// End time
 	End *int64 `json:"end,omitempty"`
 	// Is Recharts
 	IsRecharts *bool `json:"isRecharts,omitempty"`
 	// Metrics
-	Metrics []string `json:"metrics"`
-	// Node name
-	NodeName *string `json:"nodeName,omitempty"`
+	Metrics *[]string `json:"metrics,omitempty"`
+	// List of metrics with custom settings
+	MetricsWithSettings *[]MetricSettings `json:"metricsWithSettings,omitempty"`
+	// Node names
+	NodeNames *[]string `json:"nodeNames,omitempty"`
 	// Node prefix
 	NodePrefix *string `json:"nodePrefix,omitempty"`
+	// Region code
+	RegionCodes *[]string `json:"regionCodes,omitempty"`
 	// Start time
 	Start int64 `json:"start"`
+	// Table id
+	TableId *string `json:"tableId,omitempty"`
+	// Table name
+	TableName *string `json:"tableName,omitempty"`
+	XclusterConfigUuid string `json:"xclusterConfigUuid"`
 }
 
 // NewMetricQueryParams instantiates a new MetricQueryParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricQueryParams(metrics []string, start int64, ) *MetricQueryParams {
+func NewMetricQueryParams(start int64, xclusterConfigUuid string, ) *MetricQueryParams {
 	this := MetricQueryParams{}
-	this.Metrics = metrics
 	this.Start = start
+	this.XclusterConfigUuid = xclusterConfigUuid
 	return &this
 }
 
@@ -47,6 +60,70 @@ func NewMetricQueryParams(metrics []string, start int64, ) *MetricQueryParams {
 func NewMetricQueryParamsWithDefaults() *MetricQueryParams {
 	this := MetricQueryParams{}
 	return &this
+}
+
+// GetAvailabilityZones returns the AvailabilityZones field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetAvailabilityZones() []string {
+	if o == nil || o.AvailabilityZones == nil {
+		var ret []string
+		return ret
+	}
+	return *o.AvailabilityZones
+}
+
+// GetAvailabilityZonesOk returns a tuple with the AvailabilityZones field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetAvailabilityZonesOk() (*[]string, bool) {
+	if o == nil || o.AvailabilityZones == nil {
+		return nil, false
+	}
+	return o.AvailabilityZones, true
+}
+
+// HasAvailabilityZones returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasAvailabilityZones() bool {
+	if o != nil && o.AvailabilityZones != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailabilityZones gets a reference to the given []string and assigns it to the AvailabilityZones field.
+func (o *MetricQueryParams) SetAvailabilityZones(v []string) {
+	o.AvailabilityZones = &v
+}
+
+// GetClusterUuids returns the ClusterUuids field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetClusterUuids() []string {
+	if o == nil || o.ClusterUuids == nil {
+		var ret []string
+		return ret
+	}
+	return *o.ClusterUuids
+}
+
+// GetClusterUuidsOk returns a tuple with the ClusterUuids field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetClusterUuidsOk() (*[]string, bool) {
+	if o == nil || o.ClusterUuids == nil {
+		return nil, false
+	}
+	return o.ClusterUuids, true
+}
+
+// HasClusterUuids returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasClusterUuids() bool {
+	if o != nil && o.ClusterUuids != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterUuids gets a reference to the given []string and assigns it to the ClusterUuids field.
+func (o *MetricQueryParams) SetClusterUuids(v []string) {
+	o.ClusterUuids = &v
 }
 
 // GetEnd returns the End field value if set, zero value otherwise.
@@ -113,60 +190,100 @@ func (o *MetricQueryParams) SetIsRecharts(v bool) {
 	o.IsRecharts = &v
 }
 
-// GetMetrics returns the Metrics field value
+// GetMetrics returns the Metrics field value if set, zero value otherwise.
 func (o *MetricQueryParams) GetMetrics() []string {
-	if o == nil  {
+	if o == nil || o.Metrics == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Metrics
+	return *o.Metrics
 }
 
-// GetMetricsOk returns a tuple with the Metrics field value
+// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricQueryParams) GetMetricsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Metrics == nil {
 		return nil, false
 	}
-	return &o.Metrics, true
+	return o.Metrics, true
 }
 
-// SetMetrics sets field value
-func (o *MetricQueryParams) SetMetrics(v []string) {
-	o.Metrics = v
-}
-
-// GetNodeName returns the NodeName field value if set, zero value otherwise.
-func (o *MetricQueryParams) GetNodeName() string {
-	if o == nil || o.NodeName == nil {
-		var ret string
-		return ret
-	}
-	return *o.NodeName
-}
-
-// GetNodeNameOk returns a tuple with the NodeName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetricQueryParams) GetNodeNameOk() (*string, bool) {
-	if o == nil || o.NodeName == nil {
-		return nil, false
-	}
-	return o.NodeName, true
-}
-
-// HasNodeName returns a boolean if a field has been set.
-func (o *MetricQueryParams) HasNodeName() bool {
-	if o != nil && o.NodeName != nil {
+// HasMetrics returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasMetrics() bool {
+	if o != nil && o.Metrics != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNodeName gets a reference to the given string and assigns it to the NodeName field.
-func (o *MetricQueryParams) SetNodeName(v string) {
-	o.NodeName = &v
+// SetMetrics gets a reference to the given []string and assigns it to the Metrics field.
+func (o *MetricQueryParams) SetMetrics(v []string) {
+	o.Metrics = &v
+}
+
+// GetMetricsWithSettings returns the MetricsWithSettings field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetMetricsWithSettings() []MetricSettings {
+	if o == nil || o.MetricsWithSettings == nil {
+		var ret []MetricSettings
+		return ret
+	}
+	return *o.MetricsWithSettings
+}
+
+// GetMetricsWithSettingsOk returns a tuple with the MetricsWithSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetMetricsWithSettingsOk() (*[]MetricSettings, bool) {
+	if o == nil || o.MetricsWithSettings == nil {
+		return nil, false
+	}
+	return o.MetricsWithSettings, true
+}
+
+// HasMetricsWithSettings returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasMetricsWithSettings() bool {
+	if o != nil && o.MetricsWithSettings != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsWithSettings gets a reference to the given []MetricSettings and assigns it to the MetricsWithSettings field.
+func (o *MetricQueryParams) SetMetricsWithSettings(v []MetricSettings) {
+	o.MetricsWithSettings = &v
+}
+
+// GetNodeNames returns the NodeNames field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetNodeNames() []string {
+	if o == nil || o.NodeNames == nil {
+		var ret []string
+		return ret
+	}
+	return *o.NodeNames
+}
+
+// GetNodeNamesOk returns a tuple with the NodeNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetNodeNamesOk() (*[]string, bool) {
+	if o == nil || o.NodeNames == nil {
+		return nil, false
+	}
+	return o.NodeNames, true
+}
+
+// HasNodeNames returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasNodeNames() bool {
+	if o != nil && o.NodeNames != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeNames gets a reference to the given []string and assigns it to the NodeNames field.
+func (o *MetricQueryParams) SetNodeNames(v []string) {
+	o.NodeNames = &v
 }
 
 // GetNodePrefix returns the NodePrefix field value if set, zero value otherwise.
@@ -201,6 +318,38 @@ func (o *MetricQueryParams) SetNodePrefix(v string) {
 	o.NodePrefix = &v
 }
 
+// GetRegionCodes returns the RegionCodes field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetRegionCodes() []string {
+	if o == nil || o.RegionCodes == nil {
+		var ret []string
+		return ret
+	}
+	return *o.RegionCodes
+}
+
+// GetRegionCodesOk returns a tuple with the RegionCodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetRegionCodesOk() (*[]string, bool) {
+	if o == nil || o.RegionCodes == nil {
+		return nil, false
+	}
+	return o.RegionCodes, true
+}
+
+// HasRegionCodes returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasRegionCodes() bool {
+	if o != nil && o.RegionCodes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionCodes gets a reference to the given []string and assigns it to the RegionCodes field.
+func (o *MetricQueryParams) SetRegionCodes(v []string) {
+	o.RegionCodes = &v
+}
+
 // GetStart returns the Start field value
 func (o *MetricQueryParams) GetStart() int64 {
 	if o == nil  {
@@ -225,25 +374,134 @@ func (o *MetricQueryParams) SetStart(v int64) {
 	o.Start = v
 }
 
+// GetTableId returns the TableId field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetTableId() string {
+	if o == nil || o.TableId == nil {
+		var ret string
+		return ret
+	}
+	return *o.TableId
+}
+
+// GetTableIdOk returns a tuple with the TableId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetTableIdOk() (*string, bool) {
+	if o == nil || o.TableId == nil {
+		return nil, false
+	}
+	return o.TableId, true
+}
+
+// HasTableId returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasTableId() bool {
+	if o != nil && o.TableId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableId gets a reference to the given string and assigns it to the TableId field.
+func (o *MetricQueryParams) SetTableId(v string) {
+	o.TableId = &v
+}
+
+// GetTableName returns the TableName field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetTableName() string {
+	if o == nil || o.TableName == nil {
+		var ret string
+		return ret
+	}
+	return *o.TableName
+}
+
+// GetTableNameOk returns a tuple with the TableName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetTableNameOk() (*string, bool) {
+	if o == nil || o.TableName == nil {
+		return nil, false
+	}
+	return o.TableName, true
+}
+
+// HasTableName returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasTableName() bool {
+	if o != nil && o.TableName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableName gets a reference to the given string and assigns it to the TableName field.
+func (o *MetricQueryParams) SetTableName(v string) {
+	o.TableName = &v
+}
+
+// GetXclusterConfigUuid returns the XclusterConfigUuid field value
+func (o *MetricQueryParams) GetXclusterConfigUuid() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.XclusterConfigUuid
+}
+
+// GetXclusterConfigUuidOk returns a tuple with the XclusterConfigUuid field value
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetXclusterConfigUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.XclusterConfigUuid, true
+}
+
+// SetXclusterConfigUuid sets field value
+func (o *MetricQueryParams) SetXclusterConfigUuid(v string) {
+	o.XclusterConfigUuid = v
+}
+
 func (o MetricQueryParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AvailabilityZones != nil {
+		toSerialize["availabilityZones"] = o.AvailabilityZones
+	}
+	if o.ClusterUuids != nil {
+		toSerialize["clusterUuids"] = o.ClusterUuids
+	}
 	if o.End != nil {
 		toSerialize["end"] = o.End
 	}
 	if o.IsRecharts != nil {
 		toSerialize["isRecharts"] = o.IsRecharts
 	}
-	if true {
+	if o.Metrics != nil {
 		toSerialize["metrics"] = o.Metrics
 	}
-	if o.NodeName != nil {
-		toSerialize["nodeName"] = o.NodeName
+	if o.MetricsWithSettings != nil {
+		toSerialize["metricsWithSettings"] = o.MetricsWithSettings
+	}
+	if o.NodeNames != nil {
+		toSerialize["nodeNames"] = o.NodeNames
 	}
 	if o.NodePrefix != nil {
 		toSerialize["nodePrefix"] = o.NodePrefix
 	}
+	if o.RegionCodes != nil {
+		toSerialize["regionCodes"] = o.RegionCodes
+	}
 	if true {
 		toSerialize["start"] = o.Start
+	}
+	if o.TableId != nil {
+		toSerialize["tableId"] = o.TableId
+	}
+	if o.TableName != nil {
+		toSerialize["tableName"] = o.TableName
+	}
+	if true {
+		toSerialize["xclusterConfigUuid"] = o.XclusterConfigUuid
 	}
 	return json.Marshal(toSerialize)
 }

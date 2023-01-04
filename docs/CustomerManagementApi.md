@@ -296,7 +296,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    metrics := *openapiclient.NewMetricQueryParams([]string{"Metrics_example"}, int64(123)) // MetricQueryParams | Metrics to be added
+    metrics := *openapiclient.NewMetricQueryParams(int64(123), "XclusterConfigUuid_example") // MetricQueryParams | Metrics to be added
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

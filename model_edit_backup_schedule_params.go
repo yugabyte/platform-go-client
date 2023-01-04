@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -20,6 +20,12 @@ type EditBackupScheduleParams struct {
 	CronExpression *string `json:"cronExpression,omitempty"`
 	// Frequency of the schedule
 	Frequency *int64 `json:"frequency,omitempty"`
+	// Time Unit for frequency
+	FrequencyTimeUnit *string `json:"frequencyTimeUnit,omitempty"`
+	// Frequency of incremental backup schedule
+	IncrementalBackupFrequency *int64 `json:"incrementalBackupFrequency,omitempty"`
+	// TimeUnit for incremental Backup Schedule frequency
+	IncrementalBackupFrequencyTimeUnit *string `json:"incrementalBackupFrequencyTimeUnit,omitempty"`
 	// State of the schedule
 	Status *string `json:"status,omitempty"`
 }
@@ -105,6 +111,102 @@ func (o *EditBackupScheduleParams) SetFrequency(v int64) {
 	o.Frequency = &v
 }
 
+// GetFrequencyTimeUnit returns the FrequencyTimeUnit field value if set, zero value otherwise.
+func (o *EditBackupScheduleParams) GetFrequencyTimeUnit() string {
+	if o == nil || o.FrequencyTimeUnit == nil {
+		var ret string
+		return ret
+	}
+	return *o.FrequencyTimeUnit
+}
+
+// GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupScheduleParams) GetFrequencyTimeUnitOk() (*string, bool) {
+	if o == nil || o.FrequencyTimeUnit == nil {
+		return nil, false
+	}
+	return o.FrequencyTimeUnit, true
+}
+
+// HasFrequencyTimeUnit returns a boolean if a field has been set.
+func (o *EditBackupScheduleParams) HasFrequencyTimeUnit() bool {
+	if o != nil && o.FrequencyTimeUnit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFrequencyTimeUnit gets a reference to the given string and assigns it to the FrequencyTimeUnit field.
+func (o *EditBackupScheduleParams) SetFrequencyTimeUnit(v string) {
+	o.FrequencyTimeUnit = &v
+}
+
+// GetIncrementalBackupFrequency returns the IncrementalBackupFrequency field value if set, zero value otherwise.
+func (o *EditBackupScheduleParams) GetIncrementalBackupFrequency() int64 {
+	if o == nil || o.IncrementalBackupFrequency == nil {
+		var ret int64
+		return ret
+	}
+	return *o.IncrementalBackupFrequency
+}
+
+// GetIncrementalBackupFrequencyOk returns a tuple with the IncrementalBackupFrequency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyOk() (*int64, bool) {
+	if o == nil || o.IncrementalBackupFrequency == nil {
+		return nil, false
+	}
+	return o.IncrementalBackupFrequency, true
+}
+
+// HasIncrementalBackupFrequency returns a boolean if a field has been set.
+func (o *EditBackupScheduleParams) HasIncrementalBackupFrequency() bool {
+	if o != nil && o.IncrementalBackupFrequency != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIncrementalBackupFrequency gets a reference to the given int64 and assigns it to the IncrementalBackupFrequency field.
+func (o *EditBackupScheduleParams) SetIncrementalBackupFrequency(v int64) {
+	o.IncrementalBackupFrequency = &v
+}
+
+// GetIncrementalBackupFrequencyTimeUnit returns the IncrementalBackupFrequencyTimeUnit field value if set, zero value otherwise.
+func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyTimeUnit() string {
+	if o == nil || o.IncrementalBackupFrequencyTimeUnit == nil {
+		var ret string
+		return ret
+	}
+	return *o.IncrementalBackupFrequencyTimeUnit
+}
+
+// GetIncrementalBackupFrequencyTimeUnitOk returns a tuple with the IncrementalBackupFrequencyTimeUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyTimeUnitOk() (*string, bool) {
+	if o == nil || o.IncrementalBackupFrequencyTimeUnit == nil {
+		return nil, false
+	}
+	return o.IncrementalBackupFrequencyTimeUnit, true
+}
+
+// HasIncrementalBackupFrequencyTimeUnit returns a boolean if a field has been set.
+func (o *EditBackupScheduleParams) HasIncrementalBackupFrequencyTimeUnit() bool {
+	if o != nil && o.IncrementalBackupFrequencyTimeUnit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIncrementalBackupFrequencyTimeUnit gets a reference to the given string and assigns it to the IncrementalBackupFrequencyTimeUnit field.
+func (o *EditBackupScheduleParams) SetIncrementalBackupFrequencyTimeUnit(v string) {
+	o.IncrementalBackupFrequencyTimeUnit = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EditBackupScheduleParams) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -144,6 +246,15 @@ func (o EditBackupScheduleParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.Frequency != nil {
 		toSerialize["frequency"] = o.Frequency
+	}
+	if o.FrequencyTimeUnit != nil {
+		toSerialize["frequencyTimeUnit"] = o.FrequencyTimeUnit
+	}
+	if o.IncrementalBackupFrequency != nil {
+		toSerialize["incrementalBackupFrequency"] = o.IncrementalBackupFrequency
+	}
+	if o.IncrementalBackupFrequencyTimeUnit != nil {
+		toSerialize["incrementalBackupFrequencyTimeUnit"] = o.IncrementalBackupFrequencyTimeUnit
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status

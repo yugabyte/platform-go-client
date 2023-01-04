@@ -7,10 +7,12 @@ Method | HTTP request | Description
 [**CreateNodeInstance**](NodeInstancesApi.md#CreateNodeInstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes | Create a node instance
 [**DeleteInstance**](NodeInstancesApi.md#DeleteInstance) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Delete a node instance
 [**DetachedNodeAction**](NodeInstancesApi.md#DetachedNodeAction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
+[**GetNodeDetails**](NodeInstancesApi.md#GetNodeDetails) | **Get** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}/details | Get node details
 [**GetNodeInstance**](NodeInstancesApi.md#GetNodeInstance) | **Get** /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list | Get a node instance
 [**ListByProvider**](NodeInstancesApi.md#ListByProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 [**ListByZone**](NodeInstancesApi.md#ListByZone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
 [**NodeAction**](NodeInstancesApi.md#NodeAction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Update a node
+[**ValidateNodeInstance**](NodeInstancesApi.md#ValidateNodeInstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
 
 
 
@@ -220,6 +222,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetNodeDetails
+
+> NodeDetailsResp GetNodeDetails(ctx, cUUID, universeUUID, nodeName).Execute()
+
+Get node details
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    universeUUID := TODO // string | 
+    nodeName := "nodeName_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.NodeInstancesApi.GetNodeDetails(context.Background(), cUUID, universeUUID, nodeName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.GetNodeDetails``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetNodeDetails`: NodeDetailsResp
+    fmt.Fprintf(os.Stdout, "Response from `NodeInstancesApi.GetNodeDetails`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**universeUUID** | [**string**](.md) |  | 
+**nodeName** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetNodeDetailsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**NodeDetailsResp**](NodeDetailsResp.md)
 
 ### Authorization
 
@@ -517,6 +593,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ValidateNodeInstance
+
+> map[string]ValidationResult ValidateNodeInstance(ctx, cUUID, azUUID).Execute()
+
+Validate a node instance
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    azUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.NodeInstancesApi.ValidateNodeInstance(context.Background(), cUUID, azUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.ValidateNodeInstance``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ValidateNodeInstance`: map[string]ValidationResult
+    fmt.Fprintf(os.Stdout, "Response from `NodeInstancesApi.ValidateNodeInstance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**azUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateNodeInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**map[string]ValidationResult**](ValidationResult.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

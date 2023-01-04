@@ -4,11 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BacklogStatus** | Pointer to **bool** | Backlog status of schedule arose due to conflicts | [optional] [readonly] 
 **CronExpression** | Pointer to **string** | Cron expression for the schedule | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **FailureCount** | Pointer to **int32** | Number of failed backup attempts | [optional] [readonly] 
-**Frequency** | Pointer to **int64** | Frequency of the schedule, in minutes | [optional] 
+**Frequency** | Pointer to **int64** | Frequency of the schedule, in milli seconds | [optional] 
+**FrequencyTimeUnit** | Pointer to **string** | Time unit of frequency | [optional] 
+**NextScheduleTaskTime** | Pointer to **time.Time** | Time on which schedule is expected to run | [optional] [readonly] 
+**OwnerUUID** | Pointer to **string** | Owner UUID for the schedule | [optional] [readonly] 
 **RunningState** | Pointer to **bool** | Running state of the schedule | [optional] 
+**ScheduleName** | Pointer to **string** | Name of the schedule | [optional] [readonly] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the task. Possible values are _Active_, _Paused_, or _Stopped_. | [optional] [readonly] 
 **TaskType** | Pointer to **string** | Type of task to be scheduled. | [optional] 
@@ -31,6 +36,31 @@ will change when the set of required properties is changed
 NewScheduleWithDefaults instantiates a new Schedule object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBacklogStatus
+
+`func (o *Schedule) GetBacklogStatus() bool`
+
+GetBacklogStatus returns the BacklogStatus field if non-nil, zero value otherwise.
+
+### GetBacklogStatusOk
+
+`func (o *Schedule) GetBacklogStatusOk() (*bool, bool)`
+
+GetBacklogStatusOk returns a tuple with the BacklogStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBacklogStatus
+
+`func (o *Schedule) SetBacklogStatus(v bool)`
+
+SetBacklogStatus sets BacklogStatus field to given value.
+
+### HasBacklogStatus
+
+`func (o *Schedule) HasBacklogStatus() bool`
+
+HasBacklogStatus returns a boolean if a field has been set.
 
 ### GetCronExpression
 
@@ -132,6 +162,81 @@ SetFrequency sets Frequency field to given value.
 
 HasFrequency returns a boolean if a field has been set.
 
+### GetFrequencyTimeUnit
+
+`func (o *Schedule) GetFrequencyTimeUnit() string`
+
+GetFrequencyTimeUnit returns the FrequencyTimeUnit field if non-nil, zero value otherwise.
+
+### GetFrequencyTimeUnitOk
+
+`func (o *Schedule) GetFrequencyTimeUnitOk() (*string, bool)`
+
+GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFrequencyTimeUnit
+
+`func (o *Schedule) SetFrequencyTimeUnit(v string)`
+
+SetFrequencyTimeUnit sets FrequencyTimeUnit field to given value.
+
+### HasFrequencyTimeUnit
+
+`func (o *Schedule) HasFrequencyTimeUnit() bool`
+
+HasFrequencyTimeUnit returns a boolean if a field has been set.
+
+### GetNextScheduleTaskTime
+
+`func (o *Schedule) GetNextScheduleTaskTime() time.Time`
+
+GetNextScheduleTaskTime returns the NextScheduleTaskTime field if non-nil, zero value otherwise.
+
+### GetNextScheduleTaskTimeOk
+
+`func (o *Schedule) GetNextScheduleTaskTimeOk() (*time.Time, bool)`
+
+GetNextScheduleTaskTimeOk returns a tuple with the NextScheduleTaskTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextScheduleTaskTime
+
+`func (o *Schedule) SetNextScheduleTaskTime(v time.Time)`
+
+SetNextScheduleTaskTime sets NextScheduleTaskTime field to given value.
+
+### HasNextScheduleTaskTime
+
+`func (o *Schedule) HasNextScheduleTaskTime() bool`
+
+HasNextScheduleTaskTime returns a boolean if a field has been set.
+
+### GetOwnerUUID
+
+`func (o *Schedule) GetOwnerUUID() string`
+
+GetOwnerUUID returns the OwnerUUID field if non-nil, zero value otherwise.
+
+### GetOwnerUUIDOk
+
+`func (o *Schedule) GetOwnerUUIDOk() (*string, bool)`
+
+GetOwnerUUIDOk returns a tuple with the OwnerUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOwnerUUID
+
+`func (o *Schedule) SetOwnerUUID(v string)`
+
+SetOwnerUUID sets OwnerUUID field to given value.
+
+### HasOwnerUUID
+
+`func (o *Schedule) HasOwnerUUID() bool`
+
+HasOwnerUUID returns a boolean if a field has been set.
+
 ### GetRunningState
 
 `func (o *Schedule) GetRunningState() bool`
@@ -156,6 +261,31 @@ SetRunningState sets RunningState field to given value.
 `func (o *Schedule) HasRunningState() bool`
 
 HasRunningState returns a boolean if a field has been set.
+
+### GetScheduleName
+
+`func (o *Schedule) GetScheduleName() string`
+
+GetScheduleName returns the ScheduleName field if non-nil, zero value otherwise.
+
+### GetScheduleNameOk
+
+`func (o *Schedule) GetScheduleNameOk() (*string, bool)`
+
+GetScheduleNameOk returns a tuple with the ScheduleName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleName
+
+`func (o *Schedule) SetScheduleName(v string)`
+
+SetScheduleName sets ScheduleName field to given value.
+
+### HasScheduleName
+
+`func (o *Schedule) HasScheduleName() bool`
+
+HasScheduleName returns a boolean if a field has been set.
 
 ### GetScheduleUUID
 

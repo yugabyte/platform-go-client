@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -30,6 +30,10 @@ type CommunicationPorts struct {
 	TserverHttpPort *int32 `json:"tserverHttpPort,omitempty"`
 	// Tablet server RPC port
 	TserverRpcPort *int32 `json:"tserverRpcPort,omitempty"`
+	// Yb controller HTTP port
+	YbControllerHttpPort *int32 `json:"ybControllerHttpPort,omitempty"`
+	// Yb controller RPC port
+	YbControllerrRpcPort *int32 `json:"ybControllerrRpcPort,omitempty"`
 	// YQL HTTP port
 	YqlServerHttpPort *int32 `json:"yqlServerHttpPort,omitempty"`
 	// YQL RPC port
@@ -281,6 +285,70 @@ func (o *CommunicationPorts) SetTserverRpcPort(v int32) {
 	o.TserverRpcPort = &v
 }
 
+// GetYbControllerHttpPort returns the YbControllerHttpPort field value if set, zero value otherwise.
+func (o *CommunicationPorts) GetYbControllerHttpPort() int32 {
+	if o == nil || o.YbControllerHttpPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.YbControllerHttpPort
+}
+
+// GetYbControllerHttpPortOk returns a tuple with the YbControllerHttpPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommunicationPorts) GetYbControllerHttpPortOk() (*int32, bool) {
+	if o == nil || o.YbControllerHttpPort == nil {
+		return nil, false
+	}
+	return o.YbControllerHttpPort, true
+}
+
+// HasYbControllerHttpPort returns a boolean if a field has been set.
+func (o *CommunicationPorts) HasYbControllerHttpPort() bool {
+	if o != nil && o.YbControllerHttpPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbControllerHttpPort gets a reference to the given int32 and assigns it to the YbControllerHttpPort field.
+func (o *CommunicationPorts) SetYbControllerHttpPort(v int32) {
+	o.YbControllerHttpPort = &v
+}
+
+// GetYbControllerrRpcPort returns the YbControllerrRpcPort field value if set, zero value otherwise.
+func (o *CommunicationPorts) GetYbControllerrRpcPort() int32 {
+	if o == nil || o.YbControllerrRpcPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.YbControllerrRpcPort
+}
+
+// GetYbControllerrRpcPortOk returns a tuple with the YbControllerrRpcPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommunicationPorts) GetYbControllerrRpcPortOk() (*int32, bool) {
+	if o == nil || o.YbControllerrRpcPort == nil {
+		return nil, false
+	}
+	return o.YbControllerrRpcPort, true
+}
+
+// HasYbControllerrRpcPort returns a boolean if a field has been set.
+func (o *CommunicationPorts) HasYbControllerrRpcPort() bool {
+	if o != nil && o.YbControllerrRpcPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbControllerrRpcPort gets a reference to the given int32 and assigns it to the YbControllerrRpcPort field.
+func (o *CommunicationPorts) SetYbControllerrRpcPort(v int32) {
+	o.YbControllerrRpcPort = &v
+}
+
 // GetYqlServerHttpPort returns the YqlServerHttpPort field value if set, zero value otherwise.
 func (o *CommunicationPorts) GetYqlServerHttpPort() int32 {
 	if o == nil || o.YqlServerHttpPort == nil {
@@ -431,6 +499,12 @@ func (o CommunicationPorts) MarshalJSON() ([]byte, error) {
 	}
 	if o.TserverRpcPort != nil {
 		toSerialize["tserverRpcPort"] = o.TserverRpcPort
+	}
+	if o.YbControllerHttpPort != nil {
+		toSerialize["ybControllerHttpPort"] = o.YbControllerHttpPort
+	}
+	if o.YbControllerrRpcPort != nil {
+		toSerialize["ybControllerrRpcPort"] = o.YbControllerrRpcPort
 	}
 	if o.YqlServerHttpPort != nil {
 		toSerialize["yqlServerHttpPort"] = o.YqlServerHttpPort

@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** |  | [optional] [readonly] 
 **Architecture** | Pointer to **string** |  | [optional] 
-**Code** | Pointer to **string** | Cloud provider region code | [optional] [readonly] 
+**Code** | Pointer to **string** | Cloud provider region code | [optional] 
 **Config** | Pointer to **map[string]string** |  | [optional] 
 **Latitude** | Pointer to **float64** | The region&#39;s latitude | [optional] [readonly] 
 **Longitude** | Pointer to **float64** | The region&#39;s longitude | [optional] [readonly] 
-**Name** | Pointer to **string** | Cloud provider region name | [optional] 
+**Name** | Pointer to **string** | Cloud provider region name | [optional] [readonly] 
 **SecurityGroupId** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** | Region UUID | [optional] [readonly] 
 **VnetName** | Pointer to **string** |  | [optional] 

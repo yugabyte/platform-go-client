@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateInstanceType
 
-> InstanceType CreateInstanceType(ctx, cUUID, pUUID).InstanceType(instanceType).Execute()
+> InstanceTypeResp CreateInstanceType(ctx, cUUID, pUUID).InstanceType(instanceType).Execute()
 
 Create an instance type
 
@@ -35,7 +35,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
-    instanceType := *openapiclient.NewInstanceType(*openapiclient.NewInstanceTypeKey("InstanceTypeCode_example", "ProviderUuid_example"), "InstanceTypeCode_example", *openapiclient.NewInstanceTypeDetails("Tenancy_example", []openapiclient.VolumeDetails{*openapiclient.NewVolumeDetails("MountPath_example", int32(123), "VolumeType_example")}), *openapiclient.NewProvider([]openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("south-east-1")})}), "ProviderCode_example", "ProviderUuid_example") // InstanceType | Instance type data of the instance to be stored
+    instanceType := *openapiclient.NewInstanceType(*openapiclient.NewInstanceTypeKey("InstanceTypeCode_example", "ProviderUuid_example")) // InstanceType | Instance type data of the instance to be stored
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -44,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.CreateInstanceType``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateInstanceType`: InstanceType
+    // response from `CreateInstanceType`: InstanceTypeResp
     fmt.Fprintf(os.Stdout, "Response from `InstanceTypesApi.CreateInstanceType`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceType**](InstanceType.md)
+[**InstanceTypeResp**](InstanceTypeResp.md)
 
 ### Authorization
 
@@ -340,7 +340,7 @@ Other parameters are passed through a pointer to a apiGetGCPTypesRequest struct 
 
 ## InstanceTypeDetail
 
-> InstanceType InstanceTypeDetail(ctx, cUUID, pUUID, code).Execute()
+> InstanceTypeResp InstanceTypeDetail(ctx, cUUID, pUUID, code).Execute()
 
 Get details of an instance type
 
@@ -368,7 +368,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.InstanceTypeDetail``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `InstanceTypeDetail`: InstanceType
+    // response from `InstanceTypeDetail`: InstanceTypeResp
     fmt.Fprintf(os.Stdout, "Response from `InstanceTypesApi.InstanceTypeDetail`: %v\n", resp)
 }
 ```
@@ -396,7 +396,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InstanceType**](InstanceType.md)
+[**InstanceTypeResp**](InstanceTypeResp.md)
 
 ### Authorization
 
@@ -414,7 +414,7 @@ Name | Type | Description  | Notes
 
 ## ListOfInstanceType
 
-> []InstanceType ListOfInstanceType(ctx, cUUID, pUUID).Zone(zone).Execute()
+> []InstanceTypeResp ListOfInstanceType(ctx, cUUID, pUUID).Zone(zone).Execute()
 
 List a provider's instance types
 
@@ -442,7 +442,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.ListOfInstanceType``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListOfInstanceType`: []InstanceType
+    // response from `ListOfInstanceType`: []InstanceTypeResp
     fmt.Fprintf(os.Stdout, "Response from `InstanceTypesApi.ListOfInstanceType`: %v\n", resp)
 }
 ```
@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]InstanceType**](InstanceType.md)
+[**[]InstanceTypeResp**](InstanceTypeResp.md)
 
 ### Authorization
 

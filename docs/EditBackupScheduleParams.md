@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CronExpression** | Pointer to **string** | Cron expression for scheduling | [optional] 
 **Frequency** | Pointer to **int64** | Frequency of the schedule | [optional] 
+**FrequencyTimeUnit** | Pointer to **string** | Time Unit for frequency | [optional] 
+**IncrementalBackupFrequency** | Pointer to **int64** | Frequency of incremental backup schedule | [optional] 
+**IncrementalBackupFrequencyTimeUnit** | Pointer to **string** | TimeUnit for incremental Backup Schedule frequency | [optional] 
 **Status** | Pointer to **string** | State of the schedule | [optional] 
 
 ## Methods
@@ -76,6 +79,81 @@ SetFrequency sets Frequency field to given value.
 `func (o *EditBackupScheduleParams) HasFrequency() bool`
 
 HasFrequency returns a boolean if a field has been set.
+
+### GetFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) GetFrequencyTimeUnit() string`
+
+GetFrequencyTimeUnit returns the FrequencyTimeUnit field if non-nil, zero value otherwise.
+
+### GetFrequencyTimeUnitOk
+
+`func (o *EditBackupScheduleParams) GetFrequencyTimeUnitOk() (*string, bool)`
+
+GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) SetFrequencyTimeUnit(v string)`
+
+SetFrequencyTimeUnit sets FrequencyTimeUnit field to given value.
+
+### HasFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) HasFrequencyTimeUnit() bool`
+
+HasFrequencyTimeUnit returns a boolean if a field has been set.
+
+### GetIncrementalBackupFrequency
+
+`func (o *EditBackupScheduleParams) GetIncrementalBackupFrequency() int64`
+
+GetIncrementalBackupFrequency returns the IncrementalBackupFrequency field if non-nil, zero value otherwise.
+
+### GetIncrementalBackupFrequencyOk
+
+`func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyOk() (*int64, bool)`
+
+GetIncrementalBackupFrequencyOk returns a tuple with the IncrementalBackupFrequency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncrementalBackupFrequency
+
+`func (o *EditBackupScheduleParams) SetIncrementalBackupFrequency(v int64)`
+
+SetIncrementalBackupFrequency sets IncrementalBackupFrequency field to given value.
+
+### HasIncrementalBackupFrequency
+
+`func (o *EditBackupScheduleParams) HasIncrementalBackupFrequency() bool`
+
+HasIncrementalBackupFrequency returns a boolean if a field has been set.
+
+### GetIncrementalBackupFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyTimeUnit() string`
+
+GetIncrementalBackupFrequencyTimeUnit returns the IncrementalBackupFrequencyTimeUnit field if non-nil, zero value otherwise.
+
+### GetIncrementalBackupFrequencyTimeUnitOk
+
+`func (o *EditBackupScheduleParams) GetIncrementalBackupFrequencyTimeUnitOk() (*string, bool)`
+
+GetIncrementalBackupFrequencyTimeUnitOk returns a tuple with the IncrementalBackupFrequencyTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncrementalBackupFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) SetIncrementalBackupFrequencyTimeUnit(v string)`
+
+SetIncrementalBackupFrequencyTimeUnit sets IncrementalBackupFrequencyTimeUnit field to given value.
+
+### HasIncrementalBackupFrequencyTimeUnit
+
+`func (o *EditBackupScheduleParams) HasIncrementalBackupFrequencyTimeUnit() bool`
+
+HasIncrementalBackupFrequencyTimeUnit returns a boolean if a field has been set.
 
 ### GetStatus
 

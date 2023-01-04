@@ -6,19 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | True if the instance is active | [optional] [readonly] 
 **IdKey** | [**InstanceTypeKey**](InstanceTypeKey.md) |  | 
-**InstanceTypeCode** | **string** |  | 
-**InstanceTypeDetails** | [**InstanceTypeDetails**](InstanceTypeDetails.md) |  | 
+**InstanceTypeCode** | Pointer to **string** | Instance type code | [optional] [readonly] 
+**InstanceTypeDetails** | Pointer to [**InstanceTypeDetails**](InstanceTypeDetails.md) |  | [optional] 
 **MemSizeGB** | Pointer to **float64** | The instance&#39;s memory size, in gigabytes | [optional] 
 **NumCores** | Pointer to **float64** | The instance&#39;s number of CPU cores | [optional] 
-**Provider** | [**Provider**](Provider.md) |  | 
-**ProviderCode** | **string** |  | 
-**ProviderUuid** | **string** |  | 
 
 ## Methods
 
 ### NewInstanceType
 
-`func NewInstanceType(idKey InstanceTypeKey, instanceTypeCode string, instanceTypeDetails InstanceTypeDetails, provider Provider, providerCode string, providerUuid string, ) *InstanceType`
+`func NewInstanceType(idKey InstanceTypeKey, ) *InstanceType`
 
 NewInstanceType instantiates a new InstanceType object
 This constructor will assign default values to properties that have it defined,
@@ -97,6 +94,11 @@ and a boolean to check if the value has been set.
 
 SetInstanceTypeCode sets InstanceTypeCode field to given value.
 
+### HasInstanceTypeCode
+
+`func (o *InstanceType) HasInstanceTypeCode() bool`
+
+HasInstanceTypeCode returns a boolean if a field has been set.
 
 ### GetInstanceTypeDetails
 
@@ -117,6 +119,11 @@ and a boolean to check if the value has been set.
 
 SetInstanceTypeDetails sets InstanceTypeDetails field to given value.
 
+### HasInstanceTypeDetails
+
+`func (o *InstanceType) HasInstanceTypeDetails() bool`
+
+HasInstanceTypeDetails returns a boolean if a field has been set.
 
 ### GetMemSizeGB
 
@@ -167,66 +174,6 @@ SetNumCores sets NumCores field to given value.
 `func (o *InstanceType) HasNumCores() bool`
 
 HasNumCores returns a boolean if a field has been set.
-
-### GetProvider
-
-`func (o *InstanceType) GetProvider() Provider`
-
-GetProvider returns the Provider field if non-nil, zero value otherwise.
-
-### GetProviderOk
-
-`func (o *InstanceType) GetProviderOk() (*Provider, bool)`
-
-GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProvider
-
-`func (o *InstanceType) SetProvider(v Provider)`
-
-SetProvider sets Provider field to given value.
-
-
-### GetProviderCode
-
-`func (o *InstanceType) GetProviderCode() string`
-
-GetProviderCode returns the ProviderCode field if non-nil, zero value otherwise.
-
-### GetProviderCodeOk
-
-`func (o *InstanceType) GetProviderCodeOk() (*string, bool)`
-
-GetProviderCodeOk returns a tuple with the ProviderCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProviderCode
-
-`func (o *InstanceType) SetProviderCode(v string)`
-
-SetProviderCode sets ProviderCode field to given value.
-
-
-### GetProviderUuid
-
-`func (o *InstanceType) GetProviderUuid() string`
-
-GetProviderUuid returns the ProviderUuid field if non-nil, zero value otherwise.
-
-### GetProviderUuidOk
-
-`func (o *InstanceType) GetProviderUuidOk() (*string, bool)`
-
-GetProviderUuidOk returns a tuple with the ProviderUuid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProviderUuid
-
-`func (o *InstanceType) SetProviderUuid(v string)`
-
-SetProviderUuid sets ProviderUuid field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

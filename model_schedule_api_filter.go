@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -18,16 +18,18 @@ import (
 type ScheduleApiFilter struct {
 	Status []string `json:"status"`
 	TaskTypes []string `json:"taskTypes"`
+	UniverseUUIDList []string `json:"universeUUIDList"`
 }
 
 // NewScheduleApiFilter instantiates a new ScheduleApiFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleApiFilter(status []string, taskTypes []string, ) *ScheduleApiFilter {
+func NewScheduleApiFilter(status []string, taskTypes []string, universeUUIDList []string, ) *ScheduleApiFilter {
 	this := ScheduleApiFilter{}
 	this.Status = status
 	this.TaskTypes = taskTypes
+	this.UniverseUUIDList = universeUUIDList
 	return &this
 }
 
@@ -87,6 +89,30 @@ func (o *ScheduleApiFilter) SetTaskTypes(v []string) {
 	o.TaskTypes = v
 }
 
+// GetUniverseUUIDList returns the UniverseUUIDList field value
+func (o *ScheduleApiFilter) GetUniverseUUIDList() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+
+	return o.UniverseUUIDList
+}
+
+// GetUniverseUUIDListOk returns a tuple with the UniverseUUIDList field value
+// and a boolean to check if the value has been set.
+func (o *ScheduleApiFilter) GetUniverseUUIDListOk() (*[]string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.UniverseUUIDList, true
+}
+
+// SetUniverseUUIDList sets field value
+func (o *ScheduleApiFilter) SetUniverseUUIDList(v []string) {
+	o.UniverseUUIDList = v
+}
+
 func (o ScheduleApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -94,6 +120,9 @@ func (o ScheduleApiFilter) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["taskTypes"] = o.TaskTypes
+	}
+	if true {
+		toSerialize["universeUUIDList"] = o.UniverseUUIDList
 	}
 	return json.Marshal(toSerialize)
 }

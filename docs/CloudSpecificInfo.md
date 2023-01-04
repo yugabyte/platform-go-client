@@ -8,12 +8,16 @@ Name | Type | Description | Notes
 **Az** | Pointer to **string** | The node&#39;s availability zone | [optional] 
 **Cloud** | Pointer to **string** | The node&#39;s cloud provider | [optional] 
 **InstanceType** | Pointer to **string** | The node&#39;s instance type | [optional] 
+**KubernetesNamespace** | Pointer to **string** | Kubernetes namespace | [optional] 
+**KubernetesPodName** | Pointer to **string** | Pod name in Kubernetes | [optional] 
+**LunIndexes** | Pointer to **[]int32** | Mounted disks LUN indexes | [optional] 
 **MountRoots** | Pointer to **string** | Mount roots | [optional] 
 **PrivateDns** | Pointer to **string** | The node&#39;s private DNS | [optional] 
 **PrivateIp** | Pointer to **string** | The node&#39;s private IP address | [optional] 
 **PublicDns** | Pointer to **string** | The node&#39;s public DNS name | [optional] 
 **PublicIp** | Pointer to **string** | The node&#39;s public IP address | [optional] 
 **Region** | Pointer to **string** | The node&#39;s region | [optional] 
+**RootVolume** | Pointer to **string** | Root volume ID or name | [optional] 
 **SecondaryPrivateIp** | Pointer to **string** | Secondary Private IP | [optional] 
 **SecondarySubnetId** | Pointer to **string** | Secondary Subnet IP | [optional] 
 **SubnetId** | Pointer to **string** | ID of the subnet on which this node is deployed | [optional] 
@@ -137,6 +141,81 @@ SetInstanceType sets InstanceType field to given value.
 `func (o *CloudSpecificInfo) HasInstanceType() bool`
 
 HasInstanceType returns a boolean if a field has been set.
+
+### GetKubernetesNamespace
+
+`func (o *CloudSpecificInfo) GetKubernetesNamespace() string`
+
+GetKubernetesNamespace returns the KubernetesNamespace field if non-nil, zero value otherwise.
+
+### GetKubernetesNamespaceOk
+
+`func (o *CloudSpecificInfo) GetKubernetesNamespaceOk() (*string, bool)`
+
+GetKubernetesNamespaceOk returns a tuple with the KubernetesNamespace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesNamespace
+
+`func (o *CloudSpecificInfo) SetKubernetesNamespace(v string)`
+
+SetKubernetesNamespace sets KubernetesNamespace field to given value.
+
+### HasKubernetesNamespace
+
+`func (o *CloudSpecificInfo) HasKubernetesNamespace() bool`
+
+HasKubernetesNamespace returns a boolean if a field has been set.
+
+### GetKubernetesPodName
+
+`func (o *CloudSpecificInfo) GetKubernetesPodName() string`
+
+GetKubernetesPodName returns the KubernetesPodName field if non-nil, zero value otherwise.
+
+### GetKubernetesPodNameOk
+
+`func (o *CloudSpecificInfo) GetKubernetesPodNameOk() (*string, bool)`
+
+GetKubernetesPodNameOk returns a tuple with the KubernetesPodName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesPodName
+
+`func (o *CloudSpecificInfo) SetKubernetesPodName(v string)`
+
+SetKubernetesPodName sets KubernetesPodName field to given value.
+
+### HasKubernetesPodName
+
+`func (o *CloudSpecificInfo) HasKubernetesPodName() bool`
+
+HasKubernetesPodName returns a boolean if a field has been set.
+
+### GetLunIndexes
+
+`func (o *CloudSpecificInfo) GetLunIndexes() []int32`
+
+GetLunIndexes returns the LunIndexes field if non-nil, zero value otherwise.
+
+### GetLunIndexesOk
+
+`func (o *CloudSpecificInfo) GetLunIndexesOk() (*[]int32, bool)`
+
+GetLunIndexesOk returns a tuple with the LunIndexes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLunIndexes
+
+`func (o *CloudSpecificInfo) SetLunIndexes(v []int32)`
+
+SetLunIndexes sets LunIndexes field to given value.
+
+### HasLunIndexes
+
+`func (o *CloudSpecificInfo) HasLunIndexes() bool`
+
+HasLunIndexes returns a boolean if a field has been set.
 
 ### GetMountRoots
 
@@ -287,6 +366,31 @@ SetRegion sets Region field to given value.
 `func (o *CloudSpecificInfo) HasRegion() bool`
 
 HasRegion returns a boolean if a field has been set.
+
+### GetRootVolume
+
+`func (o *CloudSpecificInfo) GetRootVolume() string`
+
+GetRootVolume returns the RootVolume field if non-nil, zero value otherwise.
+
+### GetRootVolumeOk
+
+`func (o *CloudSpecificInfo) GetRootVolumeOk() (*string, bool)`
+
+GetRootVolumeOk returns a tuple with the RootVolume field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootVolume
+
+`func (o *CloudSpecificInfo) SetRootVolume(v string)`
+
+SetRootVolume sets RootVolume field to given value.
+
+### HasRootVolume
+
+`func (o *CloudSpecificInfo) HasRootVolume() bool`
+
+HasRootVolume returns a boolean if a field has been set.
 
 ### GetSecondaryPrivateIp
 

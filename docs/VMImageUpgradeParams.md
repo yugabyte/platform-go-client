@@ -5,14 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
-**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
@@ -20,15 +21,18 @@ Name | Type | Description | Notes
 **FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ForceVMImageUpgrade** | **bool** |  | 
 **ImportedState** | Pointer to **string** |  | [optional] 
+**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MachineImages** | **map[string]string** |  | 
+**MachineImages** | **map[string]string** | Map  of region UUID to AMI name | 
+**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**PlatformUrl** | **string** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
@@ -41,18 +45,24 @@ Name | Type | Description | Notes
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
+**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
+**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
+**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+**YbSoftwareVersion** | **string** |  | 
+**YbcInstalled** | Pointer to **bool** |  | [optional] 
+**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewVMImageUpgradeParams
 
-`func NewVMImageUpgradeParams(clusters []Cluster, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *VMImageUpgradeParams`
+`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
 
 NewVMImageUpgradeParams instantiates a new VMImageUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -91,31 +101,6 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *VMImageUpgradeParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
-
-### GetBackupInProgress
-
-`func (o *VMImageUpgradeParams) GetBackupInProgress() bool`
-
-GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
-
-### GetBackupInProgressOk
-
-`func (o *VMImageUpgradeParams) GetBackupInProgressOk() (*bool, bool)`
-
-GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBackupInProgress
-
-`func (o *VMImageUpgradeParams) SetBackupInProgress(v bool)`
-
-SetBackupInProgress sets BackupInProgress field to given value.
-
-### HasBackupInProgress
-
-`func (o *VMImageUpgradeParams) HasBackupInProgress() bool`
-
-HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -237,6 +222,26 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 
 HasCommunicationPorts returns a boolean if a field has been set.
 
+### GetCreatingUser
+
+`func (o *VMImageUpgradeParams) GetCreatingUser() Users`
+
+GetCreatingUser returns the CreatingUser field if non-nil, zero value otherwise.
+
+### GetCreatingUserOk
+
+`func (o *VMImageUpgradeParams) GetCreatingUserOk() (*Users, bool)`
+
+GetCreatingUserOk returns a tuple with the CreatingUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatingUser
+
+`func (o *VMImageUpgradeParams) SetCreatingUser(v Users)`
+
+SetCreatingUser sets CreatingUser field to given value.
+
+
 ### GetCurrentClusterType
 
 `func (o *VMImageUpgradeParams) GetCurrentClusterType() string`
@@ -286,6 +291,31 @@ SetDeviceInfo sets DeviceInfo field to given value.
 `func (o *VMImageUpgradeParams) HasDeviceInfo() bool`
 
 HasDeviceInfo returns a boolean if a field has been set.
+
+### GetEnableYbc
+
+`func (o *VMImageUpgradeParams) GetEnableYbc() bool`
+
+GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
+
+### GetEnableYbcOk
+
+`func (o *VMImageUpgradeParams) GetEnableYbcOk() (*bool, bool)`
+
+GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableYbc
+
+`func (o *VMImageUpgradeParams) SetEnableYbc(v bool)`
+
+SetEnableYbc sets EnableYbc field to given value.
+
+### HasEnableYbc
+
+`func (o *VMImageUpgradeParams) HasEnableYbc() bool`
+
+HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -457,6 +487,31 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
+### GetInstallYbc
+
+`func (o *VMImageUpgradeParams) GetInstallYbc() bool`
+
+GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+
+### GetInstallYbcOk
+
+`func (o *VMImageUpgradeParams) GetInstallYbcOk() (*bool, bool)`
+
+GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallYbc
+
+`func (o *VMImageUpgradeParams) SetInstallYbc(v bool)`
+
+SetInstallYbc sets InstallYbc field to given value.
+
+### HasInstallYbc
+
+`func (o *VMImageUpgradeParams) HasInstallYbc() bool`
+
+HasInstallYbc returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *VMImageUpgradeParams) GetItestS3PackagePath() string`
@@ -521,6 +576,31 @@ and a boolean to check if the value has been set.
 
 SetMachineImages sets MachineImages field to given value.
 
+
+### GetMastersInDefaultRegion
+
+`func (o *VMImageUpgradeParams) GetMastersInDefaultRegion() bool`
+
+GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
+
+### GetMastersInDefaultRegionOk
+
+`func (o *VMImageUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool)`
+
+GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMastersInDefaultRegion
+
+`func (o *VMImageUpgradeParams) SetMastersInDefaultRegion(v bool)`
+
+SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
+
+### HasMastersInDefaultRegion
+
+`func (o *VMImageUpgradeParams) HasMastersInDefaultRegion() bool`
+
+HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -646,6 +726,26 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *VMImageUpgradeParams) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetPlatformUrl
+
+`func (o *VMImageUpgradeParams) GetPlatformUrl() string`
+
+GetPlatformUrl returns the PlatformUrl field if non-nil, zero value otherwise.
+
+### GetPlatformUrlOk
+
+`func (o *VMImageUpgradeParams) GetPlatformUrlOk() (*string, bool)`
+
+GetPlatformUrlOk returns a tuple with the PlatformUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformUrl
+
+`func (o *VMImageUpgradeParams) SetPlatformUrl(v string)`
+
+SetPlatformUrl sets PlatformUrl field to given value.
+
 
 ### GetPreviousTaskUUID
 
@@ -962,6 +1062,31 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
+### GetUpdateOptions
+
+`func (o *VMImageUpgradeParams) GetUpdateOptions() []string`
+
+GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
+
+### GetUpdateOptionsOk
+
+`func (o *VMImageUpgradeParams) GetUpdateOptionsOk() (*[]string, bool)`
+
+GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateOptions
+
+`func (o *VMImageUpgradeParams) SetUpdateOptions(v []string)`
+
+SetUpdateOptions sets UpdateOptions field to given value.
+
+### HasUpdateOptions
+
+`func (o *VMImageUpgradeParams) HasUpdateOptions() bool`
+
+HasUpdateOptions returns a boolean if a field has been set.
+
 ### GetUpdateSucceeded
 
 `func (o *VMImageUpgradeParams) GetUpdateSucceeded() bool`
@@ -1057,6 +1182,31 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
+### GetUseNewHelmNamingStyle
+
+`func (o *VMImageUpgradeParams) GetUseNewHelmNamingStyle() bool`
+
+GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
+
+### GetUseNewHelmNamingStyleOk
+
+`func (o *VMImageUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
+
+GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseNewHelmNamingStyle
+
+`func (o *VMImageUpgradeParams) SetUseNewHelmNamingStyle(v bool)`
+
+SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
+
+### HasUseNewHelmNamingStyle
+
+`func (o *VMImageUpgradeParams) HasUseNewHelmNamingStyle() bool`
+
+HasUseNewHelmNamingStyle returns a boolean if a field has been set.
+
 ### GetUserAZSelected
 
 `func (o *VMImageUpgradeParams) GetUserAZSelected() bool`
@@ -1082,6 +1232,31 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
+### GetXclusterInfo
+
+`func (o *VMImageUpgradeParams) GetXclusterInfo() XClusterInfo`
+
+GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
+
+### GetXclusterInfoOk
+
+`func (o *VMImageUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
+
+GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXclusterInfo
+
+`func (o *VMImageUpgradeParams) SetXclusterInfo(v XClusterInfo)`
+
+SetXclusterInfo sets XclusterInfo field to given value.
+
+### HasXclusterInfo
+
+`func (o *VMImageUpgradeParams) HasXclusterInfo() bool`
+
+HasXclusterInfo returns a boolean if a field has been set.
+
 ### GetYbPrevSoftwareVersion
 
 `func (o *VMImageUpgradeParams) GetYbPrevSoftwareVersion() string`
@@ -1106,6 +1281,76 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *VMImageUpgradeParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+### GetYbSoftwareVersion
+
+`func (o *VMImageUpgradeParams) GetYbSoftwareVersion() string`
+
+GetYbSoftwareVersion returns the YbSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbSoftwareVersionOk
+
+`func (o *VMImageUpgradeParams) GetYbSoftwareVersionOk() (*string, bool)`
+
+GetYbSoftwareVersionOk returns a tuple with the YbSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbSoftwareVersion
+
+`func (o *VMImageUpgradeParams) SetYbSoftwareVersion(v string)`
+
+SetYbSoftwareVersion sets YbSoftwareVersion field to given value.
+
+
+### GetYbcInstalled
+
+`func (o *VMImageUpgradeParams) GetYbcInstalled() bool`
+
+GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
+
+### GetYbcInstalledOk
+
+`func (o *VMImageUpgradeParams) GetYbcInstalledOk() (*bool, bool)`
+
+GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcInstalled
+
+`func (o *VMImageUpgradeParams) SetYbcInstalled(v bool)`
+
+SetYbcInstalled sets YbcInstalled field to given value.
+
+### HasYbcInstalled
+
+`func (o *VMImageUpgradeParams) HasYbcInstalled() bool`
+
+HasYbcInstalled returns a boolean if a field has been set.
+
+### GetYbcSoftwareVersion
+
+`func (o *VMImageUpgradeParams) GetYbcSoftwareVersion() string`
+
+GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbcSoftwareVersionOk
+
+`func (o *VMImageUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool)`
+
+GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcSoftwareVersion
+
+`func (o *VMImageUpgradeParams) SetYbcSoftwareVersion(v string)`
+
+SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
+
+### HasYbcSoftwareVersion
+
+`func (o *VMImageUpgradeParams) HasYbcSoftwareVersion() bool`
+
+HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

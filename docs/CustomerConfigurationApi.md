@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**EditCustomerConfig**](CustomerConfigurationApi.md#EditCustomerConfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
 [**EditCustomerConfig_0**](CustomerConfigurationApi.md#EditCustomerConfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
 [**GetListOfCustomerConfig**](CustomerConfigurationApi.md#GetListOfCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
+[**ListBuckets**](CustomerConfigurationApi.md#ListBuckets) | **Post** /api/v1/customers/{cUUID}/cloud/{cloud}/buckets | List buckets with provided credentials
 
 
 
@@ -436,6 +437,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListBuckets
+
+> map[string]interface{} ListBuckets(ctx, cUUID, cloud).Credentials(credentials).Execute()
+
+List buckets with provided credentials
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    cloud := "cloud_example" // string | 
+    credentials := map[string]interface{}(Object) // map[string]interface{} | Credentials to list buckets
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CustomerConfigurationApi.ListBuckets(context.Background(), cUUID, cloud).Credentials(credentials).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.ListBuckets``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListBuckets`: map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `CustomerConfigurationApi.ListBuckets`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**cloud** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListBucketsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **credentials** | **map[string]interface{}** | Credentials to list buckets | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

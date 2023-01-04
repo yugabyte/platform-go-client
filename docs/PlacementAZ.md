@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsAffinitized** | Pointer to **bool** |  | [optional] 
+**LbName** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **NumNodesInAZ** | Pointer to **int32** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
@@ -55,6 +56,31 @@ SetIsAffinitized sets IsAffinitized field to given value.
 `func (o *PlacementAZ) HasIsAffinitized() bool`
 
 HasIsAffinitized returns a boolean if a field has been set.
+
+### GetLbName
+
+`func (o *PlacementAZ) GetLbName() string`
+
+GetLbName returns the LbName field if non-nil, zero value otherwise.
+
+### GetLbNameOk
+
+`func (o *PlacementAZ) GetLbNameOk() (*string, bool)`
+
+GetLbNameOk returns a tuple with the LbName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLbName
+
+`func (o *PlacementAZ) SetLbName(v string)`
+
+SetLbName sets LbName field to given value.
+
+### HasLbName
+
+`func (o *PlacementAZ) HasLbName() bool`
+
+HasLbName returns a boolean if a field has been set.
 
 ### GetName
 

@@ -5,23 +5,34 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActionType** | Pointer to **string** | Action type | [optional] 
+**AllTables** | Pointer to **bool** | Backup all tables in Keyspace | [optional] 
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupList** | Pointer to [**[]BackupTableParams**](BackupTableParams.md) | Backups | [optional] 
 **BackupSizeInBytes** | Pointer to **int64** | Backup size in bytes | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUuid** | Pointer to **string** | Backup UUID | [optional] 
+**BaseBackupUUID** | Pointer to **string** | Base backup UUID | [optional] 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**CreatingUser** | [**Users**](Users.md) |  | 
 **CronExpression** | Pointer to **string** | Cron expression for a recurring backup | [optional] 
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
+**DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
+**DisableMultipart** | Pointer to **bool** | Disable multipart upload | [optional] 
+**DisableParallelism** | Pointer to **bool** | Don&#39;t add -m flag during gsutil upload dir command | [optional] 
 **EnableVerboseLogs** | Pointer to **bool** | Is verbose logging enabled | [optional] 
+**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
+**ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
+**FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
+**InstallYbc** | Pointer to **bool** |  | [optional] 
+**IsFullBackup** | Pointer to **bool** | Full Table type backup | [optional] 
 **Keyspace** | Pointer to **string** | Key space | [optional] 
 **KmsConfigUUID** | Pointer to **string** | KMS configuration UUID | [optional] 
 **MinNumBackupsToRetain** | Pointer to **int32** | Minimum number of backups to retain for a particular backup schedule | [optional] 
@@ -30,12 +41,17 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
+**PlatformUrl** | **string** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] 
 **SchedulingFrequency** | Pointer to **int64** | Frequency to run the backup, in milliseconds | [optional] 
+**SleepAfterMasterRestartMillis** | **int32** |  | 
+**SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
+**StorageConfigType** | Pointer to **string** | Type of backup storage config | [optional] 
 **StorageConfigUUID** | **string** | Storage configuration UUID | 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 
@@ -44,16 +60,19 @@ Name | Type | Description | Notes
 **TableUUIDList** | Pointer to **[]string** | Table UUIDs | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
+**TimeTakenPartial** | **int64** |  | 
 **TransactionalBackup** | Pointer to **bool** | Is backup transactional across tables | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
+**YbcInstalled** | Pointer to **bool** |  | [optional] 
+**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewBackupTableParams
 
-`func NewBackupTableParams(storageConfigUUID string, ) *BackupTableParams`
+`func NewBackupTableParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *BackupTableParams`
 
 NewBackupTableParams instantiates a new BackupTableParams object
 This constructor will assign default values to properties that have it defined,
@@ -92,6 +111,31 @@ SetActionType sets ActionType field to given value.
 `func (o *BackupTableParams) HasActionType() bool`
 
 HasActionType returns a boolean if a field has been set.
+
+### GetAllTables
+
+`func (o *BackupTableParams) GetAllTables() bool`
+
+GetAllTables returns the AllTables field if non-nil, zero value otherwise.
+
+### GetAllTablesOk
+
+`func (o *BackupTableParams) GetAllTablesOk() (*bool, bool)`
+
+GetAllTablesOk returns a tuple with the AllTables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllTables
+
+`func (o *BackupTableParams) SetAllTables(v bool)`
+
+SetAllTables sets AllTables field to given value.
+
+### HasAllTables
+
+`func (o *BackupTableParams) HasAllTables() bool`
+
+HasAllTables returns a boolean if a field has been set.
 
 ### GetAlterLoadBalancer
 
@@ -218,6 +262,31 @@ SetBackupUuid sets BackupUuid field to given value.
 
 HasBackupUuid returns a boolean if a field has been set.
 
+### GetBaseBackupUUID
+
+`func (o *BackupTableParams) GetBaseBackupUUID() string`
+
+GetBaseBackupUUID returns the BaseBackupUUID field if non-nil, zero value otherwise.
+
+### GetBaseBackupUUIDOk
+
+`func (o *BackupTableParams) GetBaseBackupUUIDOk() (*string, bool)`
+
+GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBaseBackupUUID
+
+`func (o *BackupTableParams) SetBaseBackupUUID(v string)`
+
+SetBaseBackupUUID sets BaseBackupUUID field to given value.
+
+### HasBaseBackupUUID
+
+`func (o *BackupTableParams) HasBaseBackupUUID() bool`
+
+HasBaseBackupUUID returns a boolean if a field has been set.
+
 ### GetCmkArn
 
 `func (o *BackupTableParams) GetCmkArn() string`
@@ -267,6 +336,26 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 `func (o *BackupTableParams) HasCommunicationPorts() bool`
 
 HasCommunicationPorts returns a boolean if a field has been set.
+
+### GetCreatingUser
+
+`func (o *BackupTableParams) GetCreatingUser() Users`
+
+GetCreatingUser returns the CreatingUser field if non-nil, zero value otherwise.
+
+### GetCreatingUserOk
+
+`func (o *BackupTableParams) GetCreatingUserOk() (*Users, bool)`
+
+GetCreatingUserOk returns a tuple with the CreatingUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatingUser
+
+`func (o *BackupTableParams) SetCreatingUser(v Users)`
+
+SetCreatingUser sets CreatingUser field to given value.
+
 
 ### GetCronExpression
 
@@ -343,6 +432,81 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
+### GetDisableChecksum
+
+`func (o *BackupTableParams) GetDisableChecksum() bool`
+
+GetDisableChecksum returns the DisableChecksum field if non-nil, zero value otherwise.
+
+### GetDisableChecksumOk
+
+`func (o *BackupTableParams) GetDisableChecksumOk() (*bool, bool)`
+
+GetDisableChecksumOk returns a tuple with the DisableChecksum field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableChecksum
+
+`func (o *BackupTableParams) SetDisableChecksum(v bool)`
+
+SetDisableChecksum sets DisableChecksum field to given value.
+
+### HasDisableChecksum
+
+`func (o *BackupTableParams) HasDisableChecksum() bool`
+
+HasDisableChecksum returns a boolean if a field has been set.
+
+### GetDisableMultipart
+
+`func (o *BackupTableParams) GetDisableMultipart() bool`
+
+GetDisableMultipart returns the DisableMultipart field if non-nil, zero value otherwise.
+
+### GetDisableMultipartOk
+
+`func (o *BackupTableParams) GetDisableMultipartOk() (*bool, bool)`
+
+GetDisableMultipartOk returns a tuple with the DisableMultipart field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableMultipart
+
+`func (o *BackupTableParams) SetDisableMultipart(v bool)`
+
+SetDisableMultipart sets DisableMultipart field to given value.
+
+### HasDisableMultipart
+
+`func (o *BackupTableParams) HasDisableMultipart() bool`
+
+HasDisableMultipart returns a boolean if a field has been set.
+
+### GetDisableParallelism
+
+`func (o *BackupTableParams) GetDisableParallelism() bool`
+
+GetDisableParallelism returns the DisableParallelism field if non-nil, zero value otherwise.
+
+### GetDisableParallelismOk
+
+`func (o *BackupTableParams) GetDisableParallelismOk() (*bool, bool)`
+
+GetDisableParallelismOk returns a tuple with the DisableParallelism field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableParallelism
+
+`func (o *BackupTableParams) SetDisableParallelism(v bool)`
+
+SetDisableParallelism sets DisableParallelism field to given value.
+
+### HasDisableParallelism
+
+`func (o *BackupTableParams) HasDisableParallelism() bool`
+
+HasDisableParallelism returns a boolean if a field has been set.
+
 ### GetEnableVerboseLogs
 
 `func (o *BackupTableParams) GetEnableVerboseLogs() bool`
@@ -367,6 +531,31 @@ SetEnableVerboseLogs sets EnableVerboseLogs field to given value.
 `func (o *BackupTableParams) HasEnableVerboseLogs() bool`
 
 HasEnableVerboseLogs returns a boolean if a field has been set.
+
+### GetEnableYbc
+
+`func (o *BackupTableParams) GetEnableYbc() bool`
+
+GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
+
+### GetEnableYbcOk
+
+`func (o *BackupTableParams) GetEnableYbcOk() (*bool, bool)`
+
+GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableYbc
+
+`func (o *BackupTableParams) SetEnableYbc(v bool)`
+
+SetEnableYbc sets EnableYbc field to given value.
+
+### HasEnableYbc
+
+`func (o *BackupTableParams) HasEnableYbc() bool`
+
+HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -443,6 +632,31 @@ SetExpectedUniverseVersion sets ExpectedUniverseVersion field to given value.
 
 HasExpectedUniverseVersion returns a boolean if a field has been set.
 
+### GetExpiryTimeUnit
+
+`func (o *BackupTableParams) GetExpiryTimeUnit() string`
+
+GetExpiryTimeUnit returns the ExpiryTimeUnit field if non-nil, zero value otherwise.
+
+### GetExpiryTimeUnitOk
+
+`func (o *BackupTableParams) GetExpiryTimeUnitOk() (*string, bool)`
+
+GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryTimeUnit
+
+`func (o *BackupTableParams) SetExpiryTimeUnit(v string)`
+
+SetExpiryTimeUnit sets ExpiryTimeUnit field to given value.
+
+### HasExpiryTimeUnit
+
+`func (o *BackupTableParams) HasExpiryTimeUnit() bool`
+
+HasExpiryTimeUnit returns a boolean if a field has been set.
+
 ### GetExtraDependencies
 
 `func (o *BackupTableParams) GetExtraDependencies() ExtraDependencies`
@@ -493,6 +707,31 @@ SetFirstTry sets FirstTry field to given value.
 
 HasFirstTry returns a boolean if a field has been set.
 
+### GetFullChainSizeInBytes
+
+`func (o *BackupTableParams) GetFullChainSizeInBytes() int64`
+
+GetFullChainSizeInBytes returns the FullChainSizeInBytes field if non-nil, zero value otherwise.
+
+### GetFullChainSizeInBytesOk
+
+`func (o *BackupTableParams) GetFullChainSizeInBytesOk() (*int64, bool)`
+
+GetFullChainSizeInBytesOk returns a tuple with the FullChainSizeInBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullChainSizeInBytes
+
+`func (o *BackupTableParams) SetFullChainSizeInBytes(v int64)`
+
+SetFullChainSizeInBytes sets FullChainSizeInBytes field to given value.
+
+### HasFullChainSizeInBytes
+
+`func (o *BackupTableParams) HasFullChainSizeInBytes() bool`
+
+HasFullChainSizeInBytes returns a boolean if a field has been set.
+
 ### GetIgnoreErrors
 
 `func (o *BackupTableParams) GetIgnoreErrors() bool`
@@ -517,6 +756,56 @@ SetIgnoreErrors sets IgnoreErrors field to given value.
 `func (o *BackupTableParams) HasIgnoreErrors() bool`
 
 HasIgnoreErrors returns a boolean if a field has been set.
+
+### GetInstallYbc
+
+`func (o *BackupTableParams) GetInstallYbc() bool`
+
+GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+
+### GetInstallYbcOk
+
+`func (o *BackupTableParams) GetInstallYbcOk() (*bool, bool)`
+
+GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallYbc
+
+`func (o *BackupTableParams) SetInstallYbc(v bool)`
+
+SetInstallYbc sets InstallYbc field to given value.
+
+### HasInstallYbc
+
+`func (o *BackupTableParams) HasInstallYbc() bool`
+
+HasInstallYbc returns a boolean if a field has been set.
+
+### GetIsFullBackup
+
+`func (o *BackupTableParams) GetIsFullBackup() bool`
+
+GetIsFullBackup returns the IsFullBackup field if non-nil, zero value otherwise.
+
+### GetIsFullBackupOk
+
+`func (o *BackupTableParams) GetIsFullBackupOk() (*bool, bool)`
+
+GetIsFullBackupOk returns a tuple with the IsFullBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsFullBackup
+
+`func (o *BackupTableParams) SetIsFullBackup(v bool)`
+
+SetIsFullBackup sets IsFullBackup field to given value.
+
+### HasIsFullBackup
+
+`func (o *BackupTableParams) HasIsFullBackup() bool`
+
+HasIsFullBackup returns a boolean if a field has been set.
 
 ### GetKeyspace
 
@@ -718,6 +1007,26 @@ SetParallelism sets Parallelism field to given value.
 
 HasParallelism returns a boolean if a field has been set.
 
+### GetPlatformUrl
+
+`func (o *BackupTableParams) GetPlatformUrl() string`
+
+GetPlatformUrl returns the PlatformUrl field if non-nil, zero value otherwise.
+
+### GetPlatformUrlOk
+
+`func (o *BackupTableParams) GetPlatformUrlOk() (*string, bool)`
+
+GetPlatformUrlOk returns a tuple with the PlatformUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformUrl
+
+`func (o *BackupTableParams) SetPlatformUrl(v string)`
+
+SetPlatformUrl sets PlatformUrl field to given value.
+
+
 ### GetPreviousTaskUUID
 
 `func (o *BackupTableParams) GetPreviousTaskUUID() string`
@@ -742,6 +1051,31 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *BackupTableParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
+
+### GetRegionLocations
+
+`func (o *BackupTableParams) GetRegionLocations() []RegionLocations`
+
+GetRegionLocations returns the RegionLocations field if non-nil, zero value otherwise.
+
+### GetRegionLocationsOk
+
+`func (o *BackupTableParams) GetRegionLocationsOk() (*[]RegionLocations, bool)`
+
+GetRegionLocationsOk returns a tuple with the RegionLocations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegionLocations
+
+`func (o *BackupTableParams) SetRegionLocations(v []RegionLocations)`
+
+SetRegionLocations sets RegionLocations field to given value.
+
+### HasRegionLocations
+
+`func (o *BackupTableParams) HasRegionLocations() bool`
+
+HasRegionLocations returns a boolean if a field has been set.
 
 ### GetRestoreTimeStamp
 
@@ -818,6 +1152,46 @@ SetSchedulingFrequency sets SchedulingFrequency field to given value.
 
 HasSchedulingFrequency returns a boolean if a field has been set.
 
+### GetSleepAfterMasterRestartMillis
+
+`func (o *BackupTableParams) GetSleepAfterMasterRestartMillis() int32`
+
+GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterMasterRestartMillisOk
+
+`func (o *BackupTableParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterMasterRestartMillis
+
+`func (o *BackupTableParams) SetSleepAfterMasterRestartMillis(v int32)`
+
+SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
+
+
+### GetSleepAfterTServerRestartMillis
+
+`func (o *BackupTableParams) GetSleepAfterTServerRestartMillis() int32`
+
+GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterTServerRestartMillisOk
+
+`func (o *BackupTableParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterTServerRestartMillis
+
+`func (o *BackupTableParams) SetSleepAfterTServerRestartMillis(v int32)`
+
+SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
+
+
 ### GetSourceXClusterConfigs
 
 `func (o *BackupTableParams) GetSourceXClusterConfigs() []string`
@@ -867,6 +1241,31 @@ SetSse sets Sse field to given value.
 `func (o *BackupTableParams) HasSse() bool`
 
 HasSse returns a boolean if a field has been set.
+
+### GetStorageConfigType
+
+`func (o *BackupTableParams) GetStorageConfigType() string`
+
+GetStorageConfigType returns the StorageConfigType field if non-nil, zero value otherwise.
+
+### GetStorageConfigTypeOk
+
+`func (o *BackupTableParams) GetStorageConfigTypeOk() (*string, bool)`
+
+GetStorageConfigTypeOk returns a tuple with the StorageConfigType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageConfigType
+
+`func (o *BackupTableParams) SetStorageConfigType(v string)`
+
+SetStorageConfigType sets StorageConfigType field to given value.
+
+### HasStorageConfigType
+
+`func (o *BackupTableParams) HasStorageConfigType() bool`
+
+HasStorageConfigType returns a boolean if a field has been set.
 
 ### GetStorageConfigUUID
 
@@ -1063,6 +1462,26 @@ SetTimeBeforeDelete sets TimeBeforeDelete field to given value.
 
 HasTimeBeforeDelete returns a boolean if a field has been set.
 
+### GetTimeTakenPartial
+
+`func (o *BackupTableParams) GetTimeTakenPartial() int64`
+
+GetTimeTakenPartial returns the TimeTakenPartial field if non-nil, zero value otherwise.
+
+### GetTimeTakenPartialOk
+
+`func (o *BackupTableParams) GetTimeTakenPartialOk() (*int64, bool)`
+
+GetTimeTakenPartialOk returns a tuple with the TimeTakenPartial field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeTakenPartial
+
+`func (o *BackupTableParams) SetTimeTakenPartial(v int64)`
+
+SetTimeTakenPartial sets TimeTakenPartial field to given value.
+
+
 ### GetTransactionalBackup
 
 `func (o *BackupTableParams) GetTransactionalBackup() bool`
@@ -1162,6 +1581,56 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *BackupTableParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
+
+### GetYbcInstalled
+
+`func (o *BackupTableParams) GetYbcInstalled() bool`
+
+GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
+
+### GetYbcInstalledOk
+
+`func (o *BackupTableParams) GetYbcInstalledOk() (*bool, bool)`
+
+GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcInstalled
+
+`func (o *BackupTableParams) SetYbcInstalled(v bool)`
+
+SetYbcInstalled sets YbcInstalled field to given value.
+
+### HasYbcInstalled
+
+`func (o *BackupTableParams) HasYbcInstalled() bool`
+
+HasYbcInstalled returns a boolean if a field has been set.
+
+### GetYbcSoftwareVersion
+
+`func (o *BackupTableParams) GetYbcSoftwareVersion() string`
+
+GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetYbcSoftwareVersionOk
+
+`func (o *BackupTableParams) GetYbcSoftwareVersionOk() (*string, bool)`
+
+GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbcSoftwareVersion
+
+`func (o *BackupTableParams) SetYbcSoftwareVersion(v string)`
+
+SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
+
+### HasYbcSoftwareVersion
+
+`func (o *BackupTableParams) HasYbcSoftwareVersion() bool`
+
+HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

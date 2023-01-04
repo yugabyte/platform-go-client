@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -19,29 +19,22 @@ type InstanceType struct {
 	// True if the instance is active
 	Active *bool `json:"active,omitempty"`
 	IdKey InstanceTypeKey `json:"idKey"`
-	InstanceTypeCode string `json:"instanceTypeCode"`
-	InstanceTypeDetails InstanceTypeDetails `json:"instanceTypeDetails"`
+	// Instance type code
+	InstanceTypeCode *string `json:"instanceTypeCode,omitempty"`
+	InstanceTypeDetails *InstanceTypeDetails `json:"instanceTypeDetails,omitempty"`
 	// The instance's memory size, in gigabytes
 	MemSizeGB *float64 `json:"memSizeGB,omitempty"`
 	// The instance's number of CPU cores
 	NumCores *float64 `json:"numCores,omitempty"`
-	Provider Provider `json:"provider"`
-	ProviderCode string `json:"providerCode"`
-	ProviderUuid string `json:"providerUuid"`
 }
 
 // NewInstanceType instantiates a new InstanceType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(idKey InstanceTypeKey, instanceTypeCode string, instanceTypeDetails InstanceTypeDetails, provider Provider, providerCode string, providerUuid string, ) *InstanceType {
+func NewInstanceType(idKey InstanceTypeKey, ) *InstanceType {
 	this := InstanceType{}
 	this.IdKey = idKey
-	this.InstanceTypeCode = instanceTypeCode
-	this.InstanceTypeDetails = instanceTypeDetails
-	this.Provider = provider
-	this.ProviderCode = providerCode
-	this.ProviderUuid = providerUuid
 	return &this
 }
 
@@ -109,52 +102,68 @@ func (o *InstanceType) SetIdKey(v InstanceTypeKey) {
 	o.IdKey = v
 }
 
-// GetInstanceTypeCode returns the InstanceTypeCode field value
+// GetInstanceTypeCode returns the InstanceTypeCode field value if set, zero value otherwise.
 func (o *InstanceType) GetInstanceTypeCode() string {
-	if o == nil  {
+	if o == nil || o.InstanceTypeCode == nil {
 		var ret string
 		return ret
 	}
-
-	return o.InstanceTypeCode
+	return *o.InstanceTypeCode
 }
 
-// GetInstanceTypeCodeOk returns a tuple with the InstanceTypeCode field value
+// GetInstanceTypeCodeOk returns a tuple with the InstanceTypeCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstanceType) GetInstanceTypeCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.InstanceTypeCode == nil {
 		return nil, false
 	}
-	return &o.InstanceTypeCode, true
+	return o.InstanceTypeCode, true
 }
 
-// SetInstanceTypeCode sets field value
+// HasInstanceTypeCode returns a boolean if a field has been set.
+func (o *InstanceType) HasInstanceTypeCode() bool {
+	if o != nil && o.InstanceTypeCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstanceTypeCode gets a reference to the given string and assigns it to the InstanceTypeCode field.
 func (o *InstanceType) SetInstanceTypeCode(v string) {
-	o.InstanceTypeCode = v
+	o.InstanceTypeCode = &v
 }
 
-// GetInstanceTypeDetails returns the InstanceTypeDetails field value
+// GetInstanceTypeDetails returns the InstanceTypeDetails field value if set, zero value otherwise.
 func (o *InstanceType) GetInstanceTypeDetails() InstanceTypeDetails {
-	if o == nil  {
+	if o == nil || o.InstanceTypeDetails == nil {
 		var ret InstanceTypeDetails
 		return ret
 	}
-
-	return o.InstanceTypeDetails
+	return *o.InstanceTypeDetails
 }
 
-// GetInstanceTypeDetailsOk returns a tuple with the InstanceTypeDetails field value
+// GetInstanceTypeDetailsOk returns a tuple with the InstanceTypeDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstanceType) GetInstanceTypeDetailsOk() (*InstanceTypeDetails, bool) {
-	if o == nil  {
+	if o == nil || o.InstanceTypeDetails == nil {
 		return nil, false
 	}
-	return &o.InstanceTypeDetails, true
+	return o.InstanceTypeDetails, true
 }
 
-// SetInstanceTypeDetails sets field value
+// HasInstanceTypeDetails returns a boolean if a field has been set.
+func (o *InstanceType) HasInstanceTypeDetails() bool {
+	if o != nil && o.InstanceTypeDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstanceTypeDetails gets a reference to the given InstanceTypeDetails and assigns it to the InstanceTypeDetails field.
 func (o *InstanceType) SetInstanceTypeDetails(v InstanceTypeDetails) {
-	o.InstanceTypeDetails = v
+	o.InstanceTypeDetails = &v
 }
 
 // GetMemSizeGB returns the MemSizeGB field value if set, zero value otherwise.
@@ -221,78 +230,6 @@ func (o *InstanceType) SetNumCores(v float64) {
 	o.NumCores = &v
 }
 
-// GetProvider returns the Provider field value
-func (o *InstanceType) GetProvider() Provider {
-	if o == nil  {
-		var ret Provider
-		return ret
-	}
-
-	return o.Provider
-}
-
-// GetProviderOk returns a tuple with the Provider field value
-// and a boolean to check if the value has been set.
-func (o *InstanceType) GetProviderOk() (*Provider, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Provider, true
-}
-
-// SetProvider sets field value
-func (o *InstanceType) SetProvider(v Provider) {
-	o.Provider = v
-}
-
-// GetProviderCode returns the ProviderCode field value
-func (o *InstanceType) GetProviderCode() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.ProviderCode
-}
-
-// GetProviderCodeOk returns a tuple with the ProviderCode field value
-// and a boolean to check if the value has been set.
-func (o *InstanceType) GetProviderCodeOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.ProviderCode, true
-}
-
-// SetProviderCode sets field value
-func (o *InstanceType) SetProviderCode(v string) {
-	o.ProviderCode = v
-}
-
-// GetProviderUuid returns the ProviderUuid field value
-func (o *InstanceType) GetProviderUuid() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.ProviderUuid
-}
-
-// GetProviderUuidOk returns a tuple with the ProviderUuid field value
-// and a boolean to check if the value has been set.
-func (o *InstanceType) GetProviderUuidOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.ProviderUuid, true
-}
-
-// SetProviderUuid sets field value
-func (o *InstanceType) SetProviderUuid(v string) {
-	o.ProviderUuid = v
-}
-
 func (o InstanceType) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Active != nil {
@@ -301,10 +238,10 @@ func (o InstanceType) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["idKey"] = o.IdKey
 	}
-	if true {
+	if o.InstanceTypeCode != nil {
 		toSerialize["instanceTypeCode"] = o.InstanceTypeCode
 	}
-	if true {
+	if o.InstanceTypeDetails != nil {
 		toSerialize["instanceTypeDetails"] = o.InstanceTypeDetails
 	}
 	if o.MemSizeGB != nil {
@@ -312,15 +249,6 @@ func (o InstanceType) MarshalJSON() ([]byte, error) {
 	}
 	if o.NumCores != nil {
 		toSerialize["numCores"] = o.NumCores
-	}
-	if true {
-		toSerialize["provider"] = o.Provider
-	}
-	if true {
-		toSerialize["providerCode"] = o.ProviderCode
-	}
-	if true {
-		toSerialize["providerUuid"] = o.ProviderUuid
 	}
 	return json.Marshal(toSerialize)
 }

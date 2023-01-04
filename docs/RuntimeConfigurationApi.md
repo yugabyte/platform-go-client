@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteKey**](RuntimeConfigurationApi.md#DeleteKey) | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key
 [**GetConfig**](RuntimeConfigurationApi.md#GetConfig) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope} | List configuration entries for a scope
 [**GetConfigurationKey**](RuntimeConfigurationApi.md#GetConfigurationKey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Get a configuration key
+[**ListKeyInfo**](RuntimeConfigurationApi.md#ListKeyInfo) | **Get** /api/v1/runtime_config/mutable_key_info | List mutable keys
 [**ListKeys**](RuntimeConfigurationApi.md#ListKeys) | **Get** /api/v1/runtime_config/mutable_keys | List mutable keys
 [**ListScopes**](RuntimeConfigurationApi.md#ListScopes) | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes | List configuration scopes
 [**SetKey**](RuntimeConfigurationApi.md#SetKey) | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Update a configuration key
@@ -89,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## GetConfig
 
-> RuntimeConfigData GetConfig(ctx, cUUID, scope).IncludeInherited(includeInherited).Execute()
+> ScopedConfig GetConfig(ctx, cUUID, scope).IncludeInherited(includeInherited).Execute()
 
 List configuration entries for a scope
 
@@ -119,7 +120,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.GetConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetConfig`: RuntimeConfigData
+    // response from `GetConfig`: ScopedConfig
     fmt.Fprintf(os.Stdout, "Response from `RuntimeConfigurationApi.GetConfig`: %v\n", resp)
 }
 ```
@@ -146,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RuntimeConfigData**](RuntimeConfigData.md)
+[**ScopedConfig**](ScopedConfig.md)
 
 ### Authorization
 
@@ -230,6 +231,67 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: text/plain
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListKeyInfo
+
+> []ConfKeyInfo ListKeyInfo(ctx).Execute()
+
+List mutable keys
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.RuntimeConfigurationApi.ListKeyInfo(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.ListKeyInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListKeyInfo`: []ConfKeyInfo
+    fmt.Fprintf(os.Stdout, "Response from `RuntimeConfigurationApi.ListKeyInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListKeyInfoRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]ConfKeyInfo**](ConfKeyInfo.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

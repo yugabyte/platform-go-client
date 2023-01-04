@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Abortable** | Pointer to **bool** | Customer task abortable | [optional] 
 **CompletionTime** | Pointer to **time.Time** | Customer task completion time | [optional] 
+**CorrelationId** | Pointer to **string** | Correlation id | [optional] 
 **CreateTime** | Pointer to **time.Time** | Customer task creation time | [optional] 
 **Id** | Pointer to **string** | Customer task UUID | [optional] 
 **PercentComplete** | Pointer to **int32** | Customer task percentage completed | [optional] 
@@ -85,6 +86,31 @@ SetCompletionTime sets CompletionTime field to given value.
 `func (o *CustomerTaskData) HasCompletionTime() bool`
 
 HasCompletionTime returns a boolean if a field has been set.
+
+### GetCorrelationId
+
+`func (o *CustomerTaskData) GetCorrelationId() string`
+
+GetCorrelationId returns the CorrelationId field if non-nil, zero value otherwise.
+
+### GetCorrelationIdOk
+
+`func (o *CustomerTaskData) GetCorrelationIdOk() (*string, bool)`
+
+GetCorrelationIdOk returns a tuple with the CorrelationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCorrelationId
+
+`func (o *CustomerTaskData) SetCorrelationId(v string)`
+
+SetCorrelationId sets CorrelationId field to given value.
+
+### HasCorrelationId
+
+`func (o *CustomerTaskData) HasCorrelationId() bool`
+
+HasCorrelationId returns a boolean if a field has been set.
 
 ### GetCreateTime
 

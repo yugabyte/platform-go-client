@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -18,6 +18,8 @@ import (
 type MultiTableBackupRequestParams struct {
 	// Action type
 	ActionType *string `json:"actionType,omitempty"`
+	// Backup all tables in Keyspace
+	AllTables *bool `json:"allTables,omitempty"`
 	// Alter load balancer state
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backups
@@ -28,9 +30,12 @@ type MultiTableBackupRequestParams struct {
 	BackupType *string `json:"backupType,omitempty"`
 	// Backup UUID
 	BackupUuid *string `json:"backupUuid,omitempty"`
+	// Base backup UUID
+	BaseBackupUUID *string `json:"baseBackupUUID,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	CreatingUser Users `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
 	// Customer UUID
@@ -38,18 +43,32 @@ type MultiTableBackupRequestParams struct {
 	// Customer UUID
 	CustomerUuid *string `json:"customerUuid,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	// Disable checksum
+	DisableChecksum *bool `json:"disableChecksum,omitempty"`
+	// Disable multipart upload
+	DisableMultipart *bool `json:"disableMultipart,omitempty"`
+	// Don't add -m flag during gsutil upload dir command
+	DisableParallelism *bool `json:"disableParallelism,omitempty"`
 	// Is verbose logging enabled
 	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
+	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
+	// Time unit for backup expiry time
+	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	// Whether this task has been tried before
 	FirstTry *bool `json:"firstTry,omitempty"`
+	// Incremental backups chain size
+	FullChainSizeInBytes *int64 `json:"fullChainSizeInBytes,omitempty"`
 	// Should table backup errors be ignored
 	IgnoreErrors *bool `json:"ignoreErrors,omitempty"`
+	InstallYbc *bool `json:"installYbc,omitempty"`
+	// Full Table type backup
+	IsFullBackup *bool `json:"isFullBackup,omitempty"`
 	// Key space
 	Keyspace *string `json:"keyspace,omitempty"`
 	// KMS configuration UUID
@@ -66,18 +85,25 @@ type MultiTableBackupRequestParams struct {
 	OldOwner *string `json:"oldOwner,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
-	// Previous task UUID only if this task is a retry
+	PlatformUrl string `json:"platformUrl"`
+	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
+	// Per region locations
+	RegionLocations *[]RegionLocations `json:"regionLocations,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
 	// Schedule UUID
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
 	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
+	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
 	Sse *bool `json:"sse,omitempty"`
+	// Type of backup storage config
+	StorageConfigType *string `json:"storageConfigType,omitempty"`
 	// Storage configuration UUID
 	StorageConfigUUID string `json:"storageConfigUUID"`
 	// Storage location
@@ -94,6 +120,7 @@ type MultiTableBackupRequestParams struct {
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
 	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
+	TimeTakenPartial int64 `json:"timeTakenPartial"`
 	// Is backup transactional across tables
 	TransactionalBackup *bool `json:"transactionalBackup,omitempty"`
 	// Associated universe UUID
@@ -102,15 +129,22 @@ type MultiTableBackupRequestParams struct {
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
+	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewMultiTableBackupRequestParams instantiates a new MultiTableBackupRequestParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiTableBackupRequestParams(storageConfigUUID string, ) *MultiTableBackupRequestParams {
+func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams {
 	this := MultiTableBackupRequestParams{}
+	this.CreatingUser = creatingUser
+	this.PlatformUrl = platformUrl
+	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
+	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
+	this.TimeTakenPartial = timeTakenPartial
 	return &this
 }
 
@@ -152,6 +186,38 @@ func (o *MultiTableBackupRequestParams) HasActionType() bool {
 // SetActionType gets a reference to the given string and assigns it to the ActionType field.
 func (o *MultiTableBackupRequestParams) SetActionType(v string) {
 	o.ActionType = &v
+}
+
+// GetAllTables returns the AllTables field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetAllTables() bool {
+	if o == nil || o.AllTables == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AllTables
+}
+
+// GetAllTablesOk returns a tuple with the AllTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetAllTablesOk() (*bool, bool) {
+	if o == nil || o.AllTables == nil {
+		return nil, false
+	}
+	return o.AllTables, true
+}
+
+// HasAllTables returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasAllTables() bool {
+	if o != nil && o.AllTables != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllTables gets a reference to the given bool and assigns it to the AllTables field.
+func (o *MultiTableBackupRequestParams) SetAllTables(v bool) {
+	o.AllTables = &v
 }
 
 // GetAlterLoadBalancer returns the AlterLoadBalancer field value if set, zero value otherwise.
@@ -314,6 +380,38 @@ func (o *MultiTableBackupRequestParams) SetBackupUuid(v string) {
 	o.BackupUuid = &v
 }
 
+// GetBaseBackupUUID returns the BaseBackupUUID field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetBaseBackupUUID() string {
+	if o == nil || o.BaseBackupUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.BaseBackupUUID
+}
+
+// GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetBaseBackupUUIDOk() (*string, bool) {
+	if o == nil || o.BaseBackupUUID == nil {
+		return nil, false
+	}
+	return o.BaseBackupUUID, true
+}
+
+// HasBaseBackupUUID returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasBaseBackupUUID() bool {
+	if o != nil && o.BaseBackupUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBaseBackupUUID gets a reference to the given string and assigns it to the BaseBackupUUID field.
+func (o *MultiTableBackupRequestParams) SetBaseBackupUUID(v string) {
+	o.BaseBackupUUID = &v
+}
+
 // GetCmkArn returns the CmkArn field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetCmkArn() string {
 	if o == nil || o.CmkArn == nil {
@@ -376,6 +474,30 @@ func (o *MultiTableBackupRequestParams) HasCommunicationPorts() bool {
 // SetCommunicationPorts gets a reference to the given CommunicationPorts and assigns it to the CommunicationPorts field.
 func (o *MultiTableBackupRequestParams) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
+}
+
+// GetCreatingUser returns the CreatingUser field value
+func (o *MultiTableBackupRequestParams) GetCreatingUser() Users {
+	if o == nil  {
+		var ret Users
+		return ret
+	}
+
+	return o.CreatingUser
+}
+
+// GetCreatingUserOk returns a tuple with the CreatingUser field value
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetCreatingUserOk() (*Users, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatingUser, true
+}
+
+// SetCreatingUser sets field value
+func (o *MultiTableBackupRequestParams) SetCreatingUser(v Users) {
+	o.CreatingUser = v
 }
 
 // GetCronExpression returns the CronExpression field value if set, zero value otherwise.
@@ -506,6 +628,102 @@ func (o *MultiTableBackupRequestParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
 }
 
+// GetDisableChecksum returns the DisableChecksum field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetDisableChecksum() bool {
+	if o == nil || o.DisableChecksum == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DisableChecksum
+}
+
+// GetDisableChecksumOk returns a tuple with the DisableChecksum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetDisableChecksumOk() (*bool, bool) {
+	if o == nil || o.DisableChecksum == nil {
+		return nil, false
+	}
+	return o.DisableChecksum, true
+}
+
+// HasDisableChecksum returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasDisableChecksum() bool {
+	if o != nil && o.DisableChecksum != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableChecksum gets a reference to the given bool and assigns it to the DisableChecksum field.
+func (o *MultiTableBackupRequestParams) SetDisableChecksum(v bool) {
+	o.DisableChecksum = &v
+}
+
+// GetDisableMultipart returns the DisableMultipart field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetDisableMultipart() bool {
+	if o == nil || o.DisableMultipart == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DisableMultipart
+}
+
+// GetDisableMultipartOk returns a tuple with the DisableMultipart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetDisableMultipartOk() (*bool, bool) {
+	if o == nil || o.DisableMultipart == nil {
+		return nil, false
+	}
+	return o.DisableMultipart, true
+}
+
+// HasDisableMultipart returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasDisableMultipart() bool {
+	if o != nil && o.DisableMultipart != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableMultipart gets a reference to the given bool and assigns it to the DisableMultipart field.
+func (o *MultiTableBackupRequestParams) SetDisableMultipart(v bool) {
+	o.DisableMultipart = &v
+}
+
+// GetDisableParallelism returns the DisableParallelism field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetDisableParallelism() bool {
+	if o == nil || o.DisableParallelism == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DisableParallelism
+}
+
+// GetDisableParallelismOk returns a tuple with the DisableParallelism field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetDisableParallelismOk() (*bool, bool) {
+	if o == nil || o.DisableParallelism == nil {
+		return nil, false
+	}
+	return o.DisableParallelism, true
+}
+
+// HasDisableParallelism returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasDisableParallelism() bool {
+	if o != nil && o.DisableParallelism != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableParallelism gets a reference to the given bool and assigns it to the DisableParallelism field.
+func (o *MultiTableBackupRequestParams) SetDisableParallelism(v bool) {
+	o.DisableParallelism = &v
+}
+
 // GetEnableVerboseLogs returns the EnableVerboseLogs field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetEnableVerboseLogs() bool {
 	if o == nil || o.EnableVerboseLogs == nil {
@@ -536,6 +754,38 @@ func (o *MultiTableBackupRequestParams) HasEnableVerboseLogs() bool {
 // SetEnableVerboseLogs gets a reference to the given bool and assigns it to the EnableVerboseLogs field.
 func (o *MultiTableBackupRequestParams) SetEnableVerboseLogs(v bool) {
 	o.EnableVerboseLogs = &v
+}
+
+// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetEnableYbc() bool {
+	if o == nil || o.EnableYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableYbc
+}
+
+// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetEnableYbcOk() (*bool, bool) {
+	if o == nil || o.EnableYbc == nil {
+		return nil, false
+	}
+	return o.EnableYbc, true
+}
+
+// HasEnableYbc returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasEnableYbc() bool {
+	if o != nil && o.EnableYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
+func (o *MultiTableBackupRequestParams) SetEnableYbc(v bool) {
+	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -634,6 +884,38 @@ func (o *MultiTableBackupRequestParams) SetExpectedUniverseVersion(v int32) {
 	o.ExpectedUniverseVersion = &v
 }
 
+// GetExpiryTimeUnit returns the ExpiryTimeUnit field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetExpiryTimeUnit() string {
+	if o == nil || o.ExpiryTimeUnit == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExpiryTimeUnit
+}
+
+// GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetExpiryTimeUnitOk() (*string, bool) {
+	if o == nil || o.ExpiryTimeUnit == nil {
+		return nil, false
+	}
+	return o.ExpiryTimeUnit, true
+}
+
+// HasExpiryTimeUnit returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasExpiryTimeUnit() bool {
+	if o != nil && o.ExpiryTimeUnit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryTimeUnit gets a reference to the given string and assigns it to the ExpiryTimeUnit field.
+func (o *MultiTableBackupRequestParams) SetExpiryTimeUnit(v string) {
+	o.ExpiryTimeUnit = &v
+}
+
 // GetExtraDependencies returns the ExtraDependencies field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetExtraDependencies() ExtraDependencies {
 	if o == nil || o.ExtraDependencies == nil {
@@ -698,6 +980,38 @@ func (o *MultiTableBackupRequestParams) SetFirstTry(v bool) {
 	o.FirstTry = &v
 }
 
+// GetFullChainSizeInBytes returns the FullChainSizeInBytes field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetFullChainSizeInBytes() int64 {
+	if o == nil || o.FullChainSizeInBytes == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FullChainSizeInBytes
+}
+
+// GetFullChainSizeInBytesOk returns a tuple with the FullChainSizeInBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetFullChainSizeInBytesOk() (*int64, bool) {
+	if o == nil || o.FullChainSizeInBytes == nil {
+		return nil, false
+	}
+	return o.FullChainSizeInBytes, true
+}
+
+// HasFullChainSizeInBytes returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasFullChainSizeInBytes() bool {
+	if o != nil && o.FullChainSizeInBytes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFullChainSizeInBytes gets a reference to the given int64 and assigns it to the FullChainSizeInBytes field.
+func (o *MultiTableBackupRequestParams) SetFullChainSizeInBytes(v int64) {
+	o.FullChainSizeInBytes = &v
+}
+
 // GetIgnoreErrors returns the IgnoreErrors field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetIgnoreErrors() bool {
 	if o == nil || o.IgnoreErrors == nil {
@@ -728,6 +1042,70 @@ func (o *MultiTableBackupRequestParams) HasIgnoreErrors() bool {
 // SetIgnoreErrors gets a reference to the given bool and assigns it to the IgnoreErrors field.
 func (o *MultiTableBackupRequestParams) SetIgnoreErrors(v bool) {
 	o.IgnoreErrors = &v
+}
+
+// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetInstallYbc() bool {
+	if o == nil || o.InstallYbc == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallYbc
+}
+
+// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetInstallYbcOk() (*bool, bool) {
+	if o == nil || o.InstallYbc == nil {
+		return nil, false
+	}
+	return o.InstallYbc, true
+}
+
+// HasInstallYbc returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasInstallYbc() bool {
+	if o != nil && o.InstallYbc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
+func (o *MultiTableBackupRequestParams) SetInstallYbc(v bool) {
+	o.InstallYbc = &v
+}
+
+// GetIsFullBackup returns the IsFullBackup field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetIsFullBackup() bool {
+	if o == nil || o.IsFullBackup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsFullBackup
+}
+
+// GetIsFullBackupOk returns a tuple with the IsFullBackup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetIsFullBackupOk() (*bool, bool) {
+	if o == nil || o.IsFullBackup == nil {
+		return nil, false
+	}
+	return o.IsFullBackup, true
+}
+
+// HasIsFullBackup returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasIsFullBackup() bool {
+	if o != nil && o.IsFullBackup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsFullBackup gets a reference to the given bool and assigns it to the IsFullBackup field.
+func (o *MultiTableBackupRequestParams) SetIsFullBackup(v bool) {
+	o.IsFullBackup = &v
 }
 
 // GetKeyspace returns the Keyspace field value if set, zero value otherwise.
@@ -986,6 +1364,30 @@ func (o *MultiTableBackupRequestParams) SetParallelism(v int32) {
 	o.Parallelism = &v
 }
 
+// GetPlatformUrl returns the PlatformUrl field value
+func (o *MultiTableBackupRequestParams) GetPlatformUrl() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformUrl
+}
+
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetPlatformUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformUrl, true
+}
+
+// SetPlatformUrl sets field value
+func (o *MultiTableBackupRequestParams) SetPlatformUrl(v string) {
+	o.PlatformUrl = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1016,6 +1418,38 @@ func (o *MultiTableBackupRequestParams) HasPreviousTaskUUID() bool {
 // SetPreviousTaskUUID gets a reference to the given string and assigns it to the PreviousTaskUUID field.
 func (o *MultiTableBackupRequestParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
+}
+
+// GetRegionLocations returns the RegionLocations field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetRegionLocations() []RegionLocations {
+	if o == nil || o.RegionLocations == nil {
+		var ret []RegionLocations
+		return ret
+	}
+	return *o.RegionLocations
+}
+
+// GetRegionLocationsOk returns a tuple with the RegionLocations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetRegionLocationsOk() (*[]RegionLocations, bool) {
+	if o == nil || o.RegionLocations == nil {
+		return nil, false
+	}
+	return o.RegionLocations, true
+}
+
+// HasRegionLocations returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasRegionLocations() bool {
+	if o != nil && o.RegionLocations != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionLocations gets a reference to the given []RegionLocations and assigns it to the RegionLocations field.
+func (o *MultiTableBackupRequestParams) SetRegionLocations(v []RegionLocations) {
+	o.RegionLocations = &v
 }
 
 // GetRestoreTimeStamp returns the RestoreTimeStamp field value if set, zero value otherwise.
@@ -1114,6 +1548,54 @@ func (o *MultiTableBackupRequestParams) SetSchedulingFrequency(v int64) {
 	o.SchedulingFrequency = &v
 }
 
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterMasterRestartMillis
+}
+
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterMasterRestartMillis, true
+}
+
+// SetSleepAfterMasterRestartMillis sets field value
+func (o *MultiTableBackupRequestParams) SetSleepAfterMasterRestartMillis(v int32) {
+	o.SleepAfterMasterRestartMillis = v
+}
+
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillis() int32 {
+	if o == nil  {
+		var ret int32
+		return ret
+	}
+
+	return o.SleepAfterTServerRestartMillis
+}
+
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SleepAfterTServerRestartMillis, true
+}
+
+// SetSleepAfterTServerRestartMillis sets field value
+func (o *MultiTableBackupRequestParams) SetSleepAfterTServerRestartMillis(v int32) {
+	o.SleepAfterTServerRestartMillis = v
+}
+
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetSourceXClusterConfigs() []string {
 	if o == nil || o.SourceXClusterConfigs == nil {
@@ -1176,6 +1658,38 @@ func (o *MultiTableBackupRequestParams) HasSse() bool {
 // SetSse gets a reference to the given bool and assigns it to the Sse field.
 func (o *MultiTableBackupRequestParams) SetSse(v bool) {
 	o.Sse = &v
+}
+
+// GetStorageConfigType returns the StorageConfigType field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetStorageConfigType() string {
+	if o == nil || o.StorageConfigType == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageConfigType
+}
+
+// GetStorageConfigTypeOk returns a tuple with the StorageConfigType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetStorageConfigTypeOk() (*string, bool) {
+	if o == nil || o.StorageConfigType == nil {
+		return nil, false
+	}
+	return o.StorageConfigType, true
+}
+
+// HasStorageConfigType returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasStorageConfigType() bool {
+	if o != nil && o.StorageConfigType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageConfigType gets a reference to the given string and assigns it to the StorageConfigType field.
+func (o *MultiTableBackupRequestParams) SetStorageConfigType(v string) {
+	o.StorageConfigType = &v
 }
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
@@ -1426,6 +1940,30 @@ func (o *MultiTableBackupRequestParams) SetTimeBeforeDelete(v int64) {
 	o.TimeBeforeDelete = &v
 }
 
+// GetTimeTakenPartial returns the TimeTakenPartial field value
+func (o *MultiTableBackupRequestParams) GetTimeTakenPartial() int64 {
+	if o == nil  {
+		var ret int64
+		return ret
+	}
+
+	return o.TimeTakenPartial
+}
+
+// GetTimeTakenPartialOk returns a tuple with the TimeTakenPartial field value
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetTimeTakenPartialOk() (*int64, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TimeTakenPartial, true
+}
+
+// SetTimeTakenPartial sets field value
+func (o *MultiTableBackupRequestParams) SetTimeTakenPartial(v int64) {
+	o.TimeTakenPartial = v
+}
+
 // GetTransactionalBackup returns the TransactionalBackup field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetTransactionalBackup() bool {
 	if o == nil || o.TransactionalBackup == nil {
@@ -1554,10 +2092,77 @@ func (o *MultiTableBackupRequestParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
+// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetYbcInstalled() bool {
+	if o == nil || o.YbcInstalled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YbcInstalled
+}
+
+// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetYbcInstalledOk() (*bool, bool) {
+	if o == nil || o.YbcInstalled == nil {
+		return nil, false
+	}
+	return o.YbcInstalled, true
+}
+
+// HasYbcInstalled returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasYbcInstalled() bool {
+	if o != nil && o.YbcInstalled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
+func (o *MultiTableBackupRequestParams) SetYbcInstalled(v bool) {
+	o.YbcInstalled = &v
+}
+
+// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetYbcSoftwareVersion() string {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.YbcSoftwareVersion
+}
+
+// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetYbcSoftwareVersionOk() (*string, bool) {
+	if o == nil || o.YbcSoftwareVersion == nil {
+		return nil, false
+	}
+	return o.YbcSoftwareVersion, true
+}
+
+// HasYbcSoftwareVersion returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasYbcSoftwareVersion() bool {
+	if o != nil && o.YbcSoftwareVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
+func (o *MultiTableBackupRequestParams) SetYbcSoftwareVersion(v string) {
+	o.YbcSoftwareVersion = &v
+}
+
 func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ActionType != nil {
 		toSerialize["actionType"] = o.ActionType
+	}
+	if o.AllTables != nil {
+		toSerialize["allTables"] = o.AllTables
 	}
 	if o.AlterLoadBalancer != nil {
 		toSerialize["alterLoadBalancer"] = o.AlterLoadBalancer
@@ -1574,11 +2179,17 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.BackupUuid != nil {
 		toSerialize["backupUuid"] = o.BackupUuid
 	}
+	if o.BaseBackupUUID != nil {
+		toSerialize["baseBackupUUID"] = o.BaseBackupUUID
+	}
 	if o.CmkArn != nil {
 		toSerialize["cmkArn"] = o.CmkArn
 	}
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
+	}
+	if true {
+		toSerialize["creatingUser"] = o.CreatingUser
 	}
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
@@ -1592,8 +2203,20 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
 	}
+	if o.DisableChecksum != nil {
+		toSerialize["disableChecksum"] = o.DisableChecksum
+	}
+	if o.DisableMultipart != nil {
+		toSerialize["disableMultipart"] = o.DisableMultipart
+	}
+	if o.DisableParallelism != nil {
+		toSerialize["disableParallelism"] = o.DisableParallelism
+	}
 	if o.EnableVerboseLogs != nil {
 		toSerialize["enableVerboseLogs"] = o.EnableVerboseLogs
+	}
+	if o.EnableYbc != nil {
+		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1604,14 +2227,26 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.ExpectedUniverseVersion != nil {
 		toSerialize["expectedUniverseVersion"] = o.ExpectedUniverseVersion
 	}
+	if o.ExpiryTimeUnit != nil {
+		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
+	}
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
 	if o.FirstTry != nil {
 		toSerialize["firstTry"] = o.FirstTry
 	}
+	if o.FullChainSizeInBytes != nil {
+		toSerialize["fullChainSizeInBytes"] = o.FullChainSizeInBytes
+	}
 	if o.IgnoreErrors != nil {
 		toSerialize["ignoreErrors"] = o.IgnoreErrors
+	}
+	if o.InstallYbc != nil {
+		toSerialize["installYbc"] = o.InstallYbc
+	}
+	if o.IsFullBackup != nil {
+		toSerialize["isFullBackup"] = o.IsFullBackup
 	}
 	if o.Keyspace != nil {
 		toSerialize["keyspace"] = o.Keyspace
@@ -1637,8 +2272,14 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.Parallelism != nil {
 		toSerialize["parallelism"] = o.Parallelism
 	}
+	if true {
+		toSerialize["platformUrl"] = o.PlatformUrl
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
+	}
+	if o.RegionLocations != nil {
+		toSerialize["regionLocations"] = o.RegionLocations
 	}
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
@@ -1649,11 +2290,20 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.SchedulingFrequency != nil {
 		toSerialize["schedulingFrequency"] = o.SchedulingFrequency
 	}
+	if true {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if true {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}
 	if o.Sse != nil {
 		toSerialize["sse"] = o.Sse
+	}
+	if o.StorageConfigType != nil {
+		toSerialize["storageConfigType"] = o.StorageConfigType
 	}
 	if true {
 		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
@@ -1679,6 +2329,9 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.TimeBeforeDelete != nil {
 		toSerialize["timeBeforeDelete"] = o.TimeBeforeDelete
 	}
+	if true {
+		toSerialize["timeTakenPartial"] = o.TimeTakenPartial
+	}
 	if o.TransactionalBackup != nil {
 		toSerialize["transactionalBackup"] = o.TransactionalBackup
 	}
@@ -1690,6 +2343,12 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
+	}
+	if o.YbcInstalled != nil {
+		toSerialize["ybcInstalled"] = o.YbcInstalled
+	}
+	if o.YbcSoftwareVersion != nil {
+		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

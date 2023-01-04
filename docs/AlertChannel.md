@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomerUuid** | **string** |  | 
-**Name** | **string** |  | 
+**CustomerUuid** | **string** | Customer UUID | [readonly] 
+**Name** | **string** | Name | 
 **Params** | [**AlertChannelParams**](AlertChannelParams.md) |  | 
-**Uuid** | **string** |  | 
+**Uuid** | Pointer to **string** | Channel UUID | [optional] [readonly] 
 
 ## Methods
 
 ### NewAlertChannel
 
-`func NewAlertChannel(customerUuid string, name string, params AlertChannelParams, uuid string, ) *AlertChannel`
+`func NewAlertChannel(customerUuid string, name string, params AlertChannelParams, ) *AlertChannel`
 
 NewAlertChannel instantiates a new AlertChannel object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +107,11 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
+### HasUuid
+
+`func (o *AlertChannel) HasUuid() bool`
+
+HasUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

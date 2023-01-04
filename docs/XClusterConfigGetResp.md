@@ -4,22 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreateTime** | Pointer to **time.Time** | Create time | [optional] 
+**CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
 **Lag** | **map[string]interface{}** | Lag metric data | 
-**ModifyTime** | Pointer to **time.Time** | Modify time | [optional] 
-**Name** | Pointer to **string** | Name | [optional] 
+**ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
+**Name** | Pointer to **string** | XCluster config name | [optional] 
+**Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
+**ReplicationGroupName** | Pointer to **string** | Replication group name in DB | [optional] 
 **SourceUniverseUUID** | Pointer to **string** | Source Universe UUID | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
-**Tables** | Pointer to **[]string** | Source Universe table IDs | [optional] 
+**TableDetails** | [**[]XClusterTableConfig**](XClusterTableConfig.md) |  | 
+**Tables** | Pointer to **[]string** |  | [optional] 
 **TargetUniverseUUID** | Pointer to **string** | Target Universe UUID | [optional] 
-**Uuid** | Pointer to **string** | UUID | [optional] 
-**XclusterConfig** | [**XClusterConfig**](XClusterConfig.md) |  | 
+**Uuid** | Pointer to **string** | XCluster config UUID | [optional] 
 
 ## Methods
 
 ### NewXClusterConfigGetResp
 
-`func NewXClusterConfigGetResp(lag map[string]interface{}, xclusterConfig XClusterConfig, ) *XClusterConfigGetResp`
+`func NewXClusterConfigGetResp(lag map[string]interface{}, tableDetails []XClusterTableConfig, ) *XClusterConfigGetResp`
 
 NewXClusterConfigGetResp instantiates a new XClusterConfigGetResp object
 This constructor will assign default values to properties that have it defined,
@@ -129,6 +131,56 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetPaused
+
+`func (o *XClusterConfigGetResp) GetPaused() bool`
+
+GetPaused returns the Paused field if non-nil, zero value otherwise.
+
+### GetPausedOk
+
+`func (o *XClusterConfigGetResp) GetPausedOk() (*bool, bool)`
+
+GetPausedOk returns a tuple with the Paused field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaused
+
+`func (o *XClusterConfigGetResp) SetPaused(v bool)`
+
+SetPaused sets Paused field to given value.
+
+### HasPaused
+
+`func (o *XClusterConfigGetResp) HasPaused() bool`
+
+HasPaused returns a boolean if a field has been set.
+
+### GetReplicationGroupName
+
+`func (o *XClusterConfigGetResp) GetReplicationGroupName() string`
+
+GetReplicationGroupName returns the ReplicationGroupName field if non-nil, zero value otherwise.
+
+### GetReplicationGroupNameOk
+
+`func (o *XClusterConfigGetResp) GetReplicationGroupNameOk() (*string, bool)`
+
+GetReplicationGroupNameOk returns a tuple with the ReplicationGroupName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplicationGroupName
+
+`func (o *XClusterConfigGetResp) SetReplicationGroupName(v string)`
+
+SetReplicationGroupName sets ReplicationGroupName field to given value.
+
+### HasReplicationGroupName
+
+`func (o *XClusterConfigGetResp) HasReplicationGroupName() bool`
+
+HasReplicationGroupName returns a boolean if a field has been set.
+
 ### GetSourceUniverseUUID
 
 `func (o *XClusterConfigGetResp) GetSourceUniverseUUID() string`
@@ -178,6 +230,26 @@ SetStatus sets Status field to given value.
 `func (o *XClusterConfigGetResp) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetTableDetails
+
+`func (o *XClusterConfigGetResp) GetTableDetails() []XClusterTableConfig`
+
+GetTableDetails returns the TableDetails field if non-nil, zero value otherwise.
+
+### GetTableDetailsOk
+
+`func (o *XClusterConfigGetResp) GetTableDetailsOk() (*[]XClusterTableConfig, bool)`
+
+GetTableDetailsOk returns a tuple with the TableDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableDetails
+
+`func (o *XClusterConfigGetResp) SetTableDetails(v []XClusterTableConfig)`
+
+SetTableDetails sets TableDetails field to given value.
+
 
 ### GetTables
 
@@ -253,26 +325,6 @@ SetUuid sets Uuid field to given value.
 `func (o *XClusterConfigGetResp) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
-
-### GetXclusterConfig
-
-`func (o *XClusterConfigGetResp) GetXclusterConfig() XClusterConfig`
-
-GetXclusterConfig returns the XclusterConfig field if non-nil, zero value otherwise.
-
-### GetXclusterConfigOk
-
-`func (o *XClusterConfigGetResp) GetXclusterConfigOk() (*XClusterConfig, bool)`
-
-GetXclusterConfigOk returns a tuple with the XclusterConfig field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXclusterConfig
-
-`func (o *XClusterConfigGetResp) SetXclusterConfig(v XClusterConfig)`
-
-SetXclusterConfig sets XclusterConfig field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

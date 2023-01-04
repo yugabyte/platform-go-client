@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WebhookUrl** | **string** |  | 
+**WebhookUrl** | **string** | Webhook URL | 
 
 ## Methods
 

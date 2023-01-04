@@ -4,18 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AvailabilityZones** | Pointer to **[]string** | Availability zone code | [optional] 
+**ClusterUuids** | Pointer to **[]string** | Cluster UUIDs | [optional] 
 **End** | Pointer to **int64** | End time | [optional] 
 **IsRecharts** | Pointer to **bool** | Is Recharts | [optional] 
-**Metrics** | **[]string** | Metrics | 
-**NodeName** | Pointer to **string** | Node name | [optional] 
+**Metrics** | Pointer to **[]string** | Metrics | [optional] 
+**MetricsWithSettings** | Pointer to [**[]MetricSettings**](MetricSettings.md) | List of metrics with custom settings | [optional] 
+**NodeNames** | Pointer to **[]string** | Node names | [optional] 
 **NodePrefix** | Pointer to **string** | Node prefix | [optional] 
+**RegionCodes** | Pointer to **[]string** | Region code | [optional] 
 **Start** | **int64** | Start time | 
+**TableId** | Pointer to **string** | Table id | [optional] 
+**TableName** | Pointer to **string** | Table name | [optional] 
+**XclusterConfigUuid** | **string** |  | 
 
 ## Methods
 
 ### NewMetricQueryParams
 
-`func NewMetricQueryParams(metrics []string, start int64, ) *MetricQueryParams`
+`func NewMetricQueryParams(start int64, xclusterConfigUuid string, ) *MetricQueryParams`
 
 NewMetricQueryParams instantiates a new MetricQueryParams object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +36,56 @@ will change when the set of required properties is changed
 NewMetricQueryParamsWithDefaults instantiates a new MetricQueryParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAvailabilityZones
+
+`func (o *MetricQueryParams) GetAvailabilityZones() []string`
+
+GetAvailabilityZones returns the AvailabilityZones field if non-nil, zero value otherwise.
+
+### GetAvailabilityZonesOk
+
+`func (o *MetricQueryParams) GetAvailabilityZonesOk() (*[]string, bool)`
+
+GetAvailabilityZonesOk returns a tuple with the AvailabilityZones field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailabilityZones
+
+`func (o *MetricQueryParams) SetAvailabilityZones(v []string)`
+
+SetAvailabilityZones sets AvailabilityZones field to given value.
+
+### HasAvailabilityZones
+
+`func (o *MetricQueryParams) HasAvailabilityZones() bool`
+
+HasAvailabilityZones returns a boolean if a field has been set.
+
+### GetClusterUuids
+
+`func (o *MetricQueryParams) GetClusterUuids() []string`
+
+GetClusterUuids returns the ClusterUuids field if non-nil, zero value otherwise.
+
+### GetClusterUuidsOk
+
+`func (o *MetricQueryParams) GetClusterUuidsOk() (*[]string, bool)`
+
+GetClusterUuidsOk returns a tuple with the ClusterUuids field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterUuids
+
+`func (o *MetricQueryParams) SetClusterUuids(v []string)`
+
+SetClusterUuids sets ClusterUuids field to given value.
+
+### HasClusterUuids
+
+`func (o *MetricQueryParams) HasClusterUuids() bool`
+
+HasClusterUuids returns a boolean if a field has been set.
 
 ### GetEnd
 
@@ -99,31 +156,61 @@ and a boolean to check if the value has been set.
 
 SetMetrics sets Metrics field to given value.
 
+### HasMetrics
 
-### GetNodeName
+`func (o *MetricQueryParams) HasMetrics() bool`
 
-`func (o *MetricQueryParams) GetNodeName() string`
+HasMetrics returns a boolean if a field has been set.
 
-GetNodeName returns the NodeName field if non-nil, zero value otherwise.
+### GetMetricsWithSettings
 
-### GetNodeNameOk
+`func (o *MetricQueryParams) GetMetricsWithSettings() []MetricSettings`
 
-`func (o *MetricQueryParams) GetNodeNameOk() (*string, bool)`
+GetMetricsWithSettings returns the MetricsWithSettings field if non-nil, zero value otherwise.
 
-GetNodeNameOk returns a tuple with the NodeName field if it's non-nil, zero value otherwise
+### GetMetricsWithSettingsOk
+
+`func (o *MetricQueryParams) GetMetricsWithSettingsOk() (*[]MetricSettings, bool)`
+
+GetMetricsWithSettingsOk returns a tuple with the MetricsWithSettings field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNodeName
+### SetMetricsWithSettings
 
-`func (o *MetricQueryParams) SetNodeName(v string)`
+`func (o *MetricQueryParams) SetMetricsWithSettings(v []MetricSettings)`
 
-SetNodeName sets NodeName field to given value.
+SetMetricsWithSettings sets MetricsWithSettings field to given value.
 
-### HasNodeName
+### HasMetricsWithSettings
 
-`func (o *MetricQueryParams) HasNodeName() bool`
+`func (o *MetricQueryParams) HasMetricsWithSettings() bool`
 
-HasNodeName returns a boolean if a field has been set.
+HasMetricsWithSettings returns a boolean if a field has been set.
+
+### GetNodeNames
+
+`func (o *MetricQueryParams) GetNodeNames() []string`
+
+GetNodeNames returns the NodeNames field if non-nil, zero value otherwise.
+
+### GetNodeNamesOk
+
+`func (o *MetricQueryParams) GetNodeNamesOk() (*[]string, bool)`
+
+GetNodeNamesOk returns a tuple with the NodeNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeNames
+
+`func (o *MetricQueryParams) SetNodeNames(v []string)`
+
+SetNodeNames sets NodeNames field to given value.
+
+### HasNodeNames
+
+`func (o *MetricQueryParams) HasNodeNames() bool`
+
+HasNodeNames returns a boolean if a field has been set.
 
 ### GetNodePrefix
 
@@ -150,6 +237,31 @@ SetNodePrefix sets NodePrefix field to given value.
 
 HasNodePrefix returns a boolean if a field has been set.
 
+### GetRegionCodes
+
+`func (o *MetricQueryParams) GetRegionCodes() []string`
+
+GetRegionCodes returns the RegionCodes field if non-nil, zero value otherwise.
+
+### GetRegionCodesOk
+
+`func (o *MetricQueryParams) GetRegionCodesOk() (*[]string, bool)`
+
+GetRegionCodesOk returns a tuple with the RegionCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegionCodes
+
+`func (o *MetricQueryParams) SetRegionCodes(v []string)`
+
+SetRegionCodes sets RegionCodes field to given value.
+
+### HasRegionCodes
+
+`func (o *MetricQueryParams) HasRegionCodes() bool`
+
+HasRegionCodes returns a boolean if a field has been set.
+
 ### GetStart
 
 `func (o *MetricQueryParams) GetStart() int64`
@@ -168,6 +280,76 @@ and a boolean to check if the value has been set.
 `func (o *MetricQueryParams) SetStart(v int64)`
 
 SetStart sets Start field to given value.
+
+
+### GetTableId
+
+`func (o *MetricQueryParams) GetTableId() string`
+
+GetTableId returns the TableId field if non-nil, zero value otherwise.
+
+### GetTableIdOk
+
+`func (o *MetricQueryParams) GetTableIdOk() (*string, bool)`
+
+GetTableIdOk returns a tuple with the TableId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableId
+
+`func (o *MetricQueryParams) SetTableId(v string)`
+
+SetTableId sets TableId field to given value.
+
+### HasTableId
+
+`func (o *MetricQueryParams) HasTableId() bool`
+
+HasTableId returns a boolean if a field has been set.
+
+### GetTableName
+
+`func (o *MetricQueryParams) GetTableName() string`
+
+GetTableName returns the TableName field if non-nil, zero value otherwise.
+
+### GetTableNameOk
+
+`func (o *MetricQueryParams) GetTableNameOk() (*string, bool)`
+
+GetTableNameOk returns a tuple with the TableName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableName
+
+`func (o *MetricQueryParams) SetTableName(v string)`
+
+SetTableName sets TableName field to given value.
+
+### HasTableName
+
+`func (o *MetricQueryParams) HasTableName() bool`
+
+HasTableName returns a boolean if a field has been set.
+
+### GetXclusterConfigUuid
+
+`func (o *MetricQueryParams) GetXclusterConfigUuid() string`
+
+GetXclusterConfigUuid returns the XclusterConfigUuid field if non-nil, zero value otherwise.
+
+### GetXclusterConfigUuidOk
+
+`func (o *MetricQueryParams) GetXclusterConfigUuidOk() (*string, bool)`
+
+GetXclusterConfigUuidOk returns a tuple with the XclusterConfigUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXclusterConfigUuid
+
+`func (o *MetricQueryParams) SetXclusterConfigUuid(v string)`
+
+SetXclusterConfigUuid sets XclusterConfigUuid field to given value.
 
 
 

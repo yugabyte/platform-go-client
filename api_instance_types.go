@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -41,7 +41,7 @@ func (r InstanceTypesApiApiCreateInstanceTypeRequest) InstanceType(instanceType 
 	return r
 }
 
-func (r InstanceTypesApiApiCreateInstanceTypeRequest) Execute() (InstanceType, *_nethttp.Response, error) {
+func (r InstanceTypesApiApiCreateInstanceTypeRequest) Execute() (InstanceTypeResp, *_nethttp.Response, error) {
 	return r.ApiService.CreateInstanceTypeExecute(r)
 }
 
@@ -63,16 +63,16 @@ func (a *InstanceTypesApiService) CreateInstanceType(ctx _context.Context, cUUID
 
 /*
  * Execute executes the request
- * @return InstanceType
+ * @return InstanceTypeResp
  */
-func (a *InstanceTypesApiService) CreateInstanceTypeExecute(r InstanceTypesApiApiCreateInstanceTypeRequest) (InstanceType, *_nethttp.Response, error) {
+func (a *InstanceTypesApiService) CreateInstanceTypeExecute(r InstanceTypesApiApiCreateInstanceTypeRequest) (InstanceTypeResp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InstanceType
+		localVarReturnValue  InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesApiService.CreateInstanceType")
@@ -642,7 +642,7 @@ type InstanceTypesApiApiInstanceTypeDetailRequest struct {
 }
 
 
-func (r InstanceTypesApiApiInstanceTypeDetailRequest) Execute() (InstanceType, *_nethttp.Response, error) {
+func (r InstanceTypesApiApiInstanceTypeDetailRequest) Execute() (InstanceTypeResp, *_nethttp.Response, error) {
 	return r.ApiService.InstanceTypeDetailExecute(r)
 }
 
@@ -666,16 +666,16 @@ func (a *InstanceTypesApiService) InstanceTypeDetail(ctx _context.Context, cUUID
 
 /*
  * Execute executes the request
- * @return InstanceType
+ * @return InstanceTypeResp
  */
-func (a *InstanceTypesApiService) InstanceTypeDetailExecute(r InstanceTypesApiApiInstanceTypeDetailRequest) (InstanceType, *_nethttp.Response, error) {
+func (a *InstanceTypesApiService) InstanceTypeDetailExecute(r InstanceTypesApiApiInstanceTypeDetailRequest) (InstanceTypeResp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InstanceType
+		localVarReturnValue  InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesApiService.InstanceTypeDetail")
@@ -773,7 +773,7 @@ func (r InstanceTypesApiApiListOfInstanceTypeRequest) Zone(zone []string) Instan
 	return r
 }
 
-func (r InstanceTypesApiApiListOfInstanceTypeRequest) Execute() ([]InstanceType, *_nethttp.Response, error) {
+func (r InstanceTypesApiApiListOfInstanceTypeRequest) Execute() ([]InstanceTypeResp, *_nethttp.Response, error) {
 	return r.ApiService.ListOfInstanceTypeExecute(r)
 }
 
@@ -795,16 +795,16 @@ func (a *InstanceTypesApiService) ListOfInstanceType(ctx _context.Context, cUUID
 
 /*
  * Execute executes the request
- * @return []InstanceType
+ * @return []InstanceTypeResp
  */
-func (a *InstanceTypesApiService) ListOfInstanceTypeExecute(r InstanceTypesApiApiListOfInstanceTypeRequest) ([]InstanceType, *_nethttp.Response, error) {
+func (a *InstanceTypesApiService) ListOfInstanceTypeExecute(r InstanceTypesApiApiListOfInstanceTypeRequest) ([]InstanceTypeResp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []InstanceType
+		localVarReturnValue  []InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesApiService.ListOfInstanceType")

@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -23,6 +23,8 @@ type RegionFormData struct {
 	Latitude float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
 	Name string `json:"name"`
+	SecurityGroupId string `json:"securityGroupId"`
+	VnetName string `json:"vnetName"`
 	YbImage string `json:"ybImage"`
 }
 
@@ -30,7 +32,7 @@ type RegionFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, ybImage string, ) *RegionFormData {
+func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, securityGroupId string, vnetName string, ybImage string, ) *RegionFormData {
 	this := RegionFormData{}
 	this.Code = code
 	this.DestVpcId = destVpcId
@@ -39,6 +41,8 @@ func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcR
 	this.Latitude = latitude
 	this.Longitude = longitude
 	this.Name = name
+	this.SecurityGroupId = securityGroupId
+	this.VnetName = vnetName
 	this.YbImage = ybImage
 	return &this
 }
@@ -219,6 +223,54 @@ func (o *RegionFormData) SetName(v string) {
 	o.Name = v
 }
 
+// GetSecurityGroupId returns the SecurityGroupId field value
+func (o *RegionFormData) GetSecurityGroupId() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.SecurityGroupId
+}
+
+// GetSecurityGroupIdOk returns a tuple with the SecurityGroupId field value
+// and a boolean to check if the value has been set.
+func (o *RegionFormData) GetSecurityGroupIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SecurityGroupId, true
+}
+
+// SetSecurityGroupId sets field value
+func (o *RegionFormData) SetSecurityGroupId(v string) {
+	o.SecurityGroupId = v
+}
+
+// GetVnetName returns the VnetName field value
+func (o *RegionFormData) GetVnetName() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.VnetName
+}
+
+// GetVnetNameOk returns a tuple with the VnetName field value
+// and a boolean to check if the value has been set.
+func (o *RegionFormData) GetVnetNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.VnetName, true
+}
+
+// SetVnetName sets field value
+func (o *RegionFormData) SetVnetName(v string) {
+	o.VnetName = v
+}
+
 // GetYbImage returns the YbImage field value
 func (o *RegionFormData) GetYbImage() string {
 	if o == nil  {
@@ -265,6 +317,12 @@ func (o RegionFormData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["securityGroupId"] = o.SecurityGroupId
+	}
+	if true {
+		toSerialize["vnetName"] = o.VnetName
 	}
 	if true {
 		toSerialize["ybImage"] = o.YbImage

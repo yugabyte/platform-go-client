@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -14,12 +14,16 @@ import (
 	"encoding/json"
 )
 
-// YBPError Generic error response from the Yugabyte Platform API
+// YBPError Generic error response from the YugabyteDB Anywhere API
 type YBPError struct {
 	// User-visible unstructured error message
 	Error *string `json:"error,omitempty"`
-	// User visible error message as json object
+	// User visible structured error message as json object
 	ErrorJson *map[string]interface{} `json:"errorJson,omitempty"`
+	// Method for HTTP call that resulted in this error
+	HttpMethod *string `json:"httpMethod,omitempty"`
+	// URI for HTTP request that resulted in this error
+	RequestUri *string `json:"requestUri,omitempty"`
 	// Always set to false to indicate failure
 	Success *bool `json:"success,omitempty"`
 }
@@ -105,6 +109,70 @@ func (o *YBPError) SetErrorJson(v map[string]interface{}) {
 	o.ErrorJson = &v
 }
 
+// GetHttpMethod returns the HttpMethod field value if set, zero value otherwise.
+func (o *YBPError) GetHttpMethod() string {
+	if o == nil || o.HttpMethod == nil {
+		var ret string
+		return ret
+	}
+	return *o.HttpMethod
+}
+
+// GetHttpMethodOk returns a tuple with the HttpMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBPError) GetHttpMethodOk() (*string, bool) {
+	if o == nil || o.HttpMethod == nil {
+		return nil, false
+	}
+	return o.HttpMethod, true
+}
+
+// HasHttpMethod returns a boolean if a field has been set.
+func (o *YBPError) HasHttpMethod() bool {
+	if o != nil && o.HttpMethod != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHttpMethod gets a reference to the given string and assigns it to the HttpMethod field.
+func (o *YBPError) SetHttpMethod(v string) {
+	o.HttpMethod = &v
+}
+
+// GetRequestUri returns the RequestUri field value if set, zero value otherwise.
+func (o *YBPError) GetRequestUri() string {
+	if o == nil || o.RequestUri == nil {
+		var ret string
+		return ret
+	}
+	return *o.RequestUri
+}
+
+// GetRequestUriOk returns a tuple with the RequestUri field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBPError) GetRequestUriOk() (*string, bool) {
+	if o == nil || o.RequestUri == nil {
+		return nil, false
+	}
+	return o.RequestUri, true
+}
+
+// HasRequestUri returns a boolean if a field has been set.
+func (o *YBPError) HasRequestUri() bool {
+	if o != nil && o.RequestUri != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestUri gets a reference to the given string and assigns it to the RequestUri field.
+func (o *YBPError) SetRequestUri(v string) {
+	o.RequestUri = &v
+}
+
 // GetSuccess returns the Success field value if set, zero value otherwise.
 func (o *YBPError) GetSuccess() bool {
 	if o == nil || o.Success == nil {
@@ -144,6 +212,12 @@ func (o YBPError) MarshalJSON() ([]byte, error) {
 	}
 	if o.ErrorJson != nil {
 		toSerialize["errorJson"] = o.ErrorJson
+	}
+	if o.HttpMethod != nil {
+		toSerialize["httpMethod"] = o.HttpMethod
+	}
+	if o.RequestUri != nil {
+		toSerialize["requestUri"] = o.RequestUri
 	}
 	if o.Success != nil {
 		toSerialize["success"] = o.Success

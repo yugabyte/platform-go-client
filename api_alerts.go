@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -1164,6 +1164,258 @@ func (a *AlertsApiService) DeleteAlertDestinationExecute(r AlertsApiApiDeleteAle
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type AlertsApiApiDeleteAlertTemplateSettingsRequest struct {
+	ctx _context.Context
+	ApiService *AlertsApiService
+	cUUID string
+	settingsUUID string
+}
+
+
+func (r AlertsApiApiDeleteAlertTemplateSettingsRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
+	return r.ApiService.DeleteAlertTemplateSettingsExecute(r)
+}
+
+/*
+ * DeleteAlertTemplateSettings Delete an alert template settings
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param settingsUUID
+ * @return AlertsApiApiDeleteAlertTemplateSettingsRequest
+ */
+func (a *AlertsApiService) DeleteAlertTemplateSettings(ctx _context.Context, cUUID string, settingsUUID string) AlertsApiApiDeleteAlertTemplateSettingsRequest {
+	return AlertsApiApiDeleteAlertTemplateSettingsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		settingsUUID: settingsUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPSuccess
+ */
+func (a *AlertsApiService) DeleteAlertTemplateSettingsExecute(r AlertsApiApiDeleteAlertTemplateSettingsRequest) (YBPSuccess, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPSuccess
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsApiService.DeleteAlertTemplateSettings")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"settingsUUID"+"}", _neturl.PathEscape(parameterToString(r.settingsUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AlertsApiApiEditAlertTemplateSettingsRequest struct {
+	ctx _context.Context
+	ApiService *AlertsApiService
+	cUUID string
+	editAlertTemplateSettingsRequest *AlertTemplateSettingsFormData
+}
+
+func (r AlertsApiApiEditAlertTemplateSettingsRequest) EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest AlertTemplateSettingsFormData) AlertsApiApiEditAlertTemplateSettingsRequest {
+	r.editAlertTemplateSettingsRequest = &editAlertTemplateSettingsRequest
+	return r
+}
+
+func (r AlertsApiApiEditAlertTemplateSettingsRequest) Execute() ([]AlertTemplateSettings, *_nethttp.Response, error) {
+	return r.ApiService.EditAlertTemplateSettingsExecute(r)
+}
+
+/*
+ * EditAlertTemplateSettings Crete or update alert template settings list
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return AlertsApiApiEditAlertTemplateSettingsRequest
+ */
+func (a *AlertsApiService) EditAlertTemplateSettings(ctx _context.Context, cUUID string) AlertsApiApiEditAlertTemplateSettingsRequest {
+	return AlertsApiApiEditAlertTemplateSettingsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []AlertTemplateSettings
+ */
+func (a *AlertsApiService) EditAlertTemplateSettingsExecute(r AlertsApiApiEditAlertTemplateSettingsRequest) ([]AlertTemplateSettings, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []AlertTemplateSettings
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsApiService.EditAlertTemplateSettings")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/alert_template_settings"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.editAlertTemplateSettingsRequest == nil {
+		return localVarReturnValue, nil, reportError("editAlertTemplateSettingsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.editAlertTemplateSettingsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type AlertsApiApiGetRequest struct {
 	ctx _context.Context
 	ApiService *AlertsApiService
@@ -2068,6 +2320,125 @@ func (a *AlertsApiService) ListAlertDestinationsExecute(r AlertsApiApiListAlertD
 	}
 
 	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/alert_destinations"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AlertsApiApiListAlertTemplateSettingsRequest struct {
+	ctx _context.Context
+	ApiService *AlertsApiService
+	cUUID string
+}
+
+
+func (r AlertsApiApiListAlertTemplateSettingsRequest) Execute() ([]AlertTemplateSettings, *_nethttp.Response, error) {
+	return r.ApiService.ListAlertTemplateSettingsExecute(r)
+}
+
+/*
+ * ListAlertTemplateSettings Get alert template settings
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return AlertsApiApiListAlertTemplateSettingsRequest
+ */
+func (a *AlertsApiService) ListAlertTemplateSettings(ctx _context.Context, cUUID string) AlertsApiApiListAlertTemplateSettingsRequest {
+	return AlertsApiApiListAlertTemplateSettingsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []AlertTemplateSettings
+ */
+func (a *AlertsApiService) ListAlertTemplateSettingsExecute(r AlertsApiApiListAlertTemplateSettingsRequest) ([]AlertTemplateSettings, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []AlertTemplateSettings
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsApiService.ListAlertTemplateSettings")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/alert_template_settings"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

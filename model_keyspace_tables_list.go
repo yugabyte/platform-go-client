@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,9 +16,12 @@ import (
 
 // KeyspaceTablesList struct for KeyspaceTablesList
 type KeyspaceTablesList struct {
+	AllTables bool `json:"allTables"`
 	BackupSizeInBytes int64 `json:"backupSizeInBytes"`
+	DefaultLocation string `json:"defaultLocation"`
 	Keyspace string `json:"keyspace"`
-	StorageLocation string `json:"storageLocation"`
+	PerRegionLocations []RegionLocations `json:"perRegionLocations"`
+	TableUUIDList []string `json:"tableUUIDList"`
 	TablesList []string `json:"tablesList"`
 }
 
@@ -26,11 +29,14 @@ type KeyspaceTablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyspaceTablesList(backupSizeInBytes int64, keyspace string, storageLocation string, tablesList []string, ) *KeyspaceTablesList {
+func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
+	this.AllTables = allTables
 	this.BackupSizeInBytes = backupSizeInBytes
+	this.DefaultLocation = defaultLocation
 	this.Keyspace = keyspace
-	this.StorageLocation = storageLocation
+	this.PerRegionLocations = perRegionLocations
+	this.TableUUIDList = tableUUIDList
 	this.TablesList = tablesList
 	return &this
 }
@@ -41,6 +47,30 @@ func NewKeyspaceTablesList(backupSizeInBytes int64, keyspace string, storageLoca
 func NewKeyspaceTablesListWithDefaults() *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
 	return &this
+}
+
+// GetAllTables returns the AllTables field value
+func (o *KeyspaceTablesList) GetAllTables() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.AllTables
+}
+
+// GetAllTablesOk returns a tuple with the AllTables field value
+// and a boolean to check if the value has been set.
+func (o *KeyspaceTablesList) GetAllTablesOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.AllTables, true
+}
+
+// SetAllTables sets field value
+func (o *KeyspaceTablesList) SetAllTables(v bool) {
+	o.AllTables = v
 }
 
 // GetBackupSizeInBytes returns the BackupSizeInBytes field value
@@ -67,6 +97,30 @@ func (o *KeyspaceTablesList) SetBackupSizeInBytes(v int64) {
 	o.BackupSizeInBytes = v
 }
 
+// GetDefaultLocation returns the DefaultLocation field value
+func (o *KeyspaceTablesList) GetDefaultLocation() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.DefaultLocation
+}
+
+// GetDefaultLocationOk returns a tuple with the DefaultLocation field value
+// and a boolean to check if the value has been set.
+func (o *KeyspaceTablesList) GetDefaultLocationOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.DefaultLocation, true
+}
+
+// SetDefaultLocation sets field value
+func (o *KeyspaceTablesList) SetDefaultLocation(v string) {
+	o.DefaultLocation = v
+}
+
 // GetKeyspace returns the Keyspace field value
 func (o *KeyspaceTablesList) GetKeyspace() string {
 	if o == nil  {
@@ -91,28 +145,52 @@ func (o *KeyspaceTablesList) SetKeyspace(v string) {
 	o.Keyspace = v
 }
 
-// GetStorageLocation returns the StorageLocation field value
-func (o *KeyspaceTablesList) GetStorageLocation() string {
+// GetPerRegionLocations returns the PerRegionLocations field value
+func (o *KeyspaceTablesList) GetPerRegionLocations() []RegionLocations {
 	if o == nil  {
-		var ret string
+		var ret []RegionLocations
 		return ret
 	}
 
-	return o.StorageLocation
+	return o.PerRegionLocations
 }
 
-// GetStorageLocationOk returns a tuple with the StorageLocation field value
+// GetPerRegionLocationsOk returns a tuple with the PerRegionLocations field value
 // and a boolean to check if the value has been set.
-func (o *KeyspaceTablesList) GetStorageLocationOk() (*string, bool) {
+func (o *KeyspaceTablesList) GetPerRegionLocationsOk() (*[]RegionLocations, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.StorageLocation, true
+	return &o.PerRegionLocations, true
 }
 
-// SetStorageLocation sets field value
-func (o *KeyspaceTablesList) SetStorageLocation(v string) {
-	o.StorageLocation = v
+// SetPerRegionLocations sets field value
+func (o *KeyspaceTablesList) SetPerRegionLocations(v []RegionLocations) {
+	o.PerRegionLocations = v
+}
+
+// GetTableUUIDList returns the TableUUIDList field value
+func (o *KeyspaceTablesList) GetTableUUIDList() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+
+	return o.TableUUIDList
+}
+
+// GetTableUUIDListOk returns a tuple with the TableUUIDList field value
+// and a boolean to check if the value has been set.
+func (o *KeyspaceTablesList) GetTableUUIDListOk() (*[]string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TableUUIDList, true
+}
+
+// SetTableUUIDList sets field value
+func (o *KeyspaceTablesList) SetTableUUIDList(v []string) {
+	o.TableUUIDList = v
 }
 
 // GetTablesList returns the TablesList field value
@@ -142,13 +220,22 @@ func (o *KeyspaceTablesList) SetTablesList(v []string) {
 func (o KeyspaceTablesList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
+		toSerialize["allTables"] = o.AllTables
+	}
+	if true {
 		toSerialize["backupSizeInBytes"] = o.BackupSizeInBytes
+	}
+	if true {
+		toSerialize["defaultLocation"] = o.DefaultLocation
 	}
 	if true {
 		toSerialize["keyspace"] = o.Keyspace
 	}
 	if true {
-		toSerialize["storageLocation"] = o.StorageLocation
+		toSerialize["perRegionLocations"] = o.PerRegionLocations
+	}
+	if true {
+		toSerialize["tableUUIDList"] = o.TableUUIDList
 	}
 	if true {
 		toSerialize["tablesList"] = o.TablesList

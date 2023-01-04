@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -26,6 +26,129 @@ var (
 
 // CloudProvidersApiService CloudProvidersApi service
 type CloudProvidersApiService service
+
+type CloudProvidersApiApiAccessKeyRotationRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+}
+
+
+func (r CloudProvidersApiApiAccessKeyRotationRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.AccessKeyRotationExecute(r)
+}
+
+/*
+ * AccessKeyRotation Rotate access key for a provider
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return CloudProvidersApiApiAccessKeyRotationRequest
+ */
+func (a *CloudProvidersApiService) AccessKeyRotation(ctx _context.Context, cUUID string, pUUID string) CloudProvidersApiApiAccessKeyRotationRequest {
+	return CloudProvidersApiApiAccessKeyRotationRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *CloudProvidersApiService) AccessKeyRotationExecute(r CloudProvidersApiApiAccessKeyRotationRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.AccessKeyRotation")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
 
 type CloudProvidersApiApiCreateProvidersRequest struct {
 	ctx _context.Context
@@ -156,20 +279,157 @@ func (a *CloudProvidersApiService) CreateProvidersExecute(r CloudProvidersApiApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type CloudProvidersApiApiEditAccessKeyRotationScheduleRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+	sUUID string
+	body *EditAccessKeyRotationScheduleParams
+}
+
+func (r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) Body(body EditAccessKeyRotationScheduleParams) CloudProvidersApiApiEditAccessKeyRotationScheduleRequest {
+	r.body = &body
+	return r
+}
+
+func (r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) Execute() (Schedule, *_nethttp.Response, error) {
+	return r.ApiService.EditAccessKeyRotationScheduleExecute(r)
+}
+
+/*
+ * EditAccessKeyRotationSchedule Edit a access key rotation schedule
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @param sUUID
+ * @return CloudProvidersApiApiEditAccessKeyRotationScheduleRequest
+ */
+func (a *CloudProvidersApiService) EditAccessKeyRotationSchedule(ctx _context.Context, cUUID string, pUUID string, sUUID string) CloudProvidersApiApiEditAccessKeyRotationScheduleRequest {
+	return CloudProvidersApiApiEditAccessKeyRotationScheduleRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+		sUUID: sUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Schedule
+ */
+func (a *CloudProvidersApiService) EditAccessKeyRotationScheduleExecute(r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) (Schedule, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Schedule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.EditAccessKeyRotationSchedule")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"sUUID"+"}", _neturl.PathEscape(parameterToString(r.sUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.body == nil {
+		return localVarReturnValue, nil, reportError("body is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type CloudProvidersApiApiEditProviderRequest struct {
 	ctx _context.Context
 	ApiService *CloudProvidersApiService
 	cUUID string
 	pUUID string
-	editProviderFormData *EditProviderRequest
+	editProviderRequest *Provider
 }
 
-func (r CloudProvidersApiApiEditProviderRequest) EditProviderFormData(editProviderFormData EditProviderRequest) CloudProvidersApiApiEditProviderRequest {
-	r.editProviderFormData = &editProviderFormData
+func (r CloudProvidersApiApiEditProviderRequest) EditProviderRequest(editProviderRequest Provider) CloudProvidersApiApiEditProviderRequest {
+	r.editProviderRequest = &editProviderRequest
 	return r
 }
 
-func (r CloudProvidersApiApiEditProviderRequest) Execute() (Provider, *_nethttp.Response, error) {
+func (r CloudProvidersApiApiEditProviderRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.EditProviderExecute(r)
 }
 
@@ -191,16 +451,16 @@ func (a *CloudProvidersApiService) EditProvider(ctx _context.Context, cUUID stri
 
 /*
  * Execute executes the request
- * @return Provider
+ * @return YBPTask
  */
-func (a *CloudProvidersApiService) EditProviderExecute(r CloudProvidersApiApiEditProviderRequest) (Provider, *_nethttp.Response, error) {
+func (a *CloudProvidersApiService) EditProviderExecute(r CloudProvidersApiApiEditProviderRequest) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Provider
+		localVarReturnValue  YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.EditProvider")
@@ -215,8 +475,8 @@ func (a *CloudProvidersApiService) EditProviderExecute(r CloudProvidersApiApiEdi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.editProviderFormData == nil {
-		return localVarReturnValue, nil, reportError("editProviderFormData is required and must be specified")
+	if r.editProviderRequest == nil {
+		return localVarReturnValue, nil, reportError("editProviderRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -237,7 +497,7 @@ func (a *CloudProvidersApiService) EditProviderExecute(r CloudProvidersApiApiEdi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.editProviderFormData
+	localVarPostBody = r.editProviderRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -424,6 +684,385 @@ func (a *CloudProvidersApiService) GetListOfProvidersExecute(r CloudProvidersApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type CloudProvidersApiApiGetProviderRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+}
+
+
+func (r CloudProvidersApiApiGetProviderRequest) Execute() (Provider, *_nethttp.Response, error) {
+	return r.ApiService.GetProviderExecute(r)
+}
+
+/*
+ * GetProvider Get a cloud provider
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return CloudProvidersApiApiGetProviderRequest
+ */
+func (a *CloudProvidersApiService) GetProvider(ctx _context.Context, cUUID string, pUUID string) CloudProvidersApiApiGetProviderRequest {
+	return CloudProvidersApiApiGetProviderRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Provider
+ */
+func (a *CloudProvidersApiService) GetProviderExecute(r CloudProvidersApiApiGetProviderRequest) (Provider, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Provider
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.GetProvider")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type CloudProvidersApiApiListSchedulesRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+}
+
+
+func (r CloudProvidersApiApiListSchedulesRequest) Execute() ([]Schedule, *_nethttp.Response, error) {
+	return r.ApiService.ListSchedulesExecute(r)
+}
+
+/*
+ * ListSchedules List all schedules for a provider's access key rotation
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return CloudProvidersApiApiListSchedulesRequest
+ */
+func (a *CloudProvidersApiService) ListSchedules(ctx _context.Context, cUUID string, pUUID string) CloudProvidersApiApiListSchedulesRequest {
+	return CloudProvidersApiApiListSchedulesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []Schedule
+ */
+func (a *CloudProvidersApiService) ListSchedulesExecute(r CloudProvidersApiApiListSchedulesRequest) ([]Schedule, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Schedule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.ListSchedules")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type CloudProvidersApiApiPatchProviderRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+	patchProviderRequest *Provider
+}
+
+func (r CloudProvidersApiApiPatchProviderRequest) PatchProviderRequest(patchProviderRequest Provider) CloudProvidersApiApiPatchProviderRequest {
+	r.patchProviderRequest = &patchProviderRequest
+	return r
+}
+
+func (r CloudProvidersApiApiPatchProviderRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.PatchProviderExecute(r)
+}
+
+/*
+ * PatchProvider Patch a provider
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return CloudProvidersApiApiPatchProviderRequest
+ */
+func (a *CloudProvidersApiService) PatchProvider(ctx _context.Context, cUUID string, pUUID string) CloudProvidersApiApiPatchProviderRequest {
+	return CloudProvidersApiApiPatchProviderRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *CloudProvidersApiService) PatchProviderExecute(r CloudProvidersApiApiPatchProviderRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.PatchProvider")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.patchProviderRequest == nil {
+		return localVarReturnValue, nil, reportError("patchProviderRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.patchProviderRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type CloudProvidersApiApiRefreshPricingRequest struct {
 	ctx _context.Context
 	ApiService *CloudProvidersApiService
@@ -473,6 +1112,129 @@ func (a *CloudProvidersApiService) RefreshPricingExecute(r CloudProvidersApiApiR
 	}
 
 	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type CloudProvidersApiApiScheduledAccessKeyRotationRequest struct {
+	ctx _context.Context
+	ApiService *CloudProvidersApiService
+	cUUID string
+	pUUID string
+}
+
+
+func (r CloudProvidersApiApiScheduledAccessKeyRotationRequest) Execute() (Schedule, *_nethttp.Response, error) {
+	return r.ApiService.ScheduledAccessKeyRotationExecute(r)
+}
+
+/*
+ * ScheduledAccessKeyRotation Rotate access key for a provider - Scheduled
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return CloudProvidersApiApiScheduledAccessKeyRotationRequest
+ */
+func (a *CloudProvidersApiService) ScheduledAccessKeyRotation(ctx _context.Context, cUUID string, pUUID string) CloudProvidersApiApiScheduledAccessKeyRotationRequest {
+	return CloudProvidersApiApiScheduledAccessKeyRotationRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Schedule
+ */
+func (a *CloudProvidersApiService) ScheduledAccessKeyRotationExecute(r CloudProvidersApiApiScheduledAccessKeyRotationRequest) (Schedule, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Schedule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersApiService.ScheduledAccessKeyRotation")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
 

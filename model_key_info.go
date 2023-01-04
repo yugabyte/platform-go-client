@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -21,10 +21,13 @@ type KeyInfo struct {
 	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	NtpServers *[]string `json:"ntpServers,omitempty"`
 	PasswordlessSudoAccess *bool `json:"passwordlessSudoAccess,omitempty"`
 	PrivateKey *string `json:"privateKey,omitempty"`
 	ProvisionInstanceScript *string `json:"provisionInstanceScript,omitempty"`
 	PublicKey *string `json:"publicKey,omitempty"`
+	SetUpChrony *bool `json:"setUpChrony,omitempty"`
+	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
 	SkipProvisioning *bool `json:"skipProvisioning,omitempty"`
 	SshPort *int32 `json:"sshPort,omitempty"`
 	SshUser *string `json:"sshUser,omitempty"`
@@ -209,6 +212,38 @@ func (o *KeyInfo) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetNtpServers returns the NtpServers field value if set, zero value otherwise.
+func (o *KeyInfo) GetNtpServers() []string {
+	if o == nil || o.NtpServers == nil {
+		var ret []string
+		return ret
+	}
+	return *o.NtpServers
+}
+
+// GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetNtpServersOk() (*[]string, bool) {
+	if o == nil || o.NtpServers == nil {
+		return nil, false
+	}
+	return o.NtpServers, true
+}
+
+// HasNtpServers returns a boolean if a field has been set.
+func (o *KeyInfo) HasNtpServers() bool {
+	if o != nil && o.NtpServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
+func (o *KeyInfo) SetNtpServers(v []string) {
+	o.NtpServers = &v
+}
+
 // GetPasswordlessSudoAccess returns the PasswordlessSudoAccess field value if set, zero value otherwise.
 func (o *KeyInfo) GetPasswordlessSudoAccess() bool {
 	if o == nil || o.PasswordlessSudoAccess == nil {
@@ -335,6 +370,70 @@ func (o *KeyInfo) HasPublicKey() bool {
 // SetPublicKey gets a reference to the given string and assigns it to the PublicKey field.
 func (o *KeyInfo) SetPublicKey(v string) {
 	o.PublicKey = &v
+}
+
+// GetSetUpChrony returns the SetUpChrony field value if set, zero value otherwise.
+func (o *KeyInfo) GetSetUpChrony() bool {
+	if o == nil || o.SetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SetUpChrony
+}
+
+// GetSetUpChronyOk returns a tuple with the SetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.SetUpChrony == nil {
+		return nil, false
+	}
+	return o.SetUpChrony, true
+}
+
+// HasSetUpChrony returns a boolean if a field has been set.
+func (o *KeyInfo) HasSetUpChrony() bool {
+	if o != nil && o.SetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSetUpChrony gets a reference to the given bool and assigns it to the SetUpChrony field.
+func (o *KeyInfo) SetSetUpChrony(v bool) {
+	o.SetUpChrony = &v
+}
+
+// GetShowSetUpChrony returns the ShowSetUpChrony field value if set, zero value otherwise.
+func (o *KeyInfo) GetShowSetUpChrony() bool {
+	if o == nil || o.ShowSetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ShowSetUpChrony
+}
+
+// GetShowSetUpChronyOk returns a tuple with the ShowSetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetShowSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.ShowSetUpChrony == nil {
+		return nil, false
+	}
+	return o.ShowSetUpChrony, true
+}
+
+// HasShowSetUpChrony returns a boolean if a field has been set.
+func (o *KeyInfo) HasShowSetUpChrony() bool {
+	if o != nil && o.ShowSetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetShowSetUpChrony gets a reference to the given bool and assigns it to the ShowSetUpChrony field.
+func (o *KeyInfo) SetShowSetUpChrony(v bool) {
+	o.ShowSetUpChrony = &v
 }
 
 // GetSkipProvisioning returns the SkipProvisioning field value if set, zero value otherwise.
@@ -514,6 +613,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
+	if o.NtpServers != nil {
+		toSerialize["ntpServers"] = o.NtpServers
+	}
 	if o.PasswordlessSudoAccess != nil {
 		toSerialize["passwordlessSudoAccess"] = o.PasswordlessSudoAccess
 	}
@@ -525,6 +627,12 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.PublicKey != nil {
 		toSerialize["publicKey"] = o.PublicKey
+	}
+	if o.SetUpChrony != nil {
+		toSerialize["setUpChrony"] = o.SetUpChrony
+	}
+	if o.ShowSetUpChrony != nil {
+		toSerialize["showSetUpChrony"] = o.ShowSetUpChrony
 	}
 	if o.SkipProvisioning != nil {
 		toSerialize["skipProvisioning"] = o.SkipProvisioning

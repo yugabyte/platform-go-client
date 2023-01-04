@@ -1,5 +1,5 @@
 /*
- * Yugabyte Platform APIs
+ * YugabyteDB Anywhere APIs
  *
  * ALPHA - NOT FOR EXTERNAL USE
  *
@@ -16,17 +16,20 @@ import (
 
 // EditBackupParams Edit backup parameters
 type EditBackupParams struct {
+	// Time unit for backup expiry
+	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
+	// New backup Storage config
+	StorageConfigUUID *string `json:"storageConfigUUID,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
-	TimeBeforeDeleteFromPresentInMillis int64 `json:"timeBeforeDeleteFromPresentInMillis"`
+	TimeBeforeDeleteFromPresentInMillis *int64 `json:"timeBeforeDeleteFromPresentInMillis,omitempty"`
 }
 
 // NewEditBackupParams instantiates a new EditBackupParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEditBackupParams(timeBeforeDeleteFromPresentInMillis int64, ) *EditBackupParams {
+func NewEditBackupParams() *EditBackupParams {
 	this := EditBackupParams{}
-	this.TimeBeforeDeleteFromPresentInMillis = timeBeforeDeleteFromPresentInMillis
 	return &this
 }
 
@@ -38,33 +41,111 @@ func NewEditBackupParamsWithDefaults() *EditBackupParams {
 	return &this
 }
 
-// GetTimeBeforeDeleteFromPresentInMillis returns the TimeBeforeDeleteFromPresentInMillis field value
+// GetExpiryTimeUnit returns the ExpiryTimeUnit field value if set, zero value otherwise.
+func (o *EditBackupParams) GetExpiryTimeUnit() string {
+	if o == nil || o.ExpiryTimeUnit == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExpiryTimeUnit
+}
+
+// GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupParams) GetExpiryTimeUnitOk() (*string, bool) {
+	if o == nil || o.ExpiryTimeUnit == nil {
+		return nil, false
+	}
+	return o.ExpiryTimeUnit, true
+}
+
+// HasExpiryTimeUnit returns a boolean if a field has been set.
+func (o *EditBackupParams) HasExpiryTimeUnit() bool {
+	if o != nil && o.ExpiryTimeUnit != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryTimeUnit gets a reference to the given string and assigns it to the ExpiryTimeUnit field.
+func (o *EditBackupParams) SetExpiryTimeUnit(v string) {
+	o.ExpiryTimeUnit = &v
+}
+
+// GetStorageConfigUUID returns the StorageConfigUUID field value if set, zero value otherwise.
+func (o *EditBackupParams) GetStorageConfigUUID() string {
+	if o == nil || o.StorageConfigUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.StorageConfigUUID
+}
+
+// GetStorageConfigUUIDOk returns a tuple with the StorageConfigUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupParams) GetStorageConfigUUIDOk() (*string, bool) {
+	if o == nil || o.StorageConfigUUID == nil {
+		return nil, false
+	}
+	return o.StorageConfigUUID, true
+}
+
+// HasStorageConfigUUID returns a boolean if a field has been set.
+func (o *EditBackupParams) HasStorageConfigUUID() bool {
+	if o != nil && o.StorageConfigUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageConfigUUID gets a reference to the given string and assigns it to the StorageConfigUUID field.
+func (o *EditBackupParams) SetStorageConfigUUID(v string) {
+	o.StorageConfigUUID = &v
+}
+
+// GetTimeBeforeDeleteFromPresentInMillis returns the TimeBeforeDeleteFromPresentInMillis field value if set, zero value otherwise.
 func (o *EditBackupParams) GetTimeBeforeDeleteFromPresentInMillis() int64 {
-	if o == nil  {
+	if o == nil || o.TimeBeforeDeleteFromPresentInMillis == nil {
 		var ret int64
 		return ret
 	}
-
-	return o.TimeBeforeDeleteFromPresentInMillis
+	return *o.TimeBeforeDeleteFromPresentInMillis
 }
 
-// GetTimeBeforeDeleteFromPresentInMillisOk returns a tuple with the TimeBeforeDeleteFromPresentInMillis field value
+// GetTimeBeforeDeleteFromPresentInMillisOk returns a tuple with the TimeBeforeDeleteFromPresentInMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *EditBackupParams) GetTimeBeforeDeleteFromPresentInMillisOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil || o.TimeBeforeDeleteFromPresentInMillis == nil {
 		return nil, false
 	}
-	return &o.TimeBeforeDeleteFromPresentInMillis, true
+	return o.TimeBeforeDeleteFromPresentInMillis, true
 }
 
-// SetTimeBeforeDeleteFromPresentInMillis sets field value
+// HasTimeBeforeDeleteFromPresentInMillis returns a boolean if a field has been set.
+func (o *EditBackupParams) HasTimeBeforeDeleteFromPresentInMillis() bool {
+	if o != nil && o.TimeBeforeDeleteFromPresentInMillis != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBeforeDeleteFromPresentInMillis gets a reference to the given int64 and assigns it to the TimeBeforeDeleteFromPresentInMillis field.
 func (o *EditBackupParams) SetTimeBeforeDeleteFromPresentInMillis(v int64) {
-	o.TimeBeforeDeleteFromPresentInMillis = v
+	o.TimeBeforeDeleteFromPresentInMillis = &v
 }
 
 func (o EditBackupParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.ExpiryTimeUnit != nil {
+		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
+	}
+	if o.StorageConfigUUID != nil {
+		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if o.TimeBeforeDeleteFromPresentInMillis != nil {
 		toSerialize["timeBeforeDeleteFromPresentInMillis"] = o.TimeBeforeDeleteFromPresentInMillis
 	}
 	return json.Marshal(toSerialize)
