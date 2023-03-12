@@ -70,8 +70,6 @@ type APIClient struct {
 
 	CustomerTasksApi *CustomerTasksApiService
 
-	DefaultApi *DefaultApiService
-
 	EncryptionAtRestApi *EncryptionAtRestApiService
 
 	GrafanaDashboardApi *GrafanaDashboardApiService
@@ -160,7 +158,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CustomerConfigurationApi = (*CustomerConfigurationApiService)(&c.common)
 	c.CustomerManagementApi = (*CustomerManagementApiService)(&c.common)
 	c.CustomerTasksApi = (*CustomerTasksApiService)(&c.common)
-	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)

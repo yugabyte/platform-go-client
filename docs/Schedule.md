@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the task. Possible values are _Active_, _Paused_, or _Stopped_. | [optional] [readonly] 
 **TaskType** | Pointer to **string** | Type of task to be scheduled. | [optional] 
+**UserEmail** | Pointer to **string** | User who created the schedule policy | [optional] [readonly] 
 
 ## Methods
 
@@ -361,6 +362,31 @@ SetTaskType sets TaskType field to given value.
 `func (o *Schedule) HasTaskType() bool`
 
 HasTaskType returns a boolean if a field has been set.
+
+### GetUserEmail
+
+`func (o *Schedule) GetUserEmail() string`
+
+GetUserEmail returns the UserEmail field if non-nil, zero value otherwise.
+
+### GetUserEmailOk
+
+`func (o *Schedule) GetUserEmailOk() (*string, bool)`
+
+GetUserEmailOk returns a tuple with the UserEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserEmail
+
+`func (o *Schedule) SetUserEmail(v string)`
+
+SetUserEmail sets UserEmail field to given value.
+
+### HasUserEmail
+
+`func (o *Schedule) HasUserEmail() bool`
+
+HasUserEmail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

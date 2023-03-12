@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **NeedBootstrap** | Pointer to **bool** | Whether this table needs bootstrap process for replication setup | [optional] 
 **ReplicationSetupDone** | Pointer to **bool** | Whether replication is set up for this table | [optional] 
 **RestoreTime** | Pointer to **time.Time** | Time of the last try to restore data to the target universe | [optional] 
+**RestoreUuid** | Pointer to **string** |  | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **StreamId** | Pointer to **string** | Stream ID if replication is setup; bootstrap ID if the table is bootstrapped | [optional] 
 **TableId** | Pointer to **string** | Table ID | [optional] 
@@ -177,6 +178,31 @@ SetRestoreTime sets RestoreTime field to given value.
 `func (o *XClusterTableConfig) HasRestoreTime() bool`
 
 HasRestoreTime returns a boolean if a field has been set.
+
+### GetRestoreUuid
+
+`func (o *XClusterTableConfig) GetRestoreUuid() string`
+
+GetRestoreUuid returns the RestoreUuid field if non-nil, zero value otherwise.
+
+### GetRestoreUuidOk
+
+`func (o *XClusterTableConfig) GetRestoreUuidOk() (*string, bool)`
+
+GetRestoreUuidOk returns a tuple with the RestoreUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreUuid
+
+`func (o *XClusterTableConfig) SetRestoreUuid(v string)`
+
+SetRestoreUuid sets RestoreUuid field to given value.
+
+### HasRestoreUuid
+
+`func (o *XClusterTableConfig) HasRestoreUuid() bool`
+
+HasRestoreUuid returns a boolean if a field has been set.
 
 ### GetStatus
 

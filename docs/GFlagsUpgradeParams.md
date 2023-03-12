@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
@@ -31,6 +30,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TserverGFlags** | **map[string]string** |  | 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
@@ -61,7 +62,7 @@ Name | Type | Description | Notes
 
 ### NewGFlagsUpgradeParams
 
-`func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams`
+`func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams`
 
 NewGFlagsUpgradeParams instantiates a new GFlagsUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -416,31 +417,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *GFlagsUpgradeParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *GFlagsUpgradeParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *GFlagsUpgradeParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *GFlagsUpgradeParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetImportedState
 
 `func (o *GFlagsUpgradeParams) GetImportedState() string`
@@ -726,6 +702,26 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
+### GetPlatformVersion
+
+`func (o *GFlagsUpgradeParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *GFlagsUpgradeParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *GFlagsUpgradeParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
+
+
 ### GetPreviousTaskUUID
 
 `func (o *GFlagsUpgradeParams) GetPreviousTaskUUID() string`
@@ -940,6 +936,31 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 `func (o *GFlagsUpgradeParams) HasSourceXClusterConfigs() bool`
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
+
+### GetSshUserOverride
+
+`func (o *GFlagsUpgradeParams) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *GFlagsUpgradeParams) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *GFlagsUpgradeParams) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *GFlagsUpgradeParams) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 

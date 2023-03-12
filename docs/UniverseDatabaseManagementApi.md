@@ -5,7 +5,6 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateUserInDB**](UniverseDatabaseManagementApi.md#CreateUserInDB) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe
-[**RunInShell**](UniverseDatabaseManagementApi.md#RunInShell) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_in_shell | Run a shell command
 [**RunYsqlQueryUniverse**](UniverseDatabaseManagementApi.md#RunYsqlQueryUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query | Run a YSQL query in a universe
 [**SetDatabaseCredentials**](UniverseDatabaseManagementApi.md#SetDatabaseCredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials
 
@@ -13,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateUserInDB
 
-> YBPSuccess CreateUserInDB(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess CreateUserInDB(ctx, cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Execute()
 
 Create a database user for a universe
 
@@ -32,10 +31,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    databaseUserFormData := *openapiclient.NewDatabaseUserFormData("DbName_example", "Password_example", "Username_example", "YcqlAdminPassword_example", "YcqlAdminUsername_example", "YsqlAdminPassword_example", "YsqlAdminUsername_example") // DatabaseUserFormData | The database user to create
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.CreateUserInDB(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseDatabaseManagementApi.CreateUserInDB(context.Background(), cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.CreateUserInDB``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,6 +63,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **databaseUserFormData** | [**DatabaseUserFormData**](DatabaseUserFormData.md) | The database user to create | 
 
 ### Return type
 
@@ -74,80 +75,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RunInShell
-
-> YBPError RunInShell(ctx, cUUID, uniUUID).Execute()
-
-Run a shell command
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.RunInShell(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.RunInShell``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RunInShell`: YBPError
-    fmt.Fprintf(os.Stdout, "Response from `UniverseDatabaseManagementApi.RunInShell`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRunInShellRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**YBPError**](YBPError.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -232,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## SetDatabaseCredentials
 
-> YBPSuccess SetDatabaseCredentials(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess SetDatabaseCredentials(ctx, cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Execute()
 
 Set a universe's database credentials
 
@@ -251,10 +179,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    databaseSecurityFormData := *openapiclient.NewDatabaseSecurityFormData("DbName_example", "YcqlAdminPassword_example", "YcqlAdminUsername_example", "YcqlCurrAdminPassword_example", "YsqlAdminPassword_example", "YsqlAdminUsername_example", "YsqlCurrAdminPassword_example") // DatabaseSecurityFormData | The database credentials
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.SetDatabaseCredentials(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseDatabaseManagementApi.SetDatabaseCredentials(context.Background(), cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.SetDatabaseCredentials``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,6 +211,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **databaseSecurityFormData** | [**DatabaseSecurityFormData**](DatabaseSecurityFormData.md) | The database credentials | 
 
 ### Return type
 
@@ -293,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

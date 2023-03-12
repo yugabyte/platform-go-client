@@ -302,10 +302,10 @@ type AvailabilityZonesApiApiEditAZRequest struct {
 	pUUID string
 	rUUID string
 	azUUID string
-	azFormData *string
+	azFormData *AvailabilityZoneEditData
 }
 
-func (r AvailabilityZonesApiApiEditAZRequest) AzFormData(azFormData string) AvailabilityZonesApiApiEditAZRequest {
+func (r AvailabilityZonesApiApiEditAZRequest) AzFormData(azFormData AvailabilityZoneEditData) AvailabilityZonesApiApiEditAZRequest {
 	r.azFormData = &azFormData
 	return r
 }

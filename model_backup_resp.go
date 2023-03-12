@@ -21,14 +21,16 @@ type BackupResp struct {
 	Category string `json:"category"`
 	CommonBackupInfo CommonBackupInfo `json:"commonBackupInfo"`
 	CustomerUUID string `json:"customerUUID"`
-	ExpiryTime time.Time `json:"expiryTime"`
+	// The expiry time for backup.
+	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
 	FullChainSizeInBytes int64 `json:"fullChainSizeInBytes"`
 	HasIncrementalBackups bool `json:"hasIncrementalBackups"`
 	IsFullBackup bool `json:"isFullBackup"`
 	IsStorageConfigPresent bool `json:"isStorageConfigPresent"`
 	IsUniversePresent bool `json:"isUniversePresent"`
 	LastBackupState string `json:"lastBackupState"`
-	LastIncrementalBackupTime time.Time `json:"lastIncrementalBackupTime"`
+	// Time for last incremenatal backup.
+	LastIncrementalBackupTime *time.Time `json:"lastIncrementalBackupTime,omitempty"`
 	OnDemand bool `json:"onDemand"`
 	ScheduleUUID string `json:"scheduleUUID"`
 	StorageConfigType string `json:"storageConfigType"`
@@ -40,20 +42,18 @@ type BackupResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTime time.Time, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, lastIncrementalBackupTime time.Time, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
+func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.Category = category
 	this.CommonBackupInfo = commonBackupInfo
 	this.CustomerUUID = customerUUID
-	this.ExpiryTime = expiryTime
 	this.FullChainSizeInBytes = fullChainSizeInBytes
 	this.HasIncrementalBackups = hasIncrementalBackups
 	this.IsFullBackup = isFullBackup
 	this.IsStorageConfigPresent = isStorageConfigPresent
 	this.IsUniversePresent = isUniversePresent
 	this.LastBackupState = lastBackupState
-	this.LastIncrementalBackupTime = lastIncrementalBackupTime
 	this.OnDemand = onDemand
 	this.ScheduleUUID = scheduleUUID
 	this.StorageConfigType = storageConfigType
@@ -166,28 +166,36 @@ func (o *BackupResp) SetCustomerUUID(v string) {
 	o.CustomerUUID = v
 }
 
-// GetExpiryTime returns the ExpiryTime field value
+// GetExpiryTime returns the ExpiryTime field value if set, zero value otherwise.
 func (o *BackupResp) GetExpiryTime() time.Time {
-	if o == nil  {
+	if o == nil || o.ExpiryTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.ExpiryTime
+	return *o.ExpiryTime
 }
 
-// GetExpiryTimeOk returns a tuple with the ExpiryTime field value
+// GetExpiryTimeOk returns a tuple with the ExpiryTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BackupResp) GetExpiryTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.ExpiryTime == nil {
 		return nil, false
 	}
-	return &o.ExpiryTime, true
+	return o.ExpiryTime, true
 }
 
-// SetExpiryTime sets field value
+// HasExpiryTime returns a boolean if a field has been set.
+func (o *BackupResp) HasExpiryTime() bool {
+	if o != nil && o.ExpiryTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiryTime gets a reference to the given time.Time and assigns it to the ExpiryTime field.
 func (o *BackupResp) SetExpiryTime(v time.Time) {
-	o.ExpiryTime = v
+	o.ExpiryTime = &v
 }
 
 // GetFullChainSizeInBytes returns the FullChainSizeInBytes field value
@@ -334,28 +342,36 @@ func (o *BackupResp) SetLastBackupState(v string) {
 	o.LastBackupState = v
 }
 
-// GetLastIncrementalBackupTime returns the LastIncrementalBackupTime field value
+// GetLastIncrementalBackupTime returns the LastIncrementalBackupTime field value if set, zero value otherwise.
 func (o *BackupResp) GetLastIncrementalBackupTime() time.Time {
-	if o == nil  {
+	if o == nil || o.LastIncrementalBackupTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.LastIncrementalBackupTime
+	return *o.LastIncrementalBackupTime
 }
 
-// GetLastIncrementalBackupTimeOk returns a tuple with the LastIncrementalBackupTime field value
+// GetLastIncrementalBackupTimeOk returns a tuple with the LastIncrementalBackupTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BackupResp) GetLastIncrementalBackupTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.LastIncrementalBackupTime == nil {
 		return nil, false
 	}
-	return &o.LastIncrementalBackupTime, true
+	return o.LastIncrementalBackupTime, true
 }
 
-// SetLastIncrementalBackupTime sets field value
+// HasLastIncrementalBackupTime returns a boolean if a field has been set.
+func (o *BackupResp) HasLastIncrementalBackupTime() bool {
+	if o != nil && o.LastIncrementalBackupTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastIncrementalBackupTime gets a reference to the given time.Time and assigns it to the LastIncrementalBackupTime field.
 func (o *BackupResp) SetLastIncrementalBackupTime(v time.Time) {
-	o.LastIncrementalBackupTime = v
+	o.LastIncrementalBackupTime = &v
 }
 
 // GetOnDemand returns the OnDemand field value
@@ -492,7 +508,7 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["customerUUID"] = o.CustomerUUID
 	}
-	if true {
+	if o.ExpiryTime != nil {
 		toSerialize["expiryTime"] = o.ExpiryTime
 	}
 	if true {
@@ -513,7 +529,7 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["lastBackupState"] = o.LastBackupState
 	}
-	if true {
+	if o.LastIncrementalBackupTime != nil {
 		toSerialize["lastIncrementalBackupTime"] = o.LastIncrementalBackupTime
 	}
 	if true {

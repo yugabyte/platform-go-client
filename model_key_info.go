@@ -19,6 +19,7 @@ type KeyInfo struct {
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
 	DeleteRemote *bool `json:"deleteRemote,omitempty"`
 	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
+	KeyPairName *string `json:"keyPairName,omitempty"`
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NtpServers *[]string `json:"ntpServers,omitempty"`
@@ -30,6 +31,7 @@ type KeyInfo struct {
 	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
 	SkipProvisioning *bool `json:"skipProvisioning,omitempty"`
 	SshPort *int32 `json:"sshPort,omitempty"`
+	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
 	SshUser *string `json:"sshUser,omitempty"`
 	VaultFile *string `json:"vaultFile,omitempty"`
 	VaultPasswordFile *string `json:"vaultPasswordFile,omitempty"`
@@ -146,6 +148,38 @@ func (o *KeyInfo) HasInstallNodeExporter() bool {
 // SetInstallNodeExporter gets a reference to the given bool and assigns it to the InstallNodeExporter field.
 func (o *KeyInfo) SetInstallNodeExporter(v bool) {
 	o.InstallNodeExporter = &v
+}
+
+// GetKeyPairName returns the KeyPairName field value if set, zero value otherwise.
+func (o *KeyInfo) GetKeyPairName() string {
+	if o == nil || o.KeyPairName == nil {
+		var ret string
+		return ret
+	}
+	return *o.KeyPairName
+}
+
+// GetKeyPairNameOk returns a tuple with the KeyPairName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetKeyPairNameOk() (*string, bool) {
+	if o == nil || o.KeyPairName == nil {
+		return nil, false
+	}
+	return o.KeyPairName, true
+}
+
+// HasKeyPairName returns a boolean if a field has been set.
+func (o *KeyInfo) HasKeyPairName() bool {
+	if o != nil && o.KeyPairName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyPairName gets a reference to the given string and assigns it to the KeyPairName field.
+func (o *KeyInfo) SetKeyPairName(v string) {
+	o.KeyPairName = &v
 }
 
 // GetNodeExporterPort returns the NodeExporterPort field value if set, zero value otherwise.
@@ -500,6 +534,38 @@ func (o *KeyInfo) SetSshPort(v int32) {
 	o.SshPort = &v
 }
 
+// GetSshPrivateKeyContent returns the SshPrivateKeyContent field value if set, zero value otherwise.
+func (o *KeyInfo) GetSshPrivateKeyContent() string {
+	if o == nil || o.SshPrivateKeyContent == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshPrivateKeyContent
+}
+
+// GetSshPrivateKeyContentOk returns a tuple with the SshPrivateKeyContent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetSshPrivateKeyContentOk() (*string, bool) {
+	if o == nil || o.SshPrivateKeyContent == nil {
+		return nil, false
+	}
+	return o.SshPrivateKeyContent, true
+}
+
+// HasSshPrivateKeyContent returns a boolean if a field has been set.
+func (o *KeyInfo) HasSshPrivateKeyContent() bool {
+	if o != nil && o.SshPrivateKeyContent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshPrivateKeyContent gets a reference to the given string and assigns it to the SshPrivateKeyContent field.
+func (o *KeyInfo) SetSshPrivateKeyContent(v string) {
+	o.SshPrivateKeyContent = &v
+}
+
 // GetSshUser returns the SshUser field value if set, zero value otherwise.
 func (o *KeyInfo) GetSshUser() string {
 	if o == nil || o.SshUser == nil {
@@ -607,6 +673,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 	if o.InstallNodeExporter != nil {
 		toSerialize["installNodeExporter"] = o.InstallNodeExporter
 	}
+	if o.KeyPairName != nil {
+		toSerialize["keyPairName"] = o.KeyPairName
+	}
 	if o.NodeExporterPort != nil {
 		toSerialize["nodeExporterPort"] = o.NodeExporterPort
 	}
@@ -639,6 +708,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.SshPort != nil {
 		toSerialize["sshPort"] = o.SshPort
+	}
+	if o.SshPrivateKeyContent != nil {
+		toSerialize["sshPrivateKeyContent"] = o.SshPrivateKeyContent
 	}
 	if o.SshUser != nil {
 		toSerialize["sshUser"] = o.SshUser

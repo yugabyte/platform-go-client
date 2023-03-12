@@ -5,19 +5,21 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | Provider active status | [optional] [readonly] 
+**AirGapInstall** | Pointer to **bool** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.airGapInstall | [optional] 
+**AllAccessKeys** | Pointer to [**[]AccessKey**](AccessKey.md) |  | [optional] 
 **Code** | Pointer to **string** | Provider cloud code | [optional] 
-**Config** | Pointer to **map[string]string** |  | [optional] 
+**Config** | Pointer to **map[string]string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.metadata instead | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer uuid | [optional] [readonly] 
 **DestVpcId** | Pointer to **string** |  | [optional] 
-**Details** | [**ProviderDetails**](ProviderDetails.md) |  | 
+**Details** | Pointer to [**ProviderDetails**](ProviderDetails.md) |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] 
-**HostedZoneId** | Pointer to **string** |  | [optional] 
-**HostedZoneName** | Pointer to **string** |  | [optional] 
-**KeyPairName** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**KeyPairName** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead | [optional] 
 **Name** | Pointer to **string** | Provider name | [optional] 
 **Regions** | [**[]Region**](Region.md) |  | 
-**SshPrivateKeyContent** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**SshPort** | Pointer to **int32** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshPort instead | [optional] 
+**SshPrivateKeyContent** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead | [optional] 
+**SshUser** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshUser instead | [optional] 
 **Uuid** | Pointer to **string** | Provider uuid | [optional] [readonly] 
 **Version** | Pointer to **int64** | Provider version | [optional] [readonly] 
 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewProvider
 
-`func NewProvider(details ProviderDetails, regions []Region, ) *Provider`
+`func NewProvider(regions []Region, ) *Provider`
 
 NewProvider instantiates a new Provider object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +66,56 @@ SetActive sets Active field to given value.
 `func (o *Provider) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetAirGapInstall
+
+`func (o *Provider) GetAirGapInstall() bool`
+
+GetAirGapInstall returns the AirGapInstall field if non-nil, zero value otherwise.
+
+### GetAirGapInstallOk
+
+`func (o *Provider) GetAirGapInstallOk() (*bool, bool)`
+
+GetAirGapInstallOk returns a tuple with the AirGapInstall field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAirGapInstall
+
+`func (o *Provider) SetAirGapInstall(v bool)`
+
+SetAirGapInstall sets AirGapInstall field to given value.
+
+### HasAirGapInstall
+
+`func (o *Provider) HasAirGapInstall() bool`
+
+HasAirGapInstall returns a boolean if a field has been set.
+
+### GetAllAccessKeys
+
+`func (o *Provider) GetAllAccessKeys() []AccessKey`
+
+GetAllAccessKeys returns the AllAccessKeys field if non-nil, zero value otherwise.
+
+### GetAllAccessKeysOk
+
+`func (o *Provider) GetAllAccessKeysOk() (*[]AccessKey, bool)`
+
+GetAllAccessKeysOk returns a tuple with the AllAccessKeys field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllAccessKeys
+
+`func (o *Provider) SetAllAccessKeys(v []AccessKey)`
+
+SetAllAccessKeys sets AllAccessKeys field to given value.
+
+### HasAllAccessKeys
+
+`func (o *Provider) HasAllAccessKeys() bool`
+
+HasAllAccessKeys returns a boolean if a field has been set.
 
 ### GetCode
 
@@ -184,6 +236,11 @@ and a boolean to check if the value has been set.
 
 SetDetails sets Details field to given value.
 
+### HasDetails
+
+`func (o *Provider) HasDetails() bool`
+
+HasDetails returns a boolean if a field has been set.
 
 ### GetHostVpcId
 
@@ -234,56 +291,6 @@ SetHostVpcRegion sets HostVpcRegion field to given value.
 `func (o *Provider) HasHostVpcRegion() bool`
 
 HasHostVpcRegion returns a boolean if a field has been set.
-
-### GetHostedZoneId
-
-`func (o *Provider) GetHostedZoneId() string`
-
-GetHostedZoneId returns the HostedZoneId field if non-nil, zero value otherwise.
-
-### GetHostedZoneIdOk
-
-`func (o *Provider) GetHostedZoneIdOk() (*string, bool)`
-
-GetHostedZoneIdOk returns a tuple with the HostedZoneId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHostedZoneId
-
-`func (o *Provider) SetHostedZoneId(v string)`
-
-SetHostedZoneId sets HostedZoneId field to given value.
-
-### HasHostedZoneId
-
-`func (o *Provider) HasHostedZoneId() bool`
-
-HasHostedZoneId returns a boolean if a field has been set.
-
-### GetHostedZoneName
-
-`func (o *Provider) GetHostedZoneName() string`
-
-GetHostedZoneName returns the HostedZoneName field if non-nil, zero value otherwise.
-
-### GetHostedZoneNameOk
-
-`func (o *Provider) GetHostedZoneNameOk() (*string, bool)`
-
-GetHostedZoneNameOk returns a tuple with the HostedZoneName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHostedZoneName
-
-`func (o *Provider) SetHostedZoneName(v string)`
-
-SetHostedZoneName sets HostedZoneName field to given value.
-
-### HasHostedZoneName
-
-`func (o *Provider) HasHostedZoneName() bool`
-
-HasHostedZoneName returns a boolean if a field has been set.
 
 ### GetKeyPairName
 
@@ -355,6 +362,31 @@ and a boolean to check if the value has been set.
 SetRegions sets Regions field to given value.
 
 
+### GetSshPort
+
+`func (o *Provider) GetSshPort() int32`
+
+GetSshPort returns the SshPort field if non-nil, zero value otherwise.
+
+### GetSshPortOk
+
+`func (o *Provider) GetSshPortOk() (*int32, bool)`
+
+GetSshPortOk returns a tuple with the SshPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshPort
+
+`func (o *Provider) SetSshPort(v int32)`
+
+SetSshPort sets SshPort field to given value.
+
+### HasSshPort
+
+`func (o *Provider) HasSshPort() bool`
+
+HasSshPort returns a boolean if a field has been set.
+
 ### GetSshPrivateKeyContent
 
 `func (o *Provider) GetSshPrivateKeyContent() string`
@@ -379,6 +411,31 @@ SetSshPrivateKeyContent sets SshPrivateKeyContent field to given value.
 `func (o *Provider) HasSshPrivateKeyContent() bool`
 
 HasSshPrivateKeyContent returns a boolean if a field has been set.
+
+### GetSshUser
+
+`func (o *Provider) GetSshUser() string`
+
+GetSshUser returns the SshUser field if non-nil, zero value otherwise.
+
+### GetSshUserOk
+
+`func (o *Provider) GetSshUserOk() (*string, bool)`
+
+GetSshUserOk returns a tuple with the SshUser field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUser
+
+`func (o *Provider) SetSshUser(v string)`
+
+SetSshUser sets SshUser field to given value.
+
+### HasSshUser
+
+`func (o *Provider) HasSshUser() bool`
+
+HasSshUser returns a boolean if a field has been set.
 
 ### GetUuid
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Target** | Pointer to **string** | Target | [optional] [readonly] 
 **TargetID** | Pointer to **string** | Target ID | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] [readonly] 
-**Timestamp** | **time.Time** |  | 
+**Timestamp** | Pointer to **time.Time** | The task creation time. | [optional] [readonly] 
 **UserAddress** | Pointer to **string** | User IP Address | [optional] [readonly] 
 **UserEmail** | Pointer to **string** | User Email | [optional] [readonly] 
 **UserUUID** | Pointer to **string** | User UUID | [optional] [readonly] 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewAudit
 
-`func NewAudit(auditID int64, timestamp time.Time, ) *Audit`
+`func NewAudit(auditID int64, ) *Audit`
 
 NewAudit instantiates a new Audit object
 This constructor will assign default values to properties that have it defined,
@@ -302,6 +302,11 @@ and a boolean to check if the value has been set.
 
 SetTimestamp sets Timestamp field to given value.
 
+### HasTimestamp
+
+`func (o *Audit) HasTimestamp() bool`
+
+HasTimestamp returns a boolean if a field has been set.
 
 ### GetUserAddress
 

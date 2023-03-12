@@ -4,13 +4,79 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ApiLogin**](SessionManagementApi.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user and return api token
 [**AppVersion**](SessionManagementApi.md#AppVersion) | **Get** /api/v1/app_version | appVersion
 [**CustomerCount**](SessionManagementApi.md#CustomerCount) | **Get** /api/v1/customer_count | customerCount
+[**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | getAdminNotifications
 [**GetFilteredLogs**](SessionManagementApi.md#GetFilteredLogs) | **Get** /api/v1/logs | getFilteredLogs
 [**GetLogs**](SessionManagementApi.md#GetLogs) | **Get** /api/v1/logs/{maxLines} | getLogs
 [**GetSessionInfo**](SessionManagementApi.md#GetSessionInfo) | **Get** /api/v1/session_info | Get current user/customer uuid auth/api token
 [**RegisterCustomer**](SessionManagementApi.md#RegisterCustomer) | **Post** /api/v1/register | Register a customer
 
+
+
+## ApiLogin
+
+> SessionInfo ApiLogin(ctx).CustomerLoginFormData(customerLoginFormData).Execute()
+
+Authenticate user and return api token
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    customerLoginFormData := *openapiclient.NewCustomerLoginFormData("Email_example", "Password_example") // CustomerLoginFormData | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SessionManagementApi.ApiLogin(context.Background()).CustomerLoginFormData(customerLoginFormData).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.ApiLogin``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ApiLogin`: SessionInfo
+    fmt.Fprintf(os.Stdout, "Response from `SessionManagementApi.ApiLogin`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApiLoginRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customerLoginFormData** | [**CustomerLoginFormData**](CustomerLoginFormData.md) |  | 
+
+### Return type
+
+[**SessionInfo**](SessionInfo.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## AppVersion
@@ -116,6 +182,74 @@ Other parameters are passed through a pointer to a apiCustomerCountRequest struc
 ### Return type
 
 [**CustomerCountResp**](CustomerCountResp.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetAdminNotifications
+
+> CurrentAdminNotificationMessages GetAdminNotifications(ctx, cUUID).Execute()
+
+getAdminNotifications
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SessionManagementApi.GetAdminNotifications(context.Background(), cUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.GetAdminNotifications``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetAdminNotifications`: CurrentAdminNotificationMessages
+    fmt.Fprintf(os.Stdout, "Response from `SessionManagementApi.GetAdminNotifications`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAdminNotificationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CurrentAdminNotificationMessages**](Current admin notification messages.md)
 
 ### Authorization
 

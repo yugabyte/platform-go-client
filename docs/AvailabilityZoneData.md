@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | **string** | AZ code | 
 **Name** | **string** | AZ name | 
-**SecondarySubnet** | Pointer to **string** | AZ subnet | [optional] 
+**SecondarySubnet** | Pointer to **string** | AZ secondary subnet | [optional] 
 **Subnet** | Pointer to **string** | AZ subnet | [optional] 
 
 ## Methods

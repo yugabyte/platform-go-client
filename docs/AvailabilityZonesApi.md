@@ -187,7 +187,7 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     azUUID := TODO // string | 
-    azFormData := "azFormData_example" // string | Availability zone edit form data
+    azFormData := *openapiclient.NewAvailabilityZoneEditData() // AvailabilityZoneEditData | Availability zone edit form data
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 
 
- **azFormData** | **string** | Availability zone edit form data | 
+ **azFormData** | [**AvailabilityZoneEditData**](AvailabilityZoneEditData.md) | Availability zone edit form data | 
 
 ### Return type
 

@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
@@ -32,6 +31,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -41,6 +41,7 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
@@ -61,7 +62,7 @@ Name | Type | Description | Notes
 
 ### NewTlsToggleParams
 
-`func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
+`func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
 
 NewTlsToggleParams instantiates a new TlsToggleParams object
 This constructor will assign default values to properties that have it defined,
@@ -451,31 +452,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *TlsToggleParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *TlsToggleParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *TlsToggleParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *TlsToggleParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetImportedState
 
 `func (o *TlsToggleParams) GetImportedState() string`
@@ -741,6 +717,26 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
+### GetPlatformVersion
+
+`func (o *TlsToggleParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *TlsToggleParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *TlsToggleParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
+
+
 ### GetPreviousTaskUUID
 
 `func (o *TlsToggleParams) GetPreviousTaskUUID() string`
@@ -955,6 +951,31 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 `func (o *TlsToggleParams) HasSourceXClusterConfigs() bool`
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
+
+### GetSshUserOverride
+
+`func (o *TlsToggleParams) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *TlsToggleParams) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *TlsToggleParams) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *TlsToggleParams) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 

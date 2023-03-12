@@ -34,8 +34,6 @@ type KubernetesOverridesUpgradeParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
@@ -49,6 +47,7 @@ type KubernetesOverridesUpgradeParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
@@ -60,6 +59,7 @@ type KubernetesOverridesUpgradeParams struct {
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
+	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	UniverseOverrides string `json:"universeOverrides"`
@@ -85,13 +85,14 @@ type KubernetesOverridesUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKubernetesOverridesUpgradeParams(azOverrides map[string]string, clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeOverrides string, upgradeOption string, ) *KubernetesOverridesUpgradeParams {
+func NewKubernetesOverridesUpgradeParams(azOverrides map[string]string, clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeOverrides string, upgradeOption string, ) *KubernetesOverridesUpgradeParams {
 	this := KubernetesOverridesUpgradeParams{}
 	this.AzOverrides = azOverrides
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UniverseOverrides = universeOverrides
@@ -563,38 +564,6 @@ func (o *KubernetesOverridesUpgradeParams) SetExtraDependencies(v ExtraDependenc
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *KubernetesOverridesUpgradeParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *KubernetesOverridesUpgradeParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *KubernetesOverridesUpgradeParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *KubernetesOverridesUpgradeParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
 func (o *KubernetesOverridesUpgradeParams) GetImportedState() string {
 	if o == nil || o.ImportedState == nil {
@@ -931,6 +900,30 @@ func (o *KubernetesOverridesUpgradeParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *KubernetesOverridesUpgradeParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *KubernetesOverridesUpgradeParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *KubernetesOverridesUpgradeParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *KubernetesOverridesUpgradeParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1201,6 +1194,38 @@ func (o *KubernetesOverridesUpgradeParams) HasSourceXClusterConfigs() bool {
 // SetSourceXClusterConfigs gets a reference to the given []string and assigns it to the SourceXClusterConfigs field.
 func (o *KubernetesOverridesUpgradeParams) SetSourceXClusterConfigs(v []string) {
 	o.SourceXClusterConfigs = &v
+}
+
+// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
+func (o *KubernetesOverridesUpgradeParams) GetSshUserOverride() string {
+	if o == nil || o.SshUserOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUserOverride
+}
+
+// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesOverridesUpgradeParams) GetSshUserOverrideOk() (*string, bool) {
+	if o == nil || o.SshUserOverride == nil {
+		return nil, false
+	}
+	return o.SshUserOverride, true
+}
+
+// HasSshUserOverride returns a boolean if a field has been set.
+func (o *KubernetesOverridesUpgradeParams) HasSshUserOverride() bool {
+	if o != nil && o.SshUserOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
+func (o *KubernetesOverridesUpgradeParams) SetSshUserOverride(v string) {
+	o.SshUserOverride = &v
 }
 
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
@@ -1746,9 +1771,6 @@ func (o KubernetesOverridesUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
@@ -1782,6 +1804,9 @@ func (o KubernetesOverridesUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
@@ -1808,6 +1833,9 @@ func (o KubernetesOverridesUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
+	}
+	if o.SshUserOverride != nil {
+		toSerialize["sshUserOverride"] = o.SshUserOverride
 	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs

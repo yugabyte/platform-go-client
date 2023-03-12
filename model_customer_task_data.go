@@ -43,6 +43,8 @@ type CustomerTaskData struct {
 	Type *string `json:"type,omitempty"`
 	// Customer task type name
 	TypeName *string `json:"typeName,omitempty"`
+	// Customer Email
+	UserEmail *string `json:"userEmail,omitempty"`
 }
 
 // NewCustomerTaskData instantiates a new CustomerTaskData object
@@ -478,6 +480,38 @@ func (o *CustomerTaskData) SetTypeName(v string) {
 	o.TypeName = &v
 }
 
+// GetUserEmail returns the UserEmail field value if set, zero value otherwise.
+func (o *CustomerTaskData) GetUserEmail() string {
+	if o == nil || o.UserEmail == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserEmail
+}
+
+// GetUserEmailOk returns a tuple with the UserEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerTaskData) GetUserEmailOk() (*string, bool) {
+	if o == nil || o.UserEmail == nil {
+		return nil, false
+	}
+	return o.UserEmail, true
+}
+
+// HasUserEmail returns a boolean if a field has been set.
+func (o *CustomerTaskData) HasUserEmail() bool {
+	if o != nil && o.UserEmail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserEmail gets a reference to the given string and assigns it to the UserEmail field.
+func (o *CustomerTaskData) SetUserEmail(v string) {
+	o.UserEmail = &v
+}
+
 func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Abortable != nil {
@@ -518,6 +552,9 @@ func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	}
 	if o.TypeName != nil {
 		toSerialize["typeName"] = o.TypeName
+	}
+	if o.UserEmail != nil {
+		toSerialize["userEmail"] = o.UserEmail
 	}
 	return json.Marshal(toSerialize)
 }

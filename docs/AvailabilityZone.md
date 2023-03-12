@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Active** | Pointer to **bool** | AZ status. This value is &#x60;true&#x60; for an active AZ. | [optional] [readonly] 
 **Code** | Pointer to **string** | AZ code | [optional] 
 **Config** | Pointer to **map[string]string** | AZ configuration values | [optional] 
+**Details** | Pointer to [**AvailabilityZoneDetails**](AvailabilityZoneDetails.md) |  | [optional] 
 **KubeconfigPath** | Pointer to **string** | Path to Kubernetes configuration file | [optional] [readonly] 
 **Name** | **string** | AZ name | 
 **SecondarySubnet** | Pointer to **string** | AZ secondary subnet | [optional] 
@@ -106,6 +107,31 @@ SetConfig sets Config field to given value.
 `func (o *AvailabilityZone) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
+
+### GetDetails
+
+`func (o *AvailabilityZone) GetDetails() AvailabilityZoneDetails`
+
+GetDetails returns the Details field if non-nil, zero value otherwise.
+
+### GetDetailsOk
+
+`func (o *AvailabilityZone) GetDetailsOk() (*AvailabilityZoneDetails, bool)`
+
+GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetails
+
+`func (o *AvailabilityZone) SetDetails(v AvailabilityZoneDetails)`
+
+SetDetails sets Details field to given value.
+
+### HasDetails
+
+`func (o *AvailabilityZone) HasDetails() bool`
+
+HasDetails returns a boolean if a field has been set.
 
 ### GetKubeconfigPath
 

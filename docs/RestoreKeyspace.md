@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupSizeFromStorageLocation** | **int64** |  | 
-**CompleteTime** | **time.Time** |  | 
-**CreateTime** | **time.Time** |  | 
+**CompleteTime** | Pointer to **time.Time** | RestoreKeyspace task completion time | [optional] 
+**CreateTime** | Pointer to **time.Time** | RestoreKeyspace task creation time | [optional] 
 **RestoreUUID** | Pointer to **string** | Universe-level Restore UUID | [optional] [readonly] 
 **SourceKeyspace** | Pointer to **string** | Source keyspace name | [optional] [readonly] 
 **State** | Pointer to **string** | State of the keyspace restore | [optional] [readonly] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreKeyspace
 
-`func NewRestoreKeyspace(backupSizeFromStorageLocation int64, completeTime time.Time, createTime time.Time, ) *RestoreKeyspace`
+`func NewRestoreKeyspace(backupSizeFromStorageLocation int64, ) *RestoreKeyspace`
 
 NewRestoreKeyspace instantiates a new RestoreKeyspace object
 This constructor will assign default values to properties that have it defined,
@@ -73,6 +73,11 @@ and a boolean to check if the value has been set.
 
 SetCompleteTime sets CompleteTime field to given value.
 
+### HasCompleteTime
+
+`func (o *RestoreKeyspace) HasCompleteTime() bool`
+
+HasCompleteTime returns a boolean if a field has been set.
 
 ### GetCreateTime
 
@@ -93,6 +98,11 @@ and a boolean to check if the value has been set.
 
 SetCreateTime sets CreateTime field to given value.
 
+### HasCreateTime
+
+`func (o *RestoreKeyspace) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
 
 ### GetRestoreUUID
 

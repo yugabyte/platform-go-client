@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **PlacementUuid** | Pointer to **string** | UUID of the cluster to which this node belongs | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | REDIS HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | REDIS RPC port | [optional] 
+**SshUserOverride** | Pointer to **string** | SSH user override for the AMI | [optional] 
 **State** | Pointer to **string** | Node state | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
 **TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] 
@@ -579,6 +580,31 @@ SetRedisServerRpcPort sets RedisServerRpcPort field to given value.
 `func (o *NodeDetails) HasRedisServerRpcPort() bool`
 
 HasRedisServerRpcPort returns a boolean if a field has been set.
+
+### GetSshUserOverride
+
+`func (o *NodeDetails) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *NodeDetails) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *NodeDetails) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *NodeDetails) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetState
 

@@ -26,7 +26,6 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **FrequencyTimeUnit** | Pointer to **string** | Time unit for user input schedule frequency | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
 **IncrementalBackupFrequency** | Pointer to **int64** | Frequency of incremental backups | [optional] 
@@ -37,8 +36,10 @@ Name | Type | Description | Notes
 **MinNumBackupsToRetain** | Pointer to **int32** | Minimum number of backups to retain for a particular backup schedule | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
+**ParallelDBBackups** | Pointer to **int32** | Parallel DB backups | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **ScheduleName** | Pointer to **string** | Schedule Name | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] 
@@ -60,7 +61,7 @@ Name | Type | Description | Notes
 
 ### NewBackupRequestParams
 
-`func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams`
+`func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams`
 
 NewBackupRequestParams instantiates a new BackupRequestParams object
 This constructor will assign default values to properties that have it defined,
@@ -605,31 +606,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *BackupRequestParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *BackupRequestParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *BackupRequestParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *BackupRequestParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetFrequencyTimeUnit
 
 `func (o *BackupRequestParams) GetFrequencyTimeUnit() string`
@@ -880,6 +856,31 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 
 HasNodeExporterUser returns a boolean if a field has been set.
 
+### GetParallelDBBackups
+
+`func (o *BackupRequestParams) GetParallelDBBackups() int32`
+
+GetParallelDBBackups returns the ParallelDBBackups field if non-nil, zero value otherwise.
+
+### GetParallelDBBackupsOk
+
+`func (o *BackupRequestParams) GetParallelDBBackupsOk() (*int32, bool)`
+
+GetParallelDBBackupsOk returns a tuple with the ParallelDBBackups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParallelDBBackups
+
+`func (o *BackupRequestParams) SetParallelDBBackups(v int32)`
+
+SetParallelDBBackups sets ParallelDBBackups field to given value.
+
+### HasParallelDBBackups
+
+`func (o *BackupRequestParams) HasParallelDBBackups() bool`
+
+HasParallelDBBackups returns a boolean if a field has been set.
+
 ### GetParallelism
 
 `func (o *BackupRequestParams) GetParallelism() int32`
@@ -923,6 +924,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupRequestParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *BackupRequestParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *BackupRequestParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *BackupRequestParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID

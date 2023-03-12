@@ -18,12 +18,12 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ForceResizeNode** | **bool** |  | 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
+**MasterGFlags** | **map[string]string** |  | 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -40,7 +41,9 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**TserverGFlags** | **map[string]string** |  | 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
@@ -60,7 +63,7 @@ Name | Type | Description | Notes
 
 ### NewResizeNodeParams
 
-`func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ResizeNodeParams`
+`func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *ResizeNodeParams`
 
 NewResizeNodeParams instantiates a new ResizeNodeParams object
 This constructor will assign default values to properties that have it defined,
@@ -415,31 +418,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *ResizeNodeParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *ResizeNodeParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *ResizeNodeParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *ResizeNodeParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetForceResizeNode
 
 `func (o *ResizeNodeParams) GetForceResizeNode() bool`
@@ -553,6 +531,26 @@ and a boolean to check if the value has been set.
 `func (o *ResizeNodeParams) SetKubernetesUpgradeSupported(v bool)`
 
 SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
+
+
+### GetMasterGFlags
+
+`func (o *ResizeNodeParams) GetMasterGFlags() map[string]string`
+
+GetMasterGFlags returns the MasterGFlags field if non-nil, zero value otherwise.
+
+### GetMasterGFlagsOk
+
+`func (o *ResizeNodeParams) GetMasterGFlagsOk() (*map[string]string, bool)`
+
+GetMasterGFlagsOk returns a tuple with the MasterGFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMasterGFlags
+
+`func (o *ResizeNodeParams) SetMasterGFlags(v map[string]string)`
+
+SetMasterGFlags sets MasterGFlags field to given value.
 
 
 ### GetMastersInDefaultRegion
@@ -723,6 +721,26 @@ and a boolean to check if the value has been set.
 `func (o *ResizeNodeParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *ResizeNodeParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *ResizeNodeParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *ResizeNodeParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID
@@ -940,6 +958,31 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
 
+### GetSshUserOverride
+
+`func (o *ResizeNodeParams) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *ResizeNodeParams) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *ResizeNodeParams) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *ResizeNodeParams) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
+
 ### GetTargetXClusterConfigs
 
 `func (o *ResizeNodeParams) GetTargetXClusterConfigs() []string`
@@ -964,6 +1007,26 @@ SetTargetXClusterConfigs sets TargetXClusterConfigs field to given value.
 `func (o *ResizeNodeParams) HasTargetXClusterConfigs() bool`
 
 HasTargetXClusterConfigs returns a boolean if a field has been set.
+
+### GetTserverGFlags
+
+`func (o *ResizeNodeParams) GetTserverGFlags() map[string]string`
+
+GetTserverGFlags returns the TserverGFlags field if non-nil, zero value otherwise.
+
+### GetTserverGFlagsOk
+
+`func (o *ResizeNodeParams) GetTserverGFlagsOk() (*map[string]string, bool)`
+
+GetTserverGFlagsOk returns a tuple with the TserverGFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTserverGFlags
+
+`func (o *ResizeNodeParams) SetTserverGFlags(v map[string]string)`
+
+SetTserverGFlags sets TserverGFlags field to given value.
+
 
 ### GetUniversePaused
 

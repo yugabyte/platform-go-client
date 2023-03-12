@@ -21,19 +21,21 @@ type ConfKeyInfo struct {
 	HelpTxt string `json:"helpTxt"`
 	Key string `json:"key"`
 	Scope string `json:"scope"`
+	Tags []string `json:"tags"`
 }
 
 // NewConfKeyInfo instantiates a new ConfKeyInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, ) *ConfKeyInfo {
+func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, tags []string, ) *ConfKeyInfo {
 	this := ConfKeyInfo{}
 	this.DataType = dataType
 	this.DisplayName = displayName
 	this.HelpTxt = helpTxt
 	this.Key = key
 	this.Scope = scope
+	this.Tags = tags
 	return &this
 }
 
@@ -165,6 +167,30 @@ func (o *ConfKeyInfo) SetScope(v string) {
 	o.Scope = v
 }
 
+// GetTags returns the Tags field value
+func (o *ConfKeyInfo) GetTags() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value
+// and a boolean to check if the value has been set.
+func (o *ConfKeyInfo) GetTagsOk() (*[]string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Tags, true
+}
+
+// SetTags sets field value
+func (o *ConfKeyInfo) SetTags(v []string) {
+	o.Tags = v
+}
+
 func (o ConfKeyInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -181,6 +207,9 @@ func (o ConfKeyInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["scope"] = o.Scope
+	}
+	if true {
+		toSerialize["tags"] = o.Tags
 	}
 	return json.Marshal(toSerialize)
 }

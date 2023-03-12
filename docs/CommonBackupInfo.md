@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupUUID** | **string** |  | 
 **BaseBackupUUID** | **string** |  | 
-**CompletionTime** | **time.Time** |  | 
-**CreateTime** | **time.Time** |  | 
+**CompletionTime** | Pointer to **time.Time** | Backup completion time. | [optional] 
+**CreateTime** | Pointer to **time.Time** | Backup create time. | [optional] 
 **KmsConfigUUID** | **string** |  | 
 **ResponseList** | [**[]KeyspaceTablesList**](KeyspaceTablesList.md) |  | 
 **Sse** | **bool** |  | 
@@ -15,13 +15,13 @@ Name | Type | Description | Notes
 **StorageConfigUUID** | **string** |  | 
 **TaskUUID** | **string** |  | 
 **TotalBackupSizeInBytes** | **int64** |  | 
-**UpdateTime** | **time.Time** |  | 
+**UpdateTime** | Pointer to **time.Time** | Backup update time. | [optional] 
 
 ## Methods
 
 ### NewCommonBackupInfo
 
-`func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, completionTime time.Time, createTime time.Time, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, updateTime time.Time, ) *CommonBackupInfo`
+`func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo`
 
 NewCommonBackupInfo instantiates a new CommonBackupInfo object
 This constructor will assign default values to properties that have it defined,
@@ -95,6 +95,11 @@ and a boolean to check if the value has been set.
 
 SetCompletionTime sets CompletionTime field to given value.
 
+### HasCompletionTime
+
+`func (o *CommonBackupInfo) HasCompletionTime() bool`
+
+HasCompletionTime returns a boolean if a field has been set.
 
 ### GetCreateTime
 
@@ -115,6 +120,11 @@ and a boolean to check if the value has been set.
 
 SetCreateTime sets CreateTime field to given value.
 
+### HasCreateTime
+
+`func (o *CommonBackupInfo) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
 
 ### GetKmsConfigUUID
 
@@ -275,6 +285,11 @@ and a boolean to check if the value has been set.
 
 SetUpdateTime sets UpdateTime field to given value.
 
+### HasUpdateTime
+
+`func (o *CommonBackupInfo) HasUpdateTime() bool`
+
+HasUpdateTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

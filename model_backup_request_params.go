@@ -51,8 +51,6 @@ type BackupRequestParams struct {
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	// Time unit for user input schedule frequency
 	FrequencyTimeUnit *string `json:"frequencyTimeUnit,omitempty"`
 	// Should table backup errors be ignored
@@ -72,9 +70,12 @@ type BackupRequestParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	// Parallel DB backups
+	ParallelDBBackups *int32 `json:"parallelDBBackups,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Schedule Name
@@ -109,13 +110,14 @@ type BackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
+func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
 	this := BackupRequestParams{}
 	this.BackupUUID = backupUUID
 	this.CreatingUser = creatingUser
 	this.CurrentIdx = currentIdx
 	this.CurrentYbcTaskId = currentYbcTaskId
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
@@ -803,38 +805,6 @@ func (o *BackupRequestParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *BackupRequestParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetFrequencyTimeUnit returns the FrequencyTimeUnit field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetFrequencyTimeUnit() string {
 	if o == nil || o.FrequencyTimeUnit == nil {
@@ -1155,6 +1125,38 @@ func (o *BackupRequestParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetParallelDBBackups returns the ParallelDBBackups field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetParallelDBBackups() int32 {
+	if o == nil || o.ParallelDBBackups == nil {
+		var ret int32
+		return ret
+	}
+	return *o.ParallelDBBackups
+}
+
+// GetParallelDBBackupsOk returns a tuple with the ParallelDBBackups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetParallelDBBackupsOk() (*int32, bool) {
+	if o == nil || o.ParallelDBBackups == nil {
+		return nil, false
+	}
+	return o.ParallelDBBackups, true
+}
+
+// HasParallelDBBackups returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasParallelDBBackups() bool {
+	if o != nil && o.ParallelDBBackups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetParallelDBBackups gets a reference to the given int32 and assigns it to the ParallelDBBackups field.
+func (o *BackupRequestParams) SetParallelDBBackups(v int32) {
+	o.ParallelDBBackups = &v
+}
+
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetParallelism() int32 {
 	if o == nil || o.Parallelism == nil {
@@ -1209,6 +1211,30 @@ func (o *BackupRequestParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *BackupRequestParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *BackupRequestParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *BackupRequestParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1759,9 +1785,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.FrequencyTimeUnit != nil {
 		toSerialize["frequencyTimeUnit"] = o.FrequencyTimeUnit
 	}
@@ -1792,11 +1815,17 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
+	if o.ParallelDBBackups != nil {
+		toSerialize["parallelDBBackups"] = o.ParallelDBBackups
+	}
 	if o.Parallelism != nil {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
+	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

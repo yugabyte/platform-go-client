@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **Category** | **string** |  | 
 **CommonBackupInfo** | [**CommonBackupInfo**](CommonBackupInfo.md) |  | 
 **CustomerUUID** | **string** |  | 
-**ExpiryTime** | **time.Time** |  | 
+**ExpiryTime** | Pointer to **time.Time** | The expiry time for backup. | [optional] 
 **FullChainSizeInBytes** | **int64** |  | 
 **HasIncrementalBackups** | **bool** |  | 
 **IsFullBackup** | **bool** |  | 
 **IsStorageConfigPresent** | **bool** |  | 
 **IsUniversePresent** | **bool** |  | 
 **LastBackupState** | **string** |  | 
-**LastIncrementalBackupTime** | **time.Time** |  | 
+**LastIncrementalBackupTime** | Pointer to **time.Time** | Time for last incremenatal backup. | [optional] 
 **OnDemand** | **bool** |  | 
 **ScheduleUUID** | **string** |  | 
 **StorageConfigType** | **string** |  | 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTime time.Time, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, lastIncrementalBackupTime time.Time, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
+`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +140,11 @@ and a boolean to check if the value has been set.
 
 SetExpiryTime sets ExpiryTime field to given value.
 
+### HasExpiryTime
+
+`func (o *BackupResp) HasExpiryTime() bool`
+
+HasExpiryTime returns a boolean if a field has been set.
 
 ### GetFullChainSizeInBytes
 
@@ -280,6 +285,11 @@ and a boolean to check if the value has been set.
 
 SetLastIncrementalBackupTime sets LastIncrementalBackupTime field to given value.
 
+### HasLastIncrementalBackupTime
+
+`func (o *BackupResp) HasLastIncrementalBackupTime() bool`
+
+HasLastIncrementalBackupTime returns a boolean if a field has been set.
 
 ### GetOnDemand
 

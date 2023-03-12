@@ -20,6 +20,7 @@ type PerformanceRecommendation struct {
 	EntityNames string `json:"entityNames"`
 	EntityType string `json:"entityType"`
 	Id string `json:"id"`
+	IsStale bool `json:"isStale"`
 	New bool `json:"new"`
 	Observation string `json:"observation"`
 	Recommendation string `json:"recommendation"`
@@ -36,12 +37,13 @@ type PerformanceRecommendation struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string, ) *PerformanceRecommendation {
+func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, isStale bool, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string, ) *PerformanceRecommendation {
 	this := PerformanceRecommendation{}
 	this.CustomerId = customerId
 	this.EntityNames = entityNames
 	this.EntityType = entityType
 	this.Id = id
+	this.IsStale = isStale
 	this.New = new
 	this.Observation = observation
 	this.Recommendation = recommendation
@@ -157,6 +159,30 @@ func (o *PerformanceRecommendation) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *PerformanceRecommendation) SetId(v string) {
 	o.Id = v
+}
+
+// GetIsStale returns the IsStale field value
+func (o *PerformanceRecommendation) GetIsStale() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.IsStale
+}
+
+// GetIsStaleOk returns a tuple with the IsStale field value
+// and a boolean to check if the value has been set.
+func (o *PerformanceRecommendation) GetIsStaleOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.IsStale, true
+}
+
+// SetIsStale sets field value
+func (o *PerformanceRecommendation) SetIsStale(v bool) {
+	o.IsStale = v
 }
 
 // GetNew returns the New field value
@@ -412,6 +438,9 @@ func (o PerformanceRecommendation) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["isStale"] = o.IsStale
 	}
 	if true {
 		toSerialize["new"] = o.New

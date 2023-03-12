@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DateRangeEnd** | **time.Time** |  | 
-**DateRangeStart** | **time.Time** |  | 
+**DateRangeEnd** | Pointer to **time.Time** | The end date to filter paged query. | [optional] 
+**DateRangeStart** | Pointer to **time.Time** | The start date to filter paged query. | [optional] 
 **OnlyShowDeletedSourceUniverses** | **bool** |  | 
 **SourceUniverseNameList** | **[]string** |  | 
 **States** | **[]string** |  | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreApiFilter
 
-`func NewRestoreApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, onlyShowDeletedSourceUniverses bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
+`func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
 
 NewRestoreApiFilter instantiates a new RestoreApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -51,6 +51,11 @@ and a boolean to check if the value has been set.
 
 SetDateRangeEnd sets DateRangeEnd field to given value.
 
+### HasDateRangeEnd
+
+`func (o *RestoreApiFilter) HasDateRangeEnd() bool`
+
+HasDateRangeEnd returns a boolean if a field has been set.
 
 ### GetDateRangeStart
 
@@ -71,6 +76,11 @@ and a boolean to check if the value has been set.
 
 SetDateRangeStart sets DateRangeStart field to given value.
 
+### HasDateRangeStart
+
+`func (o *RestoreApiFilter) HasDateRangeStart() bool`
+
+HasDateRangeStart returns a boolean if a field has been set.
 
 ### GetOnlyShowDeletedSourceUniverses
 

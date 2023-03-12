@@ -17,21 +17,23 @@ import (
 // Region Region within a given provider. Typically, this maps to a single cloud provider region.
 type Region struct {
 	Active *bool `json:"active,omitempty"`
-	Architecture *string `json:"architecture,omitempty"`
 	// Cloud provider region code
 	Code *string `json:"code,omitempty"`
 	Config *map[string]string `json:"config,omitempty"`
+	Details *RegionDetails `json:"details,omitempty"`
 	// The region's latitude
 	Latitude *float64 `json:"latitude,omitempty"`
 	// The region's longitude
 	Longitude *float64 `json:"longitude,omitempty"`
 	// Cloud provider region name
 	Name *string `json:"name,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Moved to regionDetails.cloudInfo aws/azure securityGroupId property
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
 	// Region UUID
 	Uuid *string `json:"uuid,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Moved to regionDetails.cloudInfo aws/azure vnet property
 	VnetName *string `json:"vnetName,omitempty"`
-	// The AMI to be used in this region.
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Moved to details.cloudInfo aws/gcp/azure ybImage property
 	YbImage *string `json:"ybImage,omitempty"`
 	Zones []AvailabilityZone `json:"zones"`
 }
@@ -84,38 +86,6 @@ func (o *Region) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *Region) SetActive(v bool) {
 	o.Active = &v
-}
-
-// GetArchitecture returns the Architecture field value if set, zero value otherwise.
-func (o *Region) GetArchitecture() string {
-	if o == nil || o.Architecture == nil {
-		var ret string
-		return ret
-	}
-	return *o.Architecture
-}
-
-// GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Region) GetArchitectureOk() (*string, bool) {
-	if o == nil || o.Architecture == nil {
-		return nil, false
-	}
-	return o.Architecture, true
-}
-
-// HasArchitecture returns a boolean if a field has been set.
-func (o *Region) HasArchitecture() bool {
-	if o != nil && o.Architecture != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
-func (o *Region) SetArchitecture(v string) {
-	o.Architecture = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
@@ -180,6 +150,38 @@ func (o *Region) HasConfig() bool {
 // SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
 func (o *Region) SetConfig(v map[string]string) {
 	o.Config = &v
+}
+
+// GetDetails returns the Details field value if set, zero value otherwise.
+func (o *Region) GetDetails() RegionDetails {
+	if o == nil || o.Details == nil {
+		var ret RegionDetails
+		return ret
+	}
+	return *o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Region) GetDetailsOk() (*RegionDetails, bool) {
+	if o == nil || o.Details == nil {
+		return nil, false
+	}
+	return o.Details, true
+}
+
+// HasDetails returns a boolean if a field has been set.
+func (o *Region) HasDetails() bool {
+	if o != nil && o.Details != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given RegionDetails and assigns it to the Details field.
+func (o *Region) SetDetails(v RegionDetails) {
+	o.Details = &v
 }
 
 // GetLatitude returns the Latitude field value if set, zero value otherwise.
@@ -435,14 +437,14 @@ func (o Region) MarshalJSON() ([]byte, error) {
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
 	}
-	if o.Architecture != nil {
-		toSerialize["architecture"] = o.Architecture
-	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
+	}
+	if o.Details != nil {
+		toSerialize["details"] = o.Details
 	}
 	if o.Latitude != nil {
 		toSerialize["latitude"] = o.Latitude

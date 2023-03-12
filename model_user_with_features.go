@@ -17,7 +17,7 @@ import (
 
 // UserWithFeatures A user with set of features, associated with a customer
 type UserWithFeatures struct {
-	// API token creation date
+	// UI session token creation date
 	AuthTokenIssueDate *time.Time `json:"authTokenIssueDate,omitempty"`
 	// User creation date
 	CreationDate *time.Time `json:"creationDate,omitempty"`

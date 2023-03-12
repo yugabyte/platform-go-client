@@ -19,8 +19,10 @@ import (
 type CommonBackupInfo struct {
 	BackupUUID string `json:"backupUUID"`
 	BaseBackupUUID string `json:"baseBackupUUID"`
-	CompletionTime time.Time `json:"completionTime"`
-	CreateTime time.Time `json:"createTime"`
+	// Backup completion time.
+	CompletionTime *time.Time `json:"completionTime,omitempty"`
+	// Backup create time.
+	CreateTime *time.Time `json:"createTime,omitempty"`
 	KmsConfigUUID string `json:"kmsConfigUUID"`
 	ResponseList []KeyspaceTablesList `json:"responseList"`
 	Sse bool `json:"sse"`
@@ -28,19 +30,18 @@ type CommonBackupInfo struct {
 	StorageConfigUUID string `json:"storageConfigUUID"`
 	TaskUUID string `json:"taskUUID"`
 	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
-	UpdateTime time.Time `json:"updateTime"`
+	// Backup update time.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // NewCommonBackupInfo instantiates a new CommonBackupInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, completionTime time.Time, createTime time.Time, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, updateTime time.Time, ) *CommonBackupInfo {
+func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo {
 	this := CommonBackupInfo{}
 	this.BackupUUID = backupUUID
 	this.BaseBackupUUID = baseBackupUUID
-	this.CompletionTime = completionTime
-	this.CreateTime = createTime
 	this.KmsConfigUUID = kmsConfigUUID
 	this.ResponseList = responseList
 	this.Sse = sse
@@ -48,7 +49,6 @@ func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, completionTim
 	this.StorageConfigUUID = storageConfigUUID
 	this.TaskUUID = taskUUID
 	this.TotalBackupSizeInBytes = totalBackupSizeInBytes
-	this.UpdateTime = updateTime
 	return &this
 }
 
@@ -108,52 +108,68 @@ func (o *CommonBackupInfo) SetBaseBackupUUID(v string) {
 	o.BaseBackupUUID = v
 }
 
-// GetCompletionTime returns the CompletionTime field value
+// GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
 func (o *CommonBackupInfo) GetCompletionTime() time.Time {
-	if o == nil  {
+	if o == nil || o.CompletionTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CompletionTime
+	return *o.CompletionTime
 }
 
-// GetCompletionTimeOk returns a tuple with the CompletionTime field value
+// GetCompletionTimeOk returns a tuple with the CompletionTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonBackupInfo) GetCompletionTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.CompletionTime == nil {
 		return nil, false
 	}
-	return &o.CompletionTime, true
+	return o.CompletionTime, true
 }
 
-// SetCompletionTime sets field value
+// HasCompletionTime returns a boolean if a field has been set.
+func (o *CommonBackupInfo) HasCompletionTime() bool {
+	if o != nil && o.CompletionTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionTime gets a reference to the given time.Time and assigns it to the CompletionTime field.
 func (o *CommonBackupInfo) SetCompletionTime(v time.Time) {
-	o.CompletionTime = v
+	o.CompletionTime = &v
 }
 
-// GetCreateTime returns the CreateTime field value
+// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
 func (o *CommonBackupInfo) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil || o.CreateTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CreateTime
+	return *o.CreateTime
 }
 
-// GetCreateTimeOk returns a tuple with the CreateTime field value
+// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonBackupInfo) GetCreateTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.CreateTime == nil {
 		return nil, false
 	}
-	return &o.CreateTime, true
+	return o.CreateTime, true
 }
 
-// SetCreateTime sets field value
+// HasCreateTime returns a boolean if a field has been set.
+func (o *CommonBackupInfo) HasCreateTime() bool {
+	if o != nil && o.CreateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *CommonBackupInfo) SetCreateTime(v time.Time) {
-	o.CreateTime = v
+	o.CreateTime = &v
 }
 
 // GetKmsConfigUUID returns the KmsConfigUUID field value
@@ -324,28 +340,36 @@ func (o *CommonBackupInfo) SetTotalBackupSizeInBytes(v int64) {
 	o.TotalBackupSizeInBytes = v
 }
 
-// GetUpdateTime returns the UpdateTime field value
+// GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
 func (o *CommonBackupInfo) GetUpdateTime() time.Time {
-	if o == nil  {
+	if o == nil || o.UpdateTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.UpdateTime
+	return *o.UpdateTime
 }
 
-// GetUpdateTimeOk returns a tuple with the UpdateTime field value
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonBackupInfo) GetUpdateTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.UpdateTime == nil {
 		return nil, false
 	}
-	return &o.UpdateTime, true
+	return o.UpdateTime, true
 }
 
-// SetUpdateTime sets field value
+// HasUpdateTime returns a boolean if a field has been set.
+func (o *CommonBackupInfo) HasUpdateTime() bool {
+	if o != nil && o.UpdateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateTime gets a reference to the given time.Time and assigns it to the UpdateTime field.
 func (o *CommonBackupInfo) SetUpdateTime(v time.Time) {
-	o.UpdateTime = v
+	o.UpdateTime = &v
 }
 
 func (o CommonBackupInfo) MarshalJSON() ([]byte, error) {
@@ -356,10 +380,10 @@ func (o CommonBackupInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["baseBackupUUID"] = o.BaseBackupUUID
 	}
-	if true {
+	if o.CompletionTime != nil {
 		toSerialize["completionTime"] = o.CompletionTime
 	}
-	if true {
+	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
 	if true {
@@ -383,7 +407,7 @@ func (o CommonBackupInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["totalBackupSizeInBytes"] = o.TotalBackupSizeInBytes
 	}
-	if true {
+	if o.UpdateTime != nil {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return json.Marshal(toSerialize)

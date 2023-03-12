@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthTokenIssueDate** | Pointer to **time.Time** | API token creation date | [optional] [readonly] 
+**AuthTokenIssueDate** | Pointer to **time.Time** | UI session token creation date | [optional] [readonly] 
 **CreationDate** | Pointer to **time.Time** | User creation date | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Email** | **string** | User email address | 

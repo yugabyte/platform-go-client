@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **ProviderType** | Pointer to **string** |  | [optional] 
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
+**SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
 **TserverGFlags** | Pointer to **map[string]string** |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
@@ -787,6 +788,31 @@ SetReplicationFactor sets ReplicationFactor field to given value.
 `func (o *UserIntent) HasReplicationFactor() bool`
 
 HasReplicationFactor returns a boolean if a field has been set.
+
+### GetSpecificGFlags
+
+`func (o *UserIntent) GetSpecificGFlags() SpecificGFlags`
+
+GetSpecificGFlags returns the SpecificGFlags field if non-nil, zero value otherwise.
+
+### GetSpecificGFlagsOk
+
+`func (o *UserIntent) GetSpecificGFlagsOk() (*SpecificGFlags, bool)`
+
+GetSpecificGFlagsOk returns a tuple with the SpecificGFlags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpecificGFlags
+
+`func (o *UserIntent) SetSpecificGFlags(v SpecificGFlags)`
+
+SetSpecificGFlags sets SpecificGFlags field to given value.
+
+### HasSpecificGFlags
+
+`func (o *UserIntent) HasSpecificGFlags() bool`
+
+HasSpecificGFlags returns a boolean if a field has been set.
 
 ### GetTserverGFlags
 

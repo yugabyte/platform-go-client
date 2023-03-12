@@ -6,12 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AccessKeyRotation**](CloudProvidersApi.md#AccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | Rotate access key for a provider
 [**CreateProviders**](CloudProvidersApi.md#CreateProviders) | **Post** /api/v1/customers/{cUUID}/providers | Create a provider
+[**Delete**](CloudProvidersApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID} | Delete a cloud provider
 [**EditAccessKeyRotationSchedule**](CloudProvidersApi.md#EditAccessKeyRotationSchedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | Edit a access key rotation schedule
 [**EditProvider**](CloudProvidersApi.md#EditProvider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 [**GetListOfProviders**](CloudProvidersApi.md#GetListOfProviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 [**GetProvider**](CloudProvidersApi.md#GetProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
 [**ListSchedules**](CloudProvidersApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
-[**PatchProvider**](CloudProvidersApi.md#PatchProvider) | **Patch** /api/v1/customers/{cUUID}/providers/{pUUID} | Patch a provider
 [**RefreshPricing**](CloudProvidersApi.md#RefreshPricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
 [**ScheduledAccessKeyRotation**](CloudProvidersApi.md#ScheduledAccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## CreateProviders
 
-> YBPTask CreateProviders(ctx, cUUID).CreateProviderRequest(createProviderRequest).Execute()
+> YBPTask CreateProviders(ctx, cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).Execute()
 
 Create a provider
 
@@ -108,11 +108,12 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    createProviderRequest := *openapiclient.NewProvider(*openapiclient.NewProviderDetails(), []openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | 
+    createProviderRequest := *openapiclient.NewProvider([]openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | 
+    validate := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.CreateProviders(context.Background(), cUUID).CreateProviderRequest(createProviderRequest).Execute()
+    resp, r, err := api_client.CloudProvidersApi.CreateProviders(context.Background(), cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.CreateProviders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -139,6 +140,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createProviderRequest** | [**Provider**](Provider.md) |  | 
+ **validate** | **bool** |  | [default to false]
 
 ### Return type
 
@@ -151,6 +153,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Delete
+
+> YBPSuccess Delete(ctx, cUUID, pUUID).Execute()
+
+Delete a cloud provider
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudProvidersApi.Delete(context.Background(), cUUID, pUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `Delete`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `CloudProvidersApi.Delete`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**pUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -236,7 +309,7 @@ Name | Type | Description  | Notes
 
 ## EditProvider
 
-> YBPTask EditProvider(ctx, cUUID, pUUID).EditProviderRequest(editProviderRequest).Execute()
+> YBPTask EditProvider(ctx, cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).Execute()
 
 Update a provider
 
@@ -255,11 +328,12 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
-    editProviderRequest := *openapiclient.NewProvider(*openapiclient.NewProviderDetails(), []openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | edit provider form data
+    editProviderRequest := *openapiclient.NewProvider([]openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | edit provider form data
+    validate := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.EditProvider(context.Background(), cUUID, pUUID).EditProviderRequest(editProviderRequest).Execute()
+    resp, r, err := api_client.CloudProvidersApi.EditProvider(context.Background(), cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.EditProvider``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,6 +362,7 @@ Name | Type | Description  | Notes
 
 
  **editProviderRequest** | [**Provider**](Provider.md) | edit provider form data | 
+ **validate** | **bool** |  | [default to false]
 
 ### Return type
 
@@ -514,79 +589,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchProvider
-
-> YBPTask PatchProvider(ctx, cUUID, pUUID).PatchProviderRequest(patchProviderRequest).Execute()
-
-Patch a provider
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    pUUID := TODO // string | 
-    patchProviderRequest := *openapiclient.NewProvider(*openapiclient.NewProviderDetails(), []openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | patch provider form data
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.PatchProvider(context.Background(), cUUID, pUUID).PatchProviderRequest(patchProviderRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.PatchProvider``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchProvider`: YBPTask
-    fmt.Fprintf(os.Stdout, "Response from `CloudProvidersApi.PatchProvider`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**pUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchProviderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **patchProviderRequest** | [**Provider**](Provider.md) | patch provider form data | 
-
-### Return type
-
-[**YBPTask**](YBPTask.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

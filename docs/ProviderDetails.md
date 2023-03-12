@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AirGapInstall** | Pointer to **bool** |  | [optional] 
+**CloudInfo** | Pointer to [**CloudInfo**](CloudInfo.md) |  | [optional] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
@@ -60,6 +61,31 @@ SetAirGapInstall sets AirGapInstall field to given value.
 `func (o *ProviderDetails) HasAirGapInstall() bool`
 
 HasAirGapInstall returns a boolean if a field has been set.
+
+### GetCloudInfo
+
+`func (o *ProviderDetails) GetCloudInfo() CloudInfo`
+
+GetCloudInfo returns the CloudInfo field if non-nil, zero value otherwise.
+
+### GetCloudInfoOk
+
+`func (o *ProviderDetails) GetCloudInfoOk() (*CloudInfo, bool)`
+
+GetCloudInfoOk returns a tuple with the CloudInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudInfo
+
+`func (o *ProviderDetails) SetCloudInfo(v CloudInfo)`
+
+SetCloudInfo sets CloudInfo field to given value.
+
+### HasCloudInfo
+
+`func (o *ProviderDetails) HasCloudInfo() bool`
+
+HasCloudInfo returns a boolean if a field has been set.
 
 ### GetInstallNodeExporter
 

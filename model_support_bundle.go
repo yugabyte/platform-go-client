@@ -19,12 +19,18 @@ import (
 type SupportBundle struct {
 	BundleDetails BundleDetails `json:"bundleDetails"`
 	BundleUUID string `json:"bundleUUID"`
-	CreationDate time.Time `json:"creationDate"`
-	EndDate time.Time `json:"endDate"`
-	ExpirationDate time.Time `json:"expirationDate"`
+	// Support bundle creation date.
+	CreationDate *time.Time `json:"creationDate,omitempty"`
+	// Support bundle end date.
+	EndDate *time.Time `json:"endDate,omitempty"`
+	// Support bundle expiration date.
+	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
 	Path string `json:"path"`
 	ScopeUUID string `json:"scopeUUID"`
-	StartDate time.Time `json:"startDate"`
+	// Size in bytes of the support bundle
+	SizeInBytes *int64 `json:"sizeInBytes,omitempty"`
+	// Support bundle start date.
+	StartDate *time.Time `json:"startDate,omitempty"`
 	Status string `json:"status"`
 }
 
@@ -32,16 +38,12 @@ type SupportBundle struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, creationDate time.Time, endDate time.Time, expirationDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle {
+func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, path string, scopeUUID string, status string, ) *SupportBundle {
 	this := SupportBundle{}
 	this.BundleDetails = bundleDetails
 	this.BundleUUID = bundleUUID
-	this.CreationDate = creationDate
-	this.EndDate = endDate
-	this.ExpirationDate = expirationDate
 	this.Path = path
 	this.ScopeUUID = scopeUUID
-	this.StartDate = startDate
 	this.Status = status
 	return &this
 }
@@ -102,76 +104,100 @@ func (o *SupportBundle) SetBundleUUID(v string) {
 	o.BundleUUID = v
 }
 
-// GetCreationDate returns the CreationDate field value
+// GetCreationDate returns the CreationDate field value if set, zero value otherwise.
 func (o *SupportBundle) GetCreationDate() time.Time {
-	if o == nil  {
+	if o == nil || o.CreationDate == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CreationDate
+	return *o.CreationDate
 }
 
-// GetCreationDateOk returns a tuple with the CreationDate field value
+// GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SupportBundle) GetCreationDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.CreationDate == nil {
 		return nil, false
 	}
-	return &o.CreationDate, true
+	return o.CreationDate, true
 }
 
-// SetCreationDate sets field value
+// HasCreationDate returns a boolean if a field has been set.
+func (o *SupportBundle) HasCreationDate() bool {
+	if o != nil && o.CreationDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
 func (o *SupportBundle) SetCreationDate(v time.Time) {
-	o.CreationDate = v
+	o.CreationDate = &v
 }
 
-// GetEndDate returns the EndDate field value
+// GetEndDate returns the EndDate field value if set, zero value otherwise.
 func (o *SupportBundle) GetEndDate() time.Time {
-	if o == nil  {
+	if o == nil || o.EndDate == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.EndDate
+	return *o.EndDate
 }
 
-// GetEndDateOk returns a tuple with the EndDate field value
+// GetEndDateOk returns a tuple with the EndDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SupportBundle) GetEndDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.EndDate == nil {
 		return nil, false
 	}
-	return &o.EndDate, true
+	return o.EndDate, true
 }
 
-// SetEndDate sets field value
+// HasEndDate returns a boolean if a field has been set.
+func (o *SupportBundle) HasEndDate() bool {
+	if o != nil && o.EndDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEndDate gets a reference to the given time.Time and assigns it to the EndDate field.
 func (o *SupportBundle) SetEndDate(v time.Time) {
-	o.EndDate = v
+	o.EndDate = &v
 }
 
-// GetExpirationDate returns the ExpirationDate field value
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
 func (o *SupportBundle) GetExpirationDate() time.Time {
-	if o == nil  {
+	if o == nil || o.ExpirationDate == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.ExpirationDate
+	return *o.ExpirationDate
 }
 
-// GetExpirationDateOk returns a tuple with the ExpirationDate field value
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SupportBundle) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.ExpirationDate == nil {
 		return nil, false
 	}
-	return &o.ExpirationDate, true
+	return o.ExpirationDate, true
 }
 
-// SetExpirationDate sets field value
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *SupportBundle) HasExpirationDate() bool {
+	if o != nil && o.ExpirationDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
 func (o *SupportBundle) SetExpirationDate(v time.Time) {
-	o.ExpirationDate = v
+	o.ExpirationDate = &v
 }
 
 // GetPath returns the Path field value
@@ -222,28 +248,68 @@ func (o *SupportBundle) SetScopeUUID(v string) {
 	o.ScopeUUID = v
 }
 
-// GetStartDate returns the StartDate field value
+// GetSizeInBytes returns the SizeInBytes field value if set, zero value otherwise.
+func (o *SupportBundle) GetSizeInBytes() int64 {
+	if o == nil || o.SizeInBytes == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SizeInBytes
+}
+
+// GetSizeInBytesOk returns a tuple with the SizeInBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundle) GetSizeInBytesOk() (*int64, bool) {
+	if o == nil || o.SizeInBytes == nil {
+		return nil, false
+	}
+	return o.SizeInBytes, true
+}
+
+// HasSizeInBytes returns a boolean if a field has been set.
+func (o *SupportBundle) HasSizeInBytes() bool {
+	if o != nil && o.SizeInBytes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSizeInBytes gets a reference to the given int64 and assigns it to the SizeInBytes field.
+func (o *SupportBundle) SetSizeInBytes(v int64) {
+	o.SizeInBytes = &v
+}
+
+// GetStartDate returns the StartDate field value if set, zero value otherwise.
 func (o *SupportBundle) GetStartDate() time.Time {
-	if o == nil  {
+	if o == nil || o.StartDate == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.StartDate
+	return *o.StartDate
 }
 
-// GetStartDateOk returns a tuple with the StartDate field value
+// GetStartDateOk returns a tuple with the StartDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SupportBundle) GetStartDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.StartDate == nil {
 		return nil, false
 	}
-	return &o.StartDate, true
+	return o.StartDate, true
 }
 
-// SetStartDate sets field value
+// HasStartDate returns a boolean if a field has been set.
+func (o *SupportBundle) HasStartDate() bool {
+	if o != nil && o.StartDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStartDate gets a reference to the given time.Time and assigns it to the StartDate field.
 func (o *SupportBundle) SetStartDate(v time.Time) {
-	o.StartDate = v
+	o.StartDate = &v
 }
 
 // GetStatus returns the Status field value
@@ -278,13 +344,13 @@ func (o SupportBundle) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["bundleUUID"] = o.BundleUUID
 	}
-	if true {
+	if o.CreationDate != nil {
 		toSerialize["creationDate"] = o.CreationDate
 	}
-	if true {
+	if o.EndDate != nil {
 		toSerialize["endDate"] = o.EndDate
 	}
-	if true {
+	if o.ExpirationDate != nil {
 		toSerialize["expirationDate"] = o.ExpirationDate
 	}
 	if true {
@@ -293,7 +359,10 @@ func (o SupportBundle) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["scopeUUID"] = o.ScopeUUID
 	}
-	if true {
+	if o.SizeInBytes != nil {
+		toSerialize["sizeInBytes"] = o.SizeInBytes
+	}
+	if o.StartDate != nil {
 		toSerialize["startDate"] = o.StartDate
 	}
 	if true {

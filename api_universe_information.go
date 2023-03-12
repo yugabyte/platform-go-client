@@ -774,7 +774,7 @@ type UniverseInformationApiApiHealthCheckUniverseRequest struct {
 }
 
 
-func (r UniverseInformationApiApiHealthCheckUniverseRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
+func (r UniverseInformationApiApiHealthCheckUniverseRequest) Execute() (Details, *_nethttp.Response, error) {
 	return r.ApiService.HealthCheckUniverseExecute(r)
 }
 
@@ -797,16 +797,16 @@ func (a *UniverseInformationApiService) HealthCheckUniverse(ctx _context.Context
 
 /*
  * Execute executes the request
- * @return map[string]interface{}
+ * @return Details
  */
-func (a *UniverseInformationApiService) HealthCheckUniverseExecute(r UniverseInformationApiApiHealthCheckUniverseRequest) (map[string]interface{}, *_nethttp.Response, error) {
+func (a *UniverseInformationApiService) HealthCheckUniverseExecute(r UniverseInformationApiApiHealthCheckUniverseRequest) (Details, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  Details
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseInformationApiService.HealthCheckUniverse")

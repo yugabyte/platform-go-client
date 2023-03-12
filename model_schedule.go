@@ -43,6 +43,8 @@ type Schedule struct {
 	Status *string `json:"status,omitempty"`
 	// Type of task to be scheduled.
 	TaskType *string `json:"taskType,omitempty"`
+	// User who created the schedule policy
+	UserEmail *string `json:"userEmail,omitempty"`
 }
 
 // NewSchedule instantiates a new Schedule object
@@ -478,6 +480,38 @@ func (o *Schedule) SetTaskType(v string) {
 	o.TaskType = &v
 }
 
+// GetUserEmail returns the UserEmail field value if set, zero value otherwise.
+func (o *Schedule) GetUserEmail() string {
+	if o == nil || o.UserEmail == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserEmail
+}
+
+// GetUserEmailOk returns a tuple with the UserEmail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetUserEmailOk() (*string, bool) {
+	if o == nil || o.UserEmail == nil {
+		return nil, false
+	}
+	return o.UserEmail, true
+}
+
+// HasUserEmail returns a boolean if a field has been set.
+func (o *Schedule) HasUserEmail() bool {
+	if o != nil && o.UserEmail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserEmail gets a reference to the given string and assigns it to the UserEmail field.
+func (o *Schedule) SetUserEmail(v string) {
+	o.UserEmail = &v
+}
+
 func (o Schedule) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BacklogStatus != nil {
@@ -518,6 +552,9 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	}
 	if o.TaskType != nil {
 		toSerialize["taskType"] = o.TaskType
+	}
+	if o.UserEmail != nil {
+		toSerialize["userEmail"] = o.UserEmail
 	}
 	return json.Marshal(toSerialize)
 }

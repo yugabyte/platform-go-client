@@ -17,36 +17,38 @@ import (
 
 // RestoreResp struct for RestoreResp
 type RestoreResp struct {
-	CreationTime time.Time `json:"creationTime"`
+	// Restore creation time.
+	CreateTime *time.Time `json:"createTime,omitempty"`
 	CustomerUUID string `json:"customerUUID"`
 	IsSourceUniversePresent bool `json:"isSourceUniversePresent"`
 	RestoreKeyspaceList []RestoreKeyspace `json:"restoreKeyspaceList"`
 	RestoreSizeInBytes int64 `json:"restoreSizeInBytes"`
 	RestoreUUID string `json:"restoreUUID"`
 	SourceUniverseName string `json:"sourceUniverseName"`
+	SourceUniverseUUID string `json:"sourceUniverseUUID"`
 	State string `json:"state"`
 	TargetUniverseName string `json:"targetUniverseName"`
 	UniverseUUID string `json:"universeUUID"`
-	UpdateTime time.Time `json:"updateTime"`
+	// Restore update time.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // NewRestoreResp instantiates a new RestoreResp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreResp(creationTime time.Time, customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, state string, targetUniverseName string, universeUUID string, updateTime time.Time, ) *RestoreResp {
+func NewRestoreResp(customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, sourceUniverseUUID string, state string, targetUniverseName string, universeUUID string, ) *RestoreResp {
 	this := RestoreResp{}
-	this.CreationTime = creationTime
 	this.CustomerUUID = customerUUID
 	this.IsSourceUniversePresent = isSourceUniversePresent
 	this.RestoreKeyspaceList = restoreKeyspaceList
 	this.RestoreSizeInBytes = restoreSizeInBytes
 	this.RestoreUUID = restoreUUID
 	this.SourceUniverseName = sourceUniverseName
+	this.SourceUniverseUUID = sourceUniverseUUID
 	this.State = state
 	this.TargetUniverseName = targetUniverseName
 	this.UniverseUUID = universeUUID
-	this.UpdateTime = updateTime
 	return &this
 }
 
@@ -58,28 +60,36 @@ func NewRestoreRespWithDefaults() *RestoreResp {
 	return &this
 }
 
-// GetCreationTime returns the CreationTime field value
-func (o *RestoreResp) GetCreationTime() time.Time {
-	if o == nil  {
+// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
+func (o *RestoreResp) GetCreateTime() time.Time {
+	if o == nil || o.CreateTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CreationTime
+	return *o.CreateTime
 }
 
-// GetCreationTimeOk returns a tuple with the CreationTime field value
+// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestoreResp) GetCreationTimeOk() (*time.Time, bool) {
-	if o == nil  {
+func (o *RestoreResp) GetCreateTimeOk() (*time.Time, bool) {
+	if o == nil || o.CreateTime == nil {
 		return nil, false
 	}
-	return &o.CreationTime, true
+	return o.CreateTime, true
 }
 
-// SetCreationTime sets field value
-func (o *RestoreResp) SetCreationTime(v time.Time) {
-	o.CreationTime = v
+// HasCreateTime returns a boolean if a field has been set.
+func (o *RestoreResp) HasCreateTime() bool {
+	if o != nil && o.CreateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
+func (o *RestoreResp) SetCreateTime(v time.Time) {
+	o.CreateTime = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value
@@ -226,6 +236,30 @@ func (o *RestoreResp) SetSourceUniverseName(v string) {
 	o.SourceUniverseName = v
 }
 
+// GetSourceUniverseUUID returns the SourceUniverseUUID field value
+func (o *RestoreResp) GetSourceUniverseUUID() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.SourceUniverseUUID
+}
+
+// GetSourceUniverseUUIDOk returns a tuple with the SourceUniverseUUID field value
+// and a boolean to check if the value has been set.
+func (o *RestoreResp) GetSourceUniverseUUIDOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.SourceUniverseUUID, true
+}
+
+// SetSourceUniverseUUID sets field value
+func (o *RestoreResp) SetSourceUniverseUUID(v string) {
+	o.SourceUniverseUUID = v
+}
+
 // GetState returns the State field value
 func (o *RestoreResp) GetState() string {
 	if o == nil  {
@@ -298,34 +332,42 @@ func (o *RestoreResp) SetUniverseUUID(v string) {
 	o.UniverseUUID = v
 }
 
-// GetUpdateTime returns the UpdateTime field value
+// GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
 func (o *RestoreResp) GetUpdateTime() time.Time {
-	if o == nil  {
+	if o == nil || o.UpdateTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.UpdateTime
+	return *o.UpdateTime
 }
 
-// GetUpdateTimeOk returns a tuple with the UpdateTime field value
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreResp) GetUpdateTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.UpdateTime == nil {
 		return nil, false
 	}
-	return &o.UpdateTime, true
+	return o.UpdateTime, true
 }
 
-// SetUpdateTime sets field value
+// HasUpdateTime returns a boolean if a field has been set.
+func (o *RestoreResp) HasUpdateTime() bool {
+	if o != nil && o.UpdateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateTime gets a reference to the given time.Time and assigns it to the UpdateTime field.
 func (o *RestoreResp) SetUpdateTime(v time.Time) {
-	o.UpdateTime = v
+	o.UpdateTime = &v
 }
 
 func (o RestoreResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["creationTime"] = o.CreationTime
+	if o.CreateTime != nil {
+		toSerialize["createTime"] = o.CreateTime
 	}
 	if true {
 		toSerialize["customerUUID"] = o.CustomerUUID
@@ -346,6 +388,9 @@ func (o RestoreResp) MarshalJSON() ([]byte, error) {
 		toSerialize["sourceUniverseName"] = o.SourceUniverseName
 	}
 	if true {
+		toSerialize["sourceUniverseUUID"] = o.SourceUniverseUUID
+	}
+	if true {
 		toSerialize["state"] = o.State
 	}
 	if true {
@@ -354,7 +399,7 @@ func (o RestoreResp) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID
 	}
-	if true {
+	if o.UpdateTime != nil {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return json.Marshal(toSerialize)

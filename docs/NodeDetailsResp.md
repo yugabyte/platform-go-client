@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **IsTserver** | Pointer to **bool** | True if this node is a Tablet server | [optional] 
 **IsYqlServer** | Pointer to **bool** | True if this node is a YCQL server | [optional] 
 **IsYsqlServer** | Pointer to **bool** | True if this node is a YSQL server | [optional] 
+**KubernetesOverrides** | **string** |  | 
 **MachineImage** | Pointer to **string** | Machine image name | [optional] 
 **MasterHttpPort** | Pointer to **int32** | Master HTTP port | [optional] 
 **MasterRpcPort** | Pointer to **int32** | Master RPC port | [optional] 
@@ -26,6 +27,7 @@ Name | Type | Description | Notes
 **PlacementUuid** | Pointer to **string** | UUID of the cluster to which this node belongs | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | REDIS HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | REDIS RPC port | [optional] 
+**SshUserOverride** | Pointer to **string** | SSH user override for the AMI | [optional] 
 **State** | Pointer to **string** | Node state | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
 **TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] 
@@ -41,7 +43,7 @@ Name | Type | Description | Notes
 
 ### NewNodeDetailsResp
 
-`func NewNodeDetailsResp() *NodeDetailsResp`
+`func NewNodeDetailsResp(kubernetesOverrides string, ) *NodeDetailsResp`
 
 NewNodeDetailsResp instantiates a new NodeDetailsResp object
 This constructor will assign default values to properties that have it defined,
@@ -331,6 +333,26 @@ SetIsYsqlServer sets IsYsqlServer field to given value.
 
 HasIsYsqlServer returns a boolean if a field has been set.
 
+### GetKubernetesOverrides
+
+`func (o *NodeDetailsResp) GetKubernetesOverrides() string`
+
+GetKubernetesOverrides returns the KubernetesOverrides field if non-nil, zero value otherwise.
+
+### GetKubernetesOverridesOk
+
+`func (o *NodeDetailsResp) GetKubernetesOverridesOk() (*string, bool)`
+
+GetKubernetesOverridesOk returns a tuple with the KubernetesOverrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOverrides
+
+`func (o *NodeDetailsResp) SetKubernetesOverrides(v string)`
+
+SetKubernetesOverrides sets KubernetesOverrides field to given value.
+
+
 ### GetMachineImage
 
 `func (o *NodeDetailsResp) GetMachineImage() string`
@@ -605,6 +627,31 @@ SetRedisServerRpcPort sets RedisServerRpcPort field to given value.
 `func (o *NodeDetailsResp) HasRedisServerRpcPort() bool`
 
 HasRedisServerRpcPort returns a boolean if a field has been set.
+
+### GetSshUserOverride
+
+`func (o *NodeDetailsResp) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *NodeDetailsResp) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *NodeDetailsResp) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *NodeDetailsResp) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetState
 

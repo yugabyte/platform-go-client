@@ -78,8 +78,9 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccessKeysApi* | [**CreateAccesskey**](docs/AccessKeysApi.md#createaccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create an access key
+*AccessKeysApi* | [**CreateAccesskey**](docs/AccessKeysApi.md#createaccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create/Upload an access key for onprem Provider region
 *AccessKeysApi* | [**DeleteAccesskey**](docs/AccessKeysApi.md#deleteaccesskey) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Delete an access key
+*AccessKeysApi* | [**EditAccesskey**](docs/AccessKeysApi.md#editaccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Modify an access key
 *AccessKeysApi* | [**Index**](docs/AccessKeysApi.md#index) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Get an access key
 *AccessKeysApi* | [**List**](docs/AccessKeysApi.md#list) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | List access keys for a specific provider
 *AccessKeysApi* | [**ListAllForCustomer**](docs/AccessKeysApi.md#listallforcustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
@@ -90,24 +91,31 @@ Class | Method | HTTP request | Description
 *AlertsApi* | [**CreateAlertConfiguration**](docs/AlertsApi.md#createalertconfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
 *AlertsApi* | [**CreateAlertDestination**](docs/AlertsApi.md#createalertdestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | Create an alert destination
 *AlertsApi* | [**DeleteAlertChannel**](docs/AlertsApi.md#deletealertchannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
+*AlertsApi* | [**DeleteAlertChannelTemplates**](docs/AlertsApi.md#deletealertchanneltemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Delete alert channel templates
 *AlertsApi* | [**DeleteAlertConfiguration**](docs/AlertsApi.md#deletealertconfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
 *AlertsApi* | [**DeleteAlertDestination**](docs/AlertsApi.md#deletealertdestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
 *AlertsApi* | [**DeleteAlertTemplateSettings**](docs/AlertsApi.md#deletealerttemplatesettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings
+*AlertsApi* | [**DeleteAlertTemplateVariables**](docs/AlertsApi.md#deletealerttemplatevariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | Delete an alert template variables
 *AlertsApi* | [**EditAlertTemplateSettings**](docs/AlertsApi.md#editalerttemplatesettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Crete or update alert template settings list
+*AlertsApi* | [**EditAlertTemplateVariables**](docs/AlertsApi.md#editalerttemplatevariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | Create or update alert template variables
 *AlertsApi* | [**Get**](docs/AlertsApi.md#get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
 *AlertsApi* | [**GetAlertChannel**](docs/AlertsApi.md#getalertchannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
+*AlertsApi* | [**GetAlertChannelTemplates**](docs/AlertsApi.md#getalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Get alert channel templates
 *AlertsApi* | [**GetAlertConfiguration**](docs/AlertsApi.md#getalertconfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
 *AlertsApi* | [**GetAlertDestination**](docs/AlertsApi.md#getalertdestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Get an alert destination
 *AlertsApi* | [**ListActive**](docs/AlertsApi.md#listactive) | **Get** /api/v1/customers/{cUUID}/alerts/active | List active alerts
+*AlertsApi* | [**ListAlertChannelTemplates**](docs/AlertsApi.md#listalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | List all alert channel templates
 *AlertsApi* | [**ListAlertChannels**](docs/AlertsApi.md#listalertchannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
 *AlertsApi* | [**ListAlertConfigurations**](docs/AlertsApi.md#listalertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
 *AlertsApi* | [**ListAlertDestinations**](docs/AlertsApi.md#listalertdestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
 *AlertsApi* | [**ListAlertTemplateSettings**](docs/AlertsApi.md#listalerttemplatesettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings
+*AlertsApi* | [**ListAlertTemplateVariables**](docs/AlertsApi.md#listalerttemplatevariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | List alert template variables
 *AlertsApi* | [**ListAlertTemplates**](docs/AlertsApi.md#listalerttemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
 *AlertsApi* | [**ListOfAlerts**](docs/AlertsApi.md#listofalerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
 *AlertsApi* | [**PageAlertConfigurations**](docs/AlertsApi.md#pagealertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
 *AlertsApi* | [**PageAlerts**](docs/AlertsApi.md#pagealerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | List alerts (paginated)
 *AlertsApi* | [**SendTestAlert**](docs/AlertsApi.md#sendtestalert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration
+*AlertsApi* | [**SetAlertChannelTemplates**](docs/AlertsApi.md#setalertchanneltemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Set alert channel templates
 *AlertsApi* | [**UpdateAlertChannel**](docs/AlertsApi.md#updatealertchannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Update an alert channel
 *AlertsApi* | [**UpdateAlertConfiguration**](docs/AlertsApi.md#updatealertconfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Update an alert configuration
 *AlertsApi* | [**UpdateAlertDestination**](docs/AlertsApi.md#updatealertdestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Update an alert destination
@@ -155,12 +163,12 @@ Class | Method | HTTP request | Description
 *CertificateInfoApi* | [**Upload**](docs/CertificateInfoApi.md#upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
 *CloudProvidersApi* | [**AccessKeyRotation**](docs/CloudProvidersApi.md#accesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | Rotate access key for a provider
 *CloudProvidersApi* | [**CreateProviders**](docs/CloudProvidersApi.md#createproviders) | **Post** /api/v1/customers/{cUUID}/providers | Create a provider
+*CloudProvidersApi* | [**Delete**](docs/CloudProvidersApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID} | Delete a cloud provider
 *CloudProvidersApi* | [**EditAccessKeyRotationSchedule**](docs/CloudProvidersApi.md#editaccesskeyrotationschedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | Edit a access key rotation schedule
 *CloudProvidersApi* | [**EditProvider**](docs/CloudProvidersApi.md#editprovider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 *CloudProvidersApi* | [**GetListOfProviders**](docs/CloudProvidersApi.md#getlistofproviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 *CloudProvidersApi* | [**GetProvider**](docs/CloudProvidersApi.md#getprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
 *CloudProvidersApi* | [**ListSchedules**](docs/CloudProvidersApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
-*CloudProvidersApi* | [**PatchProvider**](docs/CloudProvidersApi.md#patchprovider) | **Patch** /api/v1/customers/{cUUID}/providers/{pUUID} | Patch a provider
 *CloudProvidersApi* | [**RefreshPricing**](docs/CloudProvidersApi.md#refreshpricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
 *CloudProvidersApi* | [**ScheduledAccessKeyRotation**](docs/CloudProvidersApi.md#scheduledaccesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
 *CustomerConfigurationApi* | [**CreateCustomerConfig**](docs/CustomerConfigurationApi.md#createcustomerconfig) | **Post** /api/v1/customers/{cUUID}/configs | Create a customer configuration
@@ -181,9 +189,6 @@ Class | Method | HTTP request | Description
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
-*DefaultApi* | [**CreateCdcStream**](docs/DefaultApi.md#createcdcstream) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams | Create CDC Stream for a cluster
-*DefaultApi* | [**DeleteCdcStream**](docs/DefaultApi.md#deletecdcstream) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId} | Delete a CDC stream for a cluster
-*DefaultApi* | [**ListCdcStreams**](docs/DefaultApi.md#listcdcstreams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams | List CDC Streams for a cluster
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 *EncryptionAtRestApi* | [**DeleteKMSConfig**](docs/EncryptionAtRestApi.md#deletekmsconfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 *EncryptionAtRestApi* | [**EditKMSConfig**](docs/EncryptionAtRestApi.md#editkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
@@ -229,10 +234,14 @@ Class | Method | HTTP request | Description
 *PackagesControllerApi* | [**FetchPackage**](docs/PackagesControllerApi.md#fetchpackage) | **Post** /api/v1/fetch_package | Fetch a package
 *PerformanceAdvisorApi* | [**Delete**](docs/PerformanceAdvisorApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | Delete performance recommendations
 *PerformanceAdvisorApi* | [**Get**](docs/PerformanceAdvisorApi.md#get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | Get performance recommendation details
+*PerformanceAdvisorApi* | [**GetLatestRun**](docs/PerformanceAdvisorApi.md#getlatestrun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | Get last performance advisor run details
+*PerformanceAdvisorApi* | [**GetSettings**](docs/PerformanceAdvisorApi.md#getsettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Get universe performance advisor settings
 *PerformanceAdvisorApi* | [**Hide**](docs/PerformanceAdvisorApi.md#hide) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/hide | Hide performance recommendations
 *PerformanceAdvisorApi* | [**Page**](docs/PerformanceAdvisorApi.md#page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | List performance recommendations (paginated)
 *PerformanceAdvisorApi* | [**PageAuditInfo**](docs/PerformanceAdvisorApi.md#pageauditinfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | List performance recommendations state change audit events (paginated)
 *PerformanceAdvisorApi* | [**Resolve**](docs/PerformanceAdvisorApi.md#resolve) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/resolve | Resolve performance recommendations
+*PerformanceAdvisorApi* | [**RunPerfAdvisor**](docs/PerformanceAdvisorApi.md#runperfadvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | Start performance advisor run for universe
+*PerformanceAdvisorApi* | [**UpdateSettings**](docs/PerformanceAdvisorApi.md#updatesettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Update universe performance advisor settings
 *RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create a new region
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
 *RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Modify a region
@@ -257,8 +266,10 @@ Class | Method | HTTP request | Description
 *ScheduleManagementApi* | [**GetSchedule**](docs/ScheduleManagementApi.md#getschedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
 *ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules
 *ScheduleManagementApi* | [**ListSchedulesV2**](docs/ScheduleManagementApi.md#listschedulesv2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
+*SessionManagementApi* | [**ApiLogin**](docs/SessionManagementApi.md#apilogin) | **Post** /api/v1/api_login | Authenticate user and return api token
 *SessionManagementApi* | [**AppVersion**](docs/SessionManagementApi.md#appversion) | **Get** /api/v1/app_version | appVersion
 *SessionManagementApi* | [**CustomerCount**](docs/SessionManagementApi.md#customercount) | **Get** /api/v1/customer_count | customerCount
+*SessionManagementApi* | [**GetAdminNotifications**](docs/SessionManagementApi.md#getadminnotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | getAdminNotifications
 *SessionManagementApi* | [**GetFilteredLogs**](docs/SessionManagementApi.md#getfilteredlogs) | **Get** /api/v1/logs | getFilteredLogs
 *SessionManagementApi* | [**GetLogs**](docs/SessionManagementApi.md#getlogs) | **Get** /api/v1/logs/{maxLines} | getLogs
 *SessionManagementApi* | [**GetSessionInfo**](docs/SessionManagementApi.md#getsessioninfo) | **Get** /api/v1/session_info | Get current user/customer uuid auth/api token
@@ -289,7 +300,6 @@ Class | Method | HTTP request | Description
 *UniverseClusterMutationsApi* | [**UpdatePrimaryCluster**](docs/UniverseClusterMutationsApi.md#updateprimarycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary | Update Primary Cluster
 *UniverseClusterMutationsApi* | [**UpdateReadOnlyCluster**](docs/UniverseClusterMutationsApi.md#updatereadonlycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Update Readonly Cluster
 *UniverseDatabaseManagementApi* | [**CreateUserInDB**](docs/UniverseDatabaseManagementApi.md#createuserindb) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe
-*UniverseDatabaseManagementApi* | [**RunInShell**](docs/UniverseDatabaseManagementApi.md#runinshell) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_in_shell | Run a shell command
 *UniverseDatabaseManagementApi* | [**RunYsqlQueryUniverse**](docs/UniverseDatabaseManagementApi.md#runysqlqueryuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query | Run a YSQL query in a universe
 *UniverseDatabaseManagementApi* | [**SetDatabaseCredentials**](docs/UniverseDatabaseManagementApi.md#setdatabasecredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials
 *UniverseInformationApi* | [**DownloadNodeLogs**](docs/UniverseInformationApi.md#downloadnodelogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs
@@ -347,8 +357,13 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AWSCloudInfo](docs/AWSCloudInfo.md)
+ - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
+ - [AZCloudInfo](docs/AZCloudInfo.md)
  - [AccessKey](docs/AccessKey.md)
+ - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
+ - [AdminNotification](docs/AdminNotification.md)
  - [Alert](docs/Alert.md)
  - [AlertApiFilter](docs/AlertApiFilter.md)
  - [AlertChannel](docs/AlertChannel.md)
@@ -360,6 +375,8 @@ Class | Method | HTTP request | Description
  - [AlertChannelParams](docs/AlertChannelParams.md)
  - [AlertChannelSlackParams](docs/AlertChannelSlackParams.md)
  - [AlertChannelSlackParamsAllOf](docs/AlertChannelSlackParamsAllOf.md)
+ - [AlertChannelTemplates](docs/AlertChannelTemplates.md)
+ - [AlertChannelTemplatesExtWithDefaultValues](docs/AlertChannelTemplatesExtWithDefaultValues.md)
  - [AlertChannelWebHookParams](docs/AlertChannelWebHookParams.md)
  - [AlertChannelWebHookParamsAllOf](docs/AlertChannelWebHookParamsAllOf.md)
  - [AlertConfiguration](docs/AlertConfiguration.md)
@@ -381,12 +398,19 @@ Class | Method | HTTP request | Description
  - [AlertTemplateApiFilter](docs/AlertTemplateApiFilter.md)
  - [AlertTemplateSettings](docs/AlertTemplateSettings.md)
  - [AlertTemplateSettingsFormData](docs/AlertTemplateSettingsFormData.md)
+ - [AlertTemplateVariable](docs/AlertTemplateVariable.md)
+ - [AlertTemplateVariablesFormData](docs/AlertTemplateVariablesFormData.md)
+ - [AlertTemplateVariablesList](docs/AlertTemplateVariablesList.md)
  - [AlertingData](docs/AlertingData.md)
  - [Audit](docs/Audit.md)
  - [AuditLoggingConfig](docs/AuditLoggingConfig.md)
  - [AvailabilityZone](docs/AvailabilityZone.md)
  - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
+ - [AvailabilityZoneDetails](docs/AvailabilityZoneDetails.md)
+ - [AvailabilityZoneEditData](docs/AvailabilityZoneEditData.md)
  - [AvailabilityZoneFormData](docs/AvailabilityZoneFormData.md)
+ - [AzureCloudInfo](docs/AzureCloudInfo.md)
+ - [AzureRegionCloudInfo](docs/AzureRegionCloudInfo.md)
  - [Backup](docs/Backup.md)
  - [BackupApiFilter](docs/BackupApiFilter.md)
  - [BackupPagedApiQuery](docs/BackupPagedApiQuery.md)
@@ -395,6 +419,8 @@ Class | Method | HTTP request | Description
  - [BackupResp](docs/BackupResp.md)
  - [BackupStorageInfo](docs/BackupStorageInfo.md)
  - [BackupTableParams](docs/BackupTableParams.md)
+ - [BasicAuthInformation](docs/BasicAuthInformation.md)
+ - [BasicAuthInformationAllOf](docs/BasicAuthInformationAllOf.md)
  - [BootstarpBackupParams](docs/BootstarpBackupParams.md)
  - [BootstrapParams](docs/BootstrapParams.md)
  - [BulkImportParams](docs/BulkImportParams.md)
@@ -404,6 +430,7 @@ Class | Method | HTTP request | Description
  - [CertificateParams](docs/CertificateParams.md)
  - [CertsRotateParams](docs/CertsRotateParams.md)
  - [ClientCertParams](docs/ClientCertParams.md)
+ - [CloudInfo](docs/CloudInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
  - [Cluster](docs/Cluster.md)
  - [ColumnDetails](docs/ColumnDetails.md)
@@ -415,6 +442,7 @@ Class | Method | HTTP request | Description
  - [ConfigEntry](docs/ConfigEntry.md)
  - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
  - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
+ - [CurrentAdminNotificationMessages](docs/CurrentAdminNotificationMessages.md)
  - [CustomCertInfo](docs/CustomCertInfo.md)
  - [CustomServerCertData](docs/CustomServerCertData.md)
  - [CustomServerCertInfo](docs/CustomServerCertInfo.md)
@@ -425,16 +453,25 @@ Class | Method | HTTP request | Description
  - [CustomerCountResp](docs/CustomerCountResp.md)
  - [CustomerDetailsData](docs/CustomerDetailsData.md)
  - [CustomerLicense](docs/CustomerLicense.md)
+ - [CustomerLoginFormData](docs/CustomerLoginFormData.md)
  - [CustomerRegisterFormData](docs/CustomerRegisterFormData.md)
  - [CustomerTaskData](docs/CustomerTaskData.md)
+ - [DatabaseSecurityFormData](docs/DatabaseSecurityFormData.md)
+ - [DatabaseUserFormData](docs/DatabaseUserFormData.md)
+ - [DeleteBackupInfo](docs/DeleteBackupInfo.md)
+ - [DeleteBackupParams](docs/DeleteBackupParams.md)
+ - [Details](docs/Details.md)
  - [DeviceInfo](docs/DeviceInfo.md)
  - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
+ - [GCPCloudInfo](docs/GCPCloudInfo.md)
+ - [GCPRegionCloudInfo](docs/GCPRegionCloudInfo.md)
  - [GCSLocation](docs/GCSLocation.md)
  - [GFlagsUpgradeParams](docs/GFlagsUpgradeParams.md)
+ - [HTTPAuthInformation](docs/HTTPAuthInformation.md)
  - [HashedTimestampColumnFinderResponse](docs/HashedTimestampColumnFinderResponse.md)
  - [HashicorpVaultConfigParams](docs/HashicorpVaultConfigParams.md)
  - [HttpLocation](docs/HttpLocation.md)
@@ -446,9 +483,11 @@ Class | Method | HTTP request | Description
  - [KeyInfo](docs/KeyInfo.md)
  - [KeyspaceTable](docs/KeyspaceTable.md)
  - [KeyspaceTablesList](docs/KeyspaceTablesList.md)
+ - [KubernetesInfo](docs/KubernetesInfo.md)
  - [KubernetesOverrideError](docs/KubernetesOverrideError.md)
  - [KubernetesOverridesResponse](docs/KubernetesOverridesResponse.md)
  - [KubernetesOverridesUpgradeParams](docs/KubernetesOverridesUpgradeParams.md)
+ - [KubernetesRegionInfo](docs/KubernetesRegionInfo.md)
  - [LogData](docs/LogData.md)
  - [MaintenanceWindow](docs/MaintenanceWindow.md)
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
@@ -456,21 +495,30 @@ Class | Method | HTTP request | Description
  - [MaintenanceWindowPagedResponse](docs/MaintenanceWindowPagedResponse.md)
  - [MasterNode](docs/MasterNode.md)
  - [MastersList](docs/MastersList.md)
+ - [Metric](docs/Metric.md)
+ - [MetricLabel](docs/MetricLabel.md)
  - [MetricQueryParams](docs/MetricQueryParams.md)
  - [MetricSettings](docs/MetricSettings.md)
+ - [MetricValue](docs/MetricValue.md)
  - [MultiTableBackupRequestParams](docs/MultiTableBackupRequestParams.md)
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
+ - [NoAuth](docs/NoAuth.md)
  - [NodeActionFormData](docs/NodeActionFormData.md)
  - [NodeConfig](docs/NodeConfig.md)
+ - [NodeData](docs/NodeData.md)
  - [NodeDetails](docs/NodeDetails.md)
  - [NodeDetailsResp](docs/NodeDetailsResp.md)
  - [NodeInstance](docs/NodeInstance.md)
  - [NodeInstanceData](docs/NodeInstanceData.md)
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
+ - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
+ - [PerProcessFlags](docs/PerProcessFlags.md)
+ - [PerfAdvisorSettingsFormData](docs/PerfAdvisorSettingsFormData.md)
+ - [PerfAdvisorSettingsWithDefaults](docs/PerfAdvisorSettingsWithDefaults.md)
  - [PerformanceRecommendation](docs/PerformanceRecommendation.md)
  - [PerformanceRecommendationFilter](docs/PerformanceRecommendationFilter.md)
  - [PerformanceRecommendationPagedQuery](docs/PerformanceRecommendationPagedQuery.md)
@@ -486,6 +534,8 @@ Class | Method | HTTP request | Description
  - [ProviderDetails](docs/ProviderDetails.md)
  - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
  - [Region](docs/Region.md)
+ - [RegionCloudInfo](docs/RegionCloudInfo.md)
+ - [RegionDetails](docs/RegionDetails.md)
  - [RegionEditFormData](docs/RegionEditFormData.md)
  - [RegionFormData](docs/RegionFormData.md)
  - [RegionLocations](docs/RegionLocations.md)
@@ -512,6 +562,7 @@ Class | Method | HTTP request | Description
  - [SessionInfo](docs/SessionInfo.md)
  - [SmtpData](docs/SmtpData.md)
  - [SoftwareUpgradeParams](docs/SoftwareUpgradeParams.md)
+ - [SpecificGFlags](docs/SpecificGFlags.md)
  - [StateChangeAuditInfo](docs/StateChangeAuditInfo.md)
  - [StateChangeAuditInfoFilter](docs/StateChangeAuditInfoFilter.md)
  - [StateChangeAuditInfoPagedQuery](docs/StateChangeAuditInfoPagedQuery.md)
@@ -525,6 +576,8 @@ Class | Method | HTTP request | Description
  - [TableSpaceInfo](docs/TableSpaceInfo.md)
  - [ThirdpartySoftwareUpgradeParams](docs/ThirdpartySoftwareUpgradeParams.md)
  - [TlsToggleParams](docs/TlsToggleParams.md)
+ - [TokenAuthInformation](docs/TokenAuthInformation.md)
+ - [TokenAuthInformationAllOf](docs/TokenAuthInformationAllOf.md)
  - [TriggerHealthCheckResult](docs/TriggerHealthCheckResult.md)
  - [UniverseConfigureTaskParams](docs/UniverseConfigureTaskParams.md)
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)

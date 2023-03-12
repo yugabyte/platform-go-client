@@ -16,8 +16,10 @@ import (
 
 // PerformanceRecommendationFilter struct for PerformanceRecommendationFilter
 type PerformanceRecommendationFilter struct {
+	CreatedInstantBefore int64 `json:"createdInstantBefore"`
 	CustomerId string `json:"customerId"`
 	Ids []string `json:"ids"`
+	IsStale bool `json:"isStale"`
 	Priorities []string `json:"priorities"`
 	States []string `json:"states"`
 	Types []string `json:"types"`
@@ -28,10 +30,12 @@ type PerformanceRecommendationFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendationFilter(customerId string, ids []string, priorities []string, states []string, types []string, universeId string, ) *PerformanceRecommendationFilter {
+func NewPerformanceRecommendationFilter(createdInstantBefore int64, customerId string, ids []string, isStale bool, priorities []string, states []string, types []string, universeId string, ) *PerformanceRecommendationFilter {
 	this := PerformanceRecommendationFilter{}
+	this.CreatedInstantBefore = createdInstantBefore
 	this.CustomerId = customerId
 	this.Ids = ids
+	this.IsStale = isStale
 	this.Priorities = priorities
 	this.States = states
 	this.Types = types
@@ -45,6 +49,30 @@ func NewPerformanceRecommendationFilter(customerId string, ids []string, priorit
 func NewPerformanceRecommendationFilterWithDefaults() *PerformanceRecommendationFilter {
 	this := PerformanceRecommendationFilter{}
 	return &this
+}
+
+// GetCreatedInstantBefore returns the CreatedInstantBefore field value
+func (o *PerformanceRecommendationFilter) GetCreatedInstantBefore() int64 {
+	if o == nil  {
+		var ret int64
+		return ret
+	}
+
+	return o.CreatedInstantBefore
+}
+
+// GetCreatedInstantBeforeOk returns a tuple with the CreatedInstantBefore field value
+// and a boolean to check if the value has been set.
+func (o *PerformanceRecommendationFilter) GetCreatedInstantBeforeOk() (*int64, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreatedInstantBefore, true
+}
+
+// SetCreatedInstantBefore sets field value
+func (o *PerformanceRecommendationFilter) SetCreatedInstantBefore(v int64) {
+	o.CreatedInstantBefore = v
 }
 
 // GetCustomerId returns the CustomerId field value
@@ -93,6 +121,30 @@ func (o *PerformanceRecommendationFilter) GetIdsOk() (*[]string, bool) {
 // SetIds sets field value
 func (o *PerformanceRecommendationFilter) SetIds(v []string) {
 	o.Ids = v
+}
+
+// GetIsStale returns the IsStale field value
+func (o *PerformanceRecommendationFilter) GetIsStale() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.IsStale
+}
+
+// GetIsStaleOk returns a tuple with the IsStale field value
+// and a boolean to check if the value has been set.
+func (o *PerformanceRecommendationFilter) GetIsStaleOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.IsStale, true
+}
+
+// SetIsStale sets field value
+func (o *PerformanceRecommendationFilter) SetIsStale(v bool) {
+	o.IsStale = v
 }
 
 // GetPriorities returns the Priorities field value
@@ -194,10 +246,16 @@ func (o *PerformanceRecommendationFilter) SetUniverseId(v string) {
 func (o PerformanceRecommendationFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
+		toSerialize["createdInstantBefore"] = o.CreatedInstantBefore
+	}
+	if true {
 		toSerialize["customerId"] = o.CustomerId
 	}
 	if true {
 		toSerialize["ids"] = o.Ids
+	}
+	if true {
+		toSerialize["isStale"] = o.IsStale
 	}
 	if true {
 		toSerialize["priorities"] = o.Priorities
