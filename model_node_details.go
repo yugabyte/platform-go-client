@@ -57,6 +57,8 @@ type NodeDetails struct {
 	RedisServerHttpPort *int32 `json:"redisServerHttpPort,omitempty"`
 	// REDIS RPC port
 	RedisServerRpcPort *int32 `json:"redisServerRpcPort,omitempty"`
+	// SSH user override for the AMI
+	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// Node state
 	State *string `json:"state,omitempty"`
 	// Tablet server HTTP port
@@ -768,6 +770,38 @@ func (o *NodeDetails) SetRedisServerRpcPort(v int32) {
 	o.RedisServerRpcPort = &v
 }
 
+// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
+func (o *NodeDetails) GetSshUserOverride() string {
+	if o == nil || o.SshUserOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUserOverride
+}
+
+// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetSshUserOverrideOk() (*string, bool) {
+	if o == nil || o.SshUserOverride == nil {
+		return nil, false
+	}
+	return o.SshUserOverride, true
+}
+
+// HasSshUserOverride returns a boolean if a field has been set.
+func (o *NodeDetails) HasSshUserOverride() bool {
+	if o != nil && o.SshUserOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
+func (o *NodeDetails) SetSshUserOverride(v string) {
+	o.SshUserOverride = &v
+}
+
 // GetState returns the State field value if set, zero value otherwise.
 func (o *NodeDetails) GetState() string {
 	if o == nil || o.State == nil {
@@ -1152,6 +1186,9 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.RedisServerRpcPort != nil {
 		toSerialize["redisServerRpcPort"] = o.RedisServerRpcPort
+	}
+	if o.SshUserOverride != nil {
+		toSerialize["sshUserOverride"] = o.SshUserOverride
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State

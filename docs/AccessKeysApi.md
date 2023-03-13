@@ -4,8 +4,9 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccesskey**](AccessKeysApi.md#CreateAccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create an access key
+[**CreateAccesskey**](AccessKeysApi.md#CreateAccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create/Upload an access key for onprem Provider region
 [**DeleteAccesskey**](AccessKeysApi.md#DeleteAccesskey) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Delete an access key
+[**EditAccesskey**](AccessKeysApi.md#EditAccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Modify an access key
 [**Index**](AccessKeysApi.md#Index) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Get an access key
 [**List**](AccessKeysApi.md#List) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | List access keys for a specific provider
 [**ListAllForCustomer**](AccessKeysApi.md#ListAllForCustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
@@ -14,9 +15,11 @@ Method | HTTP request | Description
 
 ## CreateAccesskey
 
-> AccessKey CreateAccesskey(ctx, cUUID, pUUID).Execute()
+> AccessKey CreateAccesskey(ctx, cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Execute()
 
-Create an access key
+Create/Upload an access key for onprem Provider region
+
+
 
 ### Example
 
@@ -33,10 +36,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    accessKeyFormData := *openapiclient.NewAccessKeyFormData("KeyCode_example", "KeyContent_example", "KeyType_example") // AccessKeyFormData | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AccessKeysApi.CreateAccesskey(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.AccessKeysApi.CreateAccesskey(context.Background(), cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccessKeysApi.CreateAccesskey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +68,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **accessKeyFormData** | [**AccessKeyFormData**](AccessKeyFormData.md) |  | 
 
 ### Return type
 
@@ -75,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -150,6 +155,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EditAccesskey
+
+> AccessKey EditAccesskey(ctx, cUUID, pUUID, keyCode).Accesskey(accesskey).Execute()
+
+Modify an access key
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pUUID := TODO // string | 
+    keyCode := "keyCode_example" // string | 
+    accesskey := *openapiclient.NewAccessKey(*openapiclient.NewAccessKeyId(), *openapiclient.NewKeyInfo()) // AccessKey | access key edit form data
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AccessKeysApi.EditAccesskey(context.Background(), cUUID, pUUID, keyCode).Accesskey(accesskey).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccessKeysApi.EditAccesskey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EditAccesskey`: AccessKey
+    fmt.Fprintf(os.Stdout, "Response from `AccessKeysApi.EditAccesskey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**pUUID** | [**string**](.md) |  | 
+**keyCode** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEditAccesskeyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **accesskey** | [**AccessKey**](AccessKey.md) | access key edit form data | 
+
+### Return type
+
+[**AccessKey**](AccessKey.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

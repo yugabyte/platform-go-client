@@ -9,12 +9,13 @@ Name | Type | Description | Notes
 **HelpTxt** | **string** |  | 
 **Key** | **string** |  | 
 **Scope** | **string** |  | 
+**Tags** | **[]string** |  | 
 
 ## Methods
 
 ### NewConfKeyInfo
 
-`func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, ) *ConfKeyInfo`
+`func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, tags []string, ) *ConfKeyInfo`
 
 NewConfKeyInfo instantiates a new ConfKeyInfo object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +128,26 @@ and a boolean to check if the value has been set.
 `func (o *ConfKeyInfo) SetScope(v string)`
 
 SetScope sets Scope field to given value.
+
+
+### GetTags
+
+`func (o *ConfKeyInfo) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *ConfKeyInfo) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *ConfKeyInfo) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
 
 
 

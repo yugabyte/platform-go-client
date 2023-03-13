@@ -16,6 +16,10 @@ import (
 
 // PackagePaths struct for PackagePaths
 type PackagePaths struct {
+	// Path to the Helm chart package
+	HelmChart *string `json:"helmChart,omitempty"`
+	// Checksum for the Helm chart package
+	HelmChartChecksum *string `json:"helmChartChecksum,omitempty"`
 	// Path to x86_64 package
 	X8664 *string `json:"x86_64,omitempty"`
 	// Checksum for x86_64 package
@@ -37,6 +41,70 @@ func NewPackagePaths() *PackagePaths {
 func NewPackagePathsWithDefaults() *PackagePaths {
 	this := PackagePaths{}
 	return &this
+}
+
+// GetHelmChart returns the HelmChart field value if set, zero value otherwise.
+func (o *PackagePaths) GetHelmChart() string {
+	if o == nil || o.HelmChart == nil {
+		var ret string
+		return ret
+	}
+	return *o.HelmChart
+}
+
+// GetHelmChartOk returns a tuple with the HelmChart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackagePaths) GetHelmChartOk() (*string, bool) {
+	if o == nil || o.HelmChart == nil {
+		return nil, false
+	}
+	return o.HelmChart, true
+}
+
+// HasHelmChart returns a boolean if a field has been set.
+func (o *PackagePaths) HasHelmChart() bool {
+	if o != nil && o.HelmChart != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHelmChart gets a reference to the given string and assigns it to the HelmChart field.
+func (o *PackagePaths) SetHelmChart(v string) {
+	o.HelmChart = &v
+}
+
+// GetHelmChartChecksum returns the HelmChartChecksum field value if set, zero value otherwise.
+func (o *PackagePaths) GetHelmChartChecksum() string {
+	if o == nil || o.HelmChartChecksum == nil {
+		var ret string
+		return ret
+	}
+	return *o.HelmChartChecksum
+}
+
+// GetHelmChartChecksumOk returns a tuple with the HelmChartChecksum field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackagePaths) GetHelmChartChecksumOk() (*string, bool) {
+	if o == nil || o.HelmChartChecksum == nil {
+		return nil, false
+	}
+	return o.HelmChartChecksum, true
+}
+
+// HasHelmChartChecksum returns a boolean if a field has been set.
+func (o *PackagePaths) HasHelmChartChecksum() bool {
+	if o != nil && o.HelmChartChecksum != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHelmChartChecksum gets a reference to the given string and assigns it to the HelmChartChecksum field.
+func (o *PackagePaths) SetHelmChartChecksum(v string) {
+	o.HelmChartChecksum = &v
 }
 
 // GetX8664 returns the X8664 field value if set, zero value otherwise.
@@ -105,6 +173,12 @@ func (o *PackagePaths) SetX8664Checksum(v string) {
 
 func (o PackagePaths) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.HelmChart != nil {
+		toSerialize["helmChart"] = o.HelmChart
+	}
+	if o.HelmChartChecksum != nil {
+		toSerialize["helmChartChecksum"] = o.HelmChartChecksum
+	}
 	if o.X8664 != nil {
 		toSerialize["x86_64"] = o.X8664
 	}

@@ -18,8 +18,10 @@ import (
 // RestoreKeyspace Keyspace level restores
 type RestoreKeyspace struct {
 	BackupSizeFromStorageLocation int64 `json:"backupSizeFromStorageLocation"`
-	CompleteTime time.Time `json:"completeTime"`
-	CreateTime time.Time `json:"createTime"`
+	// RestoreKeyspace task completion time
+	CompleteTime *time.Time `json:"completeTime,omitempty"`
+	// RestoreKeyspace task creation time
+	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Universe-level Restore UUID
 	RestoreUUID *string `json:"restoreUUID,omitempty"`
 	// Source keyspace name
@@ -40,11 +42,9 @@ type RestoreKeyspace struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreKeyspace(backupSizeFromStorageLocation int64, completeTime time.Time, createTime time.Time, ) *RestoreKeyspace {
+func NewRestoreKeyspace(backupSizeFromStorageLocation int64, ) *RestoreKeyspace {
 	this := RestoreKeyspace{}
 	this.BackupSizeFromStorageLocation = backupSizeFromStorageLocation
-	this.CompleteTime = completeTime
-	this.CreateTime = createTime
 	return &this
 }
 
@@ -80,52 +80,68 @@ func (o *RestoreKeyspace) SetBackupSizeFromStorageLocation(v int64) {
 	o.BackupSizeFromStorageLocation = v
 }
 
-// GetCompleteTime returns the CompleteTime field value
+// GetCompleteTime returns the CompleteTime field value if set, zero value otherwise.
 func (o *RestoreKeyspace) GetCompleteTime() time.Time {
-	if o == nil  {
+	if o == nil || o.CompleteTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CompleteTime
+	return *o.CompleteTime
 }
 
-// GetCompleteTimeOk returns a tuple with the CompleteTime field value
+// GetCompleteTimeOk returns a tuple with the CompleteTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreKeyspace) GetCompleteTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.CompleteTime == nil {
 		return nil, false
 	}
-	return &o.CompleteTime, true
+	return o.CompleteTime, true
 }
 
-// SetCompleteTime sets field value
+// HasCompleteTime returns a boolean if a field has been set.
+func (o *RestoreKeyspace) HasCompleteTime() bool {
+	if o != nil && o.CompleteTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCompleteTime gets a reference to the given time.Time and assigns it to the CompleteTime field.
 func (o *RestoreKeyspace) SetCompleteTime(v time.Time) {
-	o.CompleteTime = v
+	o.CompleteTime = &v
 }
 
-// GetCreateTime returns the CreateTime field value
+// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
 func (o *RestoreKeyspace) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil || o.CreateTime == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.CreateTime
+	return *o.CreateTime
 }
 
-// GetCreateTimeOk returns a tuple with the CreateTime field value
+// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreKeyspace) GetCreateTimeOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.CreateTime == nil {
 		return nil, false
 	}
-	return &o.CreateTime, true
+	return o.CreateTime, true
 }
 
-// SetCreateTime sets field value
+// HasCreateTime returns a boolean if a field has been set.
+func (o *RestoreKeyspace) HasCreateTime() bool {
+	if o != nil && o.CreateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *RestoreKeyspace) SetCreateTime(v time.Time) {
-	o.CreateTime = v
+	o.CreateTime = &v
 }
 
 // GetRestoreUUID returns the RestoreUUID field value if set, zero value otherwise.
@@ -357,10 +373,10 @@ func (o RestoreKeyspace) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["backupSizeFromStorageLocation"] = o.BackupSizeFromStorageLocation
 	}
-	if true {
+	if o.CompleteTime != nil {
 		toSerialize["completeTime"] = o.CompleteTime
 	}
-	if true {
+	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
 	if o.RestoreUUID != nil {

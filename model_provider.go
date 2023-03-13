@@ -18,24 +18,30 @@ import (
 type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.airGapInstall
+	AirGapInstall *bool `json:"airGapInstall,omitempty"`
+	AllAccessKeys *[]AccessKey `json:"allAccessKeys,omitempty"`
 	// Provider cloud code
 	Code *string `json:"code,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.metadata instead
 	Config *map[string]string `json:"config,omitempty"`
 	// Customer uuid
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DestVpcId *string `json:"destVpcId,omitempty"`
-	Details ProviderDetails `json:"details"`
+	Details *ProviderDetails `json:"details,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
-	HostedZoneId *string `json:"hostedZoneId,omitempty"`
-	HostedZoneName *string `json:"hostedZoneName,omitempty"`
-	// Transient property - only present in mutate API request
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
 	Regions []Region `json:"regions"`
-	// Transient property - only present in mutate API request
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshPort instead
+	SshPort *int32 `json:"sshPort,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshUser instead
+	SshUser *string `json:"sshUser,omitempty"`
 	// Provider uuid
 	Uuid *string `json:"uuid,omitempty"`
 	// Provider version
@@ -46,9 +52,8 @@ type Provider struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProvider(details ProviderDetails, regions []Region, ) *Provider {
+func NewProvider(regions []Region, ) *Provider {
 	this := Provider{}
-	this.Details = details
 	this.Regions = regions
 	return &this
 }
@@ -91,6 +96,70 @@ func (o *Provider) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *Provider) SetActive(v bool) {
 	o.Active = &v
+}
+
+// GetAirGapInstall returns the AirGapInstall field value if set, zero value otherwise.
+func (o *Provider) GetAirGapInstall() bool {
+	if o == nil || o.AirGapInstall == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AirGapInstall
+}
+
+// GetAirGapInstallOk returns a tuple with the AirGapInstall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetAirGapInstallOk() (*bool, bool) {
+	if o == nil || o.AirGapInstall == nil {
+		return nil, false
+	}
+	return o.AirGapInstall, true
+}
+
+// HasAirGapInstall returns a boolean if a field has been set.
+func (o *Provider) HasAirGapInstall() bool {
+	if o != nil && o.AirGapInstall != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAirGapInstall gets a reference to the given bool and assigns it to the AirGapInstall field.
+func (o *Provider) SetAirGapInstall(v bool) {
+	o.AirGapInstall = &v
+}
+
+// GetAllAccessKeys returns the AllAccessKeys field value if set, zero value otherwise.
+func (o *Provider) GetAllAccessKeys() []AccessKey {
+	if o == nil || o.AllAccessKeys == nil {
+		var ret []AccessKey
+		return ret
+	}
+	return *o.AllAccessKeys
+}
+
+// GetAllAccessKeysOk returns a tuple with the AllAccessKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetAllAccessKeysOk() (*[]AccessKey, bool) {
+	if o == nil || o.AllAccessKeys == nil {
+		return nil, false
+	}
+	return o.AllAccessKeys, true
+}
+
+// HasAllAccessKeys returns a boolean if a field has been set.
+func (o *Provider) HasAllAccessKeys() bool {
+	if o != nil && o.AllAccessKeys != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllAccessKeys gets a reference to the given []AccessKey and assigns it to the AllAccessKeys field.
+func (o *Provider) SetAllAccessKeys(v []AccessKey) {
+	o.AllAccessKeys = &v
 }
 
 // GetCode returns the Code field value if set, zero value otherwise.
@@ -221,28 +290,36 @@ func (o *Provider) SetDestVpcId(v string) {
 	o.DestVpcId = &v
 }
 
-// GetDetails returns the Details field value
+// GetDetails returns the Details field value if set, zero value otherwise.
 func (o *Provider) GetDetails() ProviderDetails {
-	if o == nil  {
+	if o == nil || o.Details == nil {
 		var ret ProviderDetails
 		return ret
 	}
-
-	return o.Details
+	return *o.Details
 }
 
-// GetDetailsOk returns a tuple with the Details field value
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Provider) GetDetailsOk() (*ProviderDetails, bool) {
-	if o == nil  {
+	if o == nil || o.Details == nil {
 		return nil, false
 	}
-	return &o.Details, true
+	return o.Details, true
 }
 
-// SetDetails sets field value
+// HasDetails returns a boolean if a field has been set.
+func (o *Provider) HasDetails() bool {
+	if o != nil && o.Details != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given ProviderDetails and assigns it to the Details field.
 func (o *Provider) SetDetails(v ProviderDetails) {
-	o.Details = v
+	o.Details = &v
 }
 
 // GetHostVpcId returns the HostVpcId field value if set, zero value otherwise.
@@ -307,70 +384,6 @@ func (o *Provider) HasHostVpcRegion() bool {
 // SetHostVpcRegion gets a reference to the given string and assigns it to the HostVpcRegion field.
 func (o *Provider) SetHostVpcRegion(v string) {
 	o.HostVpcRegion = &v
-}
-
-// GetHostedZoneId returns the HostedZoneId field value if set, zero value otherwise.
-func (o *Provider) GetHostedZoneId() string {
-	if o == nil || o.HostedZoneId == nil {
-		var ret string
-		return ret
-	}
-	return *o.HostedZoneId
-}
-
-// GetHostedZoneIdOk returns a tuple with the HostedZoneId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetHostedZoneIdOk() (*string, bool) {
-	if o == nil || o.HostedZoneId == nil {
-		return nil, false
-	}
-	return o.HostedZoneId, true
-}
-
-// HasHostedZoneId returns a boolean if a field has been set.
-func (o *Provider) HasHostedZoneId() bool {
-	if o != nil && o.HostedZoneId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHostedZoneId gets a reference to the given string and assigns it to the HostedZoneId field.
-func (o *Provider) SetHostedZoneId(v string) {
-	o.HostedZoneId = &v
-}
-
-// GetHostedZoneName returns the HostedZoneName field value if set, zero value otherwise.
-func (o *Provider) GetHostedZoneName() string {
-	if o == nil || o.HostedZoneName == nil {
-		var ret string
-		return ret
-	}
-	return *o.HostedZoneName
-}
-
-// GetHostedZoneNameOk returns a tuple with the HostedZoneName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetHostedZoneNameOk() (*string, bool) {
-	if o == nil || o.HostedZoneName == nil {
-		return nil, false
-	}
-	return o.HostedZoneName, true
-}
-
-// HasHostedZoneName returns a boolean if a field has been set.
-func (o *Provider) HasHostedZoneName() bool {
-	if o != nil && o.HostedZoneName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHostedZoneName gets a reference to the given string and assigns it to the HostedZoneName field.
-func (o *Provider) SetHostedZoneName(v string) {
-	o.HostedZoneName = &v
 }
 
 // GetKeyPairName returns the KeyPairName field value if set, zero value otherwise.
@@ -461,6 +474,38 @@ func (o *Provider) SetRegions(v []Region) {
 	o.Regions = v
 }
 
+// GetSshPort returns the SshPort field value if set, zero value otherwise.
+func (o *Provider) GetSshPort() int32 {
+	if o == nil || o.SshPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.SshPort
+}
+
+// GetSshPortOk returns a tuple with the SshPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetSshPortOk() (*int32, bool) {
+	if o == nil || o.SshPort == nil {
+		return nil, false
+	}
+	return o.SshPort, true
+}
+
+// HasSshPort returns a boolean if a field has been set.
+func (o *Provider) HasSshPort() bool {
+	if o != nil && o.SshPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshPort gets a reference to the given int32 and assigns it to the SshPort field.
+func (o *Provider) SetSshPort(v int32) {
+	o.SshPort = &v
+}
+
 // GetSshPrivateKeyContent returns the SshPrivateKeyContent field value if set, zero value otherwise.
 func (o *Provider) GetSshPrivateKeyContent() string {
 	if o == nil || o.SshPrivateKeyContent == nil {
@@ -491,6 +536,38 @@ func (o *Provider) HasSshPrivateKeyContent() bool {
 // SetSshPrivateKeyContent gets a reference to the given string and assigns it to the SshPrivateKeyContent field.
 func (o *Provider) SetSshPrivateKeyContent(v string) {
 	o.SshPrivateKeyContent = &v
+}
+
+// GetSshUser returns the SshUser field value if set, zero value otherwise.
+func (o *Provider) GetSshUser() string {
+	if o == nil || o.SshUser == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUser
+}
+
+// GetSshUserOk returns a tuple with the SshUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetSshUserOk() (*string, bool) {
+	if o == nil || o.SshUser == nil {
+		return nil, false
+	}
+	return o.SshUser, true
+}
+
+// HasSshUser returns a boolean if a field has been set.
+func (o *Provider) HasSshUser() bool {
+	if o != nil && o.SshUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUser gets a reference to the given string and assigns it to the SshUser field.
+func (o *Provider) SetSshUser(v string) {
+	o.SshUser = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
@@ -562,6 +639,12 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
 	}
+	if o.AirGapInstall != nil {
+		toSerialize["airGapInstall"] = o.AirGapInstall
+	}
+	if o.AllAccessKeys != nil {
+		toSerialize["allAccessKeys"] = o.AllAccessKeys
+	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
@@ -574,7 +657,7 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.DestVpcId != nil {
 		toSerialize["destVpcId"] = o.DestVpcId
 	}
-	if true {
+	if o.Details != nil {
 		toSerialize["details"] = o.Details
 	}
 	if o.HostVpcId != nil {
@@ -582,12 +665,6 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	}
 	if o.HostVpcRegion != nil {
 		toSerialize["hostVpcRegion"] = o.HostVpcRegion
-	}
-	if o.HostedZoneId != nil {
-		toSerialize["hostedZoneId"] = o.HostedZoneId
-	}
-	if o.HostedZoneName != nil {
-		toSerialize["hostedZoneName"] = o.HostedZoneName
 	}
 	if o.KeyPairName != nil {
 		toSerialize["keyPairName"] = o.KeyPairName
@@ -598,8 +675,14 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["regions"] = o.Regions
 	}
+	if o.SshPort != nil {
+		toSerialize["sshPort"] = o.SshPort
+	}
 	if o.SshPrivateKeyContent != nil {
 		toSerialize["sshPrivateKeyContent"] = o.SshPrivateKeyContent
+	}
+	if o.SshUser != nil {
+		toSerialize["sshUser"] = o.SshUser
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

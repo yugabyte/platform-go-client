@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CreatedInstantBefore** | **int64** |  | 
 **CustomerId** | **string** |  | 
 **Ids** | **[]string** |  | 
+**IsStale** | **bool** |  | 
 **Priorities** | **[]string** |  | 
 **States** | **[]string** |  | 
 **Types** | **[]string** |  | 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewPerformanceRecommendationFilter
 
-`func NewPerformanceRecommendationFilter(customerId string, ids []string, priorities []string, states []string, types []string, universeId string, ) *PerformanceRecommendationFilter`
+`func NewPerformanceRecommendationFilter(createdInstantBefore int64, customerId string, ids []string, isStale bool, priorities []string, states []string, types []string, universeId string, ) *PerformanceRecommendationFilter`
 
 NewPerformanceRecommendationFilter instantiates a new PerformanceRecommendationFilter object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,26 @@ will change when the set of required properties is changed
 NewPerformanceRecommendationFilterWithDefaults instantiates a new PerformanceRecommendationFilter object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCreatedInstantBefore
+
+`func (o *PerformanceRecommendationFilter) GetCreatedInstantBefore() int64`
+
+GetCreatedInstantBefore returns the CreatedInstantBefore field if non-nil, zero value otherwise.
+
+### GetCreatedInstantBeforeOk
+
+`func (o *PerformanceRecommendationFilter) GetCreatedInstantBeforeOk() (*int64, bool)`
+
+GetCreatedInstantBeforeOk returns a tuple with the CreatedInstantBefore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedInstantBefore
+
+`func (o *PerformanceRecommendationFilter) SetCreatedInstantBefore(v int64)`
+
+SetCreatedInstantBefore sets CreatedInstantBefore field to given value.
+
 
 ### GetCustomerId
 
@@ -68,6 +90,26 @@ and a boolean to check if the value has been set.
 `func (o *PerformanceRecommendationFilter) SetIds(v []string)`
 
 SetIds sets Ids field to given value.
+
+
+### GetIsStale
+
+`func (o *PerformanceRecommendationFilter) GetIsStale() bool`
+
+GetIsStale returns the IsStale field if non-nil, zero value otherwise.
+
+### GetIsStaleOk
+
+`func (o *PerformanceRecommendationFilter) GetIsStaleOk() (*bool, bool)`
+
+GetIsStaleOk returns a tuple with the IsStale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsStale
+
+`func (o *PerformanceRecommendationFilter) SetIsStale(v bool)`
+
+SetIsStale sets IsStale field to given value.
 
 
 ### GetPriorities

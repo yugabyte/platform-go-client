@@ -6,10 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](PerformanceAdvisorApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | Delete performance recommendations
 [**Get**](PerformanceAdvisorApi.md#Get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | Get performance recommendation details
+[**GetLatestRun**](PerformanceAdvisorApi.md#GetLatestRun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | Get last performance advisor run details
+[**GetSettings**](PerformanceAdvisorApi.md#GetSettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Get universe performance advisor settings
 [**Hide**](PerformanceAdvisorApi.md#Hide) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/hide | Hide performance recommendations
 [**Page**](PerformanceAdvisorApi.md#Page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | List performance recommendations (paginated)
 [**PageAuditInfo**](PerformanceAdvisorApi.md#PageAuditInfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | List performance recommendations state change audit events (paginated)
 [**Resolve**](PerformanceAdvisorApi.md#Resolve) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/resolve | Resolve performance recommendations
+[**RunPerfAdvisor**](PerformanceAdvisorApi.md#RunPerfAdvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | Start performance advisor run for universe
+[**UpdateSettings**](PerformanceAdvisorApi.md#UpdateSettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Update universe performance advisor settings
 
 
 
@@ -33,7 +37,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    deletePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter("CustomerId_example", []string{"Ids_example"}, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    deletePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -154,6 +158,148 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetLatestRun
+
+> YBPSuccess GetLatestRun(ctx, cUUID, uniUUID).Execute()
+
+Get last performance advisor run details
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PerformanceAdvisorApi.GetLatestRun(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.GetLatestRun``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetLatestRun`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `PerformanceAdvisorApi.GetLatestRun`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLatestRunRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSettings
+
+> PerfAdvisorSettingsWithDefaults GetSettings(ctx, cUUID, uniUUID).Execute()
+
+Get universe performance advisor settings
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PerformanceAdvisorApi.GetSettings(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.GetSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSettings`: PerfAdvisorSettingsWithDefaults
+    fmt.Fprintf(os.Stdout, "Response from `PerformanceAdvisorApi.GetSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**PerfAdvisorSettingsWithDefaults**](PerfAdvisorSettingsWithDefaults.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## Hide
 
 > YBPSuccess Hide(ctx, cUUID).HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest).Execute()
@@ -174,7 +320,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    hidePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter("CustomerId_example", []string{"Ids_example"}, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    hidePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -244,7 +390,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pagePerformanceRecommendationRequest := *openapiclient.NewPerformanceRecommendationPagedQuery("Direction_example", *openapiclient.NewPerformanceRecommendationFilter("CustomerId_example", []string{"Ids_example"}, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example"), int32(123), false, int32(123), "SortBy_example") // PerformanceRecommendationPagedQuery | 
+    pagePerformanceRecommendationRequest := *openapiclient.NewPerformanceRecommendationPagedQuery("Direction_example", *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example"), int32(123), false, int32(123), "SortBy_example") // PerformanceRecommendationPagedQuery | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -384,7 +530,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    resolvePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter("CustomerId_example", []string{"Ids_example"}, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    resolvePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -415,6 +561,150 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **resolvePerformanceRecommendationsRequest** | [**PerformanceRecommendationFilter**](PerformanceRecommendationFilter.md) |  | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RunPerfAdvisor
+
+> YBPSuccess RunPerfAdvisor(ctx, cUUID, uniUUID).Execute()
+
+Start performance advisor run for universe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PerformanceAdvisorApi.RunPerfAdvisor(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.RunPerfAdvisor``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RunPerfAdvisor`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `PerformanceAdvisorApi.RunPerfAdvisor`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRunPerfAdvisorRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateSettings
+
+> YBPSuccess UpdateSettings(ctx, cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Execute()
+
+Update universe performance advisor settings
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    performanceAdvisorSettingsRequest := *openapiclient.NewPerfAdvisorSettingsFormData() // PerfAdvisorSettingsFormData | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PerformanceAdvisorApi.UpdateSettings(context.Background(), cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.UpdateSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateSettings`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `PerformanceAdvisorApi.UpdateSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **performanceAdvisorSettingsRequest** | [**PerfAdvisorSettingsFormData**](PerfAdvisorSettingsFormData.md) |  | 
 
 ### Return type
 

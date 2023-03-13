@@ -27,6 +27,7 @@ type XClusterTableConfig struct {
 	ReplicationSetupDone *bool `json:"replicationSetupDone,omitempty"`
 	// Time of the last try to restore data to the target universe
 	RestoreTime *time.Time `json:"restoreTime,omitempty"`
+	RestoreUuid *string `json:"restoreUuid,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
 	// Stream ID if replication is setup; bootstrap ID if the table is bootstrapped
@@ -237,6 +238,38 @@ func (o *XClusterTableConfig) SetRestoreTime(v time.Time) {
 	o.RestoreTime = &v
 }
 
+// GetRestoreUuid returns the RestoreUuid field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetRestoreUuid() string {
+	if o == nil || o.RestoreUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.RestoreUuid
+}
+
+// GetRestoreUuidOk returns a tuple with the RestoreUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetRestoreUuidOk() (*string, bool) {
+	if o == nil || o.RestoreUuid == nil {
+		return nil, false
+	}
+	return o.RestoreUuid, true
+}
+
+// HasRestoreUuid returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasRestoreUuid() bool {
+	if o != nil && o.RestoreUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreUuid gets a reference to the given string and assigns it to the RestoreUuid field.
+func (o *XClusterTableConfig) SetRestoreUuid(v string) {
+	o.RestoreUuid = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *XClusterTableConfig) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -352,6 +385,9 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.RestoreTime != nil {
 		toSerialize["restoreTime"] = o.RestoreTime
+	}
+	if o.RestoreUuid != nil {
+		toSerialize["restoreUuid"] = o.RestoreUuid
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status

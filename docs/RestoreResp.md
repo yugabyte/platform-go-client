@@ -4,23 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreationTime** | **time.Time** |  | 
+**CreateTime** | Pointer to **time.Time** | Restore creation time. | [optional] 
 **CustomerUUID** | **string** |  | 
 **IsSourceUniversePresent** | **bool** |  | 
 **RestoreKeyspaceList** | [**[]RestoreKeyspace**](RestoreKeyspace.md) |  | 
 **RestoreSizeInBytes** | **int64** |  | 
 **RestoreUUID** | **string** |  | 
 **SourceUniverseName** | **string** |  | 
+**SourceUniverseUUID** | **string** |  | 
 **State** | **string** |  | 
 **TargetUniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
-**UpdateTime** | **time.Time** |  | 
+**UpdateTime** | Pointer to **time.Time** | Restore update time. | [optional] 
 
 ## Methods
 
 ### NewRestoreResp
 
-`func NewRestoreResp(creationTime time.Time, customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, state string, targetUniverseName string, universeUUID string, updateTime time.Time, ) *RestoreResp`
+`func NewRestoreResp(customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, sourceUniverseUUID string, state string, targetUniverseName string, universeUUID string, ) *RestoreResp`
 
 NewRestoreResp instantiates a new RestoreResp object
 This constructor will assign default values to properties that have it defined,
@@ -35,25 +36,30 @@ NewRestoreRespWithDefaults instantiates a new RestoreResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCreationTime
+### GetCreateTime
 
-`func (o *RestoreResp) GetCreationTime() time.Time`
+`func (o *RestoreResp) GetCreateTime() time.Time`
 
-GetCreationTime returns the CreationTime field if non-nil, zero value otherwise.
+GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
 
-### GetCreationTimeOk
+### GetCreateTimeOk
 
-`func (o *RestoreResp) GetCreationTimeOk() (*time.Time, bool)`
+`func (o *RestoreResp) GetCreateTimeOk() (*time.Time, bool)`
 
-GetCreationTimeOk returns a tuple with the CreationTime field if it's non-nil, zero value otherwise
+GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreationTime
+### SetCreateTime
 
-`func (o *RestoreResp) SetCreationTime(v time.Time)`
+`func (o *RestoreResp) SetCreateTime(v time.Time)`
 
-SetCreationTime sets CreationTime field to given value.
+SetCreateTime sets CreateTime field to given value.
 
+### HasCreateTime
+
+`func (o *RestoreResp) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 
@@ -175,6 +181,26 @@ and a boolean to check if the value has been set.
 SetSourceUniverseName sets SourceUniverseName field to given value.
 
 
+### GetSourceUniverseUUID
+
+`func (o *RestoreResp) GetSourceUniverseUUID() string`
+
+GetSourceUniverseUUID returns the SourceUniverseUUID field if non-nil, zero value otherwise.
+
+### GetSourceUniverseUUIDOk
+
+`func (o *RestoreResp) GetSourceUniverseUUIDOk() (*string, bool)`
+
+GetSourceUniverseUUIDOk returns a tuple with the SourceUniverseUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceUniverseUUID
+
+`func (o *RestoreResp) SetSourceUniverseUUID(v string)`
+
+SetSourceUniverseUUID sets SourceUniverseUUID field to given value.
+
+
 ### GetState
 
 `func (o *RestoreResp) GetState() string`
@@ -254,6 +280,11 @@ and a boolean to check if the value has been set.
 
 SetUpdateTime sets UpdateTime field to given value.
 
+### HasUpdateTime
+
+`func (o *RestoreResp) HasUpdateTime() bool`
+
+HasUpdateTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Description** | **string** | Description | 
 **DestinationUUID** | Pointer to **string** | Alert destination UUID | [optional] 
 **DurationSec** | **int32** | Duration in seconds, while condition is met to raise an alert | 
+**Labels** | Pointer to **map[string]string** | Labels | [optional] 
 **MaintenanceWindowUuids** | Pointer to **[]string** | Maintenance window UUIDs, applied to this alert config | [optional] [readonly] 
 **Name** | **string** | Name | 
 **Target** | [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | 
@@ -204,6 +205,31 @@ and a boolean to check if the value has been set.
 
 SetDurationSec sets DurationSec field to given value.
 
+
+### GetLabels
+
+`func (o *AlertConfiguration) GetLabels() map[string]string`
+
+GetLabels returns the Labels field if non-nil, zero value otherwise.
+
+### GetLabelsOk
+
+`func (o *AlertConfiguration) GetLabelsOk() (*map[string]string, bool)`
+
+GetLabelsOk returns a tuple with the Labels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabels
+
+`func (o *AlertConfiguration) SetLabels(v map[string]string)`
+
+SetLabels sets Labels field to given value.
+
+### HasLabels
+
+`func (o *AlertConfiguration) HasLabels() bool`
+
+HasLabels returns a boolean if a field has been set.
 
 ### GetMaintenanceWindowUuids
 

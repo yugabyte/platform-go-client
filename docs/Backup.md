@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **BaseBackupUUID** | Pointer to **string** | Base backup UUID | [optional] [readonly] 
 **Category** | Pointer to **string** | Category of the backup | [optional] 
 **CompletionTime** | Pointer to **time.Time** | Backup completion time | [optional] [readonly] 
-**CreateTime** | **time.Time** |  | 
+**CreateTime** | Pointer to **time.Time** | Backup creation time | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer UUID that owns this backup | [optional] 
 **Expiry** | Pointer to **time.Time** | Expiry time (unix timestamp) of the backup | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
@@ -22,14 +22,14 @@ Name | Type | Description | Notes
 **TaskUUID** | Pointer to **string** | Backup UUID | [optional] [readonly] 
 **UniverseName** | Pointer to **string** | Universe name that created this backup | [optional] 
 **UniverseUUID** | Pointer to **string** | Universe UUID that created this backup | [optional] 
-**UpdateTime** | **time.Time** |  | 
+**UpdateTime** | Pointer to **time.Time** | Backup update time | [optional] 
 **Version** | Pointer to **string** | Version of the backup in a category | [optional] 
 
 ## Methods
 
 ### NewBackup
 
-`func NewBackup(backupCategory string, createTime time.Time, incrementalBackup bool, parentBackup bool, updateTime time.Time, ) *Backup`
+`func NewBackup(backupCategory string, incrementalBackup bool, parentBackup bool, ) *Backup`
 
 NewBackup instantiates a new Backup object
 This constructor will assign default values to properties that have it defined,
@@ -208,6 +208,11 @@ and a boolean to check if the value has been set.
 
 SetCreateTime sets CreateTime field to given value.
 
+### HasCreateTime
+
+`func (o *Backup) HasCreateTime() bool`
+
+HasCreateTime returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 
@@ -493,6 +498,11 @@ and a boolean to check if the value has been set.
 
 SetUpdateTime sets UpdateTime field to given value.
 
+### HasUpdateTime
+
+`func (o *Backup) HasUpdateTime() bool`
+
+HasUpdateTime returns a boolean if a field has been set.
 
 ### GetVersion
 

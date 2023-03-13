@@ -28,8 +28,6 @@ type BulkImportParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	// Instance count
 	InstanceCount *int32 `json:"instanceCount,omitempty"`
@@ -40,6 +38,7 @@ type BulkImportParams struct {
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// S3 bucket URL
@@ -68,10 +67,11 @@ type BulkImportParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams {
+func NewBulkImportParams(creatingUser Users, platformUrl string, platformVersion string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams {
 	this := BulkImportParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.S3Bucket = s3Bucket
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
@@ -366,38 +366,6 @@ func (o *BulkImportParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *BulkImportParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BulkImportParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *BulkImportParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *BulkImportParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
 func (o *BulkImportParams) GetInstallYbc() bool {
 	if o == nil || o.InstallYbc == nil {
@@ -580,6 +548,30 @@ func (o *BulkImportParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *BulkImportParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *BulkImportParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *BulkImportParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *BulkImportParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1003,9 +995,6 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
 	}
@@ -1023,6 +1012,9 @@ func (o BulkImportParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
+	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

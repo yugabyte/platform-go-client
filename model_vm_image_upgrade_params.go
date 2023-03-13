@@ -33,8 +33,6 @@ type VMImageUpgradeParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	ForceVMImageUpgrade bool `json:"forceVMImageUpgrade"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
@@ -51,6 +49,7 @@ type VMImageUpgradeParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
@@ -62,6 +61,9 @@ type VMImageUpgradeParams struct {
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
+	SshUserOverride *string `json:"sshUserOverride,omitempty"`
+	// Map of region UUID to SSH User override
+	SshUserOverrideMap *map[string]string `json:"sshUserOverrideMap,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	UniversePaused *bool `json:"universePaused,omitempty"`
@@ -87,7 +89,7 @@ type VMImageUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams {
+func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams {
 	this := VMImageUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -95,6 +97,7 @@ func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImag
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.MachineImages = machineImages
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UpgradeOption = upgradeOption
@@ -542,38 +545,6 @@ func (o *VMImageUpgradeParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *VMImageUpgradeParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VMImageUpgradeParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *VMImageUpgradeParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *VMImageUpgradeParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetForceVMImageUpgrade returns the ForceVMImageUpgrade field value
 func (o *VMImageUpgradeParams) GetForceVMImageUpgrade() bool {
 	if o == nil  {
@@ -958,6 +929,30 @@ func (o *VMImageUpgradeParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *VMImageUpgradeParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *VMImageUpgradeParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *VMImageUpgradeParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1228,6 +1223,70 @@ func (o *VMImageUpgradeParams) HasSourceXClusterConfigs() bool {
 // SetSourceXClusterConfigs gets a reference to the given []string and assigns it to the SourceXClusterConfigs field.
 func (o *VMImageUpgradeParams) SetSourceXClusterConfigs(v []string) {
 	o.SourceXClusterConfigs = &v
+}
+
+// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetSshUserOverride() string {
+	if o == nil || o.SshUserOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUserOverride
+}
+
+// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetSshUserOverrideOk() (*string, bool) {
+	if o == nil || o.SshUserOverride == nil {
+		return nil, false
+	}
+	return o.SshUserOverride, true
+}
+
+// HasSshUserOverride returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasSshUserOverride() bool {
+	if o != nil && o.SshUserOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
+func (o *VMImageUpgradeParams) SetSshUserOverride(v string) {
+	o.SshUserOverride = &v
+}
+
+// GetSshUserOverrideMap returns the SshUserOverrideMap field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetSshUserOverrideMap() map[string]string {
+	if o == nil || o.SshUserOverrideMap == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.SshUserOverrideMap
+}
+
+// GetSshUserOverrideMapOk returns a tuple with the SshUserOverrideMap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetSshUserOverrideMapOk() (*map[string]string, bool) {
+	if o == nil || o.SshUserOverrideMap == nil {
+		return nil, false
+	}
+	return o.SshUserOverrideMap, true
+}
+
+// HasSshUserOverrideMap returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasSshUserOverrideMap() bool {
+	if o != nil && o.SshUserOverrideMap != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverrideMap gets a reference to the given map[string]string and assigns it to the SshUserOverrideMap field.
+func (o *VMImageUpgradeParams) SetSshUserOverrideMap(v map[string]string) {
+	o.SshUserOverrideMap = &v
 }
 
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
@@ -1770,9 +1829,6 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if true {
 		toSerialize["forceVMImageUpgrade"] = o.ForceVMImageUpgrade
 	}
@@ -1812,6 +1868,9 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
@@ -1838,6 +1897,12 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
+	}
+	if o.SshUserOverride != nil {
+		toSerialize["sshUserOverride"] = o.SshUserOverride
+	}
+	if o.SshUserOverrideMap != nil {
+		toSerialize["sshUserOverrideMap"] = o.SshUserOverrideMap
 	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs

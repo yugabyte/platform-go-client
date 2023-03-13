@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AirGapInstall** | Pointer to **bool** |  | [optional] 
 **DeleteRemote** | Pointer to **bool** |  | [optional] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
+**KeyPairName** | Pointer to **string** |  | [optional] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
@@ -18,6 +19,7 @@ Name | Type | Description | Notes
 **ShowSetUpChrony** | Pointer to **bool** |  | [optional] 
 **SkipProvisioning** | Pointer to **bool** |  | [optional] 
 **SshPort** | Pointer to **int32** |  | [optional] 
+**SshPrivateKeyContent** | Pointer to **string** |  | [optional] 
 **SshUser** | Pointer to **string** |  | [optional] 
 **VaultFile** | Pointer to **string** |  | [optional] 
 **VaultPasswordFile** | Pointer to **string** |  | [optional] 
@@ -115,6 +117,31 @@ SetInstallNodeExporter sets InstallNodeExporter field to given value.
 `func (o *KeyInfo) HasInstallNodeExporter() bool`
 
 HasInstallNodeExporter returns a boolean if a field has been set.
+
+### GetKeyPairName
+
+`func (o *KeyInfo) GetKeyPairName() string`
+
+GetKeyPairName returns the KeyPairName field if non-nil, zero value otherwise.
+
+### GetKeyPairNameOk
+
+`func (o *KeyInfo) GetKeyPairNameOk() (*string, bool)`
+
+GetKeyPairNameOk returns a tuple with the KeyPairName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKeyPairName
+
+`func (o *KeyInfo) SetKeyPairName(v string)`
+
+SetKeyPairName sets KeyPairName field to given value.
+
+### HasKeyPairName
+
+`func (o *KeyInfo) HasKeyPairName() bool`
+
+HasKeyPairName returns a boolean if a field has been set.
 
 ### GetNodeExporterPort
 
@@ -390,6 +417,31 @@ SetSshPort sets SshPort field to given value.
 `func (o *KeyInfo) HasSshPort() bool`
 
 HasSshPort returns a boolean if a field has been set.
+
+### GetSshPrivateKeyContent
+
+`func (o *KeyInfo) GetSshPrivateKeyContent() string`
+
+GetSshPrivateKeyContent returns the SshPrivateKeyContent field if non-nil, zero value otherwise.
+
+### GetSshPrivateKeyContentOk
+
+`func (o *KeyInfo) GetSshPrivateKeyContentOk() (*string, bool)`
+
+GetSshPrivateKeyContentOk returns a tuple with the SshPrivateKeyContent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshPrivateKeyContent
+
+`func (o *KeyInfo) SetSshPrivateKeyContent(v string)`
+
+SetSshPrivateKeyContent sets SshPrivateKeyContent field to given value.
+
+### HasSshPrivateKeyContent
+
+`func (o *KeyInfo) HasSshPrivateKeyContent() bool`
+
+HasSshPrivateKeyContent returns a boolean if a field has been set.
 
 ### GetSshUser
 

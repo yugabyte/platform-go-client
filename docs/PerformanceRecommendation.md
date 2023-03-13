@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **EntityNames** | **string** |  | 
 **EntityType** | **string** |  | 
 **Id** | **string** |  | 
+**IsStale** | **bool** |  | 
 **New** | **bool** |  | 
 **Observation** | **string** |  | 
 **Recommendation** | **string** |  | 
@@ -23,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewPerformanceRecommendation
 
-`func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string, ) *PerformanceRecommendation`
+`func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, isStale bool, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string, ) *PerformanceRecommendation`
 
 NewPerformanceRecommendation instantiates a new PerformanceRecommendation object
 This constructor will assign default values to properties that have it defined,
@@ -116,6 +117,26 @@ and a boolean to check if the value has been set.
 `func (o *PerformanceRecommendation) SetId(v string)`
 
 SetId sets Id field to given value.
+
+
+### GetIsStale
+
+`func (o *PerformanceRecommendation) GetIsStale() bool`
+
+GetIsStale returns the IsStale field if non-nil, zero value otherwise.
+
+### GetIsStaleOk
+
+`func (o *PerformanceRecommendation) GetIsStaleOk() (*bool, bool)`
+
+GetIsStaleOk returns a tuple with the IsStale field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsStale
+
+`func (o *PerformanceRecommendation) SetIsStale(v bool)`
+
+SetIsStale sets IsStale field to given value.
 
 
 ### GetNew

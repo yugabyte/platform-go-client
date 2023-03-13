@@ -33,8 +33,6 @@ type UniverseDefinitionTaskParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
@@ -47,6 +45,7 @@ type UniverseDefinitionTaskParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
@@ -58,6 +57,7 @@ type UniverseDefinitionTaskParams struct {
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
+	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	UniversePaused *bool `json:"universePaused,omitempty"`
@@ -81,11 +81,12 @@ type UniverseDefinitionTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParams {
+func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParams {
 	this := UniverseDefinitionTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
@@ -531,38 +532,6 @@ func (o *UniverseDefinitionTaskParams) SetExtraDependencies(v ExtraDependencies)
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *UniverseDefinitionTaskParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseDefinitionTaskParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *UniverseDefinitionTaskParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *UniverseDefinitionTaskParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParams) GetImportedState() string {
 	if o == nil || o.ImportedState == nil {
@@ -875,6 +844,30 @@ func (o *UniverseDefinitionTaskParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *UniverseDefinitionTaskParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *UniverseDefinitionTaskParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1145,6 +1138,38 @@ func (o *UniverseDefinitionTaskParams) HasSourceXClusterConfigs() bool {
 // SetSourceXClusterConfigs gets a reference to the given []string and assigns it to the SourceXClusterConfigs field.
 func (o *UniverseDefinitionTaskParams) SetSourceXClusterConfigs(v []string) {
 	o.SourceXClusterConfigs = &v
+}
+
+// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParams) GetSshUserOverride() string {
+	if o == nil || o.SshUserOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUserOverride
+}
+
+// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParams) GetSshUserOverrideOk() (*string, bool) {
+	if o == nil || o.SshUserOverride == nil {
+		return nil, false
+	}
+	return o.SshUserOverride, true
+}
+
+// HasSshUserOverride returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParams) HasSshUserOverride() bool {
+	if o != nil && o.SshUserOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
+func (o *UniverseDefinitionTaskParams) SetSshUserOverride(v string) {
+	o.SshUserOverride = &v
 }
 
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
@@ -1639,9 +1664,6 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
@@ -1672,6 +1694,9 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
@@ -1698,6 +1723,9 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
+	}
+	if o.SshUserOverride != nil {
+		toSerialize["sshUserOverride"] = o.SshUserOverride
 	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs

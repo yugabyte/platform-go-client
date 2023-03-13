@@ -17,8 +17,10 @@ import (
 
 // BackupApiFilter struct for BackupApiFilter
 type BackupApiFilter struct {
-	DateRangeEnd time.Time `json:"dateRangeEnd"`
-	DateRangeStart time.Time `json:"dateRangeStart"`
+	// The end date for backup filter.
+	DateRangeEnd *time.Time `json:"dateRangeEnd,omitempty"`
+	// The start date for backup filter.
+	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
 	KeyspaceList []string `json:"keyspaceList"`
 	OnlyShowDeletedConfigs bool `json:"onlyShowDeletedConfigs"`
 	OnlyShowDeletedUniverses bool `json:"onlyShowDeletedUniverses"`
@@ -33,10 +35,8 @@ type BackupApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter {
+func NewBackupApiFilter(keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter {
 	this := BackupApiFilter{}
-	this.DateRangeEnd = dateRangeEnd
-	this.DateRangeStart = dateRangeStart
 	this.KeyspaceList = keyspaceList
 	this.OnlyShowDeletedConfigs = onlyShowDeletedConfigs
 	this.OnlyShowDeletedUniverses = onlyShowDeletedUniverses
@@ -56,52 +56,68 @@ func NewBackupApiFilterWithDefaults() *BackupApiFilter {
 	return &this
 }
 
-// GetDateRangeEnd returns the DateRangeEnd field value
+// GetDateRangeEnd returns the DateRangeEnd field value if set, zero value otherwise.
 func (o *BackupApiFilter) GetDateRangeEnd() time.Time {
-	if o == nil  {
+	if o == nil || o.DateRangeEnd == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.DateRangeEnd
+	return *o.DateRangeEnd
 }
 
-// GetDateRangeEndOk returns a tuple with the DateRangeEnd field value
+// GetDateRangeEndOk returns a tuple with the DateRangeEnd field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BackupApiFilter) GetDateRangeEndOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.DateRangeEnd == nil {
 		return nil, false
 	}
-	return &o.DateRangeEnd, true
+	return o.DateRangeEnd, true
 }
 
-// SetDateRangeEnd sets field value
+// HasDateRangeEnd returns a boolean if a field has been set.
+func (o *BackupApiFilter) HasDateRangeEnd() bool {
+	if o != nil && o.DateRangeEnd != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDateRangeEnd gets a reference to the given time.Time and assigns it to the DateRangeEnd field.
 func (o *BackupApiFilter) SetDateRangeEnd(v time.Time) {
-	o.DateRangeEnd = v
+	o.DateRangeEnd = &v
 }
 
-// GetDateRangeStart returns the DateRangeStart field value
+// GetDateRangeStart returns the DateRangeStart field value if set, zero value otherwise.
 func (o *BackupApiFilter) GetDateRangeStart() time.Time {
-	if o == nil  {
+	if o == nil || o.DateRangeStart == nil {
 		var ret time.Time
 		return ret
 	}
-
-	return o.DateRangeStart
+	return *o.DateRangeStart
 }
 
-// GetDateRangeStartOk returns a tuple with the DateRangeStart field value
+// GetDateRangeStartOk returns a tuple with the DateRangeStart field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BackupApiFilter) GetDateRangeStartOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil || o.DateRangeStart == nil {
 		return nil, false
 	}
-	return &o.DateRangeStart, true
+	return o.DateRangeStart, true
 }
 
-// SetDateRangeStart sets field value
+// HasDateRangeStart returns a boolean if a field has been set.
+func (o *BackupApiFilter) HasDateRangeStart() bool {
+	if o != nil && o.DateRangeStart != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDateRangeStart gets a reference to the given time.Time and assigns it to the DateRangeStart field.
 func (o *BackupApiFilter) SetDateRangeStart(v time.Time) {
-	o.DateRangeStart = v
+	o.DateRangeStart = &v
 }
 
 // GetKeyspaceList returns the KeyspaceList field value
@@ -298,10 +314,10 @@ func (o *BackupApiFilter) SetUniverseUUIDList(v []string) {
 
 func (o BackupApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.DateRangeEnd != nil {
 		toSerialize["dateRangeEnd"] = o.DateRangeEnd
 	}
-	if true {
+	if o.DateRangeStart != nil {
 		toSerialize["dateRangeStart"] = o.DateRangeStart
 	}
 	if true {

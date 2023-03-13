@@ -13,13 +13,13 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IntervalInSeconds** | Pointer to **int64** | Time interval between snapshots | [optional] 
 **Name** | Pointer to **string** | PITR config name | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RetentionPeriodInSeconds** | Pointer to **int64** | Retention period of a snapshot | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewCreatePitrConfigParams
 
-`func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CreatePitrConfigParams`
+`func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CreatePitrConfigParams`
 
 NewCreatePitrConfigParams instantiates a new CreatePitrConfigParams object
 This constructor will assign default values to properties that have it defined,
@@ -269,31 +269,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *CreatePitrConfigParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *CreatePitrConfigParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *CreatePitrConfigParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *CreatePitrConfigParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetInstallYbc
 
 `func (o *CreatePitrConfigParams) GetInstallYbc() bool`
@@ -437,6 +412,26 @@ and a boolean to check if the value has been set.
 `func (o *CreatePitrConfigParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *CreatePitrConfigParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *CreatePitrConfigParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *CreatePitrConfigParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID

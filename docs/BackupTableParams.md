@@ -28,7 +28,6 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
@@ -42,6 +41,7 @@ Name | Type | Description | Notes
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
@@ -72,7 +72,7 @@ Name | Type | Description | Notes
 
 ### NewBackupTableParams
 
-`func NewBackupTableParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *BackupTableParams`
+`func NewBackupTableParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *BackupTableParams`
 
 NewBackupTableParams instantiates a new BackupTableParams object
 This constructor will assign default values to properties that have it defined,
@@ -682,31 +682,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *BackupTableParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *BackupTableParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *BackupTableParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *BackupTableParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetFullChainSizeInBytes
 
 `func (o *BackupTableParams) GetFullChainSizeInBytes() int64`
@@ -1025,6 +1000,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupTableParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *BackupTableParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *BackupTableParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *BackupTableParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID

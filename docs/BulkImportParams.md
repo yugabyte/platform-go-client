@@ -13,13 +13,13 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **InstanceCount** | Pointer to **int32** | Instance count | [optional] 
 **Keyspace** | Pointer to **string** | Key space | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **S3Bucket** | **string** | S3 bucket URL | 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewBulkImportParams
 
-`func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams`
+`func NewBulkImportParams(creatingUser Users, platformUrl string, platformVersion string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams`
 
 NewBulkImportParams instantiates a new BulkImportParams object
 This constructor will assign default values to properties that have it defined,
@@ -273,31 +273,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *BulkImportParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *BulkImportParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *BulkImportParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *BulkImportParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetInstallYbc
 
 `func (o *BulkImportParams) GetInstallYbc() bool`
@@ -441,6 +416,26 @@ and a boolean to check if the value has been set.
 `func (o *BulkImportParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *BulkImportParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *BulkImportParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *BulkImportParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID

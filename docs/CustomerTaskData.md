@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Title** | Pointer to **string** | Customer task title | [optional] 
 **Type** | Pointer to **string** | Customer task type | [optional] 
 **TypeName** | Pointer to **string** | Customer task type name | [optional] 
+**UserEmail** | Pointer to **string** | Customer Email | [optional] [readonly] 
 
 ## Methods
 
@@ -361,6 +362,31 @@ SetTypeName sets TypeName field to given value.
 `func (o *CustomerTaskData) HasTypeName() bool`
 
 HasTypeName returns a boolean if a field has been set.
+
+### GetUserEmail
+
+`func (o *CustomerTaskData) GetUserEmail() string`
+
+GetUserEmail returns the UserEmail field if non-nil, zero value otherwise.
+
+### GetUserEmailOk
+
+`func (o *CustomerTaskData) GetUserEmailOk() (*string, bool)`
+
+GetUserEmailOk returns a tuple with the UserEmail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserEmail
+
+`func (o *CustomerTaskData) SetUserEmail(v string)`
+
+SetUserEmail sets UserEmail field to given value.
+
+### HasUserEmail
+
+`func (o *CustomerTaskData) HasUserEmail() bool`
+
+HasUserEmail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

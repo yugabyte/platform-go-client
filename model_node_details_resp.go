@@ -36,6 +36,7 @@ type NodeDetailsResp struct {
 	IsYqlServer *bool `json:"isYqlServer,omitempty"`
 	// True if this node is a YSQL server
 	IsYsqlServer *bool `json:"isYsqlServer,omitempty"`
+	KubernetesOverrides string `json:"kubernetesOverrides"`
 	// Machine image name
 	MachineImage *string `json:"machineImage,omitempty"`
 	// Master HTTP port
@@ -58,6 +59,8 @@ type NodeDetailsResp struct {
 	RedisServerHttpPort *int32 `json:"redisServerHttpPort,omitempty"`
 	// REDIS RPC port
 	RedisServerRpcPort *int32 `json:"redisServerRpcPort,omitempty"`
+	// SSH user override for the AMI
+	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// Node state
 	State *string `json:"state,omitempty"`
 	// Tablet server HTTP port
@@ -84,8 +87,9 @@ type NodeDetailsResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeDetailsResp() *NodeDetailsResp {
+func NewNodeDetailsResp(kubernetesOverrides string, ) *NodeDetailsResp {
 	this := NodeDetailsResp{}
+	this.KubernetesOverrides = kubernetesOverrides
 	return &this
 }
 
@@ -449,6 +453,30 @@ func (o *NodeDetailsResp) SetIsYsqlServer(v bool) {
 	o.IsYsqlServer = &v
 }
 
+// GetKubernetesOverrides returns the KubernetesOverrides field value
+func (o *NodeDetailsResp) GetKubernetesOverrides() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.KubernetesOverrides
+}
+
+// GetKubernetesOverridesOk returns a tuple with the KubernetesOverrides field value
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetKubernetesOverridesOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.KubernetesOverrides, true
+}
+
+// SetKubernetesOverrides sets field value
+func (o *NodeDetailsResp) SetKubernetesOverrides(v string) {
+	o.KubernetesOverrides = v
+}
+
 // GetMachineImage returns the MachineImage field value if set, zero value otherwise.
 func (o *NodeDetailsResp) GetMachineImage() string {
 	if o == nil || o.MachineImage == nil {
@@ -799,6 +827,38 @@ func (o *NodeDetailsResp) HasRedisServerRpcPort() bool {
 // SetRedisServerRpcPort gets a reference to the given int32 and assigns it to the RedisServerRpcPort field.
 func (o *NodeDetailsResp) SetRedisServerRpcPort(v int32) {
 	o.RedisServerRpcPort = &v
+}
+
+// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
+func (o *NodeDetailsResp) GetSshUserOverride() string {
+	if o == nil || o.SshUserOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUserOverride
+}
+
+// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetSshUserOverrideOk() (*string, bool) {
+	if o == nil || o.SshUserOverride == nil {
+		return nil, false
+	}
+	return o.SshUserOverride, true
+}
+
+// HasSshUserOverride returns a boolean if a field has been set.
+func (o *NodeDetailsResp) HasSshUserOverride() bool {
+	if o != nil && o.SshUserOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
+func (o *NodeDetailsResp) SetSshUserOverride(v string) {
+	o.SshUserOverride = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
@@ -1156,6 +1216,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	if o.IsYsqlServer != nil {
 		toSerialize["isYsqlServer"] = o.IsYsqlServer
 	}
+	if true {
+		toSerialize["kubernetesOverrides"] = o.KubernetesOverrides
+	}
 	if o.MachineImage != nil {
 		toSerialize["machineImage"] = o.MachineImage
 	}
@@ -1188,6 +1251,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.RedisServerRpcPort != nil {
 		toSerialize["redisServerRpcPort"] = o.RedisServerRpcPort
+	}
+	if o.SshUserOverride != nil {
+		toSerialize["sshUserOverride"] = o.SshUserOverride
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State

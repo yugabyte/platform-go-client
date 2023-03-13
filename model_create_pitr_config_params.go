@@ -28,8 +28,6 @@ type CreatePitrConfigParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	// Time interval between snapshots
 	IntervalInSeconds *int64 `json:"intervalInSeconds,omitempty"`
@@ -40,6 +38,7 @@ type CreatePitrConfigParams struct {
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Retention period of a snapshot
@@ -60,10 +59,11 @@ type CreatePitrConfigParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CreatePitrConfigParams {
+func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CreatePitrConfigParams {
 	this := CreatePitrConfigParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
@@ -357,38 +357,6 @@ func (o *CreatePitrConfigParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *CreatePitrConfigParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreatePitrConfigParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *CreatePitrConfigParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *CreatePitrConfigParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
 func (o *CreatePitrConfigParams) GetInstallYbc() bool {
 	if o == nil || o.InstallYbc == nil {
@@ -571,6 +539,30 @@ func (o *CreatePitrConfigParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *CreatePitrConfigParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *CreatePitrConfigParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *CreatePitrConfigParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *CreatePitrConfigParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -874,9 +866,6 @@ func (o CreatePitrConfigParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
 	}
@@ -894,6 +883,9 @@ func (o CreatePitrConfigParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
+	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

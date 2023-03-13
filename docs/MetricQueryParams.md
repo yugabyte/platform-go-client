@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **NodeNames** | Pointer to **[]string** | Node names | [optional] 
 **NodePrefix** | Pointer to **string** | Node prefix | [optional] 
 **RegionCodes** | Pointer to **[]string** | Region code | [optional] 
+**ServerType** | Pointer to **string** | Server type | [optional] 
 **Start** | **int64** | Start time | 
 **TableId** | Pointer to **string** | Table id | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 
@@ -261,6 +262,31 @@ SetRegionCodes sets RegionCodes field to given value.
 `func (o *MetricQueryParams) HasRegionCodes() bool`
 
 HasRegionCodes returns a boolean if a field has been set.
+
+### GetServerType
+
+`func (o *MetricQueryParams) GetServerType() string`
+
+GetServerType returns the ServerType field if non-nil, zero value otherwise.
+
+### GetServerTypeOk
+
+`func (o *MetricQueryParams) GetServerTypeOk() (*string, bool)`
+
+GetServerTypeOk returns a tuple with the ServerType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerType
+
+`func (o *MetricQueryParams) SetServerType(v string)`
+
+SetServerType sets ServerType field to given value.
+
+### HasServerType
+
+`func (o *MetricQueryParams) HasServerType() bool`
+
+HasServerType returns a boolean if a field has been set.
 
 ### GetStart
 

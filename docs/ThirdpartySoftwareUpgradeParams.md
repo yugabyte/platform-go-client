@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ForceAll** | **bool** |  | 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
@@ -31,6 +30,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
@@ -60,7 +61,7 @@ Name | Type | Description | Notes
 
 ### NewThirdpartySoftwareUpgradeParams
 
-`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
+`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
 
 NewThirdpartySoftwareUpgradeParams instantiates a new ThirdpartySoftwareUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -415,31 +416,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetForceAll
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetForceAll() bool`
@@ -725,6 +701,26 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
+### GetPlatformVersion
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
+
+
 ### GetPreviousTaskUUID
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetPreviousTaskUUID() string`
@@ -939,6 +935,31 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasSourceXClusterConfigs() bool`
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
+
+### GetSshUserOverride
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetSshUserOverride() string`
+
+GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
+
+### GetSshUserOverrideOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetSshUserOverrideOk() (*string, bool)`
+
+GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshUserOverride
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetSshUserOverride(v string)`
+
+SetSshUserOverride sets SshUserOverride field to given value.
+
+### HasSshUserOverride
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasSshUserOverride() bool`
+
+HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 

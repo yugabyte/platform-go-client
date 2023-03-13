@@ -22,6 +22,7 @@ type AvailabilityZone struct {
 	Code *string `json:"code,omitempty"`
 	// AZ configuration values
 	Config *map[string]string `json:"config,omitempty"`
+	Details *AvailabilityZoneDetails `json:"details,omitempty"`
 	// Path to Kubernetes configuration file
 	KubeconfigPath *string `json:"kubeconfigPath,omitempty"`
 	// AZ name
@@ -146,6 +147,38 @@ func (o *AvailabilityZone) HasConfig() bool {
 // SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
 func (o *AvailabilityZone) SetConfig(v map[string]string) {
 	o.Config = &v
+}
+
+// GetDetails returns the Details field value if set, zero value otherwise.
+func (o *AvailabilityZone) GetDetails() AvailabilityZoneDetails {
+	if o == nil || o.Details == nil {
+		var ret AvailabilityZoneDetails
+		return ret
+	}
+	return *o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AvailabilityZone) GetDetailsOk() (*AvailabilityZoneDetails, bool) {
+	if o == nil || o.Details == nil {
+		return nil, false
+	}
+	return o.Details, true
+}
+
+// HasDetails returns a boolean if a field has been set.
+func (o *AvailabilityZone) HasDetails() bool {
+	if o != nil && o.Details != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given AvailabilityZoneDetails and assigns it to the Details field.
+func (o *AvailabilityZone) SetDetails(v AvailabilityZoneDetails) {
+	o.Details = &v
 }
 
 // GetKubeconfigPath returns the KubeconfigPath field value if set, zero value otherwise.
@@ -310,6 +343,9 @@ func (o AvailabilityZone) MarshalJSON() ([]byte, error) {
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
+	}
+	if o.Details != nil {
+		toSerialize["details"] = o.Details
 	}
 	if o.KubeconfigPath != nil {
 		toSerialize["kubeconfigPath"] = o.KubeconfigPath

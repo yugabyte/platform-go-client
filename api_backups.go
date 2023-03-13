@@ -541,8 +541,13 @@ type BackupsApiApiDeleteBackupsV2Request struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
+	deleteBackup *DeleteBackupParams
 }
 
+func (r BackupsApiApiDeleteBackupsV2Request) DeleteBackup(deleteBackup DeleteBackupParams) BackupsApiApiDeleteBackupsV2Request {
+	r.deleteBackup = &deleteBackup
+	return r
+}
 
 func (r BackupsApiApiDeleteBackupsV2Request) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.DeleteBackupsV2Execute(r)
@@ -587,9 +592,12 @@ func (a *BackupsApiService) DeleteBackupsV2Execute(r BackupsApiApiDeleteBackupsV
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.deleteBackup == nil {
+		return localVarReturnValue, nil, reportError("deleteBackup is required and must be specified")
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -605,6 +613,8 @@ func (a *BackupsApiService) DeleteBackupsV2Execute(r BackupsApiApiDeleteBackupsV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.deleteBackup
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

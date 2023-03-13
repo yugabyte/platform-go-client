@@ -17,6 +17,7 @@ import (
 // ProviderDetails struct for ProviderDetails
 type ProviderDetails struct {
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
+	CloudInfo *CloudInfo `json:"cloudInfo,omitempty"`
 	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
@@ -77,6 +78,38 @@ func (o *ProviderDetails) HasAirGapInstall() bool {
 // SetAirGapInstall gets a reference to the given bool and assigns it to the AirGapInstall field.
 func (o *ProviderDetails) SetAirGapInstall(v bool) {
 	o.AirGapInstall = &v
+}
+
+// GetCloudInfo returns the CloudInfo field value if set, zero value otherwise.
+func (o *ProviderDetails) GetCloudInfo() CloudInfo {
+	if o == nil || o.CloudInfo == nil {
+		var ret CloudInfo
+		return ret
+	}
+	return *o.CloudInfo
+}
+
+// GetCloudInfoOk returns a tuple with the CloudInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProviderDetails) GetCloudInfoOk() (*CloudInfo, bool) {
+	if o == nil || o.CloudInfo == nil {
+		return nil, false
+	}
+	return o.CloudInfo, true
+}
+
+// HasCloudInfo returns a boolean if a field has been set.
+func (o *ProviderDetails) HasCloudInfo() bool {
+	if o != nil && o.CloudInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudInfo gets a reference to the given CloudInfo and assigns it to the CloudInfo field.
+func (o *ProviderDetails) SetCloudInfo(v CloudInfo) {
+	o.CloudInfo = &v
 }
 
 // GetInstallNodeExporter returns the InstallNodeExporter field value if set, zero value otherwise.
@@ -435,6 +468,9 @@ func (o ProviderDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AirGapInstall != nil {
 		toSerialize["airGapInstall"] = o.AirGapInstall
+	}
+	if o.CloudInfo != nil {
+		toSerialize["cloudInfo"] = o.CloudInfo
 	}
 	if o.InstallNodeExporter != nil {
 		toSerialize["installNodeExporter"] = o.InstallNodeExporter

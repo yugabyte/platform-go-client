@@ -13,12 +13,12 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PitrConfigUUID** | Pointer to **string** | PITR Config UUID | [optional] 
 **PlatformUrl** | **string** |  | 
+**PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeInMillis** | Pointer to **int64** | Restore Time In millis | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreSnapshotScheduleParams
 
-`func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *RestoreSnapshotScheduleParams`
+`func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *RestoreSnapshotScheduleParams`
 
 NewRestoreSnapshotScheduleParams instantiates a new RestoreSnapshotScheduleParams object
 This constructor will assign default values to properties that have it defined,
@@ -269,31 +269,6 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFirstTry
-
-`func (o *RestoreSnapshotScheduleParams) GetFirstTry() bool`
-
-GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
-
-### GetFirstTryOk
-
-`func (o *RestoreSnapshotScheduleParams) GetFirstTryOk() (*bool, bool)`
-
-GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFirstTry
-
-`func (o *RestoreSnapshotScheduleParams) SetFirstTry(v bool)`
-
-SetFirstTry sets FirstTry field to given value.
-
-### HasFirstTry
-
-`func (o *RestoreSnapshotScheduleParams) HasFirstTry() bool`
-
-HasFirstTry returns a boolean if a field has been set.
-
 ### GetInstallYbc
 
 `func (o *RestoreSnapshotScheduleParams) GetInstallYbc() bool`
@@ -412,6 +387,26 @@ and a boolean to check if the value has been set.
 `func (o *RestoreSnapshotScheduleParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
+
+
+### GetPlatformVersion
+
+`func (o *RestoreSnapshotScheduleParams) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *RestoreSnapshotScheduleParams) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *RestoreSnapshotScheduleParams) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID

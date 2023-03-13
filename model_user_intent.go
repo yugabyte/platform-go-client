@@ -46,6 +46,7 @@ type UserIntent struct {
 	ProviderType *string `json:"providerType,omitempty"`
 	RegionList *[]string `json:"regionList,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
+	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
 	UniverseOverrides *string `json:"universeOverrides,omitempty"`
@@ -1003,6 +1004,38 @@ func (o *UserIntent) SetReplicationFactor(v int32) {
 	o.ReplicationFactor = &v
 }
 
+// GetSpecificGFlags returns the SpecificGFlags field value if set, zero value otherwise.
+func (o *UserIntent) GetSpecificGFlags() SpecificGFlags {
+	if o == nil || o.SpecificGFlags == nil {
+		var ret SpecificGFlags
+		return ret
+	}
+	return *o.SpecificGFlags
+}
+
+// GetSpecificGFlagsOk returns a tuple with the SpecificGFlags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetSpecificGFlagsOk() (*SpecificGFlags, bool) {
+	if o == nil || o.SpecificGFlags == nil {
+		return nil, false
+	}
+	return o.SpecificGFlags, true
+}
+
+// HasSpecificGFlags returns a boolean if a field has been set.
+func (o *UserIntent) HasSpecificGFlags() bool {
+	if o != nil && o.SpecificGFlags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpecificGFlags gets a reference to the given SpecificGFlags and assigns it to the SpecificGFlags field.
+func (o *UserIntent) SetSpecificGFlags(v SpecificGFlags) {
+	o.SpecificGFlags = &v
+}
+
 // GetTserverGFlags returns the TserverGFlags field value if set, zero value otherwise.
 func (o *UserIntent) GetTserverGFlags() map[string]string {
 	if o == nil || o.TserverGFlags == nil {
@@ -1411,6 +1444,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.ReplicationFactor != nil {
 		toSerialize["replicationFactor"] = o.ReplicationFactor
+	}
+	if o.SpecificGFlags != nil {
+		toSerialize["specificGFlags"] = o.SpecificGFlags
 	}
 	if o.TserverGFlags != nil {
 		toSerialize["tserverGFlags"] = o.TserverGFlags

@@ -11,11 +11,13 @@ Name | Type | Description | Notes
 **CustomHCPKICertInfo** | [**HashicorpVaultConfigParams**](HashicorpVaultConfigParams.md) |  | 
 **CustomServerCertInfo** | [**CustomServerCertInfo**](CustomServerCertInfo.md) |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID of the backup which it belongs to | [optional] 
-**ExpiryDate** | Pointer to **time.Time** | The certificate&#39;s expiry date | [optional] 
+**ExpiryDate** | Pointer to **time.Time** | The certificate&#39;s expiry date. Deprecated: Use expirtyDateIso instead | [optional] 
+**ExpiryDateIso** | Pointer to **time.Time** | The certificate&#39;s expiry date | [optional] 
 **InUse** | Pointer to **bool** | Indicates whether the certificate is in use. This value is &#x60;true&#x60; if the universe contains a reference to the certificate. | [optional] [readonly] 
 **Label** | Pointer to **string** | Certificate label | [optional] 
 **PrivateKey** | Pointer to **string** | Private key path | [optional] 
-**StartDate** | Pointer to **time.Time** | The certificate&#39;s creation date | [optional] 
+**StartDate** | Pointer to **time.Time** | The certificate&#39;s creation date. Deprecated: use stateDateIso instead | [optional] 
+**StartDateIso** | Pointer to **time.Time** | The certificate&#39;s creation date | [optional] 
 **UniverseDetails** | Pointer to [**[]UniverseDetailSubset**](UniverseDetailSubset.md) | Associated universe details for the certificate | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Certificate UUID | [optional] [readonly] 
 
@@ -223,6 +225,31 @@ SetExpiryDate sets ExpiryDate field to given value.
 
 HasExpiryDate returns a boolean if a field has been set.
 
+### GetExpiryDateIso
+
+`func (o *CertificateInfo) GetExpiryDateIso() time.Time`
+
+GetExpiryDateIso returns the ExpiryDateIso field if non-nil, zero value otherwise.
+
+### GetExpiryDateIsoOk
+
+`func (o *CertificateInfo) GetExpiryDateIsoOk() (*time.Time, bool)`
+
+GetExpiryDateIsoOk returns a tuple with the ExpiryDateIso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryDateIso
+
+`func (o *CertificateInfo) SetExpiryDateIso(v time.Time)`
+
+SetExpiryDateIso sets ExpiryDateIso field to given value.
+
+### HasExpiryDateIso
+
+`func (o *CertificateInfo) HasExpiryDateIso() bool`
+
+HasExpiryDateIso returns a boolean if a field has been set.
+
 ### GetInUse
 
 `func (o *CertificateInfo) GetInUse() bool`
@@ -322,6 +349,31 @@ SetStartDate sets StartDate field to given value.
 `func (o *CertificateInfo) HasStartDate() bool`
 
 HasStartDate returns a boolean if a field has been set.
+
+### GetStartDateIso
+
+`func (o *CertificateInfo) GetStartDateIso() time.Time`
+
+GetStartDateIso returns the StartDateIso field if non-nil, zero value otherwise.
+
+### GetStartDateIsoOk
+
+`func (o *CertificateInfo) GetStartDateIsoOk() (*time.Time, bool)`
+
+GetStartDateIsoOk returns a tuple with the StartDateIso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartDateIso
+
+`func (o *CertificateInfo) SetStartDateIso(v time.Time)`
+
+SetStartDateIso sets StartDateIso field to given value.
+
+### HasStartDateIso
+
+`func (o *CertificateInfo) HasStartDateIso() bool`
+
+HasStartDateIso returns a boolean if a field has been set.
 
 ### GetUniverseDetails
 

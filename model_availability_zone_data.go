@@ -20,7 +20,7 @@ type AvailabilityZoneData struct {
 	Code string `json:"code"`
 	// AZ name
 	Name string `json:"name"`
-	// AZ subnet
+	// AZ secondary subnet
 	SecondarySubnet *string `json:"secondarySubnet,omitempty"`
 	// AZ subnet
 	Subnet *string `json:"subnet,omitempty"`

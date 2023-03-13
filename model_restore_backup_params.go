@@ -46,8 +46,6 @@ type RestoreBackupParams struct {
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	// Whether this task has been tried before
-	FirstTry *bool `json:"firstTry,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	// KMS configuration UUID
 	KmsConfigUUID *string `json:"kmsConfigUUID,omitempty"`
@@ -58,6 +56,7 @@ type RestoreBackupParams struct {
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
+	PlatformVersion string `json:"platformVersion"`
 	PrefixUUID string `json:"prefixUUID"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
@@ -85,12 +84,13 @@ type RestoreBackupParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
+func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
 	this := RestoreBackupParams{}
 	this.CreatingUser = creatingUser
 	this.CurrentIdx = currentIdx
 	this.CurrentYbcTaskId = currentYbcTaskId
 	this.PlatformUrl = platformUrl
+	this.PlatformVersion = platformVersion
 	this.PrefixUUID = prefixUUID
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
@@ -690,38 +690,6 @@ func (o *RestoreBackupParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetFirstTry() bool {
-	if o == nil || o.FirstTry == nil {
-		var ret bool
-		return ret
-	}
-	return *o.FirstTry
-}
-
-// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetFirstTryOk() (*bool, bool) {
-	if o == nil || o.FirstTry == nil {
-		return nil, false
-	}
-	return o.FirstTry, true
-}
-
-// HasFirstTry returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasFirstTry() bool {
-	if o != nil && o.FirstTry != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
-func (o *RestoreBackupParams) SetFirstTry(v bool) {
-	o.FirstTry = &v
-}
-
 // GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetInstallYbc() bool {
 	if o == nil || o.InstallYbc == nil {
@@ -904,6 +872,30 @@ func (o *RestoreBackupParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *RestoreBackupParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value
+func (o *RestoreBackupParams) GetPlatformVersion() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetPlatformVersionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PlatformVersion, true
+}
+
+// SetPlatformVersion sets field value
+func (o *RestoreBackupParams) SetPlatformVersion(v string) {
+	o.PlatformVersion = v
 }
 
 // GetPrefixUUID returns the PrefixUUID field value
@@ -1349,9 +1341,6 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.FirstTry != nil {
-		toSerialize["firstTry"] = o.FirstTry
-	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
 	}
@@ -1369,6 +1358,9 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
+	}
+	if true {
+		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if true {
 		toSerialize["prefixUUID"] = o.PrefixUUID
