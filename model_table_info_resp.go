@@ -26,7 +26,7 @@ type TableInfoResp struct {
 	PgSchemaName *string `json:"pgSchemaName,omitempty"`
 	// Relation type
 	RelationType *string `json:"relationType,omitempty"`
-	// SST size in bytes
+	// Size in bytes
 	SizeBytes *float64 `json:"sizeBytes,omitempty"`
 	// Table name
 	TableName *string `json:"tableName,omitempty"`
@@ -36,8 +36,6 @@ type TableInfoResp struct {
 	TableType *string `json:"tableType,omitempty"`
 	// Table UUID
 	TableUUID *string `json:"tableUUID,omitempty"`
-	// WAL size in bytes
-	WalSizeBytes *float64 `json:"walSizeBytes,omitempty"`
 }
 
 // NewTableInfoResp instantiates a new TableInfoResp object
@@ -377,38 +375,6 @@ func (o *TableInfoResp) SetTableUUID(v string) {
 	o.TableUUID = &v
 }
 
-// GetWalSizeBytes returns the WalSizeBytes field value if set, zero value otherwise.
-func (o *TableInfoResp) GetWalSizeBytes() float64 {
-	if o == nil || o.WalSizeBytes == nil {
-		var ret float64
-		return ret
-	}
-	return *o.WalSizeBytes
-}
-
-// GetWalSizeBytesOk returns a tuple with the WalSizeBytes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TableInfoResp) GetWalSizeBytesOk() (*float64, bool) {
-	if o == nil || o.WalSizeBytes == nil {
-		return nil, false
-	}
-	return o.WalSizeBytes, true
-}
-
-// HasWalSizeBytes returns a boolean if a field has been set.
-func (o *TableInfoResp) HasWalSizeBytes() bool {
-	if o != nil && o.WalSizeBytes != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetWalSizeBytes gets a reference to the given float64 and assigns it to the WalSizeBytes field.
-func (o *TableInfoResp) SetWalSizeBytes(v float64) {
-	o.WalSizeBytes = &v
-}
-
 func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.KeySpace != nil {
@@ -440,9 +406,6 @@ func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.TableUUID != nil {
 		toSerialize["tableUUID"] = o.TableUUID
-	}
-	if o.WalSizeBytes != nil {
-		toSerialize["walSizeBytes"] = o.WalSizeBytes
 	}
 	return json.Marshal(toSerialize)
 }

@@ -8,13 +8,10 @@ Name | Type | Description | Notes
 **AssignPublicIP** | Pointer to **bool** |  | [optional] 
 **AssignStaticPublicIP** | Pointer to **bool** | Whether to assign static public IP | [optional] 
 **AwsArnString** | Pointer to **string** |  | [optional] 
-**AzOverrides** | Pointer to **map[string]string** |  | [optional] 
-**DedicatedNodes** | Pointer to **bool** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **EnableClientToNodeEncrypt** | Pointer to **bool** |  | [optional] 
 **EnableExposingService** | Pointer to **string** |  | [optional] 
 **EnableIPV6** | Pointer to **bool** |  | [optional] 
-**EnableLB** | Pointer to **bool** |  | [optional] 
 **EnableNodeToNodeEncrypt** | Pointer to **bool** |  | [optional] 
 **EnableVolumeEncryption** | Pointer to **bool** |  | [optional] 
 **EnableYCQL** | Pointer to **bool** |  | [optional] 
@@ -24,24 +21,19 @@ Name | Type | Description | Notes
 **EnableYSQLAuth** | Pointer to **bool** |  | [optional] 
 **InstanceTags** | Pointer to **map[string]string** |  | [optional] 
 **InstanceType** | Pointer to **string** |  | [optional] 
-**MasterDeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **MasterGFlags** | Pointer to **map[string]string** |  | [optional] 
-**MasterInstanceType** | Pointer to **string** |  | [optional] 
 **NumNodes** | Pointer to **int32** |  | [optional] 
 **PreferredRegion** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **ProviderType** | Pointer to **string** |  | [optional] 
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
-**SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
 **TserverGFlags** | Pointer to **map[string]string** |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
-**UniverseOverrides** | Pointer to **string** |  | [optional] 
 **UseHostname** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
-**YbcFlags** | Pointer to **map[string]string** |  | [optional] 
 **YcqlPassword** | Pointer to **string** |  | [optional] 
 **YsqlPassword** | Pointer to **string** |  | [optional] 
 
@@ -164,56 +156,6 @@ SetAwsArnString sets AwsArnString field to given value.
 
 HasAwsArnString returns a boolean if a field has been set.
 
-### GetAzOverrides
-
-`func (o *UserIntent) GetAzOverrides() map[string]string`
-
-GetAzOverrides returns the AzOverrides field if non-nil, zero value otherwise.
-
-### GetAzOverridesOk
-
-`func (o *UserIntent) GetAzOverridesOk() (*map[string]string, bool)`
-
-GetAzOverridesOk returns a tuple with the AzOverrides field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAzOverrides
-
-`func (o *UserIntent) SetAzOverrides(v map[string]string)`
-
-SetAzOverrides sets AzOverrides field to given value.
-
-### HasAzOverrides
-
-`func (o *UserIntent) HasAzOverrides() bool`
-
-HasAzOverrides returns a boolean if a field has been set.
-
-### GetDedicatedNodes
-
-`func (o *UserIntent) GetDedicatedNodes() bool`
-
-GetDedicatedNodes returns the DedicatedNodes field if non-nil, zero value otherwise.
-
-### GetDedicatedNodesOk
-
-`func (o *UserIntent) GetDedicatedNodesOk() (*bool, bool)`
-
-GetDedicatedNodesOk returns a tuple with the DedicatedNodes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDedicatedNodes
-
-`func (o *UserIntent) SetDedicatedNodes(v bool)`
-
-SetDedicatedNodes sets DedicatedNodes field to given value.
-
-### HasDedicatedNodes
-
-`func (o *UserIntent) HasDedicatedNodes() bool`
-
-HasDedicatedNodes returns a boolean if a field has been set.
-
 ### GetDeviceInfo
 
 `func (o *UserIntent) GetDeviceInfo() DeviceInfo`
@@ -313,31 +255,6 @@ SetEnableIPV6 sets EnableIPV6 field to given value.
 `func (o *UserIntent) HasEnableIPV6() bool`
 
 HasEnableIPV6 returns a boolean if a field has been set.
-
-### GetEnableLB
-
-`func (o *UserIntent) GetEnableLB() bool`
-
-GetEnableLB returns the EnableLB field if non-nil, zero value otherwise.
-
-### GetEnableLBOk
-
-`func (o *UserIntent) GetEnableLBOk() (*bool, bool)`
-
-GetEnableLBOk returns a tuple with the EnableLB field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableLB
-
-`func (o *UserIntent) SetEnableLB(v bool)`
-
-SetEnableLB sets EnableLB field to given value.
-
-### HasEnableLB
-
-`func (o *UserIntent) HasEnableLB() bool`
-
-HasEnableLB returns a boolean if a field has been set.
 
 ### GetEnableNodeToNodeEncrypt
 
@@ -564,31 +481,6 @@ SetInstanceType sets InstanceType field to given value.
 
 HasInstanceType returns a boolean if a field has been set.
 
-### GetMasterDeviceInfo
-
-`func (o *UserIntent) GetMasterDeviceInfo() DeviceInfo`
-
-GetMasterDeviceInfo returns the MasterDeviceInfo field if non-nil, zero value otherwise.
-
-### GetMasterDeviceInfoOk
-
-`func (o *UserIntent) GetMasterDeviceInfoOk() (*DeviceInfo, bool)`
-
-GetMasterDeviceInfoOk returns a tuple with the MasterDeviceInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMasterDeviceInfo
-
-`func (o *UserIntent) SetMasterDeviceInfo(v DeviceInfo)`
-
-SetMasterDeviceInfo sets MasterDeviceInfo field to given value.
-
-### HasMasterDeviceInfo
-
-`func (o *UserIntent) HasMasterDeviceInfo() bool`
-
-HasMasterDeviceInfo returns a boolean if a field has been set.
-
 ### GetMasterGFlags
 
 `func (o *UserIntent) GetMasterGFlags() map[string]string`
@@ -613,31 +505,6 @@ SetMasterGFlags sets MasterGFlags field to given value.
 `func (o *UserIntent) HasMasterGFlags() bool`
 
 HasMasterGFlags returns a boolean if a field has been set.
-
-### GetMasterInstanceType
-
-`func (o *UserIntent) GetMasterInstanceType() string`
-
-GetMasterInstanceType returns the MasterInstanceType field if non-nil, zero value otherwise.
-
-### GetMasterInstanceTypeOk
-
-`func (o *UserIntent) GetMasterInstanceTypeOk() (*string, bool)`
-
-GetMasterInstanceTypeOk returns a tuple with the MasterInstanceType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMasterInstanceType
-
-`func (o *UserIntent) SetMasterInstanceType(v string)`
-
-SetMasterInstanceType sets MasterInstanceType field to given value.
-
-### HasMasterInstanceType
-
-`func (o *UserIntent) HasMasterInstanceType() bool`
-
-HasMasterInstanceType returns a boolean if a field has been set.
 
 ### GetNumNodes
 
@@ -789,31 +656,6 @@ SetReplicationFactor sets ReplicationFactor field to given value.
 
 HasReplicationFactor returns a boolean if a field has been set.
 
-### GetSpecificGFlags
-
-`func (o *UserIntent) GetSpecificGFlags() SpecificGFlags`
-
-GetSpecificGFlags returns the SpecificGFlags field if non-nil, zero value otherwise.
-
-### GetSpecificGFlagsOk
-
-`func (o *UserIntent) GetSpecificGFlagsOk() (*SpecificGFlags, bool)`
-
-GetSpecificGFlagsOk returns a tuple with the SpecificGFlags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSpecificGFlags
-
-`func (o *UserIntent) SetSpecificGFlags(v SpecificGFlags)`
-
-SetSpecificGFlags sets SpecificGFlags field to given value.
-
-### HasSpecificGFlags
-
-`func (o *UserIntent) HasSpecificGFlags() bool`
-
-HasSpecificGFlags returns a boolean if a field has been set.
-
 ### GetTserverGFlags
 
 `func (o *UserIntent) GetTserverGFlags() map[string]string`
@@ -863,31 +705,6 @@ SetUniverseName sets UniverseName field to given value.
 `func (o *UserIntent) HasUniverseName() bool`
 
 HasUniverseName returns a boolean if a field has been set.
-
-### GetUniverseOverrides
-
-`func (o *UserIntent) GetUniverseOverrides() string`
-
-GetUniverseOverrides returns the UniverseOverrides field if non-nil, zero value otherwise.
-
-### GetUniverseOverridesOk
-
-`func (o *UserIntent) GetUniverseOverridesOk() (*string, bool)`
-
-GetUniverseOverridesOk returns a tuple with the UniverseOverrides field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUniverseOverrides
-
-`func (o *UserIntent) SetUniverseOverrides(v string)`
-
-SetUniverseOverrides sets UniverseOverrides field to given value.
-
-### HasUniverseOverrides
-
-`func (o *UserIntent) HasUniverseOverrides() bool`
-
-HasUniverseOverrides returns a boolean if a field has been set.
 
 ### GetUseHostname
 
@@ -988,31 +805,6 @@ SetYbSoftwareVersion sets YbSoftwareVersion field to given value.
 `func (o *UserIntent) HasYbSoftwareVersion() bool`
 
 HasYbSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcFlags
-
-`func (o *UserIntent) GetYbcFlags() map[string]string`
-
-GetYbcFlags returns the YbcFlags field if non-nil, zero value otherwise.
-
-### GetYbcFlagsOk
-
-`func (o *UserIntent) GetYbcFlagsOk() (*map[string]string, bool)`
-
-GetYbcFlagsOk returns a tuple with the YbcFlags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcFlags
-
-`func (o *UserIntent) SetYbcFlags(v map[string]string)`
-
-SetYbcFlags sets YbcFlags field to given value.
-
-### HasYbcFlags
-
-`func (o *UserIntent) HasYbcFlags() bool`
-
-HasYbcFlags returns a boolean if a field has been set.
 
 ### GetYcqlPassword
 

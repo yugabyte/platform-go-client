@@ -24,10 +24,6 @@ type CloudSpecificInfo struct {
 	Cloud *string `json:"cloud,omitempty"`
 	// The node's instance type
 	InstanceType *string `json:"instance_type,omitempty"`
-	// Kubernetes namespace
-	KubernetesNamespace *string `json:"kubernetesNamespace,omitempty"`
-	// Pod name in Kubernetes
-	KubernetesPodName *string `json:"kubernetesPodName,omitempty"`
 	// Mounted disks LUN indexes
 	LunIndexes *[]int32 `json:"lun_indexes,omitempty"`
 	// Mount roots
@@ -42,8 +38,6 @@ type CloudSpecificInfo struct {
 	PublicIp *string `json:"public_ip,omitempty"`
 	// The node's region
 	Region *string `json:"region,omitempty"`
-	// Root volume ID or name
-	RootVolume *string `json:"root_volume,omitempty"`
 	// Secondary Private IP
 	SecondaryPrivateIp *string `json:"secondary_private_ip,omitempty"`
 	// Secondary Subnet IP
@@ -197,70 +191,6 @@ func (o *CloudSpecificInfo) HasInstanceType() bool {
 // SetInstanceType gets a reference to the given string and assigns it to the InstanceType field.
 func (o *CloudSpecificInfo) SetInstanceType(v string) {
 	o.InstanceType = &v
-}
-
-// GetKubernetesNamespace returns the KubernetesNamespace field value if set, zero value otherwise.
-func (o *CloudSpecificInfo) GetKubernetesNamespace() string {
-	if o == nil || o.KubernetesNamespace == nil {
-		var ret string
-		return ret
-	}
-	return *o.KubernetesNamespace
-}
-
-// GetKubernetesNamespaceOk returns a tuple with the KubernetesNamespace field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CloudSpecificInfo) GetKubernetesNamespaceOk() (*string, bool) {
-	if o == nil || o.KubernetesNamespace == nil {
-		return nil, false
-	}
-	return o.KubernetesNamespace, true
-}
-
-// HasKubernetesNamespace returns a boolean if a field has been set.
-func (o *CloudSpecificInfo) HasKubernetesNamespace() bool {
-	if o != nil && o.KubernetesNamespace != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKubernetesNamespace gets a reference to the given string and assigns it to the KubernetesNamespace field.
-func (o *CloudSpecificInfo) SetKubernetesNamespace(v string) {
-	o.KubernetesNamespace = &v
-}
-
-// GetKubernetesPodName returns the KubernetesPodName field value if set, zero value otherwise.
-func (o *CloudSpecificInfo) GetKubernetesPodName() string {
-	if o == nil || o.KubernetesPodName == nil {
-		var ret string
-		return ret
-	}
-	return *o.KubernetesPodName
-}
-
-// GetKubernetesPodNameOk returns a tuple with the KubernetesPodName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CloudSpecificInfo) GetKubernetesPodNameOk() (*string, bool) {
-	if o == nil || o.KubernetesPodName == nil {
-		return nil, false
-	}
-	return o.KubernetesPodName, true
-}
-
-// HasKubernetesPodName returns a boolean if a field has been set.
-func (o *CloudSpecificInfo) HasKubernetesPodName() bool {
-	if o != nil && o.KubernetesPodName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetKubernetesPodName gets a reference to the given string and assigns it to the KubernetesPodName field.
-func (o *CloudSpecificInfo) SetKubernetesPodName(v string) {
-	o.KubernetesPodName = &v
 }
 
 // GetLunIndexes returns the LunIndexes field value if set, zero value otherwise.
@@ -487,38 +417,6 @@ func (o *CloudSpecificInfo) SetRegion(v string) {
 	o.Region = &v
 }
 
-// GetRootVolume returns the RootVolume field value if set, zero value otherwise.
-func (o *CloudSpecificInfo) GetRootVolume() string {
-	if o == nil || o.RootVolume == nil {
-		var ret string
-		return ret
-	}
-	return *o.RootVolume
-}
-
-// GetRootVolumeOk returns a tuple with the RootVolume field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CloudSpecificInfo) GetRootVolumeOk() (*string, bool) {
-	if o == nil || o.RootVolume == nil {
-		return nil, false
-	}
-	return o.RootVolume, true
-}
-
-// HasRootVolume returns a boolean if a field has been set.
-func (o *CloudSpecificInfo) HasRootVolume() bool {
-	if o != nil && o.RootVolume != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRootVolume gets a reference to the given string and assigns it to the RootVolume field.
-func (o *CloudSpecificInfo) SetRootVolume(v string) {
-	o.RootVolume = &v
-}
-
 // GetSecondaryPrivateIp returns the SecondaryPrivateIp field value if set, zero value otherwise.
 func (o *CloudSpecificInfo) GetSecondaryPrivateIp() string {
 	if o == nil || o.SecondaryPrivateIp == nil {
@@ -661,12 +559,6 @@ func (o CloudSpecificInfo) MarshalJSON() ([]byte, error) {
 	if o.InstanceType != nil {
 		toSerialize["instance_type"] = o.InstanceType
 	}
-	if o.KubernetesNamespace != nil {
-		toSerialize["kubernetesNamespace"] = o.KubernetesNamespace
-	}
-	if o.KubernetesPodName != nil {
-		toSerialize["kubernetesPodName"] = o.KubernetesPodName
-	}
 	if o.LunIndexes != nil {
 		toSerialize["lun_indexes"] = o.LunIndexes
 	}
@@ -687,9 +579,6 @@ func (o CloudSpecificInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.Region != nil {
 		toSerialize["region"] = o.Region
-	}
-	if o.RootVolume != nil {
-		toSerialize["root_volume"] = o.RootVolume
 	}
 	if o.SecondaryPrivateIp != nil {
 		toSerialize["secondary_private_ip"] = o.SecondaryPrivateIp

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TextTemplate** | Pointer to **string** | Notification text template | [optional] 
-**TitleTemplate** | Pointer to **string** | Notification title template | [optional] 
+**TextTemplate** | **string** |  | 
+**TitleTemplate** | **string** |  | 
 
 ## Methods
 
 ### NewAlertChannelParams
 
-`func NewAlertChannelParams() *AlertChannelParams`
+`func NewAlertChannelParams(textTemplate string, titleTemplate string, ) *AlertChannelParams`
 
 NewAlertChannelParams instantiates a new AlertChannelParams object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetTextTemplate sets TextTemplate field to given value.
 
-### HasTextTemplate
-
-`func (o *AlertChannelParams) HasTextTemplate() bool`
-
-HasTextTemplate returns a boolean if a field has been set.
 
 ### GetTitleTemplate
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetTitleTemplate sets TitleTemplate field to given value.
 
-### HasTitleTemplate
-
-`func (o *AlertChannelParams) HasTitleTemplate() bool`
-
-HasTitleTemplate returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

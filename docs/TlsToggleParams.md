@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | **bool** |  | 
+**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
-**ClientRootCA** | Pointer to **string** |  | [optional] 
+**ClientRootCA** | **string** |  | 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
@@ -15,54 +16,45 @@ Name | Type | Description | Notes
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **EnableClientToNodeEncrypt** | **bool** |  | 
 **EnableNodeToNodeEncrypt** | **bool** |  | 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
-**RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
-**RootCA** | Pointer to **string** |  | [optional] 
+**RootAndClientRootCASame** | **bool** |  | 
+**RootCA** | **string** |  | 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
-**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
-**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
-**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
-**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewTlsToggleParams
 
-`func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
+`func NewTlsToggleParams(allowInsecure bool, clientRootCA string, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, rootAndClientRootCASame bool, rootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
 
 NewTlsToggleParams instantiates a new TlsToggleParams object
 This constructor will assign default values to properties that have it defined,
@@ -96,6 +88,31 @@ and a boolean to check if the value has been set.
 
 SetAllowInsecure sets AllowInsecure field to given value.
 
+
+### GetBackupInProgress
+
+`func (o *TlsToggleParams) GetBackupInProgress() bool`
+
+GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
+
+### GetBackupInProgressOk
+
+`func (o *TlsToggleParams) GetBackupInProgressOk() (*bool, bool)`
+
+GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupInProgress
+
+`func (o *TlsToggleParams) SetBackupInProgress(v bool)`
+
+SetBackupInProgress sets BackupInProgress field to given value.
+
+### HasBackupInProgress
+
+`func (o *TlsToggleParams) HasBackupInProgress() bool`
+
+HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -141,11 +158,6 @@ and a boolean to check if the value has been set.
 
 SetClientRootCA sets ClientRootCA field to given value.
 
-### HasClientRootCA
-
-`func (o *TlsToggleParams) HasClientRootCA() bool`
-
-HasClientRootCA returns a boolean if a field has been set.
 
 ### GetClusters
 
@@ -327,31 +339,6 @@ and a boolean to check if the value has been set.
 SetEnableNodeToNodeEncrypt sets EnableNodeToNodeEncrypt field to given value.
 
 
-### GetEnableYbc
-
-`func (o *TlsToggleParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *TlsToggleParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *TlsToggleParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *TlsToggleParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
-
 ### GetEncryptionAtRestConfig
 
 `func (o *TlsToggleParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
@@ -452,6 +439,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
+### GetFirstTry
+
+`func (o *TlsToggleParams) GetFirstTry() bool`
+
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
+
+### GetFirstTryOk
+
+`func (o *TlsToggleParams) GetFirstTryOk() (*bool, bool)`
+
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstTry
+
+`func (o *TlsToggleParams) SetFirstTry(v bool)`
+
+SetFirstTry sets FirstTry field to given value.
+
+### HasFirstTry
+
+`func (o *TlsToggleParams) HasFirstTry() bool`
+
+HasFirstTry returns a boolean if a field has been set.
+
 ### GetImportedState
 
 `func (o *TlsToggleParams) GetImportedState() string`
@@ -476,31 +488,6 @@ SetImportedState sets ImportedState field to given value.
 `func (o *TlsToggleParams) HasImportedState() bool`
 
 HasImportedState returns a boolean if a field has been set.
-
-### GetInstallYbc
-
-`func (o *TlsToggleParams) GetInstallYbc() bool`
-
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
-
-### GetInstallYbcOk
-
-`func (o *TlsToggleParams) GetInstallYbcOk() (*bool, bool)`
-
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInstallYbc
-
-`func (o *TlsToggleParams) SetInstallYbc(v bool)`
-
-SetInstallYbc sets InstallYbc field to given value.
-
-### HasInstallYbc
-
-`func (o *TlsToggleParams) HasInstallYbc() bool`
-
-HasInstallYbc returns a boolean if a field has been set.
 
 ### GetItestS3PackagePath
 
@@ -546,31 +533,6 @@ and a boolean to check if the value has been set.
 
 SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
 
-
-### GetMastersInDefaultRegion
-
-`func (o *TlsToggleParams) GetMastersInDefaultRegion() bool`
-
-GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
-
-### GetMastersInDefaultRegionOk
-
-`func (o *TlsToggleParams) GetMastersInDefaultRegionOk() (*bool, bool)`
-
-GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMastersInDefaultRegion
-
-`func (o *TlsToggleParams) SetMastersInDefaultRegion(v bool)`
-
-SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
-
-### HasMastersInDefaultRegion
-
-`func (o *TlsToggleParams) HasMastersInDefaultRegion() bool`
-
-HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -717,26 +679,6 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
-### GetPlatformVersion
-
-`func (o *TlsToggleParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *TlsToggleParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *TlsToggleParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-
 ### GetPreviousTaskUUID
 
 `func (o *TlsToggleParams) GetPreviousTaskUUID() string`
@@ -831,11 +773,6 @@ and a boolean to check if the value has been set.
 
 SetRootAndClientRootCASame sets RootAndClientRootCASame field to given value.
 
-### HasRootAndClientRootCASame
-
-`func (o *TlsToggleParams) HasRootAndClientRootCASame() bool`
-
-HasRootAndClientRootCASame returns a boolean if a field has been set.
 
 ### GetRootCA
 
@@ -856,11 +793,6 @@ and a boolean to check if the value has been set.
 
 SetRootCA sets RootCA field to given value.
 
-### HasRootCA
-
-`func (o *TlsToggleParams) HasRootCA() bool`
-
-HasRootCA returns a boolean if a field has been set.
 
 ### GetSetTxnTableWaitCountFlag
 
@@ -951,31 +883,6 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 `func (o *TlsToggleParams) HasSourceXClusterConfigs() bool`
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
-
-### GetSshUserOverride
-
-`func (o *TlsToggleParams) GetSshUserOverride() string`
-
-GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
-
-### GetSshUserOverrideOk
-
-`func (o *TlsToggleParams) GetSshUserOverrideOk() (*string, bool)`
-
-GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSshUserOverride
-
-`func (o *TlsToggleParams) SetSshUserOverride(v string)`
-
-SetSshUserOverride sets SshUserOverride field to given value.
-
-### HasSshUserOverride
-
-`func (o *TlsToggleParams) HasSshUserOverride() bool`
-
-HasSshUserOverride returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 
@@ -1077,31 +984,6 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
-### GetUpdateOptions
-
-`func (o *TlsToggleParams) GetUpdateOptions() []string`
-
-GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
-
-### GetUpdateOptionsOk
-
-`func (o *TlsToggleParams) GetUpdateOptionsOk() (*[]string, bool)`
-
-GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdateOptions
-
-`func (o *TlsToggleParams) SetUpdateOptions(v []string)`
-
-SetUpdateOptions sets UpdateOptions field to given value.
-
-### HasUpdateOptions
-
-`func (o *TlsToggleParams) HasUpdateOptions() bool`
-
-HasUpdateOptions returns a boolean if a field has been set.
-
 ### GetUpdateSucceeded
 
 `func (o *TlsToggleParams) GetUpdateSucceeded() bool`
@@ -1197,31 +1079,6 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
-### GetUseNewHelmNamingStyle
-
-`func (o *TlsToggleParams) GetUseNewHelmNamingStyle() bool`
-
-GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
-
-### GetUseNewHelmNamingStyleOk
-
-`func (o *TlsToggleParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
-
-GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUseNewHelmNamingStyle
-
-`func (o *TlsToggleParams) SetUseNewHelmNamingStyle(v bool)`
-
-SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
-
-### HasUseNewHelmNamingStyle
-
-`func (o *TlsToggleParams) HasUseNewHelmNamingStyle() bool`
-
-HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-
 ### GetUserAZSelected
 
 `func (o *TlsToggleParams) GetUserAZSelected() bool`
@@ -1247,31 +1104,6 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
-### GetXclusterInfo
-
-`func (o *TlsToggleParams) GetXclusterInfo() XClusterInfo`
-
-GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
-
-### GetXclusterInfoOk
-
-`func (o *TlsToggleParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
-
-GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXclusterInfo
-
-`func (o *TlsToggleParams) SetXclusterInfo(v XClusterInfo)`
-
-SetXclusterInfo sets XclusterInfo field to given value.
-
-### HasXclusterInfo
-
-`func (o *TlsToggleParams) HasXclusterInfo() bool`
-
-HasXclusterInfo returns a boolean if a field has been set.
-
 ### GetYbPrevSoftwareVersion
 
 `func (o *TlsToggleParams) GetYbPrevSoftwareVersion() string`
@@ -1296,56 +1128,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *TlsToggleParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *TlsToggleParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *TlsToggleParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *TlsToggleParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *TlsToggleParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *TlsToggleParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *TlsToggleParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *TlsToggleParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *TlsToggleParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

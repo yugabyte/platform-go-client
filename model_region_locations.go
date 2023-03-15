@@ -16,7 +16,6 @@ import (
 
 // RegionLocations struct for RegionLocations
 type RegionLocations struct {
-	HOST_BASE string `json:"HOST_BASE"`
 	LOCATION string `json:"LOCATION"`
 	REGION string `json:"REGION"`
 }
@@ -25,9 +24,8 @@ type RegionLocations struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionLocations(hOSTBASE string, lOCATION string, rEGION string, ) *RegionLocations {
+func NewRegionLocations(lOCATION string, rEGION string, ) *RegionLocations {
 	this := RegionLocations{}
-	this.HOST_BASE = hOSTBASE
 	this.LOCATION = lOCATION
 	this.REGION = rEGION
 	return &this
@@ -39,30 +37,6 @@ func NewRegionLocations(hOSTBASE string, lOCATION string, rEGION string, ) *Regi
 func NewRegionLocationsWithDefaults() *RegionLocations {
 	this := RegionLocations{}
 	return &this
-}
-
-// GetHOST_BASE returns the HOST_BASE field value
-func (o *RegionLocations) GetHOST_BASE() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.HOST_BASE
-}
-
-// GetHOST_BASEOk returns a tuple with the HOST_BASE field value
-// and a boolean to check if the value has been set.
-func (o *RegionLocations) GetHOST_BASEOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.HOST_BASE, true
-}
-
-// SetHOST_BASE sets field value
-func (o *RegionLocations) SetHOST_BASE(v string) {
-	o.HOST_BASE = v
 }
 
 // GetLOCATION returns the LOCATION field value
@@ -115,9 +89,6 @@ func (o *RegionLocations) SetREGION(v string) {
 
 func (o RegionLocations) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["HOST_BASE"] = o.HOST_BASE
-	}
 	if true {
 		toSerialize["LOCATION"] = o.LOCATION
 	}

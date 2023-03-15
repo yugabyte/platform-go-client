@@ -17,11 +17,8 @@ import (
 // AlertChannelSlackParams struct for AlertChannelSlackParams
 type AlertChannelSlackParams struct {
 	AlertChannelParams
-	// Slack icon URL
-	IconUrl *string `json:"iconUrl,omitempty"`
-	// Slack username
+	IconUrl string `json:"iconUrl"`
 	Username string `json:"username"`
-	// Slack webhook URL
 	WebhookUrl string `json:"webhookUrl"`
 }
 
@@ -29,8 +26,9 @@ type AlertChannelSlackParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelSlackParams(username string, webhookUrl string, ) *AlertChannelSlackParams {
+func NewAlertChannelSlackParams(iconUrl string, username string, webhookUrl string, ) *AlertChannelSlackParams {
 	this := AlertChannelSlackParams{}
+	this.IconUrl = iconUrl
 	this.Username = username
 	this.WebhookUrl = webhookUrl
 	return &this
@@ -44,36 +42,28 @@ func NewAlertChannelSlackParamsWithDefaults() *AlertChannelSlackParams {
 	return &this
 }
 
-// GetIconUrl returns the IconUrl field value if set, zero value otherwise.
+// GetIconUrl returns the IconUrl field value
 func (o *AlertChannelSlackParams) GetIconUrl() string {
-	if o == nil || o.IconUrl == nil {
+	if o == nil  {
 		var ret string
 		return ret
 	}
-	return *o.IconUrl
+
+	return o.IconUrl
 }
 
-// GetIconUrlOk returns a tuple with the IconUrl field value if set, nil otherwise
+// GetIconUrlOk returns a tuple with the IconUrl field value
 // and a boolean to check if the value has been set.
 func (o *AlertChannelSlackParams) GetIconUrlOk() (*string, bool) {
-	if o == nil || o.IconUrl == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.IconUrl, true
+	return &o.IconUrl, true
 }
 
-// HasIconUrl returns a boolean if a field has been set.
-func (o *AlertChannelSlackParams) HasIconUrl() bool {
-	if o != nil && o.IconUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIconUrl gets a reference to the given string and assigns it to the IconUrl field.
+// SetIconUrl sets field value
 func (o *AlertChannelSlackParams) SetIconUrl(v string) {
-	o.IconUrl = &v
+	o.IconUrl = v
 }
 
 // GetUsername returns the Username field value
@@ -134,7 +124,7 @@ func (o AlertChannelSlackParams) MarshalJSON() ([]byte, error) {
 	if errAlertChannelParams != nil {
 		return []byte{}, errAlertChannelParams
 	}
-	if o.IconUrl != nil {
+	if true {
 		toSerialize["iconUrl"] = o.IconUrl
 	}
 	if true {

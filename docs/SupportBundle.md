@@ -6,20 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BundleDetails** | [**BundleDetails**](BundleDetails.md) |  | 
 **BundleUUID** | **string** |  | 
-**CreationDate** | Pointer to **time.Time** | Support bundle creation date. | [optional] 
-**EndDate** | Pointer to **time.Time** | Support bundle end date. | [optional] 
-**ExpirationDate** | Pointer to **time.Time** | Support bundle expiration date. | [optional] 
+**CreationDate** | **time.Time** |  | 
+**EndDate** | **time.Time** |  | 
+**ExpirationDate** | **time.Time** |  | 
 **Path** | **string** |  | 
 **ScopeUUID** | **string** |  | 
-**SizeInBytes** | Pointer to **int64** | Size in bytes of the support bundle | [optional] 
-**StartDate** | Pointer to **time.Time** | Support bundle start date. | [optional] 
+**StartDate** | **time.Time** |  | 
 **Status** | **string** |  | 
 
 ## Methods
 
 ### NewSupportBundle
 
-`func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, path string, scopeUUID string, status string, ) *SupportBundle`
+`func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, creationDate time.Time, endDate time.Time, expirationDate time.Time, path string, scopeUUID string, startDate time.Time, status string, ) *SupportBundle`
 
 NewSupportBundle instantiates a new SupportBundle object
 This constructor will assign default values to properties that have it defined,
@@ -93,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetCreationDate sets CreationDate field to given value.
 
-### HasCreationDate
-
-`func (o *SupportBundle) HasCreationDate() bool`
-
-HasCreationDate returns a boolean if a field has been set.
 
 ### GetEndDate
 
@@ -118,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetEndDate sets EndDate field to given value.
 
-### HasEndDate
-
-`func (o *SupportBundle) HasEndDate() bool`
-
-HasEndDate returns a boolean if a field has been set.
 
 ### GetExpirationDate
 
@@ -143,11 +132,6 @@ and a boolean to check if the value has been set.
 
 SetExpirationDate sets ExpirationDate field to given value.
 
-### HasExpirationDate
-
-`func (o *SupportBundle) HasExpirationDate() bool`
-
-HasExpirationDate returns a boolean if a field has been set.
 
 ### GetPath
 
@@ -189,31 +173,6 @@ and a boolean to check if the value has been set.
 SetScopeUUID sets ScopeUUID field to given value.
 
 
-### GetSizeInBytes
-
-`func (o *SupportBundle) GetSizeInBytes() int64`
-
-GetSizeInBytes returns the SizeInBytes field if non-nil, zero value otherwise.
-
-### GetSizeInBytesOk
-
-`func (o *SupportBundle) GetSizeInBytesOk() (*int64, bool)`
-
-GetSizeInBytesOk returns a tuple with the SizeInBytes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSizeInBytes
-
-`func (o *SupportBundle) SetSizeInBytes(v int64)`
-
-SetSizeInBytes sets SizeInBytes field to given value.
-
-### HasSizeInBytes
-
-`func (o *SupportBundle) HasSizeInBytes() bool`
-
-HasSizeInBytes returns a boolean if a field has been set.
-
 ### GetStartDate
 
 `func (o *SupportBundle) GetStartDate() time.Time`
@@ -233,11 +192,6 @@ and a boolean to check if the value has been set.
 
 SetStartDate sets StartDate field to given value.
 
-### HasStartDate
-
-`func (o *SupportBundle) HasStartDate() bool`
-
-HasStartDate returns a boolean if a field has been set.
 
 ### GetStatus
 

@@ -14,8 +14,7 @@ Name | Type | Description | Notes
 **Target** | Pointer to **string** | Target | [optional] [readonly] 
 **TargetID** | Pointer to **string** | Target ID | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] [readonly] 
-**Timestamp** | Pointer to **time.Time** | The task creation time. | [optional] [readonly] 
-**UserAddress** | Pointer to **string** | User IP Address | [optional] [readonly] 
+**Timestamp** | **time.Time** |  | 
 **UserEmail** | Pointer to **string** | User Email | [optional] [readonly] 
 **UserUUID** | Pointer to **string** | User UUID | [optional] [readonly] 
 
@@ -23,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewAudit
 
-`func NewAudit(auditID int64, ) *Audit`
+`func NewAudit(auditID int64, timestamp time.Time, ) *Audit`
 
 NewAudit instantiates a new Audit object
 This constructor will assign default values to properties that have it defined,
@@ -302,36 +301,6 @@ and a boolean to check if the value has been set.
 
 SetTimestamp sets Timestamp field to given value.
 
-### HasTimestamp
-
-`func (o *Audit) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
-
-### GetUserAddress
-
-`func (o *Audit) GetUserAddress() string`
-
-GetUserAddress returns the UserAddress field if non-nil, zero value otherwise.
-
-### GetUserAddressOk
-
-`func (o *Audit) GetUserAddressOk() (*string, bool)`
-
-GetUserAddressOk returns a tuple with the UserAddress field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserAddress
-
-`func (o *Audit) SetUserAddress(v string)`
-
-SetUserAddress sets UserAddress field to given value.
-
-### HasUserAddress
-
-`func (o *Audit) HasUserAddress() bool`
-
-HasUserAddress returns a boolean if a field has been set.
 
 ### GetUserEmail
 

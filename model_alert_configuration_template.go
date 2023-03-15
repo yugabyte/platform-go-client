@@ -32,8 +32,6 @@ type AlertConfigurationTemplate struct {
 	DestinationUUID *string `json:"destinationUUID,omitempty"`
 	// Duration in seconds, while condition is met to raise an alert
 	DurationSec int32 `json:"durationSec"`
-	// Labels
-	Labels *map[string]string `json:"labels,omitempty"`
 	// Maintenance window UUIDs, applied to this alert config
 	MaintenanceWindowUuids *[]string `json:"maintenanceWindowUuids,omitempty"`
 	// Name
@@ -291,38 +289,6 @@ func (o *AlertConfigurationTemplate) GetDurationSecOk() (*int32, bool) {
 // SetDurationSec sets field value
 func (o *AlertConfigurationTemplate) SetDurationSec(v int32) {
 	o.DurationSec = v
-}
-
-// GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *AlertConfigurationTemplate) GetLabels() map[string]string {
-	if o == nil || o.Labels == nil {
-		var ret map[string]string
-		return ret
-	}
-	return *o.Labels
-}
-
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AlertConfigurationTemplate) GetLabelsOk() (*map[string]string, bool) {
-	if o == nil || o.Labels == nil {
-		return nil, false
-	}
-	return o.Labels, true
-}
-
-// HasLabels returns a boolean if a field has been set.
-func (o *AlertConfigurationTemplate) HasLabels() bool {
-	if o != nil && o.Labels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given map[string]string and assigns it to the Labels field.
-func (o *AlertConfigurationTemplate) SetLabels(v map[string]string) {
-	o.Labels = &v
 }
 
 // GetMaintenanceWindowUuids returns the MaintenanceWindowUuids field value if set, zero value otherwise.
@@ -750,9 +716,6 @@ func (o AlertConfigurationTemplate) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["durationSec"] = o.DurationSec
-	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
 	}
 	if o.MaintenanceWindowUuids != nil {
 		toSerialize["maintenanceWindowUuids"] = o.MaintenanceWindowUuids

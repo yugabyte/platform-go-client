@@ -5,23 +5,27 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | Provider active status | [optional] [readonly] 
-**AirGapInstall** | Pointer to **bool** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.airGapInstall | [optional] 
-**AllAccessKeys** | Pointer to [**[]AccessKey**](AccessKey.md) |  | [optional] 
+**AirGapInstall** | Pointer to **bool** | Transient property - only present in mutate API request | [optional] 
 **Code** | Pointer to **string** | Provider cloud code | [optional] 
-**Config** | Pointer to **map[string]string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.metadata instead | [optional] 
+**Config** | Pointer to **map[string]string** |  | [optional] 
+**CustomHostCidrs** | Pointer to **[]string** | Transient property - only present in mutate API request | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer uuid | [optional] [readonly] 
-**DestVpcId** | Pointer to **string** |  | [optional] 
-**Details** | Pointer to [**ProviderDetails**](ProviderDetails.md) |  | [optional] 
-**HostVpcId** | Pointer to **string** |  | [optional] 
-**HostVpcRegion** | Pointer to **string** |  | [optional] 
-**KeyPairName** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead | [optional] 
+**DestVpcId** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**HostVpcId** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**HostVpcRegion** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**HostedZoneId** | Pointer to **string** |  | [optional] 
+**HostedZoneName** | Pointer to **string** |  | [optional] 
+**KeyPairName** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
 **Name** | Pointer to **string** | Provider name | [optional] 
+**NtpServers** | Pointer to **[]string** | Transient property - only present in mutate API request | [optional] 
+**OverrideKeyValidate** | Pointer to **bool** | Transient property - only present in mutate API request | [optional] 
 **Regions** | [**[]Region**](Region.md) |  | 
-**SshPort** | Pointer to **int32** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshPort instead | [optional] 
-**SshPrivateKeyContent** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead | [optional] 
-**SshUser** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshUser instead | [optional] 
+**SetUpChrony** | Pointer to **bool** | Transient property - only present in mutate API request | [optional] 
+**ShowSetUpChrony** | Pointer to **bool** | Transient property - only present in mutate API request | [optional] 
+**SshPort** | Pointer to **int32** | Transient property - only present in mutate API request | [optional] 
+**SshPrivateKeyContent** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
+**SshUser** | Pointer to **string** | Transient property - only present in mutate API request | [optional] 
 **Uuid** | Pointer to **string** | Provider uuid | [optional] [readonly] 
-**Version** | Pointer to **int64** | Provider version | [optional] [readonly] 
 
 ## Methods
 
@@ -92,31 +96,6 @@ SetAirGapInstall sets AirGapInstall field to given value.
 
 HasAirGapInstall returns a boolean if a field has been set.
 
-### GetAllAccessKeys
-
-`func (o *Provider) GetAllAccessKeys() []AccessKey`
-
-GetAllAccessKeys returns the AllAccessKeys field if non-nil, zero value otherwise.
-
-### GetAllAccessKeysOk
-
-`func (o *Provider) GetAllAccessKeysOk() (*[]AccessKey, bool)`
-
-GetAllAccessKeysOk returns a tuple with the AllAccessKeys field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllAccessKeys
-
-`func (o *Provider) SetAllAccessKeys(v []AccessKey)`
-
-SetAllAccessKeys sets AllAccessKeys field to given value.
-
-### HasAllAccessKeys
-
-`func (o *Provider) HasAllAccessKeys() bool`
-
-HasAllAccessKeys returns a boolean if a field has been set.
-
 ### GetCode
 
 `func (o *Provider) GetCode() string`
@@ -166,6 +145,31 @@ SetConfig sets Config field to given value.
 `func (o *Provider) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
+
+### GetCustomHostCidrs
+
+`func (o *Provider) GetCustomHostCidrs() []string`
+
+GetCustomHostCidrs returns the CustomHostCidrs field if non-nil, zero value otherwise.
+
+### GetCustomHostCidrsOk
+
+`func (o *Provider) GetCustomHostCidrsOk() (*[]string, bool)`
+
+GetCustomHostCidrsOk returns a tuple with the CustomHostCidrs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomHostCidrs
+
+`func (o *Provider) SetCustomHostCidrs(v []string)`
+
+SetCustomHostCidrs sets CustomHostCidrs field to given value.
+
+### HasCustomHostCidrs
+
+`func (o *Provider) HasCustomHostCidrs() bool`
+
+HasCustomHostCidrs returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 
@@ -217,31 +221,6 @@ SetDestVpcId sets DestVpcId field to given value.
 
 HasDestVpcId returns a boolean if a field has been set.
 
-### GetDetails
-
-`func (o *Provider) GetDetails() ProviderDetails`
-
-GetDetails returns the Details field if non-nil, zero value otherwise.
-
-### GetDetailsOk
-
-`func (o *Provider) GetDetailsOk() (*ProviderDetails, bool)`
-
-GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDetails
-
-`func (o *Provider) SetDetails(v ProviderDetails)`
-
-SetDetails sets Details field to given value.
-
-### HasDetails
-
-`func (o *Provider) HasDetails() bool`
-
-HasDetails returns a boolean if a field has been set.
-
 ### GetHostVpcId
 
 `func (o *Provider) GetHostVpcId() string`
@@ -291,6 +270,56 @@ SetHostVpcRegion sets HostVpcRegion field to given value.
 `func (o *Provider) HasHostVpcRegion() bool`
 
 HasHostVpcRegion returns a boolean if a field has been set.
+
+### GetHostedZoneId
+
+`func (o *Provider) GetHostedZoneId() string`
+
+GetHostedZoneId returns the HostedZoneId field if non-nil, zero value otherwise.
+
+### GetHostedZoneIdOk
+
+`func (o *Provider) GetHostedZoneIdOk() (*string, bool)`
+
+GetHostedZoneIdOk returns a tuple with the HostedZoneId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostedZoneId
+
+`func (o *Provider) SetHostedZoneId(v string)`
+
+SetHostedZoneId sets HostedZoneId field to given value.
+
+### HasHostedZoneId
+
+`func (o *Provider) HasHostedZoneId() bool`
+
+HasHostedZoneId returns a boolean if a field has been set.
+
+### GetHostedZoneName
+
+`func (o *Provider) GetHostedZoneName() string`
+
+GetHostedZoneName returns the HostedZoneName field if non-nil, zero value otherwise.
+
+### GetHostedZoneNameOk
+
+`func (o *Provider) GetHostedZoneNameOk() (*string, bool)`
+
+GetHostedZoneNameOk returns a tuple with the HostedZoneName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostedZoneName
+
+`func (o *Provider) SetHostedZoneName(v string)`
+
+SetHostedZoneName sets HostedZoneName field to given value.
+
+### HasHostedZoneName
+
+`func (o *Provider) HasHostedZoneName() bool`
+
+HasHostedZoneName returns a boolean if a field has been set.
 
 ### GetKeyPairName
 
@@ -342,6 +371,56 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetNtpServers
+
+`func (o *Provider) GetNtpServers() []string`
+
+GetNtpServers returns the NtpServers field if non-nil, zero value otherwise.
+
+### GetNtpServersOk
+
+`func (o *Provider) GetNtpServersOk() (*[]string, bool)`
+
+GetNtpServersOk returns a tuple with the NtpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServers
+
+`func (o *Provider) SetNtpServers(v []string)`
+
+SetNtpServers sets NtpServers field to given value.
+
+### HasNtpServers
+
+`func (o *Provider) HasNtpServers() bool`
+
+HasNtpServers returns a boolean if a field has been set.
+
+### GetOverrideKeyValidate
+
+`func (o *Provider) GetOverrideKeyValidate() bool`
+
+GetOverrideKeyValidate returns the OverrideKeyValidate field if non-nil, zero value otherwise.
+
+### GetOverrideKeyValidateOk
+
+`func (o *Provider) GetOverrideKeyValidateOk() (*bool, bool)`
+
+GetOverrideKeyValidateOk returns a tuple with the OverrideKeyValidate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverrideKeyValidate
+
+`func (o *Provider) SetOverrideKeyValidate(v bool)`
+
+SetOverrideKeyValidate sets OverrideKeyValidate field to given value.
+
+### HasOverrideKeyValidate
+
+`func (o *Provider) HasOverrideKeyValidate() bool`
+
+HasOverrideKeyValidate returns a boolean if a field has been set.
+
 ### GetRegions
 
 `func (o *Provider) GetRegions() []Region`
@@ -361,6 +440,56 @@ and a boolean to check if the value has been set.
 
 SetRegions sets Regions field to given value.
 
+
+### GetSetUpChrony
+
+`func (o *Provider) GetSetUpChrony() bool`
+
+GetSetUpChrony returns the SetUpChrony field if non-nil, zero value otherwise.
+
+### GetSetUpChronyOk
+
+`func (o *Provider) GetSetUpChronyOk() (*bool, bool)`
+
+GetSetUpChronyOk returns a tuple with the SetUpChrony field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSetUpChrony
+
+`func (o *Provider) SetSetUpChrony(v bool)`
+
+SetSetUpChrony sets SetUpChrony field to given value.
+
+### HasSetUpChrony
+
+`func (o *Provider) HasSetUpChrony() bool`
+
+HasSetUpChrony returns a boolean if a field has been set.
+
+### GetShowSetUpChrony
+
+`func (o *Provider) GetShowSetUpChrony() bool`
+
+GetShowSetUpChrony returns the ShowSetUpChrony field if non-nil, zero value otherwise.
+
+### GetShowSetUpChronyOk
+
+`func (o *Provider) GetShowSetUpChronyOk() (*bool, bool)`
+
+GetShowSetUpChronyOk returns a tuple with the ShowSetUpChrony field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowSetUpChrony
+
+`func (o *Provider) SetShowSetUpChrony(v bool)`
+
+SetShowSetUpChrony sets ShowSetUpChrony field to given value.
+
+### HasShowSetUpChrony
+
+`func (o *Provider) HasShowSetUpChrony() bool`
+
+HasShowSetUpChrony returns a boolean if a field has been set.
 
 ### GetSshPort
 
@@ -461,31 +590,6 @@ SetUuid sets Uuid field to given value.
 `func (o *Provider) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
-
-### GetVersion
-
-`func (o *Provider) GetVersion() int64`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *Provider) GetVersionOk() (*int64, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *Provider) SetVersion(v int64)`
-
-SetVersion sets Version field to given value.
-
-### HasVersion
-
-`func (o *Provider) HasVersion() bool`
-
-HasVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -5,13 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ActionType** | Pointer to **string** | Action type | [optional] 
-**AllTables** | Pointer to **bool** | Backup all tables in Keyspace | [optional] 
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupList** | Pointer to [**[]BackupTableParams**](BackupTableParams.md) | Backups | [optional] 
 **BackupSizeInBytes** | Pointer to **int64** | Backup size in bytes | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUuid** | Pointer to **string** | Backup UUID | [optional] 
-**BaseBackupUUID** | Pointer to **string** | Base backup UUID | [optional] 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
@@ -20,18 +18,14 @@ Name | Type | Description | Notes
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
-**DisableMultipart** | Pointer to **bool** | Disable multipart upload | [optional] 
-**DisableParallelism** | Pointer to **bool** | Don&#39;t add -m flag during gsutil upload dir command | [optional] 
 **EnableVerboseLogs** | Pointer to **bool** | Is verbose logging enabled | [optional] 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsFullBackup** | Pointer to **bool** | Full Table type backup | [optional] 
 **Keyspace** | Pointer to **string** | Key space | [optional] 
 **KmsConfigUUID** | Pointer to **string** | KMS configuration UUID | [optional] 
@@ -42,14 +36,11 @@ Name | Type | Description | Notes
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] 
 **SchedulingFrequency** | Pointer to **int64** | Frequency to run the backup, in milliseconds | [optional] 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageConfigType** | Pointer to **string** | Type of backup storage config | [optional] 
@@ -61,19 +52,16 @@ Name | Type | Description | Notes
 **TableUUIDList** | Pointer to **[]string** | Table UUIDs | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
-**TimeTakenPartial** | **int64** |  | 
 **TransactionalBackup** | Pointer to **bool** | Is backup transactional across tables | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewMultiTableBackupRequestParams
 
-`func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams`
+`func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, storageConfigUUID string, ) *MultiTableBackupRequestParams`
 
 NewMultiTableBackupRequestParams instantiates a new MultiTableBackupRequestParams object
 This constructor will assign default values to properties that have it defined,
@@ -112,31 +100,6 @@ SetActionType sets ActionType field to given value.
 `func (o *MultiTableBackupRequestParams) HasActionType() bool`
 
 HasActionType returns a boolean if a field has been set.
-
-### GetAllTables
-
-`func (o *MultiTableBackupRequestParams) GetAllTables() bool`
-
-GetAllTables returns the AllTables field if non-nil, zero value otherwise.
-
-### GetAllTablesOk
-
-`func (o *MultiTableBackupRequestParams) GetAllTablesOk() (*bool, bool)`
-
-GetAllTablesOk returns a tuple with the AllTables field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllTables
-
-`func (o *MultiTableBackupRequestParams) SetAllTables(v bool)`
-
-SetAllTables sets AllTables field to given value.
-
-### HasAllTables
-
-`func (o *MultiTableBackupRequestParams) HasAllTables() bool`
-
-HasAllTables returns a boolean if a field has been set.
 
 ### GetAlterLoadBalancer
 
@@ -262,31 +225,6 @@ SetBackupUuid sets BackupUuid field to given value.
 `func (o *MultiTableBackupRequestParams) HasBackupUuid() bool`
 
 HasBackupUuid returns a boolean if a field has been set.
-
-### GetBaseBackupUUID
-
-`func (o *MultiTableBackupRequestParams) GetBaseBackupUUID() string`
-
-GetBaseBackupUUID returns the BaseBackupUUID field if non-nil, zero value otherwise.
-
-### GetBaseBackupUUIDOk
-
-`func (o *MultiTableBackupRequestParams) GetBaseBackupUUIDOk() (*string, bool)`
-
-GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBaseBackupUUID
-
-`func (o *MultiTableBackupRequestParams) SetBaseBackupUUID(v string)`
-
-SetBaseBackupUUID sets BaseBackupUUID field to given value.
-
-### HasBaseBackupUUID
-
-`func (o *MultiTableBackupRequestParams) HasBaseBackupUUID() bool`
-
-HasBaseBackupUUID returns a boolean if a field has been set.
 
 ### GetCmkArn
 
@@ -483,56 +421,6 @@ SetDisableChecksum sets DisableChecksum field to given value.
 
 HasDisableChecksum returns a boolean if a field has been set.
 
-### GetDisableMultipart
-
-`func (o *MultiTableBackupRequestParams) GetDisableMultipart() bool`
-
-GetDisableMultipart returns the DisableMultipart field if non-nil, zero value otherwise.
-
-### GetDisableMultipartOk
-
-`func (o *MultiTableBackupRequestParams) GetDisableMultipartOk() (*bool, bool)`
-
-GetDisableMultipartOk returns a tuple with the DisableMultipart field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisableMultipart
-
-`func (o *MultiTableBackupRequestParams) SetDisableMultipart(v bool)`
-
-SetDisableMultipart sets DisableMultipart field to given value.
-
-### HasDisableMultipart
-
-`func (o *MultiTableBackupRequestParams) HasDisableMultipart() bool`
-
-HasDisableMultipart returns a boolean if a field has been set.
-
-### GetDisableParallelism
-
-`func (o *MultiTableBackupRequestParams) GetDisableParallelism() bool`
-
-GetDisableParallelism returns the DisableParallelism field if non-nil, zero value otherwise.
-
-### GetDisableParallelismOk
-
-`func (o *MultiTableBackupRequestParams) GetDisableParallelismOk() (*bool, bool)`
-
-GetDisableParallelismOk returns a tuple with the DisableParallelism field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisableParallelism
-
-`func (o *MultiTableBackupRequestParams) SetDisableParallelism(v bool)`
-
-SetDisableParallelism sets DisableParallelism field to given value.
-
-### HasDisableParallelism
-
-`func (o *MultiTableBackupRequestParams) HasDisableParallelism() bool`
-
-HasDisableParallelism returns a boolean if a field has been set.
-
 ### GetEnableVerboseLogs
 
 `func (o *MultiTableBackupRequestParams) GetEnableVerboseLogs() bool`
@@ -557,31 +445,6 @@ SetEnableVerboseLogs sets EnableVerboseLogs field to given value.
 `func (o *MultiTableBackupRequestParams) HasEnableVerboseLogs() bool`
 
 HasEnableVerboseLogs returns a boolean if a field has been set.
-
-### GetEnableYbc
-
-`func (o *MultiTableBackupRequestParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *MultiTableBackupRequestParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *MultiTableBackupRequestParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *MultiTableBackupRequestParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
 
 ### GetEncryptionAtRestConfig
 
@@ -708,30 +571,30 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetFullChainSizeInBytes
+### GetFirstTry
 
-`func (o *MultiTableBackupRequestParams) GetFullChainSizeInBytes() int64`
+`func (o *MultiTableBackupRequestParams) GetFirstTry() bool`
 
-GetFullChainSizeInBytes returns the FullChainSizeInBytes field if non-nil, zero value otherwise.
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
 
-### GetFullChainSizeInBytesOk
+### GetFirstTryOk
 
-`func (o *MultiTableBackupRequestParams) GetFullChainSizeInBytesOk() (*int64, bool)`
+`func (o *MultiTableBackupRequestParams) GetFirstTryOk() (*bool, bool)`
 
-GetFullChainSizeInBytesOk returns a tuple with the FullChainSizeInBytes field if it's non-nil, zero value otherwise
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFullChainSizeInBytes
+### SetFirstTry
 
-`func (o *MultiTableBackupRequestParams) SetFullChainSizeInBytes(v int64)`
+`func (o *MultiTableBackupRequestParams) SetFirstTry(v bool)`
 
-SetFullChainSizeInBytes sets FullChainSizeInBytes field to given value.
+SetFirstTry sets FirstTry field to given value.
 
-### HasFullChainSizeInBytes
+### HasFirstTry
 
-`func (o *MultiTableBackupRequestParams) HasFullChainSizeInBytes() bool`
+`func (o *MultiTableBackupRequestParams) HasFirstTry() bool`
 
-HasFullChainSizeInBytes returns a boolean if a field has been set.
+HasFirstTry returns a boolean if a field has been set.
 
 ### GetIgnoreErrors
 
@@ -757,31 +620,6 @@ SetIgnoreErrors sets IgnoreErrors field to given value.
 `func (o *MultiTableBackupRequestParams) HasIgnoreErrors() bool`
 
 HasIgnoreErrors returns a boolean if a field has been set.
-
-### GetInstallYbc
-
-`func (o *MultiTableBackupRequestParams) GetInstallYbc() bool`
-
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
-
-### GetInstallYbcOk
-
-`func (o *MultiTableBackupRequestParams) GetInstallYbcOk() (*bool, bool)`
-
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInstallYbc
-
-`func (o *MultiTableBackupRequestParams) SetInstallYbc(v bool)`
-
-SetInstallYbc sets InstallYbc field to given value.
-
-### HasInstallYbc
-
-`func (o *MultiTableBackupRequestParams) HasInstallYbc() bool`
-
-HasInstallYbc returns a boolean if a field has been set.
 
 ### GetIsFullBackup
 
@@ -1028,26 +866,6 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
-### GetPlatformVersion
-
-`func (o *MultiTableBackupRequestParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *MultiTableBackupRequestParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *MultiTableBackupRequestParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-
 ### GetPreviousTaskUUID
 
 `func (o *MultiTableBackupRequestParams) GetPreviousTaskUUID() string`
@@ -1172,46 +990,6 @@ SetSchedulingFrequency sets SchedulingFrequency field to given value.
 `func (o *MultiTableBackupRequestParams) HasSchedulingFrequency() bool`
 
 HasSchedulingFrequency returns a boolean if a field has been set.
-
-### GetSleepAfterMasterRestartMillis
-
-`func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillis() int32`
-
-GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
-
-### GetSleepAfterMasterRestartMillisOk
-
-`func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
-
-GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSleepAfterMasterRestartMillis
-
-`func (o *MultiTableBackupRequestParams) SetSleepAfterMasterRestartMillis(v int32)`
-
-SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
-
-
-### GetSleepAfterTServerRestartMillis
-
-`func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillis() int32`
-
-GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
-
-### GetSleepAfterTServerRestartMillisOk
-
-`func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
-
-GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSleepAfterTServerRestartMillis
-
-`func (o *MultiTableBackupRequestParams) SetSleepAfterTServerRestartMillis(v int32)`
-
-SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
-
 
 ### GetSourceXClusterConfigs
 
@@ -1483,26 +1261,6 @@ SetTimeBeforeDelete sets TimeBeforeDelete field to given value.
 
 HasTimeBeforeDelete returns a boolean if a field has been set.
 
-### GetTimeTakenPartial
-
-`func (o *MultiTableBackupRequestParams) GetTimeTakenPartial() int64`
-
-GetTimeTakenPartial returns the TimeTakenPartial field if non-nil, zero value otherwise.
-
-### GetTimeTakenPartialOk
-
-`func (o *MultiTableBackupRequestParams) GetTimeTakenPartialOk() (*int64, bool)`
-
-GetTimeTakenPartialOk returns a tuple with the TimeTakenPartial field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimeTakenPartial
-
-`func (o *MultiTableBackupRequestParams) SetTimeTakenPartial(v int64)`
-
-SetTimeTakenPartial sets TimeTakenPartial field to given value.
-
-
 ### GetTransactionalBackup
 
 `func (o *MultiTableBackupRequestParams) GetTransactionalBackup() bool`
@@ -1602,56 +1360,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *MultiTableBackupRequestParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *MultiTableBackupRequestParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *MultiTableBackupRequestParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *MultiTableBackupRequestParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *MultiTableBackupRequestParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *MultiTableBackupRequestParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *MultiTableBackupRequestParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *MultiTableBackupRequestParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *MultiTableBackupRequestParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

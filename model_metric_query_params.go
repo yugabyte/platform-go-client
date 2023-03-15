@@ -34,8 +34,6 @@ type MetricQueryParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	// Region code
 	RegionCodes *[]string `json:"regionCodes,omitempty"`
-	// Server type
-	ServerType *string `json:"serverType,omitempty"`
 	// Start time
 	Start int64 `json:"start"`
 	// Table id
@@ -352,38 +350,6 @@ func (o *MetricQueryParams) SetRegionCodes(v []string) {
 	o.RegionCodes = &v
 }
 
-// GetServerType returns the ServerType field value if set, zero value otherwise.
-func (o *MetricQueryParams) GetServerType() string {
-	if o == nil || o.ServerType == nil {
-		var ret string
-		return ret
-	}
-	return *o.ServerType
-}
-
-// GetServerTypeOk returns a tuple with the ServerType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MetricQueryParams) GetServerTypeOk() (*string, bool) {
-	if o == nil || o.ServerType == nil {
-		return nil, false
-	}
-	return o.ServerType, true
-}
-
-// HasServerType returns a boolean if a field has been set.
-func (o *MetricQueryParams) HasServerType() bool {
-	if o != nil && o.ServerType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetServerType gets a reference to the given string and assigns it to the ServerType field.
-func (o *MetricQueryParams) SetServerType(v string) {
-	o.ServerType = &v
-}
-
 // GetStart returns the Start field value
 func (o *MetricQueryParams) GetStart() int64 {
 	if o == nil  {
@@ -524,9 +490,6 @@ func (o MetricQueryParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.RegionCodes != nil {
 		toSerialize["regionCodes"] = o.RegionCodes
-	}
-	if o.ServerType != nil {
-		toSerialize["serverType"] = o.ServerType
 	}
 	if true {
 		toSerialize["start"] = o.Start

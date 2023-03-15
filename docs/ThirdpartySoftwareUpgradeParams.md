@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
+**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -13,25 +14,22 @@ Name | Type | Description | Notes
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ForceAll** | **bool** |  | 
 **ImportedState** | Pointer to **string** |  | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
@@ -40,28 +38,22 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
-**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
-**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
-**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
-**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewThirdpartySoftwareUpgradeParams
 
-`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
+`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
 
 NewThirdpartySoftwareUpgradeParams instantiates a new ThirdpartySoftwareUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -100,6 +92,31 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
+
+### GetBackupInProgress
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetBackupInProgress() bool`
+
+GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
+
+### GetBackupInProgressOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetBackupInProgressOk() (*bool, bool)`
+
+GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupInProgress
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetBackupInProgress(v bool)`
+
+SetBackupInProgress sets BackupInProgress field to given value.
+
+### HasBackupInProgress
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasBackupInProgress() bool`
+
+HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -291,31 +308,6 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
-### GetEnableYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
-
 ### GetEncryptionAtRestConfig
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
@@ -416,6 +408,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
+### GetFirstTry
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetFirstTry() bool`
+
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
+
+### GetFirstTryOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetFirstTryOk() (*bool, bool)`
+
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstTry
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetFirstTry(v bool)`
+
+SetFirstTry sets FirstTry field to given value.
+
+### HasFirstTry
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasFirstTry() bool`
+
+HasFirstTry returns a boolean if a field has been set.
+
 ### GetForceAll
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetForceAll() bool`
@@ -461,31 +478,6 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
-### GetInstallYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetInstallYbc() bool`
-
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
-
-### GetInstallYbcOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetInstallYbcOk() (*bool, bool)`
-
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInstallYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetInstallYbc(v bool)`
-
-SetInstallYbc sets InstallYbc field to given value.
-
-### HasInstallYbc
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasInstallYbc() bool`
-
-HasInstallYbc returns a boolean if a field has been set.
-
 ### GetItestS3PackagePath
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetItestS3PackagePath() string`
@@ -530,31 +522,6 @@ and a boolean to check if the value has been set.
 
 SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
 
-
-### GetMastersInDefaultRegion
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetMastersInDefaultRegion() bool`
-
-GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
-
-### GetMastersInDefaultRegionOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool)`
-
-GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMastersInDefaultRegion
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetMastersInDefaultRegion(v bool)`
-
-SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
-
-### HasMastersInDefaultRegion
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasMastersInDefaultRegion() bool`
-
-HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -699,26 +666,6 @@ and a boolean to check if the value has been set.
 `func (o *ThirdpartySoftwareUpgradeParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
-
-
-### GetPlatformVersion
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID
@@ -936,31 +883,6 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
 
-### GetSshUserOverride
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetSshUserOverride() string`
-
-GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
-
-### GetSshUserOverrideOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetSshUserOverrideOk() (*string, bool)`
-
-GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSshUserOverride
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetSshUserOverride(v string)`
-
-SetSshUserOverride sets SshUserOverride field to given value.
-
-### HasSshUserOverride
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasSshUserOverride() bool`
-
-HasSshUserOverride returns a boolean if a field has been set.
-
 ### GetTargetXClusterConfigs
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetTargetXClusterConfigs() []string`
@@ -1061,31 +983,6 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
-### GetUpdateOptions
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetUpdateOptions() []string`
-
-GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
-
-### GetUpdateOptionsOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetUpdateOptionsOk() (*[]string, bool)`
-
-GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdateOptions
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetUpdateOptions(v []string)`
-
-SetUpdateOptions sets UpdateOptions field to given value.
-
-### HasUpdateOptions
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasUpdateOptions() bool`
-
-HasUpdateOptions returns a boolean if a field has been set.
-
 ### GetUpdateSucceeded
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetUpdateSucceeded() bool`
@@ -1181,31 +1078,6 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
-### GetUseNewHelmNamingStyle
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetUseNewHelmNamingStyle() bool`
-
-GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
-
-### GetUseNewHelmNamingStyleOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
-
-GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUseNewHelmNamingStyle
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetUseNewHelmNamingStyle(v bool)`
-
-SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
-
-### HasUseNewHelmNamingStyle
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasUseNewHelmNamingStyle() bool`
-
-HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-
 ### GetUserAZSelected
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetUserAZSelected() bool`
@@ -1231,31 +1103,6 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
-### GetXclusterInfo
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetXclusterInfo() XClusterInfo`
-
-GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
-
-### GetXclusterInfoOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
-
-GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXclusterInfo
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetXclusterInfo(v XClusterInfo)`
-
-SetXclusterInfo sets XclusterInfo field to given value.
-
-### HasXclusterInfo
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasXclusterInfo() bool`
-
-HasXclusterInfo returns a boolean if a field has been set.
-
 ### GetYbPrevSoftwareVersion
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetYbPrevSoftwareVersion() string`
@@ -1280,56 +1127,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *ThirdpartySoftwareUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *ThirdpartySoftwareUpgradeParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *ThirdpartySoftwareUpgradeParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -22,48 +22,42 @@ type RestoreBackupParams struct {
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backup's storage info to restore
 	BackupStorageInfoList *[]BackupStorageInfo `json:"backupStorageInfoList,omitempty"`
-	// Category of the backup
-	Category *string `json:"category,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
 	CreatingUser Users `json:"creatingUser"`
-	CurrentIdx int32 `json:"currentIdx"`
-	CurrentYbcTaskId string `json:"currentYbcTaskId"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	// Disable checksum
 	DisableChecksum *bool `json:"disableChecksum,omitempty"`
-	// Disable multipart upload
-	DisableMultipart *bool `json:"disableMultipart,omitempty"`
 	// Is verbose logging enabled
 	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	// Whether this task has been tried before
+	FirstTry *bool `json:"firstTry,omitempty"`
 	// KMS configuration UUID
 	KmsConfigUUID *string `json:"kmsConfigUUID,omitempty"`
+	// User name of the new tables owner
+	NewOwner *string `json:"newOwner,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	// User name of the current tables owner
+	OldOwner *string `json:"oldOwner,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
-	PrefixUUID string `json:"prefixUUID"`
-	// Previous task UUID of a retry
+	// Previous task UUID only if this task is a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	// Storage config uuid
@@ -76,24 +70,16 @@ type RestoreBackupParams struct {
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewRestoreBackupParams instantiates a new RestoreBackupParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
+func NewRestoreBackupParams(creatingUser Users, platformUrl string, universeUUID string, ) *RestoreBackupParams {
 	this := RestoreBackupParams{}
 	this.CreatingUser = creatingUser
-	this.CurrentIdx = currentIdx
-	this.CurrentYbcTaskId = currentYbcTaskId
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
-	this.PrefixUUID = prefixUUID
-	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
-	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UniverseUUID = universeUUID
 	return &this
 }
@@ -202,38 +188,6 @@ func (o *RestoreBackupParams) SetBackupStorageInfoList(v []BackupStorageInfo) {
 	o.BackupStorageInfoList = &v
 }
 
-// GetCategory returns the Category field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetCategory() string {
-	if o == nil || o.Category == nil {
-		var ret string
-		return ret
-	}
-	return *o.Category
-}
-
-// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetCategoryOk() (*string, bool) {
-	if o == nil || o.Category == nil {
-		return nil, false
-	}
-	return o.Category, true
-}
-
-// HasCategory returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasCategory() bool {
-	if o != nil && o.Category != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCategory gets a reference to the given string and assigns it to the Category field.
-func (o *RestoreBackupParams) SetCategory(v string) {
-	o.Category = &v
-}
-
 // GetCmkArn returns the CmkArn field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetCmkArn() string {
 	if o == nil || o.CmkArn == nil {
@@ -320,54 +274,6 @@ func (o *RestoreBackupParams) GetCreatingUserOk() (*Users, bool) {
 // SetCreatingUser sets field value
 func (o *RestoreBackupParams) SetCreatingUser(v Users) {
 	o.CreatingUser = v
-}
-
-// GetCurrentIdx returns the CurrentIdx field value
-func (o *RestoreBackupParams) GetCurrentIdx() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.CurrentIdx
-}
-
-// GetCurrentIdxOk returns a tuple with the CurrentIdx field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentIdx, true
-}
-
-// SetCurrentIdx sets field value
-func (o *RestoreBackupParams) SetCurrentIdx(v int32) {
-	o.CurrentIdx = v
-}
-
-// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value
-func (o *RestoreBackupParams) GetCurrentYbcTaskId() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.CurrentYbcTaskId
-}
-
-// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentYbcTaskId, true
-}
-
-// SetCurrentYbcTaskId sets field value
-func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string) {
-	o.CurrentYbcTaskId = v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -466,38 +372,6 @@ func (o *RestoreBackupParams) SetDisableChecksum(v bool) {
 	o.DisableChecksum = &v
 }
 
-// GetDisableMultipart returns the DisableMultipart field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetDisableMultipart() bool {
-	if o == nil || o.DisableMultipart == nil {
-		var ret bool
-		return ret
-	}
-	return *o.DisableMultipart
-}
-
-// GetDisableMultipartOk returns a tuple with the DisableMultipart field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetDisableMultipartOk() (*bool, bool) {
-	if o == nil || o.DisableMultipart == nil {
-		return nil, false
-	}
-	return o.DisableMultipart, true
-}
-
-// HasDisableMultipart returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasDisableMultipart() bool {
-	if o != nil && o.DisableMultipart != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDisableMultipart gets a reference to the given bool and assigns it to the DisableMultipart field.
-func (o *RestoreBackupParams) SetDisableMultipart(v bool) {
-	o.DisableMultipart = &v
-}
-
 // GetEnableVerboseLogs returns the EnableVerboseLogs field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetEnableVerboseLogs() bool {
 	if o == nil || o.EnableVerboseLogs == nil {
@@ -528,38 +402,6 @@ func (o *RestoreBackupParams) HasEnableVerboseLogs() bool {
 // SetEnableVerboseLogs gets a reference to the given bool and assigns it to the EnableVerboseLogs field.
 func (o *RestoreBackupParams) SetEnableVerboseLogs(v bool) {
 	o.EnableVerboseLogs = &v
-}
-
-// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetEnableYbc() bool {
-	if o == nil || o.EnableYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.EnableYbc
-}
-
-// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetEnableYbcOk() (*bool, bool) {
-	if o == nil || o.EnableYbc == nil {
-		return nil, false
-	}
-	return o.EnableYbc, true
-}
-
-// HasEnableYbc returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasEnableYbc() bool {
-	if o != nil && o.EnableYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
-func (o *RestoreBackupParams) SetEnableYbc(v bool) {
-	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -690,36 +532,36 @@ func (o *RestoreBackupParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
-// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetInstallYbc() bool {
-	if o == nil || o.InstallYbc == nil {
+// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
+func (o *RestoreBackupParams) GetFirstTry() bool {
+	if o == nil || o.FirstTry == nil {
 		var ret bool
 		return ret
 	}
-	return *o.InstallYbc
+	return *o.FirstTry
 }
 
-// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
+// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetInstallYbcOk() (*bool, bool) {
-	if o == nil || o.InstallYbc == nil {
+func (o *RestoreBackupParams) GetFirstTryOk() (*bool, bool) {
+	if o == nil || o.FirstTry == nil {
 		return nil, false
 	}
-	return o.InstallYbc, true
+	return o.FirstTry, true
 }
 
-// HasInstallYbc returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasInstallYbc() bool {
-	if o != nil && o.InstallYbc != nil {
+// HasFirstTry returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasFirstTry() bool {
+	if o != nil && o.FirstTry != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
-func (o *RestoreBackupParams) SetInstallYbc(v bool) {
-	o.InstallYbc = &v
+// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
+func (o *RestoreBackupParams) SetFirstTry(v bool) {
+	o.FirstTry = &v
 }
 
 // GetKmsConfigUUID returns the KmsConfigUUID field value if set, zero value otherwise.
@@ -752,6 +594,38 @@ func (o *RestoreBackupParams) HasKmsConfigUUID() bool {
 // SetKmsConfigUUID gets a reference to the given string and assigns it to the KmsConfigUUID field.
 func (o *RestoreBackupParams) SetKmsConfigUUID(v string) {
 	o.KmsConfigUUID = &v
+}
+
+// GetNewOwner returns the NewOwner field value if set, zero value otherwise.
+func (o *RestoreBackupParams) GetNewOwner() string {
+	if o == nil || o.NewOwner == nil {
+		var ret string
+		return ret
+	}
+	return *o.NewOwner
+}
+
+// GetNewOwnerOk returns a tuple with the NewOwner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetNewOwnerOk() (*string, bool) {
+	if o == nil || o.NewOwner == nil {
+		return nil, false
+	}
+	return o.NewOwner, true
+}
+
+// HasNewOwner returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasNewOwner() bool {
+	if o != nil && o.NewOwner != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNewOwner gets a reference to the given string and assigns it to the NewOwner field.
+func (o *RestoreBackupParams) SetNewOwner(v string) {
+	o.NewOwner = &v
 }
 
 // GetNodeDetailsSet returns the NodeDetailsSet field value if set, zero value otherwise.
@@ -818,6 +692,38 @@ func (o *RestoreBackupParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetOldOwner returns the OldOwner field value if set, zero value otherwise.
+func (o *RestoreBackupParams) GetOldOwner() string {
+	if o == nil || o.OldOwner == nil {
+		var ret string
+		return ret
+	}
+	return *o.OldOwner
+}
+
+// GetOldOwnerOk returns a tuple with the OldOwner field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetOldOwnerOk() (*string, bool) {
+	if o == nil || o.OldOwner == nil {
+		return nil, false
+	}
+	return o.OldOwner, true
+}
+
+// HasOldOwner returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasOldOwner() bool {
+	if o != nil && o.OldOwner != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOldOwner gets a reference to the given string and assigns it to the OldOwner field.
+func (o *RestoreBackupParams) SetOldOwner(v string) {
+	o.OldOwner = &v
+}
+
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetParallelism() int32 {
 	if o == nil || o.Parallelism == nil {
@@ -872,54 +778,6 @@ func (o *RestoreBackupParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *RestoreBackupParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value
-func (o *RestoreBackupParams) GetPlatformVersion() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.PlatformVersion, true
-}
-
-// SetPlatformVersion sets field value
-func (o *RestoreBackupParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
-}
-
-// GetPrefixUUID returns the PrefixUUID field value
-func (o *RestoreBackupParams) GetPrefixUUID() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.PrefixUUID
-}
-
-// GetPrefixUUIDOk returns a tuple with the PrefixUUID field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetPrefixUUIDOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.PrefixUUID, true
-}
-
-// SetPrefixUUID sets field value
-func (o *RestoreBackupParams) SetPrefixUUID(v string) {
-	o.PrefixUUID = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -984,54 +842,6 @@ func (o *RestoreBackupParams) HasRestoreTimeStamp() bool {
 // SetRestoreTimeStamp gets a reference to the given string and assigns it to the RestoreTimeStamp field.
 func (o *RestoreBackupParams) SetRestoreTimeStamp(v string) {
 	o.RestoreTimeStamp = &v
-}
-
-// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
-func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.SleepAfterMasterRestartMillis
-}
-
-// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SleepAfterMasterRestartMillis, true
-}
-
-// SetSleepAfterMasterRestartMillis sets field value
-func (o *RestoreBackupParams) SetSleepAfterMasterRestartMillis(v int32) {
-	o.SleepAfterMasterRestartMillis = v
-}
-
-// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
-func (o *RestoreBackupParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.SleepAfterTServerRestartMillis
-}
-
-// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SleepAfterTServerRestartMillis, true
-}
-
-// SetSleepAfterTServerRestartMillis sets field value
-func (o *RestoreBackupParams) SetSleepAfterTServerRestartMillis(v int32) {
-	o.SleepAfterTServerRestartMillis = v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -1218,70 +1028,6 @@ func (o *RestoreBackupParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
-// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetYbcInstalled() bool {
-	if o == nil || o.YbcInstalled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.YbcInstalled
-}
-
-// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetYbcInstalledOk() (*bool, bool) {
-	if o == nil || o.YbcInstalled == nil {
-		return nil, false
-	}
-	return o.YbcInstalled, true
-}
-
-// HasYbcInstalled returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasYbcInstalled() bool {
-	if o != nil && o.YbcInstalled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
-func (o *RestoreBackupParams) SetYbcInstalled(v bool) {
-	o.YbcInstalled = &v
-}
-
-// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetYbcSoftwareVersion() string {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.YbcSoftwareVersion
-}
-
-// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetYbcSoftwareVersionOk() (*string, bool) {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		return nil, false
-	}
-	return o.YbcSoftwareVersion, true
-}
-
-// HasYbcSoftwareVersion returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasYbcSoftwareVersion() bool {
-	if o != nil && o.YbcSoftwareVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
-func (o *RestoreBackupParams) SetYbcSoftwareVersion(v string) {
-	o.YbcSoftwareVersion = &v
-}
-
 func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ActionType != nil {
@@ -1293,9 +1039,6 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.BackupStorageInfoList != nil {
 		toSerialize["backupStorageInfoList"] = o.BackupStorageInfoList
 	}
-	if o.Category != nil {
-		toSerialize["category"] = o.Category
-	}
 	if o.CmkArn != nil {
 		toSerialize["cmkArn"] = o.CmkArn
 	}
@@ -1304,12 +1047,6 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["creatingUser"] = o.CreatingUser
-	}
-	if true {
-		toSerialize["currentIdx"] = o.CurrentIdx
-	}
-	if true {
-		toSerialize["currentYbcTaskId"] = o.CurrentYbcTaskId
 	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
@@ -1320,14 +1057,8 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.DisableChecksum != nil {
 		toSerialize["disableChecksum"] = o.DisableChecksum
 	}
-	if o.DisableMultipart != nil {
-		toSerialize["disableMultipart"] = o.DisableMultipart
-	}
 	if o.EnableVerboseLogs != nil {
 		toSerialize["enableVerboseLogs"] = o.EnableVerboseLogs
-	}
-	if o.EnableYbc != nil {
-		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1341,11 +1072,14 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
-	if o.InstallYbc != nil {
-		toSerialize["installYbc"] = o.InstallYbc
+	if o.FirstTry != nil {
+		toSerialize["firstTry"] = o.FirstTry
 	}
 	if o.KmsConfigUUID != nil {
 		toSerialize["kmsConfigUUID"] = o.KmsConfigUUID
+	}
+	if o.NewOwner != nil {
+		toSerialize["newOwner"] = o.NewOwner
 	}
 	if o.NodeDetailsSet != nil {
 		toSerialize["nodeDetailsSet"] = o.NodeDetailsSet
@@ -1353,29 +1087,20 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
+	if o.OldOwner != nil {
+		toSerialize["oldOwner"] = o.OldOwner
+	}
 	if o.Parallelism != nil {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
-	if true {
-		toSerialize["prefixUUID"] = o.PrefixUUID
-	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
-	}
-	if true {
-		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
-	}
-	if true {
-		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
@@ -1394,12 +1119,6 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
-	}
-	if o.YbcInstalled != nil {
-		toSerialize["ybcInstalled"] = o.YbcInstalled
-	}
-	if o.YbcSoftwareVersion != nil {
-		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

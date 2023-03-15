@@ -18,34 +18,44 @@ import (
 type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.airGapInstall
+	// Transient property - only present in mutate API request
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
-	AllAccessKeys *[]AccessKey `json:"allAccessKeys,omitempty"`
 	// Provider cloud code
 	Code *string `json:"code,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.metadata instead
 	Config *map[string]string `json:"config,omitempty"`
+	// Transient property - only present in mutate API request
+	CustomHostCidrs *[]string `json:"customHostCidrs,omitempty"`
 	// Customer uuid
 	CustomerUUID *string `json:"customerUUID,omitempty"`
+	// Transient property - only present in mutate API request
 	DestVpcId *string `json:"destVpcId,omitempty"`
-	Details *ProviderDetails `json:"details,omitempty"`
+	// Transient property - only present in mutate API request
 	HostVpcId *string `json:"hostVpcId,omitempty"`
+	// Transient property - only present in mutate API request
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead
+	HostedZoneId *string `json:"hostedZoneId,omitempty"`
+	HostedZoneName *string `json:"hostedZoneName,omitempty"`
+	// Transient property - only present in mutate API request
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
+	// Transient property - only present in mutate API request
+	NtpServers *[]string `json:"ntpServers,omitempty"`
+	// Transient property - only present in mutate API request
+	OverrideKeyValidate *bool `json:"overrideKeyValidate,omitempty"`
 	Regions []Region `json:"regions"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshPort instead
+	// Transient property - only present in mutate API request
+	SetUpChrony *bool `json:"setUpChrony,omitempty"`
+	// Transient property - only present in mutate API request
+	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
+	// Transient property - only present in mutate API request
 	SshPort *int32 `json:"sshPort,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
+	// Transient property - only present in mutate API request
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshUser instead
+	// Transient property - only present in mutate API request
 	SshUser *string `json:"sshUser,omitempty"`
 	// Provider uuid
 	Uuid *string `json:"uuid,omitempty"`
-	// Provider version
-	Version *int64 `json:"version,omitempty"`
 }
 
 // NewProvider instantiates a new Provider object
@@ -130,38 +140,6 @@ func (o *Provider) SetAirGapInstall(v bool) {
 	o.AirGapInstall = &v
 }
 
-// GetAllAccessKeys returns the AllAccessKeys field value if set, zero value otherwise.
-func (o *Provider) GetAllAccessKeys() []AccessKey {
-	if o == nil || o.AllAccessKeys == nil {
-		var ret []AccessKey
-		return ret
-	}
-	return *o.AllAccessKeys
-}
-
-// GetAllAccessKeysOk returns a tuple with the AllAccessKeys field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetAllAccessKeysOk() (*[]AccessKey, bool) {
-	if o == nil || o.AllAccessKeys == nil {
-		return nil, false
-	}
-	return o.AllAccessKeys, true
-}
-
-// HasAllAccessKeys returns a boolean if a field has been set.
-func (o *Provider) HasAllAccessKeys() bool {
-	if o != nil && o.AllAccessKeys != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAllAccessKeys gets a reference to the given []AccessKey and assigns it to the AllAccessKeys field.
-func (o *Provider) SetAllAccessKeys(v []AccessKey) {
-	o.AllAccessKeys = &v
-}
-
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *Provider) GetCode() string {
 	if o == nil || o.Code == nil {
@@ -224,6 +202,38 @@ func (o *Provider) HasConfig() bool {
 // SetConfig gets a reference to the given map[string]string and assigns it to the Config field.
 func (o *Provider) SetConfig(v map[string]string) {
 	o.Config = &v
+}
+
+// GetCustomHostCidrs returns the CustomHostCidrs field value if set, zero value otherwise.
+func (o *Provider) GetCustomHostCidrs() []string {
+	if o == nil || o.CustomHostCidrs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.CustomHostCidrs
+}
+
+// GetCustomHostCidrsOk returns a tuple with the CustomHostCidrs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetCustomHostCidrsOk() (*[]string, bool) {
+	if o == nil || o.CustomHostCidrs == nil {
+		return nil, false
+	}
+	return o.CustomHostCidrs, true
+}
+
+// HasCustomHostCidrs returns a boolean if a field has been set.
+func (o *Provider) HasCustomHostCidrs() bool {
+	if o != nil && o.CustomHostCidrs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomHostCidrs gets a reference to the given []string and assigns it to the CustomHostCidrs field.
+func (o *Provider) SetCustomHostCidrs(v []string) {
+	o.CustomHostCidrs = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -290,38 +300,6 @@ func (o *Provider) SetDestVpcId(v string) {
 	o.DestVpcId = &v
 }
 
-// GetDetails returns the Details field value if set, zero value otherwise.
-func (o *Provider) GetDetails() ProviderDetails {
-	if o == nil || o.Details == nil {
-		var ret ProviderDetails
-		return ret
-	}
-	return *o.Details
-}
-
-// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetDetailsOk() (*ProviderDetails, bool) {
-	if o == nil || o.Details == nil {
-		return nil, false
-	}
-	return o.Details, true
-}
-
-// HasDetails returns a boolean if a field has been set.
-func (o *Provider) HasDetails() bool {
-	if o != nil && o.Details != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDetails gets a reference to the given ProviderDetails and assigns it to the Details field.
-func (o *Provider) SetDetails(v ProviderDetails) {
-	o.Details = &v
-}
-
 // GetHostVpcId returns the HostVpcId field value if set, zero value otherwise.
 func (o *Provider) GetHostVpcId() string {
 	if o == nil || o.HostVpcId == nil {
@@ -384,6 +362,70 @@ func (o *Provider) HasHostVpcRegion() bool {
 // SetHostVpcRegion gets a reference to the given string and assigns it to the HostVpcRegion field.
 func (o *Provider) SetHostVpcRegion(v string) {
 	o.HostVpcRegion = &v
+}
+
+// GetHostedZoneId returns the HostedZoneId field value if set, zero value otherwise.
+func (o *Provider) GetHostedZoneId() string {
+	if o == nil || o.HostedZoneId == nil {
+		var ret string
+		return ret
+	}
+	return *o.HostedZoneId
+}
+
+// GetHostedZoneIdOk returns a tuple with the HostedZoneId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetHostedZoneIdOk() (*string, bool) {
+	if o == nil || o.HostedZoneId == nil {
+		return nil, false
+	}
+	return o.HostedZoneId, true
+}
+
+// HasHostedZoneId returns a boolean if a field has been set.
+func (o *Provider) HasHostedZoneId() bool {
+	if o != nil && o.HostedZoneId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostedZoneId gets a reference to the given string and assigns it to the HostedZoneId field.
+func (o *Provider) SetHostedZoneId(v string) {
+	o.HostedZoneId = &v
+}
+
+// GetHostedZoneName returns the HostedZoneName field value if set, zero value otherwise.
+func (o *Provider) GetHostedZoneName() string {
+	if o == nil || o.HostedZoneName == nil {
+		var ret string
+		return ret
+	}
+	return *o.HostedZoneName
+}
+
+// GetHostedZoneNameOk returns a tuple with the HostedZoneName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetHostedZoneNameOk() (*string, bool) {
+	if o == nil || o.HostedZoneName == nil {
+		return nil, false
+	}
+	return o.HostedZoneName, true
+}
+
+// HasHostedZoneName returns a boolean if a field has been set.
+func (o *Provider) HasHostedZoneName() bool {
+	if o != nil && o.HostedZoneName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostedZoneName gets a reference to the given string and assigns it to the HostedZoneName field.
+func (o *Provider) SetHostedZoneName(v string) {
+	o.HostedZoneName = &v
 }
 
 // GetKeyPairName returns the KeyPairName field value if set, zero value otherwise.
@@ -450,6 +492,70 @@ func (o *Provider) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNtpServers returns the NtpServers field value if set, zero value otherwise.
+func (o *Provider) GetNtpServers() []string {
+	if o == nil || o.NtpServers == nil {
+		var ret []string
+		return ret
+	}
+	return *o.NtpServers
+}
+
+// GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetNtpServersOk() (*[]string, bool) {
+	if o == nil || o.NtpServers == nil {
+		return nil, false
+	}
+	return o.NtpServers, true
+}
+
+// HasNtpServers returns a boolean if a field has been set.
+func (o *Provider) HasNtpServers() bool {
+	if o != nil && o.NtpServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
+func (o *Provider) SetNtpServers(v []string) {
+	o.NtpServers = &v
+}
+
+// GetOverrideKeyValidate returns the OverrideKeyValidate field value if set, zero value otherwise.
+func (o *Provider) GetOverrideKeyValidate() bool {
+	if o == nil || o.OverrideKeyValidate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OverrideKeyValidate
+}
+
+// GetOverrideKeyValidateOk returns a tuple with the OverrideKeyValidate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetOverrideKeyValidateOk() (*bool, bool) {
+	if o == nil || o.OverrideKeyValidate == nil {
+		return nil, false
+	}
+	return o.OverrideKeyValidate, true
+}
+
+// HasOverrideKeyValidate returns a boolean if a field has been set.
+func (o *Provider) HasOverrideKeyValidate() bool {
+	if o != nil && o.OverrideKeyValidate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOverrideKeyValidate gets a reference to the given bool and assigns it to the OverrideKeyValidate field.
+func (o *Provider) SetOverrideKeyValidate(v bool) {
+	o.OverrideKeyValidate = &v
+}
+
 // GetRegions returns the Regions field value
 func (o *Provider) GetRegions() []Region {
 	if o == nil  {
@@ -472,6 +578,70 @@ func (o *Provider) GetRegionsOk() (*[]Region, bool) {
 // SetRegions sets field value
 func (o *Provider) SetRegions(v []Region) {
 	o.Regions = v
+}
+
+// GetSetUpChrony returns the SetUpChrony field value if set, zero value otherwise.
+func (o *Provider) GetSetUpChrony() bool {
+	if o == nil || o.SetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SetUpChrony
+}
+
+// GetSetUpChronyOk returns a tuple with the SetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.SetUpChrony == nil {
+		return nil, false
+	}
+	return o.SetUpChrony, true
+}
+
+// HasSetUpChrony returns a boolean if a field has been set.
+func (o *Provider) HasSetUpChrony() bool {
+	if o != nil && o.SetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSetUpChrony gets a reference to the given bool and assigns it to the SetUpChrony field.
+func (o *Provider) SetSetUpChrony(v bool) {
+	o.SetUpChrony = &v
+}
+
+// GetShowSetUpChrony returns the ShowSetUpChrony field value if set, zero value otherwise.
+func (o *Provider) GetShowSetUpChrony() bool {
+	if o == nil || o.ShowSetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ShowSetUpChrony
+}
+
+// GetShowSetUpChronyOk returns a tuple with the ShowSetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetShowSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.ShowSetUpChrony == nil {
+		return nil, false
+	}
+	return o.ShowSetUpChrony, true
+}
+
+// HasShowSetUpChrony returns a boolean if a field has been set.
+func (o *Provider) HasShowSetUpChrony() bool {
+	if o != nil && o.ShowSetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetShowSetUpChrony gets a reference to the given bool and assigns it to the ShowSetUpChrony field.
+func (o *Provider) SetShowSetUpChrony(v bool) {
+	o.ShowSetUpChrony = &v
 }
 
 // GetSshPort returns the SshPort field value if set, zero value otherwise.
@@ -602,38 +772,6 @@ func (o *Provider) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *Provider) GetVersion() int64 {
-	if o == nil || o.Version == nil {
-		var ret int64
-		return ret
-	}
-	return *o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Provider) GetVersionOk() (*int64, bool) {
-	if o == nil || o.Version == nil {
-		return nil, false
-	}
-	return o.Version, true
-}
-
-// HasVersion returns a boolean if a field has been set.
-func (o *Provider) HasVersion() bool {
-	if o != nil && o.Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given int64 and assigns it to the Version field.
-func (o *Provider) SetVersion(v int64) {
-	o.Version = &v
-}
-
 func (o Provider) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Active != nil {
@@ -642,14 +780,14 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.AirGapInstall != nil {
 		toSerialize["airGapInstall"] = o.AirGapInstall
 	}
-	if o.AllAccessKeys != nil {
-		toSerialize["allAccessKeys"] = o.AllAccessKeys
-	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
 	if o.Config != nil {
 		toSerialize["config"] = o.Config
+	}
+	if o.CustomHostCidrs != nil {
+		toSerialize["customHostCidrs"] = o.CustomHostCidrs
 	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
@@ -657,14 +795,17 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.DestVpcId != nil {
 		toSerialize["destVpcId"] = o.DestVpcId
 	}
-	if o.Details != nil {
-		toSerialize["details"] = o.Details
-	}
 	if o.HostVpcId != nil {
 		toSerialize["hostVpcId"] = o.HostVpcId
 	}
 	if o.HostVpcRegion != nil {
 		toSerialize["hostVpcRegion"] = o.HostVpcRegion
+	}
+	if o.HostedZoneId != nil {
+		toSerialize["hostedZoneId"] = o.HostedZoneId
+	}
+	if o.HostedZoneName != nil {
+		toSerialize["hostedZoneName"] = o.HostedZoneName
 	}
 	if o.KeyPairName != nil {
 		toSerialize["keyPairName"] = o.KeyPairName
@@ -672,8 +813,20 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.NtpServers != nil {
+		toSerialize["ntpServers"] = o.NtpServers
+	}
+	if o.OverrideKeyValidate != nil {
+		toSerialize["overrideKeyValidate"] = o.OverrideKeyValidate
+	}
 	if true {
 		toSerialize["regions"] = o.Regions
+	}
+	if o.SetUpChrony != nil {
+		toSerialize["setUpChrony"] = o.SetUpChrony
+	}
+	if o.ShowSetUpChrony != nil {
+		toSerialize["showSetUpChrony"] = o.ShowSetUpChrony
 	}
 	if o.SshPort != nil {
 		toSerialize["sshPort"] = o.SshPort
@@ -686,9 +839,6 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid
-	}
-	if o.Version != nil {
-		toSerialize["version"] = o.Version
 	}
 	return json.Marshal(toSerialize)
 }

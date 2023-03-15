@@ -32,21 +32,15 @@ type AccessKeysApiApiCreateAccesskeyRequest struct {
 	ApiService *AccessKeysApiService
 	cUUID string
 	pUUID string
-	accessKeyFormData *AccessKeyFormData
 }
 
-func (r AccessKeysApiApiCreateAccesskeyRequest) AccessKeyFormData(accessKeyFormData AccessKeyFormData) AccessKeysApiApiCreateAccesskeyRequest {
-	r.accessKeyFormData = &accessKeyFormData
-	return r
-}
 
 func (r AccessKeysApiApiCreateAccesskeyRequest) Execute() (AccessKey, *_nethttp.Response, error) {
 	return r.ApiService.CreateAccesskeyExecute(r)
 }
 
 /*
- * CreateAccesskey Create/Upload an access key for onprem Provider region
- * UNSTABLE - This API will undergo changes in future.
+ * CreateAccesskey Create an access key
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -87,12 +81,9 @@ func (a *AccessKeysApiService) CreateAccesskeyExecute(r AccessKeysApiApiCreateAc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.accessKeyFormData == nil {
-		return localVarReturnValue, nil, reportError("accessKeyFormData is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -108,8 +99,6 @@ func (a *AccessKeysApiService) CreateAccesskeyExecute(r AccessKeysApiApiCreateAc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.accessKeyFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -237,143 +226,6 @@ func (a *AccessKeysApiService) DeleteAccesskeyExecute(r AccessKeysApiApiDeleteAc
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type AccessKeysApiApiEditAccesskeyRequest struct {
-	ctx _context.Context
-	ApiService *AccessKeysApiService
-	cUUID string
-	pUUID string
-	keyCode string
-	accesskey *AccessKey
-}
-
-func (r AccessKeysApiApiEditAccesskeyRequest) Accesskey(accesskey AccessKey) AccessKeysApiApiEditAccesskeyRequest {
-	r.accesskey = &accesskey
-	return r
-}
-
-func (r AccessKeysApiApiEditAccesskeyRequest) Execute() (AccessKey, *_nethttp.Response, error) {
-	return r.ApiService.EditAccesskeyExecute(r)
-}
-
-/*
- * EditAccesskey Modify an access key
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param pUUID
- * @param keyCode
- * @return AccessKeysApiApiEditAccesskeyRequest
- */
-func (a *AccessKeysApiService) EditAccesskey(ctx _context.Context, cUUID string, pUUID string, keyCode string) AccessKeysApiApiEditAccesskeyRequest {
-	return AccessKeysApiApiEditAccesskeyRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		keyCode: keyCode,
-	}
-}
-
-/*
- * Execute executes the request
- * @return AccessKey
- */
-func (a *AccessKeysApiService) EditAccesskeyExecute(r AccessKeysApiApiEditAccesskeyRequest) (AccessKey, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPut
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AccessKey
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysApiService.EditAccesskey")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode}"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyCode"+"}", _neturl.PathEscape(parameterToString(r.keyCode, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.accesskey == nil {
-		return localVarReturnValue, nil, reportError("accesskey is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.accesskey
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -602,125 +454,6 @@ func (a *AccessKeysApiService) ListExecute(r AccessKeysApiApiListRequest) ([]Acc
 	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/access_keys"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type AccessKeysApiApiListAllForCustomerRequest struct {
-	ctx _context.Context
-	ApiService *AccessKeysApiService
-	cUUID string
-}
-
-
-func (r AccessKeysApiApiListAllForCustomerRequest) Execute() ([]AccessKey, *_nethttp.Response, error) {
-	return r.ApiService.ListAllForCustomerExecute(r)
-}
-
-/*
- * ListAllForCustomer List access keys for all providers of a customer
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @return AccessKeysApiApiListAllForCustomerRequest
- */
-func (a *AccessKeysApiService) ListAllForCustomer(ctx _context.Context, cUUID string) AccessKeysApiApiListAllForCustomerRequest {
-	return AccessKeysApiApiListAllForCustomerRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []AccessKey
- */
-func (a *AccessKeysApiService) ListAllForCustomerExecute(r AccessKeysApiApiListAllForCustomerRequest) ([]AccessKey, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []AccessKey
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysApiService.ListAllForCustomer")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/access_keys"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}

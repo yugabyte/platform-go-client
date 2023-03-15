@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpAuth** | Pointer to [**HTTPAuthInformation**](HTTP Auth information.md) |  | [optional] 
-**WebhookUrl** | **string** | Webhook URL | 
+**WebhookUrl** | **string** |  | 
 
 ## Methods
 
@@ -25,31 +24,6 @@ will change when the set of required properties is changed
 NewAlertChannelWebHookParamsAllOfWithDefaults instantiates a new AlertChannelWebHookParamsAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHttpAuth
-
-`func (o *AlertChannelWebHookParamsAllOf) GetHttpAuth() HTTPAuthInformation`
-
-GetHttpAuth returns the HttpAuth field if non-nil, zero value otherwise.
-
-### GetHttpAuthOk
-
-`func (o *AlertChannelWebHookParamsAllOf) GetHttpAuthOk() (*HTTPAuthInformation, bool)`
-
-GetHttpAuthOk returns a tuple with the HttpAuth field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpAuth
-
-`func (o *AlertChannelWebHookParamsAllOf) SetHttpAuth(v HTTPAuthInformation)`
-
-SetHttpAuth sets HttpAuth field to given value.
-
-### HasHttpAuth
-
-`func (o *AlertChannelWebHookParamsAllOf) HasHttpAuth() bool`
-
-HasHttpAuth returns a boolean if a field has been set.
 
 ### GetWebhookUrl
 

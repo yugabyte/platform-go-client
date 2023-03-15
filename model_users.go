@@ -17,7 +17,7 @@ import (
 
 // Users A user associated with a customer
 type Users struct {
-	// UI session token creation date
+	// API token creation date
 	AuthTokenIssueDate *time.Time `json:"authTokenIssueDate,omitempty"`
 	// User creation date
 	CreationDate *time.Time `json:"creationDate,omitempty"`

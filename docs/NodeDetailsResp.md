@@ -8,17 +8,15 @@ Name | Type | Description | Notes
 **AzUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 **CloudInfo** | Pointer to [**CloudSpecificInfo**](CloudSpecificInfo.md) |  | [optional] 
 **CronsActive** | Pointer to **bool** | True if cron jobs were properly configured for this node | [optional] 
-**DedicatedTo** | Pointer to **string** | Used for configurations where each node can have only one process | [optional] 
 **DisksAreMountedByUUID** | Pointer to **bool** | Disks are mounted by uuid | [optional] 
 **IsMaster** | Pointer to **bool** | True if this node is a master | [optional] 
 **IsRedisServer** | Pointer to **bool** | True if this node is a REDIS server | [optional] 
 **IsTserver** | Pointer to **bool** | True if this node is a Tablet server | [optional] 
 **IsYqlServer** | Pointer to **bool** | True if this node is a YCQL server | [optional] 
 **IsYsqlServer** | Pointer to **bool** | True if this node is a YSQL server | [optional] 
-**KubernetesOverrides** | **string** |  | 
 **MachineImage** | Pointer to **string** | Machine image name | [optional] 
 **MasterHttpPort** | Pointer to **int32** | Master HTTP port | [optional] 
-**MasterRpcPort** | Pointer to **int32** | Master RPC port | [optional] 
+**MasterRpcPort** | Pointer to **int32** | Master RCP port | [optional] 
 **MasterState** | Pointer to **string** | Master state | [optional] 
 **NodeExporterPort** | Pointer to **int32** | Node exporter port | [optional] 
 **NodeIdx** | Pointer to **int32** | Node ID | [optional] 
@@ -27,12 +25,9 @@ Name | Type | Description | Notes
 **PlacementUuid** | Pointer to **string** | UUID of the cluster to which this node belongs | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | REDIS HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | REDIS RPC port | [optional] 
-**SshUserOverride** | Pointer to **string** | SSH user override for the AMI | [optional] 
 **State** | Pointer to **string** | Node state | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
 **TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] 
-**YbControllerHttpPort** | Pointer to **int32** | Yb controller HTTP port | [optional] 
-**YbControllerRpcPort** | Pointer to **int32** | Yb controller RPC port | [optional] 
 **YbPrebuiltAmi** | Pointer to **bool** | True if this a custom YB AMI | [optional] 
 **YqlServerHttpPort** | Pointer to **int32** | YCQL HTTP port | [optional] 
 **YqlServerRpcPort** | Pointer to **int32** | YCQL RPC port | [optional] 
@@ -43,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewNodeDetailsResp
 
-`func NewNodeDetailsResp(kubernetesOverrides string, ) *NodeDetailsResp`
+`func NewNodeDetailsResp() *NodeDetailsResp`
 
 NewNodeDetailsResp instantiates a new NodeDetailsResp object
 This constructor will assign default values to properties that have it defined,
@@ -157,31 +152,6 @@ SetCronsActive sets CronsActive field to given value.
 `func (o *NodeDetailsResp) HasCronsActive() bool`
 
 HasCronsActive returns a boolean if a field has been set.
-
-### GetDedicatedTo
-
-`func (o *NodeDetailsResp) GetDedicatedTo() string`
-
-GetDedicatedTo returns the DedicatedTo field if non-nil, zero value otherwise.
-
-### GetDedicatedToOk
-
-`func (o *NodeDetailsResp) GetDedicatedToOk() (*string, bool)`
-
-GetDedicatedToOk returns a tuple with the DedicatedTo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDedicatedTo
-
-`func (o *NodeDetailsResp) SetDedicatedTo(v string)`
-
-SetDedicatedTo sets DedicatedTo field to given value.
-
-### HasDedicatedTo
-
-`func (o *NodeDetailsResp) HasDedicatedTo() bool`
-
-HasDedicatedTo returns a boolean if a field has been set.
 
 ### GetDisksAreMountedByUUID
 
@@ -332,26 +302,6 @@ SetIsYsqlServer sets IsYsqlServer field to given value.
 `func (o *NodeDetailsResp) HasIsYsqlServer() bool`
 
 HasIsYsqlServer returns a boolean if a field has been set.
-
-### GetKubernetesOverrides
-
-`func (o *NodeDetailsResp) GetKubernetesOverrides() string`
-
-GetKubernetesOverrides returns the KubernetesOverrides field if non-nil, zero value otherwise.
-
-### GetKubernetesOverridesOk
-
-`func (o *NodeDetailsResp) GetKubernetesOverridesOk() (*string, bool)`
-
-GetKubernetesOverridesOk returns a tuple with the KubernetesOverrides field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetKubernetesOverrides
-
-`func (o *NodeDetailsResp) SetKubernetesOverrides(v string)`
-
-SetKubernetesOverrides sets KubernetesOverrides field to given value.
-
 
 ### GetMachineImage
 
@@ -628,31 +578,6 @@ SetRedisServerRpcPort sets RedisServerRpcPort field to given value.
 
 HasRedisServerRpcPort returns a boolean if a field has been set.
 
-### GetSshUserOverride
-
-`func (o *NodeDetailsResp) GetSshUserOverride() string`
-
-GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
-
-### GetSshUserOverrideOk
-
-`func (o *NodeDetailsResp) GetSshUserOverrideOk() (*string, bool)`
-
-GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSshUserOverride
-
-`func (o *NodeDetailsResp) SetSshUserOverride(v string)`
-
-SetSshUserOverride sets SshUserOverride field to given value.
-
-### HasSshUserOverride
-
-`func (o *NodeDetailsResp) HasSshUserOverride() bool`
-
-HasSshUserOverride returns a boolean if a field has been set.
-
 ### GetState
 
 `func (o *NodeDetailsResp) GetState() string`
@@ -727,56 +652,6 @@ SetTserverRpcPort sets TserverRpcPort field to given value.
 `func (o *NodeDetailsResp) HasTserverRpcPort() bool`
 
 HasTserverRpcPort returns a boolean if a field has been set.
-
-### GetYbControllerHttpPort
-
-`func (o *NodeDetailsResp) GetYbControllerHttpPort() int32`
-
-GetYbControllerHttpPort returns the YbControllerHttpPort field if non-nil, zero value otherwise.
-
-### GetYbControllerHttpPortOk
-
-`func (o *NodeDetailsResp) GetYbControllerHttpPortOk() (*int32, bool)`
-
-GetYbControllerHttpPortOk returns a tuple with the YbControllerHttpPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbControllerHttpPort
-
-`func (o *NodeDetailsResp) SetYbControllerHttpPort(v int32)`
-
-SetYbControllerHttpPort sets YbControllerHttpPort field to given value.
-
-### HasYbControllerHttpPort
-
-`func (o *NodeDetailsResp) HasYbControllerHttpPort() bool`
-
-HasYbControllerHttpPort returns a boolean if a field has been set.
-
-### GetYbControllerRpcPort
-
-`func (o *NodeDetailsResp) GetYbControllerRpcPort() int32`
-
-GetYbControllerRpcPort returns the YbControllerRpcPort field if non-nil, zero value otherwise.
-
-### GetYbControllerRpcPortOk
-
-`func (o *NodeDetailsResp) GetYbControllerRpcPortOk() (*int32, bool)`
-
-GetYbControllerRpcPortOk returns a tuple with the YbControllerRpcPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbControllerRpcPort
-
-`func (o *NodeDetailsResp) SetYbControllerRpcPort(v int32)`
-
-SetYbControllerRpcPort sets YbControllerRpcPort field to given value.
-
-### HasYbControllerRpcPort
-
-`func (o *NodeDetailsResp) HasYbControllerRpcPort() bool`
-
-HasYbControllerRpcPort returns a boolean if a field has been set.
 
 ### GetYbPrebuiltAmi
 

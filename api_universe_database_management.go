@@ -32,13 +32,8 @@ type UniverseDatabaseManagementApiApiCreateUserInDBRequest struct {
 	ApiService *UniverseDatabaseManagementApiService
 	cUUID string
 	uniUUID string
-	databaseUserFormData *DatabaseUserFormData
 }
 
-func (r UniverseDatabaseManagementApiApiCreateUserInDBRequest) DatabaseUserFormData(databaseUserFormData DatabaseUserFormData) UniverseDatabaseManagementApiApiCreateUserInDBRequest {
-	r.databaseUserFormData = &databaseUserFormData
-	return r
-}
 
 func (r UniverseDatabaseManagementApiApiCreateUserInDBRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.CreateUserInDBExecute(r)
@@ -86,12 +81,9 @@ func (a *UniverseDatabaseManagementApiService) CreateUserInDBExecute(r UniverseD
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.databaseUserFormData == nil {
-		return localVarReturnValue, nil, reportError("databaseUserFormData is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -107,8 +99,130 @@ func (a *UniverseDatabaseManagementApiService) CreateUserInDBExecute(r UniverseD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.databaseUserFormData
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseDatabaseManagementApiApiRunInShellRequest struct {
+	ctx _context.Context
+	ApiService *UniverseDatabaseManagementApiService
+	cUUID string
+	uniUUID string
+}
+
+
+func (r UniverseDatabaseManagementApiApiRunInShellRequest) Execute() (YBPError, *_nethttp.Response, error) {
+	return r.ApiService.RunInShellExecute(r)
+}
+
+/*
+ * RunInShell Run a shell command
+ * This operation is no longer supported, for security reasons.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseDatabaseManagementApiApiRunInShellRequest
+ */
+func (a *UniverseDatabaseManagementApiService) RunInShell(ctx _context.Context, cUUID string, uniUUID string) UniverseDatabaseManagementApiApiRunInShellRequest {
+	return UniverseDatabaseManagementApiApiRunInShellRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPError
+ */
+func (a *UniverseDatabaseManagementApiService) RunInShellExecute(r UniverseDatabaseManagementApiApiRunInShellRequest) (YBPError, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPError
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementApiService.RunInShell")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/run_in_shell"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -299,13 +413,8 @@ type UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest struct {
 	ApiService *UniverseDatabaseManagementApiService
 	cUUID string
 	uniUUID string
-	databaseSecurityFormData *DatabaseSecurityFormData
 }
 
-func (r UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest) DatabaseSecurityFormData(databaseSecurityFormData DatabaseSecurityFormData) UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest {
-	r.databaseSecurityFormData = &databaseSecurityFormData
-	return r
-}
 
 func (r UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.SetDatabaseCredentialsExecute(r)
@@ -353,12 +462,9 @@ func (a *UniverseDatabaseManagementApiService) SetDatabaseCredentialsExecute(r U
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.databaseSecurityFormData == nil {
-		return localVarReturnValue, nil, reportError("databaseSecurityFormData is required and must be specified")
-	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -374,8 +480,6 @@ func (a *UniverseDatabaseManagementApiService) SetDatabaseCredentialsExecute(r U
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.databaseSecurityFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

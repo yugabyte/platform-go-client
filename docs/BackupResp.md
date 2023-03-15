@@ -5,28 +5,33 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupType** | **string** |  | 
-**Category** | **string** |  | 
-**CommonBackupInfo** | [**CommonBackupInfo**](CommonBackupInfo.md) |  | 
+**BackupUUID** | **string** |  | 
+**CompletionTime** | **time.Time** |  | 
+**CreateTime** | **time.Time** |  | 
 **CustomerUUID** | **string** |  | 
-**ExpiryTime** | Pointer to **time.Time** | The expiry time for backup. | [optional] 
-**FullChainSizeInBytes** | **int64** |  | 
-**HasIncrementalBackups** | **bool** |  | 
+**ExpiryTime** | **time.Time** |  | 
 **IsFullBackup** | **bool** |  | 
 **IsStorageConfigPresent** | **bool** |  | 
 **IsUniversePresent** | **bool** |  | 
-**LastBackupState** | **string** |  | 
-**LastIncrementalBackupTime** | Pointer to **time.Time** | Time for last incremenatal backup. | [optional] 
+**KmsConfigUUID** | **string** |  | 
 **OnDemand** | **bool** |  | 
+**ResponseList** | [**[]KeyspaceTablesList**](KeyspaceTablesList.md) |  | 
 **ScheduleUUID** | **string** |  | 
+**Sse** | **bool** |  | 
+**State** | **string** |  | 
 **StorageConfigType** | **string** |  | 
+**StorageConfigUUID** | **string** |  | 
+**TaskUUID** | **string** |  | 
+**TotalBackupSizeInBytes** | **int64** |  | 
 **UniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
+**UpdateTime** | **time.Time** |  | 
 
 ## Methods
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
+`func NewBackupResp(backupType string, backupUUID string, completionTime time.Time, createTime time.Time, customerUUID string, expiryTime time.Time, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, kmsConfigUUID string, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigType string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -61,44 +66,64 @@ and a boolean to check if the value has been set.
 SetBackupType sets BackupType field to given value.
 
 
-### GetCategory
+### GetBackupUUID
 
-`func (o *BackupResp) GetCategory() string`
+`func (o *BackupResp) GetBackupUUID() string`
 
-GetCategory returns the Category field if non-nil, zero value otherwise.
+GetBackupUUID returns the BackupUUID field if non-nil, zero value otherwise.
 
-### GetCategoryOk
+### GetBackupUUIDOk
 
-`func (o *BackupResp) GetCategoryOk() (*string, bool)`
+`func (o *BackupResp) GetBackupUUIDOk() (*string, bool)`
 
-GetCategoryOk returns a tuple with the Category field if it's non-nil, zero value otherwise
+GetBackupUUIDOk returns a tuple with the BackupUUID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCategory
+### SetBackupUUID
 
-`func (o *BackupResp) SetCategory(v string)`
+`func (o *BackupResp) SetBackupUUID(v string)`
 
-SetCategory sets Category field to given value.
+SetBackupUUID sets BackupUUID field to given value.
 
 
-### GetCommonBackupInfo
+### GetCompletionTime
 
-`func (o *BackupResp) GetCommonBackupInfo() CommonBackupInfo`
+`func (o *BackupResp) GetCompletionTime() time.Time`
 
-GetCommonBackupInfo returns the CommonBackupInfo field if non-nil, zero value otherwise.
+GetCompletionTime returns the CompletionTime field if non-nil, zero value otherwise.
 
-### GetCommonBackupInfoOk
+### GetCompletionTimeOk
 
-`func (o *BackupResp) GetCommonBackupInfoOk() (*CommonBackupInfo, bool)`
+`func (o *BackupResp) GetCompletionTimeOk() (*time.Time, bool)`
 
-GetCommonBackupInfoOk returns a tuple with the CommonBackupInfo field if it's non-nil, zero value otherwise
+GetCompletionTimeOk returns a tuple with the CompletionTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCommonBackupInfo
+### SetCompletionTime
 
-`func (o *BackupResp) SetCommonBackupInfo(v CommonBackupInfo)`
+`func (o *BackupResp) SetCompletionTime(v time.Time)`
 
-SetCommonBackupInfo sets CommonBackupInfo field to given value.
+SetCompletionTime sets CompletionTime field to given value.
+
+
+### GetCreateTime
+
+`func (o *BackupResp) GetCreateTime() time.Time`
+
+GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
+
+### GetCreateTimeOk
+
+`func (o *BackupResp) GetCreateTimeOk() (*time.Time, bool)`
+
+GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreateTime
+
+`func (o *BackupResp) SetCreateTime(v time.Time)`
+
+SetCreateTime sets CreateTime field to given value.
 
 
 ### GetCustomerUUID
@@ -139,51 +164,6 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetExpiryTime(v time.Time)`
 
 SetExpiryTime sets ExpiryTime field to given value.
-
-### HasExpiryTime
-
-`func (o *BackupResp) HasExpiryTime() bool`
-
-HasExpiryTime returns a boolean if a field has been set.
-
-### GetFullChainSizeInBytes
-
-`func (o *BackupResp) GetFullChainSizeInBytes() int64`
-
-GetFullChainSizeInBytes returns the FullChainSizeInBytes field if non-nil, zero value otherwise.
-
-### GetFullChainSizeInBytesOk
-
-`func (o *BackupResp) GetFullChainSizeInBytesOk() (*int64, bool)`
-
-GetFullChainSizeInBytesOk returns a tuple with the FullChainSizeInBytes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFullChainSizeInBytes
-
-`func (o *BackupResp) SetFullChainSizeInBytes(v int64)`
-
-SetFullChainSizeInBytes sets FullChainSizeInBytes field to given value.
-
-
-### GetHasIncrementalBackups
-
-`func (o *BackupResp) GetHasIncrementalBackups() bool`
-
-GetHasIncrementalBackups returns the HasIncrementalBackups field if non-nil, zero value otherwise.
-
-### GetHasIncrementalBackupsOk
-
-`func (o *BackupResp) GetHasIncrementalBackupsOk() (*bool, bool)`
-
-GetHasIncrementalBackupsOk returns a tuple with the HasIncrementalBackups field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHasIncrementalBackups
-
-`func (o *BackupResp) SetHasIncrementalBackups(v bool)`
-
-SetHasIncrementalBackups sets HasIncrementalBackups field to given value.
 
 
 ### GetIsFullBackup
@@ -246,50 +226,25 @@ and a boolean to check if the value has been set.
 SetIsUniversePresent sets IsUniversePresent field to given value.
 
 
-### GetLastBackupState
+### GetKmsConfigUUID
 
-`func (o *BackupResp) GetLastBackupState() string`
+`func (o *BackupResp) GetKmsConfigUUID() string`
 
-GetLastBackupState returns the LastBackupState field if non-nil, zero value otherwise.
+GetKmsConfigUUID returns the KmsConfigUUID field if non-nil, zero value otherwise.
 
-### GetLastBackupStateOk
+### GetKmsConfigUUIDOk
 
-`func (o *BackupResp) GetLastBackupStateOk() (*string, bool)`
+`func (o *BackupResp) GetKmsConfigUUIDOk() (*string, bool)`
 
-GetLastBackupStateOk returns a tuple with the LastBackupState field if it's non-nil, zero value otherwise
+GetKmsConfigUUIDOk returns a tuple with the KmsConfigUUID field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLastBackupState
+### SetKmsConfigUUID
 
-`func (o *BackupResp) SetLastBackupState(v string)`
+`func (o *BackupResp) SetKmsConfigUUID(v string)`
 
-SetLastBackupState sets LastBackupState field to given value.
+SetKmsConfigUUID sets KmsConfigUUID field to given value.
 
-
-### GetLastIncrementalBackupTime
-
-`func (o *BackupResp) GetLastIncrementalBackupTime() time.Time`
-
-GetLastIncrementalBackupTime returns the LastIncrementalBackupTime field if non-nil, zero value otherwise.
-
-### GetLastIncrementalBackupTimeOk
-
-`func (o *BackupResp) GetLastIncrementalBackupTimeOk() (*time.Time, bool)`
-
-GetLastIncrementalBackupTimeOk returns a tuple with the LastIncrementalBackupTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastIncrementalBackupTime
-
-`func (o *BackupResp) SetLastIncrementalBackupTime(v time.Time)`
-
-SetLastIncrementalBackupTime sets LastIncrementalBackupTime field to given value.
-
-### HasLastIncrementalBackupTime
-
-`func (o *BackupResp) HasLastIncrementalBackupTime() bool`
-
-HasLastIncrementalBackupTime returns a boolean if a field has been set.
 
 ### GetOnDemand
 
@@ -309,6 +264,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetOnDemand(v bool)`
 
 SetOnDemand sets OnDemand field to given value.
+
+
+### GetResponseList
+
+`func (o *BackupResp) GetResponseList() []KeyspaceTablesList`
+
+GetResponseList returns the ResponseList field if non-nil, zero value otherwise.
+
+### GetResponseListOk
+
+`func (o *BackupResp) GetResponseListOk() (*[]KeyspaceTablesList, bool)`
+
+GetResponseListOk returns a tuple with the ResponseList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseList
+
+`func (o *BackupResp) SetResponseList(v []KeyspaceTablesList)`
+
+SetResponseList sets ResponseList field to given value.
 
 
 ### GetScheduleUUID
@@ -331,6 +306,46 @@ and a boolean to check if the value has been set.
 SetScheduleUUID sets ScheduleUUID field to given value.
 
 
+### GetSse
+
+`func (o *BackupResp) GetSse() bool`
+
+GetSse returns the Sse field if non-nil, zero value otherwise.
+
+### GetSseOk
+
+`func (o *BackupResp) GetSseOk() (*bool, bool)`
+
+GetSseOk returns a tuple with the Sse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSse
+
+`func (o *BackupResp) SetSse(v bool)`
+
+SetSse sets Sse field to given value.
+
+
+### GetState
+
+`func (o *BackupResp) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *BackupResp) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *BackupResp) SetState(v string)`
+
+SetState sets State field to given value.
+
+
 ### GetStorageConfigType
 
 `func (o *BackupResp) GetStorageConfigType() string`
@@ -349,6 +364,66 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetStorageConfigType(v string)`
 
 SetStorageConfigType sets StorageConfigType field to given value.
+
+
+### GetStorageConfigUUID
+
+`func (o *BackupResp) GetStorageConfigUUID() string`
+
+GetStorageConfigUUID returns the StorageConfigUUID field if non-nil, zero value otherwise.
+
+### GetStorageConfigUUIDOk
+
+`func (o *BackupResp) GetStorageConfigUUIDOk() (*string, bool)`
+
+GetStorageConfigUUIDOk returns a tuple with the StorageConfigUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageConfigUUID
+
+`func (o *BackupResp) SetStorageConfigUUID(v string)`
+
+SetStorageConfigUUID sets StorageConfigUUID field to given value.
+
+
+### GetTaskUUID
+
+`func (o *BackupResp) GetTaskUUID() string`
+
+GetTaskUUID returns the TaskUUID field if non-nil, zero value otherwise.
+
+### GetTaskUUIDOk
+
+`func (o *BackupResp) GetTaskUUIDOk() (*string, bool)`
+
+GetTaskUUIDOk returns a tuple with the TaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskUUID
+
+`func (o *BackupResp) SetTaskUUID(v string)`
+
+SetTaskUUID sets TaskUUID field to given value.
+
+
+### GetTotalBackupSizeInBytes
+
+`func (o *BackupResp) GetTotalBackupSizeInBytes() int64`
+
+GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field if non-nil, zero value otherwise.
+
+### GetTotalBackupSizeInBytesOk
+
+`func (o *BackupResp) GetTotalBackupSizeInBytesOk() (*int64, bool)`
+
+GetTotalBackupSizeInBytesOk returns a tuple with the TotalBackupSizeInBytes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalBackupSizeInBytes
+
+`func (o *BackupResp) SetTotalBackupSizeInBytes(v int64)`
+
+SetTotalBackupSizeInBytes sets TotalBackupSizeInBytes field to given value.
 
 
 ### GetUniverseName
@@ -389,6 +464,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetUniverseUUID(v string)`
 
 SetUniverseUUID sets UniverseUUID field to given value.
+
+
+### GetUpdateTime
+
+`func (o *BackupResp) GetUpdateTime() time.Time`
+
+GetUpdateTime returns the UpdateTime field if non-nil, zero value otherwise.
+
+### GetUpdateTimeOk
+
+`func (o *BackupResp) GetUpdateTimeOk() (*time.Time, bool)`
+
+GetUpdateTimeOk returns a tuple with the UpdateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateTime
+
+`func (o *BackupResp) SetUpdateTime(v time.Time)`
+
+SetUpdateTime sets UpdateTime field to given value.
 
 
 

@@ -36,10 +36,7 @@ type Audit struct {
 	TargetID *string `json:"targetID,omitempty"`
 	// Task UUID
 	TaskUUID *string `json:"taskUUID,omitempty"`
-	// The task creation time.
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	// User IP Address
-	UserAddress *string `json:"userAddress,omitempty"`
+	Timestamp time.Time `json:"timestamp"`
 	// User Email
 	UserEmail *string `json:"userEmail,omitempty"`
 	// User UUID
@@ -50,9 +47,10 @@ type Audit struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudit(auditID int64, ) *Audit {
+func NewAudit(auditID int64, timestamp time.Time, ) *Audit {
 	this := Audit{}
 	this.AuditID = auditID
+	this.Timestamp = timestamp
 	return &this
 }
 
@@ -376,68 +374,28 @@ func (o *Audit) SetTaskUUID(v string) {
 	o.TaskUUID = &v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+// GetTimestamp returns the Timestamp field value
 func (o *Audit) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
+	if o == nil  {
 		var ret time.Time
 		return ret
 	}
-	return *o.Timestamp
+
+	return o.Timestamp
 }
 
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// GetTimestampOk returns a tuple with the Timestamp field value
 // and a boolean to check if the value has been set.
 func (o *Audit) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Timestamp, true
+	return &o.Timestamp, true
 }
 
-// HasTimestamp returns a boolean if a field has been set.
-func (o *Audit) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+// SetTimestamp sets field value
 func (o *Audit) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
-}
-
-// GetUserAddress returns the UserAddress field value if set, zero value otherwise.
-func (o *Audit) GetUserAddress() string {
-	if o == nil || o.UserAddress == nil {
-		var ret string
-		return ret
-	}
-	return *o.UserAddress
-}
-
-// GetUserAddressOk returns a tuple with the UserAddress field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Audit) GetUserAddressOk() (*string, bool) {
-	if o == nil || o.UserAddress == nil {
-		return nil, false
-	}
-	return o.UserAddress, true
-}
-
-// HasUserAddress returns a boolean if a field has been set.
-func (o *Audit) HasUserAddress() bool {
-	if o != nil && o.UserAddress != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUserAddress gets a reference to the given string and assigns it to the UserAddress field.
-func (o *Audit) SetUserAddress(v string) {
-	o.UserAddress = &v
+	o.Timestamp = v
 }
 
 // GetUserEmail returns the UserEmail field value if set, zero value otherwise.
@@ -536,11 +494,8 @@ func (o Audit) MarshalJSON() ([]byte, error) {
 	if o.TaskUUID != nil {
 		toSerialize["taskUUID"] = o.TaskUUID
 	}
-	if o.Timestamp != nil {
+	if true {
 		toSerialize["timestamp"] = o.Timestamp
-	}
-	if o.UserAddress != nil {
-		toSerialize["userAddress"] = o.UserAddress
 	}
 	if o.UserEmail != nil {
 		toSerialize["userEmail"] = o.UserEmail

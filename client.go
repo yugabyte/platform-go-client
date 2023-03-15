@@ -76,10 +76,6 @@ type APIClient struct {
 
 	InstanceTypesApi *InstanceTypesApiService
 
-	KubernetesOverridesControllerApi *KubernetesOverridesControllerApiService
-
-	LicenseManagementApi *LicenseManagementApiService
-
 	LoggingConfigApi *LoggingConfigApiService
 
 	MaintenanceWindowsApi *MaintenanceWindowsApiService
@@ -87,12 +83,6 @@ type APIClient struct {
 	MetricsApi *MetricsApiService
 
 	NodeInstancesApi *NodeInstancesApiService
-
-	PITRManagementApi *PITRManagementApiService
-
-	PackagesControllerApi *PackagesControllerApiService
-
-	PerformanceAdvisorApi *PerformanceAdvisorApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -122,13 +112,9 @@ type APIClient struct {
 
 	UniverseNodeMetadataMetamasterApi *UniverseNodeMetadataMetamasterApiService
 
-	UniversePerformanceSuggestionsApi *UniversePerformanceSuggestionsApiService
-
 	UniverseUpgradesManagementApi *UniverseUpgradesManagementApiService
 
 	UserManagementApi *UserManagementApiService
-
-	YbcManagementApi *YbcManagementApiService
 }
 
 type service struct {
@@ -161,15 +147,10 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
-	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)
-	c.LicenseManagementApi = (*LicenseManagementApiService)(&c.common)
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
-	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
-	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
-	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)
@@ -184,10 +165,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniverseInformationApi = (*UniverseInformationApiService)(&c.common)
 	c.UniverseManagementApi = (*UniverseManagementApiService)(&c.common)
 	c.UniverseNodeMetadataMetamasterApi = (*UniverseNodeMetadataMetamasterApiService)(&c.common)
-	c.UniversePerformanceSuggestionsApi = (*UniversePerformanceSuggestionsApiService)(&c.common)
 	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
-	c.YbcManagementApi = (*YbcManagementApiService)(&c.common)
 
 	return c
 }

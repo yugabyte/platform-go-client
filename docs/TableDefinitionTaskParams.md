@@ -8,19 +8,15 @@ Name | Type | Description | Notes
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TableDetails** | [**TableDetails**](TableDetails.md) |  | 
 **TableType** | **string** |  | 
@@ -28,14 +24,12 @@ Name | Type | Description | Notes
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewTableDefinitionTaskParams
 
-`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
+`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
 
 NewTableDefinitionTaskParams instantiates a new TableDefinitionTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -145,31 +139,6 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
-### GetEnableYbc
-
-`func (o *TableDefinitionTaskParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *TableDefinitionTaskParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *TableDefinitionTaskParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *TableDefinitionTaskParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
-
 ### GetEncryptionAtRestConfig
 
 `func (o *TableDefinitionTaskParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
@@ -270,30 +239,30 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
-### GetInstallYbc
+### GetFirstTry
 
-`func (o *TableDefinitionTaskParams) GetInstallYbc() bool`
+`func (o *TableDefinitionTaskParams) GetFirstTry() bool`
 
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
 
-### GetInstallYbcOk
+### GetFirstTryOk
 
-`func (o *TableDefinitionTaskParams) GetInstallYbcOk() (*bool, bool)`
+`func (o *TableDefinitionTaskParams) GetFirstTryOk() (*bool, bool)`
 
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInstallYbc
+### SetFirstTry
 
-`func (o *TableDefinitionTaskParams) SetInstallYbc(v bool)`
+`func (o *TableDefinitionTaskParams) SetFirstTry(v bool)`
 
-SetInstallYbc sets InstallYbc field to given value.
+SetFirstTry sets FirstTry field to given value.
 
-### HasInstallYbc
+### HasFirstTry
 
-`func (o *TableDefinitionTaskParams) HasInstallYbc() bool`
+`func (o *TableDefinitionTaskParams) HasFirstTry() bool`
 
-HasInstallYbc returns a boolean if a field has been set.
+HasFirstTry returns a boolean if a field has been set.
 
 ### GetNodeDetailsSet
 
@@ -365,26 +334,6 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
-### GetPlatformVersion
-
-`func (o *TableDefinitionTaskParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *TableDefinitionTaskParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *TableDefinitionTaskParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-
 ### GetPreviousTaskUUID
 
 `func (o *TableDefinitionTaskParams) GetPreviousTaskUUID() string`
@@ -409,46 +358,6 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *TableDefinitionTaskParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
-
-### GetSleepAfterMasterRestartMillis
-
-`func (o *TableDefinitionTaskParams) GetSleepAfterMasterRestartMillis() int32`
-
-GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
-
-### GetSleepAfterMasterRestartMillisOk
-
-`func (o *TableDefinitionTaskParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
-
-GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSleepAfterMasterRestartMillis
-
-`func (o *TableDefinitionTaskParams) SetSleepAfterMasterRestartMillis(v int32)`
-
-SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
-
-
-### GetSleepAfterTServerRestartMillis
-
-`func (o *TableDefinitionTaskParams) GetSleepAfterTServerRestartMillis() int32`
-
-GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field if non-nil, zero value otherwise.
-
-### GetSleepAfterTServerRestartMillisOk
-
-`func (o *TableDefinitionTaskParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool)`
-
-GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSleepAfterTServerRestartMillis
-
-`func (o *TableDefinitionTaskParams) SetSleepAfterTServerRestartMillis(v int32)`
-
-SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
-
 
 ### GetSourceXClusterConfigs
 
@@ -609,56 +518,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *TableDefinitionTaskParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *TableDefinitionTaskParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *TableDefinitionTaskParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *TableDefinitionTaskParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *TableDefinitionTaskParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *TableDefinitionTaskParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *TableDefinitionTaskParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *TableDefinitionTaskParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *TableDefinitionTaskParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

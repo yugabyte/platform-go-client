@@ -447,7 +447,7 @@ Name | Type | Description  | Notes
 
 ## HealthCheckUniverse
 
-> Details HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
+> map[string]interface{} HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
 
 Run a universe health check
 
@@ -476,7 +476,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.HealthCheckUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `HealthCheckUniverse`: Details
+    // response from `HealthCheckUniverse`: map[string]interface{}
     fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.HealthCheckUniverse`: %v\n", resp)
 }
 ```
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Details**](Details.md)
+**map[string]interface{}**
 
 ### Authorization
 

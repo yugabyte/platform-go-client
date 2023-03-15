@@ -11,31 +11,21 @@ Method | HTTP request | Description
 [**CreateAlertConfiguration**](AlertsApi.md#CreateAlertConfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
 [**CreateAlertDestination**](AlertsApi.md#CreateAlertDestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | Create an alert destination
 [**DeleteAlertChannel**](AlertsApi.md#DeleteAlertChannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
-[**DeleteAlertChannelTemplates**](AlertsApi.md#DeleteAlertChannelTemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Delete alert channel templates
 [**DeleteAlertConfiguration**](AlertsApi.md#DeleteAlertConfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
 [**DeleteAlertDestination**](AlertsApi.md#DeleteAlertDestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
-[**DeleteAlertTemplateSettings**](AlertsApi.md#DeleteAlertTemplateSettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings
-[**DeleteAlertTemplateVariables**](AlertsApi.md#DeleteAlertTemplateVariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | Delete an alert template variables
-[**EditAlertTemplateSettings**](AlertsApi.md#EditAlertTemplateSettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Crete or update alert template settings list
-[**EditAlertTemplateVariables**](AlertsApi.md#EditAlertTemplateVariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | Create or update alert template variables
 [**Get**](AlertsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
 [**GetAlertChannel**](AlertsApi.md#GetAlertChannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
-[**GetAlertChannelTemplates**](AlertsApi.md#GetAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Get alert channel templates
 [**GetAlertConfiguration**](AlertsApi.md#GetAlertConfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
 [**GetAlertDestination**](AlertsApi.md#GetAlertDestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Get an alert destination
 [**ListActive**](AlertsApi.md#ListActive) | **Get** /api/v1/customers/{cUUID}/alerts/active | List active alerts
-[**ListAlertChannelTemplates**](AlertsApi.md#ListAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | List all alert channel templates
 [**ListAlertChannels**](AlertsApi.md#ListAlertChannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
 [**ListAlertConfigurations**](AlertsApi.md#ListAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
 [**ListAlertDestinations**](AlertsApi.md#ListAlertDestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
-[**ListAlertTemplateSettings**](AlertsApi.md#ListAlertTemplateSettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings
-[**ListAlertTemplateVariables**](AlertsApi.md#ListAlertTemplateVariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | List alert template variables
 [**ListAlertTemplates**](AlertsApi.md#ListAlertTemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
 [**ListOfAlerts**](AlertsApi.md#ListOfAlerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
 [**PageAlertConfigurations**](AlertsApi.md#PageAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
 [**PageAlerts**](AlertsApi.md#PageAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | List alerts (paginated)
 [**SendTestAlert**](AlertsApi.md#SendTestAlert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration
-[**SetAlertChannelTemplates**](AlertsApi.md#SetAlertChannelTemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Set alert channel templates
 [**UpdateAlertChannel**](AlertsApi.md#UpdateAlertChannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Update an alert channel
 [**UpdateAlertConfiguration**](AlertsApi.md#UpdateAlertConfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Update an alert configuration
 [**UpdateAlertDestination**](AlertsApi.md#UpdateAlertDestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Update an alert destination
@@ -273,7 +263,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    createAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams()) // AlertChannelFormData | 
+    createAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams("TextTemplate_example", "TitleTemplate_example")) // AlertChannelFormData | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -535,77 +525,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteAlertChannelTemplates
-
-> YBPSuccess DeleteAlertChannelTemplates(ctx, cUUID, acType).Execute()
-
-Delete alert channel templates
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    acType := "acType_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertChannelTemplates(context.Background(), cUUID, acType).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertChannelTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteAlertChannelTemplates`: YBPSuccess
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.DeleteAlertChannelTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**acType** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteAlertChannelTemplatesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**YBPSuccess**](YBPSuccess.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteAlertConfiguration
 
 > YBPSuccess DeleteAlertConfiguration(ctx, cUUID, configurationUUID).Execute()
@@ -748,289 +667,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteAlertTemplateSettings
-
-> YBPSuccess DeleteAlertTemplateSettings(ctx, cUUID, settingsUUID).Execute()
-
-Delete an alert template settings
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    settingsUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateSettings(context.Background(), cUUID, settingsUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertTemplateSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteAlertTemplateSettings`: YBPSuccess
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.DeleteAlertTemplateSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**settingsUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteAlertTemplateSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**YBPSuccess**](YBPSuccess.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteAlertTemplateVariables
-
-> YBPSuccess DeleteAlertTemplateVariables(ctx, cUUID, variableUUID).Execute()
-
-Delete an alert template variables
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    variableUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateVariables(context.Background(), cUUID, variableUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertTemplateVariables``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteAlertTemplateVariables`: YBPSuccess
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.DeleteAlertTemplateVariables`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**variableUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteAlertTemplateVariablesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**YBPSuccess**](YBPSuccess.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## EditAlertTemplateSettings
-
-> []AlertTemplateSettings EditAlertTemplateSettings(ctx, cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Execute()
-
-Crete or update alert template settings list
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    editAlertTemplateSettingsRequest := *openapiclient.NewAlertTemplateSettingsFormData([]openapiclient.AlertTemplateSettings{*openapiclient.NewAlertTemplateSettings(time.Now(), "CustomerUUID_example", "Template_example", "Uuid_example")}) // AlertTemplateSettingsFormData | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.EditAlertTemplateSettings(context.Background(), cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.EditAlertTemplateSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EditAlertTemplateSettings`: []AlertTemplateSettings
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.EditAlertTemplateSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiEditAlertTemplateSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **editAlertTemplateSettingsRequest** | [**AlertTemplateSettingsFormData**](AlertTemplateSettingsFormData.md) |  | 
-
-### Return type
-
-[**[]AlertTemplateSettings**](AlertTemplateSettings.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## EditAlertTemplateVariables
-
-> []AlertTemplateVariable EditAlertTemplateVariables(ctx, cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Execute()
-
-Create or update alert template variables
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    editAlertTemplateVariablesRequest := *openapiclient.NewAlertTemplateVariablesFormData([]openapiclient.AlertTemplateVariable{*openapiclient.NewAlertTemplateVariable("CustomerUUID_example", "DefaultValue_example", "Name_example", []string{"PossibleValues_example"})}) // AlertTemplateVariablesFormData | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.EditAlertTemplateVariables(context.Background(), cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.EditAlertTemplateVariables``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EditAlertTemplateVariables`: []AlertTemplateVariable
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.EditAlertTemplateVariables`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiEditAlertTemplateVariablesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **editAlertTemplateVariablesRequest** | [**AlertTemplateVariablesFormData**](AlertTemplateVariablesFormData.md) |  | 
-
-### Return type
-
-[**[]AlertTemplateVariable**](AlertTemplateVariable.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## Get
 
 > Alert Get(ctx, cUUID, alertUUID).Execute()
@@ -1158,77 +794,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AlertChannel**](AlertChannel.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetAlertChannelTemplates
-
-> AlertChannelTemplatesExtWithDefaultValues GetAlertChannelTemplates(ctx, cUUID, acType).Execute()
-
-Get alert channel templates
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    acType := "acType_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.GetAlertChannelTemplates(context.Background(), cUUID, acType).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.GetAlertChannelTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAlertChannelTemplates`: AlertChannelTemplatesExtWithDefaultValues
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.GetAlertChannelTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**acType** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetAlertChannelTemplatesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**AlertChannelTemplatesExtWithDefaultValues**](Alert channel templates ext with default values.md)
 
 ### Authorization
 
@@ -1454,74 +1019,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListAlertChannelTemplates
-
-> []AlertChannelTemplatesExtWithDefaultValues ListAlertChannelTemplates(ctx, cUUID).Execute()
-
-List all alert channel templates
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.ListAlertChannelTemplates(context.Background(), cUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertChannelTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAlertChannelTemplates`: []AlertChannelTemplatesExtWithDefaultValues
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.ListAlertChannelTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAlertChannelTemplatesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]AlertChannelTemplatesExtWithDefaultValues**](Alert channel templates ext with default values.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ListAlertChannels
 
 > []AlertChannel ListAlertChannels(ctx, cUUID).Execute()
@@ -1713,142 +1210,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]AlertDefinition**](AlertDefinition.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAlertTemplateSettings
-
-> []AlertTemplateSettings ListAlertTemplateSettings(ctx, cUUID).Execute()
-
-Get alert template settings
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.ListAlertTemplateSettings(context.Background(), cUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertTemplateSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAlertTemplateSettings`: []AlertTemplateSettings
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.ListAlertTemplateSettings`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAlertTemplateSettingsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**[]AlertTemplateSettings**](AlertTemplateSettings.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListAlertTemplateVariables
-
-> AlertTemplateVariablesList ListAlertTemplateVariables(ctx, cUUID).Execute()
-
-List alert template variables
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.ListAlertTemplateVariables(context.Background(), cUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertTemplateVariables``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListAlertTemplateVariables`: AlertTemplateVariablesList
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.ListAlertTemplateVariables`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListAlertTemplateVariablesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**AlertTemplateVariablesList**](AlertTemplateVariablesList.md)
 
 ### Authorization
 
@@ -2213,79 +1574,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## SetAlertChannelTemplates
-
-> AlertChannelTemplates SetAlertChannelTemplates(ctx, cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Execute()
-
-Set alert channel templates
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    acType := "acType_example" // string | 
-    setAlertChannelTemplatesRequest := *openapiclient.NewAlertChannelTemplates("CustomerUUID_example", "TextTemplate_example", "Type_example") // AlertChannelTemplates | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.SetAlertChannelTemplates(context.Background(), cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.SetAlertChannelTemplates``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `SetAlertChannelTemplates`: AlertChannelTemplates
-    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.SetAlertChannelTemplates`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**acType** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSetAlertChannelTemplatesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **setAlertChannelTemplatesRequest** | [**AlertChannelTemplates**](AlertChannelTemplates.md) |  | 
-
-### Return type
-
-[**AlertChannelTemplates**](AlertChannelTemplates.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UpdateAlertChannel
 
 > AlertChannel UpdateAlertChannel(ctx, cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Execute()
@@ -2307,7 +1595,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     acUUID := TODO // string | 
-    updateAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams()) // AlertChannelFormData | 
+    updateAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams("TextTemplate_example", "TitleTemplate_example")) // AlertChannelFormData | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

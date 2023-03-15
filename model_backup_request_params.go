@@ -20,29 +20,19 @@ type BackupRequestParams struct {
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
-	BackupUUID string `json:"backupUUID"`
-	// UUID of the parent backup
-	BaseBackupUUID *string `json:"baseBackupUUID,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
 	CreatingUser Users `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
-	CurrentIdx int32 `json:"currentIdx"`
-	CurrentYbcTaskId string `json:"currentYbcTaskId"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	// Disable checksum
 	DisableChecksum *bool `json:"disableChecksum,omitempty"`
-	// Disable multipart upload
-	DisableMultipart *bool `json:"disableMultipart,omitempty"`
-	// Don't add -m flag during gsutil upload dir command
-	DisableParallelism *bool `json:"disableParallelism,omitempty"`
 	// Is verbose logging enabled
 	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
@@ -51,15 +41,12 @@ type BackupRequestParams struct {
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	// Whether this task has been tried before
+	FirstTry *bool `json:"firstTry,omitempty"`
 	// Time unit for user input schedule frequency
 	FrequencyTimeUnit *string `json:"frequencyTimeUnit,omitempty"`
 	// Should table backup errors be ignored
 	IgnoreErrors *bool `json:"ignoreErrors,omitempty"`
-	// Frequency of incremental backups
-	IncrementalBackupFrequency *int64 `json:"incrementalBackupFrequency,omitempty"`
-	// Time unit for user input incremental backup schedule frequency
-	IncrementalBackupFrequencyTimeUnit *string `json:"incrementalBackupFrequencyTimeUnit,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
 	// Backup info
 	KeyspaceTableList *[]KeyspaceTable `json:"keyspaceTableList,omitempty"`
 	// KMS configuration UUID
@@ -70,13 +57,10 @@ type BackupRequestParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	// Parallel DB backups
-	ParallelDBBackups *int32 `json:"parallelDBBackups,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
-	// Previous task UUID of a retry
+	// Previous task UUID only if this task is a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Schedule Name
 	ScheduleName *string `json:"scheduleName,omitempty"`
@@ -84,8 +68,6 @@ type BackupRequestParams struct {
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
 	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -102,24 +84,16 @@ type BackupRequestParams struct {
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewBackupRequestParams instantiates a new BackupRequestParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
+func NewBackupRequestParams(creatingUser Users, platformUrl string, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
 	this := BackupRequestParams{}
-	this.BackupUUID = backupUUID
 	this.CreatingUser = creatingUser
-	this.CurrentIdx = currentIdx
-	this.CurrentYbcTaskId = currentYbcTaskId
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
-	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
-	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
 	this.UniverseUUID = universeUUID
 	return &this
@@ -195,62 +169,6 @@ func (o *BackupRequestParams) HasBackupType() bool {
 // SetBackupType gets a reference to the given string and assigns it to the BackupType field.
 func (o *BackupRequestParams) SetBackupType(v string) {
 	o.BackupType = &v
-}
-
-// GetBackupUUID returns the BackupUUID field value
-func (o *BackupRequestParams) GetBackupUUID() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.BackupUUID
-}
-
-// GetBackupUUIDOk returns a tuple with the BackupUUID field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetBackupUUIDOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.BackupUUID, true
-}
-
-// SetBackupUUID sets field value
-func (o *BackupRequestParams) SetBackupUUID(v string) {
-	o.BackupUUID = v
-}
-
-// GetBaseBackupUUID returns the BaseBackupUUID field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetBaseBackupUUID() string {
-	if o == nil || o.BaseBackupUUID == nil {
-		var ret string
-		return ret
-	}
-	return *o.BaseBackupUUID
-}
-
-// GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetBaseBackupUUIDOk() (*string, bool) {
-	if o == nil || o.BaseBackupUUID == nil {
-		return nil, false
-	}
-	return o.BaseBackupUUID, true
-}
-
-// HasBaseBackupUUID returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasBaseBackupUUID() bool {
-	if o != nil && o.BaseBackupUUID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseBackupUUID gets a reference to the given string and assigns it to the BaseBackupUUID field.
-func (o *BackupRequestParams) SetBaseBackupUUID(v string) {
-	o.BaseBackupUUID = &v
 }
 
 // GetCmkArn returns the CmkArn field value if set, zero value otherwise.
@@ -373,54 +291,6 @@ func (o *BackupRequestParams) SetCronExpression(v string) {
 	o.CronExpression = &v
 }
 
-// GetCurrentIdx returns the CurrentIdx field value
-func (o *BackupRequestParams) GetCurrentIdx() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.CurrentIdx
-}
-
-// GetCurrentIdxOk returns a tuple with the CurrentIdx field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetCurrentIdxOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentIdx, true
-}
-
-// SetCurrentIdx sets field value
-func (o *BackupRequestParams) SetCurrentIdx(v int32) {
-	o.CurrentIdx = v
-}
-
-// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value
-func (o *BackupRequestParams) GetCurrentYbcTaskId() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.CurrentYbcTaskId
-}
-
-// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetCurrentYbcTaskIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentYbcTaskId, true
-}
-
-// SetCurrentYbcTaskId sets field value
-func (o *BackupRequestParams) SetCurrentYbcTaskId(v string) {
-	o.CurrentYbcTaskId = v
-}
-
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetCustomerUUID() string {
 	if o == nil || o.CustomerUUID == nil {
@@ -517,70 +387,6 @@ func (o *BackupRequestParams) SetDisableChecksum(v bool) {
 	o.DisableChecksum = &v
 }
 
-// GetDisableMultipart returns the DisableMultipart field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetDisableMultipart() bool {
-	if o == nil || o.DisableMultipart == nil {
-		var ret bool
-		return ret
-	}
-	return *o.DisableMultipart
-}
-
-// GetDisableMultipartOk returns a tuple with the DisableMultipart field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetDisableMultipartOk() (*bool, bool) {
-	if o == nil || o.DisableMultipart == nil {
-		return nil, false
-	}
-	return o.DisableMultipart, true
-}
-
-// HasDisableMultipart returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasDisableMultipart() bool {
-	if o != nil && o.DisableMultipart != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDisableMultipart gets a reference to the given bool and assigns it to the DisableMultipart field.
-func (o *BackupRequestParams) SetDisableMultipart(v bool) {
-	o.DisableMultipart = &v
-}
-
-// GetDisableParallelism returns the DisableParallelism field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetDisableParallelism() bool {
-	if o == nil || o.DisableParallelism == nil {
-		var ret bool
-		return ret
-	}
-	return *o.DisableParallelism
-}
-
-// GetDisableParallelismOk returns a tuple with the DisableParallelism field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetDisableParallelismOk() (*bool, bool) {
-	if o == nil || o.DisableParallelism == nil {
-		return nil, false
-	}
-	return o.DisableParallelism, true
-}
-
-// HasDisableParallelism returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasDisableParallelism() bool {
-	if o != nil && o.DisableParallelism != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDisableParallelism gets a reference to the given bool and assigns it to the DisableParallelism field.
-func (o *BackupRequestParams) SetDisableParallelism(v bool) {
-	o.DisableParallelism = &v
-}
-
 // GetEnableVerboseLogs returns the EnableVerboseLogs field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetEnableVerboseLogs() bool {
 	if o == nil || o.EnableVerboseLogs == nil {
@@ -611,38 +417,6 @@ func (o *BackupRequestParams) HasEnableVerboseLogs() bool {
 // SetEnableVerboseLogs gets a reference to the given bool and assigns it to the EnableVerboseLogs field.
 func (o *BackupRequestParams) SetEnableVerboseLogs(v bool) {
 	o.EnableVerboseLogs = &v
-}
-
-// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetEnableYbc() bool {
-	if o == nil || o.EnableYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.EnableYbc
-}
-
-// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetEnableYbcOk() (*bool, bool) {
-	if o == nil || o.EnableYbc == nil {
-		return nil, false
-	}
-	return o.EnableYbc, true
-}
-
-// HasEnableYbc returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasEnableYbc() bool {
-	if o != nil && o.EnableYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
-func (o *BackupRequestParams) SetEnableYbc(v bool) {
-	o.EnableYbc = &v
 }
 
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
@@ -805,6 +579,38 @@ func (o *BackupRequestParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
+// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetFirstTry() bool {
+	if o == nil || o.FirstTry == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FirstTry
+}
+
+// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetFirstTryOk() (*bool, bool) {
+	if o == nil || o.FirstTry == nil {
+		return nil, false
+	}
+	return o.FirstTry, true
+}
+
+// HasFirstTry returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasFirstTry() bool {
+	if o != nil && o.FirstTry != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
+func (o *BackupRequestParams) SetFirstTry(v bool) {
+	o.FirstTry = &v
+}
+
 // GetFrequencyTimeUnit returns the FrequencyTimeUnit field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetFrequencyTimeUnit() string {
 	if o == nil || o.FrequencyTimeUnit == nil {
@@ -867,102 +673,6 @@ func (o *BackupRequestParams) HasIgnoreErrors() bool {
 // SetIgnoreErrors gets a reference to the given bool and assigns it to the IgnoreErrors field.
 func (o *BackupRequestParams) SetIgnoreErrors(v bool) {
 	o.IgnoreErrors = &v
-}
-
-// GetIncrementalBackupFrequency returns the IncrementalBackupFrequency field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetIncrementalBackupFrequency() int64 {
-	if o == nil || o.IncrementalBackupFrequency == nil {
-		var ret int64
-		return ret
-	}
-	return *o.IncrementalBackupFrequency
-}
-
-// GetIncrementalBackupFrequencyOk returns a tuple with the IncrementalBackupFrequency field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetIncrementalBackupFrequencyOk() (*int64, bool) {
-	if o == nil || o.IncrementalBackupFrequency == nil {
-		return nil, false
-	}
-	return o.IncrementalBackupFrequency, true
-}
-
-// HasIncrementalBackupFrequency returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasIncrementalBackupFrequency() bool {
-	if o != nil && o.IncrementalBackupFrequency != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIncrementalBackupFrequency gets a reference to the given int64 and assigns it to the IncrementalBackupFrequency field.
-func (o *BackupRequestParams) SetIncrementalBackupFrequency(v int64) {
-	o.IncrementalBackupFrequency = &v
-}
-
-// GetIncrementalBackupFrequencyTimeUnit returns the IncrementalBackupFrequencyTimeUnit field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetIncrementalBackupFrequencyTimeUnit() string {
-	if o == nil || o.IncrementalBackupFrequencyTimeUnit == nil {
-		var ret string
-		return ret
-	}
-	return *o.IncrementalBackupFrequencyTimeUnit
-}
-
-// GetIncrementalBackupFrequencyTimeUnitOk returns a tuple with the IncrementalBackupFrequencyTimeUnit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetIncrementalBackupFrequencyTimeUnitOk() (*string, bool) {
-	if o == nil || o.IncrementalBackupFrequencyTimeUnit == nil {
-		return nil, false
-	}
-	return o.IncrementalBackupFrequencyTimeUnit, true
-}
-
-// HasIncrementalBackupFrequencyTimeUnit returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasIncrementalBackupFrequencyTimeUnit() bool {
-	if o != nil && o.IncrementalBackupFrequencyTimeUnit != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIncrementalBackupFrequencyTimeUnit gets a reference to the given string and assigns it to the IncrementalBackupFrequencyTimeUnit field.
-func (o *BackupRequestParams) SetIncrementalBackupFrequencyTimeUnit(v string) {
-	o.IncrementalBackupFrequencyTimeUnit = &v
-}
-
-// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetInstallYbc() bool {
-	if o == nil || o.InstallYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.InstallYbc
-}
-
-// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetInstallYbcOk() (*bool, bool) {
-	if o == nil || o.InstallYbc == nil {
-		return nil, false
-	}
-	return o.InstallYbc, true
-}
-
-// HasInstallYbc returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasInstallYbc() bool {
-	if o != nil && o.InstallYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
-func (o *BackupRequestParams) SetInstallYbc(v bool) {
-	o.InstallYbc = &v
 }
 
 // GetKeyspaceTableList returns the KeyspaceTableList field value if set, zero value otherwise.
@@ -1125,38 +835,6 @@ func (o *BackupRequestParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
-// GetParallelDBBackups returns the ParallelDBBackups field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetParallelDBBackups() int32 {
-	if o == nil || o.ParallelDBBackups == nil {
-		var ret int32
-		return ret
-	}
-	return *o.ParallelDBBackups
-}
-
-// GetParallelDBBackupsOk returns a tuple with the ParallelDBBackups field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetParallelDBBackupsOk() (*int32, bool) {
-	if o == nil || o.ParallelDBBackups == nil {
-		return nil, false
-	}
-	return o.ParallelDBBackups, true
-}
-
-// HasParallelDBBackups returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasParallelDBBackups() bool {
-	if o != nil && o.ParallelDBBackups != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetParallelDBBackups gets a reference to the given int32 and assigns it to the ParallelDBBackups field.
-func (o *BackupRequestParams) SetParallelDBBackups(v int32) {
-	o.ParallelDBBackups = &v
-}
-
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetParallelism() int32 {
 	if o == nil || o.Parallelism == nil {
@@ -1211,30 +889,6 @@ func (o *BackupRequestParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *BackupRequestParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value
-func (o *BackupRequestParams) GetPlatformVersion() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.PlatformVersion, true
-}
-
-// SetPlatformVersion sets field value
-func (o *BackupRequestParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1363,54 +1017,6 @@ func (o *BackupRequestParams) HasSchedulingFrequency() bool {
 // SetSchedulingFrequency gets a reference to the given int64 and assigns it to the SchedulingFrequency field.
 func (o *BackupRequestParams) SetSchedulingFrequency(v int64) {
 	o.SchedulingFrequency = &v
-}
-
-// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
-func (o *BackupRequestParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.SleepAfterMasterRestartMillis
-}
-
-// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SleepAfterMasterRestartMillis, true
-}
-
-// SetSleepAfterMasterRestartMillis sets field value
-func (o *BackupRequestParams) SetSleepAfterMasterRestartMillis(v int32) {
-	o.SleepAfterMasterRestartMillis = v
-}
-
-// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
-func (o *BackupRequestParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.SleepAfterTServerRestartMillis
-}
-
-// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SleepAfterTServerRestartMillis, true
-}
-
-// SetSleepAfterTServerRestartMillis sets field value
-func (o *BackupRequestParams) SetSleepAfterTServerRestartMillis(v int32) {
-	o.SleepAfterTServerRestartMillis = v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -1653,70 +1259,6 @@ func (o *BackupRequestParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
-// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetYbcInstalled() bool {
-	if o == nil || o.YbcInstalled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.YbcInstalled
-}
-
-// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetYbcInstalledOk() (*bool, bool) {
-	if o == nil || o.YbcInstalled == nil {
-		return nil, false
-	}
-	return o.YbcInstalled, true
-}
-
-// HasYbcInstalled returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasYbcInstalled() bool {
-	if o != nil && o.YbcInstalled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
-func (o *BackupRequestParams) SetYbcInstalled(v bool) {
-	o.YbcInstalled = &v
-}
-
-// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetYbcSoftwareVersion() string {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.YbcSoftwareVersion
-}
-
-// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetYbcSoftwareVersionOk() (*string, bool) {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		return nil, false
-	}
-	return o.YbcSoftwareVersion, true
-}
-
-// HasYbcSoftwareVersion returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasYbcSoftwareVersion() bool {
-	if o != nil && o.YbcSoftwareVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
-func (o *BackupRequestParams) SetYbcSoftwareVersion(v string) {
-	o.YbcSoftwareVersion = &v
-}
-
 func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AlterLoadBalancer != nil {
@@ -1724,12 +1266,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.BackupType != nil {
 		toSerialize["backupType"] = o.BackupType
-	}
-	if true {
-		toSerialize["backupUUID"] = o.BackupUUID
-	}
-	if o.BaseBackupUUID != nil {
-		toSerialize["baseBackupUUID"] = o.BaseBackupUUID
 	}
 	if o.CmkArn != nil {
 		toSerialize["cmkArn"] = o.CmkArn
@@ -1743,12 +1279,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
 	}
-	if true {
-		toSerialize["currentIdx"] = o.CurrentIdx
-	}
-	if true {
-		toSerialize["currentYbcTaskId"] = o.CurrentYbcTaskId
-	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
 	}
@@ -1758,17 +1288,8 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.DisableChecksum != nil {
 		toSerialize["disableChecksum"] = o.DisableChecksum
 	}
-	if o.DisableMultipart != nil {
-		toSerialize["disableMultipart"] = o.DisableMultipart
-	}
-	if o.DisableParallelism != nil {
-		toSerialize["disableParallelism"] = o.DisableParallelism
-	}
 	if o.EnableVerboseLogs != nil {
 		toSerialize["enableVerboseLogs"] = o.EnableVerboseLogs
-	}
-	if o.EnableYbc != nil {
-		toSerialize["enableYbc"] = o.EnableYbc
 	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
@@ -1785,20 +1306,14 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
+	if o.FirstTry != nil {
+		toSerialize["firstTry"] = o.FirstTry
+	}
 	if o.FrequencyTimeUnit != nil {
 		toSerialize["frequencyTimeUnit"] = o.FrequencyTimeUnit
 	}
 	if o.IgnoreErrors != nil {
 		toSerialize["ignoreErrors"] = o.IgnoreErrors
-	}
-	if o.IncrementalBackupFrequency != nil {
-		toSerialize["incrementalBackupFrequency"] = o.IncrementalBackupFrequency
-	}
-	if o.IncrementalBackupFrequencyTimeUnit != nil {
-		toSerialize["incrementalBackupFrequencyTimeUnit"] = o.IncrementalBackupFrequencyTimeUnit
-	}
-	if o.InstallYbc != nil {
-		toSerialize["installYbc"] = o.InstallYbc
 	}
 	if o.KeyspaceTableList != nil {
 		toSerialize["keyspaceTableList"] = o.KeyspaceTableList
@@ -1815,17 +1330,11 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
-	if o.ParallelDBBackups != nil {
-		toSerialize["parallelDBBackups"] = o.ParallelDBBackups
-	}
 	if o.Parallelism != nil {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
-	}
-	if true {
-		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
@@ -1838,12 +1347,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SchedulingFrequency != nil {
 		toSerialize["schedulingFrequency"] = o.SchedulingFrequency
-	}
-	if true {
-		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
-	}
-	if true {
-		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
@@ -1868,12 +1371,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
-	}
-	if o.YbcInstalled != nil {
-		toSerialize["ybcInstalled"] = o.YbcInstalled
-	}
-	if o.YbcSoftwareVersion != nil {
-		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

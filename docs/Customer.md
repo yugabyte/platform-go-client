@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CreationDate** | Pointer to **time.Time** | Creation time | [optional] [readonly] 
 **CustomerId** | Pointer to **int64** | Customer ID | [optional] [readonly] 
 **Name** | **string** | Name of customer | 
+**UniverseUUIDs** | Pointer to **[]string** | Universe UUIDs | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 
 ## Methods
@@ -118,6 +119,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetUniverseUUIDs
+
+`func (o *Customer) GetUniverseUUIDs() []string`
+
+GetUniverseUUIDs returns the UniverseUUIDs field if non-nil, zero value otherwise.
+
+### GetUniverseUUIDsOk
+
+`func (o *Customer) GetUniverseUUIDsOk() (*[]string, bool)`
+
+GetUniverseUUIDsOk returns a tuple with the UniverseUUIDs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseUUIDs
+
+`func (o *Customer) SetUniverseUUIDs(v []string)`
+
+SetUniverseUUIDs sets UniverseUUIDs field to given value.
+
+### HasUniverseUUIDs
+
+`func (o *Customer) HasUniverseUUIDs() bool`
+
+HasUniverseUUIDs returns a boolean if a field has been set.
 
 ### GetUuid
 

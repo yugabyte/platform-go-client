@@ -22,8 +22,6 @@ type NodeDetailsResp struct {
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
 	// True if cron jobs were properly configured for this node
 	CronsActive *bool `json:"cronsActive,omitempty"`
-	// Used for configurations where each node can have only one process
-	DedicatedTo *string `json:"dedicatedTo,omitempty"`
 	// Disks are mounted by uuid
 	DisksAreMountedByUUID *bool `json:"disksAreMountedByUUID,omitempty"`
 	// True if this node is a master
@@ -36,12 +34,11 @@ type NodeDetailsResp struct {
 	IsYqlServer *bool `json:"isYqlServer,omitempty"`
 	// True if this node is a YSQL server
 	IsYsqlServer *bool `json:"isYsqlServer,omitempty"`
-	KubernetesOverrides string `json:"kubernetesOverrides"`
 	// Machine image name
 	MachineImage *string `json:"machineImage,omitempty"`
 	// Master HTTP port
 	MasterHttpPort *int32 `json:"masterHttpPort,omitempty"`
-	// Master RPC port
+	// Master RCP port
 	MasterRpcPort *int32 `json:"masterRpcPort,omitempty"`
 	// Master state
 	MasterState *string `json:"masterState,omitempty"`
@@ -59,18 +56,12 @@ type NodeDetailsResp struct {
 	RedisServerHttpPort *int32 `json:"redisServerHttpPort,omitempty"`
 	// REDIS RPC port
 	RedisServerRpcPort *int32 `json:"redisServerRpcPort,omitempty"`
-	// SSH user override for the AMI
-	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// Node state
 	State *string `json:"state,omitempty"`
 	// Tablet server HTTP port
 	TserverHttpPort *int32 `json:"tserverHttpPort,omitempty"`
 	// Tablet server RPC port
 	TserverRpcPort *int32 `json:"tserverRpcPort,omitempty"`
-	// Yb controller HTTP port
-	YbControllerHttpPort *int32 `json:"ybControllerHttpPort,omitempty"`
-	// Yb controller RPC port
-	YbControllerRpcPort *int32 `json:"ybControllerRpcPort,omitempty"`
 	// True if this a custom YB AMI
 	YbPrebuiltAmi *bool `json:"ybPrebuiltAmi,omitempty"`
 	// YCQL HTTP port
@@ -87,9 +78,8 @@ type NodeDetailsResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeDetailsResp(kubernetesOverrides string, ) *NodeDetailsResp {
+func NewNodeDetailsResp() *NodeDetailsResp {
 	this := NodeDetailsResp{}
-	this.KubernetesOverrides = kubernetesOverrides
 	return &this
 }
 
@@ -227,38 +217,6 @@ func (o *NodeDetailsResp) HasCronsActive() bool {
 // SetCronsActive gets a reference to the given bool and assigns it to the CronsActive field.
 func (o *NodeDetailsResp) SetCronsActive(v bool) {
 	o.CronsActive = &v
-}
-
-// GetDedicatedTo returns the DedicatedTo field value if set, zero value otherwise.
-func (o *NodeDetailsResp) GetDedicatedTo() string {
-	if o == nil || o.DedicatedTo == nil {
-		var ret string
-		return ret
-	}
-	return *o.DedicatedTo
-}
-
-// GetDedicatedToOk returns a tuple with the DedicatedTo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeDetailsResp) GetDedicatedToOk() (*string, bool) {
-	if o == nil || o.DedicatedTo == nil {
-		return nil, false
-	}
-	return o.DedicatedTo, true
-}
-
-// HasDedicatedTo returns a boolean if a field has been set.
-func (o *NodeDetailsResp) HasDedicatedTo() bool {
-	if o != nil && o.DedicatedTo != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDedicatedTo gets a reference to the given string and assigns it to the DedicatedTo field.
-func (o *NodeDetailsResp) SetDedicatedTo(v string) {
-	o.DedicatedTo = &v
 }
 
 // GetDisksAreMountedByUUID returns the DisksAreMountedByUUID field value if set, zero value otherwise.
@@ -451,30 +409,6 @@ func (o *NodeDetailsResp) HasIsYsqlServer() bool {
 // SetIsYsqlServer gets a reference to the given bool and assigns it to the IsYsqlServer field.
 func (o *NodeDetailsResp) SetIsYsqlServer(v bool) {
 	o.IsYsqlServer = &v
-}
-
-// GetKubernetesOverrides returns the KubernetesOverrides field value
-func (o *NodeDetailsResp) GetKubernetesOverrides() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.KubernetesOverrides
-}
-
-// GetKubernetesOverridesOk returns a tuple with the KubernetesOverrides field value
-// and a boolean to check if the value has been set.
-func (o *NodeDetailsResp) GetKubernetesOverridesOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.KubernetesOverrides, true
-}
-
-// SetKubernetesOverrides sets field value
-func (o *NodeDetailsResp) SetKubernetesOverrides(v string) {
-	o.KubernetesOverrides = v
 }
 
 // GetMachineImage returns the MachineImage field value if set, zero value otherwise.
@@ -829,38 +763,6 @@ func (o *NodeDetailsResp) SetRedisServerRpcPort(v int32) {
 	o.RedisServerRpcPort = &v
 }
 
-// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
-func (o *NodeDetailsResp) GetSshUserOverride() string {
-	if o == nil || o.SshUserOverride == nil {
-		var ret string
-		return ret
-	}
-	return *o.SshUserOverride
-}
-
-// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeDetailsResp) GetSshUserOverrideOk() (*string, bool) {
-	if o == nil || o.SshUserOverride == nil {
-		return nil, false
-	}
-	return o.SshUserOverride, true
-}
-
-// HasSshUserOverride returns a boolean if a field has been set.
-func (o *NodeDetailsResp) HasSshUserOverride() bool {
-	if o != nil && o.SshUserOverride != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
-func (o *NodeDetailsResp) SetSshUserOverride(v string) {
-	o.SshUserOverride = &v
-}
-
 // GetState returns the State field value if set, zero value otherwise.
 func (o *NodeDetailsResp) GetState() string {
 	if o == nil || o.State == nil {
@@ -955,70 +857,6 @@ func (o *NodeDetailsResp) HasTserverRpcPort() bool {
 // SetTserverRpcPort gets a reference to the given int32 and assigns it to the TserverRpcPort field.
 func (o *NodeDetailsResp) SetTserverRpcPort(v int32) {
 	o.TserverRpcPort = &v
-}
-
-// GetYbControllerHttpPort returns the YbControllerHttpPort field value if set, zero value otherwise.
-func (o *NodeDetailsResp) GetYbControllerHttpPort() int32 {
-	if o == nil || o.YbControllerHttpPort == nil {
-		var ret int32
-		return ret
-	}
-	return *o.YbControllerHttpPort
-}
-
-// GetYbControllerHttpPortOk returns a tuple with the YbControllerHttpPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeDetailsResp) GetYbControllerHttpPortOk() (*int32, bool) {
-	if o == nil || o.YbControllerHttpPort == nil {
-		return nil, false
-	}
-	return o.YbControllerHttpPort, true
-}
-
-// HasYbControllerHttpPort returns a boolean if a field has been set.
-func (o *NodeDetailsResp) HasYbControllerHttpPort() bool {
-	if o != nil && o.YbControllerHttpPort != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbControllerHttpPort gets a reference to the given int32 and assigns it to the YbControllerHttpPort field.
-func (o *NodeDetailsResp) SetYbControllerHttpPort(v int32) {
-	o.YbControllerHttpPort = &v
-}
-
-// GetYbControllerRpcPort returns the YbControllerRpcPort field value if set, zero value otherwise.
-func (o *NodeDetailsResp) GetYbControllerRpcPort() int32 {
-	if o == nil || o.YbControllerRpcPort == nil {
-		var ret int32
-		return ret
-	}
-	return *o.YbControllerRpcPort
-}
-
-// GetYbControllerRpcPortOk returns a tuple with the YbControllerRpcPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeDetailsResp) GetYbControllerRpcPortOk() (*int32, bool) {
-	if o == nil || o.YbControllerRpcPort == nil {
-		return nil, false
-	}
-	return o.YbControllerRpcPort, true
-}
-
-// HasYbControllerRpcPort returns a boolean if a field has been set.
-func (o *NodeDetailsResp) HasYbControllerRpcPort() bool {
-	if o != nil && o.YbControllerRpcPort != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbControllerRpcPort gets a reference to the given int32 and assigns it to the YbControllerRpcPort field.
-func (o *NodeDetailsResp) SetYbControllerRpcPort(v int32) {
-	o.YbControllerRpcPort = &v
 }
 
 // GetYbPrebuiltAmi returns the YbPrebuiltAmi field value if set, zero value otherwise.
@@ -1195,9 +1033,6 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	if o.CronsActive != nil {
 		toSerialize["cronsActive"] = o.CronsActive
 	}
-	if o.DedicatedTo != nil {
-		toSerialize["dedicatedTo"] = o.DedicatedTo
-	}
 	if o.DisksAreMountedByUUID != nil {
 		toSerialize["disksAreMountedByUUID"] = o.DisksAreMountedByUUID
 	}
@@ -1215,9 +1050,6 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsYsqlServer != nil {
 		toSerialize["isYsqlServer"] = o.IsYsqlServer
-	}
-	if true {
-		toSerialize["kubernetesOverrides"] = o.KubernetesOverrides
 	}
 	if o.MachineImage != nil {
 		toSerialize["machineImage"] = o.MachineImage
@@ -1252,9 +1084,6 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	if o.RedisServerRpcPort != nil {
 		toSerialize["redisServerRpcPort"] = o.RedisServerRpcPort
 	}
-	if o.SshUserOverride != nil {
-		toSerialize["sshUserOverride"] = o.SshUserOverride
-	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
 	}
@@ -1263,12 +1092,6 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.TserverRpcPort != nil {
 		toSerialize["tserverRpcPort"] = o.TserverRpcPort
-	}
-	if o.YbControllerHttpPort != nil {
-		toSerialize["ybControllerHttpPort"] = o.YbControllerHttpPort
-	}
-	if o.YbControllerRpcPort != nil {
-		toSerialize["ybControllerRpcPort"] = o.YbControllerRpcPort
 	}
 	if o.YbPrebuiltAmi != nil {
 		toSerialize["ybPrebuiltAmi"] = o.YbPrebuiltAmi
