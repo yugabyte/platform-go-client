@@ -9,12 +9,11 @@ Name | Type | Description | Notes
 **ParentTableUUID** | Pointer to **string** | Parent Table UUID | [optional] 
 **PgSchemaName** | Pointer to **string** | Postgres schema name of the table | [optional] 
 **RelationType** | Pointer to **string** | Relation type | [optional] 
-**SizeBytes** | Pointer to **float64** | SST size in bytes | [optional] [readonly] 
+**SizeBytes** | Pointer to **float64** | Size in bytes | [optional] [readonly] 
 **TableName** | Pointer to **string** | Table name | [optional] 
 **TableSpace** | Pointer to **string** | Table space | [optional] 
 **TableType** | Pointer to **string** | Table type | [optional] 
 **TableUUID** | Pointer to **string** | Table UUID | [optional] [readonly] 
-**WalSizeBytes** | Pointer to **float64** | WAL size in bytes | [optional] [readonly] 
 
 ## Methods
 
@@ -284,31 +283,6 @@ SetTableUUID sets TableUUID field to given value.
 `func (o *TableInfoResp) HasTableUUID() bool`
 
 HasTableUUID returns a boolean if a field has been set.
-
-### GetWalSizeBytes
-
-`func (o *TableInfoResp) GetWalSizeBytes() float64`
-
-GetWalSizeBytes returns the WalSizeBytes field if non-nil, zero value otherwise.
-
-### GetWalSizeBytesOk
-
-`func (o *TableInfoResp) GetWalSizeBytesOk() (*float64, bool)`
-
-GetWalSizeBytesOk returns a tuple with the WalSizeBytes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetWalSizeBytes
-
-`func (o *TableInfoResp) SetWalSizeBytes(v float64)`
-
-SetWalSizeBytes sets WalSizeBytes field to given value.
-
-### HasWalSizeBytes
-
-`func (o *TableInfoResp) HasWalSizeBytes() bool`
-
-HasWalSizeBytes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

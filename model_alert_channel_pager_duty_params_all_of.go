@@ -16,9 +16,7 @@ import (
 
 // AlertChannelPagerDutyParamsAllOf struct for AlertChannelPagerDutyParamsAllOf
 type AlertChannelPagerDutyParamsAllOf struct {
-	// API key
 	ApiKey string `json:"apiKey"`
-	// Routing key
 	RoutingKey string `json:"routingKey"`
 }
 

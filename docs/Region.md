@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** |  | [optional] [readonly] 
+**Architecture** | Pointer to **string** |  | [optional] 
 **Code** | Pointer to **string** | Cloud provider region code | [optional] 
 **Config** | Pointer to **map[string]string** |  | [optional] 
-**Details** | Pointer to [**RegionDetails**](RegionDetails.md) |  | [optional] 
 **Latitude** | Pointer to **float64** | The region&#39;s latitude | [optional] [readonly] 
 **Longitude** | Pointer to **float64** | The region&#39;s longitude | [optional] [readonly] 
 **Name** | Pointer to **string** | Cloud provider region name | [optional] [readonly] 
-**SecurityGroupId** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to regionDetails.cloudInfo aws/azure securityGroupId property | [optional] 
+**SecurityGroupId** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** | Region UUID | [optional] [readonly] 
-**VnetName** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to regionDetails.cloudInfo aws/azure vnet property | [optional] 
-**YbImage** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to details.cloudInfo aws/gcp/azure ybImage property | [optional] 
+**VnetName** | Pointer to **string** |  | [optional] 
+**YbImage** | Pointer to **string** | The AMI to be used in this region. | [optional] 
 **Zones** | [**[]AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods
@@ -60,6 +60,31 @@ SetActive sets Active field to given value.
 `func (o *Region) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
+
+### GetArchitecture
+
+`func (o *Region) GetArchitecture() string`
+
+GetArchitecture returns the Architecture field if non-nil, zero value otherwise.
+
+### GetArchitectureOk
+
+`func (o *Region) GetArchitectureOk() (*string, bool)`
+
+GetArchitectureOk returns a tuple with the Architecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArchitecture
+
+`func (o *Region) SetArchitecture(v string)`
+
+SetArchitecture sets Architecture field to given value.
+
+### HasArchitecture
+
+`func (o *Region) HasArchitecture() bool`
+
+HasArchitecture returns a boolean if a field has been set.
 
 ### GetCode
 
@@ -110,31 +135,6 @@ SetConfig sets Config field to given value.
 `func (o *Region) HasConfig() bool`
 
 HasConfig returns a boolean if a field has been set.
-
-### GetDetails
-
-`func (o *Region) GetDetails() RegionDetails`
-
-GetDetails returns the Details field if non-nil, zero value otherwise.
-
-### GetDetailsOk
-
-`func (o *Region) GetDetailsOk() (*RegionDetails, bool)`
-
-GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDetails
-
-`func (o *Region) SetDetails(v RegionDetails)`
-
-SetDetails sets Details field to given value.
-
-### HasDetails
-
-`func (o *Region) HasDetails() bool`
-
-HasDetails returns a boolean if a field has been set.
 
 ### GetLatitude
 

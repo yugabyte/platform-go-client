@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DateRangeEnd** | Pointer to **time.Time** | The end date for backup filter. | [optional] 
-**DateRangeStart** | Pointer to **time.Time** | The start date for backup filter. | [optional] 
+**DateRangeEnd** | **time.Time** |  | 
+**DateRangeStart** | **time.Time** |  | 
 **KeyspaceList** | **[]string** |  | 
 **OnlyShowDeletedConfigs** | **bool** |  | 
 **OnlyShowDeletedUniverses** | **bool** |  | 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewBackupApiFilter
 
-`func NewBackupApiFilter(keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
+`func NewBackupApiFilter(dateRangeEnd time.Time, dateRangeStart time.Time, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
 
 NewBackupApiFilter instantiates a new BackupApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -53,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetDateRangeEnd sets DateRangeEnd field to given value.
 
-### HasDateRangeEnd
-
-`func (o *BackupApiFilter) HasDateRangeEnd() bool`
-
-HasDateRangeEnd returns a boolean if a field has been set.
 
 ### GetDateRangeStart
 
@@ -78,11 +73,6 @@ and a boolean to check if the value has been set.
 
 SetDateRangeStart sets DateRangeStart field to given value.
 
-### HasDateRangeStart
-
-`func (o *BackupApiFilter) HasDateRangeStart() bool`
-
-HasDateRangeStart returns a boolean if a field has been set.
 
 ### GetKeyspaceList
 

@@ -17,6 +17,7 @@ import (
 // SoftwareUpgradeParams struct for SoftwareUpgradeParams
 type SoftwareUpgradeParams struct {
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
+	BackupInProgress *bool `json:"backupInProgress,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	ClientRootCA *string `json:"clientRootCA,omitempty"`
 	Clusters []Cluster `json:"clusters"`
@@ -26,18 +27,17 @@ type SoftwareUpgradeParams struct {
 	CreatingUser Users `json:"creatingUser"`
 	CurrentClusterType *string `json:"currentClusterType,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	// Whether this task has been tried before
+	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
-	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
@@ -46,8 +46,7 @@ type SoftwareUpgradeParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
-	// Previous task UUID of a retry
+	// Previous task UUID only if this task is a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
@@ -58,44 +57,35 @@ type SoftwareUpgradeParams struct {
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
-	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	UniversePaused *bool `json:"universePaused,omitempty"`
 	// Associated universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
-	UpdateOptions *[]string `json:"updateOptions,omitempty"`
 	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
 	UpdatingTask *string `json:"updatingTask,omitempty"`
 	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
 	UpgradeOption string `json:"upgradeOption"`
-	UpgradeSystemCatalog bool `json:"upgradeSystemCatalog"`
-	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
 	UserAZSelected *bool `json:"userAZSelected,omitempty"`
-	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
 	YbSoftwareVersion string `json:"ybSoftwareVersion"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewSoftwareUpgradeParams instantiates a new SoftwareUpgradeParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoftwareUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, upgradeSystemCatalog bool, ybSoftwareVersion string, ) *SoftwareUpgradeParams {
+func NewSoftwareUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *SoftwareUpgradeParams {
 	this := SoftwareUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UpgradeOption = upgradeOption
-	this.UpgradeSystemCatalog = upgradeSystemCatalog
 	this.YbSoftwareVersion = ybSoftwareVersion
 	return &this
 }
@@ -138,6 +128,38 @@ func (o *SoftwareUpgradeParams) HasAllowInsecure() bool {
 // SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *SoftwareUpgradeParams) SetAllowInsecure(v bool) {
 	o.AllowInsecure = &v
+}
+
+// GetBackupInProgress returns the BackupInProgress field value if set, zero value otherwise.
+func (o *SoftwareUpgradeParams) GetBackupInProgress() bool {
+	if o == nil || o.BackupInProgress == nil {
+		var ret bool
+		return ret
+	}
+	return *o.BackupInProgress
+}
+
+// GetBackupInProgressOk returns a tuple with the BackupInProgress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwareUpgradeParams) GetBackupInProgressOk() (*bool, bool) {
+	if o == nil || o.BackupInProgress == nil {
+		return nil, false
+	}
+	return o.BackupInProgress, true
+}
+
+// HasBackupInProgress returns a boolean if a field has been set.
+func (o *SoftwareUpgradeParams) HasBackupInProgress() bool {
+	if o != nil && o.BackupInProgress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupInProgress gets a reference to the given bool and assigns it to the BackupInProgress field.
+func (o *SoftwareUpgradeParams) SetBackupInProgress(v bool) {
+	o.BackupInProgress = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -380,38 +402,6 @@ func (o *SoftwareUpgradeParams) SetDeviceInfo(v DeviceInfo) {
 	o.DeviceInfo = &v
 }
 
-// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetEnableYbc() bool {
-	if o == nil || o.EnableYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.EnableYbc
-}
-
-// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetEnableYbcOk() (*bool, bool) {
-	if o == nil || o.EnableYbc == nil {
-		return nil, false
-	}
-	return o.EnableYbc, true
-}
-
-// HasEnableYbc returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasEnableYbc() bool {
-	if o != nil && o.EnableYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
-func (o *SoftwareUpgradeParams) SetEnableYbc(v bool) {
-	o.EnableYbc = &v
-}
-
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
 func (o *SoftwareUpgradeParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig {
 	if o == nil || o.EncryptionAtRestConfig == nil {
@@ -540,6 +530,38 @@ func (o *SoftwareUpgradeParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
+// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
+func (o *SoftwareUpgradeParams) GetFirstTry() bool {
+	if o == nil || o.FirstTry == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FirstTry
+}
+
+// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwareUpgradeParams) GetFirstTryOk() (*bool, bool) {
+	if o == nil || o.FirstTry == nil {
+		return nil, false
+	}
+	return o.FirstTry, true
+}
+
+// HasFirstTry returns a boolean if a field has been set.
+func (o *SoftwareUpgradeParams) HasFirstTry() bool {
+	if o != nil && o.FirstTry != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
+func (o *SoftwareUpgradeParams) SetFirstTry(v bool) {
+	o.FirstTry = &v
+}
+
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
 func (o *SoftwareUpgradeParams) GetImportedState() string {
 	if o == nil || o.ImportedState == nil {
@@ -570,38 +592,6 @@ func (o *SoftwareUpgradeParams) HasImportedState() bool {
 // SetImportedState gets a reference to the given string and assigns it to the ImportedState field.
 func (o *SoftwareUpgradeParams) SetImportedState(v string) {
 	o.ImportedState = &v
-}
-
-// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetInstallYbc() bool {
-	if o == nil || o.InstallYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.InstallYbc
-}
-
-// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetInstallYbcOk() (*bool, bool) {
-	if o == nil || o.InstallYbc == nil {
-		return nil, false
-	}
-	return o.InstallYbc, true
-}
-
-// HasInstallYbc returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasInstallYbc() bool {
-	if o != nil && o.InstallYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
-func (o *SoftwareUpgradeParams) SetInstallYbc(v bool) {
-	o.InstallYbc = &v
 }
 
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
@@ -658,38 +648,6 @@ func (o *SoftwareUpgradeParams) GetKubernetesUpgradeSupportedOk() (*bool, bool) 
 // SetKubernetesUpgradeSupported sets field value
 func (o *SoftwareUpgradeParams) SetKubernetesUpgradeSupported(v bool) {
 	o.KubernetesUpgradeSupported = v
-}
-
-// GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetMastersInDefaultRegion() bool {
-	if o == nil || o.MastersInDefaultRegion == nil {
-		var ret bool
-		return ret
-	}
-	return *o.MastersInDefaultRegion
-}
-
-// GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool) {
-	if o == nil || o.MastersInDefaultRegion == nil {
-		return nil, false
-	}
-	return o.MastersInDefaultRegion, true
-}
-
-// HasMastersInDefaultRegion returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasMastersInDefaultRegion() bool {
-	if o != nil && o.MastersInDefaultRegion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMastersInDefaultRegion gets a reference to the given bool and assigns it to the MastersInDefaultRegion field.
-func (o *SoftwareUpgradeParams) SetMastersInDefaultRegion(v bool) {
-	o.MastersInDefaultRegion = &v
 }
 
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
@@ -874,30 +832,6 @@ func (o *SoftwareUpgradeParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *SoftwareUpgradeParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value
-func (o *SoftwareUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.PlatformVersion, true
-}
-
-// SetPlatformVersion sets field value
-func (o *SoftwareUpgradeParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1172,38 +1106,6 @@ func (o *SoftwareUpgradeParams) SetSourceXClusterConfigs(v []string) {
 	o.SourceXClusterConfigs = &v
 }
 
-// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetSshUserOverride() string {
-	if o == nil || o.SshUserOverride == nil {
-		var ret string
-		return ret
-	}
-	return *o.SshUserOverride
-}
-
-// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetSshUserOverrideOk() (*string, bool) {
-	if o == nil || o.SshUserOverride == nil {
-		return nil, false
-	}
-	return o.SshUserOverride, true
-}
-
-// HasSshUserOverride returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasSshUserOverride() bool {
-	if o != nil && o.SshUserOverride != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
-func (o *SoftwareUpgradeParams) SetSshUserOverride(v string) {
-	o.SshUserOverride = &v
-}
-
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
 func (o *SoftwareUpgradeParams) GetTargetXClusterConfigs() []string {
 	if o == nil || o.TargetXClusterConfigs == nil {
@@ -1332,38 +1234,6 @@ func (o *SoftwareUpgradeParams) SetUpdateInProgress(v bool) {
 	o.UpdateInProgress = &v
 }
 
-// GetUpdateOptions returns the UpdateOptions field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetUpdateOptions() []string {
-	if o == nil || o.UpdateOptions == nil {
-		var ret []string
-		return ret
-	}
-	return *o.UpdateOptions
-}
-
-// GetUpdateOptionsOk returns a tuple with the UpdateOptions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetUpdateOptionsOk() (*[]string, bool) {
-	if o == nil || o.UpdateOptions == nil {
-		return nil, false
-	}
-	return o.UpdateOptions, true
-}
-
-// HasUpdateOptions returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasUpdateOptions() bool {
-	if o != nil && o.UpdateOptions != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdateOptions gets a reference to the given []string and assigns it to the UpdateOptions field.
-func (o *SoftwareUpgradeParams) SetUpdateOptions(v []string) {
-	o.UpdateOptions = &v
-}
-
 // GetUpdateSucceeded returns the UpdateSucceeded field value if set, zero value otherwise.
 func (o *SoftwareUpgradeParams) GetUpdateSucceeded() bool {
 	if o == nil || o.UpdateSucceeded == nil {
@@ -1484,62 +1354,6 @@ func (o *SoftwareUpgradeParams) SetUpgradeOption(v string) {
 	o.UpgradeOption = v
 }
 
-// GetUpgradeSystemCatalog returns the UpgradeSystemCatalog field value
-func (o *SoftwareUpgradeParams) GetUpgradeSystemCatalog() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.UpgradeSystemCatalog
-}
-
-// GetUpgradeSystemCatalogOk returns a tuple with the UpgradeSystemCatalog field value
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetUpgradeSystemCatalogOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.UpgradeSystemCatalog, true
-}
-
-// SetUpgradeSystemCatalog sets field value
-func (o *SoftwareUpgradeParams) SetUpgradeSystemCatalog(v bool) {
-	o.UpgradeSystemCatalog = v
-}
-
-// GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetUseNewHelmNamingStyle() bool {
-	if o == nil || o.UseNewHelmNamingStyle == nil {
-		var ret bool
-		return ret
-	}
-	return *o.UseNewHelmNamingStyle
-}
-
-// GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool) {
-	if o == nil || o.UseNewHelmNamingStyle == nil {
-		return nil, false
-	}
-	return o.UseNewHelmNamingStyle, true
-}
-
-// HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasUseNewHelmNamingStyle() bool {
-	if o != nil && o.UseNewHelmNamingStyle != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUseNewHelmNamingStyle gets a reference to the given bool and assigns it to the UseNewHelmNamingStyle field.
-func (o *SoftwareUpgradeParams) SetUseNewHelmNamingStyle(v bool) {
-	o.UseNewHelmNamingStyle = &v
-}
-
 // GetUserAZSelected returns the UserAZSelected field value if set, zero value otherwise.
 func (o *SoftwareUpgradeParams) GetUserAZSelected() bool {
 	if o == nil || o.UserAZSelected == nil {
@@ -1570,38 +1384,6 @@ func (o *SoftwareUpgradeParams) HasUserAZSelected() bool {
 // SetUserAZSelected gets a reference to the given bool and assigns it to the UserAZSelected field.
 func (o *SoftwareUpgradeParams) SetUserAZSelected(v bool) {
 	o.UserAZSelected = &v
-}
-
-// GetXclusterInfo returns the XclusterInfo field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetXclusterInfo() XClusterInfo {
-	if o == nil || o.XclusterInfo == nil {
-		var ret XClusterInfo
-		return ret
-	}
-	return *o.XclusterInfo
-}
-
-// GetXclusterInfoOk returns a tuple with the XclusterInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool) {
-	if o == nil || o.XclusterInfo == nil {
-		return nil, false
-	}
-	return o.XclusterInfo, true
-}
-
-// HasXclusterInfo returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasXclusterInfo() bool {
-	if o != nil && o.XclusterInfo != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetXclusterInfo gets a reference to the given XClusterInfo and assigns it to the XclusterInfo field.
-func (o *SoftwareUpgradeParams) SetXclusterInfo(v XClusterInfo) {
-	o.XclusterInfo = &v
 }
 
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
@@ -1660,74 +1442,13 @@ func (o *SoftwareUpgradeParams) SetYbSoftwareVersion(v string) {
 	o.YbSoftwareVersion = v
 }
 
-// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetYbcInstalled() bool {
-	if o == nil || o.YbcInstalled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.YbcInstalled
-}
-
-// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetYbcInstalledOk() (*bool, bool) {
-	if o == nil || o.YbcInstalled == nil {
-		return nil, false
-	}
-	return o.YbcInstalled, true
-}
-
-// HasYbcInstalled returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasYbcInstalled() bool {
-	if o != nil && o.YbcInstalled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
-func (o *SoftwareUpgradeParams) SetYbcInstalled(v bool) {
-	o.YbcInstalled = &v
-}
-
-// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
-func (o *SoftwareUpgradeParams) GetYbcSoftwareVersion() string {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.YbcSoftwareVersion
-}
-
-// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SoftwareUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool) {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		return nil, false
-	}
-	return o.YbcSoftwareVersion, true
-}
-
-// HasYbcSoftwareVersion returns a boolean if a field has been set.
-func (o *SoftwareUpgradeParams) HasYbcSoftwareVersion() bool {
-	if o != nil && o.YbcSoftwareVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
-func (o *SoftwareUpgradeParams) SetYbcSoftwareVersion(v string) {
-	o.YbcSoftwareVersion = &v
-}
-
 func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
+	}
+	if o.BackupInProgress != nil {
+		toSerialize["backupInProgress"] = o.BackupInProgress
 	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
@@ -1753,9 +1474,6 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.DeviceInfo != nil {
 		toSerialize["deviceInfo"] = o.DeviceInfo
 	}
-	if o.EnableYbc != nil {
-		toSerialize["enableYbc"] = o.EnableYbc
-	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
 	}
@@ -1768,20 +1486,17 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
+	if o.FirstTry != nil {
+		toSerialize["firstTry"] = o.FirstTry
+	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
-	}
-	if o.InstallYbc != nil {
-		toSerialize["installYbc"] = o.InstallYbc
 	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
 	}
 	if true {
 		toSerialize["kubernetesUpgradeSupported"] = o.KubernetesUpgradeSupported
-	}
-	if o.MastersInDefaultRegion != nil {
-		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
@@ -1800,9 +1515,6 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
-	}
-	if true {
-		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
@@ -1831,9 +1543,6 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}
-	if o.SshUserOverride != nil {
-		toSerialize["sshUserOverride"] = o.SshUserOverride
-	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs
 	}
@@ -1845,9 +1554,6 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdateInProgress != nil {
 		toSerialize["updateInProgress"] = o.UpdateInProgress
-	}
-	if o.UpdateOptions != nil {
-		toSerialize["updateOptions"] = o.UpdateOptions
 	}
 	if o.UpdateSucceeded != nil {
 		toSerialize["updateSucceeded"] = o.UpdateSucceeded
@@ -1861,29 +1567,14 @@ func (o SoftwareUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["upgradeOption"] = o.UpgradeOption
 	}
-	if true {
-		toSerialize["upgradeSystemCatalog"] = o.UpgradeSystemCatalog
-	}
-	if o.UseNewHelmNamingStyle != nil {
-		toSerialize["useNewHelmNamingStyle"] = o.UseNewHelmNamingStyle
-	}
 	if o.UserAZSelected != nil {
 		toSerialize["userAZSelected"] = o.UserAZSelected
-	}
-	if o.XclusterInfo != nil {
-		toSerialize["xclusterInfo"] = o.XclusterInfo
 	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
 	}
 	if true {
 		toSerialize["ybSoftwareVersion"] = o.YbSoftwareVersion
-	}
-	if o.YbcInstalled != nil {
-		toSerialize["ybcInstalled"] = o.YbcInstalled
-	}
-	if o.YbcSoftwareVersion != nil {
-		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

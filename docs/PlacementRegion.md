@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AzList** | Pointer to [**[]PlacementAZ**](PlacementAZ.md) |  | [optional] 
 **Code** | Pointer to **string** |  | [optional] 
-**LbFQDN** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
 
@@ -78,31 +77,6 @@ SetCode sets Code field to given value.
 `func (o *PlacementRegion) HasCode() bool`
 
 HasCode returns a boolean if a field has been set.
-
-### GetLbFQDN
-
-`func (o *PlacementRegion) GetLbFQDN() string`
-
-GetLbFQDN returns the LbFQDN field if non-nil, zero value otherwise.
-
-### GetLbFQDNOk
-
-`func (o *PlacementRegion) GetLbFQDNOk() (*string, bool)`
-
-GetLbFQDNOk returns a tuple with the LbFQDN field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLbFQDN
-
-`func (o *PlacementRegion) SetLbFQDN(v string)`
-
-SetLbFQDN sets LbFQDN field to given value.
-
-### HasLbFQDN
-
-`func (o *PlacementRegion) HasLbFQDN() bool`
-
-HasLbFQDN returns a boolean if a field has been set.
 
 ### GetName
 

@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Channels** | **[]string** | Alert notification channels | 
-**CustomerUUID** | **string** | Customer UUID | [readonly] 
-**DefaultDestination** | **bool** | Default alert notification destination | 
-**Name** | **string** | Name | 
-**Uuid** | Pointer to **string** | Destination UUID | [optional] [readonly] 
+**Channels** | **[]string** |  | [readonly] 
+**CustomerUUID** | **string** |  | 
+**DefaultDestination** | **bool** |  | 
+**Name** | **string** |  | 
+**Uuid** | **string** |  | 
 
 ## Methods
 
 ### NewAlertDestination
 
-`func NewAlertDestination(channels []string, customerUUID string, defaultDestination bool, name string, ) *AlertDestination`
+`func NewAlertDestination(channels []string, customerUUID string, defaultDestination bool, name string, uuid string, ) *AlertDestination`
 
 NewAlertDestination instantiates a new AlertDestination object
 This constructor will assign default values to properties that have it defined,
@@ -128,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
-### HasUuid
-
-`func (o *AlertDestination) HasUuid() bool`
-
-HasUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -12,13 +12,10 @@ package ywclient
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // Schedule Backup schedule
 type Schedule struct {
-	// Backlog status of schedule arose due to conflicts
-	BacklogStatus *bool `json:"backlogStatus,omitempty"`
 	// Cron expression for the schedule
 	CronExpression *string `json:"cronExpression,omitempty"`
 	// Customer UUID
@@ -29,10 +26,6 @@ type Schedule struct {
 	Frequency *int64 `json:"frequency,omitempty"`
 	// Time unit of frequency
 	FrequencyTimeUnit *string `json:"frequencyTimeUnit,omitempty"`
-	// Time on which schedule is expected to run
-	NextScheduleTaskTime *time.Time `json:"nextScheduleTaskTime,omitempty"`
-	// Owner UUID for the schedule
-	OwnerUUID *string `json:"ownerUUID,omitempty"`
 	// Running state of the schedule
 	RunningState *bool `json:"runningState,omitempty"`
 	// Name of the schedule
@@ -43,8 +36,6 @@ type Schedule struct {
 	Status *string `json:"status,omitempty"`
 	// Type of task to be scheduled.
 	TaskType *string `json:"taskType,omitempty"`
-	// User who created the schedule policy
-	UserEmail *string `json:"userEmail,omitempty"`
 }
 
 // NewSchedule instantiates a new Schedule object
@@ -62,38 +53,6 @@ func NewSchedule() *Schedule {
 func NewScheduleWithDefaults() *Schedule {
 	this := Schedule{}
 	return &this
-}
-
-// GetBacklogStatus returns the BacklogStatus field value if set, zero value otherwise.
-func (o *Schedule) GetBacklogStatus() bool {
-	if o == nil || o.BacklogStatus == nil {
-		var ret bool
-		return ret
-	}
-	return *o.BacklogStatus
-}
-
-// GetBacklogStatusOk returns a tuple with the BacklogStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schedule) GetBacklogStatusOk() (*bool, bool) {
-	if o == nil || o.BacklogStatus == nil {
-		return nil, false
-	}
-	return o.BacklogStatus, true
-}
-
-// HasBacklogStatus returns a boolean if a field has been set.
-func (o *Schedule) HasBacklogStatus() bool {
-	if o != nil && o.BacklogStatus != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBacklogStatus gets a reference to the given bool and assigns it to the BacklogStatus field.
-func (o *Schedule) SetBacklogStatus(v bool) {
-	o.BacklogStatus = &v
 }
 
 // GetCronExpression returns the CronExpression field value if set, zero value otherwise.
@@ -256,70 +215,6 @@ func (o *Schedule) SetFrequencyTimeUnit(v string) {
 	o.FrequencyTimeUnit = &v
 }
 
-// GetNextScheduleTaskTime returns the NextScheduleTaskTime field value if set, zero value otherwise.
-func (o *Schedule) GetNextScheduleTaskTime() time.Time {
-	if o == nil || o.NextScheduleTaskTime == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.NextScheduleTaskTime
-}
-
-// GetNextScheduleTaskTimeOk returns a tuple with the NextScheduleTaskTime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schedule) GetNextScheduleTaskTimeOk() (*time.Time, bool) {
-	if o == nil || o.NextScheduleTaskTime == nil {
-		return nil, false
-	}
-	return o.NextScheduleTaskTime, true
-}
-
-// HasNextScheduleTaskTime returns a boolean if a field has been set.
-func (o *Schedule) HasNextScheduleTaskTime() bool {
-	if o != nil && o.NextScheduleTaskTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNextScheduleTaskTime gets a reference to the given time.Time and assigns it to the NextScheduleTaskTime field.
-func (o *Schedule) SetNextScheduleTaskTime(v time.Time) {
-	o.NextScheduleTaskTime = &v
-}
-
-// GetOwnerUUID returns the OwnerUUID field value if set, zero value otherwise.
-func (o *Schedule) GetOwnerUUID() string {
-	if o == nil || o.OwnerUUID == nil {
-		var ret string
-		return ret
-	}
-	return *o.OwnerUUID
-}
-
-// GetOwnerUUIDOk returns a tuple with the OwnerUUID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schedule) GetOwnerUUIDOk() (*string, bool) {
-	if o == nil || o.OwnerUUID == nil {
-		return nil, false
-	}
-	return o.OwnerUUID, true
-}
-
-// HasOwnerUUID returns a boolean if a field has been set.
-func (o *Schedule) HasOwnerUUID() bool {
-	if o != nil && o.OwnerUUID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetOwnerUUID gets a reference to the given string and assigns it to the OwnerUUID field.
-func (o *Schedule) SetOwnerUUID(v string) {
-	o.OwnerUUID = &v
-}
-
 // GetRunningState returns the RunningState field value if set, zero value otherwise.
 func (o *Schedule) GetRunningState() bool {
 	if o == nil || o.RunningState == nil {
@@ -480,43 +375,8 @@ func (o *Schedule) SetTaskType(v string) {
 	o.TaskType = &v
 }
 
-// GetUserEmail returns the UserEmail field value if set, zero value otherwise.
-func (o *Schedule) GetUserEmail() string {
-	if o == nil || o.UserEmail == nil {
-		var ret string
-		return ret
-	}
-	return *o.UserEmail
-}
-
-// GetUserEmailOk returns a tuple with the UserEmail field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schedule) GetUserEmailOk() (*string, bool) {
-	if o == nil || o.UserEmail == nil {
-		return nil, false
-	}
-	return o.UserEmail, true
-}
-
-// HasUserEmail returns a boolean if a field has been set.
-func (o *Schedule) HasUserEmail() bool {
-	if o != nil && o.UserEmail != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUserEmail gets a reference to the given string and assigns it to the UserEmail field.
-func (o *Schedule) SetUserEmail(v string) {
-	o.UserEmail = &v
-}
-
 func (o Schedule) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BacklogStatus != nil {
-		toSerialize["backlogStatus"] = o.BacklogStatus
-	}
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
 	}
@@ -532,12 +392,6 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	if o.FrequencyTimeUnit != nil {
 		toSerialize["frequencyTimeUnit"] = o.FrequencyTimeUnit
 	}
-	if o.NextScheduleTaskTime != nil {
-		toSerialize["nextScheduleTaskTime"] = o.NextScheduleTaskTime
-	}
-	if o.OwnerUUID != nil {
-		toSerialize["ownerUUID"] = o.OwnerUUID
-	}
 	if o.RunningState != nil {
 		toSerialize["runningState"] = o.RunningState
 	}
@@ -552,9 +406,6 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	}
 	if o.TaskType != nil {
 		toSerialize["taskType"] = o.TaskType
-	}
-	if o.UserEmail != nil {
-		toSerialize["userEmail"] = o.UserEmail
 	}
 	return json.Marshal(toSerialize)
 }

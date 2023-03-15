@@ -18,7 +18,6 @@ import (
 type PlacementRegion struct {
 	AzList *[]PlacementAZ `json:"azList,omitempty"`
 	Code *string `json:"code,omitempty"`
-	LbFQDN *string `json:"lbFQDN,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -104,38 +103,6 @@ func (o *PlacementRegion) SetCode(v string) {
 	o.Code = &v
 }
 
-// GetLbFQDN returns the LbFQDN field value if set, zero value otherwise.
-func (o *PlacementRegion) GetLbFQDN() string {
-	if o == nil || o.LbFQDN == nil {
-		var ret string
-		return ret
-	}
-	return *o.LbFQDN
-}
-
-// GetLbFQDNOk returns a tuple with the LbFQDN field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlacementRegion) GetLbFQDNOk() (*string, bool) {
-	if o == nil || o.LbFQDN == nil {
-		return nil, false
-	}
-	return o.LbFQDN, true
-}
-
-// HasLbFQDN returns a boolean if a field has been set.
-func (o *PlacementRegion) HasLbFQDN() bool {
-	if o != nil && o.LbFQDN != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLbFQDN gets a reference to the given string and assigns it to the LbFQDN field.
-func (o *PlacementRegion) SetLbFQDN(v string) {
-	o.LbFQDN = &v
-}
-
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *PlacementRegion) GetName() string {
 	if o == nil || o.Name == nil {
@@ -207,9 +174,6 @@ func (o PlacementRegion) MarshalJSON() ([]byte, error) {
 	}
 	if o.Code != nil {
 		toSerialize["code"] = o.Code
-	}
-	if o.LbFQDN != nil {
-		toSerialize["lbFQDN"] = o.LbFQDN
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

@@ -12,15 +12,10 @@ package ywclient
 
 import (
 	"encoding/json"
-	"time"
 )
 
 // AccessKey Access key for the cloud provider. This helps to authenticate the user and get access to the provider.
 type AccessKey struct {
-	// Creation date of key
-	CreationDate *time.Time `json:"creationDate,omitempty"`
-	// Expiration date of key
-	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
 	IdKey AccessKeyId `json:"idKey"`
 	KeyInfo KeyInfo `json:"keyInfo"`
 }
@@ -42,70 +37,6 @@ func NewAccessKey(idKey AccessKeyId, keyInfo KeyInfo, ) *AccessKey {
 func NewAccessKeyWithDefaults() *AccessKey {
 	this := AccessKey{}
 	return &this
-}
-
-// GetCreationDate returns the CreationDate field value if set, zero value otherwise.
-func (o *AccessKey) GetCreationDate() time.Time {
-	if o == nil || o.CreationDate == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreationDate
-}
-
-// GetCreationDateOk returns a tuple with the CreationDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AccessKey) GetCreationDateOk() (*time.Time, bool) {
-	if o == nil || o.CreationDate == nil {
-		return nil, false
-	}
-	return o.CreationDate, true
-}
-
-// HasCreationDate returns a boolean if a field has been set.
-func (o *AccessKey) HasCreationDate() bool {
-	if o != nil && o.CreationDate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCreationDate gets a reference to the given time.Time and assigns it to the CreationDate field.
-func (o *AccessKey) SetCreationDate(v time.Time) {
-	o.CreationDate = &v
-}
-
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
-func (o *AccessKey) GetExpirationDate() time.Time {
-	if o == nil || o.ExpirationDate == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.ExpirationDate
-}
-
-// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AccessKey) GetExpirationDateOk() (*time.Time, bool) {
-	if o == nil || o.ExpirationDate == nil {
-		return nil, false
-	}
-	return o.ExpirationDate, true
-}
-
-// HasExpirationDate returns a boolean if a field has been set.
-func (o *AccessKey) HasExpirationDate() bool {
-	if o != nil && o.ExpirationDate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
-func (o *AccessKey) SetExpirationDate(v time.Time) {
-	o.ExpirationDate = &v
 }
 
 // GetIdKey returns the IdKey field value
@@ -158,12 +89,6 @@ func (o *AccessKey) SetKeyInfo(v KeyInfo) {
 
 func (o AccessKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.CreationDate != nil {
-		toSerialize["creationDate"] = o.CreationDate
-	}
-	if o.ExpirationDate != nil {
-		toSerialize["expirationDate"] = o.ExpirationDate
-	}
 	if true {
 		toSerialize["idKey"] = o.IdKey
 	}

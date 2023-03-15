@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
+**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -13,25 +14,22 @@ Name | Type | Description | Notes
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MasterGFlags** | **map[string]string** |  | 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
@@ -40,29 +38,23 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
-**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TserverGFlags** | **map[string]string** |  | 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
-**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
-**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
-**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewGFlagsUpgradeParams
 
-`func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams`
+`func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams`
 
 NewGFlagsUpgradeParams instantiates a new GFlagsUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -101,6 +93,31 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *GFlagsUpgradeParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
+
+### GetBackupInProgress
+
+`func (o *GFlagsUpgradeParams) GetBackupInProgress() bool`
+
+GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
+
+### GetBackupInProgressOk
+
+`func (o *GFlagsUpgradeParams) GetBackupInProgressOk() (*bool, bool)`
+
+GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupInProgress
+
+`func (o *GFlagsUpgradeParams) SetBackupInProgress(v bool)`
+
+SetBackupInProgress sets BackupInProgress field to given value.
+
+### HasBackupInProgress
+
+`func (o *GFlagsUpgradeParams) HasBackupInProgress() bool`
+
+HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -292,31 +309,6 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
-### GetEnableYbc
-
-`func (o *GFlagsUpgradeParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *GFlagsUpgradeParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *GFlagsUpgradeParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *GFlagsUpgradeParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
-
 ### GetEncryptionAtRestConfig
 
 `func (o *GFlagsUpgradeParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
@@ -417,6 +409,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
+### GetFirstTry
+
+`func (o *GFlagsUpgradeParams) GetFirstTry() bool`
+
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
+
+### GetFirstTryOk
+
+`func (o *GFlagsUpgradeParams) GetFirstTryOk() (*bool, bool)`
+
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstTry
+
+`func (o *GFlagsUpgradeParams) SetFirstTry(v bool)`
+
+SetFirstTry sets FirstTry field to given value.
+
+### HasFirstTry
+
+`func (o *GFlagsUpgradeParams) HasFirstTry() bool`
+
+HasFirstTry returns a boolean if a field has been set.
+
 ### GetImportedState
 
 `func (o *GFlagsUpgradeParams) GetImportedState() string`
@@ -441,31 +458,6 @@ SetImportedState sets ImportedState field to given value.
 `func (o *GFlagsUpgradeParams) HasImportedState() bool`
 
 HasImportedState returns a boolean if a field has been set.
-
-### GetInstallYbc
-
-`func (o *GFlagsUpgradeParams) GetInstallYbc() bool`
-
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
-
-### GetInstallYbcOk
-
-`func (o *GFlagsUpgradeParams) GetInstallYbcOk() (*bool, bool)`
-
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInstallYbc
-
-`func (o *GFlagsUpgradeParams) SetInstallYbc(v bool)`
-
-SetInstallYbc sets InstallYbc field to given value.
-
-### HasInstallYbc
-
-`func (o *GFlagsUpgradeParams) HasInstallYbc() bool`
-
-HasInstallYbc returns a boolean if a field has been set.
 
 ### GetItestS3PackagePath
 
@@ -531,31 +523,6 @@ and a boolean to check if the value has been set.
 
 SetMasterGFlags sets MasterGFlags field to given value.
 
-
-### GetMastersInDefaultRegion
-
-`func (o *GFlagsUpgradeParams) GetMastersInDefaultRegion() bool`
-
-GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
-
-### GetMastersInDefaultRegionOk
-
-`func (o *GFlagsUpgradeParams) GetMastersInDefaultRegionOk() (*bool, bool)`
-
-GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMastersInDefaultRegion
-
-`func (o *GFlagsUpgradeParams) SetMastersInDefaultRegion(v bool)`
-
-SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
-
-### HasMastersInDefaultRegion
-
-`func (o *GFlagsUpgradeParams) HasMastersInDefaultRegion() bool`
-
-HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -700,26 +667,6 @@ and a boolean to check if the value has been set.
 `func (o *GFlagsUpgradeParams) SetPlatformUrl(v string)`
 
 SetPlatformUrl sets PlatformUrl field to given value.
-
-
-### GetPlatformVersion
-
-`func (o *GFlagsUpgradeParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *GFlagsUpgradeParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *GFlagsUpgradeParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
 
 
 ### GetPreviousTaskUUID
@@ -937,31 +884,6 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
 
-### GetSshUserOverride
-
-`func (o *GFlagsUpgradeParams) GetSshUserOverride() string`
-
-GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
-
-### GetSshUserOverrideOk
-
-`func (o *GFlagsUpgradeParams) GetSshUserOverrideOk() (*string, bool)`
-
-GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSshUserOverride
-
-`func (o *GFlagsUpgradeParams) SetSshUserOverride(v string)`
-
-SetSshUserOverride sets SshUserOverride field to given value.
-
-### HasSshUserOverride
-
-`func (o *GFlagsUpgradeParams) HasSshUserOverride() bool`
-
-HasSshUserOverride returns a boolean if a field has been set.
-
 ### GetTargetXClusterConfigs
 
 `func (o *GFlagsUpgradeParams) GetTargetXClusterConfigs() []string`
@@ -1082,31 +1004,6 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
-### GetUpdateOptions
-
-`func (o *GFlagsUpgradeParams) GetUpdateOptions() []string`
-
-GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
-
-### GetUpdateOptionsOk
-
-`func (o *GFlagsUpgradeParams) GetUpdateOptionsOk() (*[]string, bool)`
-
-GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdateOptions
-
-`func (o *GFlagsUpgradeParams) SetUpdateOptions(v []string)`
-
-SetUpdateOptions sets UpdateOptions field to given value.
-
-### HasUpdateOptions
-
-`func (o *GFlagsUpgradeParams) HasUpdateOptions() bool`
-
-HasUpdateOptions returns a boolean if a field has been set.
-
 ### GetUpdateSucceeded
 
 `func (o *GFlagsUpgradeParams) GetUpdateSucceeded() bool`
@@ -1202,31 +1099,6 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
-### GetUseNewHelmNamingStyle
-
-`func (o *GFlagsUpgradeParams) GetUseNewHelmNamingStyle() bool`
-
-GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
-
-### GetUseNewHelmNamingStyleOk
-
-`func (o *GFlagsUpgradeParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
-
-GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUseNewHelmNamingStyle
-
-`func (o *GFlagsUpgradeParams) SetUseNewHelmNamingStyle(v bool)`
-
-SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
-
-### HasUseNewHelmNamingStyle
-
-`func (o *GFlagsUpgradeParams) HasUseNewHelmNamingStyle() bool`
-
-HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-
 ### GetUserAZSelected
 
 `func (o *GFlagsUpgradeParams) GetUserAZSelected() bool`
@@ -1252,31 +1124,6 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
-### GetXclusterInfo
-
-`func (o *GFlagsUpgradeParams) GetXclusterInfo() XClusterInfo`
-
-GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
-
-### GetXclusterInfoOk
-
-`func (o *GFlagsUpgradeParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
-
-GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXclusterInfo
-
-`func (o *GFlagsUpgradeParams) SetXclusterInfo(v XClusterInfo)`
-
-SetXclusterInfo sets XclusterInfo field to given value.
-
-### HasXclusterInfo
-
-`func (o *GFlagsUpgradeParams) HasXclusterInfo() bool`
-
-HasXclusterInfo returns a boolean if a field has been set.
-
 ### GetYbPrevSoftwareVersion
 
 `func (o *GFlagsUpgradeParams) GetYbPrevSoftwareVersion() string`
@@ -1301,56 +1148,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *GFlagsUpgradeParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *GFlagsUpgradeParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *GFlagsUpgradeParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *GFlagsUpgradeParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *GFlagsUpgradeParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *GFlagsUpgradeParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *GFlagsUpgradeParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *GFlagsUpgradeParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *GFlagsUpgradeParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -16,8 +16,6 @@ import (
 
 // AlertChannelWebHookParamsAllOf struct for AlertChannelWebHookParamsAllOf
 type AlertChannelWebHookParamsAllOf struct {
-	HttpAuth *HTTPAuthInformation `json:"httpAuth,omitempty"`
-	// Webhook URL
 	WebhookUrl string `json:"webhookUrl"`
 }
 
@@ -37,38 +35,6 @@ func NewAlertChannelWebHookParamsAllOf(webhookUrl string, ) *AlertChannelWebHook
 func NewAlertChannelWebHookParamsAllOfWithDefaults() *AlertChannelWebHookParamsAllOf {
 	this := AlertChannelWebHookParamsAllOf{}
 	return &this
-}
-
-// GetHttpAuth returns the HttpAuth field value if set, zero value otherwise.
-func (o *AlertChannelWebHookParamsAllOf) GetHttpAuth() HTTPAuthInformation {
-	if o == nil || o.HttpAuth == nil {
-		var ret HTTPAuthInformation
-		return ret
-	}
-	return *o.HttpAuth
-}
-
-// GetHttpAuthOk returns a tuple with the HttpAuth field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AlertChannelWebHookParamsAllOf) GetHttpAuthOk() (*HTTPAuthInformation, bool) {
-	if o == nil || o.HttpAuth == nil {
-		return nil, false
-	}
-	return o.HttpAuth, true
-}
-
-// HasHttpAuth returns a boolean if a field has been set.
-func (o *AlertChannelWebHookParamsAllOf) HasHttpAuth() bool {
-	if o != nil && o.HttpAuth != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHttpAuth gets a reference to the given HTTPAuthInformation and assigns it to the HttpAuth field.
-func (o *AlertChannelWebHookParamsAllOf) SetHttpAuth(v HTTPAuthInformation) {
-	o.HttpAuth = &v
 }
 
 // GetWebhookUrl returns the WebhookUrl field value
@@ -97,9 +63,6 @@ func (o *AlertChannelWebHookParamsAllOf) SetWebhookUrl(v string) {
 
 func (o AlertChannelWebHookParamsAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.HttpAuth != nil {
-		toSerialize["httpAuth"] = o.HttpAuth
-	}
 	if true {
 		toSerialize["webhookUrl"] = o.WebhookUrl
 	}

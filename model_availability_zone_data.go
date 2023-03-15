@@ -20,8 +20,6 @@ type AvailabilityZoneData struct {
 	Code string `json:"code"`
 	// AZ name
 	Name string `json:"name"`
-	// AZ secondary subnet
-	SecondarySubnet *string `json:"secondarySubnet,omitempty"`
 	// AZ subnet
 	Subnet *string `json:"subnet,omitempty"`
 }
@@ -93,38 +91,6 @@ func (o *AvailabilityZoneData) SetName(v string) {
 	o.Name = v
 }
 
-// GetSecondarySubnet returns the SecondarySubnet field value if set, zero value otherwise.
-func (o *AvailabilityZoneData) GetSecondarySubnet() string {
-	if o == nil || o.SecondarySubnet == nil {
-		var ret string
-		return ret
-	}
-	return *o.SecondarySubnet
-}
-
-// GetSecondarySubnetOk returns a tuple with the SecondarySubnet field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AvailabilityZoneData) GetSecondarySubnetOk() (*string, bool) {
-	if o == nil || o.SecondarySubnet == nil {
-		return nil, false
-	}
-	return o.SecondarySubnet, true
-}
-
-// HasSecondarySubnet returns a boolean if a field has been set.
-func (o *AvailabilityZoneData) HasSecondarySubnet() bool {
-	if o != nil && o.SecondarySubnet != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSecondarySubnet gets a reference to the given string and assigns it to the SecondarySubnet field.
-func (o *AvailabilityZoneData) SetSecondarySubnet(v string) {
-	o.SecondarySubnet = &v
-}
-
 // GetSubnet returns the Subnet field value if set, zero value otherwise.
 func (o *AvailabilityZoneData) GetSubnet() string {
 	if o == nil || o.Subnet == nil {
@@ -164,9 +130,6 @@ func (o AvailabilityZoneData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["name"] = o.Name
-	}
-	if o.SecondarySubnet != nil {
-		toSerialize["secondarySubnet"] = o.SecondarySubnet
 	}
 	if o.Subnet != nil {
 		toSerialize["subnet"] = o.Subnet

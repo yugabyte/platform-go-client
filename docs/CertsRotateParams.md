@@ -5,64 +5,56 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
+**BackupInProgress** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
-**ClientRootCA** | Pointer to **string** |  | [optional] 
+**ClientRootCA** | **string** |  | 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
-**EnableYbc** | Pointer to **bool** |  | [optional] 
 **EncryptionAtRestConfig** | Pointer to [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | [optional] 
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FirstTry** | Pointer to **bool** | Whether this task has been tried before | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
-**InstallYbc** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
-**PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**PreviousTaskUUID** | Pointer to **string** | Previous task UUID only if this task is a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
-**RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
-**RootCA** | Pointer to **string** |  | [optional] 
+**RootAndClientRootCASame** | **bool** |  | 
+**RootCA** | **string** |  | 
 **SelfSignedClientCertRotate** | **bool** |  | 
 **SelfSignedServerCertRotate** | **bool** |  | 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
-**SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
-**UpdateOptions** | Pointer to **[]string** |  | [optional] 
 **UpdateSucceeded** | Pointer to **bool** |  | [optional] 
 **UpdatingTask** | Pointer to **string** |  | [optional] 
 **UpdatingTaskUUID** | Pointer to **string** |  | [optional] 
 **UpgradeOption** | **string** |  | 
-**UseNewHelmNamingStyle** | Pointer to **bool** |  | [optional] 
 **UserAZSelected** | Pointer to **bool** |  | [optional] 
-**XclusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
-**YbcInstalled** | Pointer to **bool** |  | [optional] 
-**YbcSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewCertsRotateParams
 
-`func NewCertsRotateParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *CertsRotateParams`
+`func NewCertsRotateParams(clientRootCA string, clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, rootAndClientRootCASame bool, rootCA string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *CertsRotateParams`
 
 NewCertsRotateParams instantiates a new CertsRotateParams object
 This constructor will assign default values to properties that have it defined,
@@ -101,6 +93,31 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *CertsRotateParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
+
+### GetBackupInProgress
+
+`func (o *CertsRotateParams) GetBackupInProgress() bool`
+
+GetBackupInProgress returns the BackupInProgress field if non-nil, zero value otherwise.
+
+### GetBackupInProgressOk
+
+`func (o *CertsRotateParams) GetBackupInProgressOk() (*bool, bool)`
+
+GetBackupInProgressOk returns a tuple with the BackupInProgress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupInProgress
+
+`func (o *CertsRotateParams) SetBackupInProgress(v bool)`
+
+SetBackupInProgress sets BackupInProgress field to given value.
+
+### HasBackupInProgress
+
+`func (o *CertsRotateParams) HasBackupInProgress() bool`
+
+HasBackupInProgress returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -146,11 +163,6 @@ and a boolean to check if the value has been set.
 
 SetClientRootCA sets ClientRootCA field to given value.
 
-### HasClientRootCA
-
-`func (o *CertsRotateParams) HasClientRootCA() bool`
-
-HasClientRootCA returns a boolean if a field has been set.
 
 ### GetClusters
 
@@ -292,31 +304,6 @@ SetDeviceInfo sets DeviceInfo field to given value.
 
 HasDeviceInfo returns a boolean if a field has been set.
 
-### GetEnableYbc
-
-`func (o *CertsRotateParams) GetEnableYbc() bool`
-
-GetEnableYbc returns the EnableYbc field if non-nil, zero value otherwise.
-
-### GetEnableYbcOk
-
-`func (o *CertsRotateParams) GetEnableYbcOk() (*bool, bool)`
-
-GetEnableYbcOk returns a tuple with the EnableYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnableYbc
-
-`func (o *CertsRotateParams) SetEnableYbc(v bool)`
-
-SetEnableYbc sets EnableYbc field to given value.
-
-### HasEnableYbc
-
-`func (o *CertsRotateParams) HasEnableYbc() bool`
-
-HasEnableYbc returns a boolean if a field has been set.
-
 ### GetEncryptionAtRestConfig
 
 `func (o *CertsRotateParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig`
@@ -417,6 +404,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
+### GetFirstTry
+
+`func (o *CertsRotateParams) GetFirstTry() bool`
+
+GetFirstTry returns the FirstTry field if non-nil, zero value otherwise.
+
+### GetFirstTryOk
+
+`func (o *CertsRotateParams) GetFirstTryOk() (*bool, bool)`
+
+GetFirstTryOk returns a tuple with the FirstTry field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstTry
+
+`func (o *CertsRotateParams) SetFirstTry(v bool)`
+
+SetFirstTry sets FirstTry field to given value.
+
+### HasFirstTry
+
+`func (o *CertsRotateParams) HasFirstTry() bool`
+
+HasFirstTry returns a boolean if a field has been set.
+
 ### GetImportedState
 
 `func (o *CertsRotateParams) GetImportedState() string`
@@ -441,31 +453,6 @@ SetImportedState sets ImportedState field to given value.
 `func (o *CertsRotateParams) HasImportedState() bool`
 
 HasImportedState returns a boolean if a field has been set.
-
-### GetInstallYbc
-
-`func (o *CertsRotateParams) GetInstallYbc() bool`
-
-GetInstallYbc returns the InstallYbc field if non-nil, zero value otherwise.
-
-### GetInstallYbcOk
-
-`func (o *CertsRotateParams) GetInstallYbcOk() (*bool, bool)`
-
-GetInstallYbcOk returns a tuple with the InstallYbc field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetInstallYbc
-
-`func (o *CertsRotateParams) SetInstallYbc(v bool)`
-
-SetInstallYbc sets InstallYbc field to given value.
-
-### HasInstallYbc
-
-`func (o *CertsRotateParams) HasInstallYbc() bool`
-
-HasInstallYbc returns a boolean if a field has been set.
 
 ### GetItestS3PackagePath
 
@@ -511,31 +498,6 @@ and a boolean to check if the value has been set.
 
 SetKubernetesUpgradeSupported sets KubernetesUpgradeSupported field to given value.
 
-
-### GetMastersInDefaultRegion
-
-`func (o *CertsRotateParams) GetMastersInDefaultRegion() bool`
-
-GetMastersInDefaultRegion returns the MastersInDefaultRegion field if non-nil, zero value otherwise.
-
-### GetMastersInDefaultRegionOk
-
-`func (o *CertsRotateParams) GetMastersInDefaultRegionOk() (*bool, bool)`
-
-GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMastersInDefaultRegion
-
-`func (o *CertsRotateParams) SetMastersInDefaultRegion(v bool)`
-
-SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
-
-### HasMastersInDefaultRegion
-
-`func (o *CertsRotateParams) HasMastersInDefaultRegion() bool`
-
-HasMastersInDefaultRegion returns a boolean if a field has been set.
 
 ### GetNextClusterIndex
 
@@ -682,26 +644,6 @@ and a boolean to check if the value has been set.
 SetPlatformUrl sets PlatformUrl field to given value.
 
 
-### GetPlatformVersion
-
-`func (o *CertsRotateParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *CertsRotateParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *CertsRotateParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-
 ### GetPreviousTaskUUID
 
 `func (o *CertsRotateParams) GetPreviousTaskUUID() string`
@@ -796,11 +738,6 @@ and a boolean to check if the value has been set.
 
 SetRootAndClientRootCASame sets RootAndClientRootCASame field to given value.
 
-### HasRootAndClientRootCASame
-
-`func (o *CertsRotateParams) HasRootAndClientRootCASame() bool`
-
-HasRootAndClientRootCASame returns a boolean if a field has been set.
 
 ### GetRootCA
 
@@ -821,11 +758,6 @@ and a boolean to check if the value has been set.
 
 SetRootCA sets RootCA field to given value.
 
-### HasRootCA
-
-`func (o *CertsRotateParams) HasRootCA() bool`
-
-HasRootCA returns a boolean if a field has been set.
 
 ### GetSelfSignedClientCertRotate
 
@@ -957,31 +889,6 @@ SetSourceXClusterConfigs sets SourceXClusterConfigs field to given value.
 
 HasSourceXClusterConfigs returns a boolean if a field has been set.
 
-### GetSshUserOverride
-
-`func (o *CertsRotateParams) GetSshUserOverride() string`
-
-GetSshUserOverride returns the SshUserOverride field if non-nil, zero value otherwise.
-
-### GetSshUserOverrideOk
-
-`func (o *CertsRotateParams) GetSshUserOverrideOk() (*string, bool)`
-
-GetSshUserOverrideOk returns a tuple with the SshUserOverride field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSshUserOverride
-
-`func (o *CertsRotateParams) SetSshUserOverride(v string)`
-
-SetSshUserOverride sets SshUserOverride field to given value.
-
-### HasSshUserOverride
-
-`func (o *CertsRotateParams) HasSshUserOverride() bool`
-
-HasSshUserOverride returns a boolean if a field has been set.
-
 ### GetTargetXClusterConfigs
 
 `func (o *CertsRotateParams) GetTargetXClusterConfigs() []string`
@@ -1082,31 +989,6 @@ SetUpdateInProgress sets UpdateInProgress field to given value.
 
 HasUpdateInProgress returns a boolean if a field has been set.
 
-### GetUpdateOptions
-
-`func (o *CertsRotateParams) GetUpdateOptions() []string`
-
-GetUpdateOptions returns the UpdateOptions field if non-nil, zero value otherwise.
-
-### GetUpdateOptionsOk
-
-`func (o *CertsRotateParams) GetUpdateOptionsOk() (*[]string, bool)`
-
-GetUpdateOptionsOk returns a tuple with the UpdateOptions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdateOptions
-
-`func (o *CertsRotateParams) SetUpdateOptions(v []string)`
-
-SetUpdateOptions sets UpdateOptions field to given value.
-
-### HasUpdateOptions
-
-`func (o *CertsRotateParams) HasUpdateOptions() bool`
-
-HasUpdateOptions returns a boolean if a field has been set.
-
 ### GetUpdateSucceeded
 
 `func (o *CertsRotateParams) GetUpdateSucceeded() bool`
@@ -1202,31 +1084,6 @@ and a boolean to check if the value has been set.
 SetUpgradeOption sets UpgradeOption field to given value.
 
 
-### GetUseNewHelmNamingStyle
-
-`func (o *CertsRotateParams) GetUseNewHelmNamingStyle() bool`
-
-GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field if non-nil, zero value otherwise.
-
-### GetUseNewHelmNamingStyleOk
-
-`func (o *CertsRotateParams) GetUseNewHelmNamingStyleOk() (*bool, bool)`
-
-GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUseNewHelmNamingStyle
-
-`func (o *CertsRotateParams) SetUseNewHelmNamingStyle(v bool)`
-
-SetUseNewHelmNamingStyle sets UseNewHelmNamingStyle field to given value.
-
-### HasUseNewHelmNamingStyle
-
-`func (o *CertsRotateParams) HasUseNewHelmNamingStyle() bool`
-
-HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-
 ### GetUserAZSelected
 
 `func (o *CertsRotateParams) GetUserAZSelected() bool`
@@ -1252,31 +1109,6 @@ SetUserAZSelected sets UserAZSelected field to given value.
 
 HasUserAZSelected returns a boolean if a field has been set.
 
-### GetXclusterInfo
-
-`func (o *CertsRotateParams) GetXclusterInfo() XClusterInfo`
-
-GetXclusterInfo returns the XclusterInfo field if non-nil, zero value otherwise.
-
-### GetXclusterInfoOk
-
-`func (o *CertsRotateParams) GetXclusterInfoOk() (*XClusterInfo, bool)`
-
-GetXclusterInfoOk returns a tuple with the XclusterInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXclusterInfo
-
-`func (o *CertsRotateParams) SetXclusterInfo(v XClusterInfo)`
-
-SetXclusterInfo sets XclusterInfo field to given value.
-
-### HasXclusterInfo
-
-`func (o *CertsRotateParams) HasXclusterInfo() bool`
-
-HasXclusterInfo returns a boolean if a field has been set.
-
 ### GetYbPrevSoftwareVersion
 
 `func (o *CertsRotateParams) GetYbPrevSoftwareVersion() string`
@@ -1301,56 +1133,6 @@ SetYbPrevSoftwareVersion sets YbPrevSoftwareVersion field to given value.
 `func (o *CertsRotateParams) HasYbPrevSoftwareVersion() bool`
 
 HasYbPrevSoftwareVersion returns a boolean if a field has been set.
-
-### GetYbcInstalled
-
-`func (o *CertsRotateParams) GetYbcInstalled() bool`
-
-GetYbcInstalled returns the YbcInstalled field if non-nil, zero value otherwise.
-
-### GetYbcInstalledOk
-
-`func (o *CertsRotateParams) GetYbcInstalledOk() (*bool, bool)`
-
-GetYbcInstalledOk returns a tuple with the YbcInstalled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcInstalled
-
-`func (o *CertsRotateParams) SetYbcInstalled(v bool)`
-
-SetYbcInstalled sets YbcInstalled field to given value.
-
-### HasYbcInstalled
-
-`func (o *CertsRotateParams) HasYbcInstalled() bool`
-
-HasYbcInstalled returns a boolean if a field has been set.
-
-### GetYbcSoftwareVersion
-
-`func (o *CertsRotateParams) GetYbcSoftwareVersion() string`
-
-GetYbcSoftwareVersion returns the YbcSoftwareVersion field if non-nil, zero value otherwise.
-
-### GetYbcSoftwareVersionOk
-
-`func (o *CertsRotateParams) GetYbcSoftwareVersionOk() (*string, bool)`
-
-GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbcSoftwareVersion
-
-`func (o *CertsRotateParams) SetYbcSoftwareVersion(v string)`
-
-SetYbcSoftwareVersion sets YbcSoftwareVersion field to given value.
-
-### HasYbcSoftwareVersion
-
-`func (o *CertsRotateParams) HasYbcSoftwareVersion() bool`
-
-HasYbcSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

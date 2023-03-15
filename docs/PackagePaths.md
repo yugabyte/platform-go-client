@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HelmChart** | Pointer to **string** | Path to the Helm chart package | [optional] 
-**HelmChartChecksum** | Pointer to **string** | Checksum for the Helm chart package | [optional] 
 **X8664** | Pointer to **string** | Path to x86_64 package | [optional] 
 **X8664Checksum** | Pointer to **string** | Checksum for x86_64 package | [optional] 
 
@@ -27,56 +25,6 @@ will change when the set of required properties is changed
 NewPackagePathsWithDefaults instantiates a new PackagePaths object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHelmChart
-
-`func (o *PackagePaths) GetHelmChart() string`
-
-GetHelmChart returns the HelmChart field if non-nil, zero value otherwise.
-
-### GetHelmChartOk
-
-`func (o *PackagePaths) GetHelmChartOk() (*string, bool)`
-
-GetHelmChartOk returns a tuple with the HelmChart field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHelmChart
-
-`func (o *PackagePaths) SetHelmChart(v string)`
-
-SetHelmChart sets HelmChart field to given value.
-
-### HasHelmChart
-
-`func (o *PackagePaths) HasHelmChart() bool`
-
-HasHelmChart returns a boolean if a field has been set.
-
-### GetHelmChartChecksum
-
-`func (o *PackagePaths) GetHelmChartChecksum() string`
-
-GetHelmChartChecksum returns the HelmChartChecksum field if non-nil, zero value otherwise.
-
-### GetHelmChartChecksumOk
-
-`func (o *PackagePaths) GetHelmChartChecksumOk() (*string, bool)`
-
-GetHelmChartChecksumOk returns a tuple with the HelmChartChecksum field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHelmChartChecksum
-
-`func (o *PackagePaths) SetHelmChartChecksum(v string)`
-
-SetHelmChartChecksum sets HelmChartChecksum field to given value.
-
-### HasHelmChartChecksum
-
-`func (o *PackagePaths) HasHelmChartChecksum() bool`
-
-HasHelmChartChecksum returns a boolean if a field has been set.
 
 ### GetX8664
 

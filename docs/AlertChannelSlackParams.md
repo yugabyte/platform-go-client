@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IconUrl** | Pointer to **string** | Slack icon URL | [optional] 
-**Username** | **string** | Slack username | 
-**WebhookUrl** | **string** | Slack webhook URL | 
+**IconUrl** | **string** |  | 
+**Username** | **string** |  | 
+**WebhookUrl** | **string** |  | 
 
 ## Methods
 
 ### NewAlertChannelSlackParams
 
-`func NewAlertChannelSlackParams(username string, webhookUrl string, ) *AlertChannelSlackParams`
+`func NewAlertChannelSlackParams(iconUrl string, username string, webhookUrl string, ) *AlertChannelSlackParams`
 
 NewAlertChannelSlackParams instantiates a new AlertChannelSlackParams object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetIconUrl sets IconUrl field to given value.
 
-### HasIconUrl
-
-`func (o *AlertChannelSlackParams) HasIconUrl() bool`
-
-HasIconUrl returns a boolean if a field has been set.
 
 ### GetUsername
 

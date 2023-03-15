@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DefaultRecipients** | Pointer to **bool** | Use health check notification recipients | [optional] 
-**DefaultSmtpSettings** | Pointer to **bool** | Use health check notification SMTP settings | [optional] 
-**Recipients** | Pointer to **[]string** | List of recipients | [optional] 
-**SmtpData** | Pointer to [**SmtpData**](SmtpData.md) |  | [optional] 
+**DefaultRecipients** | **bool** |  | 
+**DefaultSmtpSettings** | **bool** |  | 
+**Recipients** | **[]string** |  | 
+**SmtpData** | [**SmtpData**](SmtpData.md) |  | 
 
 ## Methods
 
 ### NewAlertChannelEmailParamsAllOf
 
-`func NewAlertChannelEmailParamsAllOf() *AlertChannelEmailParamsAllOf`
+`func NewAlertChannelEmailParamsAllOf(defaultRecipients bool, defaultSmtpSettings bool, recipients []string, smtpData SmtpData, ) *AlertChannelEmailParamsAllOf`
 
 NewAlertChannelEmailParamsAllOf instantiates a new AlertChannelEmailParamsAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetDefaultRecipients sets DefaultRecipients field to given value.
 
-### HasDefaultRecipients
-
-`func (o *AlertChannelEmailParamsAllOf) HasDefaultRecipients() bool`
-
-HasDefaultRecipients returns a boolean if a field has been set.
 
 ### GetDefaultSmtpSettings
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetDefaultSmtpSettings sets DefaultSmtpSettings field to given value.
 
-### HasDefaultSmtpSettings
-
-`func (o *AlertChannelEmailParamsAllOf) HasDefaultSmtpSettings() bool`
-
-HasDefaultSmtpSettings returns a boolean if a field has been set.
 
 ### GetRecipients
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetRecipients sets Recipients field to given value.
 
-### HasRecipients
-
-`func (o *AlertChannelEmailParamsAllOf) HasRecipients() bool`
-
-HasRecipients returns a boolean if a field has been set.
 
 ### GetSmtpData
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetSmtpData sets SmtpData field to given value.
 
-### HasSmtpData
-
-`func (o *AlertChannelEmailParamsAllOf) HasSmtpData() bool`
-
-HasSmtpData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

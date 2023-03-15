@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AllTables** | **bool** |  | 
 **BackupSizeInBytes** | **int64** |  | 
 **DefaultLocation** | **string** |  | 
 **Keyspace** | **string** |  | 
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewKeyspaceTablesList
 
-`func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList`
+`func NewKeyspaceTablesList(backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList`
 
 NewKeyspaceTablesList instantiates a new KeyspaceTablesList object
 This constructor will assign default values to properties that have it defined,
@@ -30,26 +29,6 @@ will change when the set of required properties is changed
 NewKeyspaceTablesListWithDefaults instantiates a new KeyspaceTablesList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAllTables
-
-`func (o *KeyspaceTablesList) GetAllTables() bool`
-
-GetAllTables returns the AllTables field if non-nil, zero value otherwise.
-
-### GetAllTablesOk
-
-`func (o *KeyspaceTablesList) GetAllTablesOk() (*bool, bool)`
-
-GetAllTablesOk returns a tuple with the AllTables field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllTables
-
-`func (o *KeyspaceTablesList) SetAllTables(v bool)`
-
-SetAllTables sets AllTables field to given value.
-
 
 ### GetBackupSizeInBytes
 

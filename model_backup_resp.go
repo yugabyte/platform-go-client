@@ -18,47 +18,57 @@ import (
 // BackupResp struct for BackupResp
 type BackupResp struct {
 	BackupType string `json:"backupType"`
-	Category string `json:"category"`
-	CommonBackupInfo CommonBackupInfo `json:"commonBackupInfo"`
+	BackupUUID string `json:"backupUUID"`
+	CompletionTime time.Time `json:"completionTime"`
+	CreateTime time.Time `json:"createTime"`
 	CustomerUUID string `json:"customerUUID"`
-	// The expiry time for backup.
-	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
-	FullChainSizeInBytes int64 `json:"fullChainSizeInBytes"`
-	HasIncrementalBackups bool `json:"hasIncrementalBackups"`
+	ExpiryTime time.Time `json:"expiryTime"`
 	IsFullBackup bool `json:"isFullBackup"`
 	IsStorageConfigPresent bool `json:"isStorageConfigPresent"`
 	IsUniversePresent bool `json:"isUniversePresent"`
-	LastBackupState string `json:"lastBackupState"`
-	// Time for last incremenatal backup.
-	LastIncrementalBackupTime *time.Time `json:"lastIncrementalBackupTime,omitempty"`
+	KmsConfigUUID string `json:"kmsConfigUUID"`
 	OnDemand bool `json:"onDemand"`
+	ResponseList []KeyspaceTablesList `json:"responseList"`
 	ScheduleUUID string `json:"scheduleUUID"`
+	Sse bool `json:"sse"`
+	State string `json:"state"`
 	StorageConfigType string `json:"storageConfigType"`
+	StorageConfigUUID string `json:"storageConfigUUID"`
+	TaskUUID string `json:"taskUUID"`
+	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
 	UniverseName string `json:"universeName"`
 	UniverseUUID string `json:"universeUUID"`
+	UpdateTime time.Time `json:"updateTime"`
 }
 
 // NewBackupResp instantiates a new BackupResp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
+func NewBackupResp(backupType string, backupUUID string, completionTime time.Time, createTime time.Time, customerUUID string, expiryTime time.Time, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, kmsConfigUUID string, onDemand bool, responseList []KeyspaceTablesList, scheduleUUID string, sse bool, state string, storageConfigType string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, universeName string, universeUUID string, updateTime time.Time, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
-	this.Category = category
-	this.CommonBackupInfo = commonBackupInfo
+	this.BackupUUID = backupUUID
+	this.CompletionTime = completionTime
+	this.CreateTime = createTime
 	this.CustomerUUID = customerUUID
-	this.FullChainSizeInBytes = fullChainSizeInBytes
-	this.HasIncrementalBackups = hasIncrementalBackups
+	this.ExpiryTime = expiryTime
 	this.IsFullBackup = isFullBackup
 	this.IsStorageConfigPresent = isStorageConfigPresent
 	this.IsUniversePresent = isUniversePresent
-	this.LastBackupState = lastBackupState
+	this.KmsConfigUUID = kmsConfigUUID
 	this.OnDemand = onDemand
+	this.ResponseList = responseList
 	this.ScheduleUUID = scheduleUUID
+	this.Sse = sse
+	this.State = state
 	this.StorageConfigType = storageConfigType
+	this.StorageConfigUUID = storageConfigUUID
+	this.TaskUUID = taskUUID
+	this.TotalBackupSizeInBytes = totalBackupSizeInBytes
 	this.UniverseName = universeName
 	this.UniverseUUID = universeUUID
+	this.UpdateTime = updateTime
 	return &this
 }
 
@@ -94,52 +104,76 @@ func (o *BackupResp) SetBackupType(v string) {
 	o.BackupType = v
 }
 
-// GetCategory returns the Category field value
-func (o *BackupResp) GetCategory() string {
+// GetBackupUUID returns the BackupUUID field value
+func (o *BackupResp) GetBackupUUID() string {
 	if o == nil  {
 		var ret string
 		return ret
 	}
 
-	return o.Category
+	return o.BackupUUID
 }
 
-// GetCategoryOk returns a tuple with the Category field value
+// GetBackupUUIDOk returns a tuple with the BackupUUID field value
 // and a boolean to check if the value has been set.
-func (o *BackupResp) GetCategoryOk() (*string, bool) {
+func (o *BackupResp) GetBackupUUIDOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.Category, true
+	return &o.BackupUUID, true
 }
 
-// SetCategory sets field value
-func (o *BackupResp) SetCategory(v string) {
-	o.Category = v
+// SetBackupUUID sets field value
+func (o *BackupResp) SetBackupUUID(v string) {
+	o.BackupUUID = v
 }
 
-// GetCommonBackupInfo returns the CommonBackupInfo field value
-func (o *BackupResp) GetCommonBackupInfo() CommonBackupInfo {
+// GetCompletionTime returns the CompletionTime field value
+func (o *BackupResp) GetCompletionTime() time.Time {
 	if o == nil  {
-		var ret CommonBackupInfo
+		var ret time.Time
 		return ret
 	}
 
-	return o.CommonBackupInfo
+	return o.CompletionTime
 }
 
-// GetCommonBackupInfoOk returns a tuple with the CommonBackupInfo field value
+// GetCompletionTimeOk returns a tuple with the CompletionTime field value
 // and a boolean to check if the value has been set.
-func (o *BackupResp) GetCommonBackupInfoOk() (*CommonBackupInfo, bool) {
+func (o *BackupResp) GetCompletionTimeOk() (*time.Time, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.CommonBackupInfo, true
+	return &o.CompletionTime, true
 }
 
-// SetCommonBackupInfo sets field value
-func (o *BackupResp) SetCommonBackupInfo(v CommonBackupInfo) {
-	o.CommonBackupInfo = v
+// SetCompletionTime sets field value
+func (o *BackupResp) SetCompletionTime(v time.Time) {
+	o.CompletionTime = v
+}
+
+// GetCreateTime returns the CreateTime field value
+func (o *BackupResp) GetCreateTime() time.Time {
+	if o == nil  {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreateTime
+}
+
+// GetCreateTimeOk returns a tuple with the CreateTime field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetCreateTimeOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CreateTime, true
+}
+
+// SetCreateTime sets field value
+func (o *BackupResp) SetCreateTime(v time.Time) {
+	o.CreateTime = v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value
@@ -166,84 +200,28 @@ func (o *BackupResp) SetCustomerUUID(v string) {
 	o.CustomerUUID = v
 }
 
-// GetExpiryTime returns the ExpiryTime field value if set, zero value otherwise.
+// GetExpiryTime returns the ExpiryTime field value
 func (o *BackupResp) GetExpiryTime() time.Time {
-	if o == nil || o.ExpiryTime == nil {
+	if o == nil  {
 		var ret time.Time
 		return ret
 	}
-	return *o.ExpiryTime
+
+	return o.ExpiryTime
 }
 
-// GetExpiryTimeOk returns a tuple with the ExpiryTime field value if set, nil otherwise
+// GetExpiryTimeOk returns a tuple with the ExpiryTime field value
 // and a boolean to check if the value has been set.
 func (o *BackupResp) GetExpiryTimeOk() (*time.Time, bool) {
-	if o == nil || o.ExpiryTime == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.ExpiryTime, true
+	return &o.ExpiryTime, true
 }
 
-// HasExpiryTime returns a boolean if a field has been set.
-func (o *BackupResp) HasExpiryTime() bool {
-	if o != nil && o.ExpiryTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiryTime gets a reference to the given time.Time and assigns it to the ExpiryTime field.
+// SetExpiryTime sets field value
 func (o *BackupResp) SetExpiryTime(v time.Time) {
-	o.ExpiryTime = &v
-}
-
-// GetFullChainSizeInBytes returns the FullChainSizeInBytes field value
-func (o *BackupResp) GetFullChainSizeInBytes() int64 {
-	if o == nil  {
-		var ret int64
-		return ret
-	}
-
-	return o.FullChainSizeInBytes
-}
-
-// GetFullChainSizeInBytesOk returns a tuple with the FullChainSizeInBytes field value
-// and a boolean to check if the value has been set.
-func (o *BackupResp) GetFullChainSizeInBytesOk() (*int64, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.FullChainSizeInBytes, true
-}
-
-// SetFullChainSizeInBytes sets field value
-func (o *BackupResp) SetFullChainSizeInBytes(v int64) {
-	o.FullChainSizeInBytes = v
-}
-
-// GetHasIncrementalBackups returns the HasIncrementalBackups field value
-func (o *BackupResp) GetHasIncrementalBackups() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.HasIncrementalBackups
-}
-
-// GetHasIncrementalBackupsOk returns a tuple with the HasIncrementalBackups field value
-// and a boolean to check if the value has been set.
-func (o *BackupResp) GetHasIncrementalBackupsOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.HasIncrementalBackups, true
-}
-
-// SetHasIncrementalBackups sets field value
-func (o *BackupResp) SetHasIncrementalBackups(v bool) {
-	o.HasIncrementalBackups = v
+	o.ExpiryTime = v
 }
 
 // GetIsFullBackup returns the IsFullBackup field value
@@ -318,60 +296,28 @@ func (o *BackupResp) SetIsUniversePresent(v bool) {
 	o.IsUniversePresent = v
 }
 
-// GetLastBackupState returns the LastBackupState field value
-func (o *BackupResp) GetLastBackupState() string {
+// GetKmsConfigUUID returns the KmsConfigUUID field value
+func (o *BackupResp) GetKmsConfigUUID() string {
 	if o == nil  {
 		var ret string
 		return ret
 	}
 
-	return o.LastBackupState
+	return o.KmsConfigUUID
 }
 
-// GetLastBackupStateOk returns a tuple with the LastBackupState field value
+// GetKmsConfigUUIDOk returns a tuple with the KmsConfigUUID field value
 // and a boolean to check if the value has been set.
-func (o *BackupResp) GetLastBackupStateOk() (*string, bool) {
+func (o *BackupResp) GetKmsConfigUUIDOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.LastBackupState, true
+	return &o.KmsConfigUUID, true
 }
 
-// SetLastBackupState sets field value
-func (o *BackupResp) SetLastBackupState(v string) {
-	o.LastBackupState = v
-}
-
-// GetLastIncrementalBackupTime returns the LastIncrementalBackupTime field value if set, zero value otherwise.
-func (o *BackupResp) GetLastIncrementalBackupTime() time.Time {
-	if o == nil || o.LastIncrementalBackupTime == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.LastIncrementalBackupTime
-}
-
-// GetLastIncrementalBackupTimeOk returns a tuple with the LastIncrementalBackupTime field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupResp) GetLastIncrementalBackupTimeOk() (*time.Time, bool) {
-	if o == nil || o.LastIncrementalBackupTime == nil {
-		return nil, false
-	}
-	return o.LastIncrementalBackupTime, true
-}
-
-// HasLastIncrementalBackupTime returns a boolean if a field has been set.
-func (o *BackupResp) HasLastIncrementalBackupTime() bool {
-	if o != nil && o.LastIncrementalBackupTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLastIncrementalBackupTime gets a reference to the given time.Time and assigns it to the LastIncrementalBackupTime field.
-func (o *BackupResp) SetLastIncrementalBackupTime(v time.Time) {
-	o.LastIncrementalBackupTime = &v
+// SetKmsConfigUUID sets field value
+func (o *BackupResp) SetKmsConfigUUID(v string) {
+	o.KmsConfigUUID = v
 }
 
 // GetOnDemand returns the OnDemand field value
@@ -398,6 +344,30 @@ func (o *BackupResp) SetOnDemand(v bool) {
 	o.OnDemand = v
 }
 
+// GetResponseList returns the ResponseList field value
+func (o *BackupResp) GetResponseList() []KeyspaceTablesList {
+	if o == nil  {
+		var ret []KeyspaceTablesList
+		return ret
+	}
+
+	return o.ResponseList
+}
+
+// GetResponseListOk returns a tuple with the ResponseList field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetResponseListOk() (*[]KeyspaceTablesList, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ResponseList, true
+}
+
+// SetResponseList sets field value
+func (o *BackupResp) SetResponseList(v []KeyspaceTablesList) {
+	o.ResponseList = v
+}
+
 // GetScheduleUUID returns the ScheduleUUID field value
 func (o *BackupResp) GetScheduleUUID() string {
 	if o == nil  {
@@ -422,6 +392,54 @@ func (o *BackupResp) SetScheduleUUID(v string) {
 	o.ScheduleUUID = v
 }
 
+// GetSse returns the Sse field value
+func (o *BackupResp) GetSse() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.Sse
+}
+
+// GetSseOk returns a tuple with the Sse field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetSseOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Sse, true
+}
+
+// SetSse sets field value
+func (o *BackupResp) SetSse(v bool) {
+	o.Sse = v
+}
+
+// GetState returns the State field value
+func (o *BackupResp) GetState() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetStateOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.State, true
+}
+
+// SetState sets field value
+func (o *BackupResp) SetState(v string) {
+	o.State = v
+}
+
 // GetStorageConfigType returns the StorageConfigType field value
 func (o *BackupResp) GetStorageConfigType() string {
 	if o == nil  {
@@ -444,6 +462,78 @@ func (o *BackupResp) GetStorageConfigTypeOk() (*string, bool) {
 // SetStorageConfigType sets field value
 func (o *BackupResp) SetStorageConfigType(v string) {
 	o.StorageConfigType = v
+}
+
+// GetStorageConfigUUID returns the StorageConfigUUID field value
+func (o *BackupResp) GetStorageConfigUUID() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.StorageConfigUUID
+}
+
+// GetStorageConfigUUIDOk returns a tuple with the StorageConfigUUID field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetStorageConfigUUIDOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.StorageConfigUUID, true
+}
+
+// SetStorageConfigUUID sets field value
+func (o *BackupResp) SetStorageConfigUUID(v string) {
+	o.StorageConfigUUID = v
+}
+
+// GetTaskUUID returns the TaskUUID field value
+func (o *BackupResp) GetTaskUUID() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.TaskUUID
+}
+
+// GetTaskUUIDOk returns a tuple with the TaskUUID field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetTaskUUIDOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TaskUUID, true
+}
+
+// SetTaskUUID sets field value
+func (o *BackupResp) SetTaskUUID(v string) {
+	o.TaskUUID = v
+}
+
+// GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field value
+func (o *BackupResp) GetTotalBackupSizeInBytes() int64 {
+	if o == nil  {
+		var ret int64
+		return ret
+	}
+
+	return o.TotalBackupSizeInBytes
+}
+
+// GetTotalBackupSizeInBytesOk returns a tuple with the TotalBackupSizeInBytes field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetTotalBackupSizeInBytesOk() (*int64, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TotalBackupSizeInBytes, true
+}
+
+// SetTotalBackupSizeInBytes sets field value
+func (o *BackupResp) SetTotalBackupSizeInBytes(v int64) {
+	o.TotalBackupSizeInBytes = v
 }
 
 // GetUniverseName returns the UniverseName field value
@@ -494,28 +584,49 @@ func (o *BackupResp) SetUniverseUUID(v string) {
 	o.UniverseUUID = v
 }
 
+// GetUpdateTime returns the UpdateTime field value
+func (o *BackupResp) GetUpdateTime() time.Time {
+	if o == nil  {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdateTime
+}
+
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetUpdateTimeOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.UpdateTime, true
+}
+
+// SetUpdateTime sets field value
+func (o *BackupResp) SetUpdateTime(v time.Time) {
+	o.UpdateTime = v
+}
+
 func (o BackupResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["backupType"] = o.BackupType
 	}
 	if true {
-		toSerialize["category"] = o.Category
+		toSerialize["backupUUID"] = o.BackupUUID
 	}
 	if true {
-		toSerialize["commonBackupInfo"] = o.CommonBackupInfo
+		toSerialize["completionTime"] = o.CompletionTime
+	}
+	if true {
+		toSerialize["createTime"] = o.CreateTime
 	}
 	if true {
 		toSerialize["customerUUID"] = o.CustomerUUID
 	}
-	if o.ExpiryTime != nil {
+	if true {
 		toSerialize["expiryTime"] = o.ExpiryTime
-	}
-	if true {
-		toSerialize["fullChainSizeInBytes"] = o.FullChainSizeInBytes
-	}
-	if true {
-		toSerialize["hasIncrementalBackups"] = o.HasIncrementalBackups
 	}
 	if true {
 		toSerialize["isFullBackup"] = o.IsFullBackup
@@ -527,25 +638,43 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 		toSerialize["isUniversePresent"] = o.IsUniversePresent
 	}
 	if true {
-		toSerialize["lastBackupState"] = o.LastBackupState
-	}
-	if o.LastIncrementalBackupTime != nil {
-		toSerialize["lastIncrementalBackupTime"] = o.LastIncrementalBackupTime
+		toSerialize["kmsConfigUUID"] = o.KmsConfigUUID
 	}
 	if true {
 		toSerialize["onDemand"] = o.OnDemand
 	}
 	if true {
+		toSerialize["responseList"] = o.ResponseList
+	}
+	if true {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID
 	}
 	if true {
+		toSerialize["sse"] = o.Sse
+	}
+	if true {
+		toSerialize["state"] = o.State
+	}
+	if true {
 		toSerialize["storageConfigType"] = o.StorageConfigType
+	}
+	if true {
+		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if true {
+		toSerialize["taskUUID"] = o.TaskUUID
+	}
+	if true {
+		toSerialize["totalBackupSizeInBytes"] = o.TotalBackupSizeInBytes
 	}
 	if true {
 		toSerialize["universeName"] = o.UniverseName
 	}
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID
+	}
+	if true {
+		toSerialize["updateTime"] = o.UpdateTime
 	}
 	return json.Marshal(toSerialize)
 }

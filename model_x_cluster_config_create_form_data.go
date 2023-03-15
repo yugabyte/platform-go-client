@@ -16,9 +16,6 @@ import (
 
 // XClusterConfigCreateFormData xcluster create form
 type XClusterConfigCreateFormData struct {
-	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
-	// Run the pre-checks without actually running the subtasks
-	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
 	Name string `json:"name"`
 	// Source Universe UUID
@@ -48,70 +45,6 @@ func NewXClusterConfigCreateFormData(name string, sourceUniverseUUID string, tab
 func NewXClusterConfigCreateFormDataWithDefaults() *XClusterConfigCreateFormData {
 	this := XClusterConfigCreateFormData{}
 	return &this
-}
-
-// GetBootstrapParams returns the BootstrapParams field value if set, zero value otherwise.
-func (o *XClusterConfigCreateFormData) GetBootstrapParams() BootstrapParams {
-	if o == nil || o.BootstrapParams == nil {
-		var ret BootstrapParams
-		return ret
-	}
-	return *o.BootstrapParams
-}
-
-// GetBootstrapParamsOk returns a tuple with the BootstrapParams field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterConfigCreateFormData) GetBootstrapParamsOk() (*BootstrapParams, bool) {
-	if o == nil || o.BootstrapParams == nil {
-		return nil, false
-	}
-	return o.BootstrapParams, true
-}
-
-// HasBootstrapParams returns a boolean if a field has been set.
-func (o *XClusterConfigCreateFormData) HasBootstrapParams() bool {
-	if o != nil && o.BootstrapParams != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBootstrapParams gets a reference to the given BootstrapParams and assigns it to the BootstrapParams field.
-func (o *XClusterConfigCreateFormData) SetBootstrapParams(v BootstrapParams) {
-	o.BootstrapParams = &v
-}
-
-// GetDryRun returns the DryRun field value if set, zero value otherwise.
-func (o *XClusterConfigCreateFormData) GetDryRun() bool {
-	if o == nil || o.DryRun == nil {
-		var ret bool
-		return ret
-	}
-	return *o.DryRun
-}
-
-// GetDryRunOk returns a tuple with the DryRun field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterConfigCreateFormData) GetDryRunOk() (*bool, bool) {
-	if o == nil || o.DryRun == nil {
-		return nil, false
-	}
-	return o.DryRun, true
-}
-
-// HasDryRun returns a boolean if a field has been set.
-func (o *XClusterConfigCreateFormData) HasDryRun() bool {
-	if o != nil && o.DryRun != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDryRun gets a reference to the given bool and assigns it to the DryRun field.
-func (o *XClusterConfigCreateFormData) SetDryRun(v bool) {
-	o.DryRun = &v
 }
 
 // GetName returns the Name field value
@@ -212,12 +145,6 @@ func (o *XClusterConfigCreateFormData) SetTargetUniverseUUID(v string) {
 
 func (o XClusterConfigCreateFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BootstrapParams != nil {
-		toSerialize["bootstrapParams"] = o.BootstrapParams
-	}
-	if o.DryRun != nil {
-		toSerialize["dryRun"] = o.DryRun
-	}
 	if true {
 		toSerialize["name"] = o.Name
 	}

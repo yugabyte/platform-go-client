@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HOST_BASE** | **string** |  | 
 **LOCATION** | **string** |  | 
 **REGION** | **string** |  | 
 
@@ -12,7 +11,7 @@ Name | Type | Description | Notes
 
 ### NewRegionLocations
 
-`func NewRegionLocations(hOSTBASE string, lOCATION string, rEGION string, ) *RegionLocations`
+`func NewRegionLocations(lOCATION string, rEGION string, ) *RegionLocations`
 
 NewRegionLocations instantiates a new RegionLocations object
 This constructor will assign default values to properties that have it defined,
@@ -26,26 +25,6 @@ will change when the set of required properties is changed
 NewRegionLocationsWithDefaults instantiates a new RegionLocations object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHOST_BASE
-
-`func (o *RegionLocations) GetHOST_BASE() string`
-
-GetHOST_BASE returns the HOST_BASE field if non-nil, zero value otherwise.
-
-### GetHOST_BASEOk
-
-`func (o *RegionLocations) GetHOST_BASEOk() (*string, bool)`
-
-GetHOST_BASEOk returns a tuple with the HOST_BASE field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHOST_BASE
-
-`func (o *RegionLocations) SetHOST_BASE(v string)`
-
-SetHOST_BASE sets HOST_BASE field to given value.
-
 
 ### GetLOCATION
 

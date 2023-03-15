@@ -6,8 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **Keyspace** | Pointer to **string** | Keyspace name | [optional] 
-**NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
-**OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
@@ -80,56 +78,6 @@ SetKeyspace sets Keyspace field to given value.
 `func (o *BackupStorageInfo) HasKeyspace() bool`
 
 HasKeyspace returns a boolean if a field has been set.
-
-### GetNewOwner
-
-`func (o *BackupStorageInfo) GetNewOwner() string`
-
-GetNewOwner returns the NewOwner field if non-nil, zero value otherwise.
-
-### GetNewOwnerOk
-
-`func (o *BackupStorageInfo) GetNewOwnerOk() (*string, bool)`
-
-GetNewOwnerOk returns a tuple with the NewOwner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNewOwner
-
-`func (o *BackupStorageInfo) SetNewOwner(v string)`
-
-SetNewOwner sets NewOwner field to given value.
-
-### HasNewOwner
-
-`func (o *BackupStorageInfo) HasNewOwner() bool`
-
-HasNewOwner returns a boolean if a field has been set.
-
-### GetOldOwner
-
-`func (o *BackupStorageInfo) GetOldOwner() string`
-
-GetOldOwner returns the OldOwner field if non-nil, zero value otherwise.
-
-### GetOldOwnerOk
-
-`func (o *BackupStorageInfo) GetOldOwnerOk() (*string, bool)`
-
-GetOldOwnerOk returns a tuple with the OldOwner field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOldOwner
-
-`func (o *BackupStorageInfo) SetOldOwner(v string)`
-
-SetOldOwner sets OldOwner field to given value.
-
-### HasOldOwner
-
-`func (o *BackupStorageInfo) HasOldOwner() bool`
-
-HasOldOwner returns a boolean if a field has been set.
 
 ### GetSse
 

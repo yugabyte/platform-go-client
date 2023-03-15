@@ -5,9 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Error** | Pointer to **string** | User-visible unstructured error message | [optional] 
-**ErrorJson** | Pointer to **map[string]interface{}** | User visible structured error message as json object | [optional] 
-**HttpMethod** | Pointer to **string** | Method for HTTP call that resulted in this error | [optional] 
-**RequestUri** | Pointer to **string** | URI for HTTP request that resulted in this error | [optional] 
+**ErrorJson** | Pointer to **map[string]interface{}** | User visible error message as json object | [optional] 
 **Success** | Pointer to **bool** | Always set to false to indicate failure | [optional] 
 
 ## Methods
@@ -78,56 +76,6 @@ SetErrorJson sets ErrorJson field to given value.
 `func (o *YBPError) HasErrorJson() bool`
 
 HasErrorJson returns a boolean if a field has been set.
-
-### GetHttpMethod
-
-`func (o *YBPError) GetHttpMethod() string`
-
-GetHttpMethod returns the HttpMethod field if non-nil, zero value otherwise.
-
-### GetHttpMethodOk
-
-`func (o *YBPError) GetHttpMethodOk() (*string, bool)`
-
-GetHttpMethodOk returns a tuple with the HttpMethod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHttpMethod
-
-`func (o *YBPError) SetHttpMethod(v string)`
-
-SetHttpMethod sets HttpMethod field to given value.
-
-### HasHttpMethod
-
-`func (o *YBPError) HasHttpMethod() bool`
-
-HasHttpMethod returns a boolean if a field has been set.
-
-### GetRequestUri
-
-`func (o *YBPError) GetRequestUri() string`
-
-GetRequestUri returns the RequestUri field if non-nil, zero value otherwise.
-
-### GetRequestUriOk
-
-`func (o *YBPError) GetRequestUriOk() (*string, bool)`
-
-GetRequestUriOk returns a tuple with the RequestUri field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRequestUri
-
-`func (o *YBPError) SetRequestUri(v string)`
-
-SetRequestUri sets RequestUri field to given value.
-
-### HasRequestUri
-
-`func (o *YBPError) HasRequestUri() bool`
-
-HasRequestUri returns a boolean if a field has been set.
 
 ### GetSuccess
 

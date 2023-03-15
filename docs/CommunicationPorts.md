@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **RedisServerRpcPort** | Pointer to **int32** | Redis RPC port | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
 **TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] 
-**YbControllerHttpPort** | Pointer to **int32** | Yb controller HTTP port | [optional] 
-**YbControllerrRpcPort** | Pointer to **int32** | Yb controller RPC port | [optional] 
 **YqlServerHttpPort** | Pointer to **int32** | YQL HTTP port | [optional] 
 **YqlServerRpcPort** | Pointer to **int32** | YQL RPC port | [optional] 
 **YsqlServerHttpPort** | Pointer to **int32** | YSQL HTTP port | [optional] 
@@ -211,56 +209,6 @@ SetTserverRpcPort sets TserverRpcPort field to given value.
 `func (o *CommunicationPorts) HasTserverRpcPort() bool`
 
 HasTserverRpcPort returns a boolean if a field has been set.
-
-### GetYbControllerHttpPort
-
-`func (o *CommunicationPorts) GetYbControllerHttpPort() int32`
-
-GetYbControllerHttpPort returns the YbControllerHttpPort field if non-nil, zero value otherwise.
-
-### GetYbControllerHttpPortOk
-
-`func (o *CommunicationPorts) GetYbControllerHttpPortOk() (*int32, bool)`
-
-GetYbControllerHttpPortOk returns a tuple with the YbControllerHttpPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbControllerHttpPort
-
-`func (o *CommunicationPorts) SetYbControllerHttpPort(v int32)`
-
-SetYbControllerHttpPort sets YbControllerHttpPort field to given value.
-
-### HasYbControllerHttpPort
-
-`func (o *CommunicationPorts) HasYbControllerHttpPort() bool`
-
-HasYbControllerHttpPort returns a boolean if a field has been set.
-
-### GetYbControllerrRpcPort
-
-`func (o *CommunicationPorts) GetYbControllerrRpcPort() int32`
-
-GetYbControllerrRpcPort returns the YbControllerrRpcPort field if non-nil, zero value otherwise.
-
-### GetYbControllerrRpcPortOk
-
-`func (o *CommunicationPorts) GetYbControllerrRpcPortOk() (*int32, bool)`
-
-GetYbControllerrRpcPortOk returns a tuple with the YbControllerrRpcPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetYbControllerrRpcPort
-
-`func (o *CommunicationPorts) SetYbControllerrRpcPort(v int32)`
-
-SetYbControllerrRpcPort sets YbControllerrRpcPort field to given value.
-
-### HasYbControllerrRpcPort
-
-`func (o *CommunicationPorts) HasYbControllerrRpcPort() bool`
-
-HasYbControllerrRpcPort returns a boolean if a field has been set.
 
 ### GetYqlServerHttpPort
 

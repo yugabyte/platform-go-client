@@ -14,20 +14,20 @@ import (
 	"encoding/json"
 )
 
-// AlertChannelParams Supertype for channel params for different channel types.
+// AlertChannelParams struct for AlertChannelParams
 type AlertChannelParams struct {
-	// Notification text template
-	TextTemplate *string `json:"textTemplate,omitempty"`
-	// Notification title template
-	TitleTemplate *string `json:"titleTemplate,omitempty"`
+	TextTemplate string `json:"textTemplate"`
+	TitleTemplate string `json:"titleTemplate"`
 }
 
 // NewAlertChannelParams instantiates a new AlertChannelParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelParams() *AlertChannelParams {
+func NewAlertChannelParams(textTemplate string, titleTemplate string, ) *AlertChannelParams {
 	this := AlertChannelParams{}
+	this.TextTemplate = textTemplate
+	this.TitleTemplate = titleTemplate
 	return &this
 }
 
@@ -39,76 +39,60 @@ func NewAlertChannelParamsWithDefaults() *AlertChannelParams {
 	return &this
 }
 
-// GetTextTemplate returns the TextTemplate field value if set, zero value otherwise.
+// GetTextTemplate returns the TextTemplate field value
 func (o *AlertChannelParams) GetTextTemplate() string {
-	if o == nil || o.TextTemplate == nil {
+	if o == nil  {
 		var ret string
 		return ret
 	}
-	return *o.TextTemplate
+
+	return o.TextTemplate
 }
 
-// GetTextTemplateOk returns a tuple with the TextTemplate field value if set, nil otherwise
+// GetTextTemplateOk returns a tuple with the TextTemplate field value
 // and a boolean to check if the value has been set.
 func (o *AlertChannelParams) GetTextTemplateOk() (*string, bool) {
-	if o == nil || o.TextTemplate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.TextTemplate, true
+	return &o.TextTemplate, true
 }
 
-// HasTextTemplate returns a boolean if a field has been set.
-func (o *AlertChannelParams) HasTextTemplate() bool {
-	if o != nil && o.TextTemplate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTextTemplate gets a reference to the given string and assigns it to the TextTemplate field.
+// SetTextTemplate sets field value
 func (o *AlertChannelParams) SetTextTemplate(v string) {
-	o.TextTemplate = &v
+	o.TextTemplate = v
 }
 
-// GetTitleTemplate returns the TitleTemplate field value if set, zero value otherwise.
+// GetTitleTemplate returns the TitleTemplate field value
 func (o *AlertChannelParams) GetTitleTemplate() string {
-	if o == nil || o.TitleTemplate == nil {
+	if o == nil  {
 		var ret string
 		return ret
 	}
-	return *o.TitleTemplate
+
+	return o.TitleTemplate
 }
 
-// GetTitleTemplateOk returns a tuple with the TitleTemplate field value if set, nil otherwise
+// GetTitleTemplateOk returns a tuple with the TitleTemplate field value
 // and a boolean to check if the value has been set.
 func (o *AlertChannelParams) GetTitleTemplateOk() (*string, bool) {
-	if o == nil || o.TitleTemplate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.TitleTemplate, true
+	return &o.TitleTemplate, true
 }
 
-// HasTitleTemplate returns a boolean if a field has been set.
-func (o *AlertChannelParams) HasTitleTemplate() bool {
-	if o != nil && o.TitleTemplate != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTitleTemplate gets a reference to the given string and assigns it to the TitleTemplate field.
+// SetTitleTemplate sets field value
 func (o *AlertChannelParams) SetTitleTemplate(v string) {
-	o.TitleTemplate = &v
+	o.TitleTemplate = v
 }
 
 func (o AlertChannelParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.TextTemplate != nil {
+	if true {
 		toSerialize["textTemplate"] = o.TextTemplate
 	}
-	if o.TitleTemplate != nil {
+	if true {
 		toSerialize["titleTemplate"] = o.TitleTemplate
 	}
 	return json.Marshal(toSerialize)

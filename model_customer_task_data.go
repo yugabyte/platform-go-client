@@ -21,8 +21,6 @@ type CustomerTaskData struct {
 	Abortable *bool `json:"abortable,omitempty"`
 	// Customer task completion time
 	CompletionTime *time.Time `json:"completionTime,omitempty"`
-	// Correlation id
-	CorrelationId *string `json:"correlationId,omitempty"`
 	// Customer task creation time
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Customer task UUID
@@ -43,8 +41,6 @@ type CustomerTaskData struct {
 	Type *string `json:"type,omitempty"`
 	// Customer task type name
 	TypeName *string `json:"typeName,omitempty"`
-	// Customer Email
-	UserEmail *string `json:"userEmail,omitempty"`
 }
 
 // NewCustomerTaskData instantiates a new CustomerTaskData object
@@ -126,38 +122,6 @@ func (o *CustomerTaskData) HasCompletionTime() bool {
 // SetCompletionTime gets a reference to the given time.Time and assigns it to the CompletionTime field.
 func (o *CustomerTaskData) SetCompletionTime(v time.Time) {
 	o.CompletionTime = &v
-}
-
-// GetCorrelationId returns the CorrelationId field value if set, zero value otherwise.
-func (o *CustomerTaskData) GetCorrelationId() string {
-	if o == nil || o.CorrelationId == nil {
-		var ret string
-		return ret
-	}
-	return *o.CorrelationId
-}
-
-// GetCorrelationIdOk returns a tuple with the CorrelationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerTaskData) GetCorrelationIdOk() (*string, bool) {
-	if o == nil || o.CorrelationId == nil {
-		return nil, false
-	}
-	return o.CorrelationId, true
-}
-
-// HasCorrelationId returns a boolean if a field has been set.
-func (o *CustomerTaskData) HasCorrelationId() bool {
-	if o != nil && o.CorrelationId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCorrelationId gets a reference to the given string and assigns it to the CorrelationId field.
-func (o *CustomerTaskData) SetCorrelationId(v string) {
-	o.CorrelationId = &v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -480,38 +444,6 @@ func (o *CustomerTaskData) SetTypeName(v string) {
 	o.TypeName = &v
 }
 
-// GetUserEmail returns the UserEmail field value if set, zero value otherwise.
-func (o *CustomerTaskData) GetUserEmail() string {
-	if o == nil || o.UserEmail == nil {
-		var ret string
-		return ret
-	}
-	return *o.UserEmail
-}
-
-// GetUserEmailOk returns a tuple with the UserEmail field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerTaskData) GetUserEmailOk() (*string, bool) {
-	if o == nil || o.UserEmail == nil {
-		return nil, false
-	}
-	return o.UserEmail, true
-}
-
-// HasUserEmail returns a boolean if a field has been set.
-func (o *CustomerTaskData) HasUserEmail() bool {
-	if o != nil && o.UserEmail != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUserEmail gets a reference to the given string and assigns it to the UserEmail field.
-func (o *CustomerTaskData) SetUserEmail(v string) {
-	o.UserEmail = &v
-}
-
 func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Abortable != nil {
@@ -519,9 +451,6 @@ func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	}
 	if o.CompletionTime != nil {
 		toSerialize["completionTime"] = o.CompletionTime
-	}
-	if o.CorrelationId != nil {
-		toSerialize["correlationId"] = o.CorrelationId
 	}
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
@@ -552,9 +481,6 @@ func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	}
 	if o.TypeName != nil {
 		toSerialize["typeName"] = o.TypeName
-	}
-	if o.UserEmail != nil {
-		toSerialize["userEmail"] = o.UserEmail
 	}
 	return json.Marshal(toSerialize)
 }

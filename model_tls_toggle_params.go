@@ -17,8 +17,9 @@ import (
 // TlsToggleParams struct for TlsToggleParams
 type TlsToggleParams struct {
 	AllowInsecure bool `json:"allowInsecure"`
+	BackupInProgress *bool `json:"backupInProgress,omitempty"`
 	Capability *string `json:"capability,omitempty"`
-	ClientRootCA *string `json:"clientRootCA,omitempty"`
+	ClientRootCA string `json:"clientRootCA"`
 	Clusters []Cluster `json:"clusters"`
 	// Amazon Resource Name (ARN) of the CMK
 	CmkArn *string `json:"cmkArn,omitempty"`
@@ -28,18 +29,17 @@ type TlsToggleParams struct {
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	EnableClientToNodeEncrypt bool `json:"enableClientToNodeEncrypt"`
 	EnableNodeToNodeEncrypt bool `json:"enableNodeToNodeEncrypt"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	// Whether this task has been tried before
+	FirstTry *bool `json:"firstTry,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
-	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
@@ -48,53 +48,48 @@ type TlsToggleParams struct {
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
-	// Previous task UUID of a retry
+	// Previous task UUID only if this task is a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
-	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
-	RootCA *string `json:"rootCA,omitempty"`
+	RootAndClientRootCASame bool `json:"rootAndClientRootCASame"`
+	RootCA string `json:"rootCA"`
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
-	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	UniversePaused *bool `json:"universePaused,omitempty"`
 	// Associated universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
-	UpdateOptions *[]string `json:"updateOptions,omitempty"`
 	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
 	UpdatingTask *string `json:"updatingTask,omitempty"`
 	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
 	UpgradeOption string `json:"upgradeOption"`
-	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
 	UserAZSelected *bool `json:"userAZSelected,omitempty"`
-	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 // NewTlsToggleParams instantiates a new TlsToggleParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams {
+func NewTlsToggleParams(allowInsecure bool, clientRootCA string, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, rootAndClientRootCASame bool, rootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams {
 	this := TlsToggleParams{}
 	this.AllowInsecure = allowInsecure
+	this.ClientRootCA = clientRootCA
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.EnableClientToNodeEncrypt = enableClientToNodeEncrypt
 	this.EnableNodeToNodeEncrypt = enableNodeToNodeEncrypt
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
+	this.RootAndClientRootCASame = rootAndClientRootCASame
+	this.RootCA = rootCA
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UpgradeOption = upgradeOption
@@ -133,6 +128,38 @@ func (o *TlsToggleParams) SetAllowInsecure(v bool) {
 	o.AllowInsecure = v
 }
 
+// GetBackupInProgress returns the BackupInProgress field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetBackupInProgress() bool {
+	if o == nil || o.BackupInProgress == nil {
+		var ret bool
+		return ret
+	}
+	return *o.BackupInProgress
+}
+
+// GetBackupInProgressOk returns a tuple with the BackupInProgress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetBackupInProgressOk() (*bool, bool) {
+	if o == nil || o.BackupInProgress == nil {
+		return nil, false
+	}
+	return o.BackupInProgress, true
+}
+
+// HasBackupInProgress returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasBackupInProgress() bool {
+	if o != nil && o.BackupInProgress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupInProgress gets a reference to the given bool and assigns it to the BackupInProgress field.
+func (o *TlsToggleParams) SetBackupInProgress(v bool) {
+	o.BackupInProgress = &v
+}
+
 // GetCapability returns the Capability field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetCapability() string {
 	if o == nil || o.Capability == nil {
@@ -165,36 +192,28 @@ func (o *TlsToggleParams) SetCapability(v string) {
 	o.Capability = &v
 }
 
-// GetClientRootCA returns the ClientRootCA field value if set, zero value otherwise.
+// GetClientRootCA returns the ClientRootCA field value
 func (o *TlsToggleParams) GetClientRootCA() string {
-	if o == nil || o.ClientRootCA == nil {
+	if o == nil  {
 		var ret string
 		return ret
 	}
-	return *o.ClientRootCA
+
+	return o.ClientRootCA
 }
 
-// GetClientRootCAOk returns a tuple with the ClientRootCA field value if set, nil otherwise
+// GetClientRootCAOk returns a tuple with the ClientRootCA field value
 // and a boolean to check if the value has been set.
 func (o *TlsToggleParams) GetClientRootCAOk() (*string, bool) {
-	if o == nil || o.ClientRootCA == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.ClientRootCA, true
+	return &o.ClientRootCA, true
 }
 
-// HasClientRootCA returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasClientRootCA() bool {
-	if o != nil && o.ClientRootCA != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetClientRootCA gets a reference to the given string and assigns it to the ClientRootCA field.
+// SetClientRootCA sets field value
 func (o *TlsToggleParams) SetClientRootCA(v string) {
-	o.ClientRootCA = &v
+	o.ClientRootCA = v
 }
 
 // GetClusters returns the Clusters field value
@@ -421,38 +440,6 @@ func (o *TlsToggleParams) SetEnableNodeToNodeEncrypt(v bool) {
 	o.EnableNodeToNodeEncrypt = v
 }
 
-// GetEnableYbc returns the EnableYbc field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetEnableYbc() bool {
-	if o == nil || o.EnableYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.EnableYbc
-}
-
-// GetEnableYbcOk returns a tuple with the EnableYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetEnableYbcOk() (*bool, bool) {
-	if o == nil || o.EnableYbc == nil {
-		return nil, false
-	}
-	return o.EnableYbc, true
-}
-
-// HasEnableYbc returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasEnableYbc() bool {
-	if o != nil && o.EnableYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnableYbc gets a reference to the given bool and assigns it to the EnableYbc field.
-func (o *TlsToggleParams) SetEnableYbc(v bool) {
-	o.EnableYbc = &v
-}
-
 // GetEncryptionAtRestConfig returns the EncryptionAtRestConfig field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetEncryptionAtRestConfig() EncryptionAtRestConfig {
 	if o == nil || o.EncryptionAtRestConfig == nil {
@@ -581,6 +568,38 @@ func (o *TlsToggleParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
+// GetFirstTry returns the FirstTry field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetFirstTry() bool {
+	if o == nil || o.FirstTry == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FirstTry
+}
+
+// GetFirstTryOk returns a tuple with the FirstTry field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetFirstTryOk() (*bool, bool) {
+	if o == nil || o.FirstTry == nil {
+		return nil, false
+	}
+	return o.FirstTry, true
+}
+
+// HasFirstTry returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasFirstTry() bool {
+	if o != nil && o.FirstTry != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstTry gets a reference to the given bool and assigns it to the FirstTry field.
+func (o *TlsToggleParams) SetFirstTry(v bool) {
+	o.FirstTry = &v
+}
+
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetImportedState() string {
 	if o == nil || o.ImportedState == nil {
@@ -611,38 +630,6 @@ func (o *TlsToggleParams) HasImportedState() bool {
 // SetImportedState gets a reference to the given string and assigns it to the ImportedState field.
 func (o *TlsToggleParams) SetImportedState(v string) {
 	o.ImportedState = &v
-}
-
-// GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetInstallYbc() bool {
-	if o == nil || o.InstallYbc == nil {
-		var ret bool
-		return ret
-	}
-	return *o.InstallYbc
-}
-
-// GetInstallYbcOk returns a tuple with the InstallYbc field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetInstallYbcOk() (*bool, bool) {
-	if o == nil || o.InstallYbc == nil {
-		return nil, false
-	}
-	return o.InstallYbc, true
-}
-
-// HasInstallYbc returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasInstallYbc() bool {
-	if o != nil && o.InstallYbc != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
-func (o *TlsToggleParams) SetInstallYbc(v bool) {
-	o.InstallYbc = &v
 }
 
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
@@ -699,38 +686,6 @@ func (o *TlsToggleParams) GetKubernetesUpgradeSupportedOk() (*bool, bool) {
 // SetKubernetesUpgradeSupported sets field value
 func (o *TlsToggleParams) SetKubernetesUpgradeSupported(v bool) {
 	o.KubernetesUpgradeSupported = v
-}
-
-// GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetMastersInDefaultRegion() bool {
-	if o == nil || o.MastersInDefaultRegion == nil {
-		var ret bool
-		return ret
-	}
-	return *o.MastersInDefaultRegion
-}
-
-// GetMastersInDefaultRegionOk returns a tuple with the MastersInDefaultRegion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetMastersInDefaultRegionOk() (*bool, bool) {
-	if o == nil || o.MastersInDefaultRegion == nil {
-		return nil, false
-	}
-	return o.MastersInDefaultRegion, true
-}
-
-// HasMastersInDefaultRegion returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasMastersInDefaultRegion() bool {
-	if o != nil && o.MastersInDefaultRegion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMastersInDefaultRegion gets a reference to the given bool and assigns it to the MastersInDefaultRegion field.
-func (o *TlsToggleParams) SetMastersInDefaultRegion(v bool) {
-	o.MastersInDefaultRegion = &v
 }
 
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
@@ -917,30 +872,6 @@ func (o *TlsToggleParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
-func (o *TlsToggleParams) GetPlatformVersion() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.PlatformVersion, true
-}
-
-// SetPlatformVersion sets field value
-func (o *TlsToggleParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
-}
-
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1037,68 +968,52 @@ func (o *TlsToggleParams) SetResetAZConfig(v bool) {
 	o.ResetAZConfig = &v
 }
 
-// GetRootAndClientRootCASame returns the RootAndClientRootCASame field value if set, zero value otherwise.
+// GetRootAndClientRootCASame returns the RootAndClientRootCASame field value
 func (o *TlsToggleParams) GetRootAndClientRootCASame() bool {
-	if o == nil || o.RootAndClientRootCASame == nil {
+	if o == nil  {
 		var ret bool
 		return ret
 	}
-	return *o.RootAndClientRootCASame
+
+	return o.RootAndClientRootCASame
 }
 
-// GetRootAndClientRootCASameOk returns a tuple with the RootAndClientRootCASame field value if set, nil otherwise
+// GetRootAndClientRootCASameOk returns a tuple with the RootAndClientRootCASame field value
 // and a boolean to check if the value has been set.
 func (o *TlsToggleParams) GetRootAndClientRootCASameOk() (*bool, bool) {
-	if o == nil || o.RootAndClientRootCASame == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.RootAndClientRootCASame, true
+	return &o.RootAndClientRootCASame, true
 }
 
-// HasRootAndClientRootCASame returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasRootAndClientRootCASame() bool {
-	if o != nil && o.RootAndClientRootCASame != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRootAndClientRootCASame gets a reference to the given bool and assigns it to the RootAndClientRootCASame field.
+// SetRootAndClientRootCASame sets field value
 func (o *TlsToggleParams) SetRootAndClientRootCASame(v bool) {
-	o.RootAndClientRootCASame = &v
+	o.RootAndClientRootCASame = v
 }
 
-// GetRootCA returns the RootCA field value if set, zero value otherwise.
+// GetRootCA returns the RootCA field value
 func (o *TlsToggleParams) GetRootCA() string {
-	if o == nil || o.RootCA == nil {
+	if o == nil  {
 		var ret string
 		return ret
 	}
-	return *o.RootCA
+
+	return o.RootCA
 }
 
-// GetRootCAOk returns a tuple with the RootCA field value if set, nil otherwise
+// GetRootCAOk returns a tuple with the RootCA field value
 // and a boolean to check if the value has been set.
 func (o *TlsToggleParams) GetRootCAOk() (*string, bool) {
-	if o == nil || o.RootCA == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.RootCA, true
+	return &o.RootCA, true
 }
 
-// HasRootCA returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasRootCA() bool {
-	if o != nil && o.RootCA != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRootCA gets a reference to the given string and assigns it to the RootCA field.
+// SetRootCA sets field value
 func (o *TlsToggleParams) SetRootCA(v string) {
-	o.RootCA = &v
+	o.RootCA = v
 }
 
 // GetSetTxnTableWaitCountFlag returns the SetTxnTableWaitCountFlag field value if set, zero value otherwise.
@@ -1211,38 +1126,6 @@ func (o *TlsToggleParams) HasSourceXClusterConfigs() bool {
 // SetSourceXClusterConfigs gets a reference to the given []string and assigns it to the SourceXClusterConfigs field.
 func (o *TlsToggleParams) SetSourceXClusterConfigs(v []string) {
 	o.SourceXClusterConfigs = &v
-}
-
-// GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetSshUserOverride() string {
-	if o == nil || o.SshUserOverride == nil {
-		var ret string
-		return ret
-	}
-	return *o.SshUserOverride
-}
-
-// GetSshUserOverrideOk returns a tuple with the SshUserOverride field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetSshUserOverrideOk() (*string, bool) {
-	if o == nil || o.SshUserOverride == nil {
-		return nil, false
-	}
-	return o.SshUserOverride, true
-}
-
-// HasSshUserOverride returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasSshUserOverride() bool {
-	if o != nil && o.SshUserOverride != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSshUserOverride gets a reference to the given string and assigns it to the SshUserOverride field.
-func (o *TlsToggleParams) SetSshUserOverride(v string) {
-	o.SshUserOverride = &v
 }
 
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
@@ -1373,38 +1256,6 @@ func (o *TlsToggleParams) SetUpdateInProgress(v bool) {
 	o.UpdateInProgress = &v
 }
 
-// GetUpdateOptions returns the UpdateOptions field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetUpdateOptions() []string {
-	if o == nil || o.UpdateOptions == nil {
-		var ret []string
-		return ret
-	}
-	return *o.UpdateOptions
-}
-
-// GetUpdateOptionsOk returns a tuple with the UpdateOptions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetUpdateOptionsOk() (*[]string, bool) {
-	if o == nil || o.UpdateOptions == nil {
-		return nil, false
-	}
-	return o.UpdateOptions, true
-}
-
-// HasUpdateOptions returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasUpdateOptions() bool {
-	if o != nil && o.UpdateOptions != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdateOptions gets a reference to the given []string and assigns it to the UpdateOptions field.
-func (o *TlsToggleParams) SetUpdateOptions(v []string) {
-	o.UpdateOptions = &v
-}
-
 // GetUpdateSucceeded returns the UpdateSucceeded field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetUpdateSucceeded() bool {
 	if o == nil || o.UpdateSucceeded == nil {
@@ -1525,38 +1376,6 @@ func (o *TlsToggleParams) SetUpgradeOption(v string) {
 	o.UpgradeOption = v
 }
 
-// GetUseNewHelmNamingStyle returns the UseNewHelmNamingStyle field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetUseNewHelmNamingStyle() bool {
-	if o == nil || o.UseNewHelmNamingStyle == nil {
-		var ret bool
-		return ret
-	}
-	return *o.UseNewHelmNamingStyle
-}
-
-// GetUseNewHelmNamingStyleOk returns a tuple with the UseNewHelmNamingStyle field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetUseNewHelmNamingStyleOk() (*bool, bool) {
-	if o == nil || o.UseNewHelmNamingStyle == nil {
-		return nil, false
-	}
-	return o.UseNewHelmNamingStyle, true
-}
-
-// HasUseNewHelmNamingStyle returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasUseNewHelmNamingStyle() bool {
-	if o != nil && o.UseNewHelmNamingStyle != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUseNewHelmNamingStyle gets a reference to the given bool and assigns it to the UseNewHelmNamingStyle field.
-func (o *TlsToggleParams) SetUseNewHelmNamingStyle(v bool) {
-	o.UseNewHelmNamingStyle = &v
-}
-
 // GetUserAZSelected returns the UserAZSelected field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetUserAZSelected() bool {
 	if o == nil || o.UserAZSelected == nil {
@@ -1587,38 +1406,6 @@ func (o *TlsToggleParams) HasUserAZSelected() bool {
 // SetUserAZSelected gets a reference to the given bool and assigns it to the UserAZSelected field.
 func (o *TlsToggleParams) SetUserAZSelected(v bool) {
 	o.UserAZSelected = &v
-}
-
-// GetXclusterInfo returns the XclusterInfo field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetXclusterInfo() XClusterInfo {
-	if o == nil || o.XclusterInfo == nil {
-		var ret XClusterInfo
-		return ret
-	}
-	return *o.XclusterInfo
-}
-
-// GetXclusterInfoOk returns a tuple with the XclusterInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetXclusterInfoOk() (*XClusterInfo, bool) {
-	if o == nil || o.XclusterInfo == nil {
-		return nil, false
-	}
-	return o.XclusterInfo, true
-}
-
-// HasXclusterInfo returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasXclusterInfo() bool {
-	if o != nil && o.XclusterInfo != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetXclusterInfo gets a reference to the given XClusterInfo and assigns it to the XclusterInfo field.
-func (o *TlsToggleParams) SetXclusterInfo(v XClusterInfo) {
-	o.XclusterInfo = &v
 }
 
 // GetYbPrevSoftwareVersion returns the YbPrevSoftwareVersion field value if set, zero value otherwise.
@@ -1653,79 +1440,18 @@ func (o *TlsToggleParams) SetYbPrevSoftwareVersion(v string) {
 	o.YbPrevSoftwareVersion = &v
 }
 
-// GetYbcInstalled returns the YbcInstalled field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetYbcInstalled() bool {
-	if o == nil || o.YbcInstalled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.YbcInstalled
-}
-
-// GetYbcInstalledOk returns a tuple with the YbcInstalled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetYbcInstalledOk() (*bool, bool) {
-	if o == nil || o.YbcInstalled == nil {
-		return nil, false
-	}
-	return o.YbcInstalled, true
-}
-
-// HasYbcInstalled returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasYbcInstalled() bool {
-	if o != nil && o.YbcInstalled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcInstalled gets a reference to the given bool and assigns it to the YbcInstalled field.
-func (o *TlsToggleParams) SetYbcInstalled(v bool) {
-	o.YbcInstalled = &v
-}
-
-// GetYbcSoftwareVersion returns the YbcSoftwareVersion field value if set, zero value otherwise.
-func (o *TlsToggleParams) GetYbcSoftwareVersion() string {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.YbcSoftwareVersion
-}
-
-// GetYbcSoftwareVersionOk returns a tuple with the YbcSoftwareVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TlsToggleParams) GetYbcSoftwareVersionOk() (*string, bool) {
-	if o == nil || o.YbcSoftwareVersion == nil {
-		return nil, false
-	}
-	return o.YbcSoftwareVersion, true
-}
-
-// HasYbcSoftwareVersion returns a boolean if a field has been set.
-func (o *TlsToggleParams) HasYbcSoftwareVersion() bool {
-	if o != nil && o.YbcSoftwareVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetYbcSoftwareVersion gets a reference to the given string and assigns it to the YbcSoftwareVersion field.
-func (o *TlsToggleParams) SetYbcSoftwareVersion(v string) {
-	o.YbcSoftwareVersion = &v
-}
-
 func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["allowInsecure"] = o.AllowInsecure
 	}
+	if o.BackupInProgress != nil {
+		toSerialize["backupInProgress"] = o.BackupInProgress
+	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
 	}
-	if o.ClientRootCA != nil {
+	if true {
 		toSerialize["clientRootCA"] = o.ClientRootCA
 	}
 	if true {
@@ -1752,9 +1478,6 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["enableNodeToNodeEncrypt"] = o.EnableNodeToNodeEncrypt
 	}
-	if o.EnableYbc != nil {
-		toSerialize["enableYbc"] = o.EnableYbc
-	}
 	if o.EncryptionAtRestConfig != nil {
 		toSerialize["encryptionAtRestConfig"] = o.EncryptionAtRestConfig
 	}
@@ -1767,20 +1490,17 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
+	if o.FirstTry != nil {
+		toSerialize["firstTry"] = o.FirstTry
+	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
-	}
-	if o.InstallYbc != nil {
-		toSerialize["installYbc"] = o.InstallYbc
 	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
 	}
 	if true {
 		toSerialize["kubernetesUpgradeSupported"] = o.KubernetesUpgradeSupported
-	}
-	if o.MastersInDefaultRegion != nil {
-		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
@@ -1800,9 +1520,6 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
@@ -1812,10 +1529,10 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.ResetAZConfig != nil {
 		toSerialize["resetAZConfig"] = o.ResetAZConfig
 	}
-	if o.RootAndClientRootCASame != nil {
+	if true {
 		toSerialize["rootAndClientRootCASame"] = o.RootAndClientRootCASame
 	}
-	if o.RootCA != nil {
+	if true {
 		toSerialize["rootCA"] = o.RootCA
 	}
 	if o.SetTxnTableWaitCountFlag != nil {
@@ -1830,9 +1547,6 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}
-	if o.SshUserOverride != nil {
-		toSerialize["sshUserOverride"] = o.SshUserOverride
-	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs
 	}
@@ -1844,9 +1558,6 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdateInProgress != nil {
 		toSerialize["updateInProgress"] = o.UpdateInProgress
-	}
-	if o.UpdateOptions != nil {
-		toSerialize["updateOptions"] = o.UpdateOptions
 	}
 	if o.UpdateSucceeded != nil {
 		toSerialize["updateSucceeded"] = o.UpdateSucceeded
@@ -1860,23 +1571,11 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["upgradeOption"] = o.UpgradeOption
 	}
-	if o.UseNewHelmNamingStyle != nil {
-		toSerialize["useNewHelmNamingStyle"] = o.UseNewHelmNamingStyle
-	}
 	if o.UserAZSelected != nil {
 		toSerialize["userAZSelected"] = o.UserAZSelected
 	}
-	if o.XclusterInfo != nil {
-		toSerialize["xclusterInfo"] = o.XclusterInfo
-	}
 	if o.YbPrevSoftwareVersion != nil {
 		toSerialize["ybPrevSoftwareVersion"] = o.YbPrevSoftwareVersion
-	}
-	if o.YbcInstalled != nil {
-		toSerialize["ybcInstalled"] = o.YbcInstalled
-	}
-	if o.YbcSoftwareVersion != nil {
-		toSerialize["ybcSoftwareVersion"] = o.YbcSoftwareVersion
 	}
 	return json.Marshal(toSerialize)
 }

@@ -16,7 +16,6 @@ import (
 
 // KeyspaceTablesList struct for KeyspaceTablesList
 type KeyspaceTablesList struct {
-	AllTables bool `json:"allTables"`
 	BackupSizeInBytes int64 `json:"backupSizeInBytes"`
 	DefaultLocation string `json:"defaultLocation"`
 	Keyspace string `json:"keyspace"`
@@ -29,9 +28,8 @@ type KeyspaceTablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList {
+func NewKeyspaceTablesList(backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
-	this.AllTables = allTables
 	this.BackupSizeInBytes = backupSizeInBytes
 	this.DefaultLocation = defaultLocation
 	this.Keyspace = keyspace
@@ -47,30 +45,6 @@ func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocat
 func NewKeyspaceTablesListWithDefaults() *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
 	return &this
-}
-
-// GetAllTables returns the AllTables field value
-func (o *KeyspaceTablesList) GetAllTables() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.AllTables
-}
-
-// GetAllTablesOk returns a tuple with the AllTables field value
-// and a boolean to check if the value has been set.
-func (o *KeyspaceTablesList) GetAllTablesOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.AllTables, true
-}
-
-// SetAllTables sets field value
-func (o *KeyspaceTablesList) SetAllTables(v bool) {
-	o.AllTables = v
 }
 
 // GetBackupSizeInBytes returns the BackupSizeInBytes field value
@@ -219,9 +193,6 @@ func (o *KeyspaceTablesList) SetTablesList(v []string) {
 
 func (o KeyspaceTablesList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["allTables"] = o.AllTables
-	}
 	if true {
 		toSerialize["backupSizeInBytes"] = o.BackupSizeInBytes
 	}

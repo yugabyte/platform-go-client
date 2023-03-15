@@ -17,26 +17,20 @@ import (
 
 // Backup A single backup. Includes the backup's status, expiration time, and configuration.
 type Backup struct {
-	BackupCategory string `json:"backupCategory"`
 	BackupInfo *BackupTableParams `json:"backupInfo,omitempty"`
 	// Backup UUID
 	BackupUUID *string `json:"backupUUID,omitempty"`
-	// Base backup UUID
-	BaseBackupUUID *string `json:"baseBackupUUID,omitempty"`
 	// Category of the backup
 	Category *string `json:"category,omitempty"`
 	// Backup completion time
 	CompletionTime *time.Time `json:"completionTime,omitempty"`
-	// Backup creation time
-	CreateTime *time.Time `json:"createTime,omitempty"`
+	CreateTime time.Time `json:"createTime"`
 	// Customer UUID that owns this backup
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// Expiry time (unix timestamp) of the backup
 	Expiry *time.Time `json:"expiry,omitempty"`
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
-	IncrementalBackup bool `json:"incrementalBackup"`
-	ParentBackup bool `json:"parentBackup"`
 	// Schedule UUID, if this backup is part of a schedule
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// State of the backup
@@ -49,8 +43,7 @@ type Backup struct {
 	UniverseName *string `json:"universeName,omitempty"`
 	// Universe UUID that created this backup
 	UniverseUUID *string `json:"universeUUID,omitempty"`
-	// Backup update time
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	UpdateTime time.Time `json:"updateTime"`
 	// Version of the backup in a category
 	Version *string `json:"version,omitempty"`
 }
@@ -59,11 +52,10 @@ type Backup struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackup(backupCategory string, incrementalBackup bool, parentBackup bool, ) *Backup {
+func NewBackup(createTime time.Time, updateTime time.Time, ) *Backup {
 	this := Backup{}
-	this.BackupCategory = backupCategory
-	this.IncrementalBackup = incrementalBackup
-	this.ParentBackup = parentBackup
+	this.CreateTime = createTime
+	this.UpdateTime = updateTime
 	return &this
 }
 
@@ -73,30 +65,6 @@ func NewBackup(backupCategory string, incrementalBackup bool, parentBackup bool,
 func NewBackupWithDefaults() *Backup {
 	this := Backup{}
 	return &this
-}
-
-// GetBackupCategory returns the BackupCategory field value
-func (o *Backup) GetBackupCategory() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.BackupCategory
-}
-
-// GetBackupCategoryOk returns a tuple with the BackupCategory field value
-// and a boolean to check if the value has been set.
-func (o *Backup) GetBackupCategoryOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.BackupCategory, true
-}
-
-// SetBackupCategory sets field value
-func (o *Backup) SetBackupCategory(v string) {
-	o.BackupCategory = v
 }
 
 // GetBackupInfo returns the BackupInfo field value if set, zero value otherwise.
@@ -163,38 +131,6 @@ func (o *Backup) SetBackupUUID(v string) {
 	o.BackupUUID = &v
 }
 
-// GetBaseBackupUUID returns the BaseBackupUUID field value if set, zero value otherwise.
-func (o *Backup) GetBaseBackupUUID() string {
-	if o == nil || o.BaseBackupUUID == nil {
-		var ret string
-		return ret
-	}
-	return *o.BaseBackupUUID
-}
-
-// GetBaseBackupUUIDOk returns a tuple with the BaseBackupUUID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Backup) GetBaseBackupUUIDOk() (*string, bool) {
-	if o == nil || o.BaseBackupUUID == nil {
-		return nil, false
-	}
-	return o.BaseBackupUUID, true
-}
-
-// HasBaseBackupUUID returns a boolean if a field has been set.
-func (o *Backup) HasBaseBackupUUID() bool {
-	if o != nil && o.BaseBackupUUID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBaseBackupUUID gets a reference to the given string and assigns it to the BaseBackupUUID field.
-func (o *Backup) SetBaseBackupUUID(v string) {
-	o.BaseBackupUUID = &v
-}
-
 // GetCategory returns the Category field value if set, zero value otherwise.
 func (o *Backup) GetCategory() string {
 	if o == nil || o.Category == nil {
@@ -259,36 +195,28 @@ func (o *Backup) SetCompletionTime(v time.Time) {
 	o.CompletionTime = &v
 }
 
-// GetCreateTime returns the CreateTime field value if set, zero value otherwise.
+// GetCreateTime returns the CreateTime field value
 func (o *Backup) GetCreateTime() time.Time {
-	if o == nil || o.CreateTime == nil {
+	if o == nil  {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreateTime
+
+	return o.CreateTime
 }
 
-// GetCreateTimeOk returns a tuple with the CreateTime field value if set, nil otherwise
+// GetCreateTimeOk returns a tuple with the CreateTime field value
 // and a boolean to check if the value has been set.
 func (o *Backup) GetCreateTimeOk() (*time.Time, bool) {
-	if o == nil || o.CreateTime == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CreateTime, true
+	return &o.CreateTime, true
 }
 
-// HasCreateTime returns a boolean if a field has been set.
-func (o *Backup) HasCreateTime() bool {
-	if o != nil && o.CreateTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
+// SetCreateTime sets field value
 func (o *Backup) SetCreateTime(v time.Time) {
-	o.CreateTime = &v
+	o.CreateTime = v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -385,54 +313,6 @@ func (o *Backup) HasExpiryTimeUnit() bool {
 // SetExpiryTimeUnit gets a reference to the given string and assigns it to the ExpiryTimeUnit field.
 func (o *Backup) SetExpiryTimeUnit(v string) {
 	o.ExpiryTimeUnit = &v
-}
-
-// GetIncrementalBackup returns the IncrementalBackup field value
-func (o *Backup) GetIncrementalBackup() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.IncrementalBackup
-}
-
-// GetIncrementalBackupOk returns a tuple with the IncrementalBackup field value
-// and a boolean to check if the value has been set.
-func (o *Backup) GetIncrementalBackupOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.IncrementalBackup, true
-}
-
-// SetIncrementalBackup sets field value
-func (o *Backup) SetIncrementalBackup(v bool) {
-	o.IncrementalBackup = v
-}
-
-// GetParentBackup returns the ParentBackup field value
-func (o *Backup) GetParentBackup() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.ParentBackup
-}
-
-// GetParentBackupOk returns a tuple with the ParentBackup field value
-// and a boolean to check if the value has been set.
-func (o *Backup) GetParentBackupOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.ParentBackup, true
-}
-
-// SetParentBackup sets field value
-func (o *Backup) SetParentBackup(v bool) {
-	o.ParentBackup = v
 }
 
 // GetScheduleUUID returns the ScheduleUUID field value if set, zero value otherwise.
@@ -627,36 +507,28 @@ func (o *Backup) SetUniverseUUID(v string) {
 	o.UniverseUUID = &v
 }
 
-// GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
+// GetUpdateTime returns the UpdateTime field value
 func (o *Backup) GetUpdateTime() time.Time {
-	if o == nil || o.UpdateTime == nil {
+	if o == nil  {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdateTime
+
+	return o.UpdateTime
 }
 
-// GetUpdateTimeOk returns a tuple with the UpdateTime field value if set, nil otherwise
+// GetUpdateTimeOk returns a tuple with the UpdateTime field value
 // and a boolean to check if the value has been set.
 func (o *Backup) GetUpdateTimeOk() (*time.Time, bool) {
-	if o == nil || o.UpdateTime == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.UpdateTime, true
+	return &o.UpdateTime, true
 }
 
-// HasUpdateTime returns a boolean if a field has been set.
-func (o *Backup) HasUpdateTime() bool {
-	if o != nil && o.UpdateTime != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdateTime gets a reference to the given time.Time and assigns it to the UpdateTime field.
+// SetUpdateTime sets field value
 func (o *Backup) SetUpdateTime(v time.Time) {
-	o.UpdateTime = &v
+	o.UpdateTime = v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
@@ -693,17 +565,11 @@ func (o *Backup) SetVersion(v string) {
 
 func (o Backup) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["backupCategory"] = o.BackupCategory
-	}
 	if o.BackupInfo != nil {
 		toSerialize["backupInfo"] = o.BackupInfo
 	}
 	if o.BackupUUID != nil {
 		toSerialize["backupUUID"] = o.BackupUUID
-	}
-	if o.BaseBackupUUID != nil {
-		toSerialize["baseBackupUUID"] = o.BaseBackupUUID
 	}
 	if o.Category != nil {
 		toSerialize["category"] = o.Category
@@ -711,7 +577,7 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	if o.CompletionTime != nil {
 		toSerialize["completionTime"] = o.CompletionTime
 	}
-	if o.CreateTime != nil {
+	if true {
 		toSerialize["createTime"] = o.CreateTime
 	}
 	if o.CustomerUUID != nil {
@@ -722,12 +588,6 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpiryTimeUnit != nil {
 		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
-	}
-	if true {
-		toSerialize["incrementalBackup"] = o.IncrementalBackup
-	}
-	if true {
-		toSerialize["parentBackup"] = o.ParentBackup
 	}
 	if o.ScheduleUUID != nil {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID
@@ -747,7 +607,7 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	if o.UniverseUUID != nil {
 		toSerialize["universeUUID"] = o.UniverseUUID
 	}
-	if o.UpdateTime != nil {
+	if true {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
 	if o.Version != nil {

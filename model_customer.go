@@ -25,6 +25,8 @@ type Customer struct {
 	CustomerId *int64 `json:"customerId,omitempty"`
 	// Name of customer
 	Name string `json:"name"`
+	// Universe UUIDs
+	UniverseUUIDs *[]string `json:"universeUUIDs,omitempty"`
 	// Customer UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -160,6 +162,38 @@ func (o *Customer) SetName(v string) {
 	o.Name = v
 }
 
+// GetUniverseUUIDs returns the UniverseUUIDs field value if set, zero value otherwise.
+func (o *Customer) GetUniverseUUIDs() []string {
+	if o == nil || o.UniverseUUIDs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.UniverseUUIDs
+}
+
+// GetUniverseUUIDsOk returns a tuple with the UniverseUUIDs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Customer) GetUniverseUUIDsOk() (*[]string, bool) {
+	if o == nil || o.UniverseUUIDs == nil {
+		return nil, false
+	}
+	return o.UniverseUUIDs, true
+}
+
+// HasUniverseUUIDs returns a boolean if a field has been set.
+func (o *Customer) HasUniverseUUIDs() bool {
+	if o != nil && o.UniverseUUIDs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseUUIDs gets a reference to the given []string and assigns it to the UniverseUUIDs field.
+func (o *Customer) SetUniverseUUIDs(v []string) {
+	o.UniverseUUIDs = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *Customer) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -205,6 +239,9 @@ func (o Customer) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["name"] = o.Name
+	}
+	if o.UniverseUUIDs != nil {
+		toSerialize["universeUUIDs"] = o.UniverseUUIDs
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

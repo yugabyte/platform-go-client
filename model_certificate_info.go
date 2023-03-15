@@ -28,20 +28,16 @@ type CertificateInfo struct {
 	CustomServerCertInfo CustomServerCertInfo `json:"customServerCertInfo"`
 	// Customer UUID of the backup which it belongs to
 	CustomerUUID *string `json:"customerUUID,omitempty"`
-	// The certificate's expiry date. Deprecated: Use expirtyDateIso instead
-	ExpiryDate *time.Time `json:"expiryDate,omitempty"`
 	// The certificate's expiry date
-	ExpiryDateIso *time.Time `json:"expiryDateIso,omitempty"`
+	ExpiryDate *time.Time `json:"expiryDate,omitempty"`
 	// Indicates whether the certificate is in use. This value is `true` if the universe contains a reference to the certificate.
 	InUse *bool `json:"inUse,omitempty"`
 	// Certificate label
 	Label *string `json:"label,omitempty"`
 	// Private key path
 	PrivateKey *string `json:"privateKey,omitempty"`
-	// The certificate's creation date. Deprecated: use stateDateIso instead
-	StartDate *time.Time `json:"startDate,omitempty"`
 	// The certificate's creation date
-	StartDateIso *time.Time `json:"startDateIso,omitempty"`
+	StartDate *time.Time `json:"startDate,omitempty"`
 	// Associated universe details for the certificate
 	UniverseDetails *[]UniverseDetailSubset `json:"universeDetails,omitempty"`
 	// Certificate UUID
@@ -300,38 +296,6 @@ func (o *CertificateInfo) SetExpiryDate(v time.Time) {
 	o.ExpiryDate = &v
 }
 
-// GetExpiryDateIso returns the ExpiryDateIso field value if set, zero value otherwise.
-func (o *CertificateInfo) GetExpiryDateIso() time.Time {
-	if o == nil || o.ExpiryDateIso == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.ExpiryDateIso
-}
-
-// GetExpiryDateIsoOk returns a tuple with the ExpiryDateIso field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CertificateInfo) GetExpiryDateIsoOk() (*time.Time, bool) {
-	if o == nil || o.ExpiryDateIso == nil {
-		return nil, false
-	}
-	return o.ExpiryDateIso, true
-}
-
-// HasExpiryDateIso returns a boolean if a field has been set.
-func (o *CertificateInfo) HasExpiryDateIso() bool {
-	if o != nil && o.ExpiryDateIso != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiryDateIso gets a reference to the given time.Time and assigns it to the ExpiryDateIso field.
-func (o *CertificateInfo) SetExpiryDateIso(v time.Time) {
-	o.ExpiryDateIso = &v
-}
-
 // GetInUse returns the InUse field value if set, zero value otherwise.
 func (o *CertificateInfo) GetInUse() bool {
 	if o == nil || o.InUse == nil {
@@ -460,38 +424,6 @@ func (o *CertificateInfo) SetStartDate(v time.Time) {
 	o.StartDate = &v
 }
 
-// GetStartDateIso returns the StartDateIso field value if set, zero value otherwise.
-func (o *CertificateInfo) GetStartDateIso() time.Time {
-	if o == nil || o.StartDateIso == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.StartDateIso
-}
-
-// GetStartDateIsoOk returns a tuple with the StartDateIso field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CertificateInfo) GetStartDateIsoOk() (*time.Time, bool) {
-	if o == nil || o.StartDateIso == nil {
-		return nil, false
-	}
-	return o.StartDateIso, true
-}
-
-// HasStartDateIso returns a boolean if a field has been set.
-func (o *CertificateInfo) HasStartDateIso() bool {
-	if o != nil && o.StartDateIso != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetStartDateIso gets a reference to the given time.Time and assigns it to the StartDateIso field.
-func (o *CertificateInfo) SetStartDateIso(v time.Time) {
-	o.StartDateIso = &v
-}
-
 // GetUniverseDetails returns the UniverseDetails field value if set, zero value otherwise.
 func (o *CertificateInfo) GetUniverseDetails() []UniverseDetailSubset {
 	if o == nil || o.UniverseDetails == nil {
@@ -582,9 +514,6 @@ func (o CertificateInfo) MarshalJSON() ([]byte, error) {
 	if o.ExpiryDate != nil {
 		toSerialize["expiryDate"] = o.ExpiryDate
 	}
-	if o.ExpiryDateIso != nil {
-		toSerialize["expiryDateIso"] = o.ExpiryDateIso
-	}
 	if o.InUse != nil {
 		toSerialize["inUse"] = o.InUse
 	}
@@ -596,9 +525,6 @@ func (o CertificateInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.StartDate != nil {
 		toSerialize["startDate"] = o.StartDate
-	}
-	if o.StartDateIso != nil {
-		toSerialize["startDateIso"] = o.StartDateIso
 	}
 	if o.UniverseDetails != nil {
 		toSerialize["universeDetails"] = o.UniverseDetails
