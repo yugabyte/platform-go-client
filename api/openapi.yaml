@@ -18322,6 +18322,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -23655,6 +23656,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -26925,6 +26927,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -34850,6 +34853,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -37437,6 +37441,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -38984,6 +38989,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         userEmail:
@@ -39241,6 +39247,7 @@ components:
             - UpdateClusterUserIntent
             - CreateBackupSchedule
             - YBCBackupSucceeded
+            - CloudProviderEdit
             exampleSetFlag: true
             type: string
           type: array
@@ -42022,6 +42029,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -44965,6 +44973,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -48065,6 +48074,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -50664,6 +50674,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -53340,6 +53351,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55897,6 +55909,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -58462,6 +58475,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -63402,6 +63416,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -66525,6 +66540,7 @@ components:
           - UpdateClusterUserIntent
           - CreateBackupSchedule
           - YBCBackupSucceeded
+          - CloudProviderEdit
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
