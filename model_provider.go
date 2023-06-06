@@ -18,7 +18,7 @@ import (
 type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.airGapInstall
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.airGapInstall. Only supported in Create Request
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
 	AllAccessKeys *[]AccessKey `json:"allAccessKeys,omitempty"`
 	// Provider cloud code
@@ -31,17 +31,20 @@ type Provider struct {
 	Details *ProviderDetails `json:"details,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
+	ImageBundles []ImageBundle `json:"imageBundles"`
 	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
 	Regions []Region `json:"regions"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshPort instead
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshPort instead. Only supported in create request
 	SshPort *int32 `json:"sshPort,omitempty"`
 	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshUser instead
+	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshUser instead. Only supported in create request
 	SshUser *string `json:"sshUser,omitempty"`
+	// Current usability state
+	UsabilityState *string `json:"usabilityState,omitempty"`
 	// Provider uuid
 	Uuid *string `json:"uuid,omitempty"`
 	// Provider version
@@ -52,8 +55,9 @@ type Provider struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProvider(regions []Region, ) *Provider {
+func NewProvider(imageBundles []ImageBundle, regions []Region, ) *Provider {
 	this := Provider{}
+	this.ImageBundles = imageBundles
 	this.Regions = regions
 	return &this
 }
@@ -386,6 +390,30 @@ func (o *Provider) SetHostVpcRegion(v string) {
 	o.HostVpcRegion = &v
 }
 
+// GetImageBundles returns the ImageBundles field value
+func (o *Provider) GetImageBundles() []ImageBundle {
+	if o == nil  {
+		var ret []ImageBundle
+		return ret
+	}
+
+	return o.ImageBundles
+}
+
+// GetImageBundlesOk returns a tuple with the ImageBundles field value
+// and a boolean to check if the value has been set.
+func (o *Provider) GetImageBundlesOk() (*[]ImageBundle, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ImageBundles, true
+}
+
+// SetImageBundles sets field value
+func (o *Provider) SetImageBundles(v []ImageBundle) {
+	o.ImageBundles = v
+}
+
 // GetKeyPairName returns the KeyPairName field value if set, zero value otherwise.
 func (o *Provider) GetKeyPairName() string {
 	if o == nil || o.KeyPairName == nil {
@@ -570,6 +598,38 @@ func (o *Provider) SetSshUser(v string) {
 	o.SshUser = &v
 }
 
+// GetUsabilityState returns the UsabilityState field value if set, zero value otherwise.
+func (o *Provider) GetUsabilityState() string {
+	if o == nil || o.UsabilityState == nil {
+		var ret string
+		return ret
+	}
+	return *o.UsabilityState
+}
+
+// GetUsabilityStateOk returns a tuple with the UsabilityState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetUsabilityStateOk() (*string, bool) {
+	if o == nil || o.UsabilityState == nil {
+		return nil, false
+	}
+	return o.UsabilityState, true
+}
+
+// HasUsabilityState returns a boolean if a field has been set.
+func (o *Provider) HasUsabilityState() bool {
+	if o != nil && o.UsabilityState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsabilityState gets a reference to the given string and assigns it to the UsabilityState field.
+func (o *Provider) SetUsabilityState(v string) {
+	o.UsabilityState = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *Provider) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -666,6 +726,9 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.HostVpcRegion != nil {
 		toSerialize["hostVpcRegion"] = o.HostVpcRegion
 	}
+	if true {
+		toSerialize["imageBundles"] = o.ImageBundles
+	}
 	if o.KeyPairName != nil {
 		toSerialize["keyPairName"] = o.KeyPairName
 	}
@@ -683,6 +746,9 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	}
 	if o.SshUser != nil {
 		toSerialize["sshUser"] = o.SshUser
+	}
+	if o.UsabilityState != nil {
+		toSerialize["usabilityState"] = o.UsabilityState
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

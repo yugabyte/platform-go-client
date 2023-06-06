@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ValidateKubernetesOverrides
 
-> KubernetesOverridesResponse ValidateKubernetesOverrides(ctx, cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+> KubernetesOverridesResponse ValidateKubernetesOverrides(ctx, cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
 
 Validate kubernetes overrides.
 
@@ -31,10 +31,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // UniverseConfigureTaskParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.KubernetesOverridesControllerApi.ValidateKubernetesOverrides(context.Background(), cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+    resp, r, err := api_client.KubernetesOverridesControllerApi.ValidateKubernetesOverrides(context.Background(), cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `KubernetesOverridesControllerApi.ValidateKubernetesOverrides``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,6 +62,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

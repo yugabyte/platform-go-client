@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## CreateXClusterConfig
 
-> YBPTask CreateXClusterConfig(ctx, cUUID).XclusterReplicationCreateFormData(xclusterReplicationCreateFormData).Execute()
+> YBPTask CreateXClusterConfig(ctx, cUUID).XclusterReplicationCreateFormData(xclusterReplicationCreateFormData).Request(request).Execute()
 
 Create xcluster config
 
@@ -36,10 +36,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     xclusterReplicationCreateFormData := *openapiclient.NewXClusterConfigCreateFormData("Repl-config1", "SourceUniverseUUID_example", []string{"Tables_example"}, "TargetUniverseUUID_example") // XClusterConfigCreateFormData | XCluster Replication Create Form Data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.CreateXClusterConfig(context.Background(), cUUID).XclusterReplicationCreateFormData(xclusterReplicationCreateFormData).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.CreateXClusterConfig(context.Background(), cUUID).XclusterReplicationCreateFormData(xclusterReplicationCreateFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.CreateXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **xclusterReplicationCreateFormData** | [**XClusterConfigCreateFormData**](XClusterConfigCreateFormData.md) | XCluster Replication Create Form Data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -87,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## DeleteXClusterConfig
 
-> YBPTask DeleteXClusterConfig(ctx, cUUID, xccUUID).IsForceDelete(isForceDelete).Execute()
+> YBPTask DeleteXClusterConfig(ctx, cUUID, xccUUID).IsForceDelete(isForceDelete).Request(request).Execute()
 
 Delete xcluster config
 
@@ -107,10 +109,11 @@ func main() {
     cUUID := TODO // string | 
     xccUUID := TODO // string | 
     isForceDelete := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.DeleteXClusterConfig(context.Background(), cUUID, xccUUID).IsForceDelete(isForceDelete).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.DeleteXClusterConfig(context.Background(), cUUID, xccUUID).IsForceDelete(isForceDelete).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.DeleteXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -139,6 +142,7 @@ Name | Type | Description  | Notes
 
 
  **isForceDelete** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -160,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## EditXClusterConfig
 
-> YBPTask EditXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationEditFormData(xclusterReplicationEditFormData).Execute()
+> YBPTask EditXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationEditFormData(xclusterReplicationEditFormData).Request(request).Execute()
 
 Edit xcluster config
 
@@ -180,10 +184,11 @@ func main() {
     cUUID := TODO // string | 
     xccUUID := TODO // string | 
     xclusterReplicationEditFormData := *openapiclient.NewXClusterConfigEditFormData() // XClusterConfigEditFormData | XCluster Replication Edit Form Data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.EditXClusterConfig(context.Background(), cUUID, xccUUID).XclusterReplicationEditFormData(xclusterReplicationEditFormData).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.EditXClusterConfig(context.Background(), cUUID, xccUUID).XclusterReplicationEditFormData(xclusterReplicationEditFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.EditXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,6 +217,7 @@ Name | Type | Description  | Notes
 
 
  **xclusterReplicationEditFormData** | [**XClusterConfigEditFormData**](XClusterConfigEditFormData.md) | XCluster Replication Edit Form Data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -304,7 +310,7 @@ Name | Type | Description  | Notes
 
 ## NeedBootstrapTable
 
-> map[string]map[string]interface{} NeedBootstrapTable(ctx, cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Execute()
+> map[string]map[string]interface{} NeedBootstrapTable(ctx, cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).Request(request).Execute()
 
 Whether tables need bootstrap before setting up cross cluster replication
 
@@ -324,10 +330,12 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     xclusterNeedBootstrapFormData := *openapiclient.NewXClusterConfigNeedBootstrapFormData([]string{"Tables_example"}) // XClusterConfigNeedBootstrapFormData | XCluster Need Bootstrap Form Data
+    configType := "configType_example" // string |  (optional) (default to "null")
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapTable(context.Background(), cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapTable(context.Background(), cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.NeedBootstrapTable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -356,6 +364,8 @@ Name | Type | Description  | Notes
 
 
  **xclusterNeedBootstrapFormData** | [**XClusterConfigNeedBootstrapFormData**](XClusterConfigNeedBootstrapFormData.md) | XCluster Need Bootstrap Form Data | 
+ **configType** | **string** |  | [default to &quot;null&quot;]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -377,7 +387,7 @@ Name | Type | Description  | Notes
 
 ## NeedBootstrapXClusterConfig
 
-> map[string]map[string]interface{} NeedBootstrapXClusterConfig(ctx, cUUID, xccUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Execute()
+> map[string]map[string]interface{} NeedBootstrapXClusterConfig(ctx, cUUID, xccUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Request(request).Execute()
 
 Whether tables in an xCluster replication config have fallen far behind and need bootstrap
 
@@ -397,10 +407,11 @@ func main() {
     cUUID := TODO // string | 
     xccUUID := TODO // string | 
     xclusterNeedBootstrapFormData := *openapiclient.NewXClusterConfigNeedBootstrapFormData([]string{"Tables_example"}) // XClusterConfigNeedBootstrapFormData | XCluster Need Bootstrap Form Data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapXClusterConfig(context.Background(), cUUID, xccUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapXClusterConfig(context.Background(), cUUID, xccUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.NeedBootstrapXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -429,6 +440,7 @@ Name | Type | Description  | Notes
 
 
  **xclusterNeedBootstrapFormData** | [**XClusterConfigNeedBootstrapFormData**](XClusterConfigNeedBootstrapFormData.md) | XCluster Need Bootstrap Form Data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -450,7 +462,7 @@ Name | Type | Description  | Notes
 
 ## RestartXClusterConfig
 
-> YBPTask RestartXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationRestartFormData(xclusterReplicationRestartFormData).IsForceDelete(isForceDelete).Execute()
+> YBPTask RestartXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationRestartFormData(xclusterReplicationRestartFormData).IsForceDelete(isForceDelete).Request(request).Execute()
 
 Restart xcluster config
 
@@ -471,10 +483,11 @@ func main() {
     xccUUID := TODO // string | 
     xclusterReplicationRestartFormData := *openapiclient.NewXClusterConfigRestartFormData([]string{"Tables_example"}) // XClusterConfigRestartFormData | XCluster Replication Restart Form Data
     isForceDelete := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.RestartXClusterConfig(context.Background(), cUUID, xccUUID).XclusterReplicationRestartFormData(xclusterReplicationRestartFormData).IsForceDelete(isForceDelete).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.RestartXClusterConfig(context.Background(), cUUID, xccUUID).XclusterReplicationRestartFormData(xclusterReplicationRestartFormData).IsForceDelete(isForceDelete).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.RestartXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -504,6 +517,7 @@ Name | Type | Description  | Notes
 
  **xclusterReplicationRestartFormData** | [**XClusterConfigRestartFormData**](XClusterConfigRestartFormData.md) | XCluster Replication Restart Form Data | 
  **isForceDelete** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -525,7 +539,7 @@ Name | Type | Description  | Notes
 
 ## SyncXClusterConfig
 
-> YBPTask SyncXClusterConfig(ctx, cUUID).TargetUniverseUUID(targetUniverseUUID).Execute()
+> YBPTask SyncXClusterConfig(ctx, cUUID).TargetUniverseUUID(targetUniverseUUID).Request(request).Execute()
 
 Sync xcluster config
 
@@ -544,10 +558,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     targetUniverseUUID := TODO // string |  (optional)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.SyncXClusterConfig(context.Background(), cUUID).TargetUniverseUUID(targetUniverseUUID).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.SyncXClusterConfig(context.Background(), cUUID).TargetUniverseUUID(targetUniverseUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.SyncXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -574,6 +589,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **targetUniverseUUID** | [**string**](string.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

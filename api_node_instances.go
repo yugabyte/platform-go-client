@@ -33,10 +33,15 @@ type NodeInstancesApiApiCreateNodeInstanceRequest struct {
 	cUUID string
 	azUUID string
 	nodeInstance *NodeInstanceFormData
+	request *interface{}
 }
 
 func (r NodeInstancesApiApiCreateNodeInstanceRequest) NodeInstance(nodeInstance NodeInstanceFormData) NodeInstancesApiApiCreateNodeInstanceRequest {
 	r.nodeInstance = &nodeInstance
+	return r
+}
+func (r NodeInstancesApiApiCreateNodeInstanceRequest) Request(request interface{}) NodeInstancesApiApiCreateNodeInstanceRequest {
+	r.request = &request
 	return r
 }
 
@@ -90,6 +95,9 @@ func (a *NodeInstancesApiService) CreateNodeInstanceExecute(r NodeInstancesApiAp
 		return localVarReturnValue, nil, reportError("nodeInstance is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -166,8 +174,13 @@ type NodeInstancesApiApiDeleteInstanceRequest struct {
 	cUUID string
 	pUUID string
 	instanceIP string
+	request *interface{}
 }
 
+func (r NodeInstancesApiApiDeleteInstanceRequest) Request(request interface{}) NodeInstancesApiApiDeleteInstanceRequest {
+	r.request = &request
+	return r
+}
 
 func (r NodeInstancesApiApiDeleteInstanceRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteInstanceExecute(r)
@@ -219,6 +232,9 @@ func (a *NodeInstancesApiService) DeleteInstanceExecute(r NodeInstancesApiApiDel
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -293,8 +309,13 @@ type NodeInstancesApiApiDetachedNodeActionRequest struct {
 	cUUID string
 	pUUID string
 	instanceIP string
+	request *interface{}
 }
 
+func (r NodeInstancesApiApiDetachedNodeActionRequest) Request(request interface{}) NodeInstancesApiApiDetachedNodeActionRequest {
+	r.request = &request
+	return r
+}
 
 func (r NodeInstancesApiApiDetachedNodeActionRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.DetachedNodeActionExecute(r)
@@ -346,6 +367,9 @@ func (a *NodeInstancesApiService) DetachedNodeActionExecute(r NodeInstancesApiAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -917,10 +941,15 @@ type NodeInstancesApiApiNodeActionRequest struct {
 	universeUUID string
 	nodeName string
 	nodeAction *NodeActionFormData
+	request *interface{}
 }
 
 func (r NodeInstancesApiApiNodeActionRequest) NodeAction(nodeAction NodeActionFormData) NodeInstancesApiApiNodeActionRequest {
 	r.nodeAction = &nodeAction
+	return r
+}
+func (r NodeInstancesApiApiNodeActionRequest) Request(request interface{}) NodeInstancesApiApiNodeActionRequest {
+	r.request = &request
 	return r
 }
 
@@ -977,6 +1006,9 @@ func (a *NodeInstancesApiService) NodeActionExecute(r NodeInstancesApiApiNodeAct
 		return localVarReturnValue, nil, reportError("nodeAction is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1052,8 +1084,13 @@ type NodeInstancesApiApiValidateNodeInstanceRequest struct {
 	ApiService *NodeInstancesApiService
 	cUUID string
 	azUUID string
+	request *interface{}
 }
 
+func (r NodeInstancesApiApiValidateNodeInstanceRequest) Request(request interface{}) NodeInstancesApiApiValidateNodeInstanceRequest {
+	r.request = &request
+	return r
+}
 
 func (r NodeInstancesApiApiValidateNodeInstanceRequest) Execute() (map[string]ValidationResult, *_nethttp.Response, error) {
 	return r.ApiService.ValidateNodeInstanceExecute(r)
@@ -1102,6 +1139,9 @@ func (a *NodeInstancesApiService) ValidateNodeInstanceExecute(r NodeInstancesApi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

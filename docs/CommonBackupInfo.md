@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Sse** | **bool** |  | 
 **State** | **string** |  | 
 **StorageConfigUUID** | **string** |  | 
+**TableByTableBackup** | **bool** |  | 
 **TaskUUID** | **string** |  | 
 **TotalBackupSizeInBytes** | **int64** |  | 
 **UpdateTime** | Pointer to **time.Time** | Backup update time. | [optional] 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewCommonBackupInfo
 
-`func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo`
+`func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, tableByTableBackup bool, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo`
 
 NewCommonBackupInfo instantiates a new CommonBackupInfo object
 This constructor will assign default values to properties that have it defined,
@@ -224,6 +225,26 @@ and a boolean to check if the value has been set.
 `func (o *CommonBackupInfo) SetStorageConfigUUID(v string)`
 
 SetStorageConfigUUID sets StorageConfigUUID field to given value.
+
+
+### GetTableByTableBackup
+
+`func (o *CommonBackupInfo) GetTableByTableBackup() bool`
+
+GetTableByTableBackup returns the TableByTableBackup field if non-nil, zero value otherwise.
+
+### GetTableByTableBackupOk
+
+`func (o *CommonBackupInfo) GetTableByTableBackupOk() (*bool, bool)`
+
+GetTableByTableBackupOk returns a tuple with the TableByTableBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableByTableBackup
+
+`func (o *CommonBackupInfo) SetTableByTableBackup(v bool)`
+
+SetTableByTableBackup sets TableByTableBackup field to given value.
 
 
 ### GetTaskUUID

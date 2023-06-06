@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AwsHostedZoneName** | Pointer to **string** |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] [readonly] 
+**VpcType** | Pointer to **string** | New/Existing VPC for provider creation | [optional] [readonly] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetHostVpcRegion sets HostVpcRegion field to given value.
 `func (o *AWSCloudInfo) HasHostVpcRegion() bool`
 
 HasHostVpcRegion returns a boolean if a field has been set.
+
+### GetVpcType
+
+`func (o *AWSCloudInfo) GetVpcType() string`
+
+GetVpcType returns the VpcType field if non-nil, zero value otherwise.
+
+### GetVpcTypeOk
+
+`func (o *AWSCloudInfo) GetVpcTypeOk() (*string, bool)`
+
+GetVpcTypeOk returns a tuple with the VpcType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcType
+
+`func (o *AWSCloudInfo) SetVpcType(v string)`
+
+SetVpcType sets VpcType field to given value.
+
+### HasVpcType
+
+`func (o *AWSCloudInfo) HasVpcType() bool`
+
+HasVpcType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

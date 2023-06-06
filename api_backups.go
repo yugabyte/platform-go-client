@@ -27,16 +27,295 @@ var (
 // BackupsApiService BackupsApi service
 type BackupsApiService service
 
+type BackupsApiApiCreateBackupScheduleRequest struct {
+	ctx _context.Context
+	ApiService *BackupsApiService
+	cUUID string
+	backup *BackupRequestParams
+	request *interface{}
+}
+
+func (r BackupsApiApiCreateBackupScheduleRequest) Backup(backup BackupRequestParams) BackupsApiApiCreateBackupScheduleRequest {
+	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiCreateBackupScheduleRequest) Request(request interface{}) BackupsApiApiCreateBackupScheduleRequest {
+	r.request = &request
+	return r
+}
+
+func (r BackupsApiApiCreateBackupScheduleRequest) Execute() (Schedule, *_nethttp.Response, error) {
+	return r.ApiService.CreateBackupScheduleExecute(r)
+}
+
+/*
+ * CreateBackupSchedule Create Backup Schedule
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return BackupsApiApiCreateBackupScheduleRequest
+ */
+func (a *BackupsApiService) CreateBackupSchedule(ctx _context.Context, cUUID string) BackupsApiApiCreateBackupScheduleRequest {
+	return BackupsApiApiCreateBackupScheduleRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Schedule
+ */
+func (a *BackupsApiService) CreateBackupScheduleExecute(r BackupsApiApiCreateBackupScheduleRequest) (Schedule, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Schedule
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.CreateBackupSchedule")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/create_backup_schedule"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.backup == nil {
+		return localVarReturnValue, nil, reportError("backup is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.backup
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupsApiApiCreateBackupScheduleAsyncRequest struct {
+	ctx _context.Context
+	ApiService *BackupsApiService
+	cUUID string
+	backup *BackupRequestParams
+	request *interface{}
+}
+
+func (r BackupsApiApiCreateBackupScheduleAsyncRequest) Backup(backup BackupRequestParams) BackupsApiApiCreateBackupScheduleAsyncRequest {
+	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiCreateBackupScheduleAsyncRequest) Request(request interface{}) BackupsApiApiCreateBackupScheduleAsyncRequest {
+	r.request = &request
+	return r
+}
+
+func (r BackupsApiApiCreateBackupScheduleAsyncRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.CreateBackupScheduleAsyncExecute(r)
+}
+
+/*
+ * CreateBackupScheduleAsync Create Backup Schedule Async
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return BackupsApiApiCreateBackupScheduleAsyncRequest
+ */
+func (a *BackupsApiService) CreateBackupScheduleAsync(ctx _context.Context, cUUID string) BackupsApiApiCreateBackupScheduleAsyncRequest {
+	return BackupsApiApiCreateBackupScheduleAsyncRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *BackupsApiService) CreateBackupScheduleAsyncExecute(r BackupsApiApiCreateBackupScheduleAsyncRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.CreateBackupScheduleAsync")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/create_backup_schedule_async"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.backup == nil {
+		return localVarReturnValue, nil, reportError("backup is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.backup
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type BackupsApiApiCreateMultiTableBackupRequest struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
 	uniUUID string
 	tableBackup *MultiTableBackupRequestParams
+	request *interface{}
 }
 
 func (r BackupsApiApiCreateMultiTableBackupRequest) TableBackup(tableBackup MultiTableBackupRequestParams) BackupsApiApiCreateMultiTableBackupRequest {
 	r.tableBackup = &tableBackup
+	return r
+}
+func (r BackupsApiApiCreateMultiTableBackupRequest) Request(request interface{}) BackupsApiApiCreateMultiTableBackupRequest {
+	r.request = &request
 	return r
 }
 
@@ -90,6 +369,9 @@ func (a *BackupsApiService) CreateMultiTableBackupExecute(r BackupsApiApiCreateM
 		return localVarReturnValue, nil, reportError("tableBackup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -165,10 +447,15 @@ type BackupsApiApiCreatebackupRequest struct {
 	ApiService *BackupsApiService
 	cUUID string
 	backup *BackupRequestParams
+	request *interface{}
 }
 
 func (r BackupsApiApiCreatebackupRequest) Backup(backup BackupRequestParams) BackupsApiApiCreatebackupRequest {
 	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiCreatebackupRequest) Request(request interface{}) BackupsApiApiCreatebackupRequest {
+	r.request = &request
 	return r
 }
 
@@ -219,135 +506,9 @@ func (a *BackupsApiService) CreatebackupExecute(r BackupsApiApiCreatebackupReque
 		return localVarReturnValue, nil, reportError("backup is required and must be specified")
 	}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.backup
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type BackupsApiApiCreatebackupScheduleRequest struct {
-	ctx _context.Context
-	ApiService *BackupsApiService
-	cUUID string
-	backup *BackupRequestParams
-}
-
-func (r BackupsApiApiCreatebackupScheduleRequest) Backup(backup BackupRequestParams) BackupsApiApiCreatebackupScheduleRequest {
-	r.backup = &backup
-	return r
-}
-
-func (r BackupsApiApiCreatebackupScheduleRequest) Execute() (Schedule, *_nethttp.Response, error) {
-	return r.ApiService.CreatebackupScheduleExecute(r)
-}
-
-/*
- * CreatebackupSchedule Create Backup Schedule
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @return BackupsApiApiCreatebackupScheduleRequest
- */
-func (a *BackupsApiService) CreatebackupSchedule(ctx _context.Context, cUUID string) BackupsApiApiCreatebackupScheduleRequest {
-	return BackupsApiApiCreatebackupScheduleRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Schedule
- */
-func (a *BackupsApiService) CreatebackupScheduleExecute(r BackupsApiApiCreatebackupScheduleRequest) (Schedule, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Schedule
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.CreatebackupSchedule")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/create_backup_schedule"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.backup == nil {
-		return localVarReturnValue, nil, reportError("backup is required and must be specified")
-	}
-
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -422,8 +583,13 @@ type BackupsApiApiDeleteBackupsRequest struct {
 	ctx _context.Context
 	ApiService *BackupsApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r BackupsApiApiDeleteBackupsRequest) Request(request interface{}) BackupsApiApiDeleteBackupsRequest {
+	r.request = &request
+	return r
+}
 
 func (r BackupsApiApiDeleteBackupsRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.DeleteBackupsExecute(r)
@@ -469,6 +635,9 @@ func (a *BackupsApiService) DeleteBackupsExecute(r BackupsApiApiDeleteBackupsReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -542,10 +711,15 @@ type BackupsApiApiDeleteBackupsV2Request struct {
 	ApiService *BackupsApiService
 	cUUID string
 	deleteBackup *DeleteBackupParams
+	request *interface{}
 }
 
 func (r BackupsApiApiDeleteBackupsV2Request) DeleteBackup(deleteBackup DeleteBackupParams) BackupsApiApiDeleteBackupsV2Request {
 	r.deleteBackup = &deleteBackup
+	return r
+}
+func (r BackupsApiApiDeleteBackupsV2Request) Request(request interface{}) BackupsApiApiDeleteBackupsV2Request {
+	r.request = &request
 	return r
 }
 
@@ -596,6 +770,9 @@ func (a *BackupsApiService) DeleteBackupsV2Execute(r BackupsApiApiDeleteBackupsV
 		return localVarReturnValue, nil, reportError("deleteBackup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -672,10 +849,15 @@ type BackupsApiApiEditBackupV2Request struct {
 	cUUID string
 	backupUUID string
 	backup *EditBackupParams
+	request *interface{}
 }
 
 func (r BackupsApiApiEditBackupV2Request) Backup(backup EditBackupParams) BackupsApiApiEditBackupV2Request {
 	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiEditBackupV2Request) Request(request interface{}) BackupsApiApiEditBackupV2Request {
+	r.request = &request
 	return r
 }
 
@@ -730,6 +912,9 @@ func (a *BackupsApiService) EditBackupV2Execute(r BackupsApiApiEditBackupV2Reque
 		return localVarReturnValue, nil, reportError("backup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1067,7 +1252,7 @@ type BackupsApiApiGetThrottleParamsRequest struct {
 }
 
 
-func (r BackupsApiApiGetThrottleParamsRequest) Execute() (map[string]map[string]interface{}, *_nethttp.Response, error) {
+func (r BackupsApiApiGetThrottleParamsRequest) Execute() (YbcThrottleParametersResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetThrottleParamsExecute(r)
 }
 
@@ -1089,16 +1274,16 @@ func (a *BackupsApiService) GetThrottleParams(ctx _context.Context, cUUID string
 
 /*
  * Execute executes the request
- * @return map[string]map[string]interface{}
+ * @return YbcThrottleParametersResponse
  */
-func (a *BackupsApiService) GetThrottleParamsExecute(r BackupsApiApiGetThrottleParamsRequest) (map[string]map[string]interface{}, *_nethttp.Response, error) {
+func (a *BackupsApiService) GetThrottleParamsExecute(r BackupsApiApiGetThrottleParamsRequest) (YbcThrottleParametersResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarReturnValue  YbcThrottleParametersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.GetThrottleParams")
@@ -1187,10 +1372,15 @@ type BackupsApiApiListBackupRestoresV2Request struct {
 	ApiService *BackupsApiService
 	cUUID string
 	pageRestoresRequest *RestorePagedApiQuery
+	request *interface{}
 }
 
 func (r BackupsApiApiListBackupRestoresV2Request) PageRestoresRequest(pageRestoresRequest RestorePagedApiQuery) BackupsApiApiListBackupRestoresV2Request {
 	r.pageRestoresRequest = &pageRestoresRequest
+	return r
+}
+func (r BackupsApiApiListBackupRestoresV2Request) Request(request interface{}) BackupsApiApiListBackupRestoresV2Request {
+	r.request = &request
 	return r
 }
 
@@ -1241,6 +1431,9 @@ func (a *BackupsApiService) ListBackupRestoresV2Execute(r BackupsApiApiListBacku
 		return localVarReturnValue, nil, reportError("pageRestoresRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1316,10 +1509,15 @@ type BackupsApiApiListBackupsV2Request struct {
 	ApiService *BackupsApiService
 	cUUID string
 	pageBackupsRequest *BackupPagedApiQuery
+	request *interface{}
 }
 
 func (r BackupsApiApiListBackupsV2Request) PageBackupsRequest(pageBackupsRequest BackupPagedApiQuery) BackupsApiApiListBackupsV2Request {
 	r.pageBackupsRequest = &pageBackupsRequest
+	return r
+}
+func (r BackupsApiApiListBackupsV2Request) Request(request interface{}) BackupsApiApiListBackupsV2Request {
+	r.request = &request
 	return r
 }
 
@@ -1370,6 +1568,9 @@ func (a *BackupsApiService) ListBackupsV2Execute(r BackupsApiApiListBackupsV2Req
 		return localVarReturnValue, nil, reportError("pageBackupsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1701,10 +1902,15 @@ type BackupsApiApiRestoreRequest struct {
 	cUUID string
 	uniUUID string
 	backup *BackupTableParams
+	request *interface{}
 }
 
 func (r BackupsApiApiRestoreRequest) Backup(backup BackupTableParams) BackupsApiApiRestoreRequest {
 	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiRestoreRequest) Request(request interface{}) BackupsApiApiRestoreRequest {
+	r.request = &request
 	return r
 }
 
@@ -1758,6 +1964,9 @@ func (a *BackupsApiService) RestoreExecute(r BackupsApiApiRestoreRequest) (YBPTa
 		return localVarReturnValue, nil, reportError("backup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1833,10 +2042,15 @@ type BackupsApiApiRestoreBackupV2Request struct {
 	ApiService *BackupsApiService
 	cUUID string
 	backup *RestoreBackupParams
+	request *interface{}
 }
 
 func (r BackupsApiApiRestoreBackupV2Request) Backup(backup RestoreBackupParams) BackupsApiApiRestoreBackupV2Request {
 	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiRestoreBackupV2Request) Request(request interface{}) BackupsApiApiRestoreBackupV2Request {
+	r.request = &request
 	return r
 }
 
@@ -1887,6 +2101,9 @@ func (a *BackupsApiService) RestoreBackupV2Execute(r BackupsApiApiRestoreBackupV
 		return localVarReturnValue, nil, reportError("backup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1963,10 +2180,15 @@ type BackupsApiApiSetThrottleParamsRequest struct {
 	cUUID string
 	uniUUID string
 	throttleParams *YbcThrottleParameters
+	request *interface{}
 }
 
 func (r BackupsApiApiSetThrottleParamsRequest) ThrottleParams(throttleParams YbcThrottleParameters) BackupsApiApiSetThrottleParamsRequest {
 	r.throttleParams = &throttleParams
+	return r
+}
+func (r BackupsApiApiSetThrottleParamsRequest) Request(request interface{}) BackupsApiApiSetThrottleParamsRequest {
+	r.request = &request
 	return r
 }
 
@@ -2020,6 +2242,9 @@ func (a *BackupsApiService) SetThrottleParamsExecute(r BackupsApiApiSetThrottleP
 		return localVarReturnValue, nil, reportError("throttleParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -2096,10 +2321,15 @@ type BackupsApiApiSetUniverseBackupFlagRequest struct {
 	cUUID string
 	uniUUID string
 	markActive *bool
+	request *interface{}
 }
 
 func (r BackupsApiApiSetUniverseBackupFlagRequest) MarkActive(markActive bool) BackupsApiApiSetUniverseBackupFlagRequest {
 	r.markActive = &markActive
+	return r
+}
+func (r BackupsApiApiSetUniverseBackupFlagRequest) Request(request interface{}) BackupsApiApiSetUniverseBackupFlagRequest {
+	r.request = &request
 	return r
 }
 
@@ -2152,6 +2382,9 @@ func (a *BackupsApiService) SetUniverseBackupFlagExecute(r BackupsApiApiSetUnive
 
 	if r.markActive != nil {
 		localVarQueryParams.Add("markActive", parameterToString(*r.markActive, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2226,8 +2459,13 @@ type BackupsApiApiStopBackupRequest struct {
 	ApiService *BackupsApiService
 	cUUID string
 	backupUUID string
+	request *interface{}
 }
 
+func (r BackupsApiApiStopBackupRequest) Request(request interface{}) BackupsApiApiStopBackupRequest {
+	r.request = &request
+	return r
+}
 
 func (r BackupsApiApiStopBackupRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.StopBackupExecute(r)
@@ -2277,6 +2515,9 @@ func (a *BackupsApiService) StopBackupExecute(r BackupsApiApiStopBackupRequest) 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

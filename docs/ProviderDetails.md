@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AirGapInstall** | Pointer to **bool** |  | [optional] 
 **CloudInfo** | Pointer to [**CloudInfo**](CloudInfo.md) |  | [optional] 
+**EnableNodeAgent** | Pointer to **bool** |  | [optional] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
@@ -86,6 +87,31 @@ SetCloudInfo sets CloudInfo field to given value.
 `func (o *ProviderDetails) HasCloudInfo() bool`
 
 HasCloudInfo returns a boolean if a field has been set.
+
+### GetEnableNodeAgent
+
+`func (o *ProviderDetails) GetEnableNodeAgent() bool`
+
+GetEnableNodeAgent returns the EnableNodeAgent field if non-nil, zero value otherwise.
+
+### GetEnableNodeAgentOk
+
+`func (o *ProviderDetails) GetEnableNodeAgentOk() (*bool, bool)`
+
+GetEnableNodeAgentOk returns a tuple with the EnableNodeAgent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableNodeAgent
+
+`func (o *ProviderDetails) SetEnableNodeAgent(v bool)`
+
+SetEnableNodeAgent sets EnableNodeAgent field to given value.
+
+### HasEnableNodeAgent
+
+`func (o *ProviderDetails) HasEnableNodeAgent() bool`
+
+HasEnableNodeAgent returns a boolean if a field has been set.
 
 ### GetInstallNodeExporter
 

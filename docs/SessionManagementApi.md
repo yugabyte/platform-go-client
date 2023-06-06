@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 ## ApiLogin
 
-> SessionInfo ApiLogin(ctx).CustomerLoginFormData(customerLoginFormData).Execute()
+> SessionInfo ApiLogin(ctx).CustomerLoginFormData(customerLoginFormData).Request(request).Execute()
 
 Authenticate user and return api token
 
@@ -35,10 +35,11 @@ import (
 
 func main() {
     customerLoginFormData := *openapiclient.NewCustomerLoginFormData("Email_example", "Password_example") // CustomerLoginFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionManagementApi.ApiLogin(context.Background()).CustomerLoginFormData(customerLoginFormData).Execute()
+    resp, r, err := api_client.SessionManagementApi.ApiLogin(context.Background()).CustomerLoginFormData(customerLoginFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.ApiLogin``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiApiLoginRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerLoginFormData** | [**CustomerLoginFormData**](CustomerLoginFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -407,7 +409,7 @@ No authorization required
 
 ## GetSessionInfo
 
-> SessionInfo GetSessionInfo(ctx).Execute()
+> SessionInfo GetSessionInfo(ctx).Request(request).Execute()
 
 Get current user/customer uuid auth/api token
 
@@ -424,10 +426,11 @@ import (
 )
 
 func main() {
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionManagementApi.GetSessionInfo(context.Background()).Execute()
+    resp, r, err := api_client.SessionManagementApi.GetSessionInfo(context.Background()).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.GetSessionInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -439,12 +442,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSessionInfoRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -466,7 +473,7 @@ Other parameters are passed through a pointer to a apiGetSessionInfoRequest stru
 
 ## RegisterCustomer
 
-> SessionInfo RegisterCustomer(ctx).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Execute()
+> SessionInfo RegisterCustomer(ctx).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Request(request).Execute()
 
 Register a customer
 
@@ -487,10 +494,11 @@ import (
 func main() {
     customerRegisterFormData := *openapiclient.NewCustomerRegisterFormData("Code_example", "Email_example", "Name_example", "Password_example") // CustomerRegisterFormData | 
     generateApiToken := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SessionManagementApi.RegisterCustomer(context.Background()).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Execute()
+    resp, r, err := api_client.SessionManagementApi.RegisterCustomer(context.Background()).CustomerRegisterFormData(customerRegisterFormData).GenerateApiToken(generateApiToken).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.RegisterCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -513,6 +521,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerRegisterFormData** | [**CustomerRegisterFormData**](CustomerRegisterFormData.md) |  | 
  **generateApiToken** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

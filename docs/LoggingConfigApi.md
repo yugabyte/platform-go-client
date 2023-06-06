@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## SetAuditLoggingSettings
 
-> AuditLoggingConfig SetAuditLoggingSettings(ctx).AuditLoggingConfig(auditLoggingConfig).Execute()
+> AuditLoggingConfig SetAuditLoggingSettings(ctx).AuditLoggingConfig(auditLoggingConfig).Request(request).Execute()
 
 Set Audit Logging Level
 
@@ -29,10 +29,11 @@ import (
 
 func main() {
     auditLoggingConfig := *openapiclient.NewAuditLoggingConfig(false, false) // AuditLoggingConfig | Audit Logging config to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoggingConfigApi.SetAuditLoggingSettings(context.Background()).AuditLoggingConfig(auditLoggingConfig).Execute()
+    resp, r, err := api_client.LoggingConfigApi.SetAuditLoggingSettings(context.Background()).AuditLoggingConfig(auditLoggingConfig).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoggingConfigApi.SetAuditLoggingSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -54,6 +55,7 @@ Other parameters are passed through a pointer to a apiSetAuditLoggingSettingsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **auditLoggingConfig** | [**AuditLoggingConfig**](AuditLoggingConfig.md) | Audit Logging config to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -75,7 +77,7 @@ Name | Type | Description  | Notes
 
 ## SetLoggingSettings
 
-> PlatformLoggingConfig SetLoggingSettings(ctx).LoggingConfig(loggingConfig).Execute()
+> PlatformLoggingConfig SetLoggingSettings(ctx).LoggingConfig(loggingConfig).Request(request).Execute()
 
 Set Logging Level
 
@@ -93,10 +95,11 @@ import (
 
 func main() {
     loggingConfig := *openapiclient.NewPlatformLoggingConfig("Level_example", int32(123), "RolloverPattern_example") // PlatformLoggingConfig | Logging config to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LoggingConfigApi.SetLoggingSettings(context.Background()).LoggingConfig(loggingConfig).Execute()
+    resp, r, err := api_client.LoggingConfigApi.SetLoggingSettings(context.Background()).LoggingConfig(loggingConfig).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LoggingConfigApi.SetLoggingSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -118,6 +121,7 @@ Other parameters are passed through a pointer to a apiSetLoggingSettingsRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **loggingConfig** | [**PlatformLoggingConfig**](PlatformLoggingConfig.md) | Logging config to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

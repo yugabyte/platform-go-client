@@ -5,23 +5,28 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
+**Imported** | Pointer to **bool** | Whether this xCluster replication config was imported | [optional] 
 **Lag** | **map[string]interface{}** | Lag metric data | 
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
 **Name** | Pointer to **string** | XCluster config name | [optional] 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
 **ReplicationGroupName** | Pointer to **string** | Replication group name in DB | [optional] 
+**SourceActive** | Pointer to **bool** | Whether the source is active in txn xCluster | [optional] 
 **SourceUniverseUUID** | Pointer to **string** | Source Universe UUID | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
-**TableDetails** | [**[]XClusterTableConfig**](XClusterTableConfig.md) |  | 
-**Tables** | Pointer to **[]string** |  | [optional] 
+**TableDetails** | Pointer to [**[]XClusterTableConfig**](XClusterTableConfig.md) | Tables participating in this xCluster config | [optional] 
+**TableType** | Pointer to **string** | tableType | [optional] 
+**Tables** | Pointer to **[]string** |  | [optional] [readonly] 
+**TargetActive** | Pointer to **bool** | Whether the target is active in txn xCluster | [optional] 
 **TargetUniverseUUID** | Pointer to **string** | Target Universe UUID | [optional] 
+**Type** | Pointer to **string** | Whether the config is txn xCluster | [optional] 
 **Uuid** | Pointer to **string** | XCluster config UUID | [optional] 
 
 ## Methods
 
 ### NewXClusterConfigGetResp
 
-`func NewXClusterConfigGetResp(lag map[string]interface{}, tableDetails []XClusterTableConfig, ) *XClusterConfigGetResp`
+`func NewXClusterConfigGetResp(lag map[string]interface{}, ) *XClusterConfigGetResp`
 
 NewXClusterConfigGetResp instantiates a new XClusterConfigGetResp object
 This constructor will assign default values to properties that have it defined,
@@ -60,6 +65,31 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *XClusterConfigGetResp) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
+
+### GetImported
+
+`func (o *XClusterConfigGetResp) GetImported() bool`
+
+GetImported returns the Imported field if non-nil, zero value otherwise.
+
+### GetImportedOk
+
+`func (o *XClusterConfigGetResp) GetImportedOk() (*bool, bool)`
+
+GetImportedOk returns a tuple with the Imported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImported
+
+`func (o *XClusterConfigGetResp) SetImported(v bool)`
+
+SetImported sets Imported field to given value.
+
+### HasImported
+
+`func (o *XClusterConfigGetResp) HasImported() bool`
+
+HasImported returns a boolean if a field has been set.
 
 ### GetLag
 
@@ -181,6 +211,31 @@ SetReplicationGroupName sets ReplicationGroupName field to given value.
 
 HasReplicationGroupName returns a boolean if a field has been set.
 
+### GetSourceActive
+
+`func (o *XClusterConfigGetResp) GetSourceActive() bool`
+
+GetSourceActive returns the SourceActive field if non-nil, zero value otherwise.
+
+### GetSourceActiveOk
+
+`func (o *XClusterConfigGetResp) GetSourceActiveOk() (*bool, bool)`
+
+GetSourceActiveOk returns a tuple with the SourceActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceActive
+
+`func (o *XClusterConfigGetResp) SetSourceActive(v bool)`
+
+SetSourceActive sets SourceActive field to given value.
+
+### HasSourceActive
+
+`func (o *XClusterConfigGetResp) HasSourceActive() bool`
+
+HasSourceActive returns a boolean if a field has been set.
+
 ### GetSourceUniverseUUID
 
 `func (o *XClusterConfigGetResp) GetSourceUniverseUUID() string`
@@ -250,6 +305,36 @@ and a boolean to check if the value has been set.
 
 SetTableDetails sets TableDetails field to given value.
 
+### HasTableDetails
+
+`func (o *XClusterConfigGetResp) HasTableDetails() bool`
+
+HasTableDetails returns a boolean if a field has been set.
+
+### GetTableType
+
+`func (o *XClusterConfigGetResp) GetTableType() string`
+
+GetTableType returns the TableType field if non-nil, zero value otherwise.
+
+### GetTableTypeOk
+
+`func (o *XClusterConfigGetResp) GetTableTypeOk() (*string, bool)`
+
+GetTableTypeOk returns a tuple with the TableType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableType
+
+`func (o *XClusterConfigGetResp) SetTableType(v string)`
+
+SetTableType sets TableType field to given value.
+
+### HasTableType
+
+`func (o *XClusterConfigGetResp) HasTableType() bool`
+
+HasTableType returns a boolean if a field has been set.
 
 ### GetTables
 
@@ -276,6 +361,31 @@ SetTables sets Tables field to given value.
 
 HasTables returns a boolean if a field has been set.
 
+### GetTargetActive
+
+`func (o *XClusterConfigGetResp) GetTargetActive() bool`
+
+GetTargetActive returns the TargetActive field if non-nil, zero value otherwise.
+
+### GetTargetActiveOk
+
+`func (o *XClusterConfigGetResp) GetTargetActiveOk() (*bool, bool)`
+
+GetTargetActiveOk returns a tuple with the TargetActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetActive
+
+`func (o *XClusterConfigGetResp) SetTargetActive(v bool)`
+
+SetTargetActive sets TargetActive field to given value.
+
+### HasTargetActive
+
+`func (o *XClusterConfigGetResp) HasTargetActive() bool`
+
+HasTargetActive returns a boolean if a field has been set.
+
 ### GetTargetUniverseUUID
 
 `func (o *XClusterConfigGetResp) GetTargetUniverseUUID() string`
@@ -300,6 +410,31 @@ SetTargetUniverseUUID sets TargetUniverseUUID field to given value.
 `func (o *XClusterConfigGetResp) HasTargetUniverseUUID() bool`
 
 HasTargetUniverseUUID returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *XClusterConfigGetResp) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *XClusterConfigGetResp) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *XClusterConfigGetResp) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *XClusterConfigGetResp) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUuid
 

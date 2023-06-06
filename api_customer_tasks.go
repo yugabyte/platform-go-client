@@ -32,8 +32,13 @@ type CustomerTasksApiApiAbortTaskRequest struct {
 	ApiService *CustomerTasksApiService
 	cUUID string
 	tUUID string
+	request *interface{}
 }
 
+func (r CustomerTasksApiApiAbortTaskRequest) Request(request interface{}) CustomerTasksApiApiAbortTaskRequest {
+	r.request = &request
+	return r
+}
 
 func (r CustomerTasksApiApiAbortTaskRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.AbortTaskExecute(r)
@@ -83,6 +88,9 @@ func (a *CustomerTasksApiService) AbortTaskExecute(r CustomerTasksApiApiAbortTas
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -164,7 +172,7 @@ func (r CustomerTasksApiApiFailedSubtasksRequest) Execute() (map[string]map[stri
 }
 
 /*
- * FailedSubtasks Get a task's failed subtasks
+ * FailedSubtasks Deprecated: sinceDate=2023-06-06, sinceYBAVersion=2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param tUUID
@@ -274,7 +282,7 @@ func (a *CustomerTasksApiService) FailedSubtasksExecute(r CustomerTasksApiApiFai
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CustomerTasksApiApiRetryTaskRequest struct {
+type CustomerTasksApiApiListFailedSubtasksRequest struct {
 	ctx _context.Context
 	ApiService *CustomerTasksApiService
 	cUUID string
@@ -282,13 +290,141 @@ type CustomerTasksApiApiRetryTaskRequest struct {
 }
 
 
-func (r CustomerTasksApiApiRetryTaskRequest) Execute() (UniverseResp, *_nethttp.Response, error) {
+func (r CustomerTasksApiApiListFailedSubtasksRequest) Execute() (FailedSubtasks, *_nethttp.Response, error) {
+	return r.ApiService.ListFailedSubtasksExecute(r)
+}
+
+/*
+ * ListFailedSubtasks Get a list of task's failed subtasks
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param tUUID
+ * @return CustomerTasksApiApiListFailedSubtasksRequest
+ */
+func (a *CustomerTasksApiService) ListFailedSubtasks(ctx _context.Context, cUUID string, tUUID string) CustomerTasksApiApiListFailedSubtasksRequest {
+	return CustomerTasksApiApiListFailedSubtasksRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		tUUID: tUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FailedSubtasks
+ */
+func (a *CustomerTasksApiService) ListFailedSubtasksExecute(r CustomerTasksApiApiListFailedSubtasksRequest) (FailedSubtasks, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FailedSubtasks
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksApiService.ListFailedSubtasks")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tUUID"+"}", _neturl.PathEscape(parameterToString(r.tUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type CustomerTasksApiApiRetryTaskRequest struct {
+	ctx _context.Context
+	ApiService *CustomerTasksApiService
+	cUUID string
+	tUUID string
+	request *interface{}
+}
+
+func (r CustomerTasksApiApiRetryTaskRequest) Request(request interface{}) CustomerTasksApiApiRetryTaskRequest {
+	r.request = &request
+	return r
+}
+
+func (r CustomerTasksApiApiRetryTaskRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.RetryTaskExecute(r)
 }
 
 /*
- * RetryTask Retry a Universe task
- * Retry a Universe task.
+ * RetryTask Retry a Universe or Provider task
+ * Retry a Universe or Provider task.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param tUUID
@@ -305,16 +441,16 @@ func (a *CustomerTasksApiService) RetryTask(ctx _context.Context, cUUID string, 
 
 /*
  * Execute executes the request
- * @return UniverseResp
+ * @return YBPTask
  */
-func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTaskRequest) (UniverseResp, *_nethttp.Response, error) {
+func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTaskRequest) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  UniverseResp
+		localVarReturnValue  YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksApiService.RetryTask")
@@ -330,6 +466,9 @@ func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTas
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

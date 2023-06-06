@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **InUse** | Pointer to **bool** | True if the node is in use | [optional] 
 **InstanceName** | Pointer to **string** | The node instance&#39;s name | [optional] 
 **InstanceTypeCode** | Pointer to **string** | The node&#39;s type code | [optional] 
-**NodeName** | Pointer to **string** | The node&#39;s name | [optional] 
+**NodeName** | Pointer to **string** | The node&#39;s name | [optional] [readonly] 
 **NodeUuid** | Pointer to **string** | The node&#39;s UUID | [optional] [readonly] 
 **ZoneUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 

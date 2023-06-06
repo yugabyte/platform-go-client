@@ -34,12 +34,15 @@ type VMImageUpgradeParams struct {
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ForceVMImageUpgrade bool `json:"forceVMImageUpgrade"`
+	// ImageBundle to be used for upgrade
+	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
+	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
-	// Map  of region UUID to AMI name
-	MachineImages map[string]string `json:"machineImages"`
+	// Map  of region UUID to AMI name. Deprecated: sinceDate=2023-03-30,sinceYBAVersion=2.18.0, Use imageBundle instead.
+	MachineImages *map[string]string `json:"machineImages,omitempty"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
 	// Node details
@@ -62,7 +65,7 @@ type VMImageUpgradeParams struct {
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
-	// Map of region UUID to SSH User override
+	// Map of region UUID to SSH User override. Deprecated: sinceDate=2023-03-30,sinceYBAVersion=2.18.0, Use imageBundle instead.
 	SshUserOverrideMap *map[string]string `json:"sshUserOverrideMap,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
@@ -89,13 +92,12 @@ type VMImageUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams {
+func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams {
 	this := VMImageUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.ForceVMImageUpgrade = forceVMImageUpgrade
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
-	this.MachineImages = machineImages
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
@@ -569,6 +571,38 @@ func (o *VMImageUpgradeParams) SetForceVMImageUpgrade(v bool) {
 	o.ForceVMImageUpgrade = v
 }
 
+// GetImageBundleUUID returns the ImageBundleUUID field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetImageBundleUUID() string {
+	if o == nil || o.ImageBundleUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.ImageBundleUUID
+}
+
+// GetImageBundleUUIDOk returns a tuple with the ImageBundleUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetImageBundleUUIDOk() (*string, bool) {
+	if o == nil || o.ImageBundleUUID == nil {
+		return nil, false
+	}
+	return o.ImageBundleUUID, true
+}
+
+// HasImageBundleUUID returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasImageBundleUUID() bool {
+	if o != nil && o.ImageBundleUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImageBundleUUID gets a reference to the given string and assigns it to the ImageBundleUUID field.
+func (o *VMImageUpgradeParams) SetImageBundleUUID(v string) {
+	o.ImageBundleUUID = &v
+}
+
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
 func (o *VMImageUpgradeParams) GetImportedState() string {
 	if o == nil || o.ImportedState == nil {
@@ -633,6 +667,38 @@ func (o *VMImageUpgradeParams) SetInstallYbc(v bool) {
 	o.InstallYbc = &v
 }
 
+// GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetIsKubernetesOperatorControlled() bool {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsKubernetesOperatorControlled
+}
+
+// GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetIsKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		return nil, false
+	}
+	return o.IsKubernetesOperatorControlled, true
+}
+
+// HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasIsKubernetesOperatorControlled() bool {
+	if o != nil && o.IsKubernetesOperatorControlled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsKubernetesOperatorControlled gets a reference to the given bool and assigns it to the IsKubernetesOperatorControlled field.
+func (o *VMImageUpgradeParams) SetIsKubernetesOperatorControlled(v bool) {
+	o.IsKubernetesOperatorControlled = &v
+}
+
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
 func (o *VMImageUpgradeParams) GetItestS3PackagePath() string {
 	if o == nil || o.ItestS3PackagePath == nil {
@@ -689,28 +755,36 @@ func (o *VMImageUpgradeParams) SetKubernetesUpgradeSupported(v bool) {
 	o.KubernetesUpgradeSupported = v
 }
 
-// GetMachineImages returns the MachineImages field value
+// GetMachineImages returns the MachineImages field value if set, zero value otherwise.
 func (o *VMImageUpgradeParams) GetMachineImages() map[string]string {
-	if o == nil  {
+	if o == nil || o.MachineImages == nil {
 		var ret map[string]string
 		return ret
 	}
-
-	return o.MachineImages
+	return *o.MachineImages
 }
 
-// GetMachineImagesOk returns a tuple with the MachineImages field value
+// GetMachineImagesOk returns a tuple with the MachineImages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VMImageUpgradeParams) GetMachineImagesOk() (*map[string]string, bool) {
-	if o == nil  {
+	if o == nil || o.MachineImages == nil {
 		return nil, false
 	}
-	return &o.MachineImages, true
+	return o.MachineImages, true
 }
 
-// SetMachineImages sets field value
+// HasMachineImages returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasMachineImages() bool {
+	if o != nil && o.MachineImages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMachineImages gets a reference to the given map[string]string and assigns it to the MachineImages field.
 func (o *VMImageUpgradeParams) SetMachineImages(v map[string]string) {
-	o.MachineImages = v
+	o.MachineImages = &v
 }
 
 // GetMastersInDefaultRegion returns the MastersInDefaultRegion field value if set, zero value otherwise.
@@ -1832,11 +1906,17 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["forceVMImageUpgrade"] = o.ForceVMImageUpgrade
 	}
+	if o.ImageBundleUUID != nil {
+		toSerialize["imageBundleUUID"] = o.ImageBundleUUID
+	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
+	}
+	if o.IsKubernetesOperatorControlled != nil {
+		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
 	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
@@ -1844,7 +1924,7 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["kubernetesUpgradeSupported"] = o.KubernetesUpgradeSupported
 	}
-	if true {
+	if o.MachineImages != nil {
 		toSerialize["machineImages"] = o.MachineImages
 	}
 	if o.MastersInDefaultRegion != nil {

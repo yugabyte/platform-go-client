@@ -32,10 +32,15 @@ type MaintenanceWindowsApiApiCreateRequest struct {
 	ApiService *MaintenanceWindowsApiService
 	cUUID string
 	createMaintenanceWindowRequest *MaintenanceWindow
+	request *interface{}
 }
 
 func (r MaintenanceWindowsApiApiCreateRequest) CreateMaintenanceWindowRequest(createMaintenanceWindowRequest MaintenanceWindow) MaintenanceWindowsApiApiCreateRequest {
 	r.createMaintenanceWindowRequest = &createMaintenanceWindowRequest
+	return r
+}
+func (r MaintenanceWindowsApiApiCreateRequest) Request(request interface{}) MaintenanceWindowsApiApiCreateRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *MaintenanceWindowsApiService) CreateExecute(r MaintenanceWindowsApiApiC
 		return localVarReturnValue, nil, reportError("createMaintenanceWindowRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -161,8 +169,13 @@ type MaintenanceWindowsApiApiDeleteRequest struct {
 	ApiService *MaintenanceWindowsApiService
 	cUUID string
 	windowUUID string
+	request *interface{}
 }
 
+func (r MaintenanceWindowsApiApiDeleteRequest) Request(request interface{}) MaintenanceWindowsApiApiDeleteRequest {
+	r.request = &request
+	return r
+}
 
 func (r MaintenanceWindowsApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteExecute(r)
@@ -211,6 +224,9 @@ func (a *MaintenanceWindowsApiService) DeleteExecute(r MaintenanceWindowsApiApiD
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -406,8 +422,13 @@ type MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest struct {
 	ctx _context.Context
 	ApiService *MaintenanceWindowsApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest) Request(request interface{}) MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest {
+	r.request = &request
+	return r
+}
 
 func (r MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest) Execute() ([]MaintenanceWindow, *_nethttp.Response, error) {
 	return r.ApiService.ListOfMaintenanceWindowsExecute(r)
@@ -453,6 +474,9 @@ func (a *MaintenanceWindowsApiService) ListOfMaintenanceWindowsExecute(r Mainten
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -526,10 +550,15 @@ type MaintenanceWindowsApiApiPageRequest struct {
 	ApiService *MaintenanceWindowsApiService
 	cUUID string
 	pageMaintenanceWindowsRequest *MaintenanceWindowPagedApiQuery
+	request *interface{}
 }
 
 func (r MaintenanceWindowsApiApiPageRequest) PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest MaintenanceWindowPagedApiQuery) MaintenanceWindowsApiApiPageRequest {
 	r.pageMaintenanceWindowsRequest = &pageMaintenanceWindowsRequest
+	return r
+}
+func (r MaintenanceWindowsApiApiPageRequest) Request(request interface{}) MaintenanceWindowsApiApiPageRequest {
+	r.request = &request
 	return r
 }
 
@@ -580,6 +609,9 @@ func (a *MaintenanceWindowsApiService) PageExecute(r MaintenanceWindowsApiApiPag
 		return localVarReturnValue, nil, reportError("pageMaintenanceWindowsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -656,10 +688,15 @@ type MaintenanceWindowsApiApiUpdateRequest struct {
 	cUUID string
 	windowUUID string
 	updateMaintenanceWindowRequest *MaintenanceWindow
+	request *interface{}
 }
 
 func (r MaintenanceWindowsApiApiUpdateRequest) UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest MaintenanceWindow) MaintenanceWindowsApiApiUpdateRequest {
 	r.updateMaintenanceWindowRequest = &updateMaintenanceWindowRequest
+	return r
+}
+func (r MaintenanceWindowsApiApiUpdateRequest) Request(request interface{}) MaintenanceWindowsApiApiUpdateRequest {
+	r.request = &request
 	return r
 }
 
@@ -713,6 +750,9 @@ func (a *MaintenanceWindowsApiService) UpdateExecute(r MaintenanceWindowsApiApiU
 		return localVarReturnValue, nil, reportError("updateMaintenanceWindowRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

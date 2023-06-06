@@ -25,6 +25,7 @@ type KubernetesInfo struct {
 	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
 	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
 	KubernetesPullSecretName *string `json:"kubernetesPullSecretName,omitempty"`
+	// DEPRECATED: kubernetes service account is not needed.
 	KubernetesServiceAccount *string `json:"kubernetesServiceAccount,omitempty"`
 	KubernetesStorageClass *string `json:"kubernetesStorageClass,omitempty"`
 }

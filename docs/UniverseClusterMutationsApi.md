@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateAllClusters
 
-> YBPTask CreateAllClusters(ctx, cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+> YBPTask CreateAllClusters(ctx, cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
 
 Create Universe Clusters
 
@@ -35,10 +35,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // UniverseConfigureTaskParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseClusterMutationsApi.CreateAllClusters(context.Background(), cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+    resp, r, err := api_client.UniverseClusterMutationsApi.CreateAllClusters(context.Background(), cUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseClusterMutationsApi.CreateAllClusters``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## CreateReadOnlyCluster
 
-> YBPTask CreateReadOnlyCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+> YBPTask CreateReadOnlyCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
 
 Create ReadOnly Cluster
 
@@ -108,10 +110,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     universeConfigureTaskParams := *openapiclient.NewUniverseDefinitionTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // UniverseDefinitionTaskParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseClusterMutationsApi.CreateReadOnlyCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+    resp, r, err := api_client.UniverseClusterMutationsApi.CreateReadOnlyCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseClusterMutationsApi.CreateReadOnlyCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,6 +143,7 @@ Name | Type | Description  | Notes
 
 
  **universeConfigureTaskParams** | [**UniverseDefinitionTaskParams**](UniverseDefinitionTaskParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -161,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## DeleteReadonlyCluster
 
-> YBPTask DeleteReadonlyCluster(ctx, cUUID, uniUUID, clustUUID).IsForceDelete(isForceDelete).Execute()
+> YBPTask DeleteReadonlyCluster(ctx, cUUID, uniUUID, clustUUID).IsForceDelete(isForceDelete).Request(request).Execute()
 
 Delete Readonly Cluster
 
@@ -184,10 +188,11 @@ func main() {
     uniUUID := TODO // string | 
     clustUUID := TODO // string | 
     isForceDelete := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseClusterMutationsApi.DeleteReadonlyCluster(context.Background(), cUUID, uniUUID, clustUUID).IsForceDelete(isForceDelete).Execute()
+    resp, r, err := api_client.UniverseClusterMutationsApi.DeleteReadonlyCluster(context.Background(), cUUID, uniUUID, clustUUID).IsForceDelete(isForceDelete).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseClusterMutationsApi.DeleteReadonlyCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -218,6 +223,7 @@ Name | Type | Description  | Notes
 
 
  **isForceDelete** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -239,7 +245,7 @@ Name | Type | Description  | Notes
 
 ## UpdatePrimaryCluster
 
-> YBPTask UpdatePrimaryCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+> YBPTask UpdatePrimaryCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
 
 Update Primary Cluster
 
@@ -261,10 +267,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // UniverseConfigureTaskParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseClusterMutationsApi.UpdatePrimaryCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+    resp, r, err := api_client.UniverseClusterMutationsApi.UpdatePrimaryCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseClusterMutationsApi.UpdatePrimaryCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -293,6 +300,7 @@ Name | Type | Description  | Notes
 
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -314,7 +322,7 @@ Name | Type | Description  | Notes
 
 ## UpdateReadOnlyCluster
 
-> YBPTask UpdateReadOnlyCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+> YBPTask UpdateReadOnlyCluster(ctx, cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
 
 Update Readonly Cluster
 
@@ -336,10 +344,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // UniverseConfigureTaskParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseClusterMutationsApi.UpdateReadOnlyCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Execute()
+    resp, r, err := api_client.UniverseClusterMutationsApi.UpdateReadOnlyCluster(context.Background(), cUUID, uniUUID).UniverseConfigureTaskParams(universeConfigureTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseClusterMutationsApi.UpdateReadOnlyCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -368,6 +377,7 @@ Name | Type | Description  | Notes
 
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

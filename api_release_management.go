@@ -32,10 +32,15 @@ type ReleaseManagementApiApiCreateReleaseRequest struct {
 	ApiService *ReleaseManagementApiService
 	cUUID string
 	release *ReleaseFormData
+	request *interface{}
 }
 
 func (r ReleaseManagementApiApiCreateReleaseRequest) Release(release ReleaseFormData) ReleaseManagementApiApiCreateReleaseRequest {
 	r.release = &release
+	return r
+}
+func (r ReleaseManagementApiApiCreateReleaseRequest) Request(request interface{}) ReleaseManagementApiApiCreateReleaseRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *ReleaseManagementApiService) CreateReleaseExecute(r ReleaseManagementAp
 		return localVarReturnValue, nil, reportError("release is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -161,8 +169,13 @@ type ReleaseManagementApiApiDeleteReleaseRequest struct {
 	ApiService *ReleaseManagementApiService
 	cUUID string
 	name string
+	request *interface{}
 }
 
+func (r ReleaseManagementApiApiDeleteReleaseRequest) Request(request interface{}) ReleaseManagementApiApiDeleteReleaseRequest {
+	r.request = &request
+	return r
+}
 
 func (r ReleaseManagementApiApiDeleteReleaseRequest) Execute() (ReleaseMetadata, *_nethttp.Response, error) {
 	return r.ApiService.DeleteReleaseExecute(r)
@@ -211,6 +224,9 @@ func (a *ReleaseManagementApiService) DeleteReleaseExecute(r ReleaseManagementAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -541,8 +557,13 @@ type ReleaseManagementApiApiRefreshRequest struct {
 	ctx _context.Context
 	ApiService *ReleaseManagementApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r ReleaseManagementApiApiRefreshRequest) Request(request interface{}) ReleaseManagementApiApiRefreshRequest {
+	r.request = &request
+	return r
+}
 
 func (r ReleaseManagementApiApiRefreshRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.RefreshExecute(r)
@@ -588,6 +609,9 @@ func (a *ReleaseManagementApiService) RefreshExecute(r ReleaseManagementApiApiRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -662,10 +686,15 @@ type ReleaseManagementApiApiUpdateReleaseRequest struct {
 	cUUID string
 	name string
 	release *map[string]interface{}
+	request *interface{}
 }
 
 func (r ReleaseManagementApiApiUpdateReleaseRequest) Release(release map[string]interface{}) ReleaseManagementApiApiUpdateReleaseRequest {
 	r.release = &release
+	return r
+}
+func (r ReleaseManagementApiApiUpdateReleaseRequest) Request(request interface{}) ReleaseManagementApiApiUpdateReleaseRequest {
+	r.request = &request
 	return r
 }
 
@@ -719,6 +748,9 @@ func (a *ReleaseManagementApiService) UpdateReleaseExecute(r ReleaseManagementAp
 		return localVarReturnValue, nil, reportError("release is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

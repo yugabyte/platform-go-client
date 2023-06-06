@@ -35,6 +35,7 @@ type UniverseDefinitionTaskParams struct {
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
+	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
@@ -594,6 +595,38 @@ func (o *UniverseDefinitionTaskParams) HasInstallYbc() bool {
 // SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
 func (o *UniverseDefinitionTaskParams) SetInstallYbc(v bool) {
 	o.InstallYbc = &v
+}
+
+// GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParams) GetIsKubernetesOperatorControlled() bool {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsKubernetesOperatorControlled
+}
+
+// GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParams) GetIsKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		return nil, false
+	}
+	return o.IsKubernetesOperatorControlled, true
+}
+
+// HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParams) HasIsKubernetesOperatorControlled() bool {
+	if o != nil && o.IsKubernetesOperatorControlled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsKubernetesOperatorControlled gets a reference to the given bool and assigns it to the IsKubernetesOperatorControlled field.
+func (o *UniverseDefinitionTaskParams) SetIsKubernetesOperatorControlled(v bool) {
+	o.IsKubernetesOperatorControlled = &v
 }
 
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
@@ -1669,6 +1702,9 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
+	}
+	if o.IsKubernetesOperatorControlled != nil {
+		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
 	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath

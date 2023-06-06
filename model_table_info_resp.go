@@ -16,6 +16,10 @@ import (
 
 // TableInfoResp Table information response
 type TableInfoResp struct {
+	// Flag, indicating colocated table
+	Colocated *bool `json:"colocated,omitempty"`
+	// Colocation parent id
+	ColocationParentId *string `json:"colocationParentId,omitempty"`
 	// Keyspace
 	KeySpace *string `json:"keySpace,omitempty"`
 	// Namespace or Schema
@@ -28,6 +32,8 @@ type TableInfoResp struct {
 	RelationType *string `json:"relationType,omitempty"`
 	// SST size in bytes
 	SizeBytes *float64 `json:"sizeBytes,omitempty"`
+	// Table ID
+	TableID *string `json:"tableID,omitempty"`
 	// Table name
 	TableName *string `json:"tableName,omitempty"`
 	// Table space
@@ -55,6 +61,70 @@ func NewTableInfoResp() *TableInfoResp {
 func NewTableInfoRespWithDefaults() *TableInfoResp {
 	this := TableInfoResp{}
 	return &this
+}
+
+// GetColocated returns the Colocated field value if set, zero value otherwise.
+func (o *TableInfoResp) GetColocated() bool {
+	if o == nil || o.Colocated == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Colocated
+}
+
+// GetColocatedOk returns a tuple with the Colocated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableInfoResp) GetColocatedOk() (*bool, bool) {
+	if o == nil || o.Colocated == nil {
+		return nil, false
+	}
+	return o.Colocated, true
+}
+
+// HasColocated returns a boolean if a field has been set.
+func (o *TableInfoResp) HasColocated() bool {
+	if o != nil && o.Colocated != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetColocated gets a reference to the given bool and assigns it to the Colocated field.
+func (o *TableInfoResp) SetColocated(v bool) {
+	o.Colocated = &v
+}
+
+// GetColocationParentId returns the ColocationParentId field value if set, zero value otherwise.
+func (o *TableInfoResp) GetColocationParentId() string {
+	if o == nil || o.ColocationParentId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ColocationParentId
+}
+
+// GetColocationParentIdOk returns a tuple with the ColocationParentId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableInfoResp) GetColocationParentIdOk() (*string, bool) {
+	if o == nil || o.ColocationParentId == nil {
+		return nil, false
+	}
+	return o.ColocationParentId, true
+}
+
+// HasColocationParentId returns a boolean if a field has been set.
+func (o *TableInfoResp) HasColocationParentId() bool {
+	if o != nil && o.ColocationParentId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetColocationParentId gets a reference to the given string and assigns it to the ColocationParentId field.
+func (o *TableInfoResp) SetColocationParentId(v string) {
+	o.ColocationParentId = &v
 }
 
 // GetKeySpace returns the KeySpace field value if set, zero value otherwise.
@@ -249,6 +319,38 @@ func (o *TableInfoResp) SetSizeBytes(v float64) {
 	o.SizeBytes = &v
 }
 
+// GetTableID returns the TableID field value if set, zero value otherwise.
+func (o *TableInfoResp) GetTableID() string {
+	if o == nil || o.TableID == nil {
+		var ret string
+		return ret
+	}
+	return *o.TableID
+}
+
+// GetTableIDOk returns a tuple with the TableID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableInfoResp) GetTableIDOk() (*string, bool) {
+	if o == nil || o.TableID == nil {
+		return nil, false
+	}
+	return o.TableID, true
+}
+
+// HasTableID returns a boolean if a field has been set.
+func (o *TableInfoResp) HasTableID() bool {
+	if o != nil && o.TableID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableID gets a reference to the given string and assigns it to the TableID field.
+func (o *TableInfoResp) SetTableID(v string) {
+	o.TableID = &v
+}
+
 // GetTableName returns the TableName field value if set, zero value otherwise.
 func (o *TableInfoResp) GetTableName() string {
 	if o == nil || o.TableName == nil {
@@ -411,6 +513,12 @@ func (o *TableInfoResp) SetWalSizeBytes(v float64) {
 
 func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Colocated != nil {
+		toSerialize["colocated"] = o.Colocated
+	}
+	if o.ColocationParentId != nil {
+		toSerialize["colocationParentId"] = o.ColocationParentId
+	}
 	if o.KeySpace != nil {
 		toSerialize["keySpace"] = o.KeySpace
 	}
@@ -428,6 +536,9 @@ func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.SizeBytes != nil {
 		toSerialize["sizeBytes"] = o.SizeBytes
+	}
+	if o.TableID != nil {
+		toSerialize["tableID"] = o.TableID
 	}
 	if o.TableName != nil {
 		toSerialize["tableName"] = o.TableName

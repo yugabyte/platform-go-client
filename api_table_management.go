@@ -33,8 +33,13 @@ type TableManagementApiApiAlterTableRequest struct {
 	cUUID string
 	uniUUID string
 	tableUUID string
+	request *interface{}
 }
 
+func (r TableManagementApiApiAlterTableRequest) Request(request interface{}) TableManagementApiApiAlterTableRequest {
+	r.request = &request
+	return r
+}
 
 func (r TableManagementApiApiAlterTableRequest) Execute() (map[string]map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.AlterTableExecute(r)
@@ -86,6 +91,9 @@ func (a *TableManagementApiService) AlterTableExecute(r TableManagementApiApiAlt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -161,10 +169,15 @@ type TableManagementApiApiBulkImportDataRequest struct {
 	uniUUID string
 	tableUUID string
 	bulkImport *BulkImportParams
+	request *interface{}
 }
 
 func (r TableManagementApiApiBulkImportDataRequest) BulkImport(bulkImport BulkImportParams) TableManagementApiApiBulkImportDataRequest {
 	r.bulkImport = &bulkImport
+	return r
+}
+func (r TableManagementApiApiBulkImportDataRequest) Request(request interface{}) TableManagementApiApiBulkImportDataRequest {
+	r.request = &request
 	return r
 }
 
@@ -222,6 +235,9 @@ func (a *TableManagementApiService) BulkImportDataExecute(r TableManagementApiAp
 		return localVarReturnValue, nil, reportError("bulkImport is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -298,10 +314,15 @@ type TableManagementApiApiCreateMultiTableBackupRequest struct {
 	cUUID string
 	uniUUID string
 	tableBackup *MultiTableBackupRequestParams
+	request *interface{}
 }
 
 func (r TableManagementApiApiCreateMultiTableBackupRequest) TableBackup(tableBackup MultiTableBackupRequestParams) TableManagementApiApiCreateMultiTableBackupRequest {
 	r.tableBackup = &tableBackup
+	return r
+}
+func (r TableManagementApiApiCreateMultiTableBackupRequest) Request(request interface{}) TableManagementApiApiCreateMultiTableBackupRequest {
+	r.request = &request
 	return r
 }
 
@@ -355,6 +376,9 @@ func (a *TableManagementApiService) CreateMultiTableBackupExecute(r TableManagem
 		return localVarReturnValue, nil, reportError("tableBackup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -432,10 +456,15 @@ type TableManagementApiApiCreateSingleTableBackupRequest struct {
 	uniUUID string
 	tableUUID string
 	backup *BackupTableParams
+	request *interface{}
 }
 
 func (r TableManagementApiApiCreateSingleTableBackupRequest) Backup(backup BackupTableParams) TableManagementApiApiCreateSingleTableBackupRequest {
 	r.backup = &backup
+	return r
+}
+func (r TableManagementApiApiCreateSingleTableBackupRequest) Request(request interface{}) TableManagementApiApiCreateSingleTableBackupRequest {
+	r.request = &request
 	return r
 }
 
@@ -492,6 +521,9 @@ func (a *TableManagementApiService) CreateSingleTableBackupExecute(r TableManage
 		return localVarReturnValue, nil, reportError("backup is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -568,10 +600,15 @@ type TableManagementApiApiCreateTableRequest struct {
 	cUUID string
 	uniUUID string
 	table *TableDefinitionTaskParams
+	request *interface{}
 }
 
 func (r TableManagementApiApiCreateTableRequest) Table(table TableDefinitionTaskParams) TableManagementApiApiCreateTableRequest {
 	r.table = &table
+	return r
+}
+func (r TableManagementApiApiCreateTableRequest) Request(request interface{}) TableManagementApiApiCreateTableRequest {
+	r.request = &request
 	return r
 }
 
@@ -625,6 +662,9 @@ func (a *TableManagementApiService) CreateTableExecute(r TableManagementApiApiCr
 		return localVarReturnValue, nil, reportError("table is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -701,10 +741,15 @@ type TableManagementApiApiCreateTableSpacesRequest struct {
 	cUUID string
 	uniUUID string
 	createTableSpacesRequest *CreateTablespaceParams
+	request *interface{}
 }
 
 func (r TableManagementApiApiCreateTableSpacesRequest) CreateTableSpacesRequest(createTableSpacesRequest CreateTablespaceParams) TableManagementApiApiCreateTableSpacesRequest {
 	r.createTableSpacesRequest = &createTableSpacesRequest
+	return r
+}
+func (r TableManagementApiApiCreateTableSpacesRequest) Request(request interface{}) TableManagementApiApiCreateTableSpacesRequest {
+	r.request = &request
 	return r
 }
 
@@ -758,6 +803,9 @@ func (a *TableManagementApiService) CreateTableSpacesExecute(r TableManagementAp
 		return localVarReturnValue, nil, reportError("createTableSpacesRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -961,8 +1009,13 @@ type TableManagementApiApiDropTableRequest struct {
 	cUUID string
 	uniUUID string
 	tableUUID string
+	request *interface{}
 }
 
+func (r TableManagementApiApiDropTableRequest) Request(request interface{}) TableManagementApiApiDropTableRequest {
+	r.request = &request
+	return r
+}
 
 func (r TableManagementApiApiDropTableRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.DropTableExecute(r)
@@ -1014,6 +1067,9 @@ func (a *TableManagementApiService) DropTableExecute(r TableManagementApiApiDrop
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1344,10 +1400,20 @@ type TableManagementApiApiGetAllTablesRequest struct {
 	cUUID string
 	uniUUID string
 	includeParentTableInfo *bool
+	excludeColocatedTables *bool
+	includeColocatedParentTables *bool
 }
 
 func (r TableManagementApiApiGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementApiApiGetAllTablesRequest {
 	r.includeParentTableInfo = &includeParentTableInfo
+	return r
+}
+func (r TableManagementApiApiGetAllTablesRequest) ExcludeColocatedTables(excludeColocatedTables bool) TableManagementApiApiGetAllTablesRequest {
+	r.excludeColocatedTables = &excludeColocatedTables
+	return r
+}
+func (r TableManagementApiApiGetAllTablesRequest) IncludeColocatedParentTables(includeColocatedParentTables bool) TableManagementApiApiGetAllTablesRequest {
+	r.includeColocatedParentTables = &includeColocatedParentTables
 	return r
 }
 
@@ -1401,6 +1467,12 @@ func (a *TableManagementApiService) GetAllTablesExecute(r TableManagementApiApiG
 
 	if r.includeParentTableInfo != nil {
 		localVarQueryParams.Add("includeParentTableInfo", parameterToString(*r.includeParentTableInfo, ""))
+	}
+	if r.excludeColocatedTables != nil {
+		localVarQueryParams.Add("excludeColocatedTables", parameterToString(*r.excludeColocatedTables, ""))
+	}
+	if r.includeColocatedParentTables != nil {
+		localVarQueryParams.Add("includeColocatedParentTables", parameterToString(*r.includeColocatedParentTables, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

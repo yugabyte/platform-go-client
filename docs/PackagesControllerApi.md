@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## FetchPackage
 
-> string FetchPackage(ctx).Package_(package_).Execute()
+> string FetchPackage(ctx).Package_(package_).Request(request).Execute()
 
 Fetch a package
 
@@ -28,10 +28,11 @@ import (
 
 func main() {
     package_ := *openapiclient.NewPackagesRequestParams("BuildNumber_example") // PackagesRequestParams | Package to be imported
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PackagesControllerApi.FetchPackage(context.Background()).Package_(package_).Execute()
+    resp, r, err := api_client.PackagesControllerApi.FetchPackage(context.Background()).Package_(package_).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesControllerApi.FetchPackage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -53,6 +54,7 @@ Other parameters are passed through a pointer to a apiFetchPackageRequest struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **package_** | [**PackagesRequestParams**](PackagesRequestParams.md) | Package to be imported | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

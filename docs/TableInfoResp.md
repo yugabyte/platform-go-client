@@ -4,12 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Colocated** | Pointer to **bool** | Flag, indicating colocated table | [optional] 
+**ColocationParentId** | Pointer to **string** | Colocation parent id | [optional] 
 **KeySpace** | Pointer to **string** | Keyspace | [optional] 
 **NameSpace** | Pointer to **string** | Namespace or Schema | [optional] 
 **ParentTableUUID** | Pointer to **string** | Parent Table UUID | [optional] 
 **PgSchemaName** | Pointer to **string** | Postgres schema name of the table | [optional] 
 **RelationType** | Pointer to **string** | Relation type | [optional] 
 **SizeBytes** | Pointer to **float64** | SST size in bytes | [optional] [readonly] 
+**TableID** | Pointer to **string** | Table ID | [optional] [readonly] 
 **TableName** | Pointer to **string** | Table name | [optional] 
 **TableSpace** | Pointer to **string** | Table space | [optional] 
 **TableType** | Pointer to **string** | Table type | [optional] 
@@ -34,6 +37,56 @@ will change when the set of required properties is changed
 NewTableInfoRespWithDefaults instantiates a new TableInfoResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetColocated
+
+`func (o *TableInfoResp) GetColocated() bool`
+
+GetColocated returns the Colocated field if non-nil, zero value otherwise.
+
+### GetColocatedOk
+
+`func (o *TableInfoResp) GetColocatedOk() (*bool, bool)`
+
+GetColocatedOk returns a tuple with the Colocated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetColocated
+
+`func (o *TableInfoResp) SetColocated(v bool)`
+
+SetColocated sets Colocated field to given value.
+
+### HasColocated
+
+`func (o *TableInfoResp) HasColocated() bool`
+
+HasColocated returns a boolean if a field has been set.
+
+### GetColocationParentId
+
+`func (o *TableInfoResp) GetColocationParentId() string`
+
+GetColocationParentId returns the ColocationParentId field if non-nil, zero value otherwise.
+
+### GetColocationParentIdOk
+
+`func (o *TableInfoResp) GetColocationParentIdOk() (*string, bool)`
+
+GetColocationParentIdOk returns a tuple with the ColocationParentId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetColocationParentId
+
+`func (o *TableInfoResp) SetColocationParentId(v string)`
+
+SetColocationParentId sets ColocationParentId field to given value.
+
+### HasColocationParentId
+
+`func (o *TableInfoResp) HasColocationParentId() bool`
+
+HasColocationParentId returns a boolean if a field has been set.
 
 ### GetKeySpace
 
@@ -184,6 +237,31 @@ SetSizeBytes sets SizeBytes field to given value.
 `func (o *TableInfoResp) HasSizeBytes() bool`
 
 HasSizeBytes returns a boolean if a field has been set.
+
+### GetTableID
+
+`func (o *TableInfoResp) GetTableID() string`
+
+GetTableID returns the TableID field if non-nil, zero value otherwise.
+
+### GetTableIDOk
+
+`func (o *TableInfoResp) GetTableIDOk() (*string, bool)`
+
+GetTableIDOk returns a tuple with the TableID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableID
+
+`func (o *TableInfoResp) SetTableID(v string)`
+
+SetTableID sets TableID field to given value.
+
+### HasTableID
+
+`func (o *TableInfoResp) HasTableID() bool`
+
+HasTableID returns a boolean if a field has been set.
 
 ### GetTableName
 
