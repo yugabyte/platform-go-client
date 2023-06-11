@@ -4505,6 +4505,13 @@ paths:
         name: request
         schema:
           exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeActionFormData'
+        description: Node action data to be updated
+        required: true
       responses:
         "200":
           content:
@@ -4517,6 +4524,7 @@ paths:
       summary: Detached node action
       tags:
       - Node instances
+      x-codegen-request-body-name: Node action
   /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list:
     get:
       operationId: listByProvider
@@ -20555,6 +20563,7 @@ components:
           type: string
       type: object
     DatabaseSecurityFormData:
+      description: Database security properties
       example:
         ycqlAdminUsername: ycqlAdminUsername
         ysqlAdminPassword: ysqlAdminPassword
@@ -20566,34 +20575,33 @@ components:
       exampleSetFlag: true
       properties:
         dbName:
+          description: YSQL DB Name
           exampleSetFlag: true
           type: string
         ycqlAdminPassword:
+          description: New YCQL admin password
           exampleSetFlag: true
           type: string
         ycqlAdminUsername:
+          description: YCQL admin username
           exampleSetFlag: true
           type: string
         ycqlCurrAdminPassword:
+          description: Current YCQL admin password
           exampleSetFlag: true
           type: string
         ysqlAdminPassword:
+          description: New YSQL admin password
           exampleSetFlag: true
           type: string
         ysqlAdminUsername:
+          description: YSQL admin username
           exampleSetFlag: true
           type: string
         ysqlCurrAdminPassword:
+          description: Current YSQL admin password
           exampleSetFlag: true
           type: string
-      required:
-      - dbName
-      - ycqlAdminPassword
-      - ycqlAdminUsername
-      - ycqlCurrAdminPassword
-      - ysqlAdminPassword
-      - ysqlAdminUsername
-      - ysqlCurrAdminPassword
       type: object
     DatabaseUserFormData:
       example:

@@ -183,7 +183,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    databaseSecurityFormData := *openapiclient.NewDatabaseSecurityFormData("DbName_example", "YcqlAdminPassword_example", "YcqlAdminUsername_example", "YcqlCurrAdminPassword_example", "YsqlAdminPassword_example", "YsqlAdminUsername_example", "YsqlCurrAdminPassword_example") // DatabaseSecurityFormData | The database credentials
+    databaseSecurityFormData := *openapiclient.NewDatabaseSecurityFormData() // DatabaseSecurityFormData | The database credentials
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

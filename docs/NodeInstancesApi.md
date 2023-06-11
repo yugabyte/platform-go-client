@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 
 ## DetachedNodeAction
 
-> YBPTask DetachedNodeAction(ctx, cUUID, pUUID, instanceIP).Request(request).Execute()
+> YBPTask DetachedNodeAction(ctx, cUUID, pUUID, instanceIP).NodeAction(nodeAction).Request(request).Execute()
 
 Detached node action
 
@@ -189,11 +189,12 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     instanceIP := "instanceIP_example" // string | 
+    nodeAction := *openapiclient.NewNodeActionFormData("NodeAction_example") // NodeActionFormData | Node action data to be updated
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.DetachedNodeAction(context.Background(), cUUID, pUUID, instanceIP).Request(request).Execute()
+    resp, r, err := api_client.NodeInstancesApi.DetachedNodeAction(context.Background(), cUUID, pUUID, instanceIP).NodeAction(nodeAction).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.DetachedNodeAction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -223,6 +224,7 @@ Name | Type | Description  | Notes
 
 
 
+ **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Node action data to be updated | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -235,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

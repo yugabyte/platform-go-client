@@ -309,9 +309,14 @@ type NodeInstancesApiApiDetachedNodeActionRequest struct {
 	cUUID string
 	pUUID string
 	instanceIP string
+	nodeAction *NodeActionFormData
 	request *interface{}
 }
 
+func (r NodeInstancesApiApiDetachedNodeActionRequest) NodeAction(nodeAction NodeActionFormData) NodeInstancesApiApiDetachedNodeActionRequest {
+	r.nodeAction = &nodeAction
+	return r
+}
 func (r NodeInstancesApiApiDetachedNodeActionRequest) Request(request interface{}) NodeInstancesApiApiDetachedNodeActionRequest {
 	r.request = &request
 	return r
@@ -366,12 +371,15 @@ func (a *NodeInstancesApiService) DetachedNodeActionExecute(r NodeInstancesApiAp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.nodeAction == nil {
+		return localVarReturnValue, nil, reportError("nodeAction is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -387,6 +395,8 @@ func (a *NodeInstancesApiService) DetachedNodeActionExecute(r NodeInstancesApiAp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.nodeAction
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
