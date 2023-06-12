@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateRegion
 
-> Region CreateRegion(ctx, cUUID, pUUID).Region(region).Execute()
+> Region CreateRegion(ctx, cUUID, pUUID).Region(region).Request(request).Execute()
 
 Create a new region
 
@@ -34,10 +34,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     region := *openapiclient.NewRegionFormData("Code_example", "DestVpcId_example", "HostVpcId_example", "HostVpcRegion_example", float64(123), float64(123), "Name_example", "SecurityGroupId_example", "VnetName_example", "YbImage_example") // RegionFormData | region form data for new region to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RegionManagementApi.CreateRegion(context.Background(), cUUID, pUUID).Region(region).Execute()
+    resp, r, err := api_client.RegionManagementApi.CreateRegion(context.Background(), cUUID, pUUID).Region(region).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RegionManagementApi.CreateRegion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 
 
  **region** | [**RegionFormData**](RegionFormData.md) | region form data for new region to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -87,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## DeleteRegion
 
-> map[string]interface{} DeleteRegion(ctx, cUUID, pUUID, rUUID).Execute()
+> map[string]interface{} DeleteRegion(ctx, cUUID, pUUID, rUUID).Request(request).Execute()
 
 Delete a region
 
@@ -107,10 +109,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     rUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RegionManagementApi.DeleteRegion(context.Background(), cUUID, pUUID, rUUID).Execute()
+    resp, r, err := api_client.RegionManagementApi.DeleteRegion(context.Background(), cUUID, pUUID, rUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RegionManagementApi.DeleteRegion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,6 +143,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -161,7 +165,7 @@ Name | Type | Description  | Notes
 
 ## EditRegion
 
-> map[string]interface{} EditRegion(ctx, cUUID, pUUID, rUUID).Region(region).Execute()
+> map[string]interface{} EditRegion(ctx, cUUID, pUUID, rUUID).Region(region).Request(request).Execute()
 
 Modify a region
 
@@ -182,10 +186,11 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     region := *openapiclient.NewRegionEditFormData("SecurityGroupId_example", "VnetName_example", "YbImage_example") // RegionEditFormData | region edit form data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RegionManagementApi.EditRegion(context.Background(), cUUID, pUUID, rUUID).Region(region).Execute()
+    resp, r, err := api_client.RegionManagementApi.EditRegion(context.Background(), cUUID, pUUID, rUUID).Region(region).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RegionManagementApi.EditRegion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -216,6 +221,7 @@ Name | Type | Description  | Notes
 
 
  **region** | [**RegionEditFormData**](RegionEditFormData.md) | region edit form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

@@ -34,10 +34,15 @@ type AvailabilityZonesApiApiCreateAZRequest struct {
 	pUUID string
 	rUUID string
 	azFormData *AvailabilityZoneFormData
+	request *interface{}
 }
 
 func (r AvailabilityZonesApiApiCreateAZRequest) AzFormData(azFormData AvailabilityZoneFormData) AvailabilityZonesApiApiCreateAZRequest {
 	r.azFormData = &azFormData
+	return r
+}
+func (r AvailabilityZonesApiApiCreateAZRequest) Request(request interface{}) AvailabilityZonesApiApiCreateAZRequest {
+	r.request = &request
 	return r
 }
 
@@ -94,6 +99,9 @@ func (a *AvailabilityZonesApiService) CreateAZExecute(r AvailabilityZonesApiApiC
 		return localVarReturnValue, nil, reportError("azFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -171,8 +179,13 @@ type AvailabilityZonesApiApiDeleteAZRequest struct {
 	pUUID string
 	rUUID string
 	azUUID string
+	request *interface{}
 }
 
+func (r AvailabilityZonesApiApiDeleteAZRequest) Request(request interface{}) AvailabilityZonesApiApiDeleteAZRequest {
+	r.request = &request
+	return r
+}
 
 func (r AvailabilityZonesApiApiDeleteAZRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAZExecute(r)
@@ -227,6 +240,9 @@ func (a *AvailabilityZonesApiService) DeleteAZExecute(r AvailabilityZonesApiApiD
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -303,10 +319,15 @@ type AvailabilityZonesApiApiEditAZRequest struct {
 	rUUID string
 	azUUID string
 	azFormData *AvailabilityZoneEditData
+	request *interface{}
 }
 
 func (r AvailabilityZonesApiApiEditAZRequest) AzFormData(azFormData AvailabilityZoneEditData) AvailabilityZonesApiApiEditAZRequest {
 	r.azFormData = &azFormData
+	return r
+}
+func (r AvailabilityZonesApiApiEditAZRequest) Request(request interface{}) AvailabilityZonesApiApiEditAZRequest {
+	r.request = &request
 	return r
 }
 
@@ -366,6 +387,9 @@ func (a *AvailabilityZonesApiService) EditAZExecute(r AvailabilityZonesApiApiEdi
 		return localVarReturnValue, nil, reportError("azFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

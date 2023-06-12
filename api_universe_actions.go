@@ -31,8 +31,13 @@ type UniverseActionsApiApiImportUniverseRequest struct {
 	ctx _context.Context
 	ApiService *UniverseActionsApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r UniverseActionsApiApiImportUniverseRequest) Request(request interface{}) UniverseActionsApiApiImportUniverseRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseActionsApiApiImportUniverseRequest) Execute() (ImportUniverseFormData, *_nethttp.Response, error) {
 	return r.ApiService.ImportUniverseExecute(r)
@@ -78,6 +83,9 @@ func (a *UniverseActionsApiService) ImportUniverseExecute(r UniverseActionsApiAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

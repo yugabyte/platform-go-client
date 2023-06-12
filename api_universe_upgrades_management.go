@@ -33,10 +33,15 @@ type UniverseUpgradesManagementApiApiRebootUniverseRequest struct {
 	cUUID string
 	uniUUID string
 	upgradeTaskParams *UpgradeTaskParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiRebootUniverseRequest) UpgradeTaskParams(upgradeTaskParams UpgradeTaskParams) UniverseUpgradesManagementApiApiRebootUniverseRequest {
 	r.upgradeTaskParams = &upgradeTaskParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiRebootUniverseRequest) Request(request interface{}) UniverseUpgradesManagementApiApiRebootUniverseRequest {
+	r.request = &request
 	return r
 }
 
@@ -91,6 +96,9 @@ func (a *UniverseUpgradesManagementApiService) RebootUniverseExecute(r UniverseU
 		return localVarReturnValue, nil, reportError("upgradeTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -167,10 +175,15 @@ type UniverseUpgradesManagementApiApiResizeNodeRequest struct {
 	cUUID string
 	uniUUID string
 	resizeNodeParams *ResizeNodeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiResizeNodeRequest) ResizeNodeParams(resizeNodeParams ResizeNodeParams) UniverseUpgradesManagementApiApiResizeNodeRequest {
 	r.resizeNodeParams = &resizeNodeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiResizeNodeRequest) Request(request interface{}) UniverseUpgradesManagementApiApiResizeNodeRequest {
+	r.request = &request
 	return r
 }
 
@@ -225,6 +238,9 @@ func (a *UniverseUpgradesManagementApiService) ResizeNodeExecute(r UniverseUpgra
 		return localVarReturnValue, nil, reportError("resizeNodeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -301,10 +317,15 @@ type UniverseUpgradesManagementApiApiRestartUniverseRequest struct {
 	cUUID string
 	uniUUID string
 	restartTaskParams *RestartTaskParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiRestartUniverseRequest) RestartTaskParams(restartTaskParams RestartTaskParams) UniverseUpgradesManagementApiApiRestartUniverseRequest {
 	r.restartTaskParams = &restartTaskParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiRestartUniverseRequest) Request(request interface{}) UniverseUpgradesManagementApiApiRestartUniverseRequest {
+	r.request = &request
 	return r
 }
 
@@ -359,6 +380,9 @@ func (a *UniverseUpgradesManagementApiService) RestartUniverseExecute(r Universe
 		return localVarReturnValue, nil, reportError("restartTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -435,10 +459,15 @@ type UniverseUpgradesManagementApiApiUpgradeCertsRequest struct {
 	cUUID string
 	uniUUID string
 	certsRotateParams *CertsRotateParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeCertsRequest) CertsRotateParams(certsRotateParams CertsRotateParams) UniverseUpgradesManagementApiApiUpgradeCertsRequest {
 	r.certsRotateParams = &certsRotateParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeCertsRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeCertsRequest {
+	r.request = &request
 	return r
 }
 
@@ -493,6 +522,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeCertsExecute(r UniverseUpg
 		return localVarReturnValue, nil, reportError("certsRotateParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -569,10 +601,15 @@ type UniverseUpgradesManagementApiApiUpgradeGFlagsRequest struct {
 	cUUID string
 	uniUUID string
 	gflagsUpgradeParams *GFlagsUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeGFlagsRequest) GflagsUpgradeParams(gflagsUpgradeParams GFlagsUpgradeParams) UniverseUpgradesManagementApiApiUpgradeGFlagsRequest {
 	r.gflagsUpgradeParams = &gflagsUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeGFlagsRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeGFlagsRequest {
+	r.request = &request
 	return r
 }
 
@@ -627,6 +664,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeGFlagsExecute(r UniverseUp
 		return localVarReturnValue, nil, reportError("gflagsUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -703,10 +743,15 @@ type UniverseUpgradesManagementApiApiUpgradeKubernetesOverridesRequest struct {
 	cUUID string
 	uniUUID string
 	kubernetesOverridesUpgradeParams *KubernetesOverridesUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeKubernetesOverridesRequest) KubernetesOverridesUpgradeParams(kubernetesOverridesUpgradeParams KubernetesOverridesUpgradeParams) UniverseUpgradesManagementApiApiUpgradeKubernetesOverridesRequest {
 	r.kubernetesOverridesUpgradeParams = &kubernetesOverridesUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeKubernetesOverridesRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeKubernetesOverridesRequest {
+	r.request = &request
 	return r
 }
 
@@ -761,6 +806,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeKubernetesOverridesExecute
 		return localVarReturnValue, nil, reportError("kubernetesOverridesUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -837,10 +885,15 @@ type UniverseUpgradesManagementApiApiUpgradeSoftwareRequest struct {
 	cUUID string
 	uniUUID string
 	softwareUpgradeParams *SoftwareUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeSoftwareRequest) SoftwareUpgradeParams(softwareUpgradeParams SoftwareUpgradeParams) UniverseUpgradesManagementApiApiUpgradeSoftwareRequest {
 	r.softwareUpgradeParams = &softwareUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeSoftwareRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeSoftwareRequest {
+	r.request = &request
 	return r
 }
 
@@ -895,6 +948,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeSoftwareExecute(r Universe
 		return localVarReturnValue, nil, reportError("softwareUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -971,10 +1027,15 @@ type UniverseUpgradesManagementApiApiUpgradeSystemdRequest struct {
 	cUUID string
 	uniUUID string
 	systemdUpgradeParams *SystemdUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeSystemdRequest) SystemdUpgradeParams(systemdUpgradeParams SystemdUpgradeParams) UniverseUpgradesManagementApiApiUpgradeSystemdRequest {
 	r.systemdUpgradeParams = &systemdUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeSystemdRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeSystemdRequest {
+	r.request = &request
 	return r
 }
 
@@ -1029,6 +1090,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeSystemdExecute(r UniverseU
 		return localVarReturnValue, nil, reportError("systemdUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1105,10 +1169,15 @@ type UniverseUpgradesManagementApiApiUpgradeThirdpartySoftwareRequest struct {
 	cUUID string
 	uniUUID string
 	thirdpartySoftwareUpgradeParams *ThirdpartySoftwareUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeThirdpartySoftwareRequest) ThirdpartySoftwareUpgradeParams(thirdpartySoftwareUpgradeParams ThirdpartySoftwareUpgradeParams) UniverseUpgradesManagementApiApiUpgradeThirdpartySoftwareRequest {
 	r.thirdpartySoftwareUpgradeParams = &thirdpartySoftwareUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeThirdpartySoftwareRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeThirdpartySoftwareRequest {
+	r.request = &request
 	return r
 }
 
@@ -1163,6 +1232,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeThirdpartySoftwareExecute(
 		return localVarReturnValue, nil, reportError("thirdpartySoftwareUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1239,10 +1311,15 @@ type UniverseUpgradesManagementApiApiUpgradeTlsRequest struct {
 	cUUID string
 	uniUUID string
 	tlsToggleParams *TlsToggleParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeTlsRequest) TlsToggleParams(tlsToggleParams TlsToggleParams) UniverseUpgradesManagementApiApiUpgradeTlsRequest {
 	r.tlsToggleParams = &tlsToggleParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeTlsRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeTlsRequest {
+	r.request = &request
 	return r
 }
 
@@ -1297,6 +1374,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeTlsExecute(r UniverseUpgra
 		return localVarReturnValue, nil, reportError("tlsToggleParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1373,10 +1453,15 @@ type UniverseUpgradesManagementApiApiUpgradeVMImageRequest struct {
 	cUUID string
 	uniUUID string
 	vmimageUpgradeParams *VMImageUpgradeParams
+	request *interface{}
 }
 
 func (r UniverseUpgradesManagementApiApiUpgradeVMImageRequest) VmimageUpgradeParams(vmimageUpgradeParams VMImageUpgradeParams) UniverseUpgradesManagementApiApiUpgradeVMImageRequest {
 	r.vmimageUpgradeParams = &vmimageUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeVMImageRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeVMImageRequest {
+	r.request = &request
 	return r
 }
 
@@ -1431,6 +1516,9 @@ func (a *UniverseUpgradesManagementApiService) UpgradeVMImageExecute(r UniverseU
 		return localVarReturnValue, nil, reportError("vmimageUpgradeParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

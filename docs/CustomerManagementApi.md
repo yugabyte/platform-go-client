@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCustomer
 
-> YBPSuccess DeleteCustomer(ctx, cUUID).Execute()
+> YBPSuccess DeleteCustomer(ctx, cUUID).Request(request).Execute()
 
 Delete a customer
 
@@ -101,10 +101,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerManagementApi.DeleteCustomer(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.CustomerManagementApi.DeleteCustomer(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerManagementApi.DeleteCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,6 +131,7 @@ Other parameters are passed through a pointer to a apiDeleteCustomerRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -219,7 +221,7 @@ Name | Type | Description  | Notes
 
 ## ListOfCustomers
 
-> []Customer ListOfCustomers(ctx).Execute()
+> []Customer ListOfCustomers(ctx).Request(request).Execute()
 
 List customers
 
@@ -236,10 +238,11 @@ import (
 )
 
 func main() {
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerManagementApi.ListOfCustomers(context.Background()).Execute()
+    resp, r, err := api_client.CustomerManagementApi.ListOfCustomers(context.Background()).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerManagementApi.ListOfCustomers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -251,12 +254,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOfCustomersRequest struct via the builder pattern
 
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -278,7 +285,7 @@ Other parameters are passed through a pointer to a apiListOfCustomersRequest str
 
 ## Metrics
 
-> map[string]map[string]interface{} Metrics(ctx, cUUID).Metrics(metrics).Execute()
+> map[string]map[string]interface{} Metrics(ctx, cUUID).Metrics(metrics).Request(request).Execute()
 
 Add metrics to a customer
 
@@ -297,10 +304,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     metrics := *openapiclient.NewMetricQueryParams(int64(123), "XclusterConfigUuid_example") // MetricQueryParams | Metrics to be added
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerManagementApi.Metrics(context.Background(), cUUID).Metrics(metrics).Execute()
+    resp, r, err := api_client.CustomerManagementApi.Metrics(context.Background(), cUUID).Metrics(metrics).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerManagementApi.Metrics``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -327,6 +335,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **metrics** | [**MetricQueryParams**](MetricQueryParams.md) | Metrics to be added | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -348,7 +357,7 @@ Name | Type | Description  | Notes
 
 ## UpdateCustomer
 
-> Customer UpdateCustomer(ctx, cUUID).Customer(customer).Execute()
+> Customer UpdateCustomer(ctx, cUUID).Customer(customer).Request(request).Execute()
 
 Update a customer
 
@@ -367,10 +376,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     customer := *openapiclient.NewCustomerAlertData(*openapiclient.NewAlertingData(), "CallhomeLevel_example", *openapiclient.NewSmtpData()) // CustomerAlertData | Customer data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerManagementApi.UpdateCustomer(context.Background(), cUUID).Customer(customer).Execute()
+    resp, r, err := api_client.CustomerManagementApi.UpdateCustomer(context.Background(), cUUID).Customer(customer).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerManagementApi.UpdateCustomer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -397,6 +407,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **customer** | [**CustomerAlertData**](CustomerAlertData.md) | Customer data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

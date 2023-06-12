@@ -34,10 +34,12 @@ Name | Type | Description | Notes
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
+**SpotPrice** | Pointer to **float64** |  | [optional] 
 **TserverGFlags** | Pointer to **map[string]string** |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
 **UseHostname** | Pointer to **bool** |  | [optional] 
+**UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
@@ -814,6 +816,31 @@ SetSpecificGFlags sets SpecificGFlags field to given value.
 
 HasSpecificGFlags returns a boolean if a field has been set.
 
+### GetSpotPrice
+
+`func (o *UserIntent) GetSpotPrice() float64`
+
+GetSpotPrice returns the SpotPrice field if non-nil, zero value otherwise.
+
+### GetSpotPriceOk
+
+`func (o *UserIntent) GetSpotPriceOk() (*float64, bool)`
+
+GetSpotPriceOk returns a tuple with the SpotPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpotPrice
+
+`func (o *UserIntent) SetSpotPrice(v float64)`
+
+SetSpotPrice sets SpotPrice field to given value.
+
+### HasSpotPrice
+
+`func (o *UserIntent) HasSpotPrice() bool`
+
+HasSpotPrice returns a boolean if a field has been set.
+
 ### GetTserverGFlags
 
 `func (o *UserIntent) GetTserverGFlags() map[string]string`
@@ -913,6 +940,31 @@ SetUseHostname sets UseHostname field to given value.
 `func (o *UserIntent) HasUseHostname() bool`
 
 HasUseHostname returns a boolean if a field has been set.
+
+### GetUseSpotInstance
+
+`func (o *UserIntent) GetUseSpotInstance() bool`
+
+GetUseSpotInstance returns the UseSpotInstance field if non-nil, zero value otherwise.
+
+### GetUseSpotInstanceOk
+
+`func (o *UserIntent) GetUseSpotInstanceOk() (*bool, bool)`
+
+GetUseSpotInstanceOk returns a tuple with the UseSpotInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseSpotInstance
+
+`func (o *UserIntent) SetUseSpotInstance(v bool)`
+
+SetUseSpotInstance sets UseSpotInstance field to given value.
+
+### HasUseSpotInstance
+
+`func (o *UserIntent) HasUseSpotInstance() bool`
+
+HasUseSpotInstance returns a boolean if a field has been set.
 
 ### GetUseSystemd
 

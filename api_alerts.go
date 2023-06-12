@@ -32,8 +32,13 @@ type AlertsApiApiAcknowledgeRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	alertUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiAcknowledgeRequest) Request(request interface{}) AlertsApiApiAcknowledgeRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiAcknowledgeRequest) Execute() (Alert, *_nethttp.Response, error) {
 	return r.ApiService.AcknowledgeExecute(r)
@@ -82,6 +87,9 @@ func (a *AlertsApiService) AcknowledgeExecute(r AlertsApiApiAcknowledgeRequest) 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -155,10 +163,15 @@ type AlertsApiApiAcknowledgeByFilterRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	acknowledgeAlertsRequest *AlertApiFilter
+	request *interface{}
 }
 
 func (r AlertsApiApiAcknowledgeByFilterRequest) AcknowledgeAlertsRequest(acknowledgeAlertsRequest AlertApiFilter) AlertsApiApiAcknowledgeByFilterRequest {
 	r.acknowledgeAlertsRequest = &acknowledgeAlertsRequest
+	return r
+}
+func (r AlertsApiApiAcknowledgeByFilterRequest) Request(request interface{}) AlertsApiApiAcknowledgeByFilterRequest {
+	r.request = &request
 	return r
 }
 
@@ -209,6 +222,9 @@ func (a *AlertsApiService) AcknowledgeByFilterExecute(r AlertsApiApiAcknowledgeB
 		return localVarReturnValue, nil, reportError("acknowledgeAlertsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -279,15 +295,157 @@ func (a *AlertsApiService) AcknowledgeByFilterExecute(r AlertsApiApiAcknowledgeB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type AlertsApiApiAlertNotificationPreviewRequest struct {
+	ctx _context.Context
+	ApiService *AlertsApiService
+	cUUID string
+	notificationPreviewRequest *AlertTemplateVariablesFormData
+	request *interface{}
+}
+
+func (r AlertsApiApiAlertNotificationPreviewRequest) NotificationPreviewRequest(notificationPreviewRequest AlertTemplateVariablesFormData) AlertsApiApiAlertNotificationPreviewRequest {
+	r.notificationPreviewRequest = &notificationPreviewRequest
+	return r
+}
+func (r AlertsApiApiAlertNotificationPreviewRequest) Request(request interface{}) AlertsApiApiAlertNotificationPreviewRequest {
+	r.request = &request
+	return r
+}
+
+func (r AlertsApiApiAlertNotificationPreviewRequest) Execute() (AlertTemplateVariablesList, *_nethttp.Response, error) {
+	return r.ApiService.AlertNotificationPreviewExecute(r)
+}
+
+/*
+ * AlertNotificationPreview Prepare alert notification preview
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return AlertsApiApiAlertNotificationPreviewRequest
+ */
+func (a *AlertsApiService) AlertNotificationPreview(ctx _context.Context, cUUID string) AlertsApiApiAlertNotificationPreviewRequest {
+	return AlertsApiApiAlertNotificationPreviewRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return AlertTemplateVariablesList
+ */
+func (a *AlertsApiService) AlertNotificationPreviewExecute(r AlertsApiApiAlertNotificationPreviewRequest) (AlertTemplateVariablesList, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  AlertTemplateVariablesList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsApiService.AlertNotificationPreview")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/alert_notification_preview"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.notificationPreviewRequest == nil {
+		return localVarReturnValue, nil, reportError("notificationPreviewRequest is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.notificationPreviewRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type AlertsApiApiCountAlertsRequest struct {
 	ctx _context.Context
 	ApiService *AlertsApiService
 	cUUID string
 	countAlertsRequest *AlertApiFilter
+	request *interface{}
 }
 
 func (r AlertsApiApiCountAlertsRequest) CountAlertsRequest(countAlertsRequest AlertApiFilter) AlertsApiApiCountAlertsRequest {
 	r.countAlertsRequest = &countAlertsRequest
+	return r
+}
+func (r AlertsApiApiCountAlertsRequest) Request(request interface{}) AlertsApiApiCountAlertsRequest {
+	r.request = &request
 	return r
 }
 
@@ -338,6 +496,9 @@ func (a *AlertsApiService) CountAlertsExecute(r AlertsApiApiCountAlertsRequest) 
 		return localVarReturnValue, nil, reportError("countAlertsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -413,10 +574,15 @@ type AlertsApiApiCreateAlertChannelRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	createAlertChannelRequest *AlertChannelFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiCreateAlertChannelRequest) CreateAlertChannelRequest(createAlertChannelRequest AlertChannelFormData) AlertsApiApiCreateAlertChannelRequest {
 	r.createAlertChannelRequest = &createAlertChannelRequest
+	return r
+}
+func (r AlertsApiApiCreateAlertChannelRequest) Request(request interface{}) AlertsApiApiCreateAlertChannelRequest {
+	r.request = &request
 	return r
 }
 
@@ -467,6 +633,9 @@ func (a *AlertsApiService) CreateAlertChannelExecute(r AlertsApiApiCreateAlertCh
 		return localVarReturnValue, nil, reportError("createAlertChannelRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -542,10 +711,15 @@ type AlertsApiApiCreateAlertConfigurationRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	createAlertConfigurationRequest *AlertConfiguration
+	request *interface{}
 }
 
 func (r AlertsApiApiCreateAlertConfigurationRequest) CreateAlertConfigurationRequest(createAlertConfigurationRequest AlertConfiguration) AlertsApiApiCreateAlertConfigurationRequest {
 	r.createAlertConfigurationRequest = &createAlertConfigurationRequest
+	return r
+}
+func (r AlertsApiApiCreateAlertConfigurationRequest) Request(request interface{}) AlertsApiApiCreateAlertConfigurationRequest {
+	r.request = &request
 	return r
 }
 
@@ -596,6 +770,9 @@ func (a *AlertsApiService) CreateAlertConfigurationExecute(r AlertsApiApiCreateA
 		return localVarReturnValue, nil, reportError("createAlertConfigurationRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -671,10 +848,15 @@ type AlertsApiApiCreateAlertDestinationRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	createAlertDestinationRequest *AlertDestinationFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiCreateAlertDestinationRequest) CreateAlertDestinationRequest(createAlertDestinationRequest AlertDestinationFormData) AlertsApiApiCreateAlertDestinationRequest {
 	r.createAlertDestinationRequest = &createAlertDestinationRequest
+	return r
+}
+func (r AlertsApiApiCreateAlertDestinationRequest) Request(request interface{}) AlertsApiApiCreateAlertDestinationRequest {
+	r.request = &request
 	return r
 }
 
@@ -725,6 +907,9 @@ func (a *AlertsApiService) CreateAlertDestinationExecute(r AlertsApiApiCreateAle
 		return localVarReturnValue, nil, reportError("createAlertDestinationRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -800,8 +985,13 @@ type AlertsApiApiDeleteAlertChannelRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	acUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertChannelRequest) Request(request interface{}) AlertsApiApiDeleteAlertChannelRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertChannelRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertChannelExecute(r)
@@ -850,6 +1040,9 @@ func (a *AlertsApiService) DeleteAlertChannelExecute(r AlertsApiApiDeleteAlertCh
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -923,8 +1116,13 @@ type AlertsApiApiDeleteAlertChannelTemplatesRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	acType string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertChannelTemplatesRequest) Request(request interface{}) AlertsApiApiDeleteAlertChannelTemplatesRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertChannelTemplatesRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertChannelTemplatesExecute(r)
@@ -973,6 +1171,9 @@ func (a *AlertsApiService) DeleteAlertChannelTemplatesExecute(r AlertsApiApiDele
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1046,8 +1247,13 @@ type AlertsApiApiDeleteAlertConfigurationRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	configurationUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertConfigurationRequest) Request(request interface{}) AlertsApiApiDeleteAlertConfigurationRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertConfigurationRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertConfigurationExecute(r)
@@ -1096,6 +1302,9 @@ func (a *AlertsApiService) DeleteAlertConfigurationExecute(r AlertsApiApiDeleteA
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1169,8 +1378,13 @@ type AlertsApiApiDeleteAlertDestinationRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	adUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertDestinationRequest) Request(request interface{}) AlertsApiApiDeleteAlertDestinationRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertDestinationRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertDestinationExecute(r)
@@ -1219,6 +1433,9 @@ func (a *AlertsApiService) DeleteAlertDestinationExecute(r AlertsApiApiDeleteAle
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1292,8 +1509,13 @@ type AlertsApiApiDeleteAlertTemplateSettingsRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	settingsUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertTemplateSettingsRequest) Request(request interface{}) AlertsApiApiDeleteAlertTemplateSettingsRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertTemplateSettingsRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertTemplateSettingsExecute(r)
@@ -1342,6 +1564,9 @@ func (a *AlertsApiService) DeleteAlertTemplateSettingsExecute(r AlertsApiApiDele
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1415,8 +1640,13 @@ type AlertsApiApiDeleteAlertTemplateVariablesRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	variableUUID string
+	request *interface{}
 }
 
+func (r AlertsApiApiDeleteAlertTemplateVariablesRequest) Request(request interface{}) AlertsApiApiDeleteAlertTemplateVariablesRequest {
+	r.request = &request
+	return r
+}
 
 func (r AlertsApiApiDeleteAlertTemplateVariablesRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAlertTemplateVariablesExecute(r)
@@ -1465,6 +1695,9 @@ func (a *AlertsApiService) DeleteAlertTemplateVariablesExecute(r AlertsApiApiDel
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1538,10 +1771,15 @@ type AlertsApiApiEditAlertTemplateSettingsRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	editAlertTemplateSettingsRequest *AlertTemplateSettingsFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiEditAlertTemplateSettingsRequest) EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest AlertTemplateSettingsFormData) AlertsApiApiEditAlertTemplateSettingsRequest {
 	r.editAlertTemplateSettingsRequest = &editAlertTemplateSettingsRequest
+	return r
+}
+func (r AlertsApiApiEditAlertTemplateSettingsRequest) Request(request interface{}) AlertsApiApiEditAlertTemplateSettingsRequest {
+	r.request = &request
 	return r
 }
 
@@ -1592,6 +1830,9 @@ func (a *AlertsApiService) EditAlertTemplateSettingsExecute(r AlertsApiApiEditAl
 		return localVarReturnValue, nil, reportError("editAlertTemplateSettingsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1667,10 +1908,15 @@ type AlertsApiApiEditAlertTemplateVariablesRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	editAlertTemplateVariablesRequest *AlertTemplateVariablesFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiEditAlertTemplateVariablesRequest) EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest AlertTemplateVariablesFormData) AlertsApiApiEditAlertTemplateVariablesRequest {
 	r.editAlertTemplateVariablesRequest = &editAlertTemplateVariablesRequest
+	return r
+}
+func (r AlertsApiApiEditAlertTemplateVariablesRequest) Request(request interface{}) AlertsApiApiEditAlertTemplateVariablesRequest {
+	r.request = &request
 	return r
 }
 
@@ -1721,6 +1967,9 @@ func (a *AlertsApiService) EditAlertTemplateVariablesExecute(r AlertsApiApiEditA
 		return localVarReturnValue, nil, reportError("editAlertTemplateVariablesRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -2768,10 +3017,15 @@ type AlertsApiApiListAlertConfigurationsRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	listAlertConfigurationsRequest *AlertConfigurationApiFilter
+	request *interface{}
 }
 
 func (r AlertsApiApiListAlertConfigurationsRequest) ListAlertConfigurationsRequest(listAlertConfigurationsRequest AlertConfigurationApiFilter) AlertsApiApiListAlertConfigurationsRequest {
 	r.listAlertConfigurationsRequest = &listAlertConfigurationsRequest
+	return r
+}
+func (r AlertsApiApiListAlertConfigurationsRequest) Request(request interface{}) AlertsApiApiListAlertConfigurationsRequest {
+	r.request = &request
 	return r
 }
 
@@ -2822,6 +3076,9 @@ func (a *AlertsApiService) ListAlertConfigurationsExecute(r AlertsApiApiListAler
 		return localVarReturnValue, nil, reportError("listAlertConfigurationsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -3254,10 +3511,15 @@ type AlertsApiApiListAlertTemplatesRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	listTemplatesRequest *AlertTemplateApiFilter
+	request *interface{}
 }
 
 func (r AlertsApiApiListAlertTemplatesRequest) ListTemplatesRequest(listTemplatesRequest AlertTemplateApiFilter) AlertsApiApiListAlertTemplatesRequest {
 	r.listTemplatesRequest = &listTemplatesRequest
+	return r
+}
+func (r AlertsApiApiListAlertTemplatesRequest) Request(request interface{}) AlertsApiApiListAlertTemplatesRequest {
+	r.request = &request
 	return r
 }
 
@@ -3308,6 +3570,9 @@ func (a *AlertsApiService) ListAlertTemplatesExecute(r AlertsApiApiListAlertTemp
 		return localVarReturnValue, nil, reportError("listTemplatesRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -3502,10 +3767,15 @@ type AlertsApiApiPageAlertConfigurationsRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	pageAlertConfigurationsRequest *AlertConfigurationPagedApiQuery
+	request *interface{}
 }
 
 func (r AlertsApiApiPageAlertConfigurationsRequest) PageAlertConfigurationsRequest(pageAlertConfigurationsRequest AlertConfigurationPagedApiQuery) AlertsApiApiPageAlertConfigurationsRequest {
 	r.pageAlertConfigurationsRequest = &pageAlertConfigurationsRequest
+	return r
+}
+func (r AlertsApiApiPageAlertConfigurationsRequest) Request(request interface{}) AlertsApiApiPageAlertConfigurationsRequest {
+	r.request = &request
 	return r
 }
 
@@ -3556,6 +3826,9 @@ func (a *AlertsApiService) PageAlertConfigurationsExecute(r AlertsApiApiPageAler
 		return localVarReturnValue, nil, reportError("pageAlertConfigurationsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -3631,10 +3904,15 @@ type AlertsApiApiPageAlertsRequest struct {
 	ApiService *AlertsApiService
 	cUUID string
 	pageAlertsRequest *AlertPagedApiQuery
+	request *interface{}
 }
 
 func (r AlertsApiApiPageAlertsRequest) PageAlertsRequest(pageAlertsRequest AlertPagedApiQuery) AlertsApiApiPageAlertsRequest {
 	r.pageAlertsRequest = &pageAlertsRequest
+	return r
+}
+func (r AlertsApiApiPageAlertsRequest) Request(request interface{}) AlertsApiApiPageAlertsRequest {
+	r.request = &request
 	return r
 }
 
@@ -3685,6 +3963,9 @@ func (a *AlertsApiService) PageAlertsExecute(r AlertsApiApiPageAlertsRequest) (A
 		return localVarReturnValue, nil, reportError("pageAlertsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -3884,10 +4165,15 @@ type AlertsApiApiSetAlertChannelTemplatesRequest struct {
 	cUUID string
 	acType string
 	setAlertChannelTemplatesRequest *AlertChannelTemplates
+	request *interface{}
 }
 
 func (r AlertsApiApiSetAlertChannelTemplatesRequest) SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest AlertChannelTemplates) AlertsApiApiSetAlertChannelTemplatesRequest {
 	r.setAlertChannelTemplatesRequest = &setAlertChannelTemplatesRequest
+	return r
+}
+func (r AlertsApiApiSetAlertChannelTemplatesRequest) Request(request interface{}) AlertsApiApiSetAlertChannelTemplatesRequest {
+	r.request = &request
 	return r
 }
 
@@ -3941,6 +4227,9 @@ func (a *AlertsApiService) SetAlertChannelTemplatesExecute(r AlertsApiApiSetAler
 		return localVarReturnValue, nil, reportError("setAlertChannelTemplatesRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -4017,10 +4306,15 @@ type AlertsApiApiUpdateAlertChannelRequest struct {
 	cUUID string
 	acUUID string
 	updateAlertChannelRequest *AlertChannelFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiUpdateAlertChannelRequest) UpdateAlertChannelRequest(updateAlertChannelRequest AlertChannelFormData) AlertsApiApiUpdateAlertChannelRequest {
 	r.updateAlertChannelRequest = &updateAlertChannelRequest
+	return r
+}
+func (r AlertsApiApiUpdateAlertChannelRequest) Request(request interface{}) AlertsApiApiUpdateAlertChannelRequest {
+	r.request = &request
 	return r
 }
 
@@ -4074,6 +4368,9 @@ func (a *AlertsApiService) UpdateAlertChannelExecute(r AlertsApiApiUpdateAlertCh
 		return localVarReturnValue, nil, reportError("updateAlertChannelRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -4150,10 +4447,15 @@ type AlertsApiApiUpdateAlertConfigurationRequest struct {
 	cUUID string
 	configurationUUID string
 	updateAlertConfigurationRequest *AlertConfiguration
+	request *interface{}
 }
 
 func (r AlertsApiApiUpdateAlertConfigurationRequest) UpdateAlertConfigurationRequest(updateAlertConfigurationRequest AlertConfiguration) AlertsApiApiUpdateAlertConfigurationRequest {
 	r.updateAlertConfigurationRequest = &updateAlertConfigurationRequest
+	return r
+}
+func (r AlertsApiApiUpdateAlertConfigurationRequest) Request(request interface{}) AlertsApiApiUpdateAlertConfigurationRequest {
+	r.request = &request
 	return r
 }
 
@@ -4207,6 +4509,9 @@ func (a *AlertsApiService) UpdateAlertConfigurationExecute(r AlertsApiApiUpdateA
 		return localVarReturnValue, nil, reportError("updateAlertConfigurationRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -4283,10 +4588,15 @@ type AlertsApiApiUpdateAlertDestinationRequest struct {
 	cUUID string
 	adUUID string
 	updateAlertDestinationRequest *AlertDestinationFormData
+	request *interface{}
 }
 
 func (r AlertsApiApiUpdateAlertDestinationRequest) UpdateAlertDestinationRequest(updateAlertDestinationRequest AlertDestinationFormData) AlertsApiApiUpdateAlertDestinationRequest {
 	r.updateAlertDestinationRequest = &updateAlertDestinationRequest
+	return r
+}
+func (r AlertsApiApiUpdateAlertDestinationRequest) Request(request interface{}) AlertsApiApiUpdateAlertDestinationRequest {
+	r.request = &request
 	return r
 }
 
@@ -4340,6 +4650,9 @@ func (a *AlertsApiService) UpdateAlertDestinationExecute(r AlertsApiApiUpdateAle
 		return localVarReturnValue, nil, reportError("updateAlertDestinationRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

@@ -18,6 +18,8 @@ import (
 type BackupRequestParams struct {
 	// Alter load balancer state
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
+	// Overrides whether you want to use YBC based or script based backup.
+	BackupCategory *string `json:"backupCategory,omitempty"`
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
 	BackupUUID string `json:"backupUUID"`
@@ -163,6 +165,38 @@ func (o *BackupRequestParams) HasAlterLoadBalancer() bool {
 // SetAlterLoadBalancer gets a reference to the given bool and assigns it to the AlterLoadBalancer field.
 func (o *BackupRequestParams) SetAlterLoadBalancer(v bool) {
 	o.AlterLoadBalancer = &v
+}
+
+// GetBackupCategory returns the BackupCategory field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetBackupCategory() string {
+	if o == nil || o.BackupCategory == nil {
+		var ret string
+		return ret
+	}
+	return *o.BackupCategory
+}
+
+// GetBackupCategoryOk returns a tuple with the BackupCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetBackupCategoryOk() (*string, bool) {
+	if o == nil || o.BackupCategory == nil {
+		return nil, false
+	}
+	return o.BackupCategory, true
+}
+
+// HasBackupCategory returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasBackupCategory() bool {
+	if o != nil && o.BackupCategory != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupCategory gets a reference to the given string and assigns it to the BackupCategory field.
+func (o *BackupRequestParams) SetBackupCategory(v string) {
+	o.BackupCategory = &v
 }
 
 // GetBackupType returns the BackupType field value if set, zero value otherwise.
@@ -1721,6 +1755,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AlterLoadBalancer != nil {
 		toSerialize["alterLoadBalancer"] = o.AlterLoadBalancer
+	}
+	if o.BackupCategory != nil {
+		toSerialize["backupCategory"] = o.BackupCategory
 	}
 	if o.BackupType != nil {
 		toSerialize["backupType"] = o.BackupType

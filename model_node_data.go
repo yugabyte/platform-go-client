@@ -26,8 +26,6 @@ type NodeData struct {
 	Node string `json:"node"`
 	NodeName string `json:"node_name"`
 	Process string `json:"process"`
-	// Deprecated: Use timestampIso instead
-	Timestamp *time.Time `json:"timestamp,omitempty"`
 	TimestampIso *time.Time `json:"timestamp_iso,omitempty"`
 }
 
@@ -273,38 +271,6 @@ func (o *NodeData) SetProcess(v string) {
 	o.Process = v
 }
 
-// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *NodeData) GetTimestamp() time.Time {
-	if o == nil || o.Timestamp == nil {
-		var ret time.Time
-		return ret
-	}
-	return *o.Timestamp
-}
-
-// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeData) GetTimestampOk() (*time.Time, bool) {
-	if o == nil || o.Timestamp == nil {
-		return nil, false
-	}
-	return o.Timestamp, true
-}
-
-// HasTimestamp returns a boolean if a field has been set.
-func (o *NodeData) HasTimestamp() bool {
-	if o != nil && o.Timestamp != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
-func (o *NodeData) SetTimestamp(v time.Time) {
-	o.Timestamp = &v
-}
-
 // GetTimestampIso returns the TimestampIso field value if set, zero value otherwise.
 func (o *NodeData) GetTimestampIso() time.Time {
 	if o == nil || o.TimestampIso == nil {
@@ -365,9 +331,6 @@ func (o NodeData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["process"] = o.Process
-	}
-	if o.Timestamp != nil {
-		toSerialize["timestamp"] = o.Timestamp
 	}
 	if o.TimestampIso != nil {
 		toSerialize["timestamp_iso"] = o.TimestampIso

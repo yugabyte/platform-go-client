@@ -7,8 +7,10 @@ Name | Type | Description | Notes
 **BootstrapParams** | Pointer to [**BootstrapParams**](BootstrapParams.md) |  | [optional] 
 **DryRun** | Pointer to **bool** | Run the pre-checks without actually running the subtasks | [optional] 
 **Name** | Pointer to **string** | Name | [optional] 
+**SourceRole** | Pointer to **string** | The role that the source universe should have in the xCluster config | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **Tables** | Pointer to **[]string** | Source universe table IDs | [optional] 
+**TargetRole** | Pointer to **string** | The role that the target universe should have in the xCluster config | [optional] 
 
 ## Methods
 
@@ -104,6 +106,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetSourceRole
+
+`func (o *XClusterConfigEditFormData) GetSourceRole() string`
+
+GetSourceRole returns the SourceRole field if non-nil, zero value otherwise.
+
+### GetSourceRoleOk
+
+`func (o *XClusterConfigEditFormData) GetSourceRoleOk() (*string, bool)`
+
+GetSourceRoleOk returns a tuple with the SourceRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceRole
+
+`func (o *XClusterConfigEditFormData) SetSourceRole(v string)`
+
+SetSourceRole sets SourceRole field to given value.
+
+### HasSourceRole
+
+`func (o *XClusterConfigEditFormData) HasSourceRole() bool`
+
+HasSourceRole returns a boolean if a field has been set.
+
 ### GetStatus
 
 `func (o *XClusterConfigEditFormData) GetStatus() string`
@@ -153,6 +180,31 @@ SetTables sets Tables field to given value.
 `func (o *XClusterConfigEditFormData) HasTables() bool`
 
 HasTables returns a boolean if a field has been set.
+
+### GetTargetRole
+
+`func (o *XClusterConfigEditFormData) GetTargetRole() string`
+
+GetTargetRole returns the TargetRole field if non-nil, zero value otherwise.
+
+### GetTargetRoleOk
+
+`func (o *XClusterConfigEditFormData) GetTargetRoleOk() (*string, bool)`
+
+GetTargetRoleOk returns a tuple with the TargetRole field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetRole
+
+`func (o *XClusterConfigEditFormData) SetTargetRole(v string)`
+
+SetTargetRole sets TargetRole field to given value.
+
+### HasTargetRole
+
+`func (o *XClusterConfigEditFormData) HasTargetRole() bool`
+
+HasTargetRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## CreateSelfSignedCert
 
-> string CreateSelfSignedCert(ctx, cUUID).Label(label).Execute()
+> string CreateSelfSignedCert(ctx, cUUID).Label(label).Request(request).Execute()
 
 Create a self signed certificate
 
@@ -37,10 +37,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     label := "label_example" // string | certificate label
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.CreateSelfSignedCert(context.Background(), cUUID).Label(label).Execute()
+    resp, r, err := api_client.CertificateInfoApi.CreateSelfSignedCert(context.Background(), cUUID).Label(label).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.CreateSelfSignedCert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -67,6 +68,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **label** | **string** | certificate label | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -88,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCertificate
 
-> YBPSuccess DeleteCertificate(ctx, cUUID, rUUID).Execute()
+> YBPSuccess DeleteCertificate(ctx, cUUID, rUUID).Request(request).Execute()
 
 Delete a certificate
 
@@ -107,10 +109,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.DeleteCertificate(context.Background(), cUUID, rUUID).Execute()
+    resp, r, err := api_client.CertificateInfoApi.DeleteCertificate(context.Background(), cUUID, rUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.DeleteCertificate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,6 +141,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -159,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## EditCertificate
 
-> YBPSuccess EditCertificate(ctx, cUUID, rUUID).Execute()
+> YBPSuccess EditCertificate(ctx, cUUID, rUUID).Request(request).Execute()
 
 Edit TLS certificate config details
 
@@ -178,10 +182,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.EditCertificate(context.Background(), cUUID, rUUID).Execute()
+    resp, r, err := api_client.CertificateInfoApi.EditCertificate(context.Background(), cUUID, rUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.EditCertificate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,6 +214,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -301,7 +307,7 @@ Name | Type | Description  | Notes
 
 ## GetClientCert
 
-> CertificateDetails GetClientCert(ctx, cUUID, rUUID).Certificate(certificate).Execute()
+> CertificateDetails GetClientCert(ctx, cUUID, rUUID).Certificate(certificate).Request(request).Execute()
 
 Add a client certificate
 
@@ -321,10 +327,11 @@ func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
     certificate := *openapiclient.NewClientCertParams(int64(123), int64(123), "Username_example") // ClientCertParams | post certificate info
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.GetClientCert(context.Background(), cUUID, rUUID).Certificate(certificate).Execute()
+    resp, r, err := api_client.CertificateInfoApi.GetClientCert(context.Background(), cUUID, rUUID).Certificate(certificate).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.GetClientCert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -353,6 +360,7 @@ Name | Type | Description  | Notes
 
 
  **certificate** | [**ClientCertParams**](ClientCertParams.md) | post certificate info | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -374,7 +382,7 @@ Name | Type | Description  | Notes
 
 ## GetListOfCertificate
 
-> []CertificateInfo GetListOfCertificate(ctx, cUUID).Execute()
+> []CertificateInfoExt GetListOfCertificate(ctx, cUUID).Execute()
 
 List a customer's certificates
 
@@ -400,7 +408,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.GetListOfCertificate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetListOfCertificate`: []CertificateInfo
+    // response from `GetListOfCertificate`: []CertificateInfoExt
     fmt.Fprintf(os.Stdout, "Response from `CertificateInfoApi.GetListOfCertificate`: %v\n", resp)
 }
 ```
@@ -424,7 +432,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]CertificateInfo**](CertificateInfo.md)
+[**[]CertificateInfoExt**](CertificateInfoExt.md)
 
 ### Authorization
 
@@ -442,7 +450,7 @@ Name | Type | Description  | Notes
 
 ## GetRootCert
 
-> map[string]interface{} GetRootCert(ctx, cUUID, rUUID).Execute()
+> map[string]interface{} GetRootCert(ctx, cUUID, rUUID).Request(request).Execute()
 
 Get a customer's root certificate
 
@@ -461,10 +469,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.GetRootCert(context.Background(), cUUID, rUUID).Execute()
+    resp, r, err := api_client.CertificateInfoApi.GetRootCert(context.Background(), cUUID, rUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.GetRootCert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -492,6 +501,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -513,7 +523,7 @@ Name | Type | Description  | Notes
 
 ## UpdateEmptyCustomCert
 
-> CertificateInfo UpdateEmptyCustomCert(ctx, cUUID, rUUID).Execute()
+> CertificateInfoExt UpdateEmptyCustomCert(ctx, cUUID, rUUID).Request(request).Execute()
 
 Update an empty certificate
 
@@ -532,15 +542,16 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.UpdateEmptyCustomCert(context.Background(), cUUID, rUUID).Execute()
+    resp, r, err := api_client.CertificateInfoApi.UpdateEmptyCustomCert(context.Background(), cUUID, rUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.UpdateEmptyCustomCert``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateEmptyCustomCert`: CertificateInfo
+    // response from `UpdateEmptyCustomCert`: CertificateInfoExt
     fmt.Fprintf(os.Stdout, "Response from `CertificateInfoApi.UpdateEmptyCustomCert`: %v\n", resp)
 }
 ```
@@ -563,10 +574,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
-[**CertificateInfo**](CertificateInfo.md)
+[**CertificateInfoExt**](CertificateInfoExt.md)
 
 ### Authorization
 
@@ -584,7 +596,7 @@ Name | Type | Description  | Notes
 
 ## Upload
 
-> string Upload(ctx, cUUID).Certificate(certificate).Execute()
+> string Upload(ctx, cUUID).Certificate(certificate).Request(request).Execute()
 
 Restore a certificate from backup
 
@@ -603,10 +615,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     certificate := *openapiclient.NewCertificateParams("CertContent_example", int64(123), int64(123), "CertType_example", *openapiclient.NewCustomCertInfo("ClientCertPath_example", "ClientKeyPath_example", "NodeCertPath_example", "NodeKeyPath_example", "RootCertPath_example"), *openapiclient.NewCustomServerCertData("ServerCertContent_example", "ServerKeyContent_example"), *openapiclient.NewHashicorpVaultConfigParams("Engine_example", "MountPath_example", "Role_example", "VaultAddr_example", "VaultToken_example"), "KeyContent_example", "Label_example") // CertificateParams | certificate params of the backup to be restored
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CertificateInfoApi.Upload(context.Background(), cUUID).Certificate(certificate).Execute()
+    resp, r, err := api_client.CertificateInfoApi.Upload(context.Background(), cUUID).Certificate(certificate).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.Upload``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -633,6 +646,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **certificate** | [**CertificateParams**](CertificateParams.md) | certificate params of the backup to be restored | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

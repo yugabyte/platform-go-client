@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateRelease
 
-> YBPSuccess CreateRelease(ctx, cUUID).Release(release).Execute()
+> YBPSuccess CreateRelease(ctx, cUUID).Release(release).Request(request).Execute()
 
 Create a release
 
@@ -34,10 +34,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     release := *openapiclient.NewReleaseFormData(*openapiclient.NewGCSLocation(), *openapiclient.NewHttpLocation(), *openapiclient.NewS3Location(), "Version_example") // ReleaseFormData | Release data for remote downloading to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.CreateRelease(context.Background(), cUUID).Release(release).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.CreateRelease(context.Background(), cUUID).Release(release).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.CreateRelease``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **release** | [**ReleaseFormData**](ReleaseFormData.md) | Release data for remote downloading to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## DeleteRelease
 
-> ReleaseMetadata DeleteRelease(ctx, cUUID, name).Execute()
+> ReleaseMetadata DeleteRelease(ctx, cUUID, name).Request(request).Execute()
 
 Delete a release
 
@@ -104,10 +106,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     name := "name_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.DeleteRelease(context.Background(), cUUID, name).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.DeleteRelease(context.Background(), cUUID, name).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.DeleteRelease``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -135,6 +138,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -299,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## Refresh
 
-> YBPSuccess Refresh(ctx, cUUID).Execute()
+> YBPSuccess Refresh(ctx, cUUID).Request(request).Execute()
 
 Refresh a release
 
@@ -317,10 +321,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.Refresh(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.Refresh(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.Refresh``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -346,6 +351,7 @@ Other parameters are passed through a pointer to a apiRefreshRequest struct via 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -367,7 +373,7 @@ Name | Type | Description  | Notes
 
 ## UpdateRelease
 
-> ReleaseMetadata UpdateRelease(ctx, cUUID, name).Release(release).Execute()
+> ReleaseMetadata UpdateRelease(ctx, cUUID, name).Release(release).Request(request).Execute()
 
 Update a release
 
@@ -387,10 +393,11 @@ func main() {
     cUUID := TODO // string | 
     name := "name_example" // string | 
     release := map[string]interface{}(Object) // map[string]interface{} | Release data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.UpdateRelease(context.Background(), cUUID, name).Release(release).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.UpdateRelease(context.Background(), cUUID, name).Release(release).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.UpdateRelease``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -419,6 +426,7 @@ Name | Type | Description  | Notes
 
 
  **release** | **map[string]interface{}** | Release data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

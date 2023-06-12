@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CronExpression** | Pointer to **string** | Cron expression for a recurring backup | [optional] 
-**CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -46,6 +45,7 @@ Name | Type | Description | Notes
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
+**ScheduleName** | Pointer to **string** | Schedule Name | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] 
 **SchedulingFrequency** | Pointer to **int64** | Frequency to run the backup, in milliseconds | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -382,31 +382,6 @@ SetCronExpression sets CronExpression field to given value.
 `func (o *MultiTableBackupRequestParams) HasCronExpression() bool`
 
 HasCronExpression returns a boolean if a field has been set.
-
-### GetCustomerUUID
-
-`func (o *MultiTableBackupRequestParams) GetCustomerUUID() string`
-
-GetCustomerUUID returns the CustomerUUID field if non-nil, zero value otherwise.
-
-### GetCustomerUUIDOk
-
-`func (o *MultiTableBackupRequestParams) GetCustomerUUIDOk() (*string, bool)`
-
-GetCustomerUUIDOk returns a tuple with the CustomerUUID field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerUUID
-
-`func (o *MultiTableBackupRequestParams) SetCustomerUUID(v string)`
-
-SetCustomerUUID sets CustomerUUID field to given value.
-
-### HasCustomerUUID
-
-`func (o *MultiTableBackupRequestParams) HasCustomerUUID() bool`
-
-HasCustomerUUID returns a boolean if a field has been set.
 
 ### GetCustomerUuid
 
@@ -1122,6 +1097,31 @@ SetRestoreTimeStamp sets RestoreTimeStamp field to given value.
 `func (o *MultiTableBackupRequestParams) HasRestoreTimeStamp() bool`
 
 HasRestoreTimeStamp returns a boolean if a field has been set.
+
+### GetScheduleName
+
+`func (o *MultiTableBackupRequestParams) GetScheduleName() string`
+
+GetScheduleName returns the ScheduleName field if non-nil, zero value otherwise.
+
+### GetScheduleNameOk
+
+`func (o *MultiTableBackupRequestParams) GetScheduleNameOk() (*string, bool)`
+
+GetScheduleNameOk returns a tuple with the ScheduleName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleName
+
+`func (o *MultiTableBackupRequestParams) SetScheduleName(v string)`
+
+SetScheduleName sets ScheduleName field to given value.
+
+### HasScheduleName
+
+`func (o *MultiTableBackupRequestParams) HasScheduleName() bool`
+
+HasScheduleName returns a boolean if a field has been set.
 
 ### GetScheduleUUID
 

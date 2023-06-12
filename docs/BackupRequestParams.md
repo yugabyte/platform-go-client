@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
+**BackupCategory** | Pointer to **string** | Overrides whether you want to use YBC based or script based backup. | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUUID** | **string** |  | 
 **BaseBackupUUID** | Pointer to **string** | UUID of the parent backup | [optional] 
@@ -100,6 +101,31 @@ SetAlterLoadBalancer sets AlterLoadBalancer field to given value.
 `func (o *BackupRequestParams) HasAlterLoadBalancer() bool`
 
 HasAlterLoadBalancer returns a boolean if a field has been set.
+
+### GetBackupCategory
+
+`func (o *BackupRequestParams) GetBackupCategory() string`
+
+GetBackupCategory returns the BackupCategory field if non-nil, zero value otherwise.
+
+### GetBackupCategoryOk
+
+`func (o *BackupRequestParams) GetBackupCategoryOk() (*string, bool)`
+
+GetBackupCategoryOk returns a tuple with the BackupCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupCategory
+
+`func (o *BackupRequestParams) SetBackupCategory(v string)`
+
+SetBackupCategory sets BackupCategory field to given value.
+
+### HasBackupCategory
+
+`func (o *BackupRequestParams) HasBackupCategory() bool`
+
+HasBackupCategory returns a boolean if a field has been set.
 
 ### GetBackupType
 

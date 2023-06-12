@@ -47,10 +47,12 @@ type UserIntent struct {
 	RegionList *[]string `json:"regionList,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
+	SpotPrice *float64 `json:"spotPrice,omitempty"`
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
 	UniverseOverrides *string `json:"universeOverrides,omitempty"`
 	UseHostname *bool `json:"useHostname,omitempty"`
+	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
@@ -1036,6 +1038,38 @@ func (o *UserIntent) SetSpecificGFlags(v SpecificGFlags) {
 	o.SpecificGFlags = &v
 }
 
+// GetSpotPrice returns the SpotPrice field value if set, zero value otherwise.
+func (o *UserIntent) GetSpotPrice() float64 {
+	if o == nil || o.SpotPrice == nil {
+		var ret float64
+		return ret
+	}
+	return *o.SpotPrice
+}
+
+// GetSpotPriceOk returns a tuple with the SpotPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetSpotPriceOk() (*float64, bool) {
+	if o == nil || o.SpotPrice == nil {
+		return nil, false
+	}
+	return o.SpotPrice, true
+}
+
+// HasSpotPrice returns a boolean if a field has been set.
+func (o *UserIntent) HasSpotPrice() bool {
+	if o != nil && o.SpotPrice != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpotPrice gets a reference to the given float64 and assigns it to the SpotPrice field.
+func (o *UserIntent) SetSpotPrice(v float64) {
+	o.SpotPrice = &v
+}
+
 // GetTserverGFlags returns the TserverGFlags field value if set, zero value otherwise.
 func (o *UserIntent) GetTserverGFlags() map[string]string {
 	if o == nil || o.TserverGFlags == nil {
@@ -1162,6 +1196,38 @@ func (o *UserIntent) HasUseHostname() bool {
 // SetUseHostname gets a reference to the given bool and assigns it to the UseHostname field.
 func (o *UserIntent) SetUseHostname(v bool) {
 	o.UseHostname = &v
+}
+
+// GetUseSpotInstance returns the UseSpotInstance field value if set, zero value otherwise.
+func (o *UserIntent) GetUseSpotInstance() bool {
+	if o == nil || o.UseSpotInstance == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseSpotInstance
+}
+
+// GetUseSpotInstanceOk returns a tuple with the UseSpotInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUseSpotInstanceOk() (*bool, bool) {
+	if o == nil || o.UseSpotInstance == nil {
+		return nil, false
+	}
+	return o.UseSpotInstance, true
+}
+
+// HasUseSpotInstance returns a boolean if a field has been set.
+func (o *UserIntent) HasUseSpotInstance() bool {
+	if o != nil && o.UseSpotInstance != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseSpotInstance gets a reference to the given bool and assigns it to the UseSpotInstance field.
+func (o *UserIntent) SetUseSpotInstance(v bool) {
+	o.UseSpotInstance = &v
 }
 
 // GetUseSystemd returns the UseSystemd field value if set, zero value otherwise.
@@ -1448,6 +1514,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.SpecificGFlags != nil {
 		toSerialize["specificGFlags"] = o.SpecificGFlags
 	}
+	if o.SpotPrice != nil {
+		toSerialize["spotPrice"] = o.SpotPrice
+	}
 	if o.TserverGFlags != nil {
 		toSerialize["tserverGFlags"] = o.TserverGFlags
 	}
@@ -1459,6 +1528,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseHostname != nil {
 		toSerialize["useHostname"] = o.UseHostname
+	}
+	if o.UseSpotInstance != nil {
+		toSerialize["useSpotInstance"] = o.UseSpotInstance
 	}
 	if o.UseSystemd != nil {
 		toSerialize["useSystemd"] = o.UseSystemd

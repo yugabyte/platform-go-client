@@ -32,8 +32,13 @@ type CustomerTasksApiApiAbortTaskRequest struct {
 	ApiService *CustomerTasksApiService
 	cUUID string
 	tUUID string
+	request *interface{}
 }
 
+func (r CustomerTasksApiApiAbortTaskRequest) Request(request interface{}) CustomerTasksApiApiAbortTaskRequest {
+	r.request = &request
+	return r
+}
 
 func (r CustomerTasksApiApiAbortTaskRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.AbortTaskExecute(r)
@@ -83,6 +88,9 @@ func (a *CustomerTasksApiService) AbortTaskExecute(r CustomerTasksApiApiAbortTas
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -279,16 +287,21 @@ type CustomerTasksApiApiRetryTaskRequest struct {
 	ApiService *CustomerTasksApiService
 	cUUID string
 	tUUID string
+	request *interface{}
 }
 
+func (r CustomerTasksApiApiRetryTaskRequest) Request(request interface{}) CustomerTasksApiApiRetryTaskRequest {
+	r.request = &request
+	return r
+}
 
-func (r CustomerTasksApiApiRetryTaskRequest) Execute() (UniverseResp, *_nethttp.Response, error) {
+func (r CustomerTasksApiApiRetryTaskRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.RetryTaskExecute(r)
 }
 
 /*
- * RetryTask Retry a Universe task
- * Retry a Universe task.
+ * RetryTask Retry a Universe or Provider task
+ * Retry a Universe or Provider task.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param tUUID
@@ -305,16 +318,16 @@ func (a *CustomerTasksApiService) RetryTask(ctx _context.Context, cUUID string, 
 
 /*
  * Execute executes the request
- * @return UniverseResp
+ * @return YBPTask
  */
-func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTaskRequest) (UniverseResp, *_nethttp.Response, error) {
+func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTaskRequest) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  UniverseResp
+		localVarReturnValue  YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksApiService.RetryTask")
@@ -330,6 +343,9 @@ func (a *CustomerTasksApiService) RetryTaskExecute(r CustomerTasksApiApiRetryTas
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

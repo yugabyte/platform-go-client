@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **DeleteRemote** | Pointer to **bool** |  | [optional] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **KeyPairName** | Pointer to **string** |  | [optional] 
+**ManagementState** | Pointer to **string** | Key Management state | [optional] [readonly] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
@@ -142,6 +143,31 @@ SetKeyPairName sets KeyPairName field to given value.
 `func (o *KeyInfo) HasKeyPairName() bool`
 
 HasKeyPairName returns a boolean if a field has been set.
+
+### GetManagementState
+
+`func (o *KeyInfo) GetManagementState() string`
+
+GetManagementState returns the ManagementState field if non-nil, zero value otherwise.
+
+### GetManagementStateOk
+
+`func (o *KeyInfo) GetManagementStateOk() (*string, bool)`
+
+GetManagementStateOk returns a tuple with the ManagementState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementState
+
+`func (o *KeyInfo) SetManagementState(v string)`
+
+SetManagementState sets ManagementState field to given value.
+
+### HasManagementState
+
+`func (o *KeyInfo) HasManagementState() bool`
+
+HasManagementState returns a boolean if a field has been set.
 
 ### GetNodeExporterPort
 

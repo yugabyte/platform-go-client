@@ -32,8 +32,13 @@ type ScheduleManagementApiApiDeleteScheduleRequest struct {
 	ApiService *ScheduleManagementApiService
 	cUUID string
 	sUUID string
+	request *interface{}
 }
 
+func (r ScheduleManagementApiApiDeleteScheduleRequest) Request(request interface{}) ScheduleManagementApiApiDeleteScheduleRequest {
+	r.request = &request
+	return r
+}
 
 func (r ScheduleManagementApiApiDeleteScheduleRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteScheduleExecute(r)
@@ -82,6 +87,9 @@ func (a *ScheduleManagementApiService) DeleteScheduleExecute(r ScheduleManagemen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -155,8 +163,13 @@ type ScheduleManagementApiApiDeleteScheduleV2Request struct {
 	ApiService *ScheduleManagementApiService
 	cUUID string
 	sUUID string
+	request *interface{}
 }
 
+func (r ScheduleManagementApiApiDeleteScheduleV2Request) Request(request interface{}) ScheduleManagementApiApiDeleteScheduleV2Request {
+	r.request = &request
+	return r
+}
 
 func (r ScheduleManagementApiApiDeleteScheduleV2Request) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteScheduleV2Execute(r)
@@ -205,6 +218,9 @@ func (a *ScheduleManagementApiService) DeleteScheduleV2Execute(r ScheduleManagem
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -279,10 +295,15 @@ type ScheduleManagementApiApiEditBackupScheduleV2Request struct {
 	cUUID string
 	sUUID string
 	body *EditBackupScheduleParams
+	request *interface{}
 }
 
 func (r ScheduleManagementApiApiEditBackupScheduleV2Request) Body(body EditBackupScheduleParams) ScheduleManagementApiApiEditBackupScheduleV2Request {
 	r.body = &body
+	return r
+}
+func (r ScheduleManagementApiApiEditBackupScheduleV2Request) Request(request interface{}) ScheduleManagementApiApiEditBackupScheduleV2Request {
+	r.request = &request
 	return r
 }
 
@@ -336,6 +357,9 @@ func (a *ScheduleManagementApiService) EditBackupScheduleV2Execute(r ScheduleMan
 		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -653,10 +677,15 @@ type ScheduleManagementApiApiListSchedulesV2Request struct {
 	ApiService *ScheduleManagementApiService
 	cUUID string
 	pageScheduleRequest *SchedulePagedApiQuery
+	request *interface{}
 }
 
 func (r ScheduleManagementApiApiListSchedulesV2Request) PageScheduleRequest(pageScheduleRequest SchedulePagedApiQuery) ScheduleManagementApiApiListSchedulesV2Request {
 	r.pageScheduleRequest = &pageScheduleRequest
+	return r
+}
+func (r ScheduleManagementApiApiListSchedulesV2Request) Request(request interface{}) ScheduleManagementApiApiListSchedulesV2Request {
+	r.request = &request
 	return r
 }
 
@@ -707,6 +736,9 @@ func (a *ScheduleManagementApiService) ListSchedulesV2Execute(r ScheduleManageme
 		return localVarReturnValue, nil, reportError("pageScheduleRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

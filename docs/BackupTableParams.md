@@ -45,6 +45,7 @@ Name | Type | Description | Notes
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
+**ScheduleName** | Pointer to **string** | Schedule Name | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] 
 **SchedulingFrequency** | Pointer to **int64** | Frequency to run the backup, in milliseconds | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -1096,6 +1097,31 @@ SetRestoreTimeStamp sets RestoreTimeStamp field to given value.
 `func (o *BackupTableParams) HasRestoreTimeStamp() bool`
 
 HasRestoreTimeStamp returns a boolean if a field has been set.
+
+### GetScheduleName
+
+`func (o *BackupTableParams) GetScheduleName() string`
+
+GetScheduleName returns the ScheduleName field if non-nil, zero value otherwise.
+
+### GetScheduleNameOk
+
+`func (o *BackupTableParams) GetScheduleNameOk() (*string, bool)`
+
+GetScheduleNameOk returns a tuple with the ScheduleName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleName
+
+`func (o *BackupTableParams) SetScheduleName(v string)`
+
+SetScheduleName sets ScheduleName field to given value.
+
+### HasScheduleName
+
+`func (o *BackupTableParams) HasScheduleName() bool`
+
+HasScheduleName returns a boolean if a field has been set.
 
 ### GetScheduleUUID
 

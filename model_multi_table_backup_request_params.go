@@ -39,8 +39,6 @@ type MultiTableBackupRequestParams struct {
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
 	// Customer UUID
-	CustomerUUID *string `json:"customerUUID,omitempty"`
-	// Customer UUID
 	CustomerUuid *string `json:"customerUuid,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	// Disable checksum
@@ -91,6 +89,8 @@ type MultiTableBackupRequestParams struct {
 	RegionLocations *[]RegionLocations `json:"regionLocations,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
+	// Schedule Name
+	ScheduleName *string `json:"scheduleName,omitempty"`
 	// Schedule UUID
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
@@ -530,38 +530,6 @@ func (o *MultiTableBackupRequestParams) HasCronExpression() bool {
 // SetCronExpression gets a reference to the given string and assigns it to the CronExpression field.
 func (o *MultiTableBackupRequestParams) SetCronExpression(v string) {
 	o.CronExpression = &v
-}
-
-// GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
-func (o *MultiTableBackupRequestParams) GetCustomerUUID() string {
-	if o == nil || o.CustomerUUID == nil {
-		var ret string
-		return ret
-	}
-	return *o.CustomerUUID
-}
-
-// GetCustomerUUIDOk returns a tuple with the CustomerUUID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *MultiTableBackupRequestParams) GetCustomerUUIDOk() (*string, bool) {
-	if o == nil || o.CustomerUUID == nil {
-		return nil, false
-	}
-	return o.CustomerUUID, true
-}
-
-// HasCustomerUUID returns a boolean if a field has been set.
-func (o *MultiTableBackupRequestParams) HasCustomerUUID() bool {
-	if o != nil && o.CustomerUUID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomerUUID gets a reference to the given string and assigns it to the CustomerUUID field.
-func (o *MultiTableBackupRequestParams) SetCustomerUUID(v string) {
-	o.CustomerUUID = &v
 }
 
 // GetCustomerUuid returns the CustomerUuid field value if set, zero value otherwise.
@@ -1476,6 +1444,38 @@ func (o *MultiTableBackupRequestParams) SetRestoreTimeStamp(v string) {
 	o.RestoreTimeStamp = &v
 }
 
+// GetScheduleName returns the ScheduleName field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetScheduleName() string {
+	if o == nil || o.ScheduleName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ScheduleName
+}
+
+// GetScheduleNameOk returns a tuple with the ScheduleName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetScheduleNameOk() (*string, bool) {
+	if o == nil || o.ScheduleName == nil {
+		return nil, false
+	}
+	return o.ScheduleName, true
+}
+
+// HasScheduleName returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasScheduleName() bool {
+	if o != nil && o.ScheduleName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduleName gets a reference to the given string and assigns it to the ScheduleName field.
+func (o *MultiTableBackupRequestParams) SetScheduleName(v string) {
+	o.ScheduleName = &v
+}
+
 // GetScheduleUUID returns the ScheduleUUID field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetScheduleUUID() string {
 	if o == nil || o.ScheduleUUID == nil {
@@ -2186,9 +2186,6 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
 	}
-	if o.CustomerUUID != nil {
-		toSerialize["customerUUID"] = o.CustomerUUID
-	}
 	if o.CustomerUuid != nil {
 		toSerialize["customerUuid"] = o.CustomerUuid
 	}
@@ -2275,6 +2272,9 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
+	}
+	if o.ScheduleName != nil {
+		toSerialize["scheduleName"] = o.ScheduleName
 	}
 	if o.ScheduleUUID != nil {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID

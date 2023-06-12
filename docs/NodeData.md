@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **Node** | **string** |  | 
 **NodeName** | **string** |  | 
 **Process** | **string** |  | 
-**Timestamp** | Pointer to **time.Time** | Deprecated: Use timestampIso instead | [optional] 
 **TimestampIso** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -214,31 +213,6 @@ and a boolean to check if the value has been set.
 
 SetProcess sets Process field to given value.
 
-
-### GetTimestamp
-
-`func (o *NodeData) GetTimestamp() time.Time`
-
-GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
-
-### GetTimestampOk
-
-`func (o *NodeData) GetTimestampOk() (*time.Time, bool)`
-
-GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimestamp
-
-`func (o *NodeData) SetTimestamp(v time.Time)`
-
-SetTimestamp sets Timestamp field to given value.
-
-### HasTimestamp
-
-`func (o *NodeData) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
 
 ### GetTimestampIso
 

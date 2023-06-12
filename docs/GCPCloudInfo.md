@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
 **UseHostCredentials** | Pointer to **bool** |  | [optional] 
 **UseHostVPC** | Pointer to **bool** |  | [optional] 
+**VpcType** | Pointer to **string** | New/Existing VPC for provider creation | [optional] [readonly] 
 **YbFirewallTags** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetUseHostVPC sets UseHostVPC field to given value.
 `func (o *GCPCloudInfo) HasUseHostVPC() bool`
 
 HasUseHostVPC returns a boolean if a field has been set.
+
+### GetVpcType
+
+`func (o *GCPCloudInfo) GetVpcType() string`
+
+GetVpcType returns the VpcType field if non-nil, zero value otherwise.
+
+### GetVpcTypeOk
+
+`func (o *GCPCloudInfo) GetVpcTypeOk() (*string, bool)`
+
+GetVpcTypeOk returns a tuple with the VpcType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcType
+
+`func (o *GCPCloudInfo) SetVpcType(v string)`
+
+SetVpcType sets VpcType field to given value.
+
+### HasVpcType
+
+`func (o *GCPCloudInfo) HasVpcType() bool`
+
+HasVpcType returns a boolean if a field has been set.
 
 ### GetYbFirewallTags
 

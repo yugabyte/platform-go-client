@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## DeleteSchedule
 
-> YBPSuccess DeleteSchedule(ctx, cUUID, sUUID).Execute()
+> YBPSuccess DeleteSchedule(ctx, cUUID, sUUID).Request(request).Execute()
 
 Delete a schedule
 
@@ -34,10 +34,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     sUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.DeleteSchedule(context.Background(), cUUID, sUUID).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.DeleteSchedule(context.Background(), cUUID, sUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.DeleteSchedule``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## DeleteScheduleV2
 
-> YBPSuccess DeleteScheduleV2(ctx, cUUID, sUUID).Execute()
+> YBPSuccess DeleteScheduleV2(ctx, cUUID, sUUID).Request(request).Execute()
 
 Delete a schedule V2
 
@@ -105,10 +107,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     sUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.DeleteScheduleV2(context.Background(), cUUID, sUUID).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.DeleteScheduleV2(context.Background(), cUUID, sUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.DeleteScheduleV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,6 +139,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -157,7 +161,7 @@ Name | Type | Description  | Notes
 
 ## EditBackupScheduleV2
 
-> Schedule EditBackupScheduleV2(ctx, cUUID, sUUID).Body(body).Execute()
+> Schedule EditBackupScheduleV2(ctx, cUUID, sUUID).Body(body).Request(request).Execute()
 
 Edit a backup schedule V2
 
@@ -177,10 +181,11 @@ func main() {
     cUUID := TODO // string | 
     sUUID := TODO // string | 
     body := *openapiclient.NewEditBackupScheduleParams() // EditBackupScheduleParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.EditBackupScheduleV2(context.Background(), cUUID, sUUID).Body(body).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.EditBackupScheduleV2(context.Background(), cUUID, sUUID).Body(body).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.EditBackupScheduleV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -209,6 +214,7 @@ Name | Type | Description  | Notes
 
 
  **body** | [**EditBackupScheduleParams**](EditBackupScheduleParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -369,7 +375,7 @@ Name | Type | Description  | Notes
 
 ## ListSchedulesV2
 
-> SchedulePagedResponse ListSchedulesV2(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
+> SchedulePagedResponse ListSchedulesV2(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Request(request).Execute()
 
 List schedules V2
 
@@ -388,10 +394,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pageScheduleRequest := *openapiclient.NewSchedulePagedApiQuery("Direction_example", *openapiclient.NewScheduleApiFilter([]string{"Status_example"}, []string{"TaskTypes_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // SchedulePagedApiQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ScheduleManagementApi.ListSchedulesV2(context.Background(), cUUID).PageScheduleRequest(pageScheduleRequest).Execute()
+    resp, r, err := api_client.ScheduleManagementApi.ListSchedulesV2(context.Background(), cUUID).PageScheduleRequest(pageScheduleRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementApi.ListSchedulesV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -418,6 +425,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageScheduleRequest** | [**SchedulePagedApiQuery**](SchedulePagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

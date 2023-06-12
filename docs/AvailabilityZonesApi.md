@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreateAZ
 
-> map[string]AvailabilityZone CreateAZ(ctx, cUUID, pUUID, rUUID).AzFormData(azFormData).Execute()
+> map[string]AvailabilityZone CreateAZ(ctx, cUUID, pUUID, rUUID).AzFormData(azFormData).Request(request).Execute()
 
 Create an availability zone
 
@@ -34,10 +34,11 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     azFormData := *openapiclient.NewAvailabilityZoneFormData([]openapiclient.AvailabilityZoneData{*openapiclient.NewAvailabilityZoneData("Code_example", "Name_example")}) // AvailabilityZoneFormData | Availability zone form data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AvailabilityZonesApi.CreateAZ(context.Background(), cUUID, pUUID, rUUID).AzFormData(azFormData).Execute()
+    resp, r, err := api_client.AvailabilityZonesApi.CreateAZ(context.Background(), cUUID, pUUID, rUUID).AzFormData(azFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AvailabilityZonesApi.CreateAZ``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
 
 
  **azFormData** | [**AvailabilityZoneFormData**](AvailabilityZoneFormData.md) | Availability zone form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -89,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAZ
 
-> YBPSuccess DeleteAZ(ctx, cUUID, pUUID, rUUID, azUUID).Execute()
+> YBPSuccess DeleteAZ(ctx, cUUID, pUUID, rUUID, azUUID).Request(request).Execute()
 
 Delete an availability zone
 
@@ -110,10 +112,11 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     azUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AvailabilityZonesApi.DeleteAZ(context.Background(), cUUID, pUUID, rUUID, azUUID).Execute()
+    resp, r, err := api_client.AvailabilityZonesApi.DeleteAZ(context.Background(), cUUID, pUUID, rUUID, azUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AvailabilityZonesApi.DeleteAZ``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -145,6 +148,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -166,7 +170,7 @@ Name | Type | Description  | Notes
 
 ## EditAZ
 
-> AvailabilityZone EditAZ(ctx, cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Execute()
+> AvailabilityZone EditAZ(ctx, cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Request(request).Execute()
 
 Modify an availability zone
 
@@ -188,10 +192,11 @@ func main() {
     rUUID := TODO // string | 
     azUUID := TODO // string | 
     azFormData := *openapiclient.NewAvailabilityZoneEditData() // AvailabilityZoneEditData | Availability zone edit form data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AvailabilityZonesApi.EditAZ(context.Background(), cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Execute()
+    resp, r, err := api_client.AvailabilityZonesApi.EditAZ(context.Background(), cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AvailabilityZonesApi.EditAZ``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -224,6 +229,7 @@ Name | Type | Description  | Notes
 
 
  **azFormData** | [**AvailabilityZoneEditData**](AvailabilityZoneEditData.md) | Availability zone edit form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

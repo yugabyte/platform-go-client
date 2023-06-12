@@ -20,6 +20,8 @@ type KeyInfo struct {
 	DeleteRemote *bool `json:"deleteRemote,omitempty"`
 	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
 	KeyPairName *string `json:"keyPairName,omitempty"`
+	// Key Management state
+	ManagementState *string `json:"managementState,omitempty"`
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NtpServers *[]string `json:"ntpServers,omitempty"`
@@ -180,6 +182,38 @@ func (o *KeyInfo) HasKeyPairName() bool {
 // SetKeyPairName gets a reference to the given string and assigns it to the KeyPairName field.
 func (o *KeyInfo) SetKeyPairName(v string) {
 	o.KeyPairName = &v
+}
+
+// GetManagementState returns the ManagementState field value if set, zero value otherwise.
+func (o *KeyInfo) GetManagementState() string {
+	if o == nil || o.ManagementState == nil {
+		var ret string
+		return ret
+	}
+	return *o.ManagementState
+}
+
+// GetManagementStateOk returns a tuple with the ManagementState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KeyInfo) GetManagementStateOk() (*string, bool) {
+	if o == nil || o.ManagementState == nil {
+		return nil, false
+	}
+	return o.ManagementState, true
+}
+
+// HasManagementState returns a boolean if a field has been set.
+func (o *KeyInfo) HasManagementState() bool {
+	if o != nil && o.ManagementState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManagementState gets a reference to the given string and assigns it to the ManagementState field.
+func (o *KeyInfo) SetManagementState(v string) {
+	o.ManagementState = &v
 }
 
 // GetNodeExporterPort returns the NodeExporterPort field value if set, zero value otherwise.
@@ -675,6 +709,9 @@ func (o KeyInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.KeyPairName != nil {
 		toSerialize["keyPairName"] = o.KeyPairName
+	}
+	if o.ManagementState != nil {
+		toSerialize["managementState"] = o.ManagementState
 	}
 	if o.NodeExporterPort != nil {
 		toSerialize["nodeExporterPort"] = o.NodeExporterPort
