@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ImportUniverse
 
-> ImportUniverseFormData ImportUniverse(ctx, cUUID).Execute()
+> ImportUniverseFormData ImportUniverse(ctx, cUUID).Request(request).Execute()
 
 Import a universe
 
@@ -28,10 +28,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseActionsApi.ImportUniverse(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.UniverseActionsApi.ImportUniverse(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseActionsApi.ImportUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -57,6 +58,7 @@ Other parameters are passed through a pointer to a apiImportUniverseRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *AccessKeysApi* | [**ListAllForCustomer**](docs/AccessKeysApi.md#listallforcustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
 *AlertsApi* | [**Acknowledge**](docs/AlertsApi.md#acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
 *AlertsApi* | [**AcknowledgeByFilter**](docs/AlertsApi.md#acknowledgebyfilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts
+*AlertsApi* | [**AlertNotificationPreview**](docs/AlertsApi.md#alertnotificationpreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | Prepare alert notification preview
 *AlertsApi* | [**CountAlerts**](docs/AlertsApi.md#countalerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
 *AlertsApi* | [**CreateAlertChannel**](docs/AlertsApi.md#createalertchannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | Create an alert channel
 *AlertsApi* | [**CreateAlertConfiguration**](docs/AlertsApi.md#createalertconfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
@@ -186,7 +187,7 @@ Class | Method | HTTP request | Description
 *CustomerManagementApi* | [**UpdateCustomer**](docs/CustomerManagementApi.md#updatecustomer) | **Put** /api/v1/customers/{cUUID} | Update a customer
 *CustomerTasksApi* | [**AbortTask**](docs/CustomerTasksApi.md#aborttask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
 *CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Get a task&#39;s failed subtasks
-*CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe task
+*CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
@@ -196,6 +197,7 @@ Class | Method | HTTP request | Description
 *EncryptionAtRestApi* | [**GetKMSConfig**](docs/EncryptionAtRestApi.md#getkmsconfig) | **Get** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Get details of a KMS configuration
 *EncryptionAtRestApi* | [**GetKeyRefHistory**](docs/EncryptionAtRestApi.md#getkeyrefhistory) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Get a universe&#39;s key reference history
 *EncryptionAtRestApi* | [**ListKMSConfigs**](docs/EncryptionAtRestApi.md#listkmsconfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
+*EncryptionAtRestApi* | [**RefreshKMSConfig**](docs/EncryptionAtRestApi.md#refreshkmsconfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | Refresh KMS Config
 *EncryptionAtRestApi* | [**RemoveKeyRefHistory**](docs/EncryptionAtRestApi.md#removekeyrefhistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Remove a universe&#39;s key reference history
 *EncryptionAtRestApi* | [**RetrieveKey**](docs/EncryptionAtRestApi.md#retrievekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Retrive a universe&#39;s KMS key
 *GrafanaDashboardApi* | [**GrafanaDashboard**](docs/GrafanaDashboardApi.md#grafanadashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
@@ -218,6 +220,9 @@ Class | Method | HTTP request | Description
 *MaintenanceWindowsApi* | [**Page**](docs/MaintenanceWindowsApi.md#page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | List maintenance windows (paginated)
 *MaintenanceWindowsApi* | [**Update**](docs/MaintenanceWindowsApi.md#update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Update maintenance window
 *MetricsApi* | [**MetricsDetail**](docs/MetricsApi.md#metricsdetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics
+*NodeAgentsApi* | [**DownloadNodeAgentInstaller**](docs/NodeAgentsApi.md#downloadnodeagentinstaller) | **Get** /api/v1/node_agents/download | Download Node Agent Installer or Package
+*NodeAgentsApi* | [**GetNodeAgent**](docs/NodeAgentsApi.md#getnodeagent) | **Get** /api/v1/customers/{cUUID}/node_agents/{nUUID} | Get Node Agent
+*NodeAgentsApi* | [**ListNodeAgents**](docs/NodeAgentsApi.md#listnodeagents) | **Get** /api/v1/customers/{cUUID}/node_agents | List Node Agents
 *NodeInstancesApi* | [**CreateNodeInstance**](docs/NodeInstancesApi.md#createnodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes | Create a node instance
 *NodeInstancesApi* | [**DeleteInstance**](docs/NodeInstancesApi.md#deleteinstance) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Delete a node instance
 *NodeInstancesApi* | [**DetachedNodeAction**](docs/NodeInstancesApi.md#detachednodeaction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
@@ -242,6 +247,11 @@ Class | Method | HTTP request | Description
 *PerformanceAdvisorApi* | [**Resolve**](docs/PerformanceAdvisorApi.md#resolve) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/resolve | Resolve performance recommendations
 *PerformanceAdvisorApi* | [**RunPerfAdvisor**](docs/PerformanceAdvisorApi.md#runperfadvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | Start performance advisor run for universe
 *PerformanceAdvisorApi* | [**UpdateSettings**](docs/PerformanceAdvisorApi.md#updatesettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Update universe performance advisor settings
+*PreviewApi* | [**CreateImageBundle**](docs/PreviewApi.md#createimagebundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | Create a image bundle
+*PreviewApi* | [**Delete**](docs/PreviewApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle
+*PreviewApi* | [**EditImageBundle**](docs/PreviewApi.md#editimagebundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
+*PreviewApi* | [**GetImageBundle**](docs/PreviewApi.md#getimagebundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
+*PreviewApi* | [**GetListOfImageBundles**](docs/PreviewApi.md#getlistofimagebundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
 *RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create a new region
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
 *RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Modify a region
@@ -322,7 +332,6 @@ Class | Method | HTTP request | Description
 *UniverseManagementApi* | [**SetUniverseBackupFlag**](docs/UniverseManagementApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 *UniverseManagementApi* | [**SetUniverseHelm3Compatible**](docs/UniverseManagementApi.md#setuniversehelm3compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
 *UniverseManagementApi* | [**SetUniverseKey**](docs/UniverseManagementApi.md#setuniversekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
-*UniverseManagementApi* | [**ToggleUniverseTLS**](docs/UniverseManagementApi.md#toggleuniversetls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/toggle_tls | Toggle a universe&#39;s TLS state
 *UniverseManagementApi* | [**UpdateLoadBalancerConfig**](docs/UniverseManagementApi.md#updateloadbalancerconfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 *UniverseNodeMetadataMetamasterApi* | [**GetMasterAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getmasteraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetRedisServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getredisserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
@@ -425,8 +434,10 @@ Class | Method | HTTP request | Description
  - [BootstrapParams](docs/BootstrapParams.md)
  - [BulkImportParams](docs/BulkImportParams.md)
  - [BundleDetails](docs/BundleDetails.md)
+ - [BundleInfo](docs/BundleInfo.md)
  - [CertificateDetails](docs/CertificateDetails.md)
  - [CertificateInfo](docs/CertificateInfo.md)
+ - [CertificateInfoExt](docs/CertificateInfoExt.md)
  - [CertificateParams](docs/CertificateParams.md)
  - [CertsRotateParams](docs/CertsRotateParams.md)
  - [ClientCertParams](docs/ClientCertParams.md)
@@ -439,6 +450,7 @@ Class | Method | HTTP request | Description
  - [ConfDataType](docs/ConfDataType.md)
  - [ConfDataTypeObject](docs/ConfDataTypeObject.md)
  - [ConfKeyInfo](docs/ConfKeyInfo.md)
+ - [Config](docs/Config.md)
  - [ConfigEntry](docs/ConfigEntry.md)
  - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
  - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
@@ -475,6 +487,8 @@ Class | Method | HTTP request | Description
  - [HashedTimestampColumnFinderResponse](docs/HashedTimestampColumnFinderResponse.md)
  - [HashicorpVaultConfigParams](docs/HashicorpVaultConfigParams.md)
  - [HttpLocation](docs/HttpLocation.md)
+ - [ImageBundle](docs/ImageBundle.md)
+ - [ImageBundleDetails](docs/ImageBundleDetails.md)
  - [ImportUniverseFormData](docs/ImportUniverseFormData.md)
  - [InstanceType](docs/InstanceType.md)
  - [InstanceTypeDetails](docs/InstanceTypeDetails.md)
@@ -504,6 +518,8 @@ Class | Method | HTTP request | Description
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
  - [NoAuth](docs/NoAuth.md)
  - [NodeActionFormData](docs/NodeActionFormData.md)
+ - [NodeAgent](docs/NodeAgent.md)
+ - [NodeAgentResp](docs/NodeAgentResp.md)
  - [NodeConfig](docs/NodeConfig.md)
  - [NodeData](docs/NodeData.md)
  - [NodeDetails](docs/NodeDetails.md)
@@ -517,6 +533,7 @@ Class | Method | HTTP request | Description
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
  - [PerProcessFlags](docs/PerProcessFlags.md)
+ - [PerfAdvisorManualRunStatus](docs/PerfAdvisorManualRunStatus.md)
  - [PerfAdvisorSettingsFormData](docs/PerfAdvisorSettingsFormData.md)
  - [PerfAdvisorSettingsWithDefaults](docs/PerfAdvisorSettingsWithDefaults.md)
  - [PerformanceRecommendation](docs/PerformanceRecommendation.md)
@@ -530,6 +547,7 @@ Class | Method | HTTP request | Description
  - [PlacementInfo](docs/PlacementInfo.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PlatformLoggingConfig](docs/PlatformLoggingConfig.md)
+ - [PresetThrottleValues](docs/PresetThrottleValues.md)
  - [Provider](docs/Provider.md)
  - [ProviderDetails](docs/ProviderDetails.md)
  - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
@@ -575,6 +593,7 @@ Class | Method | HTTP request | Description
  - [TableInfoResp](docs/TableInfoResp.md)
  - [TableSpaceInfo](docs/TableSpaceInfo.md)
  - [ThirdpartySoftwareUpgradeParams](docs/ThirdpartySoftwareUpgradeParams.md)
+ - [ThrottleParamValue](docs/ThrottleParamValue.md)
  - [TlsToggleParams](docs/TlsToggleParams.md)
  - [TokenAuthInformation](docs/TokenAuthInformation.md)
  - [TokenAuthInformationAllOf](docs/TokenAuthInformationAllOf.md)
@@ -583,6 +602,7 @@ Class | Method | HTTP request | Description
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
+ - [UniversePerformanceAdvisorStatus](docs/UniversePerformanceAdvisorStatus.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
  - [UnusedIndexFinderResponse](docs/UnusedIndexFinderResponse.md)
@@ -608,6 +628,7 @@ Class | Method | HTTP request | Description
  - [YBPSuccess](docs/YBPSuccess.md)
  - [YBPTask](docs/YBPTask.md)
  - [YbcThrottleParameters](docs/YbcThrottleParameters.md)
+ - [YbcThrottleParametersResponse](docs/YbcThrottleParametersResponse.md)
 
 
 ## Documentation For Authorization

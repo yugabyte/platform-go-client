@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AzuRG** | Pointer to **string** |  | [optional] 
 **AzuSubscriptionId** | Pointer to **string** |  | [optional] 
 **AzuTenantId** | Pointer to **string** |  | [optional] 
+**VpcType** | Pointer to **string** | New/Existing VPC for provider creation | [optional] [readonly] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetAzuTenantId sets AzuTenantId field to given value.
 `func (o *AzureCloudInfo) HasAzuTenantId() bool`
 
 HasAzuTenantId returns a boolean if a field has been set.
+
+### GetVpcType
+
+`func (o *AzureCloudInfo) GetVpcType() string`
+
+GetVpcType returns the VpcType field if non-nil, zero value otherwise.
+
+### GetVpcTypeOk
+
+`func (o *AzureCloudInfo) GetVpcTypeOk() (*string, bool)`
+
+GetVpcTypeOk returns a tuple with the VpcType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVpcType
+
+`func (o *AzureCloudInfo) SetVpcType(v string)`
+
+SetVpcType sets VpcType field to given value.
+
+### HasVpcType
+
+`func (o *AzureCloudInfo) HasVpcType() bool`
+
+HasVpcType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

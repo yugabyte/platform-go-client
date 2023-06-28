@@ -35,6 +35,7 @@ type UpgradeTaskParams struct {
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
+	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
@@ -598,6 +599,38 @@ func (o *UpgradeTaskParams) HasInstallYbc() bool {
 // SetInstallYbc gets a reference to the given bool and assigns it to the InstallYbc field.
 func (o *UpgradeTaskParams) SetInstallYbc(v bool) {
 	o.InstallYbc = &v
+}
+
+// GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
+func (o *UpgradeTaskParams) GetIsKubernetesOperatorControlled() bool {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsKubernetesOperatorControlled
+}
+
+// GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpgradeTaskParams) GetIsKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		return nil, false
+	}
+	return o.IsKubernetesOperatorControlled, true
+}
+
+// HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
+func (o *UpgradeTaskParams) HasIsKubernetesOperatorControlled() bool {
+	if o != nil && o.IsKubernetesOperatorControlled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsKubernetesOperatorControlled gets a reference to the given bool and assigns it to the IsKubernetesOperatorControlled field.
+func (o *UpgradeTaskParams) SetIsKubernetesOperatorControlled(v bool) {
+	o.IsKubernetesOperatorControlled = &v
 }
 
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
@@ -1721,6 +1754,9 @@ func (o UpgradeTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
+	}
+	if o.IsKubernetesOperatorControlled != nil {
+		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
 	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath

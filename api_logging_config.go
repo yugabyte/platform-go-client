@@ -30,10 +30,15 @@ type LoggingConfigApiApiSetAuditLoggingSettingsRequest struct {
 	ctx _context.Context
 	ApiService *LoggingConfigApiService
 	auditLoggingConfig *AuditLoggingConfig
+	request *interface{}
 }
 
 func (r LoggingConfigApiApiSetAuditLoggingSettingsRequest) AuditLoggingConfig(auditLoggingConfig AuditLoggingConfig) LoggingConfigApiApiSetAuditLoggingSettingsRequest {
 	r.auditLoggingConfig = &auditLoggingConfig
+	return r
+}
+func (r LoggingConfigApiApiSetAuditLoggingSettingsRequest) Request(request interface{}) LoggingConfigApiApiSetAuditLoggingSettingsRequest {
+	r.request = &request
 	return r
 }
 
@@ -81,6 +86,9 @@ func (a *LoggingConfigApiService) SetAuditLoggingSettingsExecute(r LoggingConfig
 		return localVarReturnValue, nil, reportError("auditLoggingConfig is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -155,10 +163,15 @@ type LoggingConfigApiApiSetLoggingSettingsRequest struct {
 	ctx _context.Context
 	ApiService *LoggingConfigApiService
 	loggingConfig *PlatformLoggingConfig
+	request *interface{}
 }
 
 func (r LoggingConfigApiApiSetLoggingSettingsRequest) LoggingConfig(loggingConfig PlatformLoggingConfig) LoggingConfigApiApiSetLoggingSettingsRequest {
 	r.loggingConfig = &loggingConfig
+	return r
+}
+func (r LoggingConfigApiApiSetLoggingSettingsRequest) Request(request interface{}) LoggingConfigApiApiSetLoggingSettingsRequest {
+	r.request = &request
 	return r
 }
 
@@ -206,6 +219,9 @@ func (a *LoggingConfigApiService) SetLoggingSettingsExecute(r LoggingConfigApiAp
 		return localVarReturnValue, nil, reportError("loggingConfig is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

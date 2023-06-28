@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RegionCodes** | Pointer to **[]string** | Region code | [optional] 
 **ServerType** | Pointer to **string** | Server type | [optional] 
 **Start** | **int64** | Start time | 
+**StreamId** | Pointer to **string** | Stream id | [optional] 
 **TableId** | Pointer to **string** | Table id | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 
 **XclusterConfigUuid** | **string** |  | 
@@ -307,6 +308,31 @@ and a boolean to check if the value has been set.
 
 SetStart sets Start field to given value.
 
+
+### GetStreamId
+
+`func (o *MetricQueryParams) GetStreamId() string`
+
+GetStreamId returns the StreamId field if non-nil, zero value otherwise.
+
+### GetStreamIdOk
+
+`func (o *MetricQueryParams) GetStreamIdOk() (*string, bool)`
+
+GetStreamIdOk returns a tuple with the StreamId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStreamId
+
+`func (o *MetricQueryParams) SetStreamId(v string)`
+
+SetStreamId sets StreamId field to given value.
+
+### HasStreamId
+
+`func (o *MetricQueryParams) HasStreamId() bool`
+
+HasStreamId returns a boolean if a field has been set.
 
 ### GetTableId
 

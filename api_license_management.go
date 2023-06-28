@@ -32,8 +32,13 @@ type LicenseManagementApiApiDeleteLicenseRequest struct {
 	ApiService *LicenseManagementApiService
 	cUUID string
 	lUUID string
+	request *interface{}
 }
 
+func (r LicenseManagementApiApiDeleteLicenseRequest) Request(request interface{}) LicenseManagementApiApiDeleteLicenseRequest {
+	r.request = &request
+	return r
+}
 
 func (r LicenseManagementApiApiDeleteLicenseRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteLicenseExecute(r)
@@ -82,6 +87,9 @@ func (a *LicenseManagementApiService) DeleteLicenseExecute(r LicenseManagementAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -154,8 +162,13 @@ type LicenseManagementApiApiUploadLicenseRequest struct {
 	ctx _context.Context
 	ApiService *LicenseManagementApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r LicenseManagementApiApiUploadLicenseRequest) Request(request interface{}) LicenseManagementApiApiUploadLicenseRequest {
+	r.request = &request
+	return r
+}
 
 func (r LicenseManagementApiApiUploadLicenseRequest) Execute() (CustomerLicense, *_nethttp.Response, error) {
 	return r.ApiService.UploadLicenseExecute(r)
@@ -201,6 +214,9 @@ func (a *LicenseManagementApiService) UploadLicenseExecute(r LicenseManagementAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

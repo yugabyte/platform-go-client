@@ -19,11 +19,13 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **ForceVMImageUpgrade** | **bool** |  | 
+**ImageBundleUUID** | Pointer to **string** | ImageBundle to be used for upgrade | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
+**IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MachineImages** | **map[string]string** | Map  of region UUID to AMI name | 
+**MachineImages** | Pointer to **map[string]string** | Map  of region UUID to AMI name. Deprecated: sinceDate&#x3D;2023-03-30,sinceYBAVersion&#x3D;2.18.0, Use imageBundle instead. | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -42,7 +44,7 @@ Name | Type | Description | Notes
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
-**SshUserOverrideMap** | Pointer to **map[string]string** | Map of region UUID to SSH User override | [optional] 
+**SshUserOverrideMap** | Pointer to **map[string]string** | Map of region UUID to SSH User override. Deprecated: sinceDate&#x3D;2023-03-30,sinceYBAVersion&#x3D;2.18.0, Use imageBundle instead. | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
@@ -64,7 +66,7 @@ Name | Type | Description | Notes
 
 ### NewVMImageUpgradeParams
 
-`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, machineImages map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
+`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
 
 NewVMImageUpgradeParams instantiates a new VMImageUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -439,6 +441,31 @@ and a boolean to check if the value has been set.
 SetForceVMImageUpgrade sets ForceVMImageUpgrade field to given value.
 
 
+### GetImageBundleUUID
+
+`func (o *VMImageUpgradeParams) GetImageBundleUUID() string`
+
+GetImageBundleUUID returns the ImageBundleUUID field if non-nil, zero value otherwise.
+
+### GetImageBundleUUIDOk
+
+`func (o *VMImageUpgradeParams) GetImageBundleUUIDOk() (*string, bool)`
+
+GetImageBundleUUIDOk returns a tuple with the ImageBundleUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageBundleUUID
+
+`func (o *VMImageUpgradeParams) SetImageBundleUUID(v string)`
+
+SetImageBundleUUID sets ImageBundleUUID field to given value.
+
+### HasImageBundleUUID
+
+`func (o *VMImageUpgradeParams) HasImageBundleUUID() bool`
+
+HasImageBundleUUID returns a boolean if a field has been set.
+
 ### GetImportedState
 
 `func (o *VMImageUpgradeParams) GetImportedState() string`
@@ -488,6 +515,31 @@ SetInstallYbc sets InstallYbc field to given value.
 `func (o *VMImageUpgradeParams) HasInstallYbc() bool`
 
 HasInstallYbc returns a boolean if a field has been set.
+
+### GetIsKubernetesOperatorControlled
+
+`func (o *VMImageUpgradeParams) GetIsKubernetesOperatorControlled() bool`
+
+GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetIsKubernetesOperatorControlledOk
+
+`func (o *VMImageUpgradeParams) GetIsKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsKubernetesOperatorControlled
+
+`func (o *VMImageUpgradeParams) SetIsKubernetesOperatorControlled(v bool)`
+
+SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to given value.
+
+### HasIsKubernetesOperatorControlled
+
+`func (o *VMImageUpgradeParams) HasIsKubernetesOperatorControlled() bool`
+
+HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
 ### GetItestS3PackagePath
 
@@ -553,6 +605,11 @@ and a boolean to check if the value has been set.
 
 SetMachineImages sets MachineImages field to given value.
 
+### HasMachineImages
+
+`func (o *VMImageUpgradeParams) HasMachineImages() bool`
+
+HasMachineImages returns a boolean if a field has been set.
 
 ### GetMastersInDefaultRegion
 

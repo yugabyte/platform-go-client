@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**GetKMSConfig**](EncryptionAtRestApi.md#GetKMSConfig) | **Get** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Get details of a KMS configuration
 [**GetKeyRefHistory**](EncryptionAtRestApi.md#GetKeyRefHistory) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Get a universe&#39;s key reference history
 [**ListKMSConfigs**](EncryptionAtRestApi.md#ListKMSConfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
+[**RefreshKMSConfig**](EncryptionAtRestApi.md#RefreshKMSConfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | Refresh KMS Config
 [**RemoveKeyRefHistory**](EncryptionAtRestApi.md#RemoveKeyRefHistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Remove a universe&#39;s key reference history
 [**RetrieveKey**](EncryptionAtRestApi.md#RetrieveKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Retrive a universe&#39;s KMS key
 
@@ -18,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateKMSConfig
 
-> YBPTask CreateKMSConfig(ctx, cUUID, kmsProvider).KMSConfig(kMSConfig).Execute()
+> YBPTask CreateKMSConfig(ctx, cUUID, kmsProvider).KMSConfig(kMSConfig).Request(request).Execute()
 
 Create a KMS configuration
 
@@ -38,10 +39,11 @@ func main() {
     cUUID := TODO // string | 
     kmsProvider := "kmsProvider_example" // string | 
     kMSConfig := map[string]interface{}(Object) // map[string]interface{} | KMS config to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.CreateKMSConfig(context.Background(), cUUID, kmsProvider).KMSConfig(kMSConfig).Execute()
+    resp, r, err := api_client.EncryptionAtRestApi.CreateKMSConfig(context.Background(), cUUID, kmsProvider).KMSConfig(kMSConfig).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.CreateKMSConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -70,6 +72,7 @@ Name | Type | Description  | Notes
 
 
  **kMSConfig** | **map[string]interface{}** | KMS config to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -91,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## DeleteKMSConfig
 
-> YBPTask DeleteKMSConfig(ctx, cUUID, configUUID).Execute()
+> YBPTask DeleteKMSConfig(ctx, cUUID, configUUID).Request(request).Execute()
 
 Delete a KMS configuration
 
@@ -110,10 +113,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.DeleteKMSConfig(context.Background(), cUUID, configUUID).Execute()
+    resp, r, err := api_client.EncryptionAtRestApi.DeleteKMSConfig(context.Background(), cUUID, configUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.DeleteKMSConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -141,6 +145,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -162,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## EditKMSConfig
 
-> YBPTask EditKMSConfig(ctx, cUUID, configUUID).KMSConfig(kMSConfig).Execute()
+> YBPTask EditKMSConfig(ctx, cUUID, configUUID).KMSConfig(kMSConfig).Request(request).Execute()
 
 Edit a KMS configuration
 
@@ -182,10 +187,11 @@ func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
     kMSConfig := map[string]interface{}(Object) // map[string]interface{} | KMS config to be edited
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.EditKMSConfig(context.Background(), cUUID, configUUID).KMSConfig(kMSConfig).Execute()
+    resp, r, err := api_client.EncryptionAtRestApi.EditKMSConfig(context.Background(), cUUID, configUUID).KMSConfig(kMSConfig).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.EditKMSConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -214,6 +220,7 @@ Name | Type | Description  | Notes
 
 
  **kMSConfig** | **map[string]interface{}** | KMS config to be edited | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -514,9 +521,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RefreshKMSConfig
+
+> YBPSuccess RefreshKMSConfig(ctx, cUUID, configUUID).Request(request).Execute()
+
+Refresh KMS Config
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    configUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.EncryptionAtRestApi.RefreshKMSConfig(context.Background(), cUUID, configUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.RefreshKMSConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RefreshKMSConfig`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `EncryptionAtRestApi.RefreshKMSConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**configUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRefreshKMSConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RemoveKeyRefHistory
 
-> YBPSuccess RemoveKeyRefHistory(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess RemoveKeyRefHistory(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Remove a universe's key reference history
 
@@ -535,10 +615,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.RemoveKeyRefHistory(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.EncryptionAtRestApi.RemoveKeyRefHistory(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.RemoveKeyRefHistory``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -566,6 +647,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -587,7 +669,7 @@ Name | Type | Description  | Notes
 
 ## RetrieveKey
 
-> map[string]map[string]interface{} RetrieveKey(ctx, cUUID, uniUUID).Execute()
+> map[string]map[string]interface{} RetrieveKey(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Retrive a universe's KMS key
 
@@ -606,10 +688,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.RetrieveKey(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.EncryptionAtRestApi.RetrieveKey(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.RetrieveKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -637,6 +720,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

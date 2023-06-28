@@ -22,6 +22,8 @@ type GCPCloudInfo struct {
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	UseHostCredentials *bool `json:"useHostCredentials,omitempty"`
 	UseHostVPC *bool `json:"useHostVPC,omitempty"`
+	// New/Existing VPC for provider creation
+	VpcType *string `json:"vpcType,omitempty"`
 	YbFirewallTags *string `json:"ybFirewallTags,omitempty"`
 }
 
@@ -234,6 +236,38 @@ func (o *GCPCloudInfo) SetUseHostVPC(v bool) {
 	o.UseHostVPC = &v
 }
 
+// GetVpcType returns the VpcType field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetVpcType() string {
+	if o == nil || o.VpcType == nil {
+		var ret string
+		return ret
+	}
+	return *o.VpcType
+}
+
+// GetVpcTypeOk returns a tuple with the VpcType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetVpcTypeOk() (*string, bool) {
+	if o == nil || o.VpcType == nil {
+		return nil, false
+	}
+	return o.VpcType, true
+}
+
+// HasVpcType returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasVpcType() bool {
+	if o != nil && o.VpcType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVpcType gets a reference to the given string and assigns it to the VpcType field.
+func (o *GCPCloudInfo) SetVpcType(v string) {
+	o.VpcType = &v
+}
+
 // GetYbFirewallTags returns the YbFirewallTags field value if set, zero value otherwise.
 func (o *GCPCloudInfo) GetYbFirewallTags() string {
 	if o == nil || o.YbFirewallTags == nil {
@@ -285,6 +319,9 @@ func (o GCPCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseHostVPC != nil {
 		toSerialize["useHostVPC"] = o.UseHostVPC
+	}
+	if o.VpcType != nil {
+		toSerialize["vpcType"] = o.VpcType
 	}
 	if o.YbFirewallTags != nil {
 		toSerialize["ybFirewallTags"] = o.YbFirewallTags

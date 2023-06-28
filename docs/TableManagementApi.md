@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ## AlterTable
 
-> map[string]map[string]interface{} AlterTable(ctx, cUUID, uniUUID, tableUUID).Execute()
+> map[string]map[string]interface{} AlterTable(ctx, cUUID, uniUUID, tableUUID).Request(request).Execute()
 
 Alter a YugabyteDB table
 
@@ -41,10 +41,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.AlterTable(context.Background(), cUUID, uniUUID, tableUUID).Execute()
+    resp, r, err := api_client.TableManagementApi.AlterTable(context.Background(), cUUID, uniUUID, tableUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.AlterTable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -95,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## BulkImportData
 
-> YBPTask BulkImportData(ctx, cUUID, uniUUID, tableUUID).BulkImport(bulkImport).Execute()
+> YBPTask BulkImportData(ctx, cUUID, uniUUID, tableUUID).BulkImport(bulkImport).Request(request).Execute()
 
 Bulk import data
 
@@ -118,10 +120,11 @@ func main() {
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
     bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", "S3Bucket_example", int32(123), int32(123)) // BulkImportParams | Bulk data to be imported
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.BulkImportData(context.Background(), cUUID, uniUUID, tableUUID).BulkImport(bulkImport).Execute()
+    resp, r, err := api_client.TableManagementApi.BulkImportData(context.Background(), cUUID, uniUUID, tableUUID).BulkImport(bulkImport).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.BulkImportData``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -152,6 +155,7 @@ Name | Type | Description  | Notes
 
 
  **bulkImport** | [**BulkImportParams**](BulkImportParams.md) | Bulk data to be imported | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -173,7 +177,7 @@ Name | Type | Description  | Notes
 
 ## CreateMultiTableBackup
 
-> Schedule CreateMultiTableBackup(ctx, cUUID, uniUUID).TableBackup(tableBackup).Execute()
+> Schedule CreateMultiTableBackup(ctx, cUUID, uniUUID).TableBackup(tableBackup).Request(request).Execute()
 
 Create a multi-table backup
 
@@ -193,10 +197,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.CreateMultiTableBackup(context.Background(), cUUID, uniUUID).TableBackup(tableBackup).Execute()
+    resp, r, err := api_client.TableManagementApi.CreateMultiTableBackup(context.Background(), cUUID, uniUUID).TableBackup(tableBackup).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateMultiTableBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -225,6 +230,7 @@ Name | Type | Description  | Notes
 
 
  **tableBackup** | [**MultiTableBackupRequestParams**](MultiTableBackupRequestParams.md) | Table backup data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -246,7 +252,7 @@ Name | Type | Description  | Notes
 
 ## CreateSingleTableBackup
 
-> YBPTask CreateSingleTableBackup(ctx, cUUID, uniUUID, tableUUID).Backup(backup).Execute()
+> YBPTask CreateSingleTableBackup(ctx, cUUID, uniUUID, tableUUID).Backup(backup).Request(request).Execute()
 
 Create a single-table backup
 
@@ -267,10 +273,11 @@ func main() {
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
     backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.CreateSingleTableBackup(context.Background(), cUUID, uniUUID, tableUUID).Backup(backup).Execute()
+    resp, r, err := api_client.TableManagementApi.CreateSingleTableBackup(context.Background(), cUUID, uniUUID, tableUUID).Backup(backup).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateSingleTableBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -301,6 +308,7 @@ Name | Type | Description  | Notes
 
 
  **backup** | [**BackupTableParams**](BackupTableParams.md) | Backup data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -322,7 +330,7 @@ Name | Type | Description  | Notes
 
 ## CreateTable
 
-> YBPTask CreateTable(ctx, cUUID, uniUUID).Table(table).Execute()
+> YBPTask CreateTable(ctx, cUUID, uniUUID).Table(table).Request(request).Execute()
 
 Create a YugabyteDB table
 
@@ -342,10 +350,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.CreateTable(context.Background(), cUUID, uniUUID).Table(table).Execute()
+    resp, r, err := api_client.TableManagementApi.CreateTable(context.Background(), cUUID, uniUUID).Table(table).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateTable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -374,6 +383,7 @@ Name | Type | Description  | Notes
 
 
  **table** | [**TableDefinitionTaskParams**](TableDefinitionTaskParams.md) | Table definition to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -395,7 +405,7 @@ Name | Type | Description  | Notes
 
 ## CreateTableSpaces
 
-> YBPTask CreateTableSpaces(ctx, cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Execute()
+> YBPTask CreateTableSpaces(ctx, cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Request(request).Execute()
 
 Create tableSpaces
 
@@ -415,10 +425,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     createTableSpacesRequest := *openapiclient.NewCreateTablespaceParams([]openapiclient.TableSpaceInfo{*openapiclient.NewTableSpaceInfo("Name_example", []openapiclient.PlacementBlock{*openapiclient.NewPlacementBlock("Cloud_example", "Region_example", "Zone_example")})}) // CreateTablespaceParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.CreateTableSpaces(context.Background(), cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Execute()
+    resp, r, err := api_client.TableManagementApi.CreateTableSpaces(context.Background(), cUUID, uniUUID).CreateTableSpacesRequest(createTableSpacesRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.CreateTableSpaces``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -447,6 +458,7 @@ Name | Type | Description  | Notes
 
 
  **createTableSpacesRequest** | [**CreateTablespaceParams**](CreateTablespaceParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -542,7 +554,7 @@ Name | Type | Description  | Notes
 
 ## DropTable
 
-> YBPTask DropTable(ctx, cUUID, uniUUID, tableUUID).Execute()
+> YBPTask DropTable(ctx, cUUID, uniUUID, tableUUID).Request(request).Execute()
 
 Drop a YugabyteDB table
 
@@ -562,10 +574,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.DropTable(context.Background(), cUUID, uniUUID, tableUUID).Execute()
+    resp, r, err := api_client.TableManagementApi.DropTable(context.Background(), cUUID, uniUUID, tableUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.DropTable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -595,6 +608,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -764,7 +778,7 @@ Name | Type | Description  | Notes
 
 ## GetAllTables
 
-> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).Execute()
+> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).Execute()
 
 List all tables
 
@@ -786,10 +800,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     includeParentTableInfo := true // bool |  (optional) (default to false)
+    excludeColocatedTables := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).Execute()
+    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.GetAllTables``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -818,6 +833,7 @@ Name | Type | Description  | Notes
 
 
  **includeParentTableInfo** | **bool** |  | [default to false]
+ **excludeColocatedTables** | **bool** |  | [default to false]
 
 ### Return type
 

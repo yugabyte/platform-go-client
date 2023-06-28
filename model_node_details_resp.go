@@ -12,6 +12,7 @@ package ywclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // NodeDetailsResp struct for NodeDetailsResp
@@ -37,6 +38,8 @@ type NodeDetailsResp struct {
 	// True if this node is a YSQL server
 	IsYsqlServer *bool `json:"isYsqlServer,omitempty"`
 	KubernetesOverrides string `json:"kubernetesOverrides"`
+	// Store last volume update time
+	LastVolumeUpdateTime *time.Time `json:"lastVolumeUpdateTime,omitempty"`
 	// Machine image name
 	MachineImage *string `json:"machineImage,omitempty"`
 	// Master HTTP port
@@ -59,6 +62,8 @@ type NodeDetailsResp struct {
 	RedisServerHttpPort *int32 `json:"redisServerHttpPort,omitempty"`
 	// REDIS RPC port
 	RedisServerRpcPort *int32 `json:"redisServerRpcPort,omitempty"`
+	// SSH port override for the AMI
+	SshPortOverride *int32 `json:"sshPortOverride,omitempty"`
 	// SSH user override for the AMI
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	// Node state
@@ -477,6 +482,38 @@ func (o *NodeDetailsResp) SetKubernetesOverrides(v string) {
 	o.KubernetesOverrides = v
 }
 
+// GetLastVolumeUpdateTime returns the LastVolumeUpdateTime field value if set, zero value otherwise.
+func (o *NodeDetailsResp) GetLastVolumeUpdateTime() time.Time {
+	if o == nil || o.LastVolumeUpdateTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastVolumeUpdateTime
+}
+
+// GetLastVolumeUpdateTimeOk returns a tuple with the LastVolumeUpdateTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetLastVolumeUpdateTimeOk() (*time.Time, bool) {
+	if o == nil || o.LastVolumeUpdateTime == nil {
+		return nil, false
+	}
+	return o.LastVolumeUpdateTime, true
+}
+
+// HasLastVolumeUpdateTime returns a boolean if a field has been set.
+func (o *NodeDetailsResp) HasLastVolumeUpdateTime() bool {
+	if o != nil && o.LastVolumeUpdateTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastVolumeUpdateTime gets a reference to the given time.Time and assigns it to the LastVolumeUpdateTime field.
+func (o *NodeDetailsResp) SetLastVolumeUpdateTime(v time.Time) {
+	o.LastVolumeUpdateTime = &v
+}
+
 // GetMachineImage returns the MachineImage field value if set, zero value otherwise.
 func (o *NodeDetailsResp) GetMachineImage() string {
 	if o == nil || o.MachineImage == nil {
@@ -827,6 +864,38 @@ func (o *NodeDetailsResp) HasRedisServerRpcPort() bool {
 // SetRedisServerRpcPort gets a reference to the given int32 and assigns it to the RedisServerRpcPort field.
 func (o *NodeDetailsResp) SetRedisServerRpcPort(v int32) {
 	o.RedisServerRpcPort = &v
+}
+
+// GetSshPortOverride returns the SshPortOverride field value if set, zero value otherwise.
+func (o *NodeDetailsResp) GetSshPortOverride() int32 {
+	if o == nil || o.SshPortOverride == nil {
+		var ret int32
+		return ret
+	}
+	return *o.SshPortOverride
+}
+
+// GetSshPortOverrideOk returns a tuple with the SshPortOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetSshPortOverrideOk() (*int32, bool) {
+	if o == nil || o.SshPortOverride == nil {
+		return nil, false
+	}
+	return o.SshPortOverride, true
+}
+
+// HasSshPortOverride returns a boolean if a field has been set.
+func (o *NodeDetailsResp) HasSshPortOverride() bool {
+	if o != nil && o.SshPortOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshPortOverride gets a reference to the given int32 and assigns it to the SshPortOverride field.
+func (o *NodeDetailsResp) SetSshPortOverride(v int32) {
+	o.SshPortOverride = &v
 }
 
 // GetSshUserOverride returns the SshUserOverride field value if set, zero value otherwise.
@@ -1219,6 +1288,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["kubernetesOverrides"] = o.KubernetesOverrides
 	}
+	if o.LastVolumeUpdateTime != nil {
+		toSerialize["lastVolumeUpdateTime"] = o.LastVolumeUpdateTime
+	}
 	if o.MachineImage != nil {
 		toSerialize["machineImage"] = o.MachineImage
 	}
@@ -1251,6 +1323,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.RedisServerRpcPort != nil {
 		toSerialize["redisServerRpcPort"] = o.RedisServerRpcPort
+	}
+	if o.SshPortOverride != nil {
+		toSerialize["sshPortOverride"] = o.SshPortOverride
 	}
 	if o.SshUserOverride != nil {
 		toSerialize["sshUserOverride"] = o.SshUserOverride

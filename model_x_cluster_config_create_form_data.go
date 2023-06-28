@@ -17,6 +17,8 @@ import (
 // XClusterConfigCreateFormData xcluster create form
 type XClusterConfigCreateFormData struct {
 	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
+	// configType
+	ConfigType *string `json:"configType,omitempty"`
 	// Run the pre-checks without actually running the subtasks
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
@@ -80,6 +82,38 @@ func (o *XClusterConfigCreateFormData) HasBootstrapParams() bool {
 // SetBootstrapParams gets a reference to the given BootstrapParams and assigns it to the BootstrapParams field.
 func (o *XClusterConfigCreateFormData) SetBootstrapParams(v BootstrapParams) {
 	o.BootstrapParams = &v
+}
+
+// GetConfigType returns the ConfigType field value if set, zero value otherwise.
+func (o *XClusterConfigCreateFormData) GetConfigType() string {
+	if o == nil || o.ConfigType == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfigType
+}
+
+// GetConfigTypeOk returns a tuple with the ConfigType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigCreateFormData) GetConfigTypeOk() (*string, bool) {
+	if o == nil || o.ConfigType == nil {
+		return nil, false
+	}
+	return o.ConfigType, true
+}
+
+// HasConfigType returns a boolean if a field has been set.
+func (o *XClusterConfigCreateFormData) HasConfigType() bool {
+	if o != nil && o.ConfigType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigType gets a reference to the given string and assigns it to the ConfigType field.
+func (o *XClusterConfigCreateFormData) SetConfigType(v string) {
+	o.ConfigType = &v
 }
 
 // GetDryRun returns the DryRun field value if set, zero value otherwise.
@@ -214,6 +248,9 @@ func (o XClusterConfigCreateFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
+	}
+	if o.ConfigType != nil {
+		toSerialize["configType"] = o.ConfigType
 	}
 	if o.DryRun != nil {
 		toSerialize["dryRun"] = o.DryRun

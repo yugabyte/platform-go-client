@@ -53,6 +53,7 @@ type RestoreBackupParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	NodeIp string `json:"nodeIp"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
@@ -84,11 +85,12 @@ type RestoreBackupParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
+func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
 	this := RestoreBackupParams{}
 	this.CreatingUser = creatingUser
 	this.CurrentIdx = currentIdx
 	this.CurrentYbcTaskId = currentYbcTaskId
+	this.NodeIp = nodeIp
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
 	this.PrefixUUID = prefixUUID
@@ -818,6 +820,30 @@ func (o *RestoreBackupParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetNodeIp returns the NodeIp field value
+func (o *RestoreBackupParams) GetNodeIp() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.NodeIp
+}
+
+// GetNodeIpOk returns a tuple with the NodeIp field value
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetNodeIpOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.NodeIp, true
+}
+
+// SetNodeIp sets field value
+func (o *RestoreBackupParams) SetNodeIp(v string) {
+	o.NodeIp = v
+}
+
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetParallelism() int32 {
 	if o == nil || o.Parallelism == nil {
@@ -1352,6 +1378,9 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
+	}
+	if true {
+		toSerialize["nodeIp"] = o.NodeIp
 	}
 	if o.Parallelism != nil {
 		toSerialize["parallelism"] = o.Parallelism

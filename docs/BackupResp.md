@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CommonBackupInfo** | [**CommonBackupInfo**](CommonBackupInfo.md) |  | 
 **CustomerUUID** | **string** |  | 
 **ExpiryTime** | Pointer to **time.Time** | The expiry time for backup. | [optional] 
+**ExpiryTimeUnit** | **string** |  | 
 **FullChainSizeInBytes** | **int64** |  | 
 **HasIncrementalBackups** | **bool** |  | 
 **IsFullBackup** | **bool** |  | 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **LastBackupState** | **string** |  | 
 **LastIncrementalBackupTime** | Pointer to **time.Time** | Time for last incremenatal backup. | [optional] 
 **OnDemand** | **bool** |  | 
+**ScheduleName** | **string** |  | 
 **ScheduleUUID** | **string** |  | 
 **StorageConfigType** | **string** |  | 
 **UniverseName** | **string** |  | 
@@ -26,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
+`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -145,6 +147,26 @@ SetExpiryTime sets ExpiryTime field to given value.
 `func (o *BackupResp) HasExpiryTime() bool`
 
 HasExpiryTime returns a boolean if a field has been set.
+
+### GetExpiryTimeUnit
+
+`func (o *BackupResp) GetExpiryTimeUnit() string`
+
+GetExpiryTimeUnit returns the ExpiryTimeUnit field if non-nil, zero value otherwise.
+
+### GetExpiryTimeUnitOk
+
+`func (o *BackupResp) GetExpiryTimeUnitOk() (*string, bool)`
+
+GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiryTimeUnit
+
+`func (o *BackupResp) SetExpiryTimeUnit(v string)`
+
+SetExpiryTimeUnit sets ExpiryTimeUnit field to given value.
+
 
 ### GetFullChainSizeInBytes
 
@@ -309,6 +331,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetOnDemand(v bool)`
 
 SetOnDemand sets OnDemand field to given value.
+
+
+### GetScheduleName
+
+`func (o *BackupResp) GetScheduleName() string`
+
+GetScheduleName returns the ScheduleName field if non-nil, zero value otherwise.
+
+### GetScheduleNameOk
+
+`func (o *BackupResp) GetScheduleNameOk() (*string, bool)`
+
+GetScheduleNameOk returns a tuple with the ScheduleName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleName
+
+`func (o *BackupResp) SetScheduleName(v string)`
+
+SetScheduleName sets ScheduleName field to given value.
 
 
 ### GetScheduleUUID

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateSupportBundle
 
-> YBPTask CreateSupportBundle(ctx, cUUID, uniUUID).SupportBundle(supportBundle).Execute()
+> YBPTask CreateSupportBundle(ctx, cUUID, uniUUID).SupportBundle(supportBundle).Request(request).Execute()
 
 Create support bundle for specific universe
 
@@ -36,10 +36,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     supportBundle := *openapiclient.NewSupportBundleFormData([]string{"Components_example"}, time.Now(), time.Now()) // SupportBundleFormData | post support bundle info
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SupportBundleManagementApi.CreateSupportBundle(context.Background(), cUUID, uniUUID).SupportBundle(supportBundle).Execute()
+    resp, r, err := api_client.SupportBundleManagementApi.CreateSupportBundle(context.Background(), cUUID, uniUUID).SupportBundle(supportBundle).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SupportBundleManagementApi.CreateSupportBundle``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
 
 
  **supportBundle** | [**SupportBundleFormData**](SupportBundleFormData.md) | post support bundle info | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -89,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## DeleteSupportBundle
 
-> YBPSuccess DeleteSupportBundle(ctx, cUUID, uniUUID, sbUUID).Execute()
+> YBPSuccess DeleteSupportBundle(ctx, cUUID, uniUUID, sbUUID).Request(request).Execute()
 
 Delete a support bundle
 
@@ -109,10 +111,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     sbUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SupportBundleManagementApi.DeleteSupportBundle(context.Background(), cUUID, uniUUID, sbUUID).Execute()
+    resp, r, err := api_client.SupportBundleManagementApi.DeleteSupportBundle(context.Background(), cUUID, uniUUID, sbUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SupportBundleManagementApi.DeleteSupportBundle``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -142,6 +145,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

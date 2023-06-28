@@ -32,8 +32,13 @@ type CloudProvidersApiApiAccessKeyRotationRequest struct {
 	ApiService *CloudProvidersApiService
 	cUUID string
 	pUUID string
+	request *interface{}
 }
 
+func (r CloudProvidersApiApiAccessKeyRotationRequest) Request(request interface{}) CloudProvidersApiApiAccessKeyRotationRequest {
+	r.request = &request
+	return r
+}
 
 func (r CloudProvidersApiApiAccessKeyRotationRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.AccessKeyRotationExecute(r)
@@ -82,6 +87,9 @@ func (a *CloudProvidersApiService) AccessKeyRotationExecute(r CloudProvidersApiA
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -156,6 +164,8 @@ type CloudProvidersApiApiCreateProvidersRequest struct {
 	cUUID string
 	createProviderRequest *Provider
 	validate *bool
+	ignoreValidationErrors *bool
+	request *interface{}
 }
 
 func (r CloudProvidersApiApiCreateProvidersRequest) CreateProviderRequest(createProviderRequest Provider) CloudProvidersApiApiCreateProvidersRequest {
@@ -164,6 +174,14 @@ func (r CloudProvidersApiApiCreateProvidersRequest) CreateProviderRequest(create
 }
 func (r CloudProvidersApiApiCreateProvidersRequest) Validate(validate bool) CloudProvidersApiApiCreateProvidersRequest {
 	r.validate = &validate
+	return r
+}
+func (r CloudProvidersApiApiCreateProvidersRequest) IgnoreValidationErrors(ignoreValidationErrors bool) CloudProvidersApiApiCreateProvidersRequest {
+	r.ignoreValidationErrors = &ignoreValidationErrors
+	return r
+}
+func (r CloudProvidersApiApiCreateProvidersRequest) Request(request interface{}) CloudProvidersApiApiCreateProvidersRequest {
+	r.request = &request
 	return r
 }
 
@@ -216,6 +234,12 @@ func (a *CloudProvidersApiService) CreateProvidersExecute(r CloudProvidersApiApi
 
 	if r.validate != nil {
 		localVarQueryParams.Add("validate", parameterToString(*r.validate, ""))
+	}
+	if r.ignoreValidationErrors != nil {
+		localVarQueryParams.Add("ignoreValidationErrors", parameterToString(*r.ignoreValidationErrors, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -292,8 +316,13 @@ type CloudProvidersApiApiDeleteRequest struct {
 	ApiService *CloudProvidersApiService
 	cUUID string
 	pUUID string
+	request *interface{}
 }
 
+func (r CloudProvidersApiApiDeleteRequest) Request(request interface{}) CloudProvidersApiApiDeleteRequest {
+	r.request = &request
+	return r
+}
 
 func (r CloudProvidersApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteExecute(r)
@@ -342,6 +371,9 @@ func (a *CloudProvidersApiService) DeleteExecute(r CloudProvidersApiApiDeleteReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -417,10 +449,15 @@ type CloudProvidersApiApiEditAccessKeyRotationScheduleRequest struct {
 	pUUID string
 	sUUID string
 	body *EditAccessKeyRotationScheduleParams
+	request *interface{}
 }
 
 func (r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) Body(body EditAccessKeyRotationScheduleParams) CloudProvidersApiApiEditAccessKeyRotationScheduleRequest {
 	r.body = &body
+	return r
+}
+func (r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) Request(request interface{}) CloudProvidersApiApiEditAccessKeyRotationScheduleRequest {
+	r.request = &request
 	return r
 }
 
@@ -477,6 +514,9 @@ func (a *CloudProvidersApiService) EditAccessKeyRotationScheduleExecute(r CloudP
 		return localVarReturnValue, nil, reportError("body is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -554,6 +594,8 @@ type CloudProvidersApiApiEditProviderRequest struct {
 	pUUID string
 	editProviderRequest *Provider
 	validate *bool
+	ignoreValidationErrors *bool
+	request *interface{}
 }
 
 func (r CloudProvidersApiApiEditProviderRequest) EditProviderRequest(editProviderRequest Provider) CloudProvidersApiApiEditProviderRequest {
@@ -562,6 +604,14 @@ func (r CloudProvidersApiApiEditProviderRequest) EditProviderRequest(editProvide
 }
 func (r CloudProvidersApiApiEditProviderRequest) Validate(validate bool) CloudProvidersApiApiEditProviderRequest {
 	r.validate = &validate
+	return r
+}
+func (r CloudProvidersApiApiEditProviderRequest) IgnoreValidationErrors(ignoreValidationErrors bool) CloudProvidersApiApiEditProviderRequest {
+	r.ignoreValidationErrors = &ignoreValidationErrors
+	return r
+}
+func (r CloudProvidersApiApiEditProviderRequest) Request(request interface{}) CloudProvidersApiApiEditProviderRequest {
+	r.request = &request
 	return r
 }
 
@@ -617,6 +667,12 @@ func (a *CloudProvidersApiService) EditProviderExecute(r CloudProvidersApiApiEdi
 
 	if r.validate != nil {
 		localVarQueryParams.Add("validate", parameterToString(*r.validate, ""))
+	}
+	if r.ignoreValidationErrors != nil {
+		localVarQueryParams.Add("ignoreValidationErrors", parameterToString(*r.ignoreValidationErrors, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1074,8 +1130,13 @@ type CloudProvidersApiApiRefreshPricingRequest struct {
 	ApiService *CloudProvidersApiService
 	cUUID string
 	pUUID string
+	request *interface{}
 }
 
+func (r CloudProvidersApiApiRefreshPricingRequest) Request(request interface{}) CloudProvidersApiApiRefreshPricingRequest {
+	r.request = &request
+	return r
+}
 
 func (r CloudProvidersApiApiRefreshPricingRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.RefreshPricingExecute(r)
@@ -1125,6 +1186,9 @@ func (a *CloudProvidersApiService) RefreshPricingExecute(r CloudProvidersApiApiR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1198,8 +1262,13 @@ type CloudProvidersApiApiScheduledAccessKeyRotationRequest struct {
 	ApiService *CloudProvidersApiService
 	cUUID string
 	pUUID string
+	request *interface{}
 }
 
+func (r CloudProvidersApiApiScheduledAccessKeyRotationRequest) Request(request interface{}) CloudProvidersApiApiScheduledAccessKeyRotationRequest {
+	r.request = &request
+	return r
+}
 
 func (r CloudProvidersApiApiScheduledAccessKeyRotationRequest) Execute() (Schedule, *_nethttp.Response, error) {
 	return r.ApiService.ScheduledAccessKeyRotationExecute(r)
@@ -1248,6 +1317,9 @@ func (a *CloudProvidersApiService) ScheduledAccessKeyRotationExecute(r CloudProv
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

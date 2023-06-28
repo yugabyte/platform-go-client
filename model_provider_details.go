@@ -18,6 +18,7 @@ import (
 type ProviderDetails struct {
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
 	CloudInfo *CloudInfo `json:"cloudInfo,omitempty"`
+	EnableNodeAgent *bool `json:"enableNodeAgent,omitempty"`
 	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
@@ -110,6 +111,38 @@ func (o *ProviderDetails) HasCloudInfo() bool {
 // SetCloudInfo gets a reference to the given CloudInfo and assigns it to the CloudInfo field.
 func (o *ProviderDetails) SetCloudInfo(v CloudInfo) {
 	o.CloudInfo = &v
+}
+
+// GetEnableNodeAgent returns the EnableNodeAgent field value if set, zero value otherwise.
+func (o *ProviderDetails) GetEnableNodeAgent() bool {
+	if o == nil || o.EnableNodeAgent == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableNodeAgent
+}
+
+// GetEnableNodeAgentOk returns a tuple with the EnableNodeAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProviderDetails) GetEnableNodeAgentOk() (*bool, bool) {
+	if o == nil || o.EnableNodeAgent == nil {
+		return nil, false
+	}
+	return o.EnableNodeAgent, true
+}
+
+// HasEnableNodeAgent returns a boolean if a field has been set.
+func (o *ProviderDetails) HasEnableNodeAgent() bool {
+	if o != nil && o.EnableNodeAgent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableNodeAgent gets a reference to the given bool and assigns it to the EnableNodeAgent field.
+func (o *ProviderDetails) SetEnableNodeAgent(v bool) {
+	o.EnableNodeAgent = &v
 }
 
 // GetInstallNodeExporter returns the InstallNodeExporter field value if set, zero value otherwise.
@@ -471,6 +504,9 @@ func (o ProviderDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.CloudInfo != nil {
 		toSerialize["cloudInfo"] = o.CloudInfo
+	}
+	if o.EnableNodeAgent != nil {
+		toSerialize["enableNodeAgent"] = o.EnableNodeAgent
 	}
 	if o.InstallNodeExporter != nil {
 		toSerialize["installNodeExporter"] = o.InstallNodeExporter

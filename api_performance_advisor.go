@@ -32,10 +32,15 @@ type PerformanceAdvisorApiApiDeleteRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	deletePerformanceRecommendationsRequest *PerformanceRecommendationFilter
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiDeleteRequest) DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorApiApiDeleteRequest {
 	r.deletePerformanceRecommendationsRequest = &deletePerformanceRecommendationsRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiDeleteRequest) Request(request interface{}) PerformanceAdvisorApiApiDeleteRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *PerformanceAdvisorApiService) DeleteExecute(r PerformanceAdvisorApiApiD
 		return localVarReturnValue, nil, reportError("deletePerformanceRecommendationsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -407,8 +415,13 @@ type PerformanceAdvisorApiApiGetSettingsRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r PerformanceAdvisorApiApiGetSettingsRequest) Request(request interface{}) PerformanceAdvisorApiApiGetSettingsRequest {
+	r.request = &request
+	return r
+}
 
 func (r PerformanceAdvisorApiApiGetSettingsRequest) Execute() (PerfAdvisorSettingsWithDefaults, *_nethttp.Response, error) {
 	return r.ApiService.GetSettingsExecute(r)
@@ -457,6 +470,9 @@ func (a *PerformanceAdvisorApiService) GetSettingsExecute(r PerformanceAdvisorAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -530,10 +546,15 @@ type PerformanceAdvisorApiApiHideRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	hidePerformanceRecommendationsRequest *PerformanceRecommendationFilter
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiHideRequest) HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorApiApiHideRequest {
 	r.hidePerformanceRecommendationsRequest = &hidePerformanceRecommendationsRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiHideRequest) Request(request interface{}) PerformanceAdvisorApiApiHideRequest {
+	r.request = &request
 	return r
 }
 
@@ -584,6 +605,9 @@ func (a *PerformanceAdvisorApiService) HideExecute(r PerformanceAdvisorApiApiHid
 		return localVarReturnValue, nil, reportError("hidePerformanceRecommendationsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -659,10 +683,15 @@ type PerformanceAdvisorApiApiPageRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	pagePerformanceRecommendationRequest *PerformanceRecommendationPagedQuery
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiPageRequest) PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest PerformanceRecommendationPagedQuery) PerformanceAdvisorApiApiPageRequest {
 	r.pagePerformanceRecommendationRequest = &pagePerformanceRecommendationRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiPageRequest) Request(request interface{}) PerformanceAdvisorApiApiPageRequest {
+	r.request = &request
 	return r
 }
 
@@ -713,6 +742,9 @@ func (a *PerformanceAdvisorApiService) PageExecute(r PerformanceAdvisorApiApiPag
 		return localVarReturnValue, nil, reportError("pagePerformanceRecommendationRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -788,10 +820,15 @@ type PerformanceAdvisorApiApiPageAuditInfoRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	pageStateChangeAuditInfoRequest *StateChangeAuditInfoPagedQuery
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiPageAuditInfoRequest) PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest StateChangeAuditInfoPagedQuery) PerformanceAdvisorApiApiPageAuditInfoRequest {
 	r.pageStateChangeAuditInfoRequest = &pageStateChangeAuditInfoRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiPageAuditInfoRequest) Request(request interface{}) PerformanceAdvisorApiApiPageAuditInfoRequest {
+	r.request = &request
 	return r
 }
 
@@ -842,6 +879,9 @@ func (a *PerformanceAdvisorApiService) PageAuditInfoExecute(r PerformanceAdvisor
 		return localVarReturnValue, nil, reportError("pageStateChangeAuditInfoRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -917,10 +957,15 @@ type PerformanceAdvisorApiApiResolveRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	resolvePerformanceRecommendationsRequest *PerformanceRecommendationFilter
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiResolveRequest) ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorApiApiResolveRequest {
 	r.resolvePerformanceRecommendationsRequest = &resolvePerformanceRecommendationsRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiResolveRequest) Request(request interface{}) PerformanceAdvisorApiApiResolveRequest {
+	r.request = &request
 	return r
 }
 
@@ -971,6 +1016,9 @@ func (a *PerformanceAdvisorApiService) ResolveExecute(r PerformanceAdvisorApiApi
 		return localVarReturnValue, nil, reportError("resolvePerformanceRecommendationsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -1046,10 +1094,15 @@ type PerformanceAdvisorApiApiRunPerfAdvisorRequest struct {
 	ApiService *PerformanceAdvisorApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r PerformanceAdvisorApiApiRunPerfAdvisorRequest) Request(request interface{}) PerformanceAdvisorApiApiRunPerfAdvisorRequest {
+	r.request = &request
+	return r
+}
 
-func (r PerformanceAdvisorApiApiRunPerfAdvisorRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
+func (r PerformanceAdvisorApiApiRunPerfAdvisorRequest) Execute() (PerfAdvisorManualRunStatus, *_nethttp.Response, error) {
 	return r.ApiService.RunPerfAdvisorExecute(r)
 }
 
@@ -1071,16 +1124,16 @@ func (a *PerformanceAdvisorApiService) RunPerfAdvisor(ctx _context.Context, cUUI
 
 /*
  * Execute executes the request
- * @return YBPSuccess
+ * @return PerfAdvisorManualRunStatus
  */
-func (a *PerformanceAdvisorApiService) RunPerfAdvisorExecute(r PerformanceAdvisorApiApiRunPerfAdvisorRequest) (YBPSuccess, *_nethttp.Response, error) {
+func (a *PerformanceAdvisorApiService) RunPerfAdvisorExecute(r PerformanceAdvisorApiApiRunPerfAdvisorRequest) (PerfAdvisorManualRunStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
+		localVarReturnValue  PerfAdvisorManualRunStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorApiService.RunPerfAdvisor")
@@ -1096,6 +1149,9 @@ func (a *PerformanceAdvisorApiService) RunPerfAdvisorExecute(r PerformanceAdviso
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1170,10 +1226,15 @@ type PerformanceAdvisorApiApiUpdateSettingsRequest struct {
 	cUUID string
 	uniUUID string
 	performanceAdvisorSettingsRequest *PerfAdvisorSettingsFormData
+	request *interface{}
 }
 
 func (r PerformanceAdvisorApiApiUpdateSettingsRequest) PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest PerfAdvisorSettingsFormData) PerformanceAdvisorApiApiUpdateSettingsRequest {
 	r.performanceAdvisorSettingsRequest = &performanceAdvisorSettingsRequest
+	return r
+}
+func (r PerformanceAdvisorApiApiUpdateSettingsRequest) Request(request interface{}) PerformanceAdvisorApiApiUpdateSettingsRequest {
+	r.request = &request
 	return r
 }
 
@@ -1227,6 +1288,9 @@ func (a *PerformanceAdvisorApiService) UpdateSettingsExecute(r PerformanceAdviso
 		return localVarReturnValue, nil, reportError("performanceAdvisorSettingsRequest is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

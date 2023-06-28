@@ -35,8 +35,10 @@ type UserIntent struct {
 	EnableYEDIS *bool `json:"enableYEDIS,omitempty"`
 	EnableYSQL *bool `json:"enableYSQL,omitempty"`
 	EnableYSQLAuth *bool `json:"enableYSQLAuth,omitempty"`
+	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
 	InstanceTags *map[string]string `json:"instanceTags,omitempty"`
 	InstanceType *string `json:"instanceType,omitempty"`
+	KubernetesOperatorVersion *int64 `json:"kubernetesOperatorVersion,omitempty"`
 	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
@@ -47,10 +49,12 @@ type UserIntent struct {
 	RegionList *[]string `json:"regionList,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
+	SpotPrice *float64 `json:"spotPrice,omitempty"`
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
 	UniverseOverrides *string `json:"universeOverrides,omitempty"`
 	UseHostname *bool `json:"useHostname,omitempty"`
+	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
@@ -652,6 +656,38 @@ func (o *UserIntent) SetEnableYSQLAuth(v bool) {
 	o.EnableYSQLAuth = &v
 }
 
+// GetImageBundleUUID returns the ImageBundleUUID field value if set, zero value otherwise.
+func (o *UserIntent) GetImageBundleUUID() string {
+	if o == nil || o.ImageBundleUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.ImageBundleUUID
+}
+
+// GetImageBundleUUIDOk returns a tuple with the ImageBundleUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetImageBundleUUIDOk() (*string, bool) {
+	if o == nil || o.ImageBundleUUID == nil {
+		return nil, false
+	}
+	return o.ImageBundleUUID, true
+}
+
+// HasImageBundleUUID returns a boolean if a field has been set.
+func (o *UserIntent) HasImageBundleUUID() bool {
+	if o != nil && o.ImageBundleUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImageBundleUUID gets a reference to the given string and assigns it to the ImageBundleUUID field.
+func (o *UserIntent) SetImageBundleUUID(v string) {
+	o.ImageBundleUUID = &v
+}
+
 // GetInstanceTags returns the InstanceTags field value if set, zero value otherwise.
 func (o *UserIntent) GetInstanceTags() map[string]string {
 	if o == nil || o.InstanceTags == nil {
@@ -714,6 +750,38 @@ func (o *UserIntent) HasInstanceType() bool {
 // SetInstanceType gets a reference to the given string and assigns it to the InstanceType field.
 func (o *UserIntent) SetInstanceType(v string) {
 	o.InstanceType = &v
+}
+
+// GetKubernetesOperatorVersion returns the KubernetesOperatorVersion field value if set, zero value otherwise.
+func (o *UserIntent) GetKubernetesOperatorVersion() int64 {
+	if o == nil || o.KubernetesOperatorVersion == nil {
+		var ret int64
+		return ret
+	}
+	return *o.KubernetesOperatorVersion
+}
+
+// GetKubernetesOperatorVersionOk returns a tuple with the KubernetesOperatorVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetKubernetesOperatorVersionOk() (*int64, bool) {
+	if o == nil || o.KubernetesOperatorVersion == nil {
+		return nil, false
+	}
+	return o.KubernetesOperatorVersion, true
+}
+
+// HasKubernetesOperatorVersion returns a boolean if a field has been set.
+func (o *UserIntent) HasKubernetesOperatorVersion() bool {
+	if o != nil && o.KubernetesOperatorVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKubernetesOperatorVersion gets a reference to the given int64 and assigns it to the KubernetesOperatorVersion field.
+func (o *UserIntent) SetKubernetesOperatorVersion(v int64) {
+	o.KubernetesOperatorVersion = &v
 }
 
 // GetMasterDeviceInfo returns the MasterDeviceInfo field value if set, zero value otherwise.
@@ -1036,6 +1104,38 @@ func (o *UserIntent) SetSpecificGFlags(v SpecificGFlags) {
 	o.SpecificGFlags = &v
 }
 
+// GetSpotPrice returns the SpotPrice field value if set, zero value otherwise.
+func (o *UserIntent) GetSpotPrice() float64 {
+	if o == nil || o.SpotPrice == nil {
+		var ret float64
+		return ret
+	}
+	return *o.SpotPrice
+}
+
+// GetSpotPriceOk returns a tuple with the SpotPrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetSpotPriceOk() (*float64, bool) {
+	if o == nil || o.SpotPrice == nil {
+		return nil, false
+	}
+	return o.SpotPrice, true
+}
+
+// HasSpotPrice returns a boolean if a field has been set.
+func (o *UserIntent) HasSpotPrice() bool {
+	if o != nil && o.SpotPrice != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpotPrice gets a reference to the given float64 and assigns it to the SpotPrice field.
+func (o *UserIntent) SetSpotPrice(v float64) {
+	o.SpotPrice = &v
+}
+
 // GetTserverGFlags returns the TserverGFlags field value if set, zero value otherwise.
 func (o *UserIntent) GetTserverGFlags() map[string]string {
 	if o == nil || o.TserverGFlags == nil {
@@ -1162,6 +1262,38 @@ func (o *UserIntent) HasUseHostname() bool {
 // SetUseHostname gets a reference to the given bool and assigns it to the UseHostname field.
 func (o *UserIntent) SetUseHostname(v bool) {
 	o.UseHostname = &v
+}
+
+// GetUseSpotInstance returns the UseSpotInstance field value if set, zero value otherwise.
+func (o *UserIntent) GetUseSpotInstance() bool {
+	if o == nil || o.UseSpotInstance == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseSpotInstance
+}
+
+// GetUseSpotInstanceOk returns a tuple with the UseSpotInstance field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUseSpotInstanceOk() (*bool, bool) {
+	if o == nil || o.UseSpotInstance == nil {
+		return nil, false
+	}
+	return o.UseSpotInstance, true
+}
+
+// HasUseSpotInstance returns a boolean if a field has been set.
+func (o *UserIntent) HasUseSpotInstance() bool {
+	if o != nil && o.UseSpotInstance != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseSpotInstance gets a reference to the given bool and assigns it to the UseSpotInstance field.
+func (o *UserIntent) SetUseSpotInstance(v bool) {
+	o.UseSpotInstance = &v
 }
 
 // GetUseSystemd returns the UseSystemd field value if set, zero value otherwise.
@@ -1412,11 +1544,17 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.EnableYSQLAuth != nil {
 		toSerialize["enableYSQLAuth"] = o.EnableYSQLAuth
 	}
+	if o.ImageBundleUUID != nil {
+		toSerialize["imageBundleUUID"] = o.ImageBundleUUID
+	}
 	if o.InstanceTags != nil {
 		toSerialize["instanceTags"] = o.InstanceTags
 	}
 	if o.InstanceType != nil {
 		toSerialize["instanceType"] = o.InstanceType
+	}
+	if o.KubernetesOperatorVersion != nil {
+		toSerialize["kubernetesOperatorVersion"] = o.KubernetesOperatorVersion
 	}
 	if o.MasterDeviceInfo != nil {
 		toSerialize["masterDeviceInfo"] = o.MasterDeviceInfo
@@ -1448,6 +1586,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.SpecificGFlags != nil {
 		toSerialize["specificGFlags"] = o.SpecificGFlags
 	}
+	if o.SpotPrice != nil {
+		toSerialize["spotPrice"] = o.SpotPrice
+	}
 	if o.TserverGFlags != nil {
 		toSerialize["tserverGFlags"] = o.TserverGFlags
 	}
@@ -1459,6 +1600,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseHostname != nil {
 		toSerialize["useHostname"] = o.UseHostname
+	}
+	if o.UseSpotInstance != nil {
+		toSerialize["useSpotInstance"] = o.UseSpotInstance
 	}
 	if o.UseSystemd != nil {
 		toSerialize["useSystemd"] = o.UseSystemd

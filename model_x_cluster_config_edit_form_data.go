@@ -21,10 +21,14 @@ type XClusterConfigEditFormData struct {
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
 	Name *string `json:"name,omitempty"`
+	// The role that the source universe should have in the xCluster config
+	SourceRole *string `json:"sourceRole,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
 	// Source universe table IDs
 	Tables *[]string `json:"tables,omitempty"`
+	// The role that the target universe should have in the xCluster config
+	TargetRole *string `json:"targetRole,omitempty"`
 }
 
 // NewXClusterConfigEditFormData instantiates a new XClusterConfigEditFormData object
@@ -140,6 +144,38 @@ func (o *XClusterConfigEditFormData) SetName(v string) {
 	o.Name = &v
 }
 
+// GetSourceRole returns the SourceRole field value if set, zero value otherwise.
+func (o *XClusterConfigEditFormData) GetSourceRole() string {
+	if o == nil || o.SourceRole == nil {
+		var ret string
+		return ret
+	}
+	return *o.SourceRole
+}
+
+// GetSourceRoleOk returns a tuple with the SourceRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigEditFormData) GetSourceRoleOk() (*string, bool) {
+	if o == nil || o.SourceRole == nil {
+		return nil, false
+	}
+	return o.SourceRole, true
+}
+
+// HasSourceRole returns a boolean if a field has been set.
+func (o *XClusterConfigEditFormData) HasSourceRole() bool {
+	if o != nil && o.SourceRole != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceRole gets a reference to the given string and assigns it to the SourceRole field.
+func (o *XClusterConfigEditFormData) SetSourceRole(v string) {
+	o.SourceRole = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *XClusterConfigEditFormData) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -204,6 +240,38 @@ func (o *XClusterConfigEditFormData) SetTables(v []string) {
 	o.Tables = &v
 }
 
+// GetTargetRole returns the TargetRole field value if set, zero value otherwise.
+func (o *XClusterConfigEditFormData) GetTargetRole() string {
+	if o == nil || o.TargetRole == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetRole
+}
+
+// GetTargetRoleOk returns a tuple with the TargetRole field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigEditFormData) GetTargetRoleOk() (*string, bool) {
+	if o == nil || o.TargetRole == nil {
+		return nil, false
+	}
+	return o.TargetRole, true
+}
+
+// HasTargetRole returns a boolean if a field has been set.
+func (o *XClusterConfigEditFormData) HasTargetRole() bool {
+	if o != nil && o.TargetRole != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetRole gets a reference to the given string and assigns it to the TargetRole field.
+func (o *XClusterConfigEditFormData) SetTargetRole(v string) {
+	o.TargetRole = &v
+}
+
 func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BootstrapParams != nil {
@@ -215,11 +283,17 @@ func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.SourceRole != nil {
+		toSerialize["sourceRole"] = o.SourceRole
+	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
 	if o.Tables != nil {
 		toSerialize["tables"] = o.Tables
+	}
+	if o.TargetRole != nil {
+		toSerialize["targetRole"] = o.TargetRole
 	}
 	return json.Marshal(toSerialize)
 }

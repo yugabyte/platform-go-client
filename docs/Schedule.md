@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **FailureCount** | Pointer to **int32** | Number of failed backup attempts | [optional] [readonly] 
 **Frequency** | Pointer to **int64** | Frequency of the schedule, in milli seconds | [optional] 
 **FrequencyTimeUnit** | Pointer to **string** | Time unit of frequency | [optional] 
+**IncrementBacklogStatus** | Pointer to **bool** | Backlog status of schedule of incremental backups arose due to conflicts | [optional] [readonly] 
+**NextIncrementScheduleTaskTime** | Pointer to **time.Time** | Time on which schedule is expected to run for incremental backups | [optional] [readonly] 
 **NextScheduleTaskTime** | Pointer to **time.Time** | Time on which schedule is expected to run | [optional] [readonly] 
 **OwnerUUID** | Pointer to **string** | Owner UUID for the schedule | [optional] [readonly] 
 **RunningState** | Pointer to **bool** | Running state of the schedule | [optional] 
@@ -187,6 +189,56 @@ SetFrequencyTimeUnit sets FrequencyTimeUnit field to given value.
 `func (o *Schedule) HasFrequencyTimeUnit() bool`
 
 HasFrequencyTimeUnit returns a boolean if a field has been set.
+
+### GetIncrementBacklogStatus
+
+`func (o *Schedule) GetIncrementBacklogStatus() bool`
+
+GetIncrementBacklogStatus returns the IncrementBacklogStatus field if non-nil, zero value otherwise.
+
+### GetIncrementBacklogStatusOk
+
+`func (o *Schedule) GetIncrementBacklogStatusOk() (*bool, bool)`
+
+GetIncrementBacklogStatusOk returns a tuple with the IncrementBacklogStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncrementBacklogStatus
+
+`func (o *Schedule) SetIncrementBacklogStatus(v bool)`
+
+SetIncrementBacklogStatus sets IncrementBacklogStatus field to given value.
+
+### HasIncrementBacklogStatus
+
+`func (o *Schedule) HasIncrementBacklogStatus() bool`
+
+HasIncrementBacklogStatus returns a boolean if a field has been set.
+
+### GetNextIncrementScheduleTaskTime
+
+`func (o *Schedule) GetNextIncrementScheduleTaskTime() time.Time`
+
+GetNextIncrementScheduleTaskTime returns the NextIncrementScheduleTaskTime field if non-nil, zero value otherwise.
+
+### GetNextIncrementScheduleTaskTimeOk
+
+`func (o *Schedule) GetNextIncrementScheduleTaskTimeOk() (*time.Time, bool)`
+
+GetNextIncrementScheduleTaskTimeOk returns a tuple with the NextIncrementScheduleTaskTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNextIncrementScheduleTaskTime
+
+`func (o *Schedule) SetNextIncrementScheduleTaskTime(v time.Time)`
+
+SetNextIncrementScheduleTaskTime sets NextIncrementScheduleTaskTime field to given value.
+
+### HasNextIncrementScheduleTaskTime
+
+`func (o *Schedule) HasNextIncrementScheduleTaskTime() bool`
+
+HasNextIncrementScheduleTaskTime returns a boolean if a field has been set.
 
 ### GetNextScheduleTaskTime
 

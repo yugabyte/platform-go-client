@@ -86,6 +86,8 @@ type APIClient struct {
 
 	MetricsApi *MetricsApiService
 
+	NodeAgentsApi *NodeAgentsApiService
+
 	NodeInstancesApi *NodeInstancesApiService
 
 	PITRManagementApi *PITRManagementApiService
@@ -93,6 +95,8 @@ type APIClient struct {
 	PackagesControllerApi *PackagesControllerApiService
 
 	PerformanceAdvisorApi *PerformanceAdvisorApiService
+
+	PreviewApi *PreviewApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -166,10 +170,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
+	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
 	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
+	c.PreviewApi = (*PreviewApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)

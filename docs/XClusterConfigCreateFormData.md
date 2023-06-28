@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BootstrapParams** | Pointer to [**BootstrapParams**](BootstrapParams.md) |  | [optional] 
+**ConfigType** | Pointer to **string** | configType | [optional] 
 **DryRun** | Pointer to **bool** | Run the pre-checks without actually running the subtasks | [optional] 
 **Name** | **string** | Name | 
 **SourceUniverseUUID** | **string** | Source Universe UUID | 
@@ -54,6 +55,31 @@ SetBootstrapParams sets BootstrapParams field to given value.
 `func (o *XClusterConfigCreateFormData) HasBootstrapParams() bool`
 
 HasBootstrapParams returns a boolean if a field has been set.
+
+### GetConfigType
+
+`func (o *XClusterConfigCreateFormData) GetConfigType() string`
+
+GetConfigType returns the ConfigType field if non-nil, zero value otherwise.
+
+### GetConfigTypeOk
+
+`func (o *XClusterConfigCreateFormData) GetConfigTypeOk() (*string, bool)`
+
+GetConfigTypeOk returns a tuple with the ConfigType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigType
+
+`func (o *XClusterConfigCreateFormData) SetConfigType(v string)`
+
+SetConfigType sets ConfigType field to given value.
+
+### HasConfigType
+
+`func (o *XClusterConfigCreateFormData) HasConfigType() bool`
+
+HasConfigType returns a boolean if a field has been set.
 
 ### GetDryRun
 

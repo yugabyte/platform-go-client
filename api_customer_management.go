@@ -150,8 +150,13 @@ type CustomerManagementApiApiDeleteCustomerRequest struct {
 	ctx _context.Context
 	ApiService *CustomerManagementApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r CustomerManagementApiApiDeleteCustomerRequest) Request(request interface{}) CustomerManagementApiApiDeleteCustomerRequest {
+	r.request = &request
+	return r
+}
 
 func (r CustomerManagementApiApiDeleteCustomerRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteCustomerExecute(r)
@@ -197,6 +202,9 @@ func (a *CustomerManagementApiService) DeleteCustomerExecute(r CustomerManagemen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -387,8 +395,13 @@ func (a *CustomerManagementApiService) GetHostInfoExecute(r CustomerManagementAp
 type CustomerManagementApiApiListOfCustomersRequest struct {
 	ctx _context.Context
 	ApiService *CustomerManagementApiService
+	request *interface{}
 }
 
+func (r CustomerManagementApiApiListOfCustomersRequest) Request(request interface{}) CustomerManagementApiApiListOfCustomersRequest {
+	r.request = &request
+	return r
+}
 
 func (r CustomerManagementApiApiListOfCustomersRequest) Execute() ([]Customer, *_nethttp.Response, error) {
 	return r.ApiService.ListOfCustomersExecute(r)
@@ -431,6 +444,9 @@ func (a *CustomerManagementApiService) ListOfCustomersExecute(r CustomerManageme
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -504,10 +520,15 @@ type CustomerManagementApiApiMetricsRequest struct {
 	ApiService *CustomerManagementApiService
 	cUUID string
 	metrics *MetricQueryParams
+	request *interface{}
 }
 
 func (r CustomerManagementApiApiMetricsRequest) Metrics(metrics MetricQueryParams) CustomerManagementApiApiMetricsRequest {
 	r.metrics = &metrics
+	return r
+}
+func (r CustomerManagementApiApiMetricsRequest) Request(request interface{}) CustomerManagementApiApiMetricsRequest {
+	r.request = &request
 	return r
 }
 
@@ -558,6 +579,9 @@ func (a *CustomerManagementApiService) MetricsExecute(r CustomerManagementApiApi
 		return localVarReturnValue, nil, reportError("metrics is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -642,10 +666,15 @@ type CustomerManagementApiApiUpdateCustomerRequest struct {
 	ApiService *CustomerManagementApiService
 	cUUID string
 	customer *CustomerAlertData
+	request *interface{}
 }
 
 func (r CustomerManagementApiApiUpdateCustomerRequest) Customer(customer CustomerAlertData) CustomerManagementApiApiUpdateCustomerRequest {
 	r.customer = &customer
+	return r
+}
+func (r CustomerManagementApiApiUpdateCustomerRequest) Request(request interface{}) CustomerManagementApiApiUpdateCustomerRequest {
+	r.request = &request
 	return r
 }
 
@@ -696,6 +725,9 @@ func (a *CustomerManagementApiService) UpdateCustomerExecute(r CustomerManagemen
 		return localVarReturnValue, nil, reportError("customer is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

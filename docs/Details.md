@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **Data** | [**[]NodeData**](NodeData.md) |  | 
 **HasError** | **bool** |  | 
 **HasWarning** | **bool** |  | 
-**Timestamp** | Pointer to **time.Time** | Deprecated: Use timestampIso instead | [optional] 
 **TimestampIso** | Pointer to **time.Time** |  | [optional] 
 **YbVersion** | **string** |  | 
 
@@ -89,31 +88,6 @@ and a boolean to check if the value has been set.
 
 SetHasWarning sets HasWarning field to given value.
 
-
-### GetTimestamp
-
-`func (o *Details) GetTimestamp() time.Time`
-
-GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
-
-### GetTimestampOk
-
-`func (o *Details) GetTimestampOk() (*time.Time, bool)`
-
-GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimestamp
-
-`func (o *Details) SetTimestamp(v time.Time)`
-
-SetTimestamp sets Timestamp field to given value.
-
-### HasTimestamp
-
-`func (o *Details) HasTimestamp() bool`
-
-HasTimestamp returns a boolean if a field has been set.
 
 ### GetTimestampIso
 

@@ -36,10 +36,10 @@ type PerfAdvisorSettingsFormData struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Perf Advisor hot shard check interval
 	HotShardIntervalMins *int32 `json:"hot_shard_interval_mins,omitempty"`
-	// Perf advisor hot shard minimal reads
-	HotShardMinimalReads *int32 `json:"hot_shard_minimal_reads,omitempty"`
-	// Perf advisor hot shard minimal writes
-	HotShardMinimalWrites *int32 `json:"hot_shard_minimal_writes,omitempty"`
+	// Perf advisor hot shard minimal node reads
+	HotShardMinNodeReads *int32 `json:"hot_shard_min_node_reads,omitempty"`
+	// Perf advisor hot shard minimal node writes
+	HotShardMinNodeWrites *int32 `json:"hot_shard_min_node_writes,omitempty"`
 	// Perf Advisor hot shard read skew threshold
 	HotShardReadSkewThresholdPct *float64 `json:"hot_shard_read_skew_threshold_pct,omitempty"`
 	// Perf Advisor hot shard write skew threshold
@@ -395,68 +395,68 @@ func (o *PerfAdvisorSettingsFormData) SetHotShardIntervalMins(v int32) {
 	o.HotShardIntervalMins = &v
 }
 
-// GetHotShardMinimalReads returns the HotShardMinimalReads field value if set, zero value otherwise.
-func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalReads() int32 {
-	if o == nil || o.HotShardMinimalReads == nil {
+// GetHotShardMinNodeReads returns the HotShardMinNodeReads field value if set, zero value otherwise.
+func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeReads() int32 {
+	if o == nil || o.HotShardMinNodeReads == nil {
 		var ret int32
 		return ret
 	}
-	return *o.HotShardMinimalReads
+	return *o.HotShardMinNodeReads
 }
 
-// GetHotShardMinimalReadsOk returns a tuple with the HotShardMinimalReads field value if set, nil otherwise
+// GetHotShardMinNodeReadsOk returns a tuple with the HotShardMinNodeReads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalReadsOk() (*int32, bool) {
-	if o == nil || o.HotShardMinimalReads == nil {
+func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeReadsOk() (*int32, bool) {
+	if o == nil || o.HotShardMinNodeReads == nil {
 		return nil, false
 	}
-	return o.HotShardMinimalReads, true
+	return o.HotShardMinNodeReads, true
 }
 
-// HasHotShardMinimalReads returns a boolean if a field has been set.
-func (o *PerfAdvisorSettingsFormData) HasHotShardMinimalReads() bool {
-	if o != nil && o.HotShardMinimalReads != nil {
+// HasHotShardMinNodeReads returns a boolean if a field has been set.
+func (o *PerfAdvisorSettingsFormData) HasHotShardMinNodeReads() bool {
+	if o != nil && o.HotShardMinNodeReads != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetHotShardMinimalReads gets a reference to the given int32 and assigns it to the HotShardMinimalReads field.
-func (o *PerfAdvisorSettingsFormData) SetHotShardMinimalReads(v int32) {
-	o.HotShardMinimalReads = &v
+// SetHotShardMinNodeReads gets a reference to the given int32 and assigns it to the HotShardMinNodeReads field.
+func (o *PerfAdvisorSettingsFormData) SetHotShardMinNodeReads(v int32) {
+	o.HotShardMinNodeReads = &v
 }
 
-// GetHotShardMinimalWrites returns the HotShardMinimalWrites field value if set, zero value otherwise.
-func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalWrites() int32 {
-	if o == nil || o.HotShardMinimalWrites == nil {
+// GetHotShardMinNodeWrites returns the HotShardMinNodeWrites field value if set, zero value otherwise.
+func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeWrites() int32 {
+	if o == nil || o.HotShardMinNodeWrites == nil {
 		var ret int32
 		return ret
 	}
-	return *o.HotShardMinimalWrites
+	return *o.HotShardMinNodeWrites
 }
 
-// GetHotShardMinimalWritesOk returns a tuple with the HotShardMinimalWrites field value if set, nil otherwise
+// GetHotShardMinNodeWritesOk returns a tuple with the HotShardMinNodeWrites field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalWritesOk() (*int32, bool) {
-	if o == nil || o.HotShardMinimalWrites == nil {
+func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeWritesOk() (*int32, bool) {
+	if o == nil || o.HotShardMinNodeWrites == nil {
 		return nil, false
 	}
-	return o.HotShardMinimalWrites, true
+	return o.HotShardMinNodeWrites, true
 }
 
-// HasHotShardMinimalWrites returns a boolean if a field has been set.
-func (o *PerfAdvisorSettingsFormData) HasHotShardMinimalWrites() bool {
-	if o != nil && o.HotShardMinimalWrites != nil {
+// HasHotShardMinNodeWrites returns a boolean if a field has been set.
+func (o *PerfAdvisorSettingsFormData) HasHotShardMinNodeWrites() bool {
+	if o != nil && o.HotShardMinNodeWrites != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetHotShardMinimalWrites gets a reference to the given int32 and assigns it to the HotShardMinimalWrites field.
-func (o *PerfAdvisorSettingsFormData) SetHotShardMinimalWrites(v int32) {
-	o.HotShardMinimalWrites = &v
+// SetHotShardMinNodeWrites gets a reference to the given int32 and assigns it to the HotShardMinNodeWrites field.
+func (o *PerfAdvisorSettingsFormData) SetHotShardMinNodeWrites(v int32) {
+	o.HotShardMinNodeWrites = &v
 }
 
 // GetHotShardReadSkewThresholdPct returns the HotShardReadSkewThresholdPct field value if set, zero value otherwise.
@@ -747,11 +747,11 @@ func (o PerfAdvisorSettingsFormData) MarshalJSON() ([]byte, error) {
 	if o.HotShardIntervalMins != nil {
 		toSerialize["hot_shard_interval_mins"] = o.HotShardIntervalMins
 	}
-	if o.HotShardMinimalReads != nil {
-		toSerialize["hot_shard_minimal_reads"] = o.HotShardMinimalReads
+	if o.HotShardMinNodeReads != nil {
+		toSerialize["hot_shard_min_node_reads"] = o.HotShardMinNodeReads
 	}
-	if o.HotShardMinimalWrites != nil {
-		toSerialize["hot_shard_minimal_writes"] = o.HotShardMinimalWrites
+	if o.HotShardMinNodeWrites != nil {
+		toSerialize["hot_shard_min_node_writes"] = o.HotShardMinNodeWrites
 	}
 	if o.HotShardReadSkewThresholdPct != nil {
 		toSerialize["hot_shard_read_skew_threshold_pct"] = o.HotShardReadSkewThresholdPct
