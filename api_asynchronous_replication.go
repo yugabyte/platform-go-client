@@ -32,10 +32,15 @@ type AsynchronousReplicationApiApiCreateXClusterConfigRequest struct {
 	ApiService *AsynchronousReplicationApiService
 	cUUID string
 	xclusterReplicationCreateFormData *XClusterConfigCreateFormData
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiCreateXClusterConfigRequest) XclusterReplicationCreateFormData(xclusterReplicationCreateFormData XClusterConfigCreateFormData) AsynchronousReplicationApiApiCreateXClusterConfigRequest {
 	r.xclusterReplicationCreateFormData = &xclusterReplicationCreateFormData
+	return r
+}
+func (r AsynchronousReplicationApiApiCreateXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiCreateXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *AsynchronousReplicationApiService) CreateXClusterConfigExecute(r Asynch
 		return localVarReturnValue, nil, reportError("xclusterReplicationCreateFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -162,10 +170,15 @@ type AsynchronousReplicationApiApiDeleteXClusterConfigRequest struct {
 	cUUID string
 	xccUUID string
 	isForceDelete *bool
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiDeleteXClusterConfigRequest) IsForceDelete(isForceDelete bool) AsynchronousReplicationApiApiDeleteXClusterConfigRequest {
 	r.isForceDelete = &isForceDelete
+	return r
+}
+func (r AsynchronousReplicationApiApiDeleteXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiDeleteXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -218,6 +231,9 @@ func (a *AsynchronousReplicationApiService) DeleteXClusterConfigExecute(r Asynch
 
 	if r.isForceDelete != nil {
 		localVarQueryParams.Add("isForceDelete", parameterToString(*r.isForceDelete, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -293,10 +309,15 @@ type AsynchronousReplicationApiApiEditXClusterConfigRequest struct {
 	cUUID string
 	xccUUID string
 	xclusterReplicationEditFormData *XClusterConfigEditFormData
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiEditXClusterConfigRequest) XclusterReplicationEditFormData(xclusterReplicationEditFormData XClusterConfigEditFormData) AsynchronousReplicationApiApiEditXClusterConfigRequest {
 	r.xclusterReplicationEditFormData = &xclusterReplicationEditFormData
+	return r
+}
+func (r AsynchronousReplicationApiApiEditXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiEditXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -350,6 +371,9 @@ func (a *AsynchronousReplicationApiService) EditXClusterConfigExecute(r Asynchro
 		return localVarReturnValue, nil, reportError("xclusterReplicationEditFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -549,10 +573,20 @@ type AsynchronousReplicationApiApiNeedBootstrapTableRequest struct {
 	cUUID string
 	uniUUID string
 	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
+	configType *string
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData XClusterConfigNeedBootstrapFormData) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
 	r.xclusterNeedBootstrapFormData = &xclusterNeedBootstrapFormData
+	return r
+}
+func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) ConfigType(configType string) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
+	r.configType = &configType
+	return r
+}
+func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) Request(request interface{}) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
+	r.request = &request
 	return r
 }
 
@@ -606,6 +640,12 @@ func (a *AsynchronousReplicationApiService) NeedBootstrapTableExecute(r Asynchro
 		return localVarReturnValue, nil, reportError("xclusterNeedBootstrapFormData is required and must be specified")
 	}
 
+	if r.configType != nil {
+		localVarQueryParams.Add("configType", parameterToString(*r.configType, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -682,10 +722,15 @@ type AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest struct {
 	cUUID string
 	xccUUID string
 	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData XClusterConfigNeedBootstrapFormData) AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest {
 	r.xclusterNeedBootstrapFormData = &xclusterNeedBootstrapFormData
+	return r
+}
+func (r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -739,6 +784,9 @@ func (a *AsynchronousReplicationApiService) NeedBootstrapXClusterConfigExecute(r
 		return localVarReturnValue, nil, reportError("xclusterNeedBootstrapFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -816,6 +864,7 @@ type AsynchronousReplicationApiApiRestartXClusterConfigRequest struct {
 	xccUUID string
 	xclusterReplicationRestartFormData *XClusterConfigRestartFormData
 	isForceDelete *bool
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiRestartXClusterConfigRequest) XclusterReplicationRestartFormData(xclusterReplicationRestartFormData XClusterConfigRestartFormData) AsynchronousReplicationApiApiRestartXClusterConfigRequest {
@@ -824,6 +873,10 @@ func (r AsynchronousReplicationApiApiRestartXClusterConfigRequest) XclusterRepli
 }
 func (r AsynchronousReplicationApiApiRestartXClusterConfigRequest) IsForceDelete(isForceDelete bool) AsynchronousReplicationApiApiRestartXClusterConfigRequest {
 	r.isForceDelete = &isForceDelete
+	return r
+}
+func (r AsynchronousReplicationApiApiRestartXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiRestartXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -879,6 +932,9 @@ func (a *AsynchronousReplicationApiService) RestartXClusterConfigExecute(r Async
 
 	if r.isForceDelete != nil {
 		localVarQueryParams.Add("isForceDelete", parameterToString(*r.isForceDelete, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -955,10 +1011,15 @@ type AsynchronousReplicationApiApiSyncXClusterConfigRequest struct {
 	ApiService *AsynchronousReplicationApiService
 	cUUID string
 	targetUniverseUUID *string
+	request *interface{}
 }
 
 func (r AsynchronousReplicationApiApiSyncXClusterConfigRequest) TargetUniverseUUID(targetUniverseUUID string) AsynchronousReplicationApiApiSyncXClusterConfigRequest {
 	r.targetUniverseUUID = &targetUniverseUUID
+	return r
+}
+func (r AsynchronousReplicationApiApiSyncXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiSyncXClusterConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -1008,6 +1069,9 @@ func (a *AsynchronousReplicationApiService) SyncXClusterConfigExecute(r Asynchro
 
 	if r.targetUniverseUUID != nil {
 		localVarQueryParams.Add("targetUniverseUUID", parameterToString(*r.targetUniverseUUID, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

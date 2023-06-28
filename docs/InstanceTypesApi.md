@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateInstanceType
 
-> InstanceTypeResp CreateInstanceType(ctx, cUUID, pUUID).InstanceType(instanceType).Execute()
+> InstanceTypeResp CreateInstanceType(ctx, cUUID, pUUID).InstanceType(instanceType).Request(request).Execute()
 
 Create an instance type
 
@@ -36,10 +36,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     instanceType := *openapiclient.NewInstanceType(*openapiclient.NewInstanceTypeKey("InstanceTypeCode_example", "ProviderUuid_example")) // InstanceType | Instance type data of the instance to be stored
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InstanceTypesApi.CreateInstanceType(context.Background(), cUUID, pUUID).InstanceType(instanceType).Execute()
+    resp, r, err := api_client.InstanceTypesApi.CreateInstanceType(context.Background(), cUUID, pUUID).InstanceType(instanceType).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.CreateInstanceType``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
 
 
  **instanceType** | [**InstanceType**](InstanceType.md) | Instance type data of the instance to be stored | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -89,7 +91,7 @@ Name | Type | Description  | Notes
 
 ## DeleteInstanceType
 
-> YBPSuccess DeleteInstanceType(ctx, cUUID, pUUID, code).Execute()
+> YBPSuccess DeleteInstanceType(ctx, cUUID, pUUID, code).Request(request).Execute()
 
 Delete an instance type
 
@@ -109,10 +111,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     code := "code_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InstanceTypesApi.DeleteInstanceType(context.Background(), cUUID, pUUID, code).Execute()
+    resp, r, err := api_client.InstanceTypesApi.DeleteInstanceType(context.Background(), cUUID, pUUID, code).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.DeleteInstanceType``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -142,6 +145,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

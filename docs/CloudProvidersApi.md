@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## AccessKeyRotation
 
-> YBPTask AccessKeyRotation(ctx, cUUID, pUUID).Execute()
+> YBPTask AccessKeyRotation(ctx, cUUID, pUUID).Request(request).Execute()
 
 Rotate access key for a provider
 
@@ -38,10 +38,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.AccessKeyRotation(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.CloudProvidersApi.AccessKeyRotation(context.Background(), cUUID, pUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.AccessKeyRotation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -90,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## CreateProviders
 
-> YBPTask CreateProviders(ctx, cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).Execute()
+> YBPTask CreateProviders(ctx, cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).IgnoreValidationErrors(ignoreValidationErrors).Request(request).Execute()
 
 Create a provider
 
@@ -110,10 +112,12 @@ func main() {
     cUUID := TODO // string | 
     createProviderRequest := *openapiclient.NewProvider([]openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | 
     validate := true // bool |  (optional) (default to false)
+    ignoreValidationErrors := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.CreateProviders(context.Background(), cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).Execute()
+    resp, r, err := api_client.CloudProvidersApi.CreateProviders(context.Background(), cUUID).CreateProviderRequest(createProviderRequest).Validate(validate).IgnoreValidationErrors(ignoreValidationErrors).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.CreateProviders``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -141,6 +145,8 @@ Name | Type | Description  | Notes
 
  **createProviderRequest** | [**Provider**](Provider.md) |  | 
  **validate** | **bool** |  | [default to false]
+ **ignoreValidationErrors** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -162,7 +168,7 @@ Name | Type | Description  | Notes
 
 ## Delete
 
-> YBPSuccess Delete(ctx, cUUID, pUUID).Execute()
+> YBPSuccess Delete(ctx, cUUID, pUUID).Request(request).Execute()
 
 Delete a cloud provider
 
@@ -181,10 +187,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.Delete(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.CloudProvidersApi.Delete(context.Background(), cUUID, pUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.Delete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,6 +219,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -233,7 +241,7 @@ Name | Type | Description  | Notes
 
 ## EditAccessKeyRotationSchedule
 
-> Schedule EditAccessKeyRotationSchedule(ctx, cUUID, pUUID, sUUID).Body(body).Execute()
+> Schedule EditAccessKeyRotationSchedule(ctx, cUUID, pUUID, sUUID).Body(body).Request(request).Execute()
 
 Edit a access key rotation schedule
 
@@ -254,10 +262,11 @@ func main() {
     pUUID := TODO // string | 
     sUUID := TODO // string | 
     body := *openapiclient.NewEditAccessKeyRotationScheduleParams() // EditAccessKeyRotationScheduleParams | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.EditAccessKeyRotationSchedule(context.Background(), cUUID, pUUID, sUUID).Body(body).Execute()
+    resp, r, err := api_client.CloudProvidersApi.EditAccessKeyRotationSchedule(context.Background(), cUUID, pUUID, sUUID).Body(body).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.EditAccessKeyRotationSchedule``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,6 +297,7 @@ Name | Type | Description  | Notes
 
 
  **body** | [**EditAccessKeyRotationScheduleParams**](EditAccessKeyRotationScheduleParams.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -309,7 +319,7 @@ Name | Type | Description  | Notes
 
 ## EditProvider
 
-> YBPTask EditProvider(ctx, cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).Execute()
+> YBPTask EditProvider(ctx, cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).IgnoreValidationErrors(ignoreValidationErrors).Request(request).Execute()
 
 Update a provider
 
@@ -330,10 +340,12 @@ func main() {
     pUUID := TODO // string | 
     editProviderRequest := *openapiclient.NewProvider([]openapiclient.Region{*openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")})}) // Provider | edit provider form data
     validate := true // bool |  (optional) (default to false)
+    ignoreValidationErrors := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.EditProvider(context.Background(), cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).Execute()
+    resp, r, err := api_client.CloudProvidersApi.EditProvider(context.Background(), cUUID, pUUID).EditProviderRequest(editProviderRequest).Validate(validate).IgnoreValidationErrors(ignoreValidationErrors).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.EditProvider``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -363,6 +375,8 @@ Name | Type | Description  | Notes
 
  **editProviderRequest** | [**Provider**](Provider.md) | edit provider form data | 
  **validate** | **bool** |  | [default to false]
+ **ignoreValidationErrors** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -598,7 +612,7 @@ Name | Type | Description  | Notes
 
 ## RefreshPricing
 
-> YBPSuccess RefreshPricing(ctx, cUUID, pUUID).Execute()
+> YBPSuccess RefreshPricing(ctx, cUUID, pUUID).Request(request).Execute()
 
 Refresh pricing
 
@@ -619,10 +633,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.RefreshPricing(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.CloudProvidersApi.RefreshPricing(context.Background(), cUUID, pUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.RefreshPricing``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -650,6 +665,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -671,7 +687,7 @@ Name | Type | Description  | Notes
 
 ## ScheduledAccessKeyRotation
 
-> Schedule ScheduledAccessKeyRotation(ctx, cUUID, pUUID).Execute()
+> Schedule ScheduledAccessKeyRotation(ctx, cUUID, pUUID).Request(request).Execute()
 
 Rotate access key for a provider - Scheduled
 
@@ -690,10 +706,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CloudProvidersApi.ScheduledAccessKeyRotation(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.CloudProvidersApi.ScheduledAccessKeyRotation(context.Background(), cUUID, pUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.ScheduledAccessKeyRotation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -721,6 +738,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

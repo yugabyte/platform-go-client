@@ -22,6 +22,8 @@ type AzureCloudInfo struct {
 	AzuRG *string `json:"azuRG,omitempty"`
 	AzuSubscriptionId *string `json:"azuSubscriptionId,omitempty"`
 	AzuTenantId *string `json:"azuTenantId,omitempty"`
+	// New/Existing VPC for provider creation
+	VpcType *string `json:"vpcType,omitempty"`
 }
 
 // NewAzureCloudInfo instantiates a new AzureCloudInfo object
@@ -233,6 +235,38 @@ func (o *AzureCloudInfo) SetAzuTenantId(v string) {
 	o.AzuTenantId = &v
 }
 
+// GetVpcType returns the VpcType field value if set, zero value otherwise.
+func (o *AzureCloudInfo) GetVpcType() string {
+	if o == nil || o.VpcType == nil {
+		var ret string
+		return ret
+	}
+	return *o.VpcType
+}
+
+// GetVpcTypeOk returns a tuple with the VpcType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureCloudInfo) GetVpcTypeOk() (*string, bool) {
+	if o == nil || o.VpcType == nil {
+		return nil, false
+	}
+	return o.VpcType, true
+}
+
+// HasVpcType returns a boolean if a field has been set.
+func (o *AzureCloudInfo) HasVpcType() bool {
+	if o != nil && o.VpcType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVpcType gets a reference to the given string and assigns it to the VpcType field.
+func (o *AzureCloudInfo) SetVpcType(v string) {
+	o.VpcType = &v
+}
+
 func (o AzureCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AzuClientId != nil {
@@ -252,6 +286,9 @@ func (o AzureCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.AzuTenantId != nil {
 		toSerialize["azuTenantId"] = o.AzuTenantId
+	}
+	if o.VpcType != nil {
+		toSerialize["vpcType"] = o.VpcType
 	}
 	return json.Marshal(toSerialize)
 }

@@ -32,10 +32,15 @@ type UserManagementApiApiCreateUserRequest struct {
 	ApiService *UserManagementApiService
 	cUUID string
 	user *UserRegistrationData
+	request *interface{}
 }
 
 func (r UserManagementApiApiCreateUserRequest) User(user UserRegistrationData) UserManagementApiApiCreateUserRequest {
 	r.user = &user
+	return r
+}
+func (r UserManagementApiApiCreateUserRequest) Request(request interface{}) UserManagementApiApiCreateUserRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *UserManagementApiService) CreateUserExecute(r UserManagementApiApiCreat
 		return localVarReturnValue, nil, reportError("user is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -161,8 +169,13 @@ type UserManagementApiApiDeleteUserRequest struct {
 	ApiService *UserManagementApiService
 	cUUID string
 	uUUID string
+	request *interface{}
 }
 
+func (r UserManagementApiApiDeleteUserRequest) Request(request interface{}) UserManagementApiApiDeleteUserRequest {
+	r.request = &request
+	return r
+}
 
 func (r UserManagementApiApiDeleteUserRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteUserExecute(r)
@@ -212,6 +225,9 @@ func (a *UserManagementApiService) DeleteUserExecute(r UserManagementApiApiDelet
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -528,10 +544,15 @@ type UserManagementApiApiUpdateUserPasswordRequest struct {
 	cUUID string
 	uUUID string
 	users *UserRegistrationData
+	request *interface{}
 }
 
 func (r UserManagementApiApiUpdateUserPasswordRequest) Users(users UserRegistrationData) UserManagementApiApiUpdateUserPasswordRequest {
 	r.users = &users
+	return r
+}
+func (r UserManagementApiApiUpdateUserPasswordRequest) Request(request interface{}) UserManagementApiApiUpdateUserPasswordRequest {
+	r.request = &request
 	return r
 }
 
@@ -585,6 +606,9 @@ func (a *UserManagementApiService) UpdateUserPasswordExecute(r UserManagementApi
 		return localVarReturnValue, nil, reportError("users is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -661,10 +685,15 @@ type UserManagementApiApiUpdateUserProfileRequest struct {
 	cUUID string
 	uUUID string
 	users *UserProfileData
+	request *interface{}
 }
 
 func (r UserManagementApiApiUpdateUserProfileRequest) Users(users UserProfileData) UserManagementApiApiUpdateUserProfileRequest {
 	r.users = &users
+	return r
+}
+func (r UserManagementApiApiUpdateUserProfileRequest) Request(request interface{}) UserManagementApiApiUpdateUserProfileRequest {
+	r.request = &request
 	return r
 }
 
@@ -718,6 +747,9 @@ func (a *UserManagementApiService) UpdateUserProfileExecute(r UserManagementApiA
 		return localVarReturnValue, nil, reportError("users is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -794,10 +826,15 @@ type UserManagementApiApiUpdateUserRoleRequest struct {
 	cUUID string
 	uUUID string
 	role *string
+	request *interface{}
 }
 
 func (r UserManagementApiApiUpdateUserRoleRequest) Role(role string) UserManagementApiApiUpdateUserRoleRequest {
 	r.role = &role
+	return r
+}
+func (r UserManagementApiApiUpdateUserRoleRequest) Request(request interface{}) UserManagementApiApiUpdateUserRoleRequest {
+	r.request = &request
 	return r
 }
 
@@ -850,6 +887,9 @@ func (a *UserManagementApiService) UpdateUserRoleExecute(r UserManagementApiApiU
 
 	if r.role != nil {
 		localVarQueryParams.Add("role", parameterToString(*r.role, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

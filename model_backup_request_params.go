@@ -18,6 +18,8 @@ import (
 type BackupRequestParams struct {
 	// Alter load balancer state
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
+	// Overrides whether you want to use YBC based or script based backup.
+	BackupCategory *string `json:"backupCategory,omitempty"`
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
 	BackupUUID string `json:"backupUUID"`
@@ -29,8 +31,6 @@ type BackupRequestParams struct {
 	CreatingUser Users `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
-	CurrentIdx int32 `json:"currentIdx"`
-	CurrentYbcTaskId string `json:"currentYbcTaskId"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
@@ -92,6 +92,8 @@ type BackupRequestParams struct {
 	Sse *bool `json:"sse,omitempty"`
 	// Storage configuration UUID
 	StorageConfigUUID string `json:"storageConfigUUID"`
+	// Take table by table backups
+	TableByTableBackup *bool `json:"tableByTableBackup,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
@@ -110,12 +112,10 @@ type BackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
+func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
 	this := BackupRequestParams{}
 	this.BackupUUID = backupUUID
 	this.CreatingUser = creatingUser
-	this.CurrentIdx = currentIdx
-	this.CurrentYbcTaskId = currentYbcTaskId
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
@@ -163,6 +163,38 @@ func (o *BackupRequestParams) HasAlterLoadBalancer() bool {
 // SetAlterLoadBalancer gets a reference to the given bool and assigns it to the AlterLoadBalancer field.
 func (o *BackupRequestParams) SetAlterLoadBalancer(v bool) {
 	o.AlterLoadBalancer = &v
+}
+
+// GetBackupCategory returns the BackupCategory field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetBackupCategory() string {
+	if o == nil || o.BackupCategory == nil {
+		var ret string
+		return ret
+	}
+	return *o.BackupCategory
+}
+
+// GetBackupCategoryOk returns a tuple with the BackupCategory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetBackupCategoryOk() (*string, bool) {
+	if o == nil || o.BackupCategory == nil {
+		return nil, false
+	}
+	return o.BackupCategory, true
+}
+
+// HasBackupCategory returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasBackupCategory() bool {
+	if o != nil && o.BackupCategory != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupCategory gets a reference to the given string and assigns it to the BackupCategory field.
+func (o *BackupRequestParams) SetBackupCategory(v string) {
+	o.BackupCategory = &v
 }
 
 // GetBackupType returns the BackupType field value if set, zero value otherwise.
@@ -371,54 +403,6 @@ func (o *BackupRequestParams) HasCronExpression() bool {
 // SetCronExpression gets a reference to the given string and assigns it to the CronExpression field.
 func (o *BackupRequestParams) SetCronExpression(v string) {
 	o.CronExpression = &v
-}
-
-// GetCurrentIdx returns the CurrentIdx field value
-func (o *BackupRequestParams) GetCurrentIdx() int32 {
-	if o == nil  {
-		var ret int32
-		return ret
-	}
-
-	return o.CurrentIdx
-}
-
-// GetCurrentIdxOk returns a tuple with the CurrentIdx field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetCurrentIdxOk() (*int32, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentIdx, true
-}
-
-// SetCurrentIdx sets field value
-func (o *BackupRequestParams) SetCurrentIdx(v int32) {
-	o.CurrentIdx = v
-}
-
-// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value
-func (o *BackupRequestParams) GetCurrentYbcTaskId() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.CurrentYbcTaskId
-}
-
-// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetCurrentYbcTaskIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CurrentYbcTaskId, true
-}
-
-// SetCurrentYbcTaskId sets field value
-func (o *BackupRequestParams) SetCurrentYbcTaskId(v string) {
-	o.CurrentYbcTaskId = v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -1501,6 +1485,38 @@ func (o *BackupRequestParams) SetStorageConfigUUID(v string) {
 	o.StorageConfigUUID = v
 }
 
+// GetTableByTableBackup returns the TableByTableBackup field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetTableByTableBackup() bool {
+	if o == nil || o.TableByTableBackup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TableByTableBackup
+}
+
+// GetTableByTableBackupOk returns a tuple with the TableByTableBackup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetTableByTableBackupOk() (*bool, bool) {
+	if o == nil || o.TableByTableBackup == nil {
+		return nil, false
+	}
+	return o.TableByTableBackup, true
+}
+
+// HasTableByTableBackup returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasTableByTableBackup() bool {
+	if o != nil && o.TableByTableBackup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableByTableBackup gets a reference to the given bool and assigns it to the TableByTableBackup field.
+func (o *BackupRequestParams) SetTableByTableBackup(v bool) {
+	o.TableByTableBackup = &v
+}
+
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetTargetXClusterConfigs() []string {
 	if o == nil || o.TargetXClusterConfigs == nil {
@@ -1722,6 +1738,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if o.AlterLoadBalancer != nil {
 		toSerialize["alterLoadBalancer"] = o.AlterLoadBalancer
 	}
+	if o.BackupCategory != nil {
+		toSerialize["backupCategory"] = o.BackupCategory
+	}
 	if o.BackupType != nil {
 		toSerialize["backupType"] = o.BackupType
 	}
@@ -1742,12 +1761,6 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
-	}
-	if true {
-		toSerialize["currentIdx"] = o.CurrentIdx
-	}
-	if true {
-		toSerialize["currentYbcTaskId"] = o.CurrentYbcTaskId
 	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
@@ -1853,6 +1866,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if o.TableByTableBackup != nil {
+		toSerialize["tableByTableBackup"] = o.TableByTableBackup
 	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs

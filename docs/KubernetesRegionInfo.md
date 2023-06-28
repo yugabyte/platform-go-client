@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **KubernetesPullSecret** | Pointer to **string** |  | [optional] 
 **KubernetesPullSecretContent** | Pointer to **string** |  | [optional] 
 **KubernetesPullSecretName** | Pointer to **string** |  | [optional] 
-**KubernetesServiceAccount** | Pointer to **string** |  | [optional] 
+**KubernetesServiceAccount** | Pointer to **string** | DEPRECATED: kubernetes service account is not needed. | [optional] 
 **KubernetesStorageClass** | Pointer to **string** |  | [optional] 
 **Overrides** | Pointer to **string** |  | [optional] 
 

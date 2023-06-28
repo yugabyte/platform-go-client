@@ -18,6 +18,8 @@ import (
 type XClusterConfigNeedBootstrapFormData struct {
 	// Source universe table IDs to check whether they need bootstrap
 	Tables []string `json:"tables"`
+	// If specified and tables do not exist on the target universe, bootstrapping is required.
+	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
 }
 
 // NewXClusterConfigNeedBootstrapFormData instantiates a new XClusterConfigNeedBootstrapFormData object
@@ -62,10 +64,45 @@ func (o *XClusterConfigNeedBootstrapFormData) SetTables(v []string) {
 	o.Tables = v
 }
 
+// GetTargetUniverseUUID returns the TargetUniverseUUID field value if set, zero value otherwise.
+func (o *XClusterConfigNeedBootstrapFormData) GetTargetUniverseUUID() string {
+	if o == nil || o.TargetUniverseUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetUniverseUUID
+}
+
+// GetTargetUniverseUUIDOk returns a tuple with the TargetUniverseUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigNeedBootstrapFormData) GetTargetUniverseUUIDOk() (*string, bool) {
+	if o == nil || o.TargetUniverseUUID == nil {
+		return nil, false
+	}
+	return o.TargetUniverseUUID, true
+}
+
+// HasTargetUniverseUUID returns a boolean if a field has been set.
+func (o *XClusterConfigNeedBootstrapFormData) HasTargetUniverseUUID() bool {
+	if o != nil && o.TargetUniverseUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetUniverseUUID gets a reference to the given string and assigns it to the TargetUniverseUUID field.
+func (o *XClusterConfigNeedBootstrapFormData) SetTargetUniverseUUID(v string) {
+	o.TargetUniverseUUID = &v
+}
+
 func (o XClusterConfigNeedBootstrapFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["tables"] = o.Tables
+	}
+	if o.TargetUniverseUUID != nil {
+		toSerialize["targetUniverseUUID"] = o.TargetUniverseUUID
 	}
 	return json.Marshal(toSerialize)
 }

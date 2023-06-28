@@ -33,10 +33,15 @@ type SupportBundleManagementApiApiCreateSupportBundleRequest struct {
 	cUUID string
 	uniUUID string
 	supportBundle *SupportBundleFormData
+	request *interface{}
 }
 
 func (r SupportBundleManagementApiApiCreateSupportBundleRequest) SupportBundle(supportBundle SupportBundleFormData) SupportBundleManagementApiApiCreateSupportBundleRequest {
 	r.supportBundle = &supportBundle
+	return r
+}
+func (r SupportBundleManagementApiApiCreateSupportBundleRequest) Request(request interface{}) SupportBundleManagementApiApiCreateSupportBundleRequest {
+	r.request = &request
 	return r
 }
 
@@ -90,6 +95,9 @@ func (a *SupportBundleManagementApiService) CreateSupportBundleExecute(r Support
 		return localVarReturnValue, nil, reportError("supportBundle is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -166,8 +174,13 @@ type SupportBundleManagementApiApiDeleteSupportBundleRequest struct {
 	cUUID string
 	uniUUID string
 	sbUUID string
+	request *interface{}
 }
 
+func (r SupportBundleManagementApiApiDeleteSupportBundleRequest) Request(request interface{}) SupportBundleManagementApiApiDeleteSupportBundleRequest {
+	r.request = &request
+	return r
+}
 
 func (r SupportBundleManagementApiApiDeleteSupportBundleRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteSupportBundleExecute(r)
@@ -219,6 +232,9 @@ func (a *SupportBundleManagementApiService) DeleteSupportBundleExecute(r Support
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

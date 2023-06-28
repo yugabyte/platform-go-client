@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## Create
 
-> MaintenanceWindow Create(ctx, cUUID).CreateMaintenanceWindowRequest(createMaintenanceWindowRequest).Execute()
+> MaintenanceWindow Create(ctx, cUUID).CreateMaintenanceWindowRequest(createMaintenanceWindowRequest).Request(request).Execute()
 
 Create maintenance window
 
@@ -35,10 +35,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     createMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.Create(context.Background(), cUUID).CreateMaintenanceWindowRequest(createMaintenanceWindowRequest).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.Create(context.Background(), cUUID).CreateMaintenanceWindowRequest(createMaintenanceWindowRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.Create``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createMaintenanceWindowRequest** | [**MaintenanceWindow**](MaintenanceWindow.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## Delete
 
-> YBPSuccess Delete(ctx, cUUID, windowUUID).Execute()
+> YBPSuccess Delete(ctx, cUUID, windowUUID).Request(request).Execute()
 
 Delete maintenance window
 
@@ -105,10 +107,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     windowUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.Delete(context.Background(), cUUID, windowUUID).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.Delete(context.Background(), cUUID, windowUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.Delete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,6 +139,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -228,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## ListOfMaintenanceWindows
 
-> []MaintenanceWindow ListOfMaintenanceWindows(ctx, cUUID).Execute()
+> []MaintenanceWindow ListOfMaintenanceWindows(ctx, cUUID).Request(request).Execute()
 
 List maintenance windows
 
@@ -246,10 +250,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.ListOfMaintenanceWindows(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.ListOfMaintenanceWindows(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.ListOfMaintenanceWindows``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,6 +280,7 @@ Other parameters are passed through a pointer to a apiListOfMaintenanceWindowsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -296,7 +302,7 @@ Name | Type | Description  | Notes
 
 ## Page
 
-> MaintenanceWindowPagedResponse Page(ctx, cUUID).PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest).Execute()
+> MaintenanceWindowPagedResponse Page(ctx, cUUID).PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest).Request(request).Execute()
 
 List maintenance windows (paginated)
 
@@ -315,10 +321,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pageMaintenanceWindowsRequest := *openapiclient.NewMaintenanceWindowPagedApiQuery("Direction_example", *openapiclient.NewMaintenanceWindowApiFilter([]string{"States_example"}, []string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // MaintenanceWindowPagedApiQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.Page(context.Background(), cUUID).PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.Page(context.Background(), cUUID).PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.Page``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -345,6 +352,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageMaintenanceWindowsRequest** | [**MaintenanceWindowPagedApiQuery**](MaintenanceWindowPagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -366,7 +374,7 @@ Name | Type | Description  | Notes
 
 ## Update
 
-> MaintenanceWindow Update(ctx, cUUID, windowUUID).UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest).Execute()
+> MaintenanceWindow Update(ctx, cUUID, windowUUID).UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest).Request(request).Execute()
 
 Update maintenance window
 
@@ -387,10 +395,11 @@ func main() {
     cUUID := TODO // string | 
     windowUUID := TODO // string | 
     updateMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.Update(context.Background(), cUUID, windowUUID).UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.Update(context.Background(), cUUID, windowUUID).UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.Update``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -419,6 +428,7 @@ Name | Type | Description  | Notes
 
 
  **updateMaintenanceWindowRequest** | [**MaintenanceWindow**](MaintenanceWindow.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

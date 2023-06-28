@@ -89,6 +89,8 @@ type BackupTableParams struct {
 	RegionLocations *[]RegionLocations `json:"regionLocations,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
+	// Schedule Name
+	ScheduleName *string `json:"scheduleName,omitempty"`
 	// Schedule UUID
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
@@ -105,6 +107,8 @@ type BackupTableParams struct {
 	StorageConfigUUID string `json:"storageConfigUUID"`
 	// Storage location
 	StorageLocation *string `json:"storageLocation,omitempty"`
+	// Table by table backup
+	TableByTableBackup *bool `json:"tableByTableBackup,omitempty"`
 	// Table name
 	TableName *string `json:"tableName,omitempty"`
 	// Tables
@@ -1442,6 +1446,38 @@ func (o *BackupTableParams) SetRestoreTimeStamp(v string) {
 	o.RestoreTimeStamp = &v
 }
 
+// GetScheduleName returns the ScheduleName field value if set, zero value otherwise.
+func (o *BackupTableParams) GetScheduleName() string {
+	if o == nil || o.ScheduleName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ScheduleName
+}
+
+// GetScheduleNameOk returns a tuple with the ScheduleName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetScheduleNameOk() (*string, bool) {
+	if o == nil || o.ScheduleName == nil {
+		return nil, false
+	}
+	return o.ScheduleName, true
+}
+
+// HasScheduleName returns a boolean if a field has been set.
+func (o *BackupTableParams) HasScheduleName() bool {
+	if o != nil && o.ScheduleName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScheduleName gets a reference to the given string and assigns it to the ScheduleName field.
+func (o *BackupTableParams) SetScheduleName(v string) {
+	o.ScheduleName = &v
+}
+
 // GetScheduleUUID returns the ScheduleUUID field value if set, zero value otherwise.
 func (o *BackupTableParams) GetScheduleUUID() string {
 	if o == nil || o.ScheduleUUID == nil {
@@ -1704,6 +1740,38 @@ func (o *BackupTableParams) HasStorageLocation() bool {
 // SetStorageLocation gets a reference to the given string and assigns it to the StorageLocation field.
 func (o *BackupTableParams) SetStorageLocation(v string) {
 	o.StorageLocation = &v
+}
+
+// GetTableByTableBackup returns the TableByTableBackup field value if set, zero value otherwise.
+func (o *BackupTableParams) GetTableByTableBackup() bool {
+	if o == nil || o.TableByTableBackup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TableByTableBackup
+}
+
+// GetTableByTableBackupOk returns a tuple with the TableByTableBackup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetTableByTableBackupOk() (*bool, bool) {
+	if o == nil || o.TableByTableBackup == nil {
+		return nil, false
+	}
+	return o.TableByTableBackup, true
+}
+
+// HasTableByTableBackup returns a boolean if a field has been set.
+func (o *BackupTableParams) HasTableByTableBackup() bool {
+	if o != nil && o.TableByTableBackup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableByTableBackup gets a reference to the given bool and assigns it to the TableByTableBackup field.
+func (o *BackupTableParams) SetTableByTableBackup(v bool) {
+	o.TableByTableBackup = &v
 }
 
 // GetTableName returns the TableName field value if set, zero value otherwise.
@@ -2239,6 +2307,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
 	}
+	if o.ScheduleName != nil {
+		toSerialize["scheduleName"] = o.ScheduleName
+	}
 	if o.ScheduleUUID != nil {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID
 	}
@@ -2265,6 +2336,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.StorageLocation != nil {
 		toSerialize["storageLocation"] = o.StorageLocation
+	}
+	if o.TableByTableBackup != nil {
+		toSerialize["tableByTableBackup"] = o.TableByTableBackup
 	}
 	if o.TableName != nil {
 		toSerialize["tableName"] = o.TableName

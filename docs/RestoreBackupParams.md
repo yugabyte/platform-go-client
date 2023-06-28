@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **KmsConfigUUID** | Pointer to **string** | KMS configuration UUID | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
+**NodeIp** | **string** |  | 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
@@ -48,7 +49,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreBackupParams
 
-`func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
+`func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
 
 NewRestoreBackupParams instantiates a new RestoreBackupParams object
 This constructor will assign default values to properties that have it defined,
@@ -622,6 +623,26 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 `func (o *RestoreBackupParams) HasNodeExporterUser() bool`
 
 HasNodeExporterUser returns a boolean if a field has been set.
+
+### GetNodeIp
+
+`func (o *RestoreBackupParams) GetNodeIp() string`
+
+GetNodeIp returns the NodeIp field if non-nil, zero value otherwise.
+
+### GetNodeIpOk
+
+`func (o *RestoreBackupParams) GetNodeIpOk() (*string, bool)`
+
+GetNodeIpOk returns a tuple with the NodeIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeIp
+
+`func (o *RestoreBackupParams) SetNodeIp(v string)`
+
+SetNodeIp sets NodeIp field to given value.
+
 
 ### GetParallelism
 

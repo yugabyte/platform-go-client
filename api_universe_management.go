@@ -32,8 +32,13 @@ type UniverseManagementApiApiConfigureUniverseAlertsRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiConfigureUniverseAlertsRequest) Request(request interface{}) UniverseManagementApiApiConfigureUniverseAlertsRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiConfigureUniverseAlertsRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.ConfigureUniverseAlertsExecute(r)
@@ -82,6 +87,9 @@ func (a *UniverseManagementApiService) ConfigureUniverseAlertsExecute(r Universe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -158,6 +166,7 @@ type UniverseManagementApiApiDeleteUniverseRequest struct {
 	isForceDelete *bool
 	isDeleteBackups *bool
 	isDeleteAssociatedCerts *bool
+	request *interface{}
 }
 
 func (r UniverseManagementApiApiDeleteUniverseRequest) IsForceDelete(isForceDelete bool) UniverseManagementApiApiDeleteUniverseRequest {
@@ -170,6 +179,10 @@ func (r UniverseManagementApiApiDeleteUniverseRequest) IsDeleteBackups(isDeleteB
 }
 func (r UniverseManagementApiApiDeleteUniverseRequest) IsDeleteAssociatedCerts(isDeleteAssociatedCerts bool) UniverseManagementApiApiDeleteUniverseRequest {
 	r.isDeleteAssociatedCerts = &isDeleteAssociatedCerts
+	return r
+}
+func (r UniverseManagementApiApiDeleteUniverseRequest) Request(request interface{}) UniverseManagementApiApiDeleteUniverseRequest {
+	r.request = &request
 	return r
 }
 
@@ -228,6 +241,9 @@ func (a *UniverseManagementApiService) DeleteUniverseExecute(r UniverseManagemen
 	}
 	if r.isDeleteAssociatedCerts != nil {
 		localVarQueryParams.Add("isDeleteAssociatedCerts", parameterToString(*r.isDeleteAssociatedCerts, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -552,8 +568,13 @@ type UniverseManagementApiApiPauseUniverseRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiPauseUniverseRequest) Request(request interface{}) UniverseManagementApiApiPauseUniverseRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiPauseUniverseRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.PauseUniverseExecute(r)
@@ -602,6 +623,9 @@ func (a *UniverseManagementApiService) PauseUniverseExecute(r UniverseManagement
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -675,8 +699,13 @@ type UniverseManagementApiApiResetUniverseVersionRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiResetUniverseVersionRequest) Request(request interface{}) UniverseManagementApiApiResetUniverseVersionRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiResetUniverseVersionRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.ResetUniverseVersionExecute(r)
@@ -725,6 +754,9 @@ func (a *UniverseManagementApiService) ResetUniverseVersionExecute(r UniverseMan
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -798,8 +830,13 @@ type UniverseManagementApiApiResumeUniverseRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiResumeUniverseRequest) Request(request interface{}) UniverseManagementApiApiResumeUniverseRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiResumeUniverseRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.ResumeUniverseExecute(r)
@@ -848,6 +885,9 @@ func (a *UniverseManagementApiService) ResumeUniverseExecute(r UniverseManagemen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -922,10 +962,15 @@ type UniverseManagementApiApiSetUniverseBackupFlagRequest struct {
 	cUUID string
 	uniUUID string
 	markActive *bool
+	request *interface{}
 }
 
 func (r UniverseManagementApiApiSetUniverseBackupFlagRequest) MarkActive(markActive bool) UniverseManagementApiApiSetUniverseBackupFlagRequest {
 	r.markActive = &markActive
+	return r
+}
+func (r UniverseManagementApiApiSetUniverseBackupFlagRequest) Request(request interface{}) UniverseManagementApiApiSetUniverseBackupFlagRequest {
+	r.request = &request
 	return r
 }
 
@@ -978,6 +1023,9 @@ func (a *UniverseManagementApiService) SetUniverseBackupFlagExecute(r UniverseMa
 
 	if r.markActive != nil {
 		localVarQueryParams.Add("markActive", parameterToString(*r.markActive, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1052,8 +1100,13 @@ type UniverseManagementApiApiSetUniverseHelm3CompatibleRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiSetUniverseHelm3CompatibleRequest) Request(request interface{}) UniverseManagementApiApiSetUniverseHelm3CompatibleRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiSetUniverseHelm3CompatibleRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.SetUniverseHelm3CompatibleExecute(r)
@@ -1102,6 +1155,9 @@ func (a *UniverseManagementApiService) SetUniverseHelm3CompatibleExecute(r Unive
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1175,8 +1231,13 @@ type UniverseManagementApiApiSetUniverseKeyRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiSetUniverseKeyRequest) Request(request interface{}) UniverseManagementApiApiSetUniverseKeyRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiSetUniverseKeyRequest) Execute() (UniverseResp, *_nethttp.Response, error) {
 	return r.ApiService.SetUniverseKeyExecute(r)
@@ -1225,130 +1286,9 @@ func (a *UniverseManagementApiService) SetUniverseKeyExecute(r UniverseManagemen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type UniverseManagementApiApiToggleUniverseTLSRequest struct {
-	ctx _context.Context
-	ApiService *UniverseManagementApiService
-	cUUID string
-	uniUUID string
-}
-
-
-func (r UniverseManagementApiApiToggleUniverseTLSRequest) Execute() (UniverseResp, *_nethttp.Response, error) {
-	return r.ApiService.ToggleUniverseTLSExecute(r)
-}
-
-/*
- * ToggleUniverseTLS Toggle a universe's TLS state
- * Enable or disable node-to-node and client-to-node encryption. Supports rolling and non-rolling universe upgrades.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @return UniverseManagementApiApiToggleUniverseTLSRequest
- */
-func (a *UniverseManagementApiService) ToggleUniverseTLS(ctx _context.Context, cUUID string, uniUUID string) UniverseManagementApiApiToggleUniverseTLSRequest {
-	return UniverseManagementApiApiToggleUniverseTLSRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return UniverseResp
- */
-func (a *UniverseManagementApiService) ToggleUniverseTLSExecute(r UniverseManagementApiApiToggleUniverseTLSRequest) (UniverseResp, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UniverseResp
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementApiService.ToggleUniverseTLS")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/toggle_tls"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1422,8 +1362,13 @@ type UniverseManagementApiApiUpdateLoadBalancerConfigRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseManagementApiApiUpdateLoadBalancerConfigRequest) Request(request interface{}) UniverseManagementApiApiUpdateLoadBalancerConfigRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseManagementApiApiUpdateLoadBalancerConfigRequest) Execute() (UpdateLoadBalancerConfig, *_nethttp.Response, error) {
 	return r.ApiService.UpdateLoadBalancerConfigExecute(r)
@@ -1472,6 +1417,9 @@ func (a *UniverseManagementApiService) UpdateLoadBalancerConfigExecute(r Univers
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

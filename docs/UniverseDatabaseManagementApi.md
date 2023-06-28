@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## CreateUserInDB
 
-> YBPSuccess CreateUserInDB(ctx, cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Execute()
+> YBPSuccess CreateUserInDB(ctx, cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Request(request).Execute()
 
 Create a database user for a universe
 
@@ -32,10 +32,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     databaseUserFormData := *openapiclient.NewDatabaseUserFormData("DbName_example", "Password_example", "Username_example", "YcqlAdminPassword_example", "YcqlAdminUsername_example", "YsqlAdminPassword_example", "YsqlAdminUsername_example") // DatabaseUserFormData | The database user to create
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.CreateUserInDB(context.Background(), cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Execute()
+    resp, r, err := api_client.UniverseDatabaseManagementApi.CreateUserInDB(context.Background(), cUUID, uniUUID).DatabaseUserFormData(databaseUserFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.CreateUserInDB``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
 
 
  **databaseUserFormData** | [**DatabaseUserFormData**](DatabaseUserFormData.md) | The database user to create | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## RunYsqlQueryUniverse
 
-> map[string]interface{} RunYsqlQueryUniverse(ctx, cUUID, uniUUID).RunQueryFormData(runQueryFormData).Execute()
+> map[string]interface{} RunYsqlQueryUniverse(ctx, cUUID, uniUUID).RunQueryFormData(runQueryFormData).Request(request).Execute()
 
 Run a YSQL query in a universe
 
@@ -107,10 +109,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     runQueryFormData := *openapiclient.NewRunQueryFormData("DbName_example", "Query_example", "TableType_example") // RunQueryFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.RunYsqlQueryUniverse(context.Background(), cUUID, uniUUID).RunQueryFormData(runQueryFormData).Execute()
+    resp, r, err := api_client.UniverseDatabaseManagementApi.RunYsqlQueryUniverse(context.Background(), cUUID, uniUUID).RunQueryFormData(runQueryFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.RunYsqlQueryUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -139,6 +142,7 @@ Name | Type | Description  | Notes
 
 
  **runQueryFormData** | [**RunQueryFormData**](RunQueryFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -160,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## SetDatabaseCredentials
 
-> YBPSuccess SetDatabaseCredentials(ctx, cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Execute()
+> YBPSuccess SetDatabaseCredentials(ctx, cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Request(request).Execute()
 
 Set a universe's database credentials
 
@@ -180,10 +184,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     databaseSecurityFormData := *openapiclient.NewDatabaseSecurityFormData("DbName_example", "YcqlAdminPassword_example", "YcqlAdminUsername_example", "YcqlCurrAdminPassword_example", "YsqlAdminPassword_example", "YsqlAdminUsername_example", "YsqlCurrAdminPassword_example") // DatabaseSecurityFormData | The database credentials
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseDatabaseManagementApi.SetDatabaseCredentials(context.Background(), cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Execute()
+    resp, r, err := api_client.UniverseDatabaseManagementApi.SetDatabaseCredentials(context.Background(), cUUID, uniUUID).DatabaseSecurityFormData(databaseSecurityFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseDatabaseManagementApi.SetDatabaseCredentials``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,6 +217,7 @@ Name | Type | Description  | Notes
 
 
  **databaseSecurityFormData** | [**DatabaseSecurityFormData**](DatabaseSecurityFormData.md) | The database credentials | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

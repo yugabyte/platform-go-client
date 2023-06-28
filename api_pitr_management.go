@@ -35,10 +35,15 @@ type PITRManagementApiApiCreatePitrConfigRequest struct {
 	tableType string
 	keyspaceName string
 	pitrConfig *CreatePitrConfigParams
+	request *interface{}
 }
 
 func (r PITRManagementApiApiCreatePitrConfigRequest) PitrConfig(pitrConfig CreatePitrConfigParams) PITRManagementApiApiCreatePitrConfigRequest {
 	r.pitrConfig = &pitrConfig
+	return r
+}
+func (r PITRManagementApiApiCreatePitrConfigRequest) Request(request interface{}) PITRManagementApiApiCreatePitrConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -98,6 +103,9 @@ func (a *PITRManagementApiService) CreatePitrConfigExecute(r PITRManagementApiAp
 		return localVarReturnValue, nil, reportError("pitrConfig is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -174,8 +182,13 @@ type PITRManagementApiApiDeletePitrConfigRequest struct {
 	cUUID string
 	uniUUID string
 	pUUID string
+	request *interface{}
 }
 
+func (r PITRManagementApiApiDeletePitrConfigRequest) Request(request interface{}) PITRManagementApiApiDeletePitrConfigRequest {
+	r.request = &request
+	return r
+}
 
 func (r PITRManagementApiApiDeletePitrConfigRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeletePitrConfigExecute(r)
@@ -227,6 +240,9 @@ func (a *PITRManagementApiService) DeletePitrConfigExecute(r PITRManagementApiAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -424,10 +440,15 @@ type PITRManagementApiApiPerformPitrRequest struct {
 	cUUID string
 	uniUUID string
 	performPitr *RestoreSnapshotScheduleParams
+	request *interface{}
 }
 
 func (r PITRManagementApiApiPerformPitrRequest) PerformPitr(performPitr RestoreSnapshotScheduleParams) PITRManagementApiApiPerformPitrRequest {
 	r.performPitr = &performPitr
+	return r
+}
+func (r PITRManagementApiApiPerformPitrRequest) Request(request interface{}) PITRManagementApiApiPerformPitrRequest {
+	r.request = &request
 	return r
 }
 
@@ -481,6 +502,9 @@ func (a *PITRManagementApiService) PerformPitrExecute(r PITRManagementApiApiPerf
 		return localVarReturnValue, nil, reportError("performPitr is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

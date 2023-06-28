@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
+**BackupCategory** | Pointer to **string** | Overrides whether you want to use YBC based or script based backup. | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUUID** | **string** |  | 
 **BaseBackupUUID** | Pointer to **string** | UUID of the parent backup | [optional] 
@@ -12,8 +13,6 @@ Name | Type | Description | Notes
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CronExpression** | Pointer to **string** | Cron expression for a recurring backup | [optional] 
-**CurrentIdx** | **int32** |  | 
-**CurrentYbcTaskId** | **string** |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -49,6 +48,7 @@ Name | Type | Description | Notes
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageConfigUUID** | **string** | Storage configuration UUID | 
+**TableByTableBackup** | Pointer to **bool** | Take table by table backups | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 **UniverseUUID** | **string** | Universe UUID | 
@@ -61,7 +61,7 @@ Name | Type | Description | Notes
 
 ### NewBackupRequestParams
 
-`func NewBackupRequestParams(backupUUID string, creatingUser Users, currentIdx int32, currentYbcTaskId string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams`
+`func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams`
 
 NewBackupRequestParams instantiates a new BackupRequestParams object
 This constructor will assign default values to properties that have it defined,
@@ -100,6 +100,31 @@ SetAlterLoadBalancer sets AlterLoadBalancer field to given value.
 `func (o *BackupRequestParams) HasAlterLoadBalancer() bool`
 
 HasAlterLoadBalancer returns a boolean if a field has been set.
+
+### GetBackupCategory
+
+`func (o *BackupRequestParams) GetBackupCategory() string`
+
+GetBackupCategory returns the BackupCategory field if non-nil, zero value otherwise.
+
+### GetBackupCategoryOk
+
+`func (o *BackupRequestParams) GetBackupCategoryOk() (*string, bool)`
+
+GetBackupCategoryOk returns a tuple with the BackupCategory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupCategory
+
+`func (o *BackupRequestParams) SetBackupCategory(v string)`
+
+SetBackupCategory sets BackupCategory field to given value.
+
+### HasBackupCategory
+
+`func (o *BackupRequestParams) HasBackupCategory() bool`
+
+HasBackupCategory returns a boolean if a field has been set.
 
 ### GetBackupType
 
@@ -265,46 +290,6 @@ SetCronExpression sets CronExpression field to given value.
 `func (o *BackupRequestParams) HasCronExpression() bool`
 
 HasCronExpression returns a boolean if a field has been set.
-
-### GetCurrentIdx
-
-`func (o *BackupRequestParams) GetCurrentIdx() int32`
-
-GetCurrentIdx returns the CurrentIdx field if non-nil, zero value otherwise.
-
-### GetCurrentIdxOk
-
-`func (o *BackupRequestParams) GetCurrentIdxOk() (*int32, bool)`
-
-GetCurrentIdxOk returns a tuple with the CurrentIdx field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentIdx
-
-`func (o *BackupRequestParams) SetCurrentIdx(v int32)`
-
-SetCurrentIdx sets CurrentIdx field to given value.
-
-
-### GetCurrentYbcTaskId
-
-`func (o *BackupRequestParams) GetCurrentYbcTaskId() string`
-
-GetCurrentYbcTaskId returns the CurrentYbcTaskId field if non-nil, zero value otherwise.
-
-### GetCurrentYbcTaskIdOk
-
-`func (o *BackupRequestParams) GetCurrentYbcTaskIdOk() (*string, bool)`
-
-GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentYbcTaskId
-
-`func (o *BackupRequestParams) SetCurrentYbcTaskId(v string)`
-
-SetCurrentYbcTaskId sets CurrentYbcTaskId field to given value.
-
 
 ### GetCustomerUUID
 
@@ -1155,6 +1140,31 @@ and a boolean to check if the value has been set.
 
 SetStorageConfigUUID sets StorageConfigUUID field to given value.
 
+
+### GetTableByTableBackup
+
+`func (o *BackupRequestParams) GetTableByTableBackup() bool`
+
+GetTableByTableBackup returns the TableByTableBackup field if non-nil, zero value otherwise.
+
+### GetTableByTableBackupOk
+
+`func (o *BackupRequestParams) GetTableByTableBackupOk() (*bool, bool)`
+
+GetTableByTableBackupOk returns a tuple with the TableByTableBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableByTableBackup
+
+`func (o *BackupRequestParams) SetTableByTableBackup(v bool)`
+
+SetTableByTableBackup sets TableByTableBackup field to given value.
+
+### HasTableByTableBackup
+
+`func (o *BackupRequestParams) HasTableByTableBackup() bool`
+
+HasTableByTableBackup returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 

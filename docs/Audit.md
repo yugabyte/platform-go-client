@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **AdditionalDetails** | Pointer to **map[string]interface{}** | Additional Details | [optional] [readonly] 
 **ApiCall** | Pointer to **string** | API call | [optional] [readonly] 
 **ApiMethod** | Pointer to **string** | API method | [optional] [readonly] 
-**AuditID** | **int64** |  | 
+**AuditID** | Pointer to **int64** | Audit UID | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Payload** | Pointer to **map[string]interface{}** | Audit UUID | [optional] [readonly] 
 **Target** | Pointer to **string** | Target | [optional] [readonly] 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewAudit
 
-`func NewAudit(auditID int64, ) *Audit`
+`func NewAudit() *Audit`
 
 NewAudit instantiates a new Audit object
 This constructor will assign default values to properties that have it defined,
@@ -157,6 +157,11 @@ and a boolean to check if the value has been set.
 
 SetAuditID sets AuditID field to given value.
 
+### HasAuditID
+
+`func (o *Audit) HasAuditID() bool`
+
+HasAuditID returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 

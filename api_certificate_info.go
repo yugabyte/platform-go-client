@@ -32,10 +32,15 @@ type CertificateInfoApiApiCreateSelfSignedCertRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	label *string
+	request *interface{}
 }
 
 func (r CertificateInfoApiApiCreateSelfSignedCertRequest) Label(label string) CertificateInfoApiApiCreateSelfSignedCertRequest {
 	r.label = &label
+	return r
+}
+func (r CertificateInfoApiApiCreateSelfSignedCertRequest) Request(request interface{}) CertificateInfoApiApiCreateSelfSignedCertRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *CertificateInfoApiService) CreateSelfSignedCertExecute(r CertificateInf
 		return localVarReturnValue, nil, reportError("label is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -161,8 +169,13 @@ type CertificateInfoApiApiDeleteCertificateRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	rUUID string
+	request *interface{}
 }
 
+func (r CertificateInfoApiApiDeleteCertificateRequest) Request(request interface{}) CertificateInfoApiApiDeleteCertificateRequest {
+	r.request = &request
+	return r
+}
 
 func (r CertificateInfoApiApiDeleteCertificateRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteCertificateExecute(r)
@@ -211,6 +224,9 @@ func (a *CertificateInfoApiService) DeleteCertificateExecute(r CertificateInfoAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -284,8 +300,13 @@ type CertificateInfoApiApiEditCertificateRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	rUUID string
+	request *interface{}
 }
 
+func (r CertificateInfoApiApiEditCertificateRequest) Request(request interface{}) CertificateInfoApiApiEditCertificateRequest {
+	r.request = &request
+	return r
+}
 
 func (r CertificateInfoApiApiEditCertificateRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.EditCertificateExecute(r)
@@ -334,6 +355,9 @@ func (a *CertificateInfoApiService) EditCertificateExecute(r CertificateInfoApiA
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -531,10 +555,15 @@ type CertificateInfoApiApiGetClientCertRequest struct {
 	cUUID string
 	rUUID string
 	certificate *ClientCertParams
+	request *interface{}
 }
 
 func (r CertificateInfoApiApiGetClientCertRequest) Certificate(certificate ClientCertParams) CertificateInfoApiApiGetClientCertRequest {
 	r.certificate = &certificate
+	return r
+}
+func (r CertificateInfoApiApiGetClientCertRequest) Request(request interface{}) CertificateInfoApiApiGetClientCertRequest {
+	r.request = &request
 	return r
 }
 
@@ -588,6 +617,9 @@ func (a *CertificateInfoApiService) GetClientCertExecute(r CertificateInfoApiApi
 		return localVarReturnValue, nil, reportError("certificate is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -665,7 +697,7 @@ type CertificateInfoApiApiGetListOfCertificateRequest struct {
 }
 
 
-func (r CertificateInfoApiApiGetListOfCertificateRequest) Execute() ([]CertificateInfo, *_nethttp.Response, error) {
+func (r CertificateInfoApiApiGetListOfCertificateRequest) Execute() ([]CertificateInfoExt, *_nethttp.Response, error) {
 	return r.ApiService.GetListOfCertificateExecute(r)
 }
 
@@ -685,16 +717,16 @@ func (a *CertificateInfoApiService) GetListOfCertificate(ctx _context.Context, c
 
 /*
  * Execute executes the request
- * @return []CertificateInfo
+ * @return []CertificateInfoExt
  */
-func (a *CertificateInfoApiService) GetListOfCertificateExecute(r CertificateInfoApiApiGetListOfCertificateRequest) ([]CertificateInfo, *_nethttp.Response, error) {
+func (a *CertificateInfoApiService) GetListOfCertificateExecute(r CertificateInfoApiApiGetListOfCertificateRequest) ([]CertificateInfoExt, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []CertificateInfo
+		localVarReturnValue  []CertificateInfoExt
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoApiService.GetListOfCertificate")
@@ -791,8 +823,13 @@ type CertificateInfoApiApiGetRootCertRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	rUUID string
+	request *interface{}
 }
 
+func (r CertificateInfoApiApiGetRootCertRequest) Request(request interface{}) CertificateInfoApiApiGetRootCertRequest {
+	r.request = &request
+	return r
+}
 
 func (r CertificateInfoApiApiGetRootCertRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.GetRootCertExecute(r)
@@ -841,6 +878,9 @@ func (a *CertificateInfoApiService) GetRootCertExecute(r CertificateInfoApiApiGe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -914,10 +954,15 @@ type CertificateInfoApiApiUpdateEmptyCustomCertRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	rUUID string
+	request *interface{}
 }
 
+func (r CertificateInfoApiApiUpdateEmptyCustomCertRequest) Request(request interface{}) CertificateInfoApiApiUpdateEmptyCustomCertRequest {
+	r.request = &request
+	return r
+}
 
-func (r CertificateInfoApiApiUpdateEmptyCustomCertRequest) Execute() (CertificateInfo, *_nethttp.Response, error) {
+func (r CertificateInfoApiApiUpdateEmptyCustomCertRequest) Execute() (CertificateInfoExt, *_nethttp.Response, error) {
 	return r.ApiService.UpdateEmptyCustomCertExecute(r)
 }
 
@@ -939,16 +984,16 @@ func (a *CertificateInfoApiService) UpdateEmptyCustomCert(ctx _context.Context, 
 
 /*
  * Execute executes the request
- * @return CertificateInfo
+ * @return CertificateInfoExt
  */
-func (a *CertificateInfoApiService) UpdateEmptyCustomCertExecute(r CertificateInfoApiApiUpdateEmptyCustomCertRequest) (CertificateInfo, *_nethttp.Response, error) {
+func (a *CertificateInfoApiService) UpdateEmptyCustomCertExecute(r CertificateInfoApiApiUpdateEmptyCustomCertRequest) (CertificateInfoExt, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CertificateInfo
+		localVarReturnValue  CertificateInfoExt
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoApiService.UpdateEmptyCustomCert")
@@ -964,6 +1009,9 @@ func (a *CertificateInfoApiService) UpdateEmptyCustomCertExecute(r CertificateIn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1037,10 +1085,15 @@ type CertificateInfoApiApiUploadRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	certificate *CertificateParams
+	request *interface{}
 }
 
 func (r CertificateInfoApiApiUploadRequest) Certificate(certificate CertificateParams) CertificateInfoApiApiUploadRequest {
 	r.certificate = &certificate
+	return r
+}
+func (r CertificateInfoApiApiUploadRequest) Request(request interface{}) CertificateInfoApiApiUploadRequest {
+	r.request = &request
 	return r
 }
 
@@ -1091,6 +1144,9 @@ func (a *CertificateInfoApiService) UploadExecute(r CertificateInfoApiApiUploadR
 		return localVarReturnValue, nil, reportError("certificate is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

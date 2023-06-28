@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DeleteLicense
 
-> YBPSuccess DeleteLicense(ctx, cUUID, lUUID).Execute()
+> YBPSuccess DeleteLicense(ctx, cUUID, lUUID).Request(request).Execute()
 
 Delete a license
 
@@ -30,10 +30,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     lUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LicenseManagementApi.DeleteLicense(context.Background(), cUUID, lUUID).Execute()
+    resp, r, err := api_client.LicenseManagementApi.DeleteLicense(context.Background(), cUUID, lUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LicenseManagementApi.DeleteLicense``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,6 +62,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -82,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## UploadLicense
 
-> CustomerLicense UploadLicense(ctx, cUUID).Execute()
+> CustomerLicense UploadLicense(ctx, cUUID).Request(request).Execute()
 
 Uploads the license
 
@@ -100,10 +102,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.LicenseManagementApi.UploadLicense(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.LicenseManagementApi.UploadLicense(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LicenseManagementApi.UploadLicense``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,6 +132,7 @@ Other parameters are passed through a pointer to a apiUploadLicenseRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

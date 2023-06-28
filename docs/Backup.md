@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackupCategory** | **string** |  | 
 **BackupInfo** | Pointer to [**BackupTableParams**](BackupTableParams.md) |  | [optional] 
 **BackupUUID** | Pointer to **string** | Backup UUID | [optional] [readonly] 
 **BaseBackupUUID** | Pointer to **string** | Base backup UUID | [optional] [readonly] 
@@ -16,12 +15,12 @@ Name | Type | Description | Notes
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **IncrementalBackup** | **bool** |  | 
 **ParentBackup** | **bool** |  | 
+**ScheduleName** | Pointer to **string** | Schedule Policy Name, if this backup is part of a schedule | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID, if this backup is part of a schedule | [optional] 
 **State** | Pointer to **string** | State of the backup | [optional] [readonly] 
 **StorageConfigUUID** | Pointer to **string** | Storage Config UUID that created this backup | [optional] 
 **TaskUUID** | Pointer to **string** | Backup UUID | [optional] [readonly] 
 **UniverseName** | Pointer to **string** | Universe name that created this backup | [optional] 
-**UniverseUUID** | Pointer to **string** | Universe UUID that created this backup | [optional] 
 **UpdateTime** | Pointer to **time.Time** | Backup update time | [optional] 
 **Version** | Pointer to **string** | Version of the backup in a category | [optional] 
 
@@ -29,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewBackup
 
-`func NewBackup(backupCategory string, incrementalBackup bool, parentBackup bool, ) *Backup`
+`func NewBackup(incrementalBackup bool, parentBackup bool, ) *Backup`
 
 NewBackup instantiates a new Backup object
 This constructor will assign default values to properties that have it defined,
@@ -43,26 +42,6 @@ will change when the set of required properties is changed
 NewBackupWithDefaults instantiates a new Backup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetBackupCategory
-
-`func (o *Backup) GetBackupCategory() string`
-
-GetBackupCategory returns the BackupCategory field if non-nil, zero value otherwise.
-
-### GetBackupCategoryOk
-
-`func (o *Backup) GetBackupCategoryOk() (*string, bool)`
-
-GetBackupCategoryOk returns a tuple with the BackupCategory field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBackupCategory
-
-`func (o *Backup) SetBackupCategory(v string)`
-
-SetBackupCategory sets BackupCategory field to given value.
-
 
 ### GetBackupInfo
 
@@ -329,6 +308,31 @@ and a boolean to check if the value has been set.
 SetParentBackup sets ParentBackup field to given value.
 
 
+### GetScheduleName
+
+`func (o *Backup) GetScheduleName() string`
+
+GetScheduleName returns the ScheduleName field if non-nil, zero value otherwise.
+
+### GetScheduleNameOk
+
+`func (o *Backup) GetScheduleNameOk() (*string, bool)`
+
+GetScheduleNameOk returns a tuple with the ScheduleName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheduleName
+
+`func (o *Backup) SetScheduleName(v string)`
+
+SetScheduleName sets ScheduleName field to given value.
+
+### HasScheduleName
+
+`func (o *Backup) HasScheduleName() bool`
+
+HasScheduleName returns a boolean if a field has been set.
+
 ### GetScheduleUUID
 
 `func (o *Backup) GetScheduleUUID() string`
@@ -453,31 +457,6 @@ SetUniverseName sets UniverseName field to given value.
 `func (o *Backup) HasUniverseName() bool`
 
 HasUniverseName returns a boolean if a field has been set.
-
-### GetUniverseUUID
-
-`func (o *Backup) GetUniverseUUID() string`
-
-GetUniverseUUID returns the UniverseUUID field if non-nil, zero value otherwise.
-
-### GetUniverseUUIDOk
-
-`func (o *Backup) GetUniverseUUIDOk() (*string, bool)`
-
-GetUniverseUUIDOk returns a tuple with the UniverseUUID field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUniverseUUID
-
-`func (o *Backup) SetUniverseUUID(v string)`
-
-SetUniverseUUID sets UniverseUUID field to given value.
-
-### HasUniverseUUID
-
-`func (o *Backup) HasUniverseUUID() bool`
-
-HasUniverseUUID returns a boolean if a field has been set.
 
 ### GetUpdateTime
 

@@ -33,10 +33,15 @@ type AccessKeysApiApiCreateAccesskeyRequest struct {
 	cUUID string
 	pUUID string
 	accessKeyFormData *AccessKeyFormData
+	request *interface{}
 }
 
 func (r AccessKeysApiApiCreateAccesskeyRequest) AccessKeyFormData(accessKeyFormData AccessKeyFormData) AccessKeysApiApiCreateAccesskeyRequest {
 	r.accessKeyFormData = &accessKeyFormData
+	return r
+}
+func (r AccessKeysApiApiCreateAccesskeyRequest) Request(request interface{}) AccessKeysApiApiCreateAccesskeyRequest {
+	r.request = &request
 	return r
 }
 
@@ -91,6 +96,9 @@ func (a *AccessKeysApiService) CreateAccesskeyExecute(r AccessKeysApiApiCreateAc
 		return localVarReturnValue, nil, reportError("accessKeyFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -167,8 +175,13 @@ type AccessKeysApiApiDeleteAccesskeyRequest struct {
 	cUUID string
 	pUUID string
 	keyCode string
+	request *interface{}
 }
 
+func (r AccessKeysApiApiDeleteAccesskeyRequest) Request(request interface{}) AccessKeysApiApiDeleteAccesskeyRequest {
+	r.request = &request
+	return r
+}
 
 func (r AccessKeysApiApiDeleteAccesskeyRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteAccesskeyExecute(r)
@@ -220,6 +233,9 @@ func (a *AccessKeysApiService) DeleteAccesskeyExecute(r AccessKeysApiApiDeleteAc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -295,10 +311,15 @@ type AccessKeysApiApiEditAccesskeyRequest struct {
 	pUUID string
 	keyCode string
 	accesskey *AccessKey
+	request *interface{}
 }
 
 func (r AccessKeysApiApiEditAccesskeyRequest) Accesskey(accesskey AccessKey) AccessKeysApiApiEditAccesskeyRequest {
 	r.accesskey = &accesskey
+	return r
+}
+func (r AccessKeysApiApiEditAccesskeyRequest) Request(request interface{}) AccessKeysApiApiEditAccesskeyRequest {
+	r.request = &request
 	return r
 }
 
@@ -355,6 +376,9 @@ func (a *AccessKeysApiService) EditAccesskeyExecute(r AccessKeysApiApiEditAccess
 		return localVarReturnValue, nil, reportError("accesskey is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
