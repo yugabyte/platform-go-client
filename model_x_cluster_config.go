@@ -40,13 +40,10 @@ type XClusterConfig struct {
 	// tableType
 	TableType *string `json:"tableType,omitempty"`
 	Tables *[]string `json:"tables,omitempty"`
-	// Whether the source is active in txn xCluster
+	// Whether the target is active in txn xCluster
 	TargetActive *bool `json:"targetActive,omitempty"`
 	// Target Universe UUID
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
-	TxnTableDetails *XClusterTableConfig `json:"txnTableDetails,omitempty"`
-	// Replication group name that replicates the transaction status table
-	TxnTableReplicationGroupName *string `json:"txnTableReplicationGroupName,omitempty"`
 	// Whether the config is txn xCluster
 	Type *string `json:"type,omitempty"`
 	// XCluster config UUID
@@ -518,70 +515,6 @@ func (o *XClusterConfig) SetTargetUniverseUUID(v string) {
 	o.TargetUniverseUUID = &v
 }
 
-// GetTxnTableDetails returns the TxnTableDetails field value if set, zero value otherwise.
-func (o *XClusterConfig) GetTxnTableDetails() XClusterTableConfig {
-	if o == nil || o.TxnTableDetails == nil {
-		var ret XClusterTableConfig
-		return ret
-	}
-	return *o.TxnTableDetails
-}
-
-// GetTxnTableDetailsOk returns a tuple with the TxnTableDetails field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterConfig) GetTxnTableDetailsOk() (*XClusterTableConfig, bool) {
-	if o == nil || o.TxnTableDetails == nil {
-		return nil, false
-	}
-	return o.TxnTableDetails, true
-}
-
-// HasTxnTableDetails returns a boolean if a field has been set.
-func (o *XClusterConfig) HasTxnTableDetails() bool {
-	if o != nil && o.TxnTableDetails != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTxnTableDetails gets a reference to the given XClusterTableConfig and assigns it to the TxnTableDetails field.
-func (o *XClusterConfig) SetTxnTableDetails(v XClusterTableConfig) {
-	o.TxnTableDetails = &v
-}
-
-// GetTxnTableReplicationGroupName returns the TxnTableReplicationGroupName field value if set, zero value otherwise.
-func (o *XClusterConfig) GetTxnTableReplicationGroupName() string {
-	if o == nil || o.TxnTableReplicationGroupName == nil {
-		var ret string
-		return ret
-	}
-	return *o.TxnTableReplicationGroupName
-}
-
-// GetTxnTableReplicationGroupNameOk returns a tuple with the TxnTableReplicationGroupName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterConfig) GetTxnTableReplicationGroupNameOk() (*string, bool) {
-	if o == nil || o.TxnTableReplicationGroupName == nil {
-		return nil, false
-	}
-	return o.TxnTableReplicationGroupName, true
-}
-
-// HasTxnTableReplicationGroupName returns a boolean if a field has been set.
-func (o *XClusterConfig) HasTxnTableReplicationGroupName() bool {
-	if o != nil && o.TxnTableReplicationGroupName != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTxnTableReplicationGroupName gets a reference to the given string and assigns it to the TxnTableReplicationGroupName field.
-func (o *XClusterConfig) SetTxnTableReplicationGroupName(v string) {
-	o.TxnTableReplicationGroupName = &v
-}
-
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *XClusterConfig) GetType() string {
 	if o == nil || o.Type == nil {
@@ -689,12 +622,6 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.TargetUniverseUUID != nil {
 		toSerialize["targetUniverseUUID"] = o.TargetUniverseUUID
-	}
-	if o.TxnTableDetails != nil {
-		toSerialize["txnTableDetails"] = o.TxnTableDetails
-	}
-	if o.TxnTableReplicationGroupName != nil {
-		toSerialize["txnTableReplicationGroupName"] = o.TxnTableReplicationGroupName
 	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type

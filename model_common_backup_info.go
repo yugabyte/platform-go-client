@@ -28,6 +28,7 @@ type CommonBackupInfo struct {
 	Sse bool `json:"sse"`
 	State string `json:"state"`
 	StorageConfigUUID string `json:"storageConfigUUID"`
+	TableByTableBackup bool `json:"tableByTableBackup"`
 	TaskUUID string `json:"taskUUID"`
 	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
 	// Backup update time.
@@ -38,7 +39,7 @@ type CommonBackupInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo {
+func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, tableByTableBackup bool, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo {
 	this := CommonBackupInfo{}
 	this.BackupUUID = backupUUID
 	this.BaseBackupUUID = baseBackupUUID
@@ -47,6 +48,7 @@ func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID
 	this.Sse = sse
 	this.State = state
 	this.StorageConfigUUID = storageConfigUUID
+	this.TableByTableBackup = tableByTableBackup
 	this.TaskUUID = taskUUID
 	this.TotalBackupSizeInBytes = totalBackupSizeInBytes
 	return &this
@@ -292,6 +294,30 @@ func (o *CommonBackupInfo) SetStorageConfigUUID(v string) {
 	o.StorageConfigUUID = v
 }
 
+// GetTableByTableBackup returns the TableByTableBackup field value
+func (o *CommonBackupInfo) GetTableByTableBackup() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.TableByTableBackup
+}
+
+// GetTableByTableBackupOk returns a tuple with the TableByTableBackup field value
+// and a boolean to check if the value has been set.
+func (o *CommonBackupInfo) GetTableByTableBackupOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.TableByTableBackup, true
+}
+
+// SetTableByTableBackup sets field value
+func (o *CommonBackupInfo) SetTableByTableBackup(v bool) {
+	o.TableByTableBackup = v
+}
+
 // GetTaskUUID returns the TaskUUID field value
 func (o *CommonBackupInfo) GetTaskUUID() string {
 	if o == nil  {
@@ -400,6 +426,9 @@ func (o CommonBackupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["storageConfigUUID"] = o.StorageConfigUUID
+	}
+	if true {
+		toSerialize["tableByTableBackup"] = o.TableByTableBackup
 	}
 	if true {
 		toSerialize["taskUUID"] = o.TaskUUID

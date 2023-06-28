@@ -1401,6 +1401,7 @@ type TableManagementApiApiGetAllTablesRequest struct {
 	uniUUID string
 	includeParentTableInfo *bool
 	excludeColocatedTables *bool
+	includeColocatedParentTables *bool
 }
 
 func (r TableManagementApiApiGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementApiApiGetAllTablesRequest {
@@ -1409,6 +1410,10 @@ func (r TableManagementApiApiGetAllTablesRequest) IncludeParentTableInfo(include
 }
 func (r TableManagementApiApiGetAllTablesRequest) ExcludeColocatedTables(excludeColocatedTables bool) TableManagementApiApiGetAllTablesRequest {
 	r.excludeColocatedTables = &excludeColocatedTables
+	return r
+}
+func (r TableManagementApiApiGetAllTablesRequest) IncludeColocatedParentTables(includeColocatedParentTables bool) TableManagementApiApiGetAllTablesRequest {
+	r.includeColocatedParentTables = &includeColocatedParentTables
 	return r
 }
 
@@ -1465,6 +1470,9 @@ func (a *TableManagementApiService) GetAllTablesExecute(r TableManagementApiApiG
 	}
 	if r.excludeColocatedTables != nil {
 		localVarQueryParams.Add("excludeColocatedTables", parameterToString(*r.excludeColocatedTables, ""))
+	}
+	if r.includeColocatedParentTables != nil {
+		localVarQueryParams.Add("includeColocatedParentTables", parameterToString(*r.includeColocatedParentTables, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

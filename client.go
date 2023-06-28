@@ -78,6 +78,8 @@ type APIClient struct {
 
 	KubernetesOverridesControllerApi *KubernetesOverridesControllerApiService
 
+	LDAPRoleManagementApi *LDAPRoleManagementApiService
+
 	LicenseManagementApi *LicenseManagementApiService
 
 	LoggingConfigApi *LoggingConfigApiService
@@ -85,6 +87,8 @@ type APIClient struct {
 	MaintenanceWindowsApi *MaintenanceWindowsApiService
 
 	MetricsApi *MetricsApiService
+
+	NodeAgentsApi *NodeAgentsApiService
 
 	NodeInstancesApi *NodeInstancesApiService
 
@@ -162,10 +166,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
 	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)
+	c.LDAPRoleManagementApi = (*LDAPRoleManagementApiService)(&c.common)
 	c.LicenseManagementApi = (*LicenseManagementApiService)(&c.common)
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
+	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
 	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)

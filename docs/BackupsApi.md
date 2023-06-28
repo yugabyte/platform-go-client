@@ -120,7 +120,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -192,7 +192,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
