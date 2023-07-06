@@ -14,30 +14,30 @@ import (
 	"encoding/json"
 )
 
-// DatabaseSecurityFormData struct for DatabaseSecurityFormData
+// DatabaseSecurityFormData Database security properties
 type DatabaseSecurityFormData struct {
-	DbName string `json:"dbName"`
-	YcqlAdminPassword string `json:"ycqlAdminPassword"`
-	YcqlAdminUsername string `json:"ycqlAdminUsername"`
-	YcqlCurrAdminPassword string `json:"ycqlCurrAdminPassword"`
-	YsqlAdminPassword string `json:"ysqlAdminPassword"`
-	YsqlAdminUsername string `json:"ysqlAdminUsername"`
-	YsqlCurrAdminPassword string `json:"ysqlCurrAdminPassword"`
+	// YSQL DB Name
+	DbName *string `json:"dbName,omitempty"`
+	// New YCQL admin password
+	YcqlAdminPassword *string `json:"ycqlAdminPassword,omitempty"`
+	// YCQL admin username
+	YcqlAdminUsername *string `json:"ycqlAdminUsername,omitempty"`
+	// Current YCQL admin password
+	YcqlCurrAdminPassword *string `json:"ycqlCurrAdminPassword,omitempty"`
+	// New YSQL admin password
+	YsqlAdminPassword *string `json:"ysqlAdminPassword,omitempty"`
+	// YSQL admin username
+	YsqlAdminUsername *string `json:"ysqlAdminUsername,omitempty"`
+	// Current YSQL admin password
+	YsqlCurrAdminPassword *string `json:"ysqlCurrAdminPassword,omitempty"`
 }
 
 // NewDatabaseSecurityFormData instantiates a new DatabaseSecurityFormData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseSecurityFormData(dbName string, ycqlAdminPassword string, ycqlAdminUsername string, ycqlCurrAdminPassword string, ysqlAdminPassword string, ysqlAdminUsername string, ysqlCurrAdminPassword string, ) *DatabaseSecurityFormData {
+func NewDatabaseSecurityFormData() *DatabaseSecurityFormData {
 	this := DatabaseSecurityFormData{}
-	this.DbName = dbName
-	this.YcqlAdminPassword = ycqlAdminPassword
-	this.YcqlAdminUsername = ycqlAdminUsername
-	this.YcqlCurrAdminPassword = ycqlCurrAdminPassword
-	this.YsqlAdminPassword = ysqlAdminPassword
-	this.YsqlAdminUsername = ysqlAdminUsername
-	this.YsqlCurrAdminPassword = ysqlCurrAdminPassword
 	return &this
 }
 
@@ -49,195 +49,251 @@ func NewDatabaseSecurityFormDataWithDefaults() *DatabaseSecurityFormData {
 	return &this
 }
 
-// GetDbName returns the DbName field value
+// GetDbName returns the DbName field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetDbName() string {
-	if o == nil  {
+	if o == nil || o.DbName == nil {
 		var ret string
 		return ret
 	}
-
-	return o.DbName
+	return *o.DbName
 }
 
-// GetDbNameOk returns a tuple with the DbName field value
+// GetDbNameOk returns a tuple with the DbName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetDbNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.DbName == nil {
 		return nil, false
 	}
-	return &o.DbName, true
+	return o.DbName, true
 }
 
-// SetDbName sets field value
+// HasDbName returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasDbName() bool {
+	if o != nil && o.DbName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDbName gets a reference to the given string and assigns it to the DbName field.
 func (o *DatabaseSecurityFormData) SetDbName(v string) {
-	o.DbName = v
+	o.DbName = &v
 }
 
-// GetYcqlAdminPassword returns the YcqlAdminPassword field value
+// GetYcqlAdminPassword returns the YcqlAdminPassword field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYcqlAdminPassword() string {
-	if o == nil  {
+	if o == nil || o.YcqlAdminPassword == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YcqlAdminPassword
+	return *o.YcqlAdminPassword
 }
 
-// GetYcqlAdminPasswordOk returns a tuple with the YcqlAdminPassword field value
+// GetYcqlAdminPasswordOk returns a tuple with the YcqlAdminPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYcqlAdminPasswordOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YcqlAdminPassword == nil {
 		return nil, false
 	}
-	return &o.YcqlAdminPassword, true
+	return o.YcqlAdminPassword, true
 }
 
-// SetYcqlAdminPassword sets field value
+// HasYcqlAdminPassword returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYcqlAdminPassword() bool {
+	if o != nil && o.YcqlAdminPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYcqlAdminPassword gets a reference to the given string and assigns it to the YcqlAdminPassword field.
 func (o *DatabaseSecurityFormData) SetYcqlAdminPassword(v string) {
-	o.YcqlAdminPassword = v
+	o.YcqlAdminPassword = &v
 }
 
-// GetYcqlAdminUsername returns the YcqlAdminUsername field value
+// GetYcqlAdminUsername returns the YcqlAdminUsername field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYcqlAdminUsername() string {
-	if o == nil  {
+	if o == nil || o.YcqlAdminUsername == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YcqlAdminUsername
+	return *o.YcqlAdminUsername
 }
 
-// GetYcqlAdminUsernameOk returns a tuple with the YcqlAdminUsername field value
+// GetYcqlAdminUsernameOk returns a tuple with the YcqlAdminUsername field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYcqlAdminUsernameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YcqlAdminUsername == nil {
 		return nil, false
 	}
-	return &o.YcqlAdminUsername, true
+	return o.YcqlAdminUsername, true
 }
 
-// SetYcqlAdminUsername sets field value
+// HasYcqlAdminUsername returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYcqlAdminUsername() bool {
+	if o != nil && o.YcqlAdminUsername != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYcqlAdminUsername gets a reference to the given string and assigns it to the YcqlAdminUsername field.
 func (o *DatabaseSecurityFormData) SetYcqlAdminUsername(v string) {
-	o.YcqlAdminUsername = v
+	o.YcqlAdminUsername = &v
 }
 
-// GetYcqlCurrAdminPassword returns the YcqlCurrAdminPassword field value
+// GetYcqlCurrAdminPassword returns the YcqlCurrAdminPassword field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYcqlCurrAdminPassword() string {
-	if o == nil  {
+	if o == nil || o.YcqlCurrAdminPassword == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YcqlCurrAdminPassword
+	return *o.YcqlCurrAdminPassword
 }
 
-// GetYcqlCurrAdminPasswordOk returns a tuple with the YcqlCurrAdminPassword field value
+// GetYcqlCurrAdminPasswordOk returns a tuple with the YcqlCurrAdminPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYcqlCurrAdminPasswordOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YcqlCurrAdminPassword == nil {
 		return nil, false
 	}
-	return &o.YcqlCurrAdminPassword, true
+	return o.YcqlCurrAdminPassword, true
 }
 
-// SetYcqlCurrAdminPassword sets field value
+// HasYcqlCurrAdminPassword returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYcqlCurrAdminPassword() bool {
+	if o != nil && o.YcqlCurrAdminPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYcqlCurrAdminPassword gets a reference to the given string and assigns it to the YcqlCurrAdminPassword field.
 func (o *DatabaseSecurityFormData) SetYcqlCurrAdminPassword(v string) {
-	o.YcqlCurrAdminPassword = v
+	o.YcqlCurrAdminPassword = &v
 }
 
-// GetYsqlAdminPassword returns the YsqlAdminPassword field value
+// GetYsqlAdminPassword returns the YsqlAdminPassword field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYsqlAdminPassword() string {
-	if o == nil  {
+	if o == nil || o.YsqlAdminPassword == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YsqlAdminPassword
+	return *o.YsqlAdminPassword
 }
 
-// GetYsqlAdminPasswordOk returns a tuple with the YsqlAdminPassword field value
+// GetYsqlAdminPasswordOk returns a tuple with the YsqlAdminPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYsqlAdminPasswordOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YsqlAdminPassword == nil {
 		return nil, false
 	}
-	return &o.YsqlAdminPassword, true
+	return o.YsqlAdminPassword, true
 }
 
-// SetYsqlAdminPassword sets field value
+// HasYsqlAdminPassword returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYsqlAdminPassword() bool {
+	if o != nil && o.YsqlAdminPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlAdminPassword gets a reference to the given string and assigns it to the YsqlAdminPassword field.
 func (o *DatabaseSecurityFormData) SetYsqlAdminPassword(v string) {
-	o.YsqlAdminPassword = v
+	o.YsqlAdminPassword = &v
 }
 
-// GetYsqlAdminUsername returns the YsqlAdminUsername field value
+// GetYsqlAdminUsername returns the YsqlAdminUsername field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYsqlAdminUsername() string {
-	if o == nil  {
+	if o == nil || o.YsqlAdminUsername == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YsqlAdminUsername
+	return *o.YsqlAdminUsername
 }
 
-// GetYsqlAdminUsernameOk returns a tuple with the YsqlAdminUsername field value
+// GetYsqlAdminUsernameOk returns a tuple with the YsqlAdminUsername field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYsqlAdminUsernameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YsqlAdminUsername == nil {
 		return nil, false
 	}
-	return &o.YsqlAdminUsername, true
+	return o.YsqlAdminUsername, true
 }
 
-// SetYsqlAdminUsername sets field value
+// HasYsqlAdminUsername returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYsqlAdminUsername() bool {
+	if o != nil && o.YsqlAdminUsername != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlAdminUsername gets a reference to the given string and assigns it to the YsqlAdminUsername field.
 func (o *DatabaseSecurityFormData) SetYsqlAdminUsername(v string) {
-	o.YsqlAdminUsername = v
+	o.YsqlAdminUsername = &v
 }
 
-// GetYsqlCurrAdminPassword returns the YsqlCurrAdminPassword field value
+// GetYsqlCurrAdminPassword returns the YsqlCurrAdminPassword field value if set, zero value otherwise.
 func (o *DatabaseSecurityFormData) GetYsqlCurrAdminPassword() string {
-	if o == nil  {
+	if o == nil || o.YsqlCurrAdminPassword == nil {
 		var ret string
 		return ret
 	}
-
-	return o.YsqlCurrAdminPassword
+	return *o.YsqlCurrAdminPassword
 }
 
-// GetYsqlCurrAdminPasswordOk returns a tuple with the YsqlCurrAdminPassword field value
+// GetYsqlCurrAdminPasswordOk returns a tuple with the YsqlCurrAdminPassword field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DatabaseSecurityFormData) GetYsqlCurrAdminPasswordOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.YsqlCurrAdminPassword == nil {
 		return nil, false
 	}
-	return &o.YsqlCurrAdminPassword, true
+	return o.YsqlCurrAdminPassword, true
 }
 
-// SetYsqlCurrAdminPassword sets field value
+// HasYsqlCurrAdminPassword returns a boolean if a field has been set.
+func (o *DatabaseSecurityFormData) HasYsqlCurrAdminPassword() bool {
+	if o != nil && o.YsqlCurrAdminPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlCurrAdminPassword gets a reference to the given string and assigns it to the YsqlCurrAdminPassword field.
 func (o *DatabaseSecurityFormData) SetYsqlCurrAdminPassword(v string) {
-	o.YsqlCurrAdminPassword = v
+	o.YsqlCurrAdminPassword = &v
 }
 
 func (o DatabaseSecurityFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.DbName != nil {
 		toSerialize["dbName"] = o.DbName
 	}
-	if true {
+	if o.YcqlAdminPassword != nil {
 		toSerialize["ycqlAdminPassword"] = o.YcqlAdminPassword
 	}
-	if true {
+	if o.YcqlAdminUsername != nil {
 		toSerialize["ycqlAdminUsername"] = o.YcqlAdminUsername
 	}
-	if true {
+	if o.YcqlCurrAdminPassword != nil {
 		toSerialize["ycqlCurrAdminPassword"] = o.YcqlCurrAdminPassword
 	}
-	if true {
+	if o.YsqlAdminPassword != nil {
 		toSerialize["ysqlAdminPassword"] = o.YsqlAdminPassword
 	}
-	if true {
+	if o.YsqlAdminUsername != nil {
 		toSerialize["ysqlAdminUsername"] = o.YsqlAdminUsername
 	}
-	if true {
+	if o.YsqlCurrAdminPassword != nil {
 		toSerialize["ysqlCurrAdminPassword"] = o.YsqlCurrAdminPassword
 	}
 	return json.Marshal(toSerialize)

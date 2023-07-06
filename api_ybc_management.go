@@ -32,8 +32,13 @@ type YbcManagementApiApiDisableRequest struct {
 	ApiService *YbcManagementApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r YbcManagementApiApiDisableRequest) Request(request interface{}) YbcManagementApiApiDisableRequest {
+	r.request = &request
+	return r
+}
 
 func (r YbcManagementApiApiDisableRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DisableExecute(r)
@@ -80,6 +85,9 @@ func (a *YbcManagementApiService) DisableExecute(r YbcManagementApiApiDisableReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -145,10 +153,15 @@ type YbcManagementApiApiInstallRequest struct {
 	cUUID string
 	uniUUID string
 	ybcVersion *string
+	request *interface{}
 }
 
 func (r YbcManagementApiApiInstallRequest) YbcVersion(ybcVersion string) YbcManagementApiApiInstallRequest {
 	r.ybcVersion = &ybcVersion
+	return r
+}
+func (r YbcManagementApiApiInstallRequest) Request(request interface{}) YbcManagementApiApiInstallRequest {
+	r.request = &request
 	return r
 }
 
@@ -199,6 +212,9 @@ func (a *YbcManagementApiService) InstallExecute(r YbcManagementApiApiInstallReq
 
 	if r.ybcVersion != nil {
 		localVarQueryParams.Add("ybcVersion", parameterToString(*r.ybcVersion, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -265,10 +281,15 @@ type YbcManagementApiApiUpgradeRequest struct {
 	cUUID string
 	uniUUID string
 	ybcVersion *string
+	request *interface{}
 }
 
 func (r YbcManagementApiApiUpgradeRequest) YbcVersion(ybcVersion string) YbcManagementApiApiUpgradeRequest {
 	r.ybcVersion = &ybcVersion
+	return r
+}
+func (r YbcManagementApiApiUpgradeRequest) Request(request interface{}) YbcManagementApiApiUpgradeRequest {
+	r.request = &request
 	return r
 }
 
@@ -319,6 +340,9 @@ func (a *YbcManagementApiService) UpgradeExecute(r YbcManagementApiApiUpgradeReq
 
 	if r.ybcVersion != nil {
 		localVarQueryParams.Add("ybcVersion", parameterToString(*r.ybcVersion, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

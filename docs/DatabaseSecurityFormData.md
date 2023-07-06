@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DbName** | **string** |  | 
-**YcqlAdminPassword** | **string** |  | 
-**YcqlAdminUsername** | **string** |  | 
-**YcqlCurrAdminPassword** | **string** |  | 
-**YsqlAdminPassword** | **string** |  | 
-**YsqlAdminUsername** | **string** |  | 
-**YsqlCurrAdminPassword** | **string** |  | 
+**DbName** | Pointer to **string** | YSQL DB Name | [optional] 
+**YcqlAdminPassword** | Pointer to **string** | New YCQL admin password | [optional] 
+**YcqlAdminUsername** | Pointer to **string** | YCQL admin username | [optional] 
+**YcqlCurrAdminPassword** | Pointer to **string** | Current YCQL admin password | [optional] 
+**YsqlAdminPassword** | Pointer to **string** | New YSQL admin password | [optional] 
+**YsqlAdminUsername** | Pointer to **string** | YSQL admin username | [optional] 
+**YsqlCurrAdminPassword** | Pointer to **string** | Current YSQL admin password | [optional] 
 
 ## Methods
 
 ### NewDatabaseSecurityFormData
 
-`func NewDatabaseSecurityFormData(dbName string, ycqlAdminPassword string, ycqlAdminUsername string, ycqlCurrAdminPassword string, ysqlAdminPassword string, ysqlAdminUsername string, ysqlCurrAdminPassword string, ) *DatabaseSecurityFormData`
+`func NewDatabaseSecurityFormData() *DatabaseSecurityFormData`
 
 NewDatabaseSecurityFormData instantiates a new DatabaseSecurityFormData object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +50,11 @@ and a boolean to check if the value has been set.
 
 SetDbName sets DbName field to given value.
 
+### HasDbName
+
+`func (o *DatabaseSecurityFormData) HasDbName() bool`
+
+HasDbName returns a boolean if a field has been set.
 
 ### GetYcqlAdminPassword
 
@@ -70,6 +75,11 @@ and a boolean to check if the value has been set.
 
 SetYcqlAdminPassword sets YcqlAdminPassword field to given value.
 
+### HasYcqlAdminPassword
+
+`func (o *DatabaseSecurityFormData) HasYcqlAdminPassword() bool`
+
+HasYcqlAdminPassword returns a boolean if a field has been set.
 
 ### GetYcqlAdminUsername
 
@@ -90,6 +100,11 @@ and a boolean to check if the value has been set.
 
 SetYcqlAdminUsername sets YcqlAdminUsername field to given value.
 
+### HasYcqlAdminUsername
+
+`func (o *DatabaseSecurityFormData) HasYcqlAdminUsername() bool`
+
+HasYcqlAdminUsername returns a boolean if a field has been set.
 
 ### GetYcqlCurrAdminPassword
 
@@ -110,6 +125,11 @@ and a boolean to check if the value has been set.
 
 SetYcqlCurrAdminPassword sets YcqlCurrAdminPassword field to given value.
 
+### HasYcqlCurrAdminPassword
+
+`func (o *DatabaseSecurityFormData) HasYcqlCurrAdminPassword() bool`
+
+HasYcqlCurrAdminPassword returns a boolean if a field has been set.
 
 ### GetYsqlAdminPassword
 
@@ -130,6 +150,11 @@ and a boolean to check if the value has been set.
 
 SetYsqlAdminPassword sets YsqlAdminPassword field to given value.
 
+### HasYsqlAdminPassword
+
+`func (o *DatabaseSecurityFormData) HasYsqlAdminPassword() bool`
+
+HasYsqlAdminPassword returns a boolean if a field has been set.
 
 ### GetYsqlAdminUsername
 
@@ -150,6 +175,11 @@ and a boolean to check if the value has been set.
 
 SetYsqlAdminUsername sets YsqlAdminUsername field to given value.
 
+### HasYsqlAdminUsername
+
+`func (o *DatabaseSecurityFormData) HasYsqlAdminUsername() bool`
+
+HasYsqlAdminUsername returns a boolean if a field has been set.
 
 ### GetYsqlCurrAdminPassword
 
@@ -170,6 +200,11 @@ and a boolean to check if the value has been set.
 
 SetYsqlCurrAdminPassword sets YsqlCurrAdminPassword field to given value.
 
+### HasYsqlCurrAdminPassword
+
+`func (o *DatabaseSecurityFormData) HasYsqlCurrAdminPassword() bool`
+
+HasYsqlCurrAdminPassword returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -23,6 +23,7 @@ type BackupResp struct {
 	CustomerUUID string `json:"customerUUID"`
 	// The expiry time for backup.
 	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
+	ExpiryTimeUnit string `json:"expiryTimeUnit"`
 	FullChainSizeInBytes int64 `json:"fullChainSizeInBytes"`
 	HasIncrementalBackups bool `json:"hasIncrementalBackups"`
 	IsFullBackup bool `json:"isFullBackup"`
@@ -32,6 +33,7 @@ type BackupResp struct {
 	// Time for last incremenatal backup.
 	LastIncrementalBackupTime *time.Time `json:"lastIncrementalBackupTime,omitempty"`
 	OnDemand bool `json:"onDemand"`
+	ScheduleName string `json:"scheduleName"`
 	ScheduleUUID string `json:"scheduleUUID"`
 	StorageConfigType string `json:"storageConfigType"`
 	UniverseName string `json:"universeName"`
@@ -42,12 +44,13 @@ type BackupResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
+func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.Category = category
 	this.CommonBackupInfo = commonBackupInfo
 	this.CustomerUUID = customerUUID
+	this.ExpiryTimeUnit = expiryTimeUnit
 	this.FullChainSizeInBytes = fullChainSizeInBytes
 	this.HasIncrementalBackups = hasIncrementalBackups
 	this.IsFullBackup = isFullBackup
@@ -55,6 +58,7 @@ func NewBackupResp(backupType string, category string, commonBackupInfo CommonBa
 	this.IsUniversePresent = isUniversePresent
 	this.LastBackupState = lastBackupState
 	this.OnDemand = onDemand
+	this.ScheduleName = scheduleName
 	this.ScheduleUUID = scheduleUUID
 	this.StorageConfigType = storageConfigType
 	this.UniverseName = universeName
@@ -196,6 +200,30 @@ func (o *BackupResp) HasExpiryTime() bool {
 // SetExpiryTime gets a reference to the given time.Time and assigns it to the ExpiryTime field.
 func (o *BackupResp) SetExpiryTime(v time.Time) {
 	o.ExpiryTime = &v
+}
+
+// GetExpiryTimeUnit returns the ExpiryTimeUnit field value
+func (o *BackupResp) GetExpiryTimeUnit() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.ExpiryTimeUnit
+}
+
+// GetExpiryTimeUnitOk returns a tuple with the ExpiryTimeUnit field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetExpiryTimeUnitOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ExpiryTimeUnit, true
+}
+
+// SetExpiryTimeUnit sets field value
+func (o *BackupResp) SetExpiryTimeUnit(v string) {
+	o.ExpiryTimeUnit = v
 }
 
 // GetFullChainSizeInBytes returns the FullChainSizeInBytes field value
@@ -398,6 +426,30 @@ func (o *BackupResp) SetOnDemand(v bool) {
 	o.OnDemand = v
 }
 
+// GetScheduleName returns the ScheduleName field value
+func (o *BackupResp) GetScheduleName() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.ScheduleName
+}
+
+// GetScheduleNameOk returns a tuple with the ScheduleName field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetScheduleNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ScheduleName, true
+}
+
+// SetScheduleName sets field value
+func (o *BackupResp) SetScheduleName(v string) {
+	o.ScheduleName = v
+}
+
 // GetScheduleUUID returns the ScheduleUUID field value
 func (o *BackupResp) GetScheduleUUID() string {
 	if o == nil  {
@@ -512,6 +564,9 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 		toSerialize["expiryTime"] = o.ExpiryTime
 	}
 	if true {
+		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
+	}
+	if true {
 		toSerialize["fullChainSizeInBytes"] = o.FullChainSizeInBytes
 	}
 	if true {
@@ -534,6 +589,9 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["onDemand"] = o.OnDemand
+	}
+	if true {
+		toSerialize["scheduleName"] = o.ScheduleName
 	}
 	if true {
 		toSerialize["scheduleUUID"] = o.ScheduleUUID

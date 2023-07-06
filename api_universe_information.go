@@ -895,8 +895,13 @@ type UniverseInformationApiApiResetSlowQueriesRequest struct {
 	ApiService *UniverseInformationApiService
 	cUUID string
 	uniUUID string
+	request *interface{}
 }
 
+func (r UniverseInformationApiApiResetSlowQueriesRequest) Request(request interface{}) UniverseInformationApiApiResetSlowQueriesRequest {
+	r.request = &request
+	return r
+}
 
 func (r UniverseInformationApiApiResetSlowQueriesRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.ResetSlowQueriesExecute(r)
@@ -945,6 +950,9 @@ func (a *UniverseInformationApiService) ResetSlowQueriesExecute(r UniverseInform
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

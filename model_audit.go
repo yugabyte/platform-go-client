@@ -25,7 +25,8 @@ type Audit struct {
 	ApiCall *string `json:"apiCall,omitempty"`
 	// API method
 	ApiMethod *string `json:"apiMethod,omitempty"`
-	AuditID int64 `json:"auditID"`
+	// Audit UID
+	AuditID *int64 `json:"auditID,omitempty"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// Audit UUID
@@ -50,9 +51,8 @@ type Audit struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudit(auditID int64, ) *Audit {
+func NewAudit() *Audit {
 	this := Audit{}
-	this.AuditID = auditID
 	return &this
 }
 
@@ -192,28 +192,36 @@ func (o *Audit) SetApiMethod(v string) {
 	o.ApiMethod = &v
 }
 
-// GetAuditID returns the AuditID field value
+// GetAuditID returns the AuditID field value if set, zero value otherwise.
 func (o *Audit) GetAuditID() int64 {
-	if o == nil  {
+	if o == nil || o.AuditID == nil {
 		var ret int64
 		return ret
 	}
-
-	return o.AuditID
+	return *o.AuditID
 }
 
-// GetAuditIDOk returns a tuple with the AuditID field value
+// GetAuditIDOk returns a tuple with the AuditID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Audit) GetAuditIDOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil || o.AuditID == nil {
 		return nil, false
 	}
-	return &o.AuditID, true
+	return o.AuditID, true
 }
 
-// SetAuditID sets field value
+// HasAuditID returns a boolean if a field has been set.
+func (o *Audit) HasAuditID() bool {
+	if o != nil && o.AuditID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuditID gets a reference to the given int64 and assigns it to the AuditID field.
 func (o *Audit) SetAuditID(v int64) {
-	o.AuditID = v
+	o.AuditID = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -518,7 +526,7 @@ func (o Audit) MarshalJSON() ([]byte, error) {
 	if o.ApiMethod != nil {
 		toSerialize["apiMethod"] = o.ApiMethod
 	}
-	if true {
+	if o.AuditID != nil {
 		toSerialize["auditID"] = o.AuditID
 	}
 	if o.CustomerUUID != nil {

@@ -30,10 +30,15 @@ type PackagesControllerApiApiFetchPackageRequest struct {
 	ctx _context.Context
 	ApiService *PackagesControllerApiService
 	package_ *PackagesRequestParams
+	request *interface{}
 }
 
 func (r PackagesControllerApiApiFetchPackageRequest) Package_(package_ PackagesRequestParams) PackagesControllerApiApiFetchPackageRequest {
 	r.package_ = &package_
+	return r
+}
+func (r PackagesControllerApiApiFetchPackageRequest) Request(request interface{}) PackagesControllerApiApiFetchPackageRequest {
+	r.request = &request
 	return r
 }
 
@@ -81,6 +86,9 @@ func (a *PackagesControllerApiService) FetchPackageExecute(r PackagesControllerA
 		return localVarReturnValue, nil, reportError("package_ is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

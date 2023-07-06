@@ -32,10 +32,15 @@ type UniverseClusterMutationsApiApiCreateAllClustersRequest struct {
 	ApiService *UniverseClusterMutationsApiService
 	cUUID string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
+	request *interface{}
 }
 
 func (r UniverseClusterMutationsApiApiCreateAllClustersRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsApiApiCreateAllClustersRequest {
 	r.universeConfigureTaskParams = &universeConfigureTaskParams
+	return r
+}
+func (r UniverseClusterMutationsApiApiCreateAllClustersRequest) Request(request interface{}) UniverseClusterMutationsApiApiCreateAllClustersRequest {
+	r.request = &request
 	return r
 }
 
@@ -87,6 +92,9 @@ func (a *UniverseClusterMutationsApiService) CreateAllClustersExecute(r Universe
 		return localVarReturnValue, nil, reportError("universeConfigureTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -163,10 +171,15 @@ type UniverseClusterMutationsApiApiCreateReadOnlyClusterRequest struct {
 	cUUID string
 	uniUUID string
 	universeConfigureTaskParams *UniverseDefinitionTaskParams
+	request *interface{}
 }
 
 func (r UniverseClusterMutationsApiApiCreateReadOnlyClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseDefinitionTaskParams) UniverseClusterMutationsApiApiCreateReadOnlyClusterRequest {
 	r.universeConfigureTaskParams = &universeConfigureTaskParams
+	return r
+}
+func (r UniverseClusterMutationsApiApiCreateReadOnlyClusterRequest) Request(request interface{}) UniverseClusterMutationsApiApiCreateReadOnlyClusterRequest {
+	r.request = &request
 	return r
 }
 
@@ -221,6 +234,9 @@ func (a *UniverseClusterMutationsApiService) CreateReadOnlyClusterExecute(r Univ
 		return localVarReturnValue, nil, reportError("universeConfigureTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -298,10 +314,15 @@ type UniverseClusterMutationsApiApiDeleteReadonlyClusterRequest struct {
 	uniUUID string
 	clustUUID string
 	isForceDelete *bool
+	request *interface{}
 }
 
 func (r UniverseClusterMutationsApiApiDeleteReadonlyClusterRequest) IsForceDelete(isForceDelete bool) UniverseClusterMutationsApiApiDeleteReadonlyClusterRequest {
 	r.isForceDelete = &isForceDelete
+	return r
+}
+func (r UniverseClusterMutationsApiApiDeleteReadonlyClusterRequest) Request(request interface{}) UniverseClusterMutationsApiApiDeleteReadonlyClusterRequest {
+	r.request = &request
 	return r
 }
 
@@ -358,6 +379,9 @@ func (a *UniverseClusterMutationsApiService) DeleteReadonlyClusterExecute(r Univ
 
 	if r.isForceDelete != nil {
 		localVarQueryParams.Add("isForceDelete", parameterToString(*r.isForceDelete, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -433,10 +457,15 @@ type UniverseClusterMutationsApiApiUpdatePrimaryClusterRequest struct {
 	cUUID string
 	uniUUID string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
+	request *interface{}
 }
 
 func (r UniverseClusterMutationsApiApiUpdatePrimaryClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsApiApiUpdatePrimaryClusterRequest {
 	r.universeConfigureTaskParams = &universeConfigureTaskParams
+	return r
+}
+func (r UniverseClusterMutationsApiApiUpdatePrimaryClusterRequest) Request(request interface{}) UniverseClusterMutationsApiApiUpdatePrimaryClusterRequest {
+	r.request = &request
 	return r
 }
 
@@ -491,6 +520,9 @@ func (a *UniverseClusterMutationsApiService) UpdatePrimaryClusterExecute(r Unive
 		return localVarReturnValue, nil, reportError("universeConfigureTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -567,10 +599,15 @@ type UniverseClusterMutationsApiApiUpdateReadOnlyClusterRequest struct {
 	cUUID string
 	uniUUID string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
+	request *interface{}
 }
 
 func (r UniverseClusterMutationsApiApiUpdateReadOnlyClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsApiApiUpdateReadOnlyClusterRequest {
 	r.universeConfigureTaskParams = &universeConfigureTaskParams
+	return r
+}
+func (r UniverseClusterMutationsApiApiUpdateReadOnlyClusterRequest) Request(request interface{}) UniverseClusterMutationsApiApiUpdateReadOnlyClusterRequest {
+	r.request = &request
 	return r
 }
 
@@ -625,6 +662,9 @@ func (a *UniverseClusterMutationsApiService) UpdateReadOnlyClusterExecute(r Univ
 		return localVarReturnValue, nil, reportError("universeConfigureTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

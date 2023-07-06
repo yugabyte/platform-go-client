@@ -64,6 +64,8 @@ type APIClient struct {
 
 	CloudProvidersApi *CloudProvidersApiService
 
+	CustomCACertificatesApi *CustomCACertificatesApiService
+
 	CustomerConfigurationApi *CustomerConfigurationApiService
 
 	CustomerManagementApi *CustomerManagementApiService
@@ -78,6 +80,8 @@ type APIClient struct {
 
 	KubernetesOverridesControllerApi *KubernetesOverridesControllerApiService
 
+	LDAPRoleManagementApi *LDAPRoleManagementApiService
+
 	LicenseManagementApi *LicenseManagementApiService
 
 	LoggingConfigApi *LoggingConfigApiService
@@ -86,6 +90,8 @@ type APIClient struct {
 
 	MetricsApi *MetricsApiService
 
+	NodeAgentsApi *NodeAgentsApiService
+
 	NodeInstancesApi *NodeInstancesApiService
 
 	PITRManagementApi *PITRManagementApiService
@@ -93,6 +99,8 @@ type APIClient struct {
 	PackagesControllerApi *PackagesControllerApiService
 
 	PerformanceAdvisorApi *PerformanceAdvisorApiService
+
+	PreviewApi *PreviewApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -155,6 +163,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BackupsApi = (*BackupsApiService)(&c.common)
 	c.CertificateInfoApi = (*CertificateInfoApiService)(&c.common)
 	c.CloudProvidersApi = (*CloudProvidersApiService)(&c.common)
+	c.CustomCACertificatesApi = (*CustomCACertificatesApiService)(&c.common)
 	c.CustomerConfigurationApi = (*CustomerConfigurationApiService)(&c.common)
 	c.CustomerManagementApi = (*CustomerManagementApiService)(&c.common)
 	c.CustomerTasksApi = (*CustomerTasksApiService)(&c.common)
@@ -162,14 +171,17 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
 	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)
+	c.LDAPRoleManagementApi = (*LDAPRoleManagementApiService)(&c.common)
 	c.LicenseManagementApi = (*LicenseManagementApiService)(&c.common)
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
+	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
 	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
+	c.PreviewApi = (*PreviewApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)

@@ -31,10 +31,15 @@ type SessionManagementApiApiApiLoginRequest struct {
 	ctx _context.Context
 	ApiService *SessionManagementApiService
 	customerLoginFormData *CustomerLoginFormData
+	request *interface{}
 }
 
 func (r SessionManagementApiApiApiLoginRequest) CustomerLoginFormData(customerLoginFormData CustomerLoginFormData) SessionManagementApiApiApiLoginRequest {
 	r.customerLoginFormData = &customerLoginFormData
+	return r
+}
+func (r SessionManagementApiApiApiLoginRequest) Request(request interface{}) SessionManagementApiApiApiLoginRequest {
+	r.request = &request
 	return r
 }
 
@@ -82,6 +87,9 @@ func (a *SessionManagementApiService) ApiLoginExecute(r SessionManagementApiApiA
 		return localVarReturnValue, nil, reportError("customerLoginFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -694,8 +702,13 @@ func (a *SessionManagementApiService) GetLogsExecute(r SessionManagementApiApiGe
 type SessionManagementApiApiGetSessionInfoRequest struct {
 	ctx _context.Context
 	ApiService *SessionManagementApiService
+	request *interface{}
 }
 
+func (r SessionManagementApiApiGetSessionInfoRequest) Request(request interface{}) SessionManagementApiApiGetSessionInfoRequest {
+	r.request = &request
+	return r
+}
 
 func (r SessionManagementApiApiGetSessionInfoRequest) Execute() (SessionInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetSessionInfoExecute(r)
@@ -738,6 +751,9 @@ func (a *SessionManagementApiService) GetSessionInfoExecute(r SessionManagementA
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -811,6 +827,7 @@ type SessionManagementApiApiRegisterCustomerRequest struct {
 	ApiService *SessionManagementApiService
 	customerRegisterFormData *CustomerRegisterFormData
 	generateApiToken *bool
+	request *interface{}
 }
 
 func (r SessionManagementApiApiRegisterCustomerRequest) CustomerRegisterFormData(customerRegisterFormData CustomerRegisterFormData) SessionManagementApiApiRegisterCustomerRequest {
@@ -819,6 +836,10 @@ func (r SessionManagementApiApiRegisterCustomerRequest) CustomerRegisterFormData
 }
 func (r SessionManagementApiApiRegisterCustomerRequest) GenerateApiToken(generateApiToken bool) SessionManagementApiApiRegisterCustomerRequest {
 	r.generateApiToken = &generateApiToken
+	return r
+}
+func (r SessionManagementApiApiRegisterCustomerRequest) Request(request interface{}) SessionManagementApiApiRegisterCustomerRequest {
+	r.request = &request
 	return r
 }
 
@@ -869,6 +890,9 @@ func (a *SessionManagementApiService) RegisterCustomerExecute(r SessionManagemen
 
 	if r.generateApiToken != nil {
 		localVarQueryParams.Add("generateApiToken", parameterToString(*r.generateApiToken, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

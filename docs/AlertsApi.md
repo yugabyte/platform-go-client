@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Acknowledge**](AlertsApi.md#Acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
 [**AcknowledgeByFilter**](AlertsApi.md#AcknowledgeByFilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts
+[**AlertNotificationPreview**](AlertsApi.md#AlertNotificationPreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | Prepare alert notification preview
 [**CountAlerts**](AlertsApi.md#CountAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
 [**CreateAlertChannel**](AlertsApi.md#CreateAlertChannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | Create an alert channel
 [**CreateAlertConfiguration**](AlertsApi.md#CreateAlertConfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
@@ -44,7 +45,7 @@ Method | HTTP request | Description
 
 ## Acknowledge
 
-> Alert Acknowledge(ctx, cUUID, alertUUID).Execute()
+> Alert Acknowledge(ctx, cUUID, alertUUID).Request(request).Execute()
 
 Acknowledge an alert
 
@@ -63,10 +64,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     alertUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.Acknowledge(context.Background(), cUUID, alertUUID).Execute()
+    resp, r, err := api_client.AlertsApi.Acknowledge(context.Background(), cUUID, alertUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.Acknowledge``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -94,6 +96,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -115,7 +118,7 @@ Name | Type | Description  | Notes
 
 ## AcknowledgeByFilter
 
-> []Alert AcknowledgeByFilter(ctx, cUUID).AcknowledgeAlertsRequest(acknowledgeAlertsRequest).Execute()
+> []Alert AcknowledgeByFilter(ctx, cUUID).AcknowledgeAlertsRequest(acknowledgeAlertsRequest).Request(request).Execute()
 
 Acknowledge all alerts
 
@@ -134,10 +137,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     acknowledgeAlertsRequest := *openapiclient.NewAlertApiFilter([]string{"ConfigurationTypes_example"}, "ConfigurationUuid_example", []string{"Severities_example"}, "SourceName_example", []string{"SourceUUIDs_example"}, []string{"States_example"}, []string{"Uuids_example"}) // AlertApiFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.AcknowledgeByFilter(context.Background(), cUUID).AcknowledgeAlertsRequest(acknowledgeAlertsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.AcknowledgeByFilter(context.Background(), cUUID).AcknowledgeAlertsRequest(acknowledgeAlertsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.AcknowledgeByFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -164,6 +168,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **acknowledgeAlertsRequest** | [**AlertApiFilter**](AlertApiFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -183,9 +188,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AlertNotificationPreview
+
+> AlertTemplateVariablesList AlertNotificationPreview(ctx, cUUID).NotificationPreviewRequest(notificationPreviewRequest).Request(request).Execute()
+
+Prepare alert notification preview
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    notificationPreviewRequest := *openapiclient.NewAlertTemplateVariablesFormData([]openapiclient.AlertTemplateVariable{*openapiclient.NewAlertTemplateVariable("CustomerUUID_example", "DefaultValue_example", "Name_example", []string{"PossibleValues_example"})}) // AlertTemplateVariablesFormData | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AlertsApi.AlertNotificationPreview(context.Background(), cUUID).NotificationPreviewRequest(notificationPreviewRequest).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.AlertNotificationPreview``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AlertNotificationPreview`: AlertTemplateVariablesList
+    fmt.Fprintf(os.Stdout, "Response from `AlertsApi.AlertNotificationPreview`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAlertNotificationPreviewRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **notificationPreviewRequest** | [**AlertTemplateVariablesFormData**](AlertTemplateVariablesFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**AlertTemplateVariablesList**](AlertTemplateVariablesList.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CountAlerts
 
-> int32 CountAlerts(ctx, cUUID).CountAlertsRequest(countAlertsRequest).Execute()
+> int32 CountAlerts(ctx, cUUID).CountAlertsRequest(countAlertsRequest).Request(request).Execute()
 
 Count alerts
 
@@ -204,10 +281,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     countAlertsRequest := *openapiclient.NewAlertApiFilter([]string{"ConfigurationTypes_example"}, "ConfigurationUuid_example", []string{"Severities_example"}, "SourceName_example", []string{"SourceUUIDs_example"}, []string{"States_example"}, []string{"Uuids_example"}) // AlertApiFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.CountAlerts(context.Background(), cUUID).CountAlertsRequest(countAlertsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.CountAlerts(context.Background(), cUUID).CountAlertsRequest(countAlertsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.CountAlerts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -234,6 +312,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **countAlertsRequest** | [**AlertApiFilter**](AlertApiFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -255,7 +334,7 @@ Name | Type | Description  | Notes
 
 ## CreateAlertChannel
 
-> AlertChannel CreateAlertChannel(ctx, cUUID).CreateAlertChannelRequest(createAlertChannelRequest).Execute()
+> AlertChannel CreateAlertChannel(ctx, cUUID).CreateAlertChannelRequest(createAlertChannelRequest).Request(request).Execute()
 
 Create an alert channel
 
@@ -274,10 +353,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     createAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams()) // AlertChannelFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.CreateAlertChannel(context.Background(), cUUID).CreateAlertChannelRequest(createAlertChannelRequest).Execute()
+    resp, r, err := api_client.AlertsApi.CreateAlertChannel(context.Background(), cUUID).CreateAlertChannelRequest(createAlertChannelRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.CreateAlertChannel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -304,6 +384,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createAlertChannelRequest** | [**AlertChannelFormData**](AlertChannelFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -325,7 +406,7 @@ Name | Type | Description  | Notes
 
 ## CreateAlertConfiguration
 
-> AlertConfiguration CreateAlertConfiguration(ctx, cUUID).CreateAlertConfigurationRequest(createAlertConfigurationRequest).Execute()
+> AlertConfiguration CreateAlertConfiguration(ctx, cUUID).CreateAlertConfigurationRequest(createAlertConfigurationRequest).Request(request).Execute()
 
 Create an alert configuration
 
@@ -345,10 +426,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     createAlertConfigurationRequest := *openapiclient.NewAlertConfiguration(false, float64(123), time.Now(), "CustomerUUID_example", false, "Description_example", int32(123), "Name_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", "ThresholdUnit_example", map[string]AlertConfigurationThreshold{"key": *openapiclient.NewAlertConfigurationThreshold("Condition_example", float64(123))}) // AlertConfiguration | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.CreateAlertConfiguration(context.Background(), cUUID).CreateAlertConfigurationRequest(createAlertConfigurationRequest).Execute()
+    resp, r, err := api_client.AlertsApi.CreateAlertConfiguration(context.Background(), cUUID).CreateAlertConfigurationRequest(createAlertConfigurationRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.CreateAlertConfiguration``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -375,6 +457,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createAlertConfigurationRequest** | [**AlertConfiguration**](AlertConfiguration.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -396,7 +479,7 @@ Name | Type | Description  | Notes
 
 ## CreateAlertDestination
 
-> AlertDestination CreateAlertDestination(ctx, cUUID).CreateAlertDestinationRequest(createAlertDestinationRequest).Execute()
+> AlertDestination CreateAlertDestination(ctx, cUUID).CreateAlertDestinationRequest(createAlertDestinationRequest).Request(request).Execute()
 
 Create an alert destination
 
@@ -415,10 +498,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     createAlertDestinationRequest := *openapiclient.NewAlertDestinationFormData([]string{"Channels_example"}, false, "Name_example") // AlertDestinationFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.CreateAlertDestination(context.Background(), cUUID).CreateAlertDestinationRequest(createAlertDestinationRequest).Execute()
+    resp, r, err := api_client.AlertsApi.CreateAlertDestination(context.Background(), cUUID).CreateAlertDestinationRequest(createAlertDestinationRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.CreateAlertDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -445,6 +529,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **createAlertDestinationRequest** | [**AlertDestinationFormData**](AlertDestinationFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -466,7 +551,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertChannel
 
-> YBPSuccess DeleteAlertChannel(ctx, cUUID, acUUID).Execute()
+> YBPSuccess DeleteAlertChannel(ctx, cUUID, acUUID).Request(request).Execute()
 
 Delete an alert channel
 
@@ -485,10 +570,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     acUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertChannel(context.Background(), cUUID, acUUID).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertChannel(context.Background(), cUUID, acUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertChannel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -516,6 +602,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -537,7 +624,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertChannelTemplates
 
-> YBPSuccess DeleteAlertChannelTemplates(ctx, cUUID, acType).Execute()
+> YBPSuccess DeleteAlertChannelTemplates(ctx, cUUID, acType).Request(request).Execute()
 
 Delete alert channel templates
 
@@ -556,10 +643,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     acType := "acType_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertChannelTemplates(context.Background(), cUUID, acType).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertChannelTemplates(context.Background(), cUUID, acType).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertChannelTemplates``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -587,6 +675,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -608,7 +697,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertConfiguration
 
-> YBPSuccess DeleteAlertConfiguration(ctx, cUUID, configurationUUID).Execute()
+> YBPSuccess DeleteAlertConfiguration(ctx, cUUID, configurationUUID).Request(request).Execute()
 
 Delete an alert configuration
 
@@ -627,10 +716,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     configurationUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertConfiguration(context.Background(), cUUID, configurationUUID).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertConfiguration(context.Background(), cUUID, configurationUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertConfiguration``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -658,6 +748,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -679,7 +770,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertDestination
 
-> YBPSuccess DeleteAlertDestination(ctx, cUUID, adUUID).Execute()
+> YBPSuccess DeleteAlertDestination(ctx, cUUID, adUUID).Request(request).Execute()
 
 Delete an alert destination
 
@@ -698,10 +789,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     adUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertDestination(context.Background(), cUUID, adUUID).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertDestination(context.Background(), cUUID, adUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -729,6 +821,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -750,7 +843,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertTemplateSettings
 
-> YBPSuccess DeleteAlertTemplateSettings(ctx, cUUID, settingsUUID).Execute()
+> YBPSuccess DeleteAlertTemplateSettings(ctx, cUUID, settingsUUID).Request(request).Execute()
 
 Delete an alert template settings
 
@@ -769,10 +862,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     settingsUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateSettings(context.Background(), cUUID, settingsUUID).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateSettings(context.Background(), cUUID, settingsUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertTemplateSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -800,6 +894,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -821,7 +916,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAlertTemplateVariables
 
-> YBPSuccess DeleteAlertTemplateVariables(ctx, cUUID, variableUUID).Execute()
+> YBPSuccess DeleteAlertTemplateVariables(ctx, cUUID, variableUUID).Request(request).Execute()
 
 Delete an alert template variables
 
@@ -840,10 +935,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     variableUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateVariables(context.Background(), cUUID, variableUUID).Execute()
+    resp, r, err := api_client.AlertsApi.DeleteAlertTemplateVariables(context.Background(), cUUID, variableUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.DeleteAlertTemplateVariables``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -871,6 +967,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -892,7 +989,7 @@ Name | Type | Description  | Notes
 
 ## EditAlertTemplateSettings
 
-> []AlertTemplateSettings EditAlertTemplateSettings(ctx, cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Execute()
+> []AlertTemplateSettings EditAlertTemplateSettings(ctx, cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Request(request).Execute()
 
 Crete or update alert template settings list
 
@@ -912,10 +1009,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     editAlertTemplateSettingsRequest := *openapiclient.NewAlertTemplateSettingsFormData([]openapiclient.AlertTemplateSettings{*openapiclient.NewAlertTemplateSettings(time.Now(), "CustomerUUID_example", "Template_example", "Uuid_example")}) // AlertTemplateSettingsFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.EditAlertTemplateSettings(context.Background(), cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.EditAlertTemplateSettings(context.Background(), cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.EditAlertTemplateSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -942,6 +1040,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **editAlertTemplateSettingsRequest** | [**AlertTemplateSettingsFormData**](AlertTemplateSettingsFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -963,7 +1062,7 @@ Name | Type | Description  | Notes
 
 ## EditAlertTemplateVariables
 
-> []AlertTemplateVariable EditAlertTemplateVariables(ctx, cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Execute()
+> []AlertTemplateVariable EditAlertTemplateVariables(ctx, cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Request(request).Execute()
 
 Create or update alert template variables
 
@@ -982,10 +1081,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     editAlertTemplateVariablesRequest := *openapiclient.NewAlertTemplateVariablesFormData([]openapiclient.AlertTemplateVariable{*openapiclient.NewAlertTemplateVariable("CustomerUUID_example", "DefaultValue_example", "Name_example", []string{"PossibleValues_example"})}) // AlertTemplateVariablesFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.EditAlertTemplateVariables(context.Background(), cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Execute()
+    resp, r, err := api_client.AlertsApi.EditAlertTemplateVariables(context.Background(), cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.EditAlertTemplateVariables``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1012,6 +1112,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **editAlertTemplateVariablesRequest** | [**AlertTemplateVariablesFormData**](AlertTemplateVariablesFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -1592,7 +1693,7 @@ Name | Type | Description  | Notes
 
 ## ListAlertConfigurations
 
-> []AlertConfiguration ListAlertConfigurations(ctx, cUUID).ListAlertConfigurationsRequest(listAlertConfigurationsRequest).Execute()
+> []AlertConfiguration ListAlertConfigurations(ctx, cUUID).ListAlertConfigurationsRequest(listAlertConfigurationsRequest).Request(request).Execute()
 
 Get filtered list of alert configurations
 
@@ -1611,10 +1712,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     listAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}) // AlertConfigurationApiFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.ListAlertConfigurations(context.Background(), cUUID).ListAlertConfigurationsRequest(listAlertConfigurationsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.ListAlertConfigurations(context.Background(), cUUID).ListAlertConfigurationsRequest(listAlertConfigurationsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertConfigurations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1641,6 +1743,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **listAlertConfigurationsRequest** | [**AlertConfigurationApiFilter**](AlertConfigurationApiFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -1866,7 +1969,7 @@ Name | Type | Description  | Notes
 
 ## ListAlertTemplates
 
-> []AlertConfigurationTemplate ListAlertTemplates(ctx, cUUID).ListTemplatesRequest(listTemplatesRequest).Execute()
+> []AlertConfigurationTemplate ListAlertTemplates(ctx, cUUID).ListTemplatesRequest(listTemplatesRequest).Request(request).Execute()
 
 Get filtered list of alert configuration templates
 
@@ -1885,10 +1988,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     listTemplatesRequest := *openapiclient.NewAlertTemplateApiFilter("Name_example", "TargetType_example") // AlertTemplateApiFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.ListAlertTemplates(context.Background(), cUUID).ListTemplatesRequest(listTemplatesRequest).Execute()
+    resp, r, err := api_client.AlertsApi.ListAlertTemplates(context.Background(), cUUID).ListTemplatesRequest(listTemplatesRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertTemplates``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1915,6 +2019,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **listTemplatesRequest** | [**AlertTemplateApiFilter**](AlertTemplateApiFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2004,7 +2109,7 @@ Name | Type | Description  | Notes
 
 ## PageAlertConfigurations
 
-> AlertConfigurationPagedResponse PageAlertConfigurations(ctx, cUUID).PageAlertConfigurationsRequest(pageAlertConfigurationsRequest).Execute()
+> AlertConfigurationPagedResponse PageAlertConfigurations(ctx, cUUID).PageAlertConfigurationsRequest(pageAlertConfigurationsRequest).Request(request).Execute()
 
 List all alert configurations (paginated)
 
@@ -2023,10 +2128,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pageAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationPagedApiQuery("Direction_example", *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertConfigurationPagedApiQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.PageAlertConfigurations(context.Background(), cUUID).PageAlertConfigurationsRequest(pageAlertConfigurationsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.PageAlertConfigurations(context.Background(), cUUID).PageAlertConfigurationsRequest(pageAlertConfigurationsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.PageAlertConfigurations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2053,6 +2159,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageAlertConfigurationsRequest** | [**AlertConfigurationPagedApiQuery**](AlertConfigurationPagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2074,7 +2181,7 @@ Name | Type | Description  | Notes
 
 ## PageAlerts
 
-> AlertPagedResponse PageAlerts(ctx, cUUID).PageAlertsRequest(pageAlertsRequest).Execute()
+> AlertPagedResponse PageAlerts(ctx, cUUID).PageAlertsRequest(pageAlertsRequest).Request(request).Execute()
 
 List alerts (paginated)
 
@@ -2093,10 +2200,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pageAlertsRequest := *openapiclient.NewAlertPagedApiQuery("Direction_example", *openapiclient.NewAlertApiFilter([]string{"ConfigurationTypes_example"}, "ConfigurationUuid_example", []string{"Severities_example"}, "SourceName_example", []string{"SourceUUIDs_example"}, []string{"States_example"}, []string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertPagedApiQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.PageAlerts(context.Background(), cUUID).PageAlertsRequest(pageAlertsRequest).Execute()
+    resp, r, err := api_client.AlertsApi.PageAlerts(context.Background(), cUUID).PageAlertsRequest(pageAlertsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.PageAlerts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2123,6 +2231,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageAlertsRequest** | [**AlertPagedApiQuery**](AlertPagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2215,7 +2324,7 @@ Name | Type | Description  | Notes
 
 ## SetAlertChannelTemplates
 
-> AlertChannelTemplates SetAlertChannelTemplates(ctx, cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Execute()
+> AlertChannelTemplates SetAlertChannelTemplates(ctx, cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Request(request).Execute()
 
 Set alert channel templates
 
@@ -2235,10 +2344,11 @@ func main() {
     cUUID := TODO // string | 
     acType := "acType_example" // string | 
     setAlertChannelTemplatesRequest := *openapiclient.NewAlertChannelTemplates("CustomerUUID_example", "TextTemplate_example", "Type_example") // AlertChannelTemplates | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.SetAlertChannelTemplates(context.Background(), cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Execute()
+    resp, r, err := api_client.AlertsApi.SetAlertChannelTemplates(context.Background(), cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.SetAlertChannelTemplates``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2267,6 +2377,7 @@ Name | Type | Description  | Notes
 
 
  **setAlertChannelTemplatesRequest** | [**AlertChannelTemplates**](AlertChannelTemplates.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2288,7 +2399,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAlertChannel
 
-> AlertChannel UpdateAlertChannel(ctx, cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Execute()
+> AlertChannel UpdateAlertChannel(ctx, cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Request(request).Execute()
 
 Update an alert channel
 
@@ -2308,10 +2419,11 @@ func main() {
     cUUID := TODO // string | 
     acUUID := TODO // string | 
     updateAlertChannelRequest := *openapiclient.NewAlertChannelFormData("AlertChannelUUID_example", "Name_example", *openapiclient.NewAlertChannelParams()) // AlertChannelFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.UpdateAlertChannel(context.Background(), cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Execute()
+    resp, r, err := api_client.AlertsApi.UpdateAlertChannel(context.Background(), cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.UpdateAlertChannel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2340,6 +2452,7 @@ Name | Type | Description  | Notes
 
 
  **updateAlertChannelRequest** | [**AlertChannelFormData**](AlertChannelFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2361,7 +2474,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAlertConfiguration
 
-> AlertConfiguration UpdateAlertConfiguration(ctx, cUUID, configurationUUID).UpdateAlertConfigurationRequest(updateAlertConfigurationRequest).Execute()
+> AlertConfiguration UpdateAlertConfiguration(ctx, cUUID, configurationUUID).UpdateAlertConfigurationRequest(updateAlertConfigurationRequest).Request(request).Execute()
 
 Update an alert configuration
 
@@ -2382,10 +2495,11 @@ func main() {
     cUUID := TODO // string | 
     configurationUUID := TODO // string | 
     updateAlertConfigurationRequest := *openapiclient.NewAlertConfiguration(false, float64(123), time.Now(), "CustomerUUID_example", false, "Description_example", int32(123), "Name_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", "ThresholdUnit_example", map[string]AlertConfigurationThreshold{"key": *openapiclient.NewAlertConfigurationThreshold("Condition_example", float64(123))}) // AlertConfiguration | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.UpdateAlertConfiguration(context.Background(), cUUID, configurationUUID).UpdateAlertConfigurationRequest(updateAlertConfigurationRequest).Execute()
+    resp, r, err := api_client.AlertsApi.UpdateAlertConfiguration(context.Background(), cUUID, configurationUUID).UpdateAlertConfigurationRequest(updateAlertConfigurationRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.UpdateAlertConfiguration``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2414,6 +2528,7 @@ Name | Type | Description  | Notes
 
 
  **updateAlertConfigurationRequest** | [**AlertConfiguration**](AlertConfiguration.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -2435,7 +2550,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAlertDestination
 
-> AlertDestination UpdateAlertDestination(ctx, cUUID, adUUID).UpdateAlertDestinationRequest(updateAlertDestinationRequest).Execute()
+> AlertDestination UpdateAlertDestination(ctx, cUUID, adUUID).UpdateAlertDestinationRequest(updateAlertDestinationRequest).Request(request).Execute()
 
 Update an alert destination
 
@@ -2455,10 +2570,11 @@ func main() {
     cUUID := TODO // string | 
     adUUID := TODO // string | 
     updateAlertDestinationRequest := *openapiclient.NewAlertDestinationFormData([]string{"Channels_example"}, false, "Name_example") // AlertDestinationFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AlertsApi.UpdateAlertDestination(context.Background(), cUUID, adUUID).UpdateAlertDestinationRequest(updateAlertDestinationRequest).Execute()
+    resp, r, err := api_client.AlertsApi.UpdateAlertDestination(context.Background(), cUUID, adUUID).UpdateAlertDestinationRequest(updateAlertDestinationRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.UpdateAlertDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2487,6 +2603,7 @@ Name | Type | Description  | Notes
 
 
  **updateAlertDestinationRequest** | [**AlertDestinationFormData**](AlertDestinationFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

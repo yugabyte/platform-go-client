@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## CreateNodeInstance
 
-> map[string]NodeInstance CreateNodeInstance(ctx, cUUID, azUUID).NodeInstance(nodeInstance).Execute()
+> map[string]NodeInstance CreateNodeInstance(ctx, cUUID, azUUID).NodeInstance(nodeInstance).Request(request).Execute()
 
 Create a node instance
 
@@ -38,10 +38,11 @@ func main() {
     cUUID := TODO // string | 
     azUUID := TODO // string | 
     nodeInstance := *openapiclient.NewNodeInstanceFormData([]openapiclient.NodeInstanceData{*openapiclient.NewNodeInstanceData("Mumbai instance", "c5large", "1.1.1.1", "south-east", "centos", "south-east")}) // NodeInstanceFormData | Node instance data to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.CreateNodeInstance(context.Background(), cUUID, azUUID).NodeInstance(nodeInstance).Execute()
+    resp, r, err := api_client.NodeInstancesApi.CreateNodeInstance(context.Background(), cUUID, azUUID).NodeInstance(nodeInstance).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.CreateNodeInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -70,6 +71,7 @@ Name | Type | Description  | Notes
 
 
  **nodeInstance** | [**NodeInstanceFormData**](NodeInstanceFormData.md) | Node instance data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -91,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## DeleteInstance
 
-> YBPSuccess DeleteInstance(ctx, cUUID, pUUID, instanceIP).Execute()
+> YBPSuccess DeleteInstance(ctx, cUUID, pUUID, instanceIP).Request(request).Execute()
 
 Delete a node instance
 
@@ -111,10 +113,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     instanceIP := "instanceIP_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.DeleteInstance(context.Background(), cUUID, pUUID, instanceIP).Execute()
+    resp, r, err := api_client.NodeInstancesApi.DeleteInstance(context.Background(), cUUID, pUUID, instanceIP).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.DeleteInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -144,6 +147,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -165,7 +169,7 @@ Name | Type | Description  | Notes
 
 ## DetachedNodeAction
 
-> YBPTask DetachedNodeAction(ctx, cUUID, pUUID, instanceIP).Execute()
+> YBPTask DetachedNodeAction(ctx, cUUID, pUUID, instanceIP).NodeAction(nodeAction).Request(request).Execute()
 
 Detached node action
 
@@ -185,10 +189,12 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     instanceIP := "instanceIP_example" // string | 
+    nodeAction := *openapiclient.NewNodeActionFormData("NodeAction_example") // NodeActionFormData | Node action data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.DetachedNodeAction(context.Background(), cUUID, pUUID, instanceIP).Execute()
+    resp, r, err := api_client.NodeInstancesApi.DetachedNodeAction(context.Background(), cUUID, pUUID, instanceIP).NodeAction(nodeAction).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.DetachedNodeAction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -218,6 +224,8 @@ Name | Type | Description  | Notes
 
 
 
+ **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Node action data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -229,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -526,7 +534,7 @@ Name | Type | Description  | Notes
 
 ## NodeAction
 
-> YBPTask NodeAction(ctx, cUUID, universeUUID, nodeName).NodeAction(nodeAction).Execute()
+> YBPTask NodeAction(ctx, cUUID, universeUUID, nodeName).NodeAction(nodeAction).Request(request).Execute()
 
 Update a node
 
@@ -547,10 +555,11 @@ func main() {
     universeUUID := TODO // string | 
     nodeName := "nodeName_example" // string | 
     nodeAction := *openapiclient.NewNodeActionFormData("NodeAction_example") // NodeActionFormData | Node action data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.NodeAction(context.Background(), cUUID, universeUUID, nodeName).NodeAction(nodeAction).Execute()
+    resp, r, err := api_client.NodeInstancesApi.NodeAction(context.Background(), cUUID, universeUUID, nodeName).NodeAction(nodeAction).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.NodeAction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -581,6 +590,7 @@ Name | Type | Description  | Notes
 
 
  **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Node action data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -602,7 +612,7 @@ Name | Type | Description  | Notes
 
 ## ValidateNodeInstance
 
-> map[string]ValidationResult ValidateNodeInstance(ctx, cUUID, azUUID).Execute()
+> map[string]ValidationResult ValidateNodeInstance(ctx, cUUID, azUUID).Request(request).Execute()
 
 Validate a node instance
 
@@ -621,10 +631,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     azUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.NodeInstancesApi.ValidateNodeInstance(context.Background(), cUUID, azUUID).Execute()
+    resp, r, err := api_client.NodeInstancesApi.ValidateNodeInstance(context.Background(), cUUID, azUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.ValidateNodeInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -652,6 +663,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Tables** | **[]string** | Source universe table IDs to check whether they need bootstrap | 
+**TargetUniverseUUID** | Pointer to **string** | If specified and tables do not exist on the target universe, bootstrapping is required. | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetTables sets Tables field to given value.
 
+
+### GetTargetUniverseUUID
+
+`func (o *XClusterConfigNeedBootstrapFormData) GetTargetUniverseUUID() string`
+
+GetTargetUniverseUUID returns the TargetUniverseUUID field if non-nil, zero value otherwise.
+
+### GetTargetUniverseUUIDOk
+
+`func (o *XClusterConfigNeedBootstrapFormData) GetTargetUniverseUUIDOk() (*string, bool)`
+
+GetTargetUniverseUUIDOk returns a tuple with the TargetUniverseUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetUniverseUUID
+
+`func (o *XClusterConfigNeedBootstrapFormData) SetTargetUniverseUUID(v string)`
+
+SetTargetUniverseUUID sets TargetUniverseUUID field to given value.
+
+### HasTargetUniverseUUID
+
+`func (o *XClusterConfigNeedBootstrapFormData) HasTargetUniverseUUID() bool`
+
+HasTargetUniverseUUID returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

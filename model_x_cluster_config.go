@@ -19,6 +19,8 @@ import (
 type XClusterConfig struct {
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Whether this xCluster replication config was imported
+	Imported *bool `json:"imported,omitempty"`
 	// Last modify time of the xCluster config
 	ModifyTime *time.Time `json:"modifyTime,omitempty"`
 	// XCluster config name
@@ -27,14 +29,23 @@ type XClusterConfig struct {
 	Paused *bool `json:"paused,omitempty"`
 	// Replication group name in DB
 	ReplicationGroupName *string `json:"replicationGroupName,omitempty"`
+	// Whether the source is active in txn xCluster
+	SourceActive *bool `json:"sourceActive,omitempty"`
 	// Source Universe UUID
 	SourceUniverseUUID *string `json:"sourceUniverseUUID,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
-	TableDetails []XClusterTableConfig `json:"tableDetails"`
+	// Tables participating in this xCluster config
+	TableDetails *[]XClusterTableConfig `json:"tableDetails,omitempty"`
+	// tableType
+	TableType *string `json:"tableType,omitempty"`
 	Tables *[]string `json:"tables,omitempty"`
+	// Whether the target is active in txn xCluster
+	TargetActive *bool `json:"targetActive,omitempty"`
 	// Target Universe UUID
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
+	// Whether the config is txn xCluster
+	Type *string `json:"type,omitempty"`
 	// XCluster config UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -43,9 +54,8 @@ type XClusterConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfig(tableDetails []XClusterTableConfig, ) *XClusterConfig {
+func NewXClusterConfig() *XClusterConfig {
 	this := XClusterConfig{}
-	this.TableDetails = tableDetails
 	return &this
 }
 
@@ -87,6 +97,38 @@ func (o *XClusterConfig) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *XClusterConfig) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
+}
+
+// GetImported returns the Imported field value if set, zero value otherwise.
+func (o *XClusterConfig) GetImported() bool {
+	if o == nil || o.Imported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Imported
+}
+
+// GetImportedOk returns a tuple with the Imported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetImportedOk() (*bool, bool) {
+	if o == nil || o.Imported == nil {
+		return nil, false
+	}
+	return o.Imported, true
+}
+
+// HasImported returns a boolean if a field has been set.
+func (o *XClusterConfig) HasImported() bool {
+	if o != nil && o.Imported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImported gets a reference to the given bool and assigns it to the Imported field.
+func (o *XClusterConfig) SetImported(v bool) {
+	o.Imported = &v
 }
 
 // GetModifyTime returns the ModifyTime field value if set, zero value otherwise.
@@ -217,6 +259,38 @@ func (o *XClusterConfig) SetReplicationGroupName(v string) {
 	o.ReplicationGroupName = &v
 }
 
+// GetSourceActive returns the SourceActive field value if set, zero value otherwise.
+func (o *XClusterConfig) GetSourceActive() bool {
+	if o == nil || o.SourceActive == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SourceActive
+}
+
+// GetSourceActiveOk returns a tuple with the SourceActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetSourceActiveOk() (*bool, bool) {
+	if o == nil || o.SourceActive == nil {
+		return nil, false
+	}
+	return o.SourceActive, true
+}
+
+// HasSourceActive returns a boolean if a field has been set.
+func (o *XClusterConfig) HasSourceActive() bool {
+	if o != nil && o.SourceActive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceActive gets a reference to the given bool and assigns it to the SourceActive field.
+func (o *XClusterConfig) SetSourceActive(v bool) {
+	o.SourceActive = &v
+}
+
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value if set, zero value otherwise.
 func (o *XClusterConfig) GetSourceUniverseUUID() string {
 	if o == nil || o.SourceUniverseUUID == nil {
@@ -281,28 +355,68 @@ func (o *XClusterConfig) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetTableDetails returns the TableDetails field value
+// GetTableDetails returns the TableDetails field value if set, zero value otherwise.
 func (o *XClusterConfig) GetTableDetails() []XClusterTableConfig {
-	if o == nil  {
+	if o == nil || o.TableDetails == nil {
 		var ret []XClusterTableConfig
 		return ret
 	}
-
-	return o.TableDetails
+	return *o.TableDetails
 }
 
-// GetTableDetailsOk returns a tuple with the TableDetails field value
+// GetTableDetailsOk returns a tuple with the TableDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *XClusterConfig) GetTableDetailsOk() (*[]XClusterTableConfig, bool) {
-	if o == nil  {
+	if o == nil || o.TableDetails == nil {
 		return nil, false
 	}
-	return &o.TableDetails, true
+	return o.TableDetails, true
 }
 
-// SetTableDetails sets field value
+// HasTableDetails returns a boolean if a field has been set.
+func (o *XClusterConfig) HasTableDetails() bool {
+	if o != nil && o.TableDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableDetails gets a reference to the given []XClusterTableConfig and assigns it to the TableDetails field.
 func (o *XClusterConfig) SetTableDetails(v []XClusterTableConfig) {
-	o.TableDetails = v
+	o.TableDetails = &v
+}
+
+// GetTableType returns the TableType field value if set, zero value otherwise.
+func (o *XClusterConfig) GetTableType() string {
+	if o == nil || o.TableType == nil {
+		var ret string
+		return ret
+	}
+	return *o.TableType
+}
+
+// GetTableTypeOk returns a tuple with the TableType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetTableTypeOk() (*string, bool) {
+	if o == nil || o.TableType == nil {
+		return nil, false
+	}
+	return o.TableType, true
+}
+
+// HasTableType returns a boolean if a field has been set.
+func (o *XClusterConfig) HasTableType() bool {
+	if o != nil && o.TableType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableType gets a reference to the given string and assigns it to the TableType field.
+func (o *XClusterConfig) SetTableType(v string) {
+	o.TableType = &v
 }
 
 // GetTables returns the Tables field value if set, zero value otherwise.
@@ -337,6 +451,38 @@ func (o *XClusterConfig) SetTables(v []string) {
 	o.Tables = &v
 }
 
+// GetTargetActive returns the TargetActive field value if set, zero value otherwise.
+func (o *XClusterConfig) GetTargetActive() bool {
+	if o == nil || o.TargetActive == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TargetActive
+}
+
+// GetTargetActiveOk returns a tuple with the TargetActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetTargetActiveOk() (*bool, bool) {
+	if o == nil || o.TargetActive == nil {
+		return nil, false
+	}
+	return o.TargetActive, true
+}
+
+// HasTargetActive returns a boolean if a field has been set.
+func (o *XClusterConfig) HasTargetActive() bool {
+	if o != nil && o.TargetActive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetActive gets a reference to the given bool and assigns it to the TargetActive field.
+func (o *XClusterConfig) SetTargetActive(v bool) {
+	o.TargetActive = &v
+}
+
 // GetTargetUniverseUUID returns the TargetUniverseUUID field value if set, zero value otherwise.
 func (o *XClusterConfig) GetTargetUniverseUUID() string {
 	if o == nil || o.TargetUniverseUUID == nil {
@@ -367,6 +513,38 @@ func (o *XClusterConfig) HasTargetUniverseUUID() bool {
 // SetTargetUniverseUUID gets a reference to the given string and assigns it to the TargetUniverseUUID field.
 func (o *XClusterConfig) SetTargetUniverseUUID(v string) {
 	o.TargetUniverseUUID = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *XClusterConfig) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *XClusterConfig) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *XClusterConfig) SetType(v string) {
+	o.Type = &v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
@@ -406,6 +584,9 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
+	if o.Imported != nil {
+		toSerialize["imported"] = o.Imported
+	}
 	if o.ModifyTime != nil {
 		toSerialize["modifyTime"] = o.ModifyTime
 	}
@@ -418,20 +599,32 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	if o.ReplicationGroupName != nil {
 		toSerialize["replicationGroupName"] = o.ReplicationGroupName
 	}
+	if o.SourceActive != nil {
+		toSerialize["sourceActive"] = o.SourceActive
+	}
 	if o.SourceUniverseUUID != nil {
 		toSerialize["sourceUniverseUUID"] = o.SourceUniverseUUID
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	if true {
+	if o.TableDetails != nil {
 		toSerialize["tableDetails"] = o.TableDetails
+	}
+	if o.TableType != nil {
+		toSerialize["tableType"] = o.TableType
 	}
 	if o.Tables != nil {
 		toSerialize["tables"] = o.Tables
 	}
+	if o.TargetActive != nil {
+		toSerialize["targetActive"] = o.TargetActive
+	}
 	if o.TargetUniverseUUID != nil {
 		toSerialize["targetUniverseUUID"] = o.TargetUniverseUUID
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

@@ -29,6 +29,10 @@ type Schedule struct {
 	Frequency *int64 `json:"frequency,omitempty"`
 	// Time unit of frequency
 	FrequencyTimeUnit *string `json:"frequencyTimeUnit,omitempty"`
+	// Backlog status of schedule of incremental backups arose due to conflicts
+	IncrementBacklogStatus *bool `json:"incrementBacklogStatus,omitempty"`
+	// Time on which schedule is expected to run for incremental backups
+	NextIncrementScheduleTaskTime *time.Time `json:"nextIncrementScheduleTaskTime,omitempty"`
 	// Time on which schedule is expected to run
 	NextScheduleTaskTime *time.Time `json:"nextScheduleTaskTime,omitempty"`
 	// Owner UUID for the schedule
@@ -254,6 +258,70 @@ func (o *Schedule) HasFrequencyTimeUnit() bool {
 // SetFrequencyTimeUnit gets a reference to the given string and assigns it to the FrequencyTimeUnit field.
 func (o *Schedule) SetFrequencyTimeUnit(v string) {
 	o.FrequencyTimeUnit = &v
+}
+
+// GetIncrementBacklogStatus returns the IncrementBacklogStatus field value if set, zero value otherwise.
+func (o *Schedule) GetIncrementBacklogStatus() bool {
+	if o == nil || o.IncrementBacklogStatus == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IncrementBacklogStatus
+}
+
+// GetIncrementBacklogStatusOk returns a tuple with the IncrementBacklogStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetIncrementBacklogStatusOk() (*bool, bool) {
+	if o == nil || o.IncrementBacklogStatus == nil {
+		return nil, false
+	}
+	return o.IncrementBacklogStatus, true
+}
+
+// HasIncrementBacklogStatus returns a boolean if a field has been set.
+func (o *Schedule) HasIncrementBacklogStatus() bool {
+	if o != nil && o.IncrementBacklogStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIncrementBacklogStatus gets a reference to the given bool and assigns it to the IncrementBacklogStatus field.
+func (o *Schedule) SetIncrementBacklogStatus(v bool) {
+	o.IncrementBacklogStatus = &v
+}
+
+// GetNextIncrementScheduleTaskTime returns the NextIncrementScheduleTaskTime field value if set, zero value otherwise.
+func (o *Schedule) GetNextIncrementScheduleTaskTime() time.Time {
+	if o == nil || o.NextIncrementScheduleTaskTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.NextIncrementScheduleTaskTime
+}
+
+// GetNextIncrementScheduleTaskTimeOk returns a tuple with the NextIncrementScheduleTaskTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetNextIncrementScheduleTaskTimeOk() (*time.Time, bool) {
+	if o == nil || o.NextIncrementScheduleTaskTime == nil {
+		return nil, false
+	}
+	return o.NextIncrementScheduleTaskTime, true
+}
+
+// HasNextIncrementScheduleTaskTime returns a boolean if a field has been set.
+func (o *Schedule) HasNextIncrementScheduleTaskTime() bool {
+	if o != nil && o.NextIncrementScheduleTaskTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNextIncrementScheduleTaskTime gets a reference to the given time.Time and assigns it to the NextIncrementScheduleTaskTime field.
+func (o *Schedule) SetNextIncrementScheduleTaskTime(v time.Time) {
+	o.NextIncrementScheduleTaskTime = &v
 }
 
 // GetNextScheduleTaskTime returns the NextScheduleTaskTime field value if set, zero value otherwise.
@@ -531,6 +599,12 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	}
 	if o.FrequencyTimeUnit != nil {
 		toSerialize["frequencyTimeUnit"] = o.FrequencyTimeUnit
+	}
+	if o.IncrementBacklogStatus != nil {
+		toSerialize["incrementBacklogStatus"] = o.IncrementBacklogStatus
+	}
+	if o.NextIncrementScheduleTaskTime != nil {
+		toSerialize["nextIncrementScheduleTaskTime"] = o.NextIncrementScheduleTaskTime
 	}
 	if o.NextScheduleTaskTime != nil {
 		toSerialize["nextScheduleTaskTime"] = o.NextScheduleTaskTime
