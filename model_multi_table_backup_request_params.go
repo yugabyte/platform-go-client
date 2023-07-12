@@ -107,6 +107,8 @@ type MultiTableBackupRequestParams struct {
 	StorageConfigUUID string `json:"storageConfigUUID"`
 	// Storage location
 	StorageLocation *string `json:"storageLocation,omitempty"`
+	// Table by table backup
+	TableByTableBackup *bool `json:"tableByTableBackup,omitempty"`
 	// Table name
 	TableName *string `json:"tableName,omitempty"`
 	// Tables
@@ -1740,6 +1742,38 @@ func (o *MultiTableBackupRequestParams) SetStorageLocation(v string) {
 	o.StorageLocation = &v
 }
 
+// GetTableByTableBackup returns the TableByTableBackup field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetTableByTableBackup() bool {
+	if o == nil || o.TableByTableBackup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TableByTableBackup
+}
+
+// GetTableByTableBackupOk returns a tuple with the TableByTableBackup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetTableByTableBackupOk() (*bool, bool) {
+	if o == nil || o.TableByTableBackup == nil {
+		return nil, false
+	}
+	return o.TableByTableBackup, true
+}
+
+// HasTableByTableBackup returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasTableByTableBackup() bool {
+	if o != nil && o.TableByTableBackup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableByTableBackup gets a reference to the given bool and assigns it to the TableByTableBackup field.
+func (o *MultiTableBackupRequestParams) SetTableByTableBackup(v bool) {
+	o.TableByTableBackup = &v
+}
+
 // GetTableName returns the TableName field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetTableName() string {
 	if o == nil || o.TableName == nil {
@@ -2302,6 +2336,9 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.StorageLocation != nil {
 		toSerialize["storageLocation"] = o.StorageLocation
+	}
+	if o.TableByTableBackup != nil {
+		toSerialize["tableByTableBackup"] = o.TableByTableBackup
 	}
 	if o.TableName != nil {
 		toSerialize["tableName"] = o.TableName

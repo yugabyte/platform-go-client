@@ -778,7 +778,7 @@ Name | Type | Description  | Notes
 
 ## GetAllTables
 
-> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).Execute()
+> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).Execute()
 
 List all tables
 
@@ -801,10 +801,11 @@ func main() {
     uniUUID := TODO // string | 
     includeParentTableInfo := true // bool |  (optional) (default to false)
     excludeColocatedTables := true // bool |  (optional) (default to false)
+    includeColocatedParentTables := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).Execute()
+    resp, r, err := api_client.TableManagementApi.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TableManagementApi.GetAllTables``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -834,6 +835,7 @@ Name | Type | Description  | Notes
 
  **includeParentTableInfo** | **bool** |  | [default to false]
  **excludeColocatedTables** | **bool** |  | [default to false]
+ **includeColocatedParentTables** | **bool** |  | [default to false]
 
 ### Return type
 

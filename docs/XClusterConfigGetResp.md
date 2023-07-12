@@ -17,10 +17,8 @@ Name | Type | Description | Notes
 **TableDetails** | Pointer to [**[]XClusterTableConfig**](XClusterTableConfig.md) | Tables participating in this xCluster config | [optional] 
 **TableType** | Pointer to **string** | tableType | [optional] 
 **Tables** | Pointer to **[]string** |  | [optional] [readonly] 
-**TargetActive** | Pointer to **bool** | Whether the source is active in txn xCluster | [optional] 
+**TargetActive** | Pointer to **bool** | Whether the target is active in txn xCluster | [optional] 
 **TargetUniverseUUID** | Pointer to **string** | Target Universe UUID | [optional] 
-**TxnTableDetails** | Pointer to [**XClusterTableConfig**](XClusterTableConfig.md) |  | [optional] 
-**TxnTableReplicationGroupName** | Pointer to **string** | Replication group name that replicates the transaction status table | [optional] 
 **Type** | Pointer to **string** | Whether the config is txn xCluster | [optional] 
 **Uuid** | Pointer to **string** | XCluster config UUID | [optional] 
 
@@ -412,56 +410,6 @@ SetTargetUniverseUUID sets TargetUniverseUUID field to given value.
 `func (o *XClusterConfigGetResp) HasTargetUniverseUUID() bool`
 
 HasTargetUniverseUUID returns a boolean if a field has been set.
-
-### GetTxnTableDetails
-
-`func (o *XClusterConfigGetResp) GetTxnTableDetails() XClusterTableConfig`
-
-GetTxnTableDetails returns the TxnTableDetails field if non-nil, zero value otherwise.
-
-### GetTxnTableDetailsOk
-
-`func (o *XClusterConfigGetResp) GetTxnTableDetailsOk() (*XClusterTableConfig, bool)`
-
-GetTxnTableDetailsOk returns a tuple with the TxnTableDetails field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTxnTableDetails
-
-`func (o *XClusterConfigGetResp) SetTxnTableDetails(v XClusterTableConfig)`
-
-SetTxnTableDetails sets TxnTableDetails field to given value.
-
-### HasTxnTableDetails
-
-`func (o *XClusterConfigGetResp) HasTxnTableDetails() bool`
-
-HasTxnTableDetails returns a boolean if a field has been set.
-
-### GetTxnTableReplicationGroupName
-
-`func (o *XClusterConfigGetResp) GetTxnTableReplicationGroupName() string`
-
-GetTxnTableReplicationGroupName returns the TxnTableReplicationGroupName field if non-nil, zero value otherwise.
-
-### GetTxnTableReplicationGroupNameOk
-
-`func (o *XClusterConfigGetResp) GetTxnTableReplicationGroupNameOk() (*string, bool)`
-
-GetTxnTableReplicationGroupNameOk returns a tuple with the TxnTableReplicationGroupName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTxnTableReplicationGroupName
-
-`func (o *XClusterConfigGetResp) SetTxnTableReplicationGroupName(v string)`
-
-SetTxnTableReplicationGroupName sets TxnTableReplicationGroupName field to given value.
-
-### HasTxnTableReplicationGroupName
-
-`func (o *XClusterConfigGetResp) HasTxnTableReplicationGroupName() bool`
-
-HasTxnTableReplicationGroupName returns a boolean if a field has been set.
 
 ### GetType
 

@@ -186,7 +186,8 @@ Class | Method | HTTP request | Description
 *CustomerManagementApi* | [**Metrics**](docs/CustomerManagementApi.md#metrics) | **Post** /api/v1/customers/{cUUID}/metrics | Add metrics to a customer
 *CustomerManagementApi* | [**UpdateCustomer**](docs/CustomerManagementApi.md#updatecustomer) | **Put** /api/v1/customers/{cUUID} | Update a customer
 *CustomerTasksApi* | [**AbortTask**](docs/CustomerTasksApi.md#aborttask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
-*CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Get a task&#39;s failed subtasks
+*CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Deprecated: sinceDate&#x3D;2023-06-06, sinceYBAVersion&#x3D;2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
+*CustomerTasksApi* | [**ListFailedSubtasks**](docs/CustomerTasksApi.md#listfailedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks | Get a list of task&#39;s failed subtasks
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
@@ -209,6 +210,8 @@ Class | Method | HTTP request | Description
 *InstanceTypesApi* | [**InstanceTypeDetail**](docs/InstanceTypesApi.md#instancetypedetail) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Get details of an instance type
 *InstanceTypesApi* | [**ListOfInstanceType**](docs/InstanceTypesApi.md#listofinstancetype) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | List a provider&#39;s instance types
 *KubernetesOverridesControllerApi* | [**ValidateKubernetesOverrides**](docs/KubernetesOverridesControllerApi.md#validatekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides.
+*LDAPRoleManagementApi* | [**ListLdapDnToYbaRoles**](docs/LDAPRoleManagementApi.md#listldapdntoybaroles) | **Get** /api/v1/customers/{cUUID}/ldap_mappings | List LDAP Mappings
+*LDAPRoleManagementApi* | [**SetLdapDnToYbaRoles**](docs/LDAPRoleManagementApi.md#setldapdntoybaroles) | **Put** /api/v1/customers/{cUUID}/ldap_mappings | Set LDAP Mappings
 *LicenseManagementApi* | [**DeleteLicense**](docs/LicenseManagementApi.md#deletelicense) | **Delete** /api/v1/customers/{cUUID}/licenses/{lUUID} | Delete a license
 *LicenseManagementApi* | [**UploadLicense**](docs/LicenseManagementApi.md#uploadlicense) | **Post** /api/v1/customers/{cUUID}/licenses | Uploads the license
 *LoggingConfigApi* | [**SetAuditLoggingSettings**](docs/LoggingConfigApi.md#setauditloggingsettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level
@@ -220,6 +223,10 @@ Class | Method | HTTP request | Description
 *MaintenanceWindowsApi* | [**Page**](docs/MaintenanceWindowsApi.md#page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | List maintenance windows (paginated)
 *MaintenanceWindowsApi* | [**Update**](docs/MaintenanceWindowsApi.md#update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Update maintenance window
 *MetricsApi* | [**MetricsDetail**](docs/MetricsApi.md#metricsdetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics
+*NodeAgentsApi* | [**DownloadNodeAgentInstaller**](docs/NodeAgentsApi.md#downloadnodeagentinstaller) | **Get** /api/v1/node_agents/download | Download Node Agent Installer or Package
+*NodeAgentsApi* | [**GetNodeAgent**](docs/NodeAgentsApi.md#getnodeagent) | **Get** /api/v1/customers/{cUUID}/node_agents/{nUUID} | Get Node Agent
+*NodeAgentsApi* | [**ListNodeAgents**](docs/NodeAgentsApi.md#listnodeagents) | **Get** /api/v1/customers/{cUUID}/node_agents | List Node Agents
+*NodeAgentsApi* | [**PageListNodeAgents**](docs/NodeAgentsApi.md#pagelistnodeagents) | **Post** /api/v1/customers/{cUUID}/node_agents/page | List Node Agents (paginated)
 *NodeInstancesApi* | [**CreateNodeInstance**](docs/NodeInstancesApi.md#createnodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes | Create a node instance
 *NodeInstancesApi* | [**DeleteInstance**](docs/NodeInstancesApi.md#deleteinstance) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Delete a node instance
 *NodeInstancesApi* | [**DetachedNodeAction**](docs/NodeInstancesApi.md#detachednodeaction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
@@ -441,6 +448,7 @@ Class | Method | HTTP request | Description
  - [ConfDataType](docs/ConfDataType.md)
  - [ConfDataTypeObject](docs/ConfDataTypeObject.md)
  - [ConfKeyInfo](docs/ConfKeyInfo.md)
+ - [Config](docs/Config.md)
  - [ConfigEntry](docs/ConfigEntry.md)
  - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
  - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
@@ -469,6 +477,7 @@ Class | Method | HTTP request | Description
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
+ - [FailedSubtasks](docs/FailedSubtasks.md)
  - [GCPCloudInfo](docs/GCPCloudInfo.md)
  - [GCPRegionCloudInfo](docs/GCPRegionCloudInfo.md)
  - [GCSLocation](docs/GCSLocation.md)
@@ -490,6 +499,8 @@ Class | Method | HTTP request | Description
  - [KubernetesOverridesResponse](docs/KubernetesOverridesResponse.md)
  - [KubernetesOverridesUpgradeParams](docs/KubernetesOverridesUpgradeParams.md)
  - [KubernetesRegionInfo](docs/KubernetesRegionInfo.md)
+ - [LdapDnToYbaRoleData](docs/LdapDnToYbaRoleData.md)
+ - [LdapDnYbaRoleDataPair](docs/LdapDnYbaRoleDataPair.md)
  - [LogData](docs/LogData.md)
  - [MaintenanceWindow](docs/MaintenanceWindow.md)
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
@@ -506,6 +517,11 @@ Class | Method | HTTP request | Description
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
  - [NoAuth](docs/NoAuth.md)
  - [NodeActionFormData](docs/NodeActionFormData.md)
+ - [NodeAgent](docs/NodeAgent.md)
+ - [NodeAgentApiFilter](docs/NodeAgentApiFilter.md)
+ - [NodeAgentPagedApiQuery](docs/NodeAgentPagedApiQuery.md)
+ - [NodeAgentPagedApiResponse](docs/NodeAgentPagedApiResponse.md)
+ - [NodeAgentResp](docs/NodeAgentResp.md)
  - [NodeConfig](docs/NodeConfig.md)
  - [NodeData](docs/NodeData.md)
  - [NodeDetails](docs/NodeDetails.md)
@@ -571,6 +587,7 @@ Class | Method | HTTP request | Description
  - [StateChangeAuditInfoFilter](docs/StateChangeAuditInfoFilter.md)
  - [StateChangeAuditInfoPagedQuery](docs/StateChangeAuditInfoPagedQuery.md)
  - [StateChangeAuditInfoPagedResponse](docs/StateChangeAuditInfoPagedResponse.md)
+ - [SubtaskData](docs/SubtaskData.md)
  - [SupportBundle](docs/SupportBundle.md)
  - [SupportBundleFormData](docs/SupportBundleFormData.md)
  - [SystemdUpgradeParams](docs/SystemdUpgradeParams.md)

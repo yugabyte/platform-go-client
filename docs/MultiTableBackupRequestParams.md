@@ -55,6 +55,7 @@ Name | Type | Description | Notes
 **StorageConfigType** | Pointer to **string** | Type of backup storage config | [optional] 
 **StorageConfigUUID** | **string** | Storage configuration UUID | 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
+**TableByTableBackup** | Pointer to **bool** | Table by table backup | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
 **TableUUID** | Pointer to **string** | Table UUID | [optional] 
@@ -1332,6 +1333,31 @@ SetStorageLocation sets StorageLocation field to given value.
 `func (o *MultiTableBackupRequestParams) HasStorageLocation() bool`
 
 HasStorageLocation returns a boolean if a field has been set.
+
+### GetTableByTableBackup
+
+`func (o *MultiTableBackupRequestParams) GetTableByTableBackup() bool`
+
+GetTableByTableBackup returns the TableByTableBackup field if non-nil, zero value otherwise.
+
+### GetTableByTableBackupOk
+
+`func (o *MultiTableBackupRequestParams) GetTableByTableBackupOk() (*bool, bool)`
+
+GetTableByTableBackupOk returns a tuple with the TableByTableBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableByTableBackup
+
+`func (o *MultiTableBackupRequestParams) SetTableByTableBackup(v bool)`
+
+SetTableByTableBackup sets TableByTableBackup field to given value.
+
+### HasTableByTableBackup
+
+`func (o *MultiTableBackupRequestParams) HasTableByTableBackup() bool`
+
+HasTableByTableBackup returns a boolean if a field has been set.
 
 ### GetTableName
 

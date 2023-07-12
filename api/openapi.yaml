@@ -30,10 +30,12 @@ tags:
 - name: Grafana Dashboard
 - name: Instance types
 - name: KubernetesOverridesController
+- name: LDAP Role management
 - name: License management
 - name: LoggingConfig
 - name: Maintenance windows
 - name: Metrics
+- name: Node Agents
 - name: Node instances
 - name: PITR management
 - name: PackagesController
@@ -2626,6 +2628,62 @@ paths:
       tags:
       - Encryption at rest
       x-codegen-request-body-name: KMS config
+  /api/v1/customers/{cUUID}/ldap_mappings:
+    get:
+      description: List LDAP Mappings
+      operationId: listLdapDnToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapDnToYbaRoleData'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List LDAP Mappings
+      tags:
+      - LDAP Role management
+    put:
+      description: Set LDAP Mappings
+      operationId: setLdapDnToYbaRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LdapDnToYbaRoleData'
+        description: New LDAP Mappings to be set
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Set LDAP Mappings
+      tags:
+      - LDAP Role management
+      x-codegen-request-body-name: ldapMappings
   /api/v1/customers/{cUUID}/licenses:
     post:
       operationId: upload_license
@@ -2934,6 +2992,101 @@ paths:
       tags:
       - Customer management
       x-codegen-request-body-name: Metrics
+  /api/v1/customers/{cUUID}/node_agents:
+    get:
+      operationId: ListNodeAgents
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: nodeIp
+        schema:
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/NodeAgentResp'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List Node Agents
+      tags:
+      - Node Agents
+  /api/v1/customers/{cUUID}/node_agents/page:
+    post:
+      operationId: PageListNodeAgents
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeAgentPagedApiQuery'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeAgentPagedApiResponse'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List Node Agents (paginated)
+      tags:
+      - Node Agents
+      x-codegen-request-body-name: PageNodeAgentRequest
+  /api/v1/customers/{cUUID}/node_agents/{nUUID}:
+    get:
+      operationId: GetNodeAgent
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: nUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeAgentResp'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get Node Agent
+      tags:
+      - Node Agents
   /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list:
     get:
       operationId: getNodeInstance
@@ -5255,6 +5408,7 @@ paths:
       - Audit
   /api/v1/customers/{cUUID}/tasks/{tUUID}/failed:
     get:
+      deprecated: true
       operationId: failedSubtasks
       parameters:
       - in: path
@@ -5285,7 +5439,38 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Get a task's failed subtasks
+      summary: "Deprecated: sinceDate=2023-06-06, sinceYBAVersion=2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks\
+        \ instead"
+      tags:
+      - Customer Tasks
+  /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks:
+    get:
+      operationId: listFailedSubtasks
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: tUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedSubtasks'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a list of task's failed subtasks
       tags:
       - Customer Tasks
   /api/v1/customers/{cUUID}/tasks/{tUUID}/retry:
@@ -7279,6 +7464,12 @@ paths:
           type: boolean
       - in: query
         name: excludeColocatedTables
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      - in: query
+        name: includeColocatedParentTables
         schema:
           default: false
           exampleSetFlag: false
@@ -9651,6 +9842,43 @@ paths:
       summary: List column types
       tags:
       - Table management
+  /api/v1/node_agents/download:
+    get:
+      operationId: DownloadNodeAgentInstaller
+      parameters:
+      - in: query
+        name: downloadType
+        schema:
+          default: INSTALLER
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: os
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: arch
+        schema:
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/gzip:
+              schema:
+                exampleSetFlag: true
+                type: string
+            application/x-sh:
+              schema:
+                exampleSetFlag: true
+                type: string
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Download Node Agent Installer or Package
+      tags:
+      - Node Agents
   /api/v1/prometheus_metrics:
     get:
       operationId: MetricsDetail
@@ -10604,6 +10832,7 @@ components:
           - LEADERLESS_TABLETS
           - UNDER_REPLICATED_TABLETS
           - PRIVATE_ACCESS_KEY_STATUS
+          - NEW_YSQL_TABLES_ADDED
           exampleSetFlag: true
           type: string
         thresholdUnit:
@@ -10751,6 +10980,7 @@ components:
           - LEADERLESS_TABLETS
           - UNDER_REPLICATED_TABLETS
           - PRIVATE_ACCESS_KEY_STATUS
+          - NEW_YSQL_TABLES_ADDED
           exampleSetFlag: true
           type: string
         uuids:
@@ -11112,6 +11342,7 @@ components:
           - LEADERLESS_TABLETS
           - UNDER_REPLICATED_TABLETS
           - PRIVATE_ACCESS_KEY_STATUS
+          - NEW_YSQL_TABLES_ADDED
           exampleSetFlag: true
           type: string
         thresholdConditionReadOnly:
@@ -11197,6 +11428,7 @@ components:
           enum:
           - GREATER_THAN
           - LESS_THAN
+          - NOT_EQUAL
           exampleSetFlag: true
           type: string
         threshold:
@@ -12444,6 +12676,7 @@ components:
           backupSizeInBytes: 0
           expectedUniverseVersion: 6
           scheduleName: scheduleName
+          tableByTableBackup: true
           sourceXClusterConfigs:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -12470,24 +12703,24 @@ components:
           deviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           enableYbc: true
           nodeDetailsSet:
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -12513,10 +12746,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -12526,20 +12759,20 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -12565,10 +12798,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -12578,9 +12811,9 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           transactionalBackup: true
           oldOwner: oldOwner
           timeTakenPartial: 2
@@ -12969,10 +13202,15 @@ components:
           hasIncrementalBackups: true
           lastBackupState: InProgress
           commonBackupInfo:
+            tableByTableBackup: true
+            sse: true
+            updateTime: 2022-12-12T13:07:18Z
+            kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             completionTime: 2022-12-12T13:07:18Z
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             baseBackupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            sse: true
             createTime: 2022-12-12T13:07:18Z
             responseList:
             - backupSizeInBytes: 0
@@ -13009,12 +13247,8 @@ components:
                 REGION: REGION
               allTables: true
               defaultLocation: defaultLocation
-            updateTime: 2022-12-12T13:07:18Z
-            kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: InProgress
-            taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             totalBackupSizeInBytes: 6
-            backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupType: YQL_TABLE_TYPE
           isUniversePresent: true
           onDemand: true
@@ -13034,10 +13268,15 @@ components:
           hasIncrementalBackups: true
           lastBackupState: InProgress
           commonBackupInfo:
+            tableByTableBackup: true
+            sse: true
+            updateTime: 2022-12-12T13:07:18Z
+            kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             completionTime: 2022-12-12T13:07:18Z
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             baseBackupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            sse: true
             createTime: 2022-12-12T13:07:18Z
             responseList:
             - backupSizeInBytes: 0
@@ -13074,12 +13313,8 @@ components:
                 REGION: REGION
               allTables: true
               defaultLocation: defaultLocation
-            updateTime: 2022-12-12T13:07:18Z
-            kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: InProgress
-            taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             totalBackupSizeInBytes: 6
-            backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupType: YQL_TABLE_TYPE
           isUniversePresent: true
           onDemand: true
@@ -13122,15 +13357,15 @@ components:
     BackupRequestParams:
       description: Backup table parameters
       example:
-        expectedUniverseVersion: 4
+        expectedUniverseVersion: 1
         scheduleName: scheduleName
+        tableByTableBackup: true
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sse: true
         nodeExporterUser: nodeExporterUser
         alterLoadBalancer: true
-        currentIdx: 1
         baseBackupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         enableVerboseLogs: true
         scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13150,7 +13385,7 @@ components:
           tableUUIDList:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        sleepAfterTServerRestartMillis: 0
+        sleepAfterTServerRestartMillis: 6
         kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ignoreErrors: true
         targetXClusterConfigs:
@@ -13160,25 +13395,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -13204,10 +13439,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -13217,20 +13452,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -13256,10 +13491,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -13269,9 +13504,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         ybcInstalled: true
         communicationPorts:
           nodeExporterPort: 1
@@ -13287,17 +13522,17 @@ components:
           yqlServerHttpPort: 2
           masterRpcPort: 6
           redisServerRpcPort: 5
-        sleepAfterMasterRestartMillis: 6
+        sleepAfterMasterRestartMillis: 7
         useTablespaces: true
-        minNumBackupsToRetain: 9
+        minNumBackupsToRetain: 5
         expiryTimeUnit: NANOSECONDS
-        parallelism: 0
+        parallelism: 7
         encryptionAtRestConfig:
           encryptionAtRestEnabled: true
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
-        backupType: YQL_TABLE_TYPE
+        backupType: PGSQL_TABLE_TYPE
         disableParallelism: true
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
@@ -13319,17 +13554,16 @@ components:
         platformVersion: platformVersion
         disableMultipart: true
         platformUrl: platformUrl
-        timeBeforeDelete: 4
-        parallelDBBackups: 7
+        timeBeforeDelete: 0
+        parallelDBBackups: 3
         ybPrevSoftwareVersion: ybPrevSoftwareVersion
         cronExpression: cronExpression
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         errorString: errorString
         frequencyTimeUnit: NANOSECONDS
         installYbc: true
-        currentYbcTaskId: currentYbcTaskId
-        schedulingFrequency: 7
-        incrementalBackupFrequency: 5
+        schedulingFrequency: 0
+        incrementalBackupFrequency: 4
         cmkArn: cmkArn
         previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       exampleSetFlag: true
@@ -13349,10 +13583,9 @@ components:
         backupType:
           description: Backup type
           enum:
+          - PGSQL_TABLE_TYPE
           - YQL_TABLE_TYPE
           - REDIS_TABLE_TYPE
-          - PGSQL_TABLE_TYPE
-          - TRANSACTION_STATUS_TABLE_TYPE
           exampleSetFlag: true
           type: string
         backupUUID:
@@ -13374,13 +13607,6 @@ components:
           $ref: '#/components/schemas/Users'
         cronExpression:
           description: Cron expression for a recurring backup
-          exampleSetFlag: true
-          type: string
-        currentIdx:
-          exampleSetFlag: true
-          format: int32
-          type: integer
-        currentYbcTaskId:
           exampleSetFlag: true
           type: string
         customerUUID:
@@ -13565,6 +13791,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        tableByTableBackup:
+          description: Take table by table backups
+          exampleSetFlag: true
+          type: boolean
         targetXClusterConfigs:
           description: The target universe's xcluster replication relationships
           exampleSetFlag: false
@@ -13601,8 +13831,6 @@ components:
       required:
       - backupUUID
       - creatingUser
-      - currentIdx
-      - currentYbcTaskId
       - platformUrl
       - platformVersion
       - sleepAfterMasterRestartMillis
@@ -13618,10 +13846,15 @@ components:
         hasIncrementalBackups: true
         lastBackupState: InProgress
         commonBackupInfo:
+          tableByTableBackup: true
+          sse: true
+          updateTime: 2022-12-12T13:07:18Z
+          kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           completionTime: 2022-12-12T13:07:18Z
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           baseBackupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          sse: true
           createTime: 2022-12-12T13:07:18Z
           responseList:
           - backupSizeInBytes: 0
@@ -13658,12 +13891,8 @@ components:
               REGION: REGION
             allTables: true
             defaultLocation: defaultLocation
-          updateTime: 2022-12-12T13:07:18Z
-          kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: InProgress
-          taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           totalBackupSizeInBytes: 6
-          backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         backupType: YQL_TABLE_TYPE
         isUniversePresent: true
         onDemand: true
@@ -13856,6 +14085,7 @@ components:
         backupSizeInBytes: 0
         expectedUniverseVersion: 6
         scheduleName: scheduleName
+        tableByTableBackup: true
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13882,24 +14112,24 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -13925,10 +14155,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -13938,20 +14168,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -13977,10 +14207,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -13990,9 +14220,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         transactionalBackup: true
         oldOwner: oldOwner
         timeTakenPartial: 2
@@ -14316,6 +14546,10 @@ components:
           description: Storage location
           exampleSetFlag: true
           type: string
+        tableByTableBackup:
+          description: Table by table backup
+          exampleSetFlag: true
+          type: boolean
         tableName:
           description: Table name
           exampleSetFlag: true
@@ -14479,11 +14713,11 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         s3Bucket: s3Bucket
         tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -14493,16 +14727,16 @@ components:
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -14528,10 +14762,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -14541,20 +14775,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -14580,10 +14814,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -14593,9 +14827,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         instanceCount: 6
         ybcInstalled: true
         communicationPorts:
@@ -15122,26 +15356,26 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         selfSignedClientCertRotate: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -15167,10 +15401,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -15180,20 +15414,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -15219,10 +15453,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -15232,9 +15466,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -15635,19 +15869,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -16011,19 +16245,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -16387,19 +16621,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -16763,19 +16997,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -17139,19 +17373,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -17583,6 +17817,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -18159,19 +18394,19 @@ components:
           deviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           masterDeviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           enableYCQL: true
           numNodes: 5
           assignPublicIP: true
@@ -18340,10 +18575,15 @@ components:
       type: object
     CommonBackupInfo:
       example:
+        tableByTableBackup: true
+        sse: true
+        updateTime: 2022-12-12T13:07:18Z
+        kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         completionTime: 2022-12-12T13:07:18Z
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         baseBackupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        sse: true
         createTime: 2022-12-12T13:07:18Z
         responseList:
         - backupSizeInBytes: 0
@@ -18380,12 +18620,8 @@ components:
             REGION: REGION
           allTables: true
           defaultLocation: defaultLocation
-        updateTime: 2022-12-12T13:07:18Z
-        kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: InProgress
-        taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         totalBackupSizeInBytes: 6
-        backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       exampleSetFlag: true
       properties:
         backupUUID:
@@ -18439,6 +18675,9 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        tableByTableBackup:
+          exampleSetFlag: true
+          type: boolean
         taskUUID:
           exampleSetFlag: true
           format: uuid
@@ -18461,6 +18700,7 @@ components:
       - sse
       - state
       - storageConfigUUID
+      - tableByTableBackup
       - taskUUID
       - totalBackupSizeInBytes
       type: object
@@ -18620,6 +18860,32 @@ components:
       - scope
       - tags
       type: object
+    Config:
+      example:
+        certPath: certPath
+        serverCert: serverCert
+        offloadable: true
+        serverKey: serverKey
+      exampleSetFlag: true
+      properties:
+        certPath:
+          exampleSetFlag: true
+          type: string
+        offloadable:
+          exampleSetFlag: true
+          type: boolean
+        serverCert:
+          exampleSetFlag: true
+          type: string
+        serverKey:
+          exampleSetFlag: true
+          type: string
+      required:
+      - certPath
+      - offloadable
+      - serverCert
+      - serverKey
+      type: object
     ConfigEntry:
       description: Configuration entry
       example:
@@ -18679,27 +18945,27 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         errorString: errorString
         retentionPeriodInSeconds: 1
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -18725,10 +18991,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -18738,20 +19004,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -18777,10 +19043,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -18790,9 +19056,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         ybcInstalled: true
         name: name
         communicationPorts:
@@ -19945,11 +20211,11 @@ components:
       example:
         diskIops: 1
         storageClass: storageClass
-        numVolumes: 6
+        numVolumes: 1
         mountPoints: mountPoints
         storageType: IO1
-        throughput: 7
-        volumeSize: 1
+        throughput: 6
+        volumeSize: 7
       exampleSetFlag: true
       properties:
         diskIops:
@@ -20157,6 +20423,31 @@ components:
           exampleSetFlag: true
           type: boolean
       type: object
+    FailedSubtasks:
+      description: Failed Subtasks
+      example:
+        failedSubTasks:
+        - errorString: errorString
+          creationTime: 2022-12-12T13:07:18Z
+          subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          subTaskType: subTaskType
+          subTaskGroupType: subTaskGroupType
+          subTaskState: subTaskState
+        - errorString: errorString
+          creationTime: 2022-12-12T13:07:18Z
+          subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          subTaskType: subTaskType
+          subTaskGroupType: subTaskGroupType
+          subTaskState: subTaskState
+      exampleSetFlag: true
+      properties:
+        failedSubTasks:
+          description: List of failed subtasks
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/SubtaskData'
+          type: array
+      type: object
     GCPCloudInfo:
       example:
         useHostVPC: true
@@ -20252,25 +20543,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -20296,10 +20587,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -20309,20 +20600,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -20348,10 +20639,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -20361,9 +20652,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -20768,19 +21059,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -21144,19 +21435,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -21520,19 +21811,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -21896,19 +22187,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -22272,19 +22563,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -22722,6 +23013,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -23280,14 +23572,12 @@ components:
             format: uuid
             type: string
           type: array
-          uniqueItems: true
         tablesList:
           exampleSetFlag: false
           items:
             exampleSetFlag: true
             type: string
           type: array
-          uniqueItems: true
       required:
       - allTables
       - backupSizeInBytes
@@ -23395,25 +23685,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -23439,10 +23729,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -23452,20 +23742,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -23491,10 +23781,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -23504,9 +23794,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -23907,19 +24197,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -24283,19 +24573,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -24659,19 +24949,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -25035,19 +25325,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -25411,19 +25701,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -25858,6 +26148,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -25974,6 +26265,44 @@ components:
         overrides:
           exampleSetFlag: true
           type: string
+      type: object
+    LdapDnToYbaRoleData:
+      description: "A list of LDAP DN, YBA role pairs"
+      example:
+        ldapDnToYbaRolePairs:
+        - ybaRole: Admin
+          distinguishedName: distinguishedName
+        - ybaRole: Admin
+          distinguishedName: distinguishedName
+      exampleSetFlag: true
+      properties:
+        ldapDnToYbaRolePairs:
+          description: ' list of pairs of distinguishedName and ybaRole'
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/LdapDnYbaRoleDataPair'
+          type: array
+      type: object
+    LdapDnYbaRoleDataPair:
+      example:
+        ybaRole: Admin
+        distinguishedName: distinguishedName
+      exampleSetFlag: true
+      properties:
+        distinguishedName:
+          exampleSetFlag: true
+          type: string
+        ybaRole:
+          enum:
+          - Admin
+          - ReadOnly
+          - SuperAdmin
+          - BackupAdmin
+          exampleSetFlag: true
+          type: string
+      required:
+      - distinguishedName
+      - ybaRole
       type: object
     LogData:
       example:
@@ -26398,6 +26727,7 @@ components:
     MetricQueryParams:
       description: Metrics request data
       example:
+        streamId: streamId
         metricsWithSettings:
         - timeAggregation: DEFAULT
           metric: metric
@@ -26510,6 +26840,10 @@ components:
           exampleSetFlag: true
           format: int64
           type: integer
+        streamId:
+          description: Stream id
+          exampleSetFlag: true
+          type: string
         tableId:
           description: Table id
           exampleSetFlag: true
@@ -26621,6 +26955,7 @@ components:
         backupSizeInBytes: 0
         expectedUniverseVersion: 6
         scheduleName: scheduleName
+        tableByTableBackup: true
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -26647,24 +26982,24 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -26690,10 +27025,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -26703,20 +27038,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -26742,10 +27077,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -26755,9 +27090,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         transactionalBackup: true
         oldOwner: oldOwner
         timeTakenPartial: 2
@@ -26793,6 +27128,7 @@ components:
         - backupSizeInBytes: 0
           expectedUniverseVersion: 6
           scheduleName: scheduleName
+          tableByTableBackup: true
           sourceXClusterConfigs:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -26819,24 +27155,24 @@ components:
           deviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           enableYbc: true
           nodeDetailsSet:
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -26862,10 +27198,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -26875,20 +27211,20 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -26914,10 +27250,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -26927,9 +27263,9 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           transactionalBackup: true
           oldOwner: oldOwner
           timeTakenPartial: 2
@@ -27012,6 +27348,7 @@ components:
         - backupSizeInBytes: 0
           expectedUniverseVersion: 6
           scheduleName: scheduleName
+          tableByTableBackup: true
           sourceXClusterConfigs:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -27038,24 +27375,24 @@ components:
           deviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           enableYbc: true
           nodeDetailsSet:
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -27081,10 +27418,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -27094,20 +27431,20 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           - nodeName: nodeName
-            nodeExporterPort: 9
+            nodeExporterPort: 8
             placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            ybControllerHttpPort: 6
+            ybControllerHttpPort: 2
             dedicatedTo: MASTER
             machineImage: machineImage
-            redisServerHttpPort: 3
+            redisServerHttpPort: 6
             masterState: ToStart
-            tserverRpcPort: 2
-            ysqlServerHttpPort: 3
-            yqlServerRpcPort: 6
+            tserverRpcPort: 1
+            ysqlServerHttpPort: 6
+            yqlServerRpcPort: 5
             isMaster: true
             sshUserOverride: sshUserOverride
             cloudInfo:
@@ -27133,10 +27470,10 @@ components:
               instance_type: instance_type
             cronsActive: true
             state: Provisioned
-            nodeIdx: 6
-            masterRpcPort: 8
-            redisServerRpcPort: 6
-            tserverHttpPort: 1
+            nodeIdx: 9
+            masterRpcPort: 6
+            redisServerRpcPort: 3
+            tserverHttpPort: 6
             disksAreMountedByUUID: true
             isRedisServer: true
             ybPrebuiltAmi: true
@@ -27146,9 +27483,9 @@ components:
             ybControllerRpcPort: 6
             isYqlServer: true
             azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            masterHttpPort: 6
+            masterHttpPort: 9
             ysqlServerRpcPort: 3
-            yqlServerHttpPort: 5
+            yqlServerHttpPort: 6
           transactionalBackup: true
           oldOwner: oldOwner
           timeTakenPartial: 2
@@ -27517,6 +27854,10 @@ components:
           description: Storage location
           exampleSetFlag: true
           type: string
+        tableByTableBackup:
+          description: Table by table backup
+          exampleSetFlag: true
+          type: boolean
         tableName:
           description: Table name
           exampleSetFlag: true
@@ -27648,6 +27989,320 @@ components:
       required:
       - nodeAction
       type: object
+    NodeAgent:
+      description: Node agent details
+      exampleSetFlag: false
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        config:
+          $ref: '#/components/schemas/Config'
+        customerUuid:
+          description: Customer UUID
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        home:
+          description: Node agent installation directory
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        ip:
+          description: Node agent server IP
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        name:
+          description: Node agent name
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        port:
+          description: Node agent server port
+          exampleSetFlag: true
+          format: int32
+          readOnly: true
+          type: integer
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - UPGRADE
+          - UPGRADED
+          - READY
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Node agent installed version
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+      type: object
+    NodeAgentApiFilter:
+      example:
+        nodeIps:
+        - nodeIps
+        - nodeIps
+      exampleSetFlag: true
+      properties:
+        nodeIps:
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
+      required:
+      - nodeIps
+      type: object
+    NodeAgentPagedApiQuery:
+      example:
+        filter:
+          nodeIps:
+          - nodeIps
+          - nodeIps
+        offset: 6
+        needTotalCount: true
+        limit: 0
+        sortBy: uuid
+        direction: ASC
+      exampleSetFlag: true
+      properties:
+        direction:
+          enum:
+          - ASC
+          - DESC
+          exampleSetFlag: true
+          type: string
+        filter:
+          $ref: '#/components/schemas/NodeAgentApiFilter'
+        limit:
+          exampleSetFlag: true
+          format: int32
+          type: integer
+        needTotalCount:
+          exampleSetFlag: true
+          type: boolean
+        offset:
+          exampleSetFlag: true
+          format: int32
+          type: integer
+        sortBy:
+          enum:
+          - uuid
+          - ip
+          - name
+          - state
+          - updatedAt
+          - version
+          exampleSetFlag: true
+          type: string
+      required:
+      - direction
+      - filter
+      - limit
+      - needTotalCount
+      - offset
+      - sortBy
+      type: object
+    NodeAgentPagedApiResponse:
+      example:
+        entities:
+        - versionMatched: true
+          ip: ip
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+          updatedAt: 2022-12-21T13:07:18Z
+        - versionMatched: true
+          ip: ip
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          version: version
+          reachable: true
+          home: home
+          customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          port: 0
+          name: name
+          osType: DARWIN
+          archType: ARM64
+          state: REGISTERING
+          config:
+            certPath: certPath
+            serverCert: serverCert
+            offloadable: true
+            serverKey: serverKey
+          updatedAt: 2022-12-21T13:07:18Z
+        hasPrev: true
+        hasNext: true
+        totalCount: 0
+      exampleSetFlag: true
+      properties:
+        entities:
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/NodeAgentResp'
+          type: array
+        hasNext:
+          exampleSetFlag: true
+          type: boolean
+        hasPrev:
+          exampleSetFlag: true
+          type: boolean
+        totalCount:
+          exampleSetFlag: true
+          format: int32
+          type: integer
+      required:
+      - entities
+      - hasNext
+      - hasPrev
+      - totalCount
+      type: object
+    NodeAgentResp:
+      description: Node agent details
+      example:
+        versionMatched: true
+        ip: ip
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        reachable: true
+        home: home
+        customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        port: 0
+        name: name
+        osType: DARWIN
+        archType: ARM64
+        state: REGISTERING
+        config:
+          certPath: certPath
+          serverCert: serverCert
+          offloadable: true
+          serverKey: serverKey
+        updatedAt: 2022-12-21T13:07:18Z
+      exampleSetFlag: true
+      properties:
+        archType:
+          description: Node agent host machine arch
+          enum:
+          - ARM64
+          - AMD64
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        config:
+          $ref: '#/components/schemas/Config'
+        customerUuid:
+          description: Customer UUID
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        home:
+          description: Node agent installation directory
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        ip:
+          description: Node agent server IP
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        name:
+          description: Node agent name
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        osType:
+          description: Node agent host OS
+          enum:
+          - DARWIN
+          - LINUX
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        port:
+          description: Node agent server port
+          exampleSetFlag: true
+          format: int32
+          readOnly: true
+          type: integer
+        reachable:
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
+        state:
+          description: Node agent state
+          enum:
+          - REGISTERING
+          - UPGRADE
+          - UPGRADED
+          - READY
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Updated time
+          example: 2022-12-21T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          readOnly: true
+          type: string
+        uuid:
+          description: Node agent UUID
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        version:
+          description: Node agent installed version
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        versionMatched:
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
+      type: object
     NodeConfig:
       description: A node configuration.
       example:
@@ -27702,8 +28357,8 @@ components:
           - YB_CONTROLLER_RPC_PORT
           - REDIS_SERVER_HTTP_PORT
           - REDIS_SERVER_RPC_PORT
-          - YQL_SERVER_HTTP_PORT
-          - YQL_SERVER_RPC_PORT
+          - YCQL_SERVER_HTTP_PORT
+          - YCQL_SERVER_RPC_PORT
           - YSQL_SERVER_HTTP_PORT
           - YSQL_SERVER_RPC_PORT
           - VM_MAX_MAP_COUNT
@@ -27817,16 +28472,16 @@ components:
       description: Details of a cloud node
       example:
         nodeName: nodeName
-        nodeExporterPort: 9
+        nodeExporterPort: 8
         placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        ybControllerHttpPort: 6
+        ybControllerHttpPort: 2
         dedicatedTo: MASTER
         machineImage: machineImage
-        redisServerHttpPort: 3
+        redisServerHttpPort: 6
         masterState: ToStart
-        tserverRpcPort: 2
-        ysqlServerHttpPort: 3
-        yqlServerRpcPort: 6
+        tserverRpcPort: 1
+        ysqlServerHttpPort: 6
+        yqlServerRpcPort: 5
         isMaster: true
         sshUserOverride: sshUserOverride
         cloudInfo:
@@ -27852,10 +28507,10 @@ components:
           instance_type: instance_type
         cronsActive: true
         state: Provisioned
-        nodeIdx: 6
-        masterRpcPort: 8
-        redisServerRpcPort: 6
-        tserverHttpPort: 1
+        nodeIdx: 9
+        masterRpcPort: 6
+        redisServerRpcPort: 3
+        tserverHttpPort: 6
         disksAreMountedByUUID: true
         isRedisServer: true
         ybPrebuiltAmi: true
@@ -27865,9 +28520,9 @@ components:
         ybControllerRpcPort: 6
         isYqlServer: true
         azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        masterHttpPort: 6
+        masterHttpPort: 9
         ysqlServerRpcPort: 3
-        yqlServerHttpPort: 5
+        yqlServerHttpPort: 6
       exampleSetFlag: true
       properties:
         azUuid:
@@ -28731,12 +29386,12 @@ components:
         connection_skew_threshold_pct: 1.1465812980502945
         enabled: true
         universe_frequency_mins: 5
+        hot_shard_min_node_writes: 1
         hot_shard_read_skew_threshold_pct: 1.7386281948385884
         cpu_skew_min_usage_pct: 1.5637376656633328
-        hot_shard_minimal_writes: 1
+        hot_shard_min_node_reads: 1
         cpu_usage_threshold: 1.9301444243932577
         cpu_skew_threshold_pct: 1.2302135886934766
-        hot_shard_minimal_reads: 1
         query_skew_threshold_pct: 1.684685269835264
         rejected_conn_threshold: 1
         connection_skew_min_connections: 1
@@ -28801,14 +29456,14 @@ components:
           format: int32
           minimum: 1
           type: integer
-        hot_shard_minimal_reads:
-          description: Perf advisor hot shard minimal reads
+        hot_shard_min_node_reads:
+          description: Perf advisor hot shard minimal node reads
           exampleSetFlag: true
           format: int32
           minimum: 1
           type: integer
-        hot_shard_minimal_writes:
-          description: Perf advisor hot shard minimal writes
+        hot_shard_min_node_writes:
+          description: Perf advisor hot shard minimal node writes
           exampleSetFlag: true
           format: int32
           minimum: 1
@@ -28875,12 +29530,12 @@ components:
           connection_skew_threshold_pct: 1.1465812980502945
           enabled: true
           universe_frequency_mins: 5
+          hot_shard_min_node_writes: 1
           hot_shard_read_skew_threshold_pct: 1.7386281948385884
           cpu_skew_min_usage_pct: 1.5637376656633328
-          hot_shard_minimal_writes: 1
+          hot_shard_min_node_reads: 1
           cpu_usage_threshold: 1.9301444243932577
           cpu_skew_threshold_pct: 1.2302135886934766
-          hot_shard_minimal_reads: 1
           query_skew_threshold_pct: 1.684685269835264
           rejected_conn_threshold: 1
           connection_skew_min_connections: 1
@@ -28896,12 +29551,12 @@ components:
           connection_skew_threshold_pct: 1.1465812980502945
           enabled: true
           universe_frequency_mins: 5
+          hot_shard_min_node_writes: 1
           hot_shard_read_skew_threshold_pct: 1.7386281948385884
           cpu_skew_min_usage_pct: 1.5637376656633328
-          hot_shard_minimal_writes: 1
+          hot_shard_min_node_reads: 1
           cpu_usage_threshold: 1.9301444243932577
           cpu_skew_threshold_pct: 1.2302135886934766
-          hot_shard_minimal_reads: 1
           query_skew_threshold_pct: 1.684685269835264
           rejected_conn_threshold: 1
           connection_skew_min_connections: 1
@@ -30816,25 +31471,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -30860,10 +31515,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -30873,20 +31528,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -30912,10 +31567,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -30925,9 +31580,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -31332,19 +31987,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -31708,19 +32363,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -32084,19 +32739,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -32460,19 +33115,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -32836,19 +33491,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -33290,6 +33945,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -33370,25 +34026,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -33414,10 +34070,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -33427,20 +34083,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -33466,10 +34122,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -33479,9 +34135,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -33882,19 +34538,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -34258,19 +34914,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -34634,19 +35290,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -35010,19 +35666,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -35386,19 +36042,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -35824,6 +36480,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -36019,11 +36676,11 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         actionType: RESTORE
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -36032,16 +36689,16 @@ components:
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -36067,10 +36724,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -36080,20 +36737,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -36119,10 +36776,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -36132,9 +36789,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         ybcInstalled: true
         currentYbcTaskId: currentYbcTaskId
         communicationPorts:
@@ -36713,27 +37370,27 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         errorString: errorString
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -36759,10 +37416,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -36772,20 +37429,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -36811,10 +37468,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -36824,9 +37481,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         ybcInstalled: true
         communicationPorts:
           nodeExporterPort: 1
@@ -37033,11 +37690,13 @@ components:
         scheduleName: scheduleName
         ownerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         nextScheduleTaskTime: 2022-12-12T13:07:18Z
+        incrementBacklogStatus: true
         frequency: 6
         cronExpression: cronExpression
         frequencyTimeUnit: NANOSECONDS
         taskType: CloudBootstrap
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
         scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         runningState: true
         userEmail: userEmail
@@ -37085,6 +37744,19 @@ components:
           - MONTHS
           - YEARS
           exampleSetFlag: true
+          type: string
+        incrementBacklogStatus:
+          description: Backlog status of schedule of incremental backups arose due
+            to conflicts
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
+        nextIncrementScheduleTaskTime:
+          description: Time on which schedule is expected to run for incremental backups
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          readOnly: true
           type: string
         nextScheduleTaskTime:
           description: Time on which schedule is expected to run
@@ -37343,6 +38015,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         userEmail:
@@ -37595,6 +38268,7 @@ components:
             - InstallNodeAgent
             - WaitForNodeAgent
             - CloudProviderDelete
+            - YBCBackupSucceeded
             exampleSetFlag: true
             type: string
           type: array
@@ -37671,11 +38345,13 @@ components:
         - scheduleName: scheduleName
           ownerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           nextScheduleTaskTime: 2022-12-12T13:07:18Z
+          incrementBacklogStatus: true
           frequency: 6
           cronExpression: cronExpression
           frequencyTimeUnit: NANOSECONDS
           taskType: CloudBootstrap
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
           scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           runningState: true
           userEmail: userEmail
@@ -37685,11 +38361,13 @@ components:
         - scheduleName: scheduleName
           ownerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           nextScheduleTaskTime: 2022-12-12T13:07:18Z
+          incrementBacklogStatus: true
           frequency: 6
           cronExpression: cronExpression
           frequencyTimeUnit: NANOSECONDS
           taskType: CloudBootstrap
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
           scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           runningState: true
           userEmail: userEmail
@@ -37864,26 +38542,26 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         upgradeSystemCatalog: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -37909,10 +38587,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -37922,20 +38600,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -37961,10 +38639,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -37974,9 +38652,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -38377,19 +39055,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -38753,19 +39431,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -39129,19 +39807,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -39505,19 +40183,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -39881,19 +40559,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -40319,6 +40997,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -40575,6 +41254,44 @@ components:
       - hasPrev
       - totalCount
       type: object
+    SubtaskData:
+      example:
+        errorString: errorString
+        creationTime: 2022-12-12T13:07:18Z
+        subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        subTaskType: subTaskType
+        subTaskGroupType: subTaskGroupType
+        subTaskState: subTaskState
+      exampleSetFlag: true
+      properties:
+        creationTime:
+          description: Creation time (unix timestamp) of the task
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          type: string
+        errorString:
+          description: Failed SubTask Error message
+          exampleSetFlag: true
+          type: string
+        subTaskGroupType:
+          description: Failed SubTask Group Type
+          exampleSetFlag: true
+          type: string
+        subTaskState:
+          description: Failed SubTask State
+          exampleSetFlag: true
+          type: string
+        subTaskType:
+          description: Failed SubTask Type
+          exampleSetFlag: true
+          type: string
+        subTaskUUID:
+          description: Failed SubTask UUID
+          exampleSetFlag: true
+          format: uuid
+          type: string
+      type: object
     SupportBundle:
       example:
         path: path
@@ -40717,25 +41434,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -40761,10 +41478,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -40774,20 +41491,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -40813,10 +41530,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -40826,9 +41543,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -41229,19 +41946,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -41605,19 +42322,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -41981,19 +42698,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -42357,19 +43074,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -42733,19 +43450,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -43171,6 +43888,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -43273,11 +43991,11 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -43285,16 +44003,16 @@ components:
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -43320,10 +44038,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -43333,20 +44051,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -43372,10 +44090,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -43385,9 +44103,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         ybcInstalled: true
         communicationPorts:
           nodeExporterPort: 1
@@ -43584,18 +44302,29 @@ components:
       description: Table information response
       example:
         relationType: SYSTEM_TABLE_RELATION
+        colocated: true
+        walSizeBytes: 6.027456183070403
+        pgSchemaName: public
+        sizeBytes: 0.8008281904610115
+        tableName: tableName
         tableSpace: tableSpace
         tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tableType: YQL_TABLE_TYPE
         keySpace: keySpace
-        walSizeBytes: 6.027456183070403
+        tableID: tableID
         nameSpace: nameSpace
-        pgSchemaName: public
-        sizeBytes: 0.8008281904610115
-        tableName: tableName
+        colocationParentId: colocationParentId
       exampleSetFlag: true
       properties:
+        colocated:
+          description: "Flag, indicating colocated table"
+          exampleSetFlag: true
+          type: boolean
+        colocationParentId:
+          description: Colocation parent id
+          exampleSetFlag: true
+          type: string
         keySpace:
           description: Keyspace
           exampleSetFlag: true
@@ -43630,6 +44359,11 @@ components:
           format: double
           readOnly: true
           type: number
+        tableID:
+          description: Table ID
+          exampleSetFlag: true
+          readOnly: true
+          type: string
         tableName:
           description: Table name
           exampleSetFlag: true
@@ -43741,25 +44475,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -43785,10 +44519,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -43798,20 +44532,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -43837,10 +44571,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -43850,9 +44584,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -44253,19 +44987,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -44629,19 +45363,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -45005,19 +45739,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -45381,19 +46115,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -45757,19 +46491,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -46198,6 +46932,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -46282,25 +47017,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -46326,10 +47061,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -46339,20 +47074,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -46378,10 +47113,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -46391,9 +47126,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         enableClientToNodeEncrypt: true
@@ -46796,19 +47531,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -47172,19 +47907,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -47548,19 +48283,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -47924,19 +48659,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -48300,19 +49035,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -48744,6 +49479,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -48902,25 +49638,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -48946,10 +49682,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -48959,20 +49695,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -48998,10 +49734,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -49011,9 +49747,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -49416,19 +50152,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -49792,19 +50528,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -50168,19 +50904,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -50544,19 +51280,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -50920,19 +51656,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -51367,6 +52103,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -51421,25 +52158,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -51465,10 +52202,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -51478,20 +52215,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -51517,10 +52254,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -51530,9 +52267,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -51933,19 +52670,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -52309,19 +53046,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -52685,19 +53422,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -53061,19 +53798,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -53437,19 +54174,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -53871,6 +54608,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -53925,11 +54663,11 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
@@ -54445,19 +55183,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -54821,19 +55559,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -55197,19 +55935,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -55573,19 +56311,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -55949,19 +56687,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -56383,6 +57121,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -56556,11 +57295,11 @@ components:
           deviceInfo:
             diskIops: 1
             storageClass: storageClass
-            numVolumes: 6
+            numVolumes: 1
             mountPoints: mountPoints
             storageType: IO1
-            throughput: 7
-            volumeSize: 1
+            throughput: 6
+            volumeSize: 7
           enableYbc: true
           updatingTask: CloudBootstrap
           nodeDetailsSet:
@@ -57076,19 +57815,19 @@ components:
               deviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               masterDeviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               enableYCQL: true
               numNodes: 5
               assignPublicIP: true
@@ -57452,19 +58191,19 @@ components:
               deviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               masterDeviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               enableYCQL: true
               numNodes: 5
               assignPublicIP: true
@@ -57828,19 +58567,19 @@ components:
               deviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               masterDeviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               enableYCQL: true
               numNodes: 5
               assignPublicIP: true
@@ -58204,19 +58943,19 @@ components:
               deviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               masterDeviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               enableYCQL: true
               numNodes: 5
               assignPublicIP: true
@@ -58580,19 +59319,19 @@ components:
               deviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               masterDeviceInfo:
                 diskIops: 1
                 storageClass: storageClass
-                numVolumes: 6
+                numVolumes: 1
                 mountPoints: mountPoints
                 storageType: IO1
-                throughput: 7
-                volumeSize: 1
+                throughput: 6
+                volumeSize: 7
               enableYCQL: true
               numNodes: 5
               assignPublicIP: true
@@ -58771,25 +59510,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -58815,10 +59554,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -58828,20 +59567,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -58867,10 +59606,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -58880,9 +59619,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -59283,19 +60022,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -59659,19 +60398,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -60035,19 +60774,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -60411,19 +61150,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -60787,19 +61526,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -61225,6 +61964,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -61319,19 +62059,19 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         masterDeviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYCQL: true
         numNodes: 5
         assignPublicIP: true
@@ -61780,25 +62520,25 @@ components:
         deviceInfo:
           diskIops: 1
           storageClass: storageClass
-          numVolumes: 6
+          numVolumes: 1
           mountPoints: mountPoints
           storageType: IO1
-          throughput: 7
-          volumeSize: 1
+          throughput: 6
+          volumeSize: 7
         enableYbc: true
         updatingTask: CloudBootstrap
         nodeDetailsSet:
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -61824,10 +62564,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -61837,20 +62577,20 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         - nodeName: nodeName
-          nodeExporterPort: 9
+          nodeExporterPort: 8
           placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          ybControllerHttpPort: 6
+          ybControllerHttpPort: 2
           dedicatedTo: MASTER
           machineImage: machineImage
-          redisServerHttpPort: 3
+          redisServerHttpPort: 6
           masterState: ToStart
-          tserverRpcPort: 2
-          ysqlServerHttpPort: 3
-          yqlServerRpcPort: 6
+          tserverRpcPort: 1
+          ysqlServerHttpPort: 6
+          yqlServerRpcPort: 5
           isMaster: true
           sshUserOverride: sshUserOverride
           cloudInfo:
@@ -61876,10 +62616,10 @@ components:
             instance_type: instance_type
           cronsActive: true
           state: Provisioned
-          nodeIdx: 6
-          masterRpcPort: 8
-          redisServerRpcPort: 6
-          tserverHttpPort: 1
+          nodeIdx: 9
+          masterRpcPort: 6
+          redisServerRpcPort: 3
+          tserverHttpPort: 6
           disksAreMountedByUUID: true
           isRedisServer: true
           ybPrebuiltAmi: true
@@ -61889,9 +62629,9 @@ components:
           ybControllerRpcPort: 6
           isYqlServer: true
           azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          masterHttpPort: 6
+          masterHttpPort: 9
           ysqlServerRpcPort: 3
-          yqlServerHttpPort: 5
+          yqlServerHttpPort: 6
         remotePackagePath: remotePackagePath
         ybcInstalled: true
         communicationPorts:
@@ -62298,19 +63038,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -62674,19 +63414,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -63050,19 +63790,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -63426,19 +64166,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -63802,19 +64542,19 @@ components:
             deviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             masterDeviceInfo:
               diskIops: 1
               storageClass: storageClass
-              numVolumes: 6
+              numVolumes: 1
               mountPoints: mountPoints
               storageType: IO1
-              throughput: 7
-              volumeSize: 1
+              throughput: 6
+              volumeSize: 7
             enableYCQL: true
             numNodes: 5
             assignPublicIP: true
@@ -64267,6 +65007,7 @@ components:
           - InstallNodeAgent
           - WaitForNodeAgent
           - CloudProviderDelete
+          - YBCBackupSucceeded
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -64374,8 +65115,8 @@ components:
           - YB_CONTROLLER_RPC_PORT
           - REDIS_SERVER_HTTP_PORT
           - REDIS_SERVER_RPC_PORT
-          - YQL_SERVER_HTTP_PORT
-          - YQL_SERVER_RPC_PORT
+          - YCQL_SERVER_HTTP_PORT
+          - YCQL_SERVER_RPC_PORT
           - YSQL_SERVER_HTTP_PORT
           - YSQL_SERVER_RPC_PORT
           - VM_MAX_MAP_COUNT
@@ -64494,20 +65235,13 @@ components:
           type: array
           uniqueItems: true
         targetActive:
-          description: Whether the source is active in txn xCluster
+          description: Whether the target is active in txn xCluster
           exampleSetFlag: true
           type: boolean
         targetUniverseUUID:
           description: Target Universe UUID
           exampleSetFlag: true
           format: uuid
-          type: string
-        txnTableDetails:
-          $ref: '#/components/schemas/XClusterTableConfig'
-        txnTableReplicationGroupName:
-          description: Replication group name that replicates the transaction status
-            table
-          exampleSetFlag: true
           type: string
         type:
           description: Whether the config is txn xCluster
@@ -64653,7 +65387,6 @@ components:
         targetUniverseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         paused: true
         replicationGroupName: replicationGroupName
-        txnTableReplicationGroupName: txnTableReplicationGroupName
         type: Basic
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tableType: UNKNOWN
@@ -64667,17 +65400,6 @@ components:
         imported: true
         name: name
         sourceUniverseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        txnTableDetails:
-          restoreTime: 2022-12-12T13:07:18Z
-          restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          streamId: a9d2470786694dc4b34e0e58e592da9e
-          bootstrapCreateTime: 2022-12-12T13:07:18Z
-          indexTable: true
-          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          tableId: 000033df000030008000000000004005
-          needBootstrap: true
-          replicationSetupDone: true
-          status: Validated
         sourceActive: true
         status: Initialized
         tableDetails:
@@ -64780,20 +65502,13 @@ components:
           type: array
           uniqueItems: true
         targetActive:
-          description: Whether the source is active in txn xCluster
+          description: Whether the target is active in txn xCluster
           exampleSetFlag: true
           type: boolean
         targetUniverseUUID:
           description: Target Universe UUID
           exampleSetFlag: true
           format: uuid
-          type: string
-        txnTableDetails:
-          $ref: '#/components/schemas/XClusterTableConfig'
-        txnTableReplicationGroupName:
-          description: Replication group name that replicates the transaction status
-            table
-          exampleSetFlag: true
           type: string
         type:
           description: Whether the config is txn xCluster
@@ -64812,6 +65527,7 @@ components:
       type: object
     XClusterConfigNeedBootstrapFormData:
       example:
+        targetUniverseUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tables: "[\"000033df00003000800000000000400b\"]"
       exampleSetFlag: true
       properties:
@@ -64824,6 +65540,12 @@ components:
             type: string
           type: array
           uniqueItems: true
+        targetUniverseUUID:
+          description: "If specified and tables do not exist on the target universe,\
+            \ bootstrapping is required."
+          exampleSetFlag: true
+          format: uuid
+          type: string
       required:
       - tables
       type: object
