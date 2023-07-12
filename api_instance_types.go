@@ -34,10 +34,15 @@ type InstanceTypesApiApiCreateInstanceTypeRequest struct {
 	cUUID string
 	pUUID string
 	instanceType *InstanceType
+	request *interface{}
 }
 
 func (r InstanceTypesApiApiCreateInstanceTypeRequest) InstanceType(instanceType InstanceType) InstanceTypesApiApiCreateInstanceTypeRequest {
 	r.instanceType = &instanceType
+	return r
+}
+func (r InstanceTypesApiApiCreateInstanceTypeRequest) Request(request interface{}) InstanceTypesApiApiCreateInstanceTypeRequest {
+	r.request = &request
 	return r
 }
 
@@ -91,6 +96,9 @@ func (a *InstanceTypesApiService) CreateInstanceTypeExecute(r InstanceTypesApiAp
 		return localVarReturnValue, nil, reportError("instanceType is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -167,8 +175,13 @@ type InstanceTypesApiApiDeleteInstanceTypeRequest struct {
 	cUUID string
 	pUUID string
 	code string
+	request *interface{}
 }
 
+func (r InstanceTypesApiApiDeleteInstanceTypeRequest) Request(request interface{}) InstanceTypesApiApiDeleteInstanceTypeRequest {
+	r.request = &request
+	return r
+}
 
 func (r InstanceTypesApiApiDeleteInstanceTypeRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteInstanceTypeExecute(r)
@@ -220,6 +233,9 @@ func (a *InstanceTypesApiService) DeleteInstanceTypeExecute(r InstanceTypesApiAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

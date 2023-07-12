@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **DeleteRemote** | Pointer to **bool** |  | [optional] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **KeyPairName** | Pointer to **string** |  | [optional] 
+**ManagementState** | Pointer to **string** | Key Management state | [optional] [readonly] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **PublicKey** | Pointer to **string** |  | [optional] 
 **SetUpChrony** | Pointer to **bool** |  | [optional] 
 **ShowSetUpChrony** | Pointer to **bool** |  | [optional] 
+**SkipKeyValidateAndUpload** | Pointer to **bool** |  | [optional] 
 **SkipProvisioning** | Pointer to **bool** |  | [optional] 
 **SshPort** | Pointer to **int32** |  | [optional] 
 **SshPrivateKeyContent** | Pointer to **string** |  | [optional] 
@@ -142,6 +144,31 @@ SetKeyPairName sets KeyPairName field to given value.
 `func (o *KeyInfo) HasKeyPairName() bool`
 
 HasKeyPairName returns a boolean if a field has been set.
+
+### GetManagementState
+
+`func (o *KeyInfo) GetManagementState() string`
+
+GetManagementState returns the ManagementState field if non-nil, zero value otherwise.
+
+### GetManagementStateOk
+
+`func (o *KeyInfo) GetManagementStateOk() (*string, bool)`
+
+GetManagementStateOk returns a tuple with the ManagementState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementState
+
+`func (o *KeyInfo) SetManagementState(v string)`
+
+SetManagementState sets ManagementState field to given value.
+
+### HasManagementState
+
+`func (o *KeyInfo) HasManagementState() bool`
+
+HasManagementState returns a boolean if a field has been set.
 
 ### GetNodeExporterPort
 
@@ -367,6 +394,31 @@ SetShowSetUpChrony sets ShowSetUpChrony field to given value.
 `func (o *KeyInfo) HasShowSetUpChrony() bool`
 
 HasShowSetUpChrony returns a boolean if a field has been set.
+
+### GetSkipKeyValidateAndUpload
+
+`func (o *KeyInfo) GetSkipKeyValidateAndUpload() bool`
+
+GetSkipKeyValidateAndUpload returns the SkipKeyValidateAndUpload field if non-nil, zero value otherwise.
+
+### GetSkipKeyValidateAndUploadOk
+
+`func (o *KeyInfo) GetSkipKeyValidateAndUploadOk() (*bool, bool)`
+
+GetSkipKeyValidateAndUploadOk returns a tuple with the SkipKeyValidateAndUpload field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipKeyValidateAndUpload
+
+`func (o *KeyInfo) SetSkipKeyValidateAndUpload(v bool)`
+
+SetSkipKeyValidateAndUpload sets SkipKeyValidateAndUpload field to given value.
+
+### HasSkipKeyValidateAndUpload
+
+`func (o *KeyInfo) HasSkipKeyValidateAndUpload() bool`
+
+HasSkipKeyValidateAndUpload returns a boolean if a field has been set.
 
 ### GetSkipProvisioning
 

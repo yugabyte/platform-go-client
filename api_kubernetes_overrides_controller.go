@@ -32,10 +32,15 @@ type KubernetesOverridesControllerApiApiValidateKubernetesOverridesRequest struc
 	ApiService *KubernetesOverridesControllerApiService
 	cUUID string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
+	request *interface{}
 }
 
 func (r KubernetesOverridesControllerApiApiValidateKubernetesOverridesRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) KubernetesOverridesControllerApiApiValidateKubernetesOverridesRequest {
 	r.universeConfigureTaskParams = &universeConfigureTaskParams
+	return r
+}
+func (r KubernetesOverridesControllerApiApiValidateKubernetesOverridesRequest) Request(request interface{}) KubernetesOverridesControllerApiApiValidateKubernetesOverridesRequest {
+	r.request = &request
 	return r
 }
 
@@ -87,6 +92,9 @@ func (a *KubernetesOverridesControllerApiService) ValidateKubernetesOverridesExe
 		return localVarReturnValue, nil, reportError("universeConfigureTaskParams is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

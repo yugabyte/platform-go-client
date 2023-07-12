@@ -38,6 +38,8 @@ type MetricQueryParams struct {
 	ServerType *string `json:"serverType,omitempty"`
 	// Start time
 	Start int64 `json:"start"`
+	// Stream id
+	StreamId *string `json:"streamId,omitempty"`
 	// Table id
 	TableId *string `json:"tableId,omitempty"`
 	// Table name
@@ -408,6 +410,38 @@ func (o *MetricQueryParams) SetStart(v int64) {
 	o.Start = v
 }
 
+// GetStreamId returns the StreamId field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetStreamId() string {
+	if o == nil || o.StreamId == nil {
+		var ret string
+		return ret
+	}
+	return *o.StreamId
+}
+
+// GetStreamIdOk returns a tuple with the StreamId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetStreamIdOk() (*string, bool) {
+	if o == nil || o.StreamId == nil {
+		return nil, false
+	}
+	return o.StreamId, true
+}
+
+// HasStreamId returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasStreamId() bool {
+	if o != nil && o.StreamId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStreamId gets a reference to the given string and assigns it to the StreamId field.
+func (o *MetricQueryParams) SetStreamId(v string) {
+	o.StreamId = &v
+}
+
 // GetTableId returns the TableId field value if set, zero value otherwise.
 func (o *MetricQueryParams) GetTableId() string {
 	if o == nil || o.TableId == nil {
@@ -530,6 +564,9 @@ func (o MetricQueryParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["start"] = o.Start
+	}
+	if o.StreamId != nil {
+		toSerialize["streamId"] = o.StreamId
 	}
 	if o.TableId != nil {
 		toSerialize["tableId"] = o.TableId

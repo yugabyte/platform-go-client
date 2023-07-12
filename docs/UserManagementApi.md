@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateUser
 
-> UserWithFeatures CreateUser(ctx, cUUID).User(user).Execute()
+> UserWithFeatures CreateUser(ctx, cUUID).User(user).Request(request).Execute()
 
 Create a user
 
@@ -35,10 +35,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     user := *openapiclient.NewUserRegistrationData("test@example.com", "Admin") // UserRegistrationData | Details of the new user
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.CreateUser(context.Background(), cUUID).User(user).Execute()
+    resp, r, err := api_client.UserManagementApi.CreateUser(context.Background(), cUUID).User(user).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.CreateUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **user** | [**UserRegistrationData**](UserRegistrationData.md) | Details of the new user | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## DeleteUser
 
-> YBPSuccess DeleteUser(ctx, cUUID, uUUID).Execute()
+> YBPSuccess DeleteUser(ctx, cUUID, uUUID).Request(request).Execute()
 
 Delete a user
 
@@ -107,10 +109,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.DeleteUser(context.Background(), cUUID, uUUID).Execute()
+    resp, r, err := api_client.UserManagementApi.DeleteUser(context.Background(), cUUID, uUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.DeleteUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,6 +141,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -298,7 +302,7 @@ Name | Type | Description  | Notes
 
 ## UpdateUserPassword
 
-> YBPSuccess UpdateUserPassword(ctx, cUUID, uUUID).Users(users).Execute()
+> YBPSuccess UpdateUserPassword(ctx, cUUID, uUUID).Users(users).Request(request).Execute()
 
 Change a user's password
 
@@ -318,10 +322,11 @@ func main() {
     cUUID := TODO // string | 
     uUUID := TODO // string | 
     users := *openapiclient.NewUserRegistrationData("test@example.com", "Admin") // UserRegistrationData | User data containing the new password
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.UpdateUserPassword(context.Background(), cUUID, uUUID).Users(users).Execute()
+    resp, r, err := api_client.UserManagementApi.UpdateUserPassword(context.Background(), cUUID, uUUID).Users(users).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.UpdateUserPassword``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -350,6 +355,7 @@ Name | Type | Description  | Notes
 
 
  **users** | [**UserRegistrationData**](UserRegistrationData.md) | User data containing the new password | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -371,7 +377,7 @@ Name | Type | Description  | Notes
 
 ## UpdateUserProfile
 
-> Users UpdateUserProfile(ctx, cUUID, uUUID).Users(users).Execute()
+> Users UpdateUserProfile(ctx, cUUID, uUUID).Users(users).Request(request).Execute()
 
 Update a user's profile
 
@@ -391,10 +397,11 @@ func main() {
     cUUID := TODO // string | 
     uUUID := TODO // string | 
     users := *openapiclient.NewUserProfileData("Admin") // UserProfileData | User data in profile to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.UpdateUserProfile(context.Background(), cUUID, uUUID).Users(users).Execute()
+    resp, r, err := api_client.UserManagementApi.UpdateUserProfile(context.Background(), cUUID, uUUID).Users(users).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.UpdateUserProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -423,6 +430,7 @@ Name | Type | Description  | Notes
 
 
  **users** | [**UserProfileData**](UserProfileData.md) | User data in profile to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -444,7 +452,7 @@ Name | Type | Description  | Notes
 
 ## UpdateUserRole
 
-> YBPSuccess UpdateUserRole(ctx, cUUID, uUUID).Role(role).Execute()
+> YBPSuccess UpdateUserRole(ctx, cUUID, uUUID).Role(role).Request(request).Execute()
 
 Change a user's role
 
@@ -464,10 +472,11 @@ func main() {
     cUUID := TODO // string | 
     uUUID := TODO // string | 
     role := "role_example" // string |  (optional)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.UpdateUserRole(context.Background(), cUUID, uUUID).Role(role).Execute()
+    resp, r, err := api_client.UserManagementApi.UpdateUserRole(context.Background(), cUUID, uUUID).Role(role).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.UpdateUserRole``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -496,6 +505,7 @@ Name | Type | Description  | Notes
 
 
  **role** | **string** |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

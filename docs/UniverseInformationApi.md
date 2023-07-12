@@ -520,7 +520,7 @@ Name | Type | Description  | Notes
 
 ## ResetSlowQueries
 
-> map[string]interface{} ResetSlowQueries(ctx, cUUID, uniUUID).Execute()
+> map[string]interface{} ResetSlowQueries(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Reset slow queries for a universe
 
@@ -539,10 +539,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseInformationApi.ResetSlowQueries(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseInformationApi.ResetSlowQueries(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.ResetSlowQueries``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -570,6 +571,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

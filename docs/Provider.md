@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Active** | Pointer to **bool** | Provider active status | [optional] [readonly] 
-**AirGapInstall** | Pointer to **bool** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.airGapInstall | [optional] 
+**AirGapInstall** | Pointer to **bool** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.airGapInstall. Only supported in Create Request | [optional] 
 **AllAccessKeys** | Pointer to [**[]AccessKey**](AccessKey.md) |  | [optional] 
 **Code** | Pointer to **string** | Provider cloud code | [optional] 
 **Config** | Pointer to **map[string]string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.metadata instead | [optional] 
@@ -14,12 +14,14 @@ Name | Type | Description | Notes
 **Details** | Pointer to [**ProviderDetails**](ProviderDetails.md) |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] 
+**ImageBundles** | [**[]ImageBundle**](ImageBundle.md) |  | 
 **KeyPairName** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead | [optional] 
 **Name** | Pointer to **string** | Provider name | [optional] 
 **Regions** | [**[]Region**](Region.md) |  | 
-**SshPort** | Pointer to **int32** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshPort instead | [optional] 
+**SshPort** | Pointer to **int32** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshPort instead. Only supported in create request | [optional] 
 **SshPrivateKeyContent** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead | [optional] 
-**SshUser** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshUser instead | [optional] 
+**SshUser** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Use details.SshUser instead. Only supported in create request | [optional] 
+**UsabilityState** | Pointer to **string** | Current usability state | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Provider uuid | [optional] [readonly] 
 **Version** | Pointer to **int64** | Provider version | [optional] [readonly] 
 
@@ -27,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewProvider
 
-`func NewProvider(regions []Region, ) *Provider`
+`func NewProvider(imageBundles []ImageBundle, regions []Region, ) *Provider`
 
 NewProvider instantiates a new Provider object
 This constructor will assign default values to properties that have it defined,
@@ -292,6 +294,26 @@ SetHostVpcRegion sets HostVpcRegion field to given value.
 
 HasHostVpcRegion returns a boolean if a field has been set.
 
+### GetImageBundles
+
+`func (o *Provider) GetImageBundles() []ImageBundle`
+
+GetImageBundles returns the ImageBundles field if non-nil, zero value otherwise.
+
+### GetImageBundlesOk
+
+`func (o *Provider) GetImageBundlesOk() (*[]ImageBundle, bool)`
+
+GetImageBundlesOk returns a tuple with the ImageBundles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageBundles
+
+`func (o *Provider) SetImageBundles(v []ImageBundle)`
+
+SetImageBundles sets ImageBundles field to given value.
+
+
 ### GetKeyPairName
 
 `func (o *Provider) GetKeyPairName() string`
@@ -436,6 +458,31 @@ SetSshUser sets SshUser field to given value.
 `func (o *Provider) HasSshUser() bool`
 
 HasSshUser returns a boolean if a field has been set.
+
+### GetUsabilityState
+
+`func (o *Provider) GetUsabilityState() string`
+
+GetUsabilityState returns the UsabilityState field if non-nil, zero value otherwise.
+
+### GetUsabilityStateOk
+
+`func (o *Provider) GetUsabilityStateOk() (*string, bool)`
+
+GetUsabilityStateOk returns a tuple with the UsabilityState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsabilityState
+
+`func (o *Provider) SetUsabilityState(v string)`
+
+SetUsabilityState sets UsabilityState field to given value.
+
+### HasUsabilityState
+
+`func (o *Provider) HasUsabilityState() bool`
+
+HasUsabilityState returns a boolean if a field has been set.
 
 ### GetUuid
 

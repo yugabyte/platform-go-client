@@ -33,10 +33,15 @@ type RegionManagementApiApiCreateRegionRequest struct {
 	cUUID string
 	pUUID string
 	region *RegionFormData
+	request *interface{}
 }
 
 func (r RegionManagementApiApiCreateRegionRequest) Region(region RegionFormData) RegionManagementApiApiCreateRegionRequest {
 	r.region = &region
+	return r
+}
+func (r RegionManagementApiApiCreateRegionRequest) Request(request interface{}) RegionManagementApiApiCreateRegionRequest {
+	r.request = &request
 	return r
 }
 
@@ -90,6 +95,9 @@ func (a *RegionManagementApiService) CreateRegionExecute(r RegionManagementApiAp
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -166,8 +174,13 @@ type RegionManagementApiApiDeleteRegionRequest struct {
 	cUUID string
 	pUUID string
 	rUUID string
+	request *interface{}
 }
 
+func (r RegionManagementApiApiDeleteRegionRequest) Request(request interface{}) RegionManagementApiApiDeleteRegionRequest {
+	r.request = &request
+	return r
+}
 
 func (r RegionManagementApiApiDeleteRegionRequest) Execute() (map[string]interface{}, *_nethttp.Response, error) {
 	return r.ApiService.DeleteRegionExecute(r)
@@ -219,6 +232,9 @@ func (a *RegionManagementApiService) DeleteRegionExecute(r RegionManagementApiAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -294,10 +310,15 @@ type RegionManagementApiApiEditRegionRequest struct {
 	pUUID string
 	rUUID string
 	region *RegionEditFormData
+	request *interface{}
 }
 
 func (r RegionManagementApiApiEditRegionRequest) Region(region RegionEditFormData) RegionManagementApiApiEditRegionRequest {
 	r.region = &region
+	return r
+}
+func (r RegionManagementApiApiEditRegionRequest) Request(request interface{}) RegionManagementApiApiEditRegionRequest {
+	r.request = &request
 	return r
 }
 
@@ -354,6 +375,9 @@ func (a *RegionManagementApiService) EditRegionExecute(r RegionManagementApiApiE
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

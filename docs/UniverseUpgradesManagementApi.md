@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 ## RebootUniverse
 
-> YBPTask RebootUniverse(ctx, cUUID, uniUUID).UpgradeTaskParams(upgradeTaskParams).Execute()
+> YBPTask RebootUniverse(ctx, cUUID, uniUUID).UpgradeTaskParams(upgradeTaskParams).Request(request).Execute()
 
 Reboot universe
 
@@ -42,10 +42,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     upgradeTaskParams := *openapiclient.NewUpgradeTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // UpgradeTaskParams | Upgrade Task Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.RebootUniverse(context.Background(), cUUID, uniUUID).UpgradeTaskParams(upgradeTaskParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.RebootUniverse(context.Background(), cUUID, uniUUID).UpgradeTaskParams(upgradeTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.RebootUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
 
 
  **upgradeTaskParams** | [**UpgradeTaskParams**](UpgradeTaskParams.md) | Upgrade Task Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -95,7 +97,7 @@ Name | Type | Description  | Notes
 
 ## ResizeNode
 
-> YBPTask ResizeNode(ctx, cUUID, uniUUID).ResizeNodeParams(resizeNodeParams).Execute()
+> YBPTask ResizeNode(ctx, cUUID, uniUUID).ResizeNodeParams(resizeNodeParams).Request(request).Execute()
 
 Resize Node
 
@@ -117,10 +119,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     resizeNodeParams := *openapiclient.NewResizeNodeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // ResizeNodeParams | Resize Node Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.ResizeNode(context.Background(), cUUID, uniUUID).ResizeNodeParams(resizeNodeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.ResizeNode(context.Background(), cUUID, uniUUID).ResizeNodeParams(resizeNodeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.ResizeNode``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -149,6 +152,7 @@ Name | Type | Description  | Notes
 
 
  **resizeNodeParams** | [**ResizeNodeParams**](ResizeNodeParams.md) | Resize Node Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -170,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## RestartUniverse
 
-> YBPTask RestartUniverse(ctx, cUUID, uniUUID).RestartTaskParams(restartTaskParams).Execute()
+> YBPTask RestartUniverse(ctx, cUUID, uniUUID).RestartTaskParams(restartTaskParams).Request(request).Execute()
 
 Restart Universe
 
@@ -192,10 +196,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     restartTaskParams := *openapiclient.NewRestartTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // RestartTaskParams | Restart Task Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.RestartUniverse(context.Background(), cUUID, uniUUID).RestartTaskParams(restartTaskParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.RestartUniverse(context.Background(), cUUID, uniUUID).RestartTaskParams(restartTaskParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.RestartUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -224,6 +229,7 @@ Name | Type | Description  | Notes
 
 
  **restartTaskParams** | [**RestartTaskParams**](RestartTaskParams.md) | Restart Task Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -245,7 +251,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeCerts
 
-> YBPTask UpgradeCerts(ctx, cUUID, uniUUID).CertsRotateParams(certsRotateParams).Execute()
+> YBPTask UpgradeCerts(ctx, cUUID, uniUUID).CertsRotateParams(certsRotateParams).Request(request).Execute()
 
 Upgrade Certs
 
@@ -267,10 +273,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     certsRotateParams := *openapiclient.NewCertsRotateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", false, false, int32(123), int32(123), "UpgradeOption_example") // CertsRotateParams | Certs Rotate Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeCerts(context.Background(), cUUID, uniUUID).CertsRotateParams(certsRotateParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeCerts(context.Background(), cUUID, uniUUID).CertsRotateParams(certsRotateParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeCerts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -299,6 +306,7 @@ Name | Type | Description  | Notes
 
 
  **certsRotateParams** | [**CertsRotateParams**](CertsRotateParams.md) | Certs Rotate Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -320,7 +328,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeGFlags
 
-> YBPTask UpgradeGFlags(ctx, cUUID, uniUUID).GflagsUpgradeParams(gflagsUpgradeParams).Execute()
+> YBPTask UpgradeGFlags(ctx, cUUID, uniUUID).GflagsUpgradeParams(gflagsUpgradeParams).Request(request).Execute()
 
 Upgrade GFlags
 
@@ -342,10 +350,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     gflagsUpgradeParams := *openapiclient.NewGFlagsUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // GFlagsUpgradeParams | GFlags Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeGFlags(context.Background(), cUUID, uniUUID).GflagsUpgradeParams(gflagsUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeGFlags(context.Background(), cUUID, uniUUID).GflagsUpgradeParams(gflagsUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeGFlags``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -374,6 +383,7 @@ Name | Type | Description  | Notes
 
 
  **gflagsUpgradeParams** | [**GFlagsUpgradeParams**](GFlagsUpgradeParams.md) | GFlags Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -395,7 +405,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeKubernetesOverrides
 
-> YBPTask UpgradeKubernetesOverrides(ctx, cUUID, uniUUID).KubernetesOverridesUpgradeParams(kubernetesOverridesUpgradeParams).Execute()
+> YBPTask UpgradeKubernetesOverrides(ctx, cUUID, uniUUID).KubernetesOverridesUpgradeParams(kubernetesOverridesUpgradeParams).Request(request).Execute()
 
 Upgrade KubernetesOverrides
 
@@ -417,10 +427,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     kubernetesOverridesUpgradeParams := *openapiclient.NewKubernetesOverridesUpgradeParams(map[string]string{"key": "Inner_example"}, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UniverseOverrides_example", "UpgradeOption_example") // KubernetesOverridesUpgradeParams | Kubernetes Override Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeKubernetesOverrides(context.Background(), cUUID, uniUUID).KubernetesOverridesUpgradeParams(kubernetesOverridesUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeKubernetesOverrides(context.Background(), cUUID, uniUUID).KubernetesOverridesUpgradeParams(kubernetesOverridesUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeKubernetesOverrides``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -449,6 +460,7 @@ Name | Type | Description  | Notes
 
 
  **kubernetesOverridesUpgradeParams** | [**KubernetesOverridesUpgradeParams**](KubernetesOverridesUpgradeParams.md) | Kubernetes Override Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -470,7 +482,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeSoftware
 
-> YBPTask UpgradeSoftware(ctx, cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Execute()
+> YBPTask UpgradeSoftware(ctx, cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Request(request).Execute()
 
 Upgrade Software
 
@@ -492,10 +504,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeSoftware(context.Background(), cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeSoftware(context.Background(), cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeSoftware``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -524,6 +537,7 @@ Name | Type | Description  | Notes
 
 
  **softwareUpgradeParams** | [**SoftwareUpgradeParams**](SoftwareUpgradeParams.md) | Software Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -545,7 +559,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeSystemd
 
-> YBPTask UpgradeSystemd(ctx, cUUID, uniUUID).SystemdUpgradeParams(systemdUpgradeParams).Execute()
+> YBPTask UpgradeSystemd(ctx, cUUID, uniUUID).SystemdUpgradeParams(systemdUpgradeParams).Request(request).Execute()
 
 Upgrade Systemd
 
@@ -567,10 +581,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     systemdUpgradeParams := *openapiclient.NewSystemdUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // SystemdUpgradeParams | Systemd Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeSystemd(context.Background(), cUUID, uniUUID).SystemdUpgradeParams(systemdUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeSystemd(context.Background(), cUUID, uniUUID).SystemdUpgradeParams(systemdUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeSystemd``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -599,6 +614,7 @@ Name | Type | Description  | Notes
 
 
  **systemdUpgradeParams** | [**SystemdUpgradeParams**](SystemdUpgradeParams.md) | Systemd Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -620,7 +636,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeThirdpartySoftware
 
-> YBPTask UpgradeThirdpartySoftware(ctx, cUUID, uniUUID).ThirdpartySoftwareUpgradeParams(thirdpartySoftwareUpgradeParams).Execute()
+> YBPTask UpgradeThirdpartySoftware(ctx, cUUID, uniUUID).ThirdpartySoftwareUpgradeParams(thirdpartySoftwareUpgradeParams).Request(request).Execute()
 
 Upgrade third-party software
 
@@ -642,10 +658,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     thirdpartySoftwareUpgradeParams := *openapiclient.NewThirdpartySoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // ThirdpartySoftwareUpgradeParams | Thirdparty Software Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeThirdpartySoftware(context.Background(), cUUID, uniUUID).ThirdpartySoftwareUpgradeParams(thirdpartySoftwareUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeThirdpartySoftware(context.Background(), cUUID, uniUUID).ThirdpartySoftwareUpgradeParams(thirdpartySoftwareUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeThirdpartySoftware``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -674,6 +691,7 @@ Name | Type | Description  | Notes
 
 
  **thirdpartySoftwareUpgradeParams** | [**ThirdpartySoftwareUpgradeParams**](ThirdpartySoftwareUpgradeParams.md) | Thirdparty Software Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -695,7 +713,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeTls
 
-> YBPTask UpgradeTls(ctx, cUUID, uniUUID).TlsToggleParams(tlsToggleParams).Execute()
+> YBPTask UpgradeTls(ctx, cUUID, uniUUID).TlsToggleParams(tlsToggleParams).Request(request).Execute()
 
 Upgrade TLS
 
@@ -717,10 +735,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tlsToggleParams := *openapiclient.NewTlsToggleParams(false, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, false, false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // TlsToggleParams | TLS Toggle Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeTls(context.Background(), cUUID, uniUUID).TlsToggleParams(tlsToggleParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeTls(context.Background(), cUUID, uniUUID).TlsToggleParams(tlsToggleParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeTls``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -749,6 +768,7 @@ Name | Type | Description  | Notes
 
 
  **tlsToggleParams** | [**TlsToggleParams**](TlsToggleParams.md) | TLS Toggle Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -770,7 +790,7 @@ Name | Type | Description  | Notes
 
 ## UpgradeVMImage
 
-> YBPTask UpgradeVMImage(ctx, cUUID, uniUUID).VmimageUpgradeParams(vmimageUpgradeParams).Execute()
+> YBPTask UpgradeVMImage(ctx, cUUID, uniUUID).VmimageUpgradeParams(vmimageUpgradeParams).Request(request).Execute()
 
 Upgrade VM Image
 
@@ -791,11 +811,12 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    vmimageUpgradeParams := *openapiclient.NewVMImageUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example", "YbSoftwareVersion_example") // VMImageUpgradeParams | VM Image Upgrade Params
+    vmimageUpgradeParams := *openapiclient.NewVMImageUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example", "YbSoftwareVersion_example") // VMImageUpgradeParams | VM Image Upgrade Params
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeVMImage(context.Background(), cUUID, uniUUID).VmimageUpgradeParams(vmimageUpgradeParams).Execute()
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeVMImage(context.Background(), cUUID, uniUUID).VmimageUpgradeParams(vmimageUpgradeParams).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeVMImage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -824,6 +845,7 @@ Name | Type | Description  | Notes
 
 
  **vmimageUpgradeParams** | [**VMImageUpgradeParams**](VMImageUpgradeParams.md) | VM Image Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

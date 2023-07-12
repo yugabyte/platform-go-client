@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AbortTask**](CustomerTasksApi.md#AbortTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
 [**FailedSubtasks**](CustomerTasksApi.md#FailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Get a task&#39;s failed subtasks
-[**RetryTask**](CustomerTasksApi.md#RetryTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe task
+[**RetryTask**](CustomerTasksApi.md#RetryTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 [**TaskStatus**](CustomerTasksApi.md#TaskStatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 [**TasksList**](CustomerTasksApi.md#TasksList) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## AbortTask
 
-> YBPSuccess AbortTask(ctx, cUUID, tUUID).Execute()
+> YBPSuccess AbortTask(ctx, cUUID, tUUID).Request(request).Execute()
 
 Abort a task
 
@@ -35,10 +35,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     tUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerTasksApi.AbortTask(context.Background(), cUUID, tUUID).Execute()
+    resp, r, err := api_client.CustomerTasksApi.AbortTask(context.Background(), cUUID, tUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerTasksApi.AbortTask``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -66,6 +67,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -158,9 +160,9 @@ Name | Type | Description  | Notes
 
 ## RetryTask
 
-> UniverseResp RetryTask(ctx, cUUID, tUUID).Execute()
+> YBPTask RetryTask(ctx, cUUID, tUUID).Request(request).Execute()
 
-Retry a Universe task
+Retry a Universe or Provider task
 
 
 
@@ -179,15 +181,16 @@ import (
 func main() {
     cUUID := TODO // string | 
     tUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerTasksApi.RetryTask(context.Background(), cUUID, tUUID).Execute()
+    resp, r, err := api_client.CustomerTasksApi.RetryTask(context.Background(), cUUID, tUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerTasksApi.RetryTask``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RetryTask`: UniverseResp
+    // response from `RetryTask`: YBPTask
     fmt.Fprintf(os.Stdout, "Response from `CustomerTasksApi.RetryTask`: %v\n", resp)
 }
 ```
@@ -210,10 +213,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
-[**UniverseResp**](UniverseResp.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 

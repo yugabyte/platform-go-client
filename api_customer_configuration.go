@@ -32,10 +32,15 @@ type CustomerConfigurationApiApiCreateCustomerConfigRequest struct {
 	ApiService *CustomerConfigurationApiService
 	cUUID string
 	config *CustomerConfig
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiCreateCustomerConfigRequest) Config(config CustomerConfig) CustomerConfigurationApiApiCreateCustomerConfigRequest {
 	r.config = &config
+	return r
+}
+func (r CustomerConfigurationApiApiCreateCustomerConfigRequest) Request(request interface{}) CustomerConfigurationApiApiCreateCustomerConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -86,6 +91,9 @@ func (a *CustomerConfigurationApiService) CreateCustomerConfigExecute(r Customer
 		return localVarReturnValue, nil, reportError("config is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -162,10 +170,15 @@ type CustomerConfigurationApiApiDeleteCustomerConfigRequest struct {
 	cUUID string
 	configUUID string
 	isDeleteBackups *bool
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiDeleteCustomerConfigRequest) IsDeleteBackups(isDeleteBackups bool) CustomerConfigurationApiApiDeleteCustomerConfigRequest {
 	r.isDeleteBackups = &isDeleteBackups
+	return r
+}
+func (r CustomerConfigurationApiApiDeleteCustomerConfigRequest) Request(request interface{}) CustomerConfigurationApiApiDeleteCustomerConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -218,6 +231,9 @@ func (a *CustomerConfigurationApiService) DeleteCustomerConfigExecute(r Customer
 
 	if r.isDeleteBackups != nil {
 		localVarQueryParams.Add("isDeleteBackups", parameterToString(*r.isDeleteBackups, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -293,10 +309,15 @@ type CustomerConfigurationApiApiDeleteCustomerConfigV2Request struct {
 	cUUID string
 	configUUID string
 	isDeleteBackups *bool
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiDeleteCustomerConfigV2Request) IsDeleteBackups(isDeleteBackups bool) CustomerConfigurationApiApiDeleteCustomerConfigV2Request {
 	r.isDeleteBackups = &isDeleteBackups
+	return r
+}
+func (r CustomerConfigurationApiApiDeleteCustomerConfigV2Request) Request(request interface{}) CustomerConfigurationApiApiDeleteCustomerConfigV2Request {
+	r.request = &request
 	return r
 }
 
@@ -349,6 +370,9 @@ func (a *CustomerConfigurationApiService) DeleteCustomerConfigV2Execute(r Custom
 
 	if r.isDeleteBackups != nil {
 		localVarQueryParams.Add("isDeleteBackups", parameterToString(*r.isDeleteBackups, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -424,10 +448,15 @@ type CustomerConfigurationApiApiEditCustomerConfigRequest struct {
 	cUUID string
 	configUUID string
 	config *CustomerConfig
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiEditCustomerConfigRequest) Config(config CustomerConfig) CustomerConfigurationApiApiEditCustomerConfigRequest {
 	r.config = &config
+	return r
+}
+func (r CustomerConfigurationApiApiEditCustomerConfigRequest) Request(request interface{}) CustomerConfigurationApiApiEditCustomerConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -481,6 +510,9 @@ func (a *CustomerConfigurationApiService) EditCustomerConfigExecute(r CustomerCo
 		return localVarReturnValue, nil, reportError("config is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -557,10 +589,15 @@ type CustomerConfigurationApiApiEditCustomerConfig_0Request struct {
 	cUUID string
 	configUUID string
 	config *CustomerConfig
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiEditCustomerConfig_0Request) Config(config CustomerConfig) CustomerConfigurationApiApiEditCustomerConfig_0Request {
 	r.config = &config
+	return r
+}
+func (r CustomerConfigurationApiApiEditCustomerConfig_0Request) Request(request interface{}) CustomerConfigurationApiApiEditCustomerConfig_0Request {
+	r.request = &request
 	return r
 }
 
@@ -614,6 +651,9 @@ func (a *CustomerConfigurationApiService) EditCustomerConfig_1Execute(r Customer
 		return localVarReturnValue, nil, reportError("config is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -809,10 +849,15 @@ type CustomerConfigurationApiApiListBucketsRequest struct {
 	cUUID string
 	cloud string
 	credentials *map[string]interface{}
+	request *interface{}
 }
 
 func (r CustomerConfigurationApiApiListBucketsRequest) Credentials(credentials map[string]interface{}) CustomerConfigurationApiApiListBucketsRequest {
 	r.credentials = &credentials
+	return r
+}
+func (r CustomerConfigurationApiApiListBucketsRequest) Request(request interface{}) CustomerConfigurationApiApiListBucketsRequest {
+	r.request = &request
 	return r
 }
 
@@ -866,6 +911,9 @@ func (a *CustomerConfigurationApiService) ListBucketsExecute(r CustomerConfigura
 		return localVarReturnValue, nil, reportError("credentials is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

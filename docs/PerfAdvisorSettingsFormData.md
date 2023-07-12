@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **CpuUsageThreshold** | Pointer to **float64** | Perf advisor CPU usage threshold | [optional] 
 **Enabled** | Pointer to **bool** | Enable/disable perf advisor runs for the universe | [optional] 
 **HotShardIntervalMins** | Pointer to **int32** | Perf Advisor hot shard check interval | [optional] 
-**HotShardMinimalReads** | Pointer to **int32** | Perf advisor hot shard minimal reads | [optional] 
-**HotShardMinimalWrites** | Pointer to **int32** | Perf advisor hot shard minimal writes | [optional] 
+**HotShardMinNodeReads** | Pointer to **int32** | Perf advisor hot shard minimal node reads | [optional] 
+**HotShardMinNodeWrites** | Pointer to **int32** | Perf advisor hot shard minimal node writes | [optional] 
 **HotShardReadSkewThresholdPct** | Pointer to **float64** | Perf Advisor hot shard read skew threshold | [optional] 
 **HotShardWriteSkewThresholdPct** | Pointer to **float64** | Perf Advisor hot shard write skew threshold | [optional] 
 **QuerySkewIntervalMins** | Pointer to **int32** | Perf advisor query skew check interval | [optional] 
@@ -294,55 +294,55 @@ SetHotShardIntervalMins sets HotShardIntervalMins field to given value.
 
 HasHotShardIntervalMins returns a boolean if a field has been set.
 
-### GetHotShardMinimalReads
+### GetHotShardMinNodeReads
 
-`func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalReads() int32`
+`func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeReads() int32`
 
-GetHotShardMinimalReads returns the HotShardMinimalReads field if non-nil, zero value otherwise.
+GetHotShardMinNodeReads returns the HotShardMinNodeReads field if non-nil, zero value otherwise.
 
-### GetHotShardMinimalReadsOk
+### GetHotShardMinNodeReadsOk
 
-`func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalReadsOk() (*int32, bool)`
+`func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeReadsOk() (*int32, bool)`
 
-GetHotShardMinimalReadsOk returns a tuple with the HotShardMinimalReads field if it's non-nil, zero value otherwise
+GetHotShardMinNodeReadsOk returns a tuple with the HotShardMinNodeReads field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHotShardMinimalReads
+### SetHotShardMinNodeReads
 
-`func (o *PerfAdvisorSettingsFormData) SetHotShardMinimalReads(v int32)`
+`func (o *PerfAdvisorSettingsFormData) SetHotShardMinNodeReads(v int32)`
 
-SetHotShardMinimalReads sets HotShardMinimalReads field to given value.
+SetHotShardMinNodeReads sets HotShardMinNodeReads field to given value.
 
-### HasHotShardMinimalReads
+### HasHotShardMinNodeReads
 
-`func (o *PerfAdvisorSettingsFormData) HasHotShardMinimalReads() bool`
+`func (o *PerfAdvisorSettingsFormData) HasHotShardMinNodeReads() bool`
 
-HasHotShardMinimalReads returns a boolean if a field has been set.
+HasHotShardMinNodeReads returns a boolean if a field has been set.
 
-### GetHotShardMinimalWrites
+### GetHotShardMinNodeWrites
 
-`func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalWrites() int32`
+`func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeWrites() int32`
 
-GetHotShardMinimalWrites returns the HotShardMinimalWrites field if non-nil, zero value otherwise.
+GetHotShardMinNodeWrites returns the HotShardMinNodeWrites field if non-nil, zero value otherwise.
 
-### GetHotShardMinimalWritesOk
+### GetHotShardMinNodeWritesOk
 
-`func (o *PerfAdvisorSettingsFormData) GetHotShardMinimalWritesOk() (*int32, bool)`
+`func (o *PerfAdvisorSettingsFormData) GetHotShardMinNodeWritesOk() (*int32, bool)`
 
-GetHotShardMinimalWritesOk returns a tuple with the HotShardMinimalWrites field if it's non-nil, zero value otherwise
+GetHotShardMinNodeWritesOk returns a tuple with the HotShardMinNodeWrites field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHotShardMinimalWrites
+### SetHotShardMinNodeWrites
 
-`func (o *PerfAdvisorSettingsFormData) SetHotShardMinimalWrites(v int32)`
+`func (o *PerfAdvisorSettingsFormData) SetHotShardMinNodeWrites(v int32)`
 
-SetHotShardMinimalWrites sets HotShardMinimalWrites field to given value.
+SetHotShardMinNodeWrites sets HotShardMinNodeWrites field to given value.
 
-### HasHotShardMinimalWrites
+### HasHotShardMinNodeWrites
 
-`func (o *PerfAdvisorSettingsFormData) HasHotShardMinimalWrites() bool`
+`func (o *PerfAdvisorSettingsFormData) HasHotShardMinNodeWrites() bool`
 
-HasHotShardMinimalWrites returns a boolean if a field has been set.
+HasHotShardMinNodeWrites returns a boolean if a field has been set.
 
 ### GetHotShardReadSkewThresholdPct
 

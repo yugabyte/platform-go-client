@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## CreatePitrConfig
 
-> YBPTask CreatePitrConfig(ctx, cUUID, uniUUID, tableType, keyspaceName).PitrConfig(pitrConfig).Execute()
+> YBPTask CreatePitrConfig(ctx, cUUID, uniUUID, tableType, keyspaceName).PitrConfig(pitrConfig).Request(request).Execute()
 
 Create pitr config for a keyspace in a universe
 
@@ -35,10 +35,11 @@ func main() {
     tableType := "tableType_example" // string | 
     keyspaceName := "keyspaceName_example" // string | 
     pitrConfig := *openapiclient.NewCreatePitrConfigParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CreatePitrConfigParams | post pitr config
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PITRManagementApi.CreatePitrConfig(context.Background(), cUUID, uniUUID, tableType, keyspaceName).PitrConfig(pitrConfig).Execute()
+    resp, r, err := api_client.PITRManagementApi.CreatePitrConfig(context.Background(), cUUID, uniUUID, tableType, keyspaceName).PitrConfig(pitrConfig).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.CreatePitrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,6 +72,7 @@ Name | Type | Description  | Notes
 
 
  **pitrConfig** | [**CreatePitrConfigParams**](CreatePitrConfigParams.md) | post pitr config | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -92,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## DeletePitrConfig
 
-> YBPSuccess DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Execute()
+> YBPSuccess DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Request(request).Execute()
 
 Delete pitr config on a universe
 
@@ -112,10 +114,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     pUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PITRManagementApi.DeletePitrConfig(context.Background(), cUUID, uniUUID, pUUID).Execute()
+    resp, r, err := api_client.PITRManagementApi.DeletePitrConfig(context.Background(), cUUID, uniUUID, pUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.DeletePitrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -145,6 +148,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -237,7 +241,7 @@ Name | Type | Description  | Notes
 
 ## PerformPitr
 
-> YBPTask PerformPitr(ctx, cUUID, uniUUID).PerformPitr(performPitr).Execute()
+> YBPTask PerformPitr(ctx, cUUID, uniUUID).PerformPitr(performPitr).Request(request).Execute()
 
 Perform PITR on a universe
 
@@ -257,10 +261,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     performPitr := *openapiclient.NewRestoreSnapshotScheduleParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // RestoreSnapshotScheduleParams | perform PITR
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PITRManagementApi.PerformPitr(context.Background(), cUUID, uniUUID).PerformPitr(performPitr).Execute()
+    resp, r, err := api_client.PITRManagementApi.PerformPitr(context.Background(), cUUID, uniUUID).PerformPitr(performPitr).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.PerformPitr``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -289,6 +294,7 @@ Name | Type | Description  | Notes
 
 
  **performPitr** | [**RestoreSnapshotScheduleParams**](RestoreSnapshotScheduleParams.md) | perform PITR | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

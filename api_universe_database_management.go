@@ -33,10 +33,15 @@ type UniverseDatabaseManagementApiApiCreateUserInDBRequest struct {
 	cUUID string
 	uniUUID string
 	databaseUserFormData *DatabaseUserFormData
+	request *interface{}
 }
 
 func (r UniverseDatabaseManagementApiApiCreateUserInDBRequest) DatabaseUserFormData(databaseUserFormData DatabaseUserFormData) UniverseDatabaseManagementApiApiCreateUserInDBRequest {
 	r.databaseUserFormData = &databaseUserFormData
+	return r
+}
+func (r UniverseDatabaseManagementApiApiCreateUserInDBRequest) Request(request interface{}) UniverseDatabaseManagementApiApiCreateUserInDBRequest {
+	r.request = &request
 	return r
 }
 
@@ -90,6 +95,9 @@ func (a *UniverseDatabaseManagementApiService) CreateUserInDBExecute(r UniverseD
 		return localVarReturnValue, nil, reportError("databaseUserFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -166,10 +174,15 @@ type UniverseDatabaseManagementApiApiRunYsqlQueryUniverseRequest struct {
 	cUUID string
 	uniUUID string
 	runQueryFormData *RunQueryFormData
+	request *interface{}
 }
 
 func (r UniverseDatabaseManagementApiApiRunYsqlQueryUniverseRequest) RunQueryFormData(runQueryFormData RunQueryFormData) UniverseDatabaseManagementApiApiRunYsqlQueryUniverseRequest {
 	r.runQueryFormData = &runQueryFormData
+	return r
+}
+func (r UniverseDatabaseManagementApiApiRunYsqlQueryUniverseRequest) Request(request interface{}) UniverseDatabaseManagementApiApiRunYsqlQueryUniverseRequest {
+	r.request = &request
 	return r
 }
 
@@ -224,6 +237,9 @@ func (a *UniverseDatabaseManagementApiService) RunYsqlQueryUniverseExecute(r Uni
 		return localVarReturnValue, nil, reportError("runQueryFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -300,10 +316,15 @@ type UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest struct {
 	cUUID string
 	uniUUID string
 	databaseSecurityFormData *DatabaseSecurityFormData
+	request *interface{}
 }
 
 func (r UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest) DatabaseSecurityFormData(databaseSecurityFormData DatabaseSecurityFormData) UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest {
 	r.databaseSecurityFormData = &databaseSecurityFormData
+	return r
+}
+func (r UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest) Request(request interface{}) UniverseDatabaseManagementApiApiSetDatabaseCredentialsRequest {
+	r.request = &request
 	return r
 }
 
@@ -357,6 +378,9 @@ func (a *UniverseDatabaseManagementApiService) SetDatabaseCredentialsExecute(r U
 		return localVarReturnValue, nil, reportError("databaseSecurityFormData is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

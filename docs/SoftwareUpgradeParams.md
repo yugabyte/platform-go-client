@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
+**IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
@@ -466,6 +467,31 @@ SetInstallYbc sets InstallYbc field to given value.
 `func (o *SoftwareUpgradeParams) HasInstallYbc() bool`
 
 HasInstallYbc returns a boolean if a field has been set.
+
+### GetIsKubernetesOperatorControlled
+
+`func (o *SoftwareUpgradeParams) GetIsKubernetesOperatorControlled() bool`
+
+GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetIsKubernetesOperatorControlledOk
+
+`func (o *SoftwareUpgradeParams) GetIsKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsKubernetesOperatorControlled
+
+`func (o *SoftwareUpgradeParams) SetIsKubernetesOperatorControlled(v bool)`
+
+SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to given value.
+
+### HasIsKubernetesOperatorControlled
+
+`func (o *SoftwareUpgradeParams) HasIsKubernetesOperatorControlled() bool`
+
+HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
 ### GetItestS3PackagePath
 

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **IsTserver** | Pointer to **bool** | True if this node is a Tablet server | [optional] 
 **IsYqlServer** | Pointer to **bool** | True if this node is a YCQL server | [optional] 
 **IsYsqlServer** | Pointer to **bool** | True if this node is a YSQL server | [optional] 
+**LastVolumeUpdateTime** | Pointer to **time.Time** | Store last volume update time | [optional] [readonly] 
 **MachineImage** | Pointer to **string** | Machine image name | [optional] 
 **MasterHttpPort** | Pointer to **int32** | Master HTTP port | [optional] 
 **MasterRpcPort** | Pointer to **int32** | Master RPC port | [optional] 
@@ -25,6 +26,7 @@ Name | Type | Description | Notes
 **PlacementUuid** | Pointer to **string** | UUID of the cluster to which this node belongs | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | REDIS HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | REDIS RPC port | [optional] 
+**SshPortOverride** | Pointer to **int32** | SSH port override for the AMI | [optional] 
 **SshUserOverride** | Pointer to **string** | SSH user override for the AMI | [optional] 
 **State** | Pointer to **string** | Node state | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
@@ -306,6 +308,31 @@ SetIsYsqlServer sets IsYsqlServer field to given value.
 
 HasIsYsqlServer returns a boolean if a field has been set.
 
+### GetLastVolumeUpdateTime
+
+`func (o *NodeDetails) GetLastVolumeUpdateTime() time.Time`
+
+GetLastVolumeUpdateTime returns the LastVolumeUpdateTime field if non-nil, zero value otherwise.
+
+### GetLastVolumeUpdateTimeOk
+
+`func (o *NodeDetails) GetLastVolumeUpdateTimeOk() (*time.Time, bool)`
+
+GetLastVolumeUpdateTimeOk returns a tuple with the LastVolumeUpdateTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastVolumeUpdateTime
+
+`func (o *NodeDetails) SetLastVolumeUpdateTime(v time.Time)`
+
+SetLastVolumeUpdateTime sets LastVolumeUpdateTime field to given value.
+
+### HasLastVolumeUpdateTime
+
+`func (o *NodeDetails) HasLastVolumeUpdateTime() bool`
+
+HasLastVolumeUpdateTime returns a boolean if a field has been set.
+
 ### GetMachineImage
 
 `func (o *NodeDetails) GetMachineImage() string`
@@ -580,6 +607,31 @@ SetRedisServerRpcPort sets RedisServerRpcPort field to given value.
 `func (o *NodeDetails) HasRedisServerRpcPort() bool`
 
 HasRedisServerRpcPort returns a boolean if a field has been set.
+
+### GetSshPortOverride
+
+`func (o *NodeDetails) GetSshPortOverride() int32`
+
+GetSshPortOverride returns the SshPortOverride field if non-nil, zero value otherwise.
+
+### GetSshPortOverrideOk
+
+`func (o *NodeDetails) GetSshPortOverrideOk() (*int32, bool)`
+
+GetSshPortOverrideOk returns a tuple with the SshPortOverride field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshPortOverride
+
+`func (o *NodeDetails) SetSshPortOverride(v int32)`
+
+SetSshPortOverride sets SshPortOverride field to given value.
+
+### HasSshPortOverride
+
+`func (o *NodeDetails) HasSshPortOverride() bool`
+
+HasSshPortOverride returns a boolean if a field has been set.
 
 ### GetSshUserOverride
 

@@ -33,8 +33,13 @@ type RuntimeConfigurationApiApiDeleteKeyRequest struct {
 	cUUID string
 	scope string
 	key string
+	request *interface{}
 }
 
+func (r RuntimeConfigurationApiApiDeleteKeyRequest) Request(request interface{}) RuntimeConfigurationApiApiDeleteKeyRequest {
+	r.request = &request
+	return r
+}
 
 func (r RuntimeConfigurationApiApiDeleteKeyRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
 	return r.ApiService.DeleteKeyExecute(r)
@@ -86,6 +91,9 @@ func (a *RuntimeConfigurationApiService) DeleteKeyExecute(r RuntimeConfiguration
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -160,10 +168,15 @@ type RuntimeConfigurationApiApiGetConfigRequest struct {
 	cUUID string
 	scope string
 	includeInherited *bool
+	request *interface{}
 }
 
 func (r RuntimeConfigurationApiApiGetConfigRequest) IncludeInherited(includeInherited bool) RuntimeConfigurationApiApiGetConfigRequest {
 	r.includeInherited = &includeInherited
+	return r
+}
+func (r RuntimeConfigurationApiApiGetConfigRequest) Request(request interface{}) RuntimeConfigurationApiApiGetConfigRequest {
+	r.request = &request
 	return r
 }
 
@@ -217,6 +230,9 @@ func (a *RuntimeConfigurationApiService) GetConfigExecute(r RuntimeConfiguration
 
 	if r.includeInherited != nil {
 		localVarQueryParams.Add("includeInherited", parameterToString(*r.includeInherited, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -292,8 +308,13 @@ type RuntimeConfigurationApiApiGetConfigurationKeyRequest struct {
 	cUUID string
 	scope string
 	key string
+	request *interface{}
 }
 
+func (r RuntimeConfigurationApiApiGetConfigurationKeyRequest) Request(request interface{}) RuntimeConfigurationApiApiGetConfigurationKeyRequest {
+	r.request = &request
+	return r
+}
 
 func (r RuntimeConfigurationApiApiGetConfigurationKeyRequest) Execute() (string, *_nethttp.Response, error) {
 	return r.ApiService.GetConfigurationKeyExecute(r)
@@ -345,6 +366,9 @@ func (a *RuntimeConfigurationApiService) GetConfigurationKeyExecute(r RuntimeCon
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -649,8 +673,13 @@ type RuntimeConfigurationApiApiListScopesRequest struct {
 	ctx _context.Context
 	ApiService *RuntimeConfigurationApiService
 	cUUID string
+	request *interface{}
 }
 
+func (r RuntimeConfigurationApiApiListScopesRequest) Request(request interface{}) RuntimeConfigurationApiApiListScopesRequest {
+	r.request = &request
+	return r
+}
 
 func (r RuntimeConfigurationApiApiListScopesRequest) Execute() (RuntimeConfigData, *_nethttp.Response, error) {
 	return r.ApiService.ListScopesExecute(r)
@@ -697,6 +726,9 @@ func (a *RuntimeConfigurationApiService) ListScopesExecute(r RuntimeConfiguratio
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -772,10 +804,15 @@ type RuntimeConfigurationApiApiSetKeyRequest struct {
 	scope string
 	key string
 	newValue *string
+	request *interface{}
 }
 
 func (r RuntimeConfigurationApiApiSetKeyRequest) NewValue(newValue string) RuntimeConfigurationApiApiSetKeyRequest {
 	r.newValue = &newValue
+	return r
+}
+func (r RuntimeConfigurationApiApiSetKeyRequest) Request(request interface{}) RuntimeConfigurationApiApiSetKeyRequest {
+	r.request = &request
 	return r
 }
 
@@ -832,6 +869,9 @@ func (a *RuntimeConfigurationApiService) SetKeyExecute(r RuntimeConfigurationApi
 		return localVarReturnValue, nil, reportError("newValue is required and must be specified")
 	}
 
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"text/plain"}
 

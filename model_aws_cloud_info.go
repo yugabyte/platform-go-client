@@ -22,6 +22,8 @@ type AWSCloudInfo struct {
 	AwsHostedZoneName *string `json:"awsHostedZoneName,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
+	// New/Existing VPC for provider creation
+	VpcType *string `json:"vpcType,omitempty"`
 }
 
 // NewAWSCloudInfo instantiates a new AWSCloudInfo object
@@ -233,6 +235,38 @@ func (o *AWSCloudInfo) SetHostVpcRegion(v string) {
 	o.HostVpcRegion = &v
 }
 
+// GetVpcType returns the VpcType field value if set, zero value otherwise.
+func (o *AWSCloudInfo) GetVpcType() string {
+	if o == nil || o.VpcType == nil {
+		var ret string
+		return ret
+	}
+	return *o.VpcType
+}
+
+// GetVpcTypeOk returns a tuple with the VpcType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AWSCloudInfo) GetVpcTypeOk() (*string, bool) {
+	if o == nil || o.VpcType == nil {
+		return nil, false
+	}
+	return o.VpcType, true
+}
+
+// HasVpcType returns a boolean if a field has been set.
+func (o *AWSCloudInfo) HasVpcType() bool {
+	if o != nil && o.VpcType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVpcType gets a reference to the given string and assigns it to the VpcType field.
+func (o *AWSCloudInfo) SetVpcType(v string) {
+	o.VpcType = &v
+}
+
 func (o AWSCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AwsAccessKeyID != nil {
@@ -252,6 +286,9 @@ func (o AWSCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.HostVpcRegion != nil {
 		toSerialize["hostVpcRegion"] = o.HostVpcRegion
+	}
+	if o.VpcType != nil {
+		toSerialize["vpcType"] = o.VpcType
 	}
 	return json.Marshal(toSerialize)
 }

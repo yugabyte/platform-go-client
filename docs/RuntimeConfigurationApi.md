@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## DeleteKey
 
-> YBPSuccess DeleteKey(ctx, cUUID, scope, key).Execute()
+> YBPSuccess DeleteKey(ctx, cUUID, scope, key).Request(request).Execute()
 
 Delete a configuration key
 
@@ -36,10 +36,11 @@ func main() {
     cUUID := TODO // string | 
     scope := TODO // string | 
     key := "key_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RuntimeConfigurationApi.DeleteKey(context.Background(), cUUID, scope, key).Execute()
+    resp, r, err := api_client.RuntimeConfigurationApi.DeleteKey(context.Background(), cUUID, scope, key).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.DeleteKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -90,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## GetConfig
 
-> ScopedConfig GetConfig(ctx, cUUID, scope).IncludeInherited(includeInherited).Execute()
+> ScopedConfig GetConfig(ctx, cUUID, scope).IncludeInherited(includeInherited).Request(request).Execute()
 
 List configuration entries for a scope
 
@@ -112,10 +114,11 @@ func main() {
     cUUID := TODO // string | 
     scope := TODO // string | 
     includeInherited := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RuntimeConfigurationApi.GetConfig(context.Background(), cUUID, scope).IncludeInherited(includeInherited).Execute()
+    resp, r, err := api_client.RuntimeConfigurationApi.GetConfig(context.Background(), cUUID, scope).IncludeInherited(includeInherited).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.GetConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -144,6 +147,7 @@ Name | Type | Description  | Notes
 
 
  **includeInherited** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -165,7 +169,7 @@ Name | Type | Description  | Notes
 
 ## GetConfigurationKey
 
-> string GetConfigurationKey(ctx, cUUID, scope, key).Execute()
+> string GetConfigurationKey(ctx, cUUID, scope, key).Request(request).Execute()
 
 Get a configuration key
 
@@ -185,10 +189,11 @@ func main() {
     cUUID := TODO // string | 
     scope := TODO // string | 
     key := "key_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RuntimeConfigurationApi.GetConfigurationKey(context.Background(), cUUID, scope, key).Execute()
+    resp, r, err := api_client.RuntimeConfigurationApi.GetConfigurationKey(context.Background(), cUUID, scope, key).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.GetConfigurationKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -218,6 +223,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -361,7 +367,7 @@ Other parameters are passed through a pointer to a apiListKeysRequest struct via
 
 ## ListScopes
 
-> RuntimeConfigData ListScopes(ctx, cUUID).Execute()
+> RuntimeConfigData ListScopes(ctx, cUUID).Request(request).Execute()
 
 List configuration scopes
 
@@ -381,10 +387,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RuntimeConfigurationApi.ListScopes(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.RuntimeConfigurationApi.ListScopes(context.Background(), cUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.ListScopes``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -410,6 +417,7 @@ Other parameters are passed through a pointer to a apiListScopesRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -431,7 +439,7 @@ Name | Type | Description  | Notes
 
 ## SetKey
 
-> YBPSuccess SetKey(ctx, cUUID, scope, key).NewValue(newValue).Execute()
+> YBPSuccess SetKey(ctx, cUUID, scope, key).NewValue(newValue).Request(request).Execute()
 
 Update a configuration key
 
@@ -452,10 +460,11 @@ func main() {
     scope := TODO // string | 
     key := "key_example" // string | 
     newValue := "newValue_example" // string | New value for config key
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RuntimeConfigurationApi.SetKey(context.Background(), cUUID, scope, key).NewValue(newValue).Execute()
+    resp, r, err := api_client.RuntimeConfigurationApi.SetKey(context.Background(), cUUID, scope, key).NewValue(newValue).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.SetKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -486,6 +495,7 @@ Name | Type | Description  | Notes
 
 
  **newValue** | **string** | New value for config key | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

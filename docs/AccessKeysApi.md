@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## CreateAccesskey
 
-> AccessKey CreateAccesskey(ctx, cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Execute()
+> AccessKey CreateAccesskey(ctx, cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Request(request).Execute()
 
 Create/Upload an access key for onprem Provider region
 
@@ -37,10 +37,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     accessKeyFormData := *openapiclient.NewAccessKeyFormData("KeyCode_example", "KeyContent_example", "KeyType_example") // AccessKeyFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AccessKeysApi.CreateAccesskey(context.Background(), cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Execute()
+    resp, r, err := api_client.AccessKeysApi.CreateAccesskey(context.Background(), cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccessKeysApi.CreateAccesskey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 
 
  **accessKeyFormData** | [**AccessKeyFormData**](AccessKeyFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -90,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## DeleteAccesskey
 
-> YBPSuccess DeleteAccesskey(ctx, cUUID, pUUID, keyCode).Execute()
+> YBPSuccess DeleteAccesskey(ctx, cUUID, pUUID, keyCode).Request(request).Execute()
 
 Delete an access key
 
@@ -110,10 +112,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     keyCode := "keyCode_example" // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AccessKeysApi.DeleteAccesskey(context.Background(), cUUID, pUUID, keyCode).Execute()
+    resp, r, err := api_client.AccessKeysApi.DeleteAccesskey(context.Background(), cUUID, pUUID, keyCode).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccessKeysApi.DeleteAccesskey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -143,6 +146,7 @@ Name | Type | Description  | Notes
 
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -164,7 +168,7 @@ Name | Type | Description  | Notes
 
 ## EditAccesskey
 
-> AccessKey EditAccesskey(ctx, cUUID, pUUID, keyCode).Accesskey(accesskey).Execute()
+> AccessKey EditAccesskey(ctx, cUUID, pUUID, keyCode).Accesskey(accesskey).Request(request).Execute()
 
 Modify an access key
 
@@ -185,10 +189,11 @@ func main() {
     pUUID := TODO // string | 
     keyCode := "keyCode_example" // string | 
     accesskey := *openapiclient.NewAccessKey(*openapiclient.NewAccessKeyId(), *openapiclient.NewKeyInfo()) // AccessKey | access key edit form data
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AccessKeysApi.EditAccesskey(context.Background(), cUUID, pUUID, keyCode).Accesskey(accesskey).Execute()
+    resp, r, err := api_client.AccessKeysApi.EditAccesskey(context.Background(), cUUID, pUUID, keyCode).Accesskey(accesskey).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccessKeysApi.EditAccesskey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -219,6 +224,7 @@ Name | Type | Description  | Notes
 
 
  **accesskey** | [**AccessKey**](AccessKey.md) | access key edit form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

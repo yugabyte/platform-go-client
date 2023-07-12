@@ -14,14 +14,13 @@ Method | HTTP request | Description
 [**SetUniverseBackupFlag**](UniverseManagementApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**SetUniverseHelm3Compatible**](UniverseManagementApi.md#SetUniverseHelm3Compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
 [**SetUniverseKey**](UniverseManagementApi.md#SetUniverseKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
-[**ToggleUniverseTLS**](UniverseManagementApi.md#ToggleUniverseTLS) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/toggle_tls | Toggle a universe&#39;s TLS state
 [**UpdateLoadBalancerConfig**](UniverseManagementApi.md#UpdateLoadBalancerConfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 
 
 
 ## ConfigureUniverseAlerts
 
-> YBPSuccess ConfigureUniverseAlerts(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess ConfigureUniverseAlerts(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Configure alerts for a universe
 
@@ -40,10 +39,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.ConfigureUniverseAlerts(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.ConfigureUniverseAlerts(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.ConfigureUniverseAlerts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,6 +71,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -92,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## DeleteUniverse
 
-> YBPTask DeleteUniverse(ctx, cUUID, uniUUID).IsForceDelete(isForceDelete).IsDeleteBackups(isDeleteBackups).IsDeleteAssociatedCerts(isDeleteAssociatedCerts).Execute()
+> YBPTask DeleteUniverse(ctx, cUUID, uniUUID).IsForceDelete(isForceDelete).IsDeleteBackups(isDeleteBackups).IsDeleteAssociatedCerts(isDeleteAssociatedCerts).Request(request).Execute()
 
 Delete a universe
 
@@ -114,10 +115,11 @@ func main() {
     isForceDelete := true // bool |  (optional) (default to false)
     isDeleteBackups := true // bool |  (optional) (default to false)
     isDeleteAssociatedCerts := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.DeleteUniverse(context.Background(), cUUID, uniUUID).IsForceDelete(isForceDelete).IsDeleteBackups(isDeleteBackups).IsDeleteAssociatedCerts(isDeleteAssociatedCerts).Execute()
+    resp, r, err := api_client.UniverseManagementApi.DeleteUniverse(context.Background(), cUUID, uniUUID).IsForceDelete(isForceDelete).IsDeleteBackups(isDeleteBackups).IsDeleteAssociatedCerts(isDeleteAssociatedCerts).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.DeleteUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -148,6 +150,7 @@ Name | Type | Description  | Notes
  **isForceDelete** | **bool** |  | [default to false]
  **isDeleteBackups** | **bool** |  | [default to false]
  **isDeleteAssociatedCerts** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -310,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## PauseUniverse
 
-> YBPTask PauseUniverse(ctx, cUUID, uniUUID).Execute()
+> YBPTask PauseUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Pause a universe
 
@@ -329,10 +332,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.PauseUniverse(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.PauseUniverse(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.PauseUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -360,6 +364,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -381,7 +386,7 @@ Name | Type | Description  | Notes
 
 ## ResetUniverseVersion
 
-> YBPSuccess ResetUniverseVersion(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess ResetUniverseVersion(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Reset universe version
 
@@ -400,10 +405,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.ResetUniverseVersion(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.ResetUniverseVersion(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.ResetUniverseVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -431,6 +437,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -452,7 +459,7 @@ Name | Type | Description  | Notes
 
 ## ResumeUniverse
 
-> YBPTask ResumeUniverse(ctx, cUUID, uniUUID).Execute()
+> YBPTask ResumeUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Resume a paused universe
 
@@ -471,10 +478,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.ResumeUniverse(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.ResumeUniverse(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.ResumeUniverse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -502,6 +510,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -523,7 +532,7 @@ Name | Type | Description  | Notes
 
 ## SetUniverseBackupFlag
 
-> YBPSuccess SetUniverseBackupFlag(ctx, cUUID, uniUUID).MarkActive(markActive).Execute()
+> YBPSuccess SetUniverseBackupFlag(ctx, cUUID, uniUUID).MarkActive(markActive).Request(request).Execute()
 
 Set a universe's backup flag
 
@@ -543,10 +552,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     markActive := true // bool |  (optional)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.SetUniverseBackupFlag(context.Background(), cUUID, uniUUID).MarkActive(markActive).Execute()
+    resp, r, err := api_client.UniverseManagementApi.SetUniverseBackupFlag(context.Background(), cUUID, uniUUID).MarkActive(markActive).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.SetUniverseBackupFlag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -575,6 +585,7 @@ Name | Type | Description  | Notes
 
 
  **markActive** | **bool** |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -596,7 +607,7 @@ Name | Type | Description  | Notes
 
 ## SetUniverseHelm3Compatible
 
-> YBPSuccess SetUniverseHelm3Compatible(ctx, cUUID, uniUUID).Execute()
+> YBPSuccess SetUniverseHelm3Compatible(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Flag a universe as Helm 3-compatible
 
@@ -615,10 +626,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.SetUniverseHelm3Compatible(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.SetUniverseHelm3Compatible(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.SetUniverseHelm3Compatible``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -646,6 +658,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -667,7 +680,7 @@ Name | Type | Description  | Notes
 
 ## SetUniverseKey
 
-> UniverseResp SetUniverseKey(ctx, cUUID, uniUUID).Execute()
+> UniverseResp SetUniverseKey(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Set a universe's key
 
@@ -686,10 +699,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.SetUniverseKey(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.SetUniverseKey(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.SetUniverseKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -717,79 +731,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
-### Return type
-
-[**UniverseResp**](UniverseResp.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ToggleUniverseTLS
-
-> UniverseResp ToggleUniverseTLS(ctx, cUUID, uniUUID).Execute()
-
-Toggle a universe's TLS state
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.ToggleUniverseTLS(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.ToggleUniverseTLS``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ToggleUniverseTLS`: UniverseResp
-    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.ToggleUniverseTLS`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiToggleUniverseTLSRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -811,7 +753,7 @@ Name | Type | Description  | Notes
 
 ## UpdateLoadBalancerConfig
 
-> UpdateLoadBalancerConfig UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).Execute()
+> UpdateLoadBalancerConfig UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Update load balancer config
 
@@ -830,10 +772,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.UpdateLoadBalancerConfig(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.UniverseManagementApi.UpdateLoadBalancerConfig(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.UpdateLoadBalancerConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -861,6 +804,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

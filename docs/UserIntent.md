@@ -22,8 +22,10 @@ Name | Type | Description | Notes
 **EnableYEDIS** | Pointer to **bool** |  | [optional] 
 **EnableYSQL** | Pointer to **bool** |  | [optional] 
 **EnableYSQLAuth** | Pointer to **bool** |  | [optional] 
+**ImageBundleUUID** | Pointer to **string** |  | [optional] 
 **InstanceTags** | Pointer to **map[string]string** |  | [optional] 
 **InstanceType** | Pointer to **string** |  | [optional] 
+**KubernetesOperatorVersion** | Pointer to **int64** |  | [optional] 
 **MasterDeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **MasterGFlags** | Pointer to **map[string]string** |  | [optional] 
 **MasterInstanceType** | Pointer to **string** |  | [optional] 
@@ -34,10 +36,12 @@ Name | Type | Description | Notes
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
+**SpotPrice** | Pointer to **float64** |  | [optional] 
 **TserverGFlags** | Pointer to **map[string]string** |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
 **UseHostname** | Pointer to **bool** |  | [optional] 
+**UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
@@ -514,6 +518,31 @@ SetEnableYSQLAuth sets EnableYSQLAuth field to given value.
 
 HasEnableYSQLAuth returns a boolean if a field has been set.
 
+### GetImageBundleUUID
+
+`func (o *UserIntent) GetImageBundleUUID() string`
+
+GetImageBundleUUID returns the ImageBundleUUID field if non-nil, zero value otherwise.
+
+### GetImageBundleUUIDOk
+
+`func (o *UserIntent) GetImageBundleUUIDOk() (*string, bool)`
+
+GetImageBundleUUIDOk returns a tuple with the ImageBundleUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageBundleUUID
+
+`func (o *UserIntent) SetImageBundleUUID(v string)`
+
+SetImageBundleUUID sets ImageBundleUUID field to given value.
+
+### HasImageBundleUUID
+
+`func (o *UserIntent) HasImageBundleUUID() bool`
+
+HasImageBundleUUID returns a boolean if a field has been set.
+
 ### GetInstanceTags
 
 `func (o *UserIntent) GetInstanceTags() map[string]string`
@@ -563,6 +592,31 @@ SetInstanceType sets InstanceType field to given value.
 `func (o *UserIntent) HasInstanceType() bool`
 
 HasInstanceType returns a boolean if a field has been set.
+
+### GetKubernetesOperatorVersion
+
+`func (o *UserIntent) GetKubernetesOperatorVersion() int64`
+
+GetKubernetesOperatorVersion returns the KubernetesOperatorVersion field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorVersionOk
+
+`func (o *UserIntent) GetKubernetesOperatorVersionOk() (*int64, bool)`
+
+GetKubernetesOperatorVersionOk returns a tuple with the KubernetesOperatorVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorVersion
+
+`func (o *UserIntent) SetKubernetesOperatorVersion(v int64)`
+
+SetKubernetesOperatorVersion sets KubernetesOperatorVersion field to given value.
+
+### HasKubernetesOperatorVersion
+
+`func (o *UserIntent) HasKubernetesOperatorVersion() bool`
+
+HasKubernetesOperatorVersion returns a boolean if a field has been set.
 
 ### GetMasterDeviceInfo
 
@@ -814,6 +868,31 @@ SetSpecificGFlags sets SpecificGFlags field to given value.
 
 HasSpecificGFlags returns a boolean if a field has been set.
 
+### GetSpotPrice
+
+`func (o *UserIntent) GetSpotPrice() float64`
+
+GetSpotPrice returns the SpotPrice field if non-nil, zero value otherwise.
+
+### GetSpotPriceOk
+
+`func (o *UserIntent) GetSpotPriceOk() (*float64, bool)`
+
+GetSpotPriceOk returns a tuple with the SpotPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpotPrice
+
+`func (o *UserIntent) SetSpotPrice(v float64)`
+
+SetSpotPrice sets SpotPrice field to given value.
+
+### HasSpotPrice
+
+`func (o *UserIntent) HasSpotPrice() bool`
+
+HasSpotPrice returns a boolean if a field has been set.
+
 ### GetTserverGFlags
 
 `func (o *UserIntent) GetTserverGFlags() map[string]string`
@@ -913,6 +992,31 @@ SetUseHostname sets UseHostname field to given value.
 `func (o *UserIntent) HasUseHostname() bool`
 
 HasUseHostname returns a boolean if a field has been set.
+
+### GetUseSpotInstance
+
+`func (o *UserIntent) GetUseSpotInstance() bool`
+
+GetUseSpotInstance returns the UseSpotInstance field if non-nil, zero value otherwise.
+
+### GetUseSpotInstanceOk
+
+`func (o *UserIntent) GetUseSpotInstanceOk() (*bool, bool)`
+
+GetUseSpotInstanceOk returns a tuple with the UseSpotInstance field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseSpotInstance
+
+`func (o *UserIntent) SetUseSpotInstance(v bool)`
+
+SetUseSpotInstance sets UseSpotInstance field to given value.
+
+### HasUseSpotInstance
+
+`func (o *UserIntent) HasUseSpotInstance() bool`
+
+HasUseSpotInstance returns a boolean if a field has been set.
 
 ### GetUseSystemd
 

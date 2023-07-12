@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## Delete
 
-> YBPSuccess Delete(ctx, cUUID).DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest).Execute()
+> YBPSuccess Delete(ctx, cUUID).DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest).Request(request).Execute()
 
 Delete performance recommendations
 
@@ -38,10 +38,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     deletePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.Delete(context.Background(), cUUID).DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.Delete(context.Background(), cUUID).DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.Delete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **deletePerformanceRecommendationsRequest** | [**PerformanceRecommendationFilter**](PerformanceRecommendationFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -231,7 +233,7 @@ Name | Type | Description  | Notes
 
 ## GetSettings
 
-> PerfAdvisorSettingsWithDefaults GetSettings(ctx, cUUID, uniUUID).Execute()
+> PerfAdvisorSettingsWithDefaults GetSettings(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Get universe performance advisor settings
 
@@ -250,10 +252,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.GetSettings(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.GetSettings(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.GetSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,6 +284,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -302,7 +306,7 @@ Name | Type | Description  | Notes
 
 ## Hide
 
-> YBPSuccess Hide(ctx, cUUID).HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest).Execute()
+> YBPSuccess Hide(ctx, cUUID).HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest).Request(request).Execute()
 
 Hide performance recommendations
 
@@ -321,10 +325,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     hidePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.Hide(context.Background(), cUUID).HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.Hide(context.Background(), cUUID).HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.Hide``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -351,6 +356,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **hidePerformanceRecommendationsRequest** | [**PerformanceRecommendationFilter**](PerformanceRecommendationFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -372,7 +378,7 @@ Name | Type | Description  | Notes
 
 ## Page
 
-> PerformanceRecommendationPagedResponse Page(ctx, cUUID).PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest).Execute()
+> PerformanceRecommendationPagedResponse Page(ctx, cUUID).PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest).Request(request).Execute()
 
 List performance recommendations (paginated)
 
@@ -391,10 +397,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pagePerformanceRecommendationRequest := *openapiclient.NewPerformanceRecommendationPagedQuery("Direction_example", *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example"), int32(123), false, int32(123), "SortBy_example") // PerformanceRecommendationPagedQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.Page(context.Background(), cUUID).PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.Page(context.Background(), cUUID).PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.Page``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -421,6 +428,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pagePerformanceRecommendationRequest** | [**PerformanceRecommendationPagedQuery**](PerformanceRecommendationPagedQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -442,7 +450,7 @@ Name | Type | Description  | Notes
 
 ## PageAuditInfo
 
-> StateChangeAuditInfoPagedResponse PageAuditInfo(ctx, cUUID).PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest).Execute()
+> StateChangeAuditInfoPagedResponse PageAuditInfo(ctx, cUUID).PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest).Request(request).Execute()
 
 List performance recommendations state change audit events (paginated)
 
@@ -461,10 +469,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pageStateChangeAuditInfoRequest := *openapiclient.NewStateChangeAuditInfoPagedQuery("Direction_example", *openapiclient.NewStateChangeAuditInfoFilter("CustomerId_example", []string{"Ids_example"}, "RecommendationId_example", "UserId_example"), int32(123), false, int32(123), "SortBy_example") // StateChangeAuditInfoPagedQuery | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.PageAuditInfo(context.Background(), cUUID).PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.PageAuditInfo(context.Background(), cUUID).PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.PageAuditInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -491,6 +500,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageStateChangeAuditInfoRequest** | [**StateChangeAuditInfoPagedQuery**](StateChangeAuditInfoPagedQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -512,7 +522,7 @@ Name | Type | Description  | Notes
 
 ## Resolve
 
-> YBPSuccess Resolve(ctx, cUUID).ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest).Execute()
+> YBPSuccess Resolve(ctx, cUUID).ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest).Request(request).Execute()
 
 Resolve performance recommendations
 
@@ -531,10 +541,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     resolvePerformanceRecommendationsRequest := *openapiclient.NewPerformanceRecommendationFilter(int64(123), "CustomerId_example", []string{"Ids_example"}, false, []string{"Priorities_example"}, []string{"States_example"}, []string{"Types_example"}, "UniverseId_example") // PerformanceRecommendationFilter | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.Resolve(context.Background(), cUUID).ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.Resolve(context.Background(), cUUID).ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.Resolve``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -561,6 +572,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **resolvePerformanceRecommendationsRequest** | [**PerformanceRecommendationFilter**](PerformanceRecommendationFilter.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -582,7 +594,7 @@ Name | Type | Description  | Notes
 
 ## RunPerfAdvisor
 
-> YBPSuccess RunPerfAdvisor(ctx, cUUID, uniUUID).Execute()
+> PerfAdvisorManualRunStatus RunPerfAdvisor(ctx, cUUID, uniUUID).Request(request).Execute()
 
 Start performance advisor run for universe
 
@@ -601,15 +613,16 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.RunPerfAdvisor(context.Background(), cUUID, uniUUID).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.RunPerfAdvisor(context.Background(), cUUID, uniUUID).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.RunPerfAdvisor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RunPerfAdvisor`: YBPSuccess
+    // response from `RunPerfAdvisor`: PerfAdvisorManualRunStatus
     fmt.Fprintf(os.Stdout, "Response from `PerformanceAdvisorApi.RunPerfAdvisor`: %v\n", resp)
 }
 ```
@@ -632,10 +645,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**PerfAdvisorManualRunStatus**](PerfAdvisorManualRunStatus.md)
 
 ### Authorization
 
@@ -653,7 +667,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettings
 
-> YBPSuccess UpdateSettings(ctx, cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Execute()
+> YBPSuccess UpdateSettings(ctx, cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Request(request).Execute()
 
 Update universe performance advisor settings
 
@@ -673,10 +687,11 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     performanceAdvisorSettingsRequest := *openapiclient.NewPerfAdvisorSettingsFormData() // PerfAdvisorSettingsFormData | 
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PerformanceAdvisorApi.UpdateSettings(context.Background(), cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Execute()
+    resp, r, err := api_client.PerformanceAdvisorApi.UpdateSettings(context.Background(), cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PerformanceAdvisorApi.UpdateSettings``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -705,6 +720,7 @@ Name | Type | Description  | Notes
 
 
  **performanceAdvisorSettingsRequest** | [**PerfAdvisorSettingsFormData**](PerfAdvisorSettingsFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

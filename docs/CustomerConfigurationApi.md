@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateCustomerConfig
 
-> CustomerConfig CreateCustomerConfig(ctx, cUUID).Config(config).Execute()
+> CustomerConfig CreateCustomerConfig(ctx, cUUID).Config(config).Request(request).Execute()
 
 Create a customer configuration
 
@@ -35,10 +35,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be created
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.CreateCustomerConfig(context.Background(), cUUID).Config(config).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.CreateCustomerConfig(context.Background(), cUUID).Config(config).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.CreateCustomerConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -86,7 +88,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCustomerConfig
 
-> YBPTask DeleteCustomerConfig(ctx, cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Execute()
+> YBPTask DeleteCustomerConfig(ctx, cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Request(request).Execute()
 
 Delete a customer configuration
 
@@ -106,10 +108,11 @@ func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
     isDeleteBackups := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.DeleteCustomerConfig(context.Background(), cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.DeleteCustomerConfig(context.Background(), cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.DeleteCustomerConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,6 +141,7 @@ Name | Type | Description  | Notes
 
 
  **isDeleteBackups** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -159,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## DeleteCustomerConfigV2
 
-> YBPTask DeleteCustomerConfigV2(ctx, cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Execute()
+> YBPTask DeleteCustomerConfigV2(ctx, cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Request(request).Execute()
 
 Delete a customer configuration V2
 
@@ -179,10 +183,11 @@ func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
     isDeleteBackups := true // bool |  (optional) (default to false)
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.DeleteCustomerConfigV2(context.Background(), cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.DeleteCustomerConfigV2(context.Background(), cUUID, configUUID).IsDeleteBackups(isDeleteBackups).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.DeleteCustomerConfigV2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -211,6 +216,7 @@ Name | Type | Description  | Notes
 
 
  **isDeleteBackups** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -232,7 +238,7 @@ Name | Type | Description  | Notes
 
 ## EditCustomerConfig
 
-> CustomerConfig EditCustomerConfig(ctx, cUUID, configUUID).Config(config).Execute()
+> CustomerConfig EditCustomerConfig(ctx, cUUID, configUUID).Config(config).Request(request).Execute()
 
 Update a customer configuration
 
@@ -252,10 +258,11 @@ func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
     config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.EditCustomerConfig(context.Background(), cUUID, configUUID).Config(config).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.EditCustomerConfig(context.Background(), cUUID, configUUID).Config(config).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.EditCustomerConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -284,6 +291,7 @@ Name | Type | Description  | Notes
 
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -305,7 +313,7 @@ Name | Type | Description  | Notes
 
 ## EditCustomerConfig_0
 
-> CustomerConfig EditCustomerConfig_0(ctx, cUUID, configUUID).Config(config).Execute()
+> CustomerConfig EditCustomerConfig_0(ctx, cUUID, configUUID).Config(config).Request(request).Execute()
 
 Update a customer configuration V2
 
@@ -325,10 +333,11 @@ func main() {
     cUUID := TODO // string | 
     configUUID := TODO // string | 
     config := *openapiclient.NewCustomerConfig("backup20-01-2021", "CustomerUUID_example", map[string]interface{}("{\"AWS_ACCESS_KEY_ID\": \"AK****************ZD\"}"), "S3", "STORAGE") // CustomerConfig | Configuration data to be updated
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.EditCustomerConfig_0(context.Background(), cUUID, configUUID).Config(config).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.EditCustomerConfig_0(context.Background(), cUUID, configUUID).Config(config).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.EditCustomerConfig_0``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -357,6 +366,7 @@ Name | Type | Description  | Notes
 
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -446,7 +456,7 @@ Name | Type | Description  | Notes
 
 ## ListBuckets
 
-> map[string]interface{} ListBuckets(ctx, cUUID, cloud).Credentials(credentials).Execute()
+> map[string]interface{} ListBuckets(ctx, cUUID, cloud).Credentials(credentials).Request(request).Execute()
 
 List buckets with provided credentials
 
@@ -466,10 +476,11 @@ func main() {
     cUUID := TODO // string | 
     cloud := "cloud_example" // string | 
     credentials := map[string]interface{}(Object) // map[string]interface{} | Credentials to list buckets
+    request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CustomerConfigurationApi.ListBuckets(context.Background(), cUUID, cloud).Credentials(credentials).Execute()
+    resp, r, err := api_client.CustomerConfigurationApi.ListBuckets(context.Background(), cUUID, cloud).Credentials(credentials).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.ListBuckets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -498,6 +509,7 @@ Name | Type | Description  | Notes
 
 
  **credentials** | **map[string]interface{}** | Credentials to list buckets | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
