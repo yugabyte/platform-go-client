@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **AzuClientId** | Pointer to **string** |  | [optional] 
 **AzuClientSecret** | Pointer to **string** |  | [optional] 
 **AzuHostedZoneId** | Pointer to **string** |  | [optional] 
+**AzuNetworkRG** | Pointer to **string** |  | [optional] 
+**AzuNetworkSubscriptionId** | Pointer to **string** |  | [optional] 
 **AzuRG** | Pointer to **string** |  | [optional] 
 **AzuSubscriptionId** | Pointer to **string** |  | [optional] 
 **AzuTenantId** | Pointer to **string** |  | [optional] 
@@ -105,6 +107,56 @@ SetAzuHostedZoneId sets AzuHostedZoneId field to given value.
 `func (o *AzureCloudInfo) HasAzuHostedZoneId() bool`
 
 HasAzuHostedZoneId returns a boolean if a field has been set.
+
+### GetAzuNetworkRG
+
+`func (o *AzureCloudInfo) GetAzuNetworkRG() string`
+
+GetAzuNetworkRG returns the AzuNetworkRG field if non-nil, zero value otherwise.
+
+### GetAzuNetworkRGOk
+
+`func (o *AzureCloudInfo) GetAzuNetworkRGOk() (*string, bool)`
+
+GetAzuNetworkRGOk returns a tuple with the AzuNetworkRG field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzuNetworkRG
+
+`func (o *AzureCloudInfo) SetAzuNetworkRG(v string)`
+
+SetAzuNetworkRG sets AzuNetworkRG field to given value.
+
+### HasAzuNetworkRG
+
+`func (o *AzureCloudInfo) HasAzuNetworkRG() bool`
+
+HasAzuNetworkRG returns a boolean if a field has been set.
+
+### GetAzuNetworkSubscriptionId
+
+`func (o *AzureCloudInfo) GetAzuNetworkSubscriptionId() string`
+
+GetAzuNetworkSubscriptionId returns the AzuNetworkSubscriptionId field if non-nil, zero value otherwise.
+
+### GetAzuNetworkSubscriptionIdOk
+
+`func (o *AzureCloudInfo) GetAzuNetworkSubscriptionIdOk() (*string, bool)`
+
+GetAzuNetworkSubscriptionIdOk returns a tuple with the AzuNetworkSubscriptionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAzuNetworkSubscriptionId
+
+`func (o *AzureCloudInfo) SetAzuNetworkSubscriptionId(v string)`
+
+SetAzuNetworkSubscriptionId sets AzuNetworkSubscriptionId field to given value.
+
+### HasAzuNetworkSubscriptionId
+
+`func (o *AzureCloudInfo) HasAzuNetworkSubscriptionId() bool`
+
+HasAzuNetworkSubscriptionId returns a boolean if a field has been set.
 
 ### GetAzuRG
 

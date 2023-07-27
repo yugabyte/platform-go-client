@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ChannelType** | Pointer to **string** | Channel type | [optional] 
 **TextTemplate** | Pointer to **string** | Notification text template | [optional] 
 **TitleTemplate** | Pointer to **string** | Notification title template | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewAlertChannelParamsWithDefaults instantiates a new AlertChannelParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetChannelType
+
+`func (o *AlertChannelParams) GetChannelType() string`
+
+GetChannelType returns the ChannelType field if non-nil, zero value otherwise.
+
+### GetChannelTypeOk
+
+`func (o *AlertChannelParams) GetChannelTypeOk() (*string, bool)`
+
+GetChannelTypeOk returns a tuple with the ChannelType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChannelType
+
+`func (o *AlertChannelParams) SetChannelType(v string)`
+
+SetChannelType sets ChannelType field to given value.
+
+### HasChannelType
+
+`func (o *AlertChannelParams) HasChannelType() bool`
+
+HasChannelType returns a boolean if a field has been set.
 
 ### GetTextTemplate
 

@@ -16,6 +16,8 @@ import (
 
 // NodeActionFormData struct for NodeActionFormData
 type NodeActionFormData struct {
+	// Should ignore errors and proceed with the node action
+	Force *bool `json:"force,omitempty"`
 	NodeAction string `json:"nodeAction"`
 }
 
@@ -35,6 +37,38 @@ func NewNodeActionFormData(nodeAction string, ) *NodeActionFormData {
 func NewNodeActionFormDataWithDefaults() *NodeActionFormData {
 	this := NodeActionFormData{}
 	return &this
+}
+
+// GetForce returns the Force field value if set, zero value otherwise.
+func (o *NodeActionFormData) GetForce() bool {
+	if o == nil || o.Force == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Force
+}
+
+// GetForceOk returns a tuple with the Force field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeActionFormData) GetForceOk() (*bool, bool) {
+	if o == nil || o.Force == nil {
+		return nil, false
+	}
+	return o.Force, true
+}
+
+// HasForce returns a boolean if a field has been set.
+func (o *NodeActionFormData) HasForce() bool {
+	if o != nil && o.Force != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetForce gets a reference to the given bool and assigns it to the Force field.
+func (o *NodeActionFormData) SetForce(v bool) {
+	o.Force = &v
 }
 
 // GetNodeAction returns the NodeAction field value
@@ -63,6 +97,9 @@ func (o *NodeActionFormData) SetNodeAction(v string) {
 
 func (o NodeActionFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Force != nil {
+		toSerialize["force"] = o.Force
+	}
 	if true {
 		toSerialize["nodeAction"] = o.NodeAction
 	}

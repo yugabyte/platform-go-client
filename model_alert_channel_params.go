@@ -16,6 +16,8 @@ import (
 
 // AlertChannelParams Supertype for channel params for different channel types.
 type AlertChannelParams struct {
+	// Channel type
+	ChannelType *string `json:"channelType,omitempty"`
 	// Notification text template
 	TextTemplate *string `json:"textTemplate,omitempty"`
 	// Notification title template
@@ -37,6 +39,38 @@ func NewAlertChannelParams() *AlertChannelParams {
 func NewAlertChannelParamsWithDefaults() *AlertChannelParams {
 	this := AlertChannelParams{}
 	return &this
+}
+
+// GetChannelType returns the ChannelType field value if set, zero value otherwise.
+func (o *AlertChannelParams) GetChannelType() string {
+	if o == nil || o.ChannelType == nil {
+		var ret string
+		return ret
+	}
+	return *o.ChannelType
+}
+
+// GetChannelTypeOk returns a tuple with the ChannelType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertChannelParams) GetChannelTypeOk() (*string, bool) {
+	if o == nil || o.ChannelType == nil {
+		return nil, false
+	}
+	return o.ChannelType, true
+}
+
+// HasChannelType returns a boolean if a field has been set.
+func (o *AlertChannelParams) HasChannelType() bool {
+	if o != nil && o.ChannelType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChannelType gets a reference to the given string and assigns it to the ChannelType field.
+func (o *AlertChannelParams) SetChannelType(v string) {
+	o.ChannelType = &v
 }
 
 // GetTextTemplate returns the TextTemplate field value if set, zero value otherwise.
@@ -105,6 +139,9 @@ func (o *AlertChannelParams) SetTitleTemplate(v string) {
 
 func (o AlertChannelParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.ChannelType != nil {
+		toSerialize["channelType"] = o.ChannelType
+	}
 	if o.TextTemplate != nil {
 		toSerialize["textTemplate"] = o.TextTemplate
 	}

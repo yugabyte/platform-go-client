@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**EditProvider**](CloudProvidersApi.md#EditProvider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 [**GetListOfProviders**](CloudProvidersApi.md#GetListOfProviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 [**GetProvider**](CloudProvidersApi.md#GetProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
+[**GetRegionMetadata**](CloudProvidersApi.md#GetRegionMetadata) | **Get** /api/v1/customers/{cUUID}/providers/region_metadata/{code} | Retrieves the region metadata for the cloud providers
 [**ListSchedules**](CloudProvidersApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
 [**RefreshPricing**](CloudProvidersApi.md#RefreshPricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
 [**ScheduledAccessKeyRotation**](CloudProvidersApi.md#ScheduledAccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
@@ -168,7 +169,7 @@ Name | Type | Description  | Notes
 
 ## Delete
 
-> YBPSuccess Delete(ctx, cUUID, pUUID).Request(request).Execute()
+> YBPTask Delete(ctx, cUUID, pUUID).Request(request).Execute()
 
 Delete a cloud provider
 
@@ -196,7 +197,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.Delete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `Delete`: YBPSuccess
+    // response from `Delete`: YBPTask
     fmt.Fprintf(os.Stdout, "Response from `CloudProvidersApi.Delete`: %v\n", resp)
 }
 ```
@@ -223,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -524,6 +525,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Provider**](Provider.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRegionMetadata
+
+> RegionMetadata GetRegionMetadata(ctx, cUUID, code).SubType(subType).Execute()
+
+Retrieves the region metadata for the cloud providers
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    code := "code_example" // string | 
+    subType := "subType_example" // string |  (optional) (default to "null")
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudProvidersApi.GetRegionMetadata(context.Background(), cUUID, code).SubType(subType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudProvidersApi.GetRegionMetadata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetRegionMetadata`: RegionMetadata
+    fmt.Fprintf(os.Stdout, "Response from `CloudProvidersApi.GetRegionMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**code** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRegionMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **subType** | **string** |  | [default to &quot;null&quot;]
+
+### Return type
+
+[**RegionMetadata**](RegionMetadata.md)
 
 ### Authorization
 

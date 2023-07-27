@@ -32,9 +32,13 @@ type NodeAgentResp struct {
 	OsType *string `json:"osType,omitempty"`
 	// Node agent server port
 	Port *int32 `json:"port,omitempty"`
+	ProviderName *string `json:"providerName,omitempty"`
+	ProviderUuid *string `json:"providerUuid,omitempty"`
 	Reachable *bool `json:"reachable,omitempty"`
 	// Node agent state
 	State *string `json:"state,omitempty"`
+	UniverseName *string `json:"universeName,omitempty"`
+	UniverseUuid *string `json:"universeUuid,omitempty"`
 	// Updated time
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// Node agent UUID
@@ -317,6 +321,70 @@ func (o *NodeAgentResp) SetPort(v int32) {
 	o.Port = &v
 }
 
+// GetProviderName returns the ProviderName field value if set, zero value otherwise.
+func (o *NodeAgentResp) GetProviderName() string {
+	if o == nil || o.ProviderName == nil {
+		var ret string
+		return ret
+	}
+	return *o.ProviderName
+}
+
+// GetProviderNameOk returns a tuple with the ProviderName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgentResp) GetProviderNameOk() (*string, bool) {
+	if o == nil || o.ProviderName == nil {
+		return nil, false
+	}
+	return o.ProviderName, true
+}
+
+// HasProviderName returns a boolean if a field has been set.
+func (o *NodeAgentResp) HasProviderName() bool {
+	if o != nil && o.ProviderName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderName gets a reference to the given string and assigns it to the ProviderName field.
+func (o *NodeAgentResp) SetProviderName(v string) {
+	o.ProviderName = &v
+}
+
+// GetProviderUuid returns the ProviderUuid field value if set, zero value otherwise.
+func (o *NodeAgentResp) GetProviderUuid() string {
+	if o == nil || o.ProviderUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.ProviderUuid
+}
+
+// GetProviderUuidOk returns a tuple with the ProviderUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgentResp) GetProviderUuidOk() (*string, bool) {
+	if o == nil || o.ProviderUuid == nil {
+		return nil, false
+	}
+	return o.ProviderUuid, true
+}
+
+// HasProviderUuid returns a boolean if a field has been set.
+func (o *NodeAgentResp) HasProviderUuid() bool {
+	if o != nil && o.ProviderUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderUuid gets a reference to the given string and assigns it to the ProviderUuid field.
+func (o *NodeAgentResp) SetProviderUuid(v string) {
+	o.ProviderUuid = &v
+}
+
 // GetReachable returns the Reachable field value if set, zero value otherwise.
 func (o *NodeAgentResp) GetReachable() bool {
 	if o == nil || o.Reachable == nil {
@@ -379,6 +447,70 @@ func (o *NodeAgentResp) HasState() bool {
 // SetState gets a reference to the given string and assigns it to the State field.
 func (o *NodeAgentResp) SetState(v string) {
 	o.State = &v
+}
+
+// GetUniverseName returns the UniverseName field value if set, zero value otherwise.
+func (o *NodeAgentResp) GetUniverseName() string {
+	if o == nil || o.UniverseName == nil {
+		var ret string
+		return ret
+	}
+	return *o.UniverseName
+}
+
+// GetUniverseNameOk returns a tuple with the UniverseName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgentResp) GetUniverseNameOk() (*string, bool) {
+	if o == nil || o.UniverseName == nil {
+		return nil, false
+	}
+	return o.UniverseName, true
+}
+
+// HasUniverseName returns a boolean if a field has been set.
+func (o *NodeAgentResp) HasUniverseName() bool {
+	if o != nil && o.UniverseName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseName gets a reference to the given string and assigns it to the UniverseName field.
+func (o *NodeAgentResp) SetUniverseName(v string) {
+	o.UniverseName = &v
+}
+
+// GetUniverseUuid returns the UniverseUuid field value if set, zero value otherwise.
+func (o *NodeAgentResp) GetUniverseUuid() string {
+	if o == nil || o.UniverseUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.UniverseUuid
+}
+
+// GetUniverseUuidOk returns a tuple with the UniverseUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgentResp) GetUniverseUuidOk() (*string, bool) {
+	if o == nil || o.UniverseUuid == nil {
+		return nil, false
+	}
+	return o.UniverseUuid, true
+}
+
+// HasUniverseUuid returns a boolean if a field has been set.
+func (o *NodeAgentResp) HasUniverseUuid() bool {
+	if o != nil && o.UniverseUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseUuid gets a reference to the given string and assigns it to the UniverseUuid field.
+func (o *NodeAgentResp) SetUniverseUuid(v string) {
+	o.UniverseUuid = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -535,11 +667,23 @@ func (o NodeAgentResp) MarshalJSON() ([]byte, error) {
 	if o.Port != nil {
 		toSerialize["port"] = o.Port
 	}
+	if o.ProviderName != nil {
+		toSerialize["providerName"] = o.ProviderName
+	}
+	if o.ProviderUuid != nil {
+		toSerialize["providerUuid"] = o.ProviderUuid
+	}
 	if o.Reachable != nil {
 		toSerialize["reachable"] = o.Reachable
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
+	}
+	if o.UniverseName != nil {
+		toSerialize["universeName"] = o.UniverseName
+	}
+	if o.UniverseUuid != nil {
+		toSerialize["universeUuid"] = o.UniverseUuid
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updatedAt"] = o.UpdatedAt

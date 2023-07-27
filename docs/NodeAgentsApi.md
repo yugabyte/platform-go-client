@@ -240,7 +240,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageNodeAgentRequest := *openapiclient.NewNodeAgentPagedApiQuery("Direction_example", *openapiclient.NewNodeAgentApiFilter([]string{"NodeIps_example"}), int32(123), false, int32(123), "SortBy_example") // NodeAgentPagedApiQuery | 
+    pageNodeAgentRequest := *openapiclient.NewNodeAgentPagedApiQuery("Direction_example", *openapiclient.NewNodeAgentApiFilter("CloudType_example", []string{"NodeIps_example"}, "ProviderUuid_example", "RegionUuid_example", "UniverseUuid_example", "ZoneUuid_example"), int32(123), false, int32(123), "SortBy_example") // NodeAgentPagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

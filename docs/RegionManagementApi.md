@@ -33,7 +33,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
-    region := *openapiclient.NewRegionFormData("Code_example", "DestVpcId_example", "HostVpcId_example", "HostVpcRegion_example", float64(123), float64(123), "Name_example", "SecurityGroupId_example", "VnetName_example", "YbImage_example") // RegionFormData | region form data for new region to be created
+    region := *openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")}) // Region | region form data for new region to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **region** | [**RegionFormData**](RegionFormData.md) | region form data for new region to be created | 
+ **region** | [**Region**](Region.md) | region form data for new region to be created | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -185,7 +185,7 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     rUUID := TODO // string | 
-    region := *openapiclient.NewRegionEditFormData("SecurityGroupId_example", "VnetName_example", "YbImage_example") // RegionEditFormData | region edit form data
+    region := *openapiclient.NewRegion([]openapiclient.AvailabilityZone{*openapiclient.NewAvailabilityZone("us-west1-a")}) // Region | region edit form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 
 
- **region** | [**RegionEditFormData**](RegionEditFormData.md) | region edit form data | 
+ **region** | [**Region**](Region.md) | region edit form data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

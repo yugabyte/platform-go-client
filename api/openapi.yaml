@@ -41,6 +41,7 @@ tags:
 - name: PITR management
 - name: PackagesController
 - name: Performance Advisor
+- name: RBAC management
 - name: Region management
 - name: Release management
 - name: Runtime configuration
@@ -3612,6 +3613,41 @@ paths:
       tags:
       - Cloud providers
       x-codegen-request-body-name: CreateProviderRequest
+  /api/v1/customers/{cUUID}/providers/region_metadata/{code}:
+    get:
+      operationId: getRegionMetadata
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: code
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: subType
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionMetadata'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Retrieves the region metadata for the cloud providers
+      tags:
+      - Cloud providers
   /api/v1/customers/{cUUID}/providers/{pUUID}:
     delete:
       operationId: delete
@@ -3639,7 +3675,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/YBPSuccess'
+                $ref: '#/components/schemas/YBPTask'
           description: successful operation
       security:
       - apiKeyAuth: []
@@ -4657,7 +4693,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegionFormData'
+              $ref: '#/components/schemas/Region'
         description: region form data for new region to be created
         required: true
       responses:
@@ -4747,7 +4783,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegionEditFormData'
+              $ref: '#/components/schemas/Region'
         description: region edit form data
         required: true
       responses:
@@ -4836,7 +4872,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AvailabilityZoneFormData'
+              $ref: '#/components/schemas/AvailabilityZone'
         description: Availability zone form data
         required: true
       responses:
@@ -4942,7 +4978,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AvailabilityZoneEditData'
+              $ref: '#/components/schemas/AvailabilityZone'
         description: Availability zone edit form data
         required: true
       responses:
@@ -4999,6 +5035,194 @@ paths:
       summary: List all releases valid in region
       tags:
       - Release management
+  /api/v1/customers/{cUUID}/rbac/permissions:
+    get:
+      operationId: listPermissions
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - description: Optional resource type to filter permission list
+        in: query
+        name: resourceType
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/PermissionInfo'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all the permissions available
+      tags:
+      - RBAC management
+  /api/v1/customers/{cUUID}/rbac/role:
+    get:
+      operationId: listRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - description: Optional role type to filter roles list
+        in: query
+        name: roleType
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all the roles available
+      tags:
+      - RBAC management
+    post:
+      operationId: createRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Create a custom role
+      tags:
+      - RBAC management
+  /api/v1/customers/{cUUID}/rbac/role/{rUUID}:
+    delete:
+      operationId: deleteRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Delete a custom role
+      tags:
+      - RBAC management
+    get:
+      operationId: getRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a role's information
+      tags:
+      - RBAC management
+    put:
+      operationId: editRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Edit a custom role
+      tags:
+      - RBAC management
   /api/v1/customers/{cUUID}/regions:
     get:
       operationId: listAllRegions
@@ -5262,6 +5486,41 @@ paths:
       tags:
       - Backups
       x-codegen-request-body-name: PageRestoresRequest
+  /api/v1/customers/{cUUID}/restore/preflight:
+    post:
+      operationId: restorePreflight
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestorePreflightParams'
+        description: Parameters fr restore preflight check
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestorePreflightResponse'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Restore preflight checks
+      tags:
+      - Backups
+      x-codegen-request-body-name: restorePreflightParams
   /api/v1/customers/{cUUID}/runtime_config/scopes:
     get:
       description: "Lists all (including empty scopes) runtime config scopes for current\
@@ -6575,7 +6834,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Details'
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/Details'
+                type: array
           description: successful operation
       security:
       - apiKeyAuth: []
@@ -6903,6 +7165,39 @@ paths:
       summary: Flag a universe as Helm 3-compatible
       tags:
       - Universe management
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos:
+    get:
+      operationId: getMasterInfos
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/MasterInfo'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get master information list
+      tags:
+      - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/masters:
     get:
       operationId: getMasterAddresses
@@ -9208,6 +9503,92 @@ paths:
       summary: Download a node's logs
       tags:
       - Universe information
+  /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql:
+    post:
+      description: Queues a task to configure ycql in a universe.
+      operationId: configureYCQL
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: univUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureYCQLFormData'
+        description: Configure YCQL Form Data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Configure YCQL
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: configure_ycql_form_data
+  /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql:
+    post:
+      description: Queues a task to configure ysql in a universe.
+      operationId: configureYSQL
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: univUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureYSQLFormData'
+        description: Configure YSQL Form Data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Configure YSQL
+      tags:
+      - Universe database management
+      x-codegen-request-body-name: configure_ysql_form_data
   /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}:
     put:
       operationId: nodeAction
@@ -9530,6 +9911,40 @@ paths:
       tags:
       - User management
       x-codegen-request-body-name: Users
+  /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token:
+    get:
+      operationId: retrieveOIDCAuthToken
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOIDCAuthToken'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Retrieve OIDC auth token
+      tags:
+      - User management
   /api/v1/customers/{cUUID}/users/{uUUID}/update_profile:
     put:
       operationId: UpdateUserProfile
@@ -10963,6 +11378,7 @@ components:
         customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
         params:
+          channelType: Email
           textTemplate: textTemplate
           titleTemplate: titleTemplate
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11002,6 +11418,7 @@ components:
       example:
         name: name
         params:
+          channelType: Email
           textTemplate: textTemplate
           titleTemplate: titleTemplate
         alertChannelUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11031,10 +11448,20 @@ components:
       discriminator:
         propertyName: channelType
       example:
+        channelType: Email
         textTemplate: textTemplate
         titleTemplate: titleTemplate
       exampleSetFlag: true
       properties:
+        channelType:
+          description: Channel type
+          enum:
+          - Email
+          - Slack
+          - PagerDuty
+          - WebHook
+          exampleSetFlag: true
+          type: string
         textTemplate:
           description: Notification text template
           exampleSetFlag: true
@@ -11205,6 +11632,7 @@ components:
           - HEALTH_CHECK_NOTIFICATION_ERROR
           - UNIVERSE_METRIC_COLLECTION_FAILURE
           - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
           - BACKUP_SCHEDULE_FAILURE
           - INACTIVE_CRON_NODES
           - ALERT_QUERY_FAILED
@@ -11353,6 +11781,7 @@ components:
           - HEALTH_CHECK_NOTIFICATION_ERROR
           - UNIVERSE_METRIC_COLLECTION_FAILURE
           - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
           - BACKUP_SCHEDULE_FAILURE
           - INACTIVE_CRON_NODES
           - ALERT_QUERY_FAILED
@@ -11715,6 +12144,7 @@ components:
           - HEALTH_CHECK_NOTIFICATION_ERROR
           - UNIVERSE_METRIC_COLLECTION_FAILURE
           - BACKUP_FAILURE
+          - BACKUP_DELETION_FAILURE
           - BACKUP_SCHEDULE_FAILURE
           - INACTIVE_CRON_NODES
           - ALERT_QUERY_FAILED
@@ -11865,7 +12295,6 @@ components:
       example:
         universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        query: query
         configurationUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         version: 0
@@ -11893,9 +12322,6 @@ components:
           items:
             $ref: '#/components/schemas/AlertDefinitionLabel'
           type: array
-        query:
-          exampleSetFlag: true
-          type: string
         universeUUID:
           exampleSetFlag: true
           format: uuid
@@ -11912,7 +12338,6 @@ components:
       - configurationUUID
       - customerUUID
       - labels
-      - query
       - universeUUID
       - uuid
       - version
@@ -12497,6 +12922,9 @@ components:
             - YUGABYTE_ALERT_START_TIME
             - YUGABYTE_ALERT_END_TIME
             - YUGABYTE_ALERT_CHANNEL_NAME
+            - YUGABYTE_AFFECTED_NODE_NAMES
+            - YUGABYTE_AFFECTED_NODE_ADDRESSES
+            - YUGABYTE_AFFECTED_NODE_IDENTIFIERS
             - YUGABYTE_ALERT_LABELS_JSON
             exampleSetFlag: true
             type: string
@@ -12772,6 +13200,7 @@ components:
           - PerformanceRecommendation
           - PerformanceAdvisorSettings
           - PerformanceAdvisorRun
+          - Role
           example: User
           exampleSetFlag: true
           readOnly: true
@@ -12926,36 +13355,6 @@ components:
       required:
       - name
       type: object
-    AvailabilityZoneData:
-      description: "Details of an availability zone, used by the API and UI to validate\
-        \ data against input constraints"
-      example:
-        subnet: subnet
-        code: code
-        name: name
-        secondarySubnet: secondarySubnet
-      exampleSetFlag: true
-      properties:
-        code:
-          description: AZ code
-          exampleSetFlag: true
-          type: string
-        name:
-          description: AZ name
-          exampleSetFlag: true
-          type: string
-        secondarySubnet:
-          description: AZ secondary subnet
-          exampleSetFlag: true
-          type: string
-        subnet:
-          description: AZ subnet
-          exampleSetFlag: true
-          type: string
-      required:
-      - code
-      - name
-      type: object
     AvailabilityZoneDetails:
       example:
         cloudInfo:
@@ -12982,48 +13381,12 @@ components:
         cloudInfo:
           $ref: '#/components/schemas/AZCloudInfo'
       type: object
-    AvailabilityZoneEditData:
-      description: Model used to edit an availability zone
-      example:
-        subnet: subnet
-        secondarySubnet: secondarySubnet
-      exampleSetFlag: true
-      properties:
-        secondarySubnet:
-          description: AZ secondary subnet
-          exampleSetFlag: true
-          type: string
-        subnet:
-          description: AZ subnet
-          exampleSetFlag: true
-          type: string
-      type: object
-    AvailabilityZoneFormData:
-      example:
-        availabilityZones:
-        - subnet: subnet
-          code: code
-          name: name
-          secondarySubnet: secondarySubnet
-        - subnet: subnet
-          code: code
-          name: name
-          secondarySubnet: secondarySubnet
-      exampleSetFlag: true
-      properties:
-        availabilityZones:
-          description: List of availability zones
-          exampleSetFlag: false
-          items:
-            $ref: '#/components/schemas/AvailabilityZoneData'
-          type: array
-      required:
-      - availabilityZones
-      type: object
     AzureCloudInfo:
       example:
         azuRG: azuRG
         azuClientSecret: azuClientSecret
+        azuNetworkRG: azuNetworkRG
+        azuNetworkSubscriptionId: azuNetworkSubscriptionId
         azuSubscriptionId: azuSubscriptionId
         azuTenantId: azuTenantId
         vpcType: EXISTING
@@ -13038,6 +13401,12 @@ components:
           exampleSetFlag: true
           type: string
         azuHostedZoneId:
+          exampleSetFlag: true
+          type: string
+        azuNetworkRG:
+          exampleSetFlag: true
+          type: string
+        azuNetworkSubscriptionId:
           exampleSetFlag: true
           type: string
         azuRG:
@@ -13084,6 +13453,7 @@ components:
         scheduleName: scheduleName
         parentBackup: true
         expiryTimeUnit: NANOSECONDS
+        hasKMSHistory: true
         updateTime: 2022-12-12T13:07:18Z
         incrementalBackup: true
         taskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13292,10 +13662,11 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ReadOnly
+            role: ConnectOnly
             authTokenIssueDate: 2021-06-17T15:00:05Z
             isPrimary: true
             timezone: timezone
+            oidcJwtAuthToken: oidcJwtAuthToken
             userType: local
             creationDate: 2022-12-12T13:07:18Z
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13385,6 +13756,11 @@ components:
           - YEARS
           exampleSetFlag: true
           type: string
+        hasKMSHistory:
+          description: Whether the backup has KMS history metadata
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
         incrementalBackup:
           exampleSetFlag: true
           type: boolean
@@ -13412,6 +13788,7 @@ components:
           - Stopping
           - Stopped
           - QueuedForDeletion
+          - QueuedForForcedDeletion
           - DeleteInProgress
           example: DELETED
           exampleSetFlag: true
@@ -13521,6 +13898,7 @@ components:
             - Stopping
             - Stopped
             - QueuedForDeletion
+            - QueuedForForcedDeletion
             - DeleteInProgress
             exampleSetFlag: true
             type: string
@@ -13975,10 +14353,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -14408,6 +14787,7 @@ components:
           - Stopping
           - Stopped
           - QueuedForDeletion
+          - QueuedForForcedDeletion
           - DeleteInProgress
           exampleSetFlag: true
           type: string
@@ -14465,6 +14845,7 @@ components:
     BackupStorageInfo:
       description: Backup Storage Info for doing restore operation
       example:
+        selectiveTableRestore: true
         keyspace: keyspace
         sse: true
         oldOwner: oldOwner
@@ -14497,6 +14878,10 @@ components:
           description: User name of the current tables owner
           exampleSetFlag: true
           type: string
+        selectiveTableRestore:
+          description: Is selective table restore
+          exampleSetFlag: true
+          type: boolean
         sse:
           description: Is SSE
           exampleSetFlag: true
@@ -14709,10 +15094,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -15131,10 +15517,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -15968,10 +16355,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -18127,6 +18515,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -18212,6 +18602,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -18235,6 +18626,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -18328,6 +18721,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -18433,6 +18828,8 @@ components:
         azu:
           azuRG: azuRG
           azuClientSecret: azuClientSecret
+          azuNetworkRG: azuNetworkRG
+          azuNetworkSubscriptionId: azuNetworkSubscriptionId
           azuSubscriptionId: azuSubscriptionId
           azuTenantId: azuTenantId
           vpcType: EXISTING
@@ -19189,6 +19586,7 @@ components:
           - Stopping
           - Stopped
           - QueuedForDeletion
+          - QueuedForForcedDeletion
           - DeleteInProgress
           exampleSetFlag: true
           type: string
@@ -19428,6 +19826,80 @@ components:
           exampleSetFlag: true
           type: string
       type: object
+    ConfigureYCQLFormData:
+      description: YCQL properties
+      example:
+        enableYCQL: true
+        enableYCQLAuth: true
+        ycqlPassword: ycqlPassword
+        communicationPorts:
+          nodeExporterPort: 1
+          tserverHttpPort: 2
+          ybControllerHttpPort: 9
+          redisServerHttpPort: 5
+          ybControllerrRpcPort: 3
+          tserverRpcPort: 7
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 4
+          masterHttpPort: 0
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 2
+          masterRpcPort: 6
+          redisServerRpcPort: 5
+      exampleSetFlag: true
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts'
+        enableYCQL:
+          description: Enable YCQL Api for the universe
+          exampleSetFlag: true
+          type: boolean
+        enableYCQLAuth:
+          description: Enable YCQL Auth for the universe
+          exampleSetFlag: true
+          type: boolean
+        ycqlPassword:
+          description: YCQL Auth password
+          exampleSetFlag: true
+          type: string
+      type: object
+    ConfigureYSQLFormData:
+      description: YSQL properties
+      example:
+        ysqlPassword: ysqlPassword
+        enableYSQL: true
+        enableYSQLAuth: true
+        communicationPorts:
+          nodeExporterPort: 1
+          tserverHttpPort: 2
+          ybControllerHttpPort: 9
+          redisServerHttpPort: 5
+          ybControllerrRpcPort: 3
+          tserverRpcPort: 7
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 4
+          masterHttpPort: 0
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 2
+          masterRpcPort: 6
+          redisServerRpcPort: 5
+      exampleSetFlag: true
+      properties:
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts'
+        enableYSQL:
+          description: Enable YSQL Api for the universe
+          exampleSetFlag: true
+          type: boolean
+        enableYSQLAuth:
+          description: Enable YSQL Auth for the universe
+          exampleSetFlag: true
+          type: boolean
+        ysqlPassword:
+          description: YSQL Auth password
+          exampleSetFlag: true
+          type: string
+      type: object
     CreatePitrConfigParams:
       description: Create PITR config parameters
       example:
@@ -19445,10 +19917,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -20670,6 +21143,7 @@ components:
           backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        deleteForcefully: true
       exampleSetFlag: true
       properties:
         deleteBackupInfos:
@@ -20678,6 +21152,10 @@ components:
           items:
             $ref: '#/components/schemas/DeleteBackupInfo'
           type: array
+        deleteForcefully:
+          description: Delete Backups forcefully
+          exampleSetFlag: true
+          type: boolean
       required:
       - deleteBackupInfos
       type: object
@@ -20727,6 +21205,7 @@ components:
               - name: name
                 value: value
             name: name
+          node_identifier: node_identifier
           message: message
           has_error: true
         - node: node
@@ -20771,6 +21250,7 @@ components:
               - name: name
                 value: value
             name: name
+          node_identifier: node_identifier
           message: message
           has_error: true
         has_warning: true
@@ -21296,10 +21776,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -23461,6 +23942,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -23546,6 +24029,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -23569,6 +24053,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -23662,6 +24148,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -24338,6 +24826,7 @@ components:
       properties:
         kubeConfig:
           exampleSetFlag: true
+          readOnly: true
           type: string
         kubeConfigContent:
           exampleSetFlag: true
@@ -24356,6 +24845,7 @@ components:
           type: string
         kubernetesPullSecret:
           exampleSetFlag: true
+          readOnly: true
           type: string
         kubernetesPullSecretContent:
           exampleSetFlag: true
@@ -24570,10 +25060,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -26732,6 +27223,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -26817,6 +27310,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -26840,6 +27334,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -26933,6 +27429,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -27008,6 +27506,7 @@ components:
           type: string
         kubeConfig:
           exampleSetFlag: true
+          readOnly: true
           type: string
         kubeConfigContent:
           exampleSetFlag: true
@@ -27035,6 +27534,7 @@ components:
           type: string
         kubernetesPullSecret:
           exampleSetFlag: true
+          readOnly: true
           type: string
         kubernetesPullSecretContent:
           exampleSetFlag: true
@@ -27057,9 +27557,9 @@ components:
       description: "A list of LDAP DN, YBA role pairs"
       example:
         ldapDnToYbaRolePairs:
-        - ybaRole: ReadOnly
+        - ybaRole: ConnectOnly
           distinguishedName: distinguishedName
-        - ybaRole: ReadOnly
+        - ybaRole: ConnectOnly
           distinguishedName: distinguishedName
       exampleSetFlag: true
       properties:
@@ -27072,7 +27572,7 @@ components:
       type: object
     LdapDnYbaRoleDataPair:
       example:
-        ybaRole: ReadOnly
+        ybaRole: ConnectOnly
         distinguishedName: distinguishedName
       exampleSetFlag: true
       properties:
@@ -27081,6 +27581,7 @@ components:
           type: string
         ybaRole:
           enum:
+          - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
@@ -27361,6 +27862,36 @@ components:
       - hasNext
       - hasPrev
       - totalCount
+      type: object
+    MasterInfo:
+      description: Information about master
+      example:
+        peerRole: FOLLOWER
+        privateIp: privateIp
+        uptimeSeconds: 0
+      exampleSetFlag: true
+      properties:
+        peerRole:
+          enum:
+          - FOLLOWER
+          - LEADER
+          - LEARNER
+          - NON_PARTICIPANT
+          - READ_REPLICA
+          - UNKNOWN_ROLE
+          exampleSetFlag: true
+          type: string
+        privateIp:
+          exampleSetFlag: true
+          type: string
+        uptimeSeconds:
+          exampleSetFlag: true
+          format: int64
+          type: integer
+      required:
+      - peerRole
+      - privateIp
+      - uptimeSeconds
       type: object
     MasterNode:
       example:
@@ -28109,10 +28640,11 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ReadOnly
+            role: ConnectOnly
             authTokenIssueDate: 2021-06-17T15:00:05Z
             isPrimary: true
             timezone: timezone
+            oidcJwtAuthToken: oidcJwtAuthToken
             userType: local
             creationDate: 2022-12-12T13:07:18Z
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -28333,10 +28865,11 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ReadOnly
+            role: ConnectOnly
             authTokenIssueDate: 2021-06-17T15:00:05Z
             isPrimary: true
             timezone: timezone
+            oidcJwtAuthToken: oidcJwtAuthToken
             userType: local
             creationDate: 2022-12-12T13:07:18Z
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -28378,10 +28911,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -28768,8 +29302,13 @@ components:
     NodeActionFormData:
       example:
         nodeAction: ADD
+        force: true
       exampleSetFlag: true
       properties:
+        force:
+          description: Should ignore errors and proceed with the node action
+          exampleSetFlag: true
+          type: boolean
         nodeAction:
           enum:
           - ADD
@@ -28868,23 +29407,68 @@ components:
       type: object
     NodeAgentApiFilter:
       example:
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        cloudType: unknown
+        zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         nodeIps:
         - nodeIps
         - nodeIps
       exampleSetFlag: true
       properties:
+        cloudType:
+          enum:
+          - unknown
+          - aws
+          - gcp
+          - azu
+          - docker
+          - onprem
+          - kubernetes
+          - local
+          - other
+          exampleSetFlag: true
+          type: string
         nodeIps:
           exampleSetFlag: false
           items:
             exampleSetFlag: true
             type: string
           type: array
+          uniqueItems: true
+        providerUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        regionUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        universeUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        zoneUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
       required:
+      - cloudType
       - nodeIps
+      - providerUuid
+      - regionUuid
+      - universeUuid
+      - zoneUuid
       type: object
     NodeAgentPagedApiQuery:
       example:
         filter:
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          regionUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          cloudType: unknown
+          zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           nodeIps:
           - nodeIps
           - nodeIps
@@ -28937,10 +29521,12 @@ components:
         entities:
         - versionMatched: true
           ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           version: version
           reachable: true
           home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           port: 0
           name: name
@@ -28952,13 +29538,17 @@ components:
             serverCert: serverCert
             offloadable: true
             serverKey: serverKey
+          providerName: providerName
+          universeName: universeName
           updatedAt: 2022-12-21T13:07:18Z
         - versionMatched: true
           ip: ip
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           version: version
           reachable: true
           home: home
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           port: 0
           name: name
@@ -28970,6 +29560,8 @@ components:
             serverCert: serverCert
             offloadable: true
             serverKey: serverKey
+          providerName: providerName
+          universeName: universeName
           updatedAt: 2022-12-21T13:07:18Z
         hasPrev: true
         hasNext: true
@@ -29002,10 +29594,12 @@ components:
       example:
         versionMatched: true
         ip: ip
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         version: version
         reachable: true
         home: home
+        universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         port: 0
         name: name
@@ -29017,6 +29611,8 @@ components:
           serverCert: serverCert
           offloadable: true
           serverKey: serverKey
+        providerName: providerName
+        universeName: universeName
         updatedAt: 2022-12-21T13:07:18Z
       exampleSetFlag: true
       properties:
@@ -29065,6 +29661,15 @@ components:
           format: int32
           readOnly: true
           type: integer
+        providerName:
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        providerUuid:
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
         reachable:
           exampleSetFlag: true
           readOnly: true
@@ -29077,6 +29682,15 @@ components:
           - UPGRADED
           - READY
           exampleSetFlag: true
+          readOnly: true
+          type: string
+        universeName:
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        universeUuid:
+          exampleSetFlag: true
+          format: uuid
           readOnly: true
           type: string
         updatedAt:
@@ -29215,6 +29829,7 @@ components:
             - name: name
               value: value
           name: name
+        node_identifier: node_identifier
         message: message
         has_error: true
       exampleSetFlag: true
@@ -29245,6 +29860,9 @@ components:
         node:
           exampleSetFlag: true
           type: string
+        node_identifier:
+          exampleSetFlag: true
+          type: string
         node_name:
           exampleSetFlag: true
           type: string
@@ -29264,6 +29882,7 @@ components:
       - metrics
       - metrics_only
       - node
+      - node_identifier
       - node_name
       - process
       type: object
@@ -29473,6 +30092,7 @@ components:
           - Decommissioned
           - UpdateCert
           - ToggleTls
+          - ConfigureDBApis
           - Resizing
           - SystemdUpgrade
           - Terminating
@@ -29759,6 +30379,7 @@ components:
           - Decommissioned
           - UpdateCert
           - ToggleTls
+          - ConfigureDBApis
           - Resizing
           - SystemdUpgrade
           - Terminating
@@ -30152,6 +30773,53 @@ components:
           type: string
       required:
       - buildNumber
+      type: object
+    PerBackupLocationKeyspaceTables:
+      example:
+        originalKeyspace: originalKeyspace
+        tableNameList:
+        - tableNameList
+        - tableNameList
+      exampleSetFlag: true
+      properties:
+        originalKeyspace:
+          description: Original keyspace name
+          exampleSetFlag: true
+          type: string
+        tableNameList:
+          description: List of parent tables associated with the keyspace
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
+      type: object
+    PerLocationBackupInfo:
+      example:
+        backupLocation: backupLocation
+        perBackupLocationKeyspaceTables:
+          originalKeyspace: originalKeyspace
+          tableNameList:
+          - tableNameList
+          - tableNameList
+        isYSQLBackup: true
+        isSelectiveRestoreSupported: true
+      exampleSetFlag: true
+      properties:
+        backupLocation:
+          description: Backup location
+          exampleSetFlag: true
+          type: string
+        isSelectiveRestoreSupported:
+          description: Whether selective table restore is supported for this backup
+          exampleSetFlag: true
+          type: boolean
+        isYSQLBackup:
+          description: Whether backup type is YSQL
+          exampleSetFlag: true
+          type: boolean
+        perBackupLocationKeyspaceTables:
+          $ref: '#/components/schemas/PerBackupLocationKeyspaceTables'
       type: object
     PerProcessFlags:
       example:
@@ -30771,6 +31439,80 @@ components:
       - hasNext
       - hasPrev
       - totalCount
+      type: object
+    PermissionDetails:
+      example:
+        permissionList:
+        - resource_type: UNIVERSE
+          permission: CREATE
+        - resource_type: UNIVERSE
+          permission: CREATE
+      exampleSetFlag: true
+      properties:
+        permissionList:
+          description: Set of permissions
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/PermissionInfoIdentifier'
+          type: array
+          uniqueItems: true
+      type: object
+    PermissionInfo:
+      example:
+        resource_type: UNIVERSE
+        description: description
+        permission: CREATE
+        prerequisite_permissions:
+        - resource_type: UNIVERSE
+          permission: CREATE
+        - resource_type: UNIVERSE
+          permission: CREATE
+      exampleSetFlag: true
+      properties:
+        description:
+          exampleSetFlag: true
+          type: string
+        permission:
+          enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+          exampleSetFlag: true
+          type: string
+        prerequisite_permissions:
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/PermissionInfoIdentifier'
+          type: array
+          uniqueItems: true
+        resource_type:
+          enum:
+          - UNIVERSE
+          - DEFAULT
+          exampleSetFlag: true
+          type: string
+      type: object
+    PermissionInfoIdentifier:
+      example:
+        resource_type: UNIVERSE
+        permission: CREATE
+      exampleSetFlag: true
+      properties:
+        permission:
+          enum:
+          - CREATE
+          - READ
+          - UPDATE
+          - DELETE
+          exampleSetFlag: true
+          type: string
+        resource_type:
+          enum:
+          - UNIVERSE
+          - DEFAULT
+          exampleSetFlag: true
+          type: string
       type: object
     PitrConfig:
       description: PITR config created on the universe
@@ -31568,6 +32310,8 @@ components:
             azu:
               azuRG: azuRG
               azuClientSecret: azuClientSecret
+              azuNetworkRG: azuNetworkRG
+              azuNetworkSubscriptionId: azuNetworkSubscriptionId
               azuSubscriptionId: azuSubscriptionId
               azuTenantId: azuTenantId
               vpcType: EXISTING
@@ -31735,6 +32479,8 @@ components:
           azu:
             azuRG: azuRG
             azuClientSecret: azuClientSecret
+            azuNetworkRG: azuNetworkRG
+            azuNetworkSubscriptionId: azuNetworkSubscriptionId
             azuSubscriptionId: azuSubscriptionId
             azuTenantId: azuTenantId
             vpcType: EXISTING
@@ -32096,85 +32842,6 @@ components:
         cloudInfo:
           $ref: '#/components/schemas/RegionCloudInfo'
       type: object
-    RegionEditFormData:
-      example:
-        securityGroupId: securityGroupId
-        ybImage: ybImage
-        vnetName: vnetName
-      exampleSetFlag: true
-      properties:
-        securityGroupId:
-          exampleSetFlag: true
-          type: string
-        vnetName:
-          exampleSetFlag: true
-          type: string
-        ybImage:
-          exampleSetFlag: true
-          type: string
-      required:
-      - securityGroupId
-      - vnetName
-      - ybImage
-      type: object
-    RegionFormData:
-      example:
-        securityGroupId: securityGroupId
-        hostVpcId: hostVpcId
-        code: code
-        destVpcId: destVpcId
-        ybImage: ybImage
-        latitude: 0.8008281904610115
-        name: name
-        vnetName: vnetName
-        hostVpcRegion: hostVpcRegion
-        longitude: 6.027456183070403
-      exampleSetFlag: true
-      properties:
-        code:
-          exampleSetFlag: true
-          type: string
-        destVpcId:
-          exampleSetFlag: true
-          type: string
-        hostVpcId:
-          exampleSetFlag: true
-          type: string
-        hostVpcRegion:
-          exampleSetFlag: true
-          type: string
-        latitude:
-          exampleSetFlag: true
-          format: double
-          type: number
-        longitude:
-          exampleSetFlag: true
-          format: double
-          type: number
-        name:
-          exampleSetFlag: true
-          type: string
-        securityGroupId:
-          exampleSetFlag: true
-          type: string
-        vnetName:
-          exampleSetFlag: true
-          type: string
-        ybImage:
-          exampleSetFlag: true
-          type: string
-      required:
-      - code
-      - destVpcId
-      - hostVpcId
-      - hostVpcRegion
-      - latitude
-      - longitude
-      - name
-      - securityGroupId
-      - vnetName
-      - ybImage
-      type: object
     RegionLocations:
       example:
         LOCATION: LOCATION
@@ -32195,6 +32862,59 @@ components:
       - HOST_BASE
       - LOCATION
       - REGION
+      type: object
+    RegionMetadata:
+      example:
+        regionMetadata:
+          key:
+            latitude: 0.8008281904610115
+            name: name
+            availabilityZones:
+            - availabilityZones
+            - availabilityZones
+            longitude: 6.027456183070403
+      exampleSetFlag: true
+      properties:
+        regionMetadata:
+          additionalProperties:
+            $ref: '#/components/schemas/RegionMetadataInfo'
+          exampleSetFlag: true
+          type: object
+      required:
+      - regionMetadata
+      type: object
+    RegionMetadataInfo:
+      example:
+        latitude: 0.8008281904610115
+        name: name
+        availabilityZones:
+        - availabilityZones
+        - availabilityZones
+        longitude: 6.027456183070403
+      exampleSetFlag: true
+      properties:
+        availabilityZones:
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
+        latitude:
+          exampleSetFlag: true
+          format: double
+          type: number
+        longitude:
+          exampleSetFlag: true
+          format: double
+          type: number
+        name:
+          exampleSetFlag: true
+          type: string
+      required:
+      - availabilityZones
+      - latitude
+      - longitude
+      - name
       type: object
     ReleaseFormData:
       description: Specification for release locations
@@ -32489,10 +33209,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -34658,6 +35379,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -34743,6 +35466,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -34766,6 +35490,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -34859,6 +35585,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -35093,10 +35821,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -37246,6 +37975,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -37331,6 +38062,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -37354,6 +38086,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -37447,6 +38181,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -37582,7 +38318,8 @@ components:
     RestoreBackupParams:
       example:
         backupStorageInfoList:
-        - keyspace: keyspace
+        - selectiveTableRestore: true
+          keyspace: keyspace
           sse: true
           oldOwner: oldOwner
           tableNameList:
@@ -37591,7 +38328,8 @@ components:
           storageLocation: storageLocation
           newOwner: newOwner
           backupType: YQL_TABLE_TYPE
-        - keyspace: keyspace
+        - selectiveTableRestore: true
+          keyspace: keyspace
           sse: true
           oldOwner: oldOwner
           tableNameList:
@@ -37620,10 +38358,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -38201,6 +38940,78 @@ components:
       - hasPrev
       - totalCount
       type: object
+    RestorePreflightParams:
+      example:
+        storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        backupLocations:
+        - backupLocations
+        - backupLocations
+        backupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
+      properties:
+        backupLocations:
+          description: List of backup locations
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
+          uniqueItems: true
+        backupUUID:
+          description: The backup of which the restore is being attempted
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        storageConfigUUID:
+          description: Storage config UUID
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        universeUUID:
+          description: Target universe UUID
+          exampleSetFlag: true
+          format: uuid
+          type: string
+      required:
+      - backupLocations
+      - storageConfigUUID
+      - universeUUID
+      type: object
+    RestorePreflightResponse:
+      example:
+        perLocationBackupInfoMap:
+          key:
+            backupLocation: backupLocation
+            perBackupLocationKeyspaceTables:
+              originalKeyspace: originalKeyspace
+              tableNameList:
+              - tableNameList
+              - tableNameList
+            isYSQLBackup: true
+            isSelectiveRestoreSupported: true
+        backupCategory: YB_BACKUP_SCRIPT
+        hasKMSHistory: true
+      exampleSetFlag: true
+      properties:
+        backupCategory:
+          description: Backup Category
+          enum:
+          - YB_BACKUP_SCRIPT
+          - YB_CONTROLLER
+          exampleSetFlag: true
+          type: string
+        hasKMSHistory:
+          description: Whether backup was KMS encrypted
+          exampleSetFlag: true
+          type: boolean
+        perLocationBackupInfoMap:
+          additionalProperties:
+            $ref: '#/components/schemas/PerLocationBackupInfo'
+          description: Map of backup location and backup-info object
+          exampleSetFlag: true
+          type: object
+      type: object
     RestoreResp:
       example:
         restoreSizeInBytes: 6
@@ -38321,10 +39132,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -38590,6 +39402,64 @@ components:
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
+    Role:
+      example:
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        permissionDetails:
+          permissionList:
+          - resource_type: UNIVERSE
+            permission: CREATE
+          - resource_type: UNIVERSE
+            permission: CREATE
+        name: name
+        description: description
+        updatedOn: 2022-12-12T13:07:18Z
+        roleType: System
+        createdOn: 2022-12-12T13:07:18Z
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
+      properties:
+        createdOn:
+          description: Role create time
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          type: string
+        customerUUID:
+          description: Customer UUID
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        description:
+          description: Role description
+          exampleSetFlag: true
+          type: string
+        name:
+          description: Role name
+          exampleSetFlag: true
+          type: string
+        permissionDetails:
+          $ref: '#/components/schemas/PermissionDetails'
+        roleType:
+          description: Type of the role
+          enum:
+          - System
+          - Custom
+          exampleSetFlag: true
+          type: string
+        roleUUID:
+          description: Role UUID
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        updatedOn:
+          description: Role last updated time
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          type: string
+      type: object
     RunQueryFormData:
       example:
         tableType: YQL_TABLE_TYPE
@@ -38794,6 +39664,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -38879,6 +39751,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -38902,6 +39775,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -38995,6 +39870,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -39052,6 +39929,8 @@ components:
             - RestoreBackup
             - MultiTableBackup
             - CreateBackup
+            - ConfigureDBApis
+            - ConfigureDBApisKubernetes
             - CreatePitrConfig
             - DeletePitrConfig
             - RestoreSnapshotSchedule
@@ -39137,6 +40016,7 @@ components:
             - DeleteKeyspace
             - LoadBalancerStateChange
             - ModifyBlackList
+            - CheckUnderReplicatedTablets
             - ManipulateDnsRecordTask
             - RemoveUniverseEntry
             - SetFlagInMemory
@@ -39160,6 +40040,8 @@ components:
             - DeleteClusterFromUniverse
             - InstanceActions
             - WaitForServerReady
+            - WaitForClockSync
+            - WaitForDuration
             - RunExternalScript
             - RemoveAuthorizedKey
             - UpdateUniverseAccessKey
@@ -39253,6 +40135,8 @@ components:
             - CloudProviderDelete
             - CloudImageBundleSetup
             - UpdateClusterUserIntent
+            - UpdateClusterAPIDetails
+            - UpdateUniverseCommunicationPorts
             - CreateBackupSchedule
             - YBCBackupSucceeded
             - CloudProviderEdit
@@ -39681,10 +40565,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -41834,6 +42719,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -41919,6 +42806,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -41942,6 +42830,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -42035,6 +42925,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -42625,10 +43517,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -44778,6 +45671,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -44863,6 +45758,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -44886,6 +45782,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -44979,6 +45877,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -45040,10 +45940,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -45723,10 +46624,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -47879,6 +48781,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -47964,6 +48868,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -47987,6 +48892,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -48080,6 +48987,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -48320,10 +49229,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -50479,6 +51389,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -50564,6 +51476,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -50587,6 +51500,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -50680,6 +51595,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -50994,10 +51911,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -53156,6 +54074,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -53241,6 +54161,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -53264,6 +54185,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -53357,6 +54280,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -53565,10 +54490,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -55714,6 +56640,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -55799,6 +56727,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -55822,6 +56751,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -55915,6 +56846,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -56131,10 +57064,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -58280,6 +59214,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -58365,6 +59301,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -58388,6 +59325,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -58481,6 +59420,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -58816,10 +59757,11 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ReadOnly
+            role: ConnectOnly
             authTokenIssueDate: 2021-06-17T15:00:05Z
             isPrimary: true
             timezone: timezone
+            oidcJwtAuthToken: oidcJwtAuthToken
             userType: local
             creationDate: 2022-12-12T13:07:18Z
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -61068,10 +62010,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -63221,6 +64164,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -63306,6 +64251,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -63329,6 +64275,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -63422,6 +64370,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit
@@ -63725,6 +64675,16 @@ components:
           exampleSetFlag: true
           type: string
       type: object
+    UserOIDCAuthToken:
+      example:
+        oidcAuthToken: oidcAuthToken
+      exampleSetFlag: true
+      properties:
+        oidcAuthToken:
+          description: User OIDC Auth token
+          exampleSetFlag: true
+          type: string
+      type: object
     UserProfileData:
       description: User profile data. The API and UI use this to validate form data.
       example:
@@ -63747,6 +64707,7 @@ components:
         role:
           description: User role
           enum:
+          - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
@@ -63801,6 +64762,7 @@ components:
         role:
           description: User role
           enum:
+          - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
@@ -63822,10 +64784,11 @@ components:
       example:
         ldapSpecifiedRole: true
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: ReadOnly
+        role: ConnectOnly
         authTokenIssueDate: 2021-06-17T15:00:05Z
         isPrimary: true
         timezone: timezone
+        oidcJwtAuthToken: oidcJwtAuthToken
         userType: local
         creationDate: 2022-12-12T13:07:18Z
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -63865,9 +64828,14 @@ components:
           description: LDAP Specified Role
           exampleSetFlag: true
           type: boolean
+        oidcJwtAuthToken:
+          exampleSetFlag: true
+          readOnly: true
+          type: string
         role:
           description: User role
           enum:
+          - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
@@ -63899,10 +64867,11 @@ components:
       example:
         ldapSpecifiedRole: true
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: ReadOnly
+        role: ConnectOnly
         authTokenIssueDate: 2021-06-17T15:00:05Z
         isPrimary: true
         timezone: timezone
+        oidcJwtAuthToken: oidcJwtAuthToken
         userType: local
         creationDate: 2022-12-12T13:07:18Z
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -63942,9 +64911,14 @@ components:
           description: LDAP Specified Role
           exampleSetFlag: true
           type: boolean
+        oidcJwtAuthToken:
+          exampleSetFlag: true
+          readOnly: true
+          type: string
         role:
           description: User role
           enum:
+          - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
@@ -64151,10 +65125,11 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ReadOnly
+          role: ConnectOnly
           authTokenIssueDate: 2021-06-17T15:00:05Z
           isPrimary: true
           timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
           userType: local
           creationDate: 2022-12-12T13:07:18Z
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -66345,6 +67320,8 @@ components:
           - RestoreBackup
           - MultiTableBackup
           - CreateBackup
+          - ConfigureDBApis
+          - ConfigureDBApisKubernetes
           - CreatePitrConfig
           - DeletePitrConfig
           - RestoreSnapshotSchedule
@@ -66430,6 +67407,7 @@ components:
           - DeleteKeyspace
           - LoadBalancerStateChange
           - ModifyBlackList
+          - CheckUnderReplicatedTablets
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -66453,6 +67431,8 @@ components:
           - DeleteClusterFromUniverse
           - InstanceActions
           - WaitForServerReady
+          - WaitForClockSync
+          - WaitForDuration
           - RunExternalScript
           - RemoveAuthorizedKey
           - UpdateUniverseAccessKey
@@ -66546,6 +67526,8 @@ components:
           - CloudProviderDelete
           - CloudImageBundleSetup
           - UpdateClusterUserIntent
+          - UpdateClusterAPIDetails
+          - UpdateUniverseCommunicationPorts
           - CreateBackupSchedule
           - YBCBackupSucceeded
           - CloudProviderEdit

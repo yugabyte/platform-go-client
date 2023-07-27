@@ -32,11 +32,11 @@ type RegionManagementApiApiCreateRegionRequest struct {
 	ApiService *RegionManagementApiService
 	cUUID string
 	pUUID string
-	region *RegionFormData
+	region *Region
 	request *interface{}
 }
 
-func (r RegionManagementApiApiCreateRegionRequest) Region(region RegionFormData) RegionManagementApiApiCreateRegionRequest {
+func (r RegionManagementApiApiCreateRegionRequest) Region(region Region) RegionManagementApiApiCreateRegionRequest {
 	r.region = &region
 	return r
 }
@@ -309,11 +309,11 @@ type RegionManagementApiApiEditRegionRequest struct {
 	cUUID string
 	pUUID string
 	rUUID string
-	region *RegionEditFormData
+	region *Region
 	request *interface{}
 }
 
-func (r RegionManagementApiApiEditRegionRequest) Region(region RegionEditFormData) RegionManagementApiApiEditRegionRequest {
+func (r RegionManagementApiApiEditRegionRequest) Region(region Region) RegionManagementApiApiEditRegionRequest {
 	r.region = &region
 	return r
 }

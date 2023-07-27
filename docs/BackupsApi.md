@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
 [**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
 [**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
+[**RestorePreflight**](BackupsApi.md#RestorePreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
 [**SetThrottleParams**](BackupsApi.md#SetThrottleParams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 [**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
@@ -1170,6 +1171,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RestorePreflight
+
+> RestorePreflightResponse RestorePreflight(ctx, cUUID).RestorePreflightParams(restorePreflightParams).Request(request).Execute()
+
+Restore preflight checks
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    restorePreflightParams := *openapiclient.NewRestorePreflightParams([]string{"BackupLocations_example"}, "StorageConfigUUID_example", "UniverseUUID_example") // RestorePreflightParams | Parameters fr restore preflight check
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.RestorePreflight(context.Background(), cUUID).RestorePreflightParams(restorePreflightParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.RestorePreflight``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RestorePreflight`: RestorePreflightResponse
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.RestorePreflight`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRestorePreflightRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **restorePreflightParams** | [**RestorePreflightParams**](RestorePreflightParams.md) | Parameters fr restore preflight check | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**RestorePreflightResponse**](RestorePreflightResponse.md)
 
 ### Authorization
 

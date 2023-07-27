@@ -33,7 +33,7 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     rUUID := TODO // string | 
-    azFormData := *openapiclient.NewAvailabilityZoneFormData([]openapiclient.AvailabilityZoneData{*openapiclient.NewAvailabilityZoneData("Code_example", "Name_example")}) // AvailabilityZoneFormData | Availability zone form data
+    azFormData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability zone form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 
 
- **azFormData** | [**AvailabilityZoneFormData**](AvailabilityZoneFormData.md) | Availability zone form data | 
+ **azFormData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability zone form data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -191,7 +191,7 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     azUUID := TODO // string | 
-    azFormData := *openapiclient.NewAvailabilityZoneEditData() // AvailabilityZoneEditData | Availability zone edit form data
+    azFormData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability zone edit form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 
 
- **azFormData** | [**AvailabilityZoneEditData**](AvailabilityZoneEditData.md) | Availability zone edit form data | 
+ **azFormData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability zone edit form data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

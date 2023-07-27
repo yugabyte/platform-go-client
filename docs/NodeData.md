@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Metrics** | [**[]Metric**](Metric.md) |  | 
 **MetricsOnly** | **bool** |  | 
 **Node** | **string** |  | 
+**NodeIdentifier** | **string** |  | 
 **NodeName** | **string** |  | 
 **Process** | **string** |  | 
 **TimestampIso** | Pointer to **time.Time** |  | [optional] 
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewNodeData
 
-`func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeName string, process string, ) *NodeData`
+`func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeIdentifier string, nodeName string, process string, ) *NodeData`
 
 NewNodeData instantiates a new NodeData object
 This constructor will assign default values to properties that have it defined,
@@ -172,6 +173,26 @@ and a boolean to check if the value has been set.
 `func (o *NodeData) SetNode(v string)`
 
 SetNode sets Node field to given value.
+
+
+### GetNodeIdentifier
+
+`func (o *NodeData) GetNodeIdentifier() string`
+
+GetNodeIdentifier returns the NodeIdentifier field if non-nil, zero value otherwise.
+
+### GetNodeIdentifierOk
+
+`func (o *NodeData) GetNodeIdentifierOk() (*string, bool)`
+
+GetNodeIdentifierOk returns a tuple with the NodeIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeIdentifier
+
+`func (o *NodeData) SetNodeIdentifier(v string)`
+
+SetNodeIdentifier sets NodeIdentifier field to given value.
 
 
 ### GetNodeName

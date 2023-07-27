@@ -16,16 +16,26 @@ import (
 
 // NodeAgentApiFilter struct for NodeAgentApiFilter
 type NodeAgentApiFilter struct {
+	CloudType string `json:"cloudType"`
 	NodeIps []string `json:"nodeIps"`
+	ProviderUuid string `json:"providerUuid"`
+	RegionUuid string `json:"regionUuid"`
+	UniverseUuid string `json:"universeUuid"`
+	ZoneUuid string `json:"zoneUuid"`
 }
 
 // NewNodeAgentApiFilter instantiates a new NodeAgentApiFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeAgentApiFilter(nodeIps []string, ) *NodeAgentApiFilter {
+func NewNodeAgentApiFilter(cloudType string, nodeIps []string, providerUuid string, regionUuid string, universeUuid string, zoneUuid string, ) *NodeAgentApiFilter {
 	this := NodeAgentApiFilter{}
+	this.CloudType = cloudType
 	this.NodeIps = nodeIps
+	this.ProviderUuid = providerUuid
+	this.RegionUuid = regionUuid
+	this.UniverseUuid = universeUuid
+	this.ZoneUuid = zoneUuid
 	return &this
 }
 
@@ -35,6 +45,30 @@ func NewNodeAgentApiFilter(nodeIps []string, ) *NodeAgentApiFilter {
 func NewNodeAgentApiFilterWithDefaults() *NodeAgentApiFilter {
 	this := NodeAgentApiFilter{}
 	return &this
+}
+
+// GetCloudType returns the CloudType field value
+func (o *NodeAgentApiFilter) GetCloudType() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.CloudType
+}
+
+// GetCloudTypeOk returns a tuple with the CloudType field value
+// and a boolean to check if the value has been set.
+func (o *NodeAgentApiFilter) GetCloudTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CloudType, true
+}
+
+// SetCloudType sets field value
+func (o *NodeAgentApiFilter) SetCloudType(v string) {
+	o.CloudType = v
 }
 
 // GetNodeIps returns the NodeIps field value
@@ -61,10 +95,121 @@ func (o *NodeAgentApiFilter) SetNodeIps(v []string) {
 	o.NodeIps = v
 }
 
+// GetProviderUuid returns the ProviderUuid field value
+func (o *NodeAgentApiFilter) GetProviderUuid() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.ProviderUuid
+}
+
+// GetProviderUuidOk returns a tuple with the ProviderUuid field value
+// and a boolean to check if the value has been set.
+func (o *NodeAgentApiFilter) GetProviderUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ProviderUuid, true
+}
+
+// SetProviderUuid sets field value
+func (o *NodeAgentApiFilter) SetProviderUuid(v string) {
+	o.ProviderUuid = v
+}
+
+// GetRegionUuid returns the RegionUuid field value
+func (o *NodeAgentApiFilter) GetRegionUuid() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.RegionUuid
+}
+
+// GetRegionUuidOk returns a tuple with the RegionUuid field value
+// and a boolean to check if the value has been set.
+func (o *NodeAgentApiFilter) GetRegionUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.RegionUuid, true
+}
+
+// SetRegionUuid sets field value
+func (o *NodeAgentApiFilter) SetRegionUuid(v string) {
+	o.RegionUuid = v
+}
+
+// GetUniverseUuid returns the UniverseUuid field value
+func (o *NodeAgentApiFilter) GetUniverseUuid() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.UniverseUuid
+}
+
+// GetUniverseUuidOk returns a tuple with the UniverseUuid field value
+// and a boolean to check if the value has been set.
+func (o *NodeAgentApiFilter) GetUniverseUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.UniverseUuid, true
+}
+
+// SetUniverseUuid sets field value
+func (o *NodeAgentApiFilter) SetUniverseUuid(v string) {
+	o.UniverseUuid = v
+}
+
+// GetZoneUuid returns the ZoneUuid field value
+func (o *NodeAgentApiFilter) GetZoneUuid() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.ZoneUuid
+}
+
+// GetZoneUuidOk returns a tuple with the ZoneUuid field value
+// and a boolean to check if the value has been set.
+func (o *NodeAgentApiFilter) GetZoneUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ZoneUuid, true
+}
+
+// SetZoneUuid sets field value
+func (o *NodeAgentApiFilter) SetZoneUuid(v string) {
+	o.ZoneUuid = v
+}
+
 func (o NodeAgentApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
+		toSerialize["cloudType"] = o.CloudType
+	}
+	if true {
 		toSerialize["nodeIps"] = o.NodeIps
+	}
+	if true {
+		toSerialize["providerUuid"] = o.ProviderUuid
+	}
+	if true {
+		toSerialize["regionUuid"] = o.RegionUuid
+	}
+	if true {
+		toSerialize["universeUuid"] = o.UniverseUuid
+	}
+	if true {
+		toSerialize["zoneUuid"] = o.ZoneUuid
 	}
 	return json.Marshal(toSerialize)
 }

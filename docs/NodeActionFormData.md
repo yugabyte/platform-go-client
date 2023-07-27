@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Force** | Pointer to **bool** | Should ignore errors and proceed with the node action | [optional] 
 **NodeAction** | **string** |  | 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewNodeActionFormDataWithDefaults instantiates a new NodeActionFormData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetForce
+
+`func (o *NodeActionFormData) GetForce() bool`
+
+GetForce returns the Force field if non-nil, zero value otherwise.
+
+### GetForceOk
+
+`func (o *NodeActionFormData) GetForceOk() (*bool, bool)`
+
+GetForceOk returns a tuple with the Force field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForce
+
+`func (o *NodeActionFormData) SetForce(v bool)`
+
+SetForce sets Force field to given value.
+
+### HasForce
+
+`func (o *NodeActionFormData) HasForce() bool`
+
+HasForce returns a boolean if a field has been set.
 
 ### GetNodeAction
 

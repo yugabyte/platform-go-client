@@ -19,6 +19,8 @@ type AzureCloudInfo struct {
 	AzuClientId *string `json:"azuClientId,omitempty"`
 	AzuClientSecret *string `json:"azuClientSecret,omitempty"`
 	AzuHostedZoneId *string `json:"azuHostedZoneId,omitempty"`
+	AzuNetworkRG *string `json:"azuNetworkRG,omitempty"`
+	AzuNetworkSubscriptionId *string `json:"azuNetworkSubscriptionId,omitempty"`
 	AzuRG *string `json:"azuRG,omitempty"`
 	AzuSubscriptionId *string `json:"azuSubscriptionId,omitempty"`
 	AzuTenantId *string `json:"azuTenantId,omitempty"`
@@ -137,6 +139,70 @@ func (o *AzureCloudInfo) HasAzuHostedZoneId() bool {
 // SetAzuHostedZoneId gets a reference to the given string and assigns it to the AzuHostedZoneId field.
 func (o *AzureCloudInfo) SetAzuHostedZoneId(v string) {
 	o.AzuHostedZoneId = &v
+}
+
+// GetAzuNetworkRG returns the AzuNetworkRG field value if set, zero value otherwise.
+func (o *AzureCloudInfo) GetAzuNetworkRG() string {
+	if o == nil || o.AzuNetworkRG == nil {
+		var ret string
+		return ret
+	}
+	return *o.AzuNetworkRG
+}
+
+// GetAzuNetworkRGOk returns a tuple with the AzuNetworkRG field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureCloudInfo) GetAzuNetworkRGOk() (*string, bool) {
+	if o == nil || o.AzuNetworkRG == nil {
+		return nil, false
+	}
+	return o.AzuNetworkRG, true
+}
+
+// HasAzuNetworkRG returns a boolean if a field has been set.
+func (o *AzureCloudInfo) HasAzuNetworkRG() bool {
+	if o != nil && o.AzuNetworkRG != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzuNetworkRG gets a reference to the given string and assigns it to the AzuNetworkRG field.
+func (o *AzureCloudInfo) SetAzuNetworkRG(v string) {
+	o.AzuNetworkRG = &v
+}
+
+// GetAzuNetworkSubscriptionId returns the AzuNetworkSubscriptionId field value if set, zero value otherwise.
+func (o *AzureCloudInfo) GetAzuNetworkSubscriptionId() string {
+	if o == nil || o.AzuNetworkSubscriptionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.AzuNetworkSubscriptionId
+}
+
+// GetAzuNetworkSubscriptionIdOk returns a tuple with the AzuNetworkSubscriptionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureCloudInfo) GetAzuNetworkSubscriptionIdOk() (*string, bool) {
+	if o == nil || o.AzuNetworkSubscriptionId == nil {
+		return nil, false
+	}
+	return o.AzuNetworkSubscriptionId, true
+}
+
+// HasAzuNetworkSubscriptionId returns a boolean if a field has been set.
+func (o *AzureCloudInfo) HasAzuNetworkSubscriptionId() bool {
+	if o != nil && o.AzuNetworkSubscriptionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzuNetworkSubscriptionId gets a reference to the given string and assigns it to the AzuNetworkSubscriptionId field.
+func (o *AzureCloudInfo) SetAzuNetworkSubscriptionId(v string) {
+	o.AzuNetworkSubscriptionId = &v
 }
 
 // GetAzuRG returns the AzuRG field value if set, zero value otherwise.
@@ -277,6 +343,12 @@ func (o AzureCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.AzuHostedZoneId != nil {
 		toSerialize["azuHostedZoneId"] = o.AzuHostedZoneId
+	}
+	if o.AzuNetworkRG != nil {
+		toSerialize["azuNetworkRG"] = o.AzuNetworkRG
+	}
+	if o.AzuNetworkSubscriptionId != nil {
+		toSerialize["azuNetworkSubscriptionId"] = o.AzuNetworkSubscriptionId
 	}
 	if o.AzuRG != nil {
 		toSerialize["azuRG"] = o.AzuRG

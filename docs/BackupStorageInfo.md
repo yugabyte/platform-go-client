@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Keyspace** | Pointer to **string** | Keyspace name | [optional] 
 **NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
+**SelectiveTableRestore** | Pointer to **bool** | Is selective table restore | [optional] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
@@ -130,6 +131,31 @@ SetOldOwner sets OldOwner field to given value.
 `func (o *BackupStorageInfo) HasOldOwner() bool`
 
 HasOldOwner returns a boolean if a field has been set.
+
+### GetSelectiveTableRestore
+
+`func (o *BackupStorageInfo) GetSelectiveTableRestore() bool`
+
+GetSelectiveTableRestore returns the SelectiveTableRestore field if non-nil, zero value otherwise.
+
+### GetSelectiveTableRestoreOk
+
+`func (o *BackupStorageInfo) GetSelectiveTableRestoreOk() (*bool, bool)`
+
+GetSelectiveTableRestoreOk returns a tuple with the SelectiveTableRestore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelectiveTableRestore
+
+`func (o *BackupStorageInfo) SetSelectiveTableRestore(v bool)`
+
+SetSelectiveTableRestore sets SelectiveTableRestore field to given value.
+
+### HasSelectiveTableRestore
+
+`func (o *BackupStorageInfo) HasSelectiveTableRestore() bool`
+
+HasSelectiveTableRestore returns a boolean if a field has been set.
 
 ### GetSse
 

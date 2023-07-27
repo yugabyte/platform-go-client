@@ -33,11 +33,11 @@ type AvailabilityZonesApiApiCreateAZRequest struct {
 	cUUID string
 	pUUID string
 	rUUID string
-	azFormData *AvailabilityZoneFormData
+	azFormData *AvailabilityZone
 	request *interface{}
 }
 
-func (r AvailabilityZonesApiApiCreateAZRequest) AzFormData(azFormData AvailabilityZoneFormData) AvailabilityZonesApiApiCreateAZRequest {
+func (r AvailabilityZonesApiApiCreateAZRequest) AzFormData(azFormData AvailabilityZone) AvailabilityZonesApiApiCreateAZRequest {
 	r.azFormData = &azFormData
 	return r
 }
@@ -318,11 +318,11 @@ type AvailabilityZonesApiApiEditAZRequest struct {
 	pUUID string
 	rUUID string
 	azUUID string
-	azFormData *AvailabilityZoneEditData
+	azFormData *AvailabilityZone
 	request *interface{}
 }
 
-func (r AvailabilityZonesApiApiEditAZRequest) AzFormData(azFormData AvailabilityZoneEditData) AvailabilityZonesApiApiEditAZRequest {
+func (r AvailabilityZonesApiApiEditAZRequest) AzFormData(azFormData AvailabilityZone) AvailabilityZonesApiApiEditAZRequest {
 	r.azFormData = &azFormData
 	return r
 }

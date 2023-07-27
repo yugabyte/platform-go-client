@@ -29,6 +29,7 @@ type UserWithFeatures struct {
 	IsPrimary *bool `json:"isPrimary,omitempty"`
 	// LDAP Specified Role
 	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
+	OidcJwtAuthToken *string `json:"oidcJwtAuthToken,omitempty"`
 	// User role
 	Role *string `json:"role,omitempty"`
 	// User timezone
@@ -241,6 +242,38 @@ func (o *UserWithFeatures) SetLdapSpecifiedRole(v bool) {
 	o.LdapSpecifiedRole = &v
 }
 
+// GetOidcJwtAuthToken returns the OidcJwtAuthToken field value if set, zero value otherwise.
+func (o *UserWithFeatures) GetOidcJwtAuthToken() string {
+	if o == nil || o.OidcJwtAuthToken == nil {
+		var ret string
+		return ret
+	}
+	return *o.OidcJwtAuthToken
+}
+
+// GetOidcJwtAuthTokenOk returns a tuple with the OidcJwtAuthToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserWithFeatures) GetOidcJwtAuthTokenOk() (*string, bool) {
+	if o == nil || o.OidcJwtAuthToken == nil {
+		return nil, false
+	}
+	return o.OidcJwtAuthToken, true
+}
+
+// HasOidcJwtAuthToken returns a boolean if a field has been set.
+func (o *UserWithFeatures) HasOidcJwtAuthToken() bool {
+	if o != nil && o.OidcJwtAuthToken != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOidcJwtAuthToken gets a reference to the given string and assigns it to the OidcJwtAuthToken field.
+func (o *UserWithFeatures) SetOidcJwtAuthToken(v string) {
+	o.OidcJwtAuthToken = &v
+}
+
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *UserWithFeatures) GetRole() string {
 	if o == nil || o.Role == nil {
@@ -388,6 +421,9 @@ func (o UserWithFeatures) MarshalJSON() ([]byte, error) {
 	}
 	if o.LdapSpecifiedRole != nil {
 		toSerialize["ldapSpecifiedRole"] = o.LdapSpecifiedRole
+	}
+	if o.OidcJwtAuthToken != nil {
+		toSerialize["oidcJwtAuthToken"] = o.OidcJwtAuthToken
 	}
 	if o.Role != nil {
 		toSerialize["role"] = o.Role
