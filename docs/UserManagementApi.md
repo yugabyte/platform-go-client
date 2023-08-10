@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteUser**](UserManagementApi.md#DeleteUser) | **Delete** /api/v1/customers/{cUUID}/users/{uUUID} | Delete a user
 [**GetUserDetails**](UserManagementApi.md#GetUserDetails) | **Get** /api/v1/customers/{cUUID}/users/{uUUID} | Get a user&#39;s details
 [**ListUsers**](UserManagementApi.md#ListUsers) | **Get** /api/v1/customers/{cUUID}/users | List all users
+[**RetrieveOIDCAuthToken**](UserManagementApi.md#RetrieveOIDCAuthToken) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token | Retrieve OIDC auth token
 [**UpdateUserPassword**](UserManagementApi.md#UpdateUserPassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change a user&#39;s password
 [**UpdateUserProfile**](UserManagementApi.md#UpdateUserProfile) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/update_profile | Update a user&#39;s profile
 [**UpdateUserRole**](UserManagementApi.md#UpdateUserRole) | **Put** /api/v1/customers/{cUUID}/users/{uUUID} | Change a user&#39;s role
@@ -285,6 +286,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]UserWithFeatures**](UserWithFeatures.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RetrieveOIDCAuthToken
+
+> UserOIDCAuthToken RetrieveOIDCAuthToken(ctx, cUUID, uUUID).Request(request).Execute()
+
+Retrieve OIDC auth token
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UserManagementApi.RetrieveOIDCAuthToken(context.Background(), cUUID, uUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.RetrieveOIDCAuthToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RetrieveOIDCAuthToken`: UserOIDCAuthToken
+    fmt.Fprintf(os.Stdout, "Response from `UserManagementApi.RetrieveOIDCAuthToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRetrieveOIDCAuthTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**UserOIDCAuthToken**](UserOIDCAuthToken.md)
 
 ### Authorization
 

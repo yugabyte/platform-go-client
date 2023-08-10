@@ -24,6 +24,7 @@ type NodeData struct {
 	Metrics []Metric `json:"metrics"`
 	MetricsOnly bool `json:"metrics_only"`
 	Node string `json:"node"`
+	NodeIdentifier string `json:"node_identifier"`
 	NodeName string `json:"node_name"`
 	Process string `json:"process"`
 	TimestampIso *time.Time `json:"timestamp_iso,omitempty"`
@@ -33,7 +34,7 @@ type NodeData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeName string, process string, ) *NodeData {
+func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeIdentifier string, nodeName string, process string, ) *NodeData {
 	this := NodeData{}
 	this.Details = details
 	this.HasError = hasError
@@ -42,6 +43,7 @@ func NewNodeData(details []string, hasError bool, hasWarning bool, message strin
 	this.Metrics = metrics
 	this.MetricsOnly = metricsOnly
 	this.Node = node
+	this.NodeIdentifier = nodeIdentifier
 	this.NodeName = nodeName
 	this.Process = process
 	return &this
@@ -223,6 +225,30 @@ func (o *NodeData) SetNode(v string) {
 	o.Node = v
 }
 
+// GetNodeIdentifier returns the NodeIdentifier field value
+func (o *NodeData) GetNodeIdentifier() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.NodeIdentifier
+}
+
+// GetNodeIdentifierOk returns a tuple with the NodeIdentifier field value
+// and a boolean to check if the value has been set.
+func (o *NodeData) GetNodeIdentifierOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.NodeIdentifier, true
+}
+
+// SetNodeIdentifier sets field value
+func (o *NodeData) SetNodeIdentifier(v string) {
+	o.NodeIdentifier = v
+}
+
 // GetNodeName returns the NodeName field value
 func (o *NodeData) GetNodeName() string {
 	if o == nil  {
@@ -325,6 +351,9 @@ func (o NodeData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["node"] = o.Node
+	}
+	if true {
+		toSerialize["node_identifier"] = o.NodeIdentifier
 	}
 	if true {
 		toSerialize["node_name"] = o.NodeName

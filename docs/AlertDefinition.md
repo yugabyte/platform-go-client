@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ConfigurationUUID** | **string** |  | 
 **CustomerUUID** | **string** |  | 
 **Labels** | [**[]AlertDefinitionLabel**](AlertDefinitionLabel.md) |  | 
-**Query** | **string** |  | 
 **UniverseUUID** | **string** |  | 
 **Uuid** | **string** |  | 
 **Version** | **int32** |  | 
@@ -16,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewAlertDefinition
 
-`func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, query string, universeUUID string, uuid string, version int32, ) *AlertDefinition`
+`func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, universeUUID string, uuid string, version int32, ) *AlertDefinition`
 
 NewAlertDefinition instantiates a new AlertDefinition object
 This constructor will assign default values to properties that have it defined,
@@ -89,26 +88,6 @@ and a boolean to check if the value has been set.
 `func (o *AlertDefinition) SetLabels(v []AlertDefinitionLabel)`
 
 SetLabels sets Labels field to given value.
-
-
-### GetQuery
-
-`func (o *AlertDefinition) GetQuery() string`
-
-GetQuery returns the Query field if non-nil, zero value otherwise.
-
-### GetQueryOk
-
-`func (o *AlertDefinition) GetQueryOk() (*string, bool)`
-
-GetQueryOk returns a tuple with the Query field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQuery
-
-`func (o *AlertDefinition) SetQuery(v string)`
-
-SetQuery sets Query field to given value.
 
 
 ### GetUniverseUUID

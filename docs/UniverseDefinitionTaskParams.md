@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
+**PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
@@ -663,6 +664,31 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *UniverseDefinitionTaskParams) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetPlacementModificationTaskUuid
+
+`func (o *UniverseDefinitionTaskParams) GetPlacementModificationTaskUuid() string`
+
+GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field if non-nil, zero value otherwise.
+
+### GetPlacementModificationTaskUuidOk
+
+`func (o *UniverseDefinitionTaskParams) GetPlacementModificationTaskUuidOk() (*string, bool)`
+
+GetPlacementModificationTaskUuidOk returns a tuple with the PlacementModificationTaskUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlacementModificationTaskUuid
+
+`func (o *UniverseDefinitionTaskParams) SetPlacementModificationTaskUuid(v string)`
+
+SetPlacementModificationTaskUuid sets PlacementModificationTaskUuid field to given value.
+
+### HasPlacementModificationTaskUuid
+
+`func (o *UniverseDefinitionTaskParams) HasPlacementModificationTaskUuid() bool`
+
+HasPlacementModificationTaskUuid returns a boolean if a field has been set.
 
 ### GetPlatformUrl
 

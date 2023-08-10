@@ -72,6 +72,8 @@ type APIClient struct {
 
 	CustomerTasksApi *CustomerTasksApiService
 
+	DisasterRecoveryApi *DisasterRecoveryApiService
+
 	EncryptionAtRestApi *EncryptionAtRestApiService
 
 	GrafanaDashboardApi *GrafanaDashboardApiService
@@ -101,6 +103,8 @@ type APIClient struct {
 	PerformanceAdvisorApi *PerformanceAdvisorApiService
 
 	PreviewApi *PreviewApiService
+
+	RBACManagementApi *RBACManagementApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -167,6 +171,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CustomerConfigurationApi = (*CustomerConfigurationApiService)(&c.common)
 	c.CustomerManagementApi = (*CustomerManagementApiService)(&c.common)
 	c.CustomerTasksApi = (*CustomerTasksApiService)(&c.common)
+	c.DisasterRecoveryApi = (*DisasterRecoveryApiService)(&c.common)
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
@@ -182,6 +187,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.PreviewApi = (*PreviewApiService)(&c.common)
+	c.RBACManagementApi = (*RBACManagementApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)

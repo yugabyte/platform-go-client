@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **CustomerUUID** | Pointer to **string** | Customer UUID that owns this backup | [optional] 
 **Expiry** | Pointer to **time.Time** | Expiry time (unix timestamp) of the backup | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
+**HasKMSHistory** | Pointer to **bool** | Whether the backup has KMS history metadata | [optional] [readonly] 
 **IncrementalBackup** | **bool** |  | 
 **ParentBackup** | **bool** |  | 
 **ScheduleName** | Pointer to **string** | Schedule Policy Name, if this backup is part of a schedule | [optional] 
@@ -267,6 +268,31 @@ SetExpiryTimeUnit sets ExpiryTimeUnit field to given value.
 `func (o *Backup) HasExpiryTimeUnit() bool`
 
 HasExpiryTimeUnit returns a boolean if a field has been set.
+
+### GetHasKMSHistory
+
+`func (o *Backup) GetHasKMSHistory() bool`
+
+GetHasKMSHistory returns the HasKMSHistory field if non-nil, zero value otherwise.
+
+### GetHasKMSHistoryOk
+
+`func (o *Backup) GetHasKMSHistoryOk() (*bool, bool)`
+
+GetHasKMSHistoryOk returns a tuple with the HasKMSHistory field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasKMSHistory
+
+`func (o *Backup) SetHasKMSHistory(v bool)`
+
+SetHasKMSHistory sets HasKMSHistory field to given value.
+
+### HasHasKMSHistory
+
+`func (o *Backup) HasHasKMSHistory() bool`
+
+HasHasKMSHistory returns a boolean if a field has been set.
 
 ### GetIncrementalBackup
 

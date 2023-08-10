@@ -20,6 +20,10 @@ type UniverseResp struct {
 	CreationDate *string `json:"creationDate,omitempty"`
 	// DNS name
 	DnsName *string `json:"dnsName,omitempty"`
+	// UUIDs of DR configs where this universe is the source (primary)
+	DrConfigUuidsAsSource *[]string `json:"drConfigUuidsAsSource,omitempty"`
+	// UUIDs of DR configs where this universe is the target (secondary)
+	DrConfigUuidsAsTarget *[]string `json:"drConfigUuidsAsTarget,omitempty"`
 	// Universe name
 	Name *string `json:"name,omitempty"`
 	// Price
@@ -117,6 +121,70 @@ func (o *UniverseResp) HasDnsName() bool {
 // SetDnsName gets a reference to the given string and assigns it to the DnsName field.
 func (o *UniverseResp) SetDnsName(v string) {
 	o.DnsName = &v
+}
+
+// GetDrConfigUuidsAsSource returns the DrConfigUuidsAsSource field value if set, zero value otherwise.
+func (o *UniverseResp) GetDrConfigUuidsAsSource() []string {
+	if o == nil || o.DrConfigUuidsAsSource == nil {
+		var ret []string
+		return ret
+	}
+	return *o.DrConfigUuidsAsSource
+}
+
+// GetDrConfigUuidsAsSourceOk returns a tuple with the DrConfigUuidsAsSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetDrConfigUuidsAsSourceOk() (*[]string, bool) {
+	if o == nil || o.DrConfigUuidsAsSource == nil {
+		return nil, false
+	}
+	return o.DrConfigUuidsAsSource, true
+}
+
+// HasDrConfigUuidsAsSource returns a boolean if a field has been set.
+func (o *UniverseResp) HasDrConfigUuidsAsSource() bool {
+	if o != nil && o.DrConfigUuidsAsSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDrConfigUuidsAsSource gets a reference to the given []string and assigns it to the DrConfigUuidsAsSource field.
+func (o *UniverseResp) SetDrConfigUuidsAsSource(v []string) {
+	o.DrConfigUuidsAsSource = &v
+}
+
+// GetDrConfigUuidsAsTarget returns the DrConfigUuidsAsTarget field value if set, zero value otherwise.
+func (o *UniverseResp) GetDrConfigUuidsAsTarget() []string {
+	if o == nil || o.DrConfigUuidsAsTarget == nil {
+		var ret []string
+		return ret
+	}
+	return *o.DrConfigUuidsAsTarget
+}
+
+// GetDrConfigUuidsAsTargetOk returns a tuple with the DrConfigUuidsAsTarget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetDrConfigUuidsAsTargetOk() (*[]string, bool) {
+	if o == nil || o.DrConfigUuidsAsTarget == nil {
+		return nil, false
+	}
+	return o.DrConfigUuidsAsTarget, true
+}
+
+// HasDrConfigUuidsAsTarget returns a boolean if a field has been set.
+func (o *UniverseResp) HasDrConfigUuidsAsTarget() bool {
+	if o != nil && o.DrConfigUuidsAsTarget != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDrConfigUuidsAsTarget gets a reference to the given []string and assigns it to the DrConfigUuidsAsTarget field.
+func (o *UniverseResp) SetDrConfigUuidsAsTarget(v []string) {
+	o.DrConfigUuidsAsTarget = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -414,6 +482,12 @@ func (o UniverseResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.DnsName != nil {
 		toSerialize["dnsName"] = o.DnsName
+	}
+	if o.DrConfigUuidsAsSource != nil {
+		toSerialize["drConfigUuidsAsSource"] = o.DrConfigUuidsAsSource
+	}
+	if o.DrConfigUuidsAsTarget != nil {
+		toSerialize["drConfigUuidsAsTarget"] = o.DrConfigUuidsAsTarget
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

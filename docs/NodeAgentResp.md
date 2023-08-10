@@ -12,8 +12,12 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Node agent name | [optional] [readonly] 
 **OsType** | Pointer to **string** | Node agent host OS | [optional] [readonly] 
 **Port** | Pointer to **int32** | Node agent server port | [optional] [readonly] 
+**ProviderName** | Pointer to **string** |  | [optional] [readonly] 
+**ProviderUuid** | Pointer to **string** |  | [optional] [readonly] 
 **Reachable** | Pointer to **bool** |  | [optional] [readonly] 
 **State** | Pointer to **string** | Node agent state | [optional] [readonly] 
+**UniverseName** | Pointer to **string** |  | [optional] [readonly] 
+**UniverseUuid** | Pointer to **string** |  | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** | Updated time | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Node agent UUID | [optional] [readonly] 
 **Version** | Pointer to **string** | Node agent installed version | [optional] [readonly] 
@@ -238,6 +242,56 @@ SetPort sets Port field to given value.
 
 HasPort returns a boolean if a field has been set.
 
+### GetProviderName
+
+`func (o *NodeAgentResp) GetProviderName() string`
+
+GetProviderName returns the ProviderName field if non-nil, zero value otherwise.
+
+### GetProviderNameOk
+
+`func (o *NodeAgentResp) GetProviderNameOk() (*string, bool)`
+
+GetProviderNameOk returns a tuple with the ProviderName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderName
+
+`func (o *NodeAgentResp) SetProviderName(v string)`
+
+SetProviderName sets ProviderName field to given value.
+
+### HasProviderName
+
+`func (o *NodeAgentResp) HasProviderName() bool`
+
+HasProviderName returns a boolean if a field has been set.
+
+### GetProviderUuid
+
+`func (o *NodeAgentResp) GetProviderUuid() string`
+
+GetProviderUuid returns the ProviderUuid field if non-nil, zero value otherwise.
+
+### GetProviderUuidOk
+
+`func (o *NodeAgentResp) GetProviderUuidOk() (*string, bool)`
+
+GetProviderUuidOk returns a tuple with the ProviderUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderUuid
+
+`func (o *NodeAgentResp) SetProviderUuid(v string)`
+
+SetProviderUuid sets ProviderUuid field to given value.
+
+### HasProviderUuid
+
+`func (o *NodeAgentResp) HasProviderUuid() bool`
+
+HasProviderUuid returns a boolean if a field has been set.
+
 ### GetReachable
 
 `func (o *NodeAgentResp) GetReachable() bool`
@@ -287,6 +341,56 @@ SetState sets State field to given value.
 `func (o *NodeAgentResp) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetUniverseName
+
+`func (o *NodeAgentResp) GetUniverseName() string`
+
+GetUniverseName returns the UniverseName field if non-nil, zero value otherwise.
+
+### GetUniverseNameOk
+
+`func (o *NodeAgentResp) GetUniverseNameOk() (*string, bool)`
+
+GetUniverseNameOk returns a tuple with the UniverseName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseName
+
+`func (o *NodeAgentResp) SetUniverseName(v string)`
+
+SetUniverseName sets UniverseName field to given value.
+
+### HasUniverseName
+
+`func (o *NodeAgentResp) HasUniverseName() bool`
+
+HasUniverseName returns a boolean if a field has been set.
+
+### GetUniverseUuid
+
+`func (o *NodeAgentResp) GetUniverseUuid() string`
+
+GetUniverseUuid returns the UniverseUuid field if non-nil, zero value otherwise.
+
+### GetUniverseUuidOk
+
+`func (o *NodeAgentResp) GetUniverseUuidOk() (*string, bool)`
+
+GetUniverseUuidOk returns a tuple with the UniverseUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseUuid
+
+`func (o *NodeAgentResp) SetUniverseUuid(v string)`
+
+SetUniverseUuid sets UniverseUuid field to given value.
+
+### HasUniverseUuid
+
+`func (o *NodeAgentResp) HasUniverseUuid() bool`
+
+HasUniverseUuid returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

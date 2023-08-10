@@ -19,7 +19,6 @@ type AlertDefinition struct {
 	ConfigurationUUID string `json:"configurationUUID"`
 	CustomerUUID string `json:"customerUUID"`
 	Labels []AlertDefinitionLabel `json:"labels"`
-	Query string `json:"query"`
 	UniverseUUID string `json:"universeUUID"`
 	Uuid string `json:"uuid"`
 	Version int32 `json:"version"`
@@ -29,12 +28,11 @@ type AlertDefinition struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, query string, universeUUID string, uuid string, version int32, ) *AlertDefinition {
+func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, universeUUID string, uuid string, version int32, ) *AlertDefinition {
 	this := AlertDefinition{}
 	this.ConfigurationUUID = configurationUUID
 	this.CustomerUUID = customerUUID
 	this.Labels = labels
-	this.Query = query
 	this.UniverseUUID = universeUUID
 	this.Uuid = uuid
 	this.Version = version
@@ -121,30 +119,6 @@ func (o *AlertDefinition) SetLabels(v []AlertDefinitionLabel) {
 	o.Labels = v
 }
 
-// GetQuery returns the Query field value
-func (o *AlertDefinition) GetQuery() string {
-	if o == nil  {
-		var ret string
-		return ret
-	}
-
-	return o.Query
-}
-
-// GetQueryOk returns a tuple with the Query field value
-// and a boolean to check if the value has been set.
-func (o *AlertDefinition) GetQueryOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Query, true
-}
-
-// SetQuery sets field value
-func (o *AlertDefinition) SetQuery(v string) {
-	o.Query = v
-}
-
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *AlertDefinition) GetUniverseUUID() string {
 	if o == nil  {
@@ -227,9 +201,6 @@ func (o AlertDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["labels"] = o.Labels
-	}
-	if true {
-		toSerialize["query"] = o.Query
 	}
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID

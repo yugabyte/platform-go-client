@@ -29,6 +29,7 @@ type XClusterConfigGetResp struct {
 	Name *string `json:"name,omitempty"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
+	PitrConfigs []PitrConfig `json:"pitrConfigs"`
 	// Replication group name in DB
 	ReplicationGroupName *string `json:"replicationGroupName,omitempty"`
 	// Whether the source is active in txn xCluster
@@ -48,6 +49,7 @@ type XClusterConfigGetResp struct {
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
 	// Whether the config is txn xCluster
 	Type *string `json:"type,omitempty"`
+	UsedForDr *bool `json:"usedForDr,omitempty"`
 	// XCluster config UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -56,9 +58,10 @@ type XClusterConfigGetResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigGetResp(lag map[string]interface{}, ) *XClusterConfigGetResp {
+func NewXClusterConfigGetResp(lag map[string]interface{}, pitrConfigs []PitrConfig, ) *XClusterConfigGetResp {
 	this := XClusterConfigGetResp{}
 	this.Lag = lag
+	this.PitrConfigs = pitrConfigs
 	return &this
 }
 
@@ -252,6 +255,30 @@ func (o *XClusterConfigGetResp) HasPaused() bool {
 // SetPaused gets a reference to the given bool and assigns it to the Paused field.
 func (o *XClusterConfigGetResp) SetPaused(v bool) {
 	o.Paused = &v
+}
+
+// GetPitrConfigs returns the PitrConfigs field value
+func (o *XClusterConfigGetResp) GetPitrConfigs() []PitrConfig {
+	if o == nil  {
+		var ret []PitrConfig
+		return ret
+	}
+
+	return o.PitrConfigs
+}
+
+// GetPitrConfigsOk returns a tuple with the PitrConfigs field value
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetPitrConfigsOk() (*[]PitrConfig, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.PitrConfigs, true
+}
+
+// SetPitrConfigs sets field value
+func (o *XClusterConfigGetResp) SetPitrConfigs(v []PitrConfig) {
+	o.PitrConfigs = v
 }
 
 // GetReplicationGroupName returns the ReplicationGroupName field value if set, zero value otherwise.
@@ -574,6 +601,38 @@ func (o *XClusterConfigGetResp) SetType(v string) {
 	o.Type = &v
 }
 
+// GetUsedForDr returns the UsedForDr field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetUsedForDr() bool {
+	if o == nil || o.UsedForDr == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UsedForDr
+}
+
+// GetUsedForDrOk returns a tuple with the UsedForDr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetUsedForDrOk() (*bool, bool) {
+	if o == nil || o.UsedForDr == nil {
+		return nil, false
+	}
+	return o.UsedForDr, true
+}
+
+// HasUsedForDr returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasUsedForDr() bool {
+	if o != nil && o.UsedForDr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedForDr gets a reference to the given bool and assigns it to the UsedForDr field.
+func (o *XClusterConfigGetResp) SetUsedForDr(v bool) {
+	o.UsedForDr = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *XClusterConfigGetResp) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -626,6 +685,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	if o.Paused != nil {
 		toSerialize["paused"] = o.Paused
 	}
+	if true {
+		toSerialize["pitrConfigs"] = o.PitrConfigs
+	}
 	if o.ReplicationGroupName != nil {
 		toSerialize["replicationGroupName"] = o.ReplicationGroupName
 	}
@@ -655,6 +717,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.UsedForDr != nil {
+		toSerialize["usedForDr"] = o.UsedForDr
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

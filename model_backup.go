@@ -34,6 +34,8 @@ type Backup struct {
 	Expiry *time.Time `json:"expiry,omitempty"`
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
+	// Whether the backup has KMS history metadata
+	HasKMSHistory *bool `json:"hasKMSHistory,omitempty"`
 	IncrementalBackup bool `json:"incrementalBackup"`
 	ParentBackup bool `json:"parentBackup"`
 	// Schedule Policy Name, if this backup is part of a schedule
@@ -359,6 +361,38 @@ func (o *Backup) HasExpiryTimeUnit() bool {
 // SetExpiryTimeUnit gets a reference to the given string and assigns it to the ExpiryTimeUnit field.
 func (o *Backup) SetExpiryTimeUnit(v string) {
 	o.ExpiryTimeUnit = &v
+}
+
+// GetHasKMSHistory returns the HasKMSHistory field value if set, zero value otherwise.
+func (o *Backup) GetHasKMSHistory() bool {
+	if o == nil || o.HasKMSHistory == nil {
+		var ret bool
+		return ret
+	}
+	return *o.HasKMSHistory
+}
+
+// GetHasKMSHistoryOk returns a tuple with the HasKMSHistory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Backup) GetHasKMSHistoryOk() (*bool, bool) {
+	if o == nil || o.HasKMSHistory == nil {
+		return nil, false
+	}
+	return o.HasKMSHistory, true
+}
+
+// HasHasKMSHistory returns a boolean if a field has been set.
+func (o *Backup) HasHasKMSHistory() bool {
+	if o != nil && o.HasKMSHistory != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHasKMSHistory gets a reference to the given bool and assigns it to the HasKMSHistory field.
+func (o *Backup) SetHasKMSHistory(v bool) {
+	o.HasKMSHistory = &v
 }
 
 // GetIncrementalBackup returns the IncrementalBackup field value
@@ -693,6 +727,9 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpiryTimeUnit != nil {
 		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
+	}
+	if o.HasKMSHistory != nil {
+		toSerialize["hasKMSHistory"] = o.HasKMSHistory
 	}
 	if true {
 		toSerialize["incrementalBackup"] = o.IncrementalBackup

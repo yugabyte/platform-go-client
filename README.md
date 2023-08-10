@@ -131,9 +131,11 @@ Class | Method | HTTP request | Description
 *AuditApi* | [**GetTaskAudit**](docs/AuditApi.md#gettaskaudit) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info | Get audit info for a task
 *AuditApi* | [**GetUserFromTask**](docs/AuditApi.md#getuserfromtask) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user | Get the user associated with a task
 *AuditApi* | [**ListOfAudit**](docs/AuditApi.md#listofaudit) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail | List a user&#39;s audit entries
-*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Create an availability zone
+*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+*AvailabilityZonesApi* | [**CreateZone**](docs/AvailabilityZonesApi.md#createzone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
 *AvailabilityZonesApi* | [**DeleteAZ**](docs/AvailabilityZonesApi.md#deleteaz) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
-*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Modify an availability zone
+*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+*AvailabilityZonesApi* | [**EditZone**](docs/AvailabilityZonesApi.md#editzone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
 *AvailabilityZonesApi* | [**ListOfAZ**](docs/AvailabilityZonesApi.md#listofaz) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 *BackupsApi* | [**CreateBackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 *BackupsApi* | [**CreateBackupScheduleAsync**](docs/BackupsApi.md#createbackupscheduleasync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
@@ -151,6 +153,7 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**ListOfBackups**](docs/BackupsApi.md#listofbackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
 *BackupsApi* | [**Restore**](docs/BackupsApi.md#restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
 *BackupsApi* | [**RestoreBackupV2**](docs/BackupsApi.md#restorebackupv2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
+*BackupsApi* | [**RestorePreflight**](docs/BackupsApi.md#restorepreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
 *BackupsApi* | [**SetThrottleParams**](docs/BackupsApi.md#setthrottleparams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 *BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 *BackupsApi* | [**StopBackup**](docs/BackupsApi.md#stopbackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
@@ -170,6 +173,7 @@ Class | Method | HTTP request | Description
 *CloudProvidersApi* | [**EditProvider**](docs/CloudProvidersApi.md#editprovider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 *CloudProvidersApi* | [**GetListOfProviders**](docs/CloudProvidersApi.md#getlistofproviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 *CloudProvidersApi* | [**GetProvider**](docs/CloudProvidersApi.md#getprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
+*CloudProvidersApi* | [**GetRegionMetadata**](docs/CloudProvidersApi.md#getregionmetadata) | **Get** /api/v1/customers/{cUUID}/providers/region_metadata/{code} | Retrieves the region metadata for the cloud providers
 *CloudProvidersApi* | [**ListSchedules**](docs/CloudProvidersApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
 *CloudProvidersApi* | [**RefreshPricing**](docs/CloudProvidersApi.md#refreshpricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
 *CloudProvidersApi* | [**ScheduledAccessKeyRotation**](docs/CloudProvidersApi.md#scheduledaccesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
@@ -197,6 +201,9 @@ Class | Method | HTTP request | Description
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
+*DisasterRecoveryApi* | [**CreateDrConfig**](docs/DisasterRecoveryApi.md#createdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
+*DisasterRecoveryApi* | [**DeleteXClusterConfig**](docs/DisasterRecoveryApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Delete xcluster config
+*DisasterRecoveryApi* | [**GetDrConfig**](docs/DisasterRecoveryApi.md#getdrconfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 *EncryptionAtRestApi* | [**DeleteKMSConfig**](docs/EncryptionAtRestApi.md#deletekmsconfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 *EncryptionAtRestApi* | [**EditKMSConfig**](docs/EncryptionAtRestApi.md#editkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
@@ -262,9 +269,19 @@ Class | Method | HTTP request | Description
 *PreviewApi* | [**EditImageBundle**](docs/PreviewApi.md#editimagebundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
 *PreviewApi* | [**GetImageBundle**](docs/PreviewApi.md#getimagebundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
 *PreviewApi* | [**GetListOfImageBundles**](docs/PreviewApi.md#getlistofimagebundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
-*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create a new region
+*RBACManagementApi* | [**CreateRole**](docs/RBACManagementApi.md#createrole) | **Post** /api/v1/customers/{cUUID}/rbac/role | Create a custom role
+*RBACManagementApi* | [**DeleteRole**](docs/RBACManagementApi.md#deleterole) | **Delete** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Delete a custom role
+*RBACManagementApi* | [**EditRole**](docs/RBACManagementApi.md#editrole) | **Put** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Edit a custom role
+*RBACManagementApi* | [**EditRoleBinding**](docs/RBACManagementApi.md#editrolebinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Edit the role bindings of a user
+*RBACManagementApi* | [**GetRole**](docs/RBACManagementApi.md#getrole) | **Get** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Get a role&#39;s information
+*RBACManagementApi* | [**GetRoleBindings**](docs/RBACManagementApi.md#getrolebindings) | **Get** /api/v1/customers/{cUUID}/rbac/role_binding | Get all the role bindings available
+*RBACManagementApi* | [**ListPermissions**](docs/RBACManagementApi.md#listpermissions) | **Get** /api/v1/customers/{cUUID}/rbac/permissions | List all the permissions available
+*RBACManagementApi* | [**ListRoles**](docs/RBACManagementApi.md#listroles) | **Get** /api/v1/customers/{cUUID}/rbac/role | List all the roles available
+*RegionManagementApi* | [**CreateProviderRegion**](docs/RegionManagementApi.md#createproviderregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | Create a new region
+*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
-*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Modify a region
+*RegionManagementApi* | [**EditProviderRegion**](docs/RegionManagementApi.md#editproviderregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | Modify a region
+*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**GetRegion**](docs/RegionManagementApi.md#getregion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 *ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
@@ -319,11 +336,14 @@ Class | Method | HTTP request | Description
 *UniverseClusterMutationsApi* | [**DeleteReadonlyCluster**](docs/UniverseClusterMutationsApi.md#deletereadonlycluster) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only/{clustUUID} | Delete Readonly Cluster
 *UniverseClusterMutationsApi* | [**UpdatePrimaryCluster**](docs/UniverseClusterMutationsApi.md#updateprimarycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary | Update Primary Cluster
 *UniverseClusterMutationsApi* | [**UpdateReadOnlyCluster**](docs/UniverseClusterMutationsApi.md#updatereadonlycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Update Readonly Cluster
+*UniverseDatabaseManagementApi* | [**ConfigureYCQL**](docs/UniverseDatabaseManagementApi.md#configureycql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | Configure YCQL
+*UniverseDatabaseManagementApi* | [**ConfigureYSQL**](docs/UniverseDatabaseManagementApi.md#configureysql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | Configure YSQL
 *UniverseDatabaseManagementApi* | [**CreateUserInDB**](docs/UniverseDatabaseManagementApi.md#createuserindb) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe
 *UniverseDatabaseManagementApi* | [**RunYsqlQueryUniverse**](docs/UniverseDatabaseManagementApi.md#runysqlqueryuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query | Run a YSQL query in a universe
 *UniverseDatabaseManagementApi* | [**SetDatabaseCredentials**](docs/UniverseDatabaseManagementApi.md#setdatabasecredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials
 *UniverseInformationApi* | [**DownloadNodeLogs**](docs/UniverseInformationApi.md#downloadnodelogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs
 *UniverseInformationApi* | [**GetLiveQueries**](docs/UniverseInformationApi.md#getlivequeries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Get live queries for a universe
+*UniverseInformationApi* | [**GetMasterInfos**](docs/UniverseInformationApi.md#getmasterinfos) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos | Get master information list
 *UniverseInformationApi* | [**GetMasterLeaderIP**](docs/UniverseInformationApi.md#getmasterleaderip) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Get IP address of a universe&#39;s master leader
 *UniverseInformationApi* | [**GetSlowQueries**](docs/UniverseInformationApi.md#getslowqueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Get slow queries for a universe
 *UniverseInformationApi* | [**GetUniverseCost**](docs/UniverseInformationApi.md#getuniversecost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Get a cost estimate for a universe
@@ -366,6 +386,7 @@ Class | Method | HTTP request | Description
 *UserManagementApi* | [**DeleteUser**](docs/UserManagementApi.md#deleteuser) | **Delete** /api/v1/customers/{cUUID}/users/{uUUID} | Delete a user
 *UserManagementApi* | [**GetUserDetails**](docs/UserManagementApi.md#getuserdetails) | **Get** /api/v1/customers/{cUUID}/users/{uUUID} | Get a user&#39;s details
 *UserManagementApi* | [**ListUsers**](docs/UserManagementApi.md#listusers) | **Get** /api/v1/customers/{cUUID}/users | List all users
+*UserManagementApi* | [**RetrieveOIDCAuthToken**](docs/UserManagementApi.md#retrieveoidcauthtoken) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token | Retrieve OIDC auth token
 *UserManagementApi* | [**UpdateUserPassword**](docs/UserManagementApi.md#updateuserpassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change a user&#39;s password
 *UserManagementApi* | [**UpdateUserProfile**](docs/UserManagementApi.md#updateuserprofile) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/update_profile | Update a user&#39;s profile
 *UserManagementApi* | [**UpdateUserRole**](docs/UserManagementApi.md#updateuserrole) | **Put** /api/v1/customers/{cUUID}/users/{uUUID} | Change a user&#39;s role
@@ -379,6 +400,7 @@ Class | Method | HTTP request | Description
  - [AWSCloudInfo](docs/AWSCloudInfo.md)
  - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
  - [AZCloudInfo](docs/AZCloudInfo.md)
+ - [AZOverrides](docs/AZOverrides.md)
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
@@ -426,7 +448,6 @@ Class | Method | HTTP request | Description
  - [AvailabilityZone](docs/AvailabilityZone.md)
  - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
  - [AvailabilityZoneDetails](docs/AvailabilityZoneDetails.md)
- - [AvailabilityZoneEditData](docs/AvailabilityZoneEditData.md)
  - [AvailabilityZoneFormData](docs/AvailabilityZoneFormData.md)
  - [AzureCloudInfo](docs/AzureCloudInfo.md)
  - [AzureRegionCloudInfo](docs/AzureRegionCloudInfo.md)
@@ -462,6 +483,8 @@ Class | Method | HTTP request | Description
  - [ConfKeyInfo](docs/ConfKeyInfo.md)
  - [Config](docs/Config.md)
  - [ConfigEntry](docs/ConfigEntry.md)
+ - [ConfigureYCQLFormData](docs/ConfigureYCQLFormData.md)
+ - [ConfigureYSQLFormData](docs/ConfigureYSQLFormData.md)
  - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
  - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
  - [CurrentAdminNotificationMessages](docs/CurrentAdminNotificationMessages.md)
@@ -486,6 +509,7 @@ Class | Method | HTTP request | Description
  - [DeleteBackupParams](docs/DeleteBackupParams.md)
  - [Details](docs/Details.md)
  - [DeviceInfo](docs/DeviceInfo.md)
+ - [DrConfigCreateForm](docs/DrConfigCreateForm.md)
  - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
@@ -523,6 +547,7 @@ Class | Method | HTTP request | Description
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
  - [MaintenanceWindowPagedApiQuery](docs/MaintenanceWindowPagedApiQuery.md)
  - [MaintenanceWindowPagedResponse](docs/MaintenanceWindowPagedResponse.md)
+ - [MasterInfo](docs/MasterInfo.md)
  - [MasterNode](docs/MasterNode.md)
  - [MastersList](docs/MastersList.md)
  - [Metric](docs/Metric.md)
@@ -548,9 +573,12 @@ Class | Method | HTTP request | Description
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
  - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
+ - [OverridenDetails](docs/OverridenDetails.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
+ - [PerBackupLocationKeyspaceTables](docs/PerBackupLocationKeyspaceTables.md)
+ - [PerLocationBackupInfo](docs/PerLocationBackupInfo.md)
  - [PerProcessFlags](docs/PerProcessFlags.md)
  - [PerfAdvisorManualRunStatus](docs/PerfAdvisorManualRunStatus.md)
  - [PerfAdvisorSettingsFormData](docs/PerfAdvisorSettingsFormData.md)
@@ -559,7 +587,11 @@ Class | Method | HTTP request | Description
  - [PerformanceRecommendationFilter](docs/PerformanceRecommendationFilter.md)
  - [PerformanceRecommendationPagedQuery](docs/PerformanceRecommendationPagedQuery.md)
  - [PerformanceRecommendationPagedResponse](docs/PerformanceRecommendationPagedResponse.md)
+ - [PermissionDetails](docs/PermissionDetails.md)
+ - [PermissionInfo](docs/PermissionInfo.md)
+ - [PermissionInfoIdentifier](docs/PermissionInfoIdentifier.md)
  - [PitrConfig](docs/PitrConfig.md)
+ - [PitrParams](docs/PitrParams.md)
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementBlock](docs/PlacementBlock.md)
  - [PlacementCloud](docs/PlacementCloud.md)
@@ -573,12 +605,15 @@ Class | Method | HTTP request | Description
  - [Region](docs/Region.md)
  - [RegionCloudInfo](docs/RegionCloudInfo.md)
  - [RegionDetails](docs/RegionDetails.md)
- - [RegionEditFormData](docs/RegionEditFormData.md)
  - [RegionFormData](docs/RegionFormData.md)
  - [RegionLocations](docs/RegionLocations.md)
+ - [RegionMetadata](docs/RegionMetadata.md)
+ - [RegionMetadataInfo](docs/RegionMetadataInfo.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
  - [ResizeNodeParams](docs/ResizeNodeParams.md)
+ - [ResourceDefinition](docs/ResourceDefinition.md)
+ - [ResourceGroup](docs/ResourceGroup.md)
  - [RestartBootstrapParams](docs/RestartBootstrapParams.md)
  - [RestartTaskParams](docs/RestartTaskParams.md)
  - [RestoreApiFilter](docs/RestoreApiFilter.md)
@@ -586,8 +621,14 @@ Class | Method | HTTP request | Description
  - [RestoreKeyspace](docs/RestoreKeyspace.md)
  - [RestorePagedApiQuery](docs/RestorePagedApiQuery.md)
  - [RestorePagedApiResponse](docs/RestorePagedApiResponse.md)
+ - [RestorePreflightParams](docs/RestorePreflightParams.md)
+ - [RestorePreflightResponse](docs/RestorePreflightResponse.md)
  - [RestoreResp](docs/RestoreResp.md)
  - [RestoreSnapshotScheduleParams](docs/RestoreSnapshotScheduleParams.md)
+ - [Role](docs/Role.md)
+ - [RoleBinding](docs/RoleBinding.md)
+ - [RoleBindingFormData](docs/RoleBindingFormData.md)
+ - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
  - [S3Location](docs/S3Location.md)
@@ -629,6 +670,8 @@ Class | Method | HTTP request | Description
  - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
  - [UserIntent](docs/UserIntent.md)
+ - [UserIntentOverrides](docs/UserIntentOverrides.md)
+ - [UserOIDCAuthToken](docs/UserOIDCAuthToken.md)
  - [UserProfileData](docs/UserProfileData.md)
  - [UserRegistrationData](docs/UserRegistrationData.md)
  - [UserWithFeatures](docs/UserWithFeatures.md)

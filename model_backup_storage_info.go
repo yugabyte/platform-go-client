@@ -24,6 +24,8 @@ type BackupStorageInfo struct {
 	NewOwner *string `json:"newOwner,omitempty"`
 	// User name of the current tables owner
 	OldOwner *string `json:"oldOwner,omitempty"`
+	// Is selective table restore
+	SelectiveTableRestore *bool `json:"selectiveTableRestore,omitempty"`
 	// Is SSE
 	Sse *bool `json:"sse,omitempty"`
 	// Storage location
@@ -177,6 +179,38 @@ func (o *BackupStorageInfo) SetOldOwner(v string) {
 	o.OldOwner = &v
 }
 
+// GetSelectiveTableRestore returns the SelectiveTableRestore field value if set, zero value otherwise.
+func (o *BackupStorageInfo) GetSelectiveTableRestore() bool {
+	if o == nil || o.SelectiveTableRestore == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SelectiveTableRestore
+}
+
+// GetSelectiveTableRestoreOk returns a tuple with the SelectiveTableRestore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupStorageInfo) GetSelectiveTableRestoreOk() (*bool, bool) {
+	if o == nil || o.SelectiveTableRestore == nil {
+		return nil, false
+	}
+	return o.SelectiveTableRestore, true
+}
+
+// HasSelectiveTableRestore returns a boolean if a field has been set.
+func (o *BackupStorageInfo) HasSelectiveTableRestore() bool {
+	if o != nil && o.SelectiveTableRestore != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectiveTableRestore gets a reference to the given bool and assigns it to the SelectiveTableRestore field.
+func (o *BackupStorageInfo) SetSelectiveTableRestore(v bool) {
+	o.SelectiveTableRestore = &v
+}
+
 // GetSse returns the Sse field value if set, zero value otherwise.
 func (o *BackupStorageInfo) GetSse() bool {
 	if o == nil || o.Sse == nil {
@@ -286,6 +320,9 @@ func (o BackupStorageInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.OldOwner != nil {
 		toSerialize["oldOwner"] = o.OldOwner
+	}
+	if o.SelectiveTableRestore != nil {
+		toSerialize["selectiveTableRestore"] = o.SelectiveTableRestore
 	}
 	if o.Sse != nil {
 		toSerialize["sse"] = o.Sse

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Email** | **string** | User email address | 
 **IsPrimary** | Pointer to **bool** | True if the user is the primary user | [optional] 
 **LdapSpecifiedRole** | Pointer to **bool** | LDAP Specified Role | [optional] 
+**OidcJwtAuthToken** | Pointer to **string** |  | [optional] [readonly] 
 **Role** | Pointer to **string** | User role | [optional] 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
 **UserType** | Pointer to **string** | User Type | [optional] 
@@ -178,6 +179,31 @@ SetLdapSpecifiedRole sets LdapSpecifiedRole field to given value.
 `func (o *UserWithFeatures) HasLdapSpecifiedRole() bool`
 
 HasLdapSpecifiedRole returns a boolean if a field has been set.
+
+### GetOidcJwtAuthToken
+
+`func (o *UserWithFeatures) GetOidcJwtAuthToken() string`
+
+GetOidcJwtAuthToken returns the OidcJwtAuthToken field if non-nil, zero value otherwise.
+
+### GetOidcJwtAuthTokenOk
+
+`func (o *UserWithFeatures) GetOidcJwtAuthTokenOk() (*string, bool)`
+
+GetOidcJwtAuthTokenOk returns a tuple with the OidcJwtAuthToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOidcJwtAuthToken
+
+`func (o *UserWithFeatures) SetOidcJwtAuthToken(v string)`
+
+SetOidcJwtAuthToken sets OidcJwtAuthToken field to given value.
+
+### HasOidcJwtAuthToken
+
+`func (o *UserWithFeatures) HasOidcJwtAuthToken() bool`
+
+HasOidcJwtAuthToken returns a boolean if a field has been set.
 
 ### GetRole
 

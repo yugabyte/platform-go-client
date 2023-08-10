@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DeleteBackupInfos** | [**[]DeleteBackupInfo**](DeleteBackupInfo.md) | Backups to be deleted | 
+**DeleteForcefully** | Pointer to **bool** | Delete Backups forcefully | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetDeleteBackupInfos sets DeleteBackupInfos field to given value.
 
+
+### GetDeleteForcefully
+
+`func (o *DeleteBackupParams) GetDeleteForcefully() bool`
+
+GetDeleteForcefully returns the DeleteForcefully field if non-nil, zero value otherwise.
+
+### GetDeleteForcefullyOk
+
+`func (o *DeleteBackupParams) GetDeleteForcefullyOk() (*bool, bool)`
+
+GetDeleteForcefullyOk returns a tuple with the DeleteForcefully field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleteForcefully
+
+`func (o *DeleteBackupParams) SetDeleteForcefully(v bool)`
+
+SetDeleteForcefully sets DeleteForcefully field to given value.
+
+### HasDeleteForcefully
+
+`func (o *DeleteBackupParams) HasDeleteForcefully() bool`
+
+HasDeleteForcefully returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

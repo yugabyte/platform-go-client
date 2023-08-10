@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CertManagerClusterIssuer** | Pointer to **string** |  | [optional] 
 **CertManagerIssuer** | Pointer to **string** |  | [optional] 
-**KubeConfig** | Pointer to **string** |  | [optional] 
+**KubeConfig** | Pointer to **string** |  | [optional] [readonly] 
 **KubeConfigContent** | Pointer to **string** |  | [optional] 
 **KubeConfigName** | Pointer to **string** |  | [optional] 
 **KubeDomain** | Pointer to **string** |  | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **KubernetesImagePullSecretName** | Pointer to **string** |  | [optional] 
 **KubernetesImageRegistry** | Pointer to **string** |  | [optional] 
 **KubernetesProvider** | Pointer to **string** |  | [optional] 
-**KubernetesPullSecret** | Pointer to **string** |  | [optional] 
+**KubernetesPullSecret** | Pointer to **string** |  | [optional] [readonly] 
 **KubernetesPullSecretContent** | Pointer to **string** |  | [optional] 
 **KubernetesPullSecretName** | Pointer to **string** |  | [optional] 
 **KubernetesServiceAccount** | Pointer to **string** | DEPRECATED: kubernetes service account is not needed. | [optional] 
