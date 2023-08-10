@@ -45,6 +45,7 @@ type UniverseDefinitionTaskParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
+	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
@@ -851,6 +852,38 @@ func (o *UniverseDefinitionTaskParams) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *UniverseDefinitionTaskParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParams) GetPlacementModificationTaskUuid() string {
+	if o == nil || o.PlacementModificationTaskUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.PlacementModificationTaskUuid
+}
+
+// GetPlacementModificationTaskUuidOk returns a tuple with the PlacementModificationTaskUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParams) GetPlacementModificationTaskUuidOk() (*string, bool) {
+	if o == nil || o.PlacementModificationTaskUuid == nil {
+		return nil, false
+	}
+	return o.PlacementModificationTaskUuid, true
+}
+
+// HasPlacementModificationTaskUuid returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParams) HasPlacementModificationTaskUuid() bool {
+	if o != nil && o.PlacementModificationTaskUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlacementModificationTaskUuid gets a reference to the given string and assigns it to the PlacementModificationTaskUuid field.
+func (o *UniverseDefinitionTaskParams) SetPlacementModificationTaskUuid(v string) {
+	o.PlacementModificationTaskUuid = &v
 }
 
 // GetPlatformUrl returns the PlatformUrl field value
@@ -1726,6 +1759,9 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if o.PlacementModificationTaskUuid != nil {
+		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
 **Name** | Pointer to **string** | XCluster config name | [optional] 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
+**PitrConfigs** | [**[]PitrConfig**](PitrConfig.md) |  | 
 **ReplicationGroupName** | Pointer to **string** | Replication group name in DB | [optional] 
 **SourceActive** | Pointer to **bool** | Whether the source is active in txn xCluster | [optional] 
 **SourceUniverseUUID** | Pointer to **string** | Source Universe UUID | [optional] 
@@ -19,13 +20,14 @@ Name | Type | Description | Notes
 **TargetActive** | Pointer to **bool** | Whether the target is active in txn xCluster | [optional] 
 **TargetUniverseUUID** | Pointer to **string** | Target Universe UUID | [optional] 
 **Type** | Pointer to **string** | Whether the config is txn xCluster | [optional] 
+**UsedForDr** | Pointer to **bool** |  | [optional] [readonly] 
 **Uuid** | Pointer to **string** | XCluster config UUID | [optional] 
 
 ## Methods
 
 ### NewXClusterConfig
 
-`func NewXClusterConfig() *XClusterConfig`
+`func NewXClusterConfig(pitrConfigs []PitrConfig, ) *XClusterConfig`
 
 NewXClusterConfig instantiates a new XClusterConfig object
 This constructor will assign default values to properties that have it defined,
@@ -164,6 +166,26 @@ SetPaused sets Paused field to given value.
 `func (o *XClusterConfig) HasPaused() bool`
 
 HasPaused returns a boolean if a field has been set.
+
+### GetPitrConfigs
+
+`func (o *XClusterConfig) GetPitrConfigs() []PitrConfig`
+
+GetPitrConfigs returns the PitrConfigs field if non-nil, zero value otherwise.
+
+### GetPitrConfigsOk
+
+`func (o *XClusterConfig) GetPitrConfigsOk() (*[]PitrConfig, bool)`
+
+GetPitrConfigsOk returns a tuple with the PitrConfigs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPitrConfigs
+
+`func (o *XClusterConfig) SetPitrConfigs(v []PitrConfig)`
+
+SetPitrConfigs sets PitrConfigs field to given value.
+
 
 ### GetReplicationGroupName
 
@@ -414,6 +436,31 @@ SetType sets Type field to given value.
 `func (o *XClusterConfig) HasType() bool`
 
 HasType returns a boolean if a field has been set.
+
+### GetUsedForDr
+
+`func (o *XClusterConfig) GetUsedForDr() bool`
+
+GetUsedForDr returns the UsedForDr field if non-nil, zero value otherwise.
+
+### GetUsedForDrOk
+
+`func (o *XClusterConfig) GetUsedForDrOk() (*bool, bool)`
+
+GetUsedForDrOk returns a tuple with the UsedForDr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedForDr
+
+`func (o *XClusterConfig) SetUsedForDr(v bool)`
+
+SetUsedForDr sets UsedForDr field to given value.
+
+### HasUsedForDr
+
+`func (o *XClusterConfig) HasUsedForDr() bool`
+
+HasUsedForDr returns a boolean if a field has been set.
 
 ### GetUuid
 

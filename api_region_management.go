@@ -27,7 +27,7 @@ var (
 // RegionManagementApiService RegionManagementApi service
 type RegionManagementApiService service
 
-type RegionManagementApiApiCreateRegionRequest struct {
+type RegionManagementApiApiCreateProviderRegionRequest struct {
 	ctx _context.Context
 	ApiService *RegionManagementApiService
 	cUUID string
@@ -36,7 +36,148 @@ type RegionManagementApiApiCreateRegionRequest struct {
 	request *interface{}
 }
 
-func (r RegionManagementApiApiCreateRegionRequest) Region(region Region) RegionManagementApiApiCreateRegionRequest {
+func (r RegionManagementApiApiCreateProviderRegionRequest) Region(region Region) RegionManagementApiApiCreateProviderRegionRequest {
+	r.region = &region
+	return r
+}
+func (r RegionManagementApiApiCreateProviderRegionRequest) Request(request interface{}) RegionManagementApiApiCreateProviderRegionRequest {
+	r.request = &request
+	return r
+}
+
+func (r RegionManagementApiApiCreateProviderRegionRequest) Execute() (Region, *_nethttp.Response, error) {
+	return r.ApiService.CreateProviderRegionExecute(r)
+}
+
+/*
+ * CreateProviderRegion Create a new region
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @return RegionManagementApiApiCreateProviderRegionRequest
+ */
+func (a *RegionManagementApiService) CreateProviderRegion(ctx _context.Context, cUUID string, pUUID string) RegionManagementApiApiCreateProviderRegionRequest {
+	return RegionManagementApiApiCreateProviderRegionRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Region
+ */
+func (a *RegionManagementApiService) CreateProviderRegionExecute(r RegionManagementApiApiCreateProviderRegionRequest) (Region, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Region
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementApiService.CreateProviderRegion")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.region == nil {
+		return localVarReturnValue, nil, reportError("region is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.region
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RegionManagementApiApiCreateRegionRequest struct {
+	ctx _context.Context
+	ApiService *RegionManagementApiService
+	cUUID string
+	pUUID string
+	region *RegionFormData
+	request *interface{}
+}
+
+func (r RegionManagementApiApiCreateRegionRequest) Region(region RegionFormData) RegionManagementApiApiCreateRegionRequest {
 	r.region = &region
 	return r
 }
@@ -50,7 +191,7 @@ func (r RegionManagementApiApiCreateRegionRequest) Execute() (Region, *_nethttp.
 }
 
 /*
- * CreateRegion Create a new region
+ * CreateRegion Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -303,7 +444,7 @@ func (a *RegionManagementApiService) DeleteRegionExecute(r RegionManagementApiAp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type RegionManagementApiApiEditRegionRequest struct {
+type RegionManagementApiApiEditProviderRegionRequest struct {
 	ctx _context.Context
 	ApiService *RegionManagementApiService
 	cUUID string
@@ -313,7 +454,152 @@ type RegionManagementApiApiEditRegionRequest struct {
 	request *interface{}
 }
 
-func (r RegionManagementApiApiEditRegionRequest) Region(region Region) RegionManagementApiApiEditRegionRequest {
+func (r RegionManagementApiApiEditProviderRegionRequest) Region(region Region) RegionManagementApiApiEditProviderRegionRequest {
+	r.region = &region
+	return r
+}
+func (r RegionManagementApiApiEditProviderRegionRequest) Request(request interface{}) RegionManagementApiApiEditProviderRegionRequest {
+	r.request = &request
+	return r
+}
+
+func (r RegionManagementApiApiEditProviderRegionRequest) Execute() (Region, *_nethttp.Response, error) {
+	return r.ApiService.EditProviderRegionExecute(r)
+}
+
+/*
+ * EditProviderRegion Modify a region
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param pUUID
+ * @param rUUID
+ * @return RegionManagementApiApiEditProviderRegionRequest
+ */
+func (a *RegionManagementApiService) EditProviderRegion(ctx _context.Context, cUUID string, pUUID string, rUUID string) RegionManagementApiApiEditProviderRegionRequest {
+	return RegionManagementApiApiEditProviderRegionRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		pUUID: pUUID,
+		rUUID: rUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Region
+ */
+func (a *RegionManagementApiService) EditProviderRegionExecute(r RegionManagementApiApiEditProviderRegionRequest) (Region, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Region
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementApiService.EditProviderRegion")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rUUID"+"}", _neturl.PathEscape(parameterToString(r.rUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.region == nil {
+		return localVarReturnValue, nil, reportError("region is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.region
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RegionManagementApiApiEditRegionRequest struct {
+	ctx _context.Context
+	ApiService *RegionManagementApiService
+	cUUID string
+	pUUID string
+	rUUID string
+	region *RegionFormData
+	request *interface{}
+}
+
+func (r RegionManagementApiApiEditRegionRequest) Region(region RegionFormData) RegionManagementApiApiEditRegionRequest {
 	r.region = &region
 	return r
 }
@@ -327,7 +613,7 @@ func (r RegionManagementApiApiEditRegionRequest) Execute() (map[string]interface
 }
 
 /*
- * EditRegion Modify a region
+ * EditRegion Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

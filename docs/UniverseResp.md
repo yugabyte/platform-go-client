@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreationDate** | Pointer to **string** | Universe creation date | [optional] 
 **DnsName** | Pointer to **string** | DNS name | [optional] 
+**DrConfigUuidsAsSource** | Pointer to **[]string** | UUIDs of DR configs where this universe is the source (primary) | [optional] 
+**DrConfigUuidsAsTarget** | Pointer to **[]string** | UUIDs of DR configs where this universe is the target (secondary) | [optional] 
 **Name** | Pointer to **string** | Universe name | [optional] 
 **PricePerHour** | Pointer to **float64** | Price | [optional] 
 **Resources** | Pointer to [**UniverseResourceDetails**](UniverseResourceDetails.md) |  | [optional] 
@@ -84,6 +86,56 @@ SetDnsName sets DnsName field to given value.
 `func (o *UniverseResp) HasDnsName() bool`
 
 HasDnsName returns a boolean if a field has been set.
+
+### GetDrConfigUuidsAsSource
+
+`func (o *UniverseResp) GetDrConfigUuidsAsSource() []string`
+
+GetDrConfigUuidsAsSource returns the DrConfigUuidsAsSource field if non-nil, zero value otherwise.
+
+### GetDrConfigUuidsAsSourceOk
+
+`func (o *UniverseResp) GetDrConfigUuidsAsSourceOk() (*[]string, bool)`
+
+GetDrConfigUuidsAsSourceOk returns a tuple with the DrConfigUuidsAsSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDrConfigUuidsAsSource
+
+`func (o *UniverseResp) SetDrConfigUuidsAsSource(v []string)`
+
+SetDrConfigUuidsAsSource sets DrConfigUuidsAsSource field to given value.
+
+### HasDrConfigUuidsAsSource
+
+`func (o *UniverseResp) HasDrConfigUuidsAsSource() bool`
+
+HasDrConfigUuidsAsSource returns a boolean if a field has been set.
+
+### GetDrConfigUuidsAsTarget
+
+`func (o *UniverseResp) GetDrConfigUuidsAsTarget() []string`
+
+GetDrConfigUuidsAsTarget returns the DrConfigUuidsAsTarget field if non-nil, zero value otherwise.
+
+### GetDrConfigUuidsAsTargetOk
+
+`func (o *UniverseResp) GetDrConfigUuidsAsTargetOk() (*[]string, bool)`
+
+GetDrConfigUuidsAsTargetOk returns a tuple with the DrConfigUuidsAsTarget field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDrConfigUuidsAsTarget
+
+`func (o *UniverseResp) SetDrConfigUuidsAsTarget(v []string)`
+
+SetDrConfigUuidsAsTarget sets DrConfigUuidsAsTarget field to given value.
+
+### HasDrConfigUuidsAsTarget
+
+`func (o *UniverseResp) HasDrConfigUuidsAsTarget() bool`
+
+HasDrConfigUuidsAsTarget returns a boolean if a field has been set.
 
 ### GetName
 

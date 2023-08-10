@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AssignStaticPublicIP** | Pointer to **bool** | Whether to assign static public IP | [optional] 
 **AwsArnString** | Pointer to **string** |  | [optional] 
 **AzOverrides** | Pointer to **map[string]string** |  | [optional] 
+**CgroupSize** | Pointer to **int32** |  | [optional] 
 **DedicatedNodes** | Pointer to **bool** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **EnableClientToNodeEncrypt** | Pointer to **bool** |  | [optional] 
@@ -46,6 +47,7 @@ Name | Type | Description | Notes
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
+**UserIntentOverrides** | Pointer to [**UserIntentOverrides**](UserIntentOverrides.md) |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
 **YbcFlags** | Pointer to **map[string]string** |  | [optional] 
 **YcqlPassword** | Pointer to **string** |  | [optional] 
@@ -194,6 +196,31 @@ SetAzOverrides sets AzOverrides field to given value.
 `func (o *UserIntent) HasAzOverrides() bool`
 
 HasAzOverrides returns a boolean if a field has been set.
+
+### GetCgroupSize
+
+`func (o *UserIntent) GetCgroupSize() int32`
+
+GetCgroupSize returns the CgroupSize field if non-nil, zero value otherwise.
+
+### GetCgroupSizeOk
+
+`func (o *UserIntent) GetCgroupSizeOk() (*int32, bool)`
+
+GetCgroupSizeOk returns a tuple with the CgroupSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCgroupSize
+
+`func (o *UserIntent) SetCgroupSize(v int32)`
+
+SetCgroupSize sets CgroupSize field to given value.
+
+### HasCgroupSize
+
+`func (o *UserIntent) HasCgroupSize() bool`
+
+HasCgroupSize returns a boolean if a field has been set.
 
 ### GetDedicatedNodes
 
@@ -1119,6 +1146,31 @@ SetUseTimeSync sets UseTimeSync field to given value.
 `func (o *UserIntent) HasUseTimeSync() bool`
 
 HasUseTimeSync returns a boolean if a field has been set.
+
+### GetUserIntentOverrides
+
+`func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides`
+
+GetUserIntentOverrides returns the UserIntentOverrides field if non-nil, zero value otherwise.
+
+### GetUserIntentOverridesOk
+
+`func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool)`
+
+GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIntentOverrides
+
+`func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides)`
+
+SetUserIntentOverrides sets UserIntentOverrides field to given value.
+
+### HasUserIntentOverrides
+
+`func (o *UserIntent) HasUserIntentOverrides() bool`
+
+HasUserIntentOverrides returns a boolean if a field has been set.
 
 ### GetYbSoftwareVersion
 

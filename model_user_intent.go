@@ -22,6 +22,7 @@ type UserIntent struct {
 	AssignStaticPublicIP *bool `json:"assignStaticPublicIP,omitempty"`
 	AwsArnString *string `json:"awsArnString,omitempty"`
 	AzOverrides *map[string]string `json:"azOverrides,omitempty"`
+	CgroupSize *int32 `json:"cgroupSize,omitempty"`
 	DedicatedNodes *bool `json:"dedicatedNodes,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	EnableClientToNodeEncrypt *bool `json:"enableClientToNodeEncrypt,omitempty"`
@@ -59,6 +60,7 @@ type UserIntent struct {
 	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
+	UserIntentOverrides *UserIntentOverrides `json:"userIntentOverrides,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
 	YbcFlags *map[string]string `json:"ybcFlags,omitempty"`
 	YcqlPassword *string `json:"ycqlPassword,omitempty"`
@@ -240,6 +242,38 @@ func (o *UserIntent) HasAzOverrides() bool {
 // SetAzOverrides gets a reference to the given map[string]string and assigns it to the AzOverrides field.
 func (o *UserIntent) SetAzOverrides(v map[string]string) {
 	o.AzOverrides = &v
+}
+
+// GetCgroupSize returns the CgroupSize field value if set, zero value otherwise.
+func (o *UserIntent) GetCgroupSize() int32 {
+	if o == nil || o.CgroupSize == nil {
+		var ret int32
+		return ret
+	}
+	return *o.CgroupSize
+}
+
+// GetCgroupSizeOk returns a tuple with the CgroupSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetCgroupSizeOk() (*int32, bool) {
+	if o == nil || o.CgroupSize == nil {
+		return nil, false
+	}
+	return o.CgroupSize, true
+}
+
+// HasCgroupSize returns a boolean if a field has been set.
+func (o *UserIntent) HasCgroupSize() bool {
+	if o != nil && o.CgroupSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCgroupSize gets a reference to the given int32 and assigns it to the CgroupSize field.
+func (o *UserIntent) SetCgroupSize(v int32) {
+	o.CgroupSize = &v
 }
 
 // GetDedicatedNodes returns the DedicatedNodes field value if set, zero value otherwise.
@@ -1426,6 +1460,38 @@ func (o *UserIntent) SetUseTimeSync(v bool) {
 	o.UseTimeSync = &v
 }
 
+// GetUserIntentOverrides returns the UserIntentOverrides field value if set, zero value otherwise.
+func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides {
+	if o == nil || o.UserIntentOverrides == nil {
+		var ret UserIntentOverrides
+		return ret
+	}
+	return *o.UserIntentOverrides
+}
+
+// GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool) {
+	if o == nil || o.UserIntentOverrides == nil {
+		return nil, false
+	}
+	return o.UserIntentOverrides, true
+}
+
+// HasUserIntentOverrides returns a boolean if a field has been set.
+func (o *UserIntent) HasUserIntentOverrides() bool {
+	if o != nil && o.UserIntentOverrides != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIntentOverrides gets a reference to the given UserIntentOverrides and assigns it to the UserIntentOverrides field.
+func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides) {
+	o.UserIntentOverrides = &v
+}
+
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value if set, zero value otherwise.
 func (o *UserIntent) GetYbSoftwareVersion() string {
 	if o == nil || o.YbSoftwareVersion == nil {
@@ -1571,6 +1637,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.AzOverrides != nil {
 		toSerialize["azOverrides"] = o.AzOverrides
 	}
+	if o.CgroupSize != nil {
+		toSerialize["cgroupSize"] = o.CgroupSize
+	}
 	if o.DedicatedNodes != nil {
 		toSerialize["dedicatedNodes"] = o.DedicatedNodes
 	}
@@ -1681,6 +1750,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseTimeSync != nil {
 		toSerialize["useTimeSync"] = o.UseTimeSync
+	}
+	if o.UserIntentOverrides != nil {
+		toSerialize["userIntentOverrides"] = o.UserIntentOverrides
 	}
 	if o.YbSoftwareVersion != nil {
 		toSerialize["ybSoftwareVersion"] = o.YbSoftwareVersion

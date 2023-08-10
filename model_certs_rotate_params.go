@@ -46,6 +46,7 @@ type CertsRotateParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
+	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
@@ -883,6 +884,38 @@ func (o *CertsRotateParams) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *CertsRotateParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
+func (o *CertsRotateParams) GetPlacementModificationTaskUuid() string {
+	if o == nil || o.PlacementModificationTaskUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.PlacementModificationTaskUuid
+}
+
+// GetPlacementModificationTaskUuidOk returns a tuple with the PlacementModificationTaskUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CertsRotateParams) GetPlacementModificationTaskUuidOk() (*string, bool) {
+	if o == nil || o.PlacementModificationTaskUuid == nil {
+		return nil, false
+	}
+	return o.PlacementModificationTaskUuid, true
+}
+
+// HasPlacementModificationTaskUuid returns a boolean if a field has been set.
+func (o *CertsRotateParams) HasPlacementModificationTaskUuid() bool {
+	if o != nil && o.PlacementModificationTaskUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlacementModificationTaskUuid gets a reference to the given string and assigns it to the PlacementModificationTaskUuid field.
+func (o *CertsRotateParams) SetPlacementModificationTaskUuid(v string) {
+	o.PlacementModificationTaskUuid = &v
 }
 
 // GetPlatformUrl returns the PlatformUrl field value
@@ -1833,6 +1866,9 @@ func (o CertsRotateParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if o.PlacementModificationTaskUuid != nil {
+		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl

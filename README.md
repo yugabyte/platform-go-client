@@ -131,9 +131,11 @@ Class | Method | HTTP request | Description
 *AuditApi* | [**GetTaskAudit**](docs/AuditApi.md#gettaskaudit) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info | Get audit info for a task
 *AuditApi* | [**GetUserFromTask**](docs/AuditApi.md#getuserfromtask) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user | Get the user associated with a task
 *AuditApi* | [**ListOfAudit**](docs/AuditApi.md#listofaudit) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail | List a user&#39;s audit entries
-*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Create an availability zone
+*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+*AvailabilityZonesApi* | [**CreateZone**](docs/AvailabilityZonesApi.md#createzone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
 *AvailabilityZonesApi* | [**DeleteAZ**](docs/AvailabilityZonesApi.md#deleteaz) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
-*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Modify an availability zone
+*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+*AvailabilityZonesApi* | [**EditZone**](docs/AvailabilityZonesApi.md#editzone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
 *AvailabilityZonesApi* | [**ListOfAZ**](docs/AvailabilityZonesApi.md#listofaz) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 *BackupsApi* | [**CreateBackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
 *BackupsApi* | [**CreateBackupScheduleAsync**](docs/BackupsApi.md#createbackupscheduleasync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
@@ -199,6 +201,9 @@ Class | Method | HTTP request | Description
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
+*DisasterRecoveryApi* | [**CreateDrConfig**](docs/DisasterRecoveryApi.md#createdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
+*DisasterRecoveryApi* | [**DeleteXClusterConfig**](docs/DisasterRecoveryApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Delete xcluster config
+*DisasterRecoveryApi* | [**GetDrConfig**](docs/DisasterRecoveryApi.md#getdrconfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 *EncryptionAtRestApi* | [**DeleteKMSConfig**](docs/EncryptionAtRestApi.md#deletekmsconfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 *EncryptionAtRestApi* | [**EditKMSConfig**](docs/EncryptionAtRestApi.md#editkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
@@ -267,12 +272,16 @@ Class | Method | HTTP request | Description
 *RBACManagementApi* | [**CreateRole**](docs/RBACManagementApi.md#createrole) | **Post** /api/v1/customers/{cUUID}/rbac/role | Create a custom role
 *RBACManagementApi* | [**DeleteRole**](docs/RBACManagementApi.md#deleterole) | **Delete** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Delete a custom role
 *RBACManagementApi* | [**EditRole**](docs/RBACManagementApi.md#editrole) | **Put** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Edit a custom role
+*RBACManagementApi* | [**EditRoleBinding**](docs/RBACManagementApi.md#editrolebinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Edit the role bindings of a user
 *RBACManagementApi* | [**GetRole**](docs/RBACManagementApi.md#getrole) | **Get** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Get a role&#39;s information
+*RBACManagementApi* | [**GetRoleBindings**](docs/RBACManagementApi.md#getrolebindings) | **Get** /api/v1/customers/{cUUID}/rbac/role_binding | Get all the role bindings available
 *RBACManagementApi* | [**ListPermissions**](docs/RBACManagementApi.md#listpermissions) | **Get** /api/v1/customers/{cUUID}/rbac/permissions | List all the permissions available
 *RBACManagementApi* | [**ListRoles**](docs/RBACManagementApi.md#listroles) | **Get** /api/v1/customers/{cUUID}/rbac/role | List all the roles available
-*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create a new region
+*RegionManagementApi* | [**CreateProviderRegion**](docs/RegionManagementApi.md#createproviderregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | Create a new region
+*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
-*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Modify a region
+*RegionManagementApi* | [**EditProviderRegion**](docs/RegionManagementApi.md#editproviderregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | Modify a region
+*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**GetRegion**](docs/RegionManagementApi.md#getregion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 *ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
@@ -391,6 +400,7 @@ Class | Method | HTTP request | Description
  - [AWSCloudInfo](docs/AWSCloudInfo.md)
  - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
  - [AZCloudInfo](docs/AZCloudInfo.md)
+ - [AZOverrides](docs/AZOverrides.md)
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
@@ -436,7 +446,9 @@ Class | Method | HTTP request | Description
  - [Audit](docs/Audit.md)
  - [AuditLoggingConfig](docs/AuditLoggingConfig.md)
  - [AvailabilityZone](docs/AvailabilityZone.md)
+ - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
  - [AvailabilityZoneDetails](docs/AvailabilityZoneDetails.md)
+ - [AvailabilityZoneFormData](docs/AvailabilityZoneFormData.md)
  - [AzureCloudInfo](docs/AzureCloudInfo.md)
  - [AzureRegionCloudInfo](docs/AzureRegionCloudInfo.md)
  - [Backup](docs/Backup.md)
@@ -497,6 +509,7 @@ Class | Method | HTTP request | Description
  - [DeleteBackupParams](docs/DeleteBackupParams.md)
  - [Details](docs/Details.md)
  - [DeviceInfo](docs/DeviceInfo.md)
+ - [DrConfigCreateForm](docs/DrConfigCreateForm.md)
  - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
@@ -560,6 +573,7 @@ Class | Method | HTTP request | Description
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
  - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
+ - [OverridenDetails](docs/OverridenDetails.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
@@ -577,6 +591,7 @@ Class | Method | HTTP request | Description
  - [PermissionInfo](docs/PermissionInfo.md)
  - [PermissionInfoIdentifier](docs/PermissionInfoIdentifier.md)
  - [PitrConfig](docs/PitrConfig.md)
+ - [PitrParams](docs/PitrParams.md)
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementBlock](docs/PlacementBlock.md)
  - [PlacementCloud](docs/PlacementCloud.md)
@@ -590,12 +605,15 @@ Class | Method | HTTP request | Description
  - [Region](docs/Region.md)
  - [RegionCloudInfo](docs/RegionCloudInfo.md)
  - [RegionDetails](docs/RegionDetails.md)
+ - [RegionFormData](docs/RegionFormData.md)
  - [RegionLocations](docs/RegionLocations.md)
  - [RegionMetadata](docs/RegionMetadata.md)
  - [RegionMetadataInfo](docs/RegionMetadataInfo.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
  - [ResizeNodeParams](docs/ResizeNodeParams.md)
+ - [ResourceDefinition](docs/ResourceDefinition.md)
+ - [ResourceGroup](docs/ResourceGroup.md)
  - [RestartBootstrapParams](docs/RestartBootstrapParams.md)
  - [RestartTaskParams](docs/RestartTaskParams.md)
  - [RestoreApiFilter](docs/RestoreApiFilter.md)
@@ -608,6 +626,9 @@ Class | Method | HTTP request | Description
  - [RestoreResp](docs/RestoreResp.md)
  - [RestoreSnapshotScheduleParams](docs/RestoreSnapshotScheduleParams.md)
  - [Role](docs/Role.md)
+ - [RoleBinding](docs/RoleBinding.md)
+ - [RoleBindingFormData](docs/RoleBindingFormData.md)
+ - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
  - [S3Location](docs/S3Location.md)
@@ -649,6 +670,7 @@ Class | Method | HTTP request | Description
  - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
  - [UserIntent](docs/UserIntent.md)
+ - [UserIntentOverrides](docs/UserIntentOverrides.md)
  - [UserOIDCAuthToken](docs/UserOIDCAuthToken.md)
  - [UserProfileData](docs/UserProfileData.md)
  - [UserRegistrationData](docs/UserRegistrationData.md)

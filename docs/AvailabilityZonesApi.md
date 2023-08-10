@@ -4,9 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAZ**](AvailabilityZonesApi.md#CreateAZ) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Create an availability zone
+[**CreateAZ**](AvailabilityZonesApi.md#CreateAZ) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+[**CreateZone**](AvailabilityZonesApi.md#CreateZone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
 [**DeleteAZ**](AvailabilityZonesApi.md#DeleteAZ) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
-[**EditAZ**](AvailabilityZonesApi.md#EditAZ) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Modify an availability zone
+[**EditAZ**](AvailabilityZonesApi.md#EditAZ) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+[**EditZone**](AvailabilityZonesApi.md#EditZone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
 [**ListOfAZ**](AvailabilityZonesApi.md#ListOfAZ) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 
 
@@ -15,7 +17,7 @@ Method | HTTP request | Description
 
 > map[string]AvailabilityZone CreateAZ(ctx, cUUID, pUUID, rUUID).AzFormData(azFormData).Request(request).Execute()
 
-Create an availability zone
+Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
 
 ### Example
 
@@ -33,7 +35,7 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     rUUID := TODO // string | 
-    azFormData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability zone form data
+    azFormData := *openapiclient.NewAvailabilityZoneFormData([]openapiclient.AvailabilityZoneData{*openapiclient.NewAvailabilityZoneData("Code_example", "Name_example")}) // AvailabilityZoneFormData | Availability zone form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -68,7 +70,85 @@ Name | Type | Description  | Notes
 
 
 
- **azFormData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability zone form data | 
+ **azFormData** | [**AvailabilityZoneFormData**](AvailabilityZoneFormData.md) | Availability zone form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**map[string]AvailabilityZone**](AvailabilityZone.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateZone
+
+> map[string]AvailabilityZone CreateZone(ctx, cUUID, pUUID, rUUID).AzData(azData).Request(request).Execute()
+
+Create an availability zone
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pUUID := TODO // string | 
+    rUUID := TODO // string | 
+    azData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability Zone to create
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AvailabilityZonesApi.CreateZone(context.Background(), cUUID, pUUID, rUUID).AzData(azData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AvailabilityZonesApi.CreateZone``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateZone`: map[string]AvailabilityZone
+    fmt.Fprintf(os.Stdout, "Response from `AvailabilityZonesApi.CreateZone`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**pUUID** | [**string**](.md) |  | 
+**rUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateZoneRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **azData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability Zone to create | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -172,7 +252,7 @@ Name | Type | Description  | Notes
 
 > AvailabilityZone EditAZ(ctx, cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Request(request).Execute()
 
-Modify an availability zone
+Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
 
 ### Example
 
@@ -191,7 +271,7 @@ func main() {
     pUUID := TODO // string | 
     rUUID := TODO // string | 
     azUUID := TODO // string | 
-    azFormData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability zone edit form data
+    azFormData := *openapiclient.NewAvailabilityZoneFormData([]openapiclient.AvailabilityZoneData{*openapiclient.NewAvailabilityZoneData("Code_example", "Name_example")}) // AvailabilityZoneFormData | Availability zone edit form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -228,7 +308,88 @@ Name | Type | Description  | Notes
 
 
 
- **azFormData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability zone edit form data | 
+ **azFormData** | [**AvailabilityZoneFormData**](AvailabilityZoneFormData.md) | Availability zone edit form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**AvailabilityZone**](AvailabilityZone.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EditZone
+
+> AvailabilityZone EditZone(ctx, cUUID, pUUID, rUUID, azUUID).AzData(azData).Request(request).Execute()
+
+Modify an availability zone
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pUUID := TODO // string | 
+    rUUID := TODO // string | 
+    azUUID := TODO // string | 
+    azData := *openapiclient.NewAvailabilityZone("us-west1-a") // AvailabilityZone | Availability zone to edit
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AvailabilityZonesApi.EditZone(context.Background(), cUUID, pUUID, rUUID, azUUID).AzData(azData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AvailabilityZonesApi.EditZone``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EditZone`: AvailabilityZone
+    fmt.Fprintf(os.Stdout, "Response from `AvailabilityZonesApi.EditZone`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**pUUID** | [**string**](.md) |  | 
+**rUUID** | [**string**](.md) |  | 
+**azUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEditZoneRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **azData** | [**AvailabilityZone**](AvailabilityZone.md) | Availability zone to edit | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
