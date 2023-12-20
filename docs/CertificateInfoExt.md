@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **CustomHCPKICertInfo** | [**HashicorpVaultConfigParams**](HashicorpVaultConfigParams.md) |  | 
 **CustomServerCertInfo** | [**CustomServerCertInfo**](CustomServerCertInfo.md) |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID of the backup which it belongs to | [optional] 
-**ExpiryDate** | Pointer to **time.Time** | The certificate&#39;s expiry date. Deprecated: Use expirtyDateIso instead | [optional] 
+**ExpiryDate** | Pointer to **time.Time** | The certificate&#39;s expiry date. Deprecated since YBA version 2.17.2.0. Use expirtyDateIso instead | [optional] 
 **ExpiryDateIso** | Pointer to **time.Time** | The certificate&#39;s expiry date | [optional] 
 **InUse** | Pointer to **bool** | Indicates whether the certificate is in use. This value is &#x60;true&#x60; if the universe contains a reference to the certificate. | [optional] [readonly] 
 **Label** | Pointer to **string** | Certificate label | [optional] 
 **PrivateKey** | Pointer to **string** | Private key path | [optional] 
-**StartDate** | Pointer to **time.Time** | The certificate&#39;s creation date. Deprecated: use stateDateIso instead | [optional] 
+**StartDate** | Pointer to **time.Time** | The certificate&#39;s creation date. Deprecated since YBA version 2.17.2.0. Use stateDateIso instead | [optional] 
 **StartDateIso** | Pointer to **time.Time** | The certificate&#39;s creation date | [optional] 
 **UniverseDetailSubsets** | [**[]UniverseDetailSubset**](UniverseDetailSubset.md) |  | 
 **UniverseDetails** | Pointer to [**[]UniverseDetailSubset**](UniverseDetailSubset.md) | Associated universe details for the certificate | [optional] [readonly] 

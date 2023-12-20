@@ -360,7 +360,7 @@ func (r SessionManagementApiApiGetAdminNotificationsRequest) Execute() (CurrentA
 }
 
 /*
- * GetAdminNotifications getAdminNotifications
+ * GetAdminNotifications WARNING: This is a preview API that could change. Returns the current list of notifications for admin
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return SessionManagementApiApiGetAdminNotificationsRequest

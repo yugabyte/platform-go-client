@@ -45,7 +45,7 @@ func (r ScheduleManagementApiApiDeleteScheduleRequest) Execute() (YBPSuccess, *_
 }
 
 /*
- * DeleteSchedule Delete a schedule
+ * DeleteSchedule Deprecated since YBA version 2.20.0.0. Use 'Delete a schedule V2' instead. Delete a schedule
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param sUUID
@@ -565,7 +565,7 @@ func (r ScheduleManagementApiApiListSchedulesRequest) Execute() ([]Schedule, *_n
 }
 
 /*
- * ListSchedules List schedules
+ * ListSchedules Deprecated since YBA version 2.20.0.0. Use 'List schedules V2' instead. List schedules
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return ScheduleManagementApiApiListSchedulesRequest

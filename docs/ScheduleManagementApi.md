@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteSchedule**](ScheduleManagementApi.md#DeleteSchedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Delete a schedule
+[**DeleteSchedule**](ScheduleManagementApi.md#DeleteSchedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Deprecated since YBA version 2.20.0.0. Use &#39;Delete a schedule V2&#39; instead. Delete a schedule
 [**DeleteScheduleV2**](ScheduleManagementApi.md#DeleteScheduleV2) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete | Delete a schedule V2
 [**EditBackupScheduleV2**](ScheduleManagementApi.md#EditBackupScheduleV2) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule V2
 [**GetSchedule**](ScheduleManagementApi.md#GetSchedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
-[**ListSchedules**](ScheduleManagementApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules
+[**ListSchedules**](ScheduleManagementApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/schedules | Deprecated since YBA version 2.20.0.0. Use &#39;List schedules V2&#39; instead. List schedules
 [**ListSchedulesV2**](ScheduleManagementApi.md#ListSchedulesV2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
 
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > YBPSuccess DeleteSchedule(ctx, cUUID, sUUID).Request(request).Execute()
 
-Delete a schedule
+Deprecated since YBA version 2.20.0.0. Use 'Delete a schedule V2' instead. Delete a schedule
 
 ### Example
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 > []Schedule ListSchedules(ctx, cUUID).Execute()
 
-List schedules
+Deprecated since YBA version 2.20.0.0. Use 'List schedules V2' instead. List schedules
 
 ### Example
 

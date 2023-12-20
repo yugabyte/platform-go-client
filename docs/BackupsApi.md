@@ -4,25 +4,25 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateBackupSchedule**](BackupsApi.md#CreateBackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
+[**CreateBackupSchedule**](BackupsApi.md#CreateBackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Deprecated since YBA version 2.20.0.0. Use &#39;Create Backup Schedule Async&#39; instead. Create Backup Schedule
 [**CreateBackupScheduleAsync**](BackupsApi.md#CreateBackupScheduleAsync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
-[**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
-[**Createbackup**](BackupsApi.md#Createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
-[**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
+[**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+[**Createbackup**](BackupsApi.md#Createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
+[**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;Delete backups V2&#39; instead. Delete backups
 [**DeleteBackupsV2**](BackupsApi.md#DeleteBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 [**EditBackupV2**](BackupsApi.md#EditBackupV2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
-[**FetchBackupsByTaskUUID**](BackupsApi.md#FetchBackupsByTaskUUID) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
+[**FetchBackupsByTaskUUID**](BackupsApi.md#FetchBackupsByTaskUUID) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List backups associated with a task
 [**GetBackupV2**](BackupsApi.md#GetBackupV2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
 [**GetThrottleParams**](BackupsApi.md#GetThrottleParams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Get throttle params from YB-Controller
 [**ListBackupRestoresV2**](BackupsApi.md#ListBackupRestoresV2) | **Post** /api/v1/customers/{cUUID}/restore/page | List Backup Restores (paginated)
 [**ListBackupsV2**](BackupsApi.md#ListBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 [**ListIncrementalBackups**](BackupsApi.md#ListIncrementalBackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
-[**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
-[**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
+[**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;List Backups (paginated) V2&#39; instead. List a customer&#39;s backups
+[**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Deprecated since YBA version 2.20.0.0. Use &#39;Restore from a backup V2&#39; instead. Restore from a backup
 [**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 [**RestorePreflight**](BackupsApi.md#RestorePreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
 [**SetThrottleParams**](BackupsApi.md#SetThrottleParams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
-[**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
+[**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Available since YBA version 2.2.0.0. Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 
 
@@ -31,7 +31,7 @@ Method | HTTP request | Description
 
 > Schedule CreateBackupSchedule(ctx, cUUID).Backup(backup).Request(request).Execute()
 
-Create Backup Schedule
+Deprecated since YBA version 2.20.0.0. Use 'Create Backup Schedule Async' instead. Create Backup Schedule
 
 ### Example
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 > Schedule CreateMultiTableBackup(ctx, cUUID, uniUUID).TableBackup(tableBackup).Request(request).Execute()
 
-Create a multi-table backup
+Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
 
 ### Example
 
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 
 > YBPTask Createbackup(ctx, cUUID).Backup(backup).Request(request).Execute()
 
-Create a backup
+Create a backup V2
 
 ### Example
 
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} DeleteBackups(ctx, cUUID).Request(request).Execute()
 
-Delete backups
+Deprecated since YBA version 2.20.0.0. Use 'Delete backups V2' instead. Delete backups
 
 ### Example
 
@@ -541,7 +541,7 @@ Name | Type | Description  | Notes
 
 > []Backup FetchBackupsByTaskUUID(ctx, cUUID, uniUUID, tUUID).Execute()
 
-List a task's backups
+List backups associated with a task
 
 ### Example
 
@@ -972,7 +972,7 @@ Name | Type | Description  | Notes
 
 > []Backup ListOfBackups(ctx, cUUID, uniUUID).Execute()
 
-List a customer's backups
+Deprecated since YBA version 2.20.0.0. Use 'List Backups (paginated) V2' instead. List a customer's backups
 
 ### Example
 
@@ -1043,7 +1043,7 @@ Name | Type | Description  | Notes
 
 > YBPTask Restore(ctx, cUUID, uniUUID).Backup(backup).Request(request).Execute()
 
-Restore from a backup
+Deprecated since YBA version 2.20.0.0. Use 'Restore from a backup V2' instead. Restore from a backup
 
 ### Example
 
@@ -1337,7 +1337,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess SetUniverseBackupFlag(ctx, cUUID, uniUUID).MarkActive(markActive).Request(request).Execute()
 
-Set a universe's backup flag
+Available since YBA version 2.2.0.0. Set a universe's backup flag
 
 ### Example
 

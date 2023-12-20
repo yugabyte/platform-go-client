@@ -16,18 +16,20 @@ import (
 
 // InstanceTypeDetails struct for InstanceTypeDetails
 type InstanceTypeDetails struct {
-	Tenancy string `json:"tenancy"`
-	VolumeDetailsList []VolumeDetails `json:"volumeDetailsList"`
+	// Architecture for the instance.
+	Arch *string `json:"arch,omitempty"`
+	// Tenancy for the instance.
+	Tenancy *string `json:"tenancy,omitempty"`
+	// Volume Details for the instance.
+	VolumeDetailsList *[]VolumeDetails `json:"volumeDetailsList,omitempty"`
 }
 
 // NewInstanceTypeDetails instantiates a new InstanceTypeDetails object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceTypeDetails(tenancy string, volumeDetailsList []VolumeDetails, ) *InstanceTypeDetails {
+func NewInstanceTypeDetails() *InstanceTypeDetails {
 	this := InstanceTypeDetails{}
-	this.Tenancy = tenancy
-	this.VolumeDetailsList = volumeDetailsList
 	return &this
 }
 
@@ -39,60 +41,111 @@ func NewInstanceTypeDetailsWithDefaults() *InstanceTypeDetails {
 	return &this
 }
 
-// GetTenancy returns the Tenancy field value
-func (o *InstanceTypeDetails) GetTenancy() string {
-	if o == nil  {
+// GetArch returns the Arch field value if set, zero value otherwise.
+func (o *InstanceTypeDetails) GetArch() string {
+	if o == nil || o.Arch == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Tenancy
+	return *o.Arch
 }
 
-// GetTenancyOk returns a tuple with the Tenancy field value
+// GetArchOk returns a tuple with the Arch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InstanceTypeDetails) GetTenancyOk() (*string, bool) {
-	if o == nil  {
+func (o *InstanceTypeDetails) GetArchOk() (*string, bool) {
+	if o == nil || o.Arch == nil {
 		return nil, false
 	}
-	return &o.Tenancy, true
+	return o.Arch, true
 }
 
-// SetTenancy sets field value
+// HasArch returns a boolean if a field has been set.
+func (o *InstanceTypeDetails) HasArch() bool {
+	if o != nil && o.Arch != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetArch gets a reference to the given string and assigns it to the Arch field.
+func (o *InstanceTypeDetails) SetArch(v string) {
+	o.Arch = &v
+}
+
+// GetTenancy returns the Tenancy field value if set, zero value otherwise.
+func (o *InstanceTypeDetails) GetTenancy() string {
+	if o == nil || o.Tenancy == nil {
+		var ret string
+		return ret
+	}
+	return *o.Tenancy
+}
+
+// GetTenancyOk returns a tuple with the Tenancy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InstanceTypeDetails) GetTenancyOk() (*string, bool) {
+	if o == nil || o.Tenancy == nil {
+		return nil, false
+	}
+	return o.Tenancy, true
+}
+
+// HasTenancy returns a boolean if a field has been set.
+func (o *InstanceTypeDetails) HasTenancy() bool {
+	if o != nil && o.Tenancy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTenancy gets a reference to the given string and assigns it to the Tenancy field.
 func (o *InstanceTypeDetails) SetTenancy(v string) {
-	o.Tenancy = v
+	o.Tenancy = &v
 }
 
-// GetVolumeDetailsList returns the VolumeDetailsList field value
+// GetVolumeDetailsList returns the VolumeDetailsList field value if set, zero value otherwise.
 func (o *InstanceTypeDetails) GetVolumeDetailsList() []VolumeDetails {
-	if o == nil  {
+	if o == nil || o.VolumeDetailsList == nil {
 		var ret []VolumeDetails
 		return ret
 	}
-
-	return o.VolumeDetailsList
+	return *o.VolumeDetailsList
 }
 
-// GetVolumeDetailsListOk returns a tuple with the VolumeDetailsList field value
+// GetVolumeDetailsListOk returns a tuple with the VolumeDetailsList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InstanceTypeDetails) GetVolumeDetailsListOk() (*[]VolumeDetails, bool) {
-	if o == nil  {
+	if o == nil || o.VolumeDetailsList == nil {
 		return nil, false
 	}
-	return &o.VolumeDetailsList, true
+	return o.VolumeDetailsList, true
 }
 
-// SetVolumeDetailsList sets field value
+// HasVolumeDetailsList returns a boolean if a field has been set.
+func (o *InstanceTypeDetails) HasVolumeDetailsList() bool {
+	if o != nil && o.VolumeDetailsList != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeDetailsList gets a reference to the given []VolumeDetails and assigns it to the VolumeDetailsList field.
 func (o *InstanceTypeDetails) SetVolumeDetailsList(v []VolumeDetails) {
-	o.VolumeDetailsList = v
+	o.VolumeDetailsList = &v
 }
 
 func (o InstanceTypeDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Arch != nil {
+		toSerialize["arch"] = o.Arch
+	}
+	if o.Tenancy != nil {
 		toSerialize["tenancy"] = o.Tenancy
 	}
-	if true {
+	if o.VolumeDetailsList != nil {
 		toSerialize["volumeDetailsList"] = o.VolumeDetailsList
 	}
 	return json.Marshal(toSerialize)

@@ -4,17 +4,16 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ConfigureUniverseAlerts**](UniverseManagementApi.md#ConfigureUniverseAlerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
-[**DeleteUniverse**](UniverseManagementApi.md#DeleteUniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
-[**GetUniverse**](UniverseManagementApi.md#GetUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Get a universe
-[**ListUniverses**](UniverseManagementApi.md#ListUniverses) | **Get** /api/v1/customers/{cUUID}/universes | List universes
-[**PauseUniverse**](UniverseManagementApi.md#PauseUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Pause a universe
-[**ResetUniverseVersion**](UniverseManagementApi.md#ResetUniverseVersion) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/setup_universe_2dc | Reset universe version
-[**ResumeUniverse**](UniverseManagementApi.md#ResumeUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/resume | Resume a paused universe
-[**SetUniverseBackupFlag**](UniverseManagementApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
-[**SetUniverseHelm3Compatible**](UniverseManagementApi.md#SetUniverseHelm3Compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
-[**SetUniverseKey**](UniverseManagementApi.md#SetUniverseKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
-[**UpdateLoadBalancerConfig**](UniverseManagementApi.md#UpdateLoadBalancerConfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
+[**ConfigureUniverseAlerts**](UniverseManagementApi.md#ConfigureUniverseAlerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Available since YBA version 2.2.0.0. Configure alerts for a universe
+[**DeleteUniverse**](UniverseManagementApi.md#DeleteUniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Available since YBA version 2.2.0.0. Delete a universe
+[**GetUniverse**](UniverseManagementApi.md#GetUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Available since YBA version 2.2.0.0. Get a universe
+[**ListUniverses**](UniverseManagementApi.md#ListUniverses) | **Get** /api/v1/customers/{cUUID}/universes | Available since YBA version 2.2.0.0. List universes
+[**PauseUniverse**](UniverseManagementApi.md#PauseUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Available since YBA version 2.6.0.0. Pause a universe
+[**ResumeUniverse**](UniverseManagementApi.md#ResumeUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/resume | Available since YBA version 2.6.0.0. Resume a paused universe
+[**SetUniverseBackupFlag**](UniverseManagementApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Available since YBA version 2.2.0.0. Set a universe&#39;s backup flag
+[**SetUniverseHelm3Compatible**](UniverseManagementApi.md#SetUniverseHelm3Compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
+[**SetUniverseKey**](UniverseManagementApi.md#SetUniverseKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Available since YBA version 2.2.0.0. Set a universe&#39;s key
+[**UpdateLoadBalancerConfig**](UniverseManagementApi.md#UpdateLoadBalancerConfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | WARNING: This is a preview API that could change. Update load balancer config
 
 
 
@@ -22,7 +21,7 @@ Method | HTTP request | Description
 
 > YBPSuccess ConfigureUniverseAlerts(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Configure alerts for a universe
+Available since YBA version 2.2.0.0. Configure alerts for a universe
 
 ### Example
 
@@ -95,7 +94,7 @@ Name | Type | Description  | Notes
 
 > YBPTask DeleteUniverse(ctx, cUUID, uniUUID).IsForceDelete(isForceDelete).IsDeleteBackups(isDeleteBackups).IsDeleteAssociatedCerts(isDeleteAssociatedCerts).Request(request).Execute()
 
-Delete a universe
+Available since YBA version 2.2.0.0. Delete a universe
 
 ### Example
 
@@ -174,7 +173,7 @@ Name | Type | Description  | Notes
 
 > UniverseResp GetUniverse(ctx, cUUID, uniUUID).Execute()
 
-Get a universe
+Available since YBA version 2.2.0.0. Get a universe
 
 ### Example
 
@@ -245,7 +244,7 @@ Name | Type | Description  | Notes
 
 > []UniverseResp ListUniverses(ctx, cUUID).Name(name).Execute()
 
-List universes
+Available since YBA version 2.2.0.0. List universes
 
 ### Example
 
@@ -315,7 +314,7 @@ Name | Type | Description  | Notes
 
 > YBPTask PauseUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Pause a universe
+Available since YBA version 2.6.0.0. Pause a universe
 
 ### Example
 
@@ -384,84 +383,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ResetUniverseVersion
-
-> YBPSuccess ResetUniverseVersion(ctx, cUUID, uniUUID).Request(request).Execute()
-
-Reset universe version
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-    request := TODO // interface{} |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.ResetUniverseVersion(context.Background(), cUUID, uniUUID).Request(request).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.ResetUniverseVersion``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ResetUniverseVersion`: YBPSuccess
-    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.ResetUniverseVersion`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiResetUniverseVersionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **request** | [**interface{}**](interface{}.md) |  | 
-
-### Return type
-
-[**YBPSuccess**](YBPSuccess.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## ResumeUniverse
 
 > YBPTask ResumeUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Resume a paused universe
+Available since YBA version 2.6.0.0. Resume a paused universe
 
 ### Example
 
@@ -534,7 +460,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess SetUniverseBackupFlag(ctx, cUUID, uniUUID).MarkActive(markActive).Request(request).Execute()
 
-Set a universe's backup flag
+Available since YBA version 2.2.0.0. Set a universe's backup flag
 
 ### Example
 
@@ -609,7 +535,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess SetUniverseHelm3Compatible(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Flag a universe as Helm 3-compatible
+Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
 
 ### Example
 
@@ -682,7 +608,7 @@ Name | Type | Description  | Notes
 
 > UniverseResp SetUniverseKey(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Set a universe's key
+Available since YBA version 2.2.0.0. Set a universe's key
 
 ### Example
 
@@ -755,7 +681,7 @@ Name | Type | Description  | Notes
 
 > UpdateLoadBalancerConfig UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Update load balancer config
+WARNING: This is a preview API that could change. Update load balancer config
 
 ### Example
 

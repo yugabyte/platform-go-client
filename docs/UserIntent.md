@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **InstanceType** | Pointer to **string** |  | [optional] 
 **KubernetesOperatorVersion** | Pointer to **int64** |  | [optional] 
 **MasterDeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
-**MasterGFlags** | Pointer to **map[string]string** |  | [optional] 
+**MasterGFlags** | Pointer to **map[string]string** | User-defined gflags for master. Deprecated since YBA version 2.18.6.0, use specificGFlags | [optional] 
 **MasterInstanceType** | Pointer to **string** |  | [optional] 
 **MasterK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **NumNodes** | Pointer to **int32** |  | [optional] 
@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
 **SpotPrice** | Pointer to **float64** |  | [optional] 
-**TserverGFlags** | Pointer to **map[string]string** |  | [optional] 
+**TserverGFlags** | Pointer to **map[string]string** | User-defined gflags for tserver. Deprecated since YBA version 2.18.6.0, use specificGFlags | [optional] 
 **TserverK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
@@ -47,7 +47,6 @@ Name | Type | Description | Notes
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
-**UserIntentOverrides** | Pointer to [**UserIntentOverrides**](UserIntentOverrides.md) |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
 **YbcFlags** | Pointer to **map[string]string** |  | [optional] 
 **YcqlPassword** | Pointer to **string** |  | [optional] 
@@ -1146,31 +1145,6 @@ SetUseTimeSync sets UseTimeSync field to given value.
 `func (o *UserIntent) HasUseTimeSync() bool`
 
 HasUseTimeSync returns a boolean if a field has been set.
-
-### GetUserIntentOverrides
-
-`func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides`
-
-GetUserIntentOverrides returns the UserIntentOverrides field if non-nil, zero value otherwise.
-
-### GetUserIntentOverridesOk
-
-`func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool)`
-
-GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserIntentOverrides
-
-`func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides)`
-
-SetUserIntentOverrides sets UserIntentOverrides field to given value.
-
-### HasUserIntentOverrides
-
-`func (o *UserIntent) HasUserIntentOverrides() bool`
-
-HasUserIntentOverrides returns a boolean if a field has been set.
 
 ### GetYbSoftwareVersion
 

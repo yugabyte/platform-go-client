@@ -49,7 +49,7 @@ func (r PerformanceAdvisorApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.
 }
 
 /*
- * Delete Delete performance recommendations
+ * Delete WARNING: This is a preview API that could change. Delete performance recommendations
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiDeleteRequest
@@ -177,7 +177,7 @@ func (r PerformanceAdvisorApiApiGetRequest) Execute() (PerformanceRecommendation
 }
 
 /*
- * Get Get performance recommendation details
+ * Get WARNING: This is a preview API that could change. Get performance recommendation details
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param rUUID
@@ -300,7 +300,7 @@ func (r PerformanceAdvisorApiApiGetLatestRunRequest) Execute() (YBPSuccess, *_ne
 }
 
 /*
- * GetLatestRun Get last performance advisor run details
+ * GetLatestRun WARNING: This is a preview API that could change. Get last performance advisor run details
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -428,7 +428,7 @@ func (r PerformanceAdvisorApiApiGetSettingsRequest) Execute() (PerfAdvisorSettin
 }
 
 /*
- * GetSettings Get universe performance advisor settings
+ * GetSettings WARNING: This is a preview API that could change. Get universe performance advisor settings
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -541,143 +541,6 @@ func (a *PerformanceAdvisorApiService) GetSettingsExecute(r PerformanceAdvisorAp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PerformanceAdvisorApiApiHideRequest struct {
-	ctx _context.Context
-	ApiService *PerformanceAdvisorApiService
-	cUUID string
-	hidePerformanceRecommendationsRequest *PerformanceRecommendationFilter
-	request *interface{}
-}
-
-func (r PerformanceAdvisorApiApiHideRequest) HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorApiApiHideRequest {
-	r.hidePerformanceRecommendationsRequest = &hidePerformanceRecommendationsRequest
-	return r
-}
-func (r PerformanceAdvisorApiApiHideRequest) Request(request interface{}) PerformanceAdvisorApiApiHideRequest {
-	r.request = &request
-	return r
-}
-
-func (r PerformanceAdvisorApiApiHideRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
-	return r.ApiService.HideExecute(r)
-}
-
-/*
- * Hide Hide performance recommendations
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @return PerformanceAdvisorApiApiHideRequest
- */
-func (a *PerformanceAdvisorApiService) Hide(ctx _context.Context, cUUID string) PerformanceAdvisorApiApiHideRequest {
-	return PerformanceAdvisorApiApiHideRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPSuccess
- */
-func (a *PerformanceAdvisorApiService) HideExecute(r PerformanceAdvisorApiApiHideRequest) (YBPSuccess, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorApiService.Hide")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/performance_recommendations/hide"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.hidePerformanceRecommendationsRequest == nil {
-		return localVarReturnValue, nil, reportError("hidePerformanceRecommendationsRequest is required and must be specified")
-	}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.hidePerformanceRecommendationsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type PerformanceAdvisorApiApiPageRequest struct {
 	ctx _context.Context
 	ApiService *PerformanceAdvisorApiService
@@ -700,7 +563,7 @@ func (r PerformanceAdvisorApiApiPageRequest) Execute() (PerformanceRecommendatio
 }
 
 /*
- * Page List performance recommendations (paginated)
+ * Page WARNING: This is a preview API that could change. List performance recommendations (paginated)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiPageRequest
@@ -837,7 +700,7 @@ func (r PerformanceAdvisorApiApiPageAuditInfoRequest) Execute() (StateChangeAudi
 }
 
 /*
- * PageAuditInfo List performance recommendations state change audit events (paginated)
+ * PageAuditInfo WARNING: This is a preview API that could change. List performance recommendations state change audit events (paginated)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiPageAuditInfoRequest
@@ -952,143 +815,6 @@ func (a *PerformanceAdvisorApiService) PageAuditInfoExecute(r PerformanceAdvisor
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PerformanceAdvisorApiApiResolveRequest struct {
-	ctx _context.Context
-	ApiService *PerformanceAdvisorApiService
-	cUUID string
-	resolvePerformanceRecommendationsRequest *PerformanceRecommendationFilter
-	request *interface{}
-}
-
-func (r PerformanceAdvisorApiApiResolveRequest) ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorApiApiResolveRequest {
-	r.resolvePerformanceRecommendationsRequest = &resolvePerformanceRecommendationsRequest
-	return r
-}
-func (r PerformanceAdvisorApiApiResolveRequest) Request(request interface{}) PerformanceAdvisorApiApiResolveRequest {
-	r.request = &request
-	return r
-}
-
-func (r PerformanceAdvisorApiApiResolveRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
-	return r.ApiService.ResolveExecute(r)
-}
-
-/*
- * Resolve Resolve performance recommendations
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @return PerformanceAdvisorApiApiResolveRequest
- */
-func (a *PerformanceAdvisorApiService) Resolve(ctx _context.Context, cUUID string) PerformanceAdvisorApiApiResolveRequest {
-	return PerformanceAdvisorApiApiResolveRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPSuccess
- */
-func (a *PerformanceAdvisorApiService) ResolveExecute(r PerformanceAdvisorApiApiResolveRequest) (YBPSuccess, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorApiService.Resolve")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/performance_recommendations/resolve"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.resolvePerformanceRecommendationsRequest == nil {
-		return localVarReturnValue, nil, reportError("resolvePerformanceRecommendationsRequest is required and must be specified")
-	}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.resolvePerformanceRecommendationsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type PerformanceAdvisorApiApiRunPerfAdvisorRequest struct {
 	ctx _context.Context
 	ApiService *PerformanceAdvisorApiService
@@ -1107,7 +833,7 @@ func (r PerformanceAdvisorApiApiRunPerfAdvisorRequest) Execute() (PerfAdvisorMan
 }
 
 /*
- * RunPerfAdvisor Start performance advisor run for universe
+ * RunPerfAdvisor WARNING: This is a preview API that could change. Start performance advisor run for universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1243,7 +969,7 @@ func (r PerformanceAdvisorApiApiUpdateSettingsRequest) Execute() (YBPSuccess, *_
 }
 
 /*
- * UpdateSettings Update universe performance advisor settings
+ * UpdateSettings WARNING: This is a preview API that could change. Update universe performance advisor settings
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

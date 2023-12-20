@@ -40,7 +40,7 @@ func (r UniversePerformanceSuggestionsApiApiGetQueryDistributionSuggestionsReque
 }
 
 /*
- * GetQueryDistributionSuggestions Get query distribution improvement suggestion for a universe
+ * GetQueryDistributionSuggestions WARNING: This is a preview API that could change. Get query distribution improvement suggestion for a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -163,7 +163,7 @@ func (r UniversePerformanceSuggestionsApiApiGetRangeHashRequest) Execute() (Hash
 }
 
 /*
- * GetRangeHash Return list of hash indexes
+ * GetRangeHash WARNING: This is a preview API that could change. Return list of hash indexes
  * Returns list of hash indexes on timestamp columns.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
@@ -287,7 +287,7 @@ func (r UniversePerformanceSuggestionsApiApiGetUnusedIndexesRequest) Execute() (
 }
 
 /*
- * GetUnusedIndexes Return list of each unused index across the universe
+ * GetUnusedIndexes WARNING: This is a preview API that could change. Return list of each unused index across the universe
  * Returns list of unused indexes, along with their database and table.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID

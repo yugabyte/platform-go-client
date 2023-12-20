@@ -24,8 +24,10 @@ type UserRegistrationData struct {
 	Features *map[string]map[string]interface{} `json:"features,omitempty"`
 	// Password
 	Password *string `json:"password,omitempty"`
-	// User role
-	Role string `json:"role"`
+	// Deprecated since YBA version 2.19.3.0. Use field roleResourceDefinitions instead.
+	Role *string `json:"role,omitempty"`
+	// List of roles and resource groups defined for user.
+	RoleResourceDefinitions *[]RoleResourceDefinition `json:"roleResourceDefinitions,omitempty"`
 	// User timezone
 	Timezone *string `json:"timezone,omitempty"`
 }
@@ -34,10 +36,9 @@ type UserRegistrationData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserRegistrationData(email string, role string, ) *UserRegistrationData {
+func NewUserRegistrationData(email string, ) *UserRegistrationData {
 	this := UserRegistrationData{}
 	this.Email = email
-	this.Role = role
 	return &this
 }
 
@@ -169,28 +170,68 @@ func (o *UserRegistrationData) SetPassword(v string) {
 	o.Password = &v
 }
 
-// GetRole returns the Role field value
+// GetRole returns the Role field value if set, zero value otherwise.
 func (o *UserRegistrationData) GetRole() string {
-	if o == nil  {
+	if o == nil || o.Role == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Role
+	return *o.Role
 }
 
-// GetRoleOk returns a tuple with the Role field value
+// GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserRegistrationData) GetRoleOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Role == nil {
 		return nil, false
 	}
-	return &o.Role, true
+	return o.Role, true
 }
 
-// SetRole sets field value
+// HasRole returns a boolean if a field has been set.
+func (o *UserRegistrationData) HasRole() bool {
+	if o != nil && o.Role != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRole gets a reference to the given string and assigns it to the Role field.
 func (o *UserRegistrationData) SetRole(v string) {
-	o.Role = v
+	o.Role = &v
+}
+
+// GetRoleResourceDefinitions returns the RoleResourceDefinitions field value if set, zero value otherwise.
+func (o *UserRegistrationData) GetRoleResourceDefinitions() []RoleResourceDefinition {
+	if o == nil || o.RoleResourceDefinitions == nil {
+		var ret []RoleResourceDefinition
+		return ret
+	}
+	return *o.RoleResourceDefinitions
+}
+
+// GetRoleResourceDefinitionsOk returns a tuple with the RoleResourceDefinitions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserRegistrationData) GetRoleResourceDefinitionsOk() (*[]RoleResourceDefinition, bool) {
+	if o == nil || o.RoleResourceDefinitions == nil {
+		return nil, false
+	}
+	return o.RoleResourceDefinitions, true
+}
+
+// HasRoleResourceDefinitions returns a boolean if a field has been set.
+func (o *UserRegistrationData) HasRoleResourceDefinitions() bool {
+	if o != nil && o.RoleResourceDefinitions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleResourceDefinitions gets a reference to the given []RoleResourceDefinition and assigns it to the RoleResourceDefinitions field.
+func (o *UserRegistrationData) SetRoleResourceDefinitions(v []RoleResourceDefinition) {
+	o.RoleResourceDefinitions = &v
 }
 
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
@@ -239,8 +280,11 @@ func (o UserRegistrationData) MarshalJSON() ([]byte, error) {
 	if o.Password != nil {
 		toSerialize["password"] = o.Password
 	}
-	if true {
+	if o.Role != nil {
 		toSerialize["role"] = o.Role
+	}
+	if o.RoleResourceDefinitions != nil {
+		toSerialize["roleResourceDefinitions"] = o.RoleResourceDefinitions
 	}
 	if o.Timezone != nil {
 		toSerialize["timezone"] = o.Timezone

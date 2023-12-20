@@ -18,6 +18,8 @@ import (
 type SessionInfo struct {
 	// API token
 	ApiToken *string `json:"apiToken,omitempty"`
+	// API token version
+	ApiTokenVersion *int64 `json:"apiTokenVersion,omitempty"`
 	// Auth token
 	AuthToken *string `json:"authToken,omitempty"`
 	// Customer UUID
@@ -73,6 +75,38 @@ func (o *SessionInfo) HasApiToken() bool {
 // SetApiToken gets a reference to the given string and assigns it to the ApiToken field.
 func (o *SessionInfo) SetApiToken(v string) {
 	o.ApiToken = &v
+}
+
+// GetApiTokenVersion returns the ApiTokenVersion field value if set, zero value otherwise.
+func (o *SessionInfo) GetApiTokenVersion() int64 {
+	if o == nil || o.ApiTokenVersion == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ApiTokenVersion
+}
+
+// GetApiTokenVersionOk returns a tuple with the ApiTokenVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SessionInfo) GetApiTokenVersionOk() (*int64, bool) {
+	if o == nil || o.ApiTokenVersion == nil {
+		return nil, false
+	}
+	return o.ApiTokenVersion, true
+}
+
+// HasApiTokenVersion returns a boolean if a field has been set.
+func (o *SessionInfo) HasApiTokenVersion() bool {
+	if o != nil && o.ApiTokenVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApiTokenVersion gets a reference to the given int64 and assigns it to the ApiTokenVersion field.
+func (o *SessionInfo) SetApiTokenVersion(v int64) {
+	o.ApiTokenVersion = &v
 }
 
 // GetAuthToken returns the AuthToken field value if set, zero value otherwise.
@@ -175,6 +209,9 @@ func (o SessionInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ApiToken != nil {
 		toSerialize["apiToken"] = o.ApiToken
+	}
+	if o.ApiTokenVersion != nil {
+		toSerialize["apiTokenVersion"] = o.ApiTokenVersion
 	}
 	if o.AuthToken != nil {
 		toSerialize["authToken"] = o.AuthToken

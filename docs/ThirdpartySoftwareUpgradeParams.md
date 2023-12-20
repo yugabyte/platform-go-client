@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
+**Arch** | Pointer to **string** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
+**IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
@@ -33,6 +35,7 @@ Name | Type | Description | Notes
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
+**PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -41,6 +44,7 @@ Name | Type | Description | Notes
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
+**SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -102,6 +106,31 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
+
+### GetArch
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetArch() string`
+
+GetArch returns the Arch field if non-nil, zero value otherwise.
+
+### GetArchOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetArchOk() (*string, bool)`
+
+GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArch
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetArch(v string)`
+
+SetArch sets Arch field to given value.
+
+### HasArch
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasArch() bool`
+
+HasArch returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -513,6 +542,31 @@ SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to g
 
 HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
+### GetIsSoftwareRollbackAllowed
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetIsSoftwareRollbackAllowed() bool`
+
+GetIsSoftwareRollbackAllowed returns the IsSoftwareRollbackAllowed field if non-nil, zero value otherwise.
+
+### GetIsSoftwareRollbackAllowedOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetIsSoftwareRollbackAllowedOk() (*bool, bool)`
+
+GetIsSoftwareRollbackAllowedOk returns a tuple with the IsSoftwareRollbackAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSoftwareRollbackAllowed
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetIsSoftwareRollbackAllowed(v bool)`
+
+SetIsSoftwareRollbackAllowed sets IsSoftwareRollbackAllowed field to given value.
+
+### HasIsSoftwareRollbackAllowed
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasIsSoftwareRollbackAllowed() bool`
+
+HasIsSoftwareRollbackAllowed returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetItestS3PackagePath() string`
@@ -773,6 +827,31 @@ and a boolean to check if the value has been set.
 SetPlatformVersion sets PlatformVersion field to given value.
 
 
+### GetPrevYBSoftwareConfig
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPrevYBSoftwareConfig() PrevYBSoftwareConfig`
+
+GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field if non-nil, zero value otherwise.
+
+### GetPrevYBSoftwareConfigOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPrevYBSoftwareConfigOk() (*PrevYBSoftwareConfig, bool)`
+
+GetPrevYBSoftwareConfigOk returns a tuple with the PrevYBSoftwareConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrevYBSoftwareConfig
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetPrevYBSoftwareConfig(v PrevYBSoftwareConfig)`
+
+SetPrevYBSoftwareConfig sets PrevYBSoftwareConfig field to given value.
+
+### HasPrevYBSoftwareConfig
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasPrevYBSoftwareConfig() bool`
+
+HasPrevYBSoftwareConfig returns a boolean if a field has been set.
+
 ### GetPreviousTaskUUID
 
 `func (o *ThirdpartySoftwareUpgradeParams) GetPreviousTaskUUID() string`
@@ -962,6 +1041,31 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+
+### GetSoftwareUpgradeState
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetSoftwareUpgradeState() string`
+
+GetSoftwareUpgradeState returns the SoftwareUpgradeState field if non-nil, zero value otherwise.
+
+### GetSoftwareUpgradeStateOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetSoftwareUpgradeStateOk() (*string, bool)`
+
+GetSoftwareUpgradeStateOk returns a tuple with the SoftwareUpgradeState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareUpgradeState
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetSoftwareUpgradeState(v string)`
+
+SetSoftwareUpgradeState sets SoftwareUpgradeState field to given value.
+
+### HasSoftwareUpgradeState
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasSoftwareUpgradeState() bool`
+
+HasSoftwareUpgradeState returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

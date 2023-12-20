@@ -22,20 +22,22 @@ type HashicorpVaultConfigParams struct {
 	Ttl *int64 `json:"ttl,omitempty"`
 	TtlExpiry *int64 `json:"ttlExpiry,omitempty"`
 	VaultAddr string `json:"vaultAddr"`
-	VaultToken string `json:"vaultToken"`
+	VaultAuthNamespace *string `json:"vaultAuthNamespace,omitempty"`
+	VaultRoleID *string `json:"vaultRoleID,omitempty"`
+	VaultSecretID *string `json:"vaultSecretID,omitempty"`
+	VaultToken *string `json:"vaultToken,omitempty"`
 }
 
 // NewHashicorpVaultConfigParams instantiates a new HashicorpVaultConfigParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string, vaultToken string, ) *HashicorpVaultConfigParams {
+func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string, ) *HashicorpVaultConfigParams {
 	this := HashicorpVaultConfigParams{}
 	this.Engine = engine
 	this.MountPath = mountPath
 	this.Role = role
 	this.VaultAddr = vaultAddr
-	this.VaultToken = vaultToken
 	return &this
 }
 
@@ -207,28 +209,132 @@ func (o *HashicorpVaultConfigParams) SetVaultAddr(v string) {
 	o.VaultAddr = v
 }
 
-// GetVaultToken returns the VaultToken field value
-func (o *HashicorpVaultConfigParams) GetVaultToken() string {
-	if o == nil  {
+// GetVaultAuthNamespace returns the VaultAuthNamespace field value if set, zero value otherwise.
+func (o *HashicorpVaultConfigParams) GetVaultAuthNamespace() string {
+	if o == nil || o.VaultAuthNamespace == nil {
 		var ret string
 		return ret
 	}
-
-	return o.VaultToken
+	return *o.VaultAuthNamespace
 }
 
-// GetVaultTokenOk returns a tuple with the VaultToken field value
+// GetVaultAuthNamespaceOk returns a tuple with the VaultAuthNamespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HashicorpVaultConfigParams) GetVaultTokenOk() (*string, bool) {
-	if o == nil  {
+func (o *HashicorpVaultConfigParams) GetVaultAuthNamespaceOk() (*string, bool) {
+	if o == nil || o.VaultAuthNamespace == nil {
 		return nil, false
 	}
-	return &o.VaultToken, true
+	return o.VaultAuthNamespace, true
 }
 
-// SetVaultToken sets field value
+// HasVaultAuthNamespace returns a boolean if a field has been set.
+func (o *HashicorpVaultConfigParams) HasVaultAuthNamespace() bool {
+	if o != nil && o.VaultAuthNamespace != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultAuthNamespace gets a reference to the given string and assigns it to the VaultAuthNamespace field.
+func (o *HashicorpVaultConfigParams) SetVaultAuthNamespace(v string) {
+	o.VaultAuthNamespace = &v
+}
+
+// GetVaultRoleID returns the VaultRoleID field value if set, zero value otherwise.
+func (o *HashicorpVaultConfigParams) GetVaultRoleID() string {
+	if o == nil || o.VaultRoleID == nil {
+		var ret string
+		return ret
+	}
+	return *o.VaultRoleID
+}
+
+// GetVaultRoleIDOk returns a tuple with the VaultRoleID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HashicorpVaultConfigParams) GetVaultRoleIDOk() (*string, bool) {
+	if o == nil || o.VaultRoleID == nil {
+		return nil, false
+	}
+	return o.VaultRoleID, true
+}
+
+// HasVaultRoleID returns a boolean if a field has been set.
+func (o *HashicorpVaultConfigParams) HasVaultRoleID() bool {
+	if o != nil && o.VaultRoleID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultRoleID gets a reference to the given string and assigns it to the VaultRoleID field.
+func (o *HashicorpVaultConfigParams) SetVaultRoleID(v string) {
+	o.VaultRoleID = &v
+}
+
+// GetVaultSecretID returns the VaultSecretID field value if set, zero value otherwise.
+func (o *HashicorpVaultConfigParams) GetVaultSecretID() string {
+	if o == nil || o.VaultSecretID == nil {
+		var ret string
+		return ret
+	}
+	return *o.VaultSecretID
+}
+
+// GetVaultSecretIDOk returns a tuple with the VaultSecretID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HashicorpVaultConfigParams) GetVaultSecretIDOk() (*string, bool) {
+	if o == nil || o.VaultSecretID == nil {
+		return nil, false
+	}
+	return o.VaultSecretID, true
+}
+
+// HasVaultSecretID returns a boolean if a field has been set.
+func (o *HashicorpVaultConfigParams) HasVaultSecretID() bool {
+	if o != nil && o.VaultSecretID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultSecretID gets a reference to the given string and assigns it to the VaultSecretID field.
+func (o *HashicorpVaultConfigParams) SetVaultSecretID(v string) {
+	o.VaultSecretID = &v
+}
+
+// GetVaultToken returns the VaultToken field value if set, zero value otherwise.
+func (o *HashicorpVaultConfigParams) GetVaultToken() string {
+	if o == nil || o.VaultToken == nil {
+		var ret string
+		return ret
+	}
+	return *o.VaultToken
+}
+
+// GetVaultTokenOk returns a tuple with the VaultToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HashicorpVaultConfigParams) GetVaultTokenOk() (*string, bool) {
+	if o == nil || o.VaultToken == nil {
+		return nil, false
+	}
+	return o.VaultToken, true
+}
+
+// HasVaultToken returns a boolean if a field has been set.
+func (o *HashicorpVaultConfigParams) HasVaultToken() bool {
+	if o != nil && o.VaultToken != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVaultToken gets a reference to the given string and assigns it to the VaultToken field.
 func (o *HashicorpVaultConfigParams) SetVaultToken(v string) {
-	o.VaultToken = v
+	o.VaultToken = &v
 }
 
 func (o HashicorpVaultConfigParams) MarshalJSON() ([]byte, error) {
@@ -251,7 +357,16 @@ func (o HashicorpVaultConfigParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["vaultAddr"] = o.VaultAddr
 	}
-	if true {
+	if o.VaultAuthNamespace != nil {
+		toSerialize["vaultAuthNamespace"] = o.VaultAuthNamespace
+	}
+	if o.VaultRoleID != nil {
+		toSerialize["vaultRoleID"] = o.VaultRoleID
+	}
+	if o.VaultSecretID != nil {
+		toSerialize["vaultSecretID"] = o.VaultSecretID
+	}
+	if o.VaultToken != nil {
 		toSerialize["vaultToken"] = o.VaultToken
 	}
 	return json.Marshal(toSerialize)

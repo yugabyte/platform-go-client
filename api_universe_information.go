@@ -41,7 +41,7 @@ func (r UniverseInformationApiApiDownloadNodeLogsRequest) Execute() (string, *_n
 }
 
 /*
- * DownloadNodeLogs Download a node's logs
+ * DownloadNodeLogs Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node's logs.
  * Downloads the log files from a given node.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
@@ -168,7 +168,7 @@ func (r UniverseInformationApiApiGetLiveQueriesRequest) Execute() (map[string]in
 }
 
 /*
- * GetLiveQueries Get live queries for a universe
+ * GetLiveQueries Available since YBA version 2.4.0.0. Get live queries for a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -278,129 +278,6 @@ func (a *UniverseInformationApiService) GetLiveQueriesExecute(r UniverseInformat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseInformationApiApiGetMasterInfosRequest struct {
-	ctx _context.Context
-	ApiService *UniverseInformationApiService
-	cUUID string
-	uniUUID string
-}
-
-
-func (r UniverseInformationApiApiGetMasterInfosRequest) Execute() ([]MasterInfo, *_nethttp.Response, error) {
-	return r.ApiService.GetMasterInfosExecute(r)
-}
-
-/*
- * GetMasterInfos Get master information list
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @return UniverseInformationApiApiGetMasterInfosRequest
- */
-func (a *UniverseInformationApiService) GetMasterInfos(ctx _context.Context, cUUID string, uniUUID string) UniverseInformationApiApiGetMasterInfosRequest {
-	return UniverseInformationApiApiGetMasterInfosRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []MasterInfo
- */
-func (a *UniverseInformationApiService) GetMasterInfosExecute(r UniverseInformationApiApiGetMasterInfosRequest) ([]MasterInfo, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []MasterInfo
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseInformationApiService.GetMasterInfos")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type UniverseInformationApiApiGetMasterLeaderIPRequest struct {
 	ctx _context.Context
 	ApiService *UniverseInformationApiService
@@ -414,7 +291,7 @@ func (r UniverseInformationApiApiGetMasterLeaderIPRequest) Execute() (map[string
 }
 
 /*
- * GetMasterLeaderIP Get IP address of a universe's master leader
+ * GetMasterLeaderIP Available since YBA version 2.2.0.0. Get IP address of a universe's master leader
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -537,7 +414,7 @@ func (r UniverseInformationApiApiGetSlowQueriesRequest) Execute() (map[string]in
 }
 
 /*
- * GetSlowQueries Get slow queries for a universe
+ * GetSlowQueries Available since YBA version 2.6.0.0. Get slow queries for a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -660,7 +537,7 @@ func (r UniverseInformationApiApiGetUniverseCostRequest) Execute() (UniverseReso
 }
 
 /*
- * GetUniverseCost Get a cost estimate for a universe
+ * GetUniverseCost Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -770,52 +647,57 @@ func (a *UniverseInformationApiService) GetUniverseCostExecute(r UniverseInforma
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseInformationApiApiGetUniverseCostForAllRequest struct {
+type UniverseInformationApiApiGetUniverseResourcesRequest struct {
 	ctx _context.Context
 	ApiService *UniverseInformationApiService
 	cUUID string
+	uniUUID string
 }
 
 
-func (r UniverseInformationApiApiGetUniverseCostForAllRequest) Execute() ([]UniverseResourceDetails, *_nethttp.Response, error) {
-	return r.ApiService.GetUniverseCostForAllExecute(r)
+func (r UniverseInformationApiApiGetUniverseResourcesRequest) Execute() (UniverseResourceDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetUniverseResourcesExecute(r)
 }
 
 /*
- * GetUniverseCostForAll Get a cost estimate for all universes
+ * GetUniverseResources Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
+ * Expects UniverseDefinitionTaskParams in request body and calculates the resource estimate for NodeDetailsSet in that.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
- * @return UniverseInformationApiApiGetUniverseCostForAllRequest
+ * @param uniUUID
+ * @return UniverseInformationApiApiGetUniverseResourcesRequest
  */
-func (a *UniverseInformationApiService) GetUniverseCostForAll(ctx _context.Context, cUUID string) UniverseInformationApiApiGetUniverseCostForAllRequest {
-	return UniverseInformationApiApiGetUniverseCostForAllRequest{
+func (a *UniverseInformationApiService) GetUniverseResources(ctx _context.Context, cUUID string, uniUUID string) UniverseInformationApiApiGetUniverseResourcesRequest {
+	return UniverseInformationApiApiGetUniverseResourcesRequest{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
+		uniUUID: uniUUID,
 	}
 }
 
 /*
  * Execute executes the request
- * @return []UniverseResourceDetails
+ * @return UniverseResourceDetails
  */
-func (a *UniverseInformationApiService) GetUniverseCostForAllExecute(r UniverseInformationApiApiGetUniverseCostForAllRequest) ([]UniverseResourceDetails, *_nethttp.Response, error) {
+func (a *UniverseInformationApiService) GetUniverseResourcesExecute(r UniverseInformationApiApiGetUniverseResourcesRequest) (UniverseResourceDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []UniverseResourceDetails
+		localVarReturnValue  UniverseResourceDetails
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseInformationApiService.GetUniverseCostForAll")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseInformationApiService.GetUniverseResources")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/cost"
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -902,7 +784,7 @@ func (r UniverseInformationApiApiHealthCheckUniverseRequest) Execute() ([]Detail
 }
 
 /*
- * HealthCheckUniverse Run a universe health check
+ * HealthCheckUniverse Available since YBA version 2.2.0.0. Return results for the last health check
  * Checks the health of all tablet servers and masters in the universe, as well as certain conditions on the machines themselves, including disk utilization, presence of FATAL or core files, and more.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
@@ -1031,7 +913,7 @@ func (r UniverseInformationApiApiResetSlowQueriesRequest) Execute() (map[string]
 }
 
 /*
- * ResetSlowQueries Reset slow queries for a universe
+ * ResetSlowQueries Available since YBA version 2.6.0.0. Reset slow queries for a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1144,130 +1026,6 @@ func (a *UniverseInformationApiService) ResetSlowQueriesExecute(r UniverseInform
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseInformationApiApiTriggerHealthCheckRequest struct {
-	ctx _context.Context
-	ApiService *UniverseInformationApiService
-	cUUID string
-	uniUUID string
-}
-
-
-func (r UniverseInformationApiApiTriggerHealthCheckRequest) Execute() (TriggerHealthCheckResult, *_nethttp.Response, error) {
-	return r.ApiService.TriggerHealthCheckExecute(r)
-}
-
-/*
- * TriggerHealthCheck Trigger a universe health check
- * Trigger a universe health check and return the trigger time.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @return UniverseInformationApiApiTriggerHealthCheckRequest
- */
-func (a *UniverseInformationApiService) TriggerHealthCheck(ctx _context.Context, cUUID string, uniUUID string) UniverseInformationApiApiTriggerHealthCheckRequest {
-	return UniverseInformationApiApiTriggerHealthCheckRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return TriggerHealthCheckResult
- */
-func (a *UniverseInformationApiService) TriggerHealthCheckExecute(r UniverseInformationApiApiTriggerHealthCheckRequest) (TriggerHealthCheckResult, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TriggerHealthCheckResult
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseInformationApiService.TriggerHealthCheck")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type UniverseInformationApiApiUniverseStatusRequest struct {
 	ctx _context.Context
 	ApiService *UniverseInformationApiService
@@ -1281,7 +1039,7 @@ func (r UniverseInformationApiApiUniverseStatusRequest) Execute() (map[string]ma
 }
 
 /*
- * UniverseStatus Get a universe's status
+ * UniverseStatus Available since YBA version 2.2.0.0. Get a universe's status
  * This will return a Map of node name to its status in json format
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID

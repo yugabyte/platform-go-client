@@ -36,6 +36,7 @@ type PitrConfig struct {
 	TableType *string `json:"tableType,omitempty"`
 	// Update time of the PITR con
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	UsedForXCluster *bool `json:"usedForXCluster,omitempty"`
 	// PITR config UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -388,6 +389,38 @@ func (o *PitrConfig) SetUpdateTime(v time.Time) {
 	o.UpdateTime = &v
 }
 
+// GetUsedForXCluster returns the UsedForXCluster field value if set, zero value otherwise.
+func (o *PitrConfig) GetUsedForXCluster() bool {
+	if o == nil || o.UsedForXCluster == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UsedForXCluster
+}
+
+// GetUsedForXClusterOk returns a tuple with the UsedForXCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PitrConfig) GetUsedForXClusterOk() (*bool, bool) {
+	if o == nil || o.UsedForXCluster == nil {
+		return nil, false
+	}
+	return o.UsedForXCluster, true
+}
+
+// HasUsedForXCluster returns a boolean if a field has been set.
+func (o *PitrConfig) HasUsedForXCluster() bool {
+	if o != nil && o.UsedForXCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedForXCluster gets a reference to the given bool and assigns it to the UsedForXCluster field.
+func (o *PitrConfig) SetUsedForXCluster(v bool) {
+	o.UsedForXCluster = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *PitrConfig) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -454,6 +487,9 @@ func (o PitrConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdateTime != nil {
 		toSerialize["updateTime"] = o.UpdateTime
+	}
+	if o.UsedForXCluster != nil {
+		toSerialize["usedForXCluster"] = o.UsedForXCluster
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

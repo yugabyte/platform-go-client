@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tenancy** | **string** |  | 
-**VolumeDetailsList** | [**[]VolumeDetails**](VolumeDetails.md) |  | 
+**Arch** | Pointer to **string** | Architecture for the instance. | [optional] 
+**Tenancy** | Pointer to **string** | Tenancy for the instance. | [optional] 
+**VolumeDetailsList** | Pointer to [**[]VolumeDetails**](VolumeDetails.md) | Volume Details for the instance. | [optional] 
 
 ## Methods
 
 ### NewInstanceTypeDetails
 
-`func NewInstanceTypeDetails(tenancy string, volumeDetailsList []VolumeDetails, ) *InstanceTypeDetails`
+`func NewInstanceTypeDetails() *InstanceTypeDetails`
 
 NewInstanceTypeDetails instantiates a new InstanceTypeDetails object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewInstanceTypeDetailsWithDefaults instantiates a new InstanceTypeDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetArch
+
+`func (o *InstanceTypeDetails) GetArch() string`
+
+GetArch returns the Arch field if non-nil, zero value otherwise.
+
+### GetArchOk
+
+`func (o *InstanceTypeDetails) GetArchOk() (*string, bool)`
+
+GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArch
+
+`func (o *InstanceTypeDetails) SetArch(v string)`
+
+SetArch sets Arch field to given value.
+
+### HasArch
+
+`func (o *InstanceTypeDetails) HasArch() bool`
+
+HasArch returns a boolean if a field has been set.
 
 ### GetTenancy
 
@@ -45,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetTenancy sets Tenancy field to given value.
 
+### HasTenancy
+
+`func (o *InstanceTypeDetails) HasTenancy() bool`
+
+HasTenancy returns a boolean if a field has been set.
 
 ### GetVolumeDetailsList
 
@@ -65,6 +96,11 @@ and a boolean to check if the value has been set.
 
 SetVolumeDetailsList sets VolumeDetailsList field to given value.
 
+### HasVolumeDetailsList
+
+`func (o *InstanceTypeDetails) HasVolumeDetailsList() bool`
+
+HasVolumeDetailsList returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

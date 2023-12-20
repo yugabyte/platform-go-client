@@ -45,7 +45,7 @@ func (r AlertsApiApiAcknowledgeRequest) Execute() (Alert, *_nethttp.Response, er
 }
 
 /*
- * Acknowledge Acknowledge an alert
+ * Acknowledge WARNING: This is a preview API that could change. Acknowledge an alert
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param alertUUID
@@ -180,7 +180,7 @@ func (r AlertsApiApiAcknowledgeByFilterRequest) Execute() ([]Alert, *_nethttp.Re
 }
 
 /*
- * AcknowledgeByFilter Acknowledge all alerts
+ * AcknowledgeByFilter Deprecated since YBA version 2.8.0.0. Acknowledge all alerts
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiAcknowledgeByFilterRequest
@@ -317,7 +317,7 @@ func (r AlertsApiApiAlertNotificationPreviewRequest) Execute() (AlertTemplateVar
 }
 
 /*
- * AlertNotificationPreview Prepare alert notification preview
+ * AlertNotificationPreview WARNING: This is a preview API that could change. Prepare alert notification preview
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiAlertNotificationPreviewRequest
@@ -454,7 +454,7 @@ func (r AlertsApiApiCountAlertsRequest) Execute() (int32, *_nethttp.Response, er
 }
 
 /*
- * CountAlerts Count alerts
+ * CountAlerts WARNING: This is a preview API that could change. Count alerts
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiCountAlertsRequest
@@ -591,7 +591,7 @@ func (r AlertsApiApiCreateAlertChannelRequest) Execute() (AlertChannel, *_nethtt
 }
 
 /*
- * CreateAlertChannel Create an alert channel
+ * CreateAlertChannel WARNING: This is a preview API that could change. Create an alert channel
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiCreateAlertChannelRequest
@@ -728,7 +728,7 @@ func (r AlertsApiApiCreateAlertConfigurationRequest) Execute() (AlertConfigurati
 }
 
 /*
- * CreateAlertConfiguration Create an alert configuration
+ * CreateAlertConfiguration WARNING: This is a preview API that could change. Create an alert configuration
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiCreateAlertConfigurationRequest
@@ -865,7 +865,7 @@ func (r AlertsApiApiCreateAlertDestinationRequest) Execute() (AlertDestination, 
 }
 
 /*
- * CreateAlertDestination Create an alert destination
+ * CreateAlertDestination WARNING: This is a preview API that could change. Create an alert destination
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiCreateAlertDestinationRequest
@@ -998,7 +998,7 @@ func (r AlertsApiApiDeleteAlertChannelRequest) Execute() (YBPSuccess, *_nethttp.
 }
 
 /*
- * DeleteAlertChannel Delete an alert channel
+ * DeleteAlertChannel WARNING: This is a preview API that could change. Delete an alert channel
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acUUID
@@ -1129,7 +1129,7 @@ func (r AlertsApiApiDeleteAlertChannelTemplatesRequest) Execute() (YBPSuccess, *
 }
 
 /*
- * DeleteAlertChannelTemplates Delete alert channel templates
+ * DeleteAlertChannelTemplates WARNING: This is a preview API that could change. Delete alert channel templates
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acType
@@ -1260,7 +1260,7 @@ func (r AlertsApiApiDeleteAlertConfigurationRequest) Execute() (YBPSuccess, *_ne
 }
 
 /*
- * DeleteAlertConfiguration Delete an alert configuration
+ * DeleteAlertConfiguration WARNING: This is a preview API that could change. Delete an alert configuration
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configurationUUID
@@ -1391,7 +1391,7 @@ func (r AlertsApiApiDeleteAlertDestinationRequest) Execute() (YBPSuccess, *_neth
 }
 
 /*
- * DeleteAlertDestination Delete an alert destination
+ * DeleteAlertDestination WARNING: This is a preview API that could change. Delete an alert destination
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param adUUID
@@ -1522,7 +1522,7 @@ func (r AlertsApiApiDeleteAlertTemplateSettingsRequest) Execute() (YBPSuccess, *
 }
 
 /*
- * DeleteAlertTemplateSettings Delete an alert template settings
+ * DeleteAlertTemplateSettings Deprecated since YBA version 2.20.0.0. Delete an alert template settings
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param settingsUUID
@@ -1653,7 +1653,7 @@ func (r AlertsApiApiDeleteAlertTemplateVariablesRequest) Execute() (YBPSuccess, 
 }
 
 /*
- * DeleteAlertTemplateVariables Delete an alert template variables
+ * DeleteAlertTemplateVariables WARNING: This is a preview API that could change. Delete an alert template variables
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param variableUUID
@@ -1788,7 +1788,7 @@ func (r AlertsApiApiEditAlertTemplateSettingsRequest) Execute() ([]AlertTemplate
 }
 
 /*
- * EditAlertTemplateSettings Crete or update alert template settings list
+ * EditAlertTemplateSettings Deprecated since YBA version 2.20.0.0. Create or update alert template settings list
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiEditAlertTemplateSettingsRequest
@@ -1925,7 +1925,7 @@ func (r AlertsApiApiEditAlertTemplateVariablesRequest) Execute() ([]AlertTemplat
 }
 
 /*
- * EditAlertTemplateVariables Create or update alert template variables
+ * EditAlertTemplateVariables WARNING: This is a preview API that could change. Create or update alert template variables
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiEditAlertTemplateVariablesRequest
@@ -2053,7 +2053,7 @@ func (r AlertsApiApiGetRequest) Execute() (Alert, *_nethttp.Response, error) {
 }
 
 /*
- * Get Get details of an alert
+ * Get WARNING: This is a preview API that could change. Get details of an alert
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param alertUUID
@@ -2176,7 +2176,7 @@ func (r AlertsApiApiGetAlertChannelRequest) Execute() (AlertChannel, *_nethttp.R
 }
 
 /*
- * GetAlertChannel Get an alert channel
+ * GetAlertChannel WARNING: This is a preview API that could change. Get an alert channel
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acUUID
@@ -2299,7 +2299,7 @@ func (r AlertsApiApiGetAlertChannelTemplatesRequest) Execute() (AlertChannelTemp
 }
 
 /*
- * GetAlertChannelTemplates Get alert channel templates
+ * GetAlertChannelTemplates WARNING: This is a preview API that could change. Get alert channel templates
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acType
@@ -2422,7 +2422,7 @@ func (r AlertsApiApiGetAlertConfigurationRequest) Execute() (AlertConfiguration,
 }
 
 /*
- * GetAlertConfiguration Get an alert configuration
+ * GetAlertConfiguration WARNING: This is a preview API that could change. Get an alert configuration
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configurationUUID
@@ -2545,7 +2545,7 @@ func (r AlertsApiApiGetAlertDestinationRequest) Execute() (AlertDestination, *_n
 }
 
 /*
- * GetAlertDestination Get an alert destination
+ * GetAlertDestination WARNING: This is a preview API that could change. Get an alert destination
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param adUUID
@@ -2667,7 +2667,7 @@ func (r AlertsApiApiListActiveRequest) Execute() ([]Alert, *_nethttp.Response, e
 }
 
 /*
- * ListActive List active alerts
+ * ListActive Deprecated since YBA version 2.8.0.0. List active alerts
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListActiveRequest
@@ -2786,7 +2786,7 @@ func (r AlertsApiApiListAlertChannelTemplatesRequest) Execute() ([]AlertChannelT
 }
 
 /*
- * ListAlertChannelTemplates List all alert channel templates
+ * ListAlertChannelTemplates WARNING: This is a preview API that could change. List all alert channel templates
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertChannelTemplatesRequest
@@ -2905,7 +2905,7 @@ func (r AlertsApiApiListAlertChannelsRequest) Execute() ([]AlertChannel, *_netht
 }
 
 /*
- * ListAlertChannels List all alert channels
+ * ListAlertChannels WARNING: This is a preview API that could change. List all alert channels
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertChannelsRequest
@@ -3034,7 +3034,7 @@ func (r AlertsApiApiListAlertConfigurationsRequest) Execute() ([]AlertConfigurat
 }
 
 /*
- * ListAlertConfigurations Get filtered list of alert configurations
+ * ListAlertConfigurations WARNING: This is a preview API that could change. Get filtered list of alert configurations
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertConfigurationsRequest
@@ -3161,7 +3161,7 @@ func (r AlertsApiApiListAlertDestinationsRequest) Execute() ([]AlertDefinition, 
 }
 
 /*
- * ListAlertDestinations List alert destinations
+ * ListAlertDestinations WARNING: This is a preview API that could change. List alert destinations
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertDestinationsRequest
@@ -3280,7 +3280,7 @@ func (r AlertsApiApiListAlertTemplateSettingsRequest) Execute() ([]AlertTemplate
 }
 
 /*
- * ListAlertTemplateSettings Get alert template settings
+ * ListAlertTemplateSettings Deprecated since YBA version 2.20.0.0. Get alert template settings
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertTemplateSettingsRequest
@@ -3399,7 +3399,7 @@ func (r AlertsApiApiListAlertTemplateVariablesRequest) Execute() (AlertTemplateV
 }
 
 /*
- * ListAlertTemplateVariables List alert template variables
+ * ListAlertTemplateVariables WARNING: This is a preview API that could change. List alert template variables
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertTemplateVariablesRequest
@@ -3528,7 +3528,7 @@ func (r AlertsApiApiListAlertTemplatesRequest) Execute() ([]AlertConfigurationTe
 }
 
 /*
- * ListAlertTemplates Get filtered list of alert configuration templates
+ * ListAlertTemplates WARNING: This is a preview API that could change. Get filtered list of alert configuration templates
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListAlertTemplatesRequest
@@ -3655,7 +3655,7 @@ func (r AlertsApiApiListOfAlertsRequest) Execute() ([]Alert, *_nethttp.Response,
 }
 
 /*
- * ListOfAlerts List all alerts
+ * ListOfAlerts WARNING: This is a preview API that could change. List all alerts
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiListOfAlertsRequest
@@ -3784,7 +3784,7 @@ func (r AlertsApiApiPageAlertConfigurationsRequest) Execute() (AlertConfiguratio
 }
 
 /*
- * PageAlertConfigurations List all alert configurations (paginated)
+ * PageAlertConfigurations WARNING: This is a preview API that could change. List all alert configurations (paginated)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiPageAlertConfigurationsRequest
@@ -3921,7 +3921,7 @@ func (r AlertsApiApiPageAlertsRequest) Execute() (AlertPagedResponse, *_nethttp.
 }
 
 /*
- * PageAlerts List alerts (paginated)
+ * PageAlerts WARNING: This is a preview API that could change. List alerts (paginated)
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AlertsApiApiPageAlertsRequest
@@ -4049,7 +4049,7 @@ func (r AlertsApiApiSendTestAlertRequest) Execute() (YBPSuccess, *_nethttp.Respo
 }
 
 /*
- * SendTestAlert Send test alert for alert configuration
+ * SendTestAlert WARNING: This is a preview API that could change. Send test alert for alert configuration
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configurationUUID
@@ -4182,7 +4182,7 @@ func (r AlertsApiApiSetAlertChannelTemplatesRequest) Execute() (AlertChannelTemp
 }
 
 /*
- * SetAlertChannelTemplates Set alert channel templates
+ * SetAlertChannelTemplates WARNING: This is a preview API that could change. Set alert channel templates
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acType
@@ -4323,7 +4323,7 @@ func (r AlertsApiApiUpdateAlertChannelRequest) Execute() (AlertChannel, *_nethtt
 }
 
 /*
- * UpdateAlertChannel Update an alert channel
+ * UpdateAlertChannel WARNING: This is a preview API that could change. Update an alert channel
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param acUUID
@@ -4464,7 +4464,7 @@ func (r AlertsApiApiUpdateAlertConfigurationRequest) Execute() (AlertConfigurati
 }
 
 /*
- * UpdateAlertConfiguration Update an alert configuration
+ * UpdateAlertConfiguration WARNING: This is a preview API that could change. Update an alert configuration
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configurationUUID
@@ -4605,7 +4605,7 @@ func (r AlertsApiApiUpdateAlertDestinationRequest) Execute() (AlertDestination, 
 }
 
 /*
- * UpdateAlertDestination Update an alert destination
+ * UpdateAlertDestination WARNING: This is a preview API that could change. Update an alert destination
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param adUUID

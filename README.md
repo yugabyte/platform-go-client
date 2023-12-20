@@ -78,110 +78,105 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccessKeysApi* | [**CreateAccesskey**](docs/AccessKeysApi.md#createaccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create/Upload an access key for onprem Provider region
+*AccessKeysApi* | [**CreateAccesskey**](docs/AccessKeysApi.md#createaccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
 *AccessKeysApi* | [**DeleteAccesskey**](docs/AccessKeysApi.md#deleteaccesskey) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Delete an access key
-*AccessKeysApi* | [**EditAccesskey**](docs/AccessKeysApi.md#editaccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Modify an access key
+*AccessKeysApi* | [**EditAccesskey**](docs/AccessKeysApi.md#editaccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | WARNING: This is a preview API that could change. Modify the existing access Key
 *AccessKeysApi* | [**Index**](docs/AccessKeysApi.md#index) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Get an access key
 *AccessKeysApi* | [**List**](docs/AccessKeysApi.md#list) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | List access keys for a specific provider
 *AccessKeysApi* | [**ListAllForCustomer**](docs/AccessKeysApi.md#listallforcustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
-*AlertsApi* | [**Acknowledge**](docs/AlertsApi.md#acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
-*AlertsApi* | [**AcknowledgeByFilter**](docs/AlertsApi.md#acknowledgebyfilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts
-*AlertsApi* | [**AlertNotificationPreview**](docs/AlertsApi.md#alertnotificationpreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | Prepare alert notification preview
-*AlertsApi* | [**CountAlerts**](docs/AlertsApi.md#countalerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
-*AlertsApi* | [**CreateAlertChannel**](docs/AlertsApi.md#createalertchannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | Create an alert channel
-*AlertsApi* | [**CreateAlertConfiguration**](docs/AlertsApi.md#createalertconfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
-*AlertsApi* | [**CreateAlertDestination**](docs/AlertsApi.md#createalertdestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | Create an alert destination
-*AlertsApi* | [**DeleteAlertChannel**](docs/AlertsApi.md#deletealertchannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
-*AlertsApi* | [**DeleteAlertChannelTemplates**](docs/AlertsApi.md#deletealertchanneltemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Delete alert channel templates
-*AlertsApi* | [**DeleteAlertConfiguration**](docs/AlertsApi.md#deletealertconfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
-*AlertsApi* | [**DeleteAlertDestination**](docs/AlertsApi.md#deletealertdestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
-*AlertsApi* | [**DeleteAlertTemplateSettings**](docs/AlertsApi.md#deletealerttemplatesettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings
-*AlertsApi* | [**DeleteAlertTemplateVariables**](docs/AlertsApi.md#deletealerttemplatevariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | Delete an alert template variables
-*AlertsApi* | [**EditAlertTemplateSettings**](docs/AlertsApi.md#editalerttemplatesettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Crete or update alert template settings list
-*AlertsApi* | [**EditAlertTemplateVariables**](docs/AlertsApi.md#editalerttemplatevariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | Create or update alert template variables
-*AlertsApi* | [**Get**](docs/AlertsApi.md#get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
-*AlertsApi* | [**GetAlertChannel**](docs/AlertsApi.md#getalertchannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
-*AlertsApi* | [**GetAlertChannelTemplates**](docs/AlertsApi.md#getalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Get alert channel templates
-*AlertsApi* | [**GetAlertConfiguration**](docs/AlertsApi.md#getalertconfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
-*AlertsApi* | [**GetAlertDestination**](docs/AlertsApi.md#getalertdestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Get an alert destination
-*AlertsApi* | [**ListActive**](docs/AlertsApi.md#listactive) | **Get** /api/v1/customers/{cUUID}/alerts/active | List active alerts
-*AlertsApi* | [**ListAlertChannelTemplates**](docs/AlertsApi.md#listalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | List all alert channel templates
-*AlertsApi* | [**ListAlertChannels**](docs/AlertsApi.md#listalertchannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
-*AlertsApi* | [**ListAlertConfigurations**](docs/AlertsApi.md#listalertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
-*AlertsApi* | [**ListAlertDestinations**](docs/AlertsApi.md#listalertdestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
-*AlertsApi* | [**ListAlertTemplateSettings**](docs/AlertsApi.md#listalerttemplatesettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings
-*AlertsApi* | [**ListAlertTemplateVariables**](docs/AlertsApi.md#listalerttemplatevariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | List alert template variables
-*AlertsApi* | [**ListAlertTemplates**](docs/AlertsApi.md#listalerttemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
-*AlertsApi* | [**ListOfAlerts**](docs/AlertsApi.md#listofalerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
-*AlertsApi* | [**PageAlertConfigurations**](docs/AlertsApi.md#pagealertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
-*AlertsApi* | [**PageAlerts**](docs/AlertsApi.md#pagealerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | List alerts (paginated)
-*AlertsApi* | [**SendTestAlert**](docs/AlertsApi.md#sendtestalert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration
-*AlertsApi* | [**SetAlertChannelTemplates**](docs/AlertsApi.md#setalertchanneltemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Set alert channel templates
-*AlertsApi* | [**UpdateAlertChannel**](docs/AlertsApi.md#updatealertchannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Update an alert channel
-*AlertsApi* | [**UpdateAlertConfiguration**](docs/AlertsApi.md#updatealertconfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Update an alert configuration
-*AlertsApi* | [**UpdateAlertDestination**](docs/AlertsApi.md#updatealertdestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Update an alert destination
-*AsynchronousReplicationApi* | [**CreateXClusterConfig**](docs/AsynchronousReplicationApi.md#createxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs | Create xcluster config
-*AsynchronousReplicationApi* | [**DeleteXClusterConfig**](docs/AsynchronousReplicationApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Delete xcluster config
-*AsynchronousReplicationApi* | [**EditXClusterConfig**](docs/AsynchronousReplicationApi.md#editxclusterconfig) | **Put** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Edit xcluster config
-*AsynchronousReplicationApi* | [**GetXClusterConfig**](docs/AsynchronousReplicationApi.md#getxclusterconfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Get xcluster config
-*AsynchronousReplicationApi* | [**NeedBootstrapTable**](docs/AsynchronousReplicationApi.md#needbootstraptable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | Whether tables need bootstrap before setting up cross cluster replication
-*AsynchronousReplicationApi* | [**NeedBootstrapXClusterConfig**](docs/AsynchronousReplicationApi.md#needbootstrapxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/need_bootstrap | Whether tables in an xCluster replication config have fallen far behind and need bootstrap
-*AsynchronousReplicationApi* | [**RestartXClusterConfig**](docs/AsynchronousReplicationApi.md#restartxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Restart xcluster config
-*AsynchronousReplicationApi* | [**SyncXClusterConfig**](docs/AsynchronousReplicationApi.md#syncxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Sync xcluster config
+*AlertsApi* | [**Acknowledge**](docs/AlertsApi.md#acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | WARNING: This is a preview API that could change. Acknowledge an alert
+*AlertsApi* | [**AcknowledgeByFilter**](docs/AlertsApi.md#acknowledgebyfilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Deprecated since YBA version 2.8.0.0. Acknowledge all alerts
+*AlertsApi* | [**AlertNotificationPreview**](docs/AlertsApi.md#alertnotificationpreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | WARNING: This is a preview API that could change. Prepare alert notification preview
+*AlertsApi* | [**CountAlerts**](docs/AlertsApi.md#countalerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | WARNING: This is a preview API that could change. Count alerts
+*AlertsApi* | [**CreateAlertChannel**](docs/AlertsApi.md#createalertchannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | WARNING: This is a preview API that could change. Create an alert channel
+*AlertsApi* | [**CreateAlertConfiguration**](docs/AlertsApi.md#createalertconfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | WARNING: This is a preview API that could change. Create an alert configuration
+*AlertsApi* | [**CreateAlertDestination**](docs/AlertsApi.md#createalertdestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | WARNING: This is a preview API that could change. Create an alert destination
+*AlertsApi* | [**DeleteAlertChannel**](docs/AlertsApi.md#deletealertchannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Delete an alert channel
+*AlertsApi* | [**DeleteAlertChannelTemplates**](docs/AlertsApi.md#deletealertchanneltemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Delete alert channel templates
+*AlertsApi* | [**DeleteAlertConfiguration**](docs/AlertsApi.md#deletealertconfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Delete an alert configuration
+*AlertsApi* | [**DeleteAlertDestination**](docs/AlertsApi.md#deletealertdestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Delete an alert destination
+*AlertsApi* | [**DeleteAlertTemplateSettings**](docs/AlertsApi.md#deletealerttemplatesettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Deprecated since YBA version 2.20.0.0. Delete an alert template settings
+*AlertsApi* | [**DeleteAlertTemplateVariables**](docs/AlertsApi.md#deletealerttemplatevariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | WARNING: This is a preview API that could change. Delete an alert template variables
+*AlertsApi* | [**EditAlertTemplateSettings**](docs/AlertsApi.md#editalerttemplatesettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Deprecated since YBA version 2.20.0.0. Create or update alert template settings list
+*AlertsApi* | [**EditAlertTemplateVariables**](docs/AlertsApi.md#editalerttemplatevariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | WARNING: This is a preview API that could change. Create or update alert template variables
+*AlertsApi* | [**Get**](docs/AlertsApi.md#get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | WARNING: This is a preview API that could change. Get details of an alert
+*AlertsApi* | [**GetAlertChannel**](docs/AlertsApi.md#getalertchannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Get an alert channel
+*AlertsApi* | [**GetAlertChannelTemplates**](docs/AlertsApi.md#getalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Get alert channel templates
+*AlertsApi* | [**GetAlertConfiguration**](docs/AlertsApi.md#getalertconfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Get an alert configuration
+*AlertsApi* | [**GetAlertDestination**](docs/AlertsApi.md#getalertdestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Get an alert destination
+*AlertsApi* | [**ListActive**](docs/AlertsApi.md#listactive) | **Get** /api/v1/customers/{cUUID}/alerts/active | Deprecated since YBA version 2.8.0.0. List active alerts
+*AlertsApi* | [**ListAlertChannelTemplates**](docs/AlertsApi.md#listalertchanneltemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | WARNING: This is a preview API that could change. List all alert channel templates
+*AlertsApi* | [**ListAlertChannels**](docs/AlertsApi.md#listalertchannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | WARNING: This is a preview API that could change. List all alert channels
+*AlertsApi* | [**ListAlertConfigurations**](docs/AlertsApi.md#listalertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | WARNING: This is a preview API that could change. Get filtered list of alert configurations
+*AlertsApi* | [**ListAlertDestinations**](docs/AlertsApi.md#listalertdestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | WARNING: This is a preview API that could change. List alert destinations
+*AlertsApi* | [**ListAlertTemplateSettings**](docs/AlertsApi.md#listalerttemplatesettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Deprecated since YBA version 2.20.0.0. Get alert template settings
+*AlertsApi* | [**ListAlertTemplateVariables**](docs/AlertsApi.md#listalerttemplatevariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | WARNING: This is a preview API that could change. List alert template variables
+*AlertsApi* | [**ListAlertTemplates**](docs/AlertsApi.md#listalerttemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | WARNING: This is a preview API that could change. Get filtered list of alert configuration templates
+*AlertsApi* | [**ListOfAlerts**](docs/AlertsApi.md#listofalerts) | **Get** /api/v1/customers/{cUUID}/alerts | WARNING: This is a preview API that could change. List all alerts
+*AlertsApi* | [**PageAlertConfigurations**](docs/AlertsApi.md#pagealertconfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | WARNING: This is a preview API that could change. List all alert configurations (paginated)
+*AlertsApi* | [**PageAlerts**](docs/AlertsApi.md#pagealerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | WARNING: This is a preview API that could change. List alerts (paginated)
+*AlertsApi* | [**SendTestAlert**](docs/AlertsApi.md#sendtestalert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | WARNING: This is a preview API that could change. Send test alert for alert configuration
+*AlertsApi* | [**SetAlertChannelTemplates**](docs/AlertsApi.md#setalertchanneltemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Set alert channel templates
+*AlertsApi* | [**UpdateAlertChannel**](docs/AlertsApi.md#updatealertchannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Update an alert channel
+*AlertsApi* | [**UpdateAlertConfiguration**](docs/AlertsApi.md#updatealertconfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Update an alert configuration
+*AlertsApi* | [**UpdateAlertDestination**](docs/AlertsApi.md#updatealertdestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Update an alert destination
+*AsynchronousReplicationApi* | [**CreateXClusterConfig**](docs/AsynchronousReplicationApi.md#createxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs | Available since YBA version 2.16.0.0. Create xcluster config
+*AsynchronousReplicationApi* | [**DeleteXClusterConfig**](docs/AsynchronousReplicationApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Delete xcluster config
+*AsynchronousReplicationApi* | [**EditXClusterConfig**](docs/AsynchronousReplicationApi.md#editxclusterconfig) | **Put** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Edit xcluster config
+*AsynchronousReplicationApi* | [**GetXClusterConfig**](docs/AsynchronousReplicationApi.md#getxclusterconfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Get xcluster config
+*AsynchronousReplicationApi* | [**NeedBootstrapTable**](docs/AsynchronousReplicationApi.md#needbootstraptable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | WARNING: This is a preview API that could change. Whether tables need bootstrap before setting up cross cluster replication
+*AsynchronousReplicationApi* | [**RestartXClusterConfig**](docs/AsynchronousReplicationApi.md#restartxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Restart xcluster config
+*AsynchronousReplicationApi* | [**SyncXClusterConfig**](docs/AsynchronousReplicationApi.md#syncxclusterconfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Available since YBA version 2.16.0.0. Sync xcluster config
 *AuditApi* | [**GetTaskAudit**](docs/AuditApi.md#gettaskaudit) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_info | Get audit info for a task
 *AuditApi* | [**GetUserFromTask**](docs/AuditApi.md#getuserfromtask) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/audit_user | Get the user associated with a task
 *AuditApi* | [**ListOfAudit**](docs/AuditApi.md#listofaudit) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/audit_trail | List a user&#39;s audit entries
-*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
-*AvailabilityZonesApi* | [**CreateZone**](docs/AvailabilityZonesApi.md#createzone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
+*AvailabilityZonesApi* | [**CreateAZ**](docs/AvailabilityZonesApi.md#createaz) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+*AvailabilityZonesApi* | [**CreateZone**](docs/AvailabilityZonesApi.md#createzone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | WARNING: This is a preview API that could change. Create an availability zone
 *AvailabilityZonesApi* | [**DeleteAZ**](docs/AvailabilityZonesApi.md#deleteaz) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
-*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
-*AvailabilityZonesApi* | [**EditZone**](docs/AvailabilityZonesApi.md#editzone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
+*AvailabilityZonesApi* | [**EditAZ**](docs/AvailabilityZonesApi.md#editaz) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+*AvailabilityZonesApi* | [**EditZone**](docs/AvailabilityZonesApi.md#editzone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | WARNING: This is a preview API that could change. Modify an availability zone
 *AvailabilityZonesApi* | [**ListOfAZ**](docs/AvailabilityZonesApi.md#listofaz) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
-*BackupsApi* | [**CreateBackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule
+*BackupsApi* | [**CreateBackupSchedule**](docs/BackupsApi.md#createbackupschedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Deprecated since YBA version 2.20.0.0. Use &#39;Create Backup Schedule Async&#39; instead. Create Backup Schedule
 *BackupsApi* | [**CreateBackupScheduleAsync**](docs/BackupsApi.md#createbackupscheduleasync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
-*BackupsApi* | [**CreateMultiTableBackup**](docs/BackupsApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
-*BackupsApi* | [**Createbackup**](docs/BackupsApi.md#createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup
-*BackupsApi* | [**DeleteBackups**](docs/BackupsApi.md#deletebackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete backups
+*BackupsApi* | [**CreateMultiTableBackup**](docs/BackupsApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+*BackupsApi* | [**Createbackup**](docs/BackupsApi.md#createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
+*BackupsApi* | [**DeleteBackups**](docs/BackupsApi.md#deletebackups) | **Delete** /api/v1/customers/{cUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;Delete backups V2&#39; instead. Delete backups
 *BackupsApi* | [**DeleteBackupsV2**](docs/BackupsApi.md#deletebackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 *BackupsApi* | [**EditBackupV2**](docs/BackupsApi.md#editbackupv2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
-*BackupsApi* | [**FetchBackupsByTaskUUID**](docs/BackupsApi.md#fetchbackupsbytaskuuid) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List a task&#39;s backups
+*BackupsApi* | [**FetchBackupsByTaskUUID**](docs/BackupsApi.md#fetchbackupsbytaskuuid) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List backups associated with a task
 *BackupsApi* | [**GetBackupV2**](docs/BackupsApi.md#getbackupv2) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID} | Get Backup V2
 *BackupsApi* | [**GetThrottleParams**](docs/BackupsApi.md#getthrottleparams) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Get throttle params from YB-Controller
 *BackupsApi* | [**ListBackupRestoresV2**](docs/BackupsApi.md#listbackuprestoresv2) | **Post** /api/v1/customers/{cUUID}/restore/page | List Backup Restores (paginated)
 *BackupsApi* | [**ListBackupsV2**](docs/BackupsApi.md#listbackupsv2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 *BackupsApi* | [**ListIncrementalBackups**](docs/BackupsApi.md#listincrementalbackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
-*BackupsApi* | [**ListOfBackups**](docs/BackupsApi.md#listofbackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups
-*BackupsApi* | [**Restore**](docs/BackupsApi.md#restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup
+*BackupsApi* | [**ListOfBackups**](docs/BackupsApi.md#listofbackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;List Backups (paginated) V2&#39; instead. List a customer&#39;s backups
+*BackupsApi* | [**Restore**](docs/BackupsApi.md#restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Deprecated since YBA version 2.20.0.0. Use &#39;Restore from a backup V2&#39; instead. Restore from a backup
 *BackupsApi* | [**RestoreBackupV2**](docs/BackupsApi.md#restorebackupv2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 *BackupsApi* | [**RestorePreflight**](docs/BackupsApi.md#restorepreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
 *BackupsApi* | [**SetThrottleParams**](docs/BackupsApi.md#setthrottleparams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
-*BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
+*BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Available since YBA version 2.2.0.0. Set a universe&#39;s backup flag
 *BackupsApi* | [**StopBackup**](docs/BackupsApi.md#stopbackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
-*CertificateInfoApi* | [**CreateSelfSignedCert**](docs/CertificateInfoApi.md#createselfsignedcert) | **Post** /api/v1/customers/{cUUID}/certificates/create_self_signed_cert | Create a self signed certificate
 *CertificateInfoApi* | [**DeleteCertificate**](docs/CertificateInfoApi.md#deletecertificate) | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID} | Delete a certificate
 *CertificateInfoApi* | [**EditCertificate**](docs/CertificateInfoApi.md#editcertificate) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit | Edit TLS certificate config details
-*CertificateInfoApi* | [**GetCertificate**](docs/CertificateInfoApi.md#getcertificate) | **Get** /api/v1/customers/{cUUID}/certificates/{name} | Get a certificate&#39;s UUID
-*CertificateInfoApi* | [**GetClientCert**](docs/CertificateInfoApi.md#getclientcert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID} | Add a client certificate
 *CertificateInfoApi* | [**GetListOfCertificate**](docs/CertificateInfoApi.md#getlistofcertificate) | **Get** /api/v1/customers/{cUUID}/certificates | List a customer&#39;s certificates
 *CertificateInfoApi* | [**GetRootCert**](docs/CertificateInfoApi.md#getrootcert) | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download | Get a customer&#39;s root certificate
-*CertificateInfoApi* | [**UpdateEmptyCustomCert**](docs/CertificateInfoApi.md#updateemptycustomcert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/update_empty_cert | Update an empty certificate
 *CertificateInfoApi* | [**Upload**](docs/CertificateInfoApi.md#upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
-*CloudProvidersApi* | [**AccessKeyRotation**](docs/CloudProvidersApi.md#accesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | Rotate access key for a provider
+*CloudProvidersApi* | [**AccessKeyRotation**](docs/CloudProvidersApi.md#accesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | WARNING: This is a preview API that could change. Rotate access key for a provider
 *CloudProvidersApi* | [**CreateProviders**](docs/CloudProvidersApi.md#createproviders) | **Post** /api/v1/customers/{cUUID}/providers | Create a provider
 *CloudProvidersApi* | [**Delete**](docs/CloudProvidersApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID} | Delete a cloud provider
-*CloudProvidersApi* | [**EditAccessKeyRotationSchedule**](docs/CloudProvidersApi.md#editaccesskeyrotationschedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | Edit a access key rotation schedule
+*CloudProvidersApi* | [**EditAccessKeyRotationSchedule**](docs/CloudProvidersApi.md#editaccesskeyrotationschedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | WARNING: This is a preview API that could change. Edit a access key rotation schedule
 *CloudProvidersApi* | [**EditProvider**](docs/CloudProvidersApi.md#editprovider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 *CloudProvidersApi* | [**GetListOfProviders**](docs/CloudProvidersApi.md#getlistofproviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 *CloudProvidersApi* | [**GetProvider**](docs/CloudProvidersApi.md#getprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
 *CloudProvidersApi* | [**GetRegionMetadata**](docs/CloudProvidersApi.md#getregionmetadata) | **Get** /api/v1/customers/{cUUID}/providers/region_metadata/{code} | Retrieves the region metadata for the cloud providers
-*CloudProvidersApi* | [**ListSchedules**](docs/CloudProvidersApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
-*CloudProvidersApi* | [**RefreshPricing**](docs/CloudProvidersApi.md#refreshpricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
-*CloudProvidersApi* | [**ScheduledAccessKeyRotation**](docs/CloudProvidersApi.md#scheduledaccesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
-*CustomCACertificatesApi* | [**AddCA**](docs/CustomCACertificatesApi.md#addca) | **Post** /api/v1/customers/{cUUID}/customCAStore | Add a named custom CA certificate
-*CustomCACertificatesApi* | [**DeleteCustomCACertificate**](docs/CustomCACertificatesApi.md#deletecustomcacertificate) | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Delete a named custom CA certificate
-*CustomCACertificatesApi* | [**GetAllCustomCaCertificates**](docs/CustomCACertificatesApi.md#getallcustomcacertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Download a custom CA certificates of a customer
-*CustomCACertificatesApi* | [**ListAllCustomCaCertificates**](docs/CustomCACertificatesApi.md#listallcustomcacertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates | List all custom CA certificates of a customer
-*CustomCACertificatesApi* | [**UpdateCA**](docs/CustomCACertificatesApi.md#updateca) | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID} | Update a named custom CA certificate
+*CloudProvidersApi* | [**ListSchedules**](docs/CloudProvidersApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | WARNING: This is a preview API that could change. List all schedules for a provider&#39;s access key rotation
+*CloudProvidersApi* | [**RefreshPricing**](docs/CloudProvidersApi.md#refreshpricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | WARNING: This is a preview API that could change. Refresh pricing
+*CloudProvidersApi* | [**ScheduledAccessKeyRotation**](docs/CloudProvidersApi.md#scheduledaccesskeyrotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | WARNING: This is a preview API that could change. Rotate access key for a provider - Scheduled
+*CustomCACertificatesApi* | [**AddCA**](docs/CustomCACertificatesApi.md#addca) | **Post** /api/v1/customers/{cUUID}/customCAStore | WARNING: This is a preview API that could change. Add a named custom CA certificate
+*CustomCACertificatesApi* | [**DeleteCustomCACertificate**](docs/CustomCACertificatesApi.md#deletecustomcacertificate) | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | WARNING: This is a preview API that could change. Delete a named custom CA certificate
+*CustomCACertificatesApi* | [**GetAllCustomCaCertificates**](docs/CustomCACertificatesApi.md#getallcustomcacertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | WARNING: This is a preview API that could change. Download a custom CA certificates of a customer
+*CustomCACertificatesApi* | [**ListAllCustomCaCertificates**](docs/CustomCACertificatesApi.md#listallcustomcacertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates | WARNING: This is a preview API that could change. List all custom CA certificates of a customer
+*CustomCACertificatesApi* | [**UpdateCA**](docs/CustomCACertificatesApi.md#updateca) | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID} | WARNING: This is a preview API that could change. Update a named custom CA certificate
 *CustomerConfigurationApi* | [**CreateCustomerConfig**](docs/CustomerConfigurationApi.md#createcustomerconfig) | **Post** /api/v1/customers/{cUUID}/configs | Create a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfig**](docs/CustomerConfigurationApi.md#deletecustomerconfig) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID} | Delete a customer configuration
 *CustomerConfigurationApi* | [**DeleteCustomerConfigV2**](docs/CustomerConfigurationApi.md#deletecustomerconfigv2) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete | Delete a customer configuration V2
@@ -193,28 +188,31 @@ Class | Method | HTTP request | Description
 *CustomerManagementApi* | [**DeleteCustomer**](docs/CustomerManagementApi.md#deletecustomer) | **Delete** /api/v1/customers/{cUUID} | Delete a customer
 *CustomerManagementApi* | [**GetHostInfo**](docs/CustomerManagementApi.md#gethostinfo) | **Get** /api/v1/customers/{cUUID}/host_info | Get a customer&#39;s host info
 *CustomerManagementApi* | [**ListOfCustomers**](docs/CustomerManagementApi.md#listofcustomers) | **Get** /api/v1/customers | List customers
-*CustomerManagementApi* | [**Metrics**](docs/CustomerManagementApi.md#metrics) | **Post** /api/v1/customers/{cUUID}/metrics | Add metrics to a customer
 *CustomerManagementApi* | [**UpdateCustomer**](docs/CustomerManagementApi.md#updatecustomer) | **Put** /api/v1/customers/{cUUID} | Update a customer
 *CustomerTasksApi* | [**AbortTask**](docs/CustomerTasksApi.md#aborttask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
-*CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Deprecated: sinceDate&#x3D;2023-06-06, sinceYBAVersion&#x3D;2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
+*CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Deprecated since YBA version 2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
 *CustomerTasksApi* | [**ListFailedSubtasks**](docs/CustomerTasksApi.md#listfailedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks | Get a list of task&#39;s failed subtasks
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
 *DisasterRecoveryApi* | [**CreateDrConfig**](docs/DisasterRecoveryApi.md#createdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
 *DisasterRecoveryApi* | [**DeleteXClusterConfig**](docs/DisasterRecoveryApi.md#deletexclusterconfig) | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Delete xcluster config
+*DisasterRecoveryApi* | [**FailoverDrConfig**](docs/DisasterRecoveryApi.md#failoverdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover | Failover a disaster recovery config
 *DisasterRecoveryApi* | [**GetDrConfig**](docs/DisasterRecoveryApi.md#getdrconfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
+*DisasterRecoveryApi* | [**GetDrConfigSafetime**](docs/DisasterRecoveryApi.md#getdrconfigsafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
+*DisasterRecoveryApi* | [**ReplaceReplicaDrConfig**](docs/DisasterRecoveryApi.md#replacereplicadrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica | Replace Replica in a disaster recovery config
+*DisasterRecoveryApi* | [**RestartDrConfig**](docs/DisasterRecoveryApi.md#restartdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart | Restart disaster recovery config
+*DisasterRecoveryApi* | [**SetTablesDrConfig**](docs/DisasterRecoveryApi.md#settablesdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables | Set tables in disaster recovery config
+*DisasterRecoveryApi* | [**SwitchoverDrConfig**](docs/DisasterRecoveryApi.md#switchoverdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover | Switchover a disaster recovery config
+*DisasterRecoveryApi* | [**SyncDrConfig**](docs/DisasterRecoveryApi.md#syncdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync | Sync disaster recovery config
 *EncryptionAtRestApi* | [**CreateKMSConfig**](docs/EncryptionAtRestApi.md#createkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 *EncryptionAtRestApi* | [**DeleteKMSConfig**](docs/EncryptionAtRestApi.md#deletekmsconfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 *EncryptionAtRestApi* | [**EditKMSConfig**](docs/EncryptionAtRestApi.md#editkmsconfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
-*EncryptionAtRestApi* | [**GetCurrentKeyRef**](docs/EncryptionAtRestApi.md#getcurrentkeyref) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms/key_ref | Get a universe&#39;s key reference
 *EncryptionAtRestApi* | [**GetKMSConfig**](docs/EncryptionAtRestApi.md#getkmsconfig) | **Get** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Get details of a KMS configuration
-*EncryptionAtRestApi* | [**GetKeyRefHistory**](docs/EncryptionAtRestApi.md#getkeyrefhistory) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Get a universe&#39;s key reference history
 *EncryptionAtRestApi* | [**ListKMSConfigs**](docs/EncryptionAtRestApi.md#listkmsconfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
-*EncryptionAtRestApi* | [**RefreshKMSConfig**](docs/EncryptionAtRestApi.md#refreshkmsconfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | Refresh KMS Config
-*EncryptionAtRestApi* | [**RemoveKeyRefHistory**](docs/EncryptionAtRestApi.md#removekeyrefhistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Remove a universe&#39;s key reference history
-*EncryptionAtRestApi* | [**RetrieveKey**](docs/EncryptionAtRestApi.md#retrievekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Retrive a universe&#39;s KMS key
-*GrafanaDashboardApi* | [**GrafanaDashboard**](docs/GrafanaDashboardApi.md#grafanadashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
+*EncryptionAtRestApi* | [**RefreshKMSConfig**](docs/EncryptionAtRestApi.md#refreshkmsconfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | WARNING: This is a preview API that could change. Refresh KMS Config
+*EncryptionAtRestApi* | [**RemoveKeyRefHistory**](docs/EncryptionAtRestApi.md#removekeyrefhistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe&#39;s key reference history
+*GrafanaDashboardApi* | [**GrafanaDashboard**](docs/GrafanaDashboardApi.md#grafanadashboard) | **Get** /api/v1/grafana_dashboard | WARNING: This is a preview API that could change. Get Grafana Dashboard
 *InstanceTypesApi* | [**CreateInstanceType**](docs/InstanceTypesApi.md#createinstancetype) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | Create an instance type
 *InstanceTypesApi* | [**DeleteInstanceType**](docs/InstanceTypesApi.md#deleteinstancetype) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Delete an instance type
 *InstanceTypesApi* | [**GetAZUTypes**](docs/InstanceTypesApi.md#getazutypes) | **Get** /api/v1/metadata/azu_types | List supported Azure disk types
@@ -225,21 +223,23 @@ Class | Method | HTTP request | Description
 *KubernetesOverridesControllerApi* | [**ValidateKubernetesOverrides**](docs/KubernetesOverridesControllerApi.md#validatekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides.
 *LDAPRoleManagementApi* | [**ListLdapDnToYbaRoles**](docs/LDAPRoleManagementApi.md#listldapdntoybaroles) | **Get** /api/v1/customers/{cUUID}/ldap_mappings | List LDAP Mappings
 *LDAPRoleManagementApi* | [**SetLdapDnToYbaRoles**](docs/LDAPRoleManagementApi.md#setldapdntoybaroles) | **Put** /api/v1/customers/{cUUID}/ldap_mappings | Set LDAP Mappings
+*LDAPRoleManagementApi* | [**SyncLdapUniverse**](docs/LDAPRoleManagementApi.md#syncldapuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync | WARNING: This is a preview API that could change. Perform an LDAP users sync on the universe
 *LicenseManagementApi* | [**DeleteLicense**](docs/LicenseManagementApi.md#deletelicense) | **Delete** /api/v1/customers/{cUUID}/licenses/{lUUID} | Delete a license
 *LicenseManagementApi* | [**UploadLicense**](docs/LicenseManagementApi.md#uploadlicense) | **Post** /api/v1/customers/{cUUID}/licenses | Uploads the license
 *LoggingConfigApi* | [**SetAuditLoggingSettings**](docs/LoggingConfigApi.md#setauditloggingsettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level
 *LoggingConfigApi* | [**SetLoggingSettings**](docs/LoggingConfigApi.md#setloggingsettings) | **Post** /api/v1/logging_config | Set Logging Level
-*MaintenanceWindowsApi* | [**Create**](docs/MaintenanceWindowsApi.md#create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | Create maintenance window
-*MaintenanceWindowsApi* | [**Delete**](docs/MaintenanceWindowsApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Delete maintenance window
-*MaintenanceWindowsApi* | [**Get**](docs/MaintenanceWindowsApi.md#get) | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Get details of a maintenance window
-*MaintenanceWindowsApi* | [**ListOfMaintenanceWindows**](docs/MaintenanceWindowsApi.md#listofmaintenancewindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list | List maintenance windows
-*MaintenanceWindowsApi* | [**Page**](docs/MaintenanceWindowsApi.md#page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | List maintenance windows (paginated)
-*MaintenanceWindowsApi* | [**Update**](docs/MaintenanceWindowsApi.md#update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Update maintenance window
-*MetricsApi* | [**MetricsDetail**](docs/MetricsApi.md#metricsdetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics
+*MaintenanceWindowsApi* | [**Create**](docs/MaintenanceWindowsApi.md#create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | WARNING: This is a preview API that could change. Create maintenance window
+*MaintenanceWindowsApi* | [**Delete**](docs/MaintenanceWindowsApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Delete maintenance window
+*MaintenanceWindowsApi* | [**Get**](docs/MaintenanceWindowsApi.md#get) | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Get details of a maintenance window
+*MaintenanceWindowsApi* | [**ListOfMaintenanceWindows**](docs/MaintenanceWindowsApi.md#listofmaintenancewindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list | WARNING: This is a preview API that could change. List maintenance windows
+*MaintenanceWindowsApi* | [**Page**](docs/MaintenanceWindowsApi.md#page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | WARNING: This is a preview API that could change. List maintenance windows (paginated)
+*MaintenanceWindowsApi* | [**Update**](docs/MaintenanceWindowsApi.md#update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Update maintenance window
+*MetricsApi* | [**MetricsDetail**](docs/MetricsApi.md#metricsdetail) | **Get** /api/v1/prometheus_metrics | Available since YBA version 2.8.0.0. Get Prometheus metrics
 *NodeAgentsApi* | [**DownloadNodeAgentInstaller**](docs/NodeAgentsApi.md#downloadnodeagentinstaller) | **Get** /api/v1/node_agents/download | Download Node Agent Installer or Package
 *NodeAgentsApi* | [**GetNodeAgent**](docs/NodeAgentsApi.md#getnodeagent) | **Get** /api/v1/customers/{cUUID}/node_agents/{nUUID} | Get Node Agent
 *NodeAgentsApi* | [**ListNodeAgents**](docs/NodeAgentsApi.md#listnodeagents) | **Get** /api/v1/customers/{cUUID}/node_agents | List Node Agents
 *NodeAgentsApi* | [**PageListNodeAgents**](docs/NodeAgentsApi.md#pagelistnodeagents) | **Post** /api/v1/customers/{cUUID}/node_agents/page | List Node Agents (paginated)
+*NodeAgentsApi* | [**ReinstallNodeAgent**](docs/NodeAgentsApi.md#reinstallnodeagent) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/node_agents | Reinstall Node Agent
 *NodeInstancesApi* | [**CreateNodeInstance**](docs/NodeInstancesApi.md#createnodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes | Create a node instance
 *NodeInstancesApi* | [**DeleteInstance**](docs/NodeInstancesApi.md#deleteinstance) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Delete a node instance
 *NodeInstancesApi* | [**DetachedNodeAction**](docs/NodeInstancesApi.md#detachednodeaction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
@@ -253,40 +253,29 @@ Class | Method | HTTP request | Description
 *PITRManagementApi* | [**DeletePitrConfig**](docs/PITRManagementApi.md#deletepitrconfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
 *PITRManagementApi* | [**ListOfPitrConfigs**](docs/PITRManagementApi.md#listofpitrconfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
 *PITRManagementApi* | [**PerformPitr**](docs/PITRManagementApi.md#performpitr) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr | Perform PITR on a universe
-*PackagesControllerApi* | [**FetchPackage**](docs/PackagesControllerApi.md#fetchpackage) | **Post** /api/v1/fetch_package | Fetch a package
-*PerformanceAdvisorApi* | [**Delete**](docs/PerformanceAdvisorApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | Delete performance recommendations
-*PerformanceAdvisorApi* | [**Get**](docs/PerformanceAdvisorApi.md#get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | Get performance recommendation details
-*PerformanceAdvisorApi* | [**GetLatestRun**](docs/PerformanceAdvisorApi.md#getlatestrun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | Get last performance advisor run details
-*PerformanceAdvisorApi* | [**GetSettings**](docs/PerformanceAdvisorApi.md#getsettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Get universe performance advisor settings
-*PerformanceAdvisorApi* | [**Hide**](docs/PerformanceAdvisorApi.md#hide) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/hide | Hide performance recommendations
-*PerformanceAdvisorApi* | [**Page**](docs/PerformanceAdvisorApi.md#page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | List performance recommendations (paginated)
-*PerformanceAdvisorApi* | [**PageAuditInfo**](docs/PerformanceAdvisorApi.md#pageauditinfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | List performance recommendations state change audit events (paginated)
-*PerformanceAdvisorApi* | [**Resolve**](docs/PerformanceAdvisorApi.md#resolve) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/resolve | Resolve performance recommendations
-*PerformanceAdvisorApi* | [**RunPerfAdvisor**](docs/PerformanceAdvisorApi.md#runperfadvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | Start performance advisor run for universe
-*PerformanceAdvisorApi* | [**UpdateSettings**](docs/PerformanceAdvisorApi.md#updatesettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Update universe performance advisor settings
-*PreviewApi* | [**CreateImageBundle**](docs/PreviewApi.md#createimagebundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | Create a image bundle
-*PreviewApi* | [**Delete**](docs/PreviewApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle
-*PreviewApi* | [**EditImageBundle**](docs/PreviewApi.md#editimagebundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
-*PreviewApi* | [**GetImageBundle**](docs/PreviewApi.md#getimagebundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
-*PreviewApi* | [**GetListOfImageBundles**](docs/PreviewApi.md#getlistofimagebundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
-*RBACManagementApi* | [**CreateRole**](docs/RBACManagementApi.md#createrole) | **Post** /api/v1/customers/{cUUID}/rbac/role | Create a custom role
-*RBACManagementApi* | [**DeleteRole**](docs/RBACManagementApi.md#deleterole) | **Delete** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Delete a custom role
-*RBACManagementApi* | [**EditRole**](docs/RBACManagementApi.md#editrole) | **Put** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Edit a custom role
-*RBACManagementApi* | [**EditRoleBinding**](docs/RBACManagementApi.md#editrolebinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Edit the role bindings of a user
-*RBACManagementApi* | [**GetRole**](docs/RBACManagementApi.md#getrole) | **Get** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Get a role&#39;s information
-*RBACManagementApi* | [**GetRoleBindings**](docs/RBACManagementApi.md#getrolebindings) | **Get** /api/v1/customers/{cUUID}/rbac/role_binding | Get all the role bindings available
-*RBACManagementApi* | [**ListPermissions**](docs/RBACManagementApi.md#listpermissions) | **Get** /api/v1/customers/{cUUID}/rbac/permissions | List all the permissions available
-*RBACManagementApi* | [**ListRoles**](docs/RBACManagementApi.md#listroles) | **Get** /api/v1/customers/{cUUID}/rbac/role | List all the roles available
-*RegionManagementApi* | [**CreateProviderRegion**](docs/RegionManagementApi.md#createproviderregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | Create a new region
-*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+*PerformanceAdvisorApi* | [**Delete**](docs/PerformanceAdvisorApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | WARNING: This is a preview API that could change. Delete performance recommendations
+*PerformanceAdvisorApi* | [**Get**](docs/PerformanceAdvisorApi.md#get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | WARNING: This is a preview API that could change. Get performance recommendation details
+*PerformanceAdvisorApi* | [**GetLatestRun**](docs/PerformanceAdvisorApi.md#getlatestrun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | WARNING: This is a preview API that could change. Get last performance advisor run details
+*PerformanceAdvisorApi* | [**GetSettings**](docs/PerformanceAdvisorApi.md#getsettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | WARNING: This is a preview API that could change. Get universe performance advisor settings
+*PerformanceAdvisorApi* | [**Page**](docs/PerformanceAdvisorApi.md#page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | WARNING: This is a preview API that could change. List performance recommendations (paginated)
+*PerformanceAdvisorApi* | [**PageAuditInfo**](docs/PerformanceAdvisorApi.md#pageauditinfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | WARNING: This is a preview API that could change. List performance recommendations state change audit events (paginated)
+*PerformanceAdvisorApi* | [**RunPerfAdvisor**](docs/PerformanceAdvisorApi.md#runperfadvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | WARNING: This is a preview API that could change. Start performance advisor run for universe
+*PerformanceAdvisorApi* | [**UpdateSettings**](docs/PerformanceAdvisorApi.md#updatesettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | WARNING: This is a preview API that could change. Update universe performance advisor settings
+*PreviewApi* | [**CreateImageBundle**](docs/PreviewApi.md#createimagebundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. Create a image bundle
+*PreviewApi* | [**Delete**](docs/PreviewApi.md#delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Delete a image bundle
+*PreviewApi* | [**EditImageBundle**](docs/PreviewApi.md#editimagebundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Update a image bundle
+*PreviewApi* | [**GetImageBundle**](docs/PreviewApi.md#getimagebundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Get a image bundle
+*PreviewApi* | [**GetListOfImageBundles**](docs/PreviewApi.md#getlistofimagebundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. List image bundles
+*RegionManagementApi* | [**CreateProviderRegion**](docs/RegionManagementApi.md#createproviderregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | WARNING: This is a preview API that could change. Create a new region
+*RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
-*RegionManagementApi* | [**EditProviderRegion**](docs/RegionManagementApi.md#editproviderregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | Modify a region
-*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+*RegionManagementApi* | [**EditProviderRegion**](docs/RegionManagementApi.md#editproviderregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | WARNING: This is a preview API that could change. Modify a region
+*RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 *RegionManagementApi* | [**GetRegion**](docs/RegionManagementApi.md#getregion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 *ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 *ReleaseManagementApi* | [**DeleteRelease**](docs/ReleaseManagementApi.md#deleterelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
-*ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List all releases valid in region
+*ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
 *ReleaseManagementApi* | [**GetListOfReleases**](docs/ReleaseManagementApi.md#getlistofreleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 *ReleaseManagementApi* | [**Refresh**](docs/ReleaseManagementApi.md#refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 *ReleaseManagementApi* | [**UpdateRelease**](docs/ReleaseManagementApi.md#updaterelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
@@ -297,16 +286,16 @@ Class | Method | HTTP request | Description
 *RuntimeConfigurationApi* | [**ListKeys**](docs/RuntimeConfigurationApi.md#listkeys) | **Get** /api/v1/runtime_config/mutable_keys | List mutable keys
 *RuntimeConfigurationApi* | [**ListScopes**](docs/RuntimeConfigurationApi.md#listscopes) | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes | List configuration scopes
 *RuntimeConfigurationApi* | [**SetKey**](docs/RuntimeConfigurationApi.md#setkey) | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Update a configuration key
-*ScheduleManagementApi* | [**DeleteSchedule**](docs/ScheduleManagementApi.md#deleteschedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Delete a schedule
+*ScheduleManagementApi* | [**DeleteSchedule**](docs/ScheduleManagementApi.md#deleteschedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Deprecated since YBA version 2.20.0.0. Use &#39;Delete a schedule V2&#39; instead. Delete a schedule
 *ScheduleManagementApi* | [**DeleteScheduleV2**](docs/ScheduleManagementApi.md#deleteschedulev2) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete | Delete a schedule V2
 *ScheduleManagementApi* | [**EditBackupScheduleV2**](docs/ScheduleManagementApi.md#editbackupschedulev2) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule V2
 *ScheduleManagementApi* | [**GetSchedule**](docs/ScheduleManagementApi.md#getschedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
-*ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules
+*ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | Deprecated since YBA version 2.20.0.0. Use &#39;List schedules V2&#39; instead. List schedules
 *ScheduleManagementApi* | [**ListSchedulesV2**](docs/ScheduleManagementApi.md#listschedulesv2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
 *SessionManagementApi* | [**ApiLogin**](docs/SessionManagementApi.md#apilogin) | **Post** /api/v1/api_login | Authenticate user and return api token
 *SessionManagementApi* | [**AppVersion**](docs/SessionManagementApi.md#appversion) | **Get** /api/v1/app_version | appVersion
 *SessionManagementApi* | [**CustomerCount**](docs/SessionManagementApi.md#customercount) | **Get** /api/v1/customer_count | customerCount
-*SessionManagementApi* | [**GetAdminNotifications**](docs/SessionManagementApi.md#getadminnotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | getAdminNotifications
+*SessionManagementApi* | [**GetAdminNotifications**](docs/SessionManagementApi.md#getadminnotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | WARNING: This is a preview API that could change. Returns the current list of notifications for admin
 *SessionManagementApi* | [**GetFilteredLogs**](docs/SessionManagementApi.md#getfilteredlogs) | **Get** /api/v1/logs | getFilteredLogs
 *SessionManagementApi* | [**GetLogs**](docs/SessionManagementApi.md#getlogs) | **Get** /api/v1/logs/{maxLines} | getLogs
 *SessionManagementApi* | [**GetSessionInfo**](docs/SessionManagementApi.md#getsessioninfo) | **Get** /api/v1/session_info | Get current user/customer uuid auth/api token
@@ -317,64 +306,53 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**GetSupportBundle**](docs/SupportBundleManagementApi.md#getsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 *SupportBundleManagementApi* | [**ListSupportBundleComponents**](docs/SupportBundleManagementApi.md#listsupportbundlecomponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
-*TableManagementApi* | [**AlterTable**](docs/TableManagementApi.md#altertable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
-*TableManagementApi* | [**BulkImportData**](docs/TableManagementApi.md#bulkimportdata) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
-*TableManagementApi* | [**CreateMultiTableBackup**](docs/TableManagementApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup
-*TableManagementApi* | [**CreateSingleTableBackup**](docs/TableManagementApi.md#createsingletablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup
-*TableManagementApi* | [**CreateTable**](docs/TableManagementApi.md#createtable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
-*TableManagementApi* | [**CreateTableSpaces**](docs/TableManagementApi.md#createtablespaces) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Create tableSpaces
-*TableManagementApi* | [**DescribeTable**](docs/TableManagementApi.md#describetable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
-*TableManagementApi* | [**DropTable**](docs/TableManagementApi.md#droptable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
-*TableManagementApi* | [**GetAllNamespaces**](docs/TableManagementApi.md#getallnamespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces | List all namespaces
-*TableManagementApi* | [**GetAllTableSpaces**](docs/TableManagementApi.md#getalltablespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | List all tablespaces
-*TableManagementApi* | [**GetAllTables**](docs/TableManagementApi.md#getalltables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | List all tables
-*TableManagementApi* | [**GetYQLDataTypes**](docs/TableManagementApi.md#getyqldatatypes) | **Get** /api/v1/metadata/yql_data_types | List column types
-*TabletServerManagementApi* | [**ListTabletServers**](docs/TabletServerManagementApi.md#listtabletservers) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablet-servers | List all tablet servers
-*UniverseActionsApi* | [**ImportUniverse**](docs/UniverseActionsApi.md#importuniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Import a universe
+*TableManagementApi* | [**CreateMultiTableBackup**](docs/TableManagementApi.md#createmultitablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+*TableManagementApi* | [**CreateSingleTableBackup**](docs/TableManagementApi.md#createsingletablebackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a single-table backup
+*UniverseActionsApi* | [**ImportUniverse**](docs/UniverseActionsApi.md#importuniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Deprecated since YBA version 2.19.3.0. Do not use, this will be removed soon. Import a universe
 *UniverseClusterMutationsApi* | [**CreateAllClusters**](docs/UniverseClusterMutationsApi.md#createallclusters) | **Post** /api/v1/customers/{cUUID}/universes/clusters | Create Universe Clusters
 *UniverseClusterMutationsApi* | [**CreateReadOnlyCluster**](docs/UniverseClusterMutationsApi.md#createreadonlycluster) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Create ReadOnly Cluster
 *UniverseClusterMutationsApi* | [**DeleteReadonlyCluster**](docs/UniverseClusterMutationsApi.md#deletereadonlycluster) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only/{clustUUID} | Delete Readonly Cluster
 *UniverseClusterMutationsApi* | [**UpdatePrimaryCluster**](docs/UniverseClusterMutationsApi.md#updateprimarycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary | Update Primary Cluster
 *UniverseClusterMutationsApi* | [**UpdateReadOnlyCluster**](docs/UniverseClusterMutationsApi.md#updatereadonlycluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Update Readonly Cluster
-*UniverseDatabaseManagementApi* | [**ConfigureYCQL**](docs/UniverseDatabaseManagementApi.md#configureycql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | Configure YCQL
-*UniverseDatabaseManagementApi* | [**ConfigureYSQL**](docs/UniverseDatabaseManagementApi.md#configureysql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | Configure YSQL
-*UniverseDatabaseManagementApi* | [**CreateUserInDB**](docs/UniverseDatabaseManagementApi.md#createuserindb) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe
-*UniverseDatabaseManagementApi* | [**RunYsqlQueryUniverse**](docs/UniverseDatabaseManagementApi.md#runysqlqueryuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query | Run a YSQL query in a universe
-*UniverseDatabaseManagementApi* | [**SetDatabaseCredentials**](docs/UniverseDatabaseManagementApi.md#setdatabasecredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials
-*UniverseInformationApi* | [**DownloadNodeLogs**](docs/UniverseInformationApi.md#downloadnodelogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs
-*UniverseInformationApi* | [**GetLiveQueries**](docs/UniverseInformationApi.md#getlivequeries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Get live queries for a universe
-*UniverseInformationApi* | [**GetMasterInfos**](docs/UniverseInformationApi.md#getmasterinfos) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos | Get master information list
-*UniverseInformationApi* | [**GetMasterLeaderIP**](docs/UniverseInformationApi.md#getmasterleaderip) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Get IP address of a universe&#39;s master leader
-*UniverseInformationApi* | [**GetSlowQueries**](docs/UniverseInformationApi.md#getslowqueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Get slow queries for a universe
-*UniverseInformationApi* | [**GetUniverseCost**](docs/UniverseInformationApi.md#getuniversecost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Get a cost estimate for a universe
-*UniverseInformationApi* | [**GetUniverseCostForAll**](docs/UniverseInformationApi.md#getuniversecostforall) | **Get** /api/v1/customers/{cUUID}/cost | Get a cost estimate for all universes
-*UniverseInformationApi* | [**HealthCheckUniverse**](docs/UniverseInformationApi.md#healthcheckuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Run a universe health check
-*UniverseInformationApi* | [**ResetSlowQueries**](docs/UniverseInformationApi.md#resetslowqueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
-*UniverseInformationApi* | [**TriggerHealthCheck**](docs/UniverseInformationApi.md#triggerhealthcheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
-*UniverseInformationApi* | [**UniverseStatus**](docs/UniverseInformationApi.md#universestatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
-*UniverseManagementApi* | [**ConfigureUniverseAlerts**](docs/UniverseManagementApi.md#configureuniversealerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
-*UniverseManagementApi* | [**DeleteUniverse**](docs/UniverseManagementApi.md#deleteuniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
-*UniverseManagementApi* | [**GetUniverse**](docs/UniverseManagementApi.md#getuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Get a universe
-*UniverseManagementApi* | [**ListUniverses**](docs/UniverseManagementApi.md#listuniverses) | **Get** /api/v1/customers/{cUUID}/universes | List universes
-*UniverseManagementApi* | [**PauseUniverse**](docs/UniverseManagementApi.md#pauseuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Pause a universe
-*UniverseManagementApi* | [**ResetUniverseVersion**](docs/UniverseManagementApi.md#resetuniverseversion) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/setup_universe_2dc | Reset universe version
-*UniverseManagementApi* | [**ResumeUniverse**](docs/UniverseManagementApi.md#resumeuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/resume | Resume a paused universe
-*UniverseManagementApi* | [**SetUniverseBackupFlag**](docs/UniverseManagementApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
-*UniverseManagementApi* | [**SetUniverseHelm3Compatible**](docs/UniverseManagementApi.md#setuniversehelm3compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Flag a universe as Helm 3-compatible
-*UniverseManagementApi* | [**SetUniverseKey**](docs/UniverseManagementApi.md#setuniversekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
-*UniverseManagementApi* | [**UpdateLoadBalancerConfig**](docs/UniverseManagementApi.md#updateloadbalancerconfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
-*UniverseNodeMetadataMetamasterApi* | [**GetMasterAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getmasteraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
-*UniverseNodeMetadataMetamasterApi* | [**GetRedisServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getredisserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
+*UniverseDatabaseManagementApi* | [**ConfigureYCQL**](docs/UniverseDatabaseManagementApi.md#configureycql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | WARNING: This is a preview API that could change. Configure YCQL
+*UniverseDatabaseManagementApi* | [**ConfigureYSQL**](docs/UniverseDatabaseManagementApi.md#configureysql) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | WARNING: This is a preview API that could change. Configure YSQL
+*UniverseInformationApi* | [**DownloadNodeLogs**](docs/UniverseInformationApi.md#downloadnodelogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node&#39;s logs.
+*UniverseInformationApi* | [**GetLiveQueries**](docs/UniverseInformationApi.md#getlivequeries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Available since YBA version 2.4.0.0. Get live queries for a universe
+*UniverseInformationApi* | [**GetMasterLeaderIP**](docs/UniverseInformationApi.md#getmasterleaderip) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Available since YBA version 2.2.0.0. Get IP address of a universe&#39;s master leader
+*UniverseInformationApi* | [**GetSlowQueries**](docs/UniverseInformationApi.md#getslowqueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Get slow queries for a universe
+*UniverseInformationApi* | [**GetUniverseCost**](docs/UniverseInformationApi.md#getuniversecost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
+*UniverseInformationApi* | [**GetUniverseResources**](docs/UniverseInformationApi.md#getuniverseresources) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources | Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
+*UniverseInformationApi* | [**HealthCheckUniverse**](docs/UniverseInformationApi.md#healthcheckuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Available since YBA version 2.2.0.0. Return results for the last health check
+*UniverseInformationApi* | [**ResetSlowQueries**](docs/UniverseInformationApi.md#resetslowqueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Reset slow queries for a universe
+*UniverseInformationApi* | [**UniverseStatus**](docs/UniverseInformationApi.md#universestatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Available since YBA version 2.2.0.0. Get a universe&#39;s status
+*UniverseManagementApi* | [**ConfigureUniverseAlerts**](docs/UniverseManagementApi.md#configureuniversealerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Available since YBA version 2.2.0.0. Configure alerts for a universe
+*UniverseManagementApi* | [**DeleteUniverse**](docs/UniverseManagementApi.md#deleteuniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Available since YBA version 2.2.0.0. Delete a universe
+*UniverseManagementApi* | [**GetUniverse**](docs/UniverseManagementApi.md#getuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Available since YBA version 2.2.0.0. Get a universe
+*UniverseManagementApi* | [**ListUniverses**](docs/UniverseManagementApi.md#listuniverses) | **Get** /api/v1/customers/{cUUID}/universes | Available since YBA version 2.2.0.0. List universes
+*UniverseManagementApi* | [**PauseUniverse**](docs/UniverseManagementApi.md#pauseuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Available since YBA version 2.6.0.0. Pause a universe
+*UniverseManagementApi* | [**ResumeUniverse**](docs/UniverseManagementApi.md#resumeuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/resume | Available since YBA version 2.6.0.0. Resume a paused universe
+*UniverseManagementApi* | [**SetUniverseBackupFlag**](docs/UniverseManagementApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Available since YBA version 2.2.0.0. Set a universe&#39;s backup flag
+*UniverseManagementApi* | [**SetUniverseHelm3Compatible**](docs/UniverseManagementApi.md#setuniversehelm3compatible) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible | Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
+*UniverseManagementApi* | [**SetUniverseKey**](docs/UniverseManagementApi.md#setuniversekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Available since YBA version 2.2.0.0. Set a universe&#39;s key
+*UniverseManagementApi* | [**UpdateLoadBalancerConfig**](docs/UniverseManagementApi.md#updateloadbalancerconfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | WARNING: This is a preview API that could change. Update load balancer config
+*UniverseNodeMetadataMetamasterApi* | [**GetMasterAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getmasteraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | Available since YBA version 2.2.0.0. List a master node&#39;s addresses
+*UniverseNodeMetadataMetamasterApi* | [**GetMasterNodesInfo**](docs/UniverseNodeMetadataMetamasterApi.md#getmasternodesinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info | Available since YBA version 2.21.1.0. Lists all master nodes details
+*UniverseNodeMetadataMetamasterApi* | [**GetRedisServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getredisserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | Available since YBA version 2.2.0.0. List a REDIS server&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetUniverseMasterNodes**](docs/UniverseNodeMetadataMetamasterApi.md#getuniversemasternodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
-*UniverseNodeMetadataMetamasterApi* | [**GetYQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getyqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
-*UniverseNodeMetadataMetamasterApi* | [**GetYSQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getysqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | List a YSQL server&#39;s addresses
-*UniversePerformanceSuggestionsApi* | [**GetQueryDistributionSuggestions**](docs/UniversePerformanceSuggestionsApi.md#getquerydistributionsuggestions) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions | Get query distribution improvement suggestion for a universe
-*UniversePerformanceSuggestionsApi* | [**GetRangeHash**](docs/UniversePerformanceSuggestionsApi.md#getrangehash) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash | Return list of hash indexes
-*UniversePerformanceSuggestionsApi* | [**GetUnusedIndexes**](docs/UniversePerformanceSuggestionsApi.md#getunusedindexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | Return list of each unused index across the universe
+*UniverseNodeMetadataMetamasterApi* | [**GetYQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getyqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | Available since YBA version 2.2.0.0. List a YQL server&#39;s addresses
+*UniverseNodeMetadataMetamasterApi* | [**GetYSQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getysqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | Available since YBA version 2.2.0.0. List a YSQL server&#39;s addresses
+*UniversePerformanceSuggestionsApi* | [**GetQueryDistributionSuggestions**](docs/UniversePerformanceSuggestionsApi.md#getquerydistributionsuggestions) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions | WARNING: This is a preview API that could change. Get query distribution improvement suggestion for a universe
+*UniversePerformanceSuggestionsApi* | [**GetRangeHash**](docs/UniversePerformanceSuggestionsApi.md#getrangehash) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash | WARNING: This is a preview API that could change. Return list of hash indexes
+*UniversePerformanceSuggestionsApi* | [**GetUnusedIndexes**](docs/UniversePerformanceSuggestionsApi.md#getunusedindexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | WARNING: This is a preview API that could change. Return list of each unused index across the universe
+*UniverseUpgradesManagementApi* | [**FinalizeUpgrade**](docs/UniverseUpgradesManagementApi.md#finalizeupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | WARNING: This is a preview API that could change. Finalize Upgrade.
+*UniverseUpgradesManagementApi* | [**PreFinalizeSoftwareUpgradeInfo**](docs/UniverseUpgradesManagementApi.md#prefinalizesoftwareupgradeinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | WARNING: This is a preview API that could change. Finalize Software Upgrade info
 *UniverseUpgradesManagementApi* | [**RebootUniverse**](docs/UniverseUpgradesManagementApi.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementApi* | [**ResizeNode**](docs/UniverseUpgradesManagementApi.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementApi* | [**RestartUniverse**](docs/UniverseUpgradesManagementApi.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
+*UniverseUpgradesManagementApi* | [**RollbackUpgrade**](docs/UniverseUpgradesManagementApi.md#rollbackupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | WARNING: This is a preview API that could change. Rollback Upgrade
+*UniverseUpgradesManagementApi* | [**SoftwareUpgradePreCheck**](docs/UniverseUpgradesManagementApi.md#softwareupgradeprecheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | WARNING: This is a preview API that could change. Software Upgrade universe pre-check
 *UniverseUpgradesManagementApi* | [**UpgradeCerts**](docs/UniverseUpgradesManagementApi.md#upgradecerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
+*UniverseUpgradesManagementApi* | [**UpgradeDBVersion**](docs/UniverseUpgradesManagementApi.md#upgradedbversion) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version | WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
 *UniverseUpgradesManagementApi* | [**UpgradeGFlags**](docs/UniverseUpgradesManagementApi.md#upgradegflags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
 *UniverseUpgradesManagementApi* | [**UpgradeKubernetesOverrides**](docs/UniverseUpgradesManagementApi.md#upgradekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/kubernetes_overrides | Upgrade KubernetesOverrides
 *UniverseUpgradesManagementApi* | [**UpgradeSoftware**](docs/UniverseUpgradesManagementApi.md#upgradesoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade Software
@@ -390,17 +368,15 @@ Class | Method | HTTP request | Description
 *UserManagementApi* | [**UpdateUserPassword**](docs/UserManagementApi.md#updateuserpassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change a user&#39;s password
 *UserManagementApi* | [**UpdateUserProfile**](docs/UserManagementApi.md#updateuserprofile) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/update_profile | Update a user&#39;s profile
 *UserManagementApi* | [**UpdateUserRole**](docs/UserManagementApi.md#updateuserrole) | **Put** /api/v1/customers/{cUUID}/users/{uUUID} | Change a user&#39;s role
-*YbcManagementApi* | [**Disable**](docs/YbcManagementApi.md#disable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/disable | 
-*YbcManagementApi* | [**Install**](docs/YbcManagementApi.md#install) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/install | 
-*YbcManagementApi* | [**Upgrade**](docs/YbcManagementApi.md#upgrade) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc/upgrade | 
 
 
 ## Documentation For Models
 
  - [AWSCloudInfo](docs/AWSCloudInfo.md)
+ - [AWSCloudWatchConfig](docs/AWSCloudWatchConfig.md)
+ - [AWSCloudWatchConfigAllOf](docs/AWSCloudWatchConfigAllOf.md)
  - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
  - [AZCloudInfo](docs/AZCloudInfo.md)
- - [AZOverrides](docs/AZOverrides.md)
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
@@ -444,6 +420,8 @@ Class | Method | HTTP request | Description
  - [AlertTemplateVariablesList](docs/AlertTemplateVariablesList.md)
  - [AlertingData](docs/AlertingData.md)
  - [Audit](docs/Audit.md)
+ - [AuditLogConfig](docs/AuditLogConfig.md)
+ - [AuditLogConfigParams](docs/AuditLogConfigParams.md)
  - [AuditLoggingConfig](docs/AuditLoggingConfig.md)
  - [AvailabilityZone](docs/AvailabilityZone.md)
  - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
@@ -503,20 +481,33 @@ Class | Method | HTTP request | Description
  - [CustomerLoginFormData](docs/CustomerLoginFormData.md)
  - [CustomerRegisterFormData](docs/CustomerRegisterFormData.md)
  - [CustomerTaskData](docs/CustomerTaskData.md)
+ - [DataDogConfig](docs/DataDogConfig.md)
+ - [DataDogConfigAllOf](docs/DataDogConfigAllOf.md)
  - [DatabaseSecurityFormData](docs/DatabaseSecurityFormData.md)
  - [DatabaseUserFormData](docs/DatabaseUserFormData.md)
  - [DeleteBackupInfo](docs/DeleteBackupInfo.md)
  - [DeleteBackupParams](docs/DeleteBackupParams.md)
  - [Details](docs/Details.md)
  - [DeviceInfo](docs/DeviceInfo.md)
+ - [DrConfig](docs/DrConfig.md)
  - [DrConfigCreateForm](docs/DrConfigCreateForm.md)
+ - [DrConfigFailoverForm](docs/DrConfigFailoverForm.md)
+ - [DrConfigReplaceReplicaForm](docs/DrConfigReplaceReplicaForm.md)
+ - [DrConfigRestartForm](docs/DrConfigRestartForm.md)
+ - [DrConfigSafetimeResp](docs/DrConfigSafetimeResp.md)
+ - [DrConfigSetTablesForm](docs/DrConfigSetTablesForm.md)
+ - [DrConfigSwitchoverForm](docs/DrConfigSwitchoverForm.md)
  - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [FailedSubtasks](docs/FailedSubtasks.md)
+ - [FinalizeUpgradeInfoResponse](docs/FinalizeUpgradeInfoResponse.md)
+ - [FinalizeUpgradeParams](docs/FinalizeUpgradeParams.md)
  - [GCPCloudInfo](docs/GCPCloudInfo.md)
+ - [GCPCloudMonitoringConfig](docs/GCPCloudMonitoringConfig.md)
+ - [GCPCloudMonitoringConfigAllOf](docs/GCPCloudMonitoringConfigAllOf.md)
  - [GCPRegionCloudInfo](docs/GCPRegionCloudInfo.md)
  - [GCSLocation](docs/GCSLocation.md)
  - [GFlagsUpgradeParams](docs/GFlagsUpgradeParams.md)
@@ -542,6 +533,8 @@ Class | Method | HTTP request | Description
  - [KubernetesRegionInfo](docs/KubernetesRegionInfo.md)
  - [LdapDnToYbaRoleData](docs/LdapDnToYbaRoleData.md)
  - [LdapDnYbaRoleDataPair](docs/LdapDnYbaRoleDataPair.md)
+ - [LdapUnivSyncFormData](docs/LdapUnivSyncFormData.md)
+ - [LocalCloudInfo](docs/LocalCloudInfo.md)
  - [LogData](docs/LogData.md)
  - [MaintenanceWindow](docs/MaintenanceWindow.md)
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
@@ -549,14 +542,16 @@ Class | Method | HTTP request | Description
  - [MaintenanceWindowPagedResponse](docs/MaintenanceWindowPagedResponse.md)
  - [MasterInfo](docs/MasterInfo.md)
  - [MasterNode](docs/MasterNode.md)
+ - [MasterNodesInfo](docs/MasterNodesInfo.md)
  - [MastersList](docs/MastersList.md)
+ - [Metadata](docs/Metadata.md)
  - [Metric](docs/Metric.md)
  - [MetricLabel](docs/MetricLabel.md)
  - [MetricQueryParams](docs/MetricQueryParams.md)
- - [MetricSettings](docs/MetricSettings.md)
  - [MetricValue](docs/MetricValue.md)
  - [MultiTableBackupRequestParams](docs/MultiTableBackupRequestParams.md)
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
+ - [NamespaceSafetime](docs/NamespaceSafetime.md)
  - [NoAuth](docs/NoAuth.md)
  - [NodeActionFormData](docs/NodeActionFormData.md)
  - [NodeAgent](docs/NodeAgent.md)
@@ -573,7 +568,6 @@ Class | Method | HTTP request | Description
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
  - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
- - [OverridenDetails](docs/OverridenDetails.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
@@ -587,9 +581,9 @@ Class | Method | HTTP request | Description
  - [PerformanceRecommendationFilter](docs/PerformanceRecommendationFilter.md)
  - [PerformanceRecommendationPagedQuery](docs/PerformanceRecommendationPagedQuery.md)
  - [PerformanceRecommendationPagedResponse](docs/PerformanceRecommendationPagedResponse.md)
+ - [Permission](docs/Permission.md)
  - [PermissionDetails](docs/PermissionDetails.md)
  - [PermissionInfo](docs/PermissionInfo.md)
- - [PermissionInfoIdentifier](docs/PermissionInfoIdentifier.md)
  - [PitrConfig](docs/PitrConfig.md)
  - [PitrParams](docs/PitrParams.md)
  - [PlacementAZ](docs/PlacementAZ.md)
@@ -599,6 +593,7 @@ Class | Method | HTTP request | Description
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PlatformLoggingConfig](docs/PlatformLoggingConfig.md)
  - [PresetThrottleValues](docs/PresetThrottleValues.md)
+ - [PrevYBSoftwareConfig](docs/PrevYBSoftwareConfig.md)
  - [Provider](docs/Provider.md)
  - [ProviderDetails](docs/ProviderDetails.md)
  - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
@@ -609,8 +604,10 @@ Class | Method | HTTP request | Description
  - [RegionLocations](docs/RegionLocations.md)
  - [RegionMetadata](docs/RegionMetadata.md)
  - [RegionMetadataInfo](docs/RegionMetadataInfo.md)
+ - [ReinstallNodeAgentForm](docs/ReinstallNodeAgentForm.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
+ - [ReplicaPlacement](docs/ReplicaPlacement.md)
  - [ResizeNodeParams](docs/ResizeNodeParams.md)
  - [ResourceDefinition](docs/ResourceDefinition.md)
  - [ResourceGroup](docs/ResourceGroup.md)
@@ -628,7 +625,9 @@ Class | Method | HTTP request | Description
  - [Role](docs/Role.md)
  - [RoleBinding](docs/RoleBinding.md)
  - [RoleBindingFormData](docs/RoleBindingFormData.md)
+ - [RoleFormData](docs/RoleFormData.md)
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
+ - [RollbackUpgradeParams](docs/RollbackUpgradeParams.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
  - [S3Location](docs/S3Location.md)
@@ -639,8 +638,12 @@ Class | Method | HTTP request | Description
  - [ScopedConfig](docs/ScopedConfig.md)
  - [SessionInfo](docs/SessionInfo.md)
  - [SmtpData](docs/SmtpData.md)
+ - [SoftwareUpgradeInfoRequest](docs/SoftwareUpgradeInfoRequest.md)
+ - [SoftwareUpgradeInfoResponse](docs/SoftwareUpgradeInfoResponse.md)
  - [SoftwareUpgradeParams](docs/SoftwareUpgradeParams.md)
  - [SpecificGFlags](docs/SpecificGFlags.md)
+ - [SplunkConfig](docs/SplunkConfig.md)
+ - [SplunkConfigAllOf](docs/SplunkConfigAllOf.md)
  - [StateChangeAuditInfo](docs/StateChangeAuditInfo.md)
  - [StateChangeAuditInfoFilter](docs/StateChangeAuditInfoFilter.md)
  - [StateChangeAuditInfoPagedQuery](docs/StateChangeAuditInfoPagedQuery.md)
@@ -653,6 +656,10 @@ Class | Method | HTTP request | Description
  - [TableDetails](docs/TableDetails.md)
  - [TableInfoResp](docs/TableInfoResp.md)
  - [TableSpaceInfo](docs/TableSpaceInfo.md)
+ - [Tablespace](docs/Tablespace.md)
+ - [TablespaceResponse](docs/TablespaceResponse.md)
+ - [TelemetryProvider](docs/TelemetryProvider.md)
+ - [TelemetryProviderConfig](docs/TelemetryProviderConfig.md)
  - [ThirdpartySoftwareUpgradeParams](docs/ThirdpartySoftwareUpgradeParams.md)
  - [ThrottleParamValue](docs/ThrottleParamValue.md)
  - [TlsToggleParams](docs/TlsToggleParams.md)
@@ -663,6 +670,7 @@ Class | Method | HTTP request | Description
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
+ - [UniverseLogsExporterConfig](docs/UniverseLogsExporterConfig.md)
  - [UniversePerformanceAdvisorStatus](docs/UniversePerformanceAdvisorStatus.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
@@ -670,7 +678,6 @@ Class | Method | HTTP request | Description
  - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
  - [UserIntent](docs/UserIntent.md)
- - [UserIntentOverrides](docs/UserIntentOverrides.md)
  - [UserOIDCAuthToken](docs/UserOIDCAuthToken.md)
  - [UserProfileData](docs/UserProfileData.md)
  - [UserRegistrationData](docs/UserRegistrationData.md)
@@ -690,6 +697,8 @@ Class | Method | HTTP request | Description
  - [YBPError](docs/YBPError.md)
  - [YBPSuccess](docs/YBPSuccess.md)
  - [YBPTask](docs/YBPTask.md)
+ - [YCQLAuditConfig](docs/YCQLAuditConfig.md)
+ - [YSQLAuditConfig](docs/YSQLAuditConfig.md)
  - [YbcThrottleParameters](docs/YbcThrottleParameters.md)
  - [YbcThrottleParametersResponse](docs/YbcThrottleParametersResponse.md)
 

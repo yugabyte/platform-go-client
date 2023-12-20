@@ -37,7 +37,7 @@ func (r GrafanaDashboardApiApiGrafanaDashboardRequest) Execute() (string, *_neth
 }
 
 /*
- * GrafanaDashboard Get Grafana Dashboard
+ * GrafanaDashboard WARNING: This is a preview API that could change. Get Grafana Dashboard
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return GrafanaDashboardApiApiGrafanaDashboardRequest
  */

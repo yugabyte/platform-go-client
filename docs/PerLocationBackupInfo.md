@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **IsSelectiveRestoreSupported** | Pointer to **bool** | Whether selective table restore is supported for this backup | [optional] 
 **IsYSQLBackup** | Pointer to **bool** | Whether backup type is YSQL | [optional] 
 **PerBackupLocationKeyspaceTables** | Pointer to [**PerBackupLocationKeyspaceTables**](PerBackupLocationKeyspaceTables.md) |  | [optional] 
+**TablespaceResponse** | Pointer to [**TablespaceResponse**](TablespaceResponse.md) |  | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetPerBackupLocationKeyspaceTables sets PerBackupLocationKeyspaceTables field to
 `func (o *PerLocationBackupInfo) HasPerBackupLocationKeyspaceTables() bool`
 
 HasPerBackupLocationKeyspaceTables returns a boolean if a field has been set.
+
+### GetTablespaceResponse
+
+`func (o *PerLocationBackupInfo) GetTablespaceResponse() TablespaceResponse`
+
+GetTablespaceResponse returns the TablespaceResponse field if non-nil, zero value otherwise.
+
+### GetTablespaceResponseOk
+
+`func (o *PerLocationBackupInfo) GetTablespaceResponseOk() (*TablespaceResponse, bool)`
+
+GetTablespaceResponseOk returns a tuple with the TablespaceResponse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTablespaceResponse
+
+`func (o *PerLocationBackupInfo) SetTablespaceResponse(v TablespaceResponse)`
+
+SetTablespaceResponse sets TablespaceResponse field to given value.
+
+### HasTablespaceResponse
+
+`func (o *PerLocationBackupInfo) HasTablespaceResponse() bool`
+
+HasTablespaceResponse returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

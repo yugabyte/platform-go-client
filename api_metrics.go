@@ -37,7 +37,7 @@ func (r MetricsApiApiMetricsDetailRequest) Execute() (string, *_nethttp.Response
 }
 
 /*
- * MetricsDetail Get Prometheus metrics
+ * MetricsDetail Available since YBA version 2.8.0.0. Get Prometheus metrics
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return MetricsApiApiMetricsDetailRequest
  */

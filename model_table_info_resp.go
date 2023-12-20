@@ -22,6 +22,8 @@ type TableInfoResp struct {
 	ColocationParentId *string `json:"colocationParentId,omitempty"`
 	// Keyspace
 	KeySpace *string `json:"keySpace,omitempty"`
+	// Main Table UUID of index tables
+	MainTableUUID *string `json:"mainTableUUID,omitempty"`
 	// Namespace or Schema
 	NameSpace *string `json:"nameSpace,omitempty"`
 	// Parent Table UUID
@@ -157,6 +159,38 @@ func (o *TableInfoResp) HasKeySpace() bool {
 // SetKeySpace gets a reference to the given string and assigns it to the KeySpace field.
 func (o *TableInfoResp) SetKeySpace(v string) {
 	o.KeySpace = &v
+}
+
+// GetMainTableUUID returns the MainTableUUID field value if set, zero value otherwise.
+func (o *TableInfoResp) GetMainTableUUID() string {
+	if o == nil || o.MainTableUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.MainTableUUID
+}
+
+// GetMainTableUUIDOk returns a tuple with the MainTableUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableInfoResp) GetMainTableUUIDOk() (*string, bool) {
+	if o == nil || o.MainTableUUID == nil {
+		return nil, false
+	}
+	return o.MainTableUUID, true
+}
+
+// HasMainTableUUID returns a boolean if a field has been set.
+func (o *TableInfoResp) HasMainTableUUID() bool {
+	if o != nil && o.MainTableUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMainTableUUID gets a reference to the given string and assigns it to the MainTableUUID field.
+func (o *TableInfoResp) SetMainTableUUID(v string) {
+	o.MainTableUUID = &v
 }
 
 // GetNameSpace returns the NameSpace field value if set, zero value otherwise.
@@ -521,6 +555,9 @@ func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.KeySpace != nil {
 		toSerialize["keySpace"] = o.KeySpace
+	}
+	if o.MainTableUUID != nil {
+		toSerialize["mainTableUUID"] = o.MainTableUUID
 	}
 	if o.NameSpace != nil {
 		toSerialize["nameSpace"] = o.NameSpace

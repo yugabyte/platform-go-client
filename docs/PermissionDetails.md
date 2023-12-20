@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PermissionList** | Pointer to [**[]PermissionInfoIdentifier**](PermissionInfoIdentifier.md) | Set of permissions | [optional] 
+**PermissionList** | Pointer to [**[]Permission**](Permission.md) | Set of permissions | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPermissionList
 
-`func (o *PermissionDetails) GetPermissionList() []PermissionInfoIdentifier`
+`func (o *PermissionDetails) GetPermissionList() []Permission`
 
 GetPermissionList returns the PermissionList field if non-nil, zero value otherwise.
 
 ### GetPermissionListOk
 
-`func (o *PermissionDetails) GetPermissionListOk() (*[]PermissionInfoIdentifier, bool)`
+`func (o *PermissionDetails) GetPermissionListOk() (*[]Permission, bool)`
 
 GetPermissionListOk returns a tuple with the PermissionList field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPermissionList
 
-`func (o *PermissionDetails) SetPermissionList(v []PermissionInfoIdentifier)`
+`func (o *PermissionDetails) SetPermissionList(v []Permission)`
 
 SetPermissionList sets PermissionList field to given value.
 

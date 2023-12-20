@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BootstrapBackupParams** | Pointer to [**BootstarpBackupParams**](BootstarpBackupParams.md) |  | [optional] 
+**BootstrapParams** | Pointer to [**RestartBootstrapParams**](RestartBootstrapParams.md) |  | [optional] 
 **Dbs** | **[]string** | Source Universe DB IDs | 
 **DryRun** | Pointer to **bool** | Run the pre-checks without actually running the subtasks | [optional] 
 **Name** | **string** | Name | 
@@ -31,30 +31,30 @@ NewDrConfigCreateFormWithDefaults instantiates a new DrConfigCreateForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetBootstrapBackupParams
+### GetBootstrapParams
 
-`func (o *DrConfigCreateForm) GetBootstrapBackupParams() BootstarpBackupParams`
+`func (o *DrConfigCreateForm) GetBootstrapParams() RestartBootstrapParams`
 
-GetBootstrapBackupParams returns the BootstrapBackupParams field if non-nil, zero value otherwise.
+GetBootstrapParams returns the BootstrapParams field if non-nil, zero value otherwise.
 
-### GetBootstrapBackupParamsOk
+### GetBootstrapParamsOk
 
-`func (o *DrConfigCreateForm) GetBootstrapBackupParamsOk() (*BootstarpBackupParams, bool)`
+`func (o *DrConfigCreateForm) GetBootstrapParamsOk() (*RestartBootstrapParams, bool)`
 
-GetBootstrapBackupParamsOk returns a tuple with the BootstrapBackupParams field if it's non-nil, zero value otherwise
+GetBootstrapParamsOk returns a tuple with the BootstrapParams field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBootstrapBackupParams
+### SetBootstrapParams
 
-`func (o *DrConfigCreateForm) SetBootstrapBackupParams(v BootstarpBackupParams)`
+`func (o *DrConfigCreateForm) SetBootstrapParams(v RestartBootstrapParams)`
 
-SetBootstrapBackupParams sets BootstrapBackupParams field to given value.
+SetBootstrapParams sets BootstrapParams field to given value.
 
-### HasBootstrapBackupParams
+### HasBootstrapParams
 
-`func (o *DrConfigCreateForm) HasBootstrapBackupParams() bool`
+`func (o *DrConfigCreateForm) HasBootstrapParams() bool`
 
-HasBootstrapBackupParams returns a boolean if a field has been set.
+HasBootstrapParams returns a boolean if a field has been set.
 
 ### GetDbs
 

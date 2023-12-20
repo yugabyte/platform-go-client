@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateRelease**](ReleaseManagementApi.md#CreateRelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 [**DeleteRelease**](ReleaseManagementApi.md#DeleteRelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
-[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List all releases valid in region
+[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
 [**GetListOfReleases**](ReleaseManagementApi.md#GetListOfReleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 [**Refresh**](ReleaseManagementApi.md#Refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 [**UpdateRelease**](ReleaseManagementApi.md#UpdateRelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} GetListOfRegionReleases(ctx, cUUID, pUUID).IncludeMetadata(includeMetadata).Execute()
 
-List all releases valid in region
+Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
 
 ### Example
 
@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 
 ## GetListOfReleases
 
-> map[string]map[string]interface{} GetListOfReleases(ctx, cUUID).IncludeMetadata(includeMetadata).Execute()
+> map[string]map[string]interface{} GetListOfReleases(ctx, cUUID).IncludeMetadata(includeMetadata).Arch(arch).Execute()
 
 List all releases
 
@@ -252,10 +252,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     includeMetadata := true // bool |  (optional) (default to false)
+    arch := "arch_example" // string |  (optional) (default to "null")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReleaseManagementApi.GetListOfReleases(context.Background(), cUUID).IncludeMetadata(includeMetadata).Execute()
+    resp, r, err := api_client.ReleaseManagementApi.GetListOfReleases(context.Background(), cUUID).IncludeMetadata(includeMetadata).Arch(arch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReleaseManagementApi.GetListOfReleases``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,6 +283,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **includeMetadata** | **bool** |  | [default to false]
+ **arch** | **string** |  | [default to &quot;null&quot;]
 
 ### Return type
 

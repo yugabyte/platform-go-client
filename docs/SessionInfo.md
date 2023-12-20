@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiToken** | Pointer to **string** | API token | [optional] 
+**ApiTokenVersion** | Pointer to **int64** | API token version | [optional] 
 **AuthToken** | Pointer to **string** | Auth token | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **UserUUID** | Pointer to **string** | User UUID | [optional] 
@@ -52,6 +53,31 @@ SetApiToken sets ApiToken field to given value.
 `func (o *SessionInfo) HasApiToken() bool`
 
 HasApiToken returns a boolean if a field has been set.
+
+### GetApiTokenVersion
+
+`func (o *SessionInfo) GetApiTokenVersion() int64`
+
+GetApiTokenVersion returns the ApiTokenVersion field if non-nil, zero value otherwise.
+
+### GetApiTokenVersionOk
+
+`func (o *SessionInfo) GetApiTokenVersionOk() (*int64, bool)`
+
+GetApiTokenVersionOk returns a tuple with the ApiTokenVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiTokenVersion
+
+`func (o *SessionInfo) SetApiTokenVersion(v int64)`
+
+SetApiTokenVersion sets ApiTokenVersion field to given value.
+
+### HasApiTokenVersion
+
+`func (o *SessionInfo) HasApiTokenVersion() bool`
+
+HasApiTokenVersion returns a boolean if a field has been set.
 
 ### GetAuthToken
 

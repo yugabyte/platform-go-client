@@ -11,10 +11,10 @@ Name | Type | Description | Notes
 **Latitude** | Pointer to **float64** | The region&#39;s latitude | [optional] [readonly] 
 **Longitude** | Pointer to **float64** | The region&#39;s longitude | [optional] [readonly] 
 **Name** | Pointer to **string** | Cloud provider region name | [optional] [readonly] 
-**SecurityGroupId** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to regionDetails.cloudInfo aws/azure securityGroupId property | [optional] 
+**SecurityGroupId** | Pointer to **string** | Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo aws/azure securityGroupId property | [optional] 
 **Uuid** | Pointer to **string** | Region UUID | [optional] [readonly] 
-**VnetName** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to regionDetails.cloudInfo aws/azure vnet property | [optional] 
-**YbImage** | Pointer to **string** | Deprecated: sinceDate&#x3D;2023-02-11, sinceYBAVersion&#x3D;2.17.2.0, Moved to details.cloudInfo aws/gcp/azure ybImage property | [optional] 
+**VnetName** | Pointer to **string** | Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo aws/azure vnet property | [optional] 
+**YbImage** | Pointer to **string** | Deprecated since YBA version 2.17.2.0, Moved to details.cloudInfo aws/gcp/azure ybImage property | [optional] 
 **Zones** | [**[]AvailabilityZone**](AvailabilityZone.md) |  | 
 
 ## Methods

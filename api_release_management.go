@@ -313,7 +313,7 @@ func (r ReleaseManagementApiApiGetListOfRegionReleasesRequest) Execute() (map[st
 }
 
 /*
- * GetListOfRegionReleases List all releases valid in region
+ * GetListOfRegionReleases Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -431,10 +431,15 @@ type ReleaseManagementApiApiGetListOfReleasesRequest struct {
 	ApiService *ReleaseManagementApiService
 	cUUID string
 	includeMetadata *bool
+	arch *string
 }
 
 func (r ReleaseManagementApiApiGetListOfReleasesRequest) IncludeMetadata(includeMetadata bool) ReleaseManagementApiApiGetListOfReleasesRequest {
 	r.includeMetadata = &includeMetadata
+	return r
+}
+func (r ReleaseManagementApiApiGetListOfReleasesRequest) Arch(arch string) ReleaseManagementApiApiGetListOfReleasesRequest {
+	r.arch = &arch
 	return r
 }
 
@@ -484,6 +489,9 @@ func (a *ReleaseManagementApiService) GetListOfReleasesExecute(r ReleaseManageme
 
 	if r.includeMetadata != nil {
 		localVarQueryParams.Add("includeMetadata", parameterToString(*r.includeMetadata, ""))
+	}
+	if r.arch != nil {
+		localVarQueryParams.Add("arch", parameterToString(*r.arch, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

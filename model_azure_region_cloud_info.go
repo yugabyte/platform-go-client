@@ -18,7 +18,7 @@ import (
 type AzureRegionCloudInfo struct {
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
 	Vnet *string `json:"vnet,omitempty"`
-	// The AMI to be used in this region.
+	// Deprecated since YBA version 2.20.0. Use provider.imageBundle instead
 	YbImage *string `json:"ybImage,omitempty"`
 }
 

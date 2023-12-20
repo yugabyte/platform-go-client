@@ -117,6 +117,8 @@ type BackupTableParams struct {
 	TableUUID *string `json:"tableUUID,omitempty"`
 	// Table UUIDs
 	TableUUIDList *[]string `json:"tableUUIDList,omitempty"`
+	// Tablespaces info
+	TablespacesList *[]Tablespace `json:"tablespacesList,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
@@ -1902,6 +1904,38 @@ func (o *BackupTableParams) SetTableUUIDList(v []string) {
 	o.TableUUIDList = &v
 }
 
+// GetTablespacesList returns the TablespacesList field value if set, zero value otherwise.
+func (o *BackupTableParams) GetTablespacesList() []Tablespace {
+	if o == nil || o.TablespacesList == nil {
+		var ret []Tablespace
+		return ret
+	}
+	return *o.TablespacesList
+}
+
+// GetTablespacesListOk returns a tuple with the TablespacesList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetTablespacesListOk() (*[]Tablespace, bool) {
+	if o == nil || o.TablespacesList == nil {
+		return nil, false
+	}
+	return o.TablespacesList, true
+}
+
+// HasTablespacesList returns a boolean if a field has been set.
+func (o *BackupTableParams) HasTablespacesList() bool {
+	if o != nil && o.TablespacesList != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTablespacesList gets a reference to the given []Tablespace and assigns it to the TablespacesList field.
+func (o *BackupTableParams) SetTablespacesList(v []Tablespace) {
+	o.TablespacesList = &v
+}
+
 // GetTargetXClusterConfigs returns the TargetXClusterConfigs field value if set, zero value otherwise.
 func (o *BackupTableParams) GetTargetXClusterConfigs() []string {
 	if o == nil || o.TargetXClusterConfigs == nil {
@@ -2351,6 +2385,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.TableUUIDList != nil {
 		toSerialize["tableUUIDList"] = o.TableUUIDList
+	}
+	if o.TablespacesList != nil {
+		toSerialize["tablespacesList"] = o.TablespacesList
 	}
 	if o.TargetXClusterConfigs != nil {
 		toSerialize["targetXClusterConfigs"] = o.TargetXClusterConfigs

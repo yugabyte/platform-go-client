@@ -16,10 +16,12 @@ import (
 
 // PermissionInfo struct for PermissionInfo
 type PermissionInfo struct {
+	Action *string `json:"action,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Permission *string `json:"permission,omitempty"`
-	PrerequisitePermissions *[]PermissionInfoIdentifier `json:"prerequisite_permissions,omitempty"`
-	ResourceType *string `json:"resource_type,omitempty"`
+	Name *string `json:"name,omitempty"`
+	PermissionValidOnResource *bool `json:"permissionValidOnResource,omitempty"`
+	PrerequisitePermissions *[]Permission `json:"prerequisitePermissions,omitempty"`
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 // NewPermissionInfo instantiates a new PermissionInfo object
@@ -37,6 +39,38 @@ func NewPermissionInfo() *PermissionInfo {
 func NewPermissionInfoWithDefaults() *PermissionInfo {
 	this := PermissionInfo{}
 	return &this
+}
+
+// GetAction returns the Action field value if set, zero value otherwise.
+func (o *PermissionInfo) GetAction() string {
+	if o == nil || o.Action == nil {
+		var ret string
+		return ret
+	}
+	return *o.Action
+}
+
+// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PermissionInfo) GetActionOk() (*string, bool) {
+	if o == nil || o.Action == nil {
+		return nil, false
+	}
+	return o.Action, true
+}
+
+// HasAction returns a boolean if a field has been set.
+func (o *PermissionInfo) HasAction() bool {
+	if o != nil && o.Action != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAction gets a reference to the given string and assigns it to the Action field.
+func (o *PermissionInfo) SetAction(v string) {
+	o.Action = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -71,42 +105,74 @@ func (o *PermissionInfo) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetPermission returns the Permission field value if set, zero value otherwise.
-func (o *PermissionInfo) GetPermission() string {
-	if o == nil || o.Permission == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PermissionInfo) GetName() string {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-	return *o.Permission
+	return *o.Name
 }
 
-// GetPermissionOk returns a tuple with the Permission field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionInfo) GetPermissionOk() (*string, bool) {
-	if o == nil || o.Permission == nil {
+func (o *PermissionInfo) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.Permission, true
+	return o.Name, true
 }
 
-// HasPermission returns a boolean if a field has been set.
-func (o *PermissionInfo) HasPermission() bool {
-	if o != nil && o.Permission != nil {
+// HasName returns a boolean if a field has been set.
+func (o *PermissionInfo) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPermission gets a reference to the given string and assigns it to the Permission field.
-func (o *PermissionInfo) SetPermission(v string) {
-	o.Permission = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PermissionInfo) SetName(v string) {
+	o.Name = &v
+}
+
+// GetPermissionValidOnResource returns the PermissionValidOnResource field value if set, zero value otherwise.
+func (o *PermissionInfo) GetPermissionValidOnResource() bool {
+	if o == nil || o.PermissionValidOnResource == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PermissionValidOnResource
+}
+
+// GetPermissionValidOnResourceOk returns a tuple with the PermissionValidOnResource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PermissionInfo) GetPermissionValidOnResourceOk() (*bool, bool) {
+	if o == nil || o.PermissionValidOnResource == nil {
+		return nil, false
+	}
+	return o.PermissionValidOnResource, true
+}
+
+// HasPermissionValidOnResource returns a boolean if a field has been set.
+func (o *PermissionInfo) HasPermissionValidOnResource() bool {
+	if o != nil && o.PermissionValidOnResource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPermissionValidOnResource gets a reference to the given bool and assigns it to the PermissionValidOnResource field.
+func (o *PermissionInfo) SetPermissionValidOnResource(v bool) {
+	o.PermissionValidOnResource = &v
 }
 
 // GetPrerequisitePermissions returns the PrerequisitePermissions field value if set, zero value otherwise.
-func (o *PermissionInfo) GetPrerequisitePermissions() []PermissionInfoIdentifier {
+func (o *PermissionInfo) GetPrerequisitePermissions() []Permission {
 	if o == nil || o.PrerequisitePermissions == nil {
-		var ret []PermissionInfoIdentifier
+		var ret []Permission
 		return ret
 	}
 	return *o.PrerequisitePermissions
@@ -114,7 +180,7 @@ func (o *PermissionInfo) GetPrerequisitePermissions() []PermissionInfoIdentifier
 
 // GetPrerequisitePermissionsOk returns a tuple with the PrerequisitePermissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionInfo) GetPrerequisitePermissionsOk() (*[]PermissionInfoIdentifier, bool) {
+func (o *PermissionInfo) GetPrerequisitePermissionsOk() (*[]Permission, bool) {
 	if o == nil || o.PrerequisitePermissions == nil {
 		return nil, false
 	}
@@ -130,8 +196,8 @@ func (o *PermissionInfo) HasPrerequisitePermissions() bool {
 	return false
 }
 
-// SetPrerequisitePermissions gets a reference to the given []PermissionInfoIdentifier and assigns it to the PrerequisitePermissions field.
-func (o *PermissionInfo) SetPrerequisitePermissions(v []PermissionInfoIdentifier) {
+// SetPrerequisitePermissions gets a reference to the given []Permission and assigns it to the PrerequisitePermissions field.
+func (o *PermissionInfo) SetPrerequisitePermissions(v []Permission) {
 	o.PrerequisitePermissions = &v
 }
 
@@ -169,17 +235,23 @@ func (o *PermissionInfo) SetResourceType(v string) {
 
 func (o PermissionInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Action != nil {
+		toSerialize["action"] = o.Action
+	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if o.Permission != nil {
-		toSerialize["permission"] = o.Permission
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
+	}
+	if o.PermissionValidOnResource != nil {
+		toSerialize["permissionValidOnResource"] = o.PermissionValidOnResource
 	}
 	if o.PrerequisitePermissions != nil {
-		toSerialize["prerequisite_permissions"] = o.PrerequisitePermissions
+		toSerialize["prerequisitePermissions"] = o.PrerequisitePermissions
 	}
 	if o.ResourceType != nil {
-		toSerialize["resource_type"] = o.ResourceType
+		toSerialize["resourceType"] = o.ResourceType
 	}
 	return json.Marshal(toSerialize)
 }

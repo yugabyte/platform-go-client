@@ -975,6 +975,7 @@ func (r UserManagementApiApiUpdateUserRoleRequest) Execute() (YBPSuccess, *_neth
 
 /*
  * UpdateUserRole Change a user's role
+ * Deprecated. Use this method instead: setRoleBinding.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uUUID

@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AccessKeyRotation**](CloudProvidersApi.md#AccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | Rotate access key for a provider
+[**AccessKeyRotation**](CloudProvidersApi.md#AccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation | WARNING: This is a preview API that could change. Rotate access key for a provider
 [**CreateProviders**](CloudProvidersApi.md#CreateProviders) | **Post** /api/v1/customers/{cUUID}/providers | Create a provider
 [**Delete**](CloudProvidersApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID} | Delete a cloud provider
-[**EditAccessKeyRotationSchedule**](CloudProvidersApi.md#EditAccessKeyRotationSchedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | Edit a access key rotation schedule
+[**EditAccessKeyRotationSchedule**](CloudProvidersApi.md#EditAccessKeyRotationSchedule) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID} | WARNING: This is a preview API that could change. Edit a access key rotation schedule
 [**EditProvider**](CloudProvidersApi.md#EditProvider) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/edit | Update a provider
 [**GetListOfProviders**](CloudProvidersApi.md#GetListOfProviders) | **Get** /api/v1/customers/{cUUID}/providers | List cloud providers
 [**GetProvider**](CloudProvidersApi.md#GetProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID} | Get a cloud provider
 [**GetRegionMetadata**](CloudProvidersApi.md#GetRegionMetadata) | **Get** /api/v1/customers/{cUUID}/providers/region_metadata/{code} | Retrieves the region metadata for the cloud providers
-[**ListSchedules**](CloudProvidersApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | List all schedules for a provider&#39;s access key rotation
-[**RefreshPricing**](CloudProvidersApi.md#RefreshPricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | Refresh pricing
-[**ScheduledAccessKeyRotation**](CloudProvidersApi.md#ScheduledAccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | Rotate access key for a provider - Scheduled
+[**ListSchedules**](CloudProvidersApi.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | WARNING: This is a preview API that could change. List all schedules for a provider&#39;s access key rotation
+[**RefreshPricing**](CloudProvidersApi.md#RefreshPricing) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing | WARNING: This is a preview API that could change. Refresh pricing
+[**ScheduledAccessKeyRotation**](CloudProvidersApi.md#ScheduledAccessKeyRotation) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule | WARNING: This is a preview API that could change. Rotate access key for a provider - Scheduled
 
 
 
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 > YBPTask AccessKeyRotation(ctx, cUUID, pUUID).Request(request).Execute()
 
-Rotate access key for a provider
+WARNING: This is a preview API that could change. Rotate access key for a provider
 
 ### Example
 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 > Schedule EditAccessKeyRotationSchedule(ctx, cUUID, pUUID, sUUID).Body(body).Request(request).Execute()
 
-Edit a access key rotation schedule
+WARNING: This is a preview API that could change. Edit a access key rotation schedule
 
 ### Example
 
@@ -617,7 +617,7 @@ Name | Type | Description  | Notes
 
 > []Schedule ListSchedules(ctx, cUUID, pUUID).Execute()
 
-List all schedules for a provider's access key rotation
+WARNING: This is a preview API that could change. List all schedules for a provider's access key rotation
 
 ### Example
 
@@ -688,7 +688,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess RefreshPricing(ctx, cUUID, pUUID).Request(request).Execute()
 
-Refresh pricing
+WARNING: This is a preview API that could change. Refresh pricing
 
 
 
@@ -763,7 +763,7 @@ Name | Type | Description  | Notes
 
 > Schedule ScheduledAccessKeyRotation(ctx, cUUID, pUUID).Request(request).Execute()
 
-Rotate access key for a provider - Scheduled
+WARNING: This is a preview API that could change. Rotate access key for a provider - Scheduled
 
 ### Example
 

@@ -10,13 +10,16 @@ Name | Type | Description | Notes
 **Ttl** | Pointer to **int64** |  | [optional] 
 **TtlExpiry** | Pointer to **int64** |  | [optional] 
 **VaultAddr** | **string** |  | 
-**VaultToken** | **string** |  | 
+**VaultAuthNamespace** | Pointer to **string** |  | [optional] 
+**VaultRoleID** | Pointer to **string** |  | [optional] 
+**VaultSecretID** | Pointer to **string** |  | [optional] 
+**VaultToken** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewHashicorpVaultConfigParams
 
-`func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string, vaultToken string, ) *HashicorpVaultConfigParams`
+`func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string, ) *HashicorpVaultConfigParams`
 
 NewHashicorpVaultConfigParams instantiates a new HashicorpVaultConfigParams object
 This constructor will assign default values to properties that have it defined,
@@ -161,6 +164,81 @@ and a boolean to check if the value has been set.
 SetVaultAddr sets VaultAddr field to given value.
 
 
+### GetVaultAuthNamespace
+
+`func (o *HashicorpVaultConfigParams) GetVaultAuthNamespace() string`
+
+GetVaultAuthNamespace returns the VaultAuthNamespace field if non-nil, zero value otherwise.
+
+### GetVaultAuthNamespaceOk
+
+`func (o *HashicorpVaultConfigParams) GetVaultAuthNamespaceOk() (*string, bool)`
+
+GetVaultAuthNamespaceOk returns a tuple with the VaultAuthNamespace field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultAuthNamespace
+
+`func (o *HashicorpVaultConfigParams) SetVaultAuthNamespace(v string)`
+
+SetVaultAuthNamespace sets VaultAuthNamespace field to given value.
+
+### HasVaultAuthNamespace
+
+`func (o *HashicorpVaultConfigParams) HasVaultAuthNamespace() bool`
+
+HasVaultAuthNamespace returns a boolean if a field has been set.
+
+### GetVaultRoleID
+
+`func (o *HashicorpVaultConfigParams) GetVaultRoleID() string`
+
+GetVaultRoleID returns the VaultRoleID field if non-nil, zero value otherwise.
+
+### GetVaultRoleIDOk
+
+`func (o *HashicorpVaultConfigParams) GetVaultRoleIDOk() (*string, bool)`
+
+GetVaultRoleIDOk returns a tuple with the VaultRoleID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultRoleID
+
+`func (o *HashicorpVaultConfigParams) SetVaultRoleID(v string)`
+
+SetVaultRoleID sets VaultRoleID field to given value.
+
+### HasVaultRoleID
+
+`func (o *HashicorpVaultConfigParams) HasVaultRoleID() bool`
+
+HasVaultRoleID returns a boolean if a field has been set.
+
+### GetVaultSecretID
+
+`func (o *HashicorpVaultConfigParams) GetVaultSecretID() string`
+
+GetVaultSecretID returns the VaultSecretID field if non-nil, zero value otherwise.
+
+### GetVaultSecretIDOk
+
+`func (o *HashicorpVaultConfigParams) GetVaultSecretIDOk() (*string, bool)`
+
+GetVaultSecretIDOk returns a tuple with the VaultSecretID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVaultSecretID
+
+`func (o *HashicorpVaultConfigParams) SetVaultSecretID(v string)`
+
+SetVaultSecretID sets VaultSecretID field to given value.
+
+### HasVaultSecretID
+
+`func (o *HashicorpVaultConfigParams) HasVaultSecretID() bool`
+
+HasVaultSecretID returns a boolean if a field has been set.
+
 ### GetVaultToken
 
 `func (o *HashicorpVaultConfigParams) GetVaultToken() string`
@@ -180,6 +258,11 @@ and a boolean to check if the value has been set.
 
 SetVaultToken sets VaultToken field to given value.
 
+### HasVaultToken
+
+`func (o *HashicorpVaultConfigParams) HasVaultToken() bool`
+
+HasVaultToken returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

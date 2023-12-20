@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAZ**](AvailabilityZonesApi.md#CreateAZ) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
-[**CreateZone**](AvailabilityZonesApi.md#CreateZone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
+[**CreateAZ**](AvailabilityZonesApi.md#CreateAZ) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+[**CreateZone**](AvailabilityZonesApi.md#CreateZone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | WARNING: This is a preview API that could change. Create an availability zone
 [**DeleteAZ**](AvailabilityZonesApi.md#DeleteAZ) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
-[**EditAZ**](AvailabilityZonesApi.md#EditAZ) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated: sinceDate&#x3D;2023-08-07, sinceYBAVersion&#x3D;2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
-[**EditZone**](AvailabilityZonesApi.md#EditZone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
+[**EditAZ**](AvailabilityZonesApi.md#EditAZ) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+[**EditZone**](AvailabilityZonesApi.md#EditZone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | WARNING: This is a preview API that could change. Modify an availability zone
 [**ListOfAZ**](AvailabilityZonesApi.md#ListOfAZ) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > map[string]AvailabilityZone CreateAZ(ctx, cUUID, pUUID, rUUID).AzFormData(azFormData).Request(request).Execute()
 
-Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
 
 ### Example
 
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 
 > map[string]AvailabilityZone CreateZone(ctx, cUUID, pUUID, rUUID).AzData(azData).Request(request).Execute()
 
-Create an availability zone
+WARNING: This is a preview API that could change. Create an availability zone
 
 ### Example
 
@@ -252,7 +252,7 @@ Name | Type | Description  | Notes
 
 > AvailabilityZone EditAZ(ctx, cUUID, pUUID, rUUID, azUUID).AzFormData(azFormData).Request(request).Execute()
 
-Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
 
 ### Example
 
@@ -333,7 +333,7 @@ Name | Type | Description  | Notes
 
 > AvailabilityZone EditZone(ctx, cUUID, pUUID, rUUID, azUUID).AzData(azData).Request(request).Execute()
 
-Modify an availability zone
+WARNING: This is a preview API that could change. Modify an availability zone
 
 ### Example
 

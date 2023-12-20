@@ -50,7 +50,7 @@ func (r RegionManagementApiApiCreateProviderRegionRequest) Execute() (Region, *_
 }
 
 /*
- * CreateProviderRegion Create a new region
+ * CreateProviderRegion WARNING: This is a preview API that could change. Create a new region
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -191,7 +191,7 @@ func (r RegionManagementApiApiCreateRegionRequest) Execute() (Region, *_nethttp.
 }
 
 /*
- * CreateRegion Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+ * CreateRegion Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -468,7 +468,7 @@ func (r RegionManagementApiApiEditProviderRegionRequest) Execute() (Region, *_ne
 }
 
 /*
- * EditProviderRegion Modify a region
+ * EditProviderRegion WARNING: This is a preview API that could change. Modify a region
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -613,7 +613,7 @@ func (r RegionManagementApiApiEditRegionRequest) Execute() (map[string]interface
 }
 
 /*
- * EditRegion Deprecated: sinceDate=2023-08-07, sinceYBAVersion=2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+ * EditRegion Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

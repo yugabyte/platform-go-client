@@ -4,10 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**FinalizeUpgrade**](UniverseUpgradesManagementApi.md#FinalizeUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | WARNING: This is a preview API that could change. Finalize Upgrade.
+[**PreFinalizeSoftwareUpgradeInfo**](UniverseUpgradesManagementApi.md#PreFinalizeSoftwareUpgradeInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | WARNING: This is a preview API that could change. Finalize Software Upgrade info
 [**RebootUniverse**](UniverseUpgradesManagementApi.md#RebootUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 [**ResizeNode**](UniverseUpgradesManagementApi.md#ResizeNode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 [**RestartUniverse**](UniverseUpgradesManagementApi.md#RestartUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
+[**RollbackUpgrade**](UniverseUpgradesManagementApi.md#RollbackUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | WARNING: This is a preview API that could change. Rollback Upgrade
+[**SoftwareUpgradePreCheck**](UniverseUpgradesManagementApi.md#SoftwareUpgradePreCheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | WARNING: This is a preview API that could change. Software Upgrade universe pre-check
 [**UpgradeCerts**](UniverseUpgradesManagementApi.md#UpgradeCerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
+[**UpgradeDBVersion**](UniverseUpgradesManagementApi.md#UpgradeDBVersion) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version | WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
 [**UpgradeGFlags**](UniverseUpgradesManagementApi.md#UpgradeGFlags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
 [**UpgradeKubernetesOverrides**](UniverseUpgradesManagementApi.md#UpgradeKubernetesOverrides) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/kubernetes_overrides | Upgrade KubernetesOverrides
 [**UpgradeSoftware**](UniverseUpgradesManagementApi.md#UpgradeSoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade Software
@@ -16,6 +21,156 @@ Method | HTTP request | Description
 [**UpgradeTls**](UniverseUpgradesManagementApi.md#UpgradeTls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls | Upgrade TLS
 [**UpgradeVMImage**](UniverseUpgradesManagementApi.md#UpgradeVMImage) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/vm | Upgrade VM Image
 
+
+
+## FinalizeUpgrade
+
+> YBPTask FinalizeUpgrade(ctx, cUUID, uniUUID).FinalizeUpgradeParams(finalizeUpgradeParams).Request(request).Execute()
+
+WARNING: This is a preview API that could change. Finalize Upgrade.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    finalizeUpgradeParams := *openapiclient.NewFinalizeUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example", false) // FinalizeUpgradeParams | Finalize Upgrade Params
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.FinalizeUpgrade(context.Background(), cUUID, uniUUID).FinalizeUpgradeParams(finalizeUpgradeParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.FinalizeUpgrade``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FinalizeUpgrade`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.FinalizeUpgrade`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFinalizeUpgradeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **finalizeUpgradeParams** | [**FinalizeUpgradeParams**](FinalizeUpgradeParams.md) | Finalize Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PreFinalizeSoftwareUpgradeInfo
+
+> FinalizeUpgradeInfoResponse PreFinalizeSoftwareUpgradeInfo(ctx, cUUID, uniUUID).Execute()
+
+WARNING: This is a preview API that could change. Finalize Software Upgrade info
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.PreFinalizeSoftwareUpgradeInfo(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.PreFinalizeSoftwareUpgradeInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PreFinalizeSoftwareUpgradeInfo`: FinalizeUpgradeInfoResponse
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.PreFinalizeSoftwareUpgradeInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPreFinalizeSoftwareUpgradeInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**FinalizeUpgradeInfoResponse**](FinalizeUpgradeInfoResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## RebootUniverse
@@ -249,6 +404,160 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RollbackUpgrade
+
+> YBPTask RollbackUpgrade(ctx, cUUID, uniUUID).RollbackUpgradeParams(rollbackUpgradeParams).Request(request).Execute()
+
+WARNING: This is a preview API that could change. Rollback Upgrade
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    rollbackUpgradeParams := *openapiclient.NewRollbackUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // RollbackUpgradeParams | RollBack Upgrade Params
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.RollbackUpgrade(context.Background(), cUUID, uniUUID).RollbackUpgradeParams(rollbackUpgradeParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.RollbackUpgrade``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RollbackUpgrade`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.RollbackUpgrade`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRollbackUpgradeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **rollbackUpgradeParams** | [**RollbackUpgradeParams**](RollbackUpgradeParams.md) | RollBack Upgrade Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SoftwareUpgradePreCheck
+
+> SoftwareUpgradeInfoResponse SoftwareUpgradePreCheck(ctx, cUUID, uniUUID).SoftwareUpgradeInfoRequest(softwareUpgradeInfoRequest).Request(request).Execute()
+
+WARNING: This is a preview API that could change. Software Upgrade universe pre-check
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    softwareUpgradeInfoRequest := *openapiclient.NewSoftwareUpgradeInfoRequest("YbSoftwareVersion_example") // SoftwareUpgradeInfoRequest | Software Upgrade Info Request
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.SoftwareUpgradePreCheck(context.Background(), cUUID, uniUUID).SoftwareUpgradeInfoRequest(softwareUpgradeInfoRequest).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.SoftwareUpgradePreCheck``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SoftwareUpgradePreCheck`: SoftwareUpgradeInfoResponse
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.SoftwareUpgradePreCheck`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSoftwareUpgradePreCheckRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **softwareUpgradeInfoRequest** | [**SoftwareUpgradeInfoRequest**](SoftwareUpgradeInfoRequest.md) | Software Upgrade Info Request | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**SoftwareUpgradeInfoResponse**](SoftwareUpgradeInfoResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpgradeCerts
 
 > YBPTask UpgradeCerts(ctx, cUUID, uniUUID).CertsRotateParams(certsRotateParams).Request(request).Execute()
@@ -306,6 +615,83 @@ Name | Type | Description  | Notes
 
 
  **certsRotateParams** | [**CertsRotateParams**](CertsRotateParams.md) | Certs Rotate Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpgradeDBVersion
+
+> YBPTask UpgradeDBVersion(ctx, cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Request(request).Execute()
+
+WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpgradeDBVersion(context.Background(), cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpgradeDBVersion``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpgradeDBVersion`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.UpgradeDBVersion`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpgradeDBVersionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **softwareUpgradeParams** | [**SoftwareUpgradeParams**](SoftwareUpgradeParams.md) | Software Upgrade Params | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

@@ -18,30 +18,33 @@ import (
 type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.airGapInstall. Only supported in Create Request
+	// Deprecated since YBA version 2.17.2.0, Use details.airGapInstall. Only supported in Create Request
 	AirGapInstall *bool `json:"airGapInstall,omitempty"`
 	AllAccessKeys *[]AccessKey `json:"allAccessKeys,omitempty"`
 	// Provider cloud code
 	Code *string `json:"code,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.metadata instead
+	// Deprecated since YBA version 2.17.2.0. Use details.metadata instead
 	Config *map[string]string `json:"config,omitempty"`
 	// Customer uuid
 	CustomerUUID *string `json:"customerUUID,omitempty"`
+	// Deprecated since YBA version 2.17.2.0
 	DestVpcId *string `json:"destVpcId,omitempty"`
 	Details *ProviderDetails `json:"details,omitempty"`
+	// Deprecated since YBA version 2.17.2.0
 	HostVpcId *string `json:"hostVpcId,omitempty"`
+	// Deprecated since YBA version 2.17.2.0
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
 	ImageBundles []ImageBundle `json:"imageBundles"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead
+	// Deprecated since YBA version 2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName instead
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
 	Regions []Region `json:"regions"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshPort instead. Only supported in create request
+	// Deprecated since YBA version 2.17.2.0, Use details.SshPort instead. Only supported in create request
 	SshPort *int32 `json:"sshPort,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
+	// Deprecated since YBA version 2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
-	// Deprecated: sinceDate=2023-02-11, sinceYBAVersion=2.17.2.0, Use details.SshUser instead. Only supported in create request
+	// Deprecated since YBA version 2.17.2.0, Use details.SshUser instead. Only supported in create request
 	SshUser *string `json:"sshUser,omitempty"`
 	// Current usability state
 	UsabilityState *string `json:"usabilityState,omitempty"`

@@ -19,8 +19,8 @@ import (
 type XClusterConfigGetResp struct {
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
-	// Whether this xCluster replication config was imported
-	Imported *bool `json:"imported,omitempty"`
+	// WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery
+	KeyspacePending *string `json:"keyspacePending,omitempty"`
 	// Lag metric data
 	Lag map[string]interface{} `json:"lag"`
 	// Last modify time of the xCluster config
@@ -29,11 +29,16 @@ type XClusterConfigGetResp struct {
 	Name *string `json:"name,omitempty"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
-	PitrConfigs []PitrConfig `json:"pitrConfigs"`
-	// Replication group name in DB
+	// WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config
+	PitrConfigs *[]PitrConfig `json:"pitrConfigs,omitempty"`
+	// Replication group name in the target universe cluster config
 	ReplicationGroupName *string `json:"replicationGroupName,omitempty"`
+	// WARNING: This is a preview API that could change. Whether this xCluster config is used as a secondary config for a DR config
+	Secondary *bool `json:"secondary,omitempty"`
 	// Whether the source is active in txn xCluster
 	SourceActive *bool `json:"sourceActive,omitempty"`
+	// WARNING: This is a preview API that could change. The replication status of the source universe; used for disaster recovery
+	SourceUniverseState *string `json:"sourceUniverseState,omitempty"`
 	// Source Universe UUID
 	SourceUniverseUUID *string `json:"sourceUniverseUUID,omitempty"`
 	// Status
@@ -45,10 +50,13 @@ type XClusterConfigGetResp struct {
 	Tables *[]string `json:"tables,omitempty"`
 	// Whether the target is active in txn xCluster
 	TargetActive *bool `json:"targetActive,omitempty"`
+	// WARNING: This is a preview API that could change. The replication status of the target universe; used for disaster recovery
+	TargetUniverseState *string `json:"targetUniverseState,omitempty"`
 	// Target Universe UUID
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
 	// Whether the config is txn xCluster
 	Type *string `json:"type,omitempty"`
+	// WARNING: This is a preview API that could change. Whether the xCluster config is used as part of a DR config
 	UsedForDr *bool `json:"usedForDr,omitempty"`
 	// XCluster config UUID
 	Uuid *string `json:"uuid,omitempty"`
@@ -58,10 +66,9 @@ type XClusterConfigGetResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigGetResp(lag map[string]interface{}, pitrConfigs []PitrConfig, ) *XClusterConfigGetResp {
+func NewXClusterConfigGetResp(lag map[string]interface{}, ) *XClusterConfigGetResp {
 	this := XClusterConfigGetResp{}
 	this.Lag = lag
-	this.PitrConfigs = pitrConfigs
 	return &this
 }
 
@@ -105,36 +112,36 @@ func (o *XClusterConfigGetResp) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
 }
 
-// GetImported returns the Imported field value if set, zero value otherwise.
-func (o *XClusterConfigGetResp) GetImported() bool {
-	if o == nil || o.Imported == nil {
-		var ret bool
+// GetKeyspacePending returns the KeyspacePending field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetKeyspacePending() string {
+	if o == nil || o.KeyspacePending == nil {
+		var ret string
 		return ret
 	}
-	return *o.Imported
+	return *o.KeyspacePending
 }
 
-// GetImportedOk returns a tuple with the Imported field value if set, nil otherwise
+// GetKeyspacePendingOk returns a tuple with the KeyspacePending field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *XClusterConfigGetResp) GetImportedOk() (*bool, bool) {
-	if o == nil || o.Imported == nil {
+func (o *XClusterConfigGetResp) GetKeyspacePendingOk() (*string, bool) {
+	if o == nil || o.KeyspacePending == nil {
 		return nil, false
 	}
-	return o.Imported, true
+	return o.KeyspacePending, true
 }
 
-// HasImported returns a boolean if a field has been set.
-func (o *XClusterConfigGetResp) HasImported() bool {
-	if o != nil && o.Imported != nil {
+// HasKeyspacePending returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasKeyspacePending() bool {
+	if o != nil && o.KeyspacePending != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetImported gets a reference to the given bool and assigns it to the Imported field.
-func (o *XClusterConfigGetResp) SetImported(v bool) {
-	o.Imported = &v
+// SetKeyspacePending gets a reference to the given string and assigns it to the KeyspacePending field.
+func (o *XClusterConfigGetResp) SetKeyspacePending(v string) {
+	o.KeyspacePending = &v
 }
 
 // GetLag returns the Lag field value
@@ -257,28 +264,36 @@ func (o *XClusterConfigGetResp) SetPaused(v bool) {
 	o.Paused = &v
 }
 
-// GetPitrConfigs returns the PitrConfigs field value
+// GetPitrConfigs returns the PitrConfigs field value if set, zero value otherwise.
 func (o *XClusterConfigGetResp) GetPitrConfigs() []PitrConfig {
-	if o == nil  {
+	if o == nil || o.PitrConfigs == nil {
 		var ret []PitrConfig
 		return ret
 	}
-
-	return o.PitrConfigs
+	return *o.PitrConfigs
 }
 
-// GetPitrConfigsOk returns a tuple with the PitrConfigs field value
+// GetPitrConfigsOk returns a tuple with the PitrConfigs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *XClusterConfigGetResp) GetPitrConfigsOk() (*[]PitrConfig, bool) {
-	if o == nil  {
+	if o == nil || o.PitrConfigs == nil {
 		return nil, false
 	}
-	return &o.PitrConfigs, true
+	return o.PitrConfigs, true
 }
 
-// SetPitrConfigs sets field value
+// HasPitrConfigs returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasPitrConfigs() bool {
+	if o != nil && o.PitrConfigs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPitrConfigs gets a reference to the given []PitrConfig and assigns it to the PitrConfigs field.
 func (o *XClusterConfigGetResp) SetPitrConfigs(v []PitrConfig) {
-	o.PitrConfigs = v
+	o.PitrConfigs = &v
 }
 
 // GetReplicationGroupName returns the ReplicationGroupName field value if set, zero value otherwise.
@@ -313,6 +328,38 @@ func (o *XClusterConfigGetResp) SetReplicationGroupName(v string) {
 	o.ReplicationGroupName = &v
 }
 
+// GetSecondary returns the Secondary field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetSecondary() bool {
+	if o == nil || o.Secondary == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Secondary
+}
+
+// GetSecondaryOk returns a tuple with the Secondary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetSecondaryOk() (*bool, bool) {
+	if o == nil || o.Secondary == nil {
+		return nil, false
+	}
+	return o.Secondary, true
+}
+
+// HasSecondary returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasSecondary() bool {
+	if o != nil && o.Secondary != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecondary gets a reference to the given bool and assigns it to the Secondary field.
+func (o *XClusterConfigGetResp) SetSecondary(v bool) {
+	o.Secondary = &v
+}
+
 // GetSourceActive returns the SourceActive field value if set, zero value otherwise.
 func (o *XClusterConfigGetResp) GetSourceActive() bool {
 	if o == nil || o.SourceActive == nil {
@@ -343,6 +390,38 @@ func (o *XClusterConfigGetResp) HasSourceActive() bool {
 // SetSourceActive gets a reference to the given bool and assigns it to the SourceActive field.
 func (o *XClusterConfigGetResp) SetSourceActive(v bool) {
 	o.SourceActive = &v
+}
+
+// GetSourceUniverseState returns the SourceUniverseState field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetSourceUniverseState() string {
+	if o == nil || o.SourceUniverseState == nil {
+		var ret string
+		return ret
+	}
+	return *o.SourceUniverseState
+}
+
+// GetSourceUniverseStateOk returns a tuple with the SourceUniverseState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetSourceUniverseStateOk() (*string, bool) {
+	if o == nil || o.SourceUniverseState == nil {
+		return nil, false
+	}
+	return o.SourceUniverseState, true
+}
+
+// HasSourceUniverseState returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasSourceUniverseState() bool {
+	if o != nil && o.SourceUniverseState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceUniverseState gets a reference to the given string and assigns it to the SourceUniverseState field.
+func (o *XClusterConfigGetResp) SetSourceUniverseState(v string) {
+	o.SourceUniverseState = &v
 }
 
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value if set, zero value otherwise.
@@ -537,6 +616,38 @@ func (o *XClusterConfigGetResp) SetTargetActive(v bool) {
 	o.TargetActive = &v
 }
 
+// GetTargetUniverseState returns the TargetUniverseState field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetTargetUniverseState() string {
+	if o == nil || o.TargetUniverseState == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetUniverseState
+}
+
+// GetTargetUniverseStateOk returns a tuple with the TargetUniverseState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetTargetUniverseStateOk() (*string, bool) {
+	if o == nil || o.TargetUniverseState == nil {
+		return nil, false
+	}
+	return o.TargetUniverseState, true
+}
+
+// HasTargetUniverseState returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasTargetUniverseState() bool {
+	if o != nil && o.TargetUniverseState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetUniverseState gets a reference to the given string and assigns it to the TargetUniverseState field.
+func (o *XClusterConfigGetResp) SetTargetUniverseState(v string) {
+	o.TargetUniverseState = &v
+}
+
 // GetTargetUniverseUUID returns the TargetUniverseUUID field value if set, zero value otherwise.
 func (o *XClusterConfigGetResp) GetTargetUniverseUUID() string {
 	if o == nil || o.TargetUniverseUUID == nil {
@@ -670,8 +781,8 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
-	if o.Imported != nil {
-		toSerialize["imported"] = o.Imported
+	if o.KeyspacePending != nil {
+		toSerialize["keyspacePending"] = o.KeyspacePending
 	}
 	if true {
 		toSerialize["lag"] = o.Lag
@@ -685,14 +796,20 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	if o.Paused != nil {
 		toSerialize["paused"] = o.Paused
 	}
-	if true {
+	if o.PitrConfigs != nil {
 		toSerialize["pitrConfigs"] = o.PitrConfigs
 	}
 	if o.ReplicationGroupName != nil {
 		toSerialize["replicationGroupName"] = o.ReplicationGroupName
 	}
+	if o.Secondary != nil {
+		toSerialize["secondary"] = o.Secondary
+	}
 	if o.SourceActive != nil {
 		toSerialize["sourceActive"] = o.SourceActive
+	}
+	if o.SourceUniverseState != nil {
+		toSerialize["sourceUniverseState"] = o.SourceUniverseState
 	}
 	if o.SourceUniverseUUID != nil {
 		toSerialize["sourceUniverseUUID"] = o.SourceUniverseUUID
@@ -711,6 +828,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.TargetActive != nil {
 		toSerialize["targetActive"] = o.TargetActive
+	}
+	if o.TargetUniverseState != nil {
+		toSerialize["targetUniverseState"] = o.TargetUniverseState
 	}
 	if o.TargetUniverseUUID != nil {
 		toSerialize["targetUniverseUUID"] = o.TargetUniverseUUID

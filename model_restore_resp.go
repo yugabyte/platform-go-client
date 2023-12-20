@@ -17,6 +17,9 @@ import (
 
 // RestoreResp struct for RestoreResp
 type RestoreResp struct {
+	// Backup details.
+	BackupCreatedOnDate *time.Time `json:"backupCreatedOnDate,omitempty"`
+	BackupType *string `json:"backupType,omitempty"`
 	// Restore creation time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	CustomerUUID string `json:"customerUUID"`
@@ -58,6 +61,70 @@ func NewRestoreResp(customerUUID string, isSourceUniversePresent bool, restoreKe
 func NewRestoreRespWithDefaults() *RestoreResp {
 	this := RestoreResp{}
 	return &this
+}
+
+// GetBackupCreatedOnDate returns the BackupCreatedOnDate field value if set, zero value otherwise.
+func (o *RestoreResp) GetBackupCreatedOnDate() time.Time {
+	if o == nil || o.BackupCreatedOnDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.BackupCreatedOnDate
+}
+
+// GetBackupCreatedOnDateOk returns a tuple with the BackupCreatedOnDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreResp) GetBackupCreatedOnDateOk() (*time.Time, bool) {
+	if o == nil || o.BackupCreatedOnDate == nil {
+		return nil, false
+	}
+	return o.BackupCreatedOnDate, true
+}
+
+// HasBackupCreatedOnDate returns a boolean if a field has been set.
+func (o *RestoreResp) HasBackupCreatedOnDate() bool {
+	if o != nil && o.BackupCreatedOnDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupCreatedOnDate gets a reference to the given time.Time and assigns it to the BackupCreatedOnDate field.
+func (o *RestoreResp) SetBackupCreatedOnDate(v time.Time) {
+	o.BackupCreatedOnDate = &v
+}
+
+// GetBackupType returns the BackupType field value if set, zero value otherwise.
+func (o *RestoreResp) GetBackupType() string {
+	if o == nil || o.BackupType == nil {
+		var ret string
+		return ret
+	}
+	return *o.BackupType
+}
+
+// GetBackupTypeOk returns a tuple with the BackupType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreResp) GetBackupTypeOk() (*string, bool) {
+	if o == nil || o.BackupType == nil {
+		return nil, false
+	}
+	return o.BackupType, true
+}
+
+// HasBackupType returns a boolean if a field has been set.
+func (o *RestoreResp) HasBackupType() bool {
+	if o != nil && o.BackupType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupType gets a reference to the given string and assigns it to the BackupType field.
+func (o *RestoreResp) SetBackupType(v string) {
+	o.BackupType = &v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -366,6 +433,12 @@ func (o *RestoreResp) SetUpdateTime(v time.Time) {
 
 func (o RestoreResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.BackupCreatedOnDate != nil {
+		toSerialize["backupCreatedOnDate"] = o.BackupCreatedOnDate
+	}
+	if o.BackupType != nil {
+		toSerialize["backupType"] = o.BackupType
+	}
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}

@@ -28,7 +28,7 @@ type CertificateInfoExt struct {
 	CustomServerCertInfo CustomServerCertInfo `json:"customServerCertInfo"`
 	// Customer UUID of the backup which it belongs to
 	CustomerUUID *string `json:"customerUUID,omitempty"`
-	// The certificate's expiry date. Deprecated: Use expirtyDateIso instead
+	// The certificate's expiry date. Deprecated since YBA version 2.17.2.0. Use expirtyDateIso instead
 	ExpiryDate *time.Time `json:"expiryDate,omitempty"`
 	// The certificate's expiry date
 	ExpiryDateIso *time.Time `json:"expiryDateIso,omitempty"`
@@ -38,7 +38,7 @@ type CertificateInfoExt struct {
 	Label *string `json:"label,omitempty"`
 	// Private key path
 	PrivateKey *string `json:"privateKey,omitempty"`
-	// The certificate's creation date. Deprecated: use stateDateIso instead
+	// The certificate's creation date. Deprecated since YBA version 2.17.2.0. Use stateDateIso instead
 	StartDate *time.Time `json:"startDate,omitempty"`
 	// The certificate's creation date
 	StartDateIso *time.Time `json:"startDateIso,omitempty"`

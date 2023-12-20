@@ -16,7 +16,7 @@ import (
 
 // RoleResourceDefinition Role and resource group definition.
 type RoleResourceDefinition struct {
-	ResourceGroup ResourceGroup `json:"resourceGroup"`
+	ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
 	// UUID of the role to attach resource group to.
 	RoleUUID string `json:"roleUUID"`
 }
@@ -25,9 +25,8 @@ type RoleResourceDefinition struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleResourceDefinition(resourceGroup ResourceGroup, roleUUID string, ) *RoleResourceDefinition {
+func NewRoleResourceDefinition(roleUUID string, ) *RoleResourceDefinition {
 	this := RoleResourceDefinition{}
-	this.ResourceGroup = resourceGroup
 	this.RoleUUID = roleUUID
 	return &this
 }
@@ -40,28 +39,36 @@ func NewRoleResourceDefinitionWithDefaults() *RoleResourceDefinition {
 	return &this
 }
 
-// GetResourceGroup returns the ResourceGroup field value
+// GetResourceGroup returns the ResourceGroup field value if set, zero value otherwise.
 func (o *RoleResourceDefinition) GetResourceGroup() ResourceGroup {
-	if o == nil  {
+	if o == nil || o.ResourceGroup == nil {
 		var ret ResourceGroup
 		return ret
 	}
-
-	return o.ResourceGroup
+	return *o.ResourceGroup
 }
 
-// GetResourceGroupOk returns a tuple with the ResourceGroup field value
+// GetResourceGroupOk returns a tuple with the ResourceGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RoleResourceDefinition) GetResourceGroupOk() (*ResourceGroup, bool) {
-	if o == nil  {
+	if o == nil || o.ResourceGroup == nil {
 		return nil, false
 	}
-	return &o.ResourceGroup, true
+	return o.ResourceGroup, true
 }
 
-// SetResourceGroup sets field value
+// HasResourceGroup returns a boolean if a field has been set.
+func (o *RoleResourceDefinition) HasResourceGroup() bool {
+	if o != nil && o.ResourceGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceGroup gets a reference to the given ResourceGroup and assigns it to the ResourceGroup field.
 func (o *RoleResourceDefinition) SetResourceGroup(v ResourceGroup) {
-	o.ResourceGroup = v
+	o.ResourceGroup = &v
 }
 
 // GetRoleUUID returns the RoleUUID field value
@@ -90,7 +97,7 @@ func (o *RoleResourceDefinition) SetRoleUUID(v string) {
 
 func (o RoleResourceDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.ResourceGroup != nil {
 		toSerialize["resourceGroup"] = o.ResourceGroup
 	}
 	if true {

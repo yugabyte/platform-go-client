@@ -7,13 +7,10 @@ Method | HTTP request | Description
 [**CreateKMSConfig**](EncryptionAtRestApi.md#CreateKMSConfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{kmsProvider} | Create a KMS configuration
 [**DeleteKMSConfig**](EncryptionAtRestApi.md#DeleteKMSConfig) | **Delete** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Delete a KMS configuration
 [**EditKMSConfig**](EncryptionAtRestApi.md#EditKMSConfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
-[**GetCurrentKeyRef**](EncryptionAtRestApi.md#GetCurrentKeyRef) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms/key_ref | Get a universe&#39;s key reference
 [**GetKMSConfig**](EncryptionAtRestApi.md#GetKMSConfig) | **Get** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Get details of a KMS configuration
-[**GetKeyRefHistory**](EncryptionAtRestApi.md#GetKeyRefHistory) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Get a universe&#39;s key reference history
 [**ListKMSConfigs**](EncryptionAtRestApi.md#ListKMSConfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
-[**RefreshKMSConfig**](EncryptionAtRestApi.md#RefreshKMSConfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | Refresh KMS Config
-[**RemoveKeyRefHistory**](EncryptionAtRestApi.md#RemoveKeyRefHistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Remove a universe&#39;s key reference history
-[**RetrieveKey**](EncryptionAtRestApi.md#RetrieveKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Retrive a universe&#39;s KMS key
+[**RefreshKMSConfig**](EncryptionAtRestApi.md#RefreshKMSConfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | WARNING: This is a preview API that could change. Refresh KMS Config
+[**RemoveKeyRefHistory**](EncryptionAtRestApi.md#RemoveKeyRefHistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe&#39;s key reference history
 
 
 
@@ -240,77 +237,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetCurrentKeyRef
-
-> map[string]map[string]interface{} GetCurrentKeyRef(ctx, cUUID, uniUUID).Execute()
-
-Get a universe's key reference
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.GetCurrentKeyRef(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.GetCurrentKeyRef``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetCurrentKeyRef`: map[string]map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `EncryptionAtRestApi.GetCurrentKeyRef`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetCurrentKeyRefRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-**map[string]map[string]interface{}**
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetKMSConfig
 
 > map[string]map[string]interface{} GetKMSConfig(ctx, cUUID, configUUID).Execute()
@@ -367,77 +293,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **map[string]map[string]interface{}**
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetKeyRefHistory
-
-> []map[string]interface{} GetKeyRefHistory(ctx, cUUID, uniUUID).Execute()
-
-Get a universe's key reference history
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.GetKeyRefHistory(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.GetKeyRefHistory``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetKeyRefHistory`: []map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `EncryptionAtRestApi.GetKeyRefHistory`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetKeyRefHistoryRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-**[]map[string]interface{}**
 
 ### Authorization
 
@@ -525,7 +380,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess RefreshKMSConfig(ctx, cUUID, configUUID).Request(request).Execute()
 
-Refresh KMS Config
+WARNING: This is a preview API that could change. Refresh KMS Config
 
 ### Example
 
@@ -598,7 +453,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess RemoveKeyRefHistory(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Remove a universe's key reference history
+Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe's key reference history
 
 ### Example
 
@@ -652,79 +507,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPSuccess**](YBPSuccess.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RetrieveKey
-
-> map[string]map[string]interface{} RetrieveKey(ctx, cUUID, uniUUID).Request(request).Execute()
-
-Retrive a universe's KMS key
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-    request := TODO // interface{} |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.EncryptionAtRestApi.RetrieveKey(context.Background(), cUUID, uniUUID).Request(request).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EncryptionAtRestApi.RetrieveKey``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RetrieveKey`: map[string]map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `EncryptionAtRestApi.RetrieveKey`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRetrieveKeyRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **request** | [**interface{}**](interface{}.md) |  | 
-
-### Return type
-
-**map[string]map[string]interface{}**
 
 ### Authorization
 

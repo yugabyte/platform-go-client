@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SecurityGroupId** | Pointer to **string** |  | [optional] 
 **Vnet** | Pointer to **string** |  | [optional] 
-**YbImage** | Pointer to **string** | The AMI to be used in this region. | [optional] 
+**YbImage** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
 
 ## Methods
 

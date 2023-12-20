@@ -30,6 +30,8 @@ type RestoreKeyspace struct {
 	State *string `json:"state,omitempty"`
 	// Storage location name
 	StorageLocation *string `json:"storageLocation,omitempty"`
+	// Restored Table name List
+	TableNameList *[]string `json:"tableNameList,omitempty"`
 	// Target keyspace name
 	TargetKeyspace *string `json:"targetKeyspace,omitempty"`
 	// Restore Keyspace task UUID
@@ -272,6 +274,38 @@ func (o *RestoreKeyspace) SetStorageLocation(v string) {
 	o.StorageLocation = &v
 }
 
+// GetTableNameList returns the TableNameList field value if set, zero value otherwise.
+func (o *RestoreKeyspace) GetTableNameList() []string {
+	if o == nil || o.TableNameList == nil {
+		var ret []string
+		return ret
+	}
+	return *o.TableNameList
+}
+
+// GetTableNameListOk returns a tuple with the TableNameList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreKeyspace) GetTableNameListOk() (*[]string, bool) {
+	if o == nil || o.TableNameList == nil {
+		return nil, false
+	}
+	return o.TableNameList, true
+}
+
+// HasTableNameList returns a boolean if a field has been set.
+func (o *RestoreKeyspace) HasTableNameList() bool {
+	if o != nil && o.TableNameList != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTableNameList gets a reference to the given []string and assigns it to the TableNameList field.
+func (o *RestoreKeyspace) SetTableNameList(v []string) {
+	o.TableNameList = &v
+}
+
 // GetTargetKeyspace returns the TargetKeyspace field value if set, zero value otherwise.
 func (o *RestoreKeyspace) GetTargetKeyspace() string {
 	if o == nil || o.TargetKeyspace == nil {
@@ -390,6 +424,9 @@ func (o RestoreKeyspace) MarshalJSON() ([]byte, error) {
 	}
 	if o.StorageLocation != nil {
 		toSerialize["storageLocation"] = o.StorageLocation
+	}
+	if o.TableNameList != nil {
+		toSerialize["tableNameList"] = o.TableNameList
 	}
 	if o.TargetKeyspace != nil {
 		toSerialize["targetKeyspace"] = o.TargetKeyspace

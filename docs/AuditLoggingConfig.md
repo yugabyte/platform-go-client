@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FileNamePrefix** | Pointer to **string** | WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to \&quot;\&quot;. For example, setting this to \&quot;yb-platform-\&quot; will generate audit log files as \&quot;yb-platform-audit.log\&quot; instead of \&quot;audit.log\&quot;. | [optional] 
 **MaxHistory** | Pointer to **int32** | Max number of days up till which logs are kept | [optional] 
 **OutputToFile** | **bool** | Flag to enable/disable audit logs output to file | 
 **OutputToStdout** | **bool** | Flag to enable/disable audit logs output to stdout | 
@@ -27,6 +28,31 @@ will change when the set of required properties is changed
 NewAuditLoggingConfigWithDefaults instantiates a new AuditLoggingConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFileNamePrefix
+
+`func (o *AuditLoggingConfig) GetFileNamePrefix() string`
+
+GetFileNamePrefix returns the FileNamePrefix field if non-nil, zero value otherwise.
+
+### GetFileNamePrefixOk
+
+`func (o *AuditLoggingConfig) GetFileNamePrefixOk() (*string, bool)`
+
+GetFileNamePrefixOk returns a tuple with the FileNamePrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileNamePrefix
+
+`func (o *AuditLoggingConfig) SetFileNamePrefix(v string)`
+
+SetFileNamePrefix sets FileNamePrefix field to given value.
+
+### HasFileNamePrefix
+
+`func (o *AuditLoggingConfig) HasFileNamePrefix() bool`
+
+HasFileNamePrefix returns a boolean if a field has been set.
 
 ### GetMaxHistory
 
