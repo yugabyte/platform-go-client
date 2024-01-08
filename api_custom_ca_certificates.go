@@ -49,7 +49,7 @@ func (r CustomCACertificatesApiApiAddCARequest) Execute() (string, *_nethttp.Res
 }
 
 /*
- * AddCA Add a named custom CA certificate
+ * AddCA WARNING: This is a preview API that could change. Add a named custom CA certificate
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return CustomCACertificatesApiApiAddCARequest
@@ -182,7 +182,7 @@ func (r CustomCACertificatesApiApiDeleteCustomCACertificateRequest) Execute() (Y
 }
 
 /*
- * DeleteCustomCACertificate Delete a named custom CA certificate
+ * DeleteCustomCACertificate WARNING: This is a preview API that could change. Delete a named custom CA certificate
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param certUUID
@@ -313,7 +313,7 @@ func (r CustomCACertificatesApiApiGetAllCustomCaCertificatesRequest) Execute() (
 }
 
 /*
- * GetAllCustomCaCertificates Download a custom CA certificates of a customer
+ * GetAllCustomCaCertificates WARNING: This is a preview API that could change. Download a custom CA certificates of a customer
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param certUUID
@@ -438,7 +438,7 @@ func (r CustomCACertificatesApiApiListAllCustomCaCertificatesRequest) Execute() 
 }
 
 /*
- * ListAllCustomCaCertificates List all custom CA certificates of a customer
+ * ListAllCustomCaCertificates WARNING: This is a preview API that could change. List all custom CA certificates of a customer
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return CustomCACertificatesApiApiListAllCustomCaCertificatesRequest
@@ -568,7 +568,7 @@ func (r CustomCACertificatesApiApiUpdateCARequest) Execute() (string, *_nethttp.
 }
 
 /*
- * UpdateCA Update a named custom CA certificate
+ * UpdateCA WARNING: This is a preview API that could change. Update a named custom CA certificate
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param certUUID

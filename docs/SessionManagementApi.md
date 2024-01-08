@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**ApiLogin**](SessionManagementApi.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user and return api token
 [**AppVersion**](SessionManagementApi.md#AppVersion) | **Get** /api/v1/app_version | appVersion
 [**CustomerCount**](SessionManagementApi.md#CustomerCount) | **Get** /api/v1/customer_count | customerCount
-[**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | getAdminNotifications
+[**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | WARNING: This is a preview API that could change. Returns the current list of notifications for admin
 [**GetFilteredLogs**](SessionManagementApi.md#GetFilteredLogs) | **Get** /api/v1/logs | getFilteredLogs
 [**GetLogs**](SessionManagementApi.md#GetLogs) | **Get** /api/v1/logs/{maxLines} | getLogs
 [**GetSessionInfo**](SessionManagementApi.md#GetSessionInfo) | **Get** /api/v1/session_info | Get current user/customer uuid auth/api token
@@ -203,7 +203,7 @@ No authorization required
 
 > CurrentAdminNotificationMessages GetAdminNotifications(ctx, cUUID).Execute()
 
-getAdminNotifications
+WARNING: This is a preview API that could change. Returns the current list of notifications for admin
 
 ### Example
 

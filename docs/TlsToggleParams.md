@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | **bool** |  | 
+**Arch** | Pointer to **string** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
+**IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
@@ -34,6 +36,7 @@ Name | Type | Description | Notes
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
+**PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -42,6 +45,7 @@ Name | Type | Description | Notes
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
+**SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -98,6 +102,31 @@ and a boolean to check if the value has been set.
 
 SetAllowInsecure sets AllowInsecure field to given value.
 
+
+### GetArch
+
+`func (o *TlsToggleParams) GetArch() string`
+
+GetArch returns the Arch field if non-nil, zero value otherwise.
+
+### GetArchOk
+
+`func (o *TlsToggleParams) GetArchOk() (*string, bool)`
+
+GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArch
+
+`func (o *TlsToggleParams) SetArch(v string)`
+
+SetArch sets Arch field to given value.
+
+### HasArch
+
+`func (o *TlsToggleParams) HasArch() bool`
+
+HasArch returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -529,6 +558,31 @@ SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to g
 
 HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
+### GetIsSoftwareRollbackAllowed
+
+`func (o *TlsToggleParams) GetIsSoftwareRollbackAllowed() bool`
+
+GetIsSoftwareRollbackAllowed returns the IsSoftwareRollbackAllowed field if non-nil, zero value otherwise.
+
+### GetIsSoftwareRollbackAllowedOk
+
+`func (o *TlsToggleParams) GetIsSoftwareRollbackAllowedOk() (*bool, bool)`
+
+GetIsSoftwareRollbackAllowedOk returns a tuple with the IsSoftwareRollbackAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSoftwareRollbackAllowed
+
+`func (o *TlsToggleParams) SetIsSoftwareRollbackAllowed(v bool)`
+
+SetIsSoftwareRollbackAllowed sets IsSoftwareRollbackAllowed field to given value.
+
+### HasIsSoftwareRollbackAllowed
+
+`func (o *TlsToggleParams) HasIsSoftwareRollbackAllowed() bool`
+
+HasIsSoftwareRollbackAllowed returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *TlsToggleParams) GetItestS3PackagePath() string`
@@ -789,6 +843,31 @@ and a boolean to check if the value has been set.
 SetPlatformVersion sets PlatformVersion field to given value.
 
 
+### GetPrevYBSoftwareConfig
+
+`func (o *TlsToggleParams) GetPrevYBSoftwareConfig() PrevYBSoftwareConfig`
+
+GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field if non-nil, zero value otherwise.
+
+### GetPrevYBSoftwareConfigOk
+
+`func (o *TlsToggleParams) GetPrevYBSoftwareConfigOk() (*PrevYBSoftwareConfig, bool)`
+
+GetPrevYBSoftwareConfigOk returns a tuple with the PrevYBSoftwareConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrevYBSoftwareConfig
+
+`func (o *TlsToggleParams) SetPrevYBSoftwareConfig(v PrevYBSoftwareConfig)`
+
+SetPrevYBSoftwareConfig sets PrevYBSoftwareConfig field to given value.
+
+### HasPrevYBSoftwareConfig
+
+`func (o *TlsToggleParams) HasPrevYBSoftwareConfig() bool`
+
+HasPrevYBSoftwareConfig returns a boolean if a field has been set.
+
 ### GetPreviousTaskUUID
 
 `func (o *TlsToggleParams) GetPreviousTaskUUID() string`
@@ -978,6 +1057,31 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+
+### GetSoftwareUpgradeState
+
+`func (o *TlsToggleParams) GetSoftwareUpgradeState() string`
+
+GetSoftwareUpgradeState returns the SoftwareUpgradeState field if non-nil, zero value otherwise.
+
+### GetSoftwareUpgradeStateOk
+
+`func (o *TlsToggleParams) GetSoftwareUpgradeStateOk() (*string, bool)`
+
+GetSoftwareUpgradeStateOk returns a tuple with the SoftwareUpgradeState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareUpgradeState
+
+`func (o *TlsToggleParams) SetSoftwareUpgradeState(v string)`
+
+SetSoftwareUpgradeState sets SoftwareUpgradeState field to given value.
+
+### HasSoftwareUpgradeState
+
+`func (o *TlsToggleParams) HasSoftwareUpgradeState() bool`
+
+HasSoftwareUpgradeState returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

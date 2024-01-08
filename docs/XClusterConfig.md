@@ -5,29 +5,32 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
-**Imported** | Pointer to **bool** | Whether this xCluster replication config was imported | [optional] 
+**KeyspacePending** | Pointer to **string** | WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery | [optional] 
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
 **Name** | Pointer to **string** | XCluster config name | [optional] 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
-**PitrConfigs** | [**[]PitrConfig**](PitrConfig.md) |  | 
-**ReplicationGroupName** | Pointer to **string** | Replication group name in DB | [optional] 
+**PitrConfigs** | Pointer to [**[]PitrConfig**](PitrConfig.md) | WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config | [optional] 
+**ReplicationGroupName** | Pointer to **string** | Replication group name in the target universe cluster config | [optional] 
+**Secondary** | Pointer to **bool** | WARNING: This is a preview API that could change. Whether this xCluster config is used as a secondary config for a DR config | [optional] 
 **SourceActive** | Pointer to **bool** | Whether the source is active in txn xCluster | [optional] 
+**SourceUniverseState** | Pointer to **string** | WARNING: This is a preview API that could change. The replication status of the source universe; used for disaster recovery | [optional] 
 **SourceUniverseUUID** | Pointer to **string** | Source Universe UUID | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **TableDetails** | Pointer to [**[]XClusterTableConfig**](XClusterTableConfig.md) | Tables participating in this xCluster config | [optional] 
 **TableType** | Pointer to **string** | tableType | [optional] 
 **Tables** | Pointer to **[]string** |  | [optional] [readonly] 
 **TargetActive** | Pointer to **bool** | Whether the target is active in txn xCluster | [optional] 
+**TargetUniverseState** | Pointer to **string** | WARNING: This is a preview API that could change. The replication status of the target universe; used for disaster recovery | [optional] 
 **TargetUniverseUUID** | Pointer to **string** | Target Universe UUID | [optional] 
 **Type** | Pointer to **string** | Whether the config is txn xCluster | [optional] 
-**UsedForDr** | Pointer to **bool** |  | [optional] [readonly] 
+**UsedForDr** | Pointer to **bool** | WARNING: This is a preview API that could change. Whether the xCluster config is used as part of a DR config | [optional] [readonly] 
 **Uuid** | Pointer to **string** | XCluster config UUID | [optional] 
 
 ## Methods
 
 ### NewXClusterConfig
 
-`func NewXClusterConfig(pitrConfigs []PitrConfig, ) *XClusterConfig`
+`func NewXClusterConfig() *XClusterConfig`
 
 NewXClusterConfig instantiates a new XClusterConfig object
 This constructor will assign default values to properties that have it defined,
@@ -67,30 +70,30 @@ SetCreateTime sets CreateTime field to given value.
 
 HasCreateTime returns a boolean if a field has been set.
 
-### GetImported
+### GetKeyspacePending
 
-`func (o *XClusterConfig) GetImported() bool`
+`func (o *XClusterConfig) GetKeyspacePending() string`
 
-GetImported returns the Imported field if non-nil, zero value otherwise.
+GetKeyspacePending returns the KeyspacePending field if non-nil, zero value otherwise.
 
-### GetImportedOk
+### GetKeyspacePendingOk
 
-`func (o *XClusterConfig) GetImportedOk() (*bool, bool)`
+`func (o *XClusterConfig) GetKeyspacePendingOk() (*string, bool)`
 
-GetImportedOk returns a tuple with the Imported field if it's non-nil, zero value otherwise
+GetKeyspacePendingOk returns a tuple with the KeyspacePending field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetImported
+### SetKeyspacePending
 
-`func (o *XClusterConfig) SetImported(v bool)`
+`func (o *XClusterConfig) SetKeyspacePending(v string)`
 
-SetImported sets Imported field to given value.
+SetKeyspacePending sets KeyspacePending field to given value.
 
-### HasImported
+### HasKeyspacePending
 
-`func (o *XClusterConfig) HasImported() bool`
+`func (o *XClusterConfig) HasKeyspacePending() bool`
 
-HasImported returns a boolean if a field has been set.
+HasKeyspacePending returns a boolean if a field has been set.
 
 ### GetModifyTime
 
@@ -186,6 +189,11 @@ and a boolean to check if the value has been set.
 
 SetPitrConfigs sets PitrConfigs field to given value.
 
+### HasPitrConfigs
+
+`func (o *XClusterConfig) HasPitrConfigs() bool`
+
+HasPitrConfigs returns a boolean if a field has been set.
 
 ### GetReplicationGroupName
 
@@ -212,6 +220,31 @@ SetReplicationGroupName sets ReplicationGroupName field to given value.
 
 HasReplicationGroupName returns a boolean if a field has been set.
 
+### GetSecondary
+
+`func (o *XClusterConfig) GetSecondary() bool`
+
+GetSecondary returns the Secondary field if non-nil, zero value otherwise.
+
+### GetSecondaryOk
+
+`func (o *XClusterConfig) GetSecondaryOk() (*bool, bool)`
+
+GetSecondaryOk returns a tuple with the Secondary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecondary
+
+`func (o *XClusterConfig) SetSecondary(v bool)`
+
+SetSecondary sets Secondary field to given value.
+
+### HasSecondary
+
+`func (o *XClusterConfig) HasSecondary() bool`
+
+HasSecondary returns a boolean if a field has been set.
+
 ### GetSourceActive
 
 `func (o *XClusterConfig) GetSourceActive() bool`
@@ -236,6 +269,31 @@ SetSourceActive sets SourceActive field to given value.
 `func (o *XClusterConfig) HasSourceActive() bool`
 
 HasSourceActive returns a boolean if a field has been set.
+
+### GetSourceUniverseState
+
+`func (o *XClusterConfig) GetSourceUniverseState() string`
+
+GetSourceUniverseState returns the SourceUniverseState field if non-nil, zero value otherwise.
+
+### GetSourceUniverseStateOk
+
+`func (o *XClusterConfig) GetSourceUniverseStateOk() (*string, bool)`
+
+GetSourceUniverseStateOk returns a tuple with the SourceUniverseState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceUniverseState
+
+`func (o *XClusterConfig) SetSourceUniverseState(v string)`
+
+SetSourceUniverseState sets SourceUniverseState field to given value.
+
+### HasSourceUniverseState
+
+`func (o *XClusterConfig) HasSourceUniverseState() bool`
+
+HasSourceUniverseState returns a boolean if a field has been set.
 
 ### GetSourceUniverseUUID
 
@@ -386,6 +444,31 @@ SetTargetActive sets TargetActive field to given value.
 `func (o *XClusterConfig) HasTargetActive() bool`
 
 HasTargetActive returns a boolean if a field has been set.
+
+### GetTargetUniverseState
+
+`func (o *XClusterConfig) GetTargetUniverseState() string`
+
+GetTargetUniverseState returns the TargetUniverseState field if non-nil, zero value otherwise.
+
+### GetTargetUniverseStateOk
+
+`func (o *XClusterConfig) GetTargetUniverseStateOk() (*string, bool)`
+
+GetTargetUniverseStateOk returns a tuple with the TargetUniverseState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetUniverseState
+
+`func (o *XClusterConfig) SetTargetUniverseState(v string)`
+
+SetTargetUniverseState sets TargetUniverseState field to given value.
+
+### HasTargetUniverseState
+
+`func (o *XClusterConfig) HasTargetUniverseState() bool`
+
+HasTargetUniverseState returns a boolean if a field has been set.
 
 ### GetTargetUniverseUUID
 

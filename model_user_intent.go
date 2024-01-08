@@ -41,6 +41,7 @@ type UserIntent struct {
 	InstanceType *string `json:"instanceType,omitempty"`
 	KubernetesOperatorVersion *int64 `json:"kubernetesOperatorVersion,omitempty"`
 	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
+	// User-defined gflags for master. Deprecated since YBA version 2.18.6.0, use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
@@ -52,6 +53,7 @@ type UserIntent struct {
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
 	SpotPrice *float64 `json:"spotPrice,omitempty"`
+	// User-defined gflags for tserver. Deprecated since YBA version 2.18.6.0, use specificGFlags
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	TserverK8SNodeResourceSpec *K8SNodeResourceSpec `json:"tserverK8SNodeResourceSpec,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
@@ -60,7 +62,6 @@ type UserIntent struct {
 	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
-	UserIntentOverrides *UserIntentOverrides `json:"userIntentOverrides,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
 	YbcFlags *map[string]string `json:"ybcFlags,omitempty"`
 	YcqlPassword *string `json:"ycqlPassword,omitempty"`
@@ -1460,38 +1461,6 @@ func (o *UserIntent) SetUseTimeSync(v bool) {
 	o.UseTimeSync = &v
 }
 
-// GetUserIntentOverrides returns the UserIntentOverrides field value if set, zero value otherwise.
-func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides {
-	if o == nil || o.UserIntentOverrides == nil {
-		var ret UserIntentOverrides
-		return ret
-	}
-	return *o.UserIntentOverrides
-}
-
-// GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool) {
-	if o == nil || o.UserIntentOverrides == nil {
-		return nil, false
-	}
-	return o.UserIntentOverrides, true
-}
-
-// HasUserIntentOverrides returns a boolean if a field has been set.
-func (o *UserIntent) HasUserIntentOverrides() bool {
-	if o != nil && o.UserIntentOverrides != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetUserIntentOverrides gets a reference to the given UserIntentOverrides and assigns it to the UserIntentOverrides field.
-func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides) {
-	o.UserIntentOverrides = &v
-}
-
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value if set, zero value otherwise.
 func (o *UserIntent) GetYbSoftwareVersion() string {
 	if o == nil || o.YbSoftwareVersion == nil {
@@ -1750,9 +1719,6 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseTimeSync != nil {
 		toSerialize["useTimeSync"] = o.UseTimeSync
-	}
-	if o.UserIntentOverrides != nil {
-		toSerialize["userIntentOverrides"] = o.UserIntentOverrides
 	}
 	if o.YbSoftwareVersion != nil {
 		toSerialize["ybSoftwareVersion"] = o.YbSoftwareVersion

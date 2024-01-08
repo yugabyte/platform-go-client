@@ -16,10 +16,13 @@ import (
 
 // ImageBundle struct for ImageBundle
 type ImageBundle struct {
+	// Is the ImageBundle Active
+	Active *bool `json:"active,omitempty"`
 	Details *ImageBundleDetails `json:"details,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 	// Image Bundle Name
 	Name *string `json:"name,omitempty"`
-	// Default Image Bundle
+	// Default Image Bundle. A provider can have two defaults, one per architecture
 	UseAsDefault *bool `json:"useAsDefault,omitempty"`
 	// Image Bundle UUID
 	Uuid *string `json:"uuid,omitempty"`
@@ -40,6 +43,38 @@ func NewImageBundle() *ImageBundle {
 func NewImageBundleWithDefaults() *ImageBundle {
 	this := ImageBundle{}
 	return &this
+}
+
+// GetActive returns the Active field value if set, zero value otherwise.
+func (o *ImageBundle) GetActive() bool {
+	if o == nil || o.Active == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Active
+}
+
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageBundle) GetActiveOk() (*bool, bool) {
+	if o == nil || o.Active == nil {
+		return nil, false
+	}
+	return o.Active, true
+}
+
+// HasActive returns a boolean if a field has been set.
+func (o *ImageBundle) HasActive() bool {
+	if o != nil && o.Active != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given bool and assigns it to the Active field.
+func (o *ImageBundle) SetActive(v bool) {
+	o.Active = &v
 }
 
 // GetDetails returns the Details field value if set, zero value otherwise.
@@ -72,6 +107,38 @@ func (o *ImageBundle) HasDetails() bool {
 // SetDetails gets a reference to the given ImageBundleDetails and assigns it to the Details field.
 func (o *ImageBundle) SetDetails(v ImageBundleDetails) {
 	o.Details = &v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *ImageBundle) GetMetadata() Metadata {
+	if o == nil || o.Metadata == nil {
+		var ret Metadata
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageBundle) GetMetadataOk() (*Metadata, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *ImageBundle) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+func (o *ImageBundle) SetMetadata(v Metadata) {
+	o.Metadata = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -172,8 +239,14 @@ func (o *ImageBundle) SetUuid(v string) {
 
 func (o ImageBundle) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Active != nil {
+		toSerialize["active"] = o.Active
+	}
 	if o.Details != nil {
 		toSerialize["details"] = o.Details
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

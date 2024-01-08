@@ -8,14 +8,15 @@ Name | Type | Description | Notes
 **Email** | **string** | Email address | 
 **Features** | Pointer to **map[string]map[string]interface{}** | User features | [optional] 
 **Password** | Pointer to **string** | Password | [optional] 
-**Role** | **string** | User role | 
+**Role** | Pointer to **string** | Deprecated since YBA version 2.19.3.0. Use field roleResourceDefinitions instead. | [optional] 
+**RoleResourceDefinitions** | Pointer to [**[]RoleResourceDefinition**](RoleResourceDefinition.md) | List of roles and resource groups defined for user. | [optional] 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
 
 ## Methods
 
 ### NewUserRegistrationData
 
-`func NewUserRegistrationData(email string, role string, ) *UserRegistrationData`
+`func NewUserRegistrationData(email string, ) *UserRegistrationData`
 
 NewUserRegistrationData instantiates a new UserRegistrationData object
 This constructor will assign default values to properties that have it defined,
@@ -144,6 +145,36 @@ and a boolean to check if the value has been set.
 
 SetRole sets Role field to given value.
 
+### HasRole
+
+`func (o *UserRegistrationData) HasRole() bool`
+
+HasRole returns a boolean if a field has been set.
+
+### GetRoleResourceDefinitions
+
+`func (o *UserRegistrationData) GetRoleResourceDefinitions() []RoleResourceDefinition`
+
+GetRoleResourceDefinitions returns the RoleResourceDefinitions field if non-nil, zero value otherwise.
+
+### GetRoleResourceDefinitionsOk
+
+`func (o *UserRegistrationData) GetRoleResourceDefinitionsOk() (*[]RoleResourceDefinition, bool)`
+
+GetRoleResourceDefinitionsOk returns a tuple with the RoleResourceDefinitions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoleResourceDefinitions
+
+`func (o *UserRegistrationData) SetRoleResourceDefinitions(v []RoleResourceDefinition)`
+
+SetRoleResourceDefinitions sets RoleResourceDefinitions field to given value.
+
+### HasRoleResourceDefinitions
+
+`func (o *UserRegistrationData) HasRoleResourceDefinitions() bool`
+
+HasRoleResourceDefinitions returns a boolean if a field has been set.
 
 ### GetTimezone
 

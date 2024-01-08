@@ -16,6 +16,8 @@ import (
 
 // AuditLoggingConfig Audit Logging Configuration
 type AuditLoggingConfig struct {
+	// WARNING: This is a preview API that could change. Audit log file name prefix. Defaults to \"\". For example, setting this to \"yb-platform-\" will generate audit log files as \"yb-platform-audit.log\" instead of \"audit.log\".
+	FileNamePrefix *string `json:"fileNamePrefix,omitempty"`
 	// Max number of days up till which logs are kept
 	MaxHistory *int32 `json:"maxHistory,omitempty"`
 	// Flag to enable/disable audit logs output to file
@@ -43,6 +45,38 @@ func NewAuditLoggingConfig(outputToFile bool, outputToStdout bool, ) *AuditLoggi
 func NewAuditLoggingConfigWithDefaults() *AuditLoggingConfig {
 	this := AuditLoggingConfig{}
 	return &this
+}
+
+// GetFileNamePrefix returns the FileNamePrefix field value if set, zero value otherwise.
+func (o *AuditLoggingConfig) GetFileNamePrefix() string {
+	if o == nil || o.FileNamePrefix == nil {
+		var ret string
+		return ret
+	}
+	return *o.FileNamePrefix
+}
+
+// GetFileNamePrefixOk returns a tuple with the FileNamePrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuditLoggingConfig) GetFileNamePrefixOk() (*string, bool) {
+	if o == nil || o.FileNamePrefix == nil {
+		return nil, false
+	}
+	return o.FileNamePrefix, true
+}
+
+// HasFileNamePrefix returns a boolean if a field has been set.
+func (o *AuditLoggingConfig) HasFileNamePrefix() bool {
+	if o != nil && o.FileNamePrefix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFileNamePrefix gets a reference to the given string and assigns it to the FileNamePrefix field.
+func (o *AuditLoggingConfig) SetFileNamePrefix(v string) {
+	o.FileNamePrefix = &v
 }
 
 // GetMaxHistory returns the MaxHistory field value if set, zero value otherwise.
@@ -159,6 +193,9 @@ func (o *AuditLoggingConfig) SetRolloverPattern(v string) {
 
 func (o AuditLoggingConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.FileNamePrefix != nil {
+		toSerialize["fileNamePrefix"] = o.FileNamePrefix
+	}
 	if o.MaxHistory != nil {
 		toSerialize["maxHistory"] = o.MaxHistory
 	}

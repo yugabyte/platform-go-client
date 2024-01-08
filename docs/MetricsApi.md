@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**MetricsDetail**](MetricsApi.md#MetricsDetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics
+[**MetricsDetail**](MetricsApi.md#MetricsDetail) | **Get** /api/v1/prometheus_metrics | Available since YBA version 2.8.0.0. Get Prometheus metrics
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > string MetricsDetail(ctx).Execute()
 
-Get Prometheus metrics
+Available since YBA version 2.8.0.0. Get Prometheus metrics
 
 ### Example
 

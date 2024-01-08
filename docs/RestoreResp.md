@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BackupCreatedOnDate** | Pointer to **time.Time** | Backup details. | [optional] 
+**BackupType** | Pointer to **string** |  | [optional] 
 **CreateTime** | Pointer to **time.Time** | Restore creation time. | [optional] 
 **CustomerUUID** | **string** |  | 
 **IsSourceUniversePresent** | **bool** |  | 
@@ -35,6 +37,56 @@ will change when the set of required properties is changed
 NewRestoreRespWithDefaults instantiates a new RestoreResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBackupCreatedOnDate
+
+`func (o *RestoreResp) GetBackupCreatedOnDate() time.Time`
+
+GetBackupCreatedOnDate returns the BackupCreatedOnDate field if non-nil, zero value otherwise.
+
+### GetBackupCreatedOnDateOk
+
+`func (o *RestoreResp) GetBackupCreatedOnDateOk() (*time.Time, bool)`
+
+GetBackupCreatedOnDateOk returns a tuple with the BackupCreatedOnDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupCreatedOnDate
+
+`func (o *RestoreResp) SetBackupCreatedOnDate(v time.Time)`
+
+SetBackupCreatedOnDate sets BackupCreatedOnDate field to given value.
+
+### HasBackupCreatedOnDate
+
+`func (o *RestoreResp) HasBackupCreatedOnDate() bool`
+
+HasBackupCreatedOnDate returns a boolean if a field has been set.
+
+### GetBackupType
+
+`func (o *RestoreResp) GetBackupType() string`
+
+GetBackupType returns the BackupType field if non-nil, zero value otherwise.
+
+### GetBackupTypeOk
+
+`func (o *RestoreResp) GetBackupTypeOk() (*string, bool)`
+
+GetBackupTypeOk returns a tuple with the BackupType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupType
+
+`func (o *RestoreResp) SetBackupType(v string)`
+
+SetBackupType sets BackupType field to given value.
+
+### HasBackupType
+
+`func (o *RestoreResp) HasBackupType() bool`
+
+HasBackupType returns a boolean if a field has been set.
 
 ### GetCreateTime
 

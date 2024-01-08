@@ -38,13 +38,14 @@ type BackupResp struct {
 	StorageConfigType string `json:"storageConfigType"`
 	UniverseName string `json:"universeName"`
 	UniverseUUID string `json:"universeUUID"`
+	UseTablespaces bool `json:"useTablespaces"`
 }
 
 // NewBackupResp instantiates a new BackupResp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp {
+func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, useTablespaces bool, ) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.Category = category
@@ -63,6 +64,7 @@ func NewBackupResp(backupType string, category string, commonBackupInfo CommonBa
 	this.StorageConfigType = storageConfigType
 	this.UniverseName = universeName
 	this.UniverseUUID = universeUUID
+	this.UseTablespaces = useTablespaces
 	return &this
 }
 
@@ -546,6 +548,30 @@ func (o *BackupResp) SetUniverseUUID(v string) {
 	o.UniverseUUID = v
 }
 
+// GetUseTablespaces returns the UseTablespaces field value
+func (o *BackupResp) GetUseTablespaces() bool {
+	if o == nil  {
+		var ret bool
+		return ret
+	}
+
+	return o.UseTablespaces
+}
+
+// GetUseTablespacesOk returns a tuple with the UseTablespaces field value
+// and a boolean to check if the value has been set.
+func (o *BackupResp) GetUseTablespacesOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.UseTablespaces, true
+}
+
+// SetUseTablespaces sets field value
+func (o *BackupResp) SetUseTablespaces(v bool) {
+	o.UseTablespaces = v
+}
+
 func (o BackupResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -604,6 +630,9 @@ func (o BackupResp) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID
+	}
+	if true {
+		toSerialize["useTablespaces"] = o.UseTablespaces
 	}
 	return json.Marshal(toSerialize)
 }

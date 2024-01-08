@@ -23,6 +23,7 @@ type PerLocationBackupInfo struct {
 	// Whether backup type is YSQL
 	IsYSQLBackup *bool `json:"isYSQLBackup,omitempty"`
 	PerBackupLocationKeyspaceTables *PerBackupLocationKeyspaceTables `json:"perBackupLocationKeyspaceTables,omitempty"`
+	TablespaceResponse *TablespaceResponse `json:"tablespaceResponse,omitempty"`
 }
 
 // NewPerLocationBackupInfo instantiates a new PerLocationBackupInfo object
@@ -170,6 +171,38 @@ func (o *PerLocationBackupInfo) SetPerBackupLocationKeyspaceTables(v PerBackupLo
 	o.PerBackupLocationKeyspaceTables = &v
 }
 
+// GetTablespaceResponse returns the TablespaceResponse field value if set, zero value otherwise.
+func (o *PerLocationBackupInfo) GetTablespaceResponse() TablespaceResponse {
+	if o == nil || o.TablespaceResponse == nil {
+		var ret TablespaceResponse
+		return ret
+	}
+	return *o.TablespaceResponse
+}
+
+// GetTablespaceResponseOk returns a tuple with the TablespaceResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PerLocationBackupInfo) GetTablespaceResponseOk() (*TablespaceResponse, bool) {
+	if o == nil || o.TablespaceResponse == nil {
+		return nil, false
+	}
+	return o.TablespaceResponse, true
+}
+
+// HasTablespaceResponse returns a boolean if a field has been set.
+func (o *PerLocationBackupInfo) HasTablespaceResponse() bool {
+	if o != nil && o.TablespaceResponse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTablespaceResponse gets a reference to the given TablespaceResponse and assigns it to the TablespaceResponse field.
+func (o *PerLocationBackupInfo) SetTablespaceResponse(v TablespaceResponse) {
+	o.TablespaceResponse = &v
+}
+
 func (o PerLocationBackupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BackupLocation != nil {
@@ -183,6 +216,9 @@ func (o PerLocationBackupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.PerBackupLocationKeyspaceTables != nil {
 		toSerialize["perBackupLocationKeyspaceTables"] = o.PerBackupLocationKeyspaceTables
+	}
+	if o.TablespaceResponse != nil {
+		toSerialize["tablespaceResponse"] = o.TablespaceResponse
 	}
 	return json.Marshal(toSerialize)
 }

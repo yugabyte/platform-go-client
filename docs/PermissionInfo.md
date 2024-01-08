@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Action** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
-**Permission** | Pointer to **string** |  | [optional] 
-**PrerequisitePermissions** | Pointer to [**[]PermissionInfoIdentifier**](PermissionInfoIdentifier.md) |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**PermissionValidOnResource** | Pointer to **bool** |  | [optional] 
+**PrerequisitePermissions** | Pointer to [**[]Permission**](Permission.md) |  | [optional] 
 **ResourceType** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -27,6 +29,31 @@ will change when the set of required properties is changed
 NewPermissionInfoWithDefaults instantiates a new PermissionInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAction
+
+`func (o *PermissionInfo) GetAction() string`
+
+GetAction returns the Action field if non-nil, zero value otherwise.
+
+### GetActionOk
+
+`func (o *PermissionInfo) GetActionOk() (*string, bool)`
+
+GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAction
+
+`func (o *PermissionInfo) SetAction(v string)`
+
+SetAction sets Action field to given value.
+
+### HasAction
+
+`func (o *PermissionInfo) HasAction() bool`
+
+HasAction returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -53,47 +80,72 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetPermission
+### GetName
 
-`func (o *PermissionInfo) GetPermission() string`
+`func (o *PermissionInfo) GetName() string`
 
-GetPermission returns the Permission field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetPermissionOk
+### GetNameOk
 
-`func (o *PermissionInfo) GetPermissionOk() (*string, bool)`
+`func (o *PermissionInfo) GetNameOk() (*string, bool)`
 
-GetPermissionOk returns a tuple with the Permission field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPermission
+### SetName
 
-`func (o *PermissionInfo) SetPermission(v string)`
+`func (o *PermissionInfo) SetName(v string)`
 
-SetPermission sets Permission field to given value.
+SetName sets Name field to given value.
 
-### HasPermission
+### HasName
 
-`func (o *PermissionInfo) HasPermission() bool`
+`func (o *PermissionInfo) HasName() bool`
 
-HasPermission returns a boolean if a field has been set.
+HasName returns a boolean if a field has been set.
+
+### GetPermissionValidOnResource
+
+`func (o *PermissionInfo) GetPermissionValidOnResource() bool`
+
+GetPermissionValidOnResource returns the PermissionValidOnResource field if non-nil, zero value otherwise.
+
+### GetPermissionValidOnResourceOk
+
+`func (o *PermissionInfo) GetPermissionValidOnResourceOk() (*bool, bool)`
+
+GetPermissionValidOnResourceOk returns a tuple with the PermissionValidOnResource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPermissionValidOnResource
+
+`func (o *PermissionInfo) SetPermissionValidOnResource(v bool)`
+
+SetPermissionValidOnResource sets PermissionValidOnResource field to given value.
+
+### HasPermissionValidOnResource
+
+`func (o *PermissionInfo) HasPermissionValidOnResource() bool`
+
+HasPermissionValidOnResource returns a boolean if a field has been set.
 
 ### GetPrerequisitePermissions
 
-`func (o *PermissionInfo) GetPrerequisitePermissions() []PermissionInfoIdentifier`
+`func (o *PermissionInfo) GetPrerequisitePermissions() []Permission`
 
 GetPrerequisitePermissions returns the PrerequisitePermissions field if non-nil, zero value otherwise.
 
 ### GetPrerequisitePermissionsOk
 
-`func (o *PermissionInfo) GetPrerequisitePermissionsOk() (*[]PermissionInfoIdentifier, bool)`
+`func (o *PermissionInfo) GetPrerequisitePermissionsOk() (*[]Permission, bool)`
 
 GetPrerequisitePermissionsOk returns a tuple with the PrerequisitePermissions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrerequisitePermissions
 
-`func (o *PermissionInfo) SetPrerequisitePermissions(v []PermissionInfoIdentifier)`
+`func (o *PermissionInfo) SetPrerequisitePermissions(v []Permission)`
 
 SetPrerequisitePermissions sets PrerequisitePermissions field to given value.
 

@@ -4,17 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadNodeLogs**](UniverseInformationApi.md#DownloadNodeLogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs
-[**GetLiveQueries**](UniverseInformationApi.md#GetLiveQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Get live queries for a universe
-[**GetMasterInfos**](UniverseInformationApi.md#GetMasterInfos) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos | Get master information list
-[**GetMasterLeaderIP**](UniverseInformationApi.md#GetMasterLeaderIP) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Get IP address of a universe&#39;s master leader
-[**GetSlowQueries**](UniverseInformationApi.md#GetSlowQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Get slow queries for a universe
-[**GetUniverseCost**](UniverseInformationApi.md#GetUniverseCost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Get a cost estimate for a universe
-[**GetUniverseCostForAll**](UniverseInformationApi.md#GetUniverseCostForAll) | **Get** /api/v1/customers/{cUUID}/cost | Get a cost estimate for all universes
-[**HealthCheckUniverse**](UniverseInformationApi.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Run a universe health check
-[**ResetSlowQueries**](UniverseInformationApi.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
-[**TriggerHealthCheck**](UniverseInformationApi.md#TriggerHealthCheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
-[**UniverseStatus**](UniverseInformationApi.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
+[**DownloadNodeLogs**](UniverseInformationApi.md#DownloadNodeLogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node&#39;s logs.
+[**GetLiveQueries**](UniverseInformationApi.md#GetLiveQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Available since YBA version 2.4.0.0. Get live queries for a universe
+[**GetMasterLeaderIP**](UniverseInformationApi.md#GetMasterLeaderIP) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Available since YBA version 2.2.0.0. Get IP address of a universe&#39;s master leader
+[**GetSlowQueries**](UniverseInformationApi.md#GetSlowQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Get slow queries for a universe
+[**GetUniverseCost**](UniverseInformationApi.md#GetUniverseCost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
+[**GetUniverseResources**](UniverseInformationApi.md#GetUniverseResources) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources | Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
+[**HealthCheckUniverse**](UniverseInformationApi.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Available since YBA version 2.2.0.0. Return results for the last health check
+[**ResetSlowQueries**](UniverseInformationApi.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Reset slow queries for a universe
+[**UniverseStatus**](UniverseInformationApi.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Available since YBA version 2.2.0.0. Get a universe&#39;s status
 
 
 
@@ -22,7 +20,7 @@ Method | HTTP request | Description
 
 > string DownloadNodeLogs(ctx, cUUID, uniUUID, nodeName).Execute()
 
-Download a node's logs
+Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node's logs.
 
 
 
@@ -98,7 +96,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetLiveQueries(ctx, cUUID, uniUUID).Execute()
 
-Get live queries for a universe
+Available since YBA version 2.4.0.0. Get live queries for a universe
 
 ### Example
 
@@ -165,82 +163,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetMasterInfos
-
-> []MasterInfo GetMasterInfos(ctx, cUUID, uniUUID).Execute()
-
-Get master information list
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseInformationApi.GetMasterInfos(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.GetMasterInfos``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMasterInfos`: []MasterInfo
-    fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.GetMasterInfos`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetMasterInfosRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**[]MasterInfo**](MasterInfo.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetMasterLeaderIP
 
 > map[string]interface{} GetMasterLeaderIP(ctx, cUUID, uniUUID).Execute()
 
-Get IP address of a universe's master leader
+Available since YBA version 2.2.0.0. Get IP address of a universe's master leader
 
 ### Example
 
@@ -311,7 +238,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetSlowQueries(ctx, cUUID, uniUUID).Execute()
 
-Get slow queries for a universe
+Available since YBA version 2.6.0.0. Get slow queries for a universe
 
 ### Example
 
@@ -382,7 +309,7 @@ Name | Type | Description  | Notes
 
 > UniverseResourceDetails GetUniverseCost(ctx, cUUID, uniUUID).Execute()
 
-Get a cost estimate for a universe
+Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
 
 ### Example
 
@@ -449,11 +376,13 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetUniverseCostForAll
+## GetUniverseResources
 
-> []UniverseResourceDetails GetUniverseCostForAll(ctx, cUUID).Execute()
+> UniverseResourceDetails GetUniverseResources(ctx, cUUID, uniUUID).Execute()
 
-Get a cost estimate for all universes
+Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
+
+
 
 ### Example
 
@@ -469,16 +398,17 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    uniUUID := TODO // string | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseInformationApi.GetUniverseCostForAll(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.UniverseInformationApi.GetUniverseResources(context.Background(), cUUID, uniUUID).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.GetUniverseCostForAll``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.GetUniverseResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetUniverseCostForAll`: []UniverseResourceDetails
-    fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.GetUniverseCostForAll`: %v\n", resp)
+    // response from `GetUniverseResources`: UniverseResourceDetails
+    fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.GetUniverseResources`: %v\n", resp)
 }
 ```
 
@@ -489,19 +419,21 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetUniverseCostForAllRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetUniverseResourcesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+
 ### Return type
 
-[**[]UniverseResourceDetails**](UniverseResourceDetails.md)
+[**UniverseResourceDetails**](UniverseResourceDetails.md)
 
 ### Authorization
 
@@ -521,7 +453,7 @@ Name | Type | Description  | Notes
 
 > []Details HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
 
-Run a universe health check
+Available since YBA version 2.2.0.0. Return results for the last health check
 
 
 
@@ -594,7 +526,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} ResetSlowQueries(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Reset slow queries for a universe
+Available since YBA version 2.6.0.0. Reset slow queries for a universe
 
 ### Example
 
@@ -663,84 +595,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## TriggerHealthCheck
-
-> TriggerHealthCheckResult TriggerHealthCheck(ctx, cUUID, uniUUID).Execute()
-
-Trigger a universe health check
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseInformationApi.TriggerHealthCheck(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationApi.TriggerHealthCheck``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `TriggerHealthCheck`: TriggerHealthCheckResult
-    fmt.Fprintf(os.Stdout, "Response from `UniverseInformationApi.TriggerHealthCheck`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiTriggerHealthCheckRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**TriggerHealthCheckResult**](TriggerHealthCheckResult.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## UniverseStatus
 
 > map[string]map[string]interface{} UniverseStatus(ctx, cUUID, uniUUID).Execute()
 
-Get a universe's status
+Available since YBA version 2.2.0.0. Get a universe's status
 
 
 

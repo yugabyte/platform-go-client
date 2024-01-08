@@ -17,6 +17,7 @@ import (
 // UniverseDefinitionTaskParamsResp struct for UniverseDefinitionTaskParamsResp
 type UniverseDefinitionTaskParamsResp struct {
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
+	Arch *string `json:"arch,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	ClientRootCA *string `json:"clientRootCA,omitempty"`
 	Clusters []Cluster `json:"clusters"`
@@ -36,6 +37,8 @@ type UniverseDefinitionTaskParamsResp struct {
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
+	// Available since YBA version 2.20.2.0
+	IsSoftwareRollbackAllowed *bool `json:"isSoftwareRollbackAllowed,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
@@ -47,6 +50,7 @@ type UniverseDefinitionTaskParamsResp struct {
 	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
+	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
@@ -56,6 +60,7 @@ type UniverseDefinitionTaskParamsResp struct {
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
+	SoftwareUpgradeState *string `json:"softwareUpgradeState,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
@@ -131,6 +136,38 @@ func (o *UniverseDefinitionTaskParamsResp) HasAllowInsecure() bool {
 // SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *UniverseDefinitionTaskParamsResp) SetAllowInsecure(v bool) {
 	o.AllowInsecure = &v
+}
+
+// GetArch returns the Arch field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetArch() string {
+	if o == nil || o.Arch == nil {
+		var ret string
+		return ret
+	}
+	return *o.Arch
+}
+
+// GetArchOk returns a tuple with the Arch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetArchOk() (*string, bool) {
+	if o == nil || o.Arch == nil {
+		return nil, false
+	}
+	return o.Arch, true
+}
+
+// HasArch returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasArch() bool {
+	if o != nil && o.Arch != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetArch gets a reference to the given string and assigns it to the Arch field.
+func (o *UniverseDefinitionTaskParamsResp) SetArch(v string) {
+	o.Arch = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -629,6 +666,38 @@ func (o *UniverseDefinitionTaskParamsResp) SetIsKubernetesOperatorControlled(v b
 	o.IsKubernetesOperatorControlled = &v
 }
 
+// GetIsSoftwareRollbackAllowed returns the IsSoftwareRollbackAllowed field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetIsSoftwareRollbackAllowed() bool {
+	if o == nil || o.IsSoftwareRollbackAllowed == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSoftwareRollbackAllowed
+}
+
+// GetIsSoftwareRollbackAllowedOk returns a tuple with the IsSoftwareRollbackAllowed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetIsSoftwareRollbackAllowedOk() (*bool, bool) {
+	if o == nil || o.IsSoftwareRollbackAllowed == nil {
+		return nil, false
+	}
+	return o.IsSoftwareRollbackAllowed, true
+}
+
+// HasIsSoftwareRollbackAllowed returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasIsSoftwareRollbackAllowed() bool {
+	if o != nil && o.IsSoftwareRollbackAllowed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSoftwareRollbackAllowed gets a reference to the given bool and assigns it to the IsSoftwareRollbackAllowed field.
+func (o *UniverseDefinitionTaskParamsResp) SetIsSoftwareRollbackAllowed(v bool) {
+	o.IsSoftwareRollbackAllowed = &v
+}
+
 // GetItestS3PackagePath returns the ItestS3PackagePath field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParamsResp) GetItestS3PackagePath() string {
 	if o == nil || o.ItestS3PackagePath == nil {
@@ -933,6 +1002,38 @@ func (o *UniverseDefinitionTaskParamsResp) SetPlatformVersion(v string) {
 	o.PlatformVersion = v
 }
 
+// GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetPrevYBSoftwareConfig() PrevYBSoftwareConfig {
+	if o == nil || o.PrevYBSoftwareConfig == nil {
+		var ret PrevYBSoftwareConfig
+		return ret
+	}
+	return *o.PrevYBSoftwareConfig
+}
+
+// GetPrevYBSoftwareConfigOk returns a tuple with the PrevYBSoftwareConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetPrevYBSoftwareConfigOk() (*PrevYBSoftwareConfig, bool) {
+	if o == nil || o.PrevYBSoftwareConfig == nil {
+		return nil, false
+	}
+	return o.PrevYBSoftwareConfig, true
+}
+
+// HasPrevYBSoftwareConfig returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasPrevYBSoftwareConfig() bool {
+	if o != nil && o.PrevYBSoftwareConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevYBSoftwareConfig gets a reference to the given PrevYBSoftwareConfig and assigns it to the PrevYBSoftwareConfig field.
+func (o *UniverseDefinitionTaskParamsResp) SetPrevYBSoftwareConfig(v PrevYBSoftwareConfig) {
+	o.PrevYBSoftwareConfig = &v
+}
+
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParamsResp) GetPreviousTaskUUID() string {
 	if o == nil || o.PreviousTaskUUID == nil {
@@ -1171,6 +1272,38 @@ func (o *UniverseDefinitionTaskParamsResp) GetSleepAfterTServerRestartMillisOk()
 // SetSleepAfterTServerRestartMillis sets field value
 func (o *UniverseDefinitionTaskParamsResp) SetSleepAfterTServerRestartMillis(v int32) {
 	o.SleepAfterTServerRestartMillis = v
+}
+
+// GetSoftwareUpgradeState returns the SoftwareUpgradeState field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetSoftwareUpgradeState() string {
+	if o == nil || o.SoftwareUpgradeState == nil {
+		var ret string
+		return ret
+	}
+	return *o.SoftwareUpgradeState
+}
+
+// GetSoftwareUpgradeStateOk returns a tuple with the SoftwareUpgradeState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetSoftwareUpgradeStateOk() (*string, bool) {
+	if o == nil || o.SoftwareUpgradeState == nil {
+		return nil, false
+	}
+	return o.SoftwareUpgradeState, true
+}
+
+// HasSoftwareUpgradeState returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasSoftwareUpgradeState() bool {
+	if o != nil && o.SoftwareUpgradeState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSoftwareUpgradeState gets a reference to the given string and assigns it to the SoftwareUpgradeState field.
+func (o *UniverseDefinitionTaskParamsResp) SetSoftwareUpgradeState(v string) {
+	o.SoftwareUpgradeState = &v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -1690,6 +1823,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
 	}
+	if o.Arch != nil {
+		toSerialize["arch"] = o.Arch
+	}
 	if o.Capability != nil {
 		toSerialize["capability"] = o.Capability
 	}
@@ -1738,6 +1874,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	if o.IsKubernetesOperatorControlled != nil {
 		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
 	}
+	if o.IsSoftwareRollbackAllowed != nil {
+		toSerialize["isSoftwareRollbackAllowed"] = o.IsSoftwareRollbackAllowed
+	}
 	if o.ItestS3PackagePath != nil {
 		toSerialize["itestS3PackagePath"] = o.ItestS3PackagePath
 	}
@@ -1768,6 +1907,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
+	if o.PrevYBSoftwareConfig != nil {
+		toSerialize["prevYBSoftwareConfig"] = o.PrevYBSoftwareConfig
+	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
@@ -1791,6 +1933,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
+	if o.SoftwareUpgradeState != nil {
+		toSerialize["softwareUpgradeState"] = o.SoftwareUpgradeState
 	}
 	if o.SourceXClusterConfigs != nil {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs

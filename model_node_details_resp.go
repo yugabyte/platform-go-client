@@ -56,6 +56,8 @@ type NodeDetailsResp struct {
 	NodeName *string `json:"nodeName,omitempty"`
 	// Node UUID
 	NodeUuid *string `json:"nodeUuid,omitempty"`
+	// Otel collector metrics port
+	OtelCollectorMetricsPort *int32 `json:"otelCollectorMetricsPort,omitempty"`
 	// UUID of the cluster to which this node belongs
 	PlacementUuid *string `json:"placementUuid,omitempty"`
 	// REDIS HTTP port
@@ -770,6 +772,38 @@ func (o *NodeDetailsResp) SetNodeUuid(v string) {
 	o.NodeUuid = &v
 }
 
+// GetOtelCollectorMetricsPort returns the OtelCollectorMetricsPort field value if set, zero value otherwise.
+func (o *NodeDetailsResp) GetOtelCollectorMetricsPort() int32 {
+	if o == nil || o.OtelCollectorMetricsPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.OtelCollectorMetricsPort
+}
+
+// GetOtelCollectorMetricsPortOk returns a tuple with the OtelCollectorMetricsPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetOtelCollectorMetricsPortOk() (*int32, bool) {
+	if o == nil || o.OtelCollectorMetricsPort == nil {
+		return nil, false
+	}
+	return o.OtelCollectorMetricsPort, true
+}
+
+// HasOtelCollectorMetricsPort returns a boolean if a field has been set.
+func (o *NodeDetailsResp) HasOtelCollectorMetricsPort() bool {
+	if o != nil && o.OtelCollectorMetricsPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOtelCollectorMetricsPort gets a reference to the given int32 and assigns it to the OtelCollectorMetricsPort field.
+func (o *NodeDetailsResp) SetOtelCollectorMetricsPort(v int32) {
+	o.OtelCollectorMetricsPort = &v
+}
+
 // GetPlacementUuid returns the PlacementUuid field value if set, zero value otherwise.
 func (o *NodeDetailsResp) GetPlacementUuid() string {
 	if o == nil || o.PlacementUuid == nil {
@@ -1314,6 +1348,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeUuid != nil {
 		toSerialize["nodeUuid"] = o.NodeUuid
+	}
+	if o.OtelCollectorMetricsPort != nil {
+		toSerialize["otelCollectorMetricsPort"] = o.OtelCollectorMetricsPort
 	}
 	if o.PlacementUuid != nil {
 		toSerialize["placementUuid"] = o.PlacementUuid

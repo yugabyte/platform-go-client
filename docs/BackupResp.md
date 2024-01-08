@@ -23,12 +23,13 @@ Name | Type | Description | Notes
 **StorageConfigType** | **string** |  | 
 **UniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
+**UseTablespaces** | **bool** |  | 
 
 ## Methods
 
 ### NewBackupResp
 
-`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, ) *BackupResp`
+`func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, useTablespaces bool, ) *BackupResp`
 
 NewBackupResp instantiates a new BackupResp object
 This constructor will assign default values to properties that have it defined,
@@ -431,6 +432,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupResp) SetUniverseUUID(v string)`
 
 SetUniverseUUID sets UniverseUUID field to given value.
+
+
+### GetUseTablespaces
+
+`func (o *BackupResp) GetUseTablespaces() bool`
+
+GetUseTablespaces returns the UseTablespaces field if non-nil, zero value otherwise.
+
+### GetUseTablespacesOk
+
+`func (o *BackupResp) GetUseTablespacesOk() (*bool, bool)`
+
+GetUseTablespacesOk returns a tuple with the UseTablespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTablespaces
+
+`func (o *BackupResp) SetUseTablespaces(v bool)`
+
+SetUseTablespaces sets UseTablespaces field to given value.
 
 
 

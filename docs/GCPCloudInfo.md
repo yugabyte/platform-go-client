@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **GceApplicationCredentialsPath** | Pointer to **string** |  | [optional] [readonly] 
 **GceProject** | Pointer to **string** |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
+**SharedVPCProject** | Pointer to **string** |  | [optional] 
 **UseHostCredentials** | Pointer to **bool** |  | [optional] 
 **UseHostVPC** | Pointer to **bool** |  | [optional] 
 **VpcType** | Pointer to **string** | New/Existing VPC for provider creation | [optional] [readonly] 
@@ -131,6 +132,31 @@ SetHostVpcId sets HostVpcId field to given value.
 `func (o *GCPCloudInfo) HasHostVpcId() bool`
 
 HasHostVpcId returns a boolean if a field has been set.
+
+### GetSharedVPCProject
+
+`func (o *GCPCloudInfo) GetSharedVPCProject() string`
+
+GetSharedVPCProject returns the SharedVPCProject field if non-nil, zero value otherwise.
+
+### GetSharedVPCProjectOk
+
+`func (o *GCPCloudInfo) GetSharedVPCProjectOk() (*string, bool)`
+
+GetSharedVPCProjectOk returns a tuple with the SharedVPCProject field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSharedVPCProject
+
+`func (o *GCPCloudInfo) SetSharedVPCProject(v string)`
+
+SetSharedVPCProject sets SharedVPCProject field to given value.
+
+### HasSharedVPCProject
+
+`func (o *GCPCloudInfo) HasSharedVPCProject() bool`
+
+HasSharedVPCProject returns a boolean if a field has been set.
 
 ### GetUseHostCredentials
 

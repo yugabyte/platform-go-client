@@ -782,10 +782,15 @@ type InstanceTypesApiApiListOfInstanceTypeRequest struct {
 	cUUID string
 	pUUID string
 	zone *[]string
+	arch *string
 }
 
 func (r InstanceTypesApiApiListOfInstanceTypeRequest) Zone(zone []string) InstanceTypesApiApiListOfInstanceTypeRequest {
 	r.zone = &zone
+	return r
+}
+func (r InstanceTypesApiApiListOfInstanceTypeRequest) Arch(arch string) InstanceTypesApiApiListOfInstanceTypeRequest {
+	r.arch = &arch
 	return r
 }
 
@@ -846,6 +851,9 @@ func (a *InstanceTypesApiService) ListOfInstanceTypeExecute(r InstanceTypesApiAp
 		} else {
 			localVarQueryParams.Add("zone", parameterToString(t, "multi"))
 		}
+	}
+	if r.arch != nil {
+		localVarQueryParams.Add("arch", parameterToString(*r.arch, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

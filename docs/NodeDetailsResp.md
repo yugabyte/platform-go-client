@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **NodeIdx** | Pointer to **int32** | Node ID | [optional] 
 **NodeName** | Pointer to **string** | Node name | [optional] 
 **NodeUuid** | Pointer to **string** | Node UUID | [optional] 
+**OtelCollectorMetricsPort** | Pointer to **int32** | Otel collector metrics port | [optional] 
 **PlacementUuid** | Pointer to **string** | UUID of the cluster to which this node belongs | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | REDIS HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | REDIS RPC port | [optional] 
@@ -579,6 +580,31 @@ SetNodeUuid sets NodeUuid field to given value.
 `func (o *NodeDetailsResp) HasNodeUuid() bool`
 
 HasNodeUuid returns a boolean if a field has been set.
+
+### GetOtelCollectorMetricsPort
+
+`func (o *NodeDetailsResp) GetOtelCollectorMetricsPort() int32`
+
+GetOtelCollectorMetricsPort returns the OtelCollectorMetricsPort field if non-nil, zero value otherwise.
+
+### GetOtelCollectorMetricsPortOk
+
+`func (o *NodeDetailsResp) GetOtelCollectorMetricsPortOk() (*int32, bool)`
+
+GetOtelCollectorMetricsPortOk returns a tuple with the OtelCollectorMetricsPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtelCollectorMetricsPort
+
+`func (o *NodeDetailsResp) SetOtelCollectorMetricsPort(v int32)`
+
+SetOtelCollectorMetricsPort sets OtelCollectorMetricsPort field to given value.
+
+### HasOtelCollectorMetricsPort
+
+`func (o *NodeDetailsResp) HasOtelCollectorMetricsPort() bool`
+
+HasOtelCollectorMetricsPort returns a boolean if a field has been set.
 
 ### GetPlacementUuid
 

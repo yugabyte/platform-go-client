@@ -45,7 +45,7 @@ func (r UniverseManagementApiApiConfigureUniverseAlertsRequest) Execute() (YBPSu
 }
 
 /*
- * ConfigureUniverseAlerts Configure alerts for a universe
+ * ConfigureUniverseAlerts Available since YBA version 2.2.0.0. Configure alerts for a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -191,7 +191,7 @@ func (r UniverseManagementApiApiDeleteUniverseRequest) Execute() (YBPTask, *_net
 }
 
 /*
- * DeleteUniverse Delete a universe
+ * DeleteUniverse Available since YBA version 2.2.0.0. Delete a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -326,7 +326,7 @@ func (r UniverseManagementApiApiGetUniverseRequest) Execute() (UniverseResp, *_n
 }
 
 /*
- * GetUniverse Get a universe
+ * GetUniverse Available since YBA version 2.2.0.0. Get a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -453,7 +453,7 @@ func (r UniverseManagementApiApiListUniversesRequest) Execute() ([]UniverseResp,
 }
 
 /*
- * ListUniverses List universes
+ * ListUniverses Available since YBA version 2.2.0.0. List universes
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return UniverseManagementApiApiListUniversesRequest
@@ -581,7 +581,7 @@ func (r UniverseManagementApiApiPauseUniverseRequest) Execute() (YBPTask, *_neth
 }
 
 /*
- * PauseUniverse Pause a universe
+ * PauseUniverse Available since YBA version 2.6.0.0. Pause a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -694,137 +694,6 @@ func (a *UniverseManagementApiService) PauseUniverseExecute(r UniverseManagement
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseManagementApiApiResetUniverseVersionRequest struct {
-	ctx _context.Context
-	ApiService *UniverseManagementApiService
-	cUUID string
-	uniUUID string
-	request *interface{}
-}
-
-func (r UniverseManagementApiApiResetUniverseVersionRequest) Request(request interface{}) UniverseManagementApiApiResetUniverseVersionRequest {
-	r.request = &request
-	return r
-}
-
-func (r UniverseManagementApiApiResetUniverseVersionRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
-	return r.ApiService.ResetUniverseVersionExecute(r)
-}
-
-/*
- * ResetUniverseVersion Reset universe version
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @return UniverseManagementApiApiResetUniverseVersionRequest
- */
-func (a *UniverseManagementApiService) ResetUniverseVersion(ctx _context.Context, cUUID string, uniUUID string) UniverseManagementApiApiResetUniverseVersionRequest {
-	return UniverseManagementApiApiResetUniverseVersionRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPSuccess
- */
-func (a *UniverseManagementApiService) ResetUniverseVersionExecute(r UniverseManagementApiApiResetUniverseVersionRequest) (YBPSuccess, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPut
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementApiService.ResetUniverseVersion")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/setup_universe_2dc"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type UniverseManagementApiApiResumeUniverseRequest struct {
 	ctx _context.Context
 	ApiService *UniverseManagementApiService
@@ -843,7 +712,7 @@ func (r UniverseManagementApiApiResumeUniverseRequest) Execute() (YBPTask, *_net
 }
 
 /*
- * ResumeUniverse Resume a paused universe
+ * ResumeUniverse Available since YBA version 2.6.0.0. Resume a paused universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -979,7 +848,7 @@ func (r UniverseManagementApiApiSetUniverseBackupFlagRequest) Execute() (YBPSucc
 }
 
 /*
- * SetUniverseBackupFlag Set a universe's backup flag
+ * SetUniverseBackupFlag Available since YBA version 2.2.0.0. Set a universe's backup flag
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1113,7 +982,7 @@ func (r UniverseManagementApiApiSetUniverseHelm3CompatibleRequest) Execute() (YB
 }
 
 /*
- * SetUniverseHelm3Compatible Flag a universe as Helm 3-compatible
+ * SetUniverseHelm3Compatible Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1244,7 +1113,7 @@ func (r UniverseManagementApiApiSetUniverseKeyRequest) Execute() (UniverseResp, 
 }
 
 /*
- * SetUniverseKey Set a universe's key
+ * SetUniverseKey Available since YBA version 2.2.0.0. Set a universe's key
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1375,7 +1244,7 @@ func (r UniverseManagementApiApiUpdateLoadBalancerConfigRequest) Execute() (Upda
 }
 
 /*
- * UpdateLoadBalancerConfig Update load balancer config
+ * UpdateLoadBalancerConfig WARNING: This is a preview API that could change. Update load balancer config
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

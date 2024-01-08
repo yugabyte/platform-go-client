@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InstanceTemplate** | Pointer to **string** | The instance template to be used for nodes created in this region. | [optional] 
-**YbImage** | Pointer to **string** | The AMI to be used in this region. | [optional] 
+**YbImage** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
 
 ## Methods
 

@@ -16,7 +16,7 @@ import (
 
 // DrConfigCreateForm drConfig create form
 type DrConfigCreateForm struct {
-	BootstrapBackupParams *BootstarpBackupParams `json:"bootstrapBackupParams,omitempty"`
+	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	// Source Universe DB IDs
 	Dbs []string `json:"dbs"`
 	// Run the pre-checks without actually running the subtasks
@@ -51,36 +51,36 @@ func NewDrConfigCreateFormWithDefaults() *DrConfigCreateForm {
 	return &this
 }
 
-// GetBootstrapBackupParams returns the BootstrapBackupParams field value if set, zero value otherwise.
-func (o *DrConfigCreateForm) GetBootstrapBackupParams() BootstarpBackupParams {
-	if o == nil || o.BootstrapBackupParams == nil {
-		var ret BootstarpBackupParams
+// GetBootstrapParams returns the BootstrapParams field value if set, zero value otherwise.
+func (o *DrConfigCreateForm) GetBootstrapParams() RestartBootstrapParams {
+	if o == nil || o.BootstrapParams == nil {
+		var ret RestartBootstrapParams
 		return ret
 	}
-	return *o.BootstrapBackupParams
+	return *o.BootstrapParams
 }
 
-// GetBootstrapBackupParamsOk returns a tuple with the BootstrapBackupParams field value if set, nil otherwise
+// GetBootstrapParamsOk returns a tuple with the BootstrapParams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DrConfigCreateForm) GetBootstrapBackupParamsOk() (*BootstarpBackupParams, bool) {
-	if o == nil || o.BootstrapBackupParams == nil {
+func (o *DrConfigCreateForm) GetBootstrapParamsOk() (*RestartBootstrapParams, bool) {
+	if o == nil || o.BootstrapParams == nil {
 		return nil, false
 	}
-	return o.BootstrapBackupParams, true
+	return o.BootstrapParams, true
 }
 
-// HasBootstrapBackupParams returns a boolean if a field has been set.
-func (o *DrConfigCreateForm) HasBootstrapBackupParams() bool {
-	if o != nil && o.BootstrapBackupParams != nil {
+// HasBootstrapParams returns a boolean if a field has been set.
+func (o *DrConfigCreateForm) HasBootstrapParams() bool {
+	if o != nil && o.BootstrapParams != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetBootstrapBackupParams gets a reference to the given BootstarpBackupParams and assigns it to the BootstrapBackupParams field.
-func (o *DrConfigCreateForm) SetBootstrapBackupParams(v BootstarpBackupParams) {
-	o.BootstrapBackupParams = &v
+// SetBootstrapParams gets a reference to the given RestartBootstrapParams and assigns it to the BootstrapParams field.
+func (o *DrConfigCreateForm) SetBootstrapParams(v RestartBootstrapParams) {
+	o.BootstrapParams = &v
 }
 
 // GetDbs returns the Dbs field value
@@ -245,8 +245,8 @@ func (o *DrConfigCreateForm) SetTargetUniverseUUID(v string) {
 
 func (o DrConfigCreateForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BootstrapBackupParams != nil {
-		toSerialize["bootstrapBackupParams"] = o.BootstrapBackupParams
+	if o.BootstrapParams != nil {
+		toSerialize["bootstrapParams"] = o.BootstrapParams
 	}
 	if true {
 		toSerialize["dbs"] = o.Dbs

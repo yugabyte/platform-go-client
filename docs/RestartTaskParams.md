@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
+**Arch** | Pointer to **string** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
+**IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
@@ -32,6 +34,7 @@ Name | Type | Description | Notes
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
+**PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -40,6 +43,7 @@ Name | Type | Description | Notes
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
+**SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -101,6 +105,31 @@ SetAllowInsecure sets AllowInsecure field to given value.
 `func (o *RestartTaskParams) HasAllowInsecure() bool`
 
 HasAllowInsecure returns a boolean if a field has been set.
+
+### GetArch
+
+`func (o *RestartTaskParams) GetArch() string`
+
+GetArch returns the Arch field if non-nil, zero value otherwise.
+
+### GetArchOk
+
+`func (o *RestartTaskParams) GetArchOk() (*string, bool)`
+
+GetArchOk returns a tuple with the Arch field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArch
+
+`func (o *RestartTaskParams) SetArch(v string)`
+
+SetArch sets Arch field to given value.
+
+### HasArch
+
+`func (o *RestartTaskParams) HasArch() bool`
+
+HasArch returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -492,6 +521,31 @@ SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to g
 
 HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
+### GetIsSoftwareRollbackAllowed
+
+`func (o *RestartTaskParams) GetIsSoftwareRollbackAllowed() bool`
+
+GetIsSoftwareRollbackAllowed returns the IsSoftwareRollbackAllowed field if non-nil, zero value otherwise.
+
+### GetIsSoftwareRollbackAllowedOk
+
+`func (o *RestartTaskParams) GetIsSoftwareRollbackAllowedOk() (*bool, bool)`
+
+GetIsSoftwareRollbackAllowedOk returns a tuple with the IsSoftwareRollbackAllowed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSoftwareRollbackAllowed
+
+`func (o *RestartTaskParams) SetIsSoftwareRollbackAllowed(v bool)`
+
+SetIsSoftwareRollbackAllowed sets IsSoftwareRollbackAllowed field to given value.
+
+### HasIsSoftwareRollbackAllowed
+
+`func (o *RestartTaskParams) HasIsSoftwareRollbackAllowed() bool`
+
+HasIsSoftwareRollbackAllowed returns a boolean if a field has been set.
+
 ### GetItestS3PackagePath
 
 `func (o *RestartTaskParams) GetItestS3PackagePath() string`
@@ -752,6 +806,31 @@ and a boolean to check if the value has been set.
 SetPlatformVersion sets PlatformVersion field to given value.
 
 
+### GetPrevYBSoftwareConfig
+
+`func (o *RestartTaskParams) GetPrevYBSoftwareConfig() PrevYBSoftwareConfig`
+
+GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field if non-nil, zero value otherwise.
+
+### GetPrevYBSoftwareConfigOk
+
+`func (o *RestartTaskParams) GetPrevYBSoftwareConfigOk() (*PrevYBSoftwareConfig, bool)`
+
+GetPrevYBSoftwareConfigOk returns a tuple with the PrevYBSoftwareConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrevYBSoftwareConfig
+
+`func (o *RestartTaskParams) SetPrevYBSoftwareConfig(v PrevYBSoftwareConfig)`
+
+SetPrevYBSoftwareConfig sets PrevYBSoftwareConfig field to given value.
+
+### HasPrevYBSoftwareConfig
+
+`func (o *RestartTaskParams) HasPrevYBSoftwareConfig() bool`
+
+HasPrevYBSoftwareConfig returns a boolean if a field has been set.
+
 ### GetPreviousTaskUUID
 
 `func (o *RestartTaskParams) GetPreviousTaskUUID() string`
@@ -941,6 +1020,31 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+
+### GetSoftwareUpgradeState
+
+`func (o *RestartTaskParams) GetSoftwareUpgradeState() string`
+
+GetSoftwareUpgradeState returns the SoftwareUpgradeState field if non-nil, zero value otherwise.
+
+### GetSoftwareUpgradeStateOk
+
+`func (o *RestartTaskParams) GetSoftwareUpgradeStateOk() (*string, bool)`
+
+GetSoftwareUpgradeStateOk returns a tuple with the SoftwareUpgradeState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSoftwareUpgradeState
+
+`func (o *RestartTaskParams) SetSoftwareUpgradeState(v string)`
+
+SetSoftwareUpgradeState sets SoftwareUpgradeState field to given value.
+
+### HasSoftwareUpgradeState
+
+`func (o *RestartTaskParams) HasSoftwareUpgradeState() bool`
+
+HasSoftwareUpgradeState returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

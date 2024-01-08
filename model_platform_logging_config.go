@@ -16,6 +16,8 @@ import (
 
 // PlatformLoggingConfig struct for PlatformLoggingConfig
 type PlatformLoggingConfig struct {
+	// WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \"\". For example, setting this to \"yb-platform-\" will generate application log files as \"yb-platform-application.log\" instead of \"application.log\".
+	FileNamePrefix *string `json:"fileNamePrefix,omitempty"`
 	Level string `json:"level"`
 	MaxHistory int32 `json:"maxHistory"`
 	RolloverPattern string `json:"rolloverPattern"`
@@ -39,6 +41,38 @@ func NewPlatformLoggingConfig(level string, maxHistory int32, rolloverPattern st
 func NewPlatformLoggingConfigWithDefaults() *PlatformLoggingConfig {
 	this := PlatformLoggingConfig{}
 	return &this
+}
+
+// GetFileNamePrefix returns the FileNamePrefix field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetFileNamePrefix() string {
+	if o == nil || o.FileNamePrefix == nil {
+		var ret string
+		return ret
+	}
+	return *o.FileNamePrefix
+}
+
+// GetFileNamePrefixOk returns a tuple with the FileNamePrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetFileNamePrefixOk() (*string, bool) {
+	if o == nil || o.FileNamePrefix == nil {
+		return nil, false
+	}
+	return o.FileNamePrefix, true
+}
+
+// HasFileNamePrefix returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasFileNamePrefix() bool {
+	if o != nil && o.FileNamePrefix != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFileNamePrefix gets a reference to the given string and assigns it to the FileNamePrefix field.
+func (o *PlatformLoggingConfig) SetFileNamePrefix(v string) {
+	o.FileNamePrefix = &v
 }
 
 // GetLevel returns the Level field value
@@ -115,6 +149,9 @@ func (o *PlatformLoggingConfig) SetRolloverPattern(v string) {
 
 func (o PlatformLoggingConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.FileNamePrefix != nil {
+		toSerialize["fileNamePrefix"] = o.FileNamePrefix
+	}
 	if true {
 		toSerialize["level"] = o.Level
 	}

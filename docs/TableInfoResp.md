@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Colocated** | Pointer to **bool** | Flag, indicating colocated table | [optional] 
 **ColocationParentId** | Pointer to **string** | Colocation parent id | [optional] 
 **KeySpace** | Pointer to **string** | Keyspace | [optional] 
+**MainTableUUID** | Pointer to **string** | Main Table UUID of index tables | [optional] 
 **NameSpace** | Pointer to **string** | Namespace or Schema | [optional] 
 **ParentTableUUID** | Pointer to **string** | Parent Table UUID | [optional] 
 **PgSchemaName** | Pointer to **string** | Postgres schema name of the table | [optional] 
@@ -112,6 +113,31 @@ SetKeySpace sets KeySpace field to given value.
 `func (o *TableInfoResp) HasKeySpace() bool`
 
 HasKeySpace returns a boolean if a field has been set.
+
+### GetMainTableUUID
+
+`func (o *TableInfoResp) GetMainTableUUID() string`
+
+GetMainTableUUID returns the MainTableUUID field if non-nil, zero value otherwise.
+
+### GetMainTableUUIDOk
+
+`func (o *TableInfoResp) GetMainTableUUIDOk() (*string, bool)`
+
+GetMainTableUUIDOk returns a tuple with the MainTableUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMainTableUUID
+
+`func (o *TableInfoResp) SetMainTableUUID(v string)`
+
+SetMainTableUUID sets MainTableUUID field to given value.
+
+### HasMainTableUUID
+
+`func (o *TableInfoResp) HasMainTableUUID() bool`
+
+HasMainTableUUID returns a boolean if a field has been set.
 
 ### GetNameSpace
 

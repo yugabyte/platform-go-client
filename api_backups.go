@@ -49,7 +49,7 @@ func (r BackupsApiApiCreateBackupScheduleRequest) Execute() (Schedule, *_nethttp
 }
 
 /*
- * CreateBackupSchedule Create Backup Schedule
+ * CreateBackupSchedule Deprecated since YBA version 2.20.0.0. Use 'Create Backup Schedule Async' instead. Create Backup Schedule
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiCreateBackupScheduleRequest
@@ -324,7 +324,7 @@ func (r BackupsApiApiCreateMultiTableBackupRequest) Execute() (Schedule, *_netht
 }
 
 /*
- * CreateMultiTableBackup Create a multi-table backup
+ * CreateMultiTableBackup Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -464,7 +464,7 @@ func (r BackupsApiApiCreatebackupRequest) Execute() (YBPTask, *_nethttp.Response
 }
 
 /*
- * Createbackup Create a backup
+ * Createbackup Create a backup V2
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiCreatebackupRequest
@@ -596,7 +596,7 @@ func (r BackupsApiApiDeleteBackupsRequest) Execute() (map[string]interface{}, *_
 }
 
 /*
- * DeleteBackups Delete backups
+ * DeleteBackups Deprecated since YBA version 2.20.0.0. Use 'Delete backups V2' instead. Delete backups
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiDeleteBackupsRequest
@@ -999,7 +999,7 @@ func (r BackupsApiApiFetchBackupsByTaskUUIDRequest) Execute() ([]Backup, *_netht
 }
 
 /*
- * FetchBackupsByTaskUUID List a task's backups
+ * FetchBackupsByTaskUUID List backups associated with a task
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1777,7 +1777,7 @@ func (r BackupsApiApiListOfBackupsRequest) Execute() ([]Backup, *_nethttp.Respon
 }
 
 /*
- * ListOfBackups List a customer's backups
+ * ListOfBackups Deprecated since YBA version 2.20.0.0. Use 'List Backups (paginated) V2' instead. List a customer's backups
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1919,7 +1919,7 @@ func (r BackupsApiApiRestoreRequest) Execute() (YBPTask, *_nethttp.Response, err
 }
 
 /*
- * Restore Restore from a backup
+ * Restore Deprecated since YBA version 2.20.0.0. Use 'Restore from a backup V2' instead. Restore from a backup
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -2475,7 +2475,7 @@ func (r BackupsApiApiSetUniverseBackupFlagRequest) Execute() (YBPSuccess, *_neth
 }
 
 /*
- * SetUniverseBackupFlag Set a universe's backup flag
+ * SetUniverseBackupFlag Available since YBA version 2.2.0.0. Set a universe's backup flag
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

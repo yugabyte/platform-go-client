@@ -35,7 +35,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    user := *openapiclient.NewUserRegistrationData("test@example.com", "Admin") // UserRegistrationData | Details of the new user
+    user := *openapiclient.NewUserRegistrationData("test@example.com") // UserRegistrationData | Details of the new user
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -395,7 +395,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uUUID := TODO // string | 
-    users := *openapiclient.NewUserRegistrationData("test@example.com", "Admin") // UserRegistrationData | User data containing the new password
+    users := *openapiclient.NewUserRegistrationData("test@example.com") // UserRegistrationData | User data containing the new password
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -529,6 +529,8 @@ Name | Type | Description  | Notes
 > YBPSuccess UpdateUserRole(ctx, cUUID, uUUID).Role(role).Request(request).Execute()
 
 Change a user's role
+
+
 
 ### Example
 

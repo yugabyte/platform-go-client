@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetQueryDistributionSuggestions**](UniversePerformanceSuggestionsApi.md#GetQueryDistributionSuggestions) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions | Get query distribution improvement suggestion for a universe
-[**GetRangeHash**](UniversePerformanceSuggestionsApi.md#GetRangeHash) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash | Return list of hash indexes
-[**GetUnusedIndexes**](UniversePerformanceSuggestionsApi.md#GetUnusedIndexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | Return list of each unused index across the universe
+[**GetQueryDistributionSuggestions**](UniversePerformanceSuggestionsApi.md#GetQueryDistributionSuggestions) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions | WARNING: This is a preview API that could change. Get query distribution improvement suggestion for a universe
+[**GetRangeHash**](UniversePerformanceSuggestionsApi.md#GetRangeHash) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash | WARNING: This is a preview API that could change. Return list of hash indexes
+[**GetUnusedIndexes**](UniversePerformanceSuggestionsApi.md#GetUnusedIndexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | WARNING: This is a preview API that could change. Return list of each unused index across the universe
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > QueryDistributionSuggestionResponse GetQueryDistributionSuggestions(ctx, cUUID, uniUUID).Execute()
 
-Get query distribution improvement suggestion for a universe
+WARNING: This is a preview API that could change. Get query distribution improvement suggestion for a universe
 
 ### Example
 
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 > HashedTimestampColumnFinderResponse GetRangeHash(ctx, cUUID, uniUUID).Execute()
 
-Return list of hash indexes
+WARNING: This is a preview API that could change. Return list of hash indexes
 
 
 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 > UnusedIndexFinderResponse GetUnusedIndexes(ctx, cUUID, uniUUID).Execute()
 
-Return list of each unused index across the universe
+WARNING: This is a preview API that could change. Return list of each unused index across the universe
 
 
 

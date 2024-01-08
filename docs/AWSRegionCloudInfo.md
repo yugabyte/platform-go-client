@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Arch** | Pointer to **string** |  | [optional] 
+**Arch** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
 **SecurityGroupId** | Pointer to **string** |  | [optional] 
 **Vnet** | Pointer to **string** |  | [optional] 
-**YbImage** | Pointer to **string** | The AMI to be used in this region. | [optional] 
+**YbImage** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
 
 ## Methods
 

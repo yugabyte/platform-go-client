@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 
 ## ListOfInstanceType
 
-> []InstanceTypeResp ListOfInstanceType(ctx, cUUID, pUUID).Zone(zone).Execute()
+> []InstanceTypeResp ListOfInstanceType(ctx, cUUID, pUUID).Zone(zone).Arch(arch).Execute()
 
 List a provider's instance types
 
@@ -438,10 +438,11 @@ func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
     zone := []string{"Inner_example"} // []string |  (optional)
+    arch := "arch_example" // string |  (optional) (default to "null")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.InstanceTypesApi.ListOfInstanceType(context.Background(), cUUID, pUUID).Zone(zone).Execute()
+    resp, r, err := api_client.InstanceTypesApi.ListOfInstanceType(context.Background(), cUUID, pUUID).Zone(zone).Arch(arch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `InstanceTypesApi.ListOfInstanceType``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -470,6 +471,7 @@ Name | Type | Description  | Notes
 
 
  **zone** | **[]string** |  | 
+ **arch** | **string** |  | [default to &quot;null&quot;]
 
 ### Return type
 

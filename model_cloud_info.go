@@ -20,6 +20,7 @@ type CloudInfo struct {
 	Azu *AzureCloudInfo `json:"azu,omitempty"`
 	Gcp *GCPCloudInfo `json:"gcp,omitempty"`
 	Kubernetes *KubernetesInfo `json:"kubernetes,omitempty"`
+	Local *LocalCloudInfo `json:"local,omitempty"`
 	Onprem *OnPremCloudInfo `json:"onprem,omitempty"`
 }
 
@@ -168,6 +169,38 @@ func (o *CloudInfo) SetKubernetes(v KubernetesInfo) {
 	o.Kubernetes = &v
 }
 
+// GetLocal returns the Local field value if set, zero value otherwise.
+func (o *CloudInfo) GetLocal() LocalCloudInfo {
+	if o == nil || o.Local == nil {
+		var ret LocalCloudInfo
+		return ret
+	}
+	return *o.Local
+}
+
+// GetLocalOk returns a tuple with the Local field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudInfo) GetLocalOk() (*LocalCloudInfo, bool) {
+	if o == nil || o.Local == nil {
+		return nil, false
+	}
+	return o.Local, true
+}
+
+// HasLocal returns a boolean if a field has been set.
+func (o *CloudInfo) HasLocal() bool {
+	if o != nil && o.Local != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLocal gets a reference to the given LocalCloudInfo and assigns it to the Local field.
+func (o *CloudInfo) SetLocal(v LocalCloudInfo) {
+	o.Local = &v
+}
+
 // GetOnprem returns the Onprem field value if set, zero value otherwise.
 func (o *CloudInfo) GetOnprem() OnPremCloudInfo {
 	if o == nil || o.Onprem == nil {
@@ -213,6 +246,9 @@ func (o CloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.Kubernetes != nil {
 		toSerialize["kubernetes"] = o.Kubernetes
+	}
+	if o.Local != nil {
+		toSerialize["local"] = o.Local
 	}
 	if o.Onprem != nil {
 		toSerialize["onprem"] = o.Onprem

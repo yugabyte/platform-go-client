@@ -4,13 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackupUuid** | Pointer to **string** |  | [optional] 
+**BackupUuid** | Pointer to **string** | The backup config used to do bootstrapping for this table | [optional] 
 **BootstrapCreateTime** | Pointer to **time.Time** | Time of the bootstrap of the table | [optional] 
-**IndexTable** | **bool** |  | 
-**NeedBootstrap** | Pointer to **bool** | Whether this table needs bootstrap process for replication setup | [optional] 
-**ReplicationSetupDone** | Pointer to **bool** | Whether replication is set up for this table | [optional] 
 **RestoreTime** | Pointer to **time.Time** | Time of the last try to restore data to the target universe | [optional] 
-**RestoreUuid** | Pointer to **string** |  | [optional] 
+**RestoreUuid** | Pointer to **string** | The restore config used to do bootstrapping for this table | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **StreamId** | Pointer to **string** | Stream ID if replication is setup; bootstrap ID if the table is bootstrapped | [optional] 
 **TableId** | Pointer to **string** | Table ID | [optional] 
@@ -19,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewXClusterTableConfig
 
-`func NewXClusterTableConfig(indexTable bool, ) *XClusterTableConfig`
+`func NewXClusterTableConfig() *XClusterTableConfig`
 
 NewXClusterTableConfig instantiates a new XClusterTableConfig object
 This constructor will assign default values to properties that have it defined,
@@ -83,76 +80,6 @@ SetBootstrapCreateTime sets BootstrapCreateTime field to given value.
 `func (o *XClusterTableConfig) HasBootstrapCreateTime() bool`
 
 HasBootstrapCreateTime returns a boolean if a field has been set.
-
-### GetIndexTable
-
-`func (o *XClusterTableConfig) GetIndexTable() bool`
-
-GetIndexTable returns the IndexTable field if non-nil, zero value otherwise.
-
-### GetIndexTableOk
-
-`func (o *XClusterTableConfig) GetIndexTableOk() (*bool, bool)`
-
-GetIndexTableOk returns a tuple with the IndexTable field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIndexTable
-
-`func (o *XClusterTableConfig) SetIndexTable(v bool)`
-
-SetIndexTable sets IndexTable field to given value.
-
-
-### GetNeedBootstrap
-
-`func (o *XClusterTableConfig) GetNeedBootstrap() bool`
-
-GetNeedBootstrap returns the NeedBootstrap field if non-nil, zero value otherwise.
-
-### GetNeedBootstrapOk
-
-`func (o *XClusterTableConfig) GetNeedBootstrapOk() (*bool, bool)`
-
-GetNeedBootstrapOk returns a tuple with the NeedBootstrap field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNeedBootstrap
-
-`func (o *XClusterTableConfig) SetNeedBootstrap(v bool)`
-
-SetNeedBootstrap sets NeedBootstrap field to given value.
-
-### HasNeedBootstrap
-
-`func (o *XClusterTableConfig) HasNeedBootstrap() bool`
-
-HasNeedBootstrap returns a boolean if a field has been set.
-
-### GetReplicationSetupDone
-
-`func (o *XClusterTableConfig) GetReplicationSetupDone() bool`
-
-GetReplicationSetupDone returns the ReplicationSetupDone field if non-nil, zero value otherwise.
-
-### GetReplicationSetupDoneOk
-
-`func (o *XClusterTableConfig) GetReplicationSetupDoneOk() (*bool, bool)`
-
-GetReplicationSetupDoneOk returns a tuple with the ReplicationSetupDone field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReplicationSetupDone
-
-`func (o *XClusterTableConfig) SetReplicationSetupDone(v bool)`
-
-SetReplicationSetupDone sets ReplicationSetupDone field to given value.
-
-### HasReplicationSetupDone
-
-`func (o *XClusterTableConfig) HasReplicationSetupDone() bool`
-
-HasReplicationSetupDone returns a boolean if a field has been set.
 
 ### GetRestoreTime
 

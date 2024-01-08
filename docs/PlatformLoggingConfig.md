@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FileNamePrefix** | Pointer to **string** | WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \&quot;\&quot;. For example, setting this to \&quot;yb-platform-\&quot; will generate application log files as \&quot;yb-platform-application.log\&quot; instead of \&quot;application.log\&quot;. | [optional] 
 **Level** | **string** |  | 
 **MaxHistory** | **int32** |  | 
 **RolloverPattern** | **string** |  | 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewPlatformLoggingConfigWithDefaults instantiates a new PlatformLoggingConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetFileNamePrefix
+
+`func (o *PlatformLoggingConfig) GetFileNamePrefix() string`
+
+GetFileNamePrefix returns the FileNamePrefix field if non-nil, zero value otherwise.
+
+### GetFileNamePrefixOk
+
+`func (o *PlatformLoggingConfig) GetFileNamePrefixOk() (*string, bool)`
+
+GetFileNamePrefixOk returns a tuple with the FileNamePrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFileNamePrefix
+
+`func (o *PlatformLoggingConfig) SetFileNamePrefix(v string)`
+
+SetFileNamePrefix sets FileNamePrefix field to given value.
+
+### HasFileNamePrefix
+
+`func (o *PlatformLoggingConfig) HasFileNamePrefix() bool`
+
+HasFileNamePrefix returns a boolean if a field has been set.
 
 ### GetLevel
 

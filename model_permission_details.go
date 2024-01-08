@@ -17,7 +17,7 @@ import (
 // PermissionDetails struct for PermissionDetails
 type PermissionDetails struct {
 	// Set of permissions
-	PermissionList *[]PermissionInfoIdentifier `json:"permissionList,omitempty"`
+	PermissionList *[]Permission `json:"permissionList,omitempty"`
 }
 
 // NewPermissionDetails instantiates a new PermissionDetails object
@@ -38,9 +38,9 @@ func NewPermissionDetailsWithDefaults() *PermissionDetails {
 }
 
 // GetPermissionList returns the PermissionList field value if set, zero value otherwise.
-func (o *PermissionDetails) GetPermissionList() []PermissionInfoIdentifier {
+func (o *PermissionDetails) GetPermissionList() []Permission {
 	if o == nil || o.PermissionList == nil {
-		var ret []PermissionInfoIdentifier
+		var ret []Permission
 		return ret
 	}
 	return *o.PermissionList
@@ -48,7 +48,7 @@ func (o *PermissionDetails) GetPermissionList() []PermissionInfoIdentifier {
 
 // GetPermissionListOk returns a tuple with the PermissionList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionDetails) GetPermissionListOk() (*[]PermissionInfoIdentifier, bool) {
+func (o *PermissionDetails) GetPermissionListOk() (*[]Permission, bool) {
 	if o == nil || o.PermissionList == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *PermissionDetails) HasPermissionList() bool {
 	return false
 }
 
-// SetPermissionList gets a reference to the given []PermissionInfoIdentifier and assigns it to the PermissionList field.
-func (o *PermissionDetails) SetPermissionList(v []PermissionInfoIdentifier) {
+// SetPermissionList gets a reference to the given []Permission and assigns it to the PermissionList field.
+func (o *PermissionDetails) SetPermissionList(v []Permission) {
 	o.PermissionList = &v
 }
 

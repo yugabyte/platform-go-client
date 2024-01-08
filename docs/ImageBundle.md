@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Active** | Pointer to **bool** | Is the ImageBundle Active | [optional] 
 **Details** | Pointer to [**ImageBundleDetails**](ImageBundleDetails.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
 **Name** | Pointer to **string** | Image Bundle Name | [optional] 
-**UseAsDefault** | Pointer to **bool** | Default Image Bundle | [optional] 
+**UseAsDefault** | Pointer to **bool** | Default Image Bundle. A provider can have two defaults, one per architecture | [optional] 
 **Uuid** | Pointer to **string** | Image Bundle UUID | [optional] [readonly] 
 
 ## Methods
@@ -27,6 +29,31 @@ will change when the set of required properties is changed
 NewImageBundleWithDefaults instantiates a new ImageBundle object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetActive
+
+`func (o *ImageBundle) GetActive() bool`
+
+GetActive returns the Active field if non-nil, zero value otherwise.
+
+### GetActiveOk
+
+`func (o *ImageBundle) GetActiveOk() (*bool, bool)`
+
+GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActive
+
+`func (o *ImageBundle) SetActive(v bool)`
+
+SetActive sets Active field to given value.
+
+### HasActive
+
+`func (o *ImageBundle) HasActive() bool`
+
+HasActive returns a boolean if a field has been set.
 
 ### GetDetails
 
@@ -52,6 +79,31 @@ SetDetails sets Details field to given value.
 `func (o *ImageBundle) HasDetails() bool`
 
 HasDetails returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *ImageBundle) GetMetadata() Metadata`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *ImageBundle) GetMetadataOk() (*Metadata, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *ImageBundle) SetMetadata(v Metadata)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *ImageBundle) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 ### GetName
 

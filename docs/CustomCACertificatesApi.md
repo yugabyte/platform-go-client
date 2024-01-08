@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddCA**](CustomCACertificatesApi.md#AddCA) | **Post** /api/v1/customers/{cUUID}/customCAStore | Add a named custom CA certificate
-[**DeleteCustomCACertificate**](CustomCACertificatesApi.md#DeleteCustomCACertificate) | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Delete a named custom CA certificate
-[**GetAllCustomCaCertificates**](CustomCACertificatesApi.md#GetAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Download a custom CA certificates of a customer
-[**ListAllCustomCaCertificates**](CustomCACertificatesApi.md#ListAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates | List all custom CA certificates of a customer
-[**UpdateCA**](CustomCACertificatesApi.md#UpdateCA) | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID} | Update a named custom CA certificate
+[**AddCA**](CustomCACertificatesApi.md#AddCA) | **Post** /api/v1/customers/{cUUID}/customCAStore | WARNING: This is a preview API that could change. Add a named custom CA certificate
+[**DeleteCustomCACertificate**](CustomCACertificatesApi.md#DeleteCustomCACertificate) | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | WARNING: This is a preview API that could change. Delete a named custom CA certificate
+[**GetAllCustomCaCertificates**](CustomCACertificatesApi.md#GetAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | WARNING: This is a preview API that could change. Download a custom CA certificates of a customer
+[**ListAllCustomCaCertificates**](CustomCACertificatesApi.md#ListAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates | WARNING: This is a preview API that could change. List all custom CA certificates of a customer
+[**UpdateCA**](CustomCACertificatesApi.md#UpdateCA) | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID} | WARNING: This is a preview API that could change. Update a named custom CA certificate
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > string AddCA(ctx, cUUID).X509CACertificate(x509CACertificate).Request(request).Execute()
 
-Add a named custom CA certificate
+WARNING: This is a preview API that could change. Add a named custom CA certificate
 
 ### Example
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteCustomCACertificate(ctx, cUUID, certUUID).Request(request).Execute()
 
-Delete a named custom CA certificate
+WARNING: This is a preview API that could change. Delete a named custom CA certificate
 
 ### Example
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 > CustomCaCertificateInfo GetAllCustomCaCertificates(ctx, cUUID, certUUID).Request(request).Execute()
 
-Download a custom CA certificates of a customer
+WARNING: This is a preview API that could change. Download a custom CA certificates of a customer
 
 ### Example
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 > []CustomCaCertificateInfo ListAllCustomCaCertificates(ctx, cUUID).Execute()
 
-List all custom CA certificates of a customer
+WARNING: This is a preview API that could change. List all custom CA certificates of a customer
 
 ### Example
 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 > string UpdateCA(ctx, cUUID, certUUID).X509CACertificate(x509CACertificate).Request(request).Execute()
 
-Update a named custom CA certificate
+WARNING: This is a preview API that could change. Update a named custom CA certificate
 
 ### Example
 

@@ -44,7 +44,7 @@ func (r UniverseActionsApiApiImportUniverseRequest) Execute() (ImportUniverseFor
 }
 
 /*
- * ImportUniverse Import a universe
+ * ImportUniverse Deprecated since YBA version 2.19.3.0. Do not use, this will be removed soon. Import a universe
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return UniverseActionsApiApiImportUniverseRequest

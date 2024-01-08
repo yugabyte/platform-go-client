@@ -27,6 +27,272 @@ var (
 // UniverseUpgradesManagementApiService UniverseUpgradesManagementApi service
 type UniverseUpgradesManagementApiService service
 
+type UniverseUpgradesManagementApiApiFinalizeUpgradeRequest struct {
+	ctx _context.Context
+	ApiService *UniverseUpgradesManagementApiService
+	cUUID string
+	uniUUID string
+	finalizeUpgradeParams *FinalizeUpgradeParams
+	request *interface{}
+}
+
+func (r UniverseUpgradesManagementApiApiFinalizeUpgradeRequest) FinalizeUpgradeParams(finalizeUpgradeParams FinalizeUpgradeParams) UniverseUpgradesManagementApiApiFinalizeUpgradeRequest {
+	r.finalizeUpgradeParams = &finalizeUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiFinalizeUpgradeRequest) Request(request interface{}) UniverseUpgradesManagementApiApiFinalizeUpgradeRequest {
+	r.request = &request
+	return r
+}
+
+func (r UniverseUpgradesManagementApiApiFinalizeUpgradeRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.FinalizeUpgradeExecute(r)
+}
+
+/*
+ * FinalizeUpgrade WARNING: This is a preview API that could change. Finalize Upgrade.
+ * Queues a task to finalize upgrade in a universe.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseUpgradesManagementApiApiFinalizeUpgradeRequest
+ */
+func (a *UniverseUpgradesManagementApiService) FinalizeUpgrade(ctx _context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementApiApiFinalizeUpgradeRequest {
+	return UniverseUpgradesManagementApiApiFinalizeUpgradeRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *UniverseUpgradesManagementApiService) FinalizeUpgradeExecute(r UniverseUpgradesManagementApiApiFinalizeUpgradeRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementApiService.FinalizeUpgrade")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.finalizeUpgradeParams == nil {
+		return localVarReturnValue, nil, reportError("finalizeUpgradeParams is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.finalizeUpgradeParams
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest struct {
+	ctx _context.Context
+	ApiService *UniverseUpgradesManagementApiService
+	cUUID string
+	uniUUID string
+}
+
+
+func (r UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest) Execute() (FinalizeUpgradeInfoResponse, *_nethttp.Response, error) {
+	return r.ApiService.PreFinalizeSoftwareUpgradeInfoExecute(r)
+}
+
+/*
+ * PreFinalizeSoftwareUpgradeInfo WARNING: This is a preview API that could change. Finalize Software Upgrade info
+ * Provides pre-finalize software upgrade info
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest
+ */
+func (a *UniverseUpgradesManagementApiService) PreFinalizeSoftwareUpgradeInfo(ctx _context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest {
+	return UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FinalizeUpgradeInfoResponse
+ */
+func (a *UniverseUpgradesManagementApiService) PreFinalizeSoftwareUpgradeInfoExecute(r UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest) (FinalizeUpgradeInfoResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  FinalizeUpgradeInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementApiService.PreFinalizeSoftwareUpgradeInfo")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseUpgradesManagementApiApiRebootUniverseRequest struct {
 	ctx _context.Context
 	ApiService *UniverseUpgradesManagementApiService
@@ -453,6 +719,290 @@ func (a *UniverseUpgradesManagementApiService) RestartUniverseExecute(r Universe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type UniverseUpgradesManagementApiApiRollbackUpgradeRequest struct {
+	ctx _context.Context
+	ApiService *UniverseUpgradesManagementApiService
+	cUUID string
+	uniUUID string
+	rollbackUpgradeParams *RollbackUpgradeParams
+	request *interface{}
+}
+
+func (r UniverseUpgradesManagementApiApiRollbackUpgradeRequest) RollbackUpgradeParams(rollbackUpgradeParams RollbackUpgradeParams) UniverseUpgradesManagementApiApiRollbackUpgradeRequest {
+	r.rollbackUpgradeParams = &rollbackUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiRollbackUpgradeRequest) Request(request interface{}) UniverseUpgradesManagementApiApiRollbackUpgradeRequest {
+	r.request = &request
+	return r
+}
+
+func (r UniverseUpgradesManagementApiApiRollbackUpgradeRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.RollbackUpgradeExecute(r)
+}
+
+/*
+ * RollbackUpgrade WARNING: This is a preview API that could change. Rollback Upgrade
+ * Queues a task to rollback upgrade in a universe.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseUpgradesManagementApiApiRollbackUpgradeRequest
+ */
+func (a *UniverseUpgradesManagementApiService) RollbackUpgrade(ctx _context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementApiApiRollbackUpgradeRequest {
+	return UniverseUpgradesManagementApiApiRollbackUpgradeRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *UniverseUpgradesManagementApiService) RollbackUpgradeExecute(r UniverseUpgradesManagementApiApiRollbackUpgradeRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementApiService.RollbackUpgrade")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.rollbackUpgradeParams == nil {
+		return localVarReturnValue, nil, reportError("rollbackUpgradeParams is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.rollbackUpgradeParams
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest struct {
+	ctx _context.Context
+	ApiService *UniverseUpgradesManagementApiService
+	cUUID string
+	uniUUID string
+	softwareUpgradeInfoRequest *SoftwareUpgradeInfoRequest
+	request *interface{}
+}
+
+func (r UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest) SoftwareUpgradeInfoRequest(softwareUpgradeInfoRequest SoftwareUpgradeInfoRequest) UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest {
+	r.softwareUpgradeInfoRequest = &softwareUpgradeInfoRequest
+	return r
+}
+func (r UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest) Request(request interface{}) UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest {
+	r.request = &request
+	return r
+}
+
+func (r UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest) Execute() (SoftwareUpgradeInfoResponse, *_nethttp.Response, error) {
+	return r.ApiService.SoftwareUpgradePreCheckExecute(r)
+}
+
+/*
+ * SoftwareUpgradePreCheck WARNING: This is a preview API that could change. Software Upgrade universe pre-check
+ * Performs pre-checks and provides pre-upgrade info
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest
+ */
+func (a *UniverseUpgradesManagementApiService) SoftwareUpgradePreCheck(ctx _context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest {
+	return UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return SoftwareUpgradeInfoResponse
+ */
+func (a *UniverseUpgradesManagementApiService) SoftwareUpgradePreCheckExecute(r UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest) (SoftwareUpgradeInfoResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  SoftwareUpgradeInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementApiService.SoftwareUpgradePreCheck")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.softwareUpgradeInfoRequest == nil {
+		return localVarReturnValue, nil, reportError("softwareUpgradeInfoRequest is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.softwareUpgradeInfoRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseUpgradesManagementApiApiUpgradeCertsRequest struct {
 	ctx _context.Context
 	ApiService *UniverseUpgradesManagementApiService
@@ -544,6 +1094,148 @@ func (a *UniverseUpgradesManagementApiService) UpgradeCertsExecute(r UniverseUpg
 	}
 	// body params
 	localVarPostBody = r.certsRotateParams
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseUpgradesManagementApiApiUpgradeDBVersionRequest struct {
+	ctx _context.Context
+	ApiService *UniverseUpgradesManagementApiService
+	cUUID string
+	uniUUID string
+	softwareUpgradeParams *SoftwareUpgradeParams
+	request *interface{}
+}
+
+func (r UniverseUpgradesManagementApiApiUpgradeDBVersionRequest) SoftwareUpgradeParams(softwareUpgradeParams SoftwareUpgradeParams) UniverseUpgradesManagementApiApiUpgradeDBVersionRequest {
+	r.softwareUpgradeParams = &softwareUpgradeParams
+	return r
+}
+func (r UniverseUpgradesManagementApiApiUpgradeDBVersionRequest) Request(request interface{}) UniverseUpgradesManagementApiApiUpgradeDBVersionRequest {
+	r.request = &request
+	return r
+}
+
+func (r UniverseUpgradesManagementApiApiUpgradeDBVersionRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.UpgradeDBVersionExecute(r)
+}
+
+/*
+ * UpgradeDBVersion WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
+ * Queues a task to perform DB version upgrade and rolling restart in a universe.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseUpgradesManagementApiApiUpgradeDBVersionRequest
+ */
+func (a *UniverseUpgradesManagementApiService) UpgradeDBVersion(ctx _context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementApiApiUpgradeDBVersionRequest {
+	return UniverseUpgradesManagementApiApiUpgradeDBVersionRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *UniverseUpgradesManagementApiService) UpgradeDBVersionExecute(r UniverseUpgradesManagementApiApiUpgradeDBVersionRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementApiService.UpgradeDBVersion")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.softwareUpgradeParams == nil {
+		return localVarReturnValue, nil, reportError("softwareUpgradeParams is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.softwareUpgradeParams
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

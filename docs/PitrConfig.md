@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **State** | **string** |  | 
 **TableType** | Pointer to **string** | Table Type | [optional] 
 **UpdateTime** | Pointer to **time.Time** | Update time of the PITR con | [optional] 
+**UsedForXCluster** | Pointer to **bool** |  | [optional] [readonly] 
 **Uuid** | Pointer to **string** | PITR config UUID | [optional] 
 
 ## Methods
@@ -295,6 +296,31 @@ SetUpdateTime sets UpdateTime field to given value.
 `func (o *PitrConfig) HasUpdateTime() bool`
 
 HasUpdateTime returns a boolean if a field has been set.
+
+### GetUsedForXCluster
+
+`func (o *PitrConfig) GetUsedForXCluster() bool`
+
+GetUsedForXCluster returns the UsedForXCluster field if non-nil, zero value otherwise.
+
+### GetUsedForXClusterOk
+
+`func (o *PitrConfig) GetUsedForXClusterOk() (*bool, bool)`
+
+GetUsedForXClusterOk returns a tuple with the UsedForXCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedForXCluster
+
+`func (o *PitrConfig) SetUsedForXCluster(v bool)`
+
+SetUsedForXCluster sets UsedForXCluster field to given value.
+
+### HasUsedForXCluster
+
+`func (o *PitrConfig) HasUsedForXCluster() bool`
+
+HasUsedForXCluster returns a boolean if a field has been set.
 
 ### GetUuid
 

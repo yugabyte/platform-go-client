@@ -98,13 +98,9 @@ type APIClient struct {
 
 	PITRManagementApi *PITRManagementApiService
 
-	PackagesControllerApi *PackagesControllerApiService
-
 	PerformanceAdvisorApi *PerformanceAdvisorApiService
 
 	PreviewApi *PreviewApiService
-
-	RBACManagementApi *RBACManagementApiService
 
 	RegionManagementApi *RegionManagementApiService
 
@@ -119,8 +115,6 @@ type APIClient struct {
 	SupportBundleManagementApi *SupportBundleManagementApiService
 
 	TableManagementApi *TableManagementApiService
-
-	TabletServerManagementApi *TabletServerManagementApiService
 
 	UniverseActionsApi *UniverseActionsApiService
 
@@ -139,8 +133,6 @@ type APIClient struct {
 	UniverseUpgradesManagementApi *UniverseUpgradesManagementApiService
 
 	UserManagementApi *UserManagementApiService
-
-	YbcManagementApi *YbcManagementApiService
 }
 
 type service struct {
@@ -184,10 +176,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
-	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.PreviewApi = (*PreviewApiService)(&c.common)
-	c.RBACManagementApi = (*RBACManagementApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)
@@ -195,7 +185,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SessionManagementApi = (*SessionManagementApiService)(&c.common)
 	c.SupportBundleManagementApi = (*SupportBundleManagementApiService)(&c.common)
 	c.TableManagementApi = (*TableManagementApiService)(&c.common)
-	c.TabletServerManagementApi = (*TabletServerManagementApiService)(&c.common)
 	c.UniverseActionsApi = (*UniverseActionsApiService)(&c.common)
 	c.UniverseClusterMutationsApi = (*UniverseClusterMutationsApiService)(&c.common)
 	c.UniverseDatabaseManagementApi = (*UniverseDatabaseManagementApiService)(&c.common)
@@ -205,7 +194,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniversePerformanceSuggestionsApi = (*UniversePerformanceSuggestionsApiService)(&c.common)
 	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
-	c.YbcManagementApi = (*YbcManagementApiService)(&c.common)
 
 	return c
 }

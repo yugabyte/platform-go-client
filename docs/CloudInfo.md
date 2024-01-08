@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Azu** | Pointer to [**AzureCloudInfo**](AzureCloudInfo.md) |  | [optional] 
 **Gcp** | Pointer to [**GCPCloudInfo**](GCPCloudInfo.md) |  | [optional] 
 **Kubernetes** | Pointer to [**KubernetesInfo**](KubernetesInfo.md) |  | [optional] 
+**Local** | Pointer to [**LocalCloudInfo**](LocalCloudInfo.md) |  | [optional] 
 **Onprem** | Pointer to [**OnPremCloudInfo**](OnPremCloudInfo.md) |  | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetKubernetes sets Kubernetes field to given value.
 `func (o *CloudInfo) HasKubernetes() bool`
 
 HasKubernetes returns a boolean if a field has been set.
+
+### GetLocal
+
+`func (o *CloudInfo) GetLocal() LocalCloudInfo`
+
+GetLocal returns the Local field if non-nil, zero value otherwise.
+
+### GetLocalOk
+
+`func (o *CloudInfo) GetLocalOk() (*LocalCloudInfo, bool)`
+
+GetLocalOk returns a tuple with the Local field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocal
+
+`func (o *CloudInfo) SetLocal(v LocalCloudInfo)`
+
+SetLocal sets Local field to given value.
+
+### HasLocal
+
+`func (o *CloudInfo) HasLocal() bool`
+
+HasLocal returns a boolean if a field has been set.
 
 ### GetOnprem
 

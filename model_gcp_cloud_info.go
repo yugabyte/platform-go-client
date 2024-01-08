@@ -20,6 +20,7 @@ type GCPCloudInfo struct {
 	GceApplicationCredentialsPath *string `json:"gceApplicationCredentialsPath,omitempty"`
 	GceProject *string `json:"gceProject,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
+	SharedVPCProject *string `json:"sharedVPCProject,omitempty"`
 	UseHostCredentials *bool `json:"useHostCredentials,omitempty"`
 	UseHostVPC *bool `json:"useHostVPC,omitempty"`
 	// New/Existing VPC for provider creation
@@ -172,6 +173,38 @@ func (o *GCPCloudInfo) SetHostVpcId(v string) {
 	o.HostVpcId = &v
 }
 
+// GetSharedVPCProject returns the SharedVPCProject field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetSharedVPCProject() string {
+	if o == nil || o.SharedVPCProject == nil {
+		var ret string
+		return ret
+	}
+	return *o.SharedVPCProject
+}
+
+// GetSharedVPCProjectOk returns a tuple with the SharedVPCProject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetSharedVPCProjectOk() (*string, bool) {
+	if o == nil || o.SharedVPCProject == nil {
+		return nil, false
+	}
+	return o.SharedVPCProject, true
+}
+
+// HasSharedVPCProject returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasSharedVPCProject() bool {
+	if o != nil && o.SharedVPCProject != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSharedVPCProject gets a reference to the given string and assigns it to the SharedVPCProject field.
+func (o *GCPCloudInfo) SetSharedVPCProject(v string) {
+	o.SharedVPCProject = &v
+}
+
 // GetUseHostCredentials returns the UseHostCredentials field value if set, zero value otherwise.
 func (o *GCPCloudInfo) GetUseHostCredentials() bool {
 	if o == nil || o.UseHostCredentials == nil {
@@ -313,6 +346,9 @@ func (o GCPCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.HostVpcId != nil {
 		toSerialize["hostVpcId"] = o.HostVpcId
+	}
+	if o.SharedVPCProject != nil {
+		toSerialize["sharedVPCProject"] = o.SharedVPCProject
 	}
 	if o.UseHostCredentials != nil {
 		toSerialize["useHostCredentials"] = o.UseHostCredentials

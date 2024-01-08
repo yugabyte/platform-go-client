@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateImageBundle**](PreviewApi.md#CreateImageBundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | Create a image bundle
-[**Delete**](PreviewApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle
-[**EditImageBundle**](PreviewApi.md#EditImageBundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
-[**GetImageBundle**](PreviewApi.md#GetImageBundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
-[**GetListOfImageBundles**](PreviewApi.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
+[**CreateImageBundle**](PreviewApi.md#CreateImageBundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. Create a image bundle
+[**Delete**](PreviewApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Delete a image bundle
+[**EditImageBundle**](PreviewApi.md#EditImageBundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Update a image bundle
+[**GetImageBundle**](PreviewApi.md#GetImageBundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Get a image bundle
+[**GetListOfImageBundles**](PreviewApi.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. List image bundles
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > ImageBundle CreateImageBundle(ctx, cUUID, pUUID).Body(body).Request(request).Execute()
 
-Create a image bundle
+WARNING: This is a preview API that could change. Create a image bundle
 
 ### Example
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 > YBPSuccess Delete(ctx, cUUID, pUUID, iBUUID).Request(request).Execute()
 
-Delete a image bundle
+WARNING: This is a preview API that could change. Delete a image bundle
 
 ### Example
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 > ImageBundle EditImageBundle(ctx, cUUID, pUUID, iBUUID).Body(body).Request(request).Execute()
 
-Update a image bundle
+WARNING: This is a preview API that could change. Update a image bundle
 
 ### Example
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 
 > ImageBundle GetImageBundle(ctx, cUUID, pUUID, iBUUID).Execute()
 
-Get a image bundle
+WARNING: This is a preview API that could change. Get a image bundle
 
 ### Example
 
@@ -317,9 +317,9 @@ Name | Type | Description  | Notes
 
 ## GetListOfImageBundles
 
-> []ImageBundle GetListOfImageBundles(ctx, cUUID, pUUID).Execute()
+> []ImageBundle GetListOfImageBundles(ctx, cUUID, pUUID).Arch(arch).Execute()
 
-List image bundles
+WARNING: This is a preview API that could change. List image bundles
 
 ### Example
 
@@ -336,10 +336,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     pUUID := TODO // string | 
+    arch := "arch_example" // string |  (optional) (default to "null")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PreviewApi.GetListOfImageBundles(context.Background(), cUUID, pUUID).Execute()
+    resp, r, err := api_client.PreviewApi.GetListOfImageBundles(context.Background(), cUUID, pUUID).Arch(arch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PreviewApi.GetListOfImageBundles``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -367,6 +368,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **arch** | **string** |  | [default to &quot;null&quot;]
 
 ### Return type
 

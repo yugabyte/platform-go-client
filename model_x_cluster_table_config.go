@@ -17,16 +17,13 @@ import (
 
 // XClusterTableConfig struct for XClusterTableConfig
 type XClusterTableConfig struct {
+	// The backup config used to do bootstrapping for this table
 	BackupUuid *string `json:"backupUuid,omitempty"`
 	// Time of the bootstrap of the table
 	BootstrapCreateTime *time.Time `json:"bootstrapCreateTime,omitempty"`
-	IndexTable bool `json:"indexTable"`
-	// Whether this table needs bootstrap process for replication setup
-	NeedBootstrap *bool `json:"needBootstrap,omitempty"`
-	// Whether replication is set up for this table
-	ReplicationSetupDone *bool `json:"replicationSetupDone,omitempty"`
 	// Time of the last try to restore data to the target universe
 	RestoreTime *time.Time `json:"restoreTime,omitempty"`
+	// The restore config used to do bootstrapping for this table
 	RestoreUuid *string `json:"restoreUuid,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
@@ -40,9 +37,8 @@ type XClusterTableConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterTableConfig(indexTable bool, ) *XClusterTableConfig {
+func NewXClusterTableConfig() *XClusterTableConfig {
 	this := XClusterTableConfig{}
-	this.IndexTable = indexTable
 	return &this
 }
 
@@ -116,94 +112,6 @@ func (o *XClusterTableConfig) HasBootstrapCreateTime() bool {
 // SetBootstrapCreateTime gets a reference to the given time.Time and assigns it to the BootstrapCreateTime field.
 func (o *XClusterTableConfig) SetBootstrapCreateTime(v time.Time) {
 	o.BootstrapCreateTime = &v
-}
-
-// GetIndexTable returns the IndexTable field value
-func (o *XClusterTableConfig) GetIndexTable() bool {
-	if o == nil  {
-		var ret bool
-		return ret
-	}
-
-	return o.IndexTable
-}
-
-// GetIndexTableOk returns a tuple with the IndexTable field value
-// and a boolean to check if the value has been set.
-func (o *XClusterTableConfig) GetIndexTableOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.IndexTable, true
-}
-
-// SetIndexTable sets field value
-func (o *XClusterTableConfig) SetIndexTable(v bool) {
-	o.IndexTable = v
-}
-
-// GetNeedBootstrap returns the NeedBootstrap field value if set, zero value otherwise.
-func (o *XClusterTableConfig) GetNeedBootstrap() bool {
-	if o == nil || o.NeedBootstrap == nil {
-		var ret bool
-		return ret
-	}
-	return *o.NeedBootstrap
-}
-
-// GetNeedBootstrapOk returns a tuple with the NeedBootstrap field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterTableConfig) GetNeedBootstrapOk() (*bool, bool) {
-	if o == nil || o.NeedBootstrap == nil {
-		return nil, false
-	}
-	return o.NeedBootstrap, true
-}
-
-// HasNeedBootstrap returns a boolean if a field has been set.
-func (o *XClusterTableConfig) HasNeedBootstrap() bool {
-	if o != nil && o.NeedBootstrap != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNeedBootstrap gets a reference to the given bool and assigns it to the NeedBootstrap field.
-func (o *XClusterTableConfig) SetNeedBootstrap(v bool) {
-	o.NeedBootstrap = &v
-}
-
-// GetReplicationSetupDone returns the ReplicationSetupDone field value if set, zero value otherwise.
-func (o *XClusterTableConfig) GetReplicationSetupDone() bool {
-	if o == nil || o.ReplicationSetupDone == nil {
-		var ret bool
-		return ret
-	}
-	return *o.ReplicationSetupDone
-}
-
-// GetReplicationSetupDoneOk returns a tuple with the ReplicationSetupDone field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *XClusterTableConfig) GetReplicationSetupDoneOk() (*bool, bool) {
-	if o == nil || o.ReplicationSetupDone == nil {
-		return nil, false
-	}
-	return o.ReplicationSetupDone, true
-}
-
-// HasReplicationSetupDone returns a boolean if a field has been set.
-func (o *XClusterTableConfig) HasReplicationSetupDone() bool {
-	if o != nil && o.ReplicationSetupDone != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetReplicationSetupDone gets a reference to the given bool and assigns it to the ReplicationSetupDone field.
-func (o *XClusterTableConfig) SetReplicationSetupDone(v bool) {
-	o.ReplicationSetupDone = &v
 }
 
 // GetRestoreTime returns the RestoreTime field value if set, zero value otherwise.
@@ -373,15 +281,6 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.BootstrapCreateTime != nil {
 		toSerialize["bootstrapCreateTime"] = o.BootstrapCreateTime
-	}
-	if true {
-		toSerialize["indexTable"] = o.IndexTable
-	}
-	if o.NeedBootstrap != nil {
-		toSerialize["needBootstrap"] = o.NeedBootstrap
-	}
-	if o.ReplicationSetupDone != nil {
-		toSerialize["replicationSetupDone"] = o.ReplicationSetupDone
 	}
 	if o.RestoreTime != nil {
 		toSerialize["restoreTime"] = o.RestoreTime

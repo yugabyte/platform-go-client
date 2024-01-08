@@ -45,7 +45,7 @@ func (r CloudProvidersApiApiAccessKeyRotationRequest) Execute() (YBPTask, *_neth
 }
 
 /*
- * AccessKeyRotation Rotate access key for a provider
+ * AccessKeyRotation WARNING: This is a preview API that could change. Rotate access key for a provider
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -466,7 +466,7 @@ func (r CloudProvidersApiApiEditAccessKeyRotationScheduleRequest) Execute() (Sch
 }
 
 /*
- * EditAccessKeyRotationSchedule Edit a access key rotation schedule
+ * EditAccessKeyRotationSchedule WARNING: This is a preview API that could change. Edit a access key rotation schedule
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -1146,7 +1146,7 @@ func (r CloudProvidersApiApiListSchedulesRequest) Execute() ([]Schedule, *_netht
 }
 
 /*
- * ListSchedules List all schedules for a provider's access key rotation
+ * ListSchedules WARNING: This is a preview API that could change. List all schedules for a provider's access key rotation
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -1274,7 +1274,7 @@ func (r CloudProvidersApiApiRefreshPricingRequest) Execute() (YBPSuccess, *_neth
 }
 
 /*
- * RefreshPricing Refresh pricing
+ * RefreshPricing WARNING: This is a preview API that could change. Refresh pricing
  * Refresh provider pricing info
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
@@ -1406,7 +1406,7 @@ func (r CloudProvidersApiApiScheduledAccessKeyRotationRequest) Execute() (Schedu
 }
 
 /*
- * ScheduledAccessKeyRotation Rotate access key for a provider - Scheduled
+ * ScheduledAccessKeyRotation WARNING: This is a preview API that could change. Rotate access key for a provider - Scheduled
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

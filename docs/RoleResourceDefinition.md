@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ResourceGroup** | [**ResourceGroup**](ResourceGroup.md) |  | 
+**ResourceGroup** | Pointer to [**ResourceGroup**](ResourceGroup.md) |  | [optional] 
 **RoleUUID** | **string** | UUID of the role to attach resource group to. | 
 
 ## Methods
 
 ### NewRoleResourceDefinition
 
-`func NewRoleResourceDefinition(resourceGroup ResourceGroup, roleUUID string, ) *RoleResourceDefinition`
+`func NewRoleResourceDefinition(roleUUID string, ) *RoleResourceDefinition`
 
 NewRoleResourceDefinition instantiates a new RoleResourceDefinition object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetResourceGroup sets ResourceGroup field to given value.
 
+### HasResourceGroup
+
+`func (o *RoleResourceDefinition) HasResourceGroup() bool`
+
+HasResourceGroup returns a boolean if a field has been set.
 
 ### GetRoleUUID
 

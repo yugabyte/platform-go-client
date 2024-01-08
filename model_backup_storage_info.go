@@ -32,6 +32,8 @@ type BackupStorageInfo struct {
 	StorageLocation *string `json:"storageLocation,omitempty"`
 	// Tables
 	TableNameList *[]string `json:"tableNameList,omitempty"`
+	// Use tablespaces during restore
+	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 }
 
 // NewBackupStorageInfo instantiates a new BackupStorageInfo object
@@ -307,6 +309,38 @@ func (o *BackupStorageInfo) SetTableNameList(v []string) {
 	o.TableNameList = &v
 }
 
+// GetUseTablespaces returns the UseTablespaces field value if set, zero value otherwise.
+func (o *BackupStorageInfo) GetUseTablespaces() bool {
+	if o == nil || o.UseTablespaces == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseTablespaces
+}
+
+// GetUseTablespacesOk returns a tuple with the UseTablespaces field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupStorageInfo) GetUseTablespacesOk() (*bool, bool) {
+	if o == nil || o.UseTablespaces == nil {
+		return nil, false
+	}
+	return o.UseTablespaces, true
+}
+
+// HasUseTablespaces returns a boolean if a field has been set.
+func (o *BackupStorageInfo) HasUseTablespaces() bool {
+	if o != nil && o.UseTablespaces != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseTablespaces gets a reference to the given bool and assigns it to the UseTablespaces field.
+func (o *BackupStorageInfo) SetUseTablespaces(v bool) {
+	o.UseTablespaces = &v
+}
+
 func (o BackupStorageInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BackupType != nil {
@@ -332,6 +366,9 @@ func (o BackupStorageInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.TableNameList != nil {
 		toSerialize["tableNameList"] = o.TableNameList
+	}
+	if o.UseTablespaces != nil {
+		toSerialize["useTablespaces"] = o.UseTablespaces
 	}
 	return json.Marshal(toSerialize)
 }

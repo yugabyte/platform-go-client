@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
+**UseTablespaces** | Pointer to **bool** | Use tablespaces during restore | [optional] 
 
 ## Methods
 
@@ -231,6 +232,31 @@ SetTableNameList sets TableNameList field to given value.
 `func (o *BackupStorageInfo) HasTableNameList() bool`
 
 HasTableNameList returns a boolean if a field has been set.
+
+### GetUseTablespaces
+
+`func (o *BackupStorageInfo) GetUseTablespaces() bool`
+
+GetUseTablespaces returns the UseTablespaces field if non-nil, zero value otherwise.
+
+### GetUseTablespacesOk
+
+`func (o *BackupStorageInfo) GetUseTablespacesOk() (*bool, bool)`
+
+GetUseTablespacesOk returns a tuple with the UseTablespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTablespaces
+
+`func (o *BackupStorageInfo) SetUseTablespaces(v bool)`
+
+SetUseTablespaces sets UseTablespaces field to given value.
+
+### HasUseTablespaces
+
+`func (o *BackupStorageInfo) HasUseTablespaces() bool`
+
+HasUseTablespaces returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

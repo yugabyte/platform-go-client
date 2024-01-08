@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **SourceKeyspace** | Pointer to **string** | Source keyspace name | [optional] [readonly] 
 **State** | Pointer to **string** | State of the keyspace restore | [optional] [readonly] 
 **StorageLocation** | Pointer to **string** | Storage location name | [optional] [readonly] 
+**TableNameList** | Pointer to **[]string** | Restored Table name List | [optional] [readonly] 
 **TargetKeyspace** | Pointer to **string** | Target keyspace name | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Restore Keyspace task UUID | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Restore keyspace UUID | [optional] [readonly] 
@@ -203,6 +204,31 @@ SetStorageLocation sets StorageLocation field to given value.
 `func (o *RestoreKeyspace) HasStorageLocation() bool`
 
 HasStorageLocation returns a boolean if a field has been set.
+
+### GetTableNameList
+
+`func (o *RestoreKeyspace) GetTableNameList() []string`
+
+GetTableNameList returns the TableNameList field if non-nil, zero value otherwise.
+
+### GetTableNameListOk
+
+`func (o *RestoreKeyspace) GetTableNameListOk() (*[]string, bool)`
+
+GetTableNameListOk returns a tuple with the TableNameList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTableNameList
+
+`func (o *RestoreKeyspace) SetTableNameList(v []string)`
+
+SetTableNameList sets TableNameList field to given value.
+
+### HasTableNameList
+
+`func (o *RestoreKeyspace) HasTableNameList() bool`
+
+HasTableNameList returns a boolean if a field has been set.
 
 ### GetTargetKeyspace
 

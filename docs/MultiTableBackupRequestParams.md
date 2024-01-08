@@ -60,6 +60,7 @@ Name | Type | Description | Notes
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
 **TableUUID** | Pointer to **string** | Table UUID | [optional] 
 **TableUUIDList** | Pointer to **[]string** | Table UUIDs | [optional] 
+**TablespacesList** | Pointer to [**[]Tablespace**](Tablespace.md) | Tablespaces info | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 **TimeTakenPartial** | **int64** |  | 
@@ -1458,6 +1459,31 @@ SetTableUUIDList sets TableUUIDList field to given value.
 `func (o *MultiTableBackupRequestParams) HasTableUUIDList() bool`
 
 HasTableUUIDList returns a boolean if a field has been set.
+
+### GetTablespacesList
+
+`func (o *MultiTableBackupRequestParams) GetTablespacesList() []Tablespace`
+
+GetTablespacesList returns the TablespacesList field if non-nil, zero value otherwise.
+
+### GetTablespacesListOk
+
+`func (o *MultiTableBackupRequestParams) GetTablespacesListOk() (*[]Tablespace, bool)`
+
+GetTablespacesListOk returns a tuple with the TablespacesList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTablespacesList
+
+`func (o *MultiTableBackupRequestParams) SetTablespacesList(v []Tablespace)`
+
+SetTablespacesList sets TablespacesList field to given value.
+
+### HasTablespacesList
+
+`func (o *MultiTableBackupRequestParams) HasTablespacesList() bool`
+
+HasTablespacesList returns a boolean if a field has been set.
 
 ### GetTargetXClusterConfigs
 

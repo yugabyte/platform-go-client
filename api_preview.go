@@ -50,7 +50,7 @@ func (r PreviewApiApiCreateImageBundleRequest) Execute() (ImageBundle, *_nethttp
 }
 
 /*
- * CreateImageBundle Create a image bundle
+ * CreateImageBundle WARNING: This is a preview API that could change. Create a image bundle
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -187,7 +187,7 @@ func (r PreviewApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.Response, e
 }
 
 /*
- * Delete Delete a image bundle
+ * Delete WARNING: This is a preview API that could change. Delete a image bundle
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -327,7 +327,7 @@ func (r PreviewApiApiEditImageBundleRequest) Execute() (ImageBundle, *_nethttp.R
 }
 
 /*
- * EditImageBundle Update a image bundle
+ * EditImageBundle WARNING: This is a preview API that could change. Update a image bundle
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -462,7 +462,7 @@ func (r PreviewApiApiGetImageBundleRequest) Execute() (ImageBundle, *_nethttp.Re
 }
 
 /*
- * GetImageBundle Get a image bundle
+ * GetImageBundle WARNING: This is a preview API that could change. Get a image bundle
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -580,15 +580,20 @@ type PreviewApiApiGetListOfImageBundlesRequest struct {
 	ApiService *PreviewApiService
 	cUUID string
 	pUUID string
+	arch *string
 }
 
+func (r PreviewApiApiGetListOfImageBundlesRequest) Arch(arch string) PreviewApiApiGetListOfImageBundlesRequest {
+	r.arch = &arch
+	return r
+}
 
 func (r PreviewApiApiGetListOfImageBundlesRequest) Execute() ([]ImageBundle, *_nethttp.Response, error) {
 	return r.ApiService.GetListOfImageBundlesExecute(r)
 }
 
 /*
- * GetListOfImageBundles List image bundles
+ * GetListOfImageBundles WARNING: This is a preview API that could change. List image bundles
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -630,6 +635,9 @@ func (a *PreviewApiService) GetListOfImageBundlesExecute(r PreviewApiApiGetListO
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.arch != nil {
+		localVarQueryParams.Add("arch", parameterToString(*r.arch, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

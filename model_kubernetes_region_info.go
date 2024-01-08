@@ -30,7 +30,7 @@ type KubernetesRegionInfo struct {
 	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
 	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
 	KubernetesPullSecretName *string `json:"kubernetesPullSecretName,omitempty"`
-	// DEPRECATED: kubernetes service account is not needed.
+	// Deprecated since YBA version 2.17.3.0. kubernetes service account is not needed.
 	KubernetesServiceAccount *string `json:"kubernetesServiceAccount,omitempty"`
 	KubernetesStorageClass *string `json:"kubernetesStorageClass,omitempty"`
 	Overrides *string `json:"overrides,omitempty"`
