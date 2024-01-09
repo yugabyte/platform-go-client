@@ -19134,7 +19134,7 @@ components:
           destVpcId: destVpcId
           gceProject: gceProject
           gceApplicationCredentials:
-            key: "{}"
+            key: gceApplicationCredentials
           gceApplicationCredentialsPath: gceApplicationCredentialsPath
           useHostCredentials: true
           vpcType: EXISTING
@@ -24640,7 +24640,7 @@ components:
         destVpcId: destVpcId
         gceProject: gceProject
         gceApplicationCredentials:
-          key: "{}"
+          key: gceApplicationCredentials
         gceApplicationCredentialsPath: gceApplicationCredentialsPath
         useHostCredentials: true
         vpcType: EXISTING
@@ -24654,8 +24654,7 @@ components:
         gceApplicationCredentials:
           additionalProperties:
             exampleSetFlag: true
-            properties: {}
-            type: object
+            type: string
           exampleSetFlag: true
           type: object
         gceApplicationCredentialsPath:
@@ -35958,7 +35957,7 @@ components:
               destVpcId: destVpcId
               gceProject: gceProject
               gceApplicationCredentials:
-                key: "{}"
+                key: gceApplicationCredentials
               gceApplicationCredentialsPath: gceApplicationCredentialsPath
               useHostCredentials: true
               vpcType: EXISTING
@@ -36140,7 +36139,7 @@ components:
             destVpcId: destVpcId
             gceProject: gceProject
             gceApplicationCredentials:
-              key: "{}"
+              key: gceApplicationCredentials
             gceApplicationCredentialsPath: gceApplicationCredentialsPath
             useHostCredentials: true
             vpcType: EXISTING
