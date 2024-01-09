@@ -16036,9 +16036,11 @@ components:
       type: object
     BundleDetails:
       example:
+        maxNumRecentCores: 6
         components:
         - UniverseLogs
         - UniverseLogs
+        maxCoreFileSize: 0
       exampleSetFlag: true
       properties:
         components:
@@ -16061,6 +16063,16 @@ components:
             exampleSetFlag: true
             type: string
           type: array
+        maxCoreFileSize:
+          description: Max size of the collected cores (if any)
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        maxNumRecentCores:
+          description: Max number of most recent cores to collect (if any)
+          exampleSetFlag: true
+          format: int32
+          type: integer
       required:
       - components
       type: object
@@ -19121,6 +19133,8 @@ components:
           hostVpcId: hostVpcId
           destVpcId: destVpcId
           gceProject: gceProject
+          gceApplicationCredentials:
+            key: "{}"
           gceApplicationCredentialsPath: gceApplicationCredentialsPath
           useHostCredentials: true
           vpcType: EXISTING
@@ -21936,21 +21950,22 @@ components:
       description: Finalize Upgrade Info Response
       example:
         impactedXClusterConnectedUniverse:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybSoftwareVersion: ybSoftwareVersion
+          universeName: universeName
+        - universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybSoftwareVersion: ybSoftwareVersion
+          universeName: universeName
       exampleSetFlag: true
       properties:
         impactedXClusterConnectedUniverse:
-          description: "WARNING: This is a preview API that could change. Set of xCluster\
-            \ connected universes uuids to be impacted "
+          description: "WARNING: This is a preview API that could change. List of\
+            \ xCluster connected universes details to be impacted "
           exampleSetFlag: false
           items:
-            exampleSetFlag: true
-            format: uuid
-            type: string
+            $ref: '#/components/schemas/ImpactedXClusterConnectedUniverse'
           readOnly: true
           type: array
-          uniqueItems: true
       type: object
     FinalizeUpgradeParams:
       example:
@@ -24624,6 +24639,8 @@ components:
         hostVpcId: hostVpcId
         destVpcId: destVpcId
         gceProject: gceProject
+        gceApplicationCredentials:
+          key: "{}"
         gceApplicationCredentialsPath: gceApplicationCredentialsPath
         useHostCredentials: true
         vpcType: EXISTING
@@ -24634,6 +24651,13 @@ components:
         destVpcId:
           exampleSetFlag: true
           type: string
+        gceApplicationCredentials:
+          additionalProperties:
+            exampleSetFlag: true
+            properties: {}
+            type: object
+          exampleSetFlag: true
+          type: object
         gceApplicationCredentialsPath:
           exampleSetFlag: true
           readOnly: true
@@ -27554,6 +27578,33 @@ components:
           description: Regions override for image bundle
           exampleSetFlag: true
           type: object
+      type: object
+    ImpactedXClusterConnectedUniverse:
+      example:
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybSoftwareVersion: ybSoftwareVersion
+        universeName: universeName
+      exampleSetFlag: true
+      properties:
+        universeName:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe name "
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        universeUUID:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe UUID "
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        ybSoftwareVersion:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe version "
+          exampleSetFlag: true
+          readOnly: true
+          type: string
       type: object
     ImportUniverseFormData:
       example:
@@ -35906,6 +35957,8 @@ components:
               hostVpcId: hostVpcId
               destVpcId: destVpcId
               gceProject: gceProject
+              gceApplicationCredentials:
+                key: "{}"
               gceApplicationCredentialsPath: gceApplicationCredentialsPath
               useHostCredentials: true
               vpcType: EXISTING
@@ -36086,6 +36139,8 @@ components:
             hostVpcId: hostVpcId
             destVpcId: destVpcId
             gceProject: gceProject
+            gceApplicationCredentials:
+              key: "{}"
             gceApplicationCredentialsPath: gceApplicationCredentialsPath
             useHostCredentials: true
             vpcType: EXISTING
@@ -46246,10 +46301,13 @@ components:
         db_name:
           exampleSetFlag: true
           type: string
+        node_name:
+          exampleSetFlag: true
+          type: string
         query:
           exampleSetFlag: true
           type: string
-        tableType:
+        table_type:
           enum:
           - YQL_TABLE_TYPE
           - REDIS_TABLE_TYPE
@@ -46259,8 +46317,9 @@ components:
           type: string
       required:
       - db_name
+      - node_name
       - query
-      - tableType
+      - table_type
       type: object
     RuntimeConfigData:
       description: Runtime configuration data
@@ -50197,12 +50256,14 @@ components:
     SupportBundle:
       example:
         path: path
-        sizeInBytes: 0
+        sizeInBytes: 1
         scopeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         bundleDetails:
+          maxNumRecentCores: 6
           components:
           - UniverseLogs
           - UniverseLogs
+          maxCoreFileSize: 0
         endDate: 2022-12-12T13:07:18Z
         bundleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         creationDate: 2022-12-12T13:07:18Z
@@ -50270,11 +50331,13 @@ components:
     SupportBundleFormData:
       description: Support bundle form metadata
       example:
+        maxNumRecentCores: 6
         components:
         - UniverseLogs
         - UniverseLogs
         endDate: 2022-12-12T13:07:18Z
         startDate: 2022-12-12T13:07:18Z
+        maxCoreFileSize: 0
       exampleSetFlag: true
       properties:
         components:
@@ -50304,6 +50367,16 @@ components:
           exampleSetFlag: true
           format: date-time
           type: string
+        maxCoreFileSize:
+          description: Max size in bytes of the recent collected cores (if any)
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        maxNumRecentCores:
+          description: Max number of the most recent cores to collect (if any)
+          exampleSetFlag: true
+          format: int32
+          type: integer
         startDate:
           description: Start date to filter logs from
           example: 2022-12-12T13:07:18Z
@@ -75364,6 +75437,7 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
+          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -75379,7 +75453,6 @@ components:
           items:
             exampleSetFlag: true
             type: string
-          readOnly: true
           type: array
           uniqueItems: true
         targetActive:
@@ -75699,6 +75772,7 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
+          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -75714,7 +75788,6 @@ components:
           items:
             exampleSetFlag: true
             type: string
-          readOnly: true
           type: array
           uniqueItems: true
         targetActive:

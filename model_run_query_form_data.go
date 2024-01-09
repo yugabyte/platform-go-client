@@ -17,17 +17,19 @@ import (
 // RunQueryFormData struct for RunQueryFormData
 type RunQueryFormData struct {
 	DbName string `json:"db_name"`
+	NodeName string `json:"node_name"`
 	Query string `json:"query"`
-	TableType string `json:"tableType"`
+	TableType string `json:"table_type"`
 }
 
 // NewRunQueryFormData instantiates a new RunQueryFormData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRunQueryFormData(dbName string, query string, tableType string, ) *RunQueryFormData {
+func NewRunQueryFormData(dbName string, nodeName string, query string, tableType string, ) *RunQueryFormData {
 	this := RunQueryFormData{}
 	this.DbName = dbName
+	this.NodeName = nodeName
 	this.Query = query
 	this.TableType = tableType
 	return &this
@@ -63,6 +65,30 @@ func (o *RunQueryFormData) GetDbNameOk() (*string, bool) {
 // SetDbName sets field value
 func (o *RunQueryFormData) SetDbName(v string) {
 	o.DbName = v
+}
+
+// GetNodeName returns the NodeName field value
+func (o *RunQueryFormData) GetNodeName() string {
+	if o == nil  {
+		var ret string
+		return ret
+	}
+
+	return o.NodeName
+}
+
+// GetNodeNameOk returns a tuple with the NodeName field value
+// and a boolean to check if the value has been set.
+func (o *RunQueryFormData) GetNodeNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.NodeName, true
+}
+
+// SetNodeName sets field value
+func (o *RunQueryFormData) SetNodeName(v string) {
+	o.NodeName = v
 }
 
 // GetQuery returns the Query field value
@@ -119,10 +145,13 @@ func (o RunQueryFormData) MarshalJSON() ([]byte, error) {
 		toSerialize["db_name"] = o.DbName
 	}
 	if true {
+		toSerialize["node_name"] = o.NodeName
+	}
+	if true {
 		toSerialize["query"] = o.Query
 	}
 	if true {
-		toSerialize["tableType"] = o.TableType
+		toSerialize["table_type"] = o.TableType
 	}
 	return json.Marshal(toSerialize)
 }

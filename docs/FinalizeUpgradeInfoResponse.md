@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ImpactedXClusterConnectedUniverse** | Pointer to **[]string** | WARNING: This is a preview API that could change. Set of xCluster connected universes uuids to be impacted  | [optional] [readonly] 
+**ImpactedXClusterConnectedUniverse** | Pointer to [**[]ImpactedXClusterConnectedUniverse**](ImpactedXClusterConnectedUniverse.md) | WARNING: This is a preview API that could change. List of xCluster connected universes details to be impacted  | [optional] [readonly] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetImpactedXClusterConnectedUniverse
 
-`func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverse() []string`
+`func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverse() []ImpactedXClusterConnectedUniverse`
 
 GetImpactedXClusterConnectedUniverse returns the ImpactedXClusterConnectedUniverse field if non-nil, zero value otherwise.
 
 ### GetImpactedXClusterConnectedUniverseOk
 
-`func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverseOk() (*[]string, bool)`
+`func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverseOk() (*[]ImpactedXClusterConnectedUniverse, bool)`
 
 GetImpactedXClusterConnectedUniverseOk returns a tuple with the ImpactedXClusterConnectedUniverse field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImpactedXClusterConnectedUniverse
 
-`func (o *FinalizeUpgradeInfoResponse) SetImpactedXClusterConnectedUniverse(v []string)`
+`func (o *FinalizeUpgradeInfoResponse) SetImpactedXClusterConnectedUniverse(v []ImpactedXClusterConnectedUniverse)`
 
 SetImpactedXClusterConnectedUniverse sets ImpactedXClusterConnectedUniverse field to given value.
 

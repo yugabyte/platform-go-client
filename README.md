@@ -517,6 +517,7 @@ Class | Method | HTTP request | Description
  - [HttpLocation](docs/HttpLocation.md)
  - [ImageBundle](docs/ImageBundle.md)
  - [ImageBundleDetails](docs/ImageBundleDetails.md)
+ - [ImpactedXClusterConnectedUniverse](docs/ImpactedXClusterConnectedUniverse.md)
  - [ImportUniverseFormData](docs/ImportUniverseFormData.md)
  - [InstanceType](docs/InstanceType.md)
  - [InstanceTypeDetails](docs/InstanceTypeDetails.md)

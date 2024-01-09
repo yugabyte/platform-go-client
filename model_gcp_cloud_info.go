@@ -17,6 +17,7 @@ import (
 // GCPCloudInfo struct for GCPCloudInfo
 type GCPCloudInfo struct {
 	DestVpcId *string `json:"destVpcId,omitempty"`
+	GceApplicationCredentials *map[string]map[string]interface{} `json:"gceApplicationCredentials,omitempty"`
 	GceApplicationCredentialsPath *string `json:"gceApplicationCredentialsPath,omitempty"`
 	GceProject *string `json:"gceProject,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
@@ -75,6 +76,38 @@ func (o *GCPCloudInfo) HasDestVpcId() bool {
 // SetDestVpcId gets a reference to the given string and assigns it to the DestVpcId field.
 func (o *GCPCloudInfo) SetDestVpcId(v string) {
 	o.DestVpcId = &v
+}
+
+// GetGceApplicationCredentials returns the GceApplicationCredentials field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetGceApplicationCredentials() map[string]map[string]interface{} {
+	if o == nil || o.GceApplicationCredentials == nil {
+		var ret map[string]map[string]interface{}
+		return ret
+	}
+	return *o.GceApplicationCredentials
+}
+
+// GetGceApplicationCredentialsOk returns a tuple with the GceApplicationCredentials field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetGceApplicationCredentialsOk() (*map[string]map[string]interface{}, bool) {
+	if o == nil || o.GceApplicationCredentials == nil {
+		return nil, false
+	}
+	return o.GceApplicationCredentials, true
+}
+
+// HasGceApplicationCredentials returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasGceApplicationCredentials() bool {
+	if o != nil && o.GceApplicationCredentials != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGceApplicationCredentials gets a reference to the given map[string]map[string]interface{} and assigns it to the GceApplicationCredentials field.
+func (o *GCPCloudInfo) SetGceApplicationCredentials(v map[string]map[string]interface{}) {
+	o.GceApplicationCredentials = &v
 }
 
 // GetGceApplicationCredentialsPath returns the GceApplicationCredentialsPath field value if set, zero value otherwise.
@@ -337,6 +370,9 @@ func (o GCPCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DestVpcId != nil {
 		toSerialize["destVpcId"] = o.DestVpcId
+	}
+	if o.GceApplicationCredentials != nil {
+		toSerialize["gceApplicationCredentials"] = o.GceApplicationCredentials
 	}
 	if o.GceApplicationCredentialsPath != nil {
 		toSerialize["gceApplicationCredentialsPath"] = o.GceApplicationCredentialsPath
