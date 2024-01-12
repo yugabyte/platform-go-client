@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownloadNodeLogs**](UniverseInformationApi.md#DownloadNodeLogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node&#39;s logs.
-[**GetLiveQueries**](UniverseInformationApi.md#GetLiveQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Available since YBA version 2.4.0.0. Get live queries for a universe
-[**GetMasterLeaderIP**](UniverseInformationApi.md#GetMasterLeaderIP) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Available since YBA version 2.2.0.0. Get IP address of a universe&#39;s master leader
-[**GetSlowQueries**](UniverseInformationApi.md#GetSlowQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Get slow queries for a universe
-[**GetUniverseCost**](UniverseInformationApi.md#GetUniverseCost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
-[**GetUniverseResources**](UniverseInformationApi.md#GetUniverseResources) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources | Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
-[**HealthCheckUniverse**](UniverseInformationApi.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Available since YBA version 2.2.0.0. Return results for the last health check
-[**ResetSlowQueries**](UniverseInformationApi.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Available since YBA version 2.6.0.0. Reset slow queries for a universe
-[**UniverseStatus**](UniverseInformationApi.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Available since YBA version 2.2.0.0. Get a universe&#39;s status
+[**DownloadNodeLogs**](UniverseInformationApi.md#DownloadNodeLogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs - deprecated
+[**GetLiveQueries**](UniverseInformationApi.md#GetLiveQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Get live queries for a universe
+[**GetMasterLeaderIP**](UniverseInformationApi.md#GetMasterLeaderIP) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Get IP address of a universe&#39;s master leader
+[**GetSlowQueries**](UniverseInformationApi.md#GetSlowQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Get slow queries for a universe
+[**GetUniverseCost**](UniverseInformationApi.md#GetUniverseCost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Get a cost estimate for a universe - deprecated
+[**GetUniverseResources**](UniverseInformationApi.md#GetUniverseResources) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources | Get a resource usage estimate for a universe
+[**HealthCheckUniverse**](UniverseInformationApi.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Return results for the last health check
+[**ResetSlowQueries**](UniverseInformationApi.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
+[**UniverseStatus**](UniverseInformationApi.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
 
 
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 > string DownloadNodeLogs(ctx, cUUID, uniUUID, nodeName).Execute()
 
-Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node's logs.
+Download a node's logs - deprecated
 
 
 
@@ -96,7 +96,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetLiveQueries(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.4.0.0. Get live queries for a universe
+Get live queries for a universe
+
+
 
 ### Example
 
@@ -167,7 +169,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetMasterLeaderIP(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. Get IP address of a universe's master leader
+Get IP address of a universe's master leader
+
+
 
 ### Example
 
@@ -238,7 +242,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetSlowQueries(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.6.0.0. Get slow queries for a universe
+Get slow queries for a universe
+
+
 
 ### Example
 
@@ -309,7 +315,9 @@ Name | Type | Description  | Notes
 
 > UniverseResourceDetails GetUniverseCost(ctx, cUUID, uniUUID).Execute()
 
-Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
+Get a cost estimate for a universe - deprecated
+
+
 
 ### Example
 
@@ -380,7 +388,7 @@ Name | Type | Description  | Notes
 
 > UniverseResourceDetails GetUniverseResources(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
+Get a resource usage estimate for a universe
 
 
 
@@ -453,7 +461,7 @@ Name | Type | Description  | Notes
 
 > []Details HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. Return results for the last health check
+Return results for the last health check
 
 
 
@@ -526,7 +534,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} ResetSlowQueries(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Available since YBA version 2.6.0.0. Reset slow queries for a universe
+Reset slow queries for a universe
+
+
 
 ### Example
 
@@ -599,7 +609,7 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} UniverseStatus(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. Get a universe's status
+Get a universe's status
 
 
 

@@ -9,8 +9,8 @@ Method | HTTP request | Description
 [**EditKMSConfig**](EncryptionAtRestApi.md#EditKMSConfig) | **Post** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/edit | Edit a KMS configuration
 [**GetKMSConfig**](EncryptionAtRestApi.md#GetKMSConfig) | **Get** /api/v1/customers/{cUUID}/kms_configs/{configUUID} | Get details of a KMS configuration
 [**ListKMSConfigs**](EncryptionAtRestApi.md#ListKMSConfigs) | **Get** /api/v1/customers/{cUUID}/kms_configs | List KMS configurations
-[**RefreshKMSConfig**](EncryptionAtRestApi.md#RefreshKMSConfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | WARNING: This is a preview API that could change. Refresh KMS Config
-[**RemoveKeyRefHistory**](EncryptionAtRestApi.md#RemoveKeyRefHistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe&#39;s key reference history
+[**RefreshKMSConfig**](EncryptionAtRestApi.md#RefreshKMSConfig) | **Put** /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh | Refresh KMS Config
+[**RemoveKeyRefHistory**](EncryptionAtRestApi.md#RemoveKeyRefHistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | This API removes a universe&#39;s key reference history - deprecated
 
 
 
@@ -380,7 +380,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess RefreshKMSConfig(ctx, cUUID, configUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Refresh KMS Config
+Refresh KMS Config
+
+
 
 ### Example
 
@@ -453,7 +455,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess RemoveKeyRefHistory(ctx, cUUID, uniUUID).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe's key reference history
+This API removes a universe's key reference history - deprecated
+
+
 
 ### Example
 

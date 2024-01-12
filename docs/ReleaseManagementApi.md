@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateRelease**](ReleaseManagementApi.md#CreateRelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
 [**DeleteRelease**](ReleaseManagementApi.md#DeleteRelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
-[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
+[**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List releases by provider - deprecated
 [**GetListOfReleases**](ReleaseManagementApi.md#GetListOfReleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
 [**Refresh**](ReleaseManagementApi.md#Refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
 [**UpdateRelease**](ReleaseManagementApi.md#UpdateRelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
@@ -162,7 +162,9 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} GetListOfRegionReleases(ctx, cUUID, pUUID).IncludeMetadata(includeMetadata).Execute()
 
-Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
+List releases by provider - deprecated
+
+
 
 ### Example
 

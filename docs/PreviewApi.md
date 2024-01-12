@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateImageBundle**](PreviewApi.md#CreateImageBundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. Create a image bundle
-[**Delete**](PreviewApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Delete a image bundle
-[**EditImageBundle**](PreviewApi.md#EditImageBundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Update a image bundle
-[**GetImageBundle**](PreviewApi.md#GetImageBundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | WARNING: This is a preview API that could change. Get a image bundle
-[**GetListOfImageBundles**](PreviewApi.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | WARNING: This is a preview API that could change. List image bundles
+[**CreateImageBundle**](PreviewApi.md#CreateImageBundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | Create a image bundle
+[**Delete**](PreviewApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle
+[**EditImageBundle**](PreviewApi.md#EditImageBundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
+[**GetImageBundle**](PreviewApi.md#GetImageBundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
+[**GetListOfImageBundles**](PreviewApi.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
 
 
 
@@ -16,7 +16,9 @@ Method | HTTP request | Description
 
 > ImageBundle CreateImageBundle(ctx, cUUID, pUUID).Body(body).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create a image bundle
+Create a image bundle
+
+
 
 ### Example
 
@@ -91,7 +93,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess Delete(ctx, cUUID, pUUID, iBUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete a image bundle
+Delete a image bundle
+
+
 
 ### Example
 
@@ -167,7 +171,9 @@ Name | Type | Description  | Notes
 
 > ImageBundle EditImageBundle(ctx, cUUID, pUUID, iBUUID).Body(body).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update a image bundle
+Update a image bundle
+
+
 
 ### Example
 
@@ -245,7 +251,9 @@ Name | Type | Description  | Notes
 
 > ImageBundle GetImageBundle(ctx, cUUID, pUUID, iBUUID).Execute()
 
-WARNING: This is a preview API that could change. Get a image bundle
+Get a image bundle
+
+
 
 ### Example
 
@@ -319,7 +327,9 @@ Name | Type | Description  | Notes
 
 > []ImageBundle GetListOfImageBundles(ctx, cUUID, pUUID).Arch(arch).Execute()
 
-WARNING: This is a preview API that could change. List image bundles
+List image bundles
+
+
 
 ### Example
 

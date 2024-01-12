@@ -50,8 +50,8 @@ func (r AccessKeysApiApiCreateAccesskeyRequest) Execute() (AccessKey, *_nethttp.
 }
 
 /*
- * CreateAccesskey Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
- * UNSTABLE - This API will undergo changes in future.
+ * CreateAccesskey Create/Upload Access Key for onprem provider region - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -328,7 +328,8 @@ func (r AccessKeysApiApiEditAccesskeyRequest) Execute() (AccessKey, *_nethttp.Re
 }
 
 /*
- * EditAccesskey WARNING: This is a preview API that could change. Modify the existing access Key
+ * EditAccesskey Modify the existing access Key
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

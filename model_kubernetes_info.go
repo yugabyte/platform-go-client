@@ -25,7 +25,7 @@ type KubernetesInfo struct {
 	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
 	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
 	KubernetesPullSecretName *string `json:"kubernetesPullSecretName,omitempty"`
-	// Deprecated since YBA version 2.17.3.0. kubernetes service account is not needed.
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.3.0.</b> kubernetes service account is not needed.
 	KubernetesServiceAccount *string `json:"kubernetesServiceAccount,omitempty"`
 	KubernetesStorageClass *string `json:"kubernetesStorageClass,omitempty"`
 }

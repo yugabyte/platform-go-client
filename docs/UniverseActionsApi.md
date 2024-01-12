@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ImportUniverse**](UniverseActionsApi.md#ImportUniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Deprecated since YBA version 2.19.3.0. Do not use, this will be removed soon. Import a universe
+[**ImportUniverse**](UniverseActionsApi.md#ImportUniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Import a universe - deprecated
 
 
 
@@ -12,7 +12,9 @@ Method | HTTP request | Description
 
 > ImportUniverseFormData ImportUniverse(ctx, cUUID).Request(request).Execute()
 
-Deprecated since YBA version 2.19.3.0. Do not use, this will be removed soon. Import a universe
+Import a universe - deprecated
+
+
 
 ### Example
 

@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateProviderRegion**](RegionManagementApi.md#CreateProviderRegion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | WARNING: This is a preview API that could change. Create a new region
-[**CreateRegion**](RegionManagementApi.md#CreateRegion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+[**CreateProviderRegion**](RegionManagementApi.md#CreateProviderRegion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | Create a new region
+[**CreateRegion**](RegionManagementApi.md#CreateRegion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create Region - deprecated
 [**DeleteRegion**](RegionManagementApi.md#DeleteRegion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
-[**EditProviderRegion**](RegionManagementApi.md#EditProviderRegion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | WARNING: This is a preview API that could change. Modify a region
-[**EditRegion**](RegionManagementApi.md#EditRegion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+[**EditProviderRegion**](RegionManagementApi.md#EditProviderRegion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID} | Modify a region
+[**EditRegion**](RegionManagementApi.md#EditRegion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Edit regions - deprecated
 [**GetRegion**](RegionManagementApi.md#GetRegion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 [**ListAllRegions**](RegionManagementApi.md#ListAllRegions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
 
@@ -18,7 +18,9 @@ Method | HTTP request | Description
 
 > Region CreateProviderRegion(ctx, cUUID, pUUID).Region(region).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create a new region
+Create a new region
+
+
 
 ### Example
 
@@ -93,7 +95,9 @@ Name | Type | Description  | Notes
 
 > Region CreateRegion(ctx, cUUID, pUUID).Region(region).Request(request).Execute()
 
-Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+Create Region - deprecated
+
+
 
 ### Example
 
@@ -244,7 +248,9 @@ Name | Type | Description  | Notes
 
 > Region EditProviderRegion(ctx, cUUID, pUUID, rUUID).Region(region).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Modify a region
+Modify a region
+
+
 
 ### Example
 
@@ -322,7 +328,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} EditRegion(ctx, cUUID, pUUID, rUUID).Region(region).Request(request).Execute()
 
-Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+Edit regions - deprecated
+
+
 
 ### Example
 

@@ -49,7 +49,8 @@ func (r MaintenanceWindowsApiApiCreateRequest) Execute() (MaintenanceWindow, *_n
 }
 
 /*
- * Create WARNING: This is a preview API that could change. Create maintenance window
+ * Create Create maintenance window
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return MaintenanceWindowsApiApiCreateRequest
@@ -182,7 +183,8 @@ func (r MaintenanceWindowsApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.
 }
 
 /*
- * Delete WARNING: This is a preview API that could change. Delete maintenance window
+ * Delete Delete maintenance window
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param windowUUID
@@ -308,7 +310,8 @@ func (r MaintenanceWindowsApiApiGetRequest) Execute() (MaintenanceWindow, *_neth
 }
 
 /*
- * Get WARNING: This is a preview API that could change. Get details of a maintenance window
+ * Get Get details of a maintenance window
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param windowUUID
@@ -435,7 +438,8 @@ func (r MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest) Execute() ([]Ma
 }
 
 /*
- * ListOfMaintenanceWindows WARNING: This is a preview API that could change. List maintenance windows
+ * ListOfMaintenanceWindows List maintenance windows
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest
@@ -567,7 +571,8 @@ func (r MaintenanceWindowsApiApiPageRequest) Execute() (MaintenanceWindowPagedRe
 }
 
 /*
- * Page WARNING: This is a preview API that could change. List maintenance windows (paginated)
+ * Page List maintenance windows (paginated)
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return MaintenanceWindowsApiApiPageRequest
@@ -705,7 +710,8 @@ func (r MaintenanceWindowsApiApiUpdateRequest) Execute() (MaintenanceWindow, *_n
 }
 
 /*
- * Update WARNING: This is a preview API that could change. Update maintenance window
+ * Update Update maintenance window
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param windowUUID

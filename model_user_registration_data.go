@@ -24,7 +24,7 @@ type UserRegistrationData struct {
 	Features *map[string]map[string]interface{} `json:"features,omitempty"`
 	// Password
 	Password *string `json:"password,omitempty"`
-	// Deprecated since YBA version 2.19.3.0. Use field roleResourceDefinitions instead.
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b> Use field roleResourceDefinitions instead.
 	Role *string `json:"role,omitempty"`
 	// List of roles and resource groups defined for user.
 	RoleResourceDefinitions *[]RoleResourceDefinition `json:"roleResourceDefinitions,omitempty"`

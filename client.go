@@ -114,8 +114,6 @@ type APIClient struct {
 
 	SupportBundleManagementApi *SupportBundleManagementApiService
 
-	TableManagementApi *TableManagementApiService
-
 	UniverseActionsApi *UniverseActionsApiService
 
 	UniverseClusterMutationsApi *UniverseClusterMutationsApiService
@@ -184,7 +182,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ScheduleManagementApi = (*ScheduleManagementApiService)(&c.common)
 	c.SessionManagementApi = (*SessionManagementApiService)(&c.common)
 	c.SupportBundleManagementApi = (*SupportBundleManagementApiService)(&c.common)
-	c.TableManagementApi = (*TableManagementApiService)(&c.common)
 	c.UniverseActionsApi = (*UniverseActionsApiService)(&c.common)
 	c.UniverseClusterMutationsApi = (*UniverseClusterMutationsApiService)(&c.common)
 	c.UniverseDatabaseManagementApi = (*UniverseDatabaseManagementApiService)(&c.common)

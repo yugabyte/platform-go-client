@@ -49,7 +49,8 @@ func (r PerformanceAdvisorApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.
 }
 
 /*
- * Delete WARNING: This is a preview API that could change. Delete performance recommendations
+ * Delete Delete performance recommendations
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiDeleteRequest
@@ -177,7 +178,8 @@ func (r PerformanceAdvisorApiApiGetRequest) Execute() (PerformanceRecommendation
 }
 
 /*
- * Get WARNING: This is a preview API that could change. Get performance recommendation details
+ * Get Get performance recommendation details
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param rUUID
@@ -300,7 +302,8 @@ func (r PerformanceAdvisorApiApiGetLatestRunRequest) Execute() (YBPSuccess, *_ne
 }
 
 /*
- * GetLatestRun WARNING: This is a preview API that could change. Get last performance advisor run details
+ * GetLatestRun Get last performance advisor run details
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -428,7 +431,8 @@ func (r PerformanceAdvisorApiApiGetSettingsRequest) Execute() (PerfAdvisorSettin
 }
 
 /*
- * GetSettings WARNING: This is a preview API that could change. Get universe performance advisor settings
+ * GetSettings Get universe performance advisor settings
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -563,7 +567,8 @@ func (r PerformanceAdvisorApiApiPageRequest) Execute() (PerformanceRecommendatio
 }
 
 /*
- * Page WARNING: This is a preview API that could change. List performance recommendations (paginated)
+ * Page List performance recommendations (paginated)
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiPageRequest
@@ -700,7 +705,8 @@ func (r PerformanceAdvisorApiApiPageAuditInfoRequest) Execute() (StateChangeAudi
 }
 
 /*
- * PageAuditInfo WARNING: This is a preview API that could change. List performance recommendations state change audit events (paginated)
+ * PageAuditInfo List performance recommendations state change audit events (paginated)
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return PerformanceAdvisorApiApiPageAuditInfoRequest
@@ -833,7 +839,8 @@ func (r PerformanceAdvisorApiApiRunPerfAdvisorRequest) Execute() (PerfAdvisorMan
 }
 
 /*
- * RunPerfAdvisor WARNING: This is a preview API that could change. Start performance advisor run for universe
+ * RunPerfAdvisor Start performance advisor run for universe
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -969,7 +976,8 @@ func (r PerformanceAdvisorApiApiUpdateSettingsRequest) Execute() (YBPSuccess, *_
 }
 
 /*
- * UpdateSettings WARNING: This is a preview API that could change. Update universe performance advisor settings
+ * UpdateSettings Update universe performance advisor settings
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

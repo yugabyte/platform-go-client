@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
-**MachineImages** | Pointer to **map[string]string** | Map of region UUID to AMI name. Deprecated since YBA version 2.18.0.0, Use imageBundle instead. | [optional] 
+**MachineImages** | Pointer to **map[string]string** | Map of region UUID to AMI name. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.0.0.&lt;/b&gt; Use imageBundle instead. | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -49,7 +49,7 @@ Name | Type | Description | Notes
 **SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
-**SshUserOverrideMap** | Pointer to **map[string]string** | Map of region UUID to SSH User override. Deprecated since YBA version 2.18.0.0, Use imageBundle instead. | [optional] 
+**SshUserOverrideMap** | Pointer to **map[string]string** | Map of region UUID to SSH User override. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.0.0.&lt;/b&gt; Use imageBundle instead. | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 

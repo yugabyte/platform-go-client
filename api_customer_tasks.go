@@ -172,7 +172,8 @@ func (r CustomerTasksApiApiFailedSubtasksRequest) Execute() (map[string]map[stri
 }
 
 /*
- * FailedSubtasks Deprecated since YBA version 2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
+ * FailedSubtasks Fetch failed subtasks - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.19.1.0.</b></p>Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param tUUID

@@ -50,8 +50,8 @@ func (r UniverseUpgradesManagementApiApiFinalizeUpgradeRequest) Execute() (YBPTa
 }
 
 /*
- * FinalizeUpgrade WARNING: This is a preview API that could change. Finalize Upgrade.
- * Queues a task to finalize upgrade in a universe.
+ * FinalizeUpgrade Finalize Upgrade
+ * WARNING: This is a preview API that could change. Queues a task to finalize upgrade in a universe.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -182,8 +182,8 @@ func (r UniverseUpgradesManagementApiApiPreFinalizeSoftwareUpgradeInfoRequest) E
 }
 
 /*
- * PreFinalizeSoftwareUpgradeInfo WARNING: This is a preview API that could change. Finalize Software Upgrade info
- * Provides pre-finalize software upgrade info
+ * PreFinalizeSoftwareUpgradeInfo Finalize Software Upgrade info
+ * WARNING: This is a preview API that could change. Provides pre-finalize software upgrade info.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -742,8 +742,8 @@ func (r UniverseUpgradesManagementApiApiRollbackUpgradeRequest) Execute() (YBPTa
 }
 
 /*
- * RollbackUpgrade WARNING: This is a preview API that could change. Rollback Upgrade
- * Queues a task to rollback upgrade in a universe.
+ * RollbackUpgrade Rollback Upgrade
+ * WARNING: This is a preview API that could change. Queues a task to rollback upgrade in a universe.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -884,8 +884,8 @@ func (r UniverseUpgradesManagementApiApiSoftwareUpgradePreCheckRequest) Execute(
 }
 
 /*
- * SoftwareUpgradePreCheck WARNING: This is a preview API that could change. Software Upgrade universe pre-check
- * Performs pre-checks and provides pre-upgrade info
+ * SoftwareUpgradePreCheck Software Upgrade universe pre-check
+ * WARNING: This is a preview API that could change. Performs pre-checks and provides pre-upgrade info.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1168,8 +1168,8 @@ func (r UniverseUpgradesManagementApiApiUpgradeDBVersionRequest) Execute() (YBPT
 }
 
 /*
- * UpgradeDBVersion WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
- * Queues a task to perform DB version upgrade and rolling restart in a universe.
+ * UpgradeDBVersion Upgrade DB version
+ * WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

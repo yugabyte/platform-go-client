@@ -17,7 +17,7 @@ import (
 // GCPCloudInfo struct for GCPCloudInfo
 type GCPCloudInfo struct {
 	DestVpcId *string `json:"destVpcId,omitempty"`
-	GceApplicationCredentials *map[string]string `json:"gceApplicationCredentials,omitempty"`
+	GceApplicationCredentials *string `json:"gceApplicationCredentials,omitempty"`
 	GceApplicationCredentialsPath *string `json:"gceApplicationCredentialsPath,omitempty"`
 	GceProject *string `json:"gceProject,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
@@ -79,9 +79,9 @@ func (o *GCPCloudInfo) SetDestVpcId(v string) {
 }
 
 // GetGceApplicationCredentials returns the GceApplicationCredentials field value if set, zero value otherwise.
-func (o *GCPCloudInfo) GetGceApplicationCredentials() map[string]string {
+func (o *GCPCloudInfo) GetGceApplicationCredentials() string {
 	if o == nil || o.GceApplicationCredentials == nil {
-		var ret map[string]string
+		var ret string
 		return ret
 	}
 	return *o.GceApplicationCredentials
@@ -89,7 +89,7 @@ func (o *GCPCloudInfo) GetGceApplicationCredentials() map[string]string {
 
 // GetGceApplicationCredentialsOk returns a tuple with the GceApplicationCredentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GCPCloudInfo) GetGceApplicationCredentialsOk() (*map[string]string, bool) {
+func (o *GCPCloudInfo) GetGceApplicationCredentialsOk() (*string, bool) {
 	if o == nil || o.GceApplicationCredentials == nil {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *GCPCloudInfo) HasGceApplicationCredentials() bool {
 	return false
 }
 
-// SetGceApplicationCredentials gets a reference to the given map[string]string and assigns it to the GceApplicationCredentials field.
-func (o *GCPCloudInfo) SetGceApplicationCredentials(v map[string]string) {
+// SetGceApplicationCredentials gets a reference to the given string and assigns it to the GceApplicationCredentials field.
+func (o *GCPCloudInfo) SetGceApplicationCredentials(v string) {
 	o.GceApplicationCredentials = &v
 }
 

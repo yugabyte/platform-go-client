@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ListLdapDnToYbaRoles**](LDAPRoleManagementApi.md#ListLdapDnToYbaRoles) | **Get** /api/v1/customers/{cUUID}/ldap_mappings | List LDAP Mappings
 [**SetLdapDnToYbaRoles**](LDAPRoleManagementApi.md#SetLdapDnToYbaRoles) | **Put** /api/v1/customers/{cUUID}/ldap_mappings | Set LDAP Mappings
-[**SyncLdapUniverse**](LDAPRoleManagementApi.md#SyncLdapUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync | WARNING: This is a preview API that could change. Perform an LDAP users sync on the universe
+[**SyncLdapUniverse**](LDAPRoleManagementApi.md#SyncLdapUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync | Perform an LDAP users sync on the universe
 
 
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 > YBPTask SyncLdapUniverse(ctx, cUUID, univUUID).SyncLdapUniverse(syncLdapUniverse).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Perform an LDAP users sync on the universe
+Perform an LDAP users sync on the universe
 
 
 

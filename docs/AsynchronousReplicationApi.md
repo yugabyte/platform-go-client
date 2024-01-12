@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateXClusterConfig**](AsynchronousReplicationApi.md#CreateXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs | Available since YBA version 2.16.0.0. Create xcluster config
-[**DeleteXClusterConfig**](AsynchronousReplicationApi.md#DeleteXClusterConfig) | **Delete** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Delete xcluster config
-[**EditXClusterConfig**](AsynchronousReplicationApi.md#EditXClusterConfig) | **Put** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Edit xcluster config
-[**GetXClusterConfig**](AsynchronousReplicationApi.md#GetXClusterConfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Get xcluster config
-[**NeedBootstrapTable**](AsynchronousReplicationApi.md#NeedBootstrapTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | WARNING: This is a preview API that could change. Whether tables need bootstrap before setting up cross cluster replication
-[**RestartXClusterConfig**](AsynchronousReplicationApi.md#RestartXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Available since YBA version 2.16.0.0. Restart xcluster config
-[**SyncXClusterConfig**](AsynchronousReplicationApi.md#SyncXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Available since YBA version 2.16.0.0. Sync xcluster config
+[**CreateXClusterConfig**](AsynchronousReplicationApi.md#CreateXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs | Create xcluster config
+[**DeleteXClusterConfig**](AsynchronousReplicationApi.md#DeleteXClusterConfig) | **Delete** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Delete xcluster config
+[**EditXClusterConfig**](AsynchronousReplicationApi.md#EditXClusterConfig) | **Put** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Edit xcluster config
+[**GetXClusterConfig**](AsynchronousReplicationApi.md#GetXClusterConfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Get xcluster config
+[**NeedBootstrapTable**](AsynchronousReplicationApi.md#NeedBootstrapTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | Whether tables need bootstrap before setting up cross cluster replication
+[**RestartXClusterConfig**](AsynchronousReplicationApi.md#RestartXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Restart xcluster config
+[**SyncXClusterConfig**](AsynchronousReplicationApi.md#SyncXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Sync xcluster config
 
 
 
@@ -18,7 +18,9 @@ Method | HTTP request | Description
 
 > YBPTask CreateXClusterConfig(ctx, cUUID).XclusterReplicationCreateFormData(xclusterReplicationCreateFormData).Request(request).Execute()
 
-Available since YBA version 2.16.0.0. Create xcluster config
+Create xcluster config
+
+
 
 ### Example
 
@@ -90,7 +92,9 @@ Name | Type | Description  | Notes
 
 > YBPTask DeleteXClusterConfig(ctx, cUUID, xccUUID).IsForceDelete(isForceDelete).Request(request).Execute()
 
-Available since YBA version 2.16.0.0. Delete xcluster config
+Delete xcluster config
+
+
 
 ### Example
 
@@ -165,7 +169,9 @@ Name | Type | Description  | Notes
 
 > YBPTask EditXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationEditFormData(xclusterReplicationEditFormData).Request(request).Execute()
 
-Available since YBA version 2.16.0.0. Edit xcluster config
+Edit xcluster config
+
+
 
 ### Example
 
@@ -240,7 +246,9 @@ Name | Type | Description  | Notes
 
 > XClusterConfigGetResp GetXClusterConfig(ctx, cUUID, xccUUID).Execute()
 
-Available since YBA version 2.16.0.0. Get xcluster config
+Get xcluster config
+
+
 
 ### Example
 
@@ -311,7 +319,9 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} NeedBootstrapTable(ctx, cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Whether tables need bootstrap before setting up cross cluster replication
+Whether tables need bootstrap before setting up cross cluster replication
+
+
 
 ### Example
 
@@ -388,7 +398,9 @@ Name | Type | Description  | Notes
 
 > YBPTask RestartXClusterConfig(ctx, cUUID, xccUUID).XclusterReplicationRestartFormData(xclusterReplicationRestartFormData).IsForceDelete(isForceDelete).Request(request).Execute()
 
-Available since YBA version 2.16.0.0. Restart xcluster config
+Restart xcluster config
+
+
 
 ### Example
 
@@ -465,7 +477,9 @@ Name | Type | Description  | Notes
 
 > YBPTask SyncXClusterConfig(ctx, cUUID).TargetUniverseUUID(targetUniverseUUID).Request(request).Execute()
 
-Available since YBA version 2.16.0.0. Sync xcluster config
+Sync xcluster config
+
+
 
 ### Example
 

@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccesskey**](AccessKeysApi.md#CreateAccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
+[**CreateAccesskey**](AccessKeysApi.md#CreateAccesskey) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | Create/Upload Access Key for onprem provider region - deprecated
 [**DeleteAccesskey**](AccessKeysApi.md#DeleteAccesskey) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Delete an access key
-[**EditAccesskey**](AccessKeysApi.md#EditAccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | WARNING: This is a preview API that could change. Modify the existing access Key
+[**EditAccesskey**](AccessKeysApi.md#EditAccesskey) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Modify the existing access Key
 [**Index**](AccessKeysApi.md#Index) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys/{keyCode} | Get an access key
 [**List**](AccessKeysApi.md#List) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/access_keys | List access keys for a specific provider
 [**ListAllForCustomer**](AccessKeysApi.md#ListAllForCustomer) | **Get** /api/v1/customers/{cUUID}/access_keys | List access keys for all providers of a customer
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > AccessKey CreateAccesskey(ctx, cUUID, pUUID).AccessKeyFormData(accessKeyFormData).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
+Create/Upload Access Key for onprem provider region - deprecated
 
 
 
@@ -170,7 +170,9 @@ Name | Type | Description  | Notes
 
 > AccessKey EditAccesskey(ctx, cUUID, pUUID, keyCode).Accesskey(accesskey).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Modify the existing access Key
+Modify the existing access Key
+
+
 
 ### Example
 

@@ -40,7 +40,8 @@ func (r UniverseNodeMetadataMetamasterApiApiGetMasterAddressesRequest) Execute()
 }
 
 /*
- * GetMasterAddresses Available since YBA version 2.2.0.0. List a master node's addresses
+ * GetMasterAddresses List a master node's addresses
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -163,7 +164,8 @@ func (r UniverseNodeMetadataMetamasterApiApiGetMasterNodesInfoRequest) Execute()
 }
 
 /*
- * GetMasterNodesInfo Available since YBA version 2.21.1.0. Lists all master nodes details
+ * GetMasterNodesInfo Lists all master nodes details
+ * Available since YBA version 2.21.1.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -286,7 +288,8 @@ func (r UniverseNodeMetadataMetamasterApiApiGetRedisServerAddressesRequest) Exec
 }
 
 /*
- * GetRedisServerAddresses Available since YBA version 2.2.0.0. List a REDIS server's addresses
+ * GetRedisServerAddresses List a REDIS server's addresses
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -528,7 +531,8 @@ func (r UniverseNodeMetadataMetamasterApiApiGetYQLServerAddressesRequest) Execut
 }
 
 /*
- * GetYQLServerAddresses Available since YBA version 2.2.0.0. List a YQL server's addresses
+ * GetYQLServerAddresses List a YQL server's addresses
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -651,7 +655,8 @@ func (r UniverseNodeMetadataMetamasterApiApiGetYSQLServerAddressesRequest) Execu
 }
 
 /*
- * GetYSQLServerAddresses Available since YBA version 2.2.0.0. List a YSQL server's addresses
+ * GetYSQLServerAddresses List a YSQL server's addresses
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

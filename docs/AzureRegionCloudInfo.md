@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SecurityGroupId** | Pointer to **string** |  | [optional] 
 **Vnet** | Pointer to **string** |  | [optional] 
-**YbImage** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
+**YbImage** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.0.&lt;/b&gt; Use provider.imageBundle instead | [optional] 
 
 ## Methods
 

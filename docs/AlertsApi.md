@@ -4,42 +4,42 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Acknowledge**](AlertsApi.md#Acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | WARNING: This is a preview API that could change. Acknowledge an alert
-[**AcknowledgeByFilter**](AlertsApi.md#AcknowledgeByFilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Deprecated since YBA version 2.8.0.0. Acknowledge all alerts
-[**AlertNotificationPreview**](AlertsApi.md#AlertNotificationPreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | WARNING: This is a preview API that could change. Prepare alert notification preview
-[**CountAlerts**](AlertsApi.md#CountAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | WARNING: This is a preview API that could change. Count alerts
-[**CreateAlertChannel**](AlertsApi.md#CreateAlertChannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | WARNING: This is a preview API that could change. Create an alert channel
-[**CreateAlertConfiguration**](AlertsApi.md#CreateAlertConfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | WARNING: This is a preview API that could change. Create an alert configuration
-[**CreateAlertDestination**](AlertsApi.md#CreateAlertDestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | WARNING: This is a preview API that could change. Create an alert destination
-[**DeleteAlertChannel**](AlertsApi.md#DeleteAlertChannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Delete an alert channel
-[**DeleteAlertChannelTemplates**](AlertsApi.md#DeleteAlertChannelTemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Delete alert channel templates
-[**DeleteAlertConfiguration**](AlertsApi.md#DeleteAlertConfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Delete an alert configuration
-[**DeleteAlertDestination**](AlertsApi.md#DeleteAlertDestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Delete an alert destination
-[**DeleteAlertTemplateSettings**](AlertsApi.md#DeleteAlertTemplateSettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Deprecated since YBA version 2.20.0.0. Delete an alert template settings
-[**DeleteAlertTemplateVariables**](AlertsApi.md#DeleteAlertTemplateVariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | WARNING: This is a preview API that could change. Delete an alert template variables
-[**EditAlertTemplateSettings**](AlertsApi.md#EditAlertTemplateSettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Deprecated since YBA version 2.20.0.0. Create or update alert template settings list
-[**EditAlertTemplateVariables**](AlertsApi.md#EditAlertTemplateVariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | WARNING: This is a preview API that could change. Create or update alert template variables
-[**Get**](AlertsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | WARNING: This is a preview API that could change. Get details of an alert
-[**GetAlertChannel**](AlertsApi.md#GetAlertChannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Get an alert channel
-[**GetAlertChannelTemplates**](AlertsApi.md#GetAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Get alert channel templates
-[**GetAlertConfiguration**](AlertsApi.md#GetAlertConfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Get an alert configuration
-[**GetAlertDestination**](AlertsApi.md#GetAlertDestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Get an alert destination
-[**ListActive**](AlertsApi.md#ListActive) | **Get** /api/v1/customers/{cUUID}/alerts/active | Deprecated since YBA version 2.8.0.0. List active alerts
-[**ListAlertChannelTemplates**](AlertsApi.md#ListAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | WARNING: This is a preview API that could change. List all alert channel templates
-[**ListAlertChannels**](AlertsApi.md#ListAlertChannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | WARNING: This is a preview API that could change. List all alert channels
-[**ListAlertConfigurations**](AlertsApi.md#ListAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | WARNING: This is a preview API that could change. Get filtered list of alert configurations
-[**ListAlertDestinations**](AlertsApi.md#ListAlertDestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | WARNING: This is a preview API that could change. List alert destinations
-[**ListAlertTemplateSettings**](AlertsApi.md#ListAlertTemplateSettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Deprecated since YBA version 2.20.0.0. Get alert template settings
-[**ListAlertTemplateVariables**](AlertsApi.md#ListAlertTemplateVariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | WARNING: This is a preview API that could change. List alert template variables
-[**ListAlertTemplates**](AlertsApi.md#ListAlertTemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | WARNING: This is a preview API that could change. Get filtered list of alert configuration templates
-[**ListOfAlerts**](AlertsApi.md#ListOfAlerts) | **Get** /api/v1/customers/{cUUID}/alerts | WARNING: This is a preview API that could change. List all alerts
-[**PageAlertConfigurations**](AlertsApi.md#PageAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | WARNING: This is a preview API that could change. List all alert configurations (paginated)
-[**PageAlerts**](AlertsApi.md#PageAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | WARNING: This is a preview API that could change. List alerts (paginated)
-[**SendTestAlert**](AlertsApi.md#SendTestAlert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | WARNING: This is a preview API that could change. Send test alert for alert configuration
-[**SetAlertChannelTemplates**](AlertsApi.md#SetAlertChannelTemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | WARNING: This is a preview API that could change. Set alert channel templates
-[**UpdateAlertChannel**](AlertsApi.md#UpdateAlertChannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | WARNING: This is a preview API that could change. Update an alert channel
-[**UpdateAlertConfiguration**](AlertsApi.md#UpdateAlertConfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | WARNING: This is a preview API that could change. Update an alert configuration
-[**UpdateAlertDestination**](AlertsApi.md#UpdateAlertDestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | WARNING: This is a preview API that could change. Update an alert destination
+[**Acknowledge**](AlertsApi.md#Acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
+[**AcknowledgeByFilter**](AlertsApi.md#AcknowledgeByFilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts - deprecated
+[**AlertNotificationPreview**](AlertsApi.md#AlertNotificationPreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | Prepare alert notification preview
+[**CountAlerts**](AlertsApi.md#CountAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
+[**CreateAlertChannel**](AlertsApi.md#CreateAlertChannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | Create an alert channel
+[**CreateAlertConfiguration**](AlertsApi.md#CreateAlertConfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
+[**CreateAlertDestination**](AlertsApi.md#CreateAlertDestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | Create an alert destination
+[**DeleteAlertChannel**](AlertsApi.md#DeleteAlertChannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
+[**DeleteAlertChannelTemplates**](AlertsApi.md#DeleteAlertChannelTemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Delete alert channel templates
+[**DeleteAlertConfiguration**](AlertsApi.md#DeleteAlertConfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
+[**DeleteAlertDestination**](AlertsApi.md#DeleteAlertDestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
+[**DeleteAlertTemplateSettings**](AlertsApi.md#DeleteAlertTemplateSettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings - deprecated
+[**DeleteAlertTemplateVariables**](AlertsApi.md#DeleteAlertTemplateVariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | Delete an alert template variables
+[**EditAlertTemplateSettings**](AlertsApi.md#EditAlertTemplateSettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Create or update alert template settings list - deprecated
+[**EditAlertTemplateVariables**](AlertsApi.md#EditAlertTemplateVariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | Create or update alert template variables
+[**Get**](AlertsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
+[**GetAlertChannel**](AlertsApi.md#GetAlertChannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
+[**GetAlertChannelTemplates**](AlertsApi.md#GetAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Get alert channel templates
+[**GetAlertConfiguration**](AlertsApi.md#GetAlertConfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
+[**GetAlertDestination**](AlertsApi.md#GetAlertDestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Get an alert destination
+[**ListActive**](AlertsApi.md#ListActive) | **Get** /api/v1/customers/{cUUID}/alerts/active | List active alerts - deprecated
+[**ListAlertChannelTemplates**](AlertsApi.md#ListAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | List all alert channel templates
+[**ListAlertChannels**](AlertsApi.md#ListAlertChannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
+[**ListAlertConfigurations**](AlertsApi.md#ListAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
+[**ListAlertDestinations**](AlertsApi.md#ListAlertDestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
+[**ListAlertTemplateSettings**](AlertsApi.md#ListAlertTemplateSettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings - deprecated
+[**ListAlertTemplateVariables**](AlertsApi.md#ListAlertTemplateVariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | List alert template variables
+[**ListAlertTemplates**](AlertsApi.md#ListAlertTemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
+[**ListOfAlerts**](AlertsApi.md#ListOfAlerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
+[**PageAlertConfigurations**](AlertsApi.md#PageAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
+[**PageAlerts**](AlertsApi.md#PageAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | List alerts (paginated)
+[**SendTestAlert**](AlertsApi.md#SendTestAlert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration
+[**SetAlertChannelTemplates**](AlertsApi.md#SetAlertChannelTemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Set alert channel templates
+[**UpdateAlertChannel**](AlertsApi.md#UpdateAlertChannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Update an alert channel
+[**UpdateAlertConfiguration**](AlertsApi.md#UpdateAlertConfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Update an alert configuration
+[**UpdateAlertDestination**](AlertsApi.md#UpdateAlertDestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Update an alert destination
 
 
 
@@ -47,7 +47,9 @@ Method | HTTP request | Description
 
 > Alert Acknowledge(ctx, cUUID, alertUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Acknowledge an alert
+Acknowledge an alert
+
+
 
 ### Example
 
@@ -120,7 +122,9 @@ Name | Type | Description  | Notes
 
 > []Alert AcknowledgeByFilter(ctx, cUUID).AcknowledgeAlertsRequest(acknowledgeAlertsRequest).Request(request).Execute()
 
-Deprecated since YBA version 2.8.0.0. Acknowledge all alerts
+Acknowledge all alerts - deprecated
+
+
 
 ### Example
 
@@ -192,7 +196,9 @@ Name | Type | Description  | Notes
 
 > AlertTemplateVariablesList AlertNotificationPreview(ctx, cUUID).NotificationPreviewRequest(notificationPreviewRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Prepare alert notification preview
+Prepare alert notification preview
+
+
 
 ### Example
 
@@ -264,7 +270,9 @@ Name | Type | Description  | Notes
 
 > int32 CountAlerts(ctx, cUUID).CountAlertsRequest(countAlertsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Count alerts
+Count alerts
+
+
 
 ### Example
 
@@ -336,7 +344,9 @@ Name | Type | Description  | Notes
 
 > AlertChannel CreateAlertChannel(ctx, cUUID).CreateAlertChannelRequest(createAlertChannelRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create an alert channel
+Create an alert channel
+
+
 
 ### Example
 
@@ -408,7 +418,9 @@ Name | Type | Description  | Notes
 
 > AlertConfiguration CreateAlertConfiguration(ctx, cUUID).CreateAlertConfigurationRequest(createAlertConfigurationRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create an alert configuration
+Create an alert configuration
+
+
 
 ### Example
 
@@ -481,7 +493,9 @@ Name | Type | Description  | Notes
 
 > AlertDestination CreateAlertDestination(ctx, cUUID).CreateAlertDestinationRequest(createAlertDestinationRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create an alert destination
+Create an alert destination
+
+
 
 ### Example
 
@@ -553,7 +567,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertChannel(ctx, cUUID, acUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete an alert channel
+Delete an alert channel
+
+
 
 ### Example
 
@@ -626,7 +642,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertChannelTemplates(ctx, cUUID, acType).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete alert channel templates
+Delete alert channel templates
+
+
 
 ### Example
 
@@ -699,7 +717,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertConfiguration(ctx, cUUID, configurationUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete an alert configuration
+Delete an alert configuration
+
+
 
 ### Example
 
@@ -772,7 +792,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertDestination(ctx, cUUID, adUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete an alert destination
+Delete an alert destination
+
+
 
 ### Example
 
@@ -845,7 +867,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertTemplateSettings(ctx, cUUID, settingsUUID).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Delete an alert template settings
+Delete an alert template settings - deprecated
+
+
 
 ### Example
 
@@ -918,7 +942,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess DeleteAlertTemplateVariables(ctx, cUUID, variableUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete an alert template variables
+Delete an alert template variables
+
+
 
 ### Example
 
@@ -991,7 +1017,9 @@ Name | Type | Description  | Notes
 
 > []AlertTemplateSettings EditAlertTemplateSettings(ctx, cUUID).EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Create or update alert template settings list
+Create or update alert template settings list - deprecated
+
+
 
 ### Example
 
@@ -1064,7 +1092,9 @@ Name | Type | Description  | Notes
 
 > []AlertTemplateVariable EditAlertTemplateVariables(ctx, cUUID).EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create or update alert template variables
+Create or update alert template variables
+
+
 
 ### Example
 
@@ -1136,7 +1166,9 @@ Name | Type | Description  | Notes
 
 > Alert Get(ctx, cUUID, alertUUID).Execute()
 
-WARNING: This is a preview API that could change. Get details of an alert
+Get details of an alert
+
+
 
 ### Example
 
@@ -1207,7 +1239,9 @@ Name | Type | Description  | Notes
 
 > AlertChannel GetAlertChannel(ctx, cUUID, acUUID).Execute()
 
-WARNING: This is a preview API that could change. Get an alert channel
+Get an alert channel
+
+
 
 ### Example
 
@@ -1278,7 +1312,9 @@ Name | Type | Description  | Notes
 
 > AlertChannelTemplatesExtWithDefaultValues GetAlertChannelTemplates(ctx, cUUID, acType).Execute()
 
-WARNING: This is a preview API that could change. Get alert channel templates
+Get alert channel templates
+
+
 
 ### Example
 
@@ -1349,7 +1385,9 @@ Name | Type | Description  | Notes
 
 > AlertConfiguration GetAlertConfiguration(ctx, cUUID, configurationUUID).Execute()
 
-WARNING: This is a preview API that could change. Get an alert configuration
+Get an alert configuration
+
+
 
 ### Example
 
@@ -1420,7 +1458,9 @@ Name | Type | Description  | Notes
 
 > AlertDestination GetAlertDestination(ctx, cUUID, adUUID).Execute()
 
-WARNING: This is a preview API that could change. Get an alert destination
+Get an alert destination
+
+
 
 ### Example
 
@@ -1491,7 +1531,9 @@ Name | Type | Description  | Notes
 
 > []Alert ListActive(ctx, cUUID).Execute()
 
-Deprecated since YBA version 2.8.0.0. List active alerts
+List active alerts - deprecated
+
+
 
 ### Example
 
@@ -1559,7 +1601,9 @@ Name | Type | Description  | Notes
 
 > []AlertChannelTemplatesExtWithDefaultValues ListAlertChannelTemplates(ctx, cUUID).Execute()
 
-WARNING: This is a preview API that could change. List all alert channel templates
+List all alert channel templates
+
+
 
 ### Example
 
@@ -1627,7 +1671,9 @@ Name | Type | Description  | Notes
 
 > []AlertChannel ListAlertChannels(ctx, cUUID).Execute()
 
-WARNING: This is a preview API that could change. List all alert channels
+List all alert channels
+
+
 
 ### Example
 
@@ -1695,7 +1741,9 @@ Name | Type | Description  | Notes
 
 > []AlertConfiguration ListAlertConfigurations(ctx, cUUID).ListAlertConfigurationsRequest(listAlertConfigurationsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Get filtered list of alert configurations
+Get filtered list of alert configurations
+
+
 
 ### Example
 
@@ -1767,7 +1815,9 @@ Name | Type | Description  | Notes
 
 > []AlertDefinition ListAlertDestinations(ctx, cUUID).Execute()
 
-WARNING: This is a preview API that could change. List alert destinations
+List alert destinations
+
+
 
 ### Example
 
@@ -1835,7 +1885,9 @@ Name | Type | Description  | Notes
 
 > []AlertTemplateSettings ListAlertTemplateSettings(ctx, cUUID).Execute()
 
-Deprecated since YBA version 2.20.0.0. Get alert template settings
+Get alert template settings - deprecated
+
+
 
 ### Example
 
@@ -1903,7 +1955,9 @@ Name | Type | Description  | Notes
 
 > AlertTemplateVariablesList ListAlertTemplateVariables(ctx, cUUID).Execute()
 
-WARNING: This is a preview API that could change. List alert template variables
+List alert template variables
+
+
 
 ### Example
 
@@ -1971,7 +2025,9 @@ Name | Type | Description  | Notes
 
 > []AlertConfigurationTemplate ListAlertTemplates(ctx, cUUID).ListTemplatesRequest(listTemplatesRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Get filtered list of alert configuration templates
+Get filtered list of alert configuration templates
+
+
 
 ### Example
 
@@ -2043,7 +2099,9 @@ Name | Type | Description  | Notes
 
 > []Alert ListOfAlerts(ctx, cUUID).Execute()
 
-WARNING: This is a preview API that could change. List all alerts
+List all alerts
+
+
 
 ### Example
 
@@ -2111,7 +2169,9 @@ Name | Type | Description  | Notes
 
 > AlertConfigurationPagedResponse PageAlertConfigurations(ctx, cUUID).PageAlertConfigurationsRequest(pageAlertConfigurationsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List all alert configurations (paginated)
+List all alert configurations (paginated)
+
+
 
 ### Example
 
@@ -2183,7 +2243,9 @@ Name | Type | Description  | Notes
 
 > AlertPagedResponse PageAlerts(ctx, cUUID).PageAlertsRequest(pageAlertsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List alerts (paginated)
+List alerts (paginated)
+
+
 
 ### Example
 
@@ -2255,7 +2317,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess SendTestAlert(ctx, cUUID, configurationUUID).Execute()
 
-WARNING: This is a preview API that could change. Send test alert for alert configuration
+Send test alert for alert configuration
+
+
 
 ### Example
 
@@ -2326,7 +2390,9 @@ Name | Type | Description  | Notes
 
 > AlertChannelTemplates SetAlertChannelTemplates(ctx, cUUID, acType).SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Set alert channel templates
+Set alert channel templates
+
+
 
 ### Example
 
@@ -2401,7 +2467,9 @@ Name | Type | Description  | Notes
 
 > AlertChannel UpdateAlertChannel(ctx, cUUID, acUUID).UpdateAlertChannelRequest(updateAlertChannelRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update an alert channel
+Update an alert channel
+
+
 
 ### Example
 
@@ -2476,7 +2544,9 @@ Name | Type | Description  | Notes
 
 > AlertConfiguration UpdateAlertConfiguration(ctx, cUUID, configurationUUID).UpdateAlertConfigurationRequest(updateAlertConfigurationRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update an alert configuration
+Update an alert configuration
+
+
 
 ### Example
 
@@ -2552,7 +2622,9 @@ Name | Type | Description  | Notes
 
 > AlertDestination UpdateAlertDestination(ctx, cUUID, adUUID).UpdateAlertDestinationRequest(updateAlertDestinationRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update an alert destination
+Update an alert destination
+
+
 
 ### Example
 

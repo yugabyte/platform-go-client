@@ -50,8 +50,8 @@ func (r UniverseDatabaseManagementApiApiConfigureYCQLRequest) Execute() (YBPTask
 }
 
 /*
- * ConfigureYCQL WARNING: This is a preview API that could change. Configure YCQL
- * Queues a task to configure ycql in a universe.
+ * ConfigureYCQL Configure YCQL
+ * WARNING: This is a preview API that could change. Queues a task to configure ycql in a universe.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param univUUID
@@ -192,8 +192,8 @@ func (r UniverseDatabaseManagementApiApiConfigureYSQLRequest) Execute() (YBPTask
 }
 
 /*
- * ConfigureYSQL WARNING: This is a preview API that could change. Configure YSQL
- * Queues a task to configure ysql in a universe.
+ * ConfigureYSQL Configure YSQL
+ * WARNING: This is a preview API that could change. Queues a task to configure ysql in a universe.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param univUUID

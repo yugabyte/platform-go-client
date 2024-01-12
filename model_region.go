@@ -27,13 +27,13 @@ type Region struct {
 	Longitude *float64 `json:"longitude,omitempty"`
 	// Cloud provider region name
 	Name *string `json:"name,omitempty"`
-	// Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo aws/azure securityGroupId property
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Moved to regionDetails.cloudInfo aws/azure securityGroupId property
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
 	// Region UUID
 	Uuid *string `json:"uuid,omitempty"`
-	// Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo aws/azure vnet property
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Moved to regionDetails.cloudInfo aws/azure vnet property
 	VnetName *string `json:"vnetName,omitempty"`
-	// Deprecated since YBA version 2.17.2.0, Moved to details.cloudInfo aws/gcp/azure ybImage property
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Moved to details.cloudInfo aws/gcp/azure ybImage property
 	YbImage *string `json:"ybImage,omitempty"`
 	Zones []AvailabilityZone `json:"zones"`
 }

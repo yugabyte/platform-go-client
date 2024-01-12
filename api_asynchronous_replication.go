@@ -49,7 +49,8 @@ func (r AsynchronousReplicationApiApiCreateXClusterConfigRequest) Execute() (YBP
 }
 
 /*
- * CreateXClusterConfig Available since YBA version 2.16.0.0. Create xcluster config
+ * CreateXClusterConfig Create xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AsynchronousReplicationApiApiCreateXClusterConfigRequest
@@ -187,7 +188,8 @@ func (r AsynchronousReplicationApiApiDeleteXClusterConfigRequest) Execute() (YBP
 }
 
 /*
- * DeleteXClusterConfig Available since YBA version 2.16.0.0. Delete xcluster config
+ * DeleteXClusterConfig Delete xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param xccUUID
@@ -326,7 +328,8 @@ func (r AsynchronousReplicationApiApiEditXClusterConfigRequest) Execute() (YBPTa
 }
 
 /*
- * EditXClusterConfig Available since YBA version 2.16.0.0. Edit xcluster config
+ * EditXClusterConfig Edit xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param xccUUID
@@ -457,7 +460,8 @@ func (r AsynchronousReplicationApiApiGetXClusterConfigRequest) Execute() (XClust
 }
 
 /*
- * GetXClusterConfig Available since YBA version 2.16.0.0. Get xcluster config
+ * GetXClusterConfig Get xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param xccUUID
@@ -595,7 +599,8 @@ func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) Execute() (map[s
 }
 
 /*
- * NeedBootstrapTable WARNING: This is a preview API that could change. Whether tables need bootstrap before setting up cross cluster replication
+ * NeedBootstrapTable Whether tables need bootstrap before setting up cross cluster replication
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -744,7 +749,8 @@ func (r AsynchronousReplicationApiApiRestartXClusterConfigRequest) Execute() (YB
 }
 
 /*
- * RestartXClusterConfig Available since YBA version 2.16.0.0. Restart xcluster config
+ * RestartXClusterConfig Restart xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param xccUUID
@@ -887,7 +893,8 @@ func (r AsynchronousReplicationApiApiSyncXClusterConfigRequest) Execute() (YBPTa
 }
 
 /*
- * SyncXClusterConfig Available since YBA version 2.16.0.0. Sync xcluster config
+ * SyncXClusterConfig Sync xcluster config
+ * Available since YBA version 2.16.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AsynchronousReplicationApiApiSyncXClusterConfigRequest
