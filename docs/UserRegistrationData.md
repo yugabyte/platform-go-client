@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Email** | **string** | Email address | 
 **Features** | Pointer to **map[string]map[string]interface{}** | User features | [optional] 
 **Password** | Pointer to **string** | Password | [optional] 
-**Role** | Pointer to **string** | Deprecated since YBA version 2.19.3.0. Use field roleResourceDefinitions instead. | [optional] 
+**Role** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.19.3.0.&lt;/b&gt; Use field roleResourceDefinitions instead. | [optional] 
 **RoleResourceDefinitions** | Pointer to [**[]RoleResourceDefinition**](RoleResourceDefinition.md) | List of roles and resource groups defined for user. | [optional] 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
 

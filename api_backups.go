@@ -49,7 +49,8 @@ func (r BackupsApiApiCreateBackupScheduleRequest) Execute() (Schedule, *_nethttp
 }
 
 /*
- * CreateBackupSchedule Deprecated since YBA version 2.20.0.0. Use 'Create Backup Schedule Async' instead. Create Backup Schedule
+ * CreateBackupSchedule Create Backup Schedule - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Create Backup Schedule Async' instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiCreateBackupScheduleRequest
@@ -324,7 +325,8 @@ func (r BackupsApiApiCreateMultiTableBackupRequest) Execute() (Schedule, *_netht
 }
 
 /*
- * CreateMultiTableBackup Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+ * CreateMultiTableBackup Create a multi-table backup - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -391,6 +393,152 @@ func (a *BackupsApiService) CreateMultiTableBackupExecute(r BackupsApiApiCreateM
 	}
 	// body params
 	localVarPostBody = r.tableBackup
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupsApiApiCreateSingleTableBackupRequest struct {
+	ctx _context.Context
+	ApiService *BackupsApiService
+	cUUID string
+	uniUUID string
+	tableUUID string
+	backup *BackupTableParams
+	request *interface{}
+}
+
+func (r BackupsApiApiCreateSingleTableBackupRequest) Backup(backup BackupTableParams) BackupsApiApiCreateSingleTableBackupRequest {
+	r.backup = &backup
+	return r
+}
+func (r BackupsApiApiCreateSingleTableBackupRequest) Request(request interface{}) BackupsApiApiCreateSingleTableBackupRequest {
+	r.request = &request
+	return r
+}
+
+func (r BackupsApiApiCreateSingleTableBackupRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.CreateSingleTableBackupExecute(r)
+}
+
+/*
+ * CreateSingleTableBackup Create a single-table backup - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @param tableUUID
+ * @return BackupsApiApiCreateSingleTableBackupRequest
+ */
+func (a *BackupsApiService) CreateSingleTableBackup(ctx _context.Context, cUUID string, uniUUID string, tableUUID string) BackupsApiApiCreateSingleTableBackupRequest {
+	return BackupsApiApiCreateSingleTableBackupRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+		tableUUID: tableUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *BackupsApiService) CreateSingleTableBackupExecute(r BackupsApiApiCreateSingleTableBackupRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsApiService.CreateSingleTableBackup")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tableUUID"+"}", _neturl.PathEscape(parameterToString(r.tableUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.backup == nil {
+		return localVarReturnValue, nil, reportError("backup is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.backup
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -596,7 +744,8 @@ func (r BackupsApiApiDeleteBackupsRequest) Execute() (map[string]interface{}, *_
 }
 
 /*
- * DeleteBackups Deprecated since YBA version 2.20.0.0. Use 'Delete backups V2' instead. Delete backups
+ * DeleteBackups Delete Backups - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Delete backups V2' instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiDeleteBackupsRequest
@@ -1777,7 +1926,8 @@ func (r BackupsApiApiListOfBackupsRequest) Execute() ([]Backup, *_nethttp.Respon
 }
 
 /*
- * ListOfBackups Deprecated since YBA version 2.20.0.0. Use 'List Backups (paginated) V2' instead. List a customer's backups
+ * ListOfBackups List a customer's backups - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'List Backups (paginated) V2' instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1919,7 +2069,8 @@ func (r BackupsApiApiRestoreRequest) Execute() (YBPTask, *_nethttp.Response, err
 }
 
 /*
- * Restore Deprecated since YBA version 2.20.0.0. Use 'Restore from a backup V2' instead. Restore from a backup
+ * Restore Restore from a backup - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Restore from a backup V2' instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -2475,7 +2626,8 @@ func (r BackupsApiApiSetUniverseBackupFlagRequest) Execute() (YBPSuccess, *_neth
 }
 
 /*
- * SetUniverseBackupFlag Available since YBA version 2.2.0.0. Set a universe's backup flag
+ * SetUniverseBackupFlag Set a universe's backup flag
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

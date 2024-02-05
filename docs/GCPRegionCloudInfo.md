@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InstanceTemplate** | Pointer to **string** | The instance template to be used for nodes created in this region. | [optional] 
-**YbImage** | Pointer to **string** | Deprecated since YBA version 2.20.0. Use provider.imageBundle instead | [optional] 
+**YbImage** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.0.&lt;/b&gt; Use provider.imageBundle instead | [optional] 
 
 ## Methods
 

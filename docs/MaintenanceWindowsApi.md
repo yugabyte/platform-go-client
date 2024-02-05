@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](MaintenanceWindowsApi.md#Create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | WARNING: This is a preview API that could change. Create maintenance window
-[**Delete**](MaintenanceWindowsApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Delete maintenance window
-[**Get**](MaintenanceWindowsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Get details of a maintenance window
-[**ListOfMaintenanceWindows**](MaintenanceWindowsApi.md#ListOfMaintenanceWindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list | WARNING: This is a preview API that could change. List maintenance windows
-[**Page**](MaintenanceWindowsApi.md#Page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | WARNING: This is a preview API that could change. List maintenance windows (paginated)
-[**Update**](MaintenanceWindowsApi.md#Update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | WARNING: This is a preview API that could change. Update maintenance window
+[**Create**](MaintenanceWindowsApi.md#Create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | Create maintenance window
+[**Delete**](MaintenanceWindowsApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Delete maintenance window
+[**Get**](MaintenanceWindowsApi.md#Get) | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Get details of a maintenance window
+[**ListOfMaintenanceWindows**](MaintenanceWindowsApi.md#ListOfMaintenanceWindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list | List maintenance windows
+[**Page**](MaintenanceWindowsApi.md#Page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | List maintenance windows (paginated)
+[**Update**](MaintenanceWindowsApi.md#Update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Update maintenance window
 
 
 
@@ -17,7 +17,9 @@ Method | HTTP request | Description
 
 > MaintenanceWindow Create(ctx, cUUID).CreateMaintenanceWindowRequest(createMaintenanceWindowRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Create maintenance window
+Create maintenance window
+
+
 
 ### Example
 
@@ -90,7 +92,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess Delete(ctx, cUUID, windowUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete maintenance window
+Delete maintenance window
+
+
 
 ### Example
 
@@ -163,7 +167,9 @@ Name | Type | Description  | Notes
 
 > MaintenanceWindow Get(ctx, cUUID, windowUUID).Execute()
 
-WARNING: This is a preview API that could change. Get details of a maintenance window
+Get details of a maintenance window
+
+
 
 ### Example
 
@@ -234,7 +240,9 @@ Name | Type | Description  | Notes
 
 > []MaintenanceWindow ListOfMaintenanceWindows(ctx, cUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List maintenance windows
+List maintenance windows
+
+
 
 ### Example
 
@@ -304,7 +312,9 @@ Name | Type | Description  | Notes
 
 > MaintenanceWindowPagedResponse Page(ctx, cUUID).PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List maintenance windows (paginated)
+List maintenance windows (paginated)
+
+
 
 ### Example
 
@@ -376,7 +386,9 @@ Name | Type | Description  | Notes
 
 > MaintenanceWindow Update(ctx, cUUID, windowUUID).UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update maintenance window
+Update maintenance window
+
+
 
 ### Example
 

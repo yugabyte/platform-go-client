@@ -44,7 +44,7 @@ type VMImageUpgradeParams struct {
 	IsSoftwareRollbackAllowed *bool `json:"isSoftwareRollbackAllowed,omitempty"`
 	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
-	// Map of region UUID to AMI name. Deprecated since YBA version 2.18.0.0, Use imageBundle instead.
+	// Map of region UUID to AMI name. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.0.0.</b> Use imageBundle instead.
 	MachineImages *map[string]string `json:"machineImages,omitempty"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
@@ -71,7 +71,7 @@ type VMImageUpgradeParams struct {
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs *[]string `json:"sourceXClusterConfigs,omitempty"`
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
-	// Map of region UUID to SSH User override. Deprecated since YBA version 2.18.0.0, Use imageBundle instead.
+	// Map of region UUID to SSH User override. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.0.0.</b> Use imageBundle instead.
 	SshUserOverrideMap *map[string]string `json:"sshUserOverrideMap,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs *[]string `json:"targetXClusterConfigs,omitempty"`

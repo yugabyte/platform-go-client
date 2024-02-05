@@ -41,7 +41,7 @@ type UserIntent struct {
 	InstanceType *string `json:"instanceType,omitempty"`
 	KubernetesOperatorVersion *int64 `json:"kubernetesOperatorVersion,omitempty"`
 	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
-	// User-defined gflags for master. Deprecated since YBA version 2.18.6.0, use specificGFlags
+	// User-defined gflags for master. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
@@ -53,7 +53,7 @@ type UserIntent struct {
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
 	SpotPrice *float64 `json:"spotPrice,omitempty"`
-	// User-defined gflags for tserver. Deprecated since YBA version 2.18.6.0, use specificGFlags
+	// User-defined gflags for tserver. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
 	TserverK8SNodeResourceSpec *K8SNodeResourceSpec `json:"tserverK8SNodeResourceSpec,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`

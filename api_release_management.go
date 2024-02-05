@@ -313,7 +313,8 @@ func (r ReleaseManagementApiApiGetListOfRegionReleasesRequest) Execute() (map[st
 }
 
 /*
- * GetListOfRegionReleases Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch instead
+ * GetListOfRegionReleases List releases by provider - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/releases/:arch instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

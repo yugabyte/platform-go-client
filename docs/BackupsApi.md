@@ -4,11 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateBackupSchedule**](BackupsApi.md#CreateBackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Deprecated since YBA version 2.20.0.0. Use &#39;Create Backup Schedule Async&#39; instead. Create Backup Schedule
+[**CreateBackupSchedule**](BackupsApi.md#CreateBackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule - deprecated
 [**CreateBackupScheduleAsync**](BackupsApi.md#CreateBackupScheduleAsync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
-[**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+[**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup - deprecated
+[**CreateSingleTableBackup**](BackupsApi.md#CreateSingleTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup | Create a single-table backup - deprecated
 [**Createbackup**](BackupsApi.md#Createbackup) | **Post** /api/v1/customers/{cUUID}/backups | Create a backup V2
-[**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;Delete backups V2&#39; instead. Delete backups
+[**DeleteBackups**](BackupsApi.md#DeleteBackups) | **Delete** /api/v1/customers/{cUUID}/backups | Delete Backups - deprecated
 [**DeleteBackupsV2**](BackupsApi.md#DeleteBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/delete | Delete backups V2
 [**EditBackupV2**](BackupsApi.md#EditBackupV2) | **Put** /api/v1/customers/{cUUID}/backups/{backupUUID} | Edit a backup V2
 [**FetchBackupsByTaskUUID**](BackupsApi.md#FetchBackupsByTaskUUID) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/tasks/{tUUID} | List backups associated with a task
@@ -17,12 +18,12 @@ Method | HTTP request | Description
 [**ListBackupRestoresV2**](BackupsApi.md#ListBackupRestoresV2) | **Post** /api/v1/customers/{cUUID}/restore/page | List Backup Restores (paginated)
 [**ListBackupsV2**](BackupsApi.md#ListBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 [**ListIncrementalBackups**](BackupsApi.md#ListIncrementalBackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
-[**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | Deprecated since YBA version 2.20.0.0. Use &#39;List Backups (paginated) V2&#39; instead. List a customer&#39;s backups
-[**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Deprecated since YBA version 2.20.0.0. Use &#39;Restore from a backup V2&#39; instead. Restore from a backup
+[**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups - deprecated
+[**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup - deprecated
 [**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 [**RestorePreflight**](BackupsApi.md#RestorePreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
 [**SetThrottleParams**](BackupsApi.md#SetThrottleParams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
-[**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Available since YBA version 2.2.0.0. Set a universe&#39;s backup flag
+[**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 
 
@@ -31,7 +32,9 @@ Method | HTTP request | Description
 
 > Schedule CreateBackupSchedule(ctx, cUUID).Backup(backup).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Use 'Create Backup Schedule Async' instead. Create Backup Schedule
+Create Backup Schedule - deprecated
+
+
 
 ### Example
 
@@ -175,7 +178,9 @@ Name | Type | Description  | Notes
 
 > Schedule CreateMultiTableBackup(ctx, cUUID, uniUUID).TableBackup(tableBackup).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create a multi-table backup
+Create a multi-table backup - deprecated
+
+
 
 ### Example
 
@@ -231,6 +236,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Schedule**](Schedule.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateSingleTableBackup
+
+> YBPTask CreateSingleTableBackup(ctx, cUUID, uniUUID, tableUUID).Backup(backup).Request(request).Execute()
+
+Create a single-table backup - deprecated
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    tableUUID := TODO // string | 
+    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.CreateSingleTableBackup(context.Background(), cUUID, uniUUID, tableUUID).Backup(backup).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.CreateSingleTableBackup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateSingleTableBackup`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.CreateSingleTableBackup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+**tableUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateSingleTableBackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **backup** | [**BackupTableParams**](BackupTableParams.md) | Backup data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -322,7 +407,9 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} DeleteBackups(ctx, cUUID).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Use 'Delete backups V2' instead. Delete backups
+Delete Backups - deprecated
+
+
 
 ### Example
 
@@ -972,7 +1059,9 @@ Name | Type | Description  | Notes
 
 > []Backup ListOfBackups(ctx, cUUID, uniUUID).Execute()
 
-Deprecated since YBA version 2.20.0.0. Use 'List Backups (paginated) V2' instead. List a customer's backups
+List a customer's backups - deprecated
+
+
 
 ### Example
 
@@ -1043,7 +1132,9 @@ Name | Type | Description  | Notes
 
 > YBPTask Restore(ctx, cUUID, uniUUID).Backup(backup).Request(request).Execute()
 
-Deprecated since YBA version 2.20.0.0. Use 'Restore from a backup V2' instead. Restore from a backup
+Restore from a backup - deprecated
+
+
 
 ### Example
 
@@ -1337,7 +1428,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess SetUniverseBackupFlag(ctx, cUUID, uniUUID).MarkActive(markActive).Request(request).Execute()
 
-Available since YBA version 2.2.0.0. Set a universe's backup flag
+Set a universe's backup flag
+
+
 
 ### Example
 

@@ -16,7 +16,7 @@ import (
 
 // NamespaceSafetime struct for NamespaceSafetime
 type NamespaceSafetime struct {
-	EstimatedDataLossMs int64 `json:"estimatedDataLossMs"`
+	EstimatedDataLossMs float64 `json:"estimatedDataLossMs"`
 	NamespaceId string `json:"namespaceId"`
 	NamespaceName string `json:"namespaceName"`
 	SafetimeEpochUs int64 `json:"safetimeEpochUs"`
@@ -28,7 +28,7 @@ type NamespaceSafetime struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNamespaceSafetime(estimatedDataLossMs int64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64, ) *NamespaceSafetime {
+func NewNamespaceSafetime(estimatedDataLossMs float64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64, ) *NamespaceSafetime {
 	this := NamespaceSafetime{}
 	this.EstimatedDataLossMs = estimatedDataLossMs
 	this.NamespaceId = namespaceId
@@ -48,9 +48,9 @@ func NewNamespaceSafetimeWithDefaults() *NamespaceSafetime {
 }
 
 // GetEstimatedDataLossMs returns the EstimatedDataLossMs field value
-func (o *NamespaceSafetime) GetEstimatedDataLossMs() int64 {
+func (o *NamespaceSafetime) GetEstimatedDataLossMs() float64 {
 	if o == nil  {
-		var ret int64
+		var ret float64
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *NamespaceSafetime) GetEstimatedDataLossMs() int64 {
 
 // GetEstimatedDataLossMsOk returns a tuple with the EstimatedDataLossMs field value
 // and a boolean to check if the value has been set.
-func (o *NamespaceSafetime) GetEstimatedDataLossMsOk() (*int64, bool) {
+func (o *NamespaceSafetime) GetEstimatedDataLossMsOk() (*float64, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *NamespaceSafetime) GetEstimatedDataLossMsOk() (*int64, bool) {
 }
 
 // SetEstimatedDataLossMs sets field value
-func (o *NamespaceSafetime) SetEstimatedDataLossMs(v int64) {
+func (o *NamespaceSafetime) SetEstimatedDataLossMs(v float64) {
 	o.EstimatedDataLossMs = v
 }
 

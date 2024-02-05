@@ -18,7 +18,7 @@ import (
 type GCPRegionCloudInfo struct {
 	// The instance template to be used for nodes created in this region.
 	InstanceTemplate *string `json:"instanceTemplate,omitempty"`
-	// Deprecated since YBA version 2.20.0. Use provider.imageBundle instead
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
 	YbImage *string `json:"ybImage,omitempty"`
 }
 

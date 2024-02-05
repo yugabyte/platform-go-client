@@ -21,6 +21,10 @@ type SupportBundleFormData struct {
 	Components []string `json:"components"`
 	// End date to filter logs till
 	EndDate time.Time `json:"endDate"`
+	// Max size in bytes of the recent collected cores (if any)
+	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
+	// Max number of the most recent cores to collect (if any)
+	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
 	// Start date to filter logs from
 	StartDate time.Time `json:"startDate"`
 }
@@ -93,6 +97,70 @@ func (o *SupportBundleFormData) SetEndDate(v time.Time) {
 	o.EndDate = v
 }
 
+// GetMaxCoreFileSize returns the MaxCoreFileSize field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetMaxCoreFileSize() int64 {
+	if o == nil || o.MaxCoreFileSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MaxCoreFileSize
+}
+
+// GetMaxCoreFileSizeOk returns a tuple with the MaxCoreFileSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetMaxCoreFileSizeOk() (*int64, bool) {
+	if o == nil || o.MaxCoreFileSize == nil {
+		return nil, false
+	}
+	return o.MaxCoreFileSize, true
+}
+
+// HasMaxCoreFileSize returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasMaxCoreFileSize() bool {
+	if o != nil && o.MaxCoreFileSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxCoreFileSize gets a reference to the given int64 and assigns it to the MaxCoreFileSize field.
+func (o *SupportBundleFormData) SetMaxCoreFileSize(v int64) {
+	o.MaxCoreFileSize = &v
+}
+
+// GetMaxNumRecentCores returns the MaxNumRecentCores field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetMaxNumRecentCores() int32 {
+	if o == nil || o.MaxNumRecentCores == nil {
+		var ret int32
+		return ret
+	}
+	return *o.MaxNumRecentCores
+}
+
+// GetMaxNumRecentCoresOk returns a tuple with the MaxNumRecentCores field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetMaxNumRecentCoresOk() (*int32, bool) {
+	if o == nil || o.MaxNumRecentCores == nil {
+		return nil, false
+	}
+	return o.MaxNumRecentCores, true
+}
+
+// HasMaxNumRecentCores returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasMaxNumRecentCores() bool {
+	if o != nil && o.MaxNumRecentCores != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxNumRecentCores gets a reference to the given int32 and assigns it to the MaxNumRecentCores field.
+func (o *SupportBundleFormData) SetMaxNumRecentCores(v int32) {
+	o.MaxNumRecentCores = &v
+}
+
 // GetStartDate returns the StartDate field value
 func (o *SupportBundleFormData) GetStartDate() time.Time {
 	if o == nil  {
@@ -124,6 +192,12 @@ func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["endDate"] = o.EndDate
+	}
+	if o.MaxCoreFileSize != nil {
+		toSerialize["maxCoreFileSize"] = o.MaxCoreFileSize
+	}
+	if o.MaxNumRecentCores != nil {
+		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
 	}
 	if true {
 		toSerialize["startDate"] = o.StartDate

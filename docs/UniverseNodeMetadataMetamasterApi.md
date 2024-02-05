@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetMasterAddresses**](UniverseNodeMetadataMetamasterApi.md#GetMasterAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | Available since YBA version 2.2.0.0. List a master node&#39;s addresses
-[**GetMasterNodesInfo**](UniverseNodeMetadataMetamasterApi.md#GetMasterNodesInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info | Available since YBA version 2.21.1.0. Lists all master nodes details
-[**GetRedisServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetRedisServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | Available since YBA version 2.2.0.0. List a REDIS server&#39;s addresses
+[**GetMasterAddresses**](UniverseNodeMetadataMetamasterApi.md#GetMasterAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
+[**GetMasterNodesInfo**](UniverseNodeMetadataMetamasterApi.md#GetMasterNodesInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info | Lists all master nodes details
+[**GetRedisServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetRedisServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
 [**GetUniverseMasterNodes**](UniverseNodeMetadataMetamasterApi.md#GetUniverseMasterNodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
-[**GetYQLServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetYQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | Available since YBA version 2.2.0.0. List a YQL server&#39;s addresses
-[**GetYSQLServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetYSQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | Available since YBA version 2.2.0.0. List a YSQL server&#39;s addresses
+[**GetYQLServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetYQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
+[**GetYSQLServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetYSQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | List a YSQL server&#39;s addresses
 
 
 
@@ -17,7 +17,9 @@ Method | HTTP request | Description
 
 > string GetMasterAddresses(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. List a master node's addresses
+List a master node's addresses
+
+
 
 ### Example
 
@@ -88,7 +90,9 @@ Name | Type | Description  | Notes
 
 > []MasterNodesInfo GetMasterNodesInfo(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.21.1.0. Lists all master nodes details
+Lists all master nodes details
+
+
 
 ### Example
 
@@ -159,7 +163,9 @@ Name | Type | Description  | Notes
 
 > string GetRedisServerAddresses(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. List a REDIS server's addresses
+List a REDIS server's addresses
+
+
 
 ### Example
 
@@ -298,7 +304,9 @@ Name | Type | Description  | Notes
 
 > string GetYQLServerAddresses(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. List a YQL server's addresses
+List a YQL server's addresses
+
+
 
 ### Example
 
@@ -369,7 +377,9 @@ Name | Type | Description  | Notes
 
 > string GetYSQLServerAddresses(ctx, cUUID, uniUUID).Execute()
 
-Available since YBA version 2.2.0.0. List a YSQL server's addresses
+List a YSQL server's addresses
+
+
 
 ### Example
 

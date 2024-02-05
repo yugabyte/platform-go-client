@@ -297,8 +297,8 @@ func (r LDAPRoleManagementApiApiSyncLdapUniverseRequest) Execute() (YBPTask, *_n
 }
 
 /*
- * SyncLdapUniverse WARNING: This is a preview API that could change. Perform an LDAP users sync on the universe
- * UNSTABLE - This API will undergo changes in future.
+ * SyncLdapUniverse Perform an LDAP users sync on the universe
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param univUUID

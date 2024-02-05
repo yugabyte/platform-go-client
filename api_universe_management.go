@@ -45,7 +45,8 @@ func (r UniverseManagementApiApiConfigureUniverseAlertsRequest) Execute() (YBPSu
 }
 
 /*
- * ConfigureUniverseAlerts Available since YBA version 2.2.0.0. Configure alerts for a universe
+ * ConfigureUniverseAlerts Configure alerts for a universe
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -191,7 +192,8 @@ func (r UniverseManagementApiApiDeleteUniverseRequest) Execute() (YBPTask, *_net
 }
 
 /*
- * DeleteUniverse Available since YBA version 2.2.0.0. Delete a universe
+ * DeleteUniverse Delete a universe
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -326,7 +328,8 @@ func (r UniverseManagementApiApiGetUniverseRequest) Execute() (UniverseResp, *_n
 }
 
 /*
- * GetUniverse Available since YBA version 2.2.0.0. Get a universe
+ * GetUniverse Get a universe
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -453,7 +456,8 @@ func (r UniverseManagementApiApiListUniversesRequest) Execute() ([]UniverseResp,
 }
 
 /*
- * ListUniverses Available since YBA version 2.2.0.0. List universes
+ * ListUniverses List universes
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return UniverseManagementApiApiListUniversesRequest
@@ -581,7 +585,8 @@ func (r UniverseManagementApiApiPauseUniverseRequest) Execute() (YBPTask, *_neth
 }
 
 /*
- * PauseUniverse Available since YBA version 2.6.0.0. Pause a universe
+ * PauseUniverse Pause a universe
+ * Available since YBA version 2.6.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -712,7 +717,8 @@ func (r UniverseManagementApiApiResumeUniverseRequest) Execute() (YBPTask, *_net
 }
 
 /*
- * ResumeUniverse Available since YBA version 2.6.0.0. Resume a paused universe
+ * ResumeUniverse Resume a paused universe
+ * Available since YBA version 2.6.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -848,7 +854,8 @@ func (r UniverseManagementApiApiSetUniverseBackupFlagRequest) Execute() (YBPSucc
 }
 
 /*
- * SetUniverseBackupFlag Available since YBA version 2.2.0.0. Set a universe's backup flag
+ * SetUniverseBackupFlag Set a universe's backup flag
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -982,7 +989,8 @@ func (r UniverseManagementApiApiSetUniverseHelm3CompatibleRequest) Execute() (YB
 }
 
 /*
- * SetUniverseHelm3Compatible Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
+ * SetUniverseHelm3Compatible Flag a universe as Helm 3-compatible - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1113,7 +1121,8 @@ func (r UniverseManagementApiApiSetUniverseKeyRequest) Execute() (UniverseResp, 
 }
 
 /*
- * SetUniverseKey Available since YBA version 2.2.0.0. Set a universe's key
+ * SetUniverseKey Set a universe's key
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1244,7 +1253,8 @@ func (r UniverseManagementApiApiUpdateLoadBalancerConfigRequest) Execute() (Upda
 }
 
 /*
- * UpdateLoadBalancerConfig WARNING: This is a preview API that could change. Update load balancer config
+ * UpdateLoadBalancerConfig Update load balancer config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

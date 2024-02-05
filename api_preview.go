@@ -50,7 +50,8 @@ func (r PreviewApiApiCreateImageBundleRequest) Execute() (ImageBundle, *_nethttp
 }
 
 /*
- * CreateImageBundle WARNING: This is a preview API that could change. Create a image bundle
+ * CreateImageBundle Create a image bundle
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -187,7 +188,8 @@ func (r PreviewApiApiDeleteRequest) Execute() (YBPSuccess, *_nethttp.Response, e
 }
 
 /*
- * Delete WARNING: This is a preview API that could change. Delete a image bundle
+ * Delete Delete a image bundle
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -327,7 +329,8 @@ func (r PreviewApiApiEditImageBundleRequest) Execute() (ImageBundle, *_nethttp.R
 }
 
 /*
- * EditImageBundle WARNING: This is a preview API that could change. Update a image bundle
+ * EditImageBundle Update a image bundle
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -462,7 +465,8 @@ func (r PreviewApiApiGetImageBundleRequest) Execute() (ImageBundle, *_nethttp.Re
 }
 
 /*
- * GetImageBundle WARNING: This is a preview API that could change. Get a image bundle
+ * GetImageBundle Get a image bundle
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -593,7 +597,8 @@ func (r PreviewApiApiGetListOfImageBundlesRequest) Execute() ([]ImageBundle, *_n
 }
 
 /*
- * GetListOfImageBundles WARNING: This is a preview API that could change. List image bundles
+ * GetListOfImageBundles List image bundles
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

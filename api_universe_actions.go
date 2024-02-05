@@ -44,7 +44,8 @@ func (r UniverseActionsApiApiImportUniverseRequest) Execute() (ImportUniverseFor
 }
 
 /*
- * ImportUniverse Deprecated since YBA version 2.19.3.0. Do not use, this will be removed soon. Import a universe
+ * ImportUniverse Import a universe - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b></p>Do not use, this will be removed soon.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return UniverseActionsApiApiImportUniverseRequest

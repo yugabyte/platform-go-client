@@ -47,7 +47,6 @@ tags:
 - name: Schedule management
 - name: Session management
 - name: Support Bundle management
-- name: Table management
 - name: Universe Upgrades Management
 - name: Universe actions
 - name: Universe database management
@@ -276,6 +275,7 @@ paths:
       - Access Keys
   /api/v1/customers/{cUUID}/admin_notifications:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAdminNotifications
       parameters:
       - in: path
@@ -292,12 +292,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Current admin notification messages'
           description: successful operation
-      summary: "WARNING: This is a preview API that could change. Returns the current\
-        \ list of notifications for admin"
+      summary: Current list of notifications for admin
       tags:
       - Session management
   /api/v1/customers/{cUUID}/alert_channel_templates:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertChannelTemplates
       parameters:
       - in: path
@@ -320,12 +320,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all alert channel\
-        \ templates"
+      summary: List all alert channel templates
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alert_channel_templates/{acType}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteAlertChannelTemplates
       parameters:
       - in: path
@@ -354,11 +354,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete alert channel\
-        \ templates"
+      summary: Delete alert channel templates
       tags:
       - Alerts
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAlertChannelTemplates
       parameters:
       - in: path
@@ -384,11 +384,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get alert channel\
-        \ templates"
+      summary: Get alert channel templates
       tags:
       - Alerts
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: setAlertChannelTemplates
       parameters:
       - in: path
@@ -423,13 +423,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Set alert channel\
-        \ templates"
+      summary: Set alert channel templates
       tags:
       - Alerts
       x-codegen-request-body-name: SetAlertChannelTemplatesRequest
   /api/v1/customers/{cUUID}/alert_channels:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertChannels
       parameters:
       - in: path
@@ -451,10 +451,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all alert channels"
+      summary: List all alert channels
       tags:
       - Alerts
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createAlertChannel
       parameters:
       - in: path
@@ -483,13 +484,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create an alert\
-        \ channel"
+      summary: Create an alert channel
       tags:
       - Alerts
       x-codegen-request-body-name: CreateAlertChannelRequest
   /api/v1/customers/{cUUID}/alert_channels/{acUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteAlertChannel
       parameters:
       - in: path
@@ -519,11 +520,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete an alert\
-        \ channel"
+      summary: Delete an alert channel
       tags:
       - Alerts
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAlertChannel
       parameters:
       - in: path
@@ -549,10 +550,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get an alert channel"
+      summary: Get an alert channel
       tags:
       - Alerts
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateAlertChannel
       parameters:
       - in: path
@@ -588,13 +590,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update an alert\
-        \ channel"
+      summary: Update an alert channel
       tags:
       - Alerts
       x-codegen-request-body-name: UpdateAlertChannelRequest
   /api/v1/customers/{cUUID}/alert_configurations:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createAlertConfiguration
       parameters:
       - in: path
@@ -623,13 +625,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create an alert\
-        \ configuration"
+      summary: Create an alert configuration
       tags:
       - Alerts
       x-codegen-request-body-name: CreateAlertConfigurationRequest
   /api/v1/customers/{cUUID}/alert_configurations/list:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertConfigurations
       parameters:
       - in: path
@@ -661,13 +663,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get filtered list\
-        \ of alert configurations"
+      summary: Get filtered list of alert configurations
       tags:
       - Alerts
       x-codegen-request-body-name: ListAlertConfigurationsRequest
   /api/v1/customers/{cUUID}/alert_configurations/page:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: pageAlertConfigurations
       parameters:
       - in: path
@@ -696,13 +698,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all alert configurations\
-        \ (paginated)"
+      summary: List all alert configurations (paginated)
       tags:
       - Alerts
       x-codegen-request-body-name: PageAlertConfigurationsRequest
   /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteAlertConfiguration
       parameters:
       - in: path
@@ -732,11 +734,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete an alert\
-        \ configuration"
+      summary: Delete an alert configuration
       tags:
       - Alerts
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAlertConfiguration
       parameters:
       - in: path
@@ -762,10 +764,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get an alert configuration"
+      summary: Get an alert configuration
       tags:
       - Alerts
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateAlertConfiguration
       parameters:
       - in: path
@@ -801,13 +804,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update an alert\
-        \ configuration"
+      summary: Update an alert configuration
       tags:
       - Alerts
       x-codegen-request-body-name: UpdateAlertConfigurationRequest
   /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: sendTestAlert
       parameters:
       - in: path
@@ -833,12 +836,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Send test alert\
-        \ for alert configuration"
+      summary: Send test alert for alert configuration
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alert_destinations:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertDestinations
       parameters:
       - in: path
@@ -860,10 +863,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List alert destinations"
+      summary: List alert destinations
       tags:
       - Alerts
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createAlertDestination
       parameters:
       - in: path
@@ -892,13 +896,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create an alert\
-        \ destination"
+      summary: Create an alert destination
       tags:
       - Alerts
       x-codegen-request-body-name: CreateAlertDestinationRequest
   /api/v1/customers/{cUUID}/alert_destinations/{adUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteAlertDestination
       parameters:
       - in: path
@@ -928,11 +932,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete an alert\
-        \ destination"
+      summary: Delete an alert destination
       tags:
       - Alerts
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAlertDestination
       parameters:
       - in: path
@@ -958,10 +962,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get an alert destination"
+      summary: Get an alert destination
       tags:
       - Alerts
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateAlertDestination
       parameters:
       - in: path
@@ -997,13 +1002,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update an alert\
-        \ destination"
+      summary: Update an alert destination
       tags:
       - Alerts
       x-codegen-request-body-name: UpdateAlertDestinationRequest
   /api/v1/customers/{cUUID}/alert_notification_preview:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: alertNotificationPreview
       parameters:
       - in: path
@@ -1032,14 +1037,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Prepare alert notification\
-        \ preview"
+      summary: Prepare alert notification preview
       tags:
       - Alerts
       x-codegen-request-body-name: NotificationPreviewRequest
   /api/v1/customers/{cUUID}/alert_template_settings:
     get:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
       operationId: listAlertTemplateSettings
       parameters:
       - in: path
@@ -1061,11 +1066,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Get alert template settings
+      summary: Get alert template settings - deprecated
       tags:
       - Alerts
     put:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
       operationId: editAlertTemplateSettings
       parameters:
       - in: path
@@ -1097,14 +1103,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Create or update alert template
-        settings list
+      summary: Create or update alert template settings list - deprecated
       tags:
       - Alerts
       x-codegen-request-body-name: EditAlertTemplateSettingsRequest
   /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID}:
     delete:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
       operationId: deleteAlertTemplateSettings
       parameters:
       - in: path
@@ -1134,11 +1140,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Delete an alert template settings
+      summary: Delete an alert template settings - deprecated
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alert_template_variables:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertTemplateVariables
       parameters:
       - in: path
@@ -1157,11 +1164,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List alert template\
-        \ variables"
+      summary: List alert template variables
       tags:
       - Alerts
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editAlertTemplateVariables
       parameters:
       - in: path
@@ -1193,13 +1200,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create or update\
-        \ alert template variables"
+      summary: Create or update alert template variables
       tags:
       - Alerts
       x-codegen-request-body-name: EditAlertTemplateVariablesRequest
   /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteAlertTemplateVariables
       parameters:
       - in: path
@@ -1229,12 +1236,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete an alert\
-        \ template variables"
+      summary: Delete an alert template variables
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alert_templates:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAlertTemplates
       parameters:
       - in: path
@@ -1266,13 +1273,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get filtered list\
-        \ of alert configuration templates"
+      summary: Get filtered list of alert configuration templates
       tags:
       - Alerts
       x-codegen-request-body-name: ListTemplatesRequest
   /api/v1/customers/{cUUID}/alerts:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listOfAlerts
       parameters:
       - in: path
@@ -1294,12 +1301,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all alerts"
+      summary: List all alerts
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alerts/acknowledge:
     post:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.8.0.0.</b></p>
       operationId: acknowledgeByFilter
       parameters:
       - in: path
@@ -1331,13 +1339,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.8.0.0. Acknowledge all alerts
+      summary: Acknowledge all alerts - deprecated
       tags:
       - Alerts
       x-codegen-request-body-name: AcknowledgeAlertsRequest
   /api/v1/customers/{cUUID}/alerts/active:
     get:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.8.0.0.</b></p>
       operationId: listActive
       parameters:
       - in: path
@@ -1359,11 +1368,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.8.0.0. List active alerts
+      summary: List active alerts - deprecated
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alerts/count:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: countAlerts
       parameters:
       - in: path
@@ -1394,12 +1404,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Count alerts"
+      summary: Count alerts
       tags:
       - Alerts
       x-codegen-request-body-name: CountAlertsRequest
   /api/v1/customers/{cUUID}/alerts/page:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: pageAlerts
       parameters:
       - in: path
@@ -1428,12 +1439,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List alerts (paginated)"
+      summary: List alerts (paginated)
       tags:
       - Alerts
       x-codegen-request-body-name: PageAlertsRequest
   /api/v1/customers/{cUUID}/alerts/{alertUUID}:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: get
       parameters:
       - in: path
@@ -1459,12 +1471,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get details of an\
-        \ alert"
+      summary: Get details of an alert
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: acknowledge
       parameters:
       - in: path
@@ -1494,12 +1506,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Acknowledge an alert"
+      summary: Acknowledge an alert
       tags:
       - Alerts
   /api/v1/customers/{cUUID}/backups:
     delete:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        'Delete backups V2' instead.
       operationId: deleteBackups
       parameters:
       - in: path
@@ -1522,8 +1536,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'Delete backups V2' instead.
-        Delete backups
+      summary: Delete Backups - deprecated
       tags:
       - Backups
     post:
@@ -2208,6 +2221,8 @@ paths:
   /api/v1/customers/{cUUID}/create_backup_schedule:
     post:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        'Create Backup Schedule Async' instead.
       operationId: createBackupSchedule
       parameters:
       - in: path
@@ -2237,8 +2252,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'Create Backup Schedule
-        Async' instead. Create Backup Schedule
+      summary: Create Backup Schedule - deprecated
       tags:
       - Backups
       x-codegen-request-body-name: backup
@@ -2279,6 +2293,7 @@ paths:
       x-codegen-request-body-name: backup
   /api/v1/customers/{cUUID}/customCAStore:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: addCA
       parameters:
       - in: path
@@ -2310,13 +2325,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Add a named custom\
-        \ CA certificate"
+      summary: Add a named custom CA certificate
       tags:
       - Custom CA Certificates
       x-codegen-request-body-name: X509CACertificate
   /api/v1/customers/{cUUID}/customCAStore/{certUUID}:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateCA
       parameters:
       - in: path
@@ -2355,13 +2370,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update a named custom\
-        \ CA certificate"
+      summary: Update a named custom CA certificate
       tags:
       - Custom CA Certificates
       x-codegen-request-body-name: X509CACertificate
   /api/v1/customers/{cUUID}/customCAStoreCertificates:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listAllCustomCaCertificates
       parameters:
       - in: path
@@ -2383,12 +2398,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all custom\
-        \ CA certificates of a customer"
+      summary: List all custom CA certificates of a customer
       tags:
       - Custom CA Certificates
   /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: Delete custom CA certificate
       parameters:
       - in: path
@@ -2418,11 +2433,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete a named custom\
-        \ CA certificate"
+      summary: Delete a named custom CA certificate
       tags:
       - Custom CA Certificates
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getAllCustomCaCertificates
       parameters:
       - in: path
@@ -2452,8 +2467,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Download a custom\
-        \ CA certificates of a customer"
+      summary: Download a custom CA certificates of a customer
       tags:
       - Custom CA Certificates
   /api/v1/customers/{cUUID}/dr_configs:
@@ -3009,6 +3023,7 @@ paths:
       x-codegen-request-body-name: KMS config
   /api/v1/customers/{cUUID}/kms_configs/{configUUID}/refresh:
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: refreshKMSConfig
       parameters:
       - in: path
@@ -3044,7 +3059,7 @@ paths:
           description: If there is an error refreshing the KMS config.
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Refresh KMS Config"
+      summary: Refresh KMS Config
       tags:
       - Encryption at rest
   /api/v1/customers/{cUUID}/kms_configs/{kmsProvider}:
@@ -3208,6 +3223,7 @@ paths:
       - License management
   /api/v1/customers/{cUUID}/maintenance_windows:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: create
       parameters:
       - in: path
@@ -3236,13 +3252,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create maintenance\
-        \ window"
+      summary: Create maintenance window
       tags:
       - Maintenance windows
       x-codegen-request-body-name: CreateMaintenanceWindowRequest
   /api/v1/customers/{cUUID}/maintenance_windows/list:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: listOfMaintenanceWindows
       parameters:
       - in: path
@@ -3268,12 +3284,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List maintenance\
-        \ windows"
+      summary: List maintenance windows
       tags:
       - Maintenance windows
   /api/v1/customers/{cUUID}/maintenance_windows/page:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: page
       parameters:
       - in: path
@@ -3302,13 +3318,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List maintenance\
-        \ windows (paginated)"
+      summary: List maintenance windows (paginated)
       tags:
       - Maintenance windows
       x-codegen-request-body-name: PageMaintenanceWindowsRequest
   /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: delete
       parameters:
       - in: path
@@ -3338,11 +3354,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete maintenance\
-        \ window"
+      summary: Delete maintenance window
       tags:
       - Maintenance windows
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: get
       parameters:
       - in: path
@@ -3368,11 +3384,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get details of a\
-        \ maintenance window"
+      summary: Get details of a maintenance window
       tags:
       - Maintenance windows
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: update
       parameters:
       - in: path
@@ -3408,8 +3424,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update maintenance\
-        \ window"
+      summary: Update maintenance window
       tags:
       - Maintenance windows
       x-codegen-request-body-name: UpdateMaintenanceWindowRequest
@@ -3540,6 +3555,7 @@ paths:
       - Node instances
   /api/v1/customers/{cUUID}/performance_recommendation_state_change/page:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: pageAuditInfo
       parameters:
       - in: path
@@ -3568,13 +3584,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List performance\
-        \ recommendations state change audit events (paginated)"
+      summary: List performance recommendations state change audit events (paginated)
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PageStateChangeAuditInfoRequest
   /api/v1/customers/{cUUID}/performance_recommendations:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: delete
       parameters:
       - in: path
@@ -3603,13 +3619,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete performance\
-        \ recommendations"
+      summary: Delete performance recommendations
       tags:
       - Performance Advisor
       x-codegen-request-body-name: DeletePerformanceRecommendationsRequest
   /api/v1/customers/{cUUID}/performance_recommendations/page:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: page
       parameters:
       - in: path
@@ -3638,13 +3654,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List performance\
-        \ recommendations (paginated)"
+      summary: List performance recommendations (paginated)
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PagePerformanceRecommendationRequest
   /api/v1/customers/{cUUID}/performance_recommendations/{rUUID}:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: get
       parameters:
       - in: path
@@ -3670,8 +3686,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get performance\
-        \ recommendation details"
+      summary: Get performance recommendation details
       tags:
       - Performance Advisor
   /api/v1/customers/{cUUID}/providers:
@@ -3857,6 +3872,7 @@ paths:
       - Cloud providers
   /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: accessKeyRotation
       parameters:
       - in: path
@@ -3886,12 +3902,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Rotate access key\
-        \ for a provider"
+      summary: Rotate access key for a provider
       tags:
       - Cloud providers
   /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: listSchedules
       parameters:
       - in: path
@@ -3920,11 +3936,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List all schedules\
-        \ for a provider's access key rotation"
+      summary: List all schedules for a provider's access key rotation
       tags:
       - Cloud providers
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: scheduledAccessKeyRotation
       parameters:
       - in: path
@@ -3954,12 +3970,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Rotate access key\
-        \ for a provider - Scheduled"
+      summary: Rotate access key for a provider - Scheduled
       tags:
       - Cloud providers
   /api/v1/customers/{cUUID}/providers/{pUUID}/access_key_rotation/schedule/{sUUID}:
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editAccessKeyRotationSchedule
       parameters:
       - in: path
@@ -4002,8 +4018,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Edit a access key\
-        \ rotation schedule"
+      summary: Edit a access key rotation schedule
       tags:
       - Cloud providers
       x-codegen-request-body-name: body
@@ -4042,7 +4057,8 @@ paths:
       - Access Keys
     post:
       deprecated: true
-      description: UNSTABLE - This API will undergo changes in future.
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key"
       operationId: createAccesskey
       parameters:
       - in: path
@@ -4078,8 +4094,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit\
-        \ instead for adding the key"
+      summary: Create/Upload Access Key for onprem provider region - deprecated
       tags:
       - Access Keys
       x-codegen-request-body-name: AccessKeyFormData
@@ -4159,6 +4174,7 @@ paths:
       tags:
       - Access Keys
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editAccesskey
       parameters:
       - in: path
@@ -4201,8 +4217,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Modify the existing\
-        \ access Key"
+      summary: Modify the existing access Key
       tags:
       - Access Keys
       x-codegen-request-body-name: accesskey
@@ -4262,6 +4277,7 @@ paths:
       x-codegen-request-body-name: EditProviderRequest
   /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getListOfImageBundles
       parameters:
       - in: path
@@ -4296,10 +4312,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. List image bundles"
+      summary: List image bundles
       tags:
       - preview
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createImageBundle
       parameters:
       - in: path
@@ -4336,12 +4353,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create a image bundle"
+      summary: Create a image bundle
       tags:
       - preview
       x-codegen-request-body-name: body
   /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: delete
       parameters:
       - in: path
@@ -4378,10 +4396,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Delete a image bundle"
+      summary: Delete a image bundle
       tags:
       - preview
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getImageBundle
       parameters:
       - in: path
@@ -4414,10 +4433,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get a image bundle"
+      summary: Get a image bundle
       tags:
       - preview
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editImageBundle
       parameters:
       - in: path
@@ -4461,7 +4481,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update a image bundle"
+      summary: Update a image bundle
       tags:
       - preview
       x-codegen-request-body-name: body
@@ -4759,6 +4779,7 @@ paths:
       - Node instances
   /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createProviderRegion
       parameters:
       - in: path
@@ -4795,12 +4816,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create a new region"
+      summary: Create a new region
       tags:
       - Region management
       x-codegen-request-body-name: region
   /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}:
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editProviderRegion
       parameters:
       - in: path
@@ -4844,12 +4866,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Modify a region"
+      summary: Modify a region
       tags:
       - Region management
       x-codegen-request-body-name: region
   /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createZone
       parameters:
       - in: path
@@ -4896,13 +4919,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Create an availability\
-        \ zone"
+      summary: Create an availability zone
       tags:
       - Availability Zones
       x-codegen-request-body-name: azData
   /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID}:
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: editZone
       parameters:
       - in: path
@@ -4953,14 +4976,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Modify an availability\
-        \ zone"
+      summary: Modify an availability zone
       tags:
       - Availability Zones
       x-codegen-request-body-name: azData
   /api/v1/customers/{cUUID}/providers/{pUUID}/refresh_pricing:
     put:
-      description: Refresh provider pricing info
+      description: "WARNING: This is a preview API that could change."
       operationId: refreshPricing
       parameters:
       - in: path
@@ -4990,7 +5012,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Refresh pricing"
+      summary: Refresh provider pricing info
       tags:
       - Cloud providers
   /api/v1/customers/{cUUID}/providers/{pUUID}/regions:
@@ -5034,6 +5056,8 @@ paths:
       - Region management
     post:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.18.2.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead"
       operationId: createRegion
       parameters:
       - in: path
@@ -5070,8 +5094,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions\
-        \ instead"
+      summary: Create Region - deprecated
       tags:
       - Region management
       x-codegen-request-body-name: region
@@ -5119,6 +5142,8 @@ paths:
       - Region management
     put:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.18.2.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead"
       operationId: editRegion
       parameters:
       - in: path
@@ -5163,8 +5188,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions\
-        \ instead"
+      summary: Edit regions - deprecated
       tags:
       - Region management
       x-codegen-request-body-name: region
@@ -5210,6 +5234,9 @@ paths:
       - Availability Zones
     post:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.18.2.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones\
+        \ instead"
       operationId: createAZ
       parameters:
       - in: path
@@ -5256,8 +5283,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones\
-        \ instead"
+      summary: Create an availability zone - deprecated
       tags:
       - Availability Zones
       x-codegen-request-body-name: azFormData
@@ -5311,6 +5337,9 @@ paths:
       - Availability Zones
     put:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.18.2.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID\
+        \ instead"
       operationId: editAZ
       parameters:
       - in: path
@@ -5361,14 +5390,15 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID\
-        \ instead"
+      summary: Edit an Availabilty Zone - deprecated
       tags:
       - Availability Zones
       x-codegen-request-body-name: azFormData
   /api/v1/customers/{cUUID}/providers/{pUUID}/releases:
     get:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/releases/:arch instead"
       operationId: getListOfRegionReleases
       parameters:
       - in: path
@@ -5405,8 +5435,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.20.0.0, Use /api/v1/customers/{cUUID}/releases/:arch\
-        \ instead"
+      summary: List releases by provider - deprecated
       tags:
       - Release management
   /api/v1/customers/{cUUID}/regions:
@@ -5917,6 +5946,8 @@ paths:
   /api/v1/customers/{cUUID}/schedules:
     get:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
+        Use 'List schedules V2' instead.
       operationId: listSchedules
       parameters:
       - in: path
@@ -5938,8 +5969,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'List schedules V2' instead.
-        List schedules
+      summary: List schedules - deprecated
       tags:
       - Schedule management
   /api/v1/customers/{cUUID}/schedules/page:
@@ -5979,6 +6009,8 @@ paths:
   /api/v1/customers/{cUUID}/schedules/{sUUID}:
     delete:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        'Delete a schedule V2' instead.
       operationId: deleteSchedule
       parameters:
       - in: path
@@ -6008,8 +6040,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'Delete a schedule V2' instead.
-        Delete a schedule
+      summary: Delete a schedule  - deprecated
       tags:
       - Schedule management
     get:
@@ -6285,6 +6316,8 @@ paths:
   /api/v1/customers/{cUUID}/tasks/{tUUID}/failed:
     get:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.19.1.0.</b></p>Use\
+        \ /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead."
       operationId: failedSubtasks
       parameters:
       - in: path
@@ -6315,8 +6348,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks\
-        \ instead"
+      summary: Fetch failed subtasks - deprecated
       tags:
       - Customer Tasks
   /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks:
@@ -6418,6 +6450,7 @@ paths:
       - Customer Tasks
   /api/v1/customers/{cUUID}/universes:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: listUniverses
       parameters:
       - in: path
@@ -6445,7 +6478,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. List universes
+      summary: List universes
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/clusters:
@@ -6488,6 +6521,8 @@ paths:
   /api/v1/customers/{cUUID}/universes/import:
     post:
       deprecated: true
+      description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b></p>Do\
+        \ not use, this will be removed soon."
       operationId: importUniverse
       parameters:
       - in: path
@@ -6510,12 +6545,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "Deprecated since YBA version 2.19.3.0. Do not use, this will be removed\
-        \ soon. Import a universe"
+      summary: Import a universe - deprecated
       tags:
       - Universe actions
   /api/v1/customers/{cUUID}/universes/{uniUUID}:
     delete:
+      description: Available since YBA version 2.2.0.0.
       operationId: deleteUniverse
       parameters:
       - in: path
@@ -6563,10 +6598,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Delete a universe
+      summary: Delete a universe
       tags:
       - Universe management
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getUniverse
       parameters:
       - in: path
@@ -6592,12 +6628,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Get a universe
+      summary: Get a universe
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/backups:
     get:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        'List Backups (paginated) V2' instead.
       operationId: ListOfBackups
       parameters:
       - in: path
@@ -6632,13 +6670,14 @@ paths:
           description: If there was a server or database issue when listing the backups
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'List Backups (paginated)
-        V2' instead. List a customer's backups
+      summary: List a customer's backups - deprecated
       tags:
       - Backups
   /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore:
     post:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        'Restore from a backup V2' instead.
       operationId: restore
       parameters:
       - in: path
@@ -6675,8 +6714,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Use 'Restore from a backup V2'
-        instead. Restore from a backup
+      summary: Restore from a backup - deprecated
       tags:
       - Backups
       x-codegen-request-body-name: backup
@@ -6908,6 +6946,7 @@ paths:
       - UniverseClusterMutations
   /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts:
     post:
+      description: Available since YBA version 2.2.0.0.
       operationId: configureUniverseAlerts
       parameters:
       - in: path
@@ -6937,12 +6976,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Configure alerts for a universe
+      summary: Configure alerts for a universe
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/cost:
     get:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        /universe_resources
       operationId: getUniverseCost
       parameters:
       - in: path
@@ -6968,15 +7009,15 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0(use /universe_resources). Get
-        a cost estimate for a universe.
+      summary: Get a cost estimate for a universe - deprecated
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check:
     get:
-      description: "Checks the health of all tablet servers and masters in the universe,\
-        \ as well as certain conditions on the machines themselves, including disk\
-        \ utilization, presence of FATAL or core files, and more."
+      description: "Available since YBA version 2.2.0.0. Checks the health of all\
+        \ tablet servers and masters in the universe, as well as certain conditions\
+        \ on the machines themselves, including disk utilization, presence of FATAL\
+        \ or core files, and more."
       operationId: healthCheckUniverse
       parameters:
       - in: path
@@ -7005,8 +7046,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Return results for the last health
-        check
+      summary: Return results for the last health check
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config:
@@ -7066,6 +7106,8 @@ paths:
   /api/v1/customers/{cUUID}/universes/{uniUUID}/kms:
     delete:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Do
+        not use.
       operationId: removeKeyRefHistory
       parameters:
       - in: path
@@ -7095,12 +7137,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Do not use. This API removes
-        a universe's key reference history
+      summary: This API removes a universe's key reference history - deprecated
       tags:
       - Encryption at rest
   /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getLatestRun
       parameters:
       - in: path
@@ -7126,12 +7168,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get last performance\
-        \ advisor run details"
+      summary: Get last performance advisor run details
       tags:
       - Performance Advisor
   /api/v1/customers/{cUUID}/universes/{uniUUID}/leader:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getMasterLeaderIP
       parameters:
       - in: path
@@ -7158,12 +7200,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Get IP address of a universe's
-        master leader
+      summary: Get IP address of a universe's master leader
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries:
     get:
+      description: Available since YBA version 2.4.0.0.
       operationId: getLiveQueries
       parameters:
       - in: path
@@ -7190,11 +7232,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.4.0.0. Get live queries for a universe
+      summary: Get live queries for a universe
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/mark_helm3_compatible:
     put:
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
       operationId: setUniverseHelm3Compatible
       parameters:
       - in: path
@@ -7224,11 +7267,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0. Flag a universe as Helm 3-compatible
+      summary: Flag a universe as Helm 3-compatible - deprecated
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/masters:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getMasterAddresses
       parameters:
       - in: path
@@ -7255,11 +7299,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. List a master node's addresses
+      summary: List a master node's addresses
       tags:
       - Universe node metadata (metamaster)
   /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info:
     get:
+      description: Available since YBA version 2.21.1.0.
       operationId: getMasterNodesInfo
       parameters:
       - in: path
@@ -7288,12 +7333,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.21.1.0. Lists all master nodes details
+      summary: Lists all master nodes details
       tags:
       - Universe node metadata (metamaster)
   /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup:
     put:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        BackupsController.
       operationId: createMultiTableBackup
       parameters:
       - in: path
@@ -7330,14 +7377,13 @@ paths:
           description: If requested schedule backup.
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create
-        a multi-table backup
+      summary: Create a multi-table backup - deprecated
       tags:
       - Backups
-      - Table management
       x-codegen-request-body-name: Table backup
   /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: needBootstrapTable
       parameters:
       - in: path
@@ -7385,8 +7431,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Whether tables need\
-        \ bootstrap before setting up cross cluster replication"
+      summary: Whether tables need bootstrap before setting up cross cluster replication
       tags:
       - Asynchronous Replication
       x-codegen-request-body-name: xcluster_need_bootstrap_form_data
@@ -7433,6 +7478,7 @@ paths:
       x-codegen-request-body-name: ReinstallNodeAgentForm
   /api/v1/customers/{cUUID}/universes/{uniUUID}/pause:
     post:
+      description: Available since YBA version 2.6.0.0.
       operationId: pauseUniverse
       parameters:
       - in: path
@@ -7462,11 +7508,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.6.0.0. Pause a universe
+      summary: Pause a universe
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getSettings
       parameters:
       - in: path
@@ -7496,11 +7543,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get universe performance\
-        \ advisor settings"
+      summary: Get universe performance advisor settings
       tags:
       - Performance Advisor
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateSettings
       parameters:
       - in: path
@@ -7536,8 +7583,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update universe\
-        \ performance advisor settings"
+      summary: Update universe performance advisor settings
       tags:
       - Performance Advisor
       x-codegen-request-body-name: PerformanceAdvisorSettingsRequest
@@ -7659,6 +7705,7 @@ paths:
       - PITR management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/query_distribution_suggestions:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getQueryDistributionSuggestions
       parameters:
       - in: path
@@ -7684,13 +7731,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get query distribution\
-        \ improvement suggestion for a universe"
+      summary: Get query distribution improvement suggestion for a universe
       tags:
       - Universe performance suggestions
   /api/v1/customers/{cUUID}/universes/{uniUUID}/range_hash:
     get:
-      description: Returns list of hash indexes on timestamp columns.
+      description: "WARNING: This is a preview API that could change. Returns list\
+        \ of hash indexes on timestamp columns."
       operationId: getRangeHash
       parameters:
       - in: path
@@ -7716,12 +7763,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Return list of hash\
-        \ indexes"
+      summary: Return list of hash indexes
       tags:
       - Universe performance suggestions
   /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getRedisServerAddresses
       parameters:
       - in: path
@@ -7748,11 +7795,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. List a REDIS server's addresses
+      summary: List a REDIS server's addresses
       tags:
       - Universe node metadata (metamaster)
   /api/v1/customers/{cUUID}/universes/{uniUUID}/resume:
     post:
+      description: Available since YBA version 2.6.0.0.
       operationId: resumeUniverse
       parameters:
       - in: path
@@ -7782,11 +7830,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.6.0.0. Resume a paused universe
+      summary: Resume a paused universe
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key:
     post:
+      description: Available since YBA version 2.2.0.0.
       operationId: setUniverseKey
       parameters:
       - in: path
@@ -7816,11 +7865,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Set a universe's key
+      summary: Set a universe's key
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries:
     delete:
+      description: Available since YBA version 2.6.0.0.
       operationId: resetSlowQueries
       parameters:
       - in: path
@@ -7851,10 +7901,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.6.0.0. Reset slow queries for a universe
+      summary: Reset slow queries for a universe
       tags:
       - Universe information
     get:
+      description: Available since YBA version 2.6.0.0.
       operationId: getSlowQueries
       parameters:
       - in: path
@@ -7881,11 +7932,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.6.0.0. Get slow queries for a universe
+      summary: Get slow queries for a universe
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: runPerfAdvisor
       parameters:
       - in: path
@@ -7915,13 +7967,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Start performance\
-        \ advisor run for universe"
+      summary: Start performance advisor run for universe
       tags:
       - Performance Advisor
   /api/v1/customers/{cUUID}/universes/{uniUUID}/status:
     get:
-      description: This will return a Map of node name to its status in json format
+      description: Available since YBA version 2.2.0.0. This will return a Map of
+        node name to its status in json format.
       operationId: universeStatus
       parameters:
       - in: path
@@ -7952,7 +8004,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Get a universe's status
+      summary: Get a universe's status
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle:
@@ -8147,6 +8199,8 @@ paths:
   /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup:
     put:
       deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use
+        BackupsController.
       operationId: createSingleTableBackup
       parameters:
       - in: path
@@ -8190,15 +8244,15 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0 (Use BackupsController). Create
-        a single-table backup
+      summary: Create a single-table backup - deprecated
       tags:
-      - Table management
+      - Backups
       x-codegen-request-body-name: Backup
   /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources:
     get:
-      description: Expects UniverseDefinitionTaskParams in request body and calculates
-        the resource estimate for NodeDetailsSet in that.
+      description: Available since YBA version 2.20.0.0. Expects UniverseDefinitionTaskParams
+        in request body and calculates the resource estimate for NodeDetailsSet in
+        that.
       operationId: getUniverseResources
       parameters:
       - in: path
@@ -8224,14 +8278,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.20.0.0. Get a resource usage estimate
-        for a universe
+      summary: Get a resource usage estimate for a universe
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes:
     get:
-      description: "Returns list of unused indexes, along with their database and\
-        \ table."
+      description: "WARNING: This is a preview API that could change. Returns list\
+        \ of unused indexes, along with their database and table."
       operationId: getUnusedIndexes
       parameters:
       - in: path
@@ -8257,12 +8310,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Return list of each\
-        \ unused index across the universe"
+      summary: Return list of each unused index across the universe
       tags:
       - Universe performance suggestions
   /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state:
     put:
+      description: Available since YBA version 2.2.0.0.
       operationId: setUniverseBackupFlag
       parameters:
       - in: path
@@ -8297,12 +8350,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. Set a universe's backup flag
+      summary: Set a universe's backup flag
       tags:
       - Universe management
       - Backups
   /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config:
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: updateLoadBalancerConfig
       parameters:
       - in: path
@@ -8332,8 +8386,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Update load balancer\
-        \ config"
+      summary: Update load balancer config
       tags:
       - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs:
@@ -8382,8 +8435,10 @@ paths:
       x-codegen-request-body-name: certs_rotate_params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version:
     post:
-      description: Queues a task to perform DB version upgrade and rolling restart
-        in a universe.
+      description: "WARNING: This is a preview API that could change. This is a two\
+        \ step DB software version upgrade, Upgrade DB version and then finalize software\
+        \ which would be same as of upgrade software but additionally support rollback\
+        \ before upgrade finalize. "
       operationId: upgradeDBVersion
       parameters:
       - in: path
@@ -8420,16 +8475,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. This is a two step\
-        \ DB software version upgrade, Upgrade DB version and then finalize software\
-        \ which would be same as of upgrade software but additionally support rollback\
-        \ before upgrade finalize. "
+      summary: Upgrade DB version
       tags:
       - Universe Upgrades Management
       x-codegen-request-body-name: software_upgrade_params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize:
     post:
-      description: Queues a task to finalize upgrade in a universe.
+      description: "WARNING: This is a preview API that could change. Queues a task\
+        \ to finalize upgrade in a universe."
       operationId: finalizeUpgrade
       parameters:
       - in: path
@@ -8466,13 +8519,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Finalize Upgrade."
+      summary: Finalize Upgrade
       tags:
       - Universe Upgrades Management
       x-codegen-request-body-name: finalize_upgrade_params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info:
     get:
-      description: Provides pre-finalize software upgrade info
+      description: "WARNING: This is a preview API that could change. Provides pre-finalize\
+        \ software upgrade info."
       operationId: preFinalizeSoftwareUpgradeInfo
       parameters:
       - in: path
@@ -8498,8 +8552,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Finalize Software\
-        \ Upgrade info"
+      summary: Finalize Software Upgrade info
       tags:
       - Universe Upgrades Management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags:
@@ -8721,7 +8774,8 @@ paths:
       x-codegen-request-body-name: restart_task_params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback:
     post:
-      description: Queues a task to rollback upgrade in a universe.
+      description: "WARNING: This is a preview API that could change. Queues a task\
+        \ to rollback upgrade in a universe."
       operationId: rollbackUpgrade
       parameters:
       - in: path
@@ -8758,7 +8812,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Rollback Upgrade"
+      summary: Rollback Upgrade
       tags:
       - Universe Upgrades Management
       x-codegen-request-body-name: rollback_upgrade_params
@@ -8808,7 +8862,8 @@ paths:
       x-codegen-request-body-name: software_upgrade_params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck:
     post:
-      description: Performs pre-checks and provides pre-upgrade info
+      description: "WARNING: This is a preview API that could change. Performs pre-checks\
+        \ and provides pre-upgrade info."
       operationId: softwareUpgradePreCheck
       parameters:
       - in: path
@@ -8845,8 +8900,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Software Upgrade\
-        \ universe pre-check"
+      summary: Software Upgrade universe pre-check
       tags:
       - Universe Upgrades Management
       x-codegen-request-body-name: software_upgrade_info_request
@@ -9097,6 +9151,7 @@ paths:
       x-codegen-request-body-name: throttleParams
   /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getYQLServerAddresses
       parameters:
       - in: path
@@ -9123,11 +9178,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. List a YQL server's addresses
+      summary: List a YQL server's addresses
       tags:
       - Universe node metadata (metamaster)
   /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers:
     get:
+      description: Available since YBA version 2.2.0.0.
       operationId: getYSQLServerAddresses
       parameters:
       - in: path
@@ -9154,13 +9210,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.2.0.0. List a YSQL server's addresses
+      summary: List a YSQL server's addresses
       tags:
       - Universe node metadata (metamaster)
   /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs:
     get:
       deprecated: true
-      description: Downloads the log files from a given node.
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>User
+        Support bundle. Downloads the log files from a given node.
       operationId: downloadNodeLogs
       parameters:
       - in: path
@@ -9193,13 +9250,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Deprecated since YBA version 2.20.0.0 (use support bundle). Download
-        a node's logs.
+      summary: Download a node's logs - deprecated
       tags:
       - Universe information
   /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql:
     post:
-      description: Queues a task to configure ycql in a universe.
+      description: "WARNING: This is a preview API that could change. Queues a task\
+        \ to configure ycql in a universe."
       operationId: configureYCQL
       parameters:
       - in: path
@@ -9236,13 +9293,14 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Configure YCQL"
+      summary: Configure YCQL
       tags:
       - Universe database management
       x-codegen-request-body-name: configure_ycql_form_data
   /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql:
     post:
-      description: Queues a task to configure ysql in a universe.
+      description: "WARNING: This is a preview API that could change. Queues a task\
+        \ to configure ysql in a universe."
       operationId: configureYSQL
       parameters:
       - in: path
@@ -9279,13 +9337,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Configure YSQL"
+      summary: Configure YSQL
       tags:
       - Universe database management
       x-codegen-request-body-name: configure_ysql_form_data
   /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync:
     post:
-      description: UNSTABLE - This API will undergo changes in future.
+      description: "WARNING: This is a preview API that could change."
       operationId: syncLdapUniverse
       parameters:
       - in: path
@@ -9322,8 +9380,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Perform an LDAP\
-        \ users sync on the universe"
+      summary: Perform an LDAP users sync on the universe
       tags:
       - LDAP Role management
       x-codegen-request-body-name: syncLdapUniverse
@@ -9764,6 +9821,7 @@ paths:
       x-codegen-request-body-name: UniverseConfigureTaskParams
   /api/v1/customers/{cUUID}/xcluster_configs:
     post:
+      description: Available since YBA version 2.16.0.0.
       operationId: createXClusterConfig
       parameters:
       - in: path
@@ -9793,12 +9851,13 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Create xcluster config
+      summary: Create xcluster config
       tags:
       - Asynchronous Replication
       x-codegen-request-body-name: xcluster_replication_create_form_data
   /api/v1/customers/{cUUID}/xcluster_configs/sync:
     post:
+      description: Available since YBA version 2.16.0.0.
       operationId: syncXClusterConfig
       parameters:
       - in: path
@@ -9827,11 +9886,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Sync xcluster config
+      summary: Sync xcluster config
       tags:
       - Asynchronous Replication
   /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}:
     delete:
+      description: Available since YBA version 2.16.0.0.
       operationId: deleteXClusterConfig
       parameters:
       - in: path
@@ -9867,10 +9927,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Delete xcluster config
+      summary: Delete xcluster config
       tags:
       - Asynchronous Replication
     get:
+      description: Available since YBA version 2.16.0.0.
       operationId: getXClusterConfig
       parameters:
       - in: path
@@ -9896,10 +9957,11 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Get xcluster config
+      summary: Get xcluster config
       tags:
       - Asynchronous Replication
     post:
+      description: Available since YBA version 2.16.0.0.
       operationId: restartXClusterConfig
       parameters:
       - in: path
@@ -9942,11 +10004,12 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Restart xcluster config
+      summary: Restart xcluster config
       tags:
       - Asynchronous Replication
       x-codegen-request-body-name: xcluster_replication_restart_form_data
     put:
+      description: Available since YBA version 2.16.0.0.
       operationId: editXClusterConfig
       parameters:
       - in: path
@@ -9983,7 +10046,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.16.0.0. Edit xcluster config
+      summary: Edit xcluster config
       tags:
       - Asynchronous Replication
       x-codegen-request-body-name: xcluster_replication_edit_form_data
@@ -10104,6 +10167,7 @@ paths:
       - Node instances
   /api/v1/grafana_dashboard:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: GrafanaDashboard
       responses:
         "200":
@@ -10115,7 +10179,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: "WARNING: This is a preview API that could change. Get Grafana Dashboard"
+      summary: Get Grafana Dashboard
       tags:
       - Grafana Dashboard
   /api/v1/logging_config:
@@ -10339,6 +10403,7 @@ paths:
       - Node Agents
   /api/v1/prometheus_metrics:
     get:
+      description: Available since YBA version 2.8.0.0.
       operationId: MetricsDetail
       responses:
         "200":
@@ -10350,7 +10415,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Available since YBA version 2.8.0.0. Get Prometheus metrics
+      summary: Get Prometheus metrics
       tags:
       - Metrics
   /api/v1/register:
@@ -10524,8 +10589,8 @@ components:
       exampleSetFlag: true
       properties:
         arch:
-          description: Deprecated since YBA version 2.20.0. Use provider.imageBundle
-            instead
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.</b>
+            Use provider.imageBundle instead
           enum:
           - x86_64
           - aarch64
@@ -10538,8 +10603,8 @@ components:
           exampleSetFlag: true
           type: string
         ybImage:
-          description: Deprecated since YBA version 2.20.0. Use provider.imageBundle
-            instead
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.</b>
+            Use provider.imageBundle instead
           exampleSetFlag: true
           type: string
       type: object
@@ -13250,6 +13315,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -13399,6 +13465,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -13705,8 +13772,8 @@ components:
           exampleSetFlag: true
           type: string
         ybImage:
-          description: Deprecated since YBA version 2.20.0. Use provider.imageBundle
-            instead
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.</b>
+            Use provider.imageBundle instead
           exampleSetFlag: true
           type: string
       type: object
@@ -16036,9 +16103,11 @@ components:
       type: object
     BundleDetails:
       example:
+        maxNumRecentCores: 6
         components:
         - UniverseLogs
         - UniverseLogs
+        maxCoreFileSize: 0
       exampleSetFlag: true
       properties:
         components:
@@ -16061,6 +16130,16 @@ components:
             exampleSetFlag: true
             type: string
           type: array
+        maxCoreFileSize:
+          description: Max size of the collected cores (if any)
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        maxNumRecentCores:
+          description: Max number of most recent cores to collect (if any)
+          exampleSetFlag: true
+          format: int32
+          type: integer
       required:
       - components
       type: object
@@ -16276,8 +16355,8 @@ components:
           format: uuid
           type: string
         expiryDate:
-          description: The certificate's expiry date. Deprecated since YBA version
-            2.17.2.0. Use expirtyDateIso instead
+          description: The certificate's expiry date. <b style="color:#ff0000">Deprecated
+            since YBA version 2.17.2.0.</b> Use expirtyDateIso instead
           exampleSetFlag: true
           format: date-time
           type: string
@@ -16304,8 +16383,8 @@ components:
           exampleSetFlag: true
           type: string
         startDate:
-          description: The certificate's creation date. Deprecated since YBA version
-            2.17.2.0. Use stateDateIso instead
+          description: The certificate's creation date. <b style="color:#ff0000">Deprecated
+            since YBA version 2.17.2.0.</b> Use stateDateIso instead
           exampleSetFlag: true
           format: date-time
           type: string
@@ -18891,6 +18970,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -19040,6 +19120,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -19121,6 +19202,7 @@ components:
           hostVpcId: hostVpcId
           destVpcId: destVpcId
           gceProject: gceProject
+          gceApplicationCredentials: gceApplicationCredentials
           gceApplicationCredentialsPath: gceApplicationCredentialsPath
           useHostCredentials: true
           vpcType: EXISTING
@@ -21685,13 +21767,13 @@ components:
         safetimes:
         - namespaceId: namespaceId
           safetimeLagUs: 1
-          estimatedDataLossMs: 0
+          estimatedDataLossMs: 0.8008281904610115
           safetimeEpochUs: 6
           namespaceName: namespaceName
           safetimeSkewUs: 5
         - namespaceId: namespaceId
           safetimeLagUs: 1
-          estimatedDataLossMs: 0
+          estimatedDataLossMs: 0.8008281904610115
           safetimeEpochUs: 6
           namespaceName: namespaceName
           safetimeSkewUs: 5
@@ -21936,21 +22018,22 @@ components:
       description: Finalize Upgrade Info Response
       example:
         impactedXClusterConnectedUniverse:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybSoftwareVersion: ybSoftwareVersion
+          universeName: universeName
+        - universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybSoftwareVersion: ybSoftwareVersion
+          universeName: universeName
       exampleSetFlag: true
       properties:
         impactedXClusterConnectedUniverse:
-          description: "WARNING: This is a preview API that could change. Set of xCluster\
-            \ connected universes uuids to be impacted "
+          description: "WARNING: This is a preview API that could change. List of\
+            \ xCluster connected universes details to be impacted "
           exampleSetFlag: false
           items:
-            exampleSetFlag: true
-            format: uuid
-            type: string
+            $ref: '#/components/schemas/ImpactedXClusterConnectedUniverse'
           readOnly: true
           type: array
-          uniqueItems: true
       type: object
     FinalizeUpgradeParams:
       example:
@@ -24424,6 +24507,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -24573,6 +24657,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -24624,6 +24709,7 @@ components:
         hostVpcId: hostVpcId
         destVpcId: destVpcId
         gceProject: gceProject
+        gceApplicationCredentials: gceApplicationCredentials
         gceApplicationCredentialsPath: gceApplicationCredentialsPath
         useHostCredentials: true
         vpcType: EXISTING
@@ -24632,6 +24718,9 @@ components:
       exampleSetFlag: true
       properties:
         destVpcId:
+          exampleSetFlag: true
+          type: string
+        gceApplicationCredentials:
           exampleSetFlag: true
           type: string
         gceApplicationCredentialsPath:
@@ -24684,8 +24773,8 @@ components:
           exampleSetFlag: true
           type: string
         ybImage:
-          description: Deprecated since YBA version 2.20.0. Use provider.imageBundle
-            instead
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.20.0.</b>
+            Use provider.imageBundle instead
           exampleSetFlag: true
           type: string
       type: object
@@ -27188,6 +27277,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -27337,6 +27427,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -27554,6 +27645,33 @@ components:
           description: Regions override for image bundle
           exampleSetFlag: true
           type: object
+      type: object
+    ImpactedXClusterConnectedUniverse:
+      example:
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybSoftwareVersion: ybSoftwareVersion
+        universeName: universeName
+      exampleSetFlag: true
+      properties:
+        universeName:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe name "
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        universeUUID:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe UUID "
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        ybSoftwareVersion:
+          description: "WARNING: This is a preview API that could change. Impacted\
+            \ Universe version "
+          exampleSetFlag: true
+          readOnly: true
+          type: string
       type: object
     ImportUniverseFormData:
       example:
@@ -28069,8 +28187,8 @@ components:
           exampleSetFlag: true
           type: string
         kubernetesServiceAccount:
-          description: Deprecated since YBA version 2.17.3.0. kubernetes service account
-            is not needed.
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.3.0.</b>
+            kubernetes service account is not needed.
           exampleSetFlag: true
           type: string
         kubernetesStorageClass:
@@ -30582,6 +30700,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -30731,6 +30850,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -30840,8 +30960,8 @@ components:
           exampleSetFlag: true
           type: string
         kubernetesServiceAccount:
-          description: Deprecated since YBA version 2.17.3.0. kubernetes service account
-            is not needed.
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.3.0.</b>
+            kubernetes service account is not needed.
           exampleSetFlag: true
           type: string
         kubernetesStorageClass:
@@ -32774,7 +32894,7 @@ components:
       example:
         namespaceId: namespaceId
         safetimeLagUs: 1
-        estimatedDataLossMs: 0
+        estimatedDataLossMs: 0.8008281904610115
         safetimeEpochUs: 6
         namespaceName: namespaceName
         safetimeSkewUs: 5
@@ -32782,8 +32902,8 @@ components:
       properties:
         estimatedDataLossMs:
           exampleSetFlag: true
-          format: int64
-          type: integer
+          format: double
+          type: number
         namespaceId:
           exampleSetFlag: true
           type: string
@@ -35906,6 +36026,7 @@ components:
               hostVpcId: hostVpcId
               destVpcId: destVpcId
               gceProject: gceProject
+              gceApplicationCredentials: gceApplicationCredentials
               gceApplicationCredentialsPath: gceApplicationCredentialsPath
               useHostCredentials: true
               vpcType: EXISTING
@@ -35952,8 +36073,8 @@ components:
           readOnly: true
           type: boolean
         airGapInstall:
-          description: "Deprecated since YBA version 2.17.2.0, Use details.airGapInstall.\
-            \ Only supported in Create Request"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Use details.airGapInstall. Only supported in Create Request
           exampleSetFlag: true
           type: boolean
         allAccessKeys:
@@ -35969,8 +36090,8 @@ components:
           additionalProperties:
             exampleSetFlag: true
             type: string
-          description: Deprecated since YBA version 2.17.2.0. Use details.metadata
-            instead
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Use details.metadata instead
           exampleSetFlag: true
           type: object
         customerUUID:
@@ -35980,17 +36101,17 @@ components:
           readOnly: true
           type: string
         destVpcId:
-          description: Deprecated since YBA version 2.17.2.0
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
           exampleSetFlag: true
           type: string
         details:
           $ref: '#/components/schemas/ProviderDetails'
         hostVpcId:
-          description: Deprecated since YBA version 2.17.2.0
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
           exampleSetFlag: true
           type: string
         hostVpcRegion:
-          description: Deprecated since YBA version 2.17.2.0
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
           exampleSetFlag: true
           type: string
         imageBundles:
@@ -35999,8 +36120,8 @@ components:
             $ref: '#/components/schemas/ImageBundle'
           type: array
         keyPairName:
-          description: "Deprecated since YBA version 2.17.2.0, Use allAccessKeys[0].keyInfo.keyPairName\
-            \ instead"
+          description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b>\
+            \ Use allAccessKeys[0].keyInfo.keyPairName instead"
           exampleSetFlag: true
           type: string
         name:
@@ -36013,19 +36134,19 @@ components:
             $ref: '#/components/schemas/Region'
           type: array
         sshPort:
-          description: "Deprecated since YBA version 2.17.2.0, Use details.SshPort\
-            \ instead. Only supported in create request"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Use details.SshPort instead. Only supported in create request
           exampleSetFlag: true
           format: int32
           type: integer
         sshPrivateKeyContent:
-          description: "Deprecated since YBA version 2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent\
-            \ instead"
+          description: "<b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b>\
+            \ Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead"
           exampleSetFlag: true
           type: string
         sshUser:
-          description: "Deprecated since YBA version 2.17.2.0, Use details.SshUser\
-            \ instead. Only supported in create request"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Use details.SshUser instead. Only supported in create request
           exampleSetFlag: true
           type: string
         usabilityState:
@@ -36086,6 +36207,7 @@ components:
             hostVpcId: hostVpcId
             destVpcId: destVpcId
             gceProject: gceProject
+            gceApplicationCredentials: gceApplicationCredentials
             gceApplicationCredentialsPath: gceApplicationCredentialsPath
             useHostCredentials: true
             vpcType: EXISTING
@@ -36363,8 +36485,8 @@ components:
           readOnly: true
           type: string
         securityGroupId:
-          description: "Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo\
-            \ aws/azure securityGroupId property"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Moved to regionDetails.cloudInfo aws/azure securityGroupId property
           exampleSetFlag: true
           type: string
         uuid:
@@ -36374,13 +36496,13 @@ components:
           readOnly: true
           type: string
         vnetName:
-          description: "Deprecated since YBA version 2.17.2.0, Moved to regionDetails.cloudInfo\
-            \ aws/azure vnet property"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Moved to regionDetails.cloudInfo aws/azure vnet property
           exampleSetFlag: true
           type: string
         ybImage:
-          description: "Deprecated since YBA version 2.17.2.0, Moved to details.cloudInfo\
-            \ aws/gcp/azure ybImage property"
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.17.2.0.</b>
+            Moved to details.cloudInfo aws/gcp/azure ybImage property
           example: TODO
           exampleSetFlag: true
           type: string
@@ -39274,6 +39396,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -39423,6 +39546,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -42007,6 +42131,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -42156,6 +42281,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -46050,6 +46176,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -46199,6 +46326,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -46246,10 +46374,13 @@ components:
         db_name:
           exampleSetFlag: true
           type: string
+        node_name:
+          exampleSetFlag: true
+          type: string
         query:
           exampleSetFlag: true
           type: string
-        tableType:
+        table_type:
           enum:
           - YQL_TABLE_TYPE
           - REDIS_TABLE_TYPE
@@ -46259,8 +46390,9 @@ components:
           type: string
       required:
       - db_name
+      - node_name
       - query
-      - tableType
+      - table_type
       type: object
     RuntimeConfigData:
       description: Runtime configuration data
@@ -46540,6 +46672,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -46689,6 +46822,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         userEmail:
@@ -46843,6 +46977,7 @@ components:
             - ModifyBlackList
             - CheckUnderReplicatedTablets
             - CheckFollowerLag
+            - CheckNodeSafeToDelete
             - ManipulateDnsRecordTask
             - RemoveUniverseEntry
             - SetFlagInMemory
@@ -46992,6 +47127,7 @@ components:
             - LdapUniverseSync
             - QueryLdapServer
             - DbLdapSync
+            - CheckForClusterServers
             exampleSetFlag: true
             type: string
           type: array
@@ -49746,6 +49882,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -49895,6 +50032,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -50197,12 +50335,14 @@ components:
     SupportBundle:
       example:
         path: path
-        sizeInBytes: 0
+        sizeInBytes: 1
         scopeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         bundleDetails:
+          maxNumRecentCores: 6
           components:
           - UniverseLogs
           - UniverseLogs
+          maxCoreFileSize: 0
         endDate: 2022-12-12T13:07:18Z
         bundleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         creationDate: 2022-12-12T13:07:18Z
@@ -50270,11 +50410,13 @@ components:
     SupportBundleFormData:
       description: Support bundle form metadata
       example:
+        maxNumRecentCores: 6
         components:
         - UniverseLogs
         - UniverseLogs
         endDate: 2022-12-12T13:07:18Z
         startDate: 2022-12-12T13:07:18Z
+        maxCoreFileSize: 0
       exampleSetFlag: true
       properties:
         components:
@@ -50304,6 +50446,16 @@ components:
           exampleSetFlag: true
           format: date-time
           type: string
+        maxCoreFileSize:
+          description: Max size in bytes of the recent collected cores (if any)
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        maxNumRecentCores:
+          description: Max number of the most recent cores to collect (if any)
+          exampleSetFlag: true
+          format: int32
+          type: integer
         startDate:
           description: Start date to filter logs from
           example: 2022-12-12T13:07:18Z
@@ -52786,6 +52938,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -52935,6 +53088,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55857,6 +56011,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -56006,6 +56161,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -58546,6 +58702,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -58695,6 +58852,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -61310,6 +61468,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -61459,6 +61618,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -63957,6 +64117,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -64106,6 +64267,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -66612,6 +66774,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -66761,6 +66924,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -71702,6 +71866,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -71851,6 +72016,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -72066,8 +72232,8 @@ components:
           additionalProperties:
             exampleSetFlag: true
             type: string
-          description: "User-defined gflags for master. Deprecated since YBA version\
-            \ 2.18.6.0, use specificGFlags"
+          description: User-defined gflags for master. <b style="color:#ff0000">Deprecated
+            since YBA version 2.18.6.0.</b> Use specificGFlags
           exampleSetFlag: true
           type: object
         masterInstanceType:
@@ -72120,8 +72286,8 @@ components:
           additionalProperties:
             exampleSetFlag: true
             type: string
-          description: "User-defined gflags for tserver. Deprecated since YBA version\
-            \ 2.18.6.0, use specificGFlags"
+          description: User-defined gflags for tserver. <b style="color:#ff0000">Deprecated
+            since YBA version 2.18.6.0.</b> Use specificGFlags
           exampleSetFlag: true
           type: object
         tserverK8SNodeResourceSpec:
@@ -72272,8 +72438,8 @@ components:
           exampleSetFlag: true
           type: string
         role:
-          description: Deprecated since YBA version 2.19.3.0. Use field roleResourceDefinitions
-            instead.
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b>
+            Use field roleResourceDefinitions instead.
           enum:
           - ConnectOnly
           - ReadOnly
@@ -74714,8 +74880,8 @@ components:
           additionalProperties:
             exampleSetFlag: true
             type: string
-          description: "Map of region UUID to AMI name. Deprecated since YBA version\
-            \ 2.18.0.0, Use imageBundle instead."
+          description: Map of region UUID to AMI name. <b style="color:#ff0000">Deprecated
+            since YBA version 2.18.0.0.</b> Use imageBundle instead.
           example: |-
             {
                 'b28e0813-4866-4a2d-89f3-52265766d666': 'OpenLogic:CentOS:7_9:7.9.2022020700',
@@ -74817,8 +74983,8 @@ components:
           additionalProperties:
             exampleSetFlag: true
             type: string
-          description: "Map of region UUID to SSH User override. Deprecated since\
-            \ YBA version 2.18.0.0, Use imageBundle instead."
+          description: Map of region UUID to SSH User override. <b style="color:#ff0000">Deprecated
+            since YBA version 2.18.0.0.</b> Use imageBundle instead.
           example: |-
             {
                 'b28e0813-4866-4a2d-89f3-52265766d666': 'ec2-user',
@@ -74981,6 +75147,7 @@ components:
           - ModifyBlackList
           - CheckUnderReplicatedTablets
           - CheckFollowerLag
+          - CheckNodeSafeToDelete
           - ManipulateDnsRecordTask
           - RemoveUniverseEntry
           - SetFlagInMemory
@@ -75130,6 +75297,7 @@ components:
           - LdapUniverseSync
           - QueryLdapServer
           - DbLdapSync
+          - CheckForClusterServers
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -75364,6 +75532,7 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
+          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -75379,7 +75548,6 @@ components:
           items:
             exampleSetFlag: true
             type: string
-          readOnly: true
           type: array
           uniqueItems: true
         targetActive:
@@ -75699,6 +75867,7 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
+          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -75714,7 +75883,6 @@ components:
           items:
             exampleSetFlag: true
             type: string
-          readOnly: true
           type: array
           uniqueItems: true
         targetActive:

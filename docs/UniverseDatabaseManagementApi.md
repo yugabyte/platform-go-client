@@ -4,8 +4,8 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ConfigureYCQL**](UniverseDatabaseManagementApi.md#ConfigureYCQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | WARNING: This is a preview API that could change. Configure YCQL
-[**ConfigureYSQL**](UniverseDatabaseManagementApi.md#ConfigureYSQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | WARNING: This is a preview API that could change. Configure YSQL
+[**ConfigureYCQL**](UniverseDatabaseManagementApi.md#ConfigureYCQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | Configure YCQL
+[**ConfigureYSQL**](UniverseDatabaseManagementApi.md#ConfigureYSQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | Configure YSQL
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > YBPTask ConfigureYCQL(ctx, cUUID, univUUID).ConfigureYcqlFormData(configureYcqlFormData).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Configure YCQL
+Configure YCQL
 
 
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > YBPTask ConfigureYSQL(ctx, cUUID, univUUID).ConfigureYsqlFormData(configureYsqlFormData).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Configure YSQL
+Configure YSQL
 
 
 

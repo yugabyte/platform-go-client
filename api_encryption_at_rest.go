@@ -700,7 +700,8 @@ func (r EncryptionAtRestApiApiRefreshKMSConfigRequest) Execute() (YBPSuccess, *_
 }
 
 /*
- * RefreshKMSConfig WARNING: This is a preview API that could change. Refresh KMS Config
+ * RefreshKMSConfig Refresh KMS Config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configUUID
@@ -840,7 +841,8 @@ func (r EncryptionAtRestApiApiRemoveKeyRefHistoryRequest) Execute() (YBPSuccess,
 }
 
 /*
- * RemoveKeyRefHistory Deprecated since YBA version 2.20.0.0. Do not use. This API removes a universe's key reference history
+ * RemoveKeyRefHistory This API removes a universe's key reference history - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Do not use.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

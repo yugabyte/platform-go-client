@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FinalizeUpgrade**](UniverseUpgradesManagementApi.md#FinalizeUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | WARNING: This is a preview API that could change. Finalize Upgrade.
-[**PreFinalizeSoftwareUpgradeInfo**](UniverseUpgradesManagementApi.md#PreFinalizeSoftwareUpgradeInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | WARNING: This is a preview API that could change. Finalize Software Upgrade info
+[**FinalizeUpgrade**](UniverseUpgradesManagementApi.md#FinalizeUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
+[**PreFinalizeSoftwareUpgradeInfo**](UniverseUpgradesManagementApi.md#PreFinalizeSoftwareUpgradeInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
 [**RebootUniverse**](UniverseUpgradesManagementApi.md#RebootUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 [**ResizeNode**](UniverseUpgradesManagementApi.md#ResizeNode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 [**RestartUniverse**](UniverseUpgradesManagementApi.md#RestartUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
-[**RollbackUpgrade**](UniverseUpgradesManagementApi.md#RollbackUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | WARNING: This is a preview API that could change. Rollback Upgrade
-[**SoftwareUpgradePreCheck**](UniverseUpgradesManagementApi.md#SoftwareUpgradePreCheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | WARNING: This is a preview API that could change. Software Upgrade universe pre-check
+[**RollbackUpgrade**](UniverseUpgradesManagementApi.md#RollbackUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | Rollback Upgrade
+[**SoftwareUpgradePreCheck**](UniverseUpgradesManagementApi.md#SoftwareUpgradePreCheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Software Upgrade universe pre-check
 [**UpgradeCerts**](UniverseUpgradesManagementApi.md#UpgradeCerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
-[**UpgradeDBVersion**](UniverseUpgradesManagementApi.md#UpgradeDBVersion) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version | WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
+[**UpgradeDBVersion**](UniverseUpgradesManagementApi.md#UpgradeDBVersion) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version | Upgrade DB version
 [**UpgradeGFlags**](UniverseUpgradesManagementApi.md#UpgradeGFlags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
 [**UpgradeKubernetesOverrides**](UniverseUpgradesManagementApi.md#UpgradeKubernetesOverrides) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/kubernetes_overrides | Upgrade KubernetesOverrides
 [**UpgradeSoftware**](UniverseUpgradesManagementApi.md#UpgradeSoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade Software
@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 > YBPTask FinalizeUpgrade(ctx, cUUID, uniUUID).FinalizeUpgradeParams(finalizeUpgradeParams).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Finalize Upgrade.
+Finalize Upgrade
 
 
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 > FinalizeUpgradeInfoResponse PreFinalizeSoftwareUpgradeInfo(ctx, cUUID, uniUUID).Execute()
 
-WARNING: This is a preview API that could change. Finalize Software Upgrade info
+Finalize Software Upgrade info
 
 
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 > YBPTask RollbackUpgrade(ctx, cUUID, uniUUID).RollbackUpgradeParams(rollbackUpgradeParams).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Rollback Upgrade
+Rollback Upgrade
 
 
 
@@ -485,7 +485,7 @@ Name | Type | Description  | Notes
 
 > SoftwareUpgradeInfoResponse SoftwareUpgradePreCheck(ctx, cUUID, uniUUID).SoftwareUpgradeInfoRequest(softwareUpgradeInfoRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Software Upgrade universe pre-check
+Software Upgrade universe pre-check
 
 
 
@@ -639,7 +639,7 @@ Name | Type | Description  | Notes
 
 > YBPTask UpgradeDBVersion(ctx, cUUID, uniUUID).SoftwareUpgradeParams(softwareUpgradeParams).Request(request).Execute()
 
-WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
+Upgrade DB version
 
 
 

@@ -50,7 +50,8 @@ func (r RegionManagementApiApiCreateProviderRegionRequest) Execute() (Region, *_
 }
 
 /*
- * CreateProviderRegion WARNING: This is a preview API that could change. Create a new region
+ * CreateProviderRegion Create a new region
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -191,7 +192,8 @@ func (r RegionManagementApiApiCreateRegionRequest) Execute() (Region, *_nethttp.
 }
 
 /*
- * CreateRegion Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+ * CreateRegion Create Region - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -468,7 +470,8 @@ func (r RegionManagementApiApiEditProviderRegionRequest) Execute() (Region, *_ne
 }
 
 /*
- * EditProviderRegion WARNING: This is a preview API that could change. Modify a region
+ * EditProviderRegion Modify a region
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -613,7 +616,8 @@ func (r RegionManagementApiApiEditRegionRequest) Execute() (map[string]interface
 }
 
 /*
- * EditRegion Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
+ * EditRegion Edit regions - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

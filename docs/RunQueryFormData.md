@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DbName** | **string** |  | 
+**NodeName** | **string** |  | 
 **Query** | **string** |  | 
 **TableType** | **string** |  | 
 
@@ -12,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewRunQueryFormData
 
-`func NewRunQueryFormData(dbName string, query string, tableType string, ) *RunQueryFormData`
+`func NewRunQueryFormData(dbName string, nodeName string, query string, tableType string, ) *RunQueryFormData`
 
 NewRunQueryFormData instantiates a new RunQueryFormData object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +46,26 @@ and a boolean to check if the value has been set.
 `func (o *RunQueryFormData) SetDbName(v string)`
 
 SetDbName sets DbName field to given value.
+
+
+### GetNodeName
+
+`func (o *RunQueryFormData) GetNodeName() string`
+
+GetNodeName returns the NodeName field if non-nil, zero value otherwise.
+
+### GetNodeNameOk
+
+`func (o *RunQueryFormData) GetNodeNameOk() (*string, bool)`
+
+GetNodeNameOk returns a tuple with the NodeName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeName
+
+`func (o *RunQueryFormData) SetNodeName(v string)`
+
+SetNodeName sets NodeName field to given value.
 
 
 ### GetQuery

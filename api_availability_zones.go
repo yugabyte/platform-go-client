@@ -51,7 +51,8 @@ func (r AvailabilityZonesApiApiCreateAZRequest) Execute() (map[string]Availabili
 }
 
 /*
- * CreateAZ Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
+ * CreateAZ Create an availability zone - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -196,7 +197,8 @@ func (r AvailabilityZonesApiApiCreateZoneRequest) Execute() (map[string]Availabi
 }
 
 /*
- * CreateZone WARNING: This is a preview API that could change. Create an availability zone
+ * CreateZone Create an availability zone
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -481,7 +483,8 @@ func (r AvailabilityZonesApiApiEditAZRequest) Execute() (AvailabilityZone, *_net
 }
 
 /*
- * EditAZ Deprecated since YBA version 2.18.2.0, Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
+ * EditAZ Edit an Availabilty Zone - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID
@@ -630,7 +633,8 @@ func (r AvailabilityZonesApiApiEditZoneRequest) Execute() (AvailabilityZone, *_n
 }
 
 /*
- * EditZone WARNING: This is a preview API that could change. Modify an availability zone
+ * EditZone Modify an availability zone
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param pUUID

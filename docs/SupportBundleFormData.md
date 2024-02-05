@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Components** | **[]string** | List of components to be included in the support bundle | 
 **EndDate** | **time.Time** | End date to filter logs till | 
+**MaxCoreFileSize** | Pointer to **int64** | Max size in bytes of the recent collected cores (if any) | [optional] 
+**MaxNumRecentCores** | Pointer to **int32** | Max number of the most recent cores to collect (if any) | [optional] 
 **StartDate** | **time.Time** | Start date to filter logs from | 
 
 ## Methods
@@ -66,6 +68,56 @@ and a boolean to check if the value has been set.
 
 SetEndDate sets EndDate field to given value.
 
+
+### GetMaxCoreFileSize
+
+`func (o *SupportBundleFormData) GetMaxCoreFileSize() int64`
+
+GetMaxCoreFileSize returns the MaxCoreFileSize field if non-nil, zero value otherwise.
+
+### GetMaxCoreFileSizeOk
+
+`func (o *SupportBundleFormData) GetMaxCoreFileSizeOk() (*int64, bool)`
+
+GetMaxCoreFileSizeOk returns a tuple with the MaxCoreFileSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxCoreFileSize
+
+`func (o *SupportBundleFormData) SetMaxCoreFileSize(v int64)`
+
+SetMaxCoreFileSize sets MaxCoreFileSize field to given value.
+
+### HasMaxCoreFileSize
+
+`func (o *SupportBundleFormData) HasMaxCoreFileSize() bool`
+
+HasMaxCoreFileSize returns a boolean if a field has been set.
+
+### GetMaxNumRecentCores
+
+`func (o *SupportBundleFormData) GetMaxNumRecentCores() int32`
+
+GetMaxNumRecentCores returns the MaxNumRecentCores field if non-nil, zero value otherwise.
+
+### GetMaxNumRecentCoresOk
+
+`func (o *SupportBundleFormData) GetMaxNumRecentCoresOk() (*int32, bool)`
+
+GetMaxNumRecentCoresOk returns a tuple with the MaxNumRecentCores field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxNumRecentCores
+
+`func (o *SupportBundleFormData) SetMaxNumRecentCores(v int32)`
+
+SetMaxNumRecentCores sets MaxNumRecentCores field to given value.
+
+### HasMaxNumRecentCores
+
+`func (o *SupportBundleFormData) HasMaxNumRecentCores() bool`
+
+HasMaxNumRecentCores returns a boolean if a field has been set.
 
 ### GetStartDate
 

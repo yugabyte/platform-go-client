@@ -16,8 +16,8 @@ import (
 
 // FinalizeUpgradeInfoResponse Finalize Upgrade Info Response
 type FinalizeUpgradeInfoResponse struct {
-	// WARNING: This is a preview API that could change. Set of xCluster connected universes uuids to be impacted 
-	ImpactedXClusterConnectedUniverse *[]string `json:"impactedXClusterConnectedUniverse,omitempty"`
+	// WARNING: This is a preview API that could change. List of xCluster connected universes details to be impacted 
+	ImpactedXClusterConnectedUniverse *[]ImpactedXClusterConnectedUniverse `json:"impactedXClusterConnectedUniverse,omitempty"`
 }
 
 // NewFinalizeUpgradeInfoResponse instantiates a new FinalizeUpgradeInfoResponse object
@@ -38,9 +38,9 @@ func NewFinalizeUpgradeInfoResponseWithDefaults() *FinalizeUpgradeInfoResponse {
 }
 
 // GetImpactedXClusterConnectedUniverse returns the ImpactedXClusterConnectedUniverse field value if set, zero value otherwise.
-func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverse() []string {
+func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverse() []ImpactedXClusterConnectedUniverse {
 	if o == nil || o.ImpactedXClusterConnectedUniverse == nil {
-		var ret []string
+		var ret []ImpactedXClusterConnectedUniverse
 		return ret
 	}
 	return *o.ImpactedXClusterConnectedUniverse
@@ -48,7 +48,7 @@ func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverse() []s
 
 // GetImpactedXClusterConnectedUniverseOk returns a tuple with the ImpactedXClusterConnectedUniverse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverseOk() (*[]string, bool) {
+func (o *FinalizeUpgradeInfoResponse) GetImpactedXClusterConnectedUniverseOk() (*[]ImpactedXClusterConnectedUniverse, bool) {
 	if o == nil || o.ImpactedXClusterConnectedUniverse == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *FinalizeUpgradeInfoResponse) HasImpactedXClusterConnectedUniverse() boo
 	return false
 }
 
-// SetImpactedXClusterConnectedUniverse gets a reference to the given []string and assigns it to the ImpactedXClusterConnectedUniverse field.
-func (o *FinalizeUpgradeInfoResponse) SetImpactedXClusterConnectedUniverse(v []string) {
+// SetImpactedXClusterConnectedUniverse gets a reference to the given []ImpactedXClusterConnectedUniverse and assigns it to the ImpactedXClusterConnectedUniverse field.
+func (o *FinalizeUpgradeInfoResponse) SetImpactedXClusterConnectedUniverse(v []ImpactedXClusterConnectedUniverse) {
 	o.ImpactedXClusterConnectedUniverse = &v
 }
 

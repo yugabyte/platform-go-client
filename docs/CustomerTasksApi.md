@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AbortTask**](CustomerTasksApi.md#AbortTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
-[**FailedSubtasks**](CustomerTasksApi.md#FailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Deprecated since YBA version 2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
+[**FailedSubtasks**](CustomerTasksApi.md#FailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Fetch failed subtasks - deprecated
 [**ListFailedSubtasks**](CustomerTasksApi.md#ListFailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks | Get a list of task&#39;s failed subtasks
 [**RetryTask**](CustomerTasksApi.md#RetryTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
 [**TaskStatus**](CustomerTasksApi.md#TaskStatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
@@ -92,7 +92,9 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} FailedSubtasks(ctx, cUUID, tUUID).Execute()
 
-Deprecated since YBA version 2.19.1.0, Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead
+Fetch failed subtasks - deprecated
+
+
 
 ### Example
 

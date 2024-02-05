@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DestVpcId** | Pointer to **string** |  | [optional] 
+**GceApplicationCredentials** | Pointer to **string** |  | [optional] 
 **GceApplicationCredentialsPath** | Pointer to **string** |  | [optional] [readonly] 
 **GceProject** | Pointer to **string** |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
@@ -57,6 +58,31 @@ SetDestVpcId sets DestVpcId field to given value.
 `func (o *GCPCloudInfo) HasDestVpcId() bool`
 
 HasDestVpcId returns a boolean if a field has been set.
+
+### GetGceApplicationCredentials
+
+`func (o *GCPCloudInfo) GetGceApplicationCredentials() string`
+
+GetGceApplicationCredentials returns the GceApplicationCredentials field if non-nil, zero value otherwise.
+
+### GetGceApplicationCredentialsOk
+
+`func (o *GCPCloudInfo) GetGceApplicationCredentialsOk() (*string, bool)`
+
+GetGceApplicationCredentialsOk returns a tuple with the GceApplicationCredentials field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGceApplicationCredentials
+
+`func (o *GCPCloudInfo) SetGceApplicationCredentials(v string)`
+
+SetGceApplicationCredentials sets GceApplicationCredentials field to given value.
+
+### HasGceApplicationCredentials
+
+`func (o *GCPCloudInfo) HasGceApplicationCredentials() bool`
+
+HasGceApplicationCredentials returns a boolean if a field has been set.
 
 ### GetGceApplicationCredentialsPath
 

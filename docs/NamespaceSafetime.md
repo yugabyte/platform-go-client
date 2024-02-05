@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EstimatedDataLossMs** | **int64** |  | 
+**EstimatedDataLossMs** | **float64** |  | 
 **NamespaceId** | **string** |  | 
 **NamespaceName** | **string** |  | 
 **SafetimeEpochUs** | **int64** |  | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewNamespaceSafetime
 
-`func NewNamespaceSafetime(estimatedDataLossMs int64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64, ) *NamespaceSafetime`
+`func NewNamespaceSafetime(estimatedDataLossMs float64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64, ) *NamespaceSafetime`
 
 NewNamespaceSafetime instantiates a new NamespaceSafetime object
 This constructor will assign default values to properties that have it defined,
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetEstimatedDataLossMs
 
-`func (o *NamespaceSafetime) GetEstimatedDataLossMs() int64`
+`func (o *NamespaceSafetime) GetEstimatedDataLossMs() float64`
 
 GetEstimatedDataLossMs returns the EstimatedDataLossMs field if non-nil, zero value otherwise.
 
 ### GetEstimatedDataLossMsOk
 
-`func (o *NamespaceSafetime) GetEstimatedDataLossMsOk() (*int64, bool)`
+`func (o *NamespaceSafetime) GetEstimatedDataLossMsOk() (*float64, bool)`
 
 GetEstimatedDataLossMsOk returns a tuple with the EstimatedDataLossMs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEstimatedDataLossMs
 
-`func (o *NamespaceSafetime) SetEstimatedDataLossMs(v int64)`
+`func (o *NamespaceSafetime) SetEstimatedDataLossMs(v float64)`
 
 SetEstimatedDataLossMs sets EstimatedDataLossMs field to given value.
 

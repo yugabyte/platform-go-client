@@ -4,14 +4,14 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](PerformanceAdvisorApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | WARNING: This is a preview API that could change. Delete performance recommendations
-[**Get**](PerformanceAdvisorApi.md#Get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | WARNING: This is a preview API that could change. Get performance recommendation details
-[**GetLatestRun**](PerformanceAdvisorApi.md#GetLatestRun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | WARNING: This is a preview API that could change. Get last performance advisor run details
-[**GetSettings**](PerformanceAdvisorApi.md#GetSettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | WARNING: This is a preview API that could change. Get universe performance advisor settings
-[**Page**](PerformanceAdvisorApi.md#Page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | WARNING: This is a preview API that could change. List performance recommendations (paginated)
-[**PageAuditInfo**](PerformanceAdvisorApi.md#PageAuditInfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | WARNING: This is a preview API that could change. List performance recommendations state change audit events (paginated)
-[**RunPerfAdvisor**](PerformanceAdvisorApi.md#RunPerfAdvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | WARNING: This is a preview API that could change. Start performance advisor run for universe
-[**UpdateSettings**](PerformanceAdvisorApi.md#UpdateSettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | WARNING: This is a preview API that could change. Update universe performance advisor settings
+[**Delete**](PerformanceAdvisorApi.md#Delete) | **Delete** /api/v1/customers/{cUUID}/performance_recommendations | Delete performance recommendations
+[**Get**](PerformanceAdvisorApi.md#Get) | **Get** /api/v1/customers/{cUUID}/performance_recommendations/{rUUID} | Get performance recommendation details
+[**GetLatestRun**](PerformanceAdvisorApi.md#GetLatestRun) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/last_run | Get last performance advisor run details
+[**GetSettings**](PerformanceAdvisorApi.md#GetSettings) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Get universe performance advisor settings
+[**Page**](PerformanceAdvisorApi.md#Page) | **Post** /api/v1/customers/{cUUID}/performance_recommendations/page | List performance recommendations (paginated)
+[**PageAuditInfo**](PerformanceAdvisorApi.md#PageAuditInfo) | **Post** /api/v1/customers/{cUUID}/performance_recommendation_state_change/page | List performance recommendations state change audit events (paginated)
+[**RunPerfAdvisor**](PerformanceAdvisorApi.md#RunPerfAdvisor) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/start_manually | Start performance advisor run for universe
+[**UpdateSettings**](PerformanceAdvisorApi.md#UpdateSettings) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/perf_advisor_settings | Update universe performance advisor settings
 
 
 
@@ -19,7 +19,9 @@ Method | HTTP request | Description
 
 > YBPSuccess Delete(ctx, cUUID).DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Delete performance recommendations
+Delete performance recommendations
+
+
 
 ### Example
 
@@ -91,7 +93,9 @@ Name | Type | Description  | Notes
 
 > PerformanceRecommendation Get(ctx, cUUID, rUUID).Execute()
 
-WARNING: This is a preview API that could change. Get performance recommendation details
+Get performance recommendation details
+
+
 
 ### Example
 
@@ -162,7 +166,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess GetLatestRun(ctx, cUUID, uniUUID).Execute()
 
-WARNING: This is a preview API that could change. Get last performance advisor run details
+Get last performance advisor run details
+
+
 
 ### Example
 
@@ -233,7 +239,9 @@ Name | Type | Description  | Notes
 
 > PerfAdvisorSettingsWithDefaults GetSettings(ctx, cUUID, uniUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Get universe performance advisor settings
+Get universe performance advisor settings
+
+
 
 ### Example
 
@@ -306,7 +314,9 @@ Name | Type | Description  | Notes
 
 > PerformanceRecommendationPagedResponse Page(ctx, cUUID).PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List performance recommendations (paginated)
+List performance recommendations (paginated)
+
+
 
 ### Example
 
@@ -378,7 +388,9 @@ Name | Type | Description  | Notes
 
 > StateChangeAuditInfoPagedResponse PageAuditInfo(ctx, cUUID).PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. List performance recommendations state change audit events (paginated)
+List performance recommendations state change audit events (paginated)
+
+
 
 ### Example
 
@@ -450,7 +462,9 @@ Name | Type | Description  | Notes
 
 > PerfAdvisorManualRunStatus RunPerfAdvisor(ctx, cUUID, uniUUID).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Start performance advisor run for universe
+Start performance advisor run for universe
+
+
 
 ### Example
 
@@ -523,7 +537,9 @@ Name | Type | Description  | Notes
 
 > YBPSuccess UpdateSettings(ctx, cUUID, uniUUID).PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest).Request(request).Execute()
 
-WARNING: This is a preview API that could change. Update universe performance advisor settings
+Update universe performance advisor settings
+
+
 
 ### Example
 

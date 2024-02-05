@@ -17,6 +17,10 @@ import (
 // BundleDetails struct for BundleDetails
 type BundleDetails struct {
 	Components []string `json:"components"`
+	// Max size of the collected cores (if any)
+	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
+	// Max number of most recent cores to collect (if any)
+	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
 }
 
 // NewBundleDetails instantiates a new BundleDetails object
@@ -61,10 +65,80 @@ func (o *BundleDetails) SetComponents(v []string) {
 	o.Components = v
 }
 
+// GetMaxCoreFileSize returns the MaxCoreFileSize field value if set, zero value otherwise.
+func (o *BundleDetails) GetMaxCoreFileSize() int64 {
+	if o == nil || o.MaxCoreFileSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MaxCoreFileSize
+}
+
+// GetMaxCoreFileSizeOk returns a tuple with the MaxCoreFileSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetMaxCoreFileSizeOk() (*int64, bool) {
+	if o == nil || o.MaxCoreFileSize == nil {
+		return nil, false
+	}
+	return o.MaxCoreFileSize, true
+}
+
+// HasMaxCoreFileSize returns a boolean if a field has been set.
+func (o *BundleDetails) HasMaxCoreFileSize() bool {
+	if o != nil && o.MaxCoreFileSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxCoreFileSize gets a reference to the given int64 and assigns it to the MaxCoreFileSize field.
+func (o *BundleDetails) SetMaxCoreFileSize(v int64) {
+	o.MaxCoreFileSize = &v
+}
+
+// GetMaxNumRecentCores returns the MaxNumRecentCores field value if set, zero value otherwise.
+func (o *BundleDetails) GetMaxNumRecentCores() int32 {
+	if o == nil || o.MaxNumRecentCores == nil {
+		var ret int32
+		return ret
+	}
+	return *o.MaxNumRecentCores
+}
+
+// GetMaxNumRecentCoresOk returns a tuple with the MaxNumRecentCores field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetMaxNumRecentCoresOk() (*int32, bool) {
+	if o == nil || o.MaxNumRecentCores == nil {
+		return nil, false
+	}
+	return o.MaxNumRecentCores, true
+}
+
+// HasMaxNumRecentCores returns a boolean if a field has been set.
+func (o *BundleDetails) HasMaxNumRecentCores() bool {
+	if o != nil && o.MaxNumRecentCores != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxNumRecentCores gets a reference to the given int32 and assigns it to the MaxNumRecentCores field.
+func (o *BundleDetails) SetMaxNumRecentCores(v int32) {
+	o.MaxNumRecentCores = &v
+}
+
 func (o BundleDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["components"] = o.Components
+	}
+	if o.MaxCoreFileSize != nil {
+		toSerialize["maxCoreFileSize"] = o.MaxCoreFileSize
+	}
+	if o.MaxNumRecentCores != nil {
+		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GrafanaDashboard**](GrafanaDashboardApi.md#GrafanaDashboard) | **Get** /api/v1/grafana_dashboard | WARNING: This is a preview API that could change. Get Grafana Dashboard
+[**GrafanaDashboard**](GrafanaDashboardApi.md#GrafanaDashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
 
 
 
@@ -12,7 +12,9 @@ Method | HTTP request | Description
 
 > string GrafanaDashboard(ctx).Execute()
 
-WARNING: This is a preview API that could change. Get Grafana Dashboard
+Get Grafana Dashboard
+
+
 
 ### Example
 

@@ -16,11 +16,11 @@ import (
 
 // AWSRegionCloudInfo struct for AWSRegionCloudInfo
 type AWSRegionCloudInfo struct {
-	// Deprecated since YBA version 2.20.0. Use provider.imageBundle instead
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
 	Arch *string `json:"arch,omitempty"`
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
 	Vnet *string `json:"vnet,omitempty"`
-	// Deprecated since YBA version 2.20.0. Use provider.imageBundle instead
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
 	YbImage *string `json:"ybImage,omitempty"`
 }
 

@@ -41,8 +41,8 @@ func (r UniverseInformationApiApiDownloadNodeLogsRequest) Execute() (string, *_n
 }
 
 /*
- * DownloadNodeLogs Deprecated since YBA version 2.20.0.0 (use support bundle). Download a node's logs.
- * Downloads the log files from a given node.
+ * DownloadNodeLogs Download a node's logs - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>User Support bundle. Downloads the log files from a given node.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -168,7 +168,8 @@ func (r UniverseInformationApiApiGetLiveQueriesRequest) Execute() (map[string]in
 }
 
 /*
- * GetLiveQueries Available since YBA version 2.4.0.0. Get live queries for a universe
+ * GetLiveQueries Get live queries for a universe
+ * Available since YBA version 2.4.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -291,7 +292,8 @@ func (r UniverseInformationApiApiGetMasterLeaderIPRequest) Execute() (map[string
 }
 
 /*
- * GetMasterLeaderIP Available since YBA version 2.2.0.0. Get IP address of a universe's master leader
+ * GetMasterLeaderIP Get IP address of a universe's master leader
+ * Available since YBA version 2.2.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -414,7 +416,8 @@ func (r UniverseInformationApiApiGetSlowQueriesRequest) Execute() (map[string]in
 }
 
 /*
- * GetSlowQueries Available since YBA version 2.6.0.0. Get slow queries for a universe
+ * GetSlowQueries Get slow queries for a universe
+ * Available since YBA version 2.6.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -537,7 +540,8 @@ func (r UniverseInformationApiApiGetUniverseCostRequest) Execute() (UniverseReso
 }
 
 /*
- * GetUniverseCost Deprecated since YBA version 2.20.0.0(use /universe_resources). Get a cost estimate for a universe.
+ * GetUniverseCost Get a cost estimate for a universe - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /universe_resources
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -660,8 +664,8 @@ func (r UniverseInformationApiApiGetUniverseResourcesRequest) Execute() (Univers
 }
 
 /*
- * GetUniverseResources Available since YBA version 2.20.0.0. Get a resource usage estimate for a universe
- * Expects UniverseDefinitionTaskParams in request body and calculates the resource estimate for NodeDetailsSet in that.
+ * GetUniverseResources Get a resource usage estimate for a universe
+ * Available since YBA version 2.20.0.0. Expects UniverseDefinitionTaskParams in request body and calculates the resource estimate for NodeDetailsSet in that.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -784,8 +788,8 @@ func (r UniverseInformationApiApiHealthCheckUniverseRequest) Execute() ([]Detail
 }
 
 /*
- * HealthCheckUniverse Available since YBA version 2.2.0.0. Return results for the last health check
- * Checks the health of all tablet servers and masters in the universe, as well as certain conditions on the machines themselves, including disk utilization, presence of FATAL or core files, and more.
+ * HealthCheckUniverse Return results for the last health check
+ * Available since YBA version 2.2.0.0. Checks the health of all tablet servers and masters in the universe, as well as certain conditions on the machines themselves, including disk utilization, presence of FATAL or core files, and more.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -913,7 +917,8 @@ func (r UniverseInformationApiApiResetSlowQueriesRequest) Execute() (map[string]
 }
 
 /*
- * ResetSlowQueries Available since YBA version 2.6.0.0. Reset slow queries for a universe
+ * ResetSlowQueries Reset slow queries for a universe
+ * Available since YBA version 2.6.0.0.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
@@ -1039,8 +1044,8 @@ func (r UniverseInformationApiApiUniverseStatusRequest) Execute() (map[string]ma
 }
 
 /*
- * UniverseStatus Available since YBA version 2.2.0.0. Get a universe's status
- * This will return a Map of node name to its status in json format
+ * UniverseStatus Get a universe's status
+ * Available since YBA version 2.2.0.0. This will return a Map of node name to its status in json format.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
