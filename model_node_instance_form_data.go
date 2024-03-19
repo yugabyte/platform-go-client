@@ -24,7 +24,7 @@ type NodeInstanceFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeInstanceFormData(nodes []NodeInstanceData, ) *NodeInstanceFormData {
+func NewNodeInstanceFormData(nodes []NodeInstanceData) *NodeInstanceFormData {
 	this := NodeInstanceFormData{}
 	this.Nodes = nodes
 	return &this
@@ -40,7 +40,7 @@ func NewNodeInstanceFormDataWithDefaults() *NodeInstanceFormData {
 
 // GetNodes returns the Nodes field value
 func (o *NodeInstanceFormData) GetNodes() []NodeInstanceData {
-	if o == nil  {
+	if o == nil {
 		var ret []NodeInstanceData
 		return ret
 	}

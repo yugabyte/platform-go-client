@@ -112,7 +112,7 @@ type BackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string, ) *BackupRequestParams {
+func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string) *BackupRequestParams {
 	this := BackupRequestParams{}
 	this.BackupUUID = backupUUID
 	this.CreatingUser = creatingUser
@@ -231,7 +231,7 @@ func (o *BackupRequestParams) SetBackupType(v string) {
 
 // GetBackupUUID returns the BackupUUID field value
 func (o *BackupRequestParams) GetBackupUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -351,7 +351,7 @@ func (o *BackupRequestParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *BackupRequestParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -1175,7 +1175,7 @@ func (o *BackupRequestParams) SetParallelism(v int32) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *BackupRequestParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1199,7 +1199,7 @@ func (o *BackupRequestParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *BackupRequestParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1351,7 +1351,7 @@ func (o *BackupRequestParams) SetSchedulingFrequency(v int64) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *BackupRequestParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1375,7 +1375,7 @@ func (o *BackupRequestParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *BackupRequestParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1463,7 +1463,7 @@ func (o *BackupRequestParams) SetSse(v bool) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *BackupRequestParams) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1583,7 +1583,7 @@ func (o *BackupRequestParams) SetTimeBeforeDelete(v int64) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *BackupRequestParams) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

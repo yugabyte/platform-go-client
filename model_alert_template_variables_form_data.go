@@ -23,7 +23,7 @@ type AlertTemplateVariablesFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateVariablesFormData(variables []AlertTemplateVariable, ) *AlertTemplateVariablesFormData {
+func NewAlertTemplateVariablesFormData(variables []AlertTemplateVariable) *AlertTemplateVariablesFormData {
 	this := AlertTemplateVariablesFormData{}
 	this.Variables = variables
 	return &this
@@ -39,7 +39,7 @@ func NewAlertTemplateVariablesFormDataWithDefaults() *AlertTemplateVariablesForm
 
 // GetVariables returns the Variables field value
 func (o *AlertTemplateVariablesFormData) GetVariables() []AlertTemplateVariable {
-	if o == nil  {
+	if o == nil {
 		var ret []AlertTemplateVariable
 		return ret
 	}

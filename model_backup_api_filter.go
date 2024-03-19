@@ -35,7 +35,7 @@ type BackupApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupApiFilter(keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter {
+func NewBackupApiFilter(keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *BackupApiFilter {
 	this := BackupApiFilter{}
 	this.KeyspaceList = keyspaceList
 	this.OnlyShowDeletedConfigs = onlyShowDeletedConfigs
@@ -122,7 +122,7 @@ func (o *BackupApiFilter) SetDateRangeStart(v time.Time) {
 
 // GetKeyspaceList returns the KeyspaceList field value
 func (o *BackupApiFilter) GetKeyspaceList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -146,7 +146,7 @@ func (o *BackupApiFilter) SetKeyspaceList(v []string) {
 
 // GetOnlyShowDeletedConfigs returns the OnlyShowDeletedConfigs field value
 func (o *BackupApiFilter) GetOnlyShowDeletedConfigs() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -170,7 +170,7 @@ func (o *BackupApiFilter) SetOnlyShowDeletedConfigs(v bool) {
 
 // GetOnlyShowDeletedUniverses returns the OnlyShowDeletedUniverses field value
 func (o *BackupApiFilter) GetOnlyShowDeletedUniverses() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -194,7 +194,7 @@ func (o *BackupApiFilter) SetOnlyShowDeletedUniverses(v bool) {
 
 // GetScheduleUUIDList returns the ScheduleUUIDList field value
 func (o *BackupApiFilter) GetScheduleUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -218,7 +218,7 @@ func (o *BackupApiFilter) SetScheduleUUIDList(v []string) {
 
 // GetStates returns the States field value
 func (o *BackupApiFilter) GetStates() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -242,7 +242,7 @@ func (o *BackupApiFilter) SetStates(v []string) {
 
 // GetStorageConfigUUIDList returns the StorageConfigUUIDList field value
 func (o *BackupApiFilter) GetStorageConfigUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -266,7 +266,7 @@ func (o *BackupApiFilter) SetStorageConfigUUIDList(v []string) {
 
 // GetUniverseNameList returns the UniverseNameList field value
 func (o *BackupApiFilter) GetUniverseNameList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -290,7 +290,7 @@ func (o *BackupApiFilter) SetUniverseNameList(v []string) {
 
 // GetUniverseUUIDList returns the UniverseUUIDList field value
 func (o *BackupApiFilter) GetUniverseUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

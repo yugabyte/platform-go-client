@@ -16,7 +16,7 @@ import (
 
 // BootstarpBackupParams Backup parameters for bootstrapping
 type BootstarpBackupParams struct {
-	// Number of concurrent commands to run on nodes over SSH
+	// Number of concurrent commands used by yb_backup (not ybc) to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	// Storage configuration UUID
 	StorageConfigUUID string `json:"storageConfigUUID"`
@@ -26,7 +26,7 @@ type BootstarpBackupParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBootstarpBackupParams(storageConfigUUID string, ) *BootstarpBackupParams {
+func NewBootstarpBackupParams(storageConfigUUID string) *BootstarpBackupParams {
 	this := BootstarpBackupParams{}
 	this.StorageConfigUUID = storageConfigUUID
 	return &this
@@ -74,7 +74,7 @@ func (o *BootstarpBackupParams) SetParallelism(v int32) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *BootstarpBackupParams) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

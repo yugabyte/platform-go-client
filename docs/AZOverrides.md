@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **CgroupSize** | Pointer to **int32** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **InstanceType** | Pointer to **string** |  | [optional] 
-**PerProcess** | Pointer to [**map[string]OverridenDetails**](OverridenDetails.md) |  | [optional] 
+**PerProcess** | Pointer to [**map[string]PerProcessDetails**](PerProcessDetails.md) |  | [optional] 
+**ProxyConfig** | Pointer to [**ProxyConfig**](ProxyConfig.md) |  | [optional] 
 
 ## Methods
 
@@ -105,20 +106,20 @@ HasInstanceType returns a boolean if a field has been set.
 
 ### GetPerProcess
 
-`func (o *AZOverrides) GetPerProcess() map[string]OverridenDetails`
+`func (o *AZOverrides) GetPerProcess() map[string]PerProcessDetails`
 
 GetPerProcess returns the PerProcess field if non-nil, zero value otherwise.
 
 ### GetPerProcessOk
 
-`func (o *AZOverrides) GetPerProcessOk() (*map[string]OverridenDetails, bool)`
+`func (o *AZOverrides) GetPerProcessOk() (*map[string]PerProcessDetails, bool)`
 
 GetPerProcessOk returns a tuple with the PerProcess field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPerProcess
 
-`func (o *AZOverrides) SetPerProcess(v map[string]OverridenDetails)`
+`func (o *AZOverrides) SetPerProcess(v map[string]PerProcessDetails)`
 
 SetPerProcess sets PerProcess field to given value.
 
@@ -127,6 +128,31 @@ SetPerProcess sets PerProcess field to given value.
 `func (o *AZOverrides) HasPerProcess() bool`
 
 HasPerProcess returns a boolean if a field has been set.
+
+### GetProxyConfig
+
+`func (o *AZOverrides) GetProxyConfig() ProxyConfig`
+
+GetProxyConfig returns the ProxyConfig field if non-nil, zero value otherwise.
+
+### GetProxyConfigOk
+
+`func (o *AZOverrides) GetProxyConfigOk() (*ProxyConfig, bool)`
+
+GetProxyConfigOk returns a tuple with the ProxyConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyConfig
+
+`func (o *AZOverrides) SetProxyConfig(v ProxyConfig)`
+
+SetProxyConfig sets ProxyConfig field to given value.
+
+### HasProxyConfig
+
+`func (o *AZOverrides) HasProxyConfig() bool`
+
+HasProxyConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

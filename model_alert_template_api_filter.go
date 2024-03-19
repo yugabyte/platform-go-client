@@ -24,7 +24,7 @@ type AlertTemplateApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateApiFilter(name string, targetType string, ) *AlertTemplateApiFilter {
+func NewAlertTemplateApiFilter(name string, targetType string) *AlertTemplateApiFilter {
 	this := AlertTemplateApiFilter{}
 	this.Name = name
 	this.TargetType = targetType
@@ -41,7 +41,7 @@ func NewAlertTemplateApiFilterWithDefaults() *AlertTemplateApiFilter {
 
 // GetName returns the Name field value
 func (o *AlertTemplateApiFilter) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *AlertTemplateApiFilter) SetName(v string) {
 
 // GetTargetType returns the TargetType field value
 func (o *AlertTemplateApiFilter) GetTargetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

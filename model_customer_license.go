@@ -33,7 +33,7 @@ type CustomerLicense struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerLicense(license string, licenseType string, ) *CustomerLicense {
+func NewCustomerLicense(license string, licenseType string) *CustomerLicense {
 	this := CustomerLicense{}
 	this.License = license
 	this.LicenseType = licenseType
@@ -114,7 +114,7 @@ func (o *CustomerLicense) SetCustomerUUID(v string) {
 
 // GetLicense returns the License field value
 func (o *CustomerLicense) GetLicense() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -138,7 +138,7 @@ func (o *CustomerLicense) SetLicense(v string) {
 
 // GetLicenseType returns the LicenseType field value
 func (o *CustomerLicense) GetLicenseType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

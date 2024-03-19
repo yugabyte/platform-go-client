@@ -22,6 +22,7 @@ type AWSCloudInfo struct {
 	AwsHostedZoneName *string `json:"awsHostedZoneName,omitempty"`
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
+	UseIMDSv2 *bool `json:"useIMDSv2,omitempty"`
 	// New/Existing VPC for provider creation
 	VpcType *string `json:"vpcType,omitempty"`
 }
@@ -235,6 +236,38 @@ func (o *AWSCloudInfo) SetHostVpcRegion(v string) {
 	o.HostVpcRegion = &v
 }
 
+// GetUseIMDSv2 returns the UseIMDSv2 field value if set, zero value otherwise.
+func (o *AWSCloudInfo) GetUseIMDSv2() bool {
+	if o == nil || o.UseIMDSv2 == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseIMDSv2
+}
+
+// GetUseIMDSv2Ok returns a tuple with the UseIMDSv2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AWSCloudInfo) GetUseIMDSv2Ok() (*bool, bool) {
+	if o == nil || o.UseIMDSv2 == nil {
+		return nil, false
+	}
+	return o.UseIMDSv2, true
+}
+
+// HasUseIMDSv2 returns a boolean if a field has been set.
+func (o *AWSCloudInfo) HasUseIMDSv2() bool {
+	if o != nil && o.UseIMDSv2 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseIMDSv2 gets a reference to the given bool and assigns it to the UseIMDSv2 field.
+func (o *AWSCloudInfo) SetUseIMDSv2(v bool) {
+	o.UseIMDSv2 = &v
+}
+
 // GetVpcType returns the VpcType field value if set, zero value otherwise.
 func (o *AWSCloudInfo) GetVpcType() string {
 	if o == nil || o.VpcType == nil {
@@ -286,6 +319,9 @@ func (o AWSCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.HostVpcRegion != nil {
 		toSerialize["hostVpcRegion"] = o.HostVpcRegion
+	}
+	if o.UseIMDSv2 != nil {
+		toSerialize["useIMDSv2"] = o.UseIMDSv2
 	}
 	if o.VpcType != nil {
 		toSerialize["vpcType"] = o.VpcType

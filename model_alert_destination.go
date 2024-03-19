@@ -32,7 +32,7 @@ type AlertDestination struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDestination(channels []string, customerUUID string, defaultDestination bool, name string, ) *AlertDestination {
+func NewAlertDestination(channels []string, customerUUID string, defaultDestination bool, name string) *AlertDestination {
 	this := AlertDestination{}
 	this.Channels = channels
 	this.CustomerUUID = customerUUID
@@ -51,7 +51,7 @@ func NewAlertDestinationWithDefaults() *AlertDestination {
 
 // GetChannels returns the Channels field value
 func (o *AlertDestination) GetChannels() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *AlertDestination) SetChannels(v []string) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertDestination) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *AlertDestination) SetCustomerUUID(v string) {
 
 // GetDefaultDestination returns the DefaultDestination field value
 func (o *AlertDestination) GetDefaultDestination() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *AlertDestination) SetDefaultDestination(v bool) {
 
 // GetName returns the Name field value
 func (o *AlertDestination) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

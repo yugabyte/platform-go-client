@@ -24,7 +24,7 @@ type CustomServerCertInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomServerCertInfo(serverCert string, serverKey string, ) *CustomServerCertInfo {
+func NewCustomServerCertInfo(serverCert string, serverKey string) *CustomServerCertInfo {
 	this := CustomServerCertInfo{}
 	this.ServerCert = serverCert
 	this.ServerKey = serverKey
@@ -41,7 +41,7 @@ func NewCustomServerCertInfoWithDefaults() *CustomServerCertInfo {
 
 // GetServerCert returns the ServerCert field value
 func (o *CustomServerCertInfo) GetServerCert() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *CustomServerCertInfo) SetServerCert(v string) {
 
 // GetServerKey returns the ServerKey field value
 func (o *CustomServerCertInfo) GetServerKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

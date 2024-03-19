@@ -25,7 +25,7 @@ type AlertChannelFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelFormData(alertChannelUUID string, name string, params AlertChannelParams, ) *AlertChannelFormData {
+func NewAlertChannelFormData(alertChannelUUID string, name string, params AlertChannelParams) *AlertChannelFormData {
 	this := AlertChannelFormData{}
 	this.AlertChannelUUID = alertChannelUUID
 	this.Name = name
@@ -43,7 +43,7 @@ func NewAlertChannelFormDataWithDefaults() *AlertChannelFormData {
 
 // GetAlertChannelUUID returns the AlertChannelUUID field value
 func (o *AlertChannelFormData) GetAlertChannelUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *AlertChannelFormData) SetAlertChannelUUID(v string) {
 
 // GetName returns the Name field value
 func (o *AlertChannelFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *AlertChannelFormData) SetName(v string) {
 
 // GetParams returns the Params field value
 func (o *AlertChannelFormData) GetParams() AlertChannelParams {
-	if o == nil  {
+	if o == nil {
 		var ret AlertChannelParams
 		return ret
 	}

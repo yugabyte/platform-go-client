@@ -66,7 +66,7 @@ type XClusterConfigGetResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigGetResp(lag map[string]interface{}, ) *XClusterConfigGetResp {
+func NewXClusterConfigGetResp(lag map[string]interface{}) *XClusterConfigGetResp {
 	this := XClusterConfigGetResp{}
 	this.Lag = lag
 	return &this
@@ -146,7 +146,7 @@ func (o *XClusterConfigGetResp) SetKeyspacePending(v string) {
 
 // GetLag returns the Lag field value
 func (o *XClusterConfigGetResp) GetLag() map[string]interface{} {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}

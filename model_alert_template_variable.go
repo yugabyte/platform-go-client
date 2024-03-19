@@ -32,7 +32,7 @@ type AlertTemplateVariable struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateVariable(customerUUID string, defaultValue string, name string, possibleValues []string, ) *AlertTemplateVariable {
+func NewAlertTemplateVariable(customerUUID string, defaultValue string, name string, possibleValues []string) *AlertTemplateVariable {
 	this := AlertTemplateVariable{}
 	this.CustomerUUID = customerUUID
 	this.DefaultValue = defaultValue
@@ -51,7 +51,7 @@ func NewAlertTemplateVariableWithDefaults() *AlertTemplateVariable {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertTemplateVariable) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *AlertTemplateVariable) SetCustomerUUID(v string) {
 
 // GetDefaultValue returns the DefaultValue field value
 func (o *AlertTemplateVariable) GetDefaultValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *AlertTemplateVariable) SetDefaultValue(v string) {
 
 // GetName returns the Name field value
 func (o *AlertTemplateVariable) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *AlertTemplateVariable) SetName(v string) {
 
 // GetPossibleValues returns the PossibleValues field value
 func (o *AlertTemplateVariable) GetPossibleValues() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

@@ -40,7 +40,7 @@ type RestoreResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreResp(customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, sourceUniverseUUID string, state string, targetUniverseName string, universeUUID string, ) *RestoreResp {
+func NewRestoreResp(customerUUID string, isSourceUniversePresent bool, restoreKeyspaceList []RestoreKeyspace, restoreSizeInBytes int64, restoreUUID string, sourceUniverseName string, sourceUniverseUUID string, state string, targetUniverseName string, universeUUID string) *RestoreResp {
 	this := RestoreResp{}
 	this.CustomerUUID = customerUUID
 	this.IsSourceUniversePresent = isSourceUniversePresent
@@ -161,7 +161,7 @@ func (o *RestoreResp) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *RestoreResp) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -185,7 +185,7 @@ func (o *RestoreResp) SetCustomerUUID(v string) {
 
 // GetIsSourceUniversePresent returns the IsSourceUniversePresent field value
 func (o *RestoreResp) GetIsSourceUniversePresent() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -209,7 +209,7 @@ func (o *RestoreResp) SetIsSourceUniversePresent(v bool) {
 
 // GetRestoreKeyspaceList returns the RestoreKeyspaceList field value
 func (o *RestoreResp) GetRestoreKeyspaceList() []RestoreKeyspace {
-	if o == nil  {
+	if o == nil {
 		var ret []RestoreKeyspace
 		return ret
 	}
@@ -233,7 +233,7 @@ func (o *RestoreResp) SetRestoreKeyspaceList(v []RestoreKeyspace) {
 
 // GetRestoreSizeInBytes returns the RestoreSizeInBytes field value
 func (o *RestoreResp) GetRestoreSizeInBytes() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -257,7 +257,7 @@ func (o *RestoreResp) SetRestoreSizeInBytes(v int64) {
 
 // GetRestoreUUID returns the RestoreUUID field value
 func (o *RestoreResp) GetRestoreUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -281,7 +281,7 @@ func (o *RestoreResp) SetRestoreUUID(v string) {
 
 // GetSourceUniverseName returns the SourceUniverseName field value
 func (o *RestoreResp) GetSourceUniverseName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -305,7 +305,7 @@ func (o *RestoreResp) SetSourceUniverseName(v string) {
 
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value
 func (o *RestoreResp) GetSourceUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -329,7 +329,7 @@ func (o *RestoreResp) SetSourceUniverseUUID(v string) {
 
 // GetState returns the State field value
 func (o *RestoreResp) GetState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -353,7 +353,7 @@ func (o *RestoreResp) SetState(v string) {
 
 // GetTargetUniverseName returns the TargetUniverseName field value
 func (o *RestoreResp) GetTargetUniverseName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -377,7 +377,7 @@ func (o *RestoreResp) SetTargetUniverseName(v string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *RestoreResp) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -39,7 +39,7 @@ type CustomerDetailsData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerDetailsData(code string, name string, ) *CustomerDetailsData {
+func NewCustomerDetailsData(code string, name string) *CustomerDetailsData {
 	this := CustomerDetailsData{}
 	this.Code = code
 	this.Name = name
@@ -120,7 +120,7 @@ func (o *CustomerDetailsData) SetCallhomeLevel(v string) {
 
 // GetCode returns the Code field value
 func (o *CustomerDetailsData) GetCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -208,7 +208,7 @@ func (o *CustomerDetailsData) SetCustomerId(v int32) {
 
 // GetName returns the Name field value
 func (o *CustomerDetailsData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

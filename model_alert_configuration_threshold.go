@@ -26,7 +26,7 @@ type AlertConfigurationThreshold struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationThreshold(condition string, threshold float64, ) *AlertConfigurationThreshold {
+func NewAlertConfigurationThreshold(condition string, threshold float64) *AlertConfigurationThreshold {
 	this := AlertConfigurationThreshold{}
 	this.Condition = condition
 	this.Threshold = threshold
@@ -43,7 +43,7 @@ func NewAlertConfigurationThresholdWithDefaults() *AlertConfigurationThreshold {
 
 // GetCondition returns the Condition field value
 func (o *AlertConfigurationThreshold) GetCondition() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *AlertConfigurationThreshold) SetCondition(v string) {
 
 // GetThreshold returns the Threshold field value
 func (o *AlertConfigurationThreshold) GetThreshold() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}

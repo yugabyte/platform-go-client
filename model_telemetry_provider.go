@@ -36,7 +36,7 @@ type TelemetryProvider struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTelemetryProvider(config TelemetryProviderConfig, customerUUID string, name string, tags map[string]string, uuid string, ) *TelemetryProvider {
+func NewTelemetryProvider(config TelemetryProviderConfig, customerUUID string, name string, tags map[string]string, uuid string) *TelemetryProvider {
 	this := TelemetryProvider{}
 	this.Config = config
 	this.CustomerUUID = customerUUID
@@ -56,7 +56,7 @@ func NewTelemetryProviderWithDefaults() *TelemetryProvider {
 
 // GetConfig returns the Config field value
 func (o *TelemetryProvider) GetConfig() TelemetryProviderConfig {
-	if o == nil  {
+	if o == nil {
 		var ret TelemetryProviderConfig
 		return ret
 	}
@@ -112,7 +112,7 @@ func (o *TelemetryProvider) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *TelemetryProvider) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -136,7 +136,7 @@ func (o *TelemetryProvider) SetCustomerUUID(v string) {
 
 // GetName returns the Name field value
 func (o *TelemetryProvider) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -160,7 +160,7 @@ func (o *TelemetryProvider) SetName(v string) {
 
 // GetTags returns the Tags field value
 func (o *TelemetryProvider) GetTags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -216,7 +216,7 @@ func (o *TelemetryProvider) SetUpdateTime(v time.Time) {
 
 // GetUuid returns the Uuid field value
 func (o *TelemetryProvider) GetUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

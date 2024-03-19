@@ -26,7 +26,7 @@ type UniverseLogsExporterConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseLogsExporterConfig(additionalTags map[string]string, exporterUuid string, ) *UniverseLogsExporterConfig {
+func NewUniverseLogsExporterConfig(additionalTags map[string]string, exporterUuid string) *UniverseLogsExporterConfig {
 	this := UniverseLogsExporterConfig{}
 	this.AdditionalTags = additionalTags
 	this.ExporterUuid = exporterUuid
@@ -43,7 +43,7 @@ func NewUniverseLogsExporterConfigWithDefaults() *UniverseLogsExporterConfig {
 
 // GetAdditionalTags returns the AdditionalTags field value
 func (o *UniverseLogsExporterConfig) GetAdditionalTags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *UniverseLogsExporterConfig) SetAdditionalTags(v map[string]string) {
 
 // GetExporterUuid returns the ExporterUuid field value
 func (o *UniverseLogsExporterConfig) GetExporterUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

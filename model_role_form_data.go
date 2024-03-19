@@ -28,7 +28,7 @@ type RoleFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleFormData(description string, name string, permissionList []Permission, ) *RoleFormData {
+func NewRoleFormData(description string, name string, permissionList []Permission) *RoleFormData {
 	this := RoleFormData{}
 	this.Description = description
 	this.Name = name
@@ -46,7 +46,7 @@ func NewRoleFormDataWithDefaults() *RoleFormData {
 
 // GetDescription returns the Description field value
 func (o *RoleFormData) GetDescription() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -70,7 +70,7 @@ func (o *RoleFormData) SetDescription(v string) {
 
 // GetName returns the Name field value
 func (o *RoleFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -94,7 +94,7 @@ func (o *RoleFormData) SetName(v string) {
 
 // GetPermissionList returns the PermissionList field value
 func (o *RoleFormData) GetPermissionList() []Permission {
-	if o == nil  {
+	if o == nil {
 		var ret []Permission
 		return ret
 	}

@@ -92,7 +92,7 @@ type SoftwareUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoftwareUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, upgradeSystemCatalog bool, ybSoftwareVersion string, ) *SoftwareUpgradeParams {
+func NewSoftwareUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, upgradeSystemCatalog bool, ybSoftwareVersion string) *SoftwareUpgradeParams {
 	this := SoftwareUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -245,7 +245,7 @@ func (o *SoftwareUpgradeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *SoftwareUpgradeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -333,7 +333,7 @@ func (o *SoftwareUpgradeParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *SoftwareUpgradeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -741,7 +741,7 @@ func (o *SoftwareUpgradeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *SoftwareUpgradeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -989,7 +989,7 @@ func (o *SoftwareUpgradeParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *SoftwareUpgradeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1013,7 +1013,7 @@ func (o *SoftwareUpgradeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *SoftwareUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1261,7 +1261,7 @@ func (o *SoftwareUpgradeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *SoftwareUpgradeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1285,7 +1285,7 @@ func (o *SoftwareUpgradeParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *SoftwareUpgradeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1661,7 +1661,7 @@ func (o *SoftwareUpgradeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *SoftwareUpgradeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1685,7 +1685,7 @@ func (o *SoftwareUpgradeParams) SetUpgradeOption(v string) {
 
 // GetUpgradeSystemCatalog returns the UpgradeSystemCatalog field value
 func (o *SoftwareUpgradeParams) GetUpgradeSystemCatalog() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1837,7 +1837,7 @@ func (o *SoftwareUpgradeParams) SetYbPrevSoftwareVersion(v string) {
 
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value
 func (o *SoftwareUpgradeParams) GetYbSoftwareVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

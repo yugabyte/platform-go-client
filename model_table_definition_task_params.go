@@ -58,7 +58,7 @@ type TableDefinitionTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams {
+func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string) *TableDefinitionTaskParams {
 	this := TableDefinitionTaskParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -145,7 +145,7 @@ func (o *TableDefinitionTaskParams) SetCommunicationPorts(v CommunicationPorts) 
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *TableDefinitionTaskParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -457,7 +457,7 @@ func (o *TableDefinitionTaskParams) SetNodeExporterUser(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *TableDefinitionTaskParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -481,7 +481,7 @@ func (o *TableDefinitionTaskParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *TableDefinitionTaskParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -537,7 +537,7 @@ func (o *TableDefinitionTaskParams) SetPreviousTaskUUID(v string) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *TableDefinitionTaskParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -561,7 +561,7 @@ func (o *TableDefinitionTaskParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *TableDefinitionTaskParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -617,7 +617,7 @@ func (o *TableDefinitionTaskParams) SetSourceXClusterConfigs(v []string) {
 
 // GetTableDetails returns the TableDetails field value
 func (o *TableDefinitionTaskParams) GetTableDetails() TableDetails {
-	if o == nil  {
+	if o == nil {
 		var ret TableDetails
 		return ret
 	}
@@ -641,7 +641,7 @@ func (o *TableDefinitionTaskParams) SetTableDetails(v TableDetails) {
 
 // GetTableType returns the TableType field value
 func (o *TableDefinitionTaskParams) GetTableType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -665,7 +665,7 @@ func (o *TableDefinitionTaskParams) SetTableType(v string) {
 
 // GetTableUUID returns the TableUUID field value
 func (o *TableDefinitionTaskParams) GetTableUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

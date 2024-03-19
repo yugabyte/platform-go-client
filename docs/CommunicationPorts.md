@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **MasterHttpPort** | Pointer to **int32** | Master table HTTP port | [optional] 
 **MasterRpcPort** | Pointer to **int32** | Master table RCP port | [optional] 
 **NodeExporterPort** | Pointer to **int32** | Node exporter port | [optional] 
+**OtelCollectorMetricsPort** | Pointer to **int32** | Otel Collector metrics port | [optional] 
 **RedisServerHttpPort** | Pointer to **int32** | Redis HTTP port | [optional] 
 **RedisServerRpcPort** | Pointer to **int32** | Redis RPC port | [optional] 
 **TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] 
@@ -111,6 +112,31 @@ SetNodeExporterPort sets NodeExporterPort field to given value.
 `func (o *CommunicationPorts) HasNodeExporterPort() bool`
 
 HasNodeExporterPort returns a boolean if a field has been set.
+
+### GetOtelCollectorMetricsPort
+
+`func (o *CommunicationPorts) GetOtelCollectorMetricsPort() int32`
+
+GetOtelCollectorMetricsPort returns the OtelCollectorMetricsPort field if non-nil, zero value otherwise.
+
+### GetOtelCollectorMetricsPortOk
+
+`func (o *CommunicationPorts) GetOtelCollectorMetricsPortOk() (*int32, bool)`
+
+GetOtelCollectorMetricsPortOk returns a tuple with the OtelCollectorMetricsPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtelCollectorMetricsPort
+
+`func (o *CommunicationPorts) SetOtelCollectorMetricsPort(v int32)`
+
+SetOtelCollectorMetricsPort sets OtelCollectorMetricsPort field to given value.
+
+### HasOtelCollectorMetricsPort
+
+`func (o *CommunicationPorts) HasOtelCollectorMetricsPort() bool`
+
+HasOtelCollectorMetricsPort returns a boolean if a field has been set.
 
 ### GetRedisServerHttpPort
 

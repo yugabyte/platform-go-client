@@ -24,7 +24,7 @@ type MetricLabel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricLabel(name string, value string, ) *MetricLabel {
+func NewMetricLabel(name string, value string) *MetricLabel {
 	this := MetricLabel{}
 	this.Name = name
 	this.Value = value
@@ -41,7 +41,7 @@ func NewMetricLabelWithDefaults() *MetricLabel {
 
 // GetName returns the Name field value
 func (o *MetricLabel) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *MetricLabel) SetName(v string) {
 
 // GetValue returns the Value field value
 func (o *MetricLabel) GetValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

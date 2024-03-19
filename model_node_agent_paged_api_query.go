@@ -28,7 +28,7 @@ type NodeAgentPagedApiQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeAgentPagedApiQuery(direction string, filter NodeAgentApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *NodeAgentPagedApiQuery {
+func NewNodeAgentPagedApiQuery(direction string, filter NodeAgentApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *NodeAgentPagedApiQuery {
 	this := NodeAgentPagedApiQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewNodeAgentPagedApiQueryWithDefaults() *NodeAgentPagedApiQuery {
 
 // GetDirection returns the Direction field value
 func (o *NodeAgentPagedApiQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *NodeAgentPagedApiQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *NodeAgentPagedApiQuery) GetFilter() NodeAgentApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret NodeAgentApiFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *NodeAgentPagedApiQuery) SetFilter(v NodeAgentApiFilter) {
 
 // GetLimit returns the Limit field value
 func (o *NodeAgentPagedApiQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *NodeAgentPagedApiQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *NodeAgentPagedApiQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *NodeAgentPagedApiQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *NodeAgentPagedApiQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *NodeAgentPagedApiQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *NodeAgentPagedApiQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -25,7 +25,7 @@ type BootstrapParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBootstrapParams(backupRequestParams BootstarpBackupParams, tables []string, ) *BootstrapParams {
+func NewBootstrapParams(backupRequestParams BootstarpBackupParams, tables []string) *BootstrapParams {
 	this := BootstrapParams{}
 	this.BackupRequestParams = backupRequestParams
 	this.Tables = tables
@@ -42,7 +42,7 @@ func NewBootstrapParamsWithDefaults() *BootstrapParams {
 
 // GetBackupRequestParams returns the BackupRequestParams field value
 func (o *BootstrapParams) GetBackupRequestParams() BootstarpBackupParams {
-	if o == nil  {
+	if o == nil {
 		var ret BootstarpBackupParams
 		return ret
 	}
@@ -66,7 +66,7 @@ func (o *BootstrapParams) SetBackupRequestParams(v BootstarpBackupParams) {
 
 // GetTables returns the Tables field value
 func (o *BootstrapParams) GetTables() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

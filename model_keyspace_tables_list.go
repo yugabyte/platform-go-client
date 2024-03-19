@@ -29,7 +29,7 @@ type KeyspaceTablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList {
+func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string) *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
 	this.AllTables = allTables
 	this.BackupSizeInBytes = backupSizeInBytes
@@ -51,7 +51,7 @@ func NewKeyspaceTablesListWithDefaults() *KeyspaceTablesList {
 
 // GetAllTables returns the AllTables field value
 func (o *KeyspaceTablesList) GetAllTables() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *KeyspaceTablesList) SetAllTables(v bool) {
 
 // GetBackupSizeInBytes returns the BackupSizeInBytes field value
 func (o *KeyspaceTablesList) GetBackupSizeInBytes() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *KeyspaceTablesList) SetBackupSizeInBytes(v int64) {
 
 // GetDefaultLocation returns the DefaultLocation field value
 func (o *KeyspaceTablesList) GetDefaultLocation() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *KeyspaceTablesList) SetDefaultLocation(v string) {
 
 // GetKeyspace returns the Keyspace field value
 func (o *KeyspaceTablesList) GetKeyspace() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *KeyspaceTablesList) SetKeyspace(v string) {
 
 // GetPerRegionLocations returns the PerRegionLocations field value
 func (o *KeyspaceTablesList) GetPerRegionLocations() []RegionLocations {
-	if o == nil  {
+	if o == nil {
 		var ret []RegionLocations
 		return ret
 	}
@@ -171,7 +171,7 @@ func (o *KeyspaceTablesList) SetPerRegionLocations(v []RegionLocations) {
 
 // GetTableUUIDList returns the TableUUIDList field value
 func (o *KeyspaceTablesList) GetTableUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -195,7 +195,7 @@ func (o *KeyspaceTablesList) SetTableUUIDList(v []string) {
 
 // GetTablesList returns the TablesList field value
 func (o *KeyspaceTablesList) GetTablesList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

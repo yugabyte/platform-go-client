@@ -29,7 +29,7 @@ type AccessKey struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccessKey(idKey AccessKeyId, keyInfo KeyInfo, ) *AccessKey {
+func NewAccessKey(idKey AccessKeyId, keyInfo KeyInfo) *AccessKey {
 	this := AccessKey{}
 	this.IdKey = idKey
 	this.KeyInfo = keyInfo
@@ -110,7 +110,7 @@ func (o *AccessKey) SetExpirationDate(v time.Time) {
 
 // GetIdKey returns the IdKey field value
 func (o *AccessKey) GetIdKey() AccessKeyId {
-	if o == nil  {
+	if o == nil {
 		var ret AccessKeyId
 		return ret
 	}
@@ -134,7 +134,7 @@ func (o *AccessKey) SetIdKey(v AccessKeyId) {
 
 // GetKeyInfo returns the KeyInfo field value
 func (o *AccessKey) GetKeyInfo() KeyInfo {
-	if o == nil  {
+	if o == nil {
 		var ret KeyInfo
 		return ret
 	}

@@ -35,8 +35,10 @@ type VMImageUpgradeParams struct {
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ForceVMImageUpgrade bool `json:"forceVMImageUpgrade"`
-	// ImageBundle to be used for upgrade
+	// ImageBundle to be used for upgrade. <b style=\"color:#ff0000\">Deprecated since YBA version 2.21.1.0.</b> Use imageBundles instead.
 	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
+	// Available since YBA version 2.21.1.0. ImageBundles for provider to be used for upgrade
+	ImageBundles *[]ImageBundleUpgradeInfo `json:"imageBundles,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
@@ -98,7 +100,7 @@ type VMImageUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams {
+func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string) *VMImageUpgradeParams {
 	this := VMImageUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -251,7 +253,7 @@ func (o *VMImageUpgradeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *VMImageUpgradeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -339,7 +341,7 @@ func (o *VMImageUpgradeParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *VMImageUpgradeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -587,7 +589,7 @@ func (o *VMImageUpgradeParams) SetExtraDependencies(v ExtraDependencies) {
 
 // GetForceVMImageUpgrade returns the ForceVMImageUpgrade field value
 func (o *VMImageUpgradeParams) GetForceVMImageUpgrade() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -639,6 +641,38 @@ func (o *VMImageUpgradeParams) HasImageBundleUUID() bool {
 // SetImageBundleUUID gets a reference to the given string and assigns it to the ImageBundleUUID field.
 func (o *VMImageUpgradeParams) SetImageBundleUUID(v string) {
 	o.ImageBundleUUID = &v
+}
+
+// GetImageBundles returns the ImageBundles field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetImageBundles() []ImageBundleUpgradeInfo {
+	if o == nil || o.ImageBundles == nil {
+		var ret []ImageBundleUpgradeInfo
+		return ret
+	}
+	return *o.ImageBundles
+}
+
+// GetImageBundlesOk returns a tuple with the ImageBundles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetImageBundlesOk() (*[]ImageBundleUpgradeInfo, bool) {
+	if o == nil || o.ImageBundles == nil {
+		return nil, false
+	}
+	return o.ImageBundles, true
+}
+
+// HasImageBundles returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasImageBundles() bool {
+	if o != nil && o.ImageBundles != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImageBundles gets a reference to the given []ImageBundleUpgradeInfo and assigns it to the ImageBundles field.
+func (o *VMImageUpgradeParams) SetImageBundles(v []ImageBundleUpgradeInfo) {
+	o.ImageBundles = &v
 }
 
 // GetImportedState returns the ImportedState field value if set, zero value otherwise.
@@ -803,7 +837,7 @@ func (o *VMImageUpgradeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *VMImageUpgradeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1083,7 +1117,7 @@ func (o *VMImageUpgradeParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *VMImageUpgradeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1107,7 +1141,7 @@ func (o *VMImageUpgradeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *VMImageUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1355,7 +1389,7 @@ func (o *VMImageUpgradeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *VMImageUpgradeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1379,7 +1413,7 @@ func (o *VMImageUpgradeParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *VMImageUpgradeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1787,7 +1821,7 @@ func (o *VMImageUpgradeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *VMImageUpgradeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1939,7 +1973,7 @@ func (o *VMImageUpgradeParams) SetYbPrevSoftwareVersion(v string) {
 
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value
 func (o *VMImageUpgradeParams) GetYbSoftwareVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -2077,6 +2111,9 @@ func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.ImageBundleUUID != nil {
 		toSerialize["imageBundleUUID"] = o.ImageBundleUUID
+	}
+	if o.ImageBundles != nil {
+		toSerialize["imageBundles"] = o.ImageBundles
 	}
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState

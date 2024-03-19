@@ -26,7 +26,7 @@ type AccessKeyFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccessKeyFormData(keyCode string, keyContent string, keyType string, ) *AccessKeyFormData {
+func NewAccessKeyFormData(keyCode string, keyContent string, keyType string) *AccessKeyFormData {
 	this := AccessKeyFormData{}
 	this.KeyCode = keyCode
 	this.KeyContent = keyContent
@@ -76,7 +76,7 @@ func (o *AccessKeyFormData) SetExpirationThresholdDays(v int32) {
 
 // GetKeyCode returns the KeyCode field value
 func (o *AccessKeyFormData) GetKeyCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -100,7 +100,7 @@ func (o *AccessKeyFormData) SetKeyCode(v string) {
 
 // GetKeyContent returns the KeyContent field value
 func (o *AccessKeyFormData) GetKeyContent() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -124,7 +124,7 @@ func (o *AccessKeyFormData) SetKeyContent(v string) {
 
 // GetKeyType returns the KeyType field value
 func (o *AccessKeyFormData) GetKeyType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

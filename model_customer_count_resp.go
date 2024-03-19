@@ -23,7 +23,7 @@ type CustomerCountResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerCountResp(count int32, ) *CustomerCountResp {
+func NewCustomerCountResp(count int32) *CustomerCountResp {
 	this := CustomerCountResp{}
 	this.Count = count
 	return &this
@@ -39,7 +39,7 @@ func NewCustomerCountRespWithDefaults() *CustomerCountResp {
 
 // GetCount returns the Count field value
 func (o *CustomerCountResp) GetCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

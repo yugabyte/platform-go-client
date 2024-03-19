@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**RestartUniverse**](UniverseUpgradesManagementApi.md#RestartUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
 [**RollbackUpgrade**](UniverseUpgradesManagementApi.md#RollbackUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | Rollback Upgrade
 [**SoftwareUpgradePreCheck**](UniverseUpgradesManagementApi.md#SoftwareUpgradePreCheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Software Upgrade universe pre-check
+[**UpdateProxyConfig**](UniverseUpgradesManagementApi.md#UpdateProxyConfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/proxy_config | Update Proxy Config
 [**UpgradeCerts**](UniverseUpgradesManagementApi.md#UpgradeCerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/certs | Upgrade Certs
 [**UpgradeDBVersion**](UniverseUpgradesManagementApi.md#UpgradeDBVersion) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/db_version | Upgrade DB version
 [**UpgradeGFlags**](UniverseUpgradesManagementApi.md#UpgradeGFlags) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/gflags | Upgrade GFlags
@@ -543,6 +544,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SoftwareUpgradeInfoResponse**](SoftwareUpgradeInfoResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateProxyConfig
+
+> YBPTask UpdateProxyConfig(ctx, cUUID, uniUUID).UpdateProxyConfigParams(updateProxyConfigParams).Request(request).Execute()
+
+Update Proxy Config
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    updateProxyConfigParams := *openapiclient.NewProxyConfigUpdateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com"), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // ProxyConfigUpdateParams | Update Proxy Config Params
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.UpdateProxyConfig(context.Background(), cUUID, uniUUID).UpdateProxyConfigParams(updateProxyConfigParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.UpdateProxyConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateProxyConfig`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.UpdateProxyConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateProxyConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **updateProxyConfigParams** | [**ProxyConfigUpdateParams**](ProxyConfigUpdateParams.md) | Update Proxy Config Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 

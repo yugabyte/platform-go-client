@@ -22,6 +22,8 @@ type YBPError struct {
 	ErrorJson *map[string]interface{} `json:"errorJson,omitempty"`
 	// Method for HTTP call that resulted in this error
 	HttpMethod *string `json:"httpMethod,omitempty"`
+	// User request JSON object
+	RequestJson *map[string]interface{} `json:"requestJson,omitempty"`
 	// URI for HTTP request that resulted in this error
 	RequestUri *string `json:"requestUri,omitempty"`
 	// Always set to false to indicate failure
@@ -141,6 +143,38 @@ func (o *YBPError) SetHttpMethod(v string) {
 	o.HttpMethod = &v
 }
 
+// GetRequestJson returns the RequestJson field value if set, zero value otherwise.
+func (o *YBPError) GetRequestJson() map[string]interface{} {
+	if o == nil || o.RequestJson == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return *o.RequestJson
+}
+
+// GetRequestJsonOk returns a tuple with the RequestJson field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBPError) GetRequestJsonOk() (*map[string]interface{}, bool) {
+	if o == nil || o.RequestJson == nil {
+		return nil, false
+	}
+	return o.RequestJson, true
+}
+
+// HasRequestJson returns a boolean if a field has been set.
+func (o *YBPError) HasRequestJson() bool {
+	if o != nil && o.RequestJson != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequestJson gets a reference to the given map[string]interface{} and assigns it to the RequestJson field.
+func (o *YBPError) SetRequestJson(v map[string]interface{}) {
+	o.RequestJson = &v
+}
+
 // GetRequestUri returns the RequestUri field value if set, zero value otherwise.
 func (o *YBPError) GetRequestUri() string {
 	if o == nil || o.RequestUri == nil {
@@ -215,6 +249,9 @@ func (o YBPError) MarshalJSON() ([]byte, error) {
 	}
 	if o.HttpMethod != nil {
 		toSerialize["httpMethod"] = o.HttpMethod
+	}
+	if o.RequestJson != nil {
+		toSerialize["requestJson"] = o.RequestJson
 	}
 	if o.RequestUri != nil {
 		toSerialize["requestUri"] = o.RequestUri

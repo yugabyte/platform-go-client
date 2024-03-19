@@ -35,7 +35,7 @@ type XClusterConfigCreateFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigCreateFormData(name string, sourceUniverseUUID string, tables []string, targetUniverseUUID string, ) *XClusterConfigCreateFormData {
+func NewXClusterConfigCreateFormData(name string, sourceUniverseUUID string, tables []string, targetUniverseUUID string) *XClusterConfigCreateFormData {
 	this := XClusterConfigCreateFormData{}
 	this.Name = name
 	this.SourceUniverseUUID = sourceUniverseUUID
@@ -150,7 +150,7 @@ func (o *XClusterConfigCreateFormData) SetDryRun(v bool) {
 
 // GetName returns the Name field value
 func (o *XClusterConfigCreateFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -174,7 +174,7 @@ func (o *XClusterConfigCreateFormData) SetName(v string) {
 
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value
 func (o *XClusterConfigCreateFormData) GetSourceUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -198,7 +198,7 @@ func (o *XClusterConfigCreateFormData) SetSourceUniverseUUID(v string) {
 
 // GetTables returns the Tables field value
 func (o *XClusterConfigCreateFormData) GetTables() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -222,7 +222,7 @@ func (o *XClusterConfigCreateFormData) SetTables(v []string) {
 
 // GetTargetUniverseUUID returns the TargetUniverseUUID field value
 func (o *XClusterConfigCreateFormData) GetTargetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
