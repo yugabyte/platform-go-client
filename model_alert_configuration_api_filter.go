@@ -31,7 +31,7 @@ type AlertConfigurationApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationApiFilter(active bool, destinationType string, destinationUuid string, name string, severity string, target AlertConfigurationTarget, targetType string, template string, uuids []string, ) *AlertConfigurationApiFilter {
+func NewAlertConfigurationApiFilter(active bool, destinationType string, destinationUuid string, name string, severity string, target AlertConfigurationTarget, targetType string, template string, uuids []string) *AlertConfigurationApiFilter {
 	this := AlertConfigurationApiFilter{}
 	this.Active = active
 	this.DestinationType = destinationType
@@ -55,7 +55,7 @@ func NewAlertConfigurationApiFilterWithDefaults() *AlertConfigurationApiFilter {
 
 // GetActive returns the Active field value
 func (o *AlertConfigurationApiFilter) GetActive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -79,7 +79,7 @@ func (o *AlertConfigurationApiFilter) SetActive(v bool) {
 
 // GetDestinationType returns the DestinationType field value
 func (o *AlertConfigurationApiFilter) GetDestinationType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -103,7 +103,7 @@ func (o *AlertConfigurationApiFilter) SetDestinationType(v string) {
 
 // GetDestinationUuid returns the DestinationUuid field value
 func (o *AlertConfigurationApiFilter) GetDestinationUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -127,7 +127,7 @@ func (o *AlertConfigurationApiFilter) SetDestinationUuid(v string) {
 
 // GetName returns the Name field value
 func (o *AlertConfigurationApiFilter) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -151,7 +151,7 @@ func (o *AlertConfigurationApiFilter) SetName(v string) {
 
 // GetSeverity returns the Severity field value
 func (o *AlertConfigurationApiFilter) GetSeverity() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -175,7 +175,7 @@ func (o *AlertConfigurationApiFilter) SetSeverity(v string) {
 
 // GetTarget returns the Target field value
 func (o *AlertConfigurationApiFilter) GetTarget() AlertConfigurationTarget {
-	if o == nil  {
+	if o == nil {
 		var ret AlertConfigurationTarget
 		return ret
 	}
@@ -199,7 +199,7 @@ func (o *AlertConfigurationApiFilter) SetTarget(v AlertConfigurationTarget) {
 
 // GetTargetType returns the TargetType field value
 func (o *AlertConfigurationApiFilter) GetTargetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -223,7 +223,7 @@ func (o *AlertConfigurationApiFilter) SetTargetType(v string) {
 
 // GetTemplate returns the Template field value
 func (o *AlertConfigurationApiFilter) GetTemplate() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -247,7 +247,7 @@ func (o *AlertConfigurationApiFilter) SetTemplate(v string) {
 
 // GetUuids returns the Uuids field value
 func (o *AlertConfigurationApiFilter) GetUuids() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

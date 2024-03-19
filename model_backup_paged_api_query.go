@@ -28,7 +28,7 @@ type BackupPagedApiQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupPagedApiQuery(direction string, filter BackupApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *BackupPagedApiQuery {
+func NewBackupPagedApiQuery(direction string, filter BackupApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *BackupPagedApiQuery {
 	this := BackupPagedApiQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewBackupPagedApiQueryWithDefaults() *BackupPagedApiQuery {
 
 // GetDirection returns the Direction field value
 func (o *BackupPagedApiQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *BackupPagedApiQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *BackupPagedApiQuery) GetFilter() BackupApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret BackupApiFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *BackupPagedApiQuery) SetFilter(v BackupApiFilter) {
 
 // GetLimit returns the Limit field value
 func (o *BackupPagedApiQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *BackupPagedApiQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *BackupPagedApiQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *BackupPagedApiQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *BackupPagedApiQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *BackupPagedApiQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *BackupPagedApiQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

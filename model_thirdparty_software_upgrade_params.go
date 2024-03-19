@@ -91,7 +91,7 @@ type ThirdpartySoftwareUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams {
+func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *ThirdpartySoftwareUpgradeParams {
 	this := ThirdpartySoftwareUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -243,7 +243,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *ThirdpartySoftwareUpgradeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -331,7 +331,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetCommunicationPorts(v CommunicationP
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *ThirdpartySoftwareUpgradeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -579,7 +579,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetExtraDependencies(v ExtraDependenci
 
 // GetForceAll returns the ForceAll field value
 func (o *ThirdpartySoftwareUpgradeParams) GetForceAll() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -763,7 +763,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *ThirdpartySoftwareUpgradeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1011,7 +1011,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetPlacementModificationTaskUuid(v str
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *ThirdpartySoftwareUpgradeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1035,7 +1035,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *ThirdpartySoftwareUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1283,7 +1283,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *ThirdpartySoftwareUpgradeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1307,7 +1307,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetSleepAfterMasterRestartMillis(v int
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *ThirdpartySoftwareUpgradeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1683,7 +1683,7 @@ func (o *ThirdpartySoftwareUpgradeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *ThirdpartySoftwareUpgradeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

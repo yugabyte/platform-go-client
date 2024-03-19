@@ -25,7 +25,7 @@ type ScheduleApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleApiFilter(status []string, taskTypes []string, universeUUIDList []string, ) *ScheduleApiFilter {
+func NewScheduleApiFilter(status []string, taskTypes []string, universeUUIDList []string) *ScheduleApiFilter {
 	this := ScheduleApiFilter{}
 	this.Status = status
 	this.TaskTypes = taskTypes
@@ -43,7 +43,7 @@ func NewScheduleApiFilterWithDefaults() *ScheduleApiFilter {
 
 // GetStatus returns the Status field value
 func (o *ScheduleApiFilter) GetStatus() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *ScheduleApiFilter) SetStatus(v []string) {
 
 // GetTaskTypes returns the TaskTypes field value
 func (o *ScheduleApiFilter) GetTaskTypes() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *ScheduleApiFilter) SetTaskTypes(v []string) {
 
 // GetUniverseUUIDList returns the UniverseUUIDList field value
 func (o *ScheduleApiFilter) GetUniverseUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

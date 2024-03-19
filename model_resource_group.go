@@ -23,7 +23,7 @@ type ResourceGroup struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResourceGroup(resourceDefinitionSet []ResourceDefinition, ) *ResourceGroup {
+func NewResourceGroup(resourceDefinitionSet []ResourceDefinition) *ResourceGroup {
 	this := ResourceGroup{}
 	this.ResourceDefinitionSet = resourceDefinitionSet
 	return &this
@@ -39,7 +39,7 @@ func NewResourceGroupWithDefaults() *ResourceGroup {
 
 // GetResourceDefinitionSet returns the ResourceDefinitionSet field value
 func (o *ResourceGroup) GetResourceDefinitionSet() []ResourceDefinition {
-	if o == nil  {
+	if o == nil {
 		var ret []ResourceDefinition
 		return ret
 	}

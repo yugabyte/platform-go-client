@@ -25,7 +25,7 @@ type TablespaceResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTablespaceResponse(conflictingTablespaces []string, containsTablespaces bool, unsupportedTablespaces []string, ) *TablespaceResponse {
+func NewTablespaceResponse(conflictingTablespaces []string, containsTablespaces bool, unsupportedTablespaces []string) *TablespaceResponse {
 	this := TablespaceResponse{}
 	this.ConflictingTablespaces = conflictingTablespaces
 	this.ContainsTablespaces = containsTablespaces
@@ -43,7 +43,7 @@ func NewTablespaceResponseWithDefaults() *TablespaceResponse {
 
 // GetConflictingTablespaces returns the ConflictingTablespaces field value
 func (o *TablespaceResponse) GetConflictingTablespaces() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *TablespaceResponse) SetConflictingTablespaces(v []string) {
 
 // GetContainsTablespaces returns the ContainsTablespaces field value
 func (o *TablespaceResponse) GetContainsTablespaces() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *TablespaceResponse) SetContainsTablespaces(v bool) {
 
 // GetUnsupportedTablespaces returns the UnsupportedTablespaces field value
 func (o *TablespaceResponse) GetUnsupportedTablespaces() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

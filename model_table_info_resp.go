@@ -20,6 +20,8 @@ type TableInfoResp struct {
 	Colocated *bool `json:"colocated,omitempty"`
 	// Colocation parent id
 	ColocationParentId *string `json:"colocationParentId,omitempty"`
+	// Index Table IDs of main table
+	IndexTableIDs *[]string `json:"indexTableIDs,omitempty"`
 	// Keyspace
 	KeySpace *string `json:"keySpace,omitempty"`
 	// Main Table UUID of index tables
@@ -127,6 +129,38 @@ func (o *TableInfoResp) HasColocationParentId() bool {
 // SetColocationParentId gets a reference to the given string and assigns it to the ColocationParentId field.
 func (o *TableInfoResp) SetColocationParentId(v string) {
 	o.ColocationParentId = &v
+}
+
+// GetIndexTableIDs returns the IndexTableIDs field value if set, zero value otherwise.
+func (o *TableInfoResp) GetIndexTableIDs() []string {
+	if o == nil || o.IndexTableIDs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.IndexTableIDs
+}
+
+// GetIndexTableIDsOk returns a tuple with the IndexTableIDs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableInfoResp) GetIndexTableIDsOk() (*[]string, bool) {
+	if o == nil || o.IndexTableIDs == nil {
+		return nil, false
+	}
+	return o.IndexTableIDs, true
+}
+
+// HasIndexTableIDs returns a boolean if a field has been set.
+func (o *TableInfoResp) HasIndexTableIDs() bool {
+	if o != nil && o.IndexTableIDs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexTableIDs gets a reference to the given []string and assigns it to the IndexTableIDs field.
+func (o *TableInfoResp) SetIndexTableIDs(v []string) {
+	o.IndexTableIDs = &v
 }
 
 // GetKeySpace returns the KeySpace field value if set, zero value otherwise.
@@ -552,6 +586,9 @@ func (o TableInfoResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.ColocationParentId != nil {
 		toSerialize["colocationParentId"] = o.ColocationParentId
+	}
+	if o.IndexTableIDs != nil {
+		toSerialize["indexTableIDs"] = o.IndexTableIDs
 	}
 	if o.KeySpace != nil {
 		toSerialize["keySpace"] = o.KeySpace

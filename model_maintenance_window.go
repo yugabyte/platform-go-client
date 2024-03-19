@@ -40,7 +40,7 @@ type MaintenanceWindow struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMaintenanceWindow(alertConfigurationFilter AlertConfigurationApiFilter, createTime time.Time, customerUUID string, description string, endTime time.Time, name string, startTime time.Time, ) *MaintenanceWindow {
+func NewMaintenanceWindow(alertConfigurationFilter AlertConfigurationApiFilter, createTime time.Time, customerUUID string, description string, endTime time.Time, name string, startTime time.Time) *MaintenanceWindow {
 	this := MaintenanceWindow{}
 	this.AlertConfigurationFilter = alertConfigurationFilter
 	this.CreateTime = createTime
@@ -62,7 +62,7 @@ func NewMaintenanceWindowWithDefaults() *MaintenanceWindow {
 
 // GetAlertConfigurationFilter returns the AlertConfigurationFilter field value
 func (o *MaintenanceWindow) GetAlertConfigurationFilter() AlertConfigurationApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret AlertConfigurationApiFilter
 		return ret
 	}
@@ -86,7 +86,7 @@ func (o *MaintenanceWindow) SetAlertConfigurationFilter(v AlertConfigurationApiF
 
 // GetCreateTime returns the CreateTime field value
 func (o *MaintenanceWindow) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -110,7 +110,7 @@ func (o *MaintenanceWindow) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *MaintenanceWindow) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -134,7 +134,7 @@ func (o *MaintenanceWindow) SetCustomerUUID(v string) {
 
 // GetDescription returns the Description field value
 func (o *MaintenanceWindow) GetDescription() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -158,7 +158,7 @@ func (o *MaintenanceWindow) SetDescription(v string) {
 
 // GetEndTime returns the EndTime field value
 func (o *MaintenanceWindow) GetEndTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -182,7 +182,7 @@ func (o *MaintenanceWindow) SetEndTime(v time.Time) {
 
 // GetName returns the Name field value
 func (o *MaintenanceWindow) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -206,7 +206,7 @@ func (o *MaintenanceWindow) SetName(v string) {
 
 // GetStartTime returns the StartTime field value
 func (o *MaintenanceWindow) GetStartTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}

@@ -60,7 +60,7 @@ type Backup struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackup(incrementalBackup bool, parentBackup bool, ) *Backup {
+func NewBackup(incrementalBackup bool, parentBackup bool) *Backup {
 	this := Backup{}
 	this.IncrementalBackup = incrementalBackup
 	this.ParentBackup = parentBackup
@@ -397,7 +397,7 @@ func (o *Backup) SetHasKMSHistory(v bool) {
 
 // GetIncrementalBackup returns the IncrementalBackup field value
 func (o *Backup) GetIncrementalBackup() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -421,7 +421,7 @@ func (o *Backup) SetIncrementalBackup(v bool) {
 
 // GetParentBackup returns the ParentBackup field value
 func (o *Backup) GetParentBackup() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}

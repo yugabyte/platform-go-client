@@ -29,7 +29,7 @@ type AlertApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertApiFilter(configurationTypes []string, configurationUuid string, severities []string, sourceName string, sourceUUIDs []string, states []string, uuids []string, ) *AlertApiFilter {
+func NewAlertApiFilter(configurationTypes []string, configurationUuid string, severities []string, sourceName string, sourceUUIDs []string, states []string, uuids []string) *AlertApiFilter {
 	this := AlertApiFilter{}
 	this.ConfigurationTypes = configurationTypes
 	this.ConfigurationUuid = configurationUuid
@@ -51,7 +51,7 @@ func NewAlertApiFilterWithDefaults() *AlertApiFilter {
 
 // GetConfigurationTypes returns the ConfigurationTypes field value
 func (o *AlertApiFilter) GetConfigurationTypes() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *AlertApiFilter) SetConfigurationTypes(v []string) {
 
 // GetConfigurationUuid returns the ConfigurationUuid field value
 func (o *AlertApiFilter) GetConfigurationUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *AlertApiFilter) SetConfigurationUuid(v string) {
 
 // GetSeverities returns the Severities field value
 func (o *AlertApiFilter) GetSeverities() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *AlertApiFilter) SetSeverities(v []string) {
 
 // GetSourceName returns the SourceName field value
 func (o *AlertApiFilter) GetSourceName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *AlertApiFilter) SetSourceName(v string) {
 
 // GetSourceUUIDs returns the SourceUUIDs field value
 func (o *AlertApiFilter) GetSourceUUIDs() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -171,7 +171,7 @@ func (o *AlertApiFilter) SetSourceUUIDs(v []string) {
 
 // GetStates returns the States field value
 func (o *AlertApiFilter) GetStates() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -195,7 +195,7 @@ func (o *AlertApiFilter) SetStates(v []string) {
 
 // GetUuids returns the Uuids field value
 func (o *AlertApiFilter) GetUuids() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

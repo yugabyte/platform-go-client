@@ -27,7 +27,7 @@ type CustomCertInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomCertInfo(clientCertPath string, clientKeyPath string, nodeCertPath string, nodeKeyPath string, rootCertPath string, ) *CustomCertInfo {
+func NewCustomCertInfo(clientCertPath string, clientKeyPath string, nodeCertPath string, nodeKeyPath string, rootCertPath string) *CustomCertInfo {
 	this := CustomCertInfo{}
 	this.ClientCertPath = clientCertPath
 	this.ClientKeyPath = clientKeyPath
@@ -47,7 +47,7 @@ func NewCustomCertInfoWithDefaults() *CustomCertInfo {
 
 // GetClientCertPath returns the ClientCertPath field value
 func (o *CustomCertInfo) GetClientCertPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *CustomCertInfo) SetClientCertPath(v string) {
 
 // GetClientKeyPath returns the ClientKeyPath field value
 func (o *CustomCertInfo) GetClientKeyPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *CustomCertInfo) SetClientKeyPath(v string) {
 
 // GetNodeCertPath returns the NodeCertPath field value
 func (o *CustomCertInfo) GetNodeCertPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -119,7 +119,7 @@ func (o *CustomCertInfo) SetNodeCertPath(v string) {
 
 // GetNodeKeyPath returns the NodeKeyPath field value
 func (o *CustomCertInfo) GetNodeKeyPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -143,7 +143,7 @@ func (o *CustomCertInfo) SetNodeKeyPath(v string) {
 
 // GetRootCertPath returns the RootCertPath field value
 func (o *CustomCertInfo) GetRootCertPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

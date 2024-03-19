@@ -25,16 +25,17 @@ Name | Type | Description | Notes
 **EnableYSQLAuth** | Pointer to **bool** |  | [optional] 
 **ImageBundleUUID** | Pointer to **string** |  | [optional] 
 **InstanceTags** | Pointer to **map[string]string** |  | [optional] 
-**InstanceType** | Pointer to **string** |  | [optional] 
+**InstanceType** | Pointer to **string** | Instance type that is used for tserver nodes in current cluster. Could be modified in payload for /resize_node API call | [optional] 
 **KubernetesOperatorVersion** | Pointer to **int64** |  | [optional] 
 **MasterDeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **MasterGFlags** | Pointer to **map[string]string** | User-defined gflags for master. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.6.0.&lt;/b&gt; Use specificGFlags | [optional] 
-**MasterInstanceType** | Pointer to **string** |  | [optional] 
+**MasterInstanceType** | Pointer to **string** | Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call | [optional] 
 **MasterK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **NumNodes** | Pointer to **int32** |  | [optional] 
 **PreferredRegion** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **ProviderType** | Pointer to **string** |  | [optional] 
+**ProxyConfig** | Pointer to [**ProxyConfig**](ProxyConfig.md) |  | [optional] 
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
@@ -47,6 +48,7 @@ Name | Type | Description | Notes
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
+**UserIntentOverrides** | Pointer to [**UserIntentOverrides**](UserIntentOverrides.md) |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
 **YbcFlags** | Pointer to **map[string]string** |  | [optional] 
 **YcqlPassword** | Pointer to **string** |  | [optional] 
@@ -846,6 +848,31 @@ SetProviderType sets ProviderType field to given value.
 
 HasProviderType returns a boolean if a field has been set.
 
+### GetProxyConfig
+
+`func (o *UserIntent) GetProxyConfig() ProxyConfig`
+
+GetProxyConfig returns the ProxyConfig field if non-nil, zero value otherwise.
+
+### GetProxyConfigOk
+
+`func (o *UserIntent) GetProxyConfigOk() (*ProxyConfig, bool)`
+
+GetProxyConfigOk returns a tuple with the ProxyConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProxyConfig
+
+`func (o *UserIntent) SetProxyConfig(v ProxyConfig)`
+
+SetProxyConfig sets ProxyConfig field to given value.
+
+### HasProxyConfig
+
+`func (o *UserIntent) HasProxyConfig() bool`
+
+HasProxyConfig returns a boolean if a field has been set.
+
 ### GetRegionList
 
 `func (o *UserIntent) GetRegionList() []string`
@@ -1145,6 +1172,31 @@ SetUseTimeSync sets UseTimeSync field to given value.
 `func (o *UserIntent) HasUseTimeSync() bool`
 
 HasUseTimeSync returns a boolean if a field has been set.
+
+### GetUserIntentOverrides
+
+`func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides`
+
+GetUserIntentOverrides returns the UserIntentOverrides field if non-nil, zero value otherwise.
+
+### GetUserIntentOverridesOk
+
+`func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool)`
+
+GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserIntentOverrides
+
+`func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides)`
+
+SetUserIntentOverrides sets UserIntentOverrides field to given value.
+
+### HasUserIntentOverrides
+
+`func (o *UserIntent) HasUserIntentOverrides() bool`
+
+HasUserIntentOverrides returns a boolean if a field has been set.
 
 ### GetYbSoftwareVersion
 

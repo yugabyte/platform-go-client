@@ -28,7 +28,7 @@ type ConfKeyInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, tags []string, ) *ConfKeyInfo {
+func NewConfKeyInfo(dataType ConfDataTypeObject, displayName string, helpTxt string, key string, scope string, tags []string) *ConfKeyInfo {
 	this := ConfKeyInfo{}
 	this.DataType = dataType
 	this.DisplayName = displayName
@@ -49,7 +49,7 @@ func NewConfKeyInfoWithDefaults() *ConfKeyInfo {
 
 // GetDataType returns the DataType field value
 func (o *ConfKeyInfo) GetDataType() ConfDataTypeObject {
-	if o == nil  {
+	if o == nil {
 		var ret ConfDataTypeObject
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *ConfKeyInfo) SetDataType(v ConfDataTypeObject) {
 
 // GetDisplayName returns the DisplayName field value
 func (o *ConfKeyInfo) GetDisplayName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *ConfKeyInfo) SetDisplayName(v string) {
 
 // GetHelpTxt returns the HelpTxt field value
 func (o *ConfKeyInfo) GetHelpTxt() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *ConfKeyInfo) SetHelpTxt(v string) {
 
 // GetKey returns the Key field value
 func (o *ConfKeyInfo) GetKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *ConfKeyInfo) SetKey(v string) {
 
 // GetScope returns the Scope field value
 func (o *ConfKeyInfo) GetScope() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *ConfKeyInfo) SetScope(v string) {
 
 // GetTags returns the Tags field value
 func (o *ConfKeyInfo) GetTags() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

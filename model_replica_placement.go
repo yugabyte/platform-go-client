@@ -24,7 +24,7 @@ type ReplicaPlacement struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplicaPlacement(numReplicas int32, placementBlocks []PlacementBlock, ) *ReplicaPlacement {
+func NewReplicaPlacement(numReplicas int32, placementBlocks []PlacementBlock) *ReplicaPlacement {
 	this := ReplicaPlacement{}
 	this.NumReplicas = numReplicas
 	this.PlacementBlocks = placementBlocks
@@ -41,7 +41,7 @@ func NewReplicaPlacementWithDefaults() *ReplicaPlacement {
 
 // GetNumReplicas returns the NumReplicas field value
 func (o *ReplicaPlacement) GetNumReplicas() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *ReplicaPlacement) SetNumReplicas(v int32) {
 
 // GetPlacementBlocks returns the PlacementBlocks field value
 func (o *ReplicaPlacement) GetPlacementBlocks() []PlacementBlock {
-	if o == nil  {
+	if o == nil {
 		var ret []PlacementBlock
 		return ret
 	}

@@ -32,7 +32,7 @@ type PlacementBlock struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlacementBlock(cloud string, region string, zone string, ) *PlacementBlock {
+func NewPlacementBlock(cloud string, region string, zone string) *PlacementBlock {
 	this := PlacementBlock{}
 	this.Cloud = cloud
 	this.Region = region
@@ -50,7 +50,7 @@ func NewPlacementBlockWithDefaults() *PlacementBlock {
 
 // GetCloud returns the Cloud field value
 func (o *PlacementBlock) GetCloud() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -138,7 +138,7 @@ func (o *PlacementBlock) SetMinNumReplicas(v int32) {
 
 // GetRegion returns the Region field value
 func (o *PlacementBlock) GetRegion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -162,7 +162,7 @@ func (o *PlacementBlock) SetRegion(v string) {
 
 // GetZone returns the Zone field value
 func (o *PlacementBlock) GetZone() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

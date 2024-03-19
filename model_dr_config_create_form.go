@@ -34,7 +34,7 @@ type DrConfigCreateForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDrConfigCreateForm(dbs []string, name string, sourceUniverseUUID string, targetUniverseUUID string, ) *DrConfigCreateForm {
+func NewDrConfigCreateForm(dbs []string, name string, sourceUniverseUUID string, targetUniverseUUID string) *DrConfigCreateForm {
 	this := DrConfigCreateForm{}
 	this.Dbs = dbs
 	this.Name = name
@@ -85,7 +85,7 @@ func (o *DrConfigCreateForm) SetBootstrapParams(v RestartBootstrapParams) {
 
 // GetDbs returns the Dbs field value
 func (o *DrConfigCreateForm) GetDbs() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -141,7 +141,7 @@ func (o *DrConfigCreateForm) SetDryRun(v bool) {
 
 // GetName returns the Name field value
 func (o *DrConfigCreateForm) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -197,7 +197,7 @@ func (o *DrConfigCreateForm) SetPitrParams(v PitrParams) {
 
 // GetSourceUniverseUUID returns the SourceUniverseUUID field value
 func (o *DrConfigCreateForm) GetSourceUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -221,7 +221,7 @@ func (o *DrConfigCreateForm) SetSourceUniverseUUID(v string) {
 
 // GetTargetUniverseUUID returns the TargetUniverseUUID field value
 func (o *DrConfigCreateForm) GetTargetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

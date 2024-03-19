@@ -25,7 +25,7 @@ type AlertDefinitionLabel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinitionLabel(key AlertDefinitionLabelKey, name string, value string, ) *AlertDefinitionLabel {
+func NewAlertDefinitionLabel(key AlertDefinitionLabelKey, name string, value string) *AlertDefinitionLabel {
 	this := AlertDefinitionLabel{}
 	this.Key = key
 	this.Name = name
@@ -43,7 +43,7 @@ func NewAlertDefinitionLabelWithDefaults() *AlertDefinitionLabel {
 
 // GetKey returns the Key field value
 func (o *AlertDefinitionLabel) GetKey() AlertDefinitionLabelKey {
-	if o == nil  {
+	if o == nil {
 		var ret AlertDefinitionLabelKey
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *AlertDefinitionLabel) SetKey(v AlertDefinitionLabelKey) {
 
 // GetName returns the Name field value
 func (o *AlertDefinitionLabel) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *AlertDefinitionLabel) SetName(v string) {
 
 // GetValue returns the Value field value
 func (o *AlertDefinitionLabel) GetValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

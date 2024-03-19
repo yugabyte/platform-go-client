@@ -94,7 +94,7 @@ type NodeDetailsResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeDetailsResp(kubernetesOverrides string, ) *NodeDetailsResp {
+func NewNodeDetailsResp(kubernetesOverrides string) *NodeDetailsResp {
 	this := NodeDetailsResp{}
 	this.KubernetesOverrides = kubernetesOverrides
 	return &this
@@ -462,7 +462,7 @@ func (o *NodeDetailsResp) SetIsYsqlServer(v bool) {
 
 // GetKubernetesOverrides returns the KubernetesOverrides field value
 func (o *NodeDetailsResp) GetKubernetesOverrides() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

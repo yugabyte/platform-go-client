@@ -24,7 +24,7 @@ type AlertTemplateVariablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateVariablesList(customVariables []AlertTemplateVariable, systemVariables []string, ) *AlertTemplateVariablesList {
+func NewAlertTemplateVariablesList(customVariables []AlertTemplateVariable, systemVariables []string) *AlertTemplateVariablesList {
 	this := AlertTemplateVariablesList{}
 	this.CustomVariables = customVariables
 	this.SystemVariables = systemVariables
@@ -41,7 +41,7 @@ func NewAlertTemplateVariablesListWithDefaults() *AlertTemplateVariablesList {
 
 // GetCustomVariables returns the CustomVariables field value
 func (o *AlertTemplateVariablesList) GetCustomVariables() []AlertTemplateVariable {
-	if o == nil  {
+	if o == nil {
 		var ret []AlertTemplateVariable
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *AlertTemplateVariablesList) SetCustomVariables(v []AlertTemplateVariabl
 
 // GetSystemVariables returns the SystemVariables field value
 func (o *AlertTemplateVariablesList) GetSystemVariables() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

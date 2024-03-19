@@ -16,6 +16,7 @@ import (
 
 // UniverseResp Universe-creation response
 type UniverseResp struct {
+	AllowedTasks *AllowedUniverseTasksResp `json:"allowedTasks,omitempty"`
 	// Universe creation date
 	CreationDate *string `json:"creationDate,omitempty"`
 	// DNS name
@@ -57,6 +58,38 @@ func NewUniverseResp() *UniverseResp {
 func NewUniverseRespWithDefaults() *UniverseResp {
 	this := UniverseResp{}
 	return &this
+}
+
+// GetAllowedTasks returns the AllowedTasks field value if set, zero value otherwise.
+func (o *UniverseResp) GetAllowedTasks() AllowedUniverseTasksResp {
+	if o == nil || o.AllowedTasks == nil {
+		var ret AllowedUniverseTasksResp
+		return ret
+	}
+	return *o.AllowedTasks
+}
+
+// GetAllowedTasksOk returns a tuple with the AllowedTasks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetAllowedTasksOk() (*AllowedUniverseTasksResp, bool) {
+	if o == nil || o.AllowedTasks == nil {
+		return nil, false
+	}
+	return o.AllowedTasks, true
+}
+
+// HasAllowedTasks returns a boolean if a field has been set.
+func (o *UniverseResp) HasAllowedTasks() bool {
+	if o != nil && o.AllowedTasks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowedTasks gets a reference to the given AllowedUniverseTasksResp and assigns it to the AllowedTasks field.
+func (o *UniverseResp) SetAllowedTasks(v AllowedUniverseTasksResp) {
+	o.AllowedTasks = &v
 }
 
 // GetCreationDate returns the CreationDate field value if set, zero value otherwise.
@@ -477,6 +510,9 @@ func (o *UniverseResp) SetVersion(v int32) {
 
 func (o UniverseResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AllowedTasks != nil {
+		toSerialize["allowedTasks"] = o.AllowedTasks
+	}
 	if o.CreationDate != nil {
 		toSerialize["creationDate"] = o.CreationDate
 	}

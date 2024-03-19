@@ -33,7 +33,7 @@ type SupportBundleFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupportBundleFormData(components []string, endDate time.Time, startDate time.Time, ) *SupportBundleFormData {
+func NewSupportBundleFormData(components []string, endDate time.Time, startDate time.Time) *SupportBundleFormData {
 	this := SupportBundleFormData{}
 	this.Components = components
 	this.EndDate = endDate
@@ -51,7 +51,7 @@ func NewSupportBundleFormDataWithDefaults() *SupportBundleFormData {
 
 // GetComponents returns the Components field value
 func (o *SupportBundleFormData) GetComponents() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *SupportBundleFormData) SetComponents(v []string) {
 
 // GetEndDate returns the EndDate field value
 func (o *SupportBundleFormData) GetEndDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -163,7 +163,7 @@ func (o *SupportBundleFormData) SetMaxNumRecentCores(v int32) {
 
 // GetStartDate returns the StartDate field value
 func (o *SupportBundleFormData) GetStartDate() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}

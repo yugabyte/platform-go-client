@@ -25,7 +25,7 @@ type NodeActionFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeActionFormData(nodeAction string, ) *NodeActionFormData {
+func NewNodeActionFormData(nodeAction string) *NodeActionFormData {
 	this := NodeActionFormData{}
 	this.NodeAction = nodeAction
 	return &this
@@ -73,7 +73,7 @@ func (o *NodeActionFormData) SetForce(v bool) {
 
 // GetNodeAction returns the NodeAction field value
 func (o *NodeActionFormData) GetNodeAction() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

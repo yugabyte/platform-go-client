@@ -28,7 +28,7 @@ type Details struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDetails(data []NodeData, hasError bool, hasWarning bool, ybVersion string, ) *Details {
+func NewDetails(data []NodeData, hasError bool, hasWarning bool, ybVersion string) *Details {
 	this := Details{}
 	this.Data = data
 	this.HasError = hasError
@@ -47,7 +47,7 @@ func NewDetailsWithDefaults() *Details {
 
 // GetData returns the Data field value
 func (o *Details) GetData() []NodeData {
-	if o == nil  {
+	if o == nil {
 		var ret []NodeData
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *Details) SetData(v []NodeData) {
 
 // GetHasError returns the HasError field value
 func (o *Details) GetHasError() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *Details) SetHasError(v bool) {
 
 // GetHasWarning returns the HasWarning field value
 func (o *Details) GetHasWarning() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -151,7 +151,7 @@ func (o *Details) SetTimestampIso(v time.Time) {
 
 // GetYbVersion returns the YbVersion field value
 func (o *Details) GetYbVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

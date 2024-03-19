@@ -30,7 +30,7 @@ type PerformanceRecommendationFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendationFilter(createdInstantBefore int64, customerId string, ids []string, isStale bool, priorities []string, states []string, types []string, universeId string, ) *PerformanceRecommendationFilter {
+func NewPerformanceRecommendationFilter(createdInstantBefore int64, customerId string, ids []string, isStale bool, priorities []string, states []string, types []string, universeId string) *PerformanceRecommendationFilter {
 	this := PerformanceRecommendationFilter{}
 	this.CreatedInstantBefore = createdInstantBefore
 	this.CustomerId = customerId
@@ -53,7 +53,7 @@ func NewPerformanceRecommendationFilterWithDefaults() *PerformanceRecommendation
 
 // GetCreatedInstantBefore returns the CreatedInstantBefore field value
 func (o *PerformanceRecommendationFilter) GetCreatedInstantBefore() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -77,7 +77,7 @@ func (o *PerformanceRecommendationFilter) SetCreatedInstantBefore(v int64) {
 
 // GetCustomerId returns the CustomerId field value
 func (o *PerformanceRecommendationFilter) GetCustomerId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +101,7 @@ func (o *PerformanceRecommendationFilter) SetCustomerId(v string) {
 
 // GetIds returns the Ids field value
 func (o *PerformanceRecommendationFilter) GetIds() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -125,7 +125,7 @@ func (o *PerformanceRecommendationFilter) SetIds(v []string) {
 
 // GetIsStale returns the IsStale field value
 func (o *PerformanceRecommendationFilter) GetIsStale() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -149,7 +149,7 @@ func (o *PerformanceRecommendationFilter) SetIsStale(v bool) {
 
 // GetPriorities returns the Priorities field value
 func (o *PerformanceRecommendationFilter) GetPriorities() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -173,7 +173,7 @@ func (o *PerformanceRecommendationFilter) SetPriorities(v []string) {
 
 // GetStates returns the States field value
 func (o *PerformanceRecommendationFilter) GetStates() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -197,7 +197,7 @@ func (o *PerformanceRecommendationFilter) SetStates(v []string) {
 
 // GetTypes returns the Types field value
 func (o *PerformanceRecommendationFilter) GetTypes() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -221,7 +221,7 @@ func (o *PerformanceRecommendationFilter) SetTypes(v []string) {
 
 // GetUniverseId returns the UniverseId field value
 func (o *PerformanceRecommendationFilter) GetUniverseId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -26,7 +26,7 @@ type MasterNodesInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMasterNodesInfo(host string, isLeader bool, masterUUID string, port int32, ) *MasterNodesInfo {
+func NewMasterNodesInfo(host string, isLeader bool, masterUUID string, port int32) *MasterNodesInfo {
 	this := MasterNodesInfo{}
 	this.Host = host
 	this.IsLeader = isLeader
@@ -45,7 +45,7 @@ func NewMasterNodesInfoWithDefaults() *MasterNodesInfo {
 
 // GetHost returns the Host field value
 func (o *MasterNodesInfo) GetHost() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *MasterNodesInfo) SetHost(v string) {
 
 // GetIsLeader returns the IsLeader field value
 func (o *MasterNodesInfo) GetIsLeader() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *MasterNodesInfo) SetIsLeader(v bool) {
 
 // GetMasterUUID returns the MasterUUID field value
 func (o *MasterNodesInfo) GetMasterUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *MasterNodesInfo) SetMasterUUID(v string) {
 
 // GetPort returns the Port field value
 func (o *MasterNodesInfo) GetPort() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

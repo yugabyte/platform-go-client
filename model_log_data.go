@@ -23,7 +23,7 @@ type LogData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogData(lines []string, ) *LogData {
+func NewLogData(lines []string) *LogData {
 	this := LogData{}
 	this.Lines = lines
 	return &this
@@ -39,7 +39,7 @@ func NewLogDataWithDefaults() *LogData {
 
 // GetLines returns the Lines field value
 func (o *LogData) GetLines() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

@@ -92,7 +92,7 @@ type CertsRotateParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertsRotateParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *CertsRotateParams {
+func NewCertsRotateParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *CertsRotateParams {
 	this := CertsRotateParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -245,7 +245,7 @@ func (o *CertsRotateParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *CertsRotateParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -333,7 +333,7 @@ func (o *CertsRotateParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *CertsRotateParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -741,7 +741,7 @@ func (o *CertsRotateParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *CertsRotateParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -989,7 +989,7 @@ func (o *CertsRotateParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *CertsRotateParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1013,7 +1013,7 @@ func (o *CertsRotateParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *CertsRotateParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1229,7 +1229,7 @@ func (o *CertsRotateParams) SetRootCA(v string) {
 
 // GetSelfSignedClientCertRotate returns the SelfSignedClientCertRotate field value
 func (o *CertsRotateParams) GetSelfSignedClientCertRotate() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1253,7 +1253,7 @@ func (o *CertsRotateParams) SetSelfSignedClientCertRotate(v bool) {
 
 // GetSelfSignedServerCertRotate returns the SelfSignedServerCertRotate field value
 func (o *CertsRotateParams) GetSelfSignedServerCertRotate() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1309,7 +1309,7 @@ func (o *CertsRotateParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *CertsRotateParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1333,7 +1333,7 @@ func (o *CertsRotateParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *CertsRotateParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1709,7 +1709,7 @@ func (o *CertsRotateParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *CertsRotateParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

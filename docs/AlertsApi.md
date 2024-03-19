@@ -1365,7 +1365,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AlertChannelTemplatesExtWithDefaultValues**](Alert channel templates ext with default values.md)
+[**AlertChannelTemplatesExtWithDefaultValues**](AlertChannelTemplatesExtWithDefaultValues.md)
 
 ### Authorization
 
@@ -1651,7 +1651,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AlertChannelTemplatesExtWithDefaultValues**](Alert channel templates ext with default values.md)
+[**[]AlertChannelTemplatesExtWithDefaultValues**](AlertChannelTemplatesExtWithDefaultValues.md)
 
 ### Authorization
 

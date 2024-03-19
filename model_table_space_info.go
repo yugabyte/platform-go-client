@@ -28,7 +28,7 @@ type TableSpaceInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTableSpaceInfo(name string, placementBlocks []PlacementBlock, ) *TableSpaceInfo {
+func NewTableSpaceInfo(name string, placementBlocks []PlacementBlock) *TableSpaceInfo {
 	this := TableSpaceInfo{}
 	this.Name = name
 	this.PlacementBlocks = placementBlocks
@@ -45,7 +45,7 @@ func NewTableSpaceInfoWithDefaults() *TableSpaceInfo {
 
 // GetName returns the Name field value
 func (o *TableSpaceInfo) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +101,7 @@ func (o *TableSpaceInfo) SetNumReplicas(v int32) {
 
 // GetPlacementBlocks returns the PlacementBlocks field value
 func (o *TableSpaceInfo) GetPlacementBlocks() []PlacementBlock {
-	if o == nil  {
+	if o == nil {
 		var ret []PlacementBlock
 		return ret
 	}

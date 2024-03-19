@@ -28,7 +28,7 @@ type AlertChannelSlackParamsAllOf struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelSlackParamsAllOf(username string, webhookUrl string, ) *AlertChannelSlackParamsAllOf {
+func NewAlertChannelSlackParamsAllOf(username string, webhookUrl string) *AlertChannelSlackParamsAllOf {
 	this := AlertChannelSlackParamsAllOf{}
 	this.Username = username
 	this.WebhookUrl = webhookUrl
@@ -77,7 +77,7 @@ func (o *AlertChannelSlackParamsAllOf) SetIconUrl(v string) {
 
 // GetUsername returns the Username field value
 func (o *AlertChannelSlackParamsAllOf) GetUsername() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +101,7 @@ func (o *AlertChannelSlackParamsAllOf) SetUsername(v string) {
 
 // GetWebhookUrl returns the WebhookUrl field value
 func (o *AlertChannelSlackParamsAllOf) GetWebhookUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -28,7 +28,7 @@ type AlertDefinition struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, universeUUID string, uuid string, version int32, ) *AlertDefinition {
+func NewAlertDefinition(configurationUUID string, customerUUID string, labels []AlertDefinitionLabel, universeUUID string, uuid string, version int32) *AlertDefinition {
 	this := AlertDefinition{}
 	this.ConfigurationUUID = configurationUUID
 	this.CustomerUUID = customerUUID
@@ -49,7 +49,7 @@ func NewAlertDefinitionWithDefaults() *AlertDefinition {
 
 // GetConfigurationUUID returns the ConfigurationUUID field value
 func (o *AlertDefinition) GetConfigurationUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *AlertDefinition) SetConfigurationUUID(v string) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertDefinition) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *AlertDefinition) SetCustomerUUID(v string) {
 
 // GetLabels returns the Labels field value
 func (o *AlertDefinition) GetLabels() []AlertDefinitionLabel {
-	if o == nil  {
+	if o == nil {
 		var ret []AlertDefinitionLabel
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *AlertDefinition) SetLabels(v []AlertDefinitionLabel) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *AlertDefinition) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *AlertDefinition) SetUniverseUUID(v string) {
 
 // GetUuid returns the Uuid field value
 func (o *AlertDefinition) GetUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *AlertDefinition) SetUuid(v string) {
 
 // GetVersion returns the Version field value
 func (o *AlertDefinition) GetVersion() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

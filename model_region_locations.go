@@ -25,7 +25,7 @@ type RegionLocations struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionLocations(hOSTBASE string, lOCATION string, rEGION string, ) *RegionLocations {
+func NewRegionLocations(hOSTBASE string, lOCATION string, rEGION string) *RegionLocations {
 	this := RegionLocations{}
 	this.HOST_BASE = hOSTBASE
 	this.LOCATION = lOCATION
@@ -43,7 +43,7 @@ func NewRegionLocationsWithDefaults() *RegionLocations {
 
 // GetHOST_BASE returns the HOST_BASE field value
 func (o *RegionLocations) GetHOST_BASE() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *RegionLocations) SetHOST_BASE(v string) {
 
 // GetLOCATION returns the LOCATION field value
 func (o *RegionLocations) GetLOCATION() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *RegionLocations) SetLOCATION(v string) {
 
 // GetREGION returns the REGION field value
 func (o *RegionLocations) GetREGION() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

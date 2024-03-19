@@ -38,7 +38,7 @@ type SupportBundle struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, path string, scopeUUID string, status string, ) *SupportBundle {
+func NewSupportBundle(bundleDetails BundleDetails, bundleUUID string, path string, scopeUUID string, status string) *SupportBundle {
 	this := SupportBundle{}
 	this.BundleDetails = bundleDetails
 	this.BundleUUID = bundleUUID
@@ -58,7 +58,7 @@ func NewSupportBundleWithDefaults() *SupportBundle {
 
 // GetBundleDetails returns the BundleDetails field value
 func (o *SupportBundle) GetBundleDetails() BundleDetails {
-	if o == nil  {
+	if o == nil {
 		var ret BundleDetails
 		return ret
 	}
@@ -82,7 +82,7 @@ func (o *SupportBundle) SetBundleDetails(v BundleDetails) {
 
 // GetBundleUUID returns the BundleUUID field value
 func (o *SupportBundle) GetBundleUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -202,7 +202,7 @@ func (o *SupportBundle) SetExpirationDate(v time.Time) {
 
 // GetPath returns the Path field value
 func (o *SupportBundle) GetPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -226,7 +226,7 @@ func (o *SupportBundle) SetPath(v string) {
 
 // GetScopeUUID returns the ScopeUUID field value
 func (o *SupportBundle) GetScopeUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -314,7 +314,7 @@ func (o *SupportBundle) SetStartDate(v time.Time) {
 
 // GetStatus returns the Status field value
 func (o *SupportBundle) GetStatus() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

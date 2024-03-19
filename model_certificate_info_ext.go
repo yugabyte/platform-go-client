@@ -53,7 +53,7 @@ type CertificateInfoExt struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertificateInfoExt(customCertPathParams CustomCertInfo, customHCPKICertInfo HashicorpVaultConfigParams, customServerCertInfo CustomServerCertInfo, universeDetailSubsets []UniverseDetailSubset, ) *CertificateInfoExt {
+func NewCertificateInfoExt(customCertPathParams CustomCertInfo, customHCPKICertInfo HashicorpVaultConfigParams, customServerCertInfo CustomServerCertInfo, universeDetailSubsets []UniverseDetailSubset) *CertificateInfoExt {
 	this := CertificateInfoExt{}
 	this.CustomCertPathParams = customCertPathParams
 	this.CustomHCPKICertInfo = customHCPKICertInfo
@@ -168,7 +168,7 @@ func (o *CertificateInfoExt) SetChecksum(v string) {
 
 // GetCustomCertPathParams returns the CustomCertPathParams field value
 func (o *CertificateInfoExt) GetCustomCertPathParams() CustomCertInfo {
-	if o == nil  {
+	if o == nil {
 		var ret CustomCertInfo
 		return ret
 	}
@@ -192,7 +192,7 @@ func (o *CertificateInfoExt) SetCustomCertPathParams(v CustomCertInfo) {
 
 // GetCustomHCPKICertInfo returns the CustomHCPKICertInfo field value
 func (o *CertificateInfoExt) GetCustomHCPKICertInfo() HashicorpVaultConfigParams {
-	if o == nil  {
+	if o == nil {
 		var ret HashicorpVaultConfigParams
 		return ret
 	}
@@ -216,7 +216,7 @@ func (o *CertificateInfoExt) SetCustomHCPKICertInfo(v HashicorpVaultConfigParams
 
 // GetCustomServerCertInfo returns the CustomServerCertInfo field value
 func (o *CertificateInfoExt) GetCustomServerCertInfo() CustomServerCertInfo {
-	if o == nil  {
+	if o == nil {
 		var ret CustomServerCertInfo
 		return ret
 	}
@@ -496,7 +496,7 @@ func (o *CertificateInfoExt) SetStartDateIso(v time.Time) {
 
 // GetUniverseDetailSubsets returns the UniverseDetailSubsets field value
 func (o *CertificateInfoExt) GetUniverseDetailSubsets() []UniverseDetailSubset {
-	if o == nil  {
+	if o == nil {
 		var ret []UniverseDetailSubset
 		return ret
 	}

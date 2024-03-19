@@ -32,7 +32,7 @@ type RegionFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, securityGroupId string, vnetName string, ybImage string, ) *RegionFormData {
+func NewRegionFormData(code string, destVpcId string, hostVpcId string, hostVpcRegion string, latitude float64, longitude float64, name string, securityGroupId string, vnetName string, ybImage string) *RegionFormData {
 	this := RegionFormData{}
 	this.Code = code
 	this.DestVpcId = destVpcId
@@ -57,7 +57,7 @@ func NewRegionFormDataWithDefaults() *RegionFormData {
 
 // GetCode returns the Code field value
 func (o *RegionFormData) GetCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -81,7 +81,7 @@ func (o *RegionFormData) SetCode(v string) {
 
 // GetDestVpcId returns the DestVpcId field value
 func (o *RegionFormData) GetDestVpcId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -105,7 +105,7 @@ func (o *RegionFormData) SetDestVpcId(v string) {
 
 // GetHostVpcId returns the HostVpcId field value
 func (o *RegionFormData) GetHostVpcId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -129,7 +129,7 @@ func (o *RegionFormData) SetHostVpcId(v string) {
 
 // GetHostVpcRegion returns the HostVpcRegion field value
 func (o *RegionFormData) GetHostVpcRegion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -153,7 +153,7 @@ func (o *RegionFormData) SetHostVpcRegion(v string) {
 
 // GetLatitude returns the Latitude field value
 func (o *RegionFormData) GetLatitude() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -177,7 +177,7 @@ func (o *RegionFormData) SetLatitude(v float64) {
 
 // GetLongitude returns the Longitude field value
 func (o *RegionFormData) GetLongitude() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -201,7 +201,7 @@ func (o *RegionFormData) SetLongitude(v float64) {
 
 // GetName returns the Name field value
 func (o *RegionFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -225,7 +225,7 @@ func (o *RegionFormData) SetName(v string) {
 
 // GetSecurityGroupId returns the SecurityGroupId field value
 func (o *RegionFormData) GetSecurityGroupId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -249,7 +249,7 @@ func (o *RegionFormData) SetSecurityGroupId(v string) {
 
 // GetVnetName returns the VnetName field value
 func (o *RegionFormData) GetVnetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -273,7 +273,7 @@ func (o *RegionFormData) SetVnetName(v string) {
 
 // GetYbImage returns the YbImage field value
 func (o *RegionFormData) GetYbImage() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

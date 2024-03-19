@@ -31,7 +31,7 @@ type CertificateParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, customCertInfo CustomCertInfo, customServerCertData CustomServerCertData, hcVaultCertParams HashicorpVaultConfigParams, keyContent string, label string, ) *CertificateParams {
+func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, customCertInfo CustomCertInfo, customServerCertData CustomServerCertData, hcVaultCertParams HashicorpVaultConfigParams, keyContent string, label string) *CertificateParams {
 	this := CertificateParams{}
 	this.CertContent = certContent
 	this.CertExpiry = certExpiry
@@ -55,7 +55,7 @@ func NewCertificateParamsWithDefaults() *CertificateParams {
 
 // GetCertContent returns the CertContent field value
 func (o *CertificateParams) GetCertContent() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -79,7 +79,7 @@ func (o *CertificateParams) SetCertContent(v string) {
 
 // GetCertExpiry returns the CertExpiry field value
 func (o *CertificateParams) GetCertExpiry() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -103,7 +103,7 @@ func (o *CertificateParams) SetCertExpiry(v int64) {
 
 // GetCertStart returns the CertStart field value
 func (o *CertificateParams) GetCertStart() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -127,7 +127,7 @@ func (o *CertificateParams) SetCertStart(v int64) {
 
 // GetCertType returns the CertType field value
 func (o *CertificateParams) GetCertType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -151,7 +151,7 @@ func (o *CertificateParams) SetCertType(v string) {
 
 // GetCustomCertInfo returns the CustomCertInfo field value
 func (o *CertificateParams) GetCustomCertInfo() CustomCertInfo {
-	if o == nil  {
+	if o == nil {
 		var ret CustomCertInfo
 		return ret
 	}
@@ -175,7 +175,7 @@ func (o *CertificateParams) SetCustomCertInfo(v CustomCertInfo) {
 
 // GetCustomServerCertData returns the CustomServerCertData field value
 func (o *CertificateParams) GetCustomServerCertData() CustomServerCertData {
-	if o == nil  {
+	if o == nil {
 		var ret CustomServerCertData
 		return ret
 	}
@@ -199,7 +199,7 @@ func (o *CertificateParams) SetCustomServerCertData(v CustomServerCertData) {
 
 // GetHcVaultCertParams returns the HcVaultCertParams field value
 func (o *CertificateParams) GetHcVaultCertParams() HashicorpVaultConfigParams {
-	if o == nil  {
+	if o == nil {
 		var ret HashicorpVaultConfigParams
 		return ret
 	}
@@ -223,7 +223,7 @@ func (o *CertificateParams) SetHcVaultCertParams(v HashicorpVaultConfigParams) {
 
 // GetKeyContent returns the KeyContent field value
 func (o *CertificateParams) GetKeyContent() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -247,7 +247,7 @@ func (o *CertificateParams) SetKeyContent(v string) {
 
 // GetLabel returns the Label field value
 func (o *CertificateParams) GetLabel() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

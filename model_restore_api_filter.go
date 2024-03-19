@@ -33,7 +33,7 @@ type RestoreApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter {
+func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *RestoreApiFilter {
 	this := RestoreApiFilter{}
 	this.OnlyShowDeletedSourceUniverses = onlyShowDeletedSourceUniverses
 	this.SourceUniverseNameList = sourceUniverseNameList
@@ -118,7 +118,7 @@ func (o *RestoreApiFilter) SetDateRangeStart(v time.Time) {
 
 // GetOnlyShowDeletedSourceUniverses returns the OnlyShowDeletedSourceUniverses field value
 func (o *RestoreApiFilter) GetOnlyShowDeletedSourceUniverses() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -142,7 +142,7 @@ func (o *RestoreApiFilter) SetOnlyShowDeletedSourceUniverses(v bool) {
 
 // GetSourceUniverseNameList returns the SourceUniverseNameList field value
 func (o *RestoreApiFilter) GetSourceUniverseNameList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -166,7 +166,7 @@ func (o *RestoreApiFilter) SetSourceUniverseNameList(v []string) {
 
 // GetStates returns the States field value
 func (o *RestoreApiFilter) GetStates() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -190,7 +190,7 @@ func (o *RestoreApiFilter) SetStates(v []string) {
 
 // GetStorageConfigUUIDList returns the StorageConfigUUIDList field value
 func (o *RestoreApiFilter) GetStorageConfigUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -214,7 +214,7 @@ func (o *RestoreApiFilter) SetStorageConfigUUIDList(v []string) {
 
 // GetUniverseNameList returns the UniverseNameList field value
 func (o *RestoreApiFilter) GetUniverseNameList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -238,7 +238,7 @@ func (o *RestoreApiFilter) SetUniverseNameList(v []string) {
 
 // GetUniverseUUIDList returns the UniverseUUIDList field value
 func (o *RestoreApiFilter) GetUniverseUUIDList() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

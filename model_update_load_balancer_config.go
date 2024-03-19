@@ -27,7 +27,7 @@ type UpdateLoadBalancerConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateLoadBalancerConfig(firstTry bool, name string, retryLimit int32, sleepMultiplier int32, taskInfo string, ) *UpdateLoadBalancerConfig {
+func NewUpdateLoadBalancerConfig(firstTry bool, name string, retryLimit int32, sleepMultiplier int32, taskInfo string) *UpdateLoadBalancerConfig {
 	this := UpdateLoadBalancerConfig{}
 	this.FirstTry = firstTry
 	this.Name = name
@@ -47,7 +47,7 @@ func NewUpdateLoadBalancerConfigWithDefaults() *UpdateLoadBalancerConfig {
 
 // GetFirstTry returns the FirstTry field value
 func (o *UpdateLoadBalancerConfig) GetFirstTry() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *UpdateLoadBalancerConfig) SetFirstTry(v bool) {
 
 // GetName returns the Name field value
 func (o *UpdateLoadBalancerConfig) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *UpdateLoadBalancerConfig) SetName(v string) {
 
 // GetRetryLimit returns the RetryLimit field value
 func (o *UpdateLoadBalancerConfig) GetRetryLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -119,7 +119,7 @@ func (o *UpdateLoadBalancerConfig) SetRetryLimit(v int32) {
 
 // GetSleepMultiplier returns the SleepMultiplier field value
 func (o *UpdateLoadBalancerConfig) GetSleepMultiplier() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -143,7 +143,7 @@ func (o *UpdateLoadBalancerConfig) SetSleepMultiplier(v int32) {
 
 // GetTaskInfo returns the TaskInfo field value
 func (o *UpdateLoadBalancerConfig) GetTaskInfo() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

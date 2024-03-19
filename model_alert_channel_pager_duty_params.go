@@ -27,7 +27,7 @@ type AlertChannelPagerDutyParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelPagerDutyParams(apiKey string, routingKey string, ) *AlertChannelPagerDutyParams {
+func NewAlertChannelPagerDutyParams(apiKey string, routingKey string) *AlertChannelPagerDutyParams {
 	this := AlertChannelPagerDutyParams{}
 	this.ApiKey = apiKey
 	this.RoutingKey = routingKey
@@ -44,7 +44,7 @@ func NewAlertChannelPagerDutyParamsWithDefaults() *AlertChannelPagerDutyParams {
 
 // GetApiKey returns the ApiKey field value
 func (o *AlertChannelPagerDutyParams) GetApiKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -68,7 +68,7 @@ func (o *AlertChannelPagerDutyParams) SetApiKey(v string) {
 
 // GetRoutingKey returns the RoutingKey field value
 func (o *AlertChannelPagerDutyParams) GetRoutingKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

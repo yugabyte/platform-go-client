@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AutoIncludeIndexTables** | Pointer to **bool** | Whether or not YBA should also include all index tables from any provided main tables. | [optional] 
 **BootstrapParams** | Pointer to [**BootstrapParams**](BootstrapParams.md) |  | [optional] 
 **DryRun** | Pointer to **bool** | Run the pre-checks without actually running the subtasks | [optional] 
 **Name** | Pointer to **string** | Name | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewXClusterConfigEditFormDataWithDefaults instantiates a new XClusterConfigEditFormData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAutoIncludeIndexTables
+
+`func (o *XClusterConfigEditFormData) GetAutoIncludeIndexTables() bool`
+
+GetAutoIncludeIndexTables returns the AutoIncludeIndexTables field if non-nil, zero value otherwise.
+
+### GetAutoIncludeIndexTablesOk
+
+`func (o *XClusterConfigEditFormData) GetAutoIncludeIndexTablesOk() (*bool, bool)`
+
+GetAutoIncludeIndexTablesOk returns a tuple with the AutoIncludeIndexTables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoIncludeIndexTables
+
+`func (o *XClusterConfigEditFormData) SetAutoIncludeIndexTables(v bool)`
+
+SetAutoIncludeIndexTables sets AutoIncludeIndexTables field to given value.
+
+### HasAutoIncludeIndexTables
+
+`func (o *XClusterConfigEditFormData) HasAutoIncludeIndexTables() bool`
+
+HasAutoIncludeIndexTables returns a boolean if a field has been set.
 
 ### GetBootstrapParams
 

@@ -25,7 +25,7 @@ type ClientCertParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClientCertParams(certExpiry int64, certStart int64, username string, ) *ClientCertParams {
+func NewClientCertParams(certExpiry int64, certStart int64, username string) *ClientCertParams {
 	this := ClientCertParams{}
 	this.CertExpiry = certExpiry
 	this.CertStart = certStart
@@ -43,7 +43,7 @@ func NewClientCertParamsWithDefaults() *ClientCertParams {
 
 // GetCertExpiry returns the CertExpiry field value
 func (o *ClientCertParams) GetCertExpiry() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *ClientCertParams) SetCertExpiry(v int64) {
 
 // GetCertStart returns the CertStart field value
 func (o *ClientCertParams) GetCertStart() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *ClientCertParams) SetCertStart(v int64) {
 
 // GetUsername returns the Username field value
 func (o *ClientCertParams) GetUsername() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

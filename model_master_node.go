@@ -24,7 +24,7 @@ type MasterNode struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMasterNode(cloudInfo CloudSpecificInfo, masterRpcPort int32, ) *MasterNode {
+func NewMasterNode(cloudInfo CloudSpecificInfo, masterRpcPort int32) *MasterNode {
 	this := MasterNode{}
 	this.CloudInfo = cloudInfo
 	this.MasterRpcPort = masterRpcPort
@@ -41,7 +41,7 @@ func NewMasterNodeWithDefaults() *MasterNode {
 
 // GetCloudInfo returns the CloudInfo field value
 func (o *MasterNode) GetCloudInfo() CloudSpecificInfo {
-	if o == nil  {
+	if o == nil {
 		var ret CloudSpecificInfo
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *MasterNode) SetCloudInfo(v CloudSpecificInfo) {
 
 // GetMasterRpcPort returns the MasterRpcPort field value
 func (o *MasterNode) GetMasterRpcPort() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

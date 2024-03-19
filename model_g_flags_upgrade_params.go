@@ -92,7 +92,7 @@ type GFlagsUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *GFlagsUpgradeParams {
+func NewGFlagsUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string) *GFlagsUpgradeParams {
 	this := GFlagsUpgradeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -245,7 +245,7 @@ func (o *GFlagsUpgradeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *GFlagsUpgradeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -333,7 +333,7 @@ func (o *GFlagsUpgradeParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *GFlagsUpgradeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -741,7 +741,7 @@ func (o *GFlagsUpgradeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *GFlagsUpgradeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -765,7 +765,7 @@ func (o *GFlagsUpgradeParams) SetKubernetesUpgradeSupported(v bool) {
 
 // GetMasterGFlags returns the MasterGFlags field value
 func (o *GFlagsUpgradeParams) GetMasterGFlags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -1013,7 +1013,7 @@ func (o *GFlagsUpgradeParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *GFlagsUpgradeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1037,7 +1037,7 @@ func (o *GFlagsUpgradeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *GFlagsUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1285,7 +1285,7 @@ func (o *GFlagsUpgradeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *GFlagsUpgradeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1309,7 +1309,7 @@ func (o *GFlagsUpgradeParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *GFlagsUpgradeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1461,7 +1461,7 @@ func (o *GFlagsUpgradeParams) SetTargetXClusterConfigs(v []string) {
 
 // GetTserverGFlags returns the TserverGFlags field value
 func (o *GFlagsUpgradeParams) GetTserverGFlags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -1709,7 +1709,7 @@ func (o *GFlagsUpgradeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *GFlagsUpgradeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

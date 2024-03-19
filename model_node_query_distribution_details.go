@@ -27,7 +27,7 @@ type NodeQueryDistributionDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeQueryDistributionDetails(node string, numDelete int32, numInsert int32, numSelect int32, numUpdate int32, ) *NodeQueryDistributionDetails {
+func NewNodeQueryDistributionDetails(node string, numDelete int32, numInsert int32, numSelect int32, numUpdate int32) *NodeQueryDistributionDetails {
 	this := NodeQueryDistributionDetails{}
 	this.Node = node
 	this.NumDelete = numDelete
@@ -47,7 +47,7 @@ func NewNodeQueryDistributionDetailsWithDefaults() *NodeQueryDistributionDetails
 
 // GetNode returns the Node field value
 func (o *NodeQueryDistributionDetails) GetNode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *NodeQueryDistributionDetails) SetNode(v string) {
 
 // GetNumDelete returns the NumDelete field value
 func (o *NodeQueryDistributionDetails) GetNumDelete() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *NodeQueryDistributionDetails) SetNumDelete(v int32) {
 
 // GetNumInsert returns the NumInsert field value
 func (o *NodeQueryDistributionDetails) GetNumInsert() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -119,7 +119,7 @@ func (o *NodeQueryDistributionDetails) SetNumInsert(v int32) {
 
 // GetNumSelect returns the NumSelect field value
 func (o *NodeQueryDistributionDetails) GetNumSelect() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -143,7 +143,7 @@ func (o *NodeQueryDistributionDetails) SetNumSelect(v int32) {
 
 // GetNumUpdate returns the NumUpdate field value
 func (o *NodeQueryDistributionDetails) GetNumUpdate() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

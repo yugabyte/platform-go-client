@@ -25,7 +25,7 @@ type NodeConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeConfig(type_ string, value string, ) *NodeConfig {
+func NewNodeConfig(type_ string, value string) *NodeConfig {
 	this := NodeConfig{}
 	this.Type = type_
 	this.Value = value
@@ -42,7 +42,7 @@ func NewNodeConfigWithDefaults() *NodeConfig {
 
 // GetType returns the Type field value
 func (o *NodeConfig) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -66,7 +66,7 @@ func (o *NodeConfig) SetType(v string) {
 
 // GetValue returns the Value field value
 func (o *NodeConfig) GetValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

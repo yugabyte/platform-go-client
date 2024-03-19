@@ -26,7 +26,7 @@ type ReleaseFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReleaseFormData(gcs GCSLocation, http HttpLocation, s3 S3Location, version string, ) *ReleaseFormData {
+func NewReleaseFormData(gcs GCSLocation, http HttpLocation, s3 S3Location, version string) *ReleaseFormData {
 	this := ReleaseFormData{}
 	this.Gcs = gcs
 	this.Http = http
@@ -45,7 +45,7 @@ func NewReleaseFormDataWithDefaults() *ReleaseFormData {
 
 // GetGcs returns the Gcs field value
 func (o *ReleaseFormData) GetGcs() GCSLocation {
-	if o == nil  {
+	if o == nil {
 		var ret GCSLocation
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *ReleaseFormData) SetGcs(v GCSLocation) {
 
 // GetHttp returns the Http field value
 func (o *ReleaseFormData) GetHttp() HttpLocation {
-	if o == nil  {
+	if o == nil {
 		var ret HttpLocation
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *ReleaseFormData) SetHttp(v HttpLocation) {
 
 // GetS3 returns the S3 field value
 func (o *ReleaseFormData) GetS3() S3Location {
-	if o == nil  {
+	if o == nil {
 		var ret S3Location
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *ReleaseFormData) SetS3(v S3Location) {
 
 // GetVersion returns the Version field value
 func (o *ReleaseFormData) GetVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

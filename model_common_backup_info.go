@@ -39,7 +39,7 @@ type CommonBackupInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, tableByTableBackup bool, taskUUID string, totalBackupSizeInBytes int64, ) *CommonBackupInfo {
+func NewCommonBackupInfo(backupUUID string, baseBackupUUID string, kmsConfigUUID string, responseList []KeyspaceTablesList, sse bool, state string, storageConfigUUID string, tableByTableBackup bool, taskUUID string, totalBackupSizeInBytes int64) *CommonBackupInfo {
 	this := CommonBackupInfo{}
 	this.BackupUUID = backupUUID
 	this.BaseBackupUUID = baseBackupUUID
@@ -64,7 +64,7 @@ func NewCommonBackupInfoWithDefaults() *CommonBackupInfo {
 
 // GetBackupUUID returns the BackupUUID field value
 func (o *CommonBackupInfo) GetBackupUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -88,7 +88,7 @@ func (o *CommonBackupInfo) SetBackupUUID(v string) {
 
 // GetBaseBackupUUID returns the BaseBackupUUID field value
 func (o *CommonBackupInfo) GetBaseBackupUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -176,7 +176,7 @@ func (o *CommonBackupInfo) SetCreateTime(v time.Time) {
 
 // GetKmsConfigUUID returns the KmsConfigUUID field value
 func (o *CommonBackupInfo) GetKmsConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -200,7 +200,7 @@ func (o *CommonBackupInfo) SetKmsConfigUUID(v string) {
 
 // GetResponseList returns the ResponseList field value
 func (o *CommonBackupInfo) GetResponseList() []KeyspaceTablesList {
-	if o == nil  {
+	if o == nil {
 		var ret []KeyspaceTablesList
 		return ret
 	}
@@ -224,7 +224,7 @@ func (o *CommonBackupInfo) SetResponseList(v []KeyspaceTablesList) {
 
 // GetSse returns the Sse field value
 func (o *CommonBackupInfo) GetSse() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -248,7 +248,7 @@ func (o *CommonBackupInfo) SetSse(v bool) {
 
 // GetState returns the State field value
 func (o *CommonBackupInfo) GetState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -272,7 +272,7 @@ func (o *CommonBackupInfo) SetState(v string) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *CommonBackupInfo) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -296,7 +296,7 @@ func (o *CommonBackupInfo) SetStorageConfigUUID(v string) {
 
 // GetTableByTableBackup returns the TableByTableBackup field value
 func (o *CommonBackupInfo) GetTableByTableBackup() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -320,7 +320,7 @@ func (o *CommonBackupInfo) SetTableByTableBackup(v bool) {
 
 // GetTaskUUID returns the TaskUUID field value
 func (o *CommonBackupInfo) GetTaskUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -344,7 +344,7 @@ func (o *CommonBackupInfo) SetTaskUUID(v string) {
 
 // GetTotalBackupSizeInBytes returns the TotalBackupSizeInBytes field value
 func (o *CommonBackupInfo) GetTotalBackupSizeInBytes() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

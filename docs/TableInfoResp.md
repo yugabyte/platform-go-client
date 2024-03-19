@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Colocated** | Pointer to **bool** | Flag, indicating colocated table | [optional] 
 **ColocationParentId** | Pointer to **string** | Colocation parent id | [optional] 
+**IndexTableIDs** | Pointer to **[]string** | Index Table IDs of main table | [optional] 
 **KeySpace** | Pointer to **string** | Keyspace | [optional] 
 **MainTableUUID** | Pointer to **string** | Main Table UUID of index tables | [optional] 
 **NameSpace** | Pointer to **string** | Namespace or Schema | [optional] 
@@ -88,6 +89,31 @@ SetColocationParentId sets ColocationParentId field to given value.
 `func (o *TableInfoResp) HasColocationParentId() bool`
 
 HasColocationParentId returns a boolean if a field has been set.
+
+### GetIndexTableIDs
+
+`func (o *TableInfoResp) GetIndexTableIDs() []string`
+
+GetIndexTableIDs returns the IndexTableIDs field if non-nil, zero value otherwise.
+
+### GetIndexTableIDsOk
+
+`func (o *TableInfoResp) GetIndexTableIDsOk() (*[]string, bool)`
+
+GetIndexTableIDsOk returns a tuple with the IndexTableIDs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIndexTableIDs
+
+`func (o *TableInfoResp) SetIndexTableIDs(v []string)`
+
+SetIndexTableIDs sets IndexTableIDs field to given value.
+
+### HasIndexTableIDs
+
+`func (o *TableInfoResp) HasIndexTableIDs() bool`
+
+HasIndexTableIDs returns a boolean if a field has been set.
 
 ### GetKeySpace
 

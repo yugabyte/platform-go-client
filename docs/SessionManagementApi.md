@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CurrentAdminNotificationMessages**](Current admin notification messages.md)
+[**CurrentAdminNotificationMessages**](CurrentAdminNotificationMessages.md)
 
 ### Authorization
 

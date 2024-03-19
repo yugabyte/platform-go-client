@@ -26,7 +26,7 @@ type BackupPagedApiResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupPagedApiResponse(entities []BackupResp, hasNext bool, hasPrev bool, totalCount int32, ) *BackupPagedApiResponse {
+func NewBackupPagedApiResponse(entities []BackupResp, hasNext bool, hasPrev bool, totalCount int32) *BackupPagedApiResponse {
 	this := BackupPagedApiResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewBackupPagedApiResponseWithDefaults() *BackupPagedApiResponse {
 
 // GetEntities returns the Entities field value
 func (o *BackupPagedApiResponse) GetEntities() []BackupResp {
-	if o == nil  {
+	if o == nil {
 		var ret []BackupResp
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *BackupPagedApiResponse) SetEntities(v []BackupResp) {
 
 // GetHasNext returns the HasNext field value
 func (o *BackupPagedApiResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *BackupPagedApiResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *BackupPagedApiResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *BackupPagedApiResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *BackupPagedApiResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

@@ -36,7 +36,7 @@ type InstanceTypeResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceTypeResp(idKey InstanceTypeKey, ) *InstanceTypeResp {
+func NewInstanceTypeResp(idKey InstanceTypeKey) *InstanceTypeResp {
 	this := InstanceTypeResp{}
 	this.IdKey = idKey
 	return &this
@@ -84,7 +84,7 @@ func (o *InstanceTypeResp) SetActive(v bool) {
 
 // GetIdKey returns the IdKey field value
 func (o *InstanceTypeResp) GetIdKey() InstanceTypeKey {
-	if o == nil  {
+	if o == nil {
 		var ret InstanceTypeKey
 		return ret
 	}

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpAuth** | Pointer to [**HTTPAuthInformation**](HTTP Auth information.md) |  | [optional] 
+**HttpAuth** | Pointer to [**HTTPAuthInformation**](HTTPAuthInformation.md) |  | [optional] 
 **WebhookUrl** | **string** | Webhook URL | 
 
 ## Methods

@@ -24,7 +24,7 @@ type CustomerLoginFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerLoginFormData(email string, password string, ) *CustomerLoginFormData {
+func NewCustomerLoginFormData(email string, password string) *CustomerLoginFormData {
 	this := CustomerLoginFormData{}
 	this.Email = email
 	this.Password = password
@@ -41,7 +41,7 @@ func NewCustomerLoginFormDataWithDefaults() *CustomerLoginFormData {
 
 // GetEmail returns the Email field value
 func (o *CustomerLoginFormData) GetEmail() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *CustomerLoginFormData) SetEmail(v string) {
 
 // GetPassword returns the Password field value
 func (o *CustomerLoginFormData) GetPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

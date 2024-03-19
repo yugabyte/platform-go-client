@@ -36,7 +36,7 @@ type CustomerConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerConfig(configName string, customerUUID string, data map[string]interface{}, name string, type_ string, ) *CustomerConfig {
+func NewCustomerConfig(configName string, customerUUID string, data map[string]interface{}, name string, type_ string) *CustomerConfig {
 	this := CustomerConfig{}
 	this.ConfigName = configName
 	this.CustomerUUID = customerUUID
@@ -56,7 +56,7 @@ func NewCustomerConfigWithDefaults() *CustomerConfig {
 
 // GetConfigName returns the ConfigName field value
 func (o *CustomerConfig) GetConfigName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -112,7 +112,7 @@ func (o *CustomerConfig) SetConfigUUID(v string) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *CustomerConfig) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -136,7 +136,7 @@ func (o *CustomerConfig) SetCustomerUUID(v string) {
 
 // GetData returns the Data field value
 func (o *CustomerConfig) GetData() map[string]interface{} {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -160,7 +160,7 @@ func (o *CustomerConfig) SetData(v map[string]interface{}) {
 
 // GetName returns the Name field value
 func (o *CustomerConfig) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -216,7 +216,7 @@ func (o *CustomerConfig) SetState(v string) {
 
 // GetType returns the Type field value
 func (o *CustomerConfig) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

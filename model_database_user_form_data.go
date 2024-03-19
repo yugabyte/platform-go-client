@@ -29,7 +29,7 @@ type DatabaseUserFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDatabaseUserFormData(dbName string, password string, username string, ycqlAdminPassword string, ycqlAdminUsername string, ysqlAdminPassword string, ysqlAdminUsername string, ) *DatabaseUserFormData {
+func NewDatabaseUserFormData(dbName string, password string, username string, ycqlAdminPassword string, ycqlAdminUsername string, ysqlAdminPassword string, ysqlAdminUsername string) *DatabaseUserFormData {
 	this := DatabaseUserFormData{}
 	this.DbName = dbName
 	this.Password = password
@@ -51,7 +51,7 @@ func NewDatabaseUserFormDataWithDefaults() *DatabaseUserFormData {
 
 // GetDbName returns the DbName field value
 func (o *DatabaseUserFormData) GetDbName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *DatabaseUserFormData) SetDbName(v string) {
 
 // GetPassword returns the Password field value
 func (o *DatabaseUserFormData) GetPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *DatabaseUserFormData) SetPassword(v string) {
 
 // GetUsername returns the Username field value
 func (o *DatabaseUserFormData) GetUsername() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -123,7 +123,7 @@ func (o *DatabaseUserFormData) SetUsername(v string) {
 
 // GetYcqlAdminPassword returns the YcqlAdminPassword field value
 func (o *DatabaseUserFormData) GetYcqlAdminPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *DatabaseUserFormData) SetYcqlAdminPassword(v string) {
 
 // GetYcqlAdminUsername returns the YcqlAdminUsername field value
 func (o *DatabaseUserFormData) GetYcqlAdminUsername() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -171,7 +171,7 @@ func (o *DatabaseUserFormData) SetYcqlAdminUsername(v string) {
 
 // GetYsqlAdminPassword returns the YsqlAdminPassword field value
 func (o *DatabaseUserFormData) GetYsqlAdminPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -195,7 +195,7 @@ func (o *DatabaseUserFormData) SetYsqlAdminPassword(v string) {
 
 // GetYsqlAdminUsername returns the YsqlAdminUsername field value
 func (o *DatabaseUserFormData) GetYsqlAdminUsername() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

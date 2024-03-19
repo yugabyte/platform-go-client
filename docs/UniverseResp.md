@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllowedTasks** | Pointer to [**AllowedUniverseTasksResp**](AllowedUniverseTasksResp.md) |  | [optional] 
 **CreationDate** | Pointer to **string** | Universe creation date | [optional] 
 **DnsName** | Pointer to **string** | DNS name | [optional] 
 **DrConfigUuidsAsSource** | Pointer to **[]string** | UUIDs of DR configs where this universe is the source (primary) | [optional] 
@@ -36,6 +37,31 @@ will change when the set of required properties is changed
 NewUniverseRespWithDefaults instantiates a new UniverseResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllowedTasks
+
+`func (o *UniverseResp) GetAllowedTasks() AllowedUniverseTasksResp`
+
+GetAllowedTasks returns the AllowedTasks field if non-nil, zero value otherwise.
+
+### GetAllowedTasksOk
+
+`func (o *UniverseResp) GetAllowedTasksOk() (*AllowedUniverseTasksResp, bool)`
+
+GetAllowedTasksOk returns a tuple with the AllowedTasks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowedTasks
+
+`func (o *UniverseResp) SetAllowedTasks(v AllowedUniverseTasksResp)`
+
+SetAllowedTasks sets AllowedTasks field to given value.
+
+### HasAllowedTasks
+
+`func (o *UniverseResp) HasAllowedTasks() bool`
+
+HasAllowedTasks returns a boolean if a field has been set.
 
 ### GetCreationDate
 

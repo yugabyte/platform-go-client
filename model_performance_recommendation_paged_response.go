@@ -26,7 +26,7 @@ type PerformanceRecommendationPagedResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendationPagedResponse(entities []PerformanceRecommendation, hasNext bool, hasPrev bool, totalCount int32, ) *PerformanceRecommendationPagedResponse {
+func NewPerformanceRecommendationPagedResponse(entities []PerformanceRecommendation, hasNext bool, hasPrev bool, totalCount int32) *PerformanceRecommendationPagedResponse {
 	this := PerformanceRecommendationPagedResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewPerformanceRecommendationPagedResponseWithDefaults() *PerformanceRecomme
 
 // GetEntities returns the Entities field value
 func (o *PerformanceRecommendationPagedResponse) GetEntities() []PerformanceRecommendation {
-	if o == nil  {
+	if o == nil {
 		var ret []PerformanceRecommendation
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *PerformanceRecommendationPagedResponse) SetEntities(v []PerformanceReco
 
 // GetHasNext returns the HasNext field value
 func (o *PerformanceRecommendationPagedResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *PerformanceRecommendationPagedResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *PerformanceRecommendationPagedResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *PerformanceRecommendationPagedResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *PerformanceRecommendationPagedResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

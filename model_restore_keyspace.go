@@ -44,7 +44,7 @@ type RestoreKeyspace struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreKeyspace(backupSizeFromStorageLocation int64, ) *RestoreKeyspace {
+func NewRestoreKeyspace(backupSizeFromStorageLocation int64) *RestoreKeyspace {
 	this := RestoreKeyspace{}
 	this.BackupSizeFromStorageLocation = backupSizeFromStorageLocation
 	return &this
@@ -60,7 +60,7 @@ func NewRestoreKeyspaceWithDefaults() *RestoreKeyspace {
 
 // GetBackupSizeFromStorageLocation returns the BackupSizeFromStorageLocation field value
 func (o *RestoreKeyspace) GetBackupSizeFromStorageLocation() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

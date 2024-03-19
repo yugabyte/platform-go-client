@@ -45,7 +45,7 @@ type BackupResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, useTablespaces bool, ) *BackupResp {
+func NewBackupResp(backupType string, category string, commonBackupInfo CommonBackupInfo, customerUUID string, expiryTimeUnit string, fullChainSizeInBytes int64, hasIncrementalBackups bool, isFullBackup bool, isStorageConfigPresent bool, isUniversePresent bool, lastBackupState string, onDemand bool, scheduleName string, scheduleUUID string, storageConfigType string, universeName string, universeUUID string, useTablespaces bool) *BackupResp {
 	this := BackupResp{}
 	this.BackupType = backupType
 	this.Category = category
@@ -78,7 +78,7 @@ func NewBackupRespWithDefaults() *BackupResp {
 
 // GetBackupType returns the BackupType field value
 func (o *BackupResp) GetBackupType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -102,7 +102,7 @@ func (o *BackupResp) SetBackupType(v string) {
 
 // GetCategory returns the Category field value
 func (o *BackupResp) GetCategory() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -126,7 +126,7 @@ func (o *BackupResp) SetCategory(v string) {
 
 // GetCommonBackupInfo returns the CommonBackupInfo field value
 func (o *BackupResp) GetCommonBackupInfo() CommonBackupInfo {
-	if o == nil  {
+	if o == nil {
 		var ret CommonBackupInfo
 		return ret
 	}
@@ -150,7 +150,7 @@ func (o *BackupResp) SetCommonBackupInfo(v CommonBackupInfo) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *BackupResp) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -206,7 +206,7 @@ func (o *BackupResp) SetExpiryTime(v time.Time) {
 
 // GetExpiryTimeUnit returns the ExpiryTimeUnit field value
 func (o *BackupResp) GetExpiryTimeUnit() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -230,7 +230,7 @@ func (o *BackupResp) SetExpiryTimeUnit(v string) {
 
 // GetFullChainSizeInBytes returns the FullChainSizeInBytes field value
 func (o *BackupResp) GetFullChainSizeInBytes() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -254,7 +254,7 @@ func (o *BackupResp) SetFullChainSizeInBytes(v int64) {
 
 // GetHasIncrementalBackups returns the HasIncrementalBackups field value
 func (o *BackupResp) GetHasIncrementalBackups() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -278,7 +278,7 @@ func (o *BackupResp) SetHasIncrementalBackups(v bool) {
 
 // GetIsFullBackup returns the IsFullBackup field value
 func (o *BackupResp) GetIsFullBackup() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -302,7 +302,7 @@ func (o *BackupResp) SetIsFullBackup(v bool) {
 
 // GetIsStorageConfigPresent returns the IsStorageConfigPresent field value
 func (o *BackupResp) GetIsStorageConfigPresent() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -326,7 +326,7 @@ func (o *BackupResp) SetIsStorageConfigPresent(v bool) {
 
 // GetIsUniversePresent returns the IsUniversePresent field value
 func (o *BackupResp) GetIsUniversePresent() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -350,7 +350,7 @@ func (o *BackupResp) SetIsUniversePresent(v bool) {
 
 // GetLastBackupState returns the LastBackupState field value
 func (o *BackupResp) GetLastBackupState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -406,7 +406,7 @@ func (o *BackupResp) SetLastIncrementalBackupTime(v time.Time) {
 
 // GetOnDemand returns the OnDemand field value
 func (o *BackupResp) GetOnDemand() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -430,7 +430,7 @@ func (o *BackupResp) SetOnDemand(v bool) {
 
 // GetScheduleName returns the ScheduleName field value
 func (o *BackupResp) GetScheduleName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -454,7 +454,7 @@ func (o *BackupResp) SetScheduleName(v string) {
 
 // GetScheduleUUID returns the ScheduleUUID field value
 func (o *BackupResp) GetScheduleUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -478,7 +478,7 @@ func (o *BackupResp) SetScheduleUUID(v string) {
 
 // GetStorageConfigType returns the StorageConfigType field value
 func (o *BackupResp) GetStorageConfigType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -502,7 +502,7 @@ func (o *BackupResp) SetStorageConfigType(v string) {
 
 // GetUniverseName returns the UniverseName field value
 func (o *BackupResp) GetUniverseName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -526,7 +526,7 @@ func (o *BackupResp) SetUniverseName(v string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *BackupResp) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -550,7 +550,7 @@ func (o *BackupResp) SetUniverseUUID(v string) {
 
 // GetUseTablespaces returns the UseTablespaces field value
 func (o *BackupResp) GetUseTablespaces() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}

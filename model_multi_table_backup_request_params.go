@@ -140,7 +140,7 @@ type MultiTableBackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams {
+func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *MultiTableBackupRequestParams {
 	this := MultiTableBackupRequestParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -482,7 +482,7 @@ func (o *MultiTableBackupRequestParams) SetCommunicationPorts(v CommunicationPor
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *MultiTableBackupRequestParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -1306,7 +1306,7 @@ func (o *MultiTableBackupRequestParams) SetParallelism(v int32) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *MultiTableBackupRequestParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1330,7 +1330,7 @@ func (o *MultiTableBackupRequestParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *MultiTableBackupRequestParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1546,7 +1546,7 @@ func (o *MultiTableBackupRequestParams) SetSchedulingFrequency(v int64) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1570,7 +1570,7 @@ func (o *MultiTableBackupRequestParams) SetSleepAfterMasterRestartMillis(v int32
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1690,7 +1690,7 @@ func (o *MultiTableBackupRequestParams) SetStorageConfigType(v string) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *MultiTableBackupRequestParams) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -2002,7 +2002,7 @@ func (o *MultiTableBackupRequestParams) SetTimeBeforeDelete(v int64) {
 
 // GetTimeTakenPartial returns the TimeTakenPartial field value
 func (o *MultiTableBackupRequestParams) GetTimeTakenPartial() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

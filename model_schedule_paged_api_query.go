@@ -28,7 +28,7 @@ type SchedulePagedApiQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSchedulePagedApiQuery(direction string, filter ScheduleApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *SchedulePagedApiQuery {
+func NewSchedulePagedApiQuery(direction string, filter ScheduleApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *SchedulePagedApiQuery {
 	this := SchedulePagedApiQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewSchedulePagedApiQueryWithDefaults() *SchedulePagedApiQuery {
 
 // GetDirection returns the Direction field value
 func (o *SchedulePagedApiQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *SchedulePagedApiQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *SchedulePagedApiQuery) GetFilter() ScheduleApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret ScheduleApiFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *SchedulePagedApiQuery) SetFilter(v ScheduleApiFilter) {
 
 // GetLimit returns the Limit field value
 func (o *SchedulePagedApiQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *SchedulePagedApiQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *SchedulePagedApiQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *SchedulePagedApiQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *SchedulePagedApiQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *SchedulePagedApiQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *SchedulePagedApiQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

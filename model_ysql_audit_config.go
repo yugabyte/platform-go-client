@@ -44,7 +44,7 @@ type YSQLAuditConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRow bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig {
+func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRow bool, logStatement bool, logStatementOnce bool) *YSQLAuditConfig {
 	this := YSQLAuditConfig{}
 	this.Classes = classes
 	this.Enabled = enabled
@@ -70,7 +70,7 @@ func NewYSQLAuditConfigWithDefaults() *YSQLAuditConfig {
 
 // GetClasses returns the Classes field value
 func (o *YSQLAuditConfig) GetClasses() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -94,7 +94,7 @@ func (o *YSQLAuditConfig) SetClasses(v []string) {
 
 // GetEnabled returns the Enabled field value
 func (o *YSQLAuditConfig) GetEnabled() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -118,7 +118,7 @@ func (o *YSQLAuditConfig) SetEnabled(v bool) {
 
 // GetLogCatalog returns the LogCatalog field value
 func (o *YSQLAuditConfig) GetLogCatalog() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -142,7 +142,7 @@ func (o *YSQLAuditConfig) SetLogCatalog(v bool) {
 
 // GetLogClient returns the LogClient field value
 func (o *YSQLAuditConfig) GetLogClient() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -166,7 +166,7 @@ func (o *YSQLAuditConfig) SetLogClient(v bool) {
 
 // GetLogLevel returns the LogLevel field value
 func (o *YSQLAuditConfig) GetLogLevel() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -190,7 +190,7 @@ func (o *YSQLAuditConfig) SetLogLevel(v string) {
 
 // GetLogParameter returns the LogParameter field value
 func (o *YSQLAuditConfig) GetLogParameter() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -214,7 +214,7 @@ func (o *YSQLAuditConfig) SetLogParameter(v bool) {
 
 // GetLogParameterMaxSize returns the LogParameterMaxSize field value
 func (o *YSQLAuditConfig) GetLogParameterMaxSize() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -238,7 +238,7 @@ func (o *YSQLAuditConfig) SetLogParameterMaxSize(v int32) {
 
 // GetLogRelation returns the LogRelation field value
 func (o *YSQLAuditConfig) GetLogRelation() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -262,7 +262,7 @@ func (o *YSQLAuditConfig) SetLogRelation(v bool) {
 
 // GetLogRow returns the LogRow field value
 func (o *YSQLAuditConfig) GetLogRow() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -286,7 +286,7 @@ func (o *YSQLAuditConfig) SetLogRow(v bool) {
 
 // GetLogStatement returns the LogStatement field value
 func (o *YSQLAuditConfig) GetLogStatement() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -310,7 +310,7 @@ func (o *YSQLAuditConfig) SetLogStatement(v bool) {
 
 // GetLogStatementOnce returns the LogStatementOnce field value
 func (o *YSQLAuditConfig) GetLogStatementOnce() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}

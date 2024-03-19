@@ -26,7 +26,7 @@ type Config struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(certPath string, offloadable bool, serverCert string, serverKey string, ) *Config {
+func NewConfig(certPath string, offloadable bool, serverCert string, serverKey string) *Config {
 	this := Config{}
 	this.CertPath = certPath
 	this.Offloadable = offloadable
@@ -45,7 +45,7 @@ func NewConfigWithDefaults() *Config {
 
 // GetCertPath returns the CertPath field value
 func (o *Config) GetCertPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *Config) SetCertPath(v string) {
 
 // GetOffloadable returns the Offloadable field value
 func (o *Config) GetOffloadable() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *Config) SetOffloadable(v bool) {
 
 // GetServerCert returns the ServerCert field value
 func (o *Config) GetServerCert() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *Config) SetServerCert(v string) {
 
 // GetServerKey returns the ServerKey field value
 func (o *Config) GetServerKey() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

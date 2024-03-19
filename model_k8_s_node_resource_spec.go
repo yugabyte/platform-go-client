@@ -24,7 +24,7 @@ type K8SNodeResourceSpec struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewK8SNodeResourceSpec(cpuCoreCount float64, memoryGib float64, ) *K8SNodeResourceSpec {
+func NewK8SNodeResourceSpec(cpuCoreCount float64, memoryGib float64) *K8SNodeResourceSpec {
 	this := K8SNodeResourceSpec{}
 	this.CpuCoreCount = cpuCoreCount
 	this.MemoryGib = memoryGib
@@ -41,7 +41,7 @@ func NewK8SNodeResourceSpecWithDefaults() *K8SNodeResourceSpec {
 
 // GetCpuCoreCount returns the CpuCoreCount field value
 func (o *K8SNodeResourceSpec) GetCpuCoreCount() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *K8SNodeResourceSpec) SetCpuCoreCount(v float64) {
 
 // GetMemoryGib returns the MemoryGib field value
 func (o *K8SNodeResourceSpec) GetMemoryGib() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}

@@ -58,7 +58,7 @@ type Provider struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProvider(imageBundles []ImageBundle, regions []Region, ) *Provider {
+func NewProvider(imageBundles []ImageBundle, regions []Region) *Provider {
 	this := Provider{}
 	this.ImageBundles = imageBundles
 	this.Regions = regions
@@ -395,7 +395,7 @@ func (o *Provider) SetHostVpcRegion(v string) {
 
 // GetImageBundles returns the ImageBundles field value
 func (o *Provider) GetImageBundles() []ImageBundle {
-	if o == nil  {
+	if o == nil {
 		var ret []ImageBundle
 		return ret
 	}
@@ -483,7 +483,7 @@ func (o *Provider) SetName(v string) {
 
 // GetRegions returns the Regions field value
 func (o *Provider) GetRegions() []Region {
-	if o == nil  {
+	if o == nil {
 		var ret []Region
 		return ret
 	}

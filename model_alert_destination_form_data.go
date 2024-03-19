@@ -25,7 +25,7 @@ type AlertDestinationFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDestinationFormData(channels []string, defaultDestination bool, name string, ) *AlertDestinationFormData {
+func NewAlertDestinationFormData(channels []string, defaultDestination bool, name string) *AlertDestinationFormData {
 	this := AlertDestinationFormData{}
 	this.Channels = channels
 	this.DefaultDestination = defaultDestination
@@ -43,7 +43,7 @@ func NewAlertDestinationFormDataWithDefaults() *AlertDestinationFormData {
 
 // GetChannels returns the Channels field value
 func (o *AlertDestinationFormData) GetChannels() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *AlertDestinationFormData) SetChannels(v []string) {
 
 // GetDefaultDestination returns the DefaultDestination field value
 func (o *AlertDestinationFormData) GetDefaultDestination() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *AlertDestinationFormData) SetDefaultDestination(v bool) {
 
 // GetName returns the Name field value
 func (o *AlertDestinationFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

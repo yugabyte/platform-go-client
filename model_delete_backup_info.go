@@ -26,7 +26,7 @@ type DeleteBackupInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteBackupInfo(backupUUID string, ) *DeleteBackupInfo {
+func NewDeleteBackupInfo(backupUUID string) *DeleteBackupInfo {
 	this := DeleteBackupInfo{}
 	this.BackupUUID = backupUUID
 	return &this
@@ -42,7 +42,7 @@ func NewDeleteBackupInfoWithDefaults() *DeleteBackupInfo {
 
 // GetBackupUUID returns the BackupUUID field value
 func (o *DeleteBackupInfo) GetBackupUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

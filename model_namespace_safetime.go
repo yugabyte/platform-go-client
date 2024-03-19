@@ -28,7 +28,7 @@ type NamespaceSafetime struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNamespaceSafetime(estimatedDataLossMs float64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64, ) *NamespaceSafetime {
+func NewNamespaceSafetime(estimatedDataLossMs float64, namespaceId string, namespaceName string, safetimeEpochUs int64, safetimeLagUs int64, safetimeSkewUs int64) *NamespaceSafetime {
 	this := NamespaceSafetime{}
 	this.EstimatedDataLossMs = estimatedDataLossMs
 	this.NamespaceId = namespaceId
@@ -49,7 +49,7 @@ func NewNamespaceSafetimeWithDefaults() *NamespaceSafetime {
 
 // GetEstimatedDataLossMs returns the EstimatedDataLossMs field value
 func (o *NamespaceSafetime) GetEstimatedDataLossMs() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *NamespaceSafetime) SetEstimatedDataLossMs(v float64) {
 
 // GetNamespaceId returns the NamespaceId field value
 func (o *NamespaceSafetime) GetNamespaceId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *NamespaceSafetime) SetNamespaceId(v string) {
 
 // GetNamespaceName returns the NamespaceName field value
 func (o *NamespaceSafetime) GetNamespaceName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *NamespaceSafetime) SetNamespaceName(v string) {
 
 // GetSafetimeEpochUs returns the SafetimeEpochUs field value
 func (o *NamespaceSafetime) GetSafetimeEpochUs() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *NamespaceSafetime) SetSafetimeEpochUs(v int64) {
 
 // GetSafetimeLagUs returns the SafetimeLagUs field value
 func (o *NamespaceSafetime) GetSafetimeLagUs() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *NamespaceSafetime) SetSafetimeLagUs(v int64) {
 
 // GetSafetimeSkewUs returns the SafetimeSkewUs field value
 func (o *NamespaceSafetime) GetSafetimeSkewUs() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

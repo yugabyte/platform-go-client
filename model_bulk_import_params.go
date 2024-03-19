@@ -67,7 +67,7 @@ type BulkImportParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkImportParams(creatingUser Users, platformUrl string, platformVersion string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams {
+func NewBulkImportParams(creatingUser Users, platformUrl string, platformVersion string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *BulkImportParams {
 	this := BulkImportParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -152,7 +152,7 @@ func (o *BulkImportParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *BulkImportParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -528,7 +528,7 @@ func (o *BulkImportParams) SetNodeExporterUser(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *BulkImportParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -552,7 +552,7 @@ func (o *BulkImportParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *BulkImportParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -608,7 +608,7 @@ func (o *BulkImportParams) SetPreviousTaskUUID(v string) {
 
 // GetS3Bucket returns the S3Bucket field value
 func (o *BulkImportParams) GetS3Bucket() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -632,7 +632,7 @@ func (o *BulkImportParams) SetS3Bucket(v string) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *BulkImportParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -656,7 +656,7 @@ func (o *BulkImportParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *BulkImportParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

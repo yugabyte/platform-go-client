@@ -59,7 +59,7 @@ type CreatePitrConfigParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CreatePitrConfigParams {
+func NewCreatePitrConfigParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *CreatePitrConfigParams {
 	this := CreatePitrConfigParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -143,7 +143,7 @@ func (o *CreatePitrConfigParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *CreatePitrConfigParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -519,7 +519,7 @@ func (o *CreatePitrConfigParams) SetNodeExporterUser(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *CreatePitrConfigParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -543,7 +543,7 @@ func (o *CreatePitrConfigParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *CreatePitrConfigParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -631,7 +631,7 @@ func (o *CreatePitrConfigParams) SetRetentionPeriodInSeconds(v int64) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *CreatePitrConfigParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -655,7 +655,7 @@ func (o *CreatePitrConfigParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *CreatePitrConfigParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

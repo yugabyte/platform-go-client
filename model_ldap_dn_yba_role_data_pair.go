@@ -24,7 +24,7 @@ type LdapDnYbaRoleDataPair struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLdapDnYbaRoleDataPair(distinguishedName string, ybaRole string, ) *LdapDnYbaRoleDataPair {
+func NewLdapDnYbaRoleDataPair(distinguishedName string, ybaRole string) *LdapDnYbaRoleDataPair {
 	this := LdapDnYbaRoleDataPair{}
 	this.DistinguishedName = distinguishedName
 	this.YbaRole = ybaRole
@@ -41,7 +41,7 @@ func NewLdapDnYbaRoleDataPairWithDefaults() *LdapDnYbaRoleDataPair {
 
 // GetDistinguishedName returns the DistinguishedName field value
 func (o *LdapDnYbaRoleDataPair) GetDistinguishedName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *LdapDnYbaRoleDataPair) SetDistinguishedName(v string) {
 
 // GetYbaRole returns the YbaRole field value
 func (o *LdapDnYbaRoleDataPair) GetYbaRole() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -25,7 +25,7 @@ type MasterInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMasterInfo(peerRole string, privateIp string, uptimeSeconds int64, ) *MasterInfo {
+func NewMasterInfo(peerRole string, privateIp string, uptimeSeconds int64) *MasterInfo {
 	this := MasterInfo{}
 	this.PeerRole = peerRole
 	this.PrivateIp = privateIp
@@ -43,7 +43,7 @@ func NewMasterInfoWithDefaults() *MasterInfo {
 
 // GetPeerRole returns the PeerRole field value
 func (o *MasterInfo) GetPeerRole() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *MasterInfo) SetPeerRole(v string) {
 
 // GetPrivateIp returns the PrivateIp field value
 func (o *MasterInfo) GetPrivateIp() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *MasterInfo) SetPrivateIp(v string) {
 
 // GetUptimeSeconds returns the UptimeSeconds field value
 func (o *MasterInfo) GetUptimeSeconds() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

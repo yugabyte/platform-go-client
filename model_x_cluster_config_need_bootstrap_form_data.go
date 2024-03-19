@@ -26,7 +26,7 @@ type XClusterConfigNeedBootstrapFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigNeedBootstrapFormData(tables []string, ) *XClusterConfigNeedBootstrapFormData {
+func NewXClusterConfigNeedBootstrapFormData(tables []string) *XClusterConfigNeedBootstrapFormData {
 	this := XClusterConfigNeedBootstrapFormData{}
 	this.Tables = tables
 	return &this
@@ -42,7 +42,7 @@ func NewXClusterConfigNeedBootstrapFormDataWithDefaults() *XClusterConfigNeedBoo
 
 // GetTables returns the Tables field value
 func (o *XClusterConfigNeedBootstrapFormData) GetTables() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

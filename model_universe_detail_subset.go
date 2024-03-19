@@ -28,7 +28,7 @@ type UniverseDetailSubset struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDetailSubset(creationDate int64, name string, universePaused bool, updateInProgress bool, updateSucceeded bool, uuid string, ) *UniverseDetailSubset {
+func NewUniverseDetailSubset(creationDate int64, name string, universePaused bool, updateInProgress bool, updateSucceeded bool, uuid string) *UniverseDetailSubset {
 	this := UniverseDetailSubset{}
 	this.CreationDate = creationDate
 	this.Name = name
@@ -49,7 +49,7 @@ func NewUniverseDetailSubsetWithDefaults() *UniverseDetailSubset {
 
 // GetCreationDate returns the CreationDate field value
 func (o *UniverseDetailSubset) GetCreationDate() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *UniverseDetailSubset) SetCreationDate(v int64) {
 
 // GetName returns the Name field value
 func (o *UniverseDetailSubset) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *UniverseDetailSubset) SetName(v string) {
 
 // GetUniversePaused returns the UniversePaused field value
 func (o *UniverseDetailSubset) GetUniversePaused() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *UniverseDetailSubset) SetUniversePaused(v bool) {
 
 // GetUpdateInProgress returns the UpdateInProgress field value
 func (o *UniverseDetailSubset) GetUpdateInProgress() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *UniverseDetailSubset) SetUpdateInProgress(v bool) {
 
 // GetUpdateSucceeded returns the UpdateSucceeded field value
 func (o *UniverseDetailSubset) GetUpdateSucceeded() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *UniverseDetailSubset) SetUpdateSucceeded(v bool) {
 
 // GetUuid returns the Uuid field value
 func (o *UniverseDetailSubset) GetUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

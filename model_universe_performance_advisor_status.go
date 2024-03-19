@@ -39,7 +39,7 @@ type UniversePerformanceAdvisorStatus struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniversePerformanceAdvisorStatus(customerUUID string, state string, universeUUID string, uuid string, ) *UniversePerformanceAdvisorStatus {
+func NewUniversePerformanceAdvisorStatus(customerUUID string, state string, universeUUID string, uuid string) *UniversePerformanceAdvisorStatus {
 	this := UniversePerformanceAdvisorStatus{}
 	this.CustomerUUID = customerUUID
 	this.State = state
@@ -58,7 +58,7 @@ func NewUniversePerformanceAdvisorStatusWithDefaults() *UniversePerformanceAdvis
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *UniversePerformanceAdvisorStatus) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -210,7 +210,7 @@ func (o *UniversePerformanceAdvisorStatus) SetStartTime(v time.Time) {
 
 // GetState returns the State field value
 func (o *UniversePerformanceAdvisorStatus) GetState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -234,7 +234,7 @@ func (o *UniversePerformanceAdvisorStatus) SetState(v string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *UniversePerformanceAdvisorStatus) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -258,7 +258,7 @@ func (o *UniversePerformanceAdvisorStatus) SetUniverseUUID(v string) {
 
 // GetUuid returns the Uuid field value
 func (o *UniversePerformanceAdvisorStatus) GetUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -59,7 +59,7 @@ type RestoreSnapshotScheduleParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *RestoreSnapshotScheduleParams {
+func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *RestoreSnapshotScheduleParams {
 	this := RestoreSnapshotScheduleParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -143,7 +143,7 @@ func (o *RestoreSnapshotScheduleParams) SetCommunicationPorts(v CommunicationPor
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *RestoreSnapshotScheduleParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -487,7 +487,7 @@ func (o *RestoreSnapshotScheduleParams) SetPitrConfigUUID(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *RestoreSnapshotScheduleParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -511,7 +511,7 @@ func (o *RestoreSnapshotScheduleParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *RestoreSnapshotScheduleParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -599,7 +599,7 @@ func (o *RestoreSnapshotScheduleParams) SetRestoreTimeInMillis(v int64) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *RestoreSnapshotScheduleParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -623,7 +623,7 @@ func (o *RestoreSnapshotScheduleParams) SetSleepAfterMasterRestartMillis(v int32
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *RestoreSnapshotScheduleParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

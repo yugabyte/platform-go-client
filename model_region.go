@@ -42,7 +42,7 @@ type Region struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegion(zones []AvailabilityZone, ) *Region {
+func NewRegion(zones []AvailabilityZone) *Region {
 	this := Region{}
 	this.Zones = zones
 	return &this
@@ -410,7 +410,7 @@ func (o *Region) SetYbImage(v string) {
 
 // GetZones returns the Zones field value
 func (o *Region) GetZones() []AvailabilityZone {
-	if o == nil  {
+	if o == nil {
 		var ret []AvailabilityZone
 		return ret
 	}

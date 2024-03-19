@@ -28,7 +28,7 @@ type Cluster struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCluster(clusterType string, userIntent UserIntent, ) *Cluster {
+func NewCluster(clusterType string, userIntent UserIntent) *Cluster {
 	this := Cluster{}
 	this.ClusterType = clusterType
 	this.UserIntent = userIntent
@@ -45,7 +45,7 @@ func NewClusterWithDefaults() *Cluster {
 
 // GetClusterType returns the ClusterType field value
 func (o *Cluster) GetClusterType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -165,7 +165,7 @@ func (o *Cluster) SetRegions(v []Region) {
 
 // GetUserIntent returns the UserIntent field value
 func (o *Cluster) GetUserIntent() UserIntent {
-	if o == nil  {
+	if o == nil {
 		var ret UserIntent
 		return ret
 	}

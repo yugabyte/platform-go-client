@@ -30,7 +30,7 @@ type RestorePreflightParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestorePreflightParams(backupLocations []string, storageConfigUUID string, universeUUID string, ) *RestorePreflightParams {
+func NewRestorePreflightParams(backupLocations []string, storageConfigUUID string, universeUUID string) *RestorePreflightParams {
 	this := RestorePreflightParams{}
 	this.BackupLocations = backupLocations
 	this.StorageConfigUUID = storageConfigUUID
@@ -48,7 +48,7 @@ func NewRestorePreflightParamsWithDefaults() *RestorePreflightParams {
 
 // GetBackupLocations returns the BackupLocations field value
 func (o *RestorePreflightParams) GetBackupLocations() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -104,7 +104,7 @@ func (o *RestorePreflightParams) SetBackupUUID(v string) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *RestorePreflightParams) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -128,7 +128,7 @@ func (o *RestorePreflightParams) SetStorageConfigUUID(v string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *RestorePreflightParams) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -25,7 +25,7 @@ type DrConfigRestartForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDrConfigRestartForm(dbs []string, ) *DrConfigRestartForm {
+func NewDrConfigRestartForm(dbs []string) *DrConfigRestartForm {
 	this := DrConfigRestartForm{}
 	this.Dbs = dbs
 	return &this
@@ -73,7 +73,7 @@ func (o *DrConfigRestartForm) SetBootstrapParams(v RestartBootstrapParams) {
 
 // GetDbs returns the Dbs field value
 func (o *DrConfigRestartForm) GetDbs() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

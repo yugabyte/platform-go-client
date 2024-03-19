@@ -28,7 +28,7 @@ type NodeAgentApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeAgentApiFilter(cloudType string, nodeIps []string, providerUuid string, regionUuid string, universeUuid string, zoneUuid string, ) *NodeAgentApiFilter {
+func NewNodeAgentApiFilter(cloudType string, nodeIps []string, providerUuid string, regionUuid string, universeUuid string, zoneUuid string) *NodeAgentApiFilter {
 	this := NodeAgentApiFilter{}
 	this.CloudType = cloudType
 	this.NodeIps = nodeIps
@@ -49,7 +49,7 @@ func NewNodeAgentApiFilterWithDefaults() *NodeAgentApiFilter {
 
 // GetCloudType returns the CloudType field value
 func (o *NodeAgentApiFilter) GetCloudType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *NodeAgentApiFilter) SetCloudType(v string) {
 
 // GetNodeIps returns the NodeIps field value
 func (o *NodeAgentApiFilter) GetNodeIps() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *NodeAgentApiFilter) SetNodeIps(v []string) {
 
 // GetProviderUuid returns the ProviderUuid field value
 func (o *NodeAgentApiFilter) GetProviderUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *NodeAgentApiFilter) SetProviderUuid(v string) {
 
 // GetRegionUuid returns the RegionUuid field value
 func (o *NodeAgentApiFilter) GetRegionUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *NodeAgentApiFilter) SetRegionUuid(v string) {
 
 // GetUniverseUuid returns the UniverseUuid field value
 func (o *NodeAgentApiFilter) GetUniverseUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *NodeAgentApiFilter) SetUniverseUuid(v string) {
 
 // GetZoneUuid returns the ZoneUuid field value
 func (o *NodeAgentApiFilter) GetZoneUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

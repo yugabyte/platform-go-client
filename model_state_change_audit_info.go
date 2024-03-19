@@ -30,7 +30,7 @@ type StateChangeAuditInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStateChangeAuditInfo(customerId string, fieldName string, id string, new bool, previousValue string, timestamp int64, updatedValue string, userId string, ) *StateChangeAuditInfo {
+func NewStateChangeAuditInfo(customerId string, fieldName string, id string, new bool, previousValue string, timestamp int64, updatedValue string, userId string) *StateChangeAuditInfo {
 	this := StateChangeAuditInfo{}
 	this.CustomerId = customerId
 	this.FieldName = fieldName
@@ -53,7 +53,7 @@ func NewStateChangeAuditInfoWithDefaults() *StateChangeAuditInfo {
 
 // GetCustomerId returns the CustomerId field value
 func (o *StateChangeAuditInfo) GetCustomerId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -77,7 +77,7 @@ func (o *StateChangeAuditInfo) SetCustomerId(v string) {
 
 // GetFieldName returns the FieldName field value
 func (o *StateChangeAuditInfo) GetFieldName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +101,7 @@ func (o *StateChangeAuditInfo) SetFieldName(v string) {
 
 // GetId returns the Id field value
 func (o *StateChangeAuditInfo) GetId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -125,7 +125,7 @@ func (o *StateChangeAuditInfo) SetId(v string) {
 
 // GetNew returns the New field value
 func (o *StateChangeAuditInfo) GetNew() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -149,7 +149,7 @@ func (o *StateChangeAuditInfo) SetNew(v bool) {
 
 // GetPreviousValue returns the PreviousValue field value
 func (o *StateChangeAuditInfo) GetPreviousValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -173,7 +173,7 @@ func (o *StateChangeAuditInfo) SetPreviousValue(v string) {
 
 // GetTimestamp returns the Timestamp field value
 func (o *StateChangeAuditInfo) GetTimestamp() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -197,7 +197,7 @@ func (o *StateChangeAuditInfo) SetTimestamp(v int64) {
 
 // GetUpdatedValue returns the UpdatedValue field value
 func (o *StateChangeAuditInfo) GetUpdatedValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -221,7 +221,7 @@ func (o *StateChangeAuditInfo) SetUpdatedValue(v string) {
 
 // GetUserId returns the UserId field value
 func (o *StateChangeAuditInfo) GetUserId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

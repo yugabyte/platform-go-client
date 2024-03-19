@@ -26,7 +26,7 @@ type MaintenanceWindowPagedResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMaintenanceWindowPagedResponse(entities []MaintenanceWindow, hasNext bool, hasPrev bool, totalCount int32, ) *MaintenanceWindowPagedResponse {
+func NewMaintenanceWindowPagedResponse(entities []MaintenanceWindow, hasNext bool, hasPrev bool, totalCount int32) *MaintenanceWindowPagedResponse {
 	this := MaintenanceWindowPagedResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewMaintenanceWindowPagedResponseWithDefaults() *MaintenanceWindowPagedResp
 
 // GetEntities returns the Entities field value
 func (o *MaintenanceWindowPagedResponse) GetEntities() []MaintenanceWindow {
-	if o == nil  {
+	if o == nil {
 		var ret []MaintenanceWindow
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *MaintenanceWindowPagedResponse) SetEntities(v []MaintenanceWindow) {
 
 // GetHasNext returns the HasNext field value
 func (o *MaintenanceWindowPagedResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *MaintenanceWindowPagedResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *MaintenanceWindowPagedResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *MaintenanceWindowPagedResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *MaintenanceWindowPagedResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

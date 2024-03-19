@@ -26,7 +26,7 @@ type CustomerRegisterFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerRegisterFormData(code string, email string, name string, password string, ) *CustomerRegisterFormData {
+func NewCustomerRegisterFormData(code string, email string, name string, password string) *CustomerRegisterFormData {
 	this := CustomerRegisterFormData{}
 	this.Code = code
 	this.Email = email
@@ -45,7 +45,7 @@ func NewCustomerRegisterFormDataWithDefaults() *CustomerRegisterFormData {
 
 // GetCode returns the Code field value
 func (o *CustomerRegisterFormData) GetCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *CustomerRegisterFormData) SetCode(v string) {
 
 // GetEmail returns the Email field value
 func (o *CustomerRegisterFormData) GetEmail() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *CustomerRegisterFormData) SetEmail(v string) {
 
 // GetName returns the Name field value
 func (o *CustomerRegisterFormData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *CustomerRegisterFormData) SetName(v string) {
 
 // GetPassword returns the Password field value
 func (o *CustomerRegisterFormData) GetPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

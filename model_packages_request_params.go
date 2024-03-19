@@ -32,7 +32,7 @@ type PackagesRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPackagesRequestParams(buildNumber string, ) *PackagesRequestParams {
+func NewPackagesRequestParams(buildNumber string) *PackagesRequestParams {
 	this := PackagesRequestParams{}
 	this.BuildNumber = buildNumber
 	return &this
@@ -112,7 +112,7 @@ func (o *PackagesRequestParams) SetArchiveType(v string) {
 
 // GetBuildNumber returns the BuildNumber field value
 func (o *PackagesRequestParams) GetBuildNumber() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

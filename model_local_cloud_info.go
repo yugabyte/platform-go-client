@@ -26,7 +26,7 @@ type LocalCloudInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, ybcBinDir string, yugabyteBinDir string, ) *LocalCloudInfo {
+func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, ybcBinDir string, yugabyteBinDir string) *LocalCloudInfo {
 	this := LocalCloudInfo{}
 	this.DataHomeDir = dataHomeDir
 	this.EnvVars = envVars
@@ -45,7 +45,7 @@ func NewLocalCloudInfoWithDefaults() *LocalCloudInfo {
 
 // GetDataHomeDir returns the DataHomeDir field value
 func (o *LocalCloudInfo) GetDataHomeDir() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *LocalCloudInfo) SetDataHomeDir(v string) {
 
 // GetEnvVars returns the EnvVars field value
 func (o *LocalCloudInfo) GetEnvVars() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *LocalCloudInfo) SetEnvVars(v map[string]string) {
 
 // GetYbcBinDir returns the YbcBinDir field value
 func (o *LocalCloudInfo) GetYbcBinDir() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *LocalCloudInfo) SetYbcBinDir(v string) {
 
 // GetYugabyteBinDir returns the YugabyteBinDir field value
 func (o *LocalCloudInfo) GetYugabyteBinDir() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

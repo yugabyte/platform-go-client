@@ -28,7 +28,7 @@ type AuditLogConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogConfig(universeLogsExporterConfig []UniverseLogsExporterConfig, ) *AuditLogConfig {
+func NewAuditLogConfig(universeLogsExporterConfig []UniverseLogsExporterConfig) *AuditLogConfig {
 	this := AuditLogConfig{}
 	this.UniverseLogsExporterConfig = universeLogsExporterConfig
 	return &this
@@ -76,7 +76,7 @@ func (o *AuditLogConfig) SetExportActive(v bool) {
 
 // GetUniverseLogsExporterConfig returns the UniverseLogsExporterConfig field value
 func (o *AuditLogConfig) GetUniverseLogsExporterConfig() []UniverseLogsExporterConfig {
-	if o == nil  {
+	if o == nil {
 		var ret []UniverseLogsExporterConfig
 		return ret
 	}

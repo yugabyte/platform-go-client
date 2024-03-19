@@ -14,12 +14,13 @@ import (
 	"encoding/json"
 )
 
-// AZOverrides struct for AZOverrides
+// AZOverrides WARNING: This is a preview API that could change. Availability zone level overrides
 type AZOverrides struct {
 	CgroupSize *int32 `json:"cgroupSize,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	InstanceType *string `json:"instanceType,omitempty"`
-	PerProcess *map[string]OverridenDetails `json:"perProcess,omitempty"`
+	PerProcess *map[string]PerProcessDetails `json:"perProcess,omitempty"`
+	ProxyConfig *ProxyConfig `json:"proxyConfig,omitempty"`
 }
 
 // NewAZOverrides instantiates a new AZOverrides object
@@ -136,9 +137,9 @@ func (o *AZOverrides) SetInstanceType(v string) {
 }
 
 // GetPerProcess returns the PerProcess field value if set, zero value otherwise.
-func (o *AZOverrides) GetPerProcess() map[string]OverridenDetails {
+func (o *AZOverrides) GetPerProcess() map[string]PerProcessDetails {
 	if o == nil || o.PerProcess == nil {
-		var ret map[string]OverridenDetails
+		var ret map[string]PerProcessDetails
 		return ret
 	}
 	return *o.PerProcess
@@ -146,7 +147,7 @@ func (o *AZOverrides) GetPerProcess() map[string]OverridenDetails {
 
 // GetPerProcessOk returns a tuple with the PerProcess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AZOverrides) GetPerProcessOk() (*map[string]OverridenDetails, bool) {
+func (o *AZOverrides) GetPerProcessOk() (*map[string]PerProcessDetails, bool) {
 	if o == nil || o.PerProcess == nil {
 		return nil, false
 	}
@@ -162,9 +163,41 @@ func (o *AZOverrides) HasPerProcess() bool {
 	return false
 }
 
-// SetPerProcess gets a reference to the given map[string]OverridenDetails and assigns it to the PerProcess field.
-func (o *AZOverrides) SetPerProcess(v map[string]OverridenDetails) {
+// SetPerProcess gets a reference to the given map[string]PerProcessDetails and assigns it to the PerProcess field.
+func (o *AZOverrides) SetPerProcess(v map[string]PerProcessDetails) {
 	o.PerProcess = &v
+}
+
+// GetProxyConfig returns the ProxyConfig field value if set, zero value otherwise.
+func (o *AZOverrides) GetProxyConfig() ProxyConfig {
+	if o == nil || o.ProxyConfig == nil {
+		var ret ProxyConfig
+		return ret
+	}
+	return *o.ProxyConfig
+}
+
+// GetProxyConfigOk returns a tuple with the ProxyConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AZOverrides) GetProxyConfigOk() (*ProxyConfig, bool) {
+	if o == nil || o.ProxyConfig == nil {
+		return nil, false
+	}
+	return o.ProxyConfig, true
+}
+
+// HasProxyConfig returns a boolean if a field has been set.
+func (o *AZOverrides) HasProxyConfig() bool {
+	if o != nil && o.ProxyConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyConfig gets a reference to the given ProxyConfig and assigns it to the ProxyConfig field.
+func (o *AZOverrides) SetProxyConfig(v ProxyConfig) {
+	o.ProxyConfig = &v
 }
 
 func (o AZOverrides) MarshalJSON() ([]byte, error) {
@@ -180,6 +213,9 @@ func (o AZOverrides) MarshalJSON() ([]byte, error) {
 	}
 	if o.PerProcess != nil {
 		toSerialize["perProcess"] = o.PerProcess
+	}
+	if o.ProxyConfig != nil {
+		toSerialize["proxyConfig"] = o.ProxyConfig
 	}
 	return json.Marshal(toSerialize)
 }

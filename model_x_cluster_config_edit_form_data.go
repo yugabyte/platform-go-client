@@ -16,6 +16,8 @@ import (
 
 // XClusterConfigEditFormData xcluster edit form
 type XClusterConfigEditFormData struct {
+	// Whether or not YBA should also include all index tables from any provided main tables.
+	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
 	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
 	// Run the pre-checks without actually running the subtasks
 	DryRun *bool `json:"dryRun,omitempty"`
@@ -46,6 +48,38 @@ func NewXClusterConfigEditFormData() *XClusterConfigEditFormData {
 func NewXClusterConfigEditFormDataWithDefaults() *XClusterConfigEditFormData {
 	this := XClusterConfigEditFormData{}
 	return &this
+}
+
+// GetAutoIncludeIndexTables returns the AutoIncludeIndexTables field value if set, zero value otherwise.
+func (o *XClusterConfigEditFormData) GetAutoIncludeIndexTables() bool {
+	if o == nil || o.AutoIncludeIndexTables == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoIncludeIndexTables
+}
+
+// GetAutoIncludeIndexTablesOk returns a tuple with the AutoIncludeIndexTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigEditFormData) GetAutoIncludeIndexTablesOk() (*bool, bool) {
+	if o == nil || o.AutoIncludeIndexTables == nil {
+		return nil, false
+	}
+	return o.AutoIncludeIndexTables, true
+}
+
+// HasAutoIncludeIndexTables returns a boolean if a field has been set.
+func (o *XClusterConfigEditFormData) HasAutoIncludeIndexTables() bool {
+	if o != nil && o.AutoIncludeIndexTables != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoIncludeIndexTables gets a reference to the given bool and assigns it to the AutoIncludeIndexTables field.
+func (o *XClusterConfigEditFormData) SetAutoIncludeIndexTables(v bool) {
+	o.AutoIncludeIndexTables = &v
 }
 
 // GetBootstrapParams returns the BootstrapParams field value if set, zero value otherwise.
@@ -274,6 +308,9 @@ func (o *XClusterConfigEditFormData) SetTargetRole(v string) {
 
 func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AutoIncludeIndexTables != nil {
+		toSerialize["autoIncludeIndexTables"] = o.AutoIncludeIndexTables
+	}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
 	}

@@ -23,7 +23,7 @@ type MetricQueryParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricQueryParams(xclusterConfigUuid string, ) *MetricQueryParams {
+func NewMetricQueryParams(xclusterConfigUuid string) *MetricQueryParams {
 	this := MetricQueryParams{}
 	this.XclusterConfigUuid = xclusterConfigUuid
 	return &this
@@ -39,7 +39,7 @@ func NewMetricQueryParamsWithDefaults() *MetricQueryParams {
 
 // GetXclusterConfigUuid returns the XclusterConfigUuid field value
 func (o *MetricQueryParams) GetXclusterConfigUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

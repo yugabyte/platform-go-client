@@ -23,7 +23,7 @@ type RegionMetadata struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionMetadata(regionMetadata map[string]RegionMetadataInfo, ) *RegionMetadata {
+func NewRegionMetadata(regionMetadata map[string]RegionMetadataInfo) *RegionMetadata {
 	this := RegionMetadata{}
 	this.RegionMetadata = regionMetadata
 	return &this
@@ -39,7 +39,7 @@ func NewRegionMetadataWithDefaults() *RegionMetadata {
 
 // GetRegionMetadata returns the RegionMetadata field value
 func (o *RegionMetadata) GetRegionMetadata() map[string]RegionMetadataInfo {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]RegionMetadataInfo
 		return ret
 	}

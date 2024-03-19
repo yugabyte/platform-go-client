@@ -14,10 +14,10 @@ import (
 	"encoding/json"
 )
 
-// UserIntentOverrides struct for UserIntentOverrides
+// UserIntentOverrides WARNING: This is a preview API that could change. User Intent overrides
 type UserIntentOverrides struct {
 	AzOverrides *map[string]AZOverrides `json:"azOverrides,omitempty"`
-	PerProcess *map[string]OverridenDetails `json:"perProcess,omitempty"`
+	PerProcess *map[string]PerProcessDetails `json:"perProcess,omitempty"`
 }
 
 // NewUserIntentOverrides instantiates a new UserIntentOverrides object
@@ -70,9 +70,9 @@ func (o *UserIntentOverrides) SetAzOverrides(v map[string]AZOverrides) {
 }
 
 // GetPerProcess returns the PerProcess field value if set, zero value otherwise.
-func (o *UserIntentOverrides) GetPerProcess() map[string]OverridenDetails {
+func (o *UserIntentOverrides) GetPerProcess() map[string]PerProcessDetails {
 	if o == nil || o.PerProcess == nil {
-		var ret map[string]OverridenDetails
+		var ret map[string]PerProcessDetails
 		return ret
 	}
 	return *o.PerProcess
@@ -80,7 +80,7 @@ func (o *UserIntentOverrides) GetPerProcess() map[string]OverridenDetails {
 
 // GetPerProcessOk returns a tuple with the PerProcess field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserIntentOverrides) GetPerProcessOk() (*map[string]OverridenDetails, bool) {
+func (o *UserIntentOverrides) GetPerProcessOk() (*map[string]PerProcessDetails, bool) {
 	if o == nil || o.PerProcess == nil {
 		return nil, false
 	}
@@ -96,8 +96,8 @@ func (o *UserIntentOverrides) HasPerProcess() bool {
 	return false
 }
 
-// SetPerProcess gets a reference to the given map[string]OverridenDetails and assigns it to the PerProcess field.
-func (o *UserIntentOverrides) SetPerProcess(v map[string]OverridenDetails) {
+// SetPerProcess gets a reference to the given map[string]PerProcessDetails and assigns it to the PerProcess field.
+func (o *UserIntentOverrides) SetPerProcess(v map[string]PerProcessDetails) {
 	o.PerProcess = &v
 }
 

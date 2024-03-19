@@ -29,7 +29,7 @@ type AlertChannel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannel(customerUuid string, name string, params AlertChannelParams, ) *AlertChannel {
+func NewAlertChannel(customerUuid string, name string, params AlertChannelParams) *AlertChannel {
 	this := AlertChannel{}
 	this.CustomerUuid = customerUuid
 	this.Name = name
@@ -47,7 +47,7 @@ func NewAlertChannelWithDefaults() *AlertChannel {
 
 // GetCustomerUuid returns the CustomerUuid field value
 func (o *AlertChannel) GetCustomerUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *AlertChannel) SetCustomerUuid(v string) {
 
 // GetName returns the Name field value
 func (o *AlertChannel) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *AlertChannel) SetName(v string) {
 
 // GetParams returns the Params field value
 func (o *AlertChannel) GetParams() AlertChannelParams {
-	if o == nil  {
+	if o == nil {
 		var ret AlertChannelParams
 		return ret
 	}

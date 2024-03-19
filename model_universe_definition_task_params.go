@@ -88,7 +88,7 @@ type UniverseDefinitionTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParams {
+func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParams {
 	this := UniverseDefinitionTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -237,7 +237,7 @@ func (o *UniverseDefinitionTaskParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *UniverseDefinitionTaskParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -325,7 +325,7 @@ func (o *UniverseDefinitionTaskParams) SetCommunicationPorts(v CommunicationPort
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *UniverseDefinitionTaskParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -957,7 +957,7 @@ func (o *UniverseDefinitionTaskParams) SetPlacementModificationTaskUuid(v string
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *UniverseDefinitionTaskParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -981,7 +981,7 @@ func (o *UniverseDefinitionTaskParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *UniverseDefinitionTaskParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1229,7 +1229,7 @@ func (o *UniverseDefinitionTaskParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *UniverseDefinitionTaskParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1253,7 +1253,7 @@ func (o *UniverseDefinitionTaskParams) SetSleepAfterMasterRestartMillis(v int32)
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *UniverseDefinitionTaskParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

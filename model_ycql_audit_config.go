@@ -38,7 +38,7 @@ type YCQLAuditConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYCQLAuditConfig(enabled bool, excludedCategories []string, excludedKeyspaces []string, excludedUsers []string, includedCategories []string, includedKeyspaces []string, includedUsers []string, logLevel string, ) *YCQLAuditConfig {
+func NewYCQLAuditConfig(enabled bool, excludedCategories []string, excludedKeyspaces []string, excludedUsers []string, includedCategories []string, includedKeyspaces []string, includedUsers []string, logLevel string) *YCQLAuditConfig {
 	this := YCQLAuditConfig{}
 	this.Enabled = enabled
 	this.ExcludedCategories = excludedCategories
@@ -61,7 +61,7 @@ func NewYCQLAuditConfigWithDefaults() *YCQLAuditConfig {
 
 // GetEnabled returns the Enabled field value
 func (o *YCQLAuditConfig) GetEnabled() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -85,7 +85,7 @@ func (o *YCQLAuditConfig) SetEnabled(v bool) {
 
 // GetExcludedCategories returns the ExcludedCategories field value
 func (o *YCQLAuditConfig) GetExcludedCategories() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -109,7 +109,7 @@ func (o *YCQLAuditConfig) SetExcludedCategories(v []string) {
 
 // GetExcludedKeyspaces returns the ExcludedKeyspaces field value
 func (o *YCQLAuditConfig) GetExcludedKeyspaces() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -133,7 +133,7 @@ func (o *YCQLAuditConfig) SetExcludedKeyspaces(v []string) {
 
 // GetExcludedUsers returns the ExcludedUsers field value
 func (o *YCQLAuditConfig) GetExcludedUsers() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -157,7 +157,7 @@ func (o *YCQLAuditConfig) SetExcludedUsers(v []string) {
 
 // GetIncludedCategories returns the IncludedCategories field value
 func (o *YCQLAuditConfig) GetIncludedCategories() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -181,7 +181,7 @@ func (o *YCQLAuditConfig) SetIncludedCategories(v []string) {
 
 // GetIncludedKeyspaces returns the IncludedKeyspaces field value
 func (o *YCQLAuditConfig) GetIncludedKeyspaces() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -205,7 +205,7 @@ func (o *YCQLAuditConfig) SetIncludedKeyspaces(v []string) {
 
 // GetIncludedUsers returns the IncludedUsers field value
 func (o *YCQLAuditConfig) GetIncludedUsers() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -229,7 +229,7 @@ func (o *YCQLAuditConfig) SetIncludedUsers(v []string) {
 
 // GetLogLevel returns the LogLevel field value
 func (o *YCQLAuditConfig) GetLogLevel() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

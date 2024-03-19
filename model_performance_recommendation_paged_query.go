@@ -28,7 +28,7 @@ type PerformanceRecommendationPagedQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendationPagedQuery(direction string, filter PerformanceRecommendationFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *PerformanceRecommendationPagedQuery {
+func NewPerformanceRecommendationPagedQuery(direction string, filter PerformanceRecommendationFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *PerformanceRecommendationPagedQuery {
 	this := PerformanceRecommendationPagedQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewPerformanceRecommendationPagedQueryWithDefaults() *PerformanceRecommenda
 
 // GetDirection returns the Direction field value
 func (o *PerformanceRecommendationPagedQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *PerformanceRecommendationPagedQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *PerformanceRecommendationPagedQuery) GetFilter() PerformanceRecommendationFilter {
-	if o == nil  {
+	if o == nil {
 		var ret PerformanceRecommendationFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *PerformanceRecommendationPagedQuery) SetFilter(v PerformanceRecommendat
 
 // GetLimit returns the Limit field value
 func (o *PerformanceRecommendationPagedQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *PerformanceRecommendationPagedQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *PerformanceRecommendationPagedQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *PerformanceRecommendationPagedQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *PerformanceRecommendationPagedQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *PerformanceRecommendationPagedQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *PerformanceRecommendationPagedQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

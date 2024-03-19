@@ -27,7 +27,7 @@ type XClusterConfigRestartFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigRestartFormData(tables []string, ) *XClusterConfigRestartFormData {
+func NewXClusterConfigRestartFormData(tables []string) *XClusterConfigRestartFormData {
 	this := XClusterConfigRestartFormData{}
 	this.Tables = tables
 	return &this
@@ -107,7 +107,7 @@ func (o *XClusterConfigRestartFormData) SetDryRun(v bool) {
 
 // GetTables returns the Tables field value
 func (o *XClusterConfigRestartFormData) GetTables() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

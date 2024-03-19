@@ -26,7 +26,7 @@ type AlertConfigurationPagedResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationPagedResponse(entities []AlertConfiguration, hasNext bool, hasPrev bool, totalCount int32, ) *AlertConfigurationPagedResponse {
+func NewAlertConfigurationPagedResponse(entities []AlertConfiguration, hasNext bool, hasPrev bool, totalCount int32) *AlertConfigurationPagedResponse {
 	this := AlertConfigurationPagedResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewAlertConfigurationPagedResponseWithDefaults() *AlertConfigurationPagedRe
 
 // GetEntities returns the Entities field value
 func (o *AlertConfigurationPagedResponse) GetEntities() []AlertConfiguration {
-	if o == nil  {
+	if o == nil {
 		var ret []AlertConfiguration
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *AlertConfigurationPagedResponse) SetEntities(v []AlertConfiguration) {
 
 // GetHasNext returns the HasNext field value
 func (o *AlertConfigurationPagedResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *AlertConfigurationPagedResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *AlertConfigurationPagedResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *AlertConfigurationPagedResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *AlertConfigurationPagedResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

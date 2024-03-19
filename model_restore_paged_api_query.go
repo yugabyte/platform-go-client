@@ -28,7 +28,7 @@ type RestorePagedApiQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestorePagedApiQuery(direction string, filter RestoreApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *RestorePagedApiQuery {
+func NewRestorePagedApiQuery(direction string, filter RestoreApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *RestorePagedApiQuery {
 	this := RestorePagedApiQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewRestorePagedApiQueryWithDefaults() *RestorePagedApiQuery {
 
 // GetDirection returns the Direction field value
 func (o *RestorePagedApiQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *RestorePagedApiQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *RestorePagedApiQuery) GetFilter() RestoreApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret RestoreApiFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *RestorePagedApiQuery) SetFilter(v RestoreApiFilter) {
 
 // GetLimit returns the Limit field value
 func (o *RestorePagedApiQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *RestorePagedApiQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *RestorePagedApiQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *RestorePagedApiQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *RestorePagedApiQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *RestorePagedApiQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *RestorePagedApiQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
