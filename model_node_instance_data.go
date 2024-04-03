@@ -38,7 +38,7 @@ type NodeInstanceData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, sshUser string, zone string, ) *NodeInstanceData {
+func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, sshUser string, zone string) *NodeInstanceData {
 	this := NodeInstanceData{}
 	this.InstanceName = instanceName
 	this.InstanceType = instanceType
@@ -59,7 +59,7 @@ func NewNodeInstanceDataWithDefaults() *NodeInstanceData {
 
 // GetInstanceName returns the InstanceName field value
 func (o *NodeInstanceData) GetInstanceName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -83,7 +83,7 @@ func (o *NodeInstanceData) SetInstanceName(v string) {
 
 // GetInstanceType returns the InstanceType field value
 func (o *NodeInstanceData) GetInstanceType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -107,7 +107,7 @@ func (o *NodeInstanceData) SetInstanceType(v string) {
 
 // GetIp returns the Ip field value
 func (o *NodeInstanceData) GetIp() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -195,7 +195,7 @@ func (o *NodeInstanceData) SetNodeName(v string) {
 
 // GetRegion returns the Region field value
 func (o *NodeInstanceData) GetRegion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -219,7 +219,7 @@ func (o *NodeInstanceData) SetRegion(v string) {
 
 // GetSshUser returns the SshUser field value
 func (o *NodeInstanceData) GetSshUser() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -243,7 +243,7 @@ func (o *NodeInstanceData) SetSshUser(v string) {
 
 // GetZone returns the Zone field value
 func (o *NodeInstanceData) GetZone() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

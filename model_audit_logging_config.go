@@ -32,7 +32,7 @@ type AuditLoggingConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLoggingConfig(outputToFile bool, outputToStdout bool, ) *AuditLoggingConfig {
+func NewAuditLoggingConfig(outputToFile bool, outputToStdout bool) *AuditLoggingConfig {
 	this := AuditLoggingConfig{}
 	this.OutputToFile = outputToFile
 	this.OutputToStdout = outputToStdout
@@ -113,7 +113,7 @@ func (o *AuditLoggingConfig) SetMaxHistory(v int32) {
 
 // GetOutputToFile returns the OutputToFile field value
 func (o *AuditLoggingConfig) GetOutputToFile() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -137,7 +137,7 @@ func (o *AuditLoggingConfig) SetOutputToFile(v bool) {
 
 // GetOutputToStdout returns the OutputToStdout field value
 func (o *AuditLoggingConfig) GetOutputToStdout() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}

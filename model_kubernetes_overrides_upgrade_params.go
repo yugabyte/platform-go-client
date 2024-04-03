@@ -92,7 +92,7 @@ type KubernetesOverridesUpgradeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKubernetesOverridesUpgradeParams(azOverrides map[string]string, clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeOverrides string, upgradeOption string, ) *KubernetesOverridesUpgradeParams {
+func NewKubernetesOverridesUpgradeParams(azOverrides map[string]string, clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeOverrides string, upgradeOption string) *KubernetesOverridesUpgradeParams {
 	this := KubernetesOverridesUpgradeParams{}
 	this.AzOverrides = azOverrides
 	this.Clusters = clusters
@@ -181,7 +181,7 @@ func (o *KubernetesOverridesUpgradeParams) SetArch(v string) {
 
 // GetAzOverrides returns the AzOverrides field value
 func (o *KubernetesOverridesUpgradeParams) GetAzOverrides() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -269,7 +269,7 @@ func (o *KubernetesOverridesUpgradeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *KubernetesOverridesUpgradeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -357,7 +357,7 @@ func (o *KubernetesOverridesUpgradeParams) SetCommunicationPorts(v Communication
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *KubernetesOverridesUpgradeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -765,7 +765,7 @@ func (o *KubernetesOverridesUpgradeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *KubernetesOverridesUpgradeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1013,7 +1013,7 @@ func (o *KubernetesOverridesUpgradeParams) SetPlacementModificationTaskUuid(v st
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *KubernetesOverridesUpgradeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1037,7 +1037,7 @@ func (o *KubernetesOverridesUpgradeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *KubernetesOverridesUpgradeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1285,7 +1285,7 @@ func (o *KubernetesOverridesUpgradeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *KubernetesOverridesUpgradeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1309,7 +1309,7 @@ func (o *KubernetesOverridesUpgradeParams) SetSleepAfterMasterRestartMillis(v in
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *KubernetesOverridesUpgradeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1461,7 +1461,7 @@ func (o *KubernetesOverridesUpgradeParams) SetTargetXClusterConfigs(v []string) 
 
 // GetUniverseOverrides returns the UniverseOverrides field value
 func (o *KubernetesOverridesUpgradeParams) GetUniverseOverrides() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1709,7 +1709,7 @@ func (o *KubernetesOverridesUpgradeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *KubernetesOverridesUpgradeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

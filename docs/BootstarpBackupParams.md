@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
+**Parallelism** | Pointer to **int32** | Number of concurrent commands used by yb_backup (not ybc) to run on nodes over SSH | [optional] 
 **StorageConfigUUID** | **string** | Storage configuration UUID | 
 
 ## Methods

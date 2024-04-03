@@ -92,7 +92,7 @@ type AuditLogConfigParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogConfigParams(auditLogConfig AuditLogConfig, clusters []Cluster, creatingUser Users, installOtelCollector bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *AuditLogConfigParams {
+func NewAuditLogConfigParams(auditLogConfig AuditLogConfig, clusters []Cluster, creatingUser Users, installOtelCollector bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *AuditLogConfigParams {
 	this := AuditLogConfigParams{}
 	this.AuditLogConfig = auditLogConfig
 	this.Clusters = clusters
@@ -181,7 +181,7 @@ func (o *AuditLogConfigParams) SetArch(v string) {
 
 // GetAuditLogConfig returns the AuditLogConfig field value
 func (o *AuditLogConfigParams) GetAuditLogConfig() AuditLogConfig {
-	if o == nil  {
+	if o == nil {
 		var ret AuditLogConfig
 		return ret
 	}
@@ -269,7 +269,7 @@ func (o *AuditLogConfigParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *AuditLogConfigParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -357,7 +357,7 @@ func (o *AuditLogConfigParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *AuditLogConfigParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -637,7 +637,7 @@ func (o *AuditLogConfigParams) SetImportedState(v string) {
 
 // GetInstallOtelCollector returns the InstallOtelCollector field value
 func (o *AuditLogConfigParams) GetInstallOtelCollector() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -789,7 +789,7 @@ func (o *AuditLogConfigParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *AuditLogConfigParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1037,7 +1037,7 @@ func (o *AuditLogConfigParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *AuditLogConfigParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1061,7 +1061,7 @@ func (o *AuditLogConfigParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *AuditLogConfigParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1309,7 +1309,7 @@ func (o *AuditLogConfigParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *AuditLogConfigParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1333,7 +1333,7 @@ func (o *AuditLogConfigParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *AuditLogConfigParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1709,7 +1709,7 @@ func (o *AuditLogConfigParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *AuditLogConfigParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

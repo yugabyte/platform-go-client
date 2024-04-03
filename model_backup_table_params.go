@@ -140,7 +140,7 @@ type BackupTableParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupTableParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *BackupTableParams {
+func NewBackupTableParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *BackupTableParams {
 	this := BackupTableParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
@@ -482,7 +482,7 @@ func (o *BackupTableParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *BackupTableParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -1306,7 +1306,7 @@ func (o *BackupTableParams) SetParallelism(v int32) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *BackupTableParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1330,7 +1330,7 @@ func (o *BackupTableParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *BackupTableParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1546,7 +1546,7 @@ func (o *BackupTableParams) SetSchedulingFrequency(v int64) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *BackupTableParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1570,7 +1570,7 @@ func (o *BackupTableParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *BackupTableParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1690,7 +1690,7 @@ func (o *BackupTableParams) SetStorageConfigType(v string) {
 
 // GetStorageConfigUUID returns the StorageConfigUUID field value
 func (o *BackupTableParams) GetStorageConfigUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -2002,7 +2002,7 @@ func (o *BackupTableParams) SetTimeBeforeDelete(v int64) {
 
 // GetTimeTakenPartial returns the TimeTakenPartial field value
 func (o *BackupTableParams) GetTimeTakenPartial() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}

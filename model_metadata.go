@@ -24,7 +24,7 @@ type Metadata struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadata(type_ string, version string, ) *Metadata {
+func NewMetadata(type_ string, version string) *Metadata {
 	this := Metadata{}
 	this.Type = type_
 	this.Version = version
@@ -41,7 +41,7 @@ func NewMetadataWithDefaults() *Metadata {
 
 // GetType returns the Type field value
 func (o *Metadata) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *Metadata) SetType(v string) {
 
 // GetVersion returns the Version field value
 func (o *Metadata) GetVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

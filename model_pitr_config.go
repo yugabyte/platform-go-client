@@ -45,7 +45,7 @@ type PitrConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPitrConfig(maxRecoverTimeInMillis int64, minRecoverTimeInMillis int64, state string, ) *PitrConfig {
+func NewPitrConfig(maxRecoverTimeInMillis int64, minRecoverTimeInMillis int64, state string) *PitrConfig {
 	this := PitrConfig{}
 	this.MaxRecoverTimeInMillis = maxRecoverTimeInMillis
 	this.MinRecoverTimeInMillis = minRecoverTimeInMillis
@@ -159,7 +159,7 @@ func (o *PitrConfig) SetDbName(v string) {
 
 // GetMaxRecoverTimeInMillis returns the MaxRecoverTimeInMillis field value
 func (o *PitrConfig) GetMaxRecoverTimeInMillis() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -183,7 +183,7 @@ func (o *PitrConfig) SetMaxRecoverTimeInMillis(v int64) {
 
 // GetMinRecoverTimeInMillis returns the MinRecoverTimeInMillis field value
 func (o *PitrConfig) GetMinRecoverTimeInMillis() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -303,7 +303,7 @@ func (o *PitrConfig) SetScheduleInterval(v int64) {
 
 // GetState returns the State field value
 func (o *PitrConfig) GetState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

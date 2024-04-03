@@ -860,7 +860,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageRestoresRequest := *openapiclient.NewRestorePagedApiQuery("Direction_example", *openapiclient.NewRestoreApiFilter(false, []string{"SourceUniverseNameList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // RestorePagedApiQuery | 
+    pageRestoresRequest := *openapiclient.NewRestorePagedApiQuery("Direction_example", *openapiclient.NewRestoreApiFilter(false, []string{"RestoreUUIDList_example"}, []string{"SourceUniverseNameList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // RestorePagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -932,7 +932,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter([]string{"KeyspaceList_example"}, false, false, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
+    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter([]string{"BackupUUIDList_example"}, []string{"KeyspaceList_example"}, false, false, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

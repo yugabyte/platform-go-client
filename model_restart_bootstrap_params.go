@@ -23,7 +23,7 @@ type RestartBootstrapParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestartBootstrapParams(backupRequestParams BootstarpBackupParams, ) *RestartBootstrapParams {
+func NewRestartBootstrapParams(backupRequestParams BootstarpBackupParams) *RestartBootstrapParams {
 	this := RestartBootstrapParams{}
 	this.BackupRequestParams = backupRequestParams
 	return &this
@@ -39,7 +39,7 @@ func NewRestartBootstrapParamsWithDefaults() *RestartBootstrapParams {
 
 // GetBackupRequestParams returns the BackupRequestParams field value
 func (o *RestartBootstrapParams) GetBackupRequestParams() BootstarpBackupParams {
-	if o == nil  {
+	if o == nil {
 		var ret BootstarpBackupParams
 		return ret
 	}

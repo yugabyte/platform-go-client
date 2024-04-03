@@ -62,7 +62,7 @@ type Alert struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlert(configurationType string, configurationUuid string, createTime time.Time, customerUUID string, definitionUuid string, labels []AlertLabel, message string, name string, severity string, severityIndex int32, sourceName string, sourceUUID string, state string, stateIndex int32, ) *Alert {
+func NewAlert(configurationType string, configurationUuid string, createTime time.Time, customerUUID string, definitionUuid string, labels []AlertLabel, message string, name string, severity string, severityIndex int32, sourceName string, sourceUUID string, state string, stateIndex int32) *Alert {
 	this := Alert{}
 	this.ConfigurationType = configurationType
 	this.ConfigurationUuid = configurationUuid
@@ -123,7 +123,7 @@ func (o *Alert) SetAcknowledgedTime(v time.Time) {
 
 // GetConfigurationType returns the ConfigurationType field value
 func (o *Alert) GetConfigurationType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -147,7 +147,7 @@ func (o *Alert) SetConfigurationType(v string) {
 
 // GetConfigurationUuid returns the ConfigurationUuid field value
 func (o *Alert) GetConfigurationUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -171,7 +171,7 @@ func (o *Alert) SetConfigurationUuid(v string) {
 
 // GetCreateTime returns the CreateTime field value
 func (o *Alert) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -195,7 +195,7 @@ func (o *Alert) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *Alert) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -219,7 +219,7 @@ func (o *Alert) SetCustomerUUID(v string) {
 
 // GetDefinitionUuid returns the DefinitionUuid field value
 func (o *Alert) GetDefinitionUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -243,7 +243,7 @@ func (o *Alert) SetDefinitionUuid(v string) {
 
 // GetLabels returns the Labels field value
 func (o *Alert) GetLabels() []AlertLabel {
-	if o == nil  {
+	if o == nil {
 		var ret []AlertLabel
 		return ret
 	}
@@ -267,7 +267,7 @@ func (o *Alert) SetLabels(v []AlertLabel) {
 
 // GetMessage returns the Message field value
 func (o *Alert) GetMessage() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -291,7 +291,7 @@ func (o *Alert) SetMessage(v string) {
 
 // GetName returns the Name field value
 func (o *Alert) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -475,7 +475,7 @@ func (o *Alert) SetResolvedTime(v time.Time) {
 
 // GetSeverity returns the Severity field value
 func (o *Alert) GetSeverity() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -499,7 +499,7 @@ func (o *Alert) SetSeverity(v string) {
 
 // GetSeverityIndex returns the SeverityIndex field value
 func (o *Alert) GetSeverityIndex() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -523,7 +523,7 @@ func (o *Alert) SetSeverityIndex(v int32) {
 
 // GetSourceName returns the SourceName field value
 func (o *Alert) GetSourceName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -547,7 +547,7 @@ func (o *Alert) SetSourceName(v string) {
 
 // GetSourceUUID returns the SourceUUID field value
 func (o *Alert) GetSourceUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -571,7 +571,7 @@ func (o *Alert) SetSourceUUID(v string) {
 
 // GetState returns the State field value
 func (o *Alert) GetState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -595,7 +595,7 @@ func (o *Alert) SetState(v string) {
 
 // GetStateIndex returns the StateIndex field value
 func (o *Alert) GetStateIndex() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

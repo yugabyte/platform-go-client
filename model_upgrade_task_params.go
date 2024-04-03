@@ -90,7 +90,7 @@ type UpgradeTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpgradeTaskParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *UpgradeTaskParams {
+func NewUpgradeTaskParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *UpgradeTaskParams {
 	this := UpgradeTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -241,7 +241,7 @@ func (o *UpgradeTaskParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *UpgradeTaskParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -329,7 +329,7 @@ func (o *UpgradeTaskParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *UpgradeTaskParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -737,7 +737,7 @@ func (o *UpgradeTaskParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *UpgradeTaskParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -985,7 +985,7 @@ func (o *UpgradeTaskParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *UpgradeTaskParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1009,7 +1009,7 @@ func (o *UpgradeTaskParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *UpgradeTaskParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1257,7 +1257,7 @@ func (o *UpgradeTaskParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *UpgradeTaskParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1281,7 +1281,7 @@ func (o *UpgradeTaskParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *UpgradeTaskParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1657,7 +1657,7 @@ func (o *UpgradeTaskParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *UpgradeTaskParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

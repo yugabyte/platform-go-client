@@ -25,7 +25,7 @@ type RoleResourceDefinition struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleResourceDefinition(roleUUID string, ) *RoleResourceDefinition {
+func NewRoleResourceDefinition(roleUUID string) *RoleResourceDefinition {
 	this := RoleResourceDefinition{}
 	this.RoleUUID = roleUUID
 	return &this
@@ -73,7 +73,7 @@ func (o *RoleResourceDefinition) SetResourceGroup(v ResourceGroup) {
 
 // GetRoleUUID returns the RoleUUID field value
 func (o *RoleResourceDefinition) GetRoleUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreationTime** | Pointer to **time.Time** | Creation time (unix timestamp) of the task | [optional] 
+**ErrorCode** | Pointer to **string** | WARNING: This is a preview API that could change. Subtask error code | [optional] 
 **ErrorString** | Pointer to **string** | Failed SubTask Error message | [optional] 
 **SubTaskGroupType** | Pointer to **string** | Failed SubTask Group Type | [optional] 
 **SubTaskState** | Pointer to **string** | Failed SubTask State | [optional] 
@@ -54,6 +55,31 @@ SetCreationTime sets CreationTime field to given value.
 `func (o *SubtaskData) HasCreationTime() bool`
 
 HasCreationTime returns a boolean if a field has been set.
+
+### GetErrorCode
+
+`func (o *SubtaskData) GetErrorCode() string`
+
+GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
+
+### GetErrorCodeOk
+
+`func (o *SubtaskData) GetErrorCodeOk() (*string, bool)`
+
+GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorCode
+
+`func (o *SubtaskData) SetErrorCode(v string)`
+
+SetErrorCode sets ErrorCode field to given value.
+
+### HasErrorCode
+
+`func (o *SubtaskData) HasErrorCode() bool`
+
+HasErrorCode returns a boolean if a field has been set.
 
 ### GetErrorString
 

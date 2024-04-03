@@ -22,6 +22,8 @@ type CommunicationPorts struct {
 	MasterRpcPort *int32 `json:"masterRpcPort,omitempty"`
 	// Node exporter port
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
+	// Otel Collector metrics port
+	OtelCollectorMetricsPort *int32 `json:"otelCollectorMetricsPort,omitempty"`
 	// Redis HTTP port
 	RedisServerHttpPort *int32 `json:"redisServerHttpPort,omitempty"`
 	// Redis RPC port
@@ -155,6 +157,38 @@ func (o *CommunicationPorts) HasNodeExporterPort() bool {
 // SetNodeExporterPort gets a reference to the given int32 and assigns it to the NodeExporterPort field.
 func (o *CommunicationPorts) SetNodeExporterPort(v int32) {
 	o.NodeExporterPort = &v
+}
+
+// GetOtelCollectorMetricsPort returns the OtelCollectorMetricsPort field value if set, zero value otherwise.
+func (o *CommunicationPorts) GetOtelCollectorMetricsPort() int32 {
+	if o == nil || o.OtelCollectorMetricsPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.OtelCollectorMetricsPort
+}
+
+// GetOtelCollectorMetricsPortOk returns a tuple with the OtelCollectorMetricsPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommunicationPorts) GetOtelCollectorMetricsPortOk() (*int32, bool) {
+	if o == nil || o.OtelCollectorMetricsPort == nil {
+		return nil, false
+	}
+	return o.OtelCollectorMetricsPort, true
+}
+
+// HasOtelCollectorMetricsPort returns a boolean if a field has been set.
+func (o *CommunicationPorts) HasOtelCollectorMetricsPort() bool {
+	if o != nil && o.OtelCollectorMetricsPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOtelCollectorMetricsPort gets a reference to the given int32 and assigns it to the OtelCollectorMetricsPort field.
+func (o *CommunicationPorts) SetOtelCollectorMetricsPort(v int32) {
+	o.OtelCollectorMetricsPort = &v
 }
 
 // GetRedisServerHttpPort returns the RedisServerHttpPort field value if set, zero value otherwise.
@@ -487,6 +521,9 @@ func (o CommunicationPorts) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeExporterPort != nil {
 		toSerialize["nodeExporterPort"] = o.NodeExporterPort
+	}
+	if o.OtelCollectorMetricsPort != nil {
+		toSerialize["otelCollectorMetricsPort"] = o.OtelCollectorMetricsPort
 	}
 	if o.RedisServerHttpPort != nil {
 		toSerialize["redisServerHttpPort"] = o.RedisServerHttpPort

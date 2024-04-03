@@ -28,7 +28,7 @@ type QueryDistributionSuggestionResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryDistributionSuggestionResponse(adviceType string, description string, details []NodeQueryDistributionDetails, endTime string, startTime string, suggestion string, ) *QueryDistributionSuggestionResponse {
+func NewQueryDistributionSuggestionResponse(adviceType string, description string, details []NodeQueryDistributionDetails, endTime string, startTime string, suggestion string) *QueryDistributionSuggestionResponse {
 	this := QueryDistributionSuggestionResponse{}
 	this.AdviceType = adviceType
 	this.Description = description
@@ -49,7 +49,7 @@ func NewQueryDistributionSuggestionResponseWithDefaults() *QueryDistributionSugg
 
 // GetAdviceType returns the AdviceType field value
 func (o *QueryDistributionSuggestionResponse) GetAdviceType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *QueryDistributionSuggestionResponse) SetAdviceType(v string) {
 
 // GetDescription returns the Description field value
 func (o *QueryDistributionSuggestionResponse) GetDescription() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *QueryDistributionSuggestionResponse) SetDescription(v string) {
 
 // GetDetails returns the Details field value
 func (o *QueryDistributionSuggestionResponse) GetDetails() []NodeQueryDistributionDetails {
-	if o == nil  {
+	if o == nil {
 		var ret []NodeQueryDistributionDetails
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *QueryDistributionSuggestionResponse) SetDetails(v []NodeQueryDistributi
 
 // GetEndTime returns the EndTime field value
 func (o *QueryDistributionSuggestionResponse) GetEndTime() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *QueryDistributionSuggestionResponse) SetEndTime(v string) {
 
 // GetStartTime returns the StartTime field value
 func (o *QueryDistributionSuggestionResponse) GetStartTime() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *QueryDistributionSuggestionResponse) SetStartTime(v string) {
 
 // GetSuggestion returns the Suggestion field value
 func (o *QueryDistributionSuggestionResponse) GetSuggestion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

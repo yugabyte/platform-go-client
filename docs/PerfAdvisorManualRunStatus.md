@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ActiveRun** | Pointer to [**UniversePerformanceAdvisorStatus**](Universe performance advisor status.md) |  | [optional] 
+**ActiveRun** | Pointer to [**UniversePerformanceAdvisorStatus**](UniversePerformanceAdvisorStatus.md) |  | [optional] 
 **Message** | Pointer to **string** | API response message. | [optional] [readonly] 
 **Success** | Pointer to **bool** | API operation status. A value of true indicates the operation was successful. | [optional] [readonly] 
 

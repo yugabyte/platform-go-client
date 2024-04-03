@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Error** | Pointer to **string** | User-visible unstructured error message | [optional] 
 **ErrorJson** | Pointer to **map[string]interface{}** | User visible structured error message as json object | [optional] 
 **HttpMethod** | Pointer to **string** | Method for HTTP call that resulted in this error | [optional] 
+**RequestJson** | Pointer to **map[string]interface{}** | User request JSON object | [optional] 
 **RequestUri** | Pointer to **string** | URI for HTTP request that resulted in this error | [optional] 
 **Success** | Pointer to **bool** | Always set to false to indicate failure | [optional] 
 
@@ -103,6 +104,31 @@ SetHttpMethod sets HttpMethod field to given value.
 `func (o *YBPError) HasHttpMethod() bool`
 
 HasHttpMethod returns a boolean if a field has been set.
+
+### GetRequestJson
+
+`func (o *YBPError) GetRequestJson() map[string]interface{}`
+
+GetRequestJson returns the RequestJson field if non-nil, zero value otherwise.
+
+### GetRequestJsonOk
+
+`func (o *YBPError) GetRequestJsonOk() (*map[string]interface{}, bool)`
+
+GetRequestJsonOk returns a tuple with the RequestJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestJson
+
+`func (o *YBPError) SetRequestJson(v map[string]interface{})`
+
+SetRequestJson sets RequestJson field to given value.
+
+### HasRequestJson
+
+`func (o *YBPError) HasRequestJson() bool`
+
+HasRequestJson returns a boolean if a field has been set.
 
 ### GetRequestUri
 

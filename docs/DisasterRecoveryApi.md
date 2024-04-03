@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateDrConfig**](DisasterRecoveryApi.md#CreateDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
 [**DeleteXClusterConfig**](DisasterRecoveryApi.md#DeleteXClusterConfig) | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Delete xcluster config
+[**EditDrConfig**](DisasterRecoveryApi.md#EditDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/edit | Edit disaster recovery config
 [**FailoverDrConfig**](DisasterRecoveryApi.md#FailoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover | Failover a disaster recovery config
 [**GetDrConfig**](DisasterRecoveryApi.md#GetDrConfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 [**GetDrConfigSafetime**](DisasterRecoveryApi.md#GetDrConfigSafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
@@ -157,6 +158,81 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EditDrConfig
+
+> DrConfig EditDrConfig(ctx, cUUID, drUUID).DisasterRecoveryEditFormData(disasterRecoveryEditFormData).Request(request).Execute()
+
+Edit disaster recovery config
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    disasterRecoveryEditFormData := *openapiclient.NewDrConfigEditForm() // DrConfigEditForm | Disaster Recovery Edit Form Data
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.EditDrConfig(context.Background(), cUUID, drUUID).DisasterRecoveryEditFormData(disasterRecoveryEditFormData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.EditDrConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EditDrConfig`: DrConfig
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.EditDrConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEditDrConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **disasterRecoveryEditFormData** | [**DrConfigEditForm**](DrConfigEditForm.md) | Disaster Recovery Edit Form Data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**DrConfig**](DrConfig.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

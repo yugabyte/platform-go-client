@@ -32,7 +32,7 @@ type HashicorpVaultConfigParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string, ) *HashicorpVaultConfigParams {
+func NewHashicorpVaultConfigParams(engine string, mountPath string, role string, vaultAddr string) *HashicorpVaultConfigParams {
 	this := HashicorpVaultConfigParams{}
 	this.Engine = engine
 	this.MountPath = mountPath
@@ -51,7 +51,7 @@ func NewHashicorpVaultConfigParamsWithDefaults() *HashicorpVaultConfigParams {
 
 // GetEngine returns the Engine field value
 func (o *HashicorpVaultConfigParams) GetEngine() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *HashicorpVaultConfigParams) SetEngine(v string) {
 
 // GetMountPath returns the MountPath field value
 func (o *HashicorpVaultConfigParams) GetMountPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -99,7 +99,7 @@ func (o *HashicorpVaultConfigParams) SetMountPath(v string) {
 
 // GetRole returns the Role field value
 func (o *HashicorpVaultConfigParams) GetRole() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -187,7 +187,7 @@ func (o *HashicorpVaultConfigParams) SetTtlExpiry(v int64) {
 
 // GetVaultAddr returns the VaultAddr field value
 func (o *HashicorpVaultConfigParams) GetVaultAddr() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

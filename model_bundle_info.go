@@ -16,7 +16,9 @@ import (
 
 // BundleInfo struct for BundleInfo
 type BundleInfo struct {
+	// sshPortOverride for the bundle. <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
 	SshPortOverride *int32 `json:"sshPortOverride,omitempty"`
+	// sshUserOverride for the bundle. <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
 	YbImage *string `json:"ybImage,omitempty"`
 }

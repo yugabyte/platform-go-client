@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BackupUUIDList** | **[]string** |  | 
 **DateRangeEnd** | Pointer to **time.Time** | The end date for backup filter. | [optional] 
 **DateRangeStart** | Pointer to **time.Time** | The start date for backup filter. | [optional] 
 **KeyspaceList** | **[]string** |  | 
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewBackupApiFilter
 
-`func NewBackupApiFilter(keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
+`func NewBackupApiFilter(backupUUIDList []string, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
 
 NewBackupApiFilter instantiates a new BackupApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +34,26 @@ will change when the set of required properties is changed
 NewBackupApiFilterWithDefaults instantiates a new BackupApiFilter object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBackupUUIDList
+
+`func (o *BackupApiFilter) GetBackupUUIDList() []string`
+
+GetBackupUUIDList returns the BackupUUIDList field if non-nil, zero value otherwise.
+
+### GetBackupUUIDListOk
+
+`func (o *BackupApiFilter) GetBackupUUIDListOk() (*[]string, bool)`
+
+GetBackupUUIDListOk returns a tuple with the BackupUUIDList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupUUIDList
+
+`func (o *BackupApiFilter) SetBackupUUIDList(v []string)`
+
+SetBackupUUIDList sets BackupUUIDList field to given value.
+
 
 ### GetDateRangeEnd
 

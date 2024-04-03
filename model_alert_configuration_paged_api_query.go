@@ -28,7 +28,7 @@ type AlertConfigurationPagedApiQuery struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationPagedApiQuery(direction string, filter AlertConfigurationApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string, ) *AlertConfigurationPagedApiQuery {
+func NewAlertConfigurationPagedApiQuery(direction string, filter AlertConfigurationApiFilter, limit int32, needTotalCount bool, offset int32, sortBy string) *AlertConfigurationPagedApiQuery {
 	this := AlertConfigurationPagedApiQuery{}
 	this.Direction = direction
 	this.Filter = filter
@@ -49,7 +49,7 @@ func NewAlertConfigurationPagedApiQueryWithDefaults() *AlertConfigurationPagedAp
 
 // GetDirection returns the Direction field value
 func (o *AlertConfigurationPagedApiQuery) GetDirection() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -73,7 +73,7 @@ func (o *AlertConfigurationPagedApiQuery) SetDirection(v string) {
 
 // GetFilter returns the Filter field value
 func (o *AlertConfigurationPagedApiQuery) GetFilter() AlertConfigurationApiFilter {
-	if o == nil  {
+	if o == nil {
 		var ret AlertConfigurationApiFilter
 		return ret
 	}
@@ -97,7 +97,7 @@ func (o *AlertConfigurationPagedApiQuery) SetFilter(v AlertConfigurationApiFilte
 
 // GetLimit returns the Limit field value
 func (o *AlertConfigurationPagedApiQuery) GetLimit() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -121,7 +121,7 @@ func (o *AlertConfigurationPagedApiQuery) SetLimit(v int32) {
 
 // GetNeedTotalCount returns the NeedTotalCount field value
 func (o *AlertConfigurationPagedApiQuery) GetNeedTotalCount() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -145,7 +145,7 @@ func (o *AlertConfigurationPagedApiQuery) SetNeedTotalCount(v bool) {
 
 // GetOffset returns the Offset field value
 func (o *AlertConfigurationPagedApiQuery) GetOffset() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -169,7 +169,7 @@ func (o *AlertConfigurationPagedApiQuery) SetOffset(v int32) {
 
 // GetSortBy returns the SortBy field value
 func (o *AlertConfigurationPagedApiQuery) GetSortBy() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

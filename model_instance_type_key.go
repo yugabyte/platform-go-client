@@ -24,7 +24,7 @@ type InstanceTypeKey struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceTypeKey(instanceTypeCode string, providerUuid string, ) *InstanceTypeKey {
+func NewInstanceTypeKey(instanceTypeCode string, providerUuid string) *InstanceTypeKey {
 	this := InstanceTypeKey{}
 	this.InstanceTypeCode = instanceTypeCode
 	this.ProviderUuid = providerUuid
@@ -41,7 +41,7 @@ func NewInstanceTypeKeyWithDefaults() *InstanceTypeKey {
 
 // GetInstanceTypeCode returns the InstanceTypeCode field value
 func (o *InstanceTypeKey) GetInstanceTypeCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *InstanceTypeKey) SetInstanceTypeCode(v string) {
 
 // GetProviderUuid returns the ProviderUuid field value
 func (o *InstanceTypeKey) GetProviderUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

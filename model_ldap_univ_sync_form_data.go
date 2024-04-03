@@ -35,7 +35,7 @@ type LdapUnivSyncFormData struct {
 	LdapGroupfield string `json:"ldapGroupfield"`
 	// Port of the ldap server : 389 or 636(tls)
 	LdapPort *int32 `json:"ldapPort,omitempty"`
-	// LDAP search filter to get the user entries
+	// LDAP search filter to get the user entries. This filter can also be used to search for the users based on their group memberships.
 	LdapSearchFilter *string `json:"ldapSearchFilter,omitempty"`
 	// IP address of the LDAP server
 	LdapServer *string `json:"ldapServer,omitempty"`
@@ -52,7 +52,7 @@ type LdapUnivSyncFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLdapUnivSyncFormData(dbuserPassword string, ldapGroupfield string, ldapUserfield string, targetApi string, ) *LdapUnivSyncFormData {
+func NewLdapUnivSyncFormData(dbuserPassword string, ldapGroupfield string, ldapUserfield string, targetApi string) *LdapUnivSyncFormData {
 	this := LdapUnivSyncFormData{}
 	this.DbuserPassword = dbuserPassword
 	this.LdapGroupfield = ldapGroupfield
@@ -135,7 +135,7 @@ func (o *LdapUnivSyncFormData) SetDbUser(v string) {
 
 // GetDbuserPassword returns the DbuserPassword field value
 func (o *LdapUnivSyncFormData) GetDbuserPassword() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -319,7 +319,7 @@ func (o *LdapUnivSyncFormData) SetLdapGroupMemberOfAttribute(v string) {
 
 // GetLdapGroupfield returns the LdapGroupfield field value
 func (o *LdapUnivSyncFormData) GetLdapGroupfield() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -471,7 +471,7 @@ func (o *LdapUnivSyncFormData) SetLdapTlsProtocol(v string) {
 
 // GetLdapUserfield returns the LdapUserfield field value
 func (o *LdapUnivSyncFormData) GetLdapUserfield() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -495,7 +495,7 @@ func (o *LdapUnivSyncFormData) SetLdapUserfield(v string) {
 
 // GetTargetApi returns the TargetApi field value
 func (o *LdapUnivSyncFormData) GetTargetApi() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

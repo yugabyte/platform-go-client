@@ -24,7 +24,7 @@ type ThrottleParamValue struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThrottleParamValue(currentValue int32, presetValues PresetThrottleValues, ) *ThrottleParamValue {
+func NewThrottleParamValue(currentValue int32, presetValues PresetThrottleValues) *ThrottleParamValue {
 	this := ThrottleParamValue{}
 	this.CurrentValue = currentValue
 	this.PresetValues = presetValues
@@ -41,7 +41,7 @@ func NewThrottleParamValueWithDefaults() *ThrottleParamValue {
 
 // GetCurrentValue returns the CurrentValue field value
 func (o *ThrottleParamValue) GetCurrentValue() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *ThrottleParamValue) SetCurrentValue(v int32) {
 
 // GetPresetValues returns the PresetValues field value
 func (o *ThrottleParamValue) GetPresetValues() PresetThrottleValues {
-	if o == nil  {
+	if o == nil {
 		var ret PresetThrottleValues
 		return ret
 	}

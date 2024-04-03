@@ -27,7 +27,7 @@ type PlatformLoggingConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlatformLoggingConfig(level string, maxHistory int32, rolloverPattern string, ) *PlatformLoggingConfig {
+func NewPlatformLoggingConfig(level string, maxHistory int32, rolloverPattern string) *PlatformLoggingConfig {
 	this := PlatformLoggingConfig{}
 	this.Level = level
 	this.MaxHistory = maxHistory
@@ -77,7 +77,7 @@ func (o *PlatformLoggingConfig) SetFileNamePrefix(v string) {
 
 // GetLevel returns the Level field value
 func (o *PlatformLoggingConfig) GetLevel() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +101,7 @@ func (o *PlatformLoggingConfig) SetLevel(v string) {
 
 // GetMaxHistory returns the MaxHistory field value
 func (o *PlatformLoggingConfig) GetMaxHistory() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -125,7 +125,7 @@ func (o *PlatformLoggingConfig) SetMaxHistory(v int32) {
 
 // GetRolloverPattern returns the RolloverPattern field value
 func (o *PlatformLoggingConfig) GetRolloverPattern() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

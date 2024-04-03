@@ -26,7 +26,7 @@ type NodeAgentPagedApiResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeAgentPagedApiResponse(entities []NodeAgentResp, hasNext bool, hasPrev bool, totalCount int32, ) *NodeAgentPagedApiResponse {
+func NewNodeAgentPagedApiResponse(entities []NodeAgentResp, hasNext bool, hasPrev bool, totalCount int32) *NodeAgentPagedApiResponse {
 	this := NodeAgentPagedApiResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewNodeAgentPagedApiResponseWithDefaults() *NodeAgentPagedApiResponse {
 
 // GetEntities returns the Entities field value
 func (o *NodeAgentPagedApiResponse) GetEntities() []NodeAgentResp {
-	if o == nil  {
+	if o == nil {
 		var ret []NodeAgentResp
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *NodeAgentPagedApiResponse) SetEntities(v []NodeAgentResp) {
 
 // GetHasNext returns the HasNext field value
 func (o *NodeAgentPagedApiResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *NodeAgentPagedApiResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *NodeAgentPagedApiResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *NodeAgentPagedApiResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *NodeAgentPagedApiResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

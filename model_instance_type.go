@@ -32,7 +32,7 @@ type InstanceType struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(idKey InstanceTypeKey, ) *InstanceType {
+func NewInstanceType(idKey InstanceTypeKey) *InstanceType {
 	this := InstanceType{}
 	this.IdKey = idKey
 	return &this
@@ -80,7 +80,7 @@ func (o *InstanceType) SetActive(v bool) {
 
 // GetIdKey returns the IdKey field value
 func (o *InstanceType) GetIdKey() InstanceTypeKey {
-	if o == nil  {
+	if o == nil {
 		var ret InstanceTypeKey
 		return ret
 	}

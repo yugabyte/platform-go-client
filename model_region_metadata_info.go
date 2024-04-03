@@ -26,7 +26,7 @@ type RegionMetadataInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegionMetadataInfo(availabilityZones []string, latitude float64, longitude float64, name string, ) *RegionMetadataInfo {
+func NewRegionMetadataInfo(availabilityZones []string, latitude float64, longitude float64, name string) *RegionMetadataInfo {
 	this := RegionMetadataInfo{}
 	this.AvailabilityZones = availabilityZones
 	this.Latitude = latitude
@@ -45,7 +45,7 @@ func NewRegionMetadataInfoWithDefaults() *RegionMetadataInfo {
 
 // GetAvailabilityZones returns the AvailabilityZones field value
 func (o *RegionMetadataInfo) GetAvailabilityZones() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *RegionMetadataInfo) SetAvailabilityZones(v []string) {
 
 // GetLatitude returns the Latitude field value
 func (o *RegionMetadataInfo) GetLatitude() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *RegionMetadataInfo) SetLatitude(v float64) {
 
 // GetLongitude returns the Longitude field value
 func (o *RegionMetadataInfo) GetLongitude() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *RegionMetadataInfo) SetLongitude(v float64) {
 
 // GetName returns the Name field value
 func (o *RegionMetadataInfo) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -25,7 +25,7 @@ type PresetThrottleValues struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetThrottleValues(defaultValue int32, maxValue int32, minValue int32, ) *PresetThrottleValues {
+func NewPresetThrottleValues(defaultValue int32, maxValue int32, minValue int32) *PresetThrottleValues {
 	this := PresetThrottleValues{}
 	this.DefaultValue = defaultValue
 	this.MaxValue = maxValue
@@ -43,7 +43,7 @@ func NewPresetThrottleValuesWithDefaults() *PresetThrottleValues {
 
 // GetDefaultValue returns the DefaultValue field value
 func (o *PresetThrottleValues) GetDefaultValue() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *PresetThrottleValues) SetDefaultValue(v int32) {
 
 // GetMaxValue returns the MaxValue field value
 func (o *PresetThrottleValues) GetMaxValue() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *PresetThrottleValues) SetMaxValue(v int32) {
 
 // GetMinValue returns the MinValue field value
 func (o *PresetThrottleValues) GetMinValue() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

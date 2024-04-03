@@ -26,7 +26,7 @@ type StateChangeAuditInfoFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStateChangeAuditInfoFilter(customerId string, ids []string, recommendationId string, userId string, ) *StateChangeAuditInfoFilter {
+func NewStateChangeAuditInfoFilter(customerId string, ids []string, recommendationId string, userId string) *StateChangeAuditInfoFilter {
 	this := StateChangeAuditInfoFilter{}
 	this.CustomerId = customerId
 	this.Ids = ids
@@ -45,7 +45,7 @@ func NewStateChangeAuditInfoFilterWithDefaults() *StateChangeAuditInfoFilter {
 
 // GetCustomerId returns the CustomerId field value
 func (o *StateChangeAuditInfoFilter) GetCustomerId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *StateChangeAuditInfoFilter) SetCustomerId(v string) {
 
 // GetIds returns the Ids field value
 func (o *StateChangeAuditInfoFilter) GetIds() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *StateChangeAuditInfoFilter) SetIds(v []string) {
 
 // GetRecommendationId returns the RecommendationId field value
 func (o *StateChangeAuditInfoFilter) GetRecommendationId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *StateChangeAuditInfoFilter) SetRecommendationId(v string) {
 
 // GetUserId returns the UserId field value
 func (o *StateChangeAuditInfoFilter) GetUserId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

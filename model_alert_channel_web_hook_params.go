@@ -26,7 +26,7 @@ type AlertChannelWebHookParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelWebHookParams(webhookUrl string, ) *AlertChannelWebHookParams {
+func NewAlertChannelWebHookParams(webhookUrl string) *AlertChannelWebHookParams {
 	this := AlertChannelWebHookParams{}
 	this.WebhookUrl = webhookUrl
 	return &this
@@ -74,7 +74,7 @@ func (o *AlertChannelWebHookParams) SetHttpAuth(v HTTPAuthInformation) {
 
 // GetWebhookUrl returns the WebhookUrl field value
 func (o *AlertChannelWebHookParams) GetWebhookUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

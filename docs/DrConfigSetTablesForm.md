@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AutoIncludeIndexTables** | Pointer to **bool** | Whether or not YBA should also include all index tables from any provided main tables. | [optional] 
 **BootstrapParams** | Pointer to [**RestartBootstrapParams**](RestartBootstrapParams.md) |  | [optional] 
 **Tables** | Pointer to **[]string** | Source universe table IDs | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewDrConfigSetTablesFormWithDefaults instantiates a new DrConfigSetTablesForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAutoIncludeIndexTables
+
+`func (o *DrConfigSetTablesForm) GetAutoIncludeIndexTables() bool`
+
+GetAutoIncludeIndexTables returns the AutoIncludeIndexTables field if non-nil, zero value otherwise.
+
+### GetAutoIncludeIndexTablesOk
+
+`func (o *DrConfigSetTablesForm) GetAutoIncludeIndexTablesOk() (*bool, bool)`
+
+GetAutoIncludeIndexTablesOk returns a tuple with the AutoIncludeIndexTables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoIncludeIndexTables
+
+`func (o *DrConfigSetTablesForm) SetAutoIncludeIndexTables(v bool)`
+
+SetAutoIncludeIndexTables sets AutoIncludeIndexTables field to given value.
+
+### HasAutoIncludeIndexTables
+
+`func (o *DrConfigSetTablesForm) HasAutoIncludeIndexTables() bool`
+
+HasAutoIncludeIndexTables returns a boolean if a field has been set.
 
 ### GetBootstrapParams
 

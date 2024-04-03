@@ -39,7 +39,7 @@ type AvailabilityZone struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAvailabilityZone(name string, ) *AvailabilityZone {
+func NewAvailabilityZone(name string) *AvailabilityZone {
 	this := AvailabilityZone{}
 	this.Name = name
 	return &this
@@ -215,7 +215,7 @@ func (o *AvailabilityZone) SetKubeconfigPath(v string) {
 
 // GetName returns the Name field value
 func (o *AvailabilityZone) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

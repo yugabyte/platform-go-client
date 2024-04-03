@@ -26,7 +26,7 @@ type SchedulePagedResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSchedulePagedResponse(entities []Schedule, hasNext bool, hasPrev bool, totalCount int32, ) *SchedulePagedResponse {
+func NewSchedulePagedResponse(entities []Schedule, hasNext bool, hasPrev bool, totalCount int32) *SchedulePagedResponse {
 	this := SchedulePagedResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewSchedulePagedResponseWithDefaults() *SchedulePagedResponse {
 
 // GetEntities returns the Entities field value
 func (o *SchedulePagedResponse) GetEntities() []Schedule {
-	if o == nil  {
+	if o == nil {
 		var ret []Schedule
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *SchedulePagedResponse) SetEntities(v []Schedule) {
 
 // GetHasNext returns the HasNext field value
 func (o *SchedulePagedResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *SchedulePagedResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *SchedulePagedResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *SchedulePagedResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *SchedulePagedResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

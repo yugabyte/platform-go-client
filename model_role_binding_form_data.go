@@ -24,7 +24,7 @@ type RoleBindingFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleBindingFormData(roleResourceDefinitions []RoleResourceDefinition, ) *RoleBindingFormData {
+func NewRoleBindingFormData(roleResourceDefinitions []RoleResourceDefinition) *RoleBindingFormData {
 	this := RoleBindingFormData{}
 	this.RoleResourceDefinitions = roleResourceDefinitions
 	return &this
@@ -40,7 +40,7 @@ func NewRoleBindingFormDataWithDefaults() *RoleBindingFormData {
 
 // GetRoleResourceDefinitions returns the RoleResourceDefinitions field value
 func (o *RoleBindingFormData) GetRoleResourceDefinitions() []RoleResourceDefinition {
-	if o == nil  {
+	if o == nil {
 		var ret []RoleResourceDefinition
 		return ret
 	}

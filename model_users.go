@@ -44,7 +44,7 @@ type Users struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUsers(email string, ) *Users {
+func NewUsers(email string) *Users {
 	this := Users{}
 	this.Email = email
 	return &this
@@ -156,7 +156,7 @@ func (o *Users) SetCustomerUUID(v string) {
 
 // GetEmail returns the Email field value
 func (o *Users) GetEmail() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

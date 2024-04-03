@@ -24,7 +24,7 @@ type CreateTablespaceParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateTablespaceParams(tablespaceInfos []TableSpaceInfo, ) *CreateTablespaceParams {
+func NewCreateTablespaceParams(tablespaceInfos []TableSpaceInfo) *CreateTablespaceParams {
 	this := CreateTablespaceParams{}
 	this.TablespaceInfos = tablespaceInfos
 	return &this
@@ -40,7 +40,7 @@ func NewCreateTablespaceParamsWithDefaults() *CreateTablespaceParams {
 
 // GetTablespaceInfos returns the TablespaceInfos field value
 func (o *CreateTablespaceParams) GetTablespaceInfos() []TableSpaceInfo {
-	if o == nil  {
+	if o == nil {
 		var ret []TableSpaceInfo
 		return ret
 	}

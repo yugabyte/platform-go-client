@@ -24,7 +24,7 @@ type MaintenanceWindowApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMaintenanceWindowApiFilter(states []string, uuids []string, ) *MaintenanceWindowApiFilter {
+func NewMaintenanceWindowApiFilter(states []string, uuids []string) *MaintenanceWindowApiFilter {
 	this := MaintenanceWindowApiFilter{}
 	this.States = states
 	this.Uuids = uuids
@@ -41,7 +41,7 @@ func NewMaintenanceWindowApiFilterWithDefaults() *MaintenanceWindowApiFilter {
 
 // GetStates returns the States field value
 func (o *MaintenanceWindowApiFilter) GetStates() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *MaintenanceWindowApiFilter) SetStates(v []string) {
 
 // GetUuids returns the Uuids field value
 func (o *MaintenanceWindowApiFilter) GetUuids() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}

@@ -35,7 +35,7 @@ type CustomCaCertificateInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomCaCertificateInfo(active bool, customerId string, id string, name string, ) *CustomCaCertificateInfo {
+func NewCustomCaCertificateInfo(active bool, customerId string, id string, name string) *CustomCaCertificateInfo {
 	this := CustomCaCertificateInfo{}
 	this.Active = active
 	this.CustomerId = customerId
@@ -54,7 +54,7 @@ func NewCustomCaCertificateInfoWithDefaults() *CustomCaCertificateInfo {
 
 // GetActive returns the Active field value
 func (o *CustomCaCertificateInfo) GetActive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -142,7 +142,7 @@ func (o *CustomCaCertificateInfo) SetCreatedTime(v time.Time) {
 
 // GetCustomerId returns the CustomerId field value
 func (o *CustomCaCertificateInfo) GetCustomerId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -198,7 +198,7 @@ func (o *CustomCaCertificateInfo) SetExpiryDate(v time.Time) {
 
 // GetId returns the Id field value
 func (o *CustomCaCertificateInfo) GetId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -222,7 +222,7 @@ func (o *CustomCaCertificateInfo) SetId(v string) {
 
 // GetName returns the Name field value
 func (o *CustomCaCertificateInfo) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

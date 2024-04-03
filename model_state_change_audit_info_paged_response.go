@@ -26,7 +26,7 @@ type StateChangeAuditInfoPagedResponse struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStateChangeAuditInfoPagedResponse(entities []StateChangeAuditInfo, hasNext bool, hasPrev bool, totalCount int32, ) *StateChangeAuditInfoPagedResponse {
+func NewStateChangeAuditInfoPagedResponse(entities []StateChangeAuditInfo, hasNext bool, hasPrev bool, totalCount int32) *StateChangeAuditInfoPagedResponse {
 	this := StateChangeAuditInfoPagedResponse{}
 	this.Entities = entities
 	this.HasNext = hasNext
@@ -45,7 +45,7 @@ func NewStateChangeAuditInfoPagedResponseWithDefaults() *StateChangeAuditInfoPag
 
 // GetEntities returns the Entities field value
 func (o *StateChangeAuditInfoPagedResponse) GetEntities() []StateChangeAuditInfo {
-	if o == nil  {
+	if o == nil {
 		var ret []StateChangeAuditInfo
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *StateChangeAuditInfoPagedResponse) SetEntities(v []StateChangeAuditInfo
 
 // GetHasNext returns the HasNext field value
 func (o *StateChangeAuditInfoPagedResponse) GetHasNext() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *StateChangeAuditInfoPagedResponse) SetHasNext(v bool) {
 
 // GetHasPrev returns the HasPrev field value
 func (o *StateChangeAuditInfoPagedResponse) GetHasPrev() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *StateChangeAuditInfoPagedResponse) SetHasPrev(v bool) {
 
 // GetTotalCount returns the TotalCount field value
 func (o *StateChangeAuditInfoPagedResponse) GetTotalCount() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SshPortOverride** | Pointer to **int32** |  | [optional] 
-**SshUserOverride** | Pointer to **string** |  | [optional] 
+**SshPortOverride** | Pointer to **int32** | sshPortOverride for the bundle. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.3.0.&lt;/b&gt; Use imageBundles.details.sshUser instead. | [optional] 
+**SshUserOverride** | Pointer to **string** | sshUserOverride for the bundle. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.3.0.&lt;/b&gt; Use imageBundles.details.sshUser instead. | [optional] 
 **YbImage** | Pointer to **string** |  | [optional] 
 
 ## Methods

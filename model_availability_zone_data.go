@@ -30,7 +30,7 @@ type AvailabilityZoneData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAvailabilityZoneData(code string, name string, ) *AvailabilityZoneData {
+func NewAvailabilityZoneData(code string, name string) *AvailabilityZoneData {
 	this := AvailabilityZoneData{}
 	this.Code = code
 	this.Name = name
@@ -47,7 +47,7 @@ func NewAvailabilityZoneDataWithDefaults() *AvailabilityZoneData {
 
 // GetCode returns the Code field value
 func (o *AvailabilityZoneData) GetCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *AvailabilityZoneData) SetCode(v string) {
 
 // GetName returns the Name field value
 func (o *AvailabilityZoneData) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
