@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**SetThrottleParams**](BackupsApi.md#SetThrottleParams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 [**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
+[**UniverseBackup**](BackupsApi.md#UniverseBackup) | **Post** /api/v1/customers/{customerUUID}/universes/{universeUUID}/universe_backup | Create a Universe Backup
 
 
 
@@ -1569,6 +1570,83 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UniverseBackup
+
+> YBPTask UniverseBackup(ctx, customerUUID, universeUUID).BackupUniverse(backupUniverse).Request(request).Execute()
+
+Create a Universe Backup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    customerUUID := TODO // string | 
+    universeUUID := TODO // string | 
+    backupUniverse := *openapiclient.NewUniverseBackupRequestFormData("PlatformVersion_example", "StorageConfigUUID_example") // UniverseBackupRequestFormData | Universe Backup data to be created
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.UniverseBackup(context.Background(), customerUUID, universeUUID).BackupUniverse(backupUniverse).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.UniverseBackup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UniverseBackup`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.UniverseBackup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**customerUUID** | [**string**](.md) |  | 
+**universeUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUniverseBackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **backupUniverse** | [**UniverseBackupRequestFormData**](UniverseBackupRequestFormData.md) | Universe Backup data to be created | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

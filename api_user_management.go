@@ -27,6 +27,137 @@ var (
 // UserManagementApiService UserManagementApi service
 type UserManagementApiService service
 
+type UserManagementApiApiChangePasswordRequest struct {
+	ctx _context.Context
+	ApiService *UserManagementApiService
+	cUUID string
+	uUUID string
+	users *UserRegistrationData
+	request *interface{}
+}
+
+func (r UserManagementApiApiChangePasswordRequest) Users(users UserRegistrationData) UserManagementApiApiChangePasswordRequest {
+	r.users = &users
+	return r
+}
+func (r UserManagementApiApiChangePasswordRequest) Request(request interface{}) UserManagementApiApiChangePasswordRequest {
+	r.request = &request
+	return r
+}
+
+func (r UserManagementApiApiChangePasswordRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.ChangePasswordExecute(r)
+}
+
+/*
+ * ChangePassword Change password - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.1.0.0.</b></p>
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uUUID
+ * @return UserManagementApiApiChangePasswordRequest
+ */
+func (a *UserManagementApiService) ChangePassword(ctx _context.Context, cUUID string, uUUID string) UserManagementApiApiChangePasswordRequest {
+	return UserManagementApiApiChangePasswordRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uUUID: uUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *UserManagementApiService) ChangePasswordExecute(r UserManagementApiApiChangePasswordRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementApiService.ChangePassword")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/users/{uUUID}/change_password"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uUUID"+"}", _neturl.PathEscape(parameterToString(r.uUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.users == nil {
+		return nil, reportError("users is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.users
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type UserManagementApiApiCreateUserRequest struct {
 	ctx _context.Context
 	ApiService *UserManagementApiService
@@ -538,6 +669,143 @@ func (a *UserManagementApiService) ListUsersExecute(r UserManagementApiApiListUs
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type UserManagementApiApiResetUserPasswordRequest struct {
+	ctx _context.Context
+	ApiService *UserManagementApiService
+	cUUID string
+	users *UserPasswordChangeFormData
+	request *interface{}
+}
+
+func (r UserManagementApiApiResetUserPasswordRequest) Users(users UserPasswordChangeFormData) UserManagementApiApiResetUserPasswordRequest {
+	r.users = &users
+	return r
+}
+func (r UserManagementApiApiResetUserPasswordRequest) Request(request interface{}) UserManagementApiApiResetUserPasswordRequest {
+	r.request = &request
+	return r
+}
+
+func (r UserManagementApiApiResetUserPasswordRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
+	return r.ApiService.ResetUserPasswordExecute(r)
+}
+
+/*
+ * ResetUserPassword Reset the user's password
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return UserManagementApiApiResetUserPasswordRequest
+ */
+func (a *UserManagementApiService) ResetUserPassword(ctx _context.Context, cUUID string) UserManagementApiApiResetUserPasswordRequest {
+	return UserManagementApiApiResetUserPasswordRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPSuccess
+ */
+func (a *UserManagementApiService) ResetUserPasswordExecute(r UserManagementApiApiResetUserPasswordRequest) (YBPSuccess, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPSuccess
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementApiService.ResetUserPassword")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/reset_password"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.users == nil {
+		return localVarReturnValue, nil, reportError("users is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.users
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UserManagementApiApiRetrieveOIDCAuthTokenRequest struct {
 	ctx _context.Context
 	ApiService *UserManagementApiService
@@ -618,147 +886,6 @@ func (a *UserManagementApiService) RetrieveOIDCAuthTokenExecute(r UserManagement
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type UserManagementApiApiUpdateUserPasswordRequest struct {
-	ctx _context.Context
-	ApiService *UserManagementApiService
-	cUUID string
-	uUUID string
-	users *UserRegistrationData
-	request *interface{}
-}
-
-func (r UserManagementApiApiUpdateUserPasswordRequest) Users(users UserRegistrationData) UserManagementApiApiUpdateUserPasswordRequest {
-	r.users = &users
-	return r
-}
-func (r UserManagementApiApiUpdateUserPasswordRequest) Request(request interface{}) UserManagementApiApiUpdateUserPasswordRequest {
-	r.request = &request
-	return r
-}
-
-func (r UserManagementApiApiUpdateUserPasswordRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
-	return r.ApiService.UpdateUserPasswordExecute(r)
-}
-
-/*
- * UpdateUserPassword Change a user's password
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uUUID
- * @return UserManagementApiApiUpdateUserPasswordRequest
- */
-func (a *UserManagementApiService) UpdateUserPassword(ctx _context.Context, cUUID string, uUUID string) UserManagementApiApiUpdateUserPasswordRequest {
-	return UserManagementApiApiUpdateUserPasswordRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPSuccess
- */
-func (a *UserManagementApiService) UpdateUserPasswordExecute(r UserManagementApiApiUpdateUserPasswordRequest) (YBPSuccess, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPut
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementApiService.UpdateUserPassword")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/users/{uUUID}/change_password"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uUUID"+"}", _neturl.PathEscape(parameterToString(r.uUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.users == nil {
-		return localVarReturnValue, nil, reportError("users is required and must be specified")
-	}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.users
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

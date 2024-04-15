@@ -19,6 +19,7 @@ type NodeInstance struct {
 	Details NodeInstanceData `json:"details"`
 	// Node details (as a JSON object)
 	DetailsJson *string `json:"detailsJson,omitempty"`
+	InUse *bool `json:"inUse,omitempty"`
 	// The node instance's name
 	InstanceName *string `json:"instanceName,omitempty"`
 	// The node's type code
@@ -105,6 +106,38 @@ func (o *NodeInstance) HasDetailsJson() bool {
 // SetDetailsJson gets a reference to the given string and assigns it to the DetailsJson field.
 func (o *NodeInstance) SetDetailsJson(v string) {
 	o.DetailsJson = &v
+}
+
+// GetInUse returns the InUse field value if set, zero value otherwise.
+func (o *NodeInstance) GetInUse() bool {
+	if o == nil || o.InUse == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InUse
+}
+
+// GetInUseOk returns a tuple with the InUse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeInstance) GetInUseOk() (*bool, bool) {
+	if o == nil || o.InUse == nil {
+		return nil, false
+	}
+	return o.InUse, true
+}
+
+// HasInUse returns a boolean if a field has been set.
+func (o *NodeInstance) HasInUse() bool {
+	if o != nil && o.InUse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInUse gets a reference to the given bool and assigns it to the InUse field.
+func (o *NodeInstance) SetInUse(v bool) {
+	o.InUse = &v
 }
 
 // GetInstanceName returns the InstanceName field value if set, zero value otherwise.
@@ -306,6 +339,9 @@ func (o NodeInstance) MarshalJSON() ([]byte, error) {
 	}
 	if o.DetailsJson != nil {
 		toSerialize["detailsJson"] = o.DetailsJson
+	}
+	if o.InUse != nil {
+		toSerialize["inUse"] = o.InUse
 	}
 	if o.InstanceName != nil {
 		toSerialize["instanceName"] = o.InstanceName

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Details** | [**NodeInstanceData**](NodeInstanceData.md) |  | 
 **DetailsJson** | Pointer to **string** | Node details (as a JSON object) | [optional] 
+**InUse** | Pointer to **bool** |  | [optional] 
 **InstanceName** | Pointer to **string** | The node instance&#39;s name | [optional] 
 **InstanceTypeCode** | Pointer to **string** | The node&#39;s type code | [optional] 
 **NodeName** | Pointer to **string** | The node&#39;s name | [optional] [readonly] 
@@ -76,6 +77,31 @@ SetDetailsJson sets DetailsJson field to given value.
 `func (o *NodeInstance) HasDetailsJson() bool`
 
 HasDetailsJson returns a boolean if a field has been set.
+
+### GetInUse
+
+`func (o *NodeInstance) GetInUse() bool`
+
+GetInUse returns the InUse field if non-nil, zero value otherwise.
+
+### GetInUseOk
+
+`func (o *NodeInstance) GetInUseOk() (*bool, bool)`
+
+GetInUseOk returns a tuple with the InUse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInUse
+
+`func (o *NodeInstance) SetInUse(v bool)`
+
+SetInUse sets InUse field to given value.
+
+### HasInUse
+
+`func (o *NodeInstance) HasInUse() bool`
+
+HasInUse returns a boolean if a field has been set.
 
 ### GetInstanceName
 

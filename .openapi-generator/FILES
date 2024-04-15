@@ -389,6 +389,7 @@ docs/TokenAuthInformation.md
 docs/TokenAuthInformationAllOf.md
 docs/TriggerHealthCheckResult.md
 docs/UniverseActionsApi.md
+docs/UniverseBackupRequestFormData.md
 docs/UniverseCDCManagementApi.md
 docs/UniverseClusterMutationsApi.md
 docs/UniverseConfigureTaskParams.md
@@ -412,6 +413,7 @@ docs/UserIntent.md
 docs/UserIntentOverrides.md
 docs/UserManagementApi.md
 docs/UserOIDCAuthToken.md
+docs/UserPasswordChangeFormData.md
 docs/UserProfileData.md
 docs/UserRegistrationData.md
 docs/UserWithFeatures.md
@@ -742,6 +744,7 @@ model_tls_toggle_params.go
 model_token_auth_information.go
 model_token_auth_information_all_of.go
 model_trigger_health_check_result.go
+model_universe_backup_request_form_data.go
 model_universe_configure_task_params.go
 model_universe_definition_task_params.go
 model_universe_definition_task_params_resp.go
@@ -756,6 +759,7 @@ model_upgrade_task_params.go
 model_user_intent.go
 model_user_intent_overrides.go
 model_user_oidc_auth_token.go
+model_user_password_change_form_data.go
 model_user_profile_data.go
 model_user_registration_data.go
 model_user_with_features.go

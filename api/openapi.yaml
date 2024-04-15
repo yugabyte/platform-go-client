@@ -5824,6 +5824,41 @@ paths:
       tags:
       - Release management
       x-codegen-request-body-name: Release
+  /api/v1/customers/{cUUID}/reset_password:
+    put:
+      operationId: resetUserPassword
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPasswordChangeFormData'
+        description: "User data containing the current, new password"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Reset the user's password
+      tags:
+      - User management
+      x-codegen-request-body-name: Users
   /api/v1/customers/{cUUID}/restore:
     post:
       operationId: restoreBackupV2
@@ -9929,7 +9964,9 @@ paths:
       - Audit
   /api/v1/customers/{cUUID}/users/{uUUID}/change_password:
     put:
-      operationId: updateUserPassword
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2024.1.0.0.</b></p>
+      operationId: changePassword
       parameters:
       - in: path
         name: cUUID
@@ -9957,15 +9994,12 @@ paths:
         description: User data containing the new password
         required: true
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YBPSuccess'
+        default:
+          content: {}
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Change a user's password
+      summary: Change password - deprecated
       tags:
       - User management
       x-codegen-request-body-name: Users
@@ -10426,6 +10460,49 @@ paths:
       summary: Validate a node instance
       tags:
       - Node instances
+  /api/v1/customers/{customerUUID}/universes/{universeUUID}/universe_backup:
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: Universe Backup
+      parameters:
+      - in: path
+        name: customerUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: universeUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UniverseBackupRequestFormData'
+        description: Universe Backup data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Create a Universe Backup
+      tags:
+      - Backups
+      x-codegen-request-body-name: Backup Universe
   /api/v1/grafana_dashboard:
     get:
       description: "WARNING: This is a preview API that could change."
@@ -34841,6 +34918,8 @@ components:
           - YB_CONTROLLER_RPC_PORT
           - REDIS_SERVER_HTTP_PORT
           - REDIS_SERVER_RPC_PORT
+          - YB_HOME_DIR_CLEAN
+          - DATA_DIR_CLEAN
           - YCQL_SERVER_HTTP_PORT
           - YCQL_SERVER_RPC_PORT
           - YSQL_SERVER_HTTP_PORT
@@ -35534,6 +35613,7 @@ components:
         nodeName: India node
         instanceName: Mumbai instance
         instanceTypeCode: c5large
+        inUse: true
         zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         details:
           nodeName: India node
@@ -35560,6 +35640,9 @@ components:
           example: "{\"ip\":\"1.1.1.1\",\"sshUser\":\"centos\"}"
           exampleSetFlag: true
           type: string
+        inUse:
+          exampleSetFlag: true
+          type: boolean
         instanceName:
           description: The node instance's name
           example: Mumbai instance
@@ -65025,6 +65108,44 @@ components:
       - universeUUID
       - uuid
       type: object
+    UniverseBackupRequestFormData:
+      description: Universe Backup Form Data
+      example:
+        storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        errorString: errorString
+        timeBeforeDelete: 0
+        platformVersion: platformVersion
+        previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
+      properties:
+        errorString:
+          description: Error message
+          exampleSetFlag: true
+          type: string
+        platformVersion:
+          exampleSetFlag: true
+          type: string
+        previousTaskUUID:
+          description: Previous task UUID of a retry
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        storageConfigUUID:
+          description: "WARNING: This is a preview API that could change.Storage configuration\
+            \ UUID"
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        timeBeforeDelete:
+          description: "WARNING: This is a preview API that could change.Time before\
+            \ deleting the backup from storage, in milliseconds"
+          exampleSetFlag: true
+          format: int64
+          type: integer
+      required:
+      - platformVersion
+      - storageConfigUUID
+      type: object
     UniverseConfigureTaskParams:
       example:
         expectedUniverseVersion: 0
@@ -79601,6 +79722,25 @@ components:
           exampleSetFlag: true
           type: string
       type: object
+    UserPasswordChangeFormData:
+      description: User registration data. The API and UI use this to validate form
+        data.
+      example:
+        newPassword: Test@1234
+        currentPassword: Test@1234
+      exampleSetFlag: true
+      properties:
+        currentPassword:
+          description: Current Password
+          example: Test@1234
+          exampleSetFlag: true
+          type: string
+        newPassword:
+          description: New Password
+          example: Test@1234
+          exampleSetFlag: true
+          type: string
+      type: object
     UserProfileData:
       description: User profile data. The API and UI use this to validate form data.
       example:
@@ -82910,6 +83050,8 @@ components:
           - YB_CONTROLLER_RPC_PORT
           - REDIS_SERVER_HTTP_PORT
           - REDIS_SERVER_RPC_PORT
+          - YB_HOME_DIR_CLEAN
+          - DATA_DIR_CLEAN
           - YCQL_SERVER_HTTP_PORT
           - YCQL_SERVER_RPC_PORT
           - YSQL_SERVER_HTTP_PORT

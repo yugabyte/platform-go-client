@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./v1"
+import sw "./ywclient"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -157,6 +157,7 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**SetThrottleParams**](docs/BackupsApi.md#setthrottleparams) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/ybc_throttle_params | Set throttle params in YB-Controller
 *BackupsApi* | [**SetUniverseBackupFlag**](docs/BackupsApi.md#setuniversebackupflag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 *BackupsApi* | [**StopBackup**](docs/BackupsApi.md#stopbackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
+*BackupsApi* | [**UniverseBackup**](docs/BackupsApi.md#universebackup) | **Post** /api/v1/customers/{customerUUID}/universes/{universeUUID}/universe_backup | Create a Universe Backup
 *CertificateInfoApi* | [**DeleteCertificate**](docs/CertificateInfoApi.md#deletecertificate) | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID} | Delete a certificate
 *CertificateInfoApi* | [**EditCertificate**](docs/CertificateInfoApi.md#editcertificate) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit | Edit TLS certificate config details
 *CertificateInfoApi* | [**GetListOfCertificate**](docs/CertificateInfoApi.md#getlistofcertificate) | **Get** /api/v1/customers/{cUUID}/certificates | List a customer&#39;s certificates
@@ -366,12 +367,13 @@ Class | Method | HTTP request | Description
 *UniverseUpgradesManagementApi* | [**UpgradeThirdpartySoftware**](docs/UniverseUpgradesManagementApi.md#upgradethirdpartysoftware) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/thirdparty_software | Upgrade third-party software
 *UniverseUpgradesManagementApi* | [**UpgradeTls**](docs/UniverseUpgradesManagementApi.md#upgradetls) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/tls | Upgrade TLS
 *UniverseUpgradesManagementApi* | [**UpgradeVMImage**](docs/UniverseUpgradesManagementApi.md#upgradevmimage) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/vm | Upgrade VM Image
+*UserManagementApi* | [**ChangePassword**](docs/UserManagementApi.md#changepassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change password - deprecated
 *UserManagementApi* | [**CreateUser**](docs/UserManagementApi.md#createuser) | **Post** /api/v1/customers/{cUUID}/users | Create a user
 *UserManagementApi* | [**DeleteUser**](docs/UserManagementApi.md#deleteuser) | **Delete** /api/v1/customers/{cUUID}/users/{uUUID} | Delete a user
 *UserManagementApi* | [**GetUserDetails**](docs/UserManagementApi.md#getuserdetails) | **Get** /api/v1/customers/{cUUID}/users/{uUUID} | Get a user&#39;s details
 *UserManagementApi* | [**ListUsers**](docs/UserManagementApi.md#listusers) | **Get** /api/v1/customers/{cUUID}/users | List all users
+*UserManagementApi* | [**ResetUserPassword**](docs/UserManagementApi.md#resetuserpassword) | **Put** /api/v1/customers/{cUUID}/reset_password | Reset the user&#39;s password
 *UserManagementApi* | [**RetrieveOIDCAuthToken**](docs/UserManagementApi.md#retrieveoidcauthtoken) | **Get** /api/v1/customers/{cUUID}/users/{uUUID}/oidc_auth_token | Retrieve OIDC auth token
-*UserManagementApi* | [**UpdateUserPassword**](docs/UserManagementApi.md#updateuserpassword) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/change_password | Change a user&#39;s password
 *UserManagementApi* | [**UpdateUserProfile**](docs/UserManagementApi.md#updateuserprofile) | **Put** /api/v1/customers/{cUUID}/users/{uUUID}/update_profile | Update a user&#39;s profile
 *UserManagementApi* | [**UpdateUserRole**](docs/UserManagementApi.md#updateuserrole) | **Put** /api/v1/customers/{cUUID}/users/{uUUID} | Change a user&#39;s role
 
@@ -683,6 +685,7 @@ Class | Method | HTTP request | Description
  - [TokenAuthInformation](docs/TokenAuthInformation.md)
  - [TokenAuthInformationAllOf](docs/TokenAuthInformationAllOf.md)
  - [TriggerHealthCheckResult](docs/TriggerHealthCheckResult.md)
+ - [UniverseBackupRequestFormData](docs/UniverseBackupRequestFormData.md)
  - [UniverseConfigureTaskParams](docs/UniverseConfigureTaskParams.md)
  - [UniverseDefinitionTaskParams](docs/UniverseDefinitionTaskParams.md)
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
@@ -697,6 +700,7 @@ Class | Method | HTTP request | Description
  - [UserIntent](docs/UserIntent.md)
  - [UserIntentOverrides](docs/UserIntentOverrides.md)
  - [UserOIDCAuthToken](docs/UserOIDCAuthToken.md)
+ - [UserPasswordChangeFormData](docs/UserPasswordChangeFormData.md)
  - [UserProfileData](docs/UserProfileData.md)
  - [UserRegistrationData](docs/UserRegistrationData.md)
  - [UserWithFeatures](docs/UserWithFeatures.md)
