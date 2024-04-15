@@ -30,7 +30,7 @@ type AlertChannelTemplates struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelTemplates(customerUUID string, textTemplate string, type_ string, ) *AlertChannelTemplates {
+func NewAlertChannelTemplates(customerUUID string, textTemplate string, type_ string) *AlertChannelTemplates {
 	this := AlertChannelTemplates{}
 	this.CustomerUUID = customerUUID
 	this.TextTemplate = textTemplate
@@ -48,7 +48,7 @@ func NewAlertChannelTemplatesWithDefaults() *AlertChannelTemplates {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertChannelTemplates) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -72,7 +72,7 @@ func (o *AlertChannelTemplates) SetCustomerUUID(v string) {
 
 // GetTextTemplate returns the TextTemplate field value
 func (o *AlertChannelTemplates) GetTextTemplate() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -128,7 +128,7 @@ func (o *AlertChannelTemplates) SetTitleTemplate(v string) {
 
 // GetType returns the Type field value
 func (o *AlertChannelTemplates) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

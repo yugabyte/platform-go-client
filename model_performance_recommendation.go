@@ -37,7 +37,7 @@ type PerformanceRecommendation struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, isStale bool, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string, ) *PerformanceRecommendation {
+func NewPerformanceRecommendation(customerId string, entityNames string, entityType string, id string, isStale bool, new bool, observation string, recommendation string, recommendationInfo map[string]map[string]interface{}, recommendationPriority string, recommendationState string, recommendationTimestamp int64, recommendationType string, stateChangeAuditInfoList []StateChangeAuditInfo, universeId string) *PerformanceRecommendation {
 	this := PerformanceRecommendation{}
 	this.CustomerId = customerId
 	this.EntityNames = entityNames
@@ -67,7 +67,7 @@ func NewPerformanceRecommendationWithDefaults() *PerformanceRecommendation {
 
 // GetCustomerId returns the CustomerId field value
 func (o *PerformanceRecommendation) GetCustomerId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *PerformanceRecommendation) SetCustomerId(v string) {
 
 // GetEntityNames returns the EntityNames field value
 func (o *PerformanceRecommendation) GetEntityNames() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -115,7 +115,7 @@ func (o *PerformanceRecommendation) SetEntityNames(v string) {
 
 // GetEntityType returns the EntityType field value
 func (o *PerformanceRecommendation) GetEntityType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -139,7 +139,7 @@ func (o *PerformanceRecommendation) SetEntityType(v string) {
 
 // GetId returns the Id field value
 func (o *PerformanceRecommendation) GetId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -163,7 +163,7 @@ func (o *PerformanceRecommendation) SetId(v string) {
 
 // GetIsStale returns the IsStale field value
 func (o *PerformanceRecommendation) GetIsStale() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -187,7 +187,7 @@ func (o *PerformanceRecommendation) SetIsStale(v bool) {
 
 // GetNew returns the New field value
 func (o *PerformanceRecommendation) GetNew() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -211,7 +211,7 @@ func (o *PerformanceRecommendation) SetNew(v bool) {
 
 // GetObservation returns the Observation field value
 func (o *PerformanceRecommendation) GetObservation() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -235,7 +235,7 @@ func (o *PerformanceRecommendation) SetObservation(v string) {
 
 // GetRecommendation returns the Recommendation field value
 func (o *PerformanceRecommendation) GetRecommendation() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -259,7 +259,7 @@ func (o *PerformanceRecommendation) SetRecommendation(v string) {
 
 // GetRecommendationInfo returns the RecommendationInfo field value
 func (o *PerformanceRecommendation) GetRecommendationInfo() map[string]map[string]interface{} {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]map[string]interface{}
 		return ret
 	}
@@ -283,7 +283,7 @@ func (o *PerformanceRecommendation) SetRecommendationInfo(v map[string]map[strin
 
 // GetRecommendationPriority returns the RecommendationPriority field value
 func (o *PerformanceRecommendation) GetRecommendationPriority() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -307,7 +307,7 @@ func (o *PerformanceRecommendation) SetRecommendationPriority(v string) {
 
 // GetRecommendationState returns the RecommendationState field value
 func (o *PerformanceRecommendation) GetRecommendationState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -331,7 +331,7 @@ func (o *PerformanceRecommendation) SetRecommendationState(v string) {
 
 // GetRecommendationTimestamp returns the RecommendationTimestamp field value
 func (o *PerformanceRecommendation) GetRecommendationTimestamp() int64 {
-	if o == nil  {
+	if o == nil {
 		var ret int64
 		return ret
 	}
@@ -355,7 +355,7 @@ func (o *PerformanceRecommendation) SetRecommendationTimestamp(v int64) {
 
 // GetRecommendationType returns the RecommendationType field value
 func (o *PerformanceRecommendation) GetRecommendationType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -379,7 +379,7 @@ func (o *PerformanceRecommendation) SetRecommendationType(v string) {
 
 // GetStateChangeAuditInfoList returns the StateChangeAuditInfoList field value
 func (o *PerformanceRecommendation) GetStateChangeAuditInfoList() []StateChangeAuditInfo {
-	if o == nil  {
+	if o == nil {
 		var ret []StateChangeAuditInfo
 		return ret
 	}
@@ -403,7 +403,7 @@ func (o *PerformanceRecommendation) SetStateChangeAuditInfoList(v []StateChangeA
 
 // GetUniverseId returns the UniverseId field value
 func (o *PerformanceRecommendation) GetUniverseId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

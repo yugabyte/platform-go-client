@@ -92,7 +92,7 @@ type TlsToggleParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams {
+func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *TlsToggleParams {
 	this := TlsToggleParams{}
 	this.AllowInsecure = allowInsecure
 	this.Clusters = clusters
@@ -118,7 +118,7 @@ func NewTlsToggleParamsWithDefaults() *TlsToggleParams {
 
 // GetAllowInsecure returns the AllowInsecure field value
 func (o *TlsToggleParams) GetAllowInsecure() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -238,7 +238,7 @@ func (o *TlsToggleParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *TlsToggleParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -326,7 +326,7 @@ func (o *TlsToggleParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *TlsToggleParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -414,7 +414,7 @@ func (o *TlsToggleParams) SetDeviceInfo(v DeviceInfo) {
 
 // GetEnableClientToNodeEncrypt returns the EnableClientToNodeEncrypt field value
 func (o *TlsToggleParams) GetEnableClientToNodeEncrypt() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -438,7 +438,7 @@ func (o *TlsToggleParams) SetEnableClientToNodeEncrypt(v bool) {
 
 // GetEnableNodeToNodeEncrypt returns the EnableNodeToNodeEncrypt field value
 func (o *TlsToggleParams) GetEnableNodeToNodeEncrypt() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -782,7 +782,7 @@ func (o *TlsToggleParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *TlsToggleParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -1030,7 +1030,7 @@ func (o *TlsToggleParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *TlsToggleParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1054,7 +1054,7 @@ func (o *TlsToggleParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *TlsToggleParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1302,7 +1302,7 @@ func (o *TlsToggleParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *TlsToggleParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1326,7 +1326,7 @@ func (o *TlsToggleParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *TlsToggleParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1702,7 +1702,7 @@ func (o *TlsToggleParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *TlsToggleParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

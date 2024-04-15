@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **DateRangeEnd** | Pointer to **time.Time** | The end date to filter paged query. | [optional] 
 **DateRangeStart** | Pointer to **time.Time** | The start date to filter paged query. | [optional] 
 **OnlyShowDeletedSourceUniverses** | **bool** |  | 
+**RestoreUUIDList** | **[]string** |  | 
 **SourceUniverseNameList** | **[]string** |  | 
 **States** | **[]string** |  | 
 **StorageConfigUUIDList** | **[]string** |  | 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreApiFilter
 
-`func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
+`func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, restoreUUIDList []string, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
 
 NewRestoreApiFilter instantiates a new RestoreApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -100,6 +101,26 @@ and a boolean to check if the value has been set.
 `func (o *RestoreApiFilter) SetOnlyShowDeletedSourceUniverses(v bool)`
 
 SetOnlyShowDeletedSourceUniverses sets OnlyShowDeletedSourceUniverses field to given value.
+
+
+### GetRestoreUUIDList
+
+`func (o *RestoreApiFilter) GetRestoreUUIDList() []string`
+
+GetRestoreUUIDList returns the RestoreUUIDList field if non-nil, zero value otherwise.
+
+### GetRestoreUUIDListOk
+
+`func (o *RestoreApiFilter) GetRestoreUUIDListOk() (*[]string, bool)`
+
+GetRestoreUUIDListOk returns a tuple with the RestoreUUIDList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreUUIDList
+
+`func (o *RestoreApiFilter) SetRestoreUUIDList(v []string)`
+
+SetRestoreUUIDList sets RestoreUUIDList field to given value.
 
 
 ### GetSourceUniverseNameList

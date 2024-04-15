@@ -23,7 +23,7 @@ type MastersList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMastersList(masters []MasterNode, ) *MastersList {
+func NewMastersList(masters []MasterNode) *MastersList {
 	this := MastersList{}
 	this.Masters = masters
 	return &this
@@ -39,7 +39,7 @@ func NewMastersListWithDefaults() *MastersList {
 
 // GetMasters returns the Masters field value
 func (o *MastersList) GetMasters() []MasterNode {
-	if o == nil  {
+	if o == nil {
 		var ret []MasterNode
 		return ret
 	}

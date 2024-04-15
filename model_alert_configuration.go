@@ -55,7 +55,7 @@ type AlertConfiguration struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfiguration(active bool, alertCount float64, createTime time.Time, customerUUID string, defaultDestination bool, description string, durationSec int32, name string, target AlertConfigurationTarget, targetType string, template string, thresholdUnit string, thresholds map[string]AlertConfigurationThreshold, ) *AlertConfiguration {
+func NewAlertConfiguration(active bool, alertCount float64, createTime time.Time, customerUUID string, defaultDestination bool, description string, durationSec int32, name string, target AlertConfigurationTarget, targetType string, template string, thresholdUnit string, thresholds map[string]AlertConfigurationThreshold) *AlertConfiguration {
 	this := AlertConfiguration{}
 	this.Active = active
 	this.AlertCount = alertCount
@@ -83,7 +83,7 @@ func NewAlertConfigurationWithDefaults() *AlertConfiguration {
 
 // GetActive returns the Active field value
 func (o *AlertConfiguration) GetActive() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -107,7 +107,7 @@ func (o *AlertConfiguration) SetActive(v bool) {
 
 // GetAlertCount returns the AlertCount field value
 func (o *AlertConfiguration) GetAlertCount() float64 {
-	if o == nil  {
+	if o == nil {
 		var ret float64
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *AlertConfiguration) SetAlertCount(v float64) {
 
 // GetCreateTime returns the CreateTime field value
 func (o *AlertConfiguration) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *AlertConfiguration) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertConfiguration) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -179,7 +179,7 @@ func (o *AlertConfiguration) SetCustomerUUID(v string) {
 
 // GetDefaultDestination returns the DefaultDestination field value
 func (o *AlertConfiguration) GetDefaultDestination() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -203,7 +203,7 @@ func (o *AlertConfiguration) SetDefaultDestination(v bool) {
 
 // GetDescription returns the Description field value
 func (o *AlertConfiguration) GetDescription() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -259,7 +259,7 @@ func (o *AlertConfiguration) SetDestinationUUID(v string) {
 
 // GetDurationSec returns the DurationSec field value
 func (o *AlertConfiguration) GetDurationSec() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -347,7 +347,7 @@ func (o *AlertConfiguration) SetMaintenanceWindowUuids(v []string) {
 
 // GetName returns the Name field value
 func (o *AlertConfiguration) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -371,7 +371,7 @@ func (o *AlertConfiguration) SetName(v string) {
 
 // GetTarget returns the Target field value
 func (o *AlertConfiguration) GetTarget() AlertConfigurationTarget {
-	if o == nil  {
+	if o == nil {
 		var ret AlertConfigurationTarget
 		return ret
 	}
@@ -395,7 +395,7 @@ func (o *AlertConfiguration) SetTarget(v AlertConfigurationTarget) {
 
 // GetTargetType returns the TargetType field value
 func (o *AlertConfiguration) GetTargetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -419,7 +419,7 @@ func (o *AlertConfiguration) SetTargetType(v string) {
 
 // GetTemplate returns the Template field value
 func (o *AlertConfiguration) GetTemplate() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -443,7 +443,7 @@ func (o *AlertConfiguration) SetTemplate(v string) {
 
 // GetThresholdUnit returns the ThresholdUnit field value
 func (o *AlertConfiguration) GetThresholdUnit() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -467,7 +467,7 @@ func (o *AlertConfiguration) SetThresholdUnit(v string) {
 
 // GetThresholds returns the Thresholds field value
 func (o *AlertConfiguration) GetThresholds() map[string]AlertConfigurationThreshold {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]AlertConfigurationThreshold
 		return ret
 	}

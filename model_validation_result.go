@@ -27,7 +27,7 @@ type ValidationResult struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidationResult(description string, isRequired bool, isValid bool, type_ string, value string, ) *ValidationResult {
+func NewValidationResult(description string, isRequired bool, isValid bool, type_ string, value string) *ValidationResult {
 	this := ValidationResult{}
 	this.Description = description
 	this.IsRequired = isRequired
@@ -47,7 +47,7 @@ func NewValidationResultWithDefaults() *ValidationResult {
 
 // GetDescription returns the Description field value
 func (o *ValidationResult) GetDescription() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -71,7 +71,7 @@ func (o *ValidationResult) SetDescription(v string) {
 
 // GetIsRequired returns the IsRequired field value
 func (o *ValidationResult) GetIsRequired() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -95,7 +95,7 @@ func (o *ValidationResult) SetIsRequired(v bool) {
 
 // GetIsValid returns the IsValid field value
 func (o *ValidationResult) GetIsValid() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -119,7 +119,7 @@ func (o *ValidationResult) SetIsValid(v bool) {
 
 // GetType returns the Type field value
 func (o *ValidationResult) GetType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -143,7 +143,7 @@ func (o *ValidationResult) SetType(v string) {
 
 // GetValue returns the Value field value
 func (o *ValidationResult) GetValue() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

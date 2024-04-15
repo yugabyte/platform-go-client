@@ -26,7 +26,7 @@ type RunQueryFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRunQueryFormData(dbName string, nodeName string, query string, tableType string, ) *RunQueryFormData {
+func NewRunQueryFormData(dbName string, nodeName string, query string, tableType string) *RunQueryFormData {
 	this := RunQueryFormData{}
 	this.DbName = dbName
 	this.NodeName = nodeName
@@ -45,7 +45,7 @@ func NewRunQueryFormDataWithDefaults() *RunQueryFormData {
 
 // GetDbName returns the DbName field value
 func (o *RunQueryFormData) GetDbName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -69,7 +69,7 @@ func (o *RunQueryFormData) SetDbName(v string) {
 
 // GetNodeName returns the NodeName field value
 func (o *RunQueryFormData) GetNodeName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -93,7 +93,7 @@ func (o *RunQueryFormData) SetNodeName(v string) {
 
 // GetQuery returns the Query field value
 func (o *RunQueryFormData) GetQuery() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +117,7 @@ func (o *RunQueryFormData) SetQuery(v string) {
 
 // GetTableType returns the TableType field value
 func (o *RunQueryFormData) GetTableType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

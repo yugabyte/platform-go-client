@@ -24,7 +24,7 @@ type AvailabilityZoneFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAvailabilityZoneFormData(availabilityZones []AvailabilityZoneData, ) *AvailabilityZoneFormData {
+func NewAvailabilityZoneFormData(availabilityZones []AvailabilityZoneData) *AvailabilityZoneFormData {
 	this := AvailabilityZoneFormData{}
 	this.AvailabilityZones = availabilityZones
 	return &this
@@ -40,7 +40,7 @@ func NewAvailabilityZoneFormDataWithDefaults() *AvailabilityZoneFormData {
 
 // GetAvailabilityZones returns the AvailabilityZones field value
 func (o *AvailabilityZoneFormData) GetAvailabilityZones() []AvailabilityZoneData {
-	if o == nil  {
+	if o == nil {
 		var ret []AvailabilityZoneData
 		return ret
 	}

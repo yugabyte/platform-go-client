@@ -23,7 +23,7 @@ type PerProcessFlags struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPerProcessFlags(value map[string]map[string]string, ) *PerProcessFlags {
+func NewPerProcessFlags(value map[string]map[string]string) *PerProcessFlags {
 	this := PerProcessFlags{}
 	this.Value = value
 	return &this
@@ -39,7 +39,7 @@ func NewPerProcessFlagsWithDefaults() *PerProcessFlags {
 
 // GetValue returns the Value field value
 func (o *PerProcessFlags) GetValue() map[string]map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]map[string]string
 		return ret
 	}

@@ -32,7 +32,7 @@ type AlertTemplateSettings struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateSettings(createTime time.Time, customerUUID string, template string, uuid string, ) *AlertTemplateSettings {
+func NewAlertTemplateSettings(createTime time.Time, customerUUID string, template string, uuid string) *AlertTemplateSettings {
 	this := AlertTemplateSettings{}
 	this.CreateTime = createTime
 	this.CustomerUUID = customerUUID
@@ -51,7 +51,7 @@ func NewAlertTemplateSettingsWithDefaults() *AlertTemplateSettings {
 
 // GetCreateTime returns the CreateTime field value
 func (o *AlertTemplateSettings) GetCreateTime() time.Time {
-	if o == nil  {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
@@ -75,7 +75,7 @@ func (o *AlertTemplateSettings) SetCreateTime(v time.Time) {
 
 // GetCustomerUUID returns the CustomerUUID field value
 func (o *AlertTemplateSettings) GetCustomerUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *AlertTemplateSettings) SetLabels(v map[string]string) {
 
 // GetTemplate returns the Template field value
 func (o *AlertTemplateSettings) GetTemplate() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *AlertTemplateSettings) SetTemplate(v string) {
 
 // GetUuid returns the Uuid field value
 func (o *AlertTemplateSettings) GetUuid() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

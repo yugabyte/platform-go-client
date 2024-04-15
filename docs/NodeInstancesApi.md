@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**ListByProvider**](NodeInstancesApi.md#ListByProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 [**ListByZone**](NodeInstancesApi.md#ListByZone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
 [**NodeAction**](NodeInstancesApi.md#NodeAction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Update a node
+[**UpdateState**](NodeInstancesApi.md#UpdateState) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state | Update node instance state
 [**ValidateNodeInstance**](NodeInstancesApi.md#ValidateNodeInstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
 
 
@@ -590,6 +591,86 @@ Name | Type | Description  | Notes
 
 
  **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Node action data to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateState
+
+> YBPTask UpdateState(ctx, cUUID, pUUID, instanceIP).NodeInstanceStateFormData(nodeInstanceStateFormData).Request(request).Execute()
+
+Update node instance state
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pUUID := TODO // string | 
+    instanceIP := "instanceIP_example" // string | 
+    nodeInstanceStateFormData := *openapiclient.NewNodeInstanceStateFormData() // NodeInstanceStateFormData | Resultant node instance state to transition to
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.NodeInstancesApi.UpdateState(context.Background(), cUUID, pUUID, instanceIP).NodeInstanceStateFormData(nodeInstanceStateFormData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NodeInstancesApi.UpdateState``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateState`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `NodeInstancesApi.UpdateState`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**pUUID** | [**string**](.md) |  | 
+**instanceIP** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateStateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **nodeInstanceStateFormData** | [**NodeInstanceStateFormData**](NodeInstanceStateFormData.md) | Resultant node instance state to transition to | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

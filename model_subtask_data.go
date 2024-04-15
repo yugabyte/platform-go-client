@@ -15,10 +15,12 @@ import (
 	"time"
 )
 
-// SubtaskData struct for SubtaskData
+// SubtaskData Detailed subtask data
 type SubtaskData struct {
 	// Creation time (unix timestamp) of the task
 	CreationTime *time.Time `json:"creationTime,omitempty"`
+	// WARNING: This is a preview API that could change. Subtask error code
+	ErrorCode *string `json:"errorCode,omitempty"`
 	// Failed SubTask Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Failed SubTask Group Type
@@ -78,6 +80,38 @@ func (o *SubtaskData) HasCreationTime() bool {
 // SetCreationTime gets a reference to the given time.Time and assigns it to the CreationTime field.
 func (o *SubtaskData) SetCreationTime(v time.Time) {
 	o.CreationTime = &v
+}
+
+// GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
+func (o *SubtaskData) GetErrorCode() string {
+	if o == nil || o.ErrorCode == nil {
+		var ret string
+		return ret
+	}
+	return *o.ErrorCode
+}
+
+// GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SubtaskData) GetErrorCodeOk() (*string, bool) {
+	if o == nil || o.ErrorCode == nil {
+		return nil, false
+	}
+	return o.ErrorCode, true
+}
+
+// HasErrorCode returns a boolean if a field has been set.
+func (o *SubtaskData) HasErrorCode() bool {
+	if o != nil && o.ErrorCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
+func (o *SubtaskData) SetErrorCode(v string) {
+	o.ErrorCode = &v
 }
 
 // GetErrorString returns the ErrorString field value if set, zero value otherwise.
@@ -244,6 +278,9 @@ func (o SubtaskData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CreationTime != nil {
 		toSerialize["creationTime"] = o.CreationTime
+	}
+	if o.ErrorCode != nil {
+		toSerialize["errorCode"] = o.ErrorCode
 	}
 	if o.ErrorString != nil {
 		toSerialize["errorString"] = o.ErrorString

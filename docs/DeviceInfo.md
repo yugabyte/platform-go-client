@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **StorageClass** | Pointer to **string** | Name of the storage class | [optional] 
 **StorageType** | Pointer to **string** | Storage type used for this instance | [optional] 
 **Throughput** | Pointer to **int32** | Desired throughput for the volumes mounted on this instance | [optional] 
-**VolumeSize** | Pointer to **int32** | The size of each volume in each instance | [optional] 
+**VolumeSize** | Pointer to **int32** | The size of each volume in each instance. Could be modified in payload for /resize_node API call | [optional] 
 
 ## Methods
 

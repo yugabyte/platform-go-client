@@ -24,7 +24,7 @@ type CustomCACertParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomCACertParams(contents string, name string, ) *CustomCACertParams {
+func NewCustomCACertParams(contents string, name string) *CustomCACertParams {
 	this := CustomCACertParams{}
 	this.Contents = contents
 	this.Name = name
@@ -41,7 +41,7 @@ func NewCustomCACertParamsWithDefaults() *CustomCACertParams {
 
 // GetContents returns the Contents field value
 func (o *CustomCACertParams) GetContents() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *CustomCACertParams) SetContents(v string) {
 
 // GetName returns the Name field value
 func (o *CustomCACertParams) GetName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -24,7 +24,7 @@ type Tablespace struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTablespace(replicaPlacement ReplicaPlacement, tablespaceName string, ) *Tablespace {
+func NewTablespace(replicaPlacement ReplicaPlacement, tablespaceName string) *Tablespace {
 	this := Tablespace{}
 	this.ReplicaPlacement = replicaPlacement
 	this.TablespaceName = tablespaceName
@@ -41,7 +41,7 @@ func NewTablespaceWithDefaults() *Tablespace {
 
 // GetReplicaPlacement returns the ReplicaPlacement field value
 func (o *Tablespace) GetReplicaPlacement() ReplicaPlacement {
-	if o == nil  {
+	if o == nil {
 		var ret ReplicaPlacement
 		return ret
 	}
@@ -65,7 +65,7 @@ func (o *Tablespace) SetReplicaPlacement(v ReplicaPlacement) {
 
 // GetTablespaceName returns the TablespaceName field value
 func (o *Tablespace) GetTablespaceName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

@@ -24,7 +24,7 @@ type SoftwareUpgradeInfoRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoftwareUpgradeInfoRequest(ybSoftwareVersion string, ) *SoftwareUpgradeInfoRequest {
+func NewSoftwareUpgradeInfoRequest(ybSoftwareVersion string) *SoftwareUpgradeInfoRequest {
 	this := SoftwareUpgradeInfoRequest{}
 	this.YbSoftwareVersion = ybSoftwareVersion
 	return &this
@@ -40,7 +40,7 @@ func NewSoftwareUpgradeInfoRequestWithDefaults() *SoftwareUpgradeInfoRequest {
 
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value
 func (o *SoftwareUpgradeInfoRequest) GetYbSoftwareVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

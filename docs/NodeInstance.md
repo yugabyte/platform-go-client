@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Details** | [**NodeInstanceData**](NodeInstanceData.md) |  | 
 **DetailsJson** | Pointer to **string** | Node details (as a JSON object) | [optional] 
-**InUse** | Pointer to **bool** | True if the node is in use | [optional] 
+**InUse** | Pointer to **bool** |  | [optional] 
 **InstanceName** | Pointer to **string** | The node instance&#39;s name | [optional] 
 **InstanceTypeCode** | Pointer to **string** | The node&#39;s type code | [optional] 
 **NodeName** | Pointer to **string** | The node&#39;s name | [optional] [readonly] 
 **NodeUuid** | Pointer to **string** | The node&#39;s UUID | [optional] [readonly] 
+**State** | Pointer to **string** | State of on-prem node | [optional] [readonly] 
 **ZoneUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 
 ## Methods
@@ -201,6 +202,31 @@ SetNodeUuid sets NodeUuid field to given value.
 `func (o *NodeInstance) HasNodeUuid() bool`
 
 HasNodeUuid returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *NodeInstance) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *NodeInstance) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *NodeInstance) SetState(v string)`
+
+SetState sets State field to given value.
+
+### HasState
+
+`func (o *NodeInstance) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetZoneUuid
 

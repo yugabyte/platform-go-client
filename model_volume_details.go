@@ -25,7 +25,7 @@ type VolumeDetails struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVolumeDetails(mountPath string, volumeSizeGB int32, volumeType string, ) *VolumeDetails {
+func NewVolumeDetails(mountPath string, volumeSizeGB int32, volumeType string) *VolumeDetails {
 	this := VolumeDetails{}
 	this.MountPath = mountPath
 	this.VolumeSizeGB = volumeSizeGB
@@ -43,7 +43,7 @@ func NewVolumeDetailsWithDefaults() *VolumeDetails {
 
 // GetMountPath returns the MountPath field value
 func (o *VolumeDetails) GetMountPath() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -67,7 +67,7 @@ func (o *VolumeDetails) SetMountPath(v string) {
 
 // GetVolumeSizeGB returns the VolumeSizeGB field value
 func (o *VolumeDetails) GetVolumeSizeGB() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -91,7 +91,7 @@ func (o *VolumeDetails) SetVolumeSizeGB(v int32) {
 
 // GetVolumeType returns the VolumeType field value
 func (o *VolumeDetails) GetVolumeType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

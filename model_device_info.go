@@ -28,7 +28,7 @@ type DeviceInfo struct {
 	StorageType *string `json:"storageType,omitempty"`
 	// Desired throughput for the volumes mounted on this instance
 	Throughput *int32 `json:"throughput,omitempty"`
-	// The size of each volume in each instance
+	// The size of each volume in each instance. Could be modified in payload for /resize_node API call
 	VolumeSize *int32 `json:"volumeSize,omitempty"`
 }
 

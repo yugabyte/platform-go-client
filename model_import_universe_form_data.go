@@ -36,7 +36,7 @@ type ImportUniverseFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImportUniverseFormData(cloudName string, cloudProviderType string, currentState string, instanceType string, masterAddresses string, providerType string, regionCode string, regionName string, replicationFactor int32, singleStep bool, universeName string, universeUUID string, zoneCode string, zoneName string, ) *ImportUniverseFormData {
+func NewImportUniverseFormData(cloudName string, cloudProviderType string, currentState string, instanceType string, masterAddresses string, providerType string, regionCode string, regionName string, replicationFactor int32, singleStep bool, universeName string, universeUUID string, zoneCode string, zoneName string) *ImportUniverseFormData {
 	this := ImportUniverseFormData{}
 	this.CloudName = cloudName
 	this.CloudProviderType = cloudProviderType
@@ -65,7 +65,7 @@ func NewImportUniverseFormDataWithDefaults() *ImportUniverseFormData {
 
 // GetCloudName returns the CloudName field value
 func (o *ImportUniverseFormData) GetCloudName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -89,7 +89,7 @@ func (o *ImportUniverseFormData) SetCloudName(v string) {
 
 // GetCloudProviderType returns the CloudProviderType field value
 func (o *ImportUniverseFormData) GetCloudProviderType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -113,7 +113,7 @@ func (o *ImportUniverseFormData) SetCloudProviderType(v string) {
 
 // GetCurrentState returns the CurrentState field value
 func (o *ImportUniverseFormData) GetCurrentState() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -137,7 +137,7 @@ func (o *ImportUniverseFormData) SetCurrentState(v string) {
 
 // GetInstanceType returns the InstanceType field value
 func (o *ImportUniverseFormData) GetInstanceType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -161,7 +161,7 @@ func (o *ImportUniverseFormData) SetInstanceType(v string) {
 
 // GetMasterAddresses returns the MasterAddresses field value
 func (o *ImportUniverseFormData) GetMasterAddresses() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -185,7 +185,7 @@ func (o *ImportUniverseFormData) SetMasterAddresses(v string) {
 
 // GetProviderType returns the ProviderType field value
 func (o *ImportUniverseFormData) GetProviderType() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -209,7 +209,7 @@ func (o *ImportUniverseFormData) SetProviderType(v string) {
 
 // GetRegionCode returns the RegionCode field value
 func (o *ImportUniverseFormData) GetRegionCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -233,7 +233,7 @@ func (o *ImportUniverseFormData) SetRegionCode(v string) {
 
 // GetRegionName returns the RegionName field value
 func (o *ImportUniverseFormData) GetRegionName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -257,7 +257,7 @@ func (o *ImportUniverseFormData) SetRegionName(v string) {
 
 // GetReplicationFactor returns the ReplicationFactor field value
 func (o *ImportUniverseFormData) GetReplicationFactor() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -281,7 +281,7 @@ func (o *ImportUniverseFormData) SetReplicationFactor(v int32) {
 
 // GetSingleStep returns the SingleStep field value
 func (o *ImportUniverseFormData) GetSingleStep() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -305,7 +305,7 @@ func (o *ImportUniverseFormData) SetSingleStep(v bool) {
 
 // GetUniverseName returns the UniverseName field value
 func (o *ImportUniverseFormData) GetUniverseName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -329,7 +329,7 @@ func (o *ImportUniverseFormData) SetUniverseName(v string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *ImportUniverseFormData) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -353,7 +353,7 @@ func (o *ImportUniverseFormData) SetUniverseUUID(v string) {
 
 // GetZoneCode returns the ZoneCode field value
 func (o *ImportUniverseFormData) GetZoneCode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -377,7 +377,7 @@ func (o *ImportUniverseFormData) SetZoneCode(v string) {
 
 // GetZoneName returns the ZoneName field value
 func (o *ImportUniverseFormData) GetZoneName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

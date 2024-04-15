@@ -16,6 +16,8 @@ import (
 
 // DrConfigSetTablesForm dr config set tables form
 type DrConfigSetTablesForm struct {
+	// Whether or not YBA should also include all index tables from any provided main tables.
+	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
 	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	// Source universe table IDs
 	Tables *[]string `json:"tables,omitempty"`
@@ -36,6 +38,38 @@ func NewDrConfigSetTablesForm() *DrConfigSetTablesForm {
 func NewDrConfigSetTablesFormWithDefaults() *DrConfigSetTablesForm {
 	this := DrConfigSetTablesForm{}
 	return &this
+}
+
+// GetAutoIncludeIndexTables returns the AutoIncludeIndexTables field value if set, zero value otherwise.
+func (o *DrConfigSetTablesForm) GetAutoIncludeIndexTables() bool {
+	if o == nil || o.AutoIncludeIndexTables == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoIncludeIndexTables
+}
+
+// GetAutoIncludeIndexTablesOk returns a tuple with the AutoIncludeIndexTables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigSetTablesForm) GetAutoIncludeIndexTablesOk() (*bool, bool) {
+	if o == nil || o.AutoIncludeIndexTables == nil {
+		return nil, false
+	}
+	return o.AutoIncludeIndexTables, true
+}
+
+// HasAutoIncludeIndexTables returns a boolean if a field has been set.
+func (o *DrConfigSetTablesForm) HasAutoIncludeIndexTables() bool {
+	if o != nil && o.AutoIncludeIndexTables != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoIncludeIndexTables gets a reference to the given bool and assigns it to the AutoIncludeIndexTables field.
+func (o *DrConfigSetTablesForm) SetAutoIncludeIndexTables(v bool) {
+	o.AutoIncludeIndexTables = &v
 }
 
 // GetBootstrapParams returns the BootstrapParams field value if set, zero value otherwise.
@@ -104,6 +138,9 @@ func (o *DrConfigSetTablesForm) SetTables(v []string) {
 
 func (o DrConfigSetTablesForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AutoIncludeIndexTables != nil {
+		toSerialize["autoIncludeIndexTables"] = o.AutoIncludeIndexTables
+	}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
 	}

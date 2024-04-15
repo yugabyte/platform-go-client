@@ -34,7 +34,7 @@ type NodeData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeIdentifier string, nodeName string, process string, ) *NodeData {
+func NewNodeData(details []string, hasError bool, hasWarning bool, message string, metrics []Metric, metricsOnly bool, node string, nodeIdentifier string, nodeName string, process string) *NodeData {
 	this := NodeData{}
 	this.Details = details
 	this.HasError = hasError
@@ -59,7 +59,7 @@ func NewNodeDataWithDefaults() *NodeData {
 
 // GetDetails returns the Details field value
 func (o *NodeData) GetDetails() []string {
-	if o == nil  {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -83,7 +83,7 @@ func (o *NodeData) SetDetails(v []string) {
 
 // GetHasError returns the HasError field value
 func (o *NodeData) GetHasError() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -107,7 +107,7 @@ func (o *NodeData) SetHasError(v bool) {
 
 // GetHasWarning returns the HasWarning field value
 func (o *NodeData) GetHasWarning() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -131,7 +131,7 @@ func (o *NodeData) SetHasWarning(v bool) {
 
 // GetMessage returns the Message field value
 func (o *NodeData) GetMessage() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -155,7 +155,7 @@ func (o *NodeData) SetMessage(v string) {
 
 // GetMetrics returns the Metrics field value
 func (o *NodeData) GetMetrics() []Metric {
-	if o == nil  {
+	if o == nil {
 		var ret []Metric
 		return ret
 	}
@@ -179,7 +179,7 @@ func (o *NodeData) SetMetrics(v []Metric) {
 
 // GetMetricsOnly returns the MetricsOnly field value
 func (o *NodeData) GetMetricsOnly() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -203,7 +203,7 @@ func (o *NodeData) SetMetricsOnly(v bool) {
 
 // GetNode returns the Node field value
 func (o *NodeData) GetNode() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -227,7 +227,7 @@ func (o *NodeData) SetNode(v string) {
 
 // GetNodeIdentifier returns the NodeIdentifier field value
 func (o *NodeData) GetNodeIdentifier() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -251,7 +251,7 @@ func (o *NodeData) SetNodeIdentifier(v string) {
 
 // GetNodeName returns the NodeName field value
 func (o *NodeData) GetNodeName() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -275,7 +275,7 @@ func (o *NodeData) SetNodeName(v string) {
 
 // GetProcess returns the Process field value
 func (o *NodeData) GetProcess() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

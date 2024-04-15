@@ -20,7 +20,8 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **ForceVMImageUpgrade** | **bool** |  | 
-**ImageBundleUUID** | Pointer to **string** | ImageBundle to be used for upgrade | [optional] 
+**ImageBundleUUID** | Pointer to **string** | ImageBundle to be used for upgrade. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.21.1.0.&lt;/b&gt; Use imageBundles instead. | [optional] 
+**ImageBundles** | Pointer to [**[]ImageBundleUpgradeInfo**](ImageBundleUpgradeInfo.md) | Available since YBA version 2.21.1.0. ImageBundles for provider to be used for upgrade | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
@@ -495,6 +496,31 @@ SetImageBundleUUID sets ImageBundleUUID field to given value.
 `func (o *VMImageUpgradeParams) HasImageBundleUUID() bool`
 
 HasImageBundleUUID returns a boolean if a field has been set.
+
+### GetImageBundles
+
+`func (o *VMImageUpgradeParams) GetImageBundles() []ImageBundleUpgradeInfo`
+
+GetImageBundles returns the ImageBundles field if non-nil, zero value otherwise.
+
+### GetImageBundlesOk
+
+`func (o *VMImageUpgradeParams) GetImageBundlesOk() (*[]ImageBundleUpgradeInfo, bool)`
+
+GetImageBundlesOk returns a tuple with the ImageBundles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageBundles
+
+`func (o *VMImageUpgradeParams) SetImageBundles(v []ImageBundleUpgradeInfo)`
+
+SetImageBundles sets ImageBundles field to given value.
+
+### HasImageBundles
+
+`func (o *VMImageUpgradeParams) HasImageBundles() bool`
+
+HasImageBundles returns a boolean if a field has been set.
 
 ### GetImportedState
 

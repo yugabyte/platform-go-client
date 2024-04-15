@@ -19,7 +19,6 @@ type NodeInstance struct {
 	Details NodeInstanceData `json:"details"`
 	// Node details (as a JSON object)
 	DetailsJson *string `json:"detailsJson,omitempty"`
-	// True if the node is in use
 	InUse *bool `json:"inUse,omitempty"`
 	// The node instance's name
 	InstanceName *string `json:"instanceName,omitempty"`
@@ -29,6 +28,8 @@ type NodeInstance struct {
 	NodeName *string `json:"nodeName,omitempty"`
 	// The node's UUID
 	NodeUuid *string `json:"nodeUuid,omitempty"`
+	// State of on-prem node
+	State *string `json:"state,omitempty"`
 	// The availability zone's UUID
 	ZoneUuid *string `json:"zoneUuid,omitempty"`
 }
@@ -37,7 +38,7 @@ type NodeInstance struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeInstance(details NodeInstanceData, ) *NodeInstance {
+func NewNodeInstance(details NodeInstanceData) *NodeInstance {
 	this := NodeInstance{}
 	this.Details = details
 	return &this
@@ -53,7 +54,7 @@ func NewNodeInstanceWithDefaults() *NodeInstance {
 
 // GetDetails returns the Details field value
 func (o *NodeInstance) GetDetails() NodeInstanceData {
-	if o == nil  {
+	if o == nil {
 		var ret NodeInstanceData
 		return ret
 	}
@@ -267,6 +268,38 @@ func (o *NodeInstance) SetNodeUuid(v string) {
 	o.NodeUuid = &v
 }
 
+// GetState returns the State field value if set, zero value otherwise.
+func (o *NodeInstance) GetState() string {
+	if o == nil || o.State == nil {
+		var ret string
+		return ret
+	}
+	return *o.State
+}
+
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeInstance) GetStateOk() (*string, bool) {
+	if o == nil || o.State == nil {
+		return nil, false
+	}
+	return o.State, true
+}
+
+// HasState returns a boolean if a field has been set.
+func (o *NodeInstance) HasState() bool {
+	if o != nil && o.State != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
+func (o *NodeInstance) SetState(v string) {
+	o.State = &v
+}
+
 // GetZoneUuid returns the ZoneUuid field value if set, zero value otherwise.
 func (o *NodeInstance) GetZoneUuid() string {
 	if o == nil || o.ZoneUuid == nil {
@@ -321,6 +354,9 @@ func (o NodeInstance) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeUuid != nil {
 		toSerialize["nodeUuid"] = o.NodeUuid
+	}
+	if o.State != nil {
+		toSerialize["state"] = o.State
 	}
 	if o.ZoneUuid != nil {
 		toSerialize["zoneUuid"] = o.ZoneUuid

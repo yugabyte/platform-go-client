@@ -85,7 +85,7 @@ type RestoreBackupParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams {
+func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string) *RestoreBackupParams {
 	this := RestoreBackupParams{}
 	this.CreatingUser = creatingUser
 	this.CurrentIdx = currentIdx
@@ -302,7 +302,7 @@ func (o *RestoreBackupParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *RestoreBackupParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -326,7 +326,7 @@ func (o *RestoreBackupParams) SetCreatingUser(v Users) {
 
 // GetCurrentIdx returns the CurrentIdx field value
 func (o *RestoreBackupParams) GetCurrentIdx() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -350,7 +350,7 @@ func (o *RestoreBackupParams) SetCurrentIdx(v int32) {
 
 // GetCurrentYbcTaskId returns the CurrentYbcTaskId field value
 func (o *RestoreBackupParams) GetCurrentYbcTaskId() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -822,7 +822,7 @@ func (o *RestoreBackupParams) SetNodeExporterUser(v string) {
 
 // GetNodeIp returns the NodeIp field value
 func (o *RestoreBackupParams) GetNodeIp() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -878,7 +878,7 @@ func (o *RestoreBackupParams) SetParallelism(v int32) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *RestoreBackupParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -902,7 +902,7 @@ func (o *RestoreBackupParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *RestoreBackupParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -926,7 +926,7 @@ func (o *RestoreBackupParams) SetPlatformVersion(v string) {
 
 // GetPrefixUUID returns the PrefixUUID field value
 func (o *RestoreBackupParams) GetPrefixUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1014,7 +1014,7 @@ func (o *RestoreBackupParams) SetRestoreTimeStamp(v string) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1038,7 +1038,7 @@ func (o *RestoreBackupParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *RestoreBackupParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1158,7 +1158,7 @@ func (o *RestoreBackupParams) SetTargetXClusterConfigs(v []string) {
 
 // GetUniverseUUID returns the UniverseUUID field value
 func (o *RestoreBackupParams) GetUniverseUUID() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

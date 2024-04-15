@@ -37,7 +37,7 @@ type CustomerAlertData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerAlertData(alertingData AlertingData, callhomeLevel string, smtpData SmtpData, ) *CustomerAlertData {
+func NewCustomerAlertData(alertingData AlertingData, callhomeLevel string, smtpData SmtpData) *CustomerAlertData {
 	this := CustomerAlertData{}
 	this.AlertingData = alertingData
 	this.CallhomeLevel = callhomeLevel
@@ -55,7 +55,7 @@ func NewCustomerAlertDataWithDefaults() *CustomerAlertData {
 
 // GetAlertingData returns the AlertingData field value
 func (o *CustomerAlertData) GetAlertingData() AlertingData {
-	if o == nil  {
+	if o == nil {
 		var ret AlertingData
 		return ret
 	}
@@ -79,7 +79,7 @@ func (o *CustomerAlertData) SetAlertingData(v AlertingData) {
 
 // GetCallhomeLevel returns the CallhomeLevel field value
 func (o *CustomerAlertData) GetCallhomeLevel() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -295,7 +295,7 @@ func (o *CustomerAlertData) SetPassword(v string) {
 
 // GetSmtpData returns the SmtpData field value
 func (o *CustomerAlertData) GetSmtpData() SmtpData {
-	if o == nil  {
+	if o == nil {
 		var ret SmtpData
 		return ret
 	}

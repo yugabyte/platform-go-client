@@ -93,7 +93,7 @@ type ResizeNodeParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *ResizeNodeParams {
+func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string) *ResizeNodeParams {
 	this := ResizeNodeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -247,7 +247,7 @@ func (o *ResizeNodeParams) SetClientRootCA(v string) {
 
 // GetClusters returns the Clusters field value
 func (o *ResizeNodeParams) GetClusters() []Cluster {
-	if o == nil  {
+	if o == nil {
 		var ret []Cluster
 		return ret
 	}
@@ -335,7 +335,7 @@ func (o *ResizeNodeParams) SetCommunicationPorts(v CommunicationPorts) {
 
 // GetCreatingUser returns the CreatingUser field value
 func (o *ResizeNodeParams) GetCreatingUser() Users {
-	if o == nil  {
+	if o == nil {
 		var ret Users
 		return ret
 	}
@@ -583,7 +583,7 @@ func (o *ResizeNodeParams) SetExtraDependencies(v ExtraDependencies) {
 
 // GetForceResizeNode returns the ForceResizeNode field value
 func (o *ResizeNodeParams) GetForceResizeNode() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -767,7 +767,7 @@ func (o *ResizeNodeParams) SetItestS3PackagePath(v string) {
 
 // GetKubernetesUpgradeSupported returns the KubernetesUpgradeSupported field value
 func (o *ResizeNodeParams) GetKubernetesUpgradeSupported() bool {
-	if o == nil  {
+	if o == nil {
 		var ret bool
 		return ret
 	}
@@ -791,7 +791,7 @@ func (o *ResizeNodeParams) SetKubernetesUpgradeSupported(v bool) {
 
 // GetMasterGFlags returns the MasterGFlags field value
 func (o *ResizeNodeParams) GetMasterGFlags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -1039,7 +1039,7 @@ func (o *ResizeNodeParams) SetPlacementModificationTaskUuid(v string) {
 
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *ResizeNodeParams) GetPlatformUrl() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1063,7 +1063,7 @@ func (o *ResizeNodeParams) SetPlatformUrl(v string) {
 
 // GetPlatformVersion returns the PlatformVersion field value
 func (o *ResizeNodeParams) GetPlatformVersion() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}
@@ -1311,7 +1311,7 @@ func (o *ResizeNodeParams) SetSetTxnTableWaitCountFlag(v bool) {
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *ResizeNodeParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1335,7 +1335,7 @@ func (o *ResizeNodeParams) SetSleepAfterMasterRestartMillis(v int32) {
 
 // GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
 func (o *ResizeNodeParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil  {
+	if o == nil {
 		var ret int32
 		return ret
 	}
@@ -1487,7 +1487,7 @@ func (o *ResizeNodeParams) SetTargetXClusterConfigs(v []string) {
 
 // GetTserverGFlags returns the TserverGFlags field value
 func (o *ResizeNodeParams) GetTserverGFlags() map[string]string {
-	if o == nil  {
+	if o == nil {
 		var ret map[string]string
 		return ret
 	}
@@ -1735,7 +1735,7 @@ func (o *ResizeNodeParams) SetUpdatingTaskUUID(v string) {
 
 // GetUpgradeOption returns the UpgradeOption field value
 func (o *ResizeNodeParams) GetUpgradeOption() string {
-	if o == nil  {
+	if o == nil {
 		var ret string
 		return ret
 	}

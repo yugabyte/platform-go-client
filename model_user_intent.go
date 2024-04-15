@@ -38,17 +38,20 @@ type UserIntent struct {
 	EnableYSQLAuth *bool `json:"enableYSQLAuth,omitempty"`
 	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
 	InstanceTags *map[string]string `json:"instanceTags,omitempty"`
+	// Instance type that is used for tserver nodes in current cluster. Could be modified in payload for /resize_node API call
 	InstanceType *string `json:"instanceType,omitempty"`
 	KubernetesOperatorVersion *int64 `json:"kubernetesOperatorVersion,omitempty"`
 	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
 	// User-defined gflags for master. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
+	// Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call
 	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
 	NumNodes *int32 `json:"numNodes,omitempty"`
 	PreferredRegion *string `json:"preferredRegion,omitempty"`
 	Provider *string `json:"provider,omitempty"`
 	ProviderType *string `json:"providerType,omitempty"`
+	ProxyConfig *ProxyConfig `json:"proxyConfig,omitempty"`
 	RegionList *[]string `json:"regionList,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
@@ -62,6 +65,7 @@ type UserIntent struct {
 	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
 	UseTimeSync *bool `json:"useTimeSync,omitempty"`
+	UserIntentOverrides *UserIntentOverrides `json:"userIntentOverrides,omitempty"`
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
 	YbcFlags *map[string]string `json:"ybcFlags,omitempty"`
 	YcqlPassword *string `json:"ycqlPassword,omitempty"`
@@ -1077,6 +1081,38 @@ func (o *UserIntent) SetProviderType(v string) {
 	o.ProviderType = &v
 }
 
+// GetProxyConfig returns the ProxyConfig field value if set, zero value otherwise.
+func (o *UserIntent) GetProxyConfig() ProxyConfig {
+	if o == nil || o.ProxyConfig == nil {
+		var ret ProxyConfig
+		return ret
+	}
+	return *o.ProxyConfig
+}
+
+// GetProxyConfigOk returns a tuple with the ProxyConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetProxyConfigOk() (*ProxyConfig, bool) {
+	if o == nil || o.ProxyConfig == nil {
+		return nil, false
+	}
+	return o.ProxyConfig, true
+}
+
+// HasProxyConfig returns a boolean if a field has been set.
+func (o *UserIntent) HasProxyConfig() bool {
+	if o != nil && o.ProxyConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyConfig gets a reference to the given ProxyConfig and assigns it to the ProxyConfig field.
+func (o *UserIntent) SetProxyConfig(v ProxyConfig) {
+	o.ProxyConfig = &v
+}
+
 // GetRegionList returns the RegionList field value if set, zero value otherwise.
 func (o *UserIntent) GetRegionList() []string {
 	if o == nil || o.RegionList == nil {
@@ -1461,6 +1497,38 @@ func (o *UserIntent) SetUseTimeSync(v bool) {
 	o.UseTimeSync = &v
 }
 
+// GetUserIntentOverrides returns the UserIntentOverrides field value if set, zero value otherwise.
+func (o *UserIntent) GetUserIntentOverrides() UserIntentOverrides {
+	if o == nil || o.UserIntentOverrides == nil {
+		var ret UserIntentOverrides
+		return ret
+	}
+	return *o.UserIntentOverrides
+}
+
+// GetUserIntentOverridesOk returns a tuple with the UserIntentOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUserIntentOverridesOk() (*UserIntentOverrides, bool) {
+	if o == nil || o.UserIntentOverrides == nil {
+		return nil, false
+	}
+	return o.UserIntentOverrides, true
+}
+
+// HasUserIntentOverrides returns a boolean if a field has been set.
+func (o *UserIntent) HasUserIntentOverrides() bool {
+	if o != nil && o.UserIntentOverrides != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserIntentOverrides gets a reference to the given UserIntentOverrides and assigns it to the UserIntentOverrides field.
+func (o *UserIntent) SetUserIntentOverrides(v UserIntentOverrides) {
+	o.UserIntentOverrides = &v
+}
+
 // GetYbSoftwareVersion returns the YbSoftwareVersion field value if set, zero value otherwise.
 func (o *UserIntent) GetYbSoftwareVersion() string {
 	if o == nil || o.YbSoftwareVersion == nil {
@@ -1684,6 +1752,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.ProviderType != nil {
 		toSerialize["providerType"] = o.ProviderType
 	}
+	if o.ProxyConfig != nil {
+		toSerialize["proxyConfig"] = o.ProxyConfig
+	}
 	if o.RegionList != nil {
 		toSerialize["regionList"] = o.RegionList
 	}
@@ -1719,6 +1790,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UseTimeSync != nil {
 		toSerialize["useTimeSync"] = o.UseTimeSync
+	}
+	if o.UserIntentOverrides != nil {
+		toSerialize["userIntentOverrides"] = o.UserIntentOverrides
 	}
 	if o.YbSoftwareVersion != nil {
 		toSerialize["ybSoftwareVersion"] = o.YbSoftwareVersion
