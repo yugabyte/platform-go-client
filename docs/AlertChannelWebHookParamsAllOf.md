@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **HttpAuth** | Pointer to [**HTTPAuthInformation**](HTTPAuthInformation.md) |  | [optional] 
+**SendResolved** | Pointer to **bool** | WARNING: This is a preview API that could change. Send resolved alert notification | [optional] 
 **WebhookUrl** | **string** | Webhook URL | 
 
 ## Methods
@@ -50,6 +51,31 @@ SetHttpAuth sets HttpAuth field to given value.
 `func (o *AlertChannelWebHookParamsAllOf) HasHttpAuth() bool`
 
 HasHttpAuth returns a boolean if a field has been set.
+
+### GetSendResolved
+
+`func (o *AlertChannelWebHookParamsAllOf) GetSendResolved() bool`
+
+GetSendResolved returns the SendResolved field if non-nil, zero value otherwise.
+
+### GetSendResolvedOk
+
+`func (o *AlertChannelWebHookParamsAllOf) GetSendResolvedOk() (*bool, bool)`
+
+GetSendResolvedOk returns a tuple with the SendResolved field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendResolved
+
+`func (o *AlertChannelWebHookParamsAllOf) SetSendResolved(v bool)`
+
+SetSendResolved sets SendResolved field to given value.
+
+### HasSendResolved
+
+`func (o *AlertChannelWebHookParamsAllOf) HasSendResolved() bool`
+
+HasSendResolved returns a boolean if a field has been set.
 
 ### GetWebhookUrl
 

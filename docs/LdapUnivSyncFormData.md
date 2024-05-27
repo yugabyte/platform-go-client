@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **LdapBindDn** | Pointer to **string** | Dn of the user authenticating to LDAP. | [optional] 
 **LdapBindPassword** | Pointer to **string** | Password of the user authenticating to LDAP. | [optional] 
 **LdapGroupMemberOfAttribute** | Pointer to **string** | LDAP group dn attribute to which the user belongs | [optional] 
-**LdapGroupfield** | **string** | LDAP field to get the group information | 
+**LdapGroupfield** | **string** | Group dn field to get the group&#39;s name from | 
 **LdapPort** | Pointer to **int32** | Port of the ldap server : 389 or 636(tls) | [optional] 
 **LdapSearchFilter** | Pointer to **string** | LDAP search filter to get the user entries. This filter can also be used to search for the users based on their group memberships. | [optional] 
 **LdapServer** | Pointer to **string** | IP address of the LDAP server | [optional] 
 **LdapTlsProtocol** | Pointer to **string** | TLS versions for LDAPS : TLSv1, TLSv1_1, TLSv1_2 | [optional] 
-**LdapUserfield** | **string** | LDAP field to get the user information | 
+**LdapUserfield** | **string** | Dn/Attribute field to get the user&#39;s name from | 
 **TargetApi** | **string** |  | 
 **UseLdapTls** | Pointer to **bool** | Use LDAP TLS | [optional] 
 

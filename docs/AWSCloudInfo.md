@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **AwsHostedZoneName** | Pointer to **string** |  | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] [readonly] 
+**UseIMDSv2** | Pointer to **bool** |  | [optional] 
 **VpcType** | Pointer to **string** | New/Existing VPC for provider creation | [optional] [readonly] 
 
 ## Methods
@@ -180,6 +181,31 @@ SetHostVpcRegion sets HostVpcRegion field to given value.
 `func (o *AWSCloudInfo) HasHostVpcRegion() bool`
 
 HasHostVpcRegion returns a boolean if a field has been set.
+
+### GetUseIMDSv2
+
+`func (o *AWSCloudInfo) GetUseIMDSv2() bool`
+
+GetUseIMDSv2 returns the UseIMDSv2 field if non-nil, zero value otherwise.
+
+### GetUseIMDSv2Ok
+
+`func (o *AWSCloudInfo) GetUseIMDSv2Ok() (*bool, bool)`
+
+GetUseIMDSv2Ok returns a tuple with the UseIMDSv2 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseIMDSv2
+
+`func (o *AWSCloudInfo) SetUseIMDSv2(v bool)`
+
+SetUseIMDSv2 sets UseIMDSv2 field to given value.
+
+### HasUseIMDSv2
+
+`func (o *AWSCloudInfo) HasUseIMDSv2() bool`
+
+HasUseIMDSv2 returns a boolean if a field has been set.
 
 ### GetVpcType
 
