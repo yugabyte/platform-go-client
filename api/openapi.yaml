@@ -1539,7 +1539,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SessionInfo'
           description: successful operation
-      summary: UI_ONLY
+      summary: Regenerate and fetch API token
       tags:
       - Session management
   /api/v1/customers/{cUUID}/backups:

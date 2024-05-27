@@ -168,7 +168,7 @@ func (r SessionManagementApiApiApiTokenRequest) Execute() (SessionInfo, *_nethtt
 }
 
 /*
- * ApiToken UI_ONLY
+ * ApiToken Regenerate and fetch API token
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return SessionManagementApiApiApiTokenRequest

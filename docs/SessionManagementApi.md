@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ApiLogin**](SessionManagementApi.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user using email and password
-[**ApiToken**](SessionManagementApi.md#ApiToken) | **Put** /api/v1/customers/{cUUID}/api_token | UI_ONLY
+[**ApiToken**](SessionManagementApi.md#ApiToken) | **Put** /api/v1/customers/{cUUID}/api_token | Regenerate and fetch API token
 [**AppVersion**](SessionManagementApi.md#AppVersion) | **Get** /api/v1/app_version | appVersion
 [**CustomerCount**](SessionManagementApi.md#CustomerCount) | **Get** /api/v1/customer_count | customerCount
 [**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
@@ -86,7 +86,7 @@ No authorization required
 
 > SessionInfo ApiToken(ctx, cUUID).ApiTokenVersion(apiTokenVersion).Request(request).Execute()
 
-UI_ONLY
+Regenerate and fetch API token
 
 ### Example
 

@@ -300,7 +300,7 @@ Class | Method | HTTP request | Description
 *ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules - deprecated
 *ScheduleManagementApi* | [**ListSchedulesV2**](docs/ScheduleManagementApi.md#listschedulesv2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
 *SessionManagementApi* | [**ApiLogin**](docs/SessionManagementApi.md#apilogin) | **Post** /api/v1/api_login | Authenticate user using email and password
-*SessionManagementApi* | [**ApiToken**](docs/SessionManagementApi.md#apitoken) | **Put** /api/v1/customers/{cUUID}/api_token | UI_ONLY
+*SessionManagementApi* | [**ApiToken**](docs/SessionManagementApi.md#apitoken) | **Put** /api/v1/customers/{cUUID}/api_token | Regenerate and fetch API token
 *SessionManagementApi* | [**AppVersion**](docs/SessionManagementApi.md#appversion) | **Get** /api/v1/app_version | appVersion
 *SessionManagementApi* | [**CustomerCount**](docs/SessionManagementApi.md#customercount) | **Get** /api/v1/customer_count | customerCount
 *SessionManagementApi* | [**GetAdminNotifications**](docs/SessionManagementApi.md#getadminnotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
