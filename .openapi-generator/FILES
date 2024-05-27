@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -246,7 +245,6 @@ docs/MaintenanceWindowPagedResponse.md
 docs/MaintenanceWindowsApi.md
 docs/MasterInfo.md
 docs/MasterNode.md
-docs/MasterNodesInfo.md
 docs/MastersList.md
 docs/Metadata.md
 docs/Metric.md
@@ -341,6 +339,7 @@ docs/RestorePreflightResponse.md
 docs/RestoreResp.md
 docs/RestoreSnapshotScheduleParams.md
 docs/Role.md
+docs/RoleAttribute.md
 docs/RoleBinding.md
 docs/RoleBindingFormData.md
 docs/RoleFormData.md
@@ -373,6 +372,7 @@ docs/SubtaskData.md
 docs/SupportBundle.md
 docs/SupportBundleFormData.md
 docs/SupportBundleManagementApi.md
+docs/SuppressHealthCheckNotificationsConfig.md
 docs/SystemdUpgradeParams.md
 docs/TableDefinitionTaskParams.md
 docs/TableDetails.md
@@ -428,6 +428,7 @@ docs/XClusterConfigGetResp.md
 docs/XClusterConfigNeedBootstrapFormData.md
 docs/XClusterConfigRestartFormData.md
 docs/XClusterInfo.md
+docs/XClusterNamespaceConfig.md
 docs/XClusterTableConfig.md
 docs/YBPError.md
 docs/YBPSuccess.md
@@ -614,7 +615,6 @@ model_maintenance_window_paged_api_query.go
 model_maintenance_window_paged_response.go
 model_master_info.go
 model_master_node.go
-model_master_nodes_info.go
 model_masters_list.go
 model_metadata.go
 model_metric.go
@@ -701,6 +701,7 @@ model_restore_preflight_response.go
 model_restore_resp.go
 model_restore_snapshot_schedule_params.go
 model_role.go
+model_role_attribute.go
 model_role_binding.go
 model_role_binding_form_data.go
 model_role_form_data.go
@@ -729,6 +730,7 @@ model_state_change_audit_info_paged_response.go
 model_subtask_data.go
 model_support_bundle.go
 model_support_bundle_form_data.go
+model_suppress_health_check_notifications_config.go
 model_systemd_upgrade_params.go
 model_table_definition_task_params.go
 model_table_details.go
@@ -774,6 +776,7 @@ model_x_cluster_config_get_resp.go
 model_x_cluster_config_need_bootstrap_form_data.go
 model_x_cluster_config_restart_form_data.go
 model_x_cluster_info.go
+model_x_cluster_namespace_config.go
 model_x_cluster_table_config.go
 model_ybc_throttle_parameters.go
 model_ybc_throttle_parameters_response.go

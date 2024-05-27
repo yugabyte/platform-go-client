@@ -19,6 +19,7 @@ import (
 type XClusterConfigGetResp struct {
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	Dbs *[]string `json:"dbs,omitempty"`
 	// WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery
 	KeyspacePending *string `json:"keyspacePending,omitempty"`
 	// Lag metric data
@@ -27,6 +28,7 @@ type XClusterConfigGetResp struct {
 	ModifyTime *time.Time `json:"modifyTime,omitempty"`
 	// XCluster config name
 	Name *string `json:"name,omitempty"`
+	Namespaces []XClusterNamespaceConfig `json:"namespaces"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
 	// WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config
@@ -66,9 +68,10 @@ type XClusterConfigGetResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfigGetResp(lag map[string]interface{}) *XClusterConfigGetResp {
+func NewXClusterConfigGetResp(lag map[string]interface{}, namespaces []XClusterNamespaceConfig) *XClusterConfigGetResp {
 	this := XClusterConfigGetResp{}
 	this.Lag = lag
+	this.Namespaces = namespaces
 	return &this
 }
 
@@ -110,6 +113,38 @@ func (o *XClusterConfigGetResp) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *XClusterConfigGetResp) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
+}
+
+// GetDbs returns the Dbs field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetDbs() []string {
+	if o == nil || o.Dbs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Dbs
+}
+
+// GetDbsOk returns a tuple with the Dbs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetDbsOk() (*[]string, bool) {
+	if o == nil || o.Dbs == nil {
+		return nil, false
+	}
+	return o.Dbs, true
+}
+
+// HasDbs returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasDbs() bool {
+	if o != nil && o.Dbs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDbs gets a reference to the given []string and assigns it to the Dbs field.
+func (o *XClusterConfigGetResp) SetDbs(v []string) {
+	o.Dbs = &v
 }
 
 // GetKeyspacePending returns the KeyspacePending field value if set, zero value otherwise.
@@ -230,6 +265,30 @@ func (o *XClusterConfigGetResp) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *XClusterConfigGetResp) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNamespaces returns the Namespaces field value
+func (o *XClusterConfigGetResp) GetNamespaces() []XClusterNamespaceConfig {
+	if o == nil {
+		var ret []XClusterNamespaceConfig
+		return ret
+	}
+
+	return o.Namespaces
+}
+
+// GetNamespacesOk returns a tuple with the Namespaces field value
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetNamespacesOk() (*[]XClusterNamespaceConfig, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Namespaces, true
+}
+
+// SetNamespaces sets field value
+func (o *XClusterConfigGetResp) SetNamespaces(v []XClusterNamespaceConfig) {
+	o.Namespaces = v
 }
 
 // GetPaused returns the Paused field value if set, zero value otherwise.
@@ -781,6 +840,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
+	if o.Dbs != nil {
+		toSerialize["dbs"] = o.Dbs
+	}
 	if o.KeyspacePending != nil {
 		toSerialize["keyspacePending"] = o.KeyspacePending
 	}
@@ -792,6 +854,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["namespaces"] = o.Namespaces
 	}
 	if o.Paused != nil {
 		toSerialize["paused"] = o.Paused

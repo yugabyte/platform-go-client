@@ -46,7 +46,7 @@ func (r UniverseManagementApiApiConfigureUniverseAlertsRequest) Execute() (YBPSu
 
 /*
  * ConfigureUniverseAlerts Configure alerts for a universe
- * Available since YBA version 2.2.0.0.
+ * <b style="color:#ff0000">Deprecated since YBA version 2.20.5.0.</b> Deprcated since YBA version 2.20.5.0. Use 'Create maintenance window' API instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

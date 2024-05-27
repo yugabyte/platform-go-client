@@ -16,6 +16,7 @@ import (
 
 // KubernetesInfo struct for KubernetesInfo
 type KubernetesInfo struct {
+	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	KubeConfig *string `json:"kubeConfig,omitempty"`
 	KubeConfigContent *string `json:"kubeConfigContent,omitempty"`
 	KubeConfigName *string `json:"kubeConfigName,omitempty"`
@@ -45,6 +46,38 @@ func NewKubernetesInfo() *KubernetesInfo {
 func NewKubernetesInfoWithDefaults() *KubernetesInfo {
 	this := KubernetesInfo{}
 	return &this
+}
+
+// GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
+func (o *KubernetesInfo) GetIsKubernetesOperatorControlled() bool {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsKubernetesOperatorControlled
+}
+
+// GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesInfo) GetIsKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil || o.IsKubernetesOperatorControlled == nil {
+		return nil, false
+	}
+	return o.IsKubernetesOperatorControlled, true
+}
+
+// HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
+func (o *KubernetesInfo) HasIsKubernetesOperatorControlled() bool {
+	if o != nil && o.IsKubernetesOperatorControlled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsKubernetesOperatorControlled gets a reference to the given bool and assigns it to the IsKubernetesOperatorControlled field.
+func (o *KubernetesInfo) SetIsKubernetesOperatorControlled(v bool) {
+	o.IsKubernetesOperatorControlled = &v
 }
 
 // GetKubeConfig returns the KubeConfig field value if set, zero value otherwise.
@@ -401,6 +434,9 @@ func (o *KubernetesInfo) SetKubernetesStorageClass(v string) {
 
 func (o KubernetesInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.IsKubernetesOperatorControlled != nil {
+		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
+	}
 	if o.KubeConfig != nil {
 		toSerialize["kubeConfig"] = o.KubeConfig
 	}

@@ -49,7 +49,7 @@ func (r ReleaseManagementApiApiCreateReleaseRequest) Execute() (YBPSuccess, *_ne
 }
 
 /*
- * CreateRelease Create a release
+ * CreateRelease Deprecated: sinceVersion 2024.1. Use ReleasesController.create instead. Create a release
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return ReleaseManagementApiApiCreateReleaseRequest
@@ -182,7 +182,7 @@ func (r ReleaseManagementApiApiDeleteReleaseRequest) Execute() (ReleaseMetadata,
 }
 
 /*
- * DeleteRelease Delete a release
+ * DeleteRelease Deprecated: sinceVersion: 2024.1. Use ReleasesController.delete instead. Delete a release
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param name
@@ -449,7 +449,7 @@ func (r ReleaseManagementApiApiGetListOfReleasesRequest) Execute() (map[string]m
 }
 
 /*
- * GetListOfReleases List all releases
+ * GetListOfReleases Deprecated: sinceVersion: 2024.1. Use ReleasesController.list instead. List all releases
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return ReleaseManagementApiApiGetListOfReleasesRequest
@@ -712,7 +712,7 @@ func (r ReleaseManagementApiApiUpdateReleaseRequest) Execute() (ReleaseMetadata,
 }
 
 /*
- * UpdateRelease Update a release
+ * UpdateRelease Deprecated: sinceVersion: 2024.1. Use ReleasesController.update instead. Update a release
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param name

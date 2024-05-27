@@ -16,7 +16,9 @@ import (
 
 // MasterInfo Information about master
 type MasterInfo struct {
+	InstanceUUID string `json:"instanceUUID"`
 	PeerRole string `json:"peerRole"`
+	Port int32 `json:"port"`
 	PrivateIp string `json:"privateIp"`
 	UptimeSeconds int64 `json:"uptimeSeconds"`
 }
@@ -25,9 +27,11 @@ type MasterInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMasterInfo(peerRole string, privateIp string, uptimeSeconds int64) *MasterInfo {
+func NewMasterInfo(instanceUUID string, peerRole string, port int32, privateIp string, uptimeSeconds int64) *MasterInfo {
 	this := MasterInfo{}
+	this.InstanceUUID = instanceUUID
 	this.PeerRole = peerRole
+	this.Port = port
 	this.PrivateIp = privateIp
 	this.UptimeSeconds = uptimeSeconds
 	return &this
@@ -39,6 +43,30 @@ func NewMasterInfo(peerRole string, privateIp string, uptimeSeconds int64) *Mast
 func NewMasterInfoWithDefaults() *MasterInfo {
 	this := MasterInfo{}
 	return &this
+}
+
+// GetInstanceUUID returns the InstanceUUID field value
+func (o *MasterInfo) GetInstanceUUID() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InstanceUUID
+}
+
+// GetInstanceUUIDOk returns a tuple with the InstanceUUID field value
+// and a boolean to check if the value has been set.
+func (o *MasterInfo) GetInstanceUUIDOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.InstanceUUID, true
+}
+
+// SetInstanceUUID sets field value
+func (o *MasterInfo) SetInstanceUUID(v string) {
+	o.InstanceUUID = v
 }
 
 // GetPeerRole returns the PeerRole field value
@@ -63,6 +91,30 @@ func (o *MasterInfo) GetPeerRoleOk() (*string, bool) {
 // SetPeerRole sets field value
 func (o *MasterInfo) SetPeerRole(v string) {
 	o.PeerRole = v
+}
+
+// GetPort returns the Port field value
+func (o *MasterInfo) GetPort() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Port
+}
+
+// GetPortOk returns a tuple with the Port field value
+// and a boolean to check if the value has been set.
+func (o *MasterInfo) GetPortOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Port, true
+}
+
+// SetPort sets field value
+func (o *MasterInfo) SetPort(v int32) {
+	o.Port = v
 }
 
 // GetPrivateIp returns the PrivateIp field value
@@ -116,7 +168,13 @@ func (o *MasterInfo) SetUptimeSeconds(v int64) {
 func (o MasterInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
+		toSerialize["instanceUUID"] = o.InstanceUUID
+	}
+	if true {
 		toSerialize["peerRole"] = o.PeerRole
+	}
+	if true {
+		toSerialize["port"] = o.Port
 	}
 	if true {
 		toSerialize["privateIp"] = o.PrivateIp
