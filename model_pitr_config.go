@@ -19,6 +19,8 @@ import (
 type PitrConfig struct {
 	// Create time of the PITR config
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Created for DR
+	CreatedForDr *bool `json:"createdForDr,omitempty"`
 	// Customer UUID of this config
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// DB Name
@@ -91,6 +93,38 @@ func (o *PitrConfig) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *PitrConfig) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
+}
+
+// GetCreatedForDr returns the CreatedForDr field value if set, zero value otherwise.
+func (o *PitrConfig) GetCreatedForDr() bool {
+	if o == nil || o.CreatedForDr == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CreatedForDr
+}
+
+// GetCreatedForDrOk returns a tuple with the CreatedForDr field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PitrConfig) GetCreatedForDrOk() (*bool, bool) {
+	if o == nil || o.CreatedForDr == nil {
+		return nil, false
+	}
+	return o.CreatedForDr, true
+}
+
+// HasCreatedForDr returns a boolean if a field has been set.
+func (o *PitrConfig) HasCreatedForDr() bool {
+	if o != nil && o.CreatedForDr != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedForDr gets a reference to the given bool and assigns it to the CreatedForDr field.
+func (o *PitrConfig) SetCreatedForDr(v bool) {
+	o.CreatedForDr = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -457,6 +491,9 @@ func (o PitrConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
+	}
+	if o.CreatedForDr != nil {
+		toSerialize["createdForDr"] = o.CreatedForDr
 	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID

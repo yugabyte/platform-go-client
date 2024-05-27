@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | Create time of the PITR config | [optional] [readonly] 
+**CreatedForDr** | Pointer to **bool** | Created for DR | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID of this config | [optional] 
 **DbName** | Pointer to **string** | DB Name | [optional] 
 **MaxRecoverTimeInMillis** | **int64** |  | 
@@ -61,6 +62,31 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *PitrConfig) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
+
+### GetCreatedForDr
+
+`func (o *PitrConfig) GetCreatedForDr() bool`
+
+GetCreatedForDr returns the CreatedForDr field if non-nil, zero value otherwise.
+
+### GetCreatedForDrOk
+
+`func (o *PitrConfig) GetCreatedForDrOk() (*bool, bool)`
+
+GetCreatedForDrOk returns a tuple with the CreatedForDr field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedForDr
+
+`func (o *PitrConfig) SetCreatedForDr(v bool)`
+
+SetCreatedForDr sets CreatedForDr field to given value.
+
+### HasCreatedForDr
+
+`func (o *PitrConfig) HasCreatedForDr() bool`
+
+HasCreatedForDr returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CertManagerClusterIssuer** | Pointer to **string** |  | [optional] 
 **CertManagerIssuer** | Pointer to **string** |  | [optional] 
+**IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] [readonly] 
 **KubeConfig** | Pointer to **string** |  | [optional] [readonly] 
 **KubeConfigContent** | Pointer to **string** |  | [optional] 
 **KubeConfigName** | Pointer to **string** |  | [optional] 
@@ -90,6 +91,31 @@ SetCertManagerIssuer sets CertManagerIssuer field to given value.
 `func (o *KubernetesRegionInfo) HasCertManagerIssuer() bool`
 
 HasCertManagerIssuer returns a boolean if a field has been set.
+
+### GetIsKubernetesOperatorControlled
+
+`func (o *KubernetesRegionInfo) GetIsKubernetesOperatorControlled() bool`
+
+GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetIsKubernetesOperatorControlledOk
+
+`func (o *KubernetesRegionInfo) GetIsKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsKubernetesOperatorControlled
+
+`func (o *KubernetesRegionInfo) SetIsKubernetesOperatorControlled(v bool)`
+
+SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to given value.
+
+### HasIsKubernetesOperatorControlled
+
+`func (o *KubernetesRegionInfo) HasIsKubernetesOperatorControlled() bool`
+
+HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
 ### GetKubeConfig
 

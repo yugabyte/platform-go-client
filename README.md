@@ -280,12 +280,12 @@ Class | Method | HTTP request | Description
 *RegionManagementApi* | [**EditRegion**](docs/RegionManagementApi.md#editregion) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Edit regions - deprecated
 *RegionManagementApi* | [**GetRegion**](docs/RegionManagementApi.md#getregion) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | List a provider&#39;s regions
 *RegionManagementApi* | [**ListAllRegions**](docs/RegionManagementApi.md#listallregions) | **Get** /api/v1/customers/{cUUID}/regions | List regions for all providers
-*ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
-*ReleaseManagementApi* | [**DeleteRelease**](docs/ReleaseManagementApi.md#deleterelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
+*ReleaseManagementApi* | [**CreateRelease**](docs/ReleaseManagementApi.md#createrelease) | **Post** /api/v1/customers/{cUUID}/releases | Deprecated: sinceVersion 2024.1. Use ReleasesController.create instead. Create a release
+*ReleaseManagementApi* | [**DeleteRelease**](docs/ReleaseManagementApi.md#deleterelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Deprecated: sinceVersion: 2024.1. Use ReleasesController.delete instead. Delete a release
 *ReleaseManagementApi* | [**GetListOfRegionReleases**](docs/ReleaseManagementApi.md#getlistofregionreleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List releases by provider - deprecated
-*ReleaseManagementApi* | [**GetListOfReleases**](docs/ReleaseManagementApi.md#getlistofreleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
+*ReleaseManagementApi* | [**GetListOfReleases**](docs/ReleaseManagementApi.md#getlistofreleases) | **Get** /api/v1/customers/{cUUID}/releases | Deprecated: sinceVersion: 2024.1. Use ReleasesController.list instead. List all releases
 *ReleaseManagementApi* | [**Refresh**](docs/ReleaseManagementApi.md#refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
-*ReleaseManagementApi* | [**UpdateRelease**](docs/ReleaseManagementApi.md#updaterelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
+*ReleaseManagementApi* | [**UpdateRelease**](docs/ReleaseManagementApi.md#updaterelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Deprecated: sinceVersion: 2024.1. Use ReleasesController.update instead. Update a release
 *RuntimeConfigurationApi* | [**DeleteKey**](docs/RuntimeConfigurationApi.md#deletekey) | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key
 *RuntimeConfigurationApi* | [**GetConfig**](docs/RuntimeConfigurationApi.md#getconfig) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope} | List configuration entries for a scope
 *RuntimeConfigurationApi* | [**GetConfigurationKey**](docs/RuntimeConfigurationApi.md#getconfigurationkey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Get a configuration key
@@ -299,7 +299,8 @@ Class | Method | HTTP request | Description
 *ScheduleManagementApi* | [**GetSchedule**](docs/ScheduleManagementApi.md#getschedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
 *ScheduleManagementApi* | [**ListSchedules**](docs/ScheduleManagementApi.md#listschedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules - deprecated
 *ScheduleManagementApi* | [**ListSchedulesV2**](docs/ScheduleManagementApi.md#listschedulesv2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
-*SessionManagementApi* | [**ApiLogin**](docs/SessionManagementApi.md#apilogin) | **Post** /api/v1/api_login | Authenticate user and return api token
+*SessionManagementApi* | [**ApiLogin**](docs/SessionManagementApi.md#apilogin) | **Post** /api/v1/api_login | Authenticate user using email and password
+*SessionManagementApi* | [**ApiToken**](docs/SessionManagementApi.md#apitoken) | **Put** /api/v1/customers/{cUUID}/api_token | Regenerate and fetch API token
 *SessionManagementApi* | [**AppVersion**](docs/SessionManagementApi.md#appversion) | **Get** /api/v1/app_version | appVersion
 *SessionManagementApi* | [**CustomerCount**](docs/SessionManagementApi.md#customercount) | **Get** /api/v1/customer_count | customerCount
 *SessionManagementApi* | [**GetAdminNotifications**](docs/SessionManagementApi.md#getadminnotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
@@ -342,7 +343,6 @@ Class | Method | HTTP request | Description
 *UniverseManagementApi* | [**SetUniverseKey**](docs/UniverseManagementApi.md#setuniversekey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
 *UniverseManagementApi* | [**UpdateLoadBalancerConfig**](docs/UniverseManagementApi.md#updateloadbalancerconfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 *UniverseNodeMetadataMetamasterApi* | [**GetMasterAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getmasteraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
-*UniverseNodeMetadataMetamasterApi* | [**GetMasterNodesInfo**](docs/UniverseNodeMetadataMetamasterApi.md#getmasternodesinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info | Lists all master nodes details
 *UniverseNodeMetadataMetamasterApi* | [**GetRedisServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getredisserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
 *UniverseNodeMetadataMetamasterApi* | [**GetUniverseMasterNodes**](docs/UniverseNodeMetadataMetamasterApi.md#getuniversemasternodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
 *UniverseNodeMetadataMetamasterApi* | [**GetYQLServerAddresses**](docs/UniverseNodeMetadataMetamasterApi.md#getyqlserveraddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
@@ -555,7 +555,6 @@ Class | Method | HTTP request | Description
  - [MaintenanceWindowPagedResponse](docs/MaintenanceWindowPagedResponse.md)
  - [MasterInfo](docs/MasterInfo.md)
  - [MasterNode](docs/MasterNode.md)
- - [MasterNodesInfo](docs/MasterNodesInfo.md)
  - [MastersList](docs/MastersList.md)
  - [Metadata](docs/Metadata.md)
  - [Metric](docs/Metric.md)
@@ -642,6 +641,7 @@ Class | Method | HTTP request | Description
  - [RestoreResp](docs/RestoreResp.md)
  - [RestoreSnapshotScheduleParams](docs/RestoreSnapshotScheduleParams.md)
  - [Role](docs/Role.md)
+ - [RoleAttribute](docs/RoleAttribute.md)
  - [RoleBinding](docs/RoleBinding.md)
  - [RoleBindingFormData](docs/RoleBindingFormData.md)
  - [RoleFormData](docs/RoleFormData.md)
@@ -670,6 +670,7 @@ Class | Method | HTTP request | Description
  - [SubtaskData](docs/SubtaskData.md)
  - [SupportBundle](docs/SupportBundle.md)
  - [SupportBundleFormData](docs/SupportBundleFormData.md)
+ - [SuppressHealthCheckNotificationsConfig](docs/SuppressHealthCheckNotificationsConfig.md)
  - [SystemdUpgradeParams](docs/SystemdUpgradeParams.md)
  - [TableDefinitionTaskParams](docs/TableDefinitionTaskParams.md)
  - [TableDetails](docs/TableDetails.md)
@@ -715,6 +716,7 @@ Class | Method | HTTP request | Description
  - [XClusterConfigNeedBootstrapFormData](docs/XClusterConfigNeedBootstrapFormData.md)
  - [XClusterConfigRestartFormData](docs/XClusterConfigRestartFormData.md)
  - [XClusterInfo](docs/XClusterInfo.md)
+ - [XClusterNamespaceConfig](docs/XClusterNamespaceConfig.md)
  - [XClusterTableConfig](docs/XClusterTableConfig.md)
  - [YBPError](docs/YBPError.md)
  - [YBPSuccess](docs/YBPSuccess.md)

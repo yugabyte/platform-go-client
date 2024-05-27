@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllowBootstrap** | Pointer to **bool** | WARNING: This is a preview API that could change. Allow backup on whole database when only set of tables require bootstrap | [optional] 
 **BackupRequestParams** | [**BootstarpBackupParams**](BootstarpBackupParams.md) |  | 
 **Tables** | **[]string** | Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body | 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewBootstrapParamsWithDefaults instantiates a new BootstrapParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllowBootstrap
+
+`func (o *BootstrapParams) GetAllowBootstrap() bool`
+
+GetAllowBootstrap returns the AllowBootstrap field if non-nil, zero value otherwise.
+
+### GetAllowBootstrapOk
+
+`func (o *BootstrapParams) GetAllowBootstrapOk() (*bool, bool)`
+
+GetAllowBootstrapOk returns a tuple with the AllowBootstrap field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowBootstrap
+
+`func (o *BootstrapParams) SetAllowBootstrap(v bool)`
+
+SetAllowBootstrap sets AllowBootstrap field to given value.
+
+### HasAllowBootstrap
+
+`func (o *BootstrapParams) HasAllowBootstrap() bool`
+
+HasAllowBootstrap returns a boolean if a field has been set.
 
 ### GetBackupRequestParams
 

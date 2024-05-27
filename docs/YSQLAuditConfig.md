@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **LogParameter** | **bool** | Log parameter | 
 **LogParameterMaxSize** | **int32** | Log parameter max size | 
 **LogRelation** | **bool** | Log relation | 
-**LogRow** | **bool** | Log row | 
+**LogRows** | **bool** | Log rows | 
 **LogStatement** | **bool** | Log statement | 
 **LogStatementOnce** | **bool** | Log statement once | 
 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewYSQLAuditConfig
 
-`func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRow bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
+`func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
 
 NewYSQLAuditConfig instantiates a new YSQLAuditConfig object
 This constructor will assign default values to properties that have it defined,
@@ -195,24 +195,24 @@ and a boolean to check if the value has been set.
 SetLogRelation sets LogRelation field to given value.
 
 
-### GetLogRow
+### GetLogRows
 
-`func (o *YSQLAuditConfig) GetLogRow() bool`
+`func (o *YSQLAuditConfig) GetLogRows() bool`
 
-GetLogRow returns the LogRow field if non-nil, zero value otherwise.
+GetLogRows returns the LogRows field if non-nil, zero value otherwise.
 
-### GetLogRowOk
+### GetLogRowsOk
 
-`func (o *YSQLAuditConfig) GetLogRowOk() (*bool, bool)`
+`func (o *YSQLAuditConfig) GetLogRowsOk() (*bool, bool)`
 
-GetLogRowOk returns a tuple with the LogRow field if it's non-nil, zero value otherwise
+GetLogRowsOk returns a tuple with the LogRows field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLogRow
+### SetLogRows
 
-`func (o *YSQLAuditConfig) SetLogRow(v bool)`
+`func (o *YSQLAuditConfig) SetLogRows(v bool)`
 
-SetLogRow sets LogRow field to given value.
+SetLogRows sets LogRows field to given value.
 
 
 ### GetLogStatement

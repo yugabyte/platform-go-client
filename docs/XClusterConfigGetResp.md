@@ -5,10 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
+**Dbs** | Pointer to **[]string** |  | [optional] [readonly] 
 **KeyspacePending** | Pointer to **string** | WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery | [optional] 
 **Lag** | **map[string]interface{}** | Lag metric data | 
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
 **Name** | Pointer to **string** | XCluster config name | [optional] 
+**Namespaces** | [**[]XClusterNamespaceConfig**](XClusterNamespaceConfig.md) |  | 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
 **PitrConfigs** | Pointer to [**[]PitrConfig**](PitrConfig.md) | WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config | [optional] 
 **ReplicationGroupName** | Pointer to **string** | Replication group name in the target universe cluster config | [optional] 
@@ -31,7 +33,7 @@ Name | Type | Description | Notes
 
 ### NewXClusterConfigGetResp
 
-`func NewXClusterConfigGetResp(lag map[string]interface{}, ) *XClusterConfigGetResp`
+`func NewXClusterConfigGetResp(lag map[string]interface{}, namespaces []XClusterNamespaceConfig, ) *XClusterConfigGetResp`
 
 NewXClusterConfigGetResp instantiates a new XClusterConfigGetResp object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +72,31 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *XClusterConfigGetResp) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
+
+### GetDbs
+
+`func (o *XClusterConfigGetResp) GetDbs() []string`
+
+GetDbs returns the Dbs field if non-nil, zero value otherwise.
+
+### GetDbsOk
+
+`func (o *XClusterConfigGetResp) GetDbsOk() (*[]string, bool)`
+
+GetDbsOk returns a tuple with the Dbs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDbs
+
+`func (o *XClusterConfigGetResp) SetDbs(v []string)`
+
+SetDbs sets Dbs field to given value.
+
+### HasDbs
+
+`func (o *XClusterConfigGetResp) HasDbs() bool`
+
+HasDbs returns a boolean if a field has been set.
 
 ### GetKeyspacePending
 
@@ -165,6 +192,26 @@ SetName sets Name field to given value.
 `func (o *XClusterConfigGetResp) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNamespaces
+
+`func (o *XClusterConfigGetResp) GetNamespaces() []XClusterNamespaceConfig`
+
+GetNamespaces returns the Namespaces field if non-nil, zero value otherwise.
+
+### GetNamespacesOk
+
+`func (o *XClusterConfigGetResp) GetNamespacesOk() (*[]XClusterNamespaceConfig, bool)`
+
+GetNamespacesOk returns a tuple with the Namespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespaces
+
+`func (o *XClusterConfigGetResp) SetNamespaces(v []XClusterNamespaceConfig)`
+
+SetNamespaces sets Namespaces field to given value.
+
 
 ### GetPaused
 

@@ -31,7 +31,7 @@ type LdapUnivSyncFormData struct {
 	LdapBindPassword *string `json:"ldapBindPassword,omitempty"`
 	// LDAP group dn attribute to which the user belongs
 	LdapGroupMemberOfAttribute *string `json:"ldapGroupMemberOfAttribute,omitempty"`
-	// LDAP field to get the group information
+	// Group dn field to get the group's name from
 	LdapGroupfield string `json:"ldapGroupfield"`
 	// Port of the ldap server : 389 or 636(tls)
 	LdapPort *int32 `json:"ldapPort,omitempty"`
@@ -41,7 +41,7 @@ type LdapUnivSyncFormData struct {
 	LdapServer *string `json:"ldapServer,omitempty"`
 	// TLS versions for LDAPS : TLSv1, TLSv1_1, TLSv1_2
 	LdapTlsProtocol *string `json:"ldapTlsProtocol,omitempty"`
-	// LDAP field to get the user information
+	// Dn/Attribute field to get the user's name from
 	LdapUserfield string `json:"ldapUserfield"`
 	TargetApi string `json:"targetApi"`
 	// Use LDAP TLS

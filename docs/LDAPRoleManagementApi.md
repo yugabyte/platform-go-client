@@ -31,7 +31,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     univUUID := TODO // string | 
-    syncLdapUniverse := *openapiclient.NewLdapUnivSyncFormData("DbuserPassword_example", "cn", "cn", "TargetApi_example") // LdapUnivSyncFormData | config to sync universe roles with ldap users
+    syncLdapUniverse := *openapiclient.NewLdapUnivSyncFormData("DbuserPassword_example", "cn", "cn, sAMAccountName", "TargetApi_example") // LdapUnivSyncFormData | config to sync universe roles with ldap users
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

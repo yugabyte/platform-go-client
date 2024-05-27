@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateRelease**](ReleaseManagementApi.md#CreateRelease) | **Post** /api/v1/customers/{cUUID}/releases | Create a release
-[**DeleteRelease**](ReleaseManagementApi.md#DeleteRelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Delete a release
+[**CreateRelease**](ReleaseManagementApi.md#CreateRelease) | **Post** /api/v1/customers/{cUUID}/releases | Deprecated: sinceVersion 2024.1. Use ReleasesController.create instead. Create a release
+[**DeleteRelease**](ReleaseManagementApi.md#DeleteRelease) | **Delete** /api/v1/customers/{cUUID}/releases/{name} | Deprecated: sinceVersion: 2024.1. Use ReleasesController.delete instead. Delete a release
 [**GetListOfRegionReleases**](ReleaseManagementApi.md#GetListOfRegionReleases) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/releases | List releases by provider - deprecated
-[**GetListOfReleases**](ReleaseManagementApi.md#GetListOfReleases) | **Get** /api/v1/customers/{cUUID}/releases | List all releases
+[**GetListOfReleases**](ReleaseManagementApi.md#GetListOfReleases) | **Get** /api/v1/customers/{cUUID}/releases | Deprecated: sinceVersion: 2024.1. Use ReleasesController.list instead. List all releases
 [**Refresh**](ReleaseManagementApi.md#Refresh) | **Put** /api/v1/customers/{cUUID}/releases | Refresh a release
-[**UpdateRelease**](ReleaseManagementApi.md#UpdateRelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Update a release
+[**UpdateRelease**](ReleaseManagementApi.md#UpdateRelease) | **Put** /api/v1/customers/{cUUID}/releases/{name} | Deprecated: sinceVersion: 2024.1. Use ReleasesController.update instead. Update a release
 
 
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > YBPSuccess CreateRelease(ctx, cUUID).Release(release).Request(request).Execute()
 
-Create a release
+Deprecated: sinceVersion 2024.1. Use ReleasesController.create instead. Create a release
 
 ### Example
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 > ReleaseMetadata DeleteRelease(ctx, cUUID, name).Request(request).Execute()
 
-Delete a release
+Deprecated: sinceVersion: 2024.1. Use ReleasesController.delete instead. Delete a release
 
 ### Example
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 > map[string]map[string]interface{} GetListOfReleases(ctx, cUUID).IncludeMetadata(includeMetadata).Arch(arch).Execute()
 
-List all releases
+Deprecated: sinceVersion: 2024.1. Use ReleasesController.list instead. List all releases
 
 ### Example
 
@@ -379,7 +379,7 @@ Name | Type | Description  | Notes
 
 > ReleaseMetadata UpdateRelease(ctx, cUUID, name).Release(release).Request(request).Execute()
 
-Update a release
+Deprecated: sinceVersion: 2024.1. Use ReleasesController.update instead. Update a release
 
 ### Example
 

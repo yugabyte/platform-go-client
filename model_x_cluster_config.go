@@ -19,12 +19,14 @@ import (
 type XClusterConfig struct {
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	Dbs *[]string `json:"dbs,omitempty"`
 	// WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery
 	KeyspacePending *string `json:"keyspacePending,omitempty"`
 	// Last modify time of the xCluster config
 	ModifyTime *time.Time `json:"modifyTime,omitempty"`
 	// XCluster config name
 	Name *string `json:"name,omitempty"`
+	Namespaces []XClusterNamespaceConfig `json:"namespaces"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
 	// WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config
@@ -64,8 +66,9 @@ type XClusterConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterConfig() *XClusterConfig {
+func NewXClusterConfig(namespaces []XClusterNamespaceConfig) *XClusterConfig {
 	this := XClusterConfig{}
+	this.Namespaces = namespaces
 	return &this
 }
 
@@ -107,6 +110,38 @@ func (o *XClusterConfig) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *XClusterConfig) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
+}
+
+// GetDbs returns the Dbs field value if set, zero value otherwise.
+func (o *XClusterConfig) GetDbs() []string {
+	if o == nil || o.Dbs == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Dbs
+}
+
+// GetDbsOk returns a tuple with the Dbs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetDbsOk() (*[]string, bool) {
+	if o == nil || o.Dbs == nil {
+		return nil, false
+	}
+	return o.Dbs, true
+}
+
+// HasDbs returns a boolean if a field has been set.
+func (o *XClusterConfig) HasDbs() bool {
+	if o != nil && o.Dbs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDbs gets a reference to the given []string and assigns it to the Dbs field.
+func (o *XClusterConfig) SetDbs(v []string) {
+	o.Dbs = &v
 }
 
 // GetKeyspacePending returns the KeyspacePending field value if set, zero value otherwise.
@@ -203,6 +238,30 @@ func (o *XClusterConfig) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *XClusterConfig) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNamespaces returns the Namespaces field value
+func (o *XClusterConfig) GetNamespaces() []XClusterNamespaceConfig {
+	if o == nil {
+		var ret []XClusterNamespaceConfig
+		return ret
+	}
+
+	return o.Namespaces
+}
+
+// GetNamespacesOk returns a tuple with the Namespaces field value
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetNamespacesOk() (*[]XClusterNamespaceConfig, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Namespaces, true
+}
+
+// SetNamespaces sets field value
+func (o *XClusterConfig) SetNamespaces(v []XClusterNamespaceConfig) {
+	o.Namespaces = v
 }
 
 // GetPaused returns the Paused field value if set, zero value otherwise.
@@ -754,6 +813,9 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
+	if o.Dbs != nil {
+		toSerialize["dbs"] = o.Dbs
+	}
 	if o.KeyspacePending != nil {
 		toSerialize["keyspacePending"] = o.KeyspacePending
 	}
@@ -762,6 +824,9 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["namespaces"] = o.Namespaces
 	}
 	if o.Paused != nil {
 		toSerialize["paused"] = o.Paused

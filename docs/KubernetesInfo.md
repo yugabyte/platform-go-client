@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] [readonly] 
 **KubeConfig** | Pointer to **string** |  | [optional] [readonly] 
 **KubeConfigContent** | Pointer to **string** |  | [optional] 
 **KubeConfigName** | Pointer to **string** |  | [optional] 
@@ -34,6 +35,31 @@ will change when the set of required properties is changed
 NewKubernetesInfoWithDefaults instantiates a new KubernetesInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetIsKubernetesOperatorControlled
+
+`func (o *KubernetesInfo) GetIsKubernetesOperatorControlled() bool`
+
+GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetIsKubernetesOperatorControlledOk
+
+`func (o *KubernetesInfo) GetIsKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsKubernetesOperatorControlled
+
+`func (o *KubernetesInfo) SetIsKubernetesOperatorControlled(v bool)`
+
+SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to given value.
+
+### HasIsKubernetesOperatorControlled
+
+`func (o *KubernetesInfo) HasIsKubernetesOperatorControlled() bool`
+
+HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
 ### GetKubeConfig
 

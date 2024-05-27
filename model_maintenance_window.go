@@ -32,6 +32,7 @@ type MaintenanceWindow struct {
 	StartTime time.Time `json:"startTime"`
 	// State
 	State *string `json:"state,omitempty"`
+	SuppressHealthCheckNotificationsConfig *SuppressHealthCheckNotificationsConfig `json:"suppressHealthCheckNotificationsConfig,omitempty"`
 	// Maintenance window UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -260,6 +261,38 @@ func (o *MaintenanceWindow) SetState(v string) {
 	o.State = &v
 }
 
+// GetSuppressHealthCheckNotificationsConfig returns the SuppressHealthCheckNotificationsConfig field value if set, zero value otherwise.
+func (o *MaintenanceWindow) GetSuppressHealthCheckNotificationsConfig() SuppressHealthCheckNotificationsConfig {
+	if o == nil || o.SuppressHealthCheckNotificationsConfig == nil {
+		var ret SuppressHealthCheckNotificationsConfig
+		return ret
+	}
+	return *o.SuppressHealthCheckNotificationsConfig
+}
+
+// GetSuppressHealthCheckNotificationsConfigOk returns a tuple with the SuppressHealthCheckNotificationsConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MaintenanceWindow) GetSuppressHealthCheckNotificationsConfigOk() (*SuppressHealthCheckNotificationsConfig, bool) {
+	if o == nil || o.SuppressHealthCheckNotificationsConfig == nil {
+		return nil, false
+	}
+	return o.SuppressHealthCheckNotificationsConfig, true
+}
+
+// HasSuppressHealthCheckNotificationsConfig returns a boolean if a field has been set.
+func (o *MaintenanceWindow) HasSuppressHealthCheckNotificationsConfig() bool {
+	if o != nil && o.SuppressHealthCheckNotificationsConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSuppressHealthCheckNotificationsConfig gets a reference to the given SuppressHealthCheckNotificationsConfig and assigns it to the SuppressHealthCheckNotificationsConfig field.
+func (o *MaintenanceWindow) SetSuppressHealthCheckNotificationsConfig(v SuppressHealthCheckNotificationsConfig) {
+	o.SuppressHealthCheckNotificationsConfig = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *MaintenanceWindow) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -317,6 +350,9 @@ func (o MaintenanceWindow) MarshalJSON() ([]byte, error) {
 	}
 	if o.State != nil {
 		toSerialize["state"] = o.State
+	}
+	if o.SuppressHealthCheckNotificationsConfig != nil {
+		toSerialize["suppressHealthCheckNotificationsConfig"] = o.SuppressHealthCheckNotificationsConfig
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

@@ -16,6 +16,8 @@ import (
 
 // BootstrapParams Bootstrap parameters
 type BootstrapParams struct {
+	// WARNING: This is a preview API that could change. Allow backup on whole database when only set of tables require bootstrap
+	AllowBootstrap *bool `json:"allowBootstrap,omitempty"`
 	BackupRequestParams BootstarpBackupParams `json:"backupRequestParams"`
 	// Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body
 	Tables []string `json:"tables"`
@@ -38,6 +40,38 @@ func NewBootstrapParams(backupRequestParams BootstarpBackupParams, tables []stri
 func NewBootstrapParamsWithDefaults() *BootstrapParams {
 	this := BootstrapParams{}
 	return &this
+}
+
+// GetAllowBootstrap returns the AllowBootstrap field value if set, zero value otherwise.
+func (o *BootstrapParams) GetAllowBootstrap() bool {
+	if o == nil || o.AllowBootstrap == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AllowBootstrap
+}
+
+// GetAllowBootstrapOk returns a tuple with the AllowBootstrap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BootstrapParams) GetAllowBootstrapOk() (*bool, bool) {
+	if o == nil || o.AllowBootstrap == nil {
+		return nil, false
+	}
+	return o.AllowBootstrap, true
+}
+
+// HasAllowBootstrap returns a boolean if a field has been set.
+func (o *BootstrapParams) HasAllowBootstrap() bool {
+	if o != nil && o.AllowBootstrap != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowBootstrap gets a reference to the given bool and assigns it to the AllowBootstrap field.
+func (o *BootstrapParams) SetAllowBootstrap(v bool) {
+	o.AllowBootstrap = &v
 }
 
 // GetBackupRequestParams returns the BackupRequestParams field value
@@ -90,6 +124,9 @@ func (o *BootstrapParams) SetTables(v []string) {
 
 func (o BootstrapParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AllowBootstrap != nil {
+		toSerialize["allowBootstrap"] = o.AllowBootstrap
+	}
 	if true {
 		toSerialize["backupRequestParams"] = o.BackupRequestParams
 	}

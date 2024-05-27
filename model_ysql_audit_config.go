@@ -32,8 +32,8 @@ type YSQLAuditConfig struct {
 	LogParameterMaxSize int32 `json:"logParameterMaxSize"`
 	// Log relation
 	LogRelation bool `json:"logRelation"`
-	// Log row
-	LogRow bool `json:"logRow"`
+	// Log rows
+	LogRows bool `json:"logRows"`
 	// Log statement
 	LogStatement bool `json:"logStatement"`
 	// Log statement once
@@ -44,7 +44,7 @@ type YSQLAuditConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRow bool, logStatement bool, logStatementOnce bool) *YSQLAuditConfig {
+func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool) *YSQLAuditConfig {
 	this := YSQLAuditConfig{}
 	this.Classes = classes
 	this.Enabled = enabled
@@ -54,7 +54,7 @@ func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClie
 	this.LogParameter = logParameter
 	this.LogParameterMaxSize = logParameterMaxSize
 	this.LogRelation = logRelation
-	this.LogRow = logRow
+	this.LogRows = logRows
 	this.LogStatement = logStatement
 	this.LogStatementOnce = logStatementOnce
 	return &this
@@ -260,28 +260,28 @@ func (o *YSQLAuditConfig) SetLogRelation(v bool) {
 	o.LogRelation = v
 }
 
-// GetLogRow returns the LogRow field value
-func (o *YSQLAuditConfig) GetLogRow() bool {
+// GetLogRows returns the LogRows field value
+func (o *YSQLAuditConfig) GetLogRows() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.LogRow
+	return o.LogRows
 }
 
-// GetLogRowOk returns a tuple with the LogRow field value
+// GetLogRowsOk returns a tuple with the LogRows field value
 // and a boolean to check if the value has been set.
-func (o *YSQLAuditConfig) GetLogRowOk() (*bool, bool) {
+func (o *YSQLAuditConfig) GetLogRowsOk() (*bool, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.LogRow, true
+	return &o.LogRows, true
 }
 
-// SetLogRow sets field value
-func (o *YSQLAuditConfig) SetLogRow(v bool) {
-	o.LogRow = v
+// SetLogRows sets field value
+func (o *YSQLAuditConfig) SetLogRows(v bool) {
+	o.LogRows = v
 }
 
 // GetLogStatement returns the LogStatement field value
@@ -359,7 +359,7 @@ func (o YSQLAuditConfig) MarshalJSON() ([]byte, error) {
 		toSerialize["logRelation"] = o.LogRelation
 	}
 	if true {
-		toSerialize["logRow"] = o.LogRow
+		toSerialize["logRows"] = o.LogRows
 	}
 	if true {
 		toSerialize["logStatement"] = o.LogStatement

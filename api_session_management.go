@@ -48,7 +48,7 @@ func (r SessionManagementApiApiApiLoginRequest) Execute() (SessionInfo, *_nethtt
 }
 
 /*
- * ApiLogin Authenticate user and return api token
+ * ApiLogin Authenticate user using email and password
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return SessionManagementApiApiApiLoginRequest
  */
@@ -109,6 +109,127 @@ func (a *SessionManagementApiService) ApiLoginExecute(r SessionManagementApiApiA
 	}
 	// body params
 	localVarPostBody = r.customerLoginFormData
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type SessionManagementApiApiApiTokenRequest struct {
+	ctx _context.Context
+	ApiService *SessionManagementApiService
+	cUUID string
+	apiTokenVersion *int64
+	request *interface{}
+}
+
+func (r SessionManagementApiApiApiTokenRequest) ApiTokenVersion(apiTokenVersion int64) SessionManagementApiApiApiTokenRequest {
+	r.apiTokenVersion = &apiTokenVersion
+	return r
+}
+func (r SessionManagementApiApiApiTokenRequest) Request(request interface{}) SessionManagementApiApiApiTokenRequest {
+	r.request = &request
+	return r
+}
+
+func (r SessionManagementApiApiApiTokenRequest) Execute() (SessionInfo, *_nethttp.Response, error) {
+	return r.ApiService.ApiTokenExecute(r)
+}
+
+/*
+ * ApiToken Regenerate and fetch API token
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @return SessionManagementApiApiApiTokenRequest
+ */
+func (a *SessionManagementApiService) ApiToken(ctx _context.Context, cUUID string) SessionManagementApiApiApiTokenRequest {
+	return SessionManagementApiApiApiTokenRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return SessionInfo
+ */
+func (a *SessionManagementApiService) ApiTokenExecute(r SessionManagementApiApiApiTokenRequest) (SessionInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  SessionInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementApiService.ApiToken")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/api_token"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.apiTokenVersion != nil {
+		localVarQueryParams.Add("apiTokenVersion", parameterToString(*r.apiTokenVersion, ""))
+	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

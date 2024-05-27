@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Name | 
 **StartTime** | **time.Time** | Start time | 
 **State** | Pointer to **string** | State | [optional] [readonly] 
+**SuppressHealthCheckNotificationsConfig** | Pointer to [**SuppressHealthCheckNotificationsConfig**](SuppressHealthCheckNotificationsConfig.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Maintenance window UUID | [optional] [readonly] 
 
 ## Methods
@@ -197,6 +198,31 @@ SetState sets State field to given value.
 `func (o *MaintenanceWindow) HasState() bool`
 
 HasState returns a boolean if a field has been set.
+
+### GetSuppressHealthCheckNotificationsConfig
+
+`func (o *MaintenanceWindow) GetSuppressHealthCheckNotificationsConfig() SuppressHealthCheckNotificationsConfig`
+
+GetSuppressHealthCheckNotificationsConfig returns the SuppressHealthCheckNotificationsConfig field if non-nil, zero value otherwise.
+
+### GetSuppressHealthCheckNotificationsConfigOk
+
+`func (o *MaintenanceWindow) GetSuppressHealthCheckNotificationsConfigOk() (*SuppressHealthCheckNotificationsConfig, bool)`
+
+GetSuppressHealthCheckNotificationsConfigOk returns a tuple with the SuppressHealthCheckNotificationsConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSuppressHealthCheckNotificationsConfig
+
+`func (o *MaintenanceWindow) SetSuppressHealthCheckNotificationsConfig(v SuppressHealthCheckNotificationsConfig)`
+
+SetSuppressHealthCheckNotificationsConfig sets SuppressHealthCheckNotificationsConfig field to given value.
+
+### HasSuppressHealthCheckNotificationsConfig
+
+`func (o *MaintenanceWindow) HasSuppressHealthCheckNotificationsConfig() bool`
+
+HasSuppressHealthCheckNotificationsConfig returns a boolean if a field has been set.
 
 ### GetUuid
 

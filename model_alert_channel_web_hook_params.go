@@ -18,6 +18,8 @@ import (
 type AlertChannelWebHookParams struct {
 	AlertChannelParams
 	HttpAuth *HTTPAuthInformation `json:"httpAuth,omitempty"`
+	// WARNING: This is a preview API that could change. Send resolved alert notification
+	SendResolved *bool `json:"sendResolved,omitempty"`
 	// Webhook URL
 	WebhookUrl string `json:"webhookUrl"`
 }
@@ -72,6 +74,38 @@ func (o *AlertChannelWebHookParams) SetHttpAuth(v HTTPAuthInformation) {
 	o.HttpAuth = &v
 }
 
+// GetSendResolved returns the SendResolved field value if set, zero value otherwise.
+func (o *AlertChannelWebHookParams) GetSendResolved() bool {
+	if o == nil || o.SendResolved == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SendResolved
+}
+
+// GetSendResolvedOk returns a tuple with the SendResolved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertChannelWebHookParams) GetSendResolvedOk() (*bool, bool) {
+	if o == nil || o.SendResolved == nil {
+		return nil, false
+	}
+	return o.SendResolved, true
+}
+
+// HasSendResolved returns a boolean if a field has been set.
+func (o *AlertChannelWebHookParams) HasSendResolved() bool {
+	if o != nil && o.SendResolved != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSendResolved gets a reference to the given bool and assigns it to the SendResolved field.
+func (o *AlertChannelWebHookParams) SetSendResolved(v bool) {
+	o.SendResolved = &v
+}
+
 // GetWebhookUrl returns the WebhookUrl field value
 func (o *AlertChannelWebHookParams) GetWebhookUrl() string {
 	if o == nil {
@@ -108,6 +142,9 @@ func (o AlertChannelWebHookParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.HttpAuth != nil {
 		toSerialize["httpAuth"] = o.HttpAuth
+	}
+	if o.SendResolved != nil {
+		toSerialize["sendResolved"] = o.SendResolved
 	}
 	if true {
 		toSerialize["webhookUrl"] = o.WebhookUrl

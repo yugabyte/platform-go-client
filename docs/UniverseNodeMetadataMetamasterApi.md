@@ -5,7 +5,6 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetMasterAddresses**](UniverseNodeMetadataMetamasterApi.md#GetMasterAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
-[**GetMasterNodesInfo**](UniverseNodeMetadataMetamasterApi.md#GetMasterNodesInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters/info | Lists all master nodes details
 [**GetRedisServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetRedisServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
 [**GetUniverseMasterNodes**](UniverseNodeMetadataMetamasterApi.md#GetUniverseMasterNodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
 [**GetYQLServerAddresses**](UniverseNodeMetadataMetamasterApi.md#GetYQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
@@ -71,79 +70,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 **string**
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetMasterNodesInfo
-
-> []MasterNodesInfo GetMasterNodesInfo(ctx, cUUID, uniUUID).Execute()
-
-Lists all master nodes details
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    uniUUID := TODO // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseNodeMetadataMetamasterApi.GetMasterNodesInfo(context.Background(), cUUID, uniUUID).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UniverseNodeMetadataMetamasterApi.GetMasterNodesInfo``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMasterNodesInfo`: []MasterNodesInfo
-    fmt.Fprintf(os.Stdout, "Response from `UniverseNodeMetadataMetamasterApi.GetMasterNodesInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**uniUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetMasterNodesInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**[]MasterNodesInfo**](MasterNodesInfo.md)
 
 ### Authorization
 

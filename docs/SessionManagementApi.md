@@ -4,7 +4,8 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ApiLogin**](SessionManagementApi.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user and return api token
+[**ApiLogin**](SessionManagementApi.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user using email and password
+[**ApiToken**](SessionManagementApi.md#ApiToken) | **Put** /api/v1/customers/{cUUID}/api_token | Regenerate and fetch API token
 [**AppVersion**](SessionManagementApi.md#AppVersion) | **Get** /api/v1/app_version | appVersion
 [**CustomerCount**](SessionManagementApi.md#CustomerCount) | **Get** /api/v1/customer_count | customerCount
 [**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 > SessionInfo ApiLogin(ctx).CustomerLoginFormData(customerLoginFormData).Request(request).Execute()
 
-Authenticate user and return api token
+Authenticate user using email and password
 
 ### Example
 
@@ -74,6 +75,78 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ApiToken
+
+> SessionInfo ApiToken(ctx, cUUID).ApiTokenVersion(apiTokenVersion).Request(request).Execute()
+
+Regenerate and fetch API token
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    apiTokenVersion := int64(789) // int64 |  (optional)
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SessionManagementApi.ApiToken(context.Background(), cUUID).ApiTokenVersion(apiTokenVersion).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SessionManagementApi.ApiToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ApiToken`: SessionInfo
+    fmt.Fprintf(os.Stdout, "Response from `SessionManagementApi.ApiToken`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApiTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **apiTokenVersion** | **int64** |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**SessionInfo**](SessionInfo.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
