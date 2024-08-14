@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AutoSyncMasterAddrs** | Pointer to **bool** | WARNING: This is a preview API that could change. Used by auto master failover | [optional] [readonly] 
 **AzUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 **CloudInfo** | Pointer to [**CloudSpecificInfo**](CloudSpecificInfo.md) |  | [optional] 
 **CronsActive** | Pointer to **bool** | True if cron jobs were properly configured for this node | [optional] 
@@ -58,6 +59,31 @@ will change when the set of required properties is changed
 NewNodeDetailsWithDefaults instantiates a new NodeDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAutoSyncMasterAddrs
+
+`func (o *NodeDetails) GetAutoSyncMasterAddrs() bool`
+
+GetAutoSyncMasterAddrs returns the AutoSyncMasterAddrs field if non-nil, zero value otherwise.
+
+### GetAutoSyncMasterAddrsOk
+
+`func (o *NodeDetails) GetAutoSyncMasterAddrsOk() (*bool, bool)`
+
+GetAutoSyncMasterAddrsOk returns a tuple with the AutoSyncMasterAddrs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoSyncMasterAddrs
+
+`func (o *NodeDetails) SetAutoSyncMasterAddrs(v bool)`
+
+SetAutoSyncMasterAddrs sets AutoSyncMasterAddrs field to given value.
+
+### HasAutoSyncMasterAddrs
+
+`func (o *NodeDetails) HasAutoSyncMasterAddrs() bool`
+
+HasAutoSyncMasterAddrs returns a boolean if a field has been set.
 
 ### GetAzUuid
 

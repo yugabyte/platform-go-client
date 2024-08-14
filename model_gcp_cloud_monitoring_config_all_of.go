@@ -16,7 +16,7 @@ import (
 
 // GCPCloudMonitoringConfigAllOf GCPCloudMonitoringConfig Config
 type GCPCloudMonitoringConfigAllOf struct {
-	// Project
+	// Project ID
 	Project *string `json:"project,omitempty"`
 }
 

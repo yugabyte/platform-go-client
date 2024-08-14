@@ -76,6 +76,8 @@ type APIClient struct {
 
 	EncryptionAtRestApi *EncryptionAtRestApiService
 
+	ExtractMetadataFromRemoteTarballApi *ExtractMetadataFromRemoteTarballApiService
+
 	GrafanaDashboardApi *GrafanaDashboardApiService
 
 	InstanceTypesApi *InstanceTypesApiService
@@ -93,6 +95,8 @@ type APIClient struct {
 	MaintenanceWindowsApi *MaintenanceWindowsApiService
 
 	MetricsApi *MetricsApiService
+
+	NewReleaseManagementApi *NewReleaseManagementApiService
 
 	NodeAgentsApi *NodeAgentsApiService
 
@@ -134,6 +138,8 @@ type APIClient struct {
 
 	UniverseUpgradesManagementApi *UniverseUpgradesManagementApiService
 
+	UploadReleasePackagesApi *UploadReleasePackagesApiService
+
 	UserManagementApi *UserManagementApiService
 }
 
@@ -167,6 +173,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.CustomerTasksApi = (*CustomerTasksApiService)(&c.common)
 	c.DisasterRecoveryApi = (*DisasterRecoveryApiService)(&c.common)
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
+	c.ExtractMetadataFromRemoteTarballApi = (*ExtractMetadataFromRemoteTarballApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
 	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)
@@ -176,6 +183,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.LoggingConfigApi = (*LoggingConfigApiService)(&c.common)
 	c.MaintenanceWindowsApi = (*MaintenanceWindowsApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
+	c.NewReleaseManagementApi = (*NewReleaseManagementApiService)(&c.common)
 	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
@@ -196,6 +204,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniverseNodeMetadataMetamasterApi = (*UniverseNodeMetadataMetamasterApiService)(&c.common)
 	c.UniversePerformanceSuggestionsApi = (*UniversePerformanceSuggestionsApiService)(&c.common)
 	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
+	c.UploadReleasePackagesApi = (*UploadReleasePackagesApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
 
 	return c

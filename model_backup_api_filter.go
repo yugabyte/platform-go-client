@@ -26,6 +26,7 @@ type BackupApiFilter struct {
 	OnlyShowDeletedConfigs bool `json:"onlyShowDeletedConfigs"`
 	OnlyShowDeletedUniverses bool `json:"onlyShowDeletedUniverses"`
 	ScheduleUUIDList []string `json:"scheduleUUIDList"`
+	ShowHidden bool `json:"showHidden"`
 	States []string `json:"states"`
 	StorageConfigUUIDList []string `json:"storageConfigUUIDList"`
 	UniverseNameList []string `json:"universeNameList"`
@@ -36,13 +37,14 @@ type BackupApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupApiFilter(backupUUIDList []string, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *BackupApiFilter {
+func NewBackupApiFilter(backupUUIDList []string, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, showHidden bool, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *BackupApiFilter {
 	this := BackupApiFilter{}
 	this.BackupUUIDList = backupUUIDList
 	this.KeyspaceList = keyspaceList
 	this.OnlyShowDeletedConfigs = onlyShowDeletedConfigs
 	this.OnlyShowDeletedUniverses = onlyShowDeletedUniverses
 	this.ScheduleUUIDList = scheduleUUIDList
+	this.ShowHidden = showHidden
 	this.States = states
 	this.StorageConfigUUIDList = storageConfigUUIDList
 	this.UniverseNameList = universeNameList
@@ -242,6 +244,30 @@ func (o *BackupApiFilter) SetScheduleUUIDList(v []string) {
 	o.ScheduleUUIDList = v
 }
 
+// GetShowHidden returns the ShowHidden field value
+func (o *BackupApiFilter) GetShowHidden() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ShowHidden
+}
+
+// GetShowHiddenOk returns a tuple with the ShowHidden field value
+// and a boolean to check if the value has been set.
+func (o *BackupApiFilter) GetShowHiddenOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ShowHidden, true
+}
+
+// SetShowHidden sets field value
+func (o *BackupApiFilter) SetShowHidden(v bool) {
+	o.ShowHidden = v
+}
+
 // GetStates returns the States field value
 func (o *BackupApiFilter) GetStates() []string {
 	if o == nil {
@@ -360,6 +386,9 @@ func (o BackupApiFilter) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["scheduleUUIDList"] = o.ScheduleUUIDList
+	}
+	if true {
+		toSerialize["showHidden"] = o.ShowHidden
 	}
 	if true {
 		toSerialize["states"] = o.States

@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | RoleBinding create time | [optional] 
+**GroupInfo** | Pointer to [**GroupMappingInfo**](GroupMappingInfo.md) |  | [optional] 
+**Principal** | [**Principal**](Principal.md) |  | 
 **ResourceGroup** | Pointer to [**ResourceGroup**](ResourceGroup.md) |  | [optional] 
 **Role** | Pointer to [**Role**](Role.md) |  | [optional] 
 **Type** | Pointer to **string** | Role binding type | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewRoleBinding
 
-`func NewRoleBinding() *RoleBinding`
+`func NewRoleBinding(principal Principal, ) *RoleBinding`
 
 NewRoleBinding instantiates a new RoleBinding object
 This constructor will assign default values to properties that have it defined,
@@ -55,6 +57,51 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *RoleBinding) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
+
+### GetGroupInfo
+
+`func (o *RoleBinding) GetGroupInfo() GroupMappingInfo`
+
+GetGroupInfo returns the GroupInfo field if non-nil, zero value otherwise.
+
+### GetGroupInfoOk
+
+`func (o *RoleBinding) GetGroupInfoOk() (*GroupMappingInfo, bool)`
+
+GetGroupInfoOk returns a tuple with the GroupInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupInfo
+
+`func (o *RoleBinding) SetGroupInfo(v GroupMappingInfo)`
+
+SetGroupInfo sets GroupInfo field to given value.
+
+### HasGroupInfo
+
+`func (o *RoleBinding) HasGroupInfo() bool`
+
+HasGroupInfo returns a boolean if a field has been set.
+
+### GetPrincipal
+
+`func (o *RoleBinding) GetPrincipal() Principal`
+
+GetPrincipal returns the Principal field if non-nil, zero value otherwise.
+
+### GetPrincipalOk
+
+`func (o *RoleBinding) GetPrincipalOk() (*Principal, bool)`
+
+GetPrincipalOk returns a tuple with the Principal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrincipal
+
+`func (o *RoleBinding) SetPrincipal(v Principal)`
+
+SetPrincipal sets Principal field to given value.
+
 
 ### GetResourceGroup
 

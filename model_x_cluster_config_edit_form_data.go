@@ -19,6 +19,8 @@ type XClusterConfigEditFormData struct {
 	// Whether or not YBA should also include all index tables from any provided main tables.
 	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
 	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
+	// WARNING: This is a preview API that could change. Source universe database IDs
+	Databases *[]string `json:"databases,omitempty"`
 	// Run the pre-checks without actually running the subtasks
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
@@ -112,6 +114,38 @@ func (o *XClusterConfigEditFormData) HasBootstrapParams() bool {
 // SetBootstrapParams gets a reference to the given BootstrapParams and assigns it to the BootstrapParams field.
 func (o *XClusterConfigEditFormData) SetBootstrapParams(v BootstrapParams) {
 	o.BootstrapParams = &v
+}
+
+// GetDatabases returns the Databases field value if set, zero value otherwise.
+func (o *XClusterConfigEditFormData) GetDatabases() []string {
+	if o == nil || o.Databases == nil {
+		var ret []string
+		return ret
+	}
+	return *o.Databases
+}
+
+// GetDatabasesOk returns a tuple with the Databases field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigEditFormData) GetDatabasesOk() (*[]string, bool) {
+	if o == nil || o.Databases == nil {
+		return nil, false
+	}
+	return o.Databases, true
+}
+
+// HasDatabases returns a boolean if a field has been set.
+func (o *XClusterConfigEditFormData) HasDatabases() bool {
+	if o != nil && o.Databases != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDatabases gets a reference to the given []string and assigns it to the Databases field.
+func (o *XClusterConfigEditFormData) SetDatabases(v []string) {
+	o.Databases = &v
 }
 
 // GetDryRun returns the DryRun field value if set, zero value otherwise.
@@ -313,6 +347,9 @@ func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
 	}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
+	}
+	if o.Databases != nil {
+		toSerialize["databases"] = o.Databases
 	}
 	if o.DryRun != nil {
 		toSerialize["dryRun"] = o.DryRun

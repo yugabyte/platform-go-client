@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowedActions** | Pointer to **[]string** |  | [optional] [readonly] 
+**AutoSyncMasterAddrs** | Pointer to **bool** | WARNING: This is a preview API that could change. Used by auto master failover | [optional] [readonly] 
 **AzUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 **CloudInfo** | Pointer to [**CloudSpecificInfo**](CloudSpecificInfo.md) |  | [optional] 
 **CronsActive** | Pointer to **bool** | True if cron jobs were properly configured for this node | [optional] 
@@ -85,6 +86,31 @@ SetAllowedActions sets AllowedActions field to given value.
 `func (o *NodeDetailsResp) HasAllowedActions() bool`
 
 HasAllowedActions returns a boolean if a field has been set.
+
+### GetAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) GetAutoSyncMasterAddrs() bool`
+
+GetAutoSyncMasterAddrs returns the AutoSyncMasterAddrs field if non-nil, zero value otherwise.
+
+### GetAutoSyncMasterAddrsOk
+
+`func (o *NodeDetailsResp) GetAutoSyncMasterAddrsOk() (*bool, bool)`
+
+GetAutoSyncMasterAddrsOk returns a tuple with the AutoSyncMasterAddrs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) SetAutoSyncMasterAddrs(v bool)`
+
+SetAutoSyncMasterAddrs sets AutoSyncMasterAddrs field to given value.
+
+### HasAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) HasAutoSyncMasterAddrs() bool`
+
+HasAutoSyncMasterAddrs returns a boolean if a field has been set.
 
 ### GetAzUuid
 

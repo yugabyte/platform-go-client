@@ -17,9 +17,9 @@ import (
 // ValidationResult Validation result of a node config
 type ValidationResult struct {
 	Description string `json:"description"`
-	IsRequired bool `json:"isRequired"`
-	IsValid bool `json:"isValid"`
+	Required bool `json:"required"`
 	Type string `json:"type"`
+	Valid bool `json:"valid"`
 	Value string `json:"value"`
 }
 
@@ -27,12 +27,12 @@ type ValidationResult struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidationResult(description string, isRequired bool, isValid bool, type_ string, value string) *ValidationResult {
+func NewValidationResult(description string, required bool, type_ string, valid bool, value string) *ValidationResult {
 	this := ValidationResult{}
 	this.Description = description
-	this.IsRequired = isRequired
-	this.IsValid = isValid
+	this.Required = required
 	this.Type = type_
+	this.Valid = valid
 	this.Value = value
 	return &this
 }
@@ -69,52 +69,28 @@ func (o *ValidationResult) SetDescription(v string) {
 	o.Description = v
 }
 
-// GetIsRequired returns the IsRequired field value
-func (o *ValidationResult) GetIsRequired() bool {
+// GetRequired returns the Required field value
+func (o *ValidationResult) GetRequired() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.IsRequired
+	return o.Required
 }
 
-// GetIsRequiredOk returns a tuple with the IsRequired field value
+// GetRequiredOk returns a tuple with the Required field value
 // and a boolean to check if the value has been set.
-func (o *ValidationResult) GetIsRequiredOk() (*bool, bool) {
+func (o *ValidationResult) GetRequiredOk() (*bool, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.IsRequired, true
+	return &o.Required, true
 }
 
-// SetIsRequired sets field value
-func (o *ValidationResult) SetIsRequired(v bool) {
-	o.IsRequired = v
-}
-
-// GetIsValid returns the IsValid field value
-func (o *ValidationResult) GetIsValid() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsValid
-}
-
-// GetIsValidOk returns a tuple with the IsValid field value
-// and a boolean to check if the value has been set.
-func (o *ValidationResult) GetIsValidOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.IsValid, true
-}
-
-// SetIsValid sets field value
-func (o *ValidationResult) SetIsValid(v bool) {
-	o.IsValid = v
+// SetRequired sets field value
+func (o *ValidationResult) SetRequired(v bool) {
+	o.Required = v
 }
 
 // GetType returns the Type field value
@@ -139,6 +115,30 @@ func (o *ValidationResult) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *ValidationResult) SetType(v string) {
 	o.Type = v
+}
+
+// GetValid returns the Valid field value
+func (o *ValidationResult) GetValid() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Valid
+}
+
+// GetValidOk returns a tuple with the Valid field value
+// and a boolean to check if the value has been set.
+func (o *ValidationResult) GetValidOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Valid, true
+}
+
+// SetValid sets field value
+func (o *ValidationResult) SetValid(v bool) {
+	o.Valid = v
 }
 
 // GetValue returns the Value field value
@@ -171,13 +171,13 @@ func (o ValidationResult) MarshalJSON() ([]byte, error) {
 		toSerialize["description"] = o.Description
 	}
 	if true {
-		toSerialize["isRequired"] = o.IsRequired
-	}
-	if true {
-		toSerialize["isValid"] = o.IsValid
+		toSerialize["required"] = o.Required
 	}
 	if true {
 		toSerialize["type"] = o.Type
+	}
+	if true {
+		toSerialize["valid"] = o.Valid
 	}
 	if true {
 		toSerialize["value"] = o.Value

@@ -21,8 +21,6 @@ type Schedule struct {
 	BacklogStatus *bool `json:"backlogStatus,omitempty"`
 	// Cron expression for the schedule
 	CronExpression *string `json:"cronExpression,omitempty"`
-	// Customer UUID
-	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// Number of failed backup attempts
 	FailureCount *int32 `json:"failureCount,omitempty"`
 	// Frequency of the schedule, in milli seconds
@@ -130,38 +128,6 @@ func (o *Schedule) HasCronExpression() bool {
 // SetCronExpression gets a reference to the given string and assigns it to the CronExpression field.
 func (o *Schedule) SetCronExpression(v string) {
 	o.CronExpression = &v
-}
-
-// GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
-func (o *Schedule) GetCustomerUUID() string {
-	if o == nil || o.CustomerUUID == nil {
-		var ret string
-		return ret
-	}
-	return *o.CustomerUUID
-}
-
-// GetCustomerUUIDOk returns a tuple with the CustomerUUID field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Schedule) GetCustomerUUIDOk() (*string, bool) {
-	if o == nil || o.CustomerUUID == nil {
-		return nil, false
-	}
-	return o.CustomerUUID, true
-}
-
-// HasCustomerUUID returns a boolean if a field has been set.
-func (o *Schedule) HasCustomerUUID() bool {
-	if o != nil && o.CustomerUUID != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomerUUID gets a reference to the given string and assigns it to the CustomerUUID field.
-func (o *Schedule) SetCustomerUUID(v string) {
-	o.CustomerUUID = &v
 }
 
 // GetFailureCount returns the FailureCount field value if set, zero value otherwise.
@@ -587,9 +553,6 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	}
 	if o.CronExpression != nil {
 		toSerialize["cronExpression"] = o.CronExpression
-	}
-	if o.CustomerUUID != nil {
-		toSerialize["customerUUID"] = o.CustomerUUID
 	}
 	if o.FailureCount != nil {
 		toSerialize["failureCount"] = o.FailureCount

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Project** | Pointer to **string** | Project | [optional] 
+**Project** | Pointer to **string** | Project ID | [optional] 
 
 ## Methods
 

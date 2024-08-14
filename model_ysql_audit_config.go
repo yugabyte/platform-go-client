@@ -24,7 +24,7 @@ type YSQLAuditConfig struct {
 	LogCatalog bool `json:"logCatalog"`
 	// Log client
 	LogClient bool `json:"logClient"`
-	// Log level
+	// Log level. For NOTICE, INFO, DEBUG levels, user also needs to set 'log_min_messages' to the required level for the audit logs to be exported. Default 'log_min_messages' is WARNING.
 	LogLevel string `json:"logLevel"`
 	// Log parameter
 	LogParameter bool `json:"logParameter"`

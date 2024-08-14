@@ -27,6 +27,7 @@ type KubernetesRegionInfo struct {
 	KubePodAddressTemplate *string `json:"kubePodAddressTemplate,omitempty"`
 	KubernetesImagePullSecretName *string `json:"kubernetesImagePullSecretName,omitempty"`
 	KubernetesImageRegistry *string `json:"kubernetesImageRegistry,omitempty"`
+	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
 	KubernetesProvider *string `json:"kubernetesProvider,omitempty"`
 	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
 	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
@@ -41,8 +42,9 @@ type KubernetesRegionInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKubernetesRegionInfo() *KubernetesRegionInfo {
+func NewKubernetesRegionInfo(kubernetesOperatorControlled bool) *KubernetesRegionInfo {
 	this := KubernetesRegionInfo{}
+	this.KubernetesOperatorControlled = kubernetesOperatorControlled
 	return &this
 }
 
@@ -406,6 +408,30 @@ func (o *KubernetesRegionInfo) SetKubernetesImageRegistry(v string) {
 	o.KubernetesImageRegistry = &v
 }
 
+// GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field value
+func (o *KubernetesRegionInfo) GetKubernetesOperatorControlled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.KubernetesOperatorControlled
+}
+
+// GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field value
+// and a boolean to check if the value has been set.
+func (o *KubernetesRegionInfo) GetKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.KubernetesOperatorControlled, true
+}
+
+// SetKubernetesOperatorControlled sets field value
+func (o *KubernetesRegionInfo) SetKubernetesOperatorControlled(v bool) {
+	o.KubernetesOperatorControlled = v
+}
+
 // GetKubernetesProvider returns the KubernetesProvider field value if set, zero value otherwise.
 func (o *KubernetesRegionInfo) GetKubernetesProvider() string {
 	if o == nil || o.KubernetesProvider == nil {
@@ -664,6 +690,9 @@ func (o KubernetesRegionInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.KubernetesImageRegistry != nil {
 		toSerialize["kubernetesImageRegistry"] = o.KubernetesImageRegistry
+	}
+	if true {
+		toSerialize["kubernetesOperatorControlled"] = o.KubernetesOperatorControlled
 	}
 	if o.KubernetesProvider != nil {
 		toSerialize["kubernetesProvider"] = o.KubernetesProvider

@@ -58,6 +58,7 @@ type BackupTableParams struct {
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	FullBackup bool `json:"fullBackup"`
 	// Incremental backups chain size
 	FullChainSizeInBytes *int64 `json:"fullChainSizeInBytes,omitempty"`
 	// Should table backup errors be ignored
@@ -140,9 +141,10 @@ type BackupTableParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupTableParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *BackupTableParams {
+func NewBackupTableParams(creatingUser Users, fullBackup bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *BackupTableParams {
 	this := BackupTableParams{}
 	this.CreatingUser = creatingUser
+	this.FullBackup = fullBackup
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
@@ -918,6 +920,30 @@ func (o *BackupTableParams) HasExtraDependencies() bool {
 // SetExtraDependencies gets a reference to the given ExtraDependencies and assigns it to the ExtraDependencies field.
 func (o *BackupTableParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
+}
+
+// GetFullBackup returns the FullBackup field value
+func (o *BackupTableParams) GetFullBackup() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.FullBackup
+}
+
+// GetFullBackupOk returns a tuple with the FullBackup field value
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetFullBackupOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.FullBackup, true
+}
+
+// SetFullBackup sets field value
+func (o *BackupTableParams) SetFullBackup(v bool) {
+	o.FullBackup = v
 }
 
 // GetFullChainSizeInBytes returns the FullChainSizeInBytes field value if set, zero value otherwise.
@@ -2289,6 +2315,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
+	}
+	if true {
+		toSerialize["fullBackup"] = o.FullBackup
 	}
 	if o.FullChainSizeInBytes != nil {
 		toSerialize["fullChainSizeInBytes"] = o.FullChainSizeInBytes

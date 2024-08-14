@@ -17,6 +17,8 @@ import (
 // XClusterNamespaceConfig struct for XClusterNamespaceConfig
 type XClusterNamespaceConfig struct {
 	SourceNamespaceId string `json:"sourceNamespaceId"`
+	// Status
+	Status *string `json:"status,omitempty"`
 }
 
 // NewXClusterNamespaceConfig instantiates a new XClusterNamespaceConfig object
@@ -61,10 +63,45 @@ func (o *XClusterNamespaceConfig) SetSourceNamespaceId(v string) {
 	o.SourceNamespaceId = v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *XClusterNamespaceConfig) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *XClusterNamespaceConfig) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *XClusterNamespaceConfig) SetStatus(v string) {
+	o.Status = &v
+}
+
 func (o XClusterNamespaceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["sourceNamespaceId"] = o.SourceNamespaceId
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }

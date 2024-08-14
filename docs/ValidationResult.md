@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | **string** |  | 
-**IsRequired** | **bool** |  | 
-**IsValid** | **bool** |  | 
+**Required** | **bool** |  | 
 **Type** | **string** |  | 
+**Valid** | **bool** |  | 
 **Value** | **string** |  | 
 
 ## Methods
 
 ### NewValidationResult
 
-`func NewValidationResult(description string, isRequired bool, isValid bool, type_ string, value string, ) *ValidationResult`
+`func NewValidationResult(description string, required bool, type_ string, valid bool, value string, ) *ValidationResult`
 
 NewValidationResult instantiates a new ValidationResult object
 This constructor will assign default values to properties that have it defined,
@@ -49,44 +49,24 @@ and a boolean to check if the value has been set.
 SetDescription sets Description field to given value.
 
 
-### GetIsRequired
+### GetRequired
 
-`func (o *ValidationResult) GetIsRequired() bool`
+`func (o *ValidationResult) GetRequired() bool`
 
-GetIsRequired returns the IsRequired field if non-nil, zero value otherwise.
+GetRequired returns the Required field if non-nil, zero value otherwise.
 
-### GetIsRequiredOk
+### GetRequiredOk
 
-`func (o *ValidationResult) GetIsRequiredOk() (*bool, bool)`
+`func (o *ValidationResult) GetRequiredOk() (*bool, bool)`
 
-GetIsRequiredOk returns a tuple with the IsRequired field if it's non-nil, zero value otherwise
+GetRequiredOk returns a tuple with the Required field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsRequired
+### SetRequired
 
-`func (o *ValidationResult) SetIsRequired(v bool)`
+`func (o *ValidationResult) SetRequired(v bool)`
 
-SetIsRequired sets IsRequired field to given value.
-
-
-### GetIsValid
-
-`func (o *ValidationResult) GetIsValid() bool`
-
-GetIsValid returns the IsValid field if non-nil, zero value otherwise.
-
-### GetIsValidOk
-
-`func (o *ValidationResult) GetIsValidOk() (*bool, bool)`
-
-GetIsValidOk returns a tuple with the IsValid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsValid
-
-`func (o *ValidationResult) SetIsValid(v bool)`
-
-SetIsValid sets IsValid field to given value.
+SetRequired sets Required field to given value.
 
 
 ### GetType
@@ -107,6 +87,26 @@ and a boolean to check if the value has been set.
 `func (o *ValidationResult) SetType(v string)`
 
 SetType sets Type field to given value.
+
+
+### GetValid
+
+`func (o *ValidationResult) GetValid() bool`
+
+GetValid returns the Valid field if non-nil, zero value otherwise.
+
+### GetValidOk
+
+`func (o *ValidationResult) GetValidOk() (*bool, bool)`
+
+GetValidOk returns a tuple with the Valid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValid
+
+`func (o *ValidationResult) SetValid(v bool)`
+
+SetValid sets Valid field to given value.
 
 
 ### GetValue

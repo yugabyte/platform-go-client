@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FullBackup** | **bool** |  | 
 **FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
@@ -75,7 +76,7 @@ Name | Type | Description | Notes
 
 ### NewMultiTableBackupRequestParams
 
-`func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams`
+`func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams`
 
 NewMultiTableBackupRequestParams instantiates a new MultiTableBackupRequestParams object
 This constructor will assign default values to properties that have it defined,
@@ -684,6 +685,26 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 `func (o *MultiTableBackupRequestParams) HasExtraDependencies() bool`
 
 HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFullBackup
+
+`func (o *MultiTableBackupRequestParams) GetFullBackup() bool`
+
+GetFullBackup returns the FullBackup field if non-nil, zero value otherwise.
+
+### GetFullBackupOk
+
+`func (o *MultiTableBackupRequestParams) GetFullBackupOk() (*bool, bool)`
+
+GetFullBackupOk returns a tuple with the FullBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullBackup
+
+`func (o *MultiTableBackupRequestParams) SetFullBackup(v bool)`
+
+SetFullBackup sets FullBackup field to given value.
+
 
 ### GetFullChainSizeInBytes
 

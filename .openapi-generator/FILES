@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -16,6 +17,7 @@ api_customer_management.go
 api_customer_tasks.go
 api_disaster_recovery.go
 api_encryption_at_rest.go
+api_extract_metadata_from_remote_tarball.go
 api_grafana_dashboard.go
 api_instance_types.go
 api_kubernetes_overrides_controller.go
@@ -25,6 +27,7 @@ api_license_management.go
 api_logging_config.go
 api_maintenance_windows_.go
 api_metrics.go
+api_new_release_management.go
 api_node_agents.go
 api_node_instances.go
 api_performance_advisor.go
@@ -45,6 +48,7 @@ api_universe_management.go
 api_universe_node_metadata_metamaster.go
 api_universe_performance_suggestions.go
 api_universe_upgrades_management.go
+api_upload_release_packages.go
 api_user_management.go
 client.go
 configuration.go
@@ -99,6 +103,7 @@ docs/AlertTemplateVariablesList.md
 docs/AlertingData.md
 docs/AlertsApi.md
 docs/AllowedUniverseTasksResp.md
+docs/Artifact.md
 docs/AsynchronousReplicationApi.md
 docs/Audit.md
 docs/AuditApi.md
@@ -118,12 +123,14 @@ docs/BackupPagedApiQuery.md
 docs/BackupPagedApiResponse.md
 docs/BackupRequestParams.md
 docs/BackupResp.md
+docs/BackupScheduleEditParams.md
+docs/BackupScheduleToggleParams.md
 docs/BackupStorageInfo.md
 docs/BackupTableParams.md
 docs/BackupsApi.md
 docs/BasicAuthInformation.md
 docs/BasicAuthInformationAllOf.md
-docs/BootstarpBackupParams.md
+docs/BootstrapBackupParams.md
 docs/BootstrapParams.md
 docs/BulkImportParams.md
 docs/BundleDetails.md
@@ -150,6 +157,7 @@ docs/ConfigEntry.md
 docs/ConfigureYCQLFormData.md
 docs/ConfigureYSQLFormData.md
 docs/CreatePitrConfigParams.md
+docs/CreateRelease.md
 docs/CreateTablespaceParams.md
 docs/CurrentAdminNotificationMessages.md
 docs/CustomCACertParams.md
@@ -184,9 +192,11 @@ docs/DrConfig.md
 docs/DrConfigCreateForm.md
 docs/DrConfigEditForm.md
 docs/DrConfigFailoverForm.md
+docs/DrConfigGetResp.md
 docs/DrConfigReplaceReplicaForm.md
 docs/DrConfigRestartForm.md
 docs/DrConfigSafetimeResp.md
+docs/DrConfigSetDatabasesForm.md
 docs/DrConfigSetTablesForm.md
 docs/DrConfigSwitchoverForm.md
 docs/EditAccessKeyRotationScheduleParams.md
@@ -195,6 +205,8 @@ docs/EditBackupScheduleParams.md
 docs/EncryptionAtRestApi.md
 docs/EncryptionAtRestConfig.md
 docs/ExtraDependencies.md
+docs/ExtractMetadata.md
+docs/ExtractMetadataFromRemoteTarballApi.md
 docs/FailedSubtasks.md
 docs/FinalizeUpgradeInfoResponse.md
 docs/FinalizeUpgradeParams.md
@@ -205,6 +217,7 @@ docs/GCPRegionCloudInfo.md
 docs/GCSLocation.md
 docs/GFlagsUpgradeParams.md
 docs/GrafanaDashboardApi.md
+docs/GroupMappingInfo.md
 docs/HTTPAuthInformation.md
 docs/HashedTimestampColumnFinderResponse.md
 docs/HashicorpVaultConfigParams.md
@@ -255,6 +268,7 @@ docs/MetricsApi.md
 docs/MultiTableBackupRequestParams.md
 docs/NamespaceInfoResp.md
 docs/NamespaceSafetime.md
+docs/NewReleaseManagementApi.md
 docs/NoAuth.md
 docs/NodeActionFormData.md
 docs/NodeAgent.md
@@ -306,6 +320,7 @@ docs/PlatformLoggingConfig.md
 docs/PresetThrottleValues.md
 docs/PrevYBSoftwareConfig.md
 docs/PreviewApi.md
+docs/Principal.md
 docs/Provider.md
 docs/ProviderDetails.md
 docs/ProxyConfig.md
@@ -327,6 +342,8 @@ docs/ReplicaPlacement.md
 docs/ResizeNodeParams.md
 docs/ResourceDefinition.md
 docs/ResourceGroup.md
+docs/ResponseExtractMetadata.md
+docs/ResponseRelease.md
 docs/RestartBootstrapParams.md
 docs/RestartTaskParams.md
 docs/RestoreApiFilter.md
@@ -344,6 +361,7 @@ docs/RoleBinding.md
 docs/RoleBindingFormData.md
 docs/RoleFormData.md
 docs/RoleResourceDefinition.md
+docs/RollMaxBatchSize.md
 docs/RollbackUpgradeParams.md
 docs/RunQueryFormData.md
 docs/RuntimeConfigData.md
@@ -388,6 +406,9 @@ docs/TlsToggleParams.md
 docs/TokenAuthInformation.md
 docs/TokenAuthInformationAllOf.md
 docs/TriggerHealthCheckResult.md
+docs/TroubleshootingPlatform.md
+docs/TroubleshootingPlatformDetailsModel.md
+docs/Universe.md
 docs/UniverseActionsApi.md
 docs/UniverseBackupRequestFormData.md
 docs/UniverseCDCManagementApi.md
@@ -408,7 +429,9 @@ docs/UniverseResp.md
 docs/UniverseUpgradesManagementApi.md
 docs/UnusedIndexFinderResponse.md
 docs/UpdateLoadBalancerConfig.md
+docs/UpdateRelease.md
 docs/UpgradeTaskParams.md
+docs/UploadReleasePackagesApi.md
 docs/UserIntent.md
 docs/UserIntentOverrides.md
 docs/UserManagementApi.md
@@ -430,6 +453,7 @@ docs/XClusterConfigRestartFormData.md
 docs/XClusterInfo.md
 docs/XClusterNamespaceConfig.md
 docs/XClusterTableConfig.md
+docs/YBPCreateSuccess.md
 docs/YBPError.md
 docs/YBPSuccess.md
 docs/YBPTask.md
@@ -483,6 +507,7 @@ model_alert_template_variables_form_data.go
 model_alert_template_variables_list.go
 model_alerting_data.go
 model_allowed_universe_tasks_resp.go
+model_artifact.go
 model_audit.go
 model_audit_log_config.go
 model_audit_log_config_params.go
@@ -505,11 +530,13 @@ model_backup_paged_api_query.go
 model_backup_paged_api_response.go
 model_backup_request_params.go
 model_backup_resp.go
+model_backup_schedule_edit_params.go
+model_backup_schedule_toggle_params.go
 model_backup_storage_info.go
 model_backup_table_params.go
 model_basic_auth_information.go
 model_basic_auth_information_all_of.go
-model_bootstarp_backup_params.go
+model_bootstrap_backup_params.go
 model_bootstrap_params.go
 model_bulk_import_params.go
 model_bundle_details.go
@@ -534,6 +561,7 @@ model_config_entry.go
 model_configure_ycql_form_data.go
 model_configure_ysql_form_data.go
 model_create_pitr_config_params.go
+model_create_release.go
 model_create_tablespace_params.go
 model_current_admin_notification_messages.go
 model_custom_ca_cert_params.go
@@ -563,9 +591,11 @@ model_dr_config.go
 model_dr_config_create_form.go
 model_dr_config_edit_form.go
 model_dr_config_failover_form.go
+model_dr_config_get_resp.go
 model_dr_config_replace_replica_form.go
 model_dr_config_restart_form.go
 model_dr_config_safetime_resp.go
+model_dr_config_set_databases_form.go
 model_dr_config_set_tables_form.go
 model_dr_config_switchover_form.go
 model_edit_access_key_rotation_schedule_params.go
@@ -573,6 +603,7 @@ model_edit_backup_params.go
 model_edit_backup_schedule_params.go
 model_encryption_at_rest_config.go
 model_extra_dependencies.go
+model_extract_metadata.go
 model_failed_subtasks.go
 model_finalize_upgrade_info_response.go
 model_finalize_upgrade_params.go
@@ -582,6 +613,7 @@ model_gcp_cloud_monitoring_config.go
 model_gcp_cloud_monitoring_config_all_of.go
 model_gcp_region_cloud_info.go
 model_gcs_location.go
+model_group_mapping_info.go
 model_hashed_timestamp_column_finder_response.go
 model_hashicorp_vault_config_params.go
 model_http_auth_information.go
@@ -670,6 +702,7 @@ model_placement_region.go
 model_platform_logging_config.go
 model_preset_throttle_values.go
 model_prev_yb_software_config.go
+model_principal.go
 model_provider.go
 model_provider_details.go
 model_proxy_config.go
@@ -689,6 +722,8 @@ model_replica_placement.go
 model_resize_node_params.go
 model_resource_definition.go
 model_resource_group.go
+model_response_extract_metadata.go
+model_response_release.go
 model_restart_bootstrap_params.go
 model_restart_task_params.go
 model_restore_api_filter.go
@@ -706,6 +741,7 @@ model_role_binding.go
 model_role_binding_form_data.go
 model_role_form_data.go
 model_role_resource_definition.go
+model_roll_max_batch_size.go
 model_rollback_upgrade_params.go
 model_run_query_form_data.go
 model_runtime_config_data.go
@@ -746,6 +782,9 @@ model_tls_toggle_params.go
 model_token_auth_information.go
 model_token_auth_information_all_of.go
 model_trigger_health_check_result.go
+model_troubleshooting_platform.go
+model_troubleshooting_platform_details_model.go
+model_universe.go
 model_universe_backup_request_form_data.go
 model_universe_configure_task_params.go
 model_universe_definition_task_params.go
@@ -757,6 +796,7 @@ model_universe_resource_details.go
 model_universe_resp.go
 model_unused_index_finder_response.go
 model_update_load_balancer_config.go
+model_update_release.go
 model_upgrade_task_params.go
 model_user_intent.go
 model_user_intent_overrides.go
@@ -780,6 +820,7 @@ model_x_cluster_namespace_config.go
 model_x_cluster_table_config.go
 model_ybc_throttle_parameters.go
 model_ybc_throttle_parameters_response.go
+model_ybp_create_success.go
 model_ybp_error.go
 model_ybp_success.go
 model_ybp_task.go

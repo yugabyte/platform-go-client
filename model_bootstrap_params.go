@@ -18,7 +18,7 @@ import (
 type BootstrapParams struct {
 	// WARNING: This is a preview API that could change. Allow backup on whole database when only set of tables require bootstrap
 	AllowBootstrap *bool `json:"allowBootstrap,omitempty"`
-	BackupRequestParams BootstarpBackupParams `json:"backupRequestParams"`
+	BackupRequestParams BootstrapBackupParams `json:"backupRequestParams"`
 	// Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body
 	Tables []string `json:"tables"`
 }
@@ -27,7 +27,7 @@ type BootstrapParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBootstrapParams(backupRequestParams BootstarpBackupParams, tables []string) *BootstrapParams {
+func NewBootstrapParams(backupRequestParams BootstrapBackupParams, tables []string) *BootstrapParams {
 	this := BootstrapParams{}
 	this.BackupRequestParams = backupRequestParams
 	this.Tables = tables
@@ -75,9 +75,9 @@ func (o *BootstrapParams) SetAllowBootstrap(v bool) {
 }
 
 // GetBackupRequestParams returns the BackupRequestParams field value
-func (o *BootstrapParams) GetBackupRequestParams() BootstarpBackupParams {
+func (o *BootstrapParams) GetBackupRequestParams() BootstrapBackupParams {
 	if o == nil {
-		var ret BootstarpBackupParams
+		var ret BootstrapBackupParams
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *BootstrapParams) GetBackupRequestParams() BootstarpBackupParams {
 
 // GetBackupRequestParamsOk returns a tuple with the BackupRequestParams field value
 // and a boolean to check if the value has been set.
-func (o *BootstrapParams) GetBackupRequestParamsOk() (*BootstarpBackupParams, bool) {
+func (o *BootstrapParams) GetBackupRequestParamsOk() (*BootstrapBackupParams, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *BootstrapParams) GetBackupRequestParamsOk() (*BootstarpBackupParams, bo
 }
 
 // SetBackupRequestParams sets field value
-func (o *BootstrapParams) SetBackupRequestParams(v BootstarpBackupParams) {
+func (o *BootstrapParams) SetBackupRequestParams(v BootstrapBackupParams) {
 	o.BackupRequestParams = v
 }
 

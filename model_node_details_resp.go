@@ -18,6 +18,8 @@ import (
 // NodeDetailsResp struct for NodeDetailsResp
 type NodeDetailsResp struct {
 	AllowedActions *[]string `json:"allowedActions,omitempty"`
+	// WARNING: This is a preview API that could change. Used by auto master failover
+	AutoSyncMasterAddrs *bool `json:"autoSyncMasterAddrs,omitempty"`
 	// The availability zone's UUID
 	AzUuid *string `json:"azUuid,omitempty"`
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
@@ -138,6 +140,38 @@ func (o *NodeDetailsResp) HasAllowedActions() bool {
 // SetAllowedActions gets a reference to the given []string and assigns it to the AllowedActions field.
 func (o *NodeDetailsResp) SetAllowedActions(v []string) {
 	o.AllowedActions = &v
+}
+
+// GetAutoSyncMasterAddrs returns the AutoSyncMasterAddrs field value if set, zero value otherwise.
+func (o *NodeDetailsResp) GetAutoSyncMasterAddrs() bool {
+	if o == nil || o.AutoSyncMasterAddrs == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoSyncMasterAddrs
+}
+
+// GetAutoSyncMasterAddrsOk returns a tuple with the AutoSyncMasterAddrs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetailsResp) GetAutoSyncMasterAddrsOk() (*bool, bool) {
+	if o == nil || o.AutoSyncMasterAddrs == nil {
+		return nil, false
+	}
+	return o.AutoSyncMasterAddrs, true
+}
+
+// HasAutoSyncMasterAddrs returns a boolean if a field has been set.
+func (o *NodeDetailsResp) HasAutoSyncMasterAddrs() bool {
+	if o != nil && o.AutoSyncMasterAddrs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSyncMasterAddrs gets a reference to the given bool and assigns it to the AutoSyncMasterAddrs field.
+func (o *NodeDetailsResp) SetAutoSyncMasterAddrs(v bool) {
+	o.AutoSyncMasterAddrs = &v
 }
 
 // GetAzUuid returns the AzUuid field value if set, zero value otherwise.
@@ -1288,6 +1322,9 @@ func (o NodeDetailsResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AllowedActions != nil {
 		toSerialize["allowedActions"] = o.AllowedActions
+	}
+	if o.AutoSyncMasterAddrs != nil {
+		toSerialize["autoSyncMasterAddrs"] = o.AutoSyncMasterAddrs
 	}
 	if o.AzUuid != nil {
 		toSerialize["azUuid"] = o.AzUuid
