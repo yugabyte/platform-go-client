@@ -1108,9 +1108,14 @@ type UniverseManagementApiApiSetUniverseKeyRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
+	setUniverseKeyRequest *EncryptionAtRestKeyParams
 	request *interface{}
 }
 
+func (r UniverseManagementApiApiSetUniverseKeyRequest) SetUniverseKeyRequest(setUniverseKeyRequest EncryptionAtRestKeyParams) UniverseManagementApiApiSetUniverseKeyRequest {
+	r.setUniverseKeyRequest = &setUniverseKeyRequest
+	return r
+}
 func (r UniverseManagementApiApiSetUniverseKeyRequest) Request(request interface{}) UniverseManagementApiApiSetUniverseKeyRequest {
 	r.request = &request
 	return r
@@ -1163,12 +1168,15 @@ func (a *UniverseManagementApiService) SetUniverseKeyExecute(r UniverseManagemen
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.setUniverseKeyRequest == nil {
+		return localVarReturnValue, nil, reportError("setUniverseKeyRequest is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1184,6 +1192,8 @@ func (a *UniverseManagementApiService) SetUniverseKeyExecute(r UniverseManagemen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.setUniverseKeyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
