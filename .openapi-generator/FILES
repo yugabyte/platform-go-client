@@ -194,6 +194,7 @@ docs/EditBackupParams.md
 docs/EditBackupScheduleParams.md
 docs/EncryptionAtRestApi.md
 docs/EncryptionAtRestConfig.md
+docs/EncryptionAtRestKeyParams.md
 docs/ExtraDependencies.md
 docs/FailedSubtasks.md
 docs/FinalizeUpgradeInfoResponse.md
@@ -572,6 +573,7 @@ model_edit_access_key_rotation_schedule_params.go
 model_edit_backup_params.go
 model_edit_backup_schedule_params.go
 model_encryption_at_rest_config.go
+model_encryption_at_rest_key_params.go
 model_extra_dependencies.go
 model_failed_subtasks.go
 model_finalize_upgrade_info_response.go

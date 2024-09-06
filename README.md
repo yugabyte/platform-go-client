@@ -512,6 +512,7 @@ Class | Method | HTTP request | Description
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
+ - [EncryptionAtRestKeyParams](docs/EncryptionAtRestKeyParams.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [FailedSubtasks](docs/FailedSubtasks.md)
  - [FinalizeUpgradeInfoResponse](docs/FinalizeUpgradeInfoResponse.md)
