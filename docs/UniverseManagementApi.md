@@ -622,7 +622,7 @@ Name | Type | Description  | Notes
 
 ## SetUniverseKey
 
-> UniverseResp SetUniverseKey(ctx, cUUID, uniUUID).Request(request).Execute()
+> UniverseResp SetUniverseKey(ctx, cUUID, uniUUID).SetUniverseKeyRequest(setUniverseKeyRequest).Request(request).Execute()
 
 Set a universe's key
 
@@ -643,11 +643,12 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
+    setUniverseKeyRequest := *openapiclient.NewEncryptionAtRestConfig() // EncryptionAtRestConfig | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UniverseManagementApi.SetUniverseKey(context.Background(), cUUID, uniUUID).Request(request).Execute()
+    resp, r, err := api_client.UniverseManagementApi.SetUniverseKey(context.Background(), cUUID, uniUUID).SetUniverseKeyRequest(setUniverseKeyRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.SetUniverseKey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -675,6 +676,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **setUniverseKeyRequest** | [**EncryptionAtRestConfig**](EncryptionAtRestConfig.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -687,7 +689,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
