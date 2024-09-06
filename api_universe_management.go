@@ -1108,11 +1108,11 @@ type UniverseManagementApiApiSetUniverseKeyRequest struct {
 	ApiService *UniverseManagementApiService
 	cUUID string
 	uniUUID string
-	setUniverseKeyRequest *EncryptionAtRestKeyParams
+	setUniverseKeyRequest *EncryptionAtRestConfig
 	request *interface{}
 }
 
-func (r UniverseManagementApiApiSetUniverseKeyRequest) SetUniverseKeyRequest(setUniverseKeyRequest EncryptionAtRestKeyParams) UniverseManagementApiApiSetUniverseKeyRequest {
+func (r UniverseManagementApiApiSetUniverseKeyRequest) SetUniverseKeyRequest(setUniverseKeyRequest EncryptionAtRestConfig) UniverseManagementApiApiSetUniverseKeyRequest {
 	r.setUniverseKeyRequest = &setUniverseKeyRequest
 	return r
 }
