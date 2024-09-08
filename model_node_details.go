@@ -17,6 +17,8 @@ import (
 
 // NodeDetails Details of a cloud node
 type NodeDetails struct {
+	// WARNING: This is a preview API that could change. Used by auto master failover
+	AutoSyncMasterAddrs *bool `json:"autoSyncMasterAddrs,omitempty"`
 	// The availability zone's UUID
 	AzUuid *string `json:"azUuid,omitempty"`
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
@@ -26,6 +28,8 @@ type NodeDetails struct {
 	DedicatedTo *string `json:"dedicatedTo,omitempty"`
 	// Disks are mounted by uuid
 	DisksAreMountedByUUID *bool `json:"disksAreMountedByUUID,omitempty"`
+	// Internal YSQL RPC port
+	InternalYsqlServerRpcPort *int32 `json:"internalYsqlServerRpcPort,omitempty"`
 	// True if this node is a master
 	IsMaster *bool `json:"isMaster,omitempty"`
 	// True if this node is a REDIS server
@@ -103,6 +107,38 @@ func NewNodeDetails() *NodeDetails {
 func NewNodeDetailsWithDefaults() *NodeDetails {
 	this := NodeDetails{}
 	return &this
+}
+
+// GetAutoSyncMasterAddrs returns the AutoSyncMasterAddrs field value if set, zero value otherwise.
+func (o *NodeDetails) GetAutoSyncMasterAddrs() bool {
+	if o == nil || o.AutoSyncMasterAddrs == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoSyncMasterAddrs
+}
+
+// GetAutoSyncMasterAddrsOk returns a tuple with the AutoSyncMasterAddrs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetAutoSyncMasterAddrsOk() (*bool, bool) {
+	if o == nil || o.AutoSyncMasterAddrs == nil {
+		return nil, false
+	}
+	return o.AutoSyncMasterAddrs, true
+}
+
+// HasAutoSyncMasterAddrs returns a boolean if a field has been set.
+func (o *NodeDetails) HasAutoSyncMasterAddrs() bool {
+	if o != nil && o.AutoSyncMasterAddrs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoSyncMasterAddrs gets a reference to the given bool and assigns it to the AutoSyncMasterAddrs field.
+func (o *NodeDetails) SetAutoSyncMasterAddrs(v bool) {
+	o.AutoSyncMasterAddrs = &v
 }
 
 // GetAzUuid returns the AzUuid field value if set, zero value otherwise.
@@ -263,6 +299,38 @@ func (o *NodeDetails) HasDisksAreMountedByUUID() bool {
 // SetDisksAreMountedByUUID gets a reference to the given bool and assigns it to the DisksAreMountedByUUID field.
 func (o *NodeDetails) SetDisksAreMountedByUUID(v bool) {
 	o.DisksAreMountedByUUID = &v
+}
+
+// GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field value if set, zero value otherwise.
+func (o *NodeDetails) GetInternalYsqlServerRpcPort() int32 {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.InternalYsqlServerRpcPort
+}
+
+// GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetInternalYsqlServerRpcPortOk() (*int32, bool) {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		return nil, false
+	}
+	return o.InternalYsqlServerRpcPort, true
+}
+
+// HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
+func (o *NodeDetails) HasInternalYsqlServerRpcPort() bool {
+	if o != nil && o.InternalYsqlServerRpcPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalYsqlServerRpcPort gets a reference to the given int32 and assigns it to the InternalYsqlServerRpcPort field.
+func (o *NodeDetails) SetInternalYsqlServerRpcPort(v int32) {
+	o.InternalYsqlServerRpcPort = &v
 }
 
 // GetIsMaster returns the IsMaster field value if set, zero value otherwise.
@@ -1227,6 +1295,9 @@ func (o *NodeDetails) SetYsqlServerRpcPort(v int32) {
 
 func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AutoSyncMasterAddrs != nil {
+		toSerialize["autoSyncMasterAddrs"] = o.AutoSyncMasterAddrs
+	}
 	if o.AzUuid != nil {
 		toSerialize["azUuid"] = o.AzUuid
 	}
@@ -1241,6 +1312,9 @@ func (o NodeDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisksAreMountedByUUID != nil {
 		toSerialize["disksAreMountedByUUID"] = o.DisksAreMountedByUUID
+	}
+	if o.InternalYsqlServerRpcPort != nil {
+		toSerialize["internalYsqlServerRpcPort"] = o.InternalYsqlServerRpcPort
 	}
 	if o.IsMaster != nil {
 		toSerialize["isMaster"] = o.IsMaster

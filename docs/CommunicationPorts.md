@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**InternalYsqlServerRpcPort** | Pointer to **int32** | Internal YSQL RPC port | [optional] 
 **MasterHttpPort** | Pointer to **int32** | Master table HTTP port | [optional] 
 **MasterRpcPort** | Pointer to **int32** | Master table RCP port | [optional] 
 **NodeExporterPort** | Pointer to **int32** | Node exporter port | [optional] 
@@ -37,6 +38,31 @@ will change when the set of required properties is changed
 NewCommunicationPortsWithDefaults instantiates a new CommunicationPorts object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetInternalYsqlServerRpcPort
+
+`func (o *CommunicationPorts) GetInternalYsqlServerRpcPort() int32`
+
+GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field if non-nil, zero value otherwise.
+
+### GetInternalYsqlServerRpcPortOk
+
+`func (o *CommunicationPorts) GetInternalYsqlServerRpcPortOk() (*int32, bool)`
+
+GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalYsqlServerRpcPort
+
+`func (o *CommunicationPorts) SetInternalYsqlServerRpcPort(v int32)`
+
+SetInternalYsqlServerRpcPort sets InternalYsqlServerRpcPort field to given value.
+
+### HasInternalYsqlServerRpcPort
+
+`func (o *CommunicationPorts) HasInternalYsqlServerRpcPort() bool`
+
+HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
 
 ### GetMasterHttpPort
 

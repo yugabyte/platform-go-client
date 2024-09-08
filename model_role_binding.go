@@ -19,6 +19,8 @@ import (
 type RoleBinding struct {
 	// RoleBinding create time
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	GroupInfo *GroupMappingInfo `json:"groupInfo,omitempty"`
+	Principal Principal `json:"principal"`
 	ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
 	Role *Role `json:"role,omitempty"`
 	// Role binding type
@@ -34,8 +36,9 @@ type RoleBinding struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleBinding() *RoleBinding {
+func NewRoleBinding(principal Principal) *RoleBinding {
 	this := RoleBinding{}
+	this.Principal = principal
 	return &this
 }
 
@@ -77,6 +80,62 @@ func (o *RoleBinding) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given time.Time and assigns it to the CreateTime field.
 func (o *RoleBinding) SetCreateTime(v time.Time) {
 	o.CreateTime = &v
+}
+
+// GetGroupInfo returns the GroupInfo field value if set, zero value otherwise.
+func (o *RoleBinding) GetGroupInfo() GroupMappingInfo {
+	if o == nil || o.GroupInfo == nil {
+		var ret GroupMappingInfo
+		return ret
+	}
+	return *o.GroupInfo
+}
+
+// GetGroupInfoOk returns a tuple with the GroupInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RoleBinding) GetGroupInfoOk() (*GroupMappingInfo, bool) {
+	if o == nil || o.GroupInfo == nil {
+		return nil, false
+	}
+	return o.GroupInfo, true
+}
+
+// HasGroupInfo returns a boolean if a field has been set.
+func (o *RoleBinding) HasGroupInfo() bool {
+	if o != nil && o.GroupInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupInfo gets a reference to the given GroupMappingInfo and assigns it to the GroupInfo field.
+func (o *RoleBinding) SetGroupInfo(v GroupMappingInfo) {
+	o.GroupInfo = &v
+}
+
+// GetPrincipal returns the Principal field value
+func (o *RoleBinding) GetPrincipal() Principal {
+	if o == nil {
+		var ret Principal
+		return ret
+	}
+
+	return o.Principal
+}
+
+// GetPrincipalOk returns a tuple with the Principal field value
+// and a boolean to check if the value has been set.
+func (o *RoleBinding) GetPrincipalOk() (*Principal, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Principal, true
+}
+
+// SetPrincipal sets field value
+func (o *RoleBinding) SetPrincipal(v Principal) {
+	o.Principal = v
 }
 
 // GetResourceGroup returns the ResourceGroup field value if set, zero value otherwise.
@@ -275,6 +334,12 @@ func (o RoleBinding) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
+	}
+	if o.GroupInfo != nil {
+		toSerialize["groupInfo"] = o.GroupInfo
+	}
+	if true {
+		toSerialize["principal"] = o.Principal
 	}
 	if o.ResourceGroup != nil {
 		toSerialize["resourceGroup"] = o.ResourceGroup

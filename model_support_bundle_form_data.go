@@ -25,6 +25,12 @@ type SupportBundleFormData struct {
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of the most recent cores to collect (if any)
 	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
+	// End date to filter prometheus metrics till
+	PromDumpEndDate *time.Time `json:"promDumpEndDate,omitempty"`
+	// Start date to filter prometheus metrics from
+	PromDumpStartDate *time.Time `json:"promDumpStartDate,omitempty"`
+	// List of exports to be included in the prometheus dump
+	PrometheusMetricsTypes *[]string `json:"prometheusMetricsTypes,omitempty"`
 	// Start date to filter logs from
 	StartDate time.Time `json:"startDate"`
 }
@@ -161,6 +167,102 @@ func (o *SupportBundleFormData) SetMaxNumRecentCores(v int32) {
 	o.MaxNumRecentCores = &v
 }
 
+// GetPromDumpEndDate returns the PromDumpEndDate field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromDumpEndDate() time.Time {
+	if o == nil || o.PromDumpEndDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.PromDumpEndDate
+}
+
+// GetPromDumpEndDateOk returns a tuple with the PromDumpEndDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromDumpEndDateOk() (*time.Time, bool) {
+	if o == nil || o.PromDumpEndDate == nil {
+		return nil, false
+	}
+	return o.PromDumpEndDate, true
+}
+
+// HasPromDumpEndDate returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromDumpEndDate() bool {
+	if o != nil && o.PromDumpEndDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPromDumpEndDate gets a reference to the given time.Time and assigns it to the PromDumpEndDate field.
+func (o *SupportBundleFormData) SetPromDumpEndDate(v time.Time) {
+	o.PromDumpEndDate = &v
+}
+
+// GetPromDumpStartDate returns the PromDumpStartDate field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromDumpStartDate() time.Time {
+	if o == nil || o.PromDumpStartDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.PromDumpStartDate
+}
+
+// GetPromDumpStartDateOk returns a tuple with the PromDumpStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromDumpStartDateOk() (*time.Time, bool) {
+	if o == nil || o.PromDumpStartDate == nil {
+		return nil, false
+	}
+	return o.PromDumpStartDate, true
+}
+
+// HasPromDumpStartDate returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromDumpStartDate() bool {
+	if o != nil && o.PromDumpStartDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPromDumpStartDate gets a reference to the given time.Time and assigns it to the PromDumpStartDate field.
+func (o *SupportBundleFormData) SetPromDumpStartDate(v time.Time) {
+	o.PromDumpStartDate = &v
+}
+
+// GetPrometheusMetricsTypes returns the PrometheusMetricsTypes field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPrometheusMetricsTypes() []string {
+	if o == nil || o.PrometheusMetricsTypes == nil {
+		var ret []string
+		return ret
+	}
+	return *o.PrometheusMetricsTypes
+}
+
+// GetPrometheusMetricsTypesOk returns a tuple with the PrometheusMetricsTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPrometheusMetricsTypesOk() (*[]string, bool) {
+	if o == nil || o.PrometheusMetricsTypes == nil {
+		return nil, false
+	}
+	return o.PrometheusMetricsTypes, true
+}
+
+// HasPrometheusMetricsTypes returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPrometheusMetricsTypes() bool {
+	if o != nil && o.PrometheusMetricsTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrometheusMetricsTypes gets a reference to the given []string and assigns it to the PrometheusMetricsTypes field.
+func (o *SupportBundleFormData) SetPrometheusMetricsTypes(v []string) {
+	o.PrometheusMetricsTypes = &v
+}
+
 // GetStartDate returns the StartDate field value
 func (o *SupportBundleFormData) GetStartDate() time.Time {
 	if o == nil {
@@ -198,6 +300,15 @@ func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxNumRecentCores != nil {
 		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
+	}
+	if o.PromDumpEndDate != nil {
+		toSerialize["promDumpEndDate"] = o.PromDumpEndDate
+	}
+	if o.PromDumpStartDate != nil {
+		toSerialize["promDumpStartDate"] = o.PromDumpStartDate
+	}
+	if o.PrometheusMetricsTypes != nil {
+		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes
 	}
 	if true {
 		toSerialize["startDate"] = o.StartDate

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OnlyShowDeletedConfigs** | **bool** |  | 
 **OnlyShowDeletedUniverses** | **bool** |  | 
 **ScheduleUUIDList** | **[]string** |  | 
+**ShowHidden** | **bool** |  | 
 **States** | **[]string** |  | 
 **StorageConfigUUIDList** | **[]string** |  | 
 **UniverseNameList** | **[]string** |  | 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewBackupApiFilter
 
-`func NewBackupApiFilter(backupUUIDList []string, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
+`func NewBackupApiFilter(backupUUIDList []string, keyspaceList []string, onlyShowDeletedConfigs bool, onlyShowDeletedUniverses bool, scheduleUUIDList []string, showHidden bool, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *BackupApiFilter`
 
 NewBackupApiFilter instantiates a new BackupApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -183,6 +184,26 @@ and a boolean to check if the value has been set.
 `func (o *BackupApiFilter) SetScheduleUUIDList(v []string)`
 
 SetScheduleUUIDList sets ScheduleUUIDList field to given value.
+
+
+### GetShowHidden
+
+`func (o *BackupApiFilter) GetShowHidden() bool`
+
+GetShowHidden returns the ShowHidden field if non-nil, zero value otherwise.
+
+### GetShowHiddenOk
+
+`func (o *BackupApiFilter) GetShowHiddenOk() (*bool, bool)`
+
+GetShowHiddenOk returns a tuple with the ShowHidden field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowHidden
+
+`func (o *BackupApiFilter) SetShowHidden(v bool)`
+
+SetShowHidden sets ShowHidden field to given value.
 
 
 ### GetStates

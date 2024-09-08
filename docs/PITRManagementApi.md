@@ -34,7 +34,7 @@ func main() {
     uniUUID := TODO // string | 
     tableType := "tableType_example" // string | 
     keyspaceName := "keyspaceName_example" // string | 
-    pitrConfig := *openapiclient.NewCreatePitrConfigParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CreatePitrConfigParams | post pitr config
+    pitrConfig := *openapiclient.NewCreatePitrConfigParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CreatePitrConfigParams | post pitr config
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -260,7 +260,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    performPitr := *openapiclient.NewRestoreSnapshotScheduleParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // RestoreSnapshotScheduleParams | perform PITR
+    performPitr := *openapiclient.NewRestoreSnapshotScheduleParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // RestoreSnapshotScheduleParams | perform PITR
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

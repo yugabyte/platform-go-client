@@ -21,16 +21,20 @@ type XClusterTableConfig struct {
 	BackupUuid *string `json:"backupUuid,omitempty"`
 	// Time of the bootstrap of the table
 	BootstrapCreateTime *time.Time `json:"bootstrapCreateTime,omitempty"`
+	// Short human readable replication status error messages
+	ReplicationStatusErrors *[]string `json:"replicationStatusErrors,omitempty"`
 	// Time of the last try to restore data to the target universe
 	RestoreTime *time.Time `json:"restoreTime,omitempty"`
 	// The restore config used to do bootstrapping for this table
 	RestoreUuid *string `json:"restoreUuid,omitempty"`
+	SourceTableInfo *TableInfoResp `json:"sourceTableInfo,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
 	// Stream ID if replication is setup; bootstrap ID if the table is bootstrapped
 	StreamId *string `json:"streamId,omitempty"`
 	// Table ID
 	TableId *string `json:"tableId,omitempty"`
+	TargetTableInfo *TableInfoResp `json:"targetTableInfo,omitempty"`
 }
 
 // NewXClusterTableConfig instantiates a new XClusterTableConfig object
@@ -114,6 +118,38 @@ func (o *XClusterTableConfig) SetBootstrapCreateTime(v time.Time) {
 	o.BootstrapCreateTime = &v
 }
 
+// GetReplicationStatusErrors returns the ReplicationStatusErrors field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetReplicationStatusErrors() []string {
+	if o == nil || o.ReplicationStatusErrors == nil {
+		var ret []string
+		return ret
+	}
+	return *o.ReplicationStatusErrors
+}
+
+// GetReplicationStatusErrorsOk returns a tuple with the ReplicationStatusErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetReplicationStatusErrorsOk() (*[]string, bool) {
+	if o == nil || o.ReplicationStatusErrors == nil {
+		return nil, false
+	}
+	return o.ReplicationStatusErrors, true
+}
+
+// HasReplicationStatusErrors returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasReplicationStatusErrors() bool {
+	if o != nil && o.ReplicationStatusErrors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplicationStatusErrors gets a reference to the given []string and assigns it to the ReplicationStatusErrors field.
+func (o *XClusterTableConfig) SetReplicationStatusErrors(v []string) {
+	o.ReplicationStatusErrors = &v
+}
+
 // GetRestoreTime returns the RestoreTime field value if set, zero value otherwise.
 func (o *XClusterTableConfig) GetRestoreTime() time.Time {
 	if o == nil || o.RestoreTime == nil {
@@ -176,6 +212,38 @@ func (o *XClusterTableConfig) HasRestoreUuid() bool {
 // SetRestoreUuid gets a reference to the given string and assigns it to the RestoreUuid field.
 func (o *XClusterTableConfig) SetRestoreUuid(v string) {
 	o.RestoreUuid = &v
+}
+
+// GetSourceTableInfo returns the SourceTableInfo field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetSourceTableInfo() TableInfoResp {
+	if o == nil || o.SourceTableInfo == nil {
+		var ret TableInfoResp
+		return ret
+	}
+	return *o.SourceTableInfo
+}
+
+// GetSourceTableInfoOk returns a tuple with the SourceTableInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetSourceTableInfoOk() (*TableInfoResp, bool) {
+	if o == nil || o.SourceTableInfo == nil {
+		return nil, false
+	}
+	return o.SourceTableInfo, true
+}
+
+// HasSourceTableInfo returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasSourceTableInfo() bool {
+	if o != nil && o.SourceTableInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceTableInfo gets a reference to the given TableInfoResp and assigns it to the SourceTableInfo field.
+func (o *XClusterTableConfig) SetSourceTableInfo(v TableInfoResp) {
+	o.SourceTableInfo = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -274,6 +342,38 @@ func (o *XClusterTableConfig) SetTableId(v string) {
 	o.TableId = &v
 }
 
+// GetTargetTableInfo returns the TargetTableInfo field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetTargetTableInfo() TableInfoResp {
+	if o == nil || o.TargetTableInfo == nil {
+		var ret TableInfoResp
+		return ret
+	}
+	return *o.TargetTableInfo
+}
+
+// GetTargetTableInfoOk returns a tuple with the TargetTableInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetTargetTableInfoOk() (*TableInfoResp, bool) {
+	if o == nil || o.TargetTableInfo == nil {
+		return nil, false
+	}
+	return o.TargetTableInfo, true
+}
+
+// HasTargetTableInfo returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasTargetTableInfo() bool {
+	if o != nil && o.TargetTableInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetTableInfo gets a reference to the given TableInfoResp and assigns it to the TargetTableInfo field.
+func (o *XClusterTableConfig) SetTargetTableInfo(v TableInfoResp) {
+	o.TargetTableInfo = &v
+}
+
 func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BackupUuid != nil {
@@ -282,11 +382,17 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	if o.BootstrapCreateTime != nil {
 		toSerialize["bootstrapCreateTime"] = o.BootstrapCreateTime
 	}
+	if o.ReplicationStatusErrors != nil {
+		toSerialize["replicationStatusErrors"] = o.ReplicationStatusErrors
+	}
 	if o.RestoreTime != nil {
 		toSerialize["restoreTime"] = o.RestoreTime
 	}
 	if o.RestoreUuid != nil {
 		toSerialize["restoreUuid"] = o.RestoreUuid
+	}
+	if o.SourceTableInfo != nil {
+		toSerialize["sourceTableInfo"] = o.SourceTableInfo
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
@@ -296,6 +402,9 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.TableId != nil {
 		toSerialize["tableId"] = o.TableId
+	}
+	if o.TargetTableInfo != nil {
+		toSerialize["targetTableInfo"] = o.TargetTableInfo
 	}
 	return json.Marshal(toSerialize)
 }

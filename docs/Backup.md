@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **HasKMSHistory** | Pointer to **bool** | Whether the backup has KMS history metadata | [optional] [readonly] 
 **IncrementalBackup** | **bool** |  | 
 **ParentBackup** | **bool** |  | 
+**RetryCount** | Pointer to **int32** | Retry count for backup deletion | [optional] 
 **ScheduleName** | Pointer to **string** | Schedule Policy Name, if this backup is part of a schedule | [optional] 
 **ScheduleUUID** | Pointer to **string** | Schedule UUID, if this backup is part of a schedule | [optional] 
 **State** | Pointer to **string** | State of the backup | [optional] [readonly] 
@@ -333,6 +334,31 @@ and a boolean to check if the value has been set.
 
 SetParentBackup sets ParentBackup field to given value.
 
+
+### GetRetryCount
+
+`func (o *Backup) GetRetryCount() int32`
+
+GetRetryCount returns the RetryCount field if non-nil, zero value otherwise.
+
+### GetRetryCountOk
+
+`func (o *Backup) GetRetryCountOk() (*int32, bool)`
+
+GetRetryCountOk returns a tuple with the RetryCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryCount
+
+`func (o *Backup) SetRetryCount(v int32)`
+
+SetRetryCount sets RetryCount field to given value.
+
+### HasRetryCount
+
+`func (o *Backup) HasRetryCount() bool`
+
+HasRetryCount returns a boolean if a field has been set.
 
 ### GetScheduleName
 

@@ -5,11 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowedActions** | Pointer to **[]string** |  | [optional] [readonly] 
+**AutoSyncMasterAddrs** | Pointer to **bool** | WARNING: This is a preview API that could change. Used by auto master failover | [optional] [readonly] 
 **AzUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 
 **CloudInfo** | Pointer to [**CloudSpecificInfo**](CloudSpecificInfo.md) |  | [optional] 
 **CronsActive** | Pointer to **bool** | True if cron jobs were properly configured for this node | [optional] 
 **DedicatedTo** | Pointer to **string** | Used for configurations where each node can have only one process | [optional] 
 **DisksAreMountedByUUID** | Pointer to **bool** | Disks are mounted by uuid | [optional] 
+**InternalYsqlServerRpcPort** | Pointer to **int32** | Internal YSQL RPC port | [optional] 
 **IsMaster** | Pointer to **bool** | True if this node is a master | [optional] 
 **IsRedisServer** | Pointer to **bool** | True if this node is a REDIS server | [optional] 
 **IsTserver** | Pointer to **bool** | True if this node is a Tablet server | [optional] 
@@ -85,6 +87,31 @@ SetAllowedActions sets AllowedActions field to given value.
 `func (o *NodeDetailsResp) HasAllowedActions() bool`
 
 HasAllowedActions returns a boolean if a field has been set.
+
+### GetAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) GetAutoSyncMasterAddrs() bool`
+
+GetAutoSyncMasterAddrs returns the AutoSyncMasterAddrs field if non-nil, zero value otherwise.
+
+### GetAutoSyncMasterAddrsOk
+
+`func (o *NodeDetailsResp) GetAutoSyncMasterAddrsOk() (*bool, bool)`
+
+GetAutoSyncMasterAddrsOk returns a tuple with the AutoSyncMasterAddrs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) SetAutoSyncMasterAddrs(v bool)`
+
+SetAutoSyncMasterAddrs sets AutoSyncMasterAddrs field to given value.
+
+### HasAutoSyncMasterAddrs
+
+`func (o *NodeDetailsResp) HasAutoSyncMasterAddrs() bool`
+
+HasAutoSyncMasterAddrs returns a boolean if a field has been set.
 
 ### GetAzUuid
 
@@ -210,6 +237,31 @@ SetDisksAreMountedByUUID sets DisksAreMountedByUUID field to given value.
 `func (o *NodeDetailsResp) HasDisksAreMountedByUUID() bool`
 
 HasDisksAreMountedByUUID returns a boolean if a field has been set.
+
+### GetInternalYsqlServerRpcPort
+
+`func (o *NodeDetailsResp) GetInternalYsqlServerRpcPort() int32`
+
+GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field if non-nil, zero value otherwise.
+
+### GetInternalYsqlServerRpcPortOk
+
+`func (o *NodeDetailsResp) GetInternalYsqlServerRpcPortOk() (*int32, bool)`
+
+GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalYsqlServerRpcPort
+
+`func (o *NodeDetailsResp) SetInternalYsqlServerRpcPort(v int32)`
+
+SetInternalYsqlServerRpcPort sets InternalYsqlServerRpcPort field to given value.
+
+### HasInternalYsqlServerRpcPort
+
+`func (o *NodeDetailsResp) HasInternalYsqlServerRpcPort() bool`
+
+HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
 
 ### GetIsMaster
 

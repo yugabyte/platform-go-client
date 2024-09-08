@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
+**EnableConnectionPooling** | Pointer to **bool** | Enable Connection Pooling for the universe | [optional] 
 **EnableYSQL** | Pointer to **bool** | Enable YSQL Api for the universe | [optional] 
 **EnableYSQLAuth** | Pointer to **bool** | Enable YSQL Auth for the universe | [optional] 
 **YsqlPassword** | Pointer to **string** | YSQL Auth password | [optional] 
@@ -52,6 +53,31 @@ SetCommunicationPorts sets CommunicationPorts field to given value.
 `func (o *ConfigureYSQLFormData) HasCommunicationPorts() bool`
 
 HasCommunicationPorts returns a boolean if a field has been set.
+
+### GetEnableConnectionPooling
+
+`func (o *ConfigureYSQLFormData) GetEnableConnectionPooling() bool`
+
+GetEnableConnectionPooling returns the EnableConnectionPooling field if non-nil, zero value otherwise.
+
+### GetEnableConnectionPoolingOk
+
+`func (o *ConfigureYSQLFormData) GetEnableConnectionPoolingOk() (*bool, bool)`
+
+GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableConnectionPooling
+
+`func (o *ConfigureYSQLFormData) SetEnableConnectionPooling(v bool)`
+
+SetEnableConnectionPooling sets EnableConnectionPooling field to given value.
+
+### HasEnableConnectionPooling
+
+`func (o *ConfigureYSQLFormData) HasEnableConnectionPooling() bool`
+
+HasEnableConnectionPooling returns a boolean if a field has been set.
 
 ### GetEnableYSQL
 

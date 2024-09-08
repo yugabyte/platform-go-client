@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Keyspace** | Pointer to **string** | Keyspace name | [optional] 
 **NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
-**SelectiveTableRestore** | Pointer to **bool** | Is selective table restore | [optional] 
+**SelectiveTableRestore** | Pointer to **bool** | Only restore selected tables instead of restoring all tables in backup | [optional] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 

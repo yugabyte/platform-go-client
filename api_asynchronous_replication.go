@@ -452,8 +452,13 @@ type AsynchronousReplicationApiApiGetXClusterConfigRequest struct {
 	ApiService *AsynchronousReplicationApiService
 	cUUID string
 	xccUUID string
+	syncWithDB *bool
 }
 
+func (r AsynchronousReplicationApiApiGetXClusterConfigRequest) SyncWithDB(syncWithDB bool) AsynchronousReplicationApiApiGetXClusterConfigRequest {
+	r.syncWithDB = &syncWithDB
+	return r
+}
 
 func (r AsynchronousReplicationApiApiGetXClusterConfigRequest) Execute() (XClusterConfigGetResp, *_nethttp.Response, error) {
 	return r.ApiService.GetXClusterConfigExecute(r)
@@ -503,6 +508,9 @@ func (a *AsynchronousReplicationApiService) GetXClusterConfigExecute(r Asynchron
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.syncWithDB != nil {
+		localVarQueryParams.Add("syncWithDB", parameterToString(*r.syncWithDB, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -578,6 +586,7 @@ type AsynchronousReplicationApiApiNeedBootstrapTableRequest struct {
 	uniUUID string
 	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
 	configType *string
+	includeDetails *bool
 	request *interface{}
 }
 
@@ -587,6 +596,10 @@ func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) XclusterNeedBoot
 }
 func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) ConfigType(configType string) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
 	r.configType = &configType
+	return r
+}
+func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) IncludeDetails(includeDetails bool) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
+	r.includeDetails = &includeDetails
 	return r
 }
 func (r AsynchronousReplicationApiApiNeedBootstrapTableRequest) Request(request interface{}) AsynchronousReplicationApiApiNeedBootstrapTableRequest {
@@ -647,6 +660,9 @@ func (a *AsynchronousReplicationApiService) NeedBootstrapTableExecute(r Asynchro
 
 	if r.configType != nil {
 		localVarQueryParams.Add("configType", parameterToString(*r.configType, ""))
+	}
+	if r.includeDetails != nil {
+		localVarQueryParams.Add("includeDetails", parameterToString(*r.includeDetails, ""))
 	}
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
@@ -893,8 +909,8 @@ func (r AsynchronousReplicationApiApiSyncXClusterConfigRequest) Execute() (YBPTa
 }
 
 /*
- * SyncXClusterConfig Sync xcluster config
- * Available since YBA version 2.16.0.0.
+ * SyncXClusterConfig Sync xcluster config - deprecated
+ * <b style="color:#ff0000">Deprecated since YBA version 2.23.0.0.</b></p> Sync xcluster config (V2) instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return AsynchronousReplicationApiApiSyncXClusterConfigRequest
@@ -936,6 +952,138 @@ func (a *AsynchronousReplicationApiService) SyncXClusterConfigExecute(r Asynchro
 	if r.targetUniverseUUID != nil {
 		localVarQueryParams.Add("targetUniverseUUID", parameterToString(*r.targetUniverseUUID, ""))
 	}
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AsynchronousReplicationApiApiSyncXClusterConfigV2Request struct {
+	ctx _context.Context
+	ApiService *AsynchronousReplicationApiService
+	cUUID string
+	xccUUID string
+	request *interface{}
+}
+
+func (r AsynchronousReplicationApiApiSyncXClusterConfigV2Request) Request(request interface{}) AsynchronousReplicationApiApiSyncXClusterConfigV2Request {
+	r.request = &request
+	return r
+}
+
+func (r AsynchronousReplicationApiApiSyncXClusterConfigV2Request) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.SyncXClusterConfigV2Execute(r)
+}
+
+/*
+ * SyncXClusterConfigV2 Sync xcluster config (V2)
+ * Available since YBA version 2.23.0.0
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param xccUUID
+ * @return AsynchronousReplicationApiApiSyncXClusterConfigV2Request
+ */
+func (a *AsynchronousReplicationApiService) SyncXClusterConfigV2(ctx _context.Context, cUUID string, xccUUID string) AsynchronousReplicationApiApiSyncXClusterConfigV2Request {
+	return AsynchronousReplicationApiApiSyncXClusterConfigV2Request{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		xccUUID: xccUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *AsynchronousReplicationApiService) SyncXClusterConfigV2Execute(r AsynchronousReplicationApiApiSyncXClusterConfigV2Request) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationApiService.SyncXClusterConfigV2")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/sync"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"xccUUID"+"}", _neturl.PathEscape(parameterToString(r.xccUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}

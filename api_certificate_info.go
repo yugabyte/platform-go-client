@@ -163,9 +163,14 @@ type CertificateInfoApiApiEditCertificateRequest struct {
 	ApiService *CertificateInfoApiService
 	cUUID string
 	rUUID string
+	certificate *CertificateParams
 	request *interface{}
 }
 
+func (r CertificateInfoApiApiEditCertificateRequest) Certificate(certificate CertificateParams) CertificateInfoApiApiEditCertificateRequest {
+	r.certificate = &certificate
+	return r
+}
 func (r CertificateInfoApiApiEditCertificateRequest) Request(request interface{}) CertificateInfoApiApiEditCertificateRequest {
 	r.request = &request
 	return r
@@ -217,12 +222,15 @@ func (a *CertificateInfoApiService) EditCertificateExecute(r CertificateInfoApiA
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.certificate == nil {
+		return localVarReturnValue, nil, reportError("certificate is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -238,6 +246,8 @@ func (a *CertificateInfoApiService) EditCertificateExecute(r CertificateInfoApiA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.certificate
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

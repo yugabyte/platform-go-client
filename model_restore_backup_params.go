@@ -63,6 +63,8 @@ type RestoreBackupParams struct {
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
+	// Restore timestamp in millis
+	RestoreToPointInTimeMillis *int64 `json:"restoreToPointInTimeMillis,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
@@ -1012,6 +1014,38 @@ func (o *RestoreBackupParams) SetRestoreTimeStamp(v string) {
 	o.RestoreTimeStamp = &v
 }
 
+// GetRestoreToPointInTimeMillis returns the RestoreToPointInTimeMillis field value if set, zero value otherwise.
+func (o *RestoreBackupParams) GetRestoreToPointInTimeMillis() int64 {
+	if o == nil || o.RestoreToPointInTimeMillis == nil {
+		var ret int64
+		return ret
+	}
+	return *o.RestoreToPointInTimeMillis
+}
+
+// GetRestoreToPointInTimeMillisOk returns a tuple with the RestoreToPointInTimeMillis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetRestoreToPointInTimeMillisOk() (*int64, bool) {
+	if o == nil || o.RestoreToPointInTimeMillis == nil {
+		return nil, false
+	}
+	return o.RestoreToPointInTimeMillis, true
+}
+
+// HasRestoreToPointInTimeMillis returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasRestoreToPointInTimeMillis() bool {
+	if o != nil && o.RestoreToPointInTimeMillis != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRestoreToPointInTimeMillis gets a reference to the given int64 and assigns it to the RestoreToPointInTimeMillis field.
+func (o *RestoreBackupParams) SetRestoreToPointInTimeMillis(v int64) {
+	o.RestoreToPointInTimeMillis = &v
+}
+
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
 func (o *RestoreBackupParams) GetSleepAfterMasterRestartMillis() int32 {
 	if o == nil {
@@ -1399,6 +1433,9 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
+	}
+	if o.RestoreToPointInTimeMillis != nil {
+		toSerialize["restoreToPointInTimeMillis"] = o.RestoreToPointInTimeMillis
 	}
 	if true {
 		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis

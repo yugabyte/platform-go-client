@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllTables** | **bool** |  | 
+**BackupPointInTimeRestoreWindow** | [**BackupPointInTimeRestoreWindow**](BackupPointInTimeRestoreWindow.md) |  | 
 **BackupSizeInBytes** | **int64** |  | 
 **DefaultLocation** | **string** |  | 
 **Keyspace** | **string** |  | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewKeyspaceTablesList
 
-`func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList`
+`func NewKeyspaceTablesList(allTables bool, backupPointInTimeRestoreWindow BackupPointInTimeRestoreWindow, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string, ) *KeyspaceTablesList`
 
 NewKeyspaceTablesList instantiates a new KeyspaceTablesList object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +50,26 @@ and a boolean to check if the value has been set.
 `func (o *KeyspaceTablesList) SetAllTables(v bool)`
 
 SetAllTables sets AllTables field to given value.
+
+
+### GetBackupPointInTimeRestoreWindow
+
+`func (o *KeyspaceTablesList) GetBackupPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow`
+
+GetBackupPointInTimeRestoreWindow returns the BackupPointInTimeRestoreWindow field if non-nil, zero value otherwise.
+
+### GetBackupPointInTimeRestoreWindowOk
+
+`func (o *KeyspaceTablesList) GetBackupPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool)`
+
+GetBackupPointInTimeRestoreWindowOk returns a tuple with the BackupPointInTimeRestoreWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupPointInTimeRestoreWindow
+
+`func (o *KeyspaceTablesList) SetBackupPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow)`
+
+SetBackupPointInTimeRestoreWindow sets BackupPointInTimeRestoreWindow field to given value.
 
 
 ### GetBackupSizeInBytes

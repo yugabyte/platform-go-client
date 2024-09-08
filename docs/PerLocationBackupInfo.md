@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **IsSelectiveRestoreSupported** | Pointer to **bool** | Whether selective table restore is supported for this backup | [optional] 
 **IsYSQLBackup** | Pointer to **bool** | Whether backup type is YSQL | [optional] 
 **PerBackupLocationKeyspaceTables** | Pointer to [**PerBackupLocationKeyspaceTables**](PerBackupLocationKeyspaceTables.md) |  | [optional] 
+**PointInTimeRestoreWindow** | Pointer to [**BackupPointInTimeRestoreWindow**](BackupPointInTimeRestoreWindow.md) |  | [optional] 
 **TablespaceResponse** | Pointer to [**TablespaceResponse**](TablespaceResponse.md) |  | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetPerBackupLocationKeyspaceTables sets PerBackupLocationKeyspaceTables field to
 `func (o *PerLocationBackupInfo) HasPerBackupLocationKeyspaceTables() bool`
 
 HasPerBackupLocationKeyspaceTables returns a boolean if a field has been set.
+
+### GetPointInTimeRestoreWindow
+
+`func (o *PerLocationBackupInfo) GetPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow`
+
+GetPointInTimeRestoreWindow returns the PointInTimeRestoreWindow field if non-nil, zero value otherwise.
+
+### GetPointInTimeRestoreWindowOk
+
+`func (o *PerLocationBackupInfo) GetPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool)`
+
+GetPointInTimeRestoreWindowOk returns a tuple with the PointInTimeRestoreWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPointInTimeRestoreWindow
+
+`func (o *PerLocationBackupInfo) SetPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow)`
+
+SetPointInTimeRestoreWindow sets PointInTimeRestoreWindow field to given value.
+
+### HasPointInTimeRestoreWindow
+
+`func (o *PerLocationBackupInfo) HasPointInTimeRestoreWindow() bool`
+
+HasPointInTimeRestoreWindow returns a boolean if a field has been set.
 
 ### GetTablespaceResponse
 

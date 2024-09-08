@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AutoIncludeIndexTables** | Pointer to **bool** | Whether or not YBA should also include all index tables from any provided main tables. | [optional] 
 **BootstrapParams** | Pointer to [**BootstrapParams**](BootstrapParams.md) |  | [optional] 
+**Databases** | Pointer to **[]string** | WARNING: This is a preview API that could change. Source universe database IDs | [optional] 
 **DryRun** | Pointer to **bool** | Run the pre-checks without actually running the subtasks | [optional] 
 **Name** | Pointer to **string** | Name | [optional] 
 **SourceRole** | Pointer to **string** | The role that the source universe should have in the xCluster config | [optional] 
@@ -81,6 +82,31 @@ SetBootstrapParams sets BootstrapParams field to given value.
 `func (o *XClusterConfigEditFormData) HasBootstrapParams() bool`
 
 HasBootstrapParams returns a boolean if a field has been set.
+
+### GetDatabases
+
+`func (o *XClusterConfigEditFormData) GetDatabases() []string`
+
+GetDatabases returns the Databases field if non-nil, zero value otherwise.
+
+### GetDatabasesOk
+
+`func (o *XClusterConfigEditFormData) GetDatabasesOk() (*[]string, bool)`
+
+GetDatabasesOk returns a tuple with the Databases field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatabases
+
+`func (o *XClusterConfigEditFormData) SetDatabases(v []string)`
+
+SetDatabases sets Databases field to given value.
+
+### HasDatabases
+
+`func (o *XClusterConfigEditFormData) HasDatabases() bool`
+
+HasDatabases returns a boolean if a field has been set.
 
 ### GetDryRun
 

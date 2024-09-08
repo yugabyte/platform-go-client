@@ -590,10 +590,15 @@ type DisasterRecoveryApiApiGetDrConfigRequest struct {
 	ApiService *DisasterRecoveryApiService
 	cUUID string
 	drUUID string
+	syncWithDB *bool
 }
 
+func (r DisasterRecoveryApiApiGetDrConfigRequest) SyncWithDB(syncWithDB bool) DisasterRecoveryApiApiGetDrConfigRequest {
+	r.syncWithDB = &syncWithDB
+	return r
+}
 
-func (r DisasterRecoveryApiApiGetDrConfigRequest) Execute() (DrConfig, *_nethttp.Response, error) {
+func (r DisasterRecoveryApiApiGetDrConfigRequest) Execute() (DrConfigGetResp, *_nethttp.Response, error) {
 	return r.ApiService.GetDrConfigExecute(r)
 }
 
@@ -615,16 +620,16 @@ func (a *DisasterRecoveryApiService) GetDrConfig(ctx _context.Context, cUUID str
 
 /*
  * Execute executes the request
- * @return DrConfig
+ * @return DrConfigGetResp
  */
-func (a *DisasterRecoveryApiService) GetDrConfigExecute(r DisasterRecoveryApiApiGetDrConfigRequest) (DrConfig, *_nethttp.Response, error) {
+func (a *DisasterRecoveryApiService) GetDrConfigExecute(r DisasterRecoveryApiApiGetDrConfigRequest) (DrConfigGetResp, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  DrConfig
+		localVarReturnValue  DrConfigGetResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryApiService.GetDrConfig")
@@ -640,6 +645,9 @@ func (a *DisasterRecoveryApiService) GetDrConfigExecute(r DisasterRecoveryApiApi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.syncWithDB != nil {
+		localVarQueryParams.Add("syncWithDB", parameterToString(*r.syncWithDB, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -763,6 +771,137 @@ func (a *DisasterRecoveryApiService) GetDrConfigSafetimeExecute(r DisasterRecove
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type DisasterRecoveryApiApiPauseDrConfigRequest struct {
+	ctx _context.Context
+	ApiService *DisasterRecoveryApiService
+	cUUID string
+	drUUID string
+	request *interface{}
+}
+
+func (r DisasterRecoveryApiApiPauseDrConfigRequest) Request(request interface{}) DisasterRecoveryApiApiPauseDrConfigRequest {
+	r.request = &request
+	return r
+}
+
+func (r DisasterRecoveryApiApiPauseDrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.PauseDrConfigExecute(r)
+}
+
+/*
+ * PauseDrConfig Pause DR config
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param drUUID
+ * @return DisasterRecoveryApiApiPauseDrConfigRequest
+ */
+func (a *DisasterRecoveryApiService) PauseDrConfig(ctx _context.Context, cUUID string, drUUID string) DisasterRecoveryApiApiPauseDrConfigRequest {
+	return DisasterRecoveryApiApiPauseDrConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		drUUID: drUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *DisasterRecoveryApiService) PauseDrConfigExecute(r DisasterRecoveryApiApiPauseDrConfigRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryApiService.PauseDrConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"drUUID"+"}", _neturl.PathEscape(parameterToString(r.drUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1070,6 +1209,279 @@ func (a *DisasterRecoveryApiService) RestartDrConfigExecute(r DisasterRecoveryAp
 	}
 	// body params
 	localVarPostBody = r.disasterRecoveryRestartFormData
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type DisasterRecoveryApiApiResumeDrConfigRequest struct {
+	ctx _context.Context
+	ApiService *DisasterRecoveryApiService
+	cUUID string
+	drUUID string
+	request *interface{}
+}
+
+func (r DisasterRecoveryApiApiResumeDrConfigRequest) Request(request interface{}) DisasterRecoveryApiApiResumeDrConfigRequest {
+	r.request = &request
+	return r
+}
+
+func (r DisasterRecoveryApiApiResumeDrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.ResumeDrConfigExecute(r)
+}
+
+/*
+ * ResumeDrConfig Resume DR config
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param drUUID
+ * @return DisasterRecoveryApiApiResumeDrConfigRequest
+ */
+func (a *DisasterRecoveryApiService) ResumeDrConfig(ctx _context.Context, cUUID string, drUUID string) DisasterRecoveryApiApiResumeDrConfigRequest {
+	return DisasterRecoveryApiApiResumeDrConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		drUUID: drUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *DisasterRecoveryApiService) ResumeDrConfigExecute(r DisasterRecoveryApiApiResumeDrConfigRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryApiService.ResumeDrConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"drUUID"+"}", _neturl.PathEscape(parameterToString(r.drUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type DisasterRecoveryApiApiSetDatabasesDrConfigRequest struct {
+	ctx _context.Context
+	ApiService *DisasterRecoveryApiService
+	cUUID string
+	drUUID string
+	disasterRecoverySetDatabasesFormData *DrConfigSetDatabasesForm
+	request *interface{}
+}
+
+func (r DisasterRecoveryApiApiSetDatabasesDrConfigRequest) DisasterRecoverySetDatabasesFormData(disasterRecoverySetDatabasesFormData DrConfigSetDatabasesForm) DisasterRecoveryApiApiSetDatabasesDrConfigRequest {
+	r.disasterRecoverySetDatabasesFormData = &disasterRecoverySetDatabasesFormData
+	return r
+}
+func (r DisasterRecoveryApiApiSetDatabasesDrConfigRequest) Request(request interface{}) DisasterRecoveryApiApiSetDatabasesDrConfigRequest {
+	r.request = &request
+	return r
+}
+
+func (r DisasterRecoveryApiApiSetDatabasesDrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
+	return r.ApiService.SetDatabasesDrConfigExecute(r)
+}
+
+/*
+ * SetDatabasesDrConfig Set databases in disaster recovery config
+ * WARNING: This is a preview API that could change.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param drUUID
+ * @return DisasterRecoveryApiApiSetDatabasesDrConfigRequest
+ */
+func (a *DisasterRecoveryApiService) SetDatabasesDrConfig(ctx _context.Context, cUUID string, drUUID string) DisasterRecoveryApiApiSetDatabasesDrConfigRequest {
+	return DisasterRecoveryApiApiSetDatabasesDrConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		drUUID: drUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return YBPTask
+ */
+func (a *DisasterRecoveryApiService) SetDatabasesDrConfigExecute(r DisasterRecoveryApiApiSetDatabasesDrConfigRequest) (YBPTask, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  YBPTask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryApiService.SetDatabasesDrConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"drUUID"+"}", _neturl.PathEscape(parameterToString(r.drUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.disasterRecoverySetDatabasesFormData == nil {
+		return localVarReturnValue, nil, reportError("disasterRecoverySetDatabasesFormData is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.disasterRecoverySetDatabasesFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

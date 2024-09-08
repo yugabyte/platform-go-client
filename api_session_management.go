@@ -837,7 +837,7 @@ func (r SessionManagementApiApiGetSessionInfoRequest) Execute() (SessionInfo, *_
 }
 
 /*
- * GetSessionInfo Get current user/customer uuid auth/api token
+ * GetSessionInfo Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return SessionManagementApiApiGetSessionInfoRequest
  */

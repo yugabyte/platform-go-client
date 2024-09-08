@@ -26,6 +26,8 @@ type XClusterConfig struct {
 	ModifyTime *time.Time `json:"modifyTime,omitempty"`
 	// XCluster config name
 	Name *string `json:"name,omitempty"`
+	// Namespaces participating in this xCluster config
+	NamespaceDetails *[]XClusterNamespaceConfig `json:"namespaceDetails,omitempty"`
 	Namespaces []XClusterNamespaceConfig `json:"namespaces"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
@@ -238,6 +240,38 @@ func (o *XClusterConfig) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *XClusterConfig) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNamespaceDetails returns the NamespaceDetails field value if set, zero value otherwise.
+func (o *XClusterConfig) GetNamespaceDetails() []XClusterNamespaceConfig {
+	if o == nil || o.NamespaceDetails == nil {
+		var ret []XClusterNamespaceConfig
+		return ret
+	}
+	return *o.NamespaceDetails
+}
+
+// GetNamespaceDetailsOk returns a tuple with the NamespaceDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfig) GetNamespaceDetailsOk() (*[]XClusterNamespaceConfig, bool) {
+	if o == nil || o.NamespaceDetails == nil {
+		return nil, false
+	}
+	return o.NamespaceDetails, true
+}
+
+// HasNamespaceDetails returns a boolean if a field has been set.
+func (o *XClusterConfig) HasNamespaceDetails() bool {
+	if o != nil && o.NamespaceDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespaceDetails gets a reference to the given []XClusterNamespaceConfig and assigns it to the NamespaceDetails field.
+func (o *XClusterConfig) SetNamespaceDetails(v []XClusterNamespaceConfig) {
+	o.NamespaceDetails = &v
 }
 
 // GetNamespaces returns the Namespaces field value
@@ -824,6 +858,9 @@ func (o XClusterConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if o.NamespaceDetails != nil {
+		toSerialize["namespaceDetails"] = o.NamespaceDetails
 	}
 	if true {
 		toSerialize["namespaces"] = o.Namespaces

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DedicatedNodes** | Pointer to **bool** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **EnableClientToNodeEncrypt** | Pointer to **bool** |  | [optional] 
+**EnableConnectionPooling** | Pointer to **bool** |  | [optional] 
 **EnableExposingService** | Pointer to **string** |  | [optional] 
 **EnableIPV6** | Pointer to **bool** |  | [optional] 
 **EnableLB** | Pointer to **bool** |  | [optional] 
@@ -297,6 +298,31 @@ SetEnableClientToNodeEncrypt sets EnableClientToNodeEncrypt field to given value
 `func (o *UserIntent) HasEnableClientToNodeEncrypt() bool`
 
 HasEnableClientToNodeEncrypt returns a boolean if a field has been set.
+
+### GetEnableConnectionPooling
+
+`func (o *UserIntent) GetEnableConnectionPooling() bool`
+
+GetEnableConnectionPooling returns the EnableConnectionPooling field if non-nil, zero value otherwise.
+
+### GetEnableConnectionPoolingOk
+
+`func (o *UserIntent) GetEnableConnectionPoolingOk() (*bool, bool)`
+
+GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableConnectionPooling
+
+`func (o *UserIntent) SetEnableConnectionPooling(v bool)`
+
+SetEnableConnectionPooling sets EnableConnectionPooling field to given value.
+
+### HasEnableConnectionPooling
+
+`func (o *UserIntent) HasEnableConnectionPooling() bool`
+
+HasEnableConnectionPooling returns a boolean if a field has been set.
 
 ### GetEnableExposingService
 

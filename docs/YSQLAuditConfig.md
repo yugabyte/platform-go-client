@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Enabled** | **bool** | Enabled | [readonly] 
 **LogCatalog** | **bool** | Log catalog | 
 **LogClient** | **bool** | Log client | 
-**LogLevel** | **string** | Log level | 
+**LogLevel** | **string** | Log level. For NOTICE, INFO, DEBUG levels, user also needs to set &#39;log_min_messages&#39; to the required level for the audit logs to be exported. Default &#39;log_min_messages&#39; is WARNING. | 
 **LogParameter** | **bool** | Log parameter | 
 **LogParameterMaxSize** | **int32** | Log parameter max size | 
 **LogRelation** | **bool** | Log relation | 

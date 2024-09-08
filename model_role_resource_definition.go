@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 )
 
-// RoleResourceDefinition Role and resource group definition.
+// RoleResourceDefinition Defines the association of Role to Resource Groups.
 type RoleResourceDefinition struct {
 	ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
 	// UUID of the role to attach resource group to.

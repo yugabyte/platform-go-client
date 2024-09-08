@@ -24,7 +24,7 @@ type BackupStorageInfo struct {
 	NewOwner *string `json:"newOwner,omitempty"`
 	// User name of the current tables owner
 	OldOwner *string `json:"oldOwner,omitempty"`
-	// Is selective table restore
+	// Only restore selected tables instead of restoring all tables in backup
 	SelectiveTableRestore *bool `json:"selectiveTableRestore,omitempty"`
 	// Is SSE
 	Sse *bool `json:"sse,omitempty"`

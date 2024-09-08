@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **Components** | **[]string** |  | 
 **MaxCoreFileSize** | Pointer to **int64** | Max size of the collected cores (if any) | [optional] 
 **MaxNumRecentCores** | Pointer to **int32** | Max number of most recent cores to collect (if any) | [optional] 
+**PromDumpEndDate** | Pointer to **time.Time** | End date to filter prometheus metrics till | [optional] 
+**PromDumpStartDate** | Pointer to **time.Time** | Start date to filter prometheus metrics from | [optional] 
+**PrometheusMetricsTypes** | Pointer to **[]string** | List of exports to be included in the prometheus dump | [optional] 
 
 ## Methods
 
@@ -96,6 +99,81 @@ SetMaxNumRecentCores sets MaxNumRecentCores field to given value.
 `func (o *BundleDetails) HasMaxNumRecentCores() bool`
 
 HasMaxNumRecentCores returns a boolean if a field has been set.
+
+### GetPromDumpEndDate
+
+`func (o *BundleDetails) GetPromDumpEndDate() time.Time`
+
+GetPromDumpEndDate returns the PromDumpEndDate field if non-nil, zero value otherwise.
+
+### GetPromDumpEndDateOk
+
+`func (o *BundleDetails) GetPromDumpEndDateOk() (*time.Time, bool)`
+
+GetPromDumpEndDateOk returns a tuple with the PromDumpEndDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPromDumpEndDate
+
+`func (o *BundleDetails) SetPromDumpEndDate(v time.Time)`
+
+SetPromDumpEndDate sets PromDumpEndDate field to given value.
+
+### HasPromDumpEndDate
+
+`func (o *BundleDetails) HasPromDumpEndDate() bool`
+
+HasPromDumpEndDate returns a boolean if a field has been set.
+
+### GetPromDumpStartDate
+
+`func (o *BundleDetails) GetPromDumpStartDate() time.Time`
+
+GetPromDumpStartDate returns the PromDumpStartDate field if non-nil, zero value otherwise.
+
+### GetPromDumpStartDateOk
+
+`func (o *BundleDetails) GetPromDumpStartDateOk() (*time.Time, bool)`
+
+GetPromDumpStartDateOk returns a tuple with the PromDumpStartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPromDumpStartDate
+
+`func (o *BundleDetails) SetPromDumpStartDate(v time.Time)`
+
+SetPromDumpStartDate sets PromDumpStartDate field to given value.
+
+### HasPromDumpStartDate
+
+`func (o *BundleDetails) HasPromDumpStartDate() bool`
+
+HasPromDumpStartDate returns a boolean if a field has been set.
+
+### GetPrometheusMetricsTypes
+
+`func (o *BundleDetails) GetPrometheusMetricsTypes() []string`
+
+GetPrometheusMetricsTypes returns the PrometheusMetricsTypes field if non-nil, zero value otherwise.
+
+### GetPrometheusMetricsTypesOk
+
+`func (o *BundleDetails) GetPrometheusMetricsTypesOk() (*[]string, bool)`
+
+GetPrometheusMetricsTypesOk returns a tuple with the PrometheusMetricsTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrometheusMetricsTypes
+
+`func (o *BundleDetails) SetPrometheusMetricsTypes(v []string)`
+
+SetPrometheusMetricsTypes sets PrometheusMetricsTypes field to given value.
+
+### HasPrometheusMetricsTypes
+
+`func (o *BundleDetails) HasPrometheusMetricsTypes() bool`
+
+HasPrometheusMetricsTypes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
