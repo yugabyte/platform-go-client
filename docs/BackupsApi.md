@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AdvancedRestorePreflight**](BackupsApi.md#AdvancedRestorePreflight) | **Post** /api/v1/customers/{cUUID}/restore/advanced_restore_preflight | Advanced Restore Preflight checks
 [**CreateBackupSchedule**](BackupsApi.md#CreateBackupSchedule) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule | Create Backup Schedule - deprecated
 [**CreateBackupScheduleAsync**](BackupsApi.md#CreateBackupScheduleAsync) | **Post** /api/v1/customers/{cUUID}/create_backup_schedule_async | Create Backup Schedule Async
 [**CreateMultiTableBackup**](BackupsApi.md#CreateMultiTableBackup) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/multi_table_backup | Create a multi-table backup - deprecated
@@ -19,6 +20,7 @@ Method | HTTP request | Description
 [**ListBackupsV2**](BackupsApi.md#ListBackupsV2) | **Post** /api/v1/customers/{cUUID}/backups/page | List Backups (paginated) V2
 [**ListIncrementalBackups**](BackupsApi.md#ListIncrementalBackups) | **Get** /api/v1/customers/{cUUID}/backups/{backupUUID}/list_increments | List Incremental backups
 [**ListOfBackups**](BackupsApi.md#ListOfBackups) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups | List a customer&#39;s backups - deprecated
+[**ListRestorableKeyspaceTables**](BackupsApi.md#ListRestorableKeyspaceTables) | **Get** /api/v1/customers/{cUUID}/backups/{baseBackupUUID}/restorable_keyspace_tables | List of all restorable entities in the incremental backup chain
 [**Restore**](BackupsApi.md#Restore) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/backups/restore | Restore from a backup - deprecated
 [**RestoreBackupV2**](BackupsApi.md#RestoreBackupV2) | **Post** /api/v1/customers/{cUUID}/restore | Restore from a backup V2
 [**RestorePreflight**](BackupsApi.md#RestorePreflight) | **Post** /api/v1/customers/{cUUID}/restore/preflight | Restore preflight checks
@@ -26,7 +28,82 @@ Method | HTTP request | Description
 [**SetUniverseBackupFlag**](BackupsApi.md#SetUniverseBackupFlag) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_backup_state | Set a universe&#39;s backup flag
 [**StopBackup**](BackupsApi.md#StopBackup) | **Post** /api/v1/customers/{cUUID}/backups/{backupUUID}/stop | Stop a backup
 [**UniverseBackup**](BackupsApi.md#UniverseBackup) | **Post** /api/v1/customers/{customerUUID}/universes/{universeUUID}/universe_backup | Create a Universe Backup
+[**ValidateKeyspaceTablesToRestore**](BackupsApi.md#ValidateKeyspaceTablesToRestore) | **Post** /api/v1/customers/{cUUID}/restore/validate_restorable_keyspace_tables | Validate keyspace and tables to Restore against Backup
 
+
+
+## AdvancedRestorePreflight
+
+> RestorePreflightResponse AdvancedRestorePreflight(ctx, cUUID).AdvancedRestorePreflightParams(advancedRestorePreflightParams).Request(request).Execute()
+
+Advanced Restore Preflight checks
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    advancedRestorePreflightParams := *openapiclient.NewParametersForAdvancedRestorePreflightChecks([]string{"BackupLocations_example"}, "StorageConfigUUID_example", "UniverseUUID_example") // ParametersForAdvancedRestorePreflightChecks | Parameters for advanced restore preflight checks
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.AdvancedRestorePreflight(context.Background(), cUUID).AdvancedRestorePreflightParams(advancedRestorePreflightParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.AdvancedRestorePreflight``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AdvancedRestorePreflight`: RestorePreflightResponse
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.AdvancedRestorePreflight`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAdvancedRestorePreflightRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **advancedRestorePreflightParams** | [**ParametersForAdvancedRestorePreflightChecks**](ParametersForAdvancedRestorePreflightChecks.md) | Parameters for advanced restore preflight checks | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**RestorePreflightResponse**](RestorePreflightResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateBackupSchedule
@@ -51,7 +128,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -123,7 +200,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -198,7 +275,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
+    tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -276,7 +353,7 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
-    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
+    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -352,7 +429,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
+    backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -861,7 +938,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageRestoresRequest := *openapiclient.NewRestorePagedApiQuery("Direction_example", *openapiclient.NewRestoreApiFilter(false, []string{"RestoreUUIDList_example"}, []string{"SourceUniverseNameList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // RestorePagedApiQuery | 
+    pageRestoresRequest := *openapiclient.NewRestorePagedApiQuery("Direction_example", *openapiclient.NewRestoreApiFilter(false, []string{"RestoreUUIDList_example"}, false, []string{"SourceUniverseNameList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // RestorePagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -933,7 +1010,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter([]string{"BackupUUIDList_example"}, []string{"KeyspaceList_example"}, false, false, []string{"ScheduleUUIDList_example"}, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
+    pageBackupsRequest := *openapiclient.NewBackupPagedApiQuery("Direction_example", *openapiclient.NewBackupApiFilter([]string{"BackupUUIDList_example"}, []string{"KeyspaceList_example"}, false, false, []string{"ScheduleUUIDList_example"}, false, []string{"States_example"}, []string{"StorageConfigUUIDList_example"}, []string{"UniverseNameList_example"}, []string{"UniverseUUIDList_example"}), int32(123), false, int32(123), "SortBy_example") // BackupPagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1129,6 +1206,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListRestorableKeyspaceTables
+
+> []KeyspaceTables ListRestorableKeyspaceTables(ctx, cUUID, baseBackupUUID).Execute()
+
+List of all restorable entities in the incremental backup chain
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    baseBackupUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.ListRestorableKeyspaceTables(context.Background(), cUUID, baseBackupUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.ListRestorableKeyspaceTables``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListRestorableKeyspaceTables`: []KeyspaceTables
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.ListRestorableKeyspaceTables`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**baseBackupUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListRestorableKeyspaceTablesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]KeyspaceTables**](KeyspaceTables.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## Restore
 
 > YBPTask Restore(ctx, cUUID, uniUUID).Backup(backup).Request(request).Execute()
@@ -1152,7 +1302,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com"), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1226,7 +1376,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com"), int32(123), "CurrentYbcTaskId_example", "NodeIp_example", "PlatformUrl_example", "PlatformVersion_example", "PrefixUUID_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), int32(123), "CurrentYbcTaskId_example", "NodeIp_example", "PlatformUrl_example", "PlatformVersion_example", "PrefixUUID_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1284,6 +1434,8 @@ Name | Type | Description  | Notes
 
 Restore preflight checks
 
+
+
 ### Example
 
 ```go
@@ -1298,7 +1450,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    restorePreflightParams := *openapiclient.NewRestorePreflightParams([]string{"BackupLocations_example"}, "StorageConfigUUID_example", "UniverseUUID_example") // RestorePreflightParams | Parameters fr restore preflight check
+    restorePreflightParams := *openapiclient.NewParametersForRestorePreflightChecks("BackupUUID_example", "UniverseUUID_example") // ParametersForRestorePreflightChecks | Parameters for restore preflight check
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1329,7 +1481,7 @@ Other parameters are passed through a pointer to a apiRestorePreflightRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **restorePreflightParams** | [**RestorePreflightParams**](RestorePreflightParams.md) | Parameters fr restore preflight check | 
+ **restorePreflightParams** | [**ParametersForRestorePreflightChecks**](ParametersForRestorePreflightChecks.md) | Parameters for restore preflight check | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -1639,6 +1791,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ValidateKeyspaceTablesToRestore
+
+> YBPSuccess ValidateKeyspaceTablesToRestore(ctx, cUUID).RestoreItemsValidationParams(restoreItemsValidationParams).Request(request).Execute()
+
+Validate keyspace and tables to Restore against Backup
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    restoreItemsValidationParams := *openapiclient.NewParametersForValidatingRestorableKeyspaceAndTablesInBackup("BackupUUID_example") // ParametersForValidatingRestorableKeyspaceAndTablesInBackup | Parameters for validating Restorable keyspace and tables
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BackupsApi.ValidateKeyspaceTablesToRestore(context.Background(), cUUID).RestoreItemsValidationParams(restoreItemsValidationParams).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BackupsApi.ValidateKeyspaceTablesToRestore``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ValidateKeyspaceTablesToRestore`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `BackupsApi.ValidateKeyspaceTablesToRestore`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateKeyspaceTablesToRestoreRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **restoreItemsValidationParams** | [**ParametersForValidatingRestorableKeyspaceAndTablesInBackup**](ParametersForValidatingRestorableKeyspaceAndTablesInBackup.md) | Parameters for validating Restorable keyspace and tables | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
 
 ### Authorization
 

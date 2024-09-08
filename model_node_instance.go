@@ -19,6 +19,7 @@ type NodeInstance struct {
 	Details NodeInstanceData `json:"details"`
 	// Node details (as a JSON object)
 	DetailsJson *string `json:"detailsJson,omitempty"`
+	// True if the node is in use  <b style=\"color:#ff0000\">Deprecated since YBA version 2024.1.0.0.</b> Use NodeInstance.state instead
 	InUse *bool `json:"inUse,omitempty"`
 	// The node instance's name
 	InstanceName *string `json:"instanceName,omitempty"`

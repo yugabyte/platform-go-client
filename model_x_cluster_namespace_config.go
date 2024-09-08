@@ -17,6 +17,10 @@ import (
 // XClusterNamespaceConfig struct for XClusterNamespaceConfig
 type XClusterNamespaceConfig struct {
 	SourceNamespaceId string `json:"sourceNamespaceId"`
+	SourceNamespaceInfo *NamespaceInfoResp `json:"sourceNamespaceInfo,omitempty"`
+	// Status
+	Status *string `json:"status,omitempty"`
+	TargetNamespaceInfo *NamespaceInfoResp `json:"targetNamespaceInfo,omitempty"`
 }
 
 // NewXClusterNamespaceConfig instantiates a new XClusterNamespaceConfig object
@@ -61,10 +65,115 @@ func (o *XClusterNamespaceConfig) SetSourceNamespaceId(v string) {
 	o.SourceNamespaceId = v
 }
 
+// GetSourceNamespaceInfo returns the SourceNamespaceInfo field value if set, zero value otherwise.
+func (o *XClusterNamespaceConfig) GetSourceNamespaceInfo() NamespaceInfoResp {
+	if o == nil || o.SourceNamespaceInfo == nil {
+		var ret NamespaceInfoResp
+		return ret
+	}
+	return *o.SourceNamespaceInfo
+}
+
+// GetSourceNamespaceInfoOk returns a tuple with the SourceNamespaceInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetSourceNamespaceInfoOk() (*NamespaceInfoResp, bool) {
+	if o == nil || o.SourceNamespaceInfo == nil {
+		return nil, false
+	}
+	return o.SourceNamespaceInfo, true
+}
+
+// HasSourceNamespaceInfo returns a boolean if a field has been set.
+func (o *XClusterNamespaceConfig) HasSourceNamespaceInfo() bool {
+	if o != nil && o.SourceNamespaceInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceNamespaceInfo gets a reference to the given NamespaceInfoResp and assigns it to the SourceNamespaceInfo field.
+func (o *XClusterNamespaceConfig) SetSourceNamespaceInfo(v NamespaceInfoResp) {
+	o.SourceNamespaceInfo = &v
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *XClusterNamespaceConfig) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *XClusterNamespaceConfig) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *XClusterNamespaceConfig) SetStatus(v string) {
+	o.Status = &v
+}
+
+// GetTargetNamespaceInfo returns the TargetNamespaceInfo field value if set, zero value otherwise.
+func (o *XClusterNamespaceConfig) GetTargetNamespaceInfo() NamespaceInfoResp {
+	if o == nil || o.TargetNamespaceInfo == nil {
+		var ret NamespaceInfoResp
+		return ret
+	}
+	return *o.TargetNamespaceInfo
+}
+
+// GetTargetNamespaceInfoOk returns a tuple with the TargetNamespaceInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetTargetNamespaceInfoOk() (*NamespaceInfoResp, bool) {
+	if o == nil || o.TargetNamespaceInfo == nil {
+		return nil, false
+	}
+	return o.TargetNamespaceInfo, true
+}
+
+// HasTargetNamespaceInfo returns a boolean if a field has been set.
+func (o *XClusterNamespaceConfig) HasTargetNamespaceInfo() bool {
+	if o != nil && o.TargetNamespaceInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetNamespaceInfo gets a reference to the given NamespaceInfoResp and assigns it to the TargetNamespaceInfo field.
+func (o *XClusterNamespaceConfig) SetTargetNamespaceInfo(v NamespaceInfoResp) {
+	o.TargetNamespaceInfo = &v
+}
+
 func (o XClusterNamespaceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["sourceNamespaceId"] = o.SourceNamespaceId
+	}
+	if o.SourceNamespaceInfo != nil {
+		toSerialize["sourceNamespaceInfo"] = o.SourceNamespaceInfo
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
+	}
+	if o.TargetNamespaceInfo != nil {
+		toSerialize["targetNamespaceInfo"] = o.TargetNamespaceInfo
 	}
 	return json.Marshal(toSerialize)
 }

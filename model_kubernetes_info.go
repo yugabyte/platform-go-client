@@ -22,6 +22,7 @@ type KubernetesInfo struct {
 	KubeConfigName *string `json:"kubeConfigName,omitempty"`
 	KubernetesImagePullSecretName *string `json:"kubernetesImagePullSecretName,omitempty"`
 	KubernetesImageRegistry *string `json:"kubernetesImageRegistry,omitempty"`
+	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
 	KubernetesProvider *string `json:"kubernetesProvider,omitempty"`
 	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
 	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
@@ -35,8 +36,9 @@ type KubernetesInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKubernetesInfo() *KubernetesInfo {
+func NewKubernetesInfo(kubernetesOperatorControlled bool) *KubernetesInfo {
 	this := KubernetesInfo{}
+	this.KubernetesOperatorControlled = kubernetesOperatorControlled
 	return &this
 }
 
@@ -238,6 +240,30 @@ func (o *KubernetesInfo) HasKubernetesImageRegistry() bool {
 // SetKubernetesImageRegistry gets a reference to the given string and assigns it to the KubernetesImageRegistry field.
 func (o *KubernetesInfo) SetKubernetesImageRegistry(v string) {
 	o.KubernetesImageRegistry = &v
+}
+
+// GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field value
+func (o *KubernetesInfo) GetKubernetesOperatorControlled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.KubernetesOperatorControlled
+}
+
+// GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field value
+// and a boolean to check if the value has been set.
+func (o *KubernetesInfo) GetKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.KubernetesOperatorControlled, true
+}
+
+// SetKubernetesOperatorControlled sets field value
+func (o *KubernetesInfo) SetKubernetesOperatorControlled(v bool) {
+	o.KubernetesOperatorControlled = v
 }
 
 // GetKubernetesProvider returns the KubernetesProvider field value if set, zero value otherwise.
@@ -451,6 +477,9 @@ func (o KubernetesInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.KubernetesImageRegistry != nil {
 		toSerialize["kubernetesImageRegistry"] = o.KubernetesImageRegistry
+	}
+	if true {
+		toSerialize["kubernetesOperatorControlled"] = o.KubernetesOperatorControlled
 	}
 	if o.KubernetesProvider != nil {
 		toSerialize["kubernetesProvider"] = o.KubernetesProvider

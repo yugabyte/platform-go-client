@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BacklogStatus** | Pointer to **bool** | Backlog status of schedule arose due to conflicts | [optional] [readonly] 
 **CronExpression** | Pointer to **string** | Cron expression for the schedule | [optional] 
-**CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **FailureCount** | Pointer to **int32** | Number of failed backup attempts | [optional] [readonly] 
 **Frequency** | Pointer to **int64** | Frequency of the schedule, in milli seconds | [optional] 
 **FrequencyTimeUnit** | Pointer to **string** | Time unit of frequency | [optional] 
@@ -89,31 +88,6 @@ SetCronExpression sets CronExpression field to given value.
 `func (o *Schedule) HasCronExpression() bool`
 
 HasCronExpression returns a boolean if a field has been set.
-
-### GetCustomerUUID
-
-`func (o *Schedule) GetCustomerUUID() string`
-
-GetCustomerUUID returns the CustomerUUID field if non-nil, zero value otherwise.
-
-### GetCustomerUUIDOk
-
-`func (o *Schedule) GetCustomerUUIDOk() (*string, bool)`
-
-GetCustomerUUIDOk returns a tuple with the CustomerUUID field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerUUID
-
-`func (o *Schedule) SetCustomerUUID(v string)`
-
-SetCustomerUUID sets CustomerUUID field to given value.
-
-### HasCustomerUUID
-
-`func (o *Schedule) HasCustomerUUID() bool`
-
-HasCustomerUUID returns a boolean if a field has been set.
 
 ### GetFailureCount
 

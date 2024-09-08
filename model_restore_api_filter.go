@@ -23,6 +23,7 @@ type RestoreApiFilter struct {
 	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
 	OnlyShowDeletedSourceUniverses bool `json:"onlyShowDeletedSourceUniverses"`
 	RestoreUUIDList []string `json:"restoreUUIDList"`
+	ShowHidden bool `json:"showHidden"`
 	SourceUniverseNameList []string `json:"sourceUniverseNameList"`
 	States []string `json:"states"`
 	StorageConfigUUIDList []string `json:"storageConfigUUIDList"`
@@ -34,10 +35,11 @@ type RestoreApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, restoreUUIDList []string, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *RestoreApiFilter {
+func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, restoreUUIDList []string, showHidden bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string) *RestoreApiFilter {
 	this := RestoreApiFilter{}
 	this.OnlyShowDeletedSourceUniverses = onlyShowDeletedSourceUniverses
 	this.RestoreUUIDList = restoreUUIDList
+	this.ShowHidden = showHidden
 	this.SourceUniverseNameList = sourceUniverseNameList
 	this.States = states
 	this.StorageConfigUUIDList = storageConfigUUIDList
@@ -164,6 +166,30 @@ func (o *RestoreApiFilter) GetRestoreUUIDListOk() (*[]string, bool) {
 // SetRestoreUUIDList sets field value
 func (o *RestoreApiFilter) SetRestoreUUIDList(v []string) {
 	o.RestoreUUIDList = v
+}
+
+// GetShowHidden returns the ShowHidden field value
+func (o *RestoreApiFilter) GetShowHidden() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ShowHidden
+}
+
+// GetShowHiddenOk returns a tuple with the ShowHidden field value
+// and a boolean to check if the value has been set.
+func (o *RestoreApiFilter) GetShowHiddenOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.ShowHidden, true
+}
+
+// SetShowHidden sets field value
+func (o *RestoreApiFilter) SetShowHidden(v bool) {
+	o.ShowHidden = v
 }
 
 // GetSourceUniverseNameList returns the SourceUniverseNameList field value
@@ -299,6 +325,9 @@ func (o RestoreApiFilter) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["restoreUUIDList"] = o.RestoreUUIDList
+	}
+	if true {
+		toSerialize["showHidden"] = o.ShowHidden
 	}
 	if true {
 		toSerialize["sourceUniverseNameList"] = o.SourceUniverseNameList

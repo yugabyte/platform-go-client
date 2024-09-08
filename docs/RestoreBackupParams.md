@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **PrefixUUID** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
+**RestoreToPointInTimeMillis** | Pointer to **int64** | Restore timestamp in millis | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -778,6 +779,31 @@ SetRestoreTimeStamp sets RestoreTimeStamp field to given value.
 `func (o *RestoreBackupParams) HasRestoreTimeStamp() bool`
 
 HasRestoreTimeStamp returns a boolean if a field has been set.
+
+### GetRestoreToPointInTimeMillis
+
+`func (o *RestoreBackupParams) GetRestoreToPointInTimeMillis() int64`
+
+GetRestoreToPointInTimeMillis returns the RestoreToPointInTimeMillis field if non-nil, zero value otherwise.
+
+### GetRestoreToPointInTimeMillisOk
+
+`func (o *RestoreBackupParams) GetRestoreToPointInTimeMillisOk() (*int64, bool)`
+
+GetRestoreToPointInTimeMillisOk returns a tuple with the RestoreToPointInTimeMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreToPointInTimeMillis
+
+`func (o *RestoreBackupParams) SetRestoreToPointInTimeMillis(v int64)`
+
+SetRestoreToPointInTimeMillis sets RestoreToPointInTimeMillis field to given value.
+
+### HasRestoreToPointInTimeMillis
+
+`func (o *RestoreBackupParams) HasRestoreToPointInTimeMillis() bool`
+
+HasRestoreToPointInTimeMillis returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

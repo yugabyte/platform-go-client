@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AllTables** | Pointer to **bool** | Backup all tables in Keyspace | [optional] 
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupList** | Pointer to [**[]BackupTableParams**](BackupTableParams.md) | Backups | [optional] 
+**BackupPointInTimeRestoreWindow** | Pointer to [**BackupPointInTimeRestoreWindow**](BackupPointInTimeRestoreWindow.md) |  | [optional] 
 **BackupSizeInBytes** | Pointer to **int64** | Backup size in bytes | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUuid** | Pointer to **string** | Backup UUID | [optional] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FullBackup** | **bool** |  | 
 **FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
@@ -42,6 +44,7 @@ Name | Type | Description | Notes
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
+**PointInTimeRestoreEnabled** | Pointer to **bool** | Point in time restore available | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
@@ -75,7 +78,7 @@ Name | Type | Description | Notes
 
 ### NewMultiTableBackupRequestParams
 
-`func NewMultiTableBackupRequestParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams`
+`func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64, ) *MultiTableBackupRequestParams`
 
 NewMultiTableBackupRequestParams instantiates a new MultiTableBackupRequestParams object
 This constructor will assign default values to properties that have it defined,
@@ -189,6 +192,31 @@ SetBackupList sets BackupList field to given value.
 `func (o *MultiTableBackupRequestParams) HasBackupList() bool`
 
 HasBackupList returns a boolean if a field has been set.
+
+### GetBackupPointInTimeRestoreWindow
+
+`func (o *MultiTableBackupRequestParams) GetBackupPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow`
+
+GetBackupPointInTimeRestoreWindow returns the BackupPointInTimeRestoreWindow field if non-nil, zero value otherwise.
+
+### GetBackupPointInTimeRestoreWindowOk
+
+`func (o *MultiTableBackupRequestParams) GetBackupPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool)`
+
+GetBackupPointInTimeRestoreWindowOk returns a tuple with the BackupPointInTimeRestoreWindow field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupPointInTimeRestoreWindow
+
+`func (o *MultiTableBackupRequestParams) SetBackupPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow)`
+
+SetBackupPointInTimeRestoreWindow sets BackupPointInTimeRestoreWindow field to given value.
+
+### HasBackupPointInTimeRestoreWindow
+
+`func (o *MultiTableBackupRequestParams) HasBackupPointInTimeRestoreWindow() bool`
+
+HasBackupPointInTimeRestoreWindow returns a boolean if a field has been set.
 
 ### GetBackupSizeInBytes
 
@@ -685,6 +713,26 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 
 HasExtraDependencies returns a boolean if a field has been set.
 
+### GetFullBackup
+
+`func (o *MultiTableBackupRequestParams) GetFullBackup() bool`
+
+GetFullBackup returns the FullBackup field if non-nil, zero value otherwise.
+
+### GetFullBackupOk
+
+`func (o *MultiTableBackupRequestParams) GetFullBackupOk() (*bool, bool)`
+
+GetFullBackupOk returns a tuple with the FullBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullBackup
+
+`func (o *MultiTableBackupRequestParams) SetFullBackup(v bool)`
+
+SetFullBackup sets FullBackup field to given value.
+
+
 ### GetFullChainSizeInBytes
 
 `func (o *MultiTableBackupRequestParams) GetFullChainSizeInBytes() int64`
@@ -1024,6 +1072,31 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+
+### GetPointInTimeRestoreEnabled
+
+`func (o *MultiTableBackupRequestParams) GetPointInTimeRestoreEnabled() bool`
+
+GetPointInTimeRestoreEnabled returns the PointInTimeRestoreEnabled field if non-nil, zero value otherwise.
+
+### GetPointInTimeRestoreEnabledOk
+
+`func (o *MultiTableBackupRequestParams) GetPointInTimeRestoreEnabledOk() (*bool, bool)`
+
+GetPointInTimeRestoreEnabledOk returns a tuple with the PointInTimeRestoreEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPointInTimeRestoreEnabled
+
+`func (o *MultiTableBackupRequestParams) SetPointInTimeRestoreEnabled(v bool)`
+
+SetPointInTimeRestoreEnabled sets PointInTimeRestoreEnabled field to given value.
+
+### HasPointInTimeRestoreEnabled
+
+`func (o *MultiTableBackupRequestParams) HasPointInTimeRestoreEnabled() bool`
+
+HasPointInTimeRestoreEnabled returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 

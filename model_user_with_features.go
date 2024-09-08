@@ -25,11 +25,11 @@ type UserWithFeatures struct {
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// User email address
 	Email string `json:"email"`
-	// True if the user is the primary user
-	IsPrimary *bool `json:"isPrimary,omitempty"`
+	GroupMemberships []string `json:"groupMemberships"`
 	// LDAP Specified Role
 	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
 	OidcJwtAuthToken *string `json:"oidcJwtAuthToken,omitempty"`
+	Primary bool `json:"primary"`
 	// User role
 	Role *string `json:"role,omitempty"`
 	// User timezone
@@ -44,9 +44,11 @@ type UserWithFeatures struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserWithFeatures(email string) *UserWithFeatures {
+func NewUserWithFeatures(email string, groupMemberships []string, primary bool) *UserWithFeatures {
 	this := UserWithFeatures{}
 	this.Email = email
+	this.GroupMemberships = groupMemberships
+	this.Primary = primary
 	return &this
 }
 
@@ -178,36 +180,28 @@ func (o *UserWithFeatures) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetIsPrimary returns the IsPrimary field value if set, zero value otherwise.
-func (o *UserWithFeatures) GetIsPrimary() bool {
-	if o == nil || o.IsPrimary == nil {
-		var ret bool
+// GetGroupMemberships returns the GroupMemberships field value
+func (o *UserWithFeatures) GetGroupMemberships() []string {
+	if o == nil {
+		var ret []string
 		return ret
 	}
-	return *o.IsPrimary
+
+	return o.GroupMemberships
 }
 
-// GetIsPrimaryOk returns a tuple with the IsPrimary field value if set, nil otherwise
+// GetGroupMembershipsOk returns a tuple with the GroupMemberships field value
 // and a boolean to check if the value has been set.
-func (o *UserWithFeatures) GetIsPrimaryOk() (*bool, bool) {
-	if o == nil || o.IsPrimary == nil {
+func (o *UserWithFeatures) GetGroupMembershipsOk() (*[]string, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.IsPrimary, true
+	return &o.GroupMemberships, true
 }
 
-// HasIsPrimary returns a boolean if a field has been set.
-func (o *UserWithFeatures) HasIsPrimary() bool {
-	if o != nil && o.IsPrimary != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIsPrimary gets a reference to the given bool and assigns it to the IsPrimary field.
-func (o *UserWithFeatures) SetIsPrimary(v bool) {
-	o.IsPrimary = &v
+// SetGroupMemberships sets field value
+func (o *UserWithFeatures) SetGroupMemberships(v []string) {
+	o.GroupMemberships = v
 }
 
 // GetLdapSpecifiedRole returns the LdapSpecifiedRole field value if set, zero value otherwise.
@@ -272,6 +266,30 @@ func (o *UserWithFeatures) HasOidcJwtAuthToken() bool {
 // SetOidcJwtAuthToken gets a reference to the given string and assigns it to the OidcJwtAuthToken field.
 func (o *UserWithFeatures) SetOidcJwtAuthToken(v string) {
 	o.OidcJwtAuthToken = &v
+}
+
+// GetPrimary returns the Primary field value
+func (o *UserWithFeatures) GetPrimary() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Primary
+}
+
+// GetPrimaryOk returns a tuple with the Primary field value
+// and a boolean to check if the value has been set.
+func (o *UserWithFeatures) GetPrimaryOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Primary, true
+}
+
+// SetPrimary sets field value
+func (o *UserWithFeatures) SetPrimary(v bool) {
+	o.Primary = v
 }
 
 // GetRole returns the Role field value if set, zero value otherwise.
@@ -416,14 +434,17 @@ func (o UserWithFeatures) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["email"] = o.Email
 	}
-	if o.IsPrimary != nil {
-		toSerialize["isPrimary"] = o.IsPrimary
+	if true {
+		toSerialize["groupMemberships"] = o.GroupMemberships
 	}
 	if o.LdapSpecifiedRole != nil {
 		toSerialize["ldapSpecifiedRole"] = o.LdapSpecifiedRole
 	}
 	if o.OidcJwtAuthToken != nil {
 		toSerialize["oidcJwtAuthToken"] = o.OidcJwtAuthToken
+	}
+	if true {
+		toSerialize["primary"] = o.Primary
 	}
 	if o.Role != nil {
 		toSerialize["role"] = o.Role

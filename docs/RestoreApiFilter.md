@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **DateRangeStart** | Pointer to **time.Time** | The start date to filter paged query. | [optional] 
 **OnlyShowDeletedSourceUniverses** | **bool** |  | 
 **RestoreUUIDList** | **[]string** |  | 
+**ShowHidden** | **bool** |  | 
 **SourceUniverseNameList** | **[]string** |  | 
 **States** | **[]string** |  | 
 **StorageConfigUUIDList** | **[]string** |  | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreApiFilter
 
-`func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, restoreUUIDList []string, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
+`func NewRestoreApiFilter(onlyShowDeletedSourceUniverses bool, restoreUUIDList []string, showHidden bool, sourceUniverseNameList []string, states []string, storageConfigUUIDList []string, universeNameList []string, universeUUIDList []string, ) *RestoreApiFilter`
 
 NewRestoreApiFilter instantiates a new RestoreApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -121,6 +122,26 @@ and a boolean to check if the value has been set.
 `func (o *RestoreApiFilter) SetRestoreUUIDList(v []string)`
 
 SetRestoreUUIDList sets RestoreUUIDList field to given value.
+
+
+### GetShowHidden
+
+`func (o *RestoreApiFilter) GetShowHidden() bool`
+
+GetShowHidden returns the ShowHidden field if non-nil, zero value otherwise.
+
+### GetShowHiddenOk
+
+`func (o *RestoreApiFilter) GetShowHiddenOk() (*bool, bool)`
+
+GetShowHiddenOk returns a tuple with the ShowHidden field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowHidden
+
+`func (o *RestoreApiFilter) SetShowHidden(v bool)`
+
+SetShowHidden sets ShowHidden field to given value.
 
 
 ### GetSourceUniverseNameList

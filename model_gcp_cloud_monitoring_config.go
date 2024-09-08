@@ -17,7 +17,7 @@ import (
 // GCPCloudMonitoringConfig struct for GCPCloudMonitoringConfig
 type GCPCloudMonitoringConfig struct {
 	TelemetryProviderConfig
-	// Project
+	// Project ID
 	Project *string `json:"project,omitempty"`
 }
 

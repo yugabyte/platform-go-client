@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **KeyspacePending** | Pointer to **string** | WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery | [optional] 
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
 **Name** | Pointer to **string** | XCluster config name | [optional] 
+**NamespaceDetails** | Pointer to [**[]XClusterNamespaceConfig**](XClusterNamespaceConfig.md) | Namespaces participating in this xCluster config | [optional] [readonly] 
 **Namespaces** | [**[]XClusterNamespaceConfig**](XClusterNamespaceConfig.md) |  | 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
 **PitrConfigs** | Pointer to [**[]PitrConfig**](PitrConfig.md) | WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config | [optional] 
@@ -171,6 +172,31 @@ SetName sets Name field to given value.
 `func (o *XClusterConfig) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNamespaceDetails
+
+`func (o *XClusterConfig) GetNamespaceDetails() []XClusterNamespaceConfig`
+
+GetNamespaceDetails returns the NamespaceDetails field if non-nil, zero value otherwise.
+
+### GetNamespaceDetailsOk
+
+`func (o *XClusterConfig) GetNamespaceDetailsOk() (*[]XClusterNamespaceConfig, bool)`
+
+GetNamespaceDetailsOk returns a tuple with the NamespaceDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespaceDetails
+
+`func (o *XClusterConfig) SetNamespaceDetails(v []XClusterNamespaceConfig)`
+
+SetNamespaceDetails sets NamespaceDetails field to given value.
+
+### HasNamespaceDetails
+
+`func (o *XClusterConfig) HasNamespaceDetails() bool`
+
+HasNamespaceDetails returns a boolean if a field has been set.
 
 ### GetNamespaces
 

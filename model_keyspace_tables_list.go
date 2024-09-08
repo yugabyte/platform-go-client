@@ -17,6 +17,7 @@ import (
 // KeyspaceTablesList struct for KeyspaceTablesList
 type KeyspaceTablesList struct {
 	AllTables bool `json:"allTables"`
+	BackupPointInTimeRestoreWindow BackupPointInTimeRestoreWindow `json:"backupPointInTimeRestoreWindow"`
 	BackupSizeInBytes int64 `json:"backupSizeInBytes"`
 	DefaultLocation string `json:"defaultLocation"`
 	Keyspace string `json:"keyspace"`
@@ -29,9 +30,10 @@ type KeyspaceTablesList struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewKeyspaceTablesList(allTables bool, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string) *KeyspaceTablesList {
+func NewKeyspaceTablesList(allTables bool, backupPointInTimeRestoreWindow BackupPointInTimeRestoreWindow, backupSizeInBytes int64, defaultLocation string, keyspace string, perRegionLocations []RegionLocations, tableUUIDList []string, tablesList []string) *KeyspaceTablesList {
 	this := KeyspaceTablesList{}
 	this.AllTables = allTables
+	this.BackupPointInTimeRestoreWindow = backupPointInTimeRestoreWindow
 	this.BackupSizeInBytes = backupSizeInBytes
 	this.DefaultLocation = defaultLocation
 	this.Keyspace = keyspace
@@ -71,6 +73,30 @@ func (o *KeyspaceTablesList) GetAllTablesOk() (*bool, bool) {
 // SetAllTables sets field value
 func (o *KeyspaceTablesList) SetAllTables(v bool) {
 	o.AllTables = v
+}
+
+// GetBackupPointInTimeRestoreWindow returns the BackupPointInTimeRestoreWindow field value
+func (o *KeyspaceTablesList) GetBackupPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow {
+	if o == nil {
+		var ret BackupPointInTimeRestoreWindow
+		return ret
+	}
+
+	return o.BackupPointInTimeRestoreWindow
+}
+
+// GetBackupPointInTimeRestoreWindowOk returns a tuple with the BackupPointInTimeRestoreWindow field value
+// and a boolean to check if the value has been set.
+func (o *KeyspaceTablesList) GetBackupPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.BackupPointInTimeRestoreWindow, true
+}
+
+// SetBackupPointInTimeRestoreWindow sets field value
+func (o *KeyspaceTablesList) SetBackupPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow) {
+	o.BackupPointInTimeRestoreWindow = v
 }
 
 // GetBackupSizeInBytes returns the BackupSizeInBytes field value
@@ -221,6 +247,9 @@ func (o KeyspaceTablesList) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["allTables"] = o.AllTables
+	}
+	if true {
+		toSerialize["backupPointInTimeRestoreWindow"] = o.BackupPointInTimeRestoreWindow
 	}
 	if true {
 		toSerialize["backupSizeInBytes"] = o.BackupSizeInBytes

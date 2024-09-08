@@ -16,6 +16,8 @@ import (
 
 // CommunicationPorts Communication ports
 type CommunicationPorts struct {
+	// Internal YSQL RPC port
+	InternalYsqlServerRpcPort *int32 `json:"internalYsqlServerRpcPort,omitempty"`
 	// Master table HTTP port
 	MasterHttpPort *int32 `json:"masterHttpPort,omitempty"`
 	// Master table RCP port
@@ -61,6 +63,38 @@ func NewCommunicationPorts() *CommunicationPorts {
 func NewCommunicationPortsWithDefaults() *CommunicationPorts {
 	this := CommunicationPorts{}
 	return &this
+}
+
+// GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field value if set, zero value otherwise.
+func (o *CommunicationPorts) GetInternalYsqlServerRpcPort() int32 {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.InternalYsqlServerRpcPort
+}
+
+// GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommunicationPorts) GetInternalYsqlServerRpcPortOk() (*int32, bool) {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		return nil, false
+	}
+	return o.InternalYsqlServerRpcPort, true
+}
+
+// HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
+func (o *CommunicationPorts) HasInternalYsqlServerRpcPort() bool {
+	if o != nil && o.InternalYsqlServerRpcPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalYsqlServerRpcPort gets a reference to the given int32 and assigns it to the InternalYsqlServerRpcPort field.
+func (o *CommunicationPorts) SetInternalYsqlServerRpcPort(v int32) {
+	o.InternalYsqlServerRpcPort = &v
 }
 
 // GetMasterHttpPort returns the MasterHttpPort field value if set, zero value otherwise.
@@ -513,6 +547,9 @@ func (o *CommunicationPorts) SetYsqlServerRpcPort(v int32) {
 
 func (o CommunicationPorts) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.InternalYsqlServerRpcPort != nil {
+		toSerialize["internalYsqlServerRpcPort"] = o.InternalYsqlServerRpcPort
+	}
 	if o.MasterHttpPort != nil {
 		toSerialize["masterHttpPort"] = o.MasterHttpPort
 	}

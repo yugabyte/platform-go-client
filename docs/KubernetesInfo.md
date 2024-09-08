@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **KubeConfigName** | Pointer to **string** |  | [optional] 
 **KubernetesImagePullSecretName** | Pointer to **string** |  | [optional] 
 **KubernetesImageRegistry** | Pointer to **string** |  | [optional] 
+**KubernetesOperatorControlled** | **bool** |  | 
 **KubernetesProvider** | Pointer to **string** |  | [optional] 
 **KubernetesPullSecret** | Pointer to **string** |  | [optional] [readonly] 
 **KubernetesPullSecretContent** | Pointer to **string** |  | [optional] 
@@ -21,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewKubernetesInfo
 
-`func NewKubernetesInfo() *KubernetesInfo`
+`func NewKubernetesInfo(kubernetesOperatorControlled bool, ) *KubernetesInfo`
 
 NewKubernetesInfo instantiates a new KubernetesInfo object
 This constructor will assign default values to properties that have it defined,
@@ -185,6 +186,26 @@ SetKubernetesImageRegistry sets KubernetesImageRegistry field to given value.
 `func (o *KubernetesInfo) HasKubernetesImageRegistry() bool`
 
 HasKubernetesImageRegistry returns a boolean if a field has been set.
+
+### GetKubernetesOperatorControlled
+
+`func (o *KubernetesInfo) GetKubernetesOperatorControlled() bool`
+
+GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorControlledOk
+
+`func (o *KubernetesInfo) GetKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorControlled
+
+`func (o *KubernetesInfo) SetKubernetesOperatorControlled(v bool)`
+
+SetKubernetesOperatorControlled sets KubernetesOperatorControlled field to given value.
+
 
 ### GetKubernetesProvider
 

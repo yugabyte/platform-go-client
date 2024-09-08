@@ -16,14 +16,14 @@ import (
 
 // RestartBootstrapParams Bootstrap parameters for restarting
 type RestartBootstrapParams struct {
-	BackupRequestParams BootstarpBackupParams `json:"backupRequestParams"`
+	BackupRequestParams BootstrapBackupParams `json:"backupRequestParams"`
 }
 
 // NewRestartBootstrapParams instantiates a new RestartBootstrapParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestartBootstrapParams(backupRequestParams BootstarpBackupParams) *RestartBootstrapParams {
+func NewRestartBootstrapParams(backupRequestParams BootstrapBackupParams) *RestartBootstrapParams {
 	this := RestartBootstrapParams{}
 	this.BackupRequestParams = backupRequestParams
 	return &this
@@ -38,9 +38,9 @@ func NewRestartBootstrapParamsWithDefaults() *RestartBootstrapParams {
 }
 
 // GetBackupRequestParams returns the BackupRequestParams field value
-func (o *RestartBootstrapParams) GetBackupRequestParams() BootstarpBackupParams {
+func (o *RestartBootstrapParams) GetBackupRequestParams() BootstrapBackupParams {
 	if o == nil {
-		var ret BootstarpBackupParams
+		var ret BootstrapBackupParams
 		return ret
 	}
 
@@ -49,7 +49,7 @@ func (o *RestartBootstrapParams) GetBackupRequestParams() BootstarpBackupParams 
 
 // GetBackupRequestParamsOk returns a tuple with the BackupRequestParams field value
 // and a boolean to check if the value has been set.
-func (o *RestartBootstrapParams) GetBackupRequestParamsOk() (*BootstarpBackupParams, bool) {
+func (o *RestartBootstrapParams) GetBackupRequestParamsOk() (*BootstrapBackupParams, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -57,7 +57,7 @@ func (o *RestartBootstrapParams) GetBackupRequestParamsOk() (*BootstarpBackupPar
 }
 
 // SetBackupRequestParams sets field value
-func (o *RestartBootstrapParams) SetBackupRequestParams(v BootstarpBackupParams) {
+func (o *RestartBootstrapParams) SetBackupRequestParams(v BootstrapBackupParams) {
 	o.BackupRequestParams = v
 }
 

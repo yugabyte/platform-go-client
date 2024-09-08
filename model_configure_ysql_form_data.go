@@ -17,6 +17,8 @@ import (
 // ConfigureYSQLFormData YSQL properties
 type ConfigureYSQLFormData struct {
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	// Enable Connection Pooling for the universe
+	EnableConnectionPooling *bool `json:"enableConnectionPooling,omitempty"`
 	// Enable YSQL Api for the universe
 	EnableYSQL *bool `json:"enableYSQL,omitempty"`
 	// Enable YSQL Auth for the universe
@@ -72,6 +74,38 @@ func (o *ConfigureYSQLFormData) HasCommunicationPorts() bool {
 // SetCommunicationPorts gets a reference to the given CommunicationPorts and assigns it to the CommunicationPorts field.
 func (o *ConfigureYSQLFormData) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
+}
+
+// GetEnableConnectionPooling returns the EnableConnectionPooling field value if set, zero value otherwise.
+func (o *ConfigureYSQLFormData) GetEnableConnectionPooling() bool {
+	if o == nil || o.EnableConnectionPooling == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableConnectionPooling
+}
+
+// GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigureYSQLFormData) GetEnableConnectionPoolingOk() (*bool, bool) {
+	if o == nil || o.EnableConnectionPooling == nil {
+		return nil, false
+	}
+	return o.EnableConnectionPooling, true
+}
+
+// HasEnableConnectionPooling returns a boolean if a field has been set.
+func (o *ConfigureYSQLFormData) HasEnableConnectionPooling() bool {
+	if o != nil && o.EnableConnectionPooling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableConnectionPooling gets a reference to the given bool and assigns it to the EnableConnectionPooling field.
+func (o *ConfigureYSQLFormData) SetEnableConnectionPooling(v bool) {
+	o.EnableConnectionPooling = &v
 }
 
 // GetEnableYSQL returns the EnableYSQL field value if set, zero value otherwise.
@@ -174,6 +208,9 @@ func (o ConfigureYSQLFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
+	}
+	if o.EnableConnectionPooling != nil {
+		toSerialize["enableConnectionPooling"] = o.EnableConnectionPooling
 	}
 	if o.EnableYSQL != nil {
 		toSerialize["enableYSQL"] = o.EnableYSQL

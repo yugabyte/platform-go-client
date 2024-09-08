@@ -10,8 +10,11 @@ Method | HTTP request | Description
 [**FailoverDrConfig**](DisasterRecoveryApi.md#FailoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover | Failover a disaster recovery config
 [**GetDrConfig**](DisasterRecoveryApi.md#GetDrConfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 [**GetDrConfigSafetime**](DisasterRecoveryApi.md#GetDrConfigSafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
+[**PauseDrConfig**](DisasterRecoveryApi.md#PauseDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause | Pause DR config
 [**ReplaceReplicaDrConfig**](DisasterRecoveryApi.md#ReplaceReplicaDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica | Replace Replica in a disaster recovery config
 [**RestartDrConfig**](DisasterRecoveryApi.md#RestartDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart | Restart disaster recovery config
+[**ResumeDrConfig**](DisasterRecoveryApi.md#ResumeDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume | Resume DR config
+[**SetDatabasesDrConfig**](DisasterRecoveryApi.md#SetDatabasesDrConfig) | **Put** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs | Set databases in disaster recovery config
 [**SetTablesDrConfig**](DisasterRecoveryApi.md#SetTablesDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables | Set tables in disaster recovery config
 [**SwitchoverDrConfig**](DisasterRecoveryApi.md#SwitchoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover | Switchover a disaster recovery config
 [**SyncDrConfig**](DisasterRecoveryApi.md#SyncDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync | Sync disaster recovery config
@@ -317,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## GetDrConfig
 
-> DrConfig GetDrConfig(ctx, cUUID, drUUID).Execute()
+> DrConfigGetResp GetDrConfig(ctx, cUUID, drUUID).SyncWithDB(syncWithDB).Execute()
 
 Get disaster recovery config
 
@@ -336,15 +339,16 @@ import (
 func main() {
     cUUID := TODO // string | 
     drUUID := TODO // string | 
+    syncWithDB := true // bool |  (optional) (default to true)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DisasterRecoveryApi.GetDrConfig(context.Background(), cUUID, drUUID).Execute()
+    resp, r, err := api_client.DisasterRecoveryApi.GetDrConfig(context.Background(), cUUID, drUUID).SyncWithDB(syncWithDB).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.GetDrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetDrConfig`: DrConfig
+    // response from `GetDrConfig`: DrConfigGetResp
     fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.GetDrConfig`: %v\n", resp)
 }
 ```
@@ -367,10 +371,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **syncWithDB** | **bool** |  | [default to true]
 
 ### Return type
 
-[**DrConfig**](DrConfig.md)
+[**DrConfigGetResp**](DrConfigGetResp.md)
 
 ### Authorization
 
@@ -442,6 +447,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DrConfigSafetimeResp**](DrConfigSafetimeResp.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PauseDrConfig
+
+> YBPTask PauseDrConfig(ctx, cUUID, drUUID).Request(request).Execute()
+
+Pause DR config
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.PauseDrConfig(context.Background(), cUUID, drUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.PauseDrConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PauseDrConfig`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.PauseDrConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPauseDrConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -589,6 +667,156 @@ Name | Type | Description  | Notes
 
  **disasterRecoveryRestartFormData** | [**DrConfigRestartForm**](DrConfigRestartForm.md) | Disaster Recovery Restart Form Data | 
  **isForceDelete** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResumeDrConfig
+
+> YBPTask ResumeDrConfig(ctx, cUUID, drUUID).Request(request).Execute()
+
+Resume DR config
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.ResumeDrConfig(context.Background(), cUUID, drUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.ResumeDrConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ResumeDrConfig`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.ResumeDrConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResumeDrConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetDatabasesDrConfig
+
+> YBPTask SetDatabasesDrConfig(ctx, cUUID, drUUID).DisasterRecoverySetDatabasesFormData(disasterRecoverySetDatabasesFormData).Request(request).Execute()
+
+Set databases in disaster recovery config
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    disasterRecoverySetDatabasesFormData := *openapiclient.NewDrConfigSetDatabasesForm() // DrConfigSetDatabasesForm | Disaster Recovery Set Databases Form Data
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.SetDatabasesDrConfig(context.Background(), cUUID, drUUID).DisasterRecoverySetDatabasesFormData(disasterRecoverySetDatabasesFormData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.SetDatabasesDrConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetDatabasesDrConfig`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.SetDatabasesDrConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetDatabasesDrConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **disasterRecoverySetDatabasesFormData** | [**DrConfigSetDatabasesForm**](DrConfigSetDatabasesForm.md) | Disaster Recovery Set Databases Form Data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

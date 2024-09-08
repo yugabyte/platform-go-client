@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**GetAdminNotifications**](SessionManagementApi.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
 [**GetFilteredLogs**](SessionManagementApi.md#GetFilteredLogs) | **Get** /api/v1/logs | getFilteredLogs
 [**GetLogs**](SessionManagementApi.md#GetLogs) | **Get** /api/v1/logs/{maxLines} | getLogs
-[**GetSessionInfo**](SessionManagementApi.md#GetSessionInfo) | **Get** /api/v1/session_info | Get current user/customer uuid auth/api token
+[**GetSessionInfo**](SessionManagementApi.md#GetSessionInfo) | **Get** /api/v1/session_info | Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that.
 [**RegisterCustomer**](SessionManagementApi.md#RegisterCustomer) | **Post** /api/v1/register | Register a customer
 
 
@@ -102,7 +102,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    apiTokenVersion := int64(789) // int64 |  (optional)
+    apiTokenVersion := int64(789) // int64 |  (optional) (default to -1)
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -133,7 +133,7 @@ Other parameters are passed through a pointer to a apiApiTokenRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **apiTokenVersion** | **int64** |  | 
+ **apiTokenVersion** | **int64** |  | [default to -1]
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -486,7 +486,7 @@ No authorization required
 
 > SessionInfo GetSessionInfo(ctx).Request(request).Execute()
 
-Get current user/customer uuid auth/api token
+Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that.
 
 ### Example
 

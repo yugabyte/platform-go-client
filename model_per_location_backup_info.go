@@ -23,6 +23,7 @@ type PerLocationBackupInfo struct {
 	// Whether backup type is YSQL
 	IsYSQLBackup *bool `json:"isYSQLBackup,omitempty"`
 	PerBackupLocationKeyspaceTables *PerBackupLocationKeyspaceTables `json:"perBackupLocationKeyspaceTables,omitempty"`
+	PointInTimeRestoreWindow *BackupPointInTimeRestoreWindow `json:"pointInTimeRestoreWindow,omitempty"`
 	TablespaceResponse *TablespaceResponse `json:"tablespaceResponse,omitempty"`
 }
 
@@ -171,6 +172,38 @@ func (o *PerLocationBackupInfo) SetPerBackupLocationKeyspaceTables(v PerBackupLo
 	o.PerBackupLocationKeyspaceTables = &v
 }
 
+// GetPointInTimeRestoreWindow returns the PointInTimeRestoreWindow field value if set, zero value otherwise.
+func (o *PerLocationBackupInfo) GetPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow {
+	if o == nil || o.PointInTimeRestoreWindow == nil {
+		var ret BackupPointInTimeRestoreWindow
+		return ret
+	}
+	return *o.PointInTimeRestoreWindow
+}
+
+// GetPointInTimeRestoreWindowOk returns a tuple with the PointInTimeRestoreWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PerLocationBackupInfo) GetPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool) {
+	if o == nil || o.PointInTimeRestoreWindow == nil {
+		return nil, false
+	}
+	return o.PointInTimeRestoreWindow, true
+}
+
+// HasPointInTimeRestoreWindow returns a boolean if a field has been set.
+func (o *PerLocationBackupInfo) HasPointInTimeRestoreWindow() bool {
+	if o != nil && o.PointInTimeRestoreWindow != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPointInTimeRestoreWindow gets a reference to the given BackupPointInTimeRestoreWindow and assigns it to the PointInTimeRestoreWindow field.
+func (o *PerLocationBackupInfo) SetPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow) {
+	o.PointInTimeRestoreWindow = &v
+}
+
 // GetTablespaceResponse returns the TablespaceResponse field value if set, zero value otherwise.
 func (o *PerLocationBackupInfo) GetTablespaceResponse() TablespaceResponse {
 	if o == nil || o.TablespaceResponse == nil {
@@ -216,6 +249,9 @@ func (o PerLocationBackupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.PerBackupLocationKeyspaceTables != nil {
 		toSerialize["perBackupLocationKeyspaceTables"] = o.PerBackupLocationKeyspaceTables
+	}
+	if o.PointInTimeRestoreWindow != nil {
+		toSerialize["pointInTimeRestoreWindow"] = o.PointInTimeRestoreWindow
 	}
 	if o.TablespaceResponse != nil {
 		toSerialize["tablespaceResponse"] = o.TablespaceResponse

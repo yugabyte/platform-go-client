@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupUuid** | Pointer to **string** | The backup config used to do bootstrapping for this table | [optional] 
 **BootstrapCreateTime** | Pointer to **time.Time** | Time of the bootstrap of the table | [optional] 
+**ReplicationStatusErrors** | Pointer to **[]string** | Short human readable replication status error messages | [optional] 
 **RestoreTime** | Pointer to **time.Time** | Time of the last try to restore data to the target universe | [optional] 
 **RestoreUuid** | Pointer to **string** | The restore config used to do bootstrapping for this table | [optional] 
+**SourceTableInfo** | Pointer to [**TableInfoResp**](TableInfoResp.md) |  | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **StreamId** | Pointer to **string** | Stream ID if replication is setup; bootstrap ID if the table is bootstrapped | [optional] 
 **TableId** | Pointer to **string** | Table ID | [optional] 
+**TargetTableInfo** | Pointer to [**TableInfoResp**](TableInfoResp.md) |  | [optional] 
 
 ## Methods
 
@@ -81,6 +84,31 @@ SetBootstrapCreateTime sets BootstrapCreateTime field to given value.
 
 HasBootstrapCreateTime returns a boolean if a field has been set.
 
+### GetReplicationStatusErrors
+
+`func (o *XClusterTableConfig) GetReplicationStatusErrors() []string`
+
+GetReplicationStatusErrors returns the ReplicationStatusErrors field if non-nil, zero value otherwise.
+
+### GetReplicationStatusErrorsOk
+
+`func (o *XClusterTableConfig) GetReplicationStatusErrorsOk() (*[]string, bool)`
+
+GetReplicationStatusErrorsOk returns a tuple with the ReplicationStatusErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplicationStatusErrors
+
+`func (o *XClusterTableConfig) SetReplicationStatusErrors(v []string)`
+
+SetReplicationStatusErrors sets ReplicationStatusErrors field to given value.
+
+### HasReplicationStatusErrors
+
+`func (o *XClusterTableConfig) HasReplicationStatusErrors() bool`
+
+HasReplicationStatusErrors returns a boolean if a field has been set.
+
 ### GetRestoreTime
 
 `func (o *XClusterTableConfig) GetRestoreTime() time.Time`
@@ -130,6 +158,31 @@ SetRestoreUuid sets RestoreUuid field to given value.
 `func (o *XClusterTableConfig) HasRestoreUuid() bool`
 
 HasRestoreUuid returns a boolean if a field has been set.
+
+### GetSourceTableInfo
+
+`func (o *XClusterTableConfig) GetSourceTableInfo() TableInfoResp`
+
+GetSourceTableInfo returns the SourceTableInfo field if non-nil, zero value otherwise.
+
+### GetSourceTableInfoOk
+
+`func (o *XClusterTableConfig) GetSourceTableInfoOk() (*TableInfoResp, bool)`
+
+GetSourceTableInfoOk returns a tuple with the SourceTableInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSourceTableInfo
+
+`func (o *XClusterTableConfig) SetSourceTableInfo(v TableInfoResp)`
+
+SetSourceTableInfo sets SourceTableInfo field to given value.
+
+### HasSourceTableInfo
+
+`func (o *XClusterTableConfig) HasSourceTableInfo() bool`
+
+HasSourceTableInfo returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -205,6 +258,31 @@ SetTableId sets TableId field to given value.
 `func (o *XClusterTableConfig) HasTableId() bool`
 
 HasTableId returns a boolean if a field has been set.
+
+### GetTargetTableInfo
+
+`func (o *XClusterTableConfig) GetTargetTableInfo() TableInfoResp`
+
+GetTargetTableInfo returns the TargetTableInfo field if non-nil, zero value otherwise.
+
+### GetTargetTableInfoOk
+
+`func (o *XClusterTableConfig) GetTargetTableInfoOk() (*TableInfoResp, bool)`
+
+GetTargetTableInfoOk returns a tuple with the TargetTableInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetTableInfo
+
+`func (o *XClusterTableConfig) SetTargetTableInfo(v TableInfoResp)`
+
+SetTargetTableInfo sets TargetTableInfo field to given value.
+
+### HasTargetTableInfo
+
+`func (o *XClusterTableConfig) HasTargetTableInfo() bool`
+
+HasTargetTableInfo returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

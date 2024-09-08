@@ -16,6 +16,8 @@ import (
 
 // AzureRegionCloudInfo struct for AzureRegionCloudInfo
 type AzureRegionCloudInfo struct {
+	AzuNetworkRGOverride *string `json:"azuNetworkRGOverride,omitempty"`
+	AzuRGOverride *string `json:"azuRGOverride,omitempty"`
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
 	Vnet *string `json:"vnet,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
@@ -37,6 +39,70 @@ func NewAzureRegionCloudInfo() *AzureRegionCloudInfo {
 func NewAzureRegionCloudInfoWithDefaults() *AzureRegionCloudInfo {
 	this := AzureRegionCloudInfo{}
 	return &this
+}
+
+// GetAzuNetworkRGOverride returns the AzuNetworkRGOverride field value if set, zero value otherwise.
+func (o *AzureRegionCloudInfo) GetAzuNetworkRGOverride() string {
+	if o == nil || o.AzuNetworkRGOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.AzuNetworkRGOverride
+}
+
+// GetAzuNetworkRGOverrideOk returns a tuple with the AzuNetworkRGOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRegionCloudInfo) GetAzuNetworkRGOverrideOk() (*string, bool) {
+	if o == nil || o.AzuNetworkRGOverride == nil {
+		return nil, false
+	}
+	return o.AzuNetworkRGOverride, true
+}
+
+// HasAzuNetworkRGOverride returns a boolean if a field has been set.
+func (o *AzureRegionCloudInfo) HasAzuNetworkRGOverride() bool {
+	if o != nil && o.AzuNetworkRGOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzuNetworkRGOverride gets a reference to the given string and assigns it to the AzuNetworkRGOverride field.
+func (o *AzureRegionCloudInfo) SetAzuNetworkRGOverride(v string) {
+	o.AzuNetworkRGOverride = &v
+}
+
+// GetAzuRGOverride returns the AzuRGOverride field value if set, zero value otherwise.
+func (o *AzureRegionCloudInfo) GetAzuRGOverride() string {
+	if o == nil || o.AzuRGOverride == nil {
+		var ret string
+		return ret
+	}
+	return *o.AzuRGOverride
+}
+
+// GetAzuRGOverrideOk returns a tuple with the AzuRGOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AzureRegionCloudInfo) GetAzuRGOverrideOk() (*string, bool) {
+	if o == nil || o.AzuRGOverride == nil {
+		return nil, false
+	}
+	return o.AzuRGOverride, true
+}
+
+// HasAzuRGOverride returns a boolean if a field has been set.
+func (o *AzureRegionCloudInfo) HasAzuRGOverride() bool {
+	if o != nil && o.AzuRGOverride != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAzuRGOverride gets a reference to the given string and assigns it to the AzuRGOverride field.
+func (o *AzureRegionCloudInfo) SetAzuRGOverride(v string) {
+	o.AzuRGOverride = &v
 }
 
 // GetSecurityGroupId returns the SecurityGroupId field value if set, zero value otherwise.
@@ -137,6 +203,12 @@ func (o *AzureRegionCloudInfo) SetYbImage(v string) {
 
 func (o AzureRegionCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AzuNetworkRGOverride != nil {
+		toSerialize["azuNetworkRGOverride"] = o.AzuNetworkRGOverride
+	}
+	if o.AzuRGOverride != nil {
+		toSerialize["azuRGOverride"] = o.AzuRGOverride
+	}
 	if o.SecurityGroupId != nil {
 		toSerialize["securityGroupId"] = o.SecurityGroupId
 	}

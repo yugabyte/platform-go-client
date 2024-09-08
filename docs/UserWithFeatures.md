@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **CreationDate** | Pointer to **time.Time** | User creation date | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Email** | **string** | User email address | 
-**IsPrimary** | Pointer to **bool** | True if the user is the primary user | [optional] 
+**GroupMemberships** | **[]string** |  | 
 **LdapSpecifiedRole** | Pointer to **bool** | LDAP Specified Role | [optional] 
 **OidcJwtAuthToken** | Pointer to **string** |  | [optional] [readonly] 
+**Primary** | **bool** |  | 
 **Role** | Pointer to **string** | User role | [optional] 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
 **UserType** | Pointer to **string** | User Type | [optional] 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewUserWithFeatures
 
-`func NewUserWithFeatures(email string, ) *UserWithFeatures`
+`func NewUserWithFeatures(email string, groupMemberships []string, primary bool, ) *UserWithFeatures`
 
 NewUserWithFeatures instantiates a new UserWithFeatures object
 This constructor will assign default values to properties that have it defined,
@@ -130,30 +131,25 @@ and a boolean to check if the value has been set.
 SetEmail sets Email field to given value.
 
 
-### GetIsPrimary
+### GetGroupMemberships
 
-`func (o *UserWithFeatures) GetIsPrimary() bool`
+`func (o *UserWithFeatures) GetGroupMemberships() []string`
 
-GetIsPrimary returns the IsPrimary field if non-nil, zero value otherwise.
+GetGroupMemberships returns the GroupMemberships field if non-nil, zero value otherwise.
 
-### GetIsPrimaryOk
+### GetGroupMembershipsOk
 
-`func (o *UserWithFeatures) GetIsPrimaryOk() (*bool, bool)`
+`func (o *UserWithFeatures) GetGroupMembershipsOk() (*[]string, bool)`
 
-GetIsPrimaryOk returns a tuple with the IsPrimary field if it's non-nil, zero value otherwise
+GetGroupMembershipsOk returns a tuple with the GroupMemberships field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIsPrimary
+### SetGroupMemberships
 
-`func (o *UserWithFeatures) SetIsPrimary(v bool)`
+`func (o *UserWithFeatures) SetGroupMemberships(v []string)`
 
-SetIsPrimary sets IsPrimary field to given value.
+SetGroupMemberships sets GroupMemberships field to given value.
 
-### HasIsPrimary
-
-`func (o *UserWithFeatures) HasIsPrimary() bool`
-
-HasIsPrimary returns a boolean if a field has been set.
 
 ### GetLdapSpecifiedRole
 
@@ -204,6 +200,26 @@ SetOidcJwtAuthToken sets OidcJwtAuthToken field to given value.
 `func (o *UserWithFeatures) HasOidcJwtAuthToken() bool`
 
 HasOidcJwtAuthToken returns a boolean if a field has been set.
+
+### GetPrimary
+
+`func (o *UserWithFeatures) GetPrimary() bool`
+
+GetPrimary returns the Primary field if non-nil, zero value otherwise.
+
+### GetPrimaryOk
+
+`func (o *UserWithFeatures) GetPrimaryOk() (*bool, bool)`
+
+GetPrimaryOk returns a tuple with the Primary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrimary
+
+`func (o *UserWithFeatures) SetPrimary(v bool)`
+
+SetPrimary sets Primary field to given value.
+
 
 ### GetRole
 

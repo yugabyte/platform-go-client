@@ -26,6 +26,7 @@ type UserIntent struct {
 	DedicatedNodes *bool `json:"dedicatedNodes,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
 	EnableClientToNodeEncrypt *bool `json:"enableClientToNodeEncrypt,omitempty"`
+	EnableConnectionPooling *bool `json:"enableConnectionPooling,omitempty"`
 	EnableExposingService *string `json:"enableExposingService,omitempty"`
 	EnableIPV6 *bool `json:"enableIPV6,omitempty"`
 	EnableLB *bool `json:"enableLB,omitempty"`
@@ -375,6 +376,38 @@ func (o *UserIntent) HasEnableClientToNodeEncrypt() bool {
 // SetEnableClientToNodeEncrypt gets a reference to the given bool and assigns it to the EnableClientToNodeEncrypt field.
 func (o *UserIntent) SetEnableClientToNodeEncrypt(v bool) {
 	o.EnableClientToNodeEncrypt = &v
+}
+
+// GetEnableConnectionPooling returns the EnableConnectionPooling field value if set, zero value otherwise.
+func (o *UserIntent) GetEnableConnectionPooling() bool {
+	if o == nil || o.EnableConnectionPooling == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableConnectionPooling
+}
+
+// GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetEnableConnectionPoolingOk() (*bool, bool) {
+	if o == nil || o.EnableConnectionPooling == nil {
+		return nil, false
+	}
+	return o.EnableConnectionPooling, true
+}
+
+// HasEnableConnectionPooling returns a boolean if a field has been set.
+func (o *UserIntent) HasEnableConnectionPooling() bool {
+	if o != nil && o.EnableConnectionPooling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableConnectionPooling gets a reference to the given bool and assigns it to the EnableConnectionPooling field.
+func (o *UserIntent) SetEnableConnectionPooling(v bool) {
+	o.EnableConnectionPooling = &v
 }
 
 // GetEnableExposingService returns the EnableExposingService field value if set, zero value otherwise.
@@ -1685,6 +1718,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.EnableClientToNodeEncrypt != nil {
 		toSerialize["enableClientToNodeEncrypt"] = o.EnableClientToNodeEncrypt
+	}
+	if o.EnableConnectionPooling != nil {
+		toSerialize["enableConnectionPooling"] = o.EnableConnectionPooling
 	}
 	if o.EnableExposingService != nil {
 		toSerialize["enableExposingService"] = o.EnableExposingService

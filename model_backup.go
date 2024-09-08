@@ -38,6 +38,8 @@ type Backup struct {
 	HasKMSHistory *bool `json:"hasKMSHistory,omitempty"`
 	IncrementalBackup bool `json:"incrementalBackup"`
 	ParentBackup bool `json:"parentBackup"`
+	// Retry count for backup deletion
+	RetryCount *int32 `json:"retryCount,omitempty"`
 	// Schedule Policy Name, if this backup is part of a schedule
 	ScheduleName *string `json:"scheduleName,omitempty"`
 	// Schedule UUID, if this backup is part of a schedule
@@ -443,6 +445,38 @@ func (o *Backup) SetParentBackup(v bool) {
 	o.ParentBackup = v
 }
 
+// GetRetryCount returns the RetryCount field value if set, zero value otherwise.
+func (o *Backup) GetRetryCount() int32 {
+	if o == nil || o.RetryCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.RetryCount
+}
+
+// GetRetryCountOk returns a tuple with the RetryCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Backup) GetRetryCountOk() (*int32, bool) {
+	if o == nil || o.RetryCount == nil {
+		return nil, false
+	}
+	return o.RetryCount, true
+}
+
+// HasRetryCount returns a boolean if a field has been set.
+func (o *Backup) HasRetryCount() bool {
+	if o != nil && o.RetryCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryCount gets a reference to the given int32 and assigns it to the RetryCount field.
+func (o *Backup) SetRetryCount(v int32) {
+	o.RetryCount = &v
+}
+
 // GetScheduleName returns the ScheduleName field value if set, zero value otherwise.
 func (o *Backup) GetScheduleName() string {
 	if o == nil || o.ScheduleName == nil {
@@ -736,6 +770,9 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["parentBackup"] = o.ParentBackup
+	}
+	if o.RetryCount != nil {
+		toSerialize["retryCount"] = o.RetryCount
 	}
 	if o.ScheduleName != nil {
 		toSerialize["scheduleName"] = o.ScheduleName

@@ -46,7 +46,7 @@ func (r LDAPOIDCRoleManagementApiApiDeleteOidcGroupMappingRequest) Execute() (YB
 
 /*
  * DeleteOidcGroupMapping Delete a OIDC group mapping
- * WARNING: This is a preview API that could change,Available since YBA version 2.21.0.0
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings/{groupUUID} DELETE endpoint instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param groupName
@@ -172,7 +172,7 @@ func (r LDAPOIDCRoleManagementApiApiListLdapDnToYbaRolesRequest) Execute() (Ldap
 
 /*
  * ListLdapDnToYbaRoles List LDAP Mappings
- * Available since YBA version 2.18.1.0
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return LDAPOIDCRoleManagementApiApiListLdapDnToYbaRolesRequest
@@ -292,7 +292,7 @@ func (r LDAPOIDCRoleManagementApiApiListOidcGroupToYbaRolesRequest) Execute() (O
 
 /*
  * ListOidcGroupToYbaRoles List OIDC Group Mappings
- * WARNING: This is a preview API that could change,Available since YBA version 2.21.0.0
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return LDAPOIDCRoleManagementApiApiListOidcGroupToYbaRolesRequest
@@ -422,7 +422,7 @@ func (r LDAPOIDCRoleManagementApiApiMapOidcGroupToYbaRolesRequest) Execute() (*_
 
 /*
  * MapOidcGroupToYbaRoles Set OIDC Mappings
- * WARNING: This is a preview API that could change,Available since YBA version 2.21.0.0
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return LDAPOIDCRoleManagementApiApiMapOidcGroupToYbaRolesRequest
@@ -549,7 +549,7 @@ func (r LDAPOIDCRoleManagementApiApiSetLdapDnToYbaRolesRequest) Execute() (*_net
 
 /*
  * SetLdapDnToYbaRoles Set LDAP Mappings
- * Available since YBA version 2.18.1.0
+ * <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return LDAPOIDCRoleManagementApiApiSetLdapDnToYbaRolesRequest

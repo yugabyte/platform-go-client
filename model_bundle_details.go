@@ -12,6 +12,7 @@ package ywclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // BundleDetails struct for BundleDetails
@@ -21,6 +22,12 @@ type BundleDetails struct {
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of most recent cores to collect (if any)
 	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
+	// End date to filter prometheus metrics till
+	PromDumpEndDate *time.Time `json:"promDumpEndDate,omitempty"`
+	// Start date to filter prometheus metrics from
+	PromDumpStartDate *time.Time `json:"promDumpStartDate,omitempty"`
+	// List of exports to be included in the prometheus dump
+	PrometheusMetricsTypes *[]string `json:"prometheusMetricsTypes,omitempty"`
 }
 
 // NewBundleDetails instantiates a new BundleDetails object
@@ -129,6 +136,102 @@ func (o *BundleDetails) SetMaxNumRecentCores(v int32) {
 	o.MaxNumRecentCores = &v
 }
 
+// GetPromDumpEndDate returns the PromDumpEndDate field value if set, zero value otherwise.
+func (o *BundleDetails) GetPromDumpEndDate() time.Time {
+	if o == nil || o.PromDumpEndDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.PromDumpEndDate
+}
+
+// GetPromDumpEndDateOk returns a tuple with the PromDumpEndDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPromDumpEndDateOk() (*time.Time, bool) {
+	if o == nil || o.PromDumpEndDate == nil {
+		return nil, false
+	}
+	return o.PromDumpEndDate, true
+}
+
+// HasPromDumpEndDate returns a boolean if a field has been set.
+func (o *BundleDetails) HasPromDumpEndDate() bool {
+	if o != nil && o.PromDumpEndDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPromDumpEndDate gets a reference to the given time.Time and assigns it to the PromDumpEndDate field.
+func (o *BundleDetails) SetPromDumpEndDate(v time.Time) {
+	o.PromDumpEndDate = &v
+}
+
+// GetPromDumpStartDate returns the PromDumpStartDate field value if set, zero value otherwise.
+func (o *BundleDetails) GetPromDumpStartDate() time.Time {
+	if o == nil || o.PromDumpStartDate == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.PromDumpStartDate
+}
+
+// GetPromDumpStartDateOk returns a tuple with the PromDumpStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPromDumpStartDateOk() (*time.Time, bool) {
+	if o == nil || o.PromDumpStartDate == nil {
+		return nil, false
+	}
+	return o.PromDumpStartDate, true
+}
+
+// HasPromDumpStartDate returns a boolean if a field has been set.
+func (o *BundleDetails) HasPromDumpStartDate() bool {
+	if o != nil && o.PromDumpStartDate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPromDumpStartDate gets a reference to the given time.Time and assigns it to the PromDumpStartDate field.
+func (o *BundleDetails) SetPromDumpStartDate(v time.Time) {
+	o.PromDumpStartDate = &v
+}
+
+// GetPrometheusMetricsTypes returns the PrometheusMetricsTypes field value if set, zero value otherwise.
+func (o *BundleDetails) GetPrometheusMetricsTypes() []string {
+	if o == nil || o.PrometheusMetricsTypes == nil {
+		var ret []string
+		return ret
+	}
+	return *o.PrometheusMetricsTypes
+}
+
+// GetPrometheusMetricsTypesOk returns a tuple with the PrometheusMetricsTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPrometheusMetricsTypesOk() (*[]string, bool) {
+	if o == nil || o.PrometheusMetricsTypes == nil {
+		return nil, false
+	}
+	return o.PrometheusMetricsTypes, true
+}
+
+// HasPrometheusMetricsTypes returns a boolean if a field has been set.
+func (o *BundleDetails) HasPrometheusMetricsTypes() bool {
+	if o != nil && o.PrometheusMetricsTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrometheusMetricsTypes gets a reference to the given []string and assigns it to the PrometheusMetricsTypes field.
+func (o *BundleDetails) SetPrometheusMetricsTypes(v []string) {
+	o.PrometheusMetricsTypes = &v
+}
+
 func (o BundleDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -139,6 +242,15 @@ func (o BundleDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxNumRecentCores != nil {
 		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
+	}
+	if o.PromDumpEndDate != nil {
+		toSerialize["promDumpEndDate"] = o.PromDumpEndDate
+	}
+	if o.PromDumpStartDate != nil {
+		toSerialize["promDumpStartDate"] = o.PromDumpStartDate
+	}
+	if o.PrometheusMetricsTypes != nil {
+		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes
 	}
 	return json.Marshal(toSerialize)
 }

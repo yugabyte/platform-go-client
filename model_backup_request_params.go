@@ -40,6 +40,8 @@ type BackupRequestParams struct {
 	DisableMultipart *bool `json:"disableMultipart,omitempty"`
 	// Don't add -m flag during gsutil upload dir command
 	DisableParallelism *bool `json:"disableParallelism,omitempty"`
+	// Enable Point-In-Time-Restore capability on backup schedules with a limited restore window. Only applicable for YB-Controller enabled universes
+	EnablePointInTimeRestore *bool `json:"enablePointInTimeRestore,omitempty"`
 	// Is verbose logging enabled
 	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
 	EnableYbc *bool `json:"enableYbc,omitempty"`
@@ -563,6 +565,38 @@ func (o *BackupRequestParams) HasDisableParallelism() bool {
 // SetDisableParallelism gets a reference to the given bool and assigns it to the DisableParallelism field.
 func (o *BackupRequestParams) SetDisableParallelism(v bool) {
 	o.DisableParallelism = &v
+}
+
+// GetEnablePointInTimeRestore returns the EnablePointInTimeRestore field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetEnablePointInTimeRestore() bool {
+	if o == nil || o.EnablePointInTimeRestore == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnablePointInTimeRestore
+}
+
+// GetEnablePointInTimeRestoreOk returns a tuple with the EnablePointInTimeRestore field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetEnablePointInTimeRestoreOk() (*bool, bool) {
+	if o == nil || o.EnablePointInTimeRestore == nil {
+		return nil, false
+	}
+	return o.EnablePointInTimeRestore, true
+}
+
+// HasEnablePointInTimeRestore returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasEnablePointInTimeRestore() bool {
+	if o != nil && o.EnablePointInTimeRestore != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnablePointInTimeRestore gets a reference to the given bool and assigns it to the EnablePointInTimeRestore field.
+func (o *BackupRequestParams) SetEnablePointInTimeRestore(v bool) {
+	o.EnablePointInTimeRestore = &v
 }
 
 // GetEnableVerboseLogs returns the EnableVerboseLogs field value if set, zero value otherwise.
@@ -1776,6 +1810,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisableParallelism != nil {
 		toSerialize["disableParallelism"] = o.DisableParallelism
+	}
+	if o.EnablePointInTimeRestore != nil {
+		toSerialize["enablePointInTimeRestore"] = o.EnablePointInTimeRestore
 	}
 	if o.EnableVerboseLogs != nil {
 		toSerialize["enableVerboseLogs"] = o.EnableVerboseLogs

@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Recharts** | **bool** |  | 
 **XclusterConfigUuid** | **string** |  | 
 
 ## Methods
 
 ### NewMetricQueryParams
 
-`func NewMetricQueryParams(xclusterConfigUuid string, ) *MetricQueryParams`
+`func NewMetricQueryParams(recharts bool, xclusterConfigUuid string, ) *MetricQueryParams`
 
 NewMetricQueryParams instantiates a new MetricQueryParams object
 This constructor will assign default values to properties that have it defined,
@@ -24,6 +25,26 @@ will change when the set of required properties is changed
 NewMetricQueryParamsWithDefaults instantiates a new MetricQueryParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetRecharts
+
+`func (o *MetricQueryParams) GetRecharts() bool`
+
+GetRecharts returns the Recharts field if non-nil, zero value otherwise.
+
+### GetRechartsOk
+
+`func (o *MetricQueryParams) GetRechartsOk() (*bool, bool)`
+
+GetRechartsOk returns a tuple with the Recharts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecharts
+
+`func (o *MetricQueryParams) SetRecharts(v bool)`
+
+SetRecharts sets Recharts field to given value.
+
 
 ### GetXclusterConfigUuid
 

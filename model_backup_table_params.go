@@ -24,6 +24,7 @@ type BackupTableParams struct {
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backups
 	BackupList *[]BackupTableParams `json:"backupList,omitempty"`
+	BackupPointInTimeRestoreWindow *BackupPointInTimeRestoreWindow `json:"backupPointInTimeRestoreWindow,omitempty"`
 	// Backup size in bytes
 	BackupSizeInBytes *int64 `json:"backupSizeInBytes,omitempty"`
 	// Backup type
@@ -58,6 +59,7 @@ type BackupTableParams struct {
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	FullBackup bool `json:"fullBackup"`
 	// Incremental backups chain size
 	FullChainSizeInBytes *int64 `json:"fullChainSizeInBytes,omitempty"`
 	// Should table backup errors be ignored
@@ -83,6 +85,8 @@ type BackupTableParams struct {
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
+	// Point in time restore available
+	PointInTimeRestoreEnabled *bool `json:"pointInTimeRestoreEnabled,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Per region locations
@@ -140,9 +144,10 @@ type BackupTableParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupTableParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *BackupTableParams {
+func NewBackupTableParams(creatingUser Users, fullBackup bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *BackupTableParams {
 	this := BackupTableParams{}
 	this.CreatingUser = creatingUser
+	this.FullBackup = fullBackup
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
@@ -286,6 +291,38 @@ func (o *BackupTableParams) HasBackupList() bool {
 // SetBackupList gets a reference to the given []BackupTableParams and assigns it to the BackupList field.
 func (o *BackupTableParams) SetBackupList(v []BackupTableParams) {
 	o.BackupList = &v
+}
+
+// GetBackupPointInTimeRestoreWindow returns the BackupPointInTimeRestoreWindow field value if set, zero value otherwise.
+func (o *BackupTableParams) GetBackupPointInTimeRestoreWindow() BackupPointInTimeRestoreWindow {
+	if o == nil || o.BackupPointInTimeRestoreWindow == nil {
+		var ret BackupPointInTimeRestoreWindow
+		return ret
+	}
+	return *o.BackupPointInTimeRestoreWindow
+}
+
+// GetBackupPointInTimeRestoreWindowOk returns a tuple with the BackupPointInTimeRestoreWindow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetBackupPointInTimeRestoreWindowOk() (*BackupPointInTimeRestoreWindow, bool) {
+	if o == nil || o.BackupPointInTimeRestoreWindow == nil {
+		return nil, false
+	}
+	return o.BackupPointInTimeRestoreWindow, true
+}
+
+// HasBackupPointInTimeRestoreWindow returns a boolean if a field has been set.
+func (o *BackupTableParams) HasBackupPointInTimeRestoreWindow() bool {
+	if o != nil && o.BackupPointInTimeRestoreWindow != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupPointInTimeRestoreWindow gets a reference to the given BackupPointInTimeRestoreWindow and assigns it to the BackupPointInTimeRestoreWindow field.
+func (o *BackupTableParams) SetBackupPointInTimeRestoreWindow(v BackupPointInTimeRestoreWindow) {
+	o.BackupPointInTimeRestoreWindow = &v
 }
 
 // GetBackupSizeInBytes returns the BackupSizeInBytes field value if set, zero value otherwise.
@@ -920,6 +957,30 @@ func (o *BackupTableParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
 }
 
+// GetFullBackup returns the FullBackup field value
+func (o *BackupTableParams) GetFullBackup() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.FullBackup
+}
+
+// GetFullBackupOk returns a tuple with the FullBackup field value
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetFullBackupOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.FullBackup, true
+}
+
+// SetFullBackup sets field value
+func (o *BackupTableParams) SetFullBackup(v bool) {
+	o.FullBackup = v
+}
+
 // GetFullChainSizeInBytes returns the FullChainSizeInBytes field value if set, zero value otherwise.
 func (o *BackupTableParams) GetFullChainSizeInBytes() int64 {
 	if o == nil || o.FullChainSizeInBytes == nil {
@@ -1350,6 +1411,38 @@ func (o *BackupTableParams) GetPlatformVersionOk() (*string, bool) {
 // SetPlatformVersion sets field value
 func (o *BackupTableParams) SetPlatformVersion(v string) {
 	o.PlatformVersion = v
+}
+
+// GetPointInTimeRestoreEnabled returns the PointInTimeRestoreEnabled field value if set, zero value otherwise.
+func (o *BackupTableParams) GetPointInTimeRestoreEnabled() bool {
+	if o == nil || o.PointInTimeRestoreEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PointInTimeRestoreEnabled
+}
+
+// GetPointInTimeRestoreEnabledOk returns a tuple with the PointInTimeRestoreEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetPointInTimeRestoreEnabledOk() (*bool, bool) {
+	if o == nil || o.PointInTimeRestoreEnabled == nil {
+		return nil, false
+	}
+	return o.PointInTimeRestoreEnabled, true
+}
+
+// HasPointInTimeRestoreEnabled returns a boolean if a field has been set.
+func (o *BackupTableParams) HasPointInTimeRestoreEnabled() bool {
+	if o != nil && o.PointInTimeRestoreEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPointInTimeRestoreEnabled gets a reference to the given bool and assigns it to the PointInTimeRestoreEnabled field.
+func (o *BackupTableParams) SetPointInTimeRestoreEnabled(v bool) {
+	o.PointInTimeRestoreEnabled = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -2230,6 +2323,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	if o.BackupList != nil {
 		toSerialize["backupList"] = o.BackupList
 	}
+	if o.BackupPointInTimeRestoreWindow != nil {
+		toSerialize["backupPointInTimeRestoreWindow"] = o.BackupPointInTimeRestoreWindow
+	}
 	if o.BackupSizeInBytes != nil {
 		toSerialize["backupSizeInBytes"] = o.BackupSizeInBytes
 	}
@@ -2290,6 +2386,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	if o.ExtraDependencies != nil {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
 	}
+	if true {
+		toSerialize["fullBackup"] = o.FullBackup
+	}
 	if o.FullChainSizeInBytes != nil {
 		toSerialize["fullChainSizeInBytes"] = o.FullChainSizeInBytes
 	}
@@ -2331,6 +2430,9 @@ func (o BackupTableParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["platformVersion"] = o.PlatformVersion
+	}
+	if o.PointInTimeRestoreEnabled != nil {
+		toSerialize["pointInTimeRestoreEnabled"] = o.PointInTimeRestoreEnabled
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

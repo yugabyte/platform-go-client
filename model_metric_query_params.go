@@ -16,6 +16,7 @@ import (
 
 // MetricQueryParams Metrics request data
 type MetricQueryParams struct {
+	Recharts bool `json:"recharts"`
 	XclusterConfigUuid string `json:"xclusterConfigUuid"`
 }
 
@@ -23,8 +24,9 @@ type MetricQueryParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricQueryParams(xclusterConfigUuid string) *MetricQueryParams {
+func NewMetricQueryParams(recharts bool, xclusterConfigUuid string) *MetricQueryParams {
 	this := MetricQueryParams{}
+	this.Recharts = recharts
 	this.XclusterConfigUuid = xclusterConfigUuid
 	return &this
 }
@@ -35,6 +37,30 @@ func NewMetricQueryParams(xclusterConfigUuid string) *MetricQueryParams {
 func NewMetricQueryParamsWithDefaults() *MetricQueryParams {
 	this := MetricQueryParams{}
 	return &this
+}
+
+// GetRecharts returns the Recharts field value
+func (o *MetricQueryParams) GetRecharts() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Recharts
+}
+
+// GetRechartsOk returns a tuple with the Recharts field value
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetRechartsOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Recharts, true
+}
+
+// SetRecharts sets field value
+func (o *MetricQueryParams) SetRecharts(v bool) {
+	o.Recharts = v
 }
 
 // GetXclusterConfigUuid returns the XclusterConfigUuid field value
@@ -63,6 +89,9 @@ func (o *MetricQueryParams) SetXclusterConfigUuid(v string) {
 
 func (o MetricQueryParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["recharts"] = o.Recharts
+	}
 	if true {
 		toSerialize["xclusterConfigUuid"] = o.XclusterConfigUuid
 	}

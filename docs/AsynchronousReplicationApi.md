@@ -10,7 +10,8 @@ Method | HTTP request | Description
 [**GetXClusterConfig**](AsynchronousReplicationApi.md#GetXClusterConfig) | **Get** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Get xcluster config
 [**NeedBootstrapTable**](AsynchronousReplicationApi.md#NeedBootstrapTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap | Whether tables need bootstrap before setting up cross cluster replication
 [**RestartXClusterConfig**](AsynchronousReplicationApi.md#RestartXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID} | Restart xcluster config
-[**SyncXClusterConfig**](AsynchronousReplicationApi.md#SyncXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Sync xcluster config
+[**SyncXClusterConfig**](AsynchronousReplicationApi.md#SyncXClusterConfig) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/sync | Sync xcluster config - deprecated
+[**SyncXClusterConfigV2**](AsynchronousReplicationApi.md#SyncXClusterConfigV2) | **Post** /api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/sync | Sync xcluster config (V2)
 
 
 
@@ -244,7 +245,7 @@ Name | Type | Description  | Notes
 
 ## GetXClusterConfig
 
-> XClusterConfigGetResp GetXClusterConfig(ctx, cUUID, xccUUID).Execute()
+> XClusterConfigGetResp GetXClusterConfig(ctx, cUUID, xccUUID).SyncWithDB(syncWithDB).Execute()
 
 Get xcluster config
 
@@ -265,10 +266,11 @@ import (
 func main() {
     cUUID := TODO // string | 
     xccUUID := TODO // string | 
+    syncWithDB := true // bool |  (optional) (default to true)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.GetXClusterConfig(context.Background(), cUUID, xccUUID).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.GetXClusterConfig(context.Background(), cUUID, xccUUID).SyncWithDB(syncWithDB).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.GetXClusterConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -296,6 +298,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **syncWithDB** | **bool** |  | [default to true]
 
 ### Return type
 
@@ -317,7 +320,7 @@ Name | Type | Description  | Notes
 
 ## NeedBootstrapTable
 
-> map[string]map[string]interface{} NeedBootstrapTable(ctx, cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).Request(request).Execute()
+> map[string]map[string]interface{} NeedBootstrapTable(ctx, cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).IncludeDetails(includeDetails).Request(request).Execute()
 
 Whether tables need bootstrap before setting up cross cluster replication
 
@@ -340,11 +343,12 @@ func main() {
     uniUUID := TODO // string | 
     xclusterNeedBootstrapFormData := *openapiclient.NewXClusterConfigNeedBootstrapFormData([]string{"Tables_example"}) // XClusterConfigNeedBootstrapFormData | XCluster Need Bootstrap Form Data
     configType := "configType_example" // string |  (optional) (default to "null")
+    includeDetails := true // bool |  (optional) (default to false)
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapTable(context.Background(), cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).Request(request).Execute()
+    resp, r, err := api_client.AsynchronousReplicationApi.NeedBootstrapTable(context.Background(), cUUID, uniUUID).XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData).ConfigType(configType).IncludeDetails(includeDetails).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.NeedBootstrapTable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -374,6 +378,7 @@ Name | Type | Description  | Notes
 
  **xclusterNeedBootstrapFormData** | [**XClusterConfigNeedBootstrapFormData**](XClusterConfigNeedBootstrapFormData.md) | XCluster Need Bootstrap Form Data | 
  **configType** | **string** |  | [default to &quot;null&quot;]
+ **includeDetails** | **bool** |  | [default to false]
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -477,7 +482,7 @@ Name | Type | Description  | Notes
 
 > YBPTask SyncXClusterConfig(ctx, cUUID).TargetUniverseUUID(targetUniverseUUID).Request(request).Execute()
 
-Sync xcluster config
+Sync xcluster config - deprecated
 
 
 
@@ -527,6 +532,81 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **targetUniverseUUID** | [**string**](string.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SyncXClusterConfigV2
+
+> YBPTask SyncXClusterConfigV2(ctx, cUUID, xccUUID).Request(request).Execute()
+
+Sync xcluster config (V2)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    xccUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.AsynchronousReplicationApi.SyncXClusterConfigV2(context.Background(), cUUID, xccUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AsynchronousReplicationApi.SyncXClusterConfigV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SyncXClusterConfigV2`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `AsynchronousReplicationApi.SyncXClusterConfigV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**xccUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSyncXClusterConfigV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
