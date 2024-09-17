@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BootstrapParams** | Pointer to [**RestartBootstrapParams**](RestartBootstrapParams.md) |  | [optional] 
+**PitrParams** | Pointer to [**PitrParams**](PitrParams.md) |  | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetBootstrapParams sets BootstrapParams field to given value.
 `func (o *DrConfigEditForm) HasBootstrapParams() bool`
 
 HasBootstrapParams returns a boolean if a field has been set.
+
+### GetPitrParams
+
+`func (o *DrConfigEditForm) GetPitrParams() PitrParams`
+
+GetPitrParams returns the PitrParams field if non-nil, zero value otherwise.
+
+### GetPitrParamsOk
+
+`func (o *DrConfigEditForm) GetPitrParamsOk() (*PitrParams, bool)`
+
+GetPitrParamsOk returns a tuple with the PitrParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPitrParams
+
+`func (o *DrConfigEditForm) SetPitrParams(v PitrParams)`
+
+SetPitrParams sets PitrParams field to given value.
+
+### HasPitrParams
+
+`func (o *DrConfigEditForm) HasPitrParams() bool`
+
+HasPitrParams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

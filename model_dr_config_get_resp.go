@@ -40,6 +40,10 @@ type DrConfigGetResp struct {
 	Paused *bool `json:"paused,omitempty"`
 	// WARNING: This is a preview API that could change. The list of PITR configs used for the underlying txn xCluster config
 	PitrConfigs *[]PitrConfig `json:"pitrConfigs,omitempty"`
+	// WARNING: This is a preview API that could change. PITR Retention Period in seconds
+	PitrRetentionPeriodSec *int64 `json:"pitrRetentionPeriodSec,omitempty"`
+	// WARNING: This is a preview API that could change. PITR Retention Period in seconds
+	PitrSnapshotIntervalSec *int64 `json:"pitrSnapshotIntervalSec,omitempty"`
 	// Whether the primary universe is active
 	PrimaryUniverseActive *bool `json:"primaryUniverseActive,omitempty"`
 	// WARNING: This is a preview API that could change. The replication status of the primary universe.
@@ -58,6 +62,8 @@ type DrConfigGetResp struct {
 	TableType *string `json:"tableType,omitempty"`
 	// List of table ids in replication
 	Tables *[]string `json:"tables,omitempty"`
+	// Whether the config is basic, txn, or db scoped xCluster
+	Type *string `json:"type,omitempty"`
 	// DR config UUID
 	Uuid *string `json:"uuid,omitempty"`
 	// UUID of the underlying xCluster config that is managing the replication
@@ -465,6 +471,70 @@ func (o *DrConfigGetResp) SetPitrConfigs(v []PitrConfig) {
 	o.PitrConfigs = &v
 }
 
+// GetPitrRetentionPeriodSec returns the PitrRetentionPeriodSec field value if set, zero value otherwise.
+func (o *DrConfigGetResp) GetPitrRetentionPeriodSec() int64 {
+	if o == nil || o.PitrRetentionPeriodSec == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PitrRetentionPeriodSec
+}
+
+// GetPitrRetentionPeriodSecOk returns a tuple with the PitrRetentionPeriodSec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetPitrRetentionPeriodSecOk() (*int64, bool) {
+	if o == nil || o.PitrRetentionPeriodSec == nil {
+		return nil, false
+	}
+	return o.PitrRetentionPeriodSec, true
+}
+
+// HasPitrRetentionPeriodSec returns a boolean if a field has been set.
+func (o *DrConfigGetResp) HasPitrRetentionPeriodSec() bool {
+	if o != nil && o.PitrRetentionPeriodSec != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPitrRetentionPeriodSec gets a reference to the given int64 and assigns it to the PitrRetentionPeriodSec field.
+func (o *DrConfigGetResp) SetPitrRetentionPeriodSec(v int64) {
+	o.PitrRetentionPeriodSec = &v
+}
+
+// GetPitrSnapshotIntervalSec returns the PitrSnapshotIntervalSec field value if set, zero value otherwise.
+func (o *DrConfigGetResp) GetPitrSnapshotIntervalSec() int64 {
+	if o == nil || o.PitrSnapshotIntervalSec == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PitrSnapshotIntervalSec
+}
+
+// GetPitrSnapshotIntervalSecOk returns a tuple with the PitrSnapshotIntervalSec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetPitrSnapshotIntervalSecOk() (*int64, bool) {
+	if o == nil || o.PitrSnapshotIntervalSec == nil {
+		return nil, false
+	}
+	return o.PitrSnapshotIntervalSec, true
+}
+
+// HasPitrSnapshotIntervalSec returns a boolean if a field has been set.
+func (o *DrConfigGetResp) HasPitrSnapshotIntervalSec() bool {
+	if o != nil && o.PitrSnapshotIntervalSec != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPitrSnapshotIntervalSec gets a reference to the given int64 and assigns it to the PitrSnapshotIntervalSec field.
+func (o *DrConfigGetResp) SetPitrSnapshotIntervalSec(v int64) {
+	o.PitrSnapshotIntervalSec = &v
+}
+
 // GetPrimaryUniverseActive returns the PrimaryUniverseActive field value if set, zero value otherwise.
 func (o *DrConfigGetResp) GetPrimaryUniverseActive() bool {
 	if o == nil || o.PrimaryUniverseActive == nil {
@@ -753,6 +823,38 @@ func (o *DrConfigGetResp) SetTables(v []string) {
 	o.Tables = &v
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *DrConfigGetResp) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *DrConfigGetResp) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *DrConfigGetResp) SetType(v string) {
+	o.Type = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *DrConfigGetResp) GetUuid() string {
 	if o == nil || o.Uuid == nil {
@@ -855,6 +957,12 @@ func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	if o.PitrConfigs != nil {
 		toSerialize["pitrConfigs"] = o.PitrConfigs
 	}
+	if o.PitrRetentionPeriodSec != nil {
+		toSerialize["pitrRetentionPeriodSec"] = o.PitrRetentionPeriodSec
+	}
+	if o.PitrSnapshotIntervalSec != nil {
+		toSerialize["pitrSnapshotIntervalSec"] = o.PitrSnapshotIntervalSec
+	}
 	if o.PrimaryUniverseActive != nil {
 		toSerialize["primaryUniverseActive"] = o.PrimaryUniverseActive
 	}
@@ -881,6 +989,9 @@ func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Tables != nil {
 		toSerialize["tables"] = o.Tables
+	}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid

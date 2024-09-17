@@ -1,4 +1,4 @@
-# Go API client for ywclient
+# Go API client for v1
 
 ALPHA - NOT FOR EXTERNAL USE
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./ywclient"
+import sw "./v1"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -523,7 +523,6 @@ Class | Method | HTTP request | Description
  - [DeleteBackupParams](docs/DeleteBackupParams.md)
  - [Details](docs/Details.md)
  - [DeviceInfo](docs/DeviceInfo.md)
- - [DrConfig](docs/DrConfig.md)
  - [DrConfigCreateForm](docs/DrConfigCreateForm.md)
  - [DrConfigEditForm](docs/DrConfigEditForm.md)
  - [DrConfigFailoverForm](docs/DrConfigFailoverForm.md)

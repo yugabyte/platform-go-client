@@ -50,6 +50,7 @@ func (r DisasterRecoveryApiApiCreateDrConfigRequest) Execute() (YBPTask, *_netht
 
 /*
  * CreateDrConfig Create disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return DisasterRecoveryApiApiCreateDrConfigRequest
@@ -188,6 +189,7 @@ func (r DisasterRecoveryApiApiDeleteXClusterConfigRequest) Execute() (YBPTask, *
 
 /*
  * DeleteXClusterConfig Delete xcluster config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -321,12 +323,13 @@ func (r DisasterRecoveryApiApiEditDrConfigRequest) Request(request interface{}) 
 	return r
 }
 
-func (r DisasterRecoveryApiApiEditDrConfigRequest) Execute() (DrConfig, *_nethttp.Response, error) {
+func (r DisasterRecoveryApiApiEditDrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.EditDrConfigExecute(r)
 }
 
 /*
  * EditDrConfig Edit disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -343,16 +346,16 @@ func (a *DisasterRecoveryApiService) EditDrConfig(ctx _context.Context, cUUID st
 
 /*
  * Execute executes the request
- * @return DrConfig
+ * @return YBPTask
  */
-func (a *DisasterRecoveryApiService) EditDrConfigExecute(r DisasterRecoveryApiApiEditDrConfigRequest) (DrConfig, *_nethttp.Response, error) {
+func (a *DisasterRecoveryApiService) EditDrConfigExecute(r DisasterRecoveryApiApiEditDrConfigRequest) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  DrConfig
+		localVarReturnValue  YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryApiService.EditDrConfig")
@@ -468,6 +471,7 @@ func (r DisasterRecoveryApiApiFailoverDrConfigRequest) Execute() (YBPTask, *_net
 
 /*
  * FailoverDrConfig Failover a disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -604,6 +608,7 @@ func (r DisasterRecoveryApiApiGetDrConfigRequest) Execute() (DrConfigGetResp, *_
 
 /*
  * GetDrConfig Get disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -730,6 +735,7 @@ func (r DisasterRecoveryApiApiGetDrConfigSafetimeRequest) Execute() (DrConfigSaf
 
 /*
  * GetDrConfigSafetime Get disaster recovery config safetime
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -858,6 +864,7 @@ func (r DisasterRecoveryApiApiPauseDrConfigRequest) Execute() (YBPTask, *_nethtt
 
 /*
  * PauseDrConfig Pause DR config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -994,6 +1001,7 @@ func (r DisasterRecoveryApiApiReplaceReplicaDrConfigRequest) Execute() (YBPTask,
 
 /*
  * ReplaceReplicaDrConfig Replace Replica in a disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -1140,6 +1148,7 @@ func (r DisasterRecoveryApiApiRestartDrConfigRequest) Execute() (YBPTask, *_neth
 
 /*
  * RestartDrConfig Restart disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -1279,6 +1288,7 @@ func (r DisasterRecoveryApiApiResumeDrConfigRequest) Execute() (YBPTask, *_netht
 
 /*
  * ResumeDrConfig Resume DR config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -1557,6 +1567,7 @@ func (r DisasterRecoveryApiApiSetTablesDrConfigRequest) Execute() (YBPTask, *_ne
 
 /*
  * SetTablesDrConfig Set tables in disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -1698,6 +1709,7 @@ func (r DisasterRecoveryApiApiSwitchoverDrConfigRequest) Execute() (YBPTask, *_n
 
 /*
  * SwitchoverDrConfig Switchover a disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID
@@ -1834,6 +1846,7 @@ func (r DisasterRecoveryApiApiSyncDrConfigRequest) Execute() (YBPTask, *_nethttp
 
 /*
  * SyncDrConfig Sync disaster recovery config
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param drUUID

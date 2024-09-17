@@ -27,6 +27,8 @@ Method | HTTP request | Description
 
 Create disaster recovery config
 
+
+
 ### Example
 
 ```go
@@ -99,6 +101,8 @@ Name | Type | Description  | Notes
 
 Delete xcluster config
 
+
+
 ### Example
 
 ```go
@@ -170,9 +174,11 @@ Name | Type | Description  | Notes
 
 ## EditDrConfig
 
-> DrConfig EditDrConfig(ctx, cUUID, drUUID).DisasterRecoveryEditFormData(disasterRecoveryEditFormData).Request(request).Execute()
+> YBPTask EditDrConfig(ctx, cUUID, drUUID).DisasterRecoveryEditFormData(disasterRecoveryEditFormData).Request(request).Execute()
 
 Edit disaster recovery config
+
+
 
 ### Example
 
@@ -199,7 +205,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.EditDrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EditDrConfig`: DrConfig
+    // response from `EditDrConfig`: YBPTask
     fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.EditDrConfig`: %v\n", resp)
 }
 ```
@@ -227,7 +233,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DrConfig**](DrConfig.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -248,6 +254,8 @@ Name | Type | Description  | Notes
 > YBPTask FailoverDrConfig(ctx, cUUID, drUUID).DisasterRecoveryFailoverFormData(disasterRecoveryFailoverFormData).Request(request).Execute()
 
 Failover a disaster recovery config
+
+
 
 ### Example
 
@@ -324,6 +332,8 @@ Name | Type | Description  | Notes
 
 Get disaster recovery config
 
+
+
 ### Example
 
 ```go
@@ -397,6 +407,8 @@ Name | Type | Description  | Notes
 
 Get disaster recovery config safetime
 
+
+
 ### Example
 
 ```go
@@ -467,6 +479,8 @@ Name | Type | Description  | Notes
 > YBPTask PauseDrConfig(ctx, cUUID, drUUID).Request(request).Execute()
 
 Pause DR config
+
+
 
 ### Example
 
@@ -540,6 +554,8 @@ Name | Type | Description  | Notes
 > YBPTask ReplaceReplicaDrConfig(ctx, cUUID, drUUID).DisasterRecoveryReplaceReplicaFormData(disasterRecoveryReplaceReplicaFormData).Request(request).Execute()
 
 Replace Replica in a disaster recovery config
+
+
 
 ### Example
 
@@ -615,6 +631,8 @@ Name | Type | Description  | Notes
 > YBPTask RestartDrConfig(ctx, cUUID, drUUID).DisasterRecoveryRestartFormData(disasterRecoveryRestartFormData).IsForceDelete(isForceDelete).Request(request).Execute()
 
 Restart disaster recovery config
+
+
 
 ### Example
 
@@ -692,6 +710,8 @@ Name | Type | Description  | Notes
 > YBPTask ResumeDrConfig(ctx, cUUID, drUUID).Request(request).Execute()
 
 Resume DR config
+
+
 
 ### Example
 
@@ -843,6 +863,8 @@ Name | Type | Description  | Notes
 
 Set tables in disaster recovery config
 
+
+
 ### Example
 
 ```go
@@ -918,6 +940,8 @@ Name | Type | Description  | Notes
 
 Switchover a disaster recovery config
 
+
+
 ### Example
 
 ```go
@@ -992,6 +1016,8 @@ Name | Type | Description  | Notes
 > YBPTask SyncDrConfig(ctx, cUUID, drUUID).Request(request).Execute()
 
 Sync disaster recovery config
+
+
 
 ### Example
 

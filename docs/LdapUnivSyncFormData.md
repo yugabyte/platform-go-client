@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **DbUser** | Pointer to **string** | Database user to connect: yugabyte for ysql, cassandra for ycql | [optional] 
 **DbuserPassword** | **string** |  | 
 **ExcludeUsers** | Pointer to **[]string** | List of users to exclude while revoking and dropping | [optional] 
+**GroupsToSync** | Pointer to **[]string** | LDAP groups to sync. In case user belongs to multiple groups &amp; we don&#39;t want to sync all of them to DB | [optional] 
 **LdapBasedn** | Pointer to **string** | Dn of the search starting point. | [optional] 
 **LdapBindDn** | Pointer to **string** | Dn of the user authenticating to LDAP. | [optional] 
 **LdapBindPassword** | Pointer to **string** | Password of the user authenticating to LDAP. | [optional] 
 **LdapGroupMemberOfAttribute** | Pointer to **string** | LDAP group dn attribute to which the user belongs | [optional] 
-**LdapGroupfield** | **string** | Group dn field to get the group&#39;s name from | 
+**LdapGroupfield** | **string** | LDAP field to get the group information | 
 **LdapPort** | Pointer to **int32** | Port of the ldap server : 389 or 636(tls) | [optional] 
-**LdapSearchFilter** | Pointer to **string** | LDAP search filter to get the user entries. This filter can also be used to search for the users based on their group memberships. | [optional] 
+**LdapSearchFilter** | Pointer to **string** | LDAP search filter to get the user entries | [optional] 
 **LdapServer** | Pointer to **string** | IP address of the LDAP server | [optional] 
 **LdapTlsProtocol** | Pointer to **string** | TLS versions for LDAPS : TLSv1, TLSv1_1, TLSv1_2 | [optional] 
 **LdapUserfield** | **string** | Dn/Attribute field to get the user&#39;s name from | 
@@ -134,6 +135,31 @@ SetExcludeUsers sets ExcludeUsers field to given value.
 `func (o *LdapUnivSyncFormData) HasExcludeUsers() bool`
 
 HasExcludeUsers returns a boolean if a field has been set.
+
+### GetGroupsToSync
+
+`func (o *LdapUnivSyncFormData) GetGroupsToSync() []string`
+
+GetGroupsToSync returns the GroupsToSync field if non-nil, zero value otherwise.
+
+### GetGroupsToSyncOk
+
+`func (o *LdapUnivSyncFormData) GetGroupsToSyncOk() (*[]string, bool)`
+
+GetGroupsToSyncOk returns a tuple with the GroupsToSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupsToSync
+
+`func (o *LdapUnivSyncFormData) SetGroupsToSync(v []string)`
+
+SetGroupsToSync sets GroupsToSync field to given value.
+
+### HasGroupsToSync
+
+`func (o *LdapUnivSyncFormData) HasGroupsToSync() bool`
+
+HasGroupsToSync returns a boolean if a field has been set.
 
 ### GetLdapBasedn
 

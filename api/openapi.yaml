@@ -2552,6 +2552,7 @@ paths:
       - Custom CA Certificates
   /api/v1/customers/{cUUID}/dr_configs:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: createDrConfig
       parameters:
       - in: path
@@ -2587,6 +2588,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_create_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}:
     delete:
+      description: "WARNING: This is a preview API that could change."
       operationId: deleteXClusterConfig
       parameters:
       - in: path
@@ -2626,6 +2628,7 @@ paths:
       tags:
       - Disaster Recovery
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getDrConfig
       parameters:
       - in: path
@@ -2662,6 +2665,7 @@ paths:
       - Disaster Recovery
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/edit:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: editDrConfig
       parameters:
       - in: path
@@ -2694,7 +2698,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DrConfig'
+                $ref: '#/components/schemas/YBPTask'
           description: successful operation
       security:
       - apiKeyAuth: []
@@ -2704,6 +2708,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_edit_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: failoverDrConfig
       parameters:
       - in: path
@@ -2746,6 +2751,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_failover_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: pauseDrConfig
       parameters:
       - in: path
@@ -2780,6 +2786,7 @@ paths:
       - Disaster Recovery
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: replaceReplicaDrConfig
       parameters:
       - in: path
@@ -2822,6 +2829,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_replace_replica_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: restartDrConfig
       parameters:
       - in: path
@@ -2870,6 +2878,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_restart_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: resumeDrConfig
       parameters:
       - in: path
@@ -2904,6 +2913,7 @@ paths:
       - Disaster Recovery
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime:
     get:
+      description: "WARNING: This is a preview API that could change."
       operationId: getDrConfigSafetime
       parameters:
       - in: path
@@ -2977,6 +2987,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_set_databases_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: setTablesDrConfig
       parameters:
       - in: path
@@ -3019,6 +3030,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_set_tables_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: switchoverDrConfig
       parameters:
       - in: path
@@ -3061,6 +3073,7 @@ paths:
       x-codegen-request-body-name: disaster_recovery_switchover_form_data
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync:
     post:
+      description: "WARNING: This is a preview API that could change."
       operationId: syncDrConfig
       parameters:
       - in: path
@@ -14583,6 +14596,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -14618,6 +14632,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -14642,6 +14657,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -14663,6 +14679,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -14698,6 +14715,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -20828,6 +20846,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -20863,6 +20882,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -20887,6 +20907,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -20908,6 +20929,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -20943,6 +20965,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -23677,49 +23700,6 @@ components:
           format: int32
           type: integer
       type: object
-    DrConfig:
-      description: disaster recovery config object
-      example:
-        modifyTime: 2022-12-12T13:07:18Z
-        createTime: 2022-12-12T13:07:18Z
-        name: name
-        state: Initializing
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      exampleSetFlag: true
-      properties:
-        createTime:
-          description: Create time of the DR config
-          example: 2022-12-12T13:07:18Z
-          exampleSetFlag: true
-          format: date-time
-          type: string
-        modifyTime:
-          description: Last modify time of the DR config
-          example: 2022-12-12T13:07:18Z
-          exampleSetFlag: true
-          format: date-time
-          type: string
-        name:
-          description: Disaster recovery config name
-          exampleSetFlag: true
-          type: string
-        state:
-          description: The state of the DR config
-          enum:
-          - Initializing
-          - Replicating
-          - Switchover in Progress
-          - Failover in Progress
-          - Halted
-          - Error
-          exampleSetFlag: true
-          type: string
-        uuid:
-          description: DR config UUID
-          exampleSetFlag: true
-          format: uuid
-          type: string
-      type: object
     DrConfigCreateForm:
       description: drConfig create form
       example:
@@ -23784,10 +23764,15 @@ components:
           backupRequestParams:
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             parallelism: 0
+        pitrParams:
+          snapshotIntervalSec: 1
+          retentionPeriodSec: 6
       exampleSetFlag: true
       properties:
         bootstrapParams:
           $ref: '#/components/schemas/RestartBootstrapParams'
+        pitrParams:
+          $ref: '#/components/schemas/PitrParams'
       type: object
     DrConfigFailoverForm:
       description: drConfig failover form
@@ -23827,6 +23812,116 @@ components:
           backupRequestParams:
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             parallelism: 0
+        xclusterConfigUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        drReplicaUniverseState: Unconfigured for DR
+        type: Basic
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        tableType: UNKNOWN
+        tables:
+        - tables
+        - tables
+        modifyTime: 2022-12-12T13:07:18Z
+        primaryUniverseUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        drReplicaUniverseActive: true
+        state: Initializing
+        primaryUniverseState: Unconfigured for DR
+        tableDetails:
+        - restoreTime: 2022-12-12T13:07:18Z
+          restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          streamId: a9d2470786694dc4b34e0e58e592da9e
+          bootstrapCreateTime: 2022-12-12T13:07:18Z
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tableId: 000033df000030008000000000004005
+          replicationStatusErrors:
+          - Missing op ID
+          - Missing op ID
+          sourceTableInfo:
+            relationType: SYSTEM_TABLE_RELATION
+            colocated: true
+            walSizeBytes: 9.301444243932576
+            indexTableIDs:
+            - indexTableIDs
+            - indexTableIDs
+            pgSchemaName: public
+            sizeBytes: 7.061401241503109
+            tableName: tableName
+            tableSpace: tableSpace
+            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tableType: YQL_TABLE_TYPE
+            keySpace: keySpace
+            tableID: tableID
+            nameSpace: nameSpace
+            colocationParentId: colocationParentId
+          targetTableInfo:
+            relationType: SYSTEM_TABLE_RELATION
+            colocated: true
+            walSizeBytes: 9.301444243932576
+            indexTableIDs:
+            - indexTableIDs
+            - indexTableIDs
+            pgSchemaName: public
+            sizeBytes: 7.061401241503109
+            tableName: tableName
+            tableSpace: tableSpace
+            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tableType: YQL_TABLE_TYPE
+            keySpace: keySpace
+            tableID: tableID
+            nameSpace: nameSpace
+            colocationParentId: colocationParentId
+          status: Validated
+        - restoreTime: 2022-12-12T13:07:18Z
+          restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          streamId: a9d2470786694dc4b34e0e58e592da9e
+          bootstrapCreateTime: 2022-12-12T13:07:18Z
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          tableId: 000033df000030008000000000004005
+          replicationStatusErrors:
+          - Missing op ID
+          - Missing op ID
+          sourceTableInfo:
+            relationType: SYSTEM_TABLE_RELATION
+            colocated: true
+            walSizeBytes: 9.301444243932576
+            indexTableIDs:
+            - indexTableIDs
+            - indexTableIDs
+            pgSchemaName: public
+            sizeBytes: 7.061401241503109
+            tableName: tableName
+            tableSpace: tableSpace
+            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tableType: YQL_TABLE_TYPE
+            keySpace: keySpace
+            tableID: tableID
+            nameSpace: nameSpace
+            colocationParentId: colocationParentId
+          targetTableInfo:
+            relationType: SYSTEM_TABLE_RELATION
+            colocated: true
+            walSizeBytes: 9.301444243932576
+            indexTableIDs:
+            - indexTableIDs
+            - indexTableIDs
+            pgSchemaName: public
+            sizeBytes: 7.061401241503109
+            tableName: tableName
+            tableSpace: tableSpace
+            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            tableType: YQL_TABLE_TYPE
+            keySpace: keySpace
+            tableID: tableID
+            nameSpace: nameSpace
+            colocationParentId: colocationParentId
+          status: Validated
         dbDetails:
         - sourceNamespaceId: sourceNamespaceId
           sourceNamespaceInfo:
@@ -23877,124 +23972,17 @@ components:
           usedForXCluster: true
           state: UNKNOWN
           retentionPeriod: 1
-        xclusterConfigUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        drReplicaUniverseState: Unconfigured for DR
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        tableType: UNKNOWN
         primaryUniverseActive: true
-        tables:
-        - tables
-        - tables
-        modifyTime: 2022-12-12T13:07:18Z
         dbs:
         - dbs
         - dbs
         createTime: 2022-12-12T13:07:18Z
         name: name
         drReplicaUniverseUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        primaryUniverseUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        drReplicaUniverseActive: true
         keyspacePending: keyspacePending
-        state: Initializing
-        primaryUniverseState: Unconfigured for DR
+        pitrRetentionPeriodSec: 5
+        pitrSnapshotIntervalSec: 2
         status: Initialized
-        tableDetails:
-        - restoreTime: 2022-12-12T13:07:18Z
-          restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          streamId: a9d2470786694dc4b34e0e58e592da9e
-          bootstrapCreateTime: 2022-12-12T13:07:18Z
-          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          tableId: 000033df000030008000000000004005
-          replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
-          sourceTableInfo:
-            relationType: SYSTEM_TABLE_RELATION
-            colocated: true
-            walSizeBytes: 2.3021358869347655
-            indexTableIDs:
-            - indexTableIDs
-            - indexTableIDs
-            pgSchemaName: public
-            sizeBytes: 5.637376656633329
-            tableName: tableName
-            tableSpace: tableSpace
-            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            tableType: YQL_TABLE_TYPE
-            keySpace: keySpace
-            tableID: tableID
-            nameSpace: nameSpace
-            colocationParentId: colocationParentId
-          targetTableInfo:
-            relationType: SYSTEM_TABLE_RELATION
-            colocated: true
-            walSizeBytes: 2.3021358869347655
-            indexTableIDs:
-            - indexTableIDs
-            - indexTableIDs
-            pgSchemaName: public
-            sizeBytes: 5.637376656633329
-            tableName: tableName
-            tableSpace: tableSpace
-            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            tableType: YQL_TABLE_TYPE
-            keySpace: keySpace
-            tableID: tableID
-            nameSpace: nameSpace
-            colocationParentId: colocationParentId
-          status: Validated
-        - restoreTime: 2022-12-12T13:07:18Z
-          restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          streamId: a9d2470786694dc4b34e0e58e592da9e
-          bootstrapCreateTime: 2022-12-12T13:07:18Z
-          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          tableId: 000033df000030008000000000004005
-          replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
-          sourceTableInfo:
-            relationType: SYSTEM_TABLE_RELATION
-            colocated: true
-            walSizeBytes: 2.3021358869347655
-            indexTableIDs:
-            - indexTableIDs
-            - indexTableIDs
-            pgSchemaName: public
-            sizeBytes: 5.637376656633329
-            tableName: tableName
-            tableSpace: tableSpace
-            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            tableType: YQL_TABLE_TYPE
-            keySpace: keySpace
-            tableID: tableID
-            nameSpace: nameSpace
-            colocationParentId: colocationParentId
-          targetTableInfo:
-            relationType: SYSTEM_TABLE_RELATION
-            colocated: true
-            walSizeBytes: 2.3021358869347655
-            indexTableIDs:
-            - indexTableIDs
-            - indexTableIDs
-            pgSchemaName: public
-            sizeBytes: 5.637376656633329
-            tableName: tableName
-            tableSpace: tableSpace
-            tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            mainTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            parentTableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            tableType: YQL_TABLE_TYPE
-            keySpace: keySpace
-            tableID: tableID
-            nameSpace: nameSpace
-            colocationParentId: colocationParentId
-          status: Validated
       exampleSetFlag: true
       properties:
         bootstrapParams:
@@ -24068,6 +24056,18 @@ components:
           items:
             $ref: '#/components/schemas/PitrConfig'
           type: array
+        pitrRetentionPeriodSec:
+          description: "WARNING: This is a preview API that could change. PITR Retention\
+            \ Period in seconds"
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        pitrSnapshotIntervalSec:
+          description: "WARNING: This is a preview API that could change. PITR Retention\
+            \ Period in seconds"
+          exampleSetFlag: true
+          format: int64
+          type: integer
         primaryUniverseActive:
           description: Whether the primary universe is active
           exampleSetFlag: true
@@ -24102,7 +24102,8 @@ components:
           - Switchover in Progress
           - Failover in Progress
           - Halted
-          - Error
+          - Updating
+          - Failed
           exampleSetFlag: true
           type: string
         status:
@@ -24139,6 +24140,14 @@ components:
             type: string
           type: array
           uniqueItems: true
+        type:
+          description: "Whether the config is basic, txn, or db scoped xCluster"
+          enum:
+          - Basic
+          - Txn
+          - Db
+          exampleSetFlag: true
+          type: string
         uuid:
           description: DR config UUID
           exampleSetFlag: true
@@ -27268,6 +27277,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -27303,6 +27313,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -27327,6 +27338,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -27348,6 +27360,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -27383,6 +27396,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -30382,6 +30396,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -30417,6 +30432,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -30441,6 +30457,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -30462,6 +30479,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -30497,6 +30515,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -34258,6 +34277,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -34293,6 +34313,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -34317,6 +34338,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -34338,6 +34360,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -34373,6 +34396,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -34660,7 +34684,7 @@ components:
       example:
         ldapServer: ldapServer
         createGroups: true
-        ldapSearchFilter: "(objectclass=person), (&(objectclass=person)(|(groupName=CN=group1,CN=Groups,DC=example,DC=com)(groupName=CN=group2,CN=Groups,DC=example,DC=com)))"
+        ldapSearchFilter: (objectclass=person)
         useLdapTls: true
         ldapUserfield: "cn, sAMAccountName"
         dbuserPassword: dbuserPassword
@@ -34671,6 +34695,9 @@ components:
         ldapPort: 0
         ldapBasedn: "dc=example,dc=org"
         ldapGroupMemberOfAttribute: ldapGroupMemberOfAttribute
+        groupsToSync:
+        - groupsToSync
+        - groupsToSync
         ldapBindDn: "cn=user,dc=example,dc=com"
         ldapTlsProtocol: TLSv1
         dbUser: dbUser
@@ -34697,6 +34724,14 @@ components:
             exampleSetFlag: true
             type: string
           type: array
+        groupsToSync:
+          description: LDAP groups to sync. In case user belongs to multiple groups
+            & we don't want to sync all of them to DB
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
         ldapBasedn:
           description: Dn of the search starting point.
           example: "dc=example,dc=org"
@@ -34716,7 +34751,7 @@ components:
           exampleSetFlag: true
           type: string
         ldapGroupfield:
-          description: Group dn field to get the group's name from
+          description: LDAP field to get the group information
           example: cn
           exampleSetFlag: true
           type: string
@@ -34726,9 +34761,8 @@ components:
           format: int32
           type: integer
         ldapSearchFilter:
-          description: LDAP search filter to get the user entries. This filter can
-            also be used to search for the users based on their group memberships.
-          example: "(objectclass=person), (&(objectclass=person)(|(groupName=CN=group1,CN=Groups,DC=example,DC=com)(groupName=CN=group2,CN=Groups,DC=example,DC=com)))"
+          description: LDAP search filter to get the user entries
+          example: (objectclass=person)
           exampleSetFlag: true
           type: string
         ldapServer:
@@ -36745,6 +36779,7 @@ components:
           description: Node agent state
           enum:
           - REGISTERING
+          - REGISTERED
           - UPGRADE
           - UPGRADED
           - READY
@@ -37043,6 +37078,7 @@ components:
           description: Node agent state
           enum:
           - REGISTERING
+          - REGISTERED
           - UPGRADE
           - UPGRADED
           - READY
@@ -43037,6 +43073,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -43072,6 +43109,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -43096,6 +43134,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -43117,6 +43156,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -43152,6 +43192,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -46694,6 +46735,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -46729,6 +46771,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -46753,6 +46796,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -46774,6 +46818,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -46809,6 +46854,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -49922,6 +49968,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -49957,6 +50004,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -49981,6 +50029,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -50002,6 +50051,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -50037,6 +50087,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -54369,6 +54420,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -54404,6 +54456,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -54428,6 +54481,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -54449,6 +54503,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -54484,6 +54539,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -54897,6 +54953,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -54932,6 +54989,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -54956,6 +55014,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -54977,6 +55036,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -55012,6 +55072,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -55241,6 +55302,7 @@ components:
             - FailoverDrConfig
             - SwitchoverDrConfig
             - EditDrConfig
+            - EditDrConfigParams
             - ReinstallNodeAgent
             - DeleteCustomerConfig
             - DeleteCustomerStorageConfig
@@ -55276,6 +55338,7 @@ components:
             - CreateYbaBackup
             - RestoreYbaBackup
             - RestoreContinuousBackup
+            - EnableNodeAgentInUniverse
             - KubernetesCheckVolumeExpansion
             - KubernetesPostExpansionCheckVolume
             - NodeCertReloadTask
@@ -55300,6 +55363,7 @@ components:
             - BulkImport
             - ChangeMasterConfig
             - ChangeAdminPassword
+            - DropTable
             - CreateTable
             - DeleteNode
             - DeleteBackup
@@ -55321,6 +55385,7 @@ components:
             - UniverseUpdateSucceeded
             - UpdateAndPersistGFlags
             - UpdateAndPersistKubernetesOverrides
+            - HandleKubernetesNamespacedServices
             - UpdatePlacementInfo
             - UpdateSoftwareVersion
             - UpdateUniverseYbcDetails
@@ -55356,6 +55421,7 @@ components:
             - SetReplicationPaused
             - ChangeXClusterRole
             - SetDrStates
+            - UpdateDrConfigParams
             - XClusterAddNamespaceToOutboundReplicationGroup
             - AddNamespaceToXClusterReplication
             - XClusterRemoveNamespaceFromTargetUniverse
@@ -58488,6 +58554,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -58523,6 +58590,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -58547,6 +58615,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -58568,6 +58637,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -58603,6 +58673,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -61961,6 +62032,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -61996,6 +62068,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -62020,6 +62093,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -62041,6 +62115,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -62076,6 +62151,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -62385,12 +62461,12 @@ components:
       example:
         relationType: SYSTEM_TABLE_RELATION
         colocated: true
-        walSizeBytes: 2.3021358869347655
+        walSizeBytes: 9.301444243932576
         indexTableIDs:
         - indexTableIDs
         - indexTableIDs
         pgSchemaName: public
-        sizeBytes: 5.637376656633329
+        sizeBytes: 7.061401241503109
         tableName: tableName
         tableSpace: tableSpace
         tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -65404,6 +65480,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -65439,6 +65516,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -65463,6 +65541,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -65484,6 +65563,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -65519,6 +65599,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -68439,6 +68520,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -68474,6 +68556,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -68498,6 +68581,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -68519,6 +68603,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -68554,6 +68639,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -71710,6 +71796,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -71745,6 +71832,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -71769,6 +71857,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -71790,6 +71879,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -71825,6 +71915,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -74703,6 +74794,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -74738,6 +74830,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -74762,6 +74855,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -74783,6 +74877,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -74818,6 +74913,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -77704,6 +77800,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -77739,6 +77836,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -77763,6 +77861,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -77784,6 +77883,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -77819,6 +77919,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -83501,6 +83602,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -83536,6 +83638,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -83560,6 +83663,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -83581,6 +83685,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -83616,6 +83721,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -87295,6 +87401,7 @@ components:
           - FailoverDrConfig
           - SwitchoverDrConfig
           - EditDrConfig
+          - EditDrConfigParams
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -87330,6 +87437,7 @@ components:
           - CreateYbaBackup
           - RestoreYbaBackup
           - RestoreContinuousBackup
+          - EnableNodeAgentInUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -87354,6 +87462,7 @@ components:
           - BulkImport
           - ChangeMasterConfig
           - ChangeAdminPassword
+          - DropTable
           - CreateTable
           - DeleteNode
           - DeleteBackup
@@ -87375,6 +87484,7 @@ components:
           - UniverseUpdateSucceeded
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
+          - HandleKubernetesNamespacedServices
           - UpdatePlacementInfo
           - UpdateSoftwareVersion
           - UpdateUniverseYbcDetails
@@ -87410,6 +87520,7 @@ components:
           - SetReplicationPaused
           - ChangeXClusterRole
           - SetDrStates
+          - UpdateDrConfigParams
           - XClusterAddNamespaceToOutboundReplicationGroup
           - AddNamespaceToXClusterReplication
           - XClusterRemoveNamespaceFromTargetUniverse
@@ -87781,7 +87892,6 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
-          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -87797,6 +87907,7 @@ components:
           items:
             exampleSetFlag: true
             type: string
+          readOnly: true
           type: array
           uniqueItems: true
         targetActive:
@@ -87820,7 +87931,7 @@ components:
           format: uuid
           type: string
         type:
-          description: Whether the config is txn xCluster
+          description: "Whether the config is basic, txn, or db scoped xCluster"
           enum:
           - Basic
           - Txn
@@ -88037,12 +88148,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 2.3021358869347655
+            walSizeBytes: 9.301444243932576
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 5.637376656633329
+            sizeBytes: 7.061401241503109
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88056,12 +88167,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 2.3021358869347655
+            walSizeBytes: 9.301444243932576
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 5.637376656633329
+            sizeBytes: 7.061401241503109
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88085,12 +88196,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 2.3021358869347655
+            walSizeBytes: 9.301444243932576
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 5.637376656633329
+            sizeBytes: 7.061401241503109
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88104,12 +88215,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 2.3021358869347655
+            walSizeBytes: 9.301444243932576
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 5.637376656633329
+            sizeBytes: 7.061401241503109
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88291,7 +88402,6 @@ components:
           exampleSetFlag: false
           items:
             $ref: '#/components/schemas/XClusterTableConfig'
-          readOnly: true
           type: array
           uniqueItems: true
         tableType:
@@ -88307,6 +88417,7 @@ components:
           items:
             exampleSetFlag: true
             type: string
+          readOnly: true
           type: array
           uniqueItems: true
         targetActive:
@@ -88330,7 +88441,7 @@ components:
           format: uuid
           type: string
         type:
-          description: Whether the config is txn xCluster
+          description: "Whether the config is basic, txn, or db scoped xCluster"
           enum:
           - Basic
           - Txn
@@ -88468,12 +88579,12 @@ components:
         sourceTableInfo:
           relationType: SYSTEM_TABLE_RELATION
           colocated: true
-          walSizeBytes: 2.3021358869347655
+          walSizeBytes: 9.301444243932576
           indexTableIDs:
           - indexTableIDs
           - indexTableIDs
           pgSchemaName: public
-          sizeBytes: 5.637376656633329
+          sizeBytes: 7.061401241503109
           tableName: tableName
           tableSpace: tableSpace
           tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88487,12 +88598,12 @@ components:
         targetTableInfo:
           relationType: SYSTEM_TABLE_RELATION
           colocated: true
-          walSizeBytes: 2.3021358869347655
+          walSizeBytes: 9.301444243932576
           indexTableIDs:
           - indexTableIDs
           - indexTableIDs
           pgSchemaName: public
-          sizeBytes: 5.637376656633329
+          sizeBytes: 7.061401241503109
           tableName: tableName
           tableSpace: tableSpace
           tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88507,7 +88618,6 @@ components:
       exampleSetFlag: true
       properties:
         backupUuid:
-          description: The backup config used to do bootstrapping for this table
           exampleSetFlag: true
           format: uuid
           type: string
@@ -88537,7 +88647,6 @@ components:
           format: date-time
           type: string
         restoreUuid:
-          description: The restore config used to do bootstrapping for this table
           exampleSetFlag: true
           format: uuid
           type: string
@@ -88569,6 +88678,9 @@ components:
           type: string
         targetTableInfo:
           $ref: '#/components/schemas/TableInfoResp'
+      required:
+      - backupUuid
+      - restoreUuid
       type: object
     YBPCreateSuccess:
       example:

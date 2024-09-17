@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BackupUuid** | Pointer to **string** | The backup config used to do bootstrapping for this table | [optional] 
+**BackupUuid** | **string** |  | 
 **BootstrapCreateTime** | Pointer to **time.Time** | Time of the bootstrap of the table | [optional] 
 **ReplicationStatusErrors** | Pointer to **[]string** | Short human readable replication status error messages | [optional] 
 **RestoreTime** | Pointer to **time.Time** | Time of the last try to restore data to the target universe | [optional] 
-**RestoreUuid** | Pointer to **string** | The restore config used to do bootstrapping for this table | [optional] 
+**RestoreUuid** | **string** |  | 
 **SourceTableInfo** | Pointer to [**TableInfoResp**](TableInfoResp.md) |  | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
 **StreamId** | Pointer to **string** | Stream ID if replication is setup; bootstrap ID if the table is bootstrapped | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewXClusterTableConfig
 
-`func NewXClusterTableConfig() *XClusterTableConfig`
+`func NewXClusterTableConfig(backupUuid string, restoreUuid string, ) *XClusterTableConfig`
 
 NewXClusterTableConfig instantiates a new XClusterTableConfig object
 This constructor will assign default values to properties that have it defined,
@@ -53,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetBackupUuid sets BackupUuid field to given value.
 
-### HasBackupUuid
-
-`func (o *XClusterTableConfig) HasBackupUuid() bool`
-
-HasBackupUuid returns a boolean if a field has been set.
 
 ### GetBootstrapCreateTime
 
@@ -153,11 +148,6 @@ and a boolean to check if the value has been set.
 
 SetRestoreUuid sets RestoreUuid field to given value.
 
-### HasRestoreUuid
-
-`func (o *XClusterTableConfig) HasRestoreUuid() bool`
-
-HasRestoreUuid returns a boolean if a field has been set.
 
 ### GetSourceTableInfo
 
