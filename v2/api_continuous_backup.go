@@ -32,11 +32,11 @@ type ContinuousBackupApiApiCreateContinuousBackupRequest struct {
 	ctx _context.Context
 	ApiService *ContinuousBackupApiService
 	cUUID string
-	continuousBackupCreateSpec *ContinuousBackupCreateSpec
+	continuousBackupSpec *ContinuousBackupSpec
 }
 
-func (r ContinuousBackupApiApiCreateContinuousBackupRequest) ContinuousBackupCreateSpec(continuousBackupCreateSpec ContinuousBackupCreateSpec) ContinuousBackupApiApiCreateContinuousBackupRequest {
-	r.continuousBackupCreateSpec = &continuousBackupCreateSpec
+func (r ContinuousBackupApiApiCreateContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ContinuousBackupApiApiCreateContinuousBackupRequest {
+	r.continuousBackupSpec = &continuousBackupSpec
 	return r
 }
 
@@ -84,8 +84,8 @@ func (a *ContinuousBackupApiService) CreateContinuousBackupExecute(r ContinuousB
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.continuousBackupCreateSpec == nil {
-		return localVarReturnValue, nil, reportError("continuousBackupCreateSpec is required and must be specified")
+	if r.continuousBackupSpec == nil {
+		return localVarReturnValue, nil, reportError("continuousBackupSpec is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -106,7 +106,7 @@ func (a *ContinuousBackupApiService) CreateContinuousBackupExecute(r ContinuousB
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.continuousBackupCreateSpec
+	localVarPostBody = r.continuousBackupSpec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -287,11 +287,11 @@ type ContinuousBackupApiApiEditContinuousBackupRequest struct {
 	ApiService *ContinuousBackupApiService
 	cUUID string
 	bUUID string
-	continuousBackupCreateSpec *ContinuousBackupCreateSpec
+	continuousBackupSpec *ContinuousBackupSpec
 }
 
-func (r ContinuousBackupApiApiEditContinuousBackupRequest) ContinuousBackupCreateSpec(continuousBackupCreateSpec ContinuousBackupCreateSpec) ContinuousBackupApiApiEditContinuousBackupRequest {
-	r.continuousBackupCreateSpec = &continuousBackupCreateSpec
+func (r ContinuousBackupApiApiEditContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ContinuousBackupApiApiEditContinuousBackupRequest {
+	r.continuousBackupSpec = &continuousBackupSpec
 	return r
 }
 
@@ -342,8 +342,8 @@ func (a *ContinuousBackupApiService) EditContinuousBackupExecute(r ContinuousBac
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.continuousBackupCreateSpec == nil {
-		return localVarReturnValue, nil, reportError("continuousBackupCreateSpec is required and must be specified")
+	if r.continuousBackupSpec == nil {
+		return localVarReturnValue, nil, reportError("continuousBackupSpec is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -364,7 +364,7 @@ func (a *ContinuousBackupApiService) EditContinuousBackupExecute(r ContinuousBac
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.continuousBackupCreateSpec
+	localVarPostBody = r.continuousBackupSpec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

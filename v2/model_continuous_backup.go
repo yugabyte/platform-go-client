@@ -15,9 +15,10 @@ import (
 	"encoding/json"
 )
 
-// ContinuousBackup Continuos Backup object which contains the info for a configuration.
+// ContinuousBackup ContinuousBackup  Continuous Backup object which contains the info for a configuration. 
 type ContinuousBackup struct {
 	Info *ContinuousBackupInfo `json:"info,omitempty"`
+	Spec *ContinuousBackupSpec `json:"spec,omitempty"`
 }
 
 // NewContinuousBackup instantiates a new ContinuousBackup object
@@ -69,10 +70,45 @@ func (o *ContinuousBackup) SetInfo(v ContinuousBackupInfo) {
 	o.Info = &v
 }
 
+// GetSpec returns the Spec field value if set, zero value otherwise.
+func (o *ContinuousBackup) GetSpec() ContinuousBackupSpec {
+	if o == nil || o.Spec == nil {
+		var ret ContinuousBackupSpec
+		return ret
+	}
+	return *o.Spec
+}
+
+// GetSpecOk returns a tuple with the Spec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContinuousBackup) GetSpecOk() (*ContinuousBackupSpec, bool) {
+	if o == nil || o.Spec == nil {
+		return nil, false
+	}
+	return o.Spec, true
+}
+
+// HasSpec returns a boolean if a field has been set.
+func (o *ContinuousBackup) HasSpec() bool {
+	if o != nil && o.Spec != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSpec gets a reference to the given ContinuousBackupSpec and assigns it to the Spec field.
+func (o *ContinuousBackup) SetSpec(v ContinuousBackupSpec) {
+	o.Spec = &v
+}
+
 func (o ContinuousBackup) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Info != nil {
 		toSerialize["info"] = o.Info
+	}
+	if o.Spec != nil {
+		toSerialize["spec"] = o.Spec
 	}
 	return json.Marshal(toSerialize)
 }

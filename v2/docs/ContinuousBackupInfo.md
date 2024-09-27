@@ -5,8 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | Pointer to **string** | UUID of the Continuous Backup Config | [optional] [readonly] 
-**Frequency** | Pointer to **int64** | Interval between two backups. | [optional] 
-**FrequencyTimeUnit** | Pointer to [**TimeUnitType**](TimeUnitType.md) |  | [optional] 
 **StorageLocation** | Pointer to **string** | bucket or directory where backups are stored | [optional] [readonly] 
 **LastBackup** | Pointer to **time.Time** | time of last backup stored | [optional] [readonly] 
 
@@ -53,56 +51,6 @@ SetUuid sets Uuid field to given value.
 `func (o *ContinuousBackupInfo) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
-
-### GetFrequency
-
-`func (o *ContinuousBackupInfo) GetFrequency() int64`
-
-GetFrequency returns the Frequency field if non-nil, zero value otherwise.
-
-### GetFrequencyOk
-
-`func (o *ContinuousBackupInfo) GetFrequencyOk() (*int64, bool)`
-
-GetFrequencyOk returns a tuple with the Frequency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFrequency
-
-`func (o *ContinuousBackupInfo) SetFrequency(v int64)`
-
-SetFrequency sets Frequency field to given value.
-
-### HasFrequency
-
-`func (o *ContinuousBackupInfo) HasFrequency() bool`
-
-HasFrequency returns a boolean if a field has been set.
-
-### GetFrequencyTimeUnit
-
-`func (o *ContinuousBackupInfo) GetFrequencyTimeUnit() TimeUnitType`
-
-GetFrequencyTimeUnit returns the FrequencyTimeUnit field if non-nil, zero value otherwise.
-
-### GetFrequencyTimeUnitOk
-
-`func (o *ContinuousBackupInfo) GetFrequencyTimeUnitOk() (*TimeUnitType, bool)`
-
-GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFrequencyTimeUnit
-
-`func (o *ContinuousBackupInfo) SetFrequencyTimeUnit(v TimeUnitType)`
-
-SetFrequencyTimeUnit sets FrequencyTimeUnit field to given value.
-
-### HasFrequencyTimeUnit
-
-`func (o *ContinuousBackupInfo) HasFrequencyTimeUnit() bool`
-
-HasFrequencyTimeUnit returns a boolean if a field has been set.
 
 ### GetStorageLocation
 

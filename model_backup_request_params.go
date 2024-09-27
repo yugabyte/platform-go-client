@@ -102,6 +102,8 @@ type BackupRequestParams struct {
 	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
 	// Universe UUID
 	UniverseUUID string `json:"universeUUID"`
+	// Use local timezone for Cron Expression, otherwise use UTC
+	UseLocalTimezone *bool `json:"useLocalTimezone,omitempty"`
 	// Is tablespaces information included
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
@@ -1639,6 +1641,38 @@ func (o *BackupRequestParams) SetUniverseUUID(v string) {
 	o.UniverseUUID = v
 }
 
+// GetUseLocalTimezone returns the UseLocalTimezone field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetUseLocalTimezone() bool {
+	if o == nil || o.UseLocalTimezone == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseLocalTimezone
+}
+
+// GetUseLocalTimezoneOk returns a tuple with the UseLocalTimezone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetUseLocalTimezoneOk() (*bool, bool) {
+	if o == nil || o.UseLocalTimezone == nil {
+		return nil, false
+	}
+	return o.UseLocalTimezone, true
+}
+
+// HasUseLocalTimezone returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasUseLocalTimezone() bool {
+	if o != nil && o.UseLocalTimezone != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseLocalTimezone gets a reference to the given bool and assigns it to the UseLocalTimezone field.
+func (o *BackupRequestParams) SetUseLocalTimezone(v bool) {
+	o.UseLocalTimezone = &v
+}
+
 // GetUseTablespaces returns the UseTablespaces field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetUseTablespaces() bool {
 	if o == nil || o.UseTablespaces == nil {
@@ -1915,6 +1949,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["universeUUID"] = o.UniverseUUID
+	}
+	if o.UseLocalTimezone != nil {
+		toSerialize["useLocalTimezone"] = o.UseLocalTimezone
 	}
 	if o.UseTablespaces != nil {
 		toSerialize["useTablespaces"] = o.UseTablespaces

@@ -45,6 +45,8 @@ type Schedule struct {
 	Status *string `json:"status,omitempty"`
 	// Type of task to be scheduled.
 	TaskType *string `json:"taskType,omitempty"`
+	// Whether to use local timezone with cron expression for the schedule
+	UseLocalTimezone *bool `json:"useLocalTimezone,omitempty"`
 	// User who created the schedule policy
 	UserEmail *string `json:"userEmail,omitempty"`
 }
@@ -514,6 +516,38 @@ func (o *Schedule) SetTaskType(v string) {
 	o.TaskType = &v
 }
 
+// GetUseLocalTimezone returns the UseLocalTimezone field value if set, zero value otherwise.
+func (o *Schedule) GetUseLocalTimezone() bool {
+	if o == nil || o.UseLocalTimezone == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseLocalTimezone
+}
+
+// GetUseLocalTimezoneOk returns a tuple with the UseLocalTimezone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Schedule) GetUseLocalTimezoneOk() (*bool, bool) {
+	if o == nil || o.UseLocalTimezone == nil {
+		return nil, false
+	}
+	return o.UseLocalTimezone, true
+}
+
+// HasUseLocalTimezone returns a boolean if a field has been set.
+func (o *Schedule) HasUseLocalTimezone() bool {
+	if o != nil && o.UseLocalTimezone != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseLocalTimezone gets a reference to the given bool and assigns it to the UseLocalTimezone field.
+func (o *Schedule) SetUseLocalTimezone(v bool) {
+	o.UseLocalTimezone = &v
+}
+
 // GetUserEmail returns the UserEmail field value if set, zero value otherwise.
 func (o *Schedule) GetUserEmail() string {
 	if o == nil || o.UserEmail == nil {
@@ -589,6 +623,9 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	}
 	if o.TaskType != nil {
 		toSerialize["taskType"] = o.TaskType
+	}
+	if o.UseLocalTimezone != nil {
+		toSerialize["useLocalTimezone"] = o.UseLocalTimezone
 	}
 	if o.UserEmail != nil {
 		toSerialize["userEmail"] = o.UserEmail

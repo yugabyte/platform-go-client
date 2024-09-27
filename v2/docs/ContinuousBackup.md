@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Info** | Pointer to [**ContinuousBackupInfo**](ContinuousBackupInfo.md) |  | [optional] 
+**Spec** | Pointer to [**ContinuousBackupSpec**](ContinuousBackupSpec.md) |  | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetInfo sets Info field to given value.
 `func (o *ContinuousBackup) HasInfo() bool`
 
 HasInfo returns a boolean if a field has been set.
+
+### GetSpec
+
+`func (o *ContinuousBackup) GetSpec() ContinuousBackupSpec`
+
+GetSpec returns the Spec field if non-nil, zero value otherwise.
+
+### GetSpecOk
+
+`func (o *ContinuousBackup) GetSpecOk() (*ContinuousBackupSpec, bool)`
+
+GetSpecOk returns a tuple with the Spec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpec
+
+`func (o *ContinuousBackup) SetSpec(v ContinuousBackupSpec)`
+
+SetSpec sets Spec field to given value.
+
+### HasSpec
+
+`func (o *ContinuousBackup) HasSpec() bool`
+
+HasSpec returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

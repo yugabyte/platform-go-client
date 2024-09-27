@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateContinuousBackup
 
-> ContinuousBackup CreateContinuousBackup(ctx, cUUID).ContinuousBackupCreateSpec(continuousBackupCreateSpec).Execute()
+> ContinuousBackup CreateContinuousBackup(ctx, cUUID).ContinuousBackupSpec(continuousBackupSpec).Execute()
 
 Create Continous Backup
 
@@ -34,11 +34,11 @@ import (
 
 func main() {
     cUUID := TODO // string | Customer UUID
-    continuousBackupCreateSpec := *openapiclient.NewContinuousBackupCreateSpec("f33e3c9b-75ab-4c30-80ad-cba85646ea39", int64(123), openapiclient.TimeUnitType("NANOSECONDS"), "yba_backups") // ContinuousBackupCreateSpec | 
+    continuousBackupSpec := *openapiclient.NewContinuousBackupSpec("f33e3c9b-75ab-4c30-80ad-cba85646ea39", int64(123), openapiclient.TimeUnitType("NANOSECONDS"), "yba_backups") // ContinuousBackupSpec | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ContinuousBackupApi.CreateContinuousBackup(context.Background(), cUUID).ContinuousBackupCreateSpec(continuousBackupCreateSpec).Execute()
+    resp, r, err := api_client.ContinuousBackupApi.CreateContinuousBackup(context.Background(), cUUID).ContinuousBackupSpec(continuousBackupSpec).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContinuousBackupApi.CreateContinuousBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateContinuousBackupRequ
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **continuousBackupCreateSpec** | [**ContinuousBackupCreateSpec**](ContinuousBackupCreateSpec.md) |  | 
+ **continuousBackupSpec** | [**ContinuousBackupSpec**](ContinuousBackupSpec.md) |  | 
 
 ### Return type
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## EditContinuousBackup
 
-> ContinuousBackup EditContinuousBackup(ctx, cUUID, bUUID).ContinuousBackupCreateSpec(continuousBackupCreateSpec).Execute()
+> ContinuousBackup EditContinuousBackup(ctx, cUUID, bUUID).ContinuousBackupSpec(continuousBackupSpec).Execute()
 
 Edit Continuous Backup config
 
@@ -180,11 +180,11 @@ import (
 func main() {
     cUUID := TODO // string | Customer UUID
     bUUID := TODO // string | Continuous Backup UUID
-    continuousBackupCreateSpec := *openapiclient.NewContinuousBackupCreateSpec("f33e3c9b-75ab-4c30-80ad-cba85646ea39", int64(123), openapiclient.TimeUnitType("NANOSECONDS"), "yba_backups") // ContinuousBackupCreateSpec | 
+    continuousBackupSpec := *openapiclient.NewContinuousBackupSpec("f33e3c9b-75ab-4c30-80ad-cba85646ea39", int64(123), openapiclient.TimeUnitType("NANOSECONDS"), "yba_backups") // ContinuousBackupSpec | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ContinuousBackupApi.EditContinuousBackup(context.Background(), cUUID, bUUID).ContinuousBackupCreateSpec(continuousBackupCreateSpec).Execute()
+    resp, r, err := api_client.ContinuousBackupApi.EditContinuousBackup(context.Background(), cUUID, bUUID).ContinuousBackupSpec(continuousBackupSpec).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContinuousBackupApi.EditContinuousBackup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **continuousBackupCreateSpec** | [**ContinuousBackupCreateSpec**](ContinuousBackupCreateSpec.md) |  | 
+ **continuousBackupSpec** | [**ContinuousBackupSpec**](ContinuousBackupSpec.md) |  | 
 
 ### Return type
 

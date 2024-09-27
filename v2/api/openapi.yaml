@@ -1979,7 +1979,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ContinuousBackupCreateSpec'
+            $ref: '#/components/schemas/ContinuousBackupSpec'
       required: true
     ContinuousBackupRestoreReq:
       content:
@@ -2374,6 +2374,39 @@ components:
           type: string
       title: GflagMetadata
       type: object
+    ContinuousBackupInfo:
+      description: |
+        ContinuousBackupInfo
+
+        These are read-only system generated properties of a continuous backup configuration. Returned as part of the Continuous Backup resource.
+      example:
+        storage_location: s3://backup_storage_path/YBA_1.2.3.4
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        last_backup: 2022-12-12T13:07:18Z
+      exampleSetFlag: true
+      properties:
+        uuid:
+          description: UUID of the Continuous Backup Config
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          exampleSetFlag: true
+          format: uuid
+          readOnly: true
+          type: string
+        storage_location:
+          description: bucket or directory where backups are stored
+          example: s3://backup_storage_path/YBA_1.2.3.4
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        last_backup:
+          description: time of last backup stored
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
+          readOnly: true
+          type: string
+      title: ContinuousBackupInfo
+      type: object
     TimeUnitType:
       description: |
         TimeUnitType
@@ -2392,66 +2425,11 @@ components:
       exampleSetFlag: false
       title: TimeUnitType
       type: string
-    ContinuousBackupInfo:
+    ContinuousBackupSpec:
       description: |
-        ContinuousBackupInfo
+        ContinuousBackupSpec
 
-        These are read-only system generated properties of a continuous backup configuration. Returned as part of the Continuous Backup resource.
-      example:
-        storage_location: s3://backup_storage_path/YBA_1.2.3.4
-        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-        last_backup: 2022-12-12T13:07:18Z
-        frequency: 0
-      exampleSetFlag: true
-      properties:
-        uuid:
-          description: UUID of the Continuous Backup Config
-          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          exampleSetFlag: true
-          format: uuid
-          readOnly: true
-          type: string
-        frequency:
-          description: Interval between two backups.
-          exampleSetFlag: false
-          format: int64
-          type: integer
-        frequency_time_unit:
-          $ref: '#/components/schemas/TimeUnitType'
-        storage_location:
-          description: bucket or directory where backups are stored
-          example: s3://backup_storage_path/YBA_1.2.3.4
-          exampleSetFlag: true
-          readOnly: true
-          type: string
-        last_backup:
-          description: time of last backup stored
-          example: 2022-12-12T13:07:18Z
-          exampleSetFlag: true
-          format: date-time
-          readOnly: true
-          type: string
-      title: ContinuousBackupInfo
-      type: object
-    ContinuousBackup:
-      description: Continuos Backup object which contains the info for a configuration.
-      example:
-        info:
-          storage_location: s3://backup_storage_path/YBA_1.2.3.4
-          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
-          last_backup: 2022-12-12T13:07:18Z
-          frequency: 0
-      exampleSetFlag: true
-      properties:
-        info:
-          $ref: '#/components/schemas/ContinuousBackupInfo'
-      title: ContinuousBackup
-      type: object
-    ContinuousBackupCreateSpec:
-      description: |
-        ContinuousBackupCreateSpec
-
-        Continuous Backup create time properties. Used to create a continuous backup configuration.
+        User specification for a continuous backup of YBA. All these properties can be edited.
       example:
         backup_dir: yba_backups
         storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
@@ -2490,7 +2468,30 @@ components:
       - frequency
       - frequency_time_unit
       - storage_config_uuid
-      title: ContinuousBackupCreateSpec
+      title: ContinuousBackupSpec
+      type: object
+    ContinuousBackup:
+      description: |
+        ContinuousBackup
+
+        Continuous Backup object which contains the info for a configuration.
+      example:
+        spec:
+          backup_dir: yba_backups
+          storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          num_backups: 6
+          frequency: 0
+        info:
+          storage_location: s3://backup_storage_path/YBA_1.2.3.4
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          last_backup: 2022-12-12T13:07:18Z
+      exampleSetFlag: true
+      properties:
+        info:
+          $ref: '#/components/schemas/ContinuousBackupInfo'
+        spec:
+          $ref: '#/components/schemas/ContinuousBackupSpec'
+      title: ContinuousBackup
       type: object
     ContinuousRestoreSpec:
       description: |

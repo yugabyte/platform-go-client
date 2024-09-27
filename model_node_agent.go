@@ -26,6 +26,7 @@ type NodeAgent struct {
 	Home *string `json:"home,omitempty"`
 	// Node agent server IP
 	Ip *string `json:"ip,omitempty"`
+	LastError *YBAError `json:"lastError,omitempty"`
 	// Node agent name
 	Name *string `json:"name,omitempty"`
 	// Node agent host OS
@@ -217,6 +218,38 @@ func (o *NodeAgent) HasIp() bool {
 // SetIp gets a reference to the given string and assigns it to the Ip field.
 func (o *NodeAgent) SetIp(v string) {
 	o.Ip = &v
+}
+
+// GetLastError returns the LastError field value if set, zero value otherwise.
+func (o *NodeAgent) GetLastError() YBAError {
+	if o == nil || o.LastError == nil {
+		var ret YBAError
+		return ret
+	}
+	return *o.LastError
+}
+
+// GetLastErrorOk returns a tuple with the LastError field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgent) GetLastErrorOk() (*YBAError, bool) {
+	if o == nil || o.LastError == nil {
+		return nil, false
+	}
+	return o.LastError, true
+}
+
+// HasLastError returns a boolean if a field has been set.
+func (o *NodeAgent) HasLastError() bool {
+	if o != nil && o.LastError != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastError gets a reference to the given YBAError and assigns it to the LastError field.
+func (o *NodeAgent) SetLastError(v YBAError) {
+	o.LastError = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -459,6 +492,9 @@ func (o NodeAgent) MarshalJSON() ([]byte, error) {
 	}
 	if o.Ip != nil {
 		toSerialize["ip"] = o.Ip
+	}
+	if o.LastError != nil {
+		toSerialize["lastError"] = o.LastError
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

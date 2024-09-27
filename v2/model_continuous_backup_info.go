@@ -20,9 +20,6 @@ import (
 type ContinuousBackupInfo struct {
 	// UUID of the Continuous Backup Config
 	Uuid *string `json:"uuid,omitempty"`
-	// Interval between two backups.
-	Frequency *int64 `json:"frequency,omitempty"`
-	FrequencyTimeUnit *TimeUnitType `json:"frequency_time_unit,omitempty"`
 	// bucket or directory where backups are stored
 	StorageLocation *string `json:"storage_location,omitempty"`
 	// time of last backup stored
@@ -76,70 +73,6 @@ func (o *ContinuousBackupInfo) HasUuid() bool {
 // SetUuid gets a reference to the given string and assigns it to the Uuid field.
 func (o *ContinuousBackupInfo) SetUuid(v string) {
 	o.Uuid = &v
-}
-
-// GetFrequency returns the Frequency field value if set, zero value otherwise.
-func (o *ContinuousBackupInfo) GetFrequency() int64 {
-	if o == nil || o.Frequency == nil {
-		var ret int64
-		return ret
-	}
-	return *o.Frequency
-}
-
-// GetFrequencyOk returns a tuple with the Frequency field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContinuousBackupInfo) GetFrequencyOk() (*int64, bool) {
-	if o == nil || o.Frequency == nil {
-		return nil, false
-	}
-	return o.Frequency, true
-}
-
-// HasFrequency returns a boolean if a field has been set.
-func (o *ContinuousBackupInfo) HasFrequency() bool {
-	if o != nil && o.Frequency != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFrequency gets a reference to the given int64 and assigns it to the Frequency field.
-func (o *ContinuousBackupInfo) SetFrequency(v int64) {
-	o.Frequency = &v
-}
-
-// GetFrequencyTimeUnit returns the FrequencyTimeUnit field value if set, zero value otherwise.
-func (o *ContinuousBackupInfo) GetFrequencyTimeUnit() TimeUnitType {
-	if o == nil || o.FrequencyTimeUnit == nil {
-		var ret TimeUnitType
-		return ret
-	}
-	return *o.FrequencyTimeUnit
-}
-
-// GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContinuousBackupInfo) GetFrequencyTimeUnitOk() (*TimeUnitType, bool) {
-	if o == nil || o.FrequencyTimeUnit == nil {
-		return nil, false
-	}
-	return o.FrequencyTimeUnit, true
-}
-
-// HasFrequencyTimeUnit returns a boolean if a field has been set.
-func (o *ContinuousBackupInfo) HasFrequencyTimeUnit() bool {
-	if o != nil && o.FrequencyTimeUnit != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFrequencyTimeUnit gets a reference to the given TimeUnitType and assigns it to the FrequencyTimeUnit field.
-func (o *ContinuousBackupInfo) SetFrequencyTimeUnit(v TimeUnitType) {
-	o.FrequencyTimeUnit = &v
 }
 
 // GetStorageLocation returns the StorageLocation field value if set, zero value otherwise.
@@ -210,12 +143,6 @@ func (o ContinuousBackupInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid
-	}
-	if o.Frequency != nil {
-		toSerialize["frequency"] = o.Frequency
-	}
-	if o.FrequencyTimeUnit != nil {
-		toSerialize["frequency_time_unit"] = o.FrequencyTimeUnit
 	}
 	if o.StorageLocation != nil {
 		toSerialize["storage_location"] = o.StorageLocation

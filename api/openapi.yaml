@@ -14791,6 +14791,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -16216,6 +16219,7 @@ components:
         extraDependencies:
           installNodeExporter: true
         platformVersion: platformVersion
+        useLocalTimezone: true
         disableMultipart: true
         platformUrl: platformUrl
         timeBeforeDelete: 3
@@ -16484,6 +16488,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        useLocalTimezone:
+          description: "Use local timezone for Cron Expression, otherwise use UTC"
+          exampleSetFlag: true
+          type: boolean
         useTablespaces:
           description: Is tablespaces information included
           exampleSetFlag: true
@@ -21041,6 +21049,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -24238,11 +24249,11 @@ components:
     DrConfigSetDatabasesForm:
       description: dr config set databases form
       example:
-        databases: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
+        dbs: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
           ]"
       exampleSetFlag: true
       properties:
-        databases:
+        dbs:
           description: "WARNING: This is a preview API that could change. Source universe\
             \ database IDs"
           example: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
@@ -24497,14 +24508,14 @@ components:
           creationTime: 2022-12-12T13:07:18Z
           subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           subTaskType: subTaskType
-          errorCode: INTERNAL_ERROR
+          errorCode: UNKNOWN_ERROR
           subTaskGroupType: subTaskGroupType
           subTaskState: subTaskState
         - errorString: errorString
           creationTime: 2022-12-12T13:07:18Z
           subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           subTaskType: subTaskType
-          errorCode: INTERNAL_ERROR
+          errorCode: UNKNOWN_ERROR
           subTaskGroupType: subTaskGroupType
           subTaskState: subTaskState
       exampleSetFlag: true
@@ -27472,6 +27483,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -30591,6 +30605,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -34472,6 +34489,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -36712,9 +36732,15 @@ components:
     NodeAgent:
       description: Node agent details
       example:
+        lastError:
+          code: UNKNOWN_ERROR
+          message: message
+        ip: ip
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        version: version
+        home: home
         customerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         port: 0
-        ip: ip
         name: name
         osType: DARWIN
         archType: ARM64
@@ -36724,9 +36750,6 @@ components:
           serverCert: serverCert
           offloadable: true
           serverKey: serverKey
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version: version
-        home: home
         updatedAt: 2022-12-21T13:07:18Z
       exampleSetFlag: true
       properties:
@@ -36756,6 +36779,8 @@ components:
           exampleSetFlag: true
           readOnly: true
           type: string
+        lastError:
+          $ref: '#/components/schemas/YBAError'
         name:
           description: Node agent name
           exampleSetFlag: true
@@ -36919,7 +36944,10 @@ components:
     NodeAgentPagedApiResponse:
       example:
         entities:
-        - versionMatched: true
+        - lastError:
+            code: UNKNOWN_ERROR
+            message: message
+          versionMatched: true
           ip: ip
           providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -36941,7 +36969,10 @@ components:
           providerName: providerName
           universeName: universeName
           updatedAt: 2022-12-21T13:07:18Z
-        - versionMatched: true
+        - lastError:
+            code: UNKNOWN_ERROR
+            message: message
+          versionMatched: true
           ip: ip
           providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -36992,6 +37023,9 @@ components:
     NodeAgentResp:
       description: Node agent details
       example:
+        lastError:
+          code: UNKNOWN_ERROR
+          message: message
         versionMatched: true
         ip: ip
         providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -37042,6 +37076,8 @@ components:
           exampleSetFlag: true
           readOnly: true
           type: string
+        lastError:
+          $ref: '#/components/schemas/YBAError'
         name:
           description: Node agent name
           exampleSetFlag: true
@@ -43268,6 +43304,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -46930,6 +46969,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -50163,6 +50205,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -54615,6 +54660,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -54777,6 +54825,7 @@ components:
         taskType: CloudBootstrap
         nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
         scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        useLocalTimezone: true
         runningState: true
         userEmail: userEmail
         backlogStatus: true
@@ -55148,6 +55197,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -55187,6 +55239,11 @@ components:
           - RunNodeCommand
           exampleSetFlag: true
           type: string
+        useLocalTimezone:
+          description: Whether to use local timezone with cron expression for the
+            schedule
+          exampleSetFlag: true
+          type: boolean
         userEmail:
           description: User who created the schedule policy
           exampleSetFlag: true
@@ -55497,6 +55554,9 @@ components:
             - CheckMemory
             - CheckLocale
             - CheckGlibc
+            - PGUpgradeTServerCheck
+            - RunYsqlMajorVersionCatalogUpgrade
+            - RollbackYsqlMajorVersionCatalogUpgrade
             - CheckSoftwareVersion
             - UpdateMountedDisks
             - TransferXClusterCerts
@@ -55617,6 +55677,7 @@ components:
           taskType: CloudBootstrap
           nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
           scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          useLocalTimezone: true
           runningState: true
           userEmail: userEmail
           backlogStatus: true
@@ -55632,6 +55693,7 @@ components:
           taskType: CloudBootstrap
           nextIncrementScheduleTaskTime: 2022-12-12T13:07:18Z
           scheduleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          useLocalTimezone: true
           runningState: true
           userEmail: userEmail
           backlogStatus: true
@@ -58749,6 +58811,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -59054,7 +59119,7 @@ components:
         creationTime: 2022-12-12T13:07:18Z
         subTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         subTaskType: subTaskType
-        errorCode: INTERNAL_ERROR
+        errorCode: UNKNOWN_ERROR
         subTaskGroupType: subTaskGroupType
         subTaskState: subTaskState
       exampleSetFlag: true
@@ -59069,9 +59134,13 @@ components:
           description: "WARNING: This is a preview API that could change. Subtask\
             \ error code"
           enum:
+          - UNKNOWN_ERROR
           - INTERNAL_ERROR
           - PLATFORM_SHUTDOWN
           - PLATFORM_RESTARTED
+          - INSTALLATION_ERROR
+          - SERVICE_START_ERROR
+          - CONNECTION_ERROR
           exampleSetFlag: true
           type: string
         errorString:
@@ -62227,6 +62296,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -65675,6 +65747,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -68715,6 +68790,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -71991,6 +72069,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -74989,6 +75070,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -77995,6 +78079,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -83797,6 +83884,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -87596,6 +87686,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - PGUpgradeTServerCheck
+          - RunYsqlMajorVersionCatalogUpgrade
+          - RollbackYsqlMajorVersionCatalogUpgrade
           - CheckSoftwareVersion
           - UpdateMountedDisks
           - TransferXClusterCerts
@@ -88017,8 +88110,6 @@ components:
     XClusterConfigEditFormData:
       description: xcluster edit form
       example:
-        databases: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
-          ]"
         tables: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
           ]"
         dryRun: true
@@ -88028,6 +88119,8 @@ components:
           backupRequestParams:
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             parallelism: 0
+        dbs: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
+          ]"
         autoIncludeIndexTables: true
         targetRole: ACTIVE
         name: Repl-config1
@@ -88042,7 +88135,7 @@ components:
           type: boolean
         bootstrapParams:
           $ref: '#/components/schemas/BootstrapParams'
-        databases:
+        dbs:
           description: "WARNING: This is a preview API that could change. Source universe\
             \ database IDs"
           example: "[\"000033df000030008000000000004006\", \"000033df00003000800000000000400b\"\
@@ -88681,6 +88774,30 @@ components:
       required:
       - backupUuid
       - restoreUuid
+      type: object
+    YBAError:
+      example:
+        code: UNKNOWN_ERROR
+        message: message
+      exampleSetFlag: true
+      properties:
+        code:
+          enum:
+          - UNKNOWN_ERROR
+          - INTERNAL_ERROR
+          - PLATFORM_SHUTDOWN
+          - PLATFORM_RESTARTED
+          - INSTALLATION_ERROR
+          - SERVICE_START_ERROR
+          - CONNECTION_ERROR
+          exampleSetFlag: true
+          type: string
+        message:
+          exampleSetFlag: true
+          type: string
+      required:
+      - code
+      - message
       type: object
     YBPCreateSuccess:
       example:
