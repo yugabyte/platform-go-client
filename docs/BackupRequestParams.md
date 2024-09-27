@@ -53,6 +53,7 @@ Name | Type | Description | Notes
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 **UniverseUUID** | **string** | Universe UUID | 
+**UseLocalTimezone** | Pointer to **bool** | Use local timezone for Cron Expression, otherwise use UTC | [optional] 
 **UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
 **YbcInstalled** | Pointer to **bool** |  | [optional] 
@@ -1261,6 +1262,31 @@ and a boolean to check if the value has been set.
 
 SetUniverseUUID sets UniverseUUID field to given value.
 
+
+### GetUseLocalTimezone
+
+`func (o *BackupRequestParams) GetUseLocalTimezone() bool`
+
+GetUseLocalTimezone returns the UseLocalTimezone field if non-nil, zero value otherwise.
+
+### GetUseLocalTimezoneOk
+
+`func (o *BackupRequestParams) GetUseLocalTimezoneOk() (*bool, bool)`
+
+GetUseLocalTimezoneOk returns a tuple with the UseLocalTimezone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseLocalTimezone
+
+`func (o *BackupRequestParams) SetUseLocalTimezone(v bool)`
+
+SetUseLocalTimezone sets UseLocalTimezone field to given value.
+
+### HasUseLocalTimezone
+
+`func (o *BackupRequestParams) HasUseLocalTimezone() bool`
+
+HasUseLocalTimezone returns a boolean if a field has been set.
 
 ### GetUseTablespaces
 

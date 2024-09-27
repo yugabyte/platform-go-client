@@ -23,6 +23,8 @@ type LdapUnivSyncFormData struct {
 	DbuserPassword string `json:"dbuserPassword"`
 	// List of users to exclude while revoking and dropping
 	ExcludeUsers *[]string `json:"excludeUsers,omitempty"`
+	// LDAP groups to sync. In case user belongs to multiple groups & we don't want to sync all of them to DB
+	GroupsToSync *[]string `json:"groupsToSync,omitempty"`
 	// Dn of the search starting point.
 	LdapBasedn *string `json:"ldapBasedn,omitempty"`
 	// Dn of the user authenticating to LDAP.
@@ -31,11 +33,11 @@ type LdapUnivSyncFormData struct {
 	LdapBindPassword *string `json:"ldapBindPassword,omitempty"`
 	// LDAP group dn attribute to which the user belongs
 	LdapGroupMemberOfAttribute *string `json:"ldapGroupMemberOfAttribute,omitempty"`
-	// Group dn field to get the group's name from
+	// LDAP field to get the group information
 	LdapGroupfield string `json:"ldapGroupfield"`
 	// Port of the ldap server : 389 or 636(tls)
 	LdapPort *int32 `json:"ldapPort,omitempty"`
-	// LDAP search filter to get the user entries. This filter can also be used to search for the users based on their group memberships.
+	// LDAP search filter to get the user entries
 	LdapSearchFilter *string `json:"ldapSearchFilter,omitempty"`
 	// IP address of the LDAP server
 	LdapServer *string `json:"ldapServer,omitempty"`
@@ -187,6 +189,38 @@ func (o *LdapUnivSyncFormData) HasExcludeUsers() bool {
 // SetExcludeUsers gets a reference to the given []string and assigns it to the ExcludeUsers field.
 func (o *LdapUnivSyncFormData) SetExcludeUsers(v []string) {
 	o.ExcludeUsers = &v
+}
+
+// GetGroupsToSync returns the GroupsToSync field value if set, zero value otherwise.
+func (o *LdapUnivSyncFormData) GetGroupsToSync() []string {
+	if o == nil || o.GroupsToSync == nil {
+		var ret []string
+		return ret
+	}
+	return *o.GroupsToSync
+}
+
+// GetGroupsToSyncOk returns a tuple with the GroupsToSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LdapUnivSyncFormData) GetGroupsToSyncOk() (*[]string, bool) {
+	if o == nil || o.GroupsToSync == nil {
+		return nil, false
+	}
+	return o.GroupsToSync, true
+}
+
+// HasGroupsToSync returns a boolean if a field has been set.
+func (o *LdapUnivSyncFormData) HasGroupsToSync() bool {
+	if o != nil && o.GroupsToSync != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupsToSync gets a reference to the given []string and assigns it to the GroupsToSync field.
+func (o *LdapUnivSyncFormData) SetGroupsToSync(v []string) {
+	o.GroupsToSync = &v
 }
 
 // GetLdapBasedn returns the LdapBasedn field value if set, zero value otherwise.
@@ -562,6 +596,9 @@ func (o LdapUnivSyncFormData) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExcludeUsers != nil {
 		toSerialize["excludeUsers"] = o.ExcludeUsers
+	}
+	if o.GroupsToSync != nil {
+		toSerialize["groupsToSync"] = o.GroupsToSync
 	}
 	if o.LdapBasedn != nil {
 		toSerialize["ldapBasedn"] = o.LdapBasedn

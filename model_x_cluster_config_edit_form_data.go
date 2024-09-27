@@ -20,7 +20,7 @@ type XClusterConfigEditFormData struct {
 	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
 	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
 	// WARNING: This is a preview API that could change. Source universe database IDs
-	Databases *[]string `json:"databases,omitempty"`
+	Dbs *[]string `json:"dbs,omitempty"`
 	// Run the pre-checks without actually running the subtasks
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
@@ -116,36 +116,36 @@ func (o *XClusterConfigEditFormData) SetBootstrapParams(v BootstrapParams) {
 	o.BootstrapParams = &v
 }
 
-// GetDatabases returns the Databases field value if set, zero value otherwise.
-func (o *XClusterConfigEditFormData) GetDatabases() []string {
-	if o == nil || o.Databases == nil {
+// GetDbs returns the Dbs field value if set, zero value otherwise.
+func (o *XClusterConfigEditFormData) GetDbs() []string {
+	if o == nil || o.Dbs == nil {
 		var ret []string
 		return ret
 	}
-	return *o.Databases
+	return *o.Dbs
 }
 
-// GetDatabasesOk returns a tuple with the Databases field value if set, nil otherwise
+// GetDbsOk returns a tuple with the Dbs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *XClusterConfigEditFormData) GetDatabasesOk() (*[]string, bool) {
-	if o == nil || o.Databases == nil {
+func (o *XClusterConfigEditFormData) GetDbsOk() (*[]string, bool) {
+	if o == nil || o.Dbs == nil {
 		return nil, false
 	}
-	return o.Databases, true
+	return o.Dbs, true
 }
 
-// HasDatabases returns a boolean if a field has been set.
-func (o *XClusterConfigEditFormData) HasDatabases() bool {
-	if o != nil && o.Databases != nil {
+// HasDbs returns a boolean if a field has been set.
+func (o *XClusterConfigEditFormData) HasDbs() bool {
+	if o != nil && o.Dbs != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDatabases gets a reference to the given []string and assigns it to the Databases field.
-func (o *XClusterConfigEditFormData) SetDatabases(v []string) {
-	o.Databases = &v
+// SetDbs gets a reference to the given []string and assigns it to the Dbs field.
+func (o *XClusterConfigEditFormData) SetDbs(v []string) {
+	o.Dbs = &v
 }
 
 // GetDryRun returns the DryRun field value if set, zero value otherwise.
@@ -348,8 +348,8 @@ func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
 	}
-	if o.Databases != nil {
-		toSerialize["databases"] = o.Databases
+	if o.Dbs != nil {
+		toSerialize["dbs"] = o.Dbs
 	}
 	if o.DryRun != nil {
 		toSerialize["dryRun"] = o.DryRun

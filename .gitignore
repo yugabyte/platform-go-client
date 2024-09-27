@@ -22,3 +22,9 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+target/
+
+Makefile
+*.openapi-generator*
+openapi-go-config*.json

@@ -17,7 +17,7 @@ import (
 // DrConfigSetDatabasesForm dr config set databases form
 type DrConfigSetDatabasesForm struct {
 	// WARNING: This is a preview API that could change. Source universe database IDs
-	Databases *[]string `json:"databases,omitempty"`
+	Dbs *[]string `json:"dbs,omitempty"`
 }
 
 // NewDrConfigSetDatabasesForm instantiates a new DrConfigSetDatabasesForm object
@@ -37,42 +37,42 @@ func NewDrConfigSetDatabasesFormWithDefaults() *DrConfigSetDatabasesForm {
 	return &this
 }
 
-// GetDatabases returns the Databases field value if set, zero value otherwise.
-func (o *DrConfigSetDatabasesForm) GetDatabases() []string {
-	if o == nil || o.Databases == nil {
+// GetDbs returns the Dbs field value if set, zero value otherwise.
+func (o *DrConfigSetDatabasesForm) GetDbs() []string {
+	if o == nil || o.Dbs == nil {
 		var ret []string
 		return ret
 	}
-	return *o.Databases
+	return *o.Dbs
 }
 
-// GetDatabasesOk returns a tuple with the Databases field value if set, nil otherwise
+// GetDbsOk returns a tuple with the Dbs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DrConfigSetDatabasesForm) GetDatabasesOk() (*[]string, bool) {
-	if o == nil || o.Databases == nil {
+func (o *DrConfigSetDatabasesForm) GetDbsOk() (*[]string, bool) {
+	if o == nil || o.Dbs == nil {
 		return nil, false
 	}
-	return o.Databases, true
+	return o.Dbs, true
 }
 
-// HasDatabases returns a boolean if a field has been set.
-func (o *DrConfigSetDatabasesForm) HasDatabases() bool {
-	if o != nil && o.Databases != nil {
+// HasDbs returns a boolean if a field has been set.
+func (o *DrConfigSetDatabasesForm) HasDbs() bool {
+	if o != nil && o.Dbs != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDatabases gets a reference to the given []string and assigns it to the Databases field.
-func (o *DrConfigSetDatabasesForm) SetDatabases(v []string) {
-	o.Databases = &v
+// SetDbs gets a reference to the given []string and assigns it to the Dbs field.
+func (o *DrConfigSetDatabasesForm) SetDbs(v []string) {
+	o.Dbs = &v
 }
 
 func (o DrConfigSetDatabasesForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Databases != nil {
-		toSerialize["databases"] = o.Databases
+	if o.Dbs != nil {
+		toSerialize["dbs"] = o.Dbs
 	}
 	return json.Marshal(toSerialize)
 }

@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Disaster recovery config name | [optional] 
 **Paused** | Pointer to **bool** | Whether the underlying xCluster config is paused | [optional] 
 **PitrConfigs** | Pointer to [**[]PitrConfig**](PitrConfig.md) | WARNING: This is a preview API that could change. The list of PITR configs used for the underlying txn xCluster config | [optional] 
+**PitrRetentionPeriodSec** | Pointer to **int64** | WARNING: This is a preview API that could change. PITR Retention Period in seconds | [optional] 
+**PitrSnapshotIntervalSec** | Pointer to **int64** | WARNING: This is a preview API that could change. PITR Retention Period in seconds | [optional] 
 **PrimaryUniverseActive** | Pointer to **bool** | Whether the primary universe is active | [optional] 
 **PrimaryUniverseState** | Pointer to **string** | WARNING: This is a preview API that could change. The replication status of the primary universe. | [optional] 
 **PrimaryUniverseUuid** | Pointer to **string** | Primary Universe UUID | [optional] 
@@ -25,6 +27,7 @@ Name | Type | Description | Notes
 **TableDetails** | Pointer to [**[]XClusterTableConfig**](XClusterTableConfig.md) | Details for each table in replication | [optional] 
 **TableType** | Pointer to **string** | The type of tables that are being replicated | [optional] 
 **Tables** | Pointer to **[]string** | List of table ids in replication | [optional] 
+**Type** | Pointer to **string** | Whether the config is basic, txn, or db scoped xCluster | [optional] 
 **Uuid** | Pointer to **string** | DR config UUID | [optional] 
 **XclusterConfigUuid** | Pointer to **string** | UUID of the underlying xCluster config that is managing the replication | [optional] 
 
@@ -347,6 +350,56 @@ SetPitrConfigs sets PitrConfigs field to given value.
 
 HasPitrConfigs returns a boolean if a field has been set.
 
+### GetPitrRetentionPeriodSec
+
+`func (o *DrConfigGetResp) GetPitrRetentionPeriodSec() int64`
+
+GetPitrRetentionPeriodSec returns the PitrRetentionPeriodSec field if non-nil, zero value otherwise.
+
+### GetPitrRetentionPeriodSecOk
+
+`func (o *DrConfigGetResp) GetPitrRetentionPeriodSecOk() (*int64, bool)`
+
+GetPitrRetentionPeriodSecOk returns a tuple with the PitrRetentionPeriodSec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPitrRetentionPeriodSec
+
+`func (o *DrConfigGetResp) SetPitrRetentionPeriodSec(v int64)`
+
+SetPitrRetentionPeriodSec sets PitrRetentionPeriodSec field to given value.
+
+### HasPitrRetentionPeriodSec
+
+`func (o *DrConfigGetResp) HasPitrRetentionPeriodSec() bool`
+
+HasPitrRetentionPeriodSec returns a boolean if a field has been set.
+
+### GetPitrSnapshotIntervalSec
+
+`func (o *DrConfigGetResp) GetPitrSnapshotIntervalSec() int64`
+
+GetPitrSnapshotIntervalSec returns the PitrSnapshotIntervalSec field if non-nil, zero value otherwise.
+
+### GetPitrSnapshotIntervalSecOk
+
+`func (o *DrConfigGetResp) GetPitrSnapshotIntervalSecOk() (*int64, bool)`
+
+GetPitrSnapshotIntervalSecOk returns a tuple with the PitrSnapshotIntervalSec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPitrSnapshotIntervalSec
+
+`func (o *DrConfigGetResp) SetPitrSnapshotIntervalSec(v int64)`
+
+SetPitrSnapshotIntervalSec sets PitrSnapshotIntervalSec field to given value.
+
+### HasPitrSnapshotIntervalSec
+
+`func (o *DrConfigGetResp) HasPitrSnapshotIntervalSec() bool`
+
+HasPitrSnapshotIntervalSec returns a boolean if a field has been set.
+
 ### GetPrimaryUniverseActive
 
 `func (o *DrConfigGetResp) GetPrimaryUniverseActive() bool`
@@ -571,6 +624,31 @@ SetTables sets Tables field to given value.
 `func (o *DrConfigGetResp) HasTables() bool`
 
 HasTables returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *DrConfigGetResp) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *DrConfigGetResp) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *DrConfigGetResp) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *DrConfigGetResp) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetUuid
 

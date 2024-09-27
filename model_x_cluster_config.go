@@ -56,7 +56,7 @@ type XClusterConfig struct {
 	TargetUniverseState *string `json:"targetUniverseState,omitempty"`
 	// Target Universe UUID
 	TargetUniverseUUID *string `json:"targetUniverseUUID,omitempty"`
-	// Whether the config is txn xCluster
+	// Whether the config is basic, txn, or db scoped xCluster
 	Type *string `json:"type,omitempty"`
 	// WARNING: This is a preview API that could change. Whether the xCluster config is used as part of a DR config
 	UsedForDr *bool `json:"usedForDr,omitempty"`

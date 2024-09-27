@@ -17,16 +17,14 @@ import (
 
 // XClusterTableConfig struct for XClusterTableConfig
 type XClusterTableConfig struct {
-	// The backup config used to do bootstrapping for this table
-	BackupUuid *string `json:"backupUuid,omitempty"`
+	BackupUuid string `json:"backupUuid"`
 	// Time of the bootstrap of the table
 	BootstrapCreateTime *time.Time `json:"bootstrapCreateTime,omitempty"`
 	// Short human readable replication status error messages
 	ReplicationStatusErrors *[]string `json:"replicationStatusErrors,omitempty"`
 	// Time of the last try to restore data to the target universe
 	RestoreTime *time.Time `json:"restoreTime,omitempty"`
-	// The restore config used to do bootstrapping for this table
-	RestoreUuid *string `json:"restoreUuid,omitempty"`
+	RestoreUuid string `json:"restoreUuid"`
 	SourceTableInfo *TableInfoResp `json:"sourceTableInfo,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
@@ -41,8 +39,10 @@ type XClusterTableConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterTableConfig() *XClusterTableConfig {
+func NewXClusterTableConfig(backupUuid string, restoreUuid string) *XClusterTableConfig {
 	this := XClusterTableConfig{}
+	this.BackupUuid = backupUuid
+	this.RestoreUuid = restoreUuid
 	return &this
 }
 
@@ -54,36 +54,28 @@ func NewXClusterTableConfigWithDefaults() *XClusterTableConfig {
 	return &this
 }
 
-// GetBackupUuid returns the BackupUuid field value if set, zero value otherwise.
+// GetBackupUuid returns the BackupUuid field value
 func (o *XClusterTableConfig) GetBackupUuid() string {
-	if o == nil || o.BackupUuid == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BackupUuid
+
+	return o.BackupUuid
 }
 
-// GetBackupUuidOk returns a tuple with the BackupUuid field value if set, nil otherwise
+// GetBackupUuidOk returns a tuple with the BackupUuid field value
 // and a boolean to check if the value has been set.
 func (o *XClusterTableConfig) GetBackupUuidOk() (*string, bool) {
-	if o == nil || o.BackupUuid == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.BackupUuid, true
+	return &o.BackupUuid, true
 }
 
-// HasBackupUuid returns a boolean if a field has been set.
-func (o *XClusterTableConfig) HasBackupUuid() bool {
-	if o != nil && o.BackupUuid != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBackupUuid gets a reference to the given string and assigns it to the BackupUuid field.
+// SetBackupUuid sets field value
 func (o *XClusterTableConfig) SetBackupUuid(v string) {
-	o.BackupUuid = &v
+	o.BackupUuid = v
 }
 
 // GetBootstrapCreateTime returns the BootstrapCreateTime field value if set, zero value otherwise.
@@ -182,36 +174,28 @@ func (o *XClusterTableConfig) SetRestoreTime(v time.Time) {
 	o.RestoreTime = &v
 }
 
-// GetRestoreUuid returns the RestoreUuid field value if set, zero value otherwise.
+// GetRestoreUuid returns the RestoreUuid field value
 func (o *XClusterTableConfig) GetRestoreUuid() string {
-	if o == nil || o.RestoreUuid == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RestoreUuid
+
+	return o.RestoreUuid
 }
 
-// GetRestoreUuidOk returns a tuple with the RestoreUuid field value if set, nil otherwise
+// GetRestoreUuidOk returns a tuple with the RestoreUuid field value
 // and a boolean to check if the value has been set.
 func (o *XClusterTableConfig) GetRestoreUuidOk() (*string, bool) {
-	if o == nil || o.RestoreUuid == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.RestoreUuid, true
+	return &o.RestoreUuid, true
 }
 
-// HasRestoreUuid returns a boolean if a field has been set.
-func (o *XClusterTableConfig) HasRestoreUuid() bool {
-	if o != nil && o.RestoreUuid != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRestoreUuid gets a reference to the given string and assigns it to the RestoreUuid field.
+// SetRestoreUuid sets field value
 func (o *XClusterTableConfig) SetRestoreUuid(v string) {
-	o.RestoreUuid = &v
+	o.RestoreUuid = v
 }
 
 // GetSourceTableInfo returns the SourceTableInfo field value if set, zero value otherwise.
@@ -376,7 +360,7 @@ func (o *XClusterTableConfig) SetTargetTableInfo(v TableInfoResp) {
 
 func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BackupUuid != nil {
+	if true {
 		toSerialize["backupUuid"] = o.BackupUuid
 	}
 	if o.BootstrapCreateTime != nil {
@@ -388,7 +372,7 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	if o.RestoreTime != nil {
 		toSerialize["restoreTime"] = o.RestoreTime
 	}
-	if o.RestoreUuid != nil {
+	if true {
 		toSerialize["restoreUuid"] = o.RestoreUuid
 	}
 	if o.SourceTableInfo != nil {

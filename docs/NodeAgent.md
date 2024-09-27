@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Home** | Pointer to **string** | Node agent installation directory | [optional] [readonly] 
 **Ip** | Pointer to **string** | Node agent server IP | [optional] [readonly] 
+**LastError** | Pointer to [**YBAError**](YBAError.md) |  | [optional] 
 **Name** | Pointer to **string** | Node agent name | [optional] [readonly] 
 **OsType** | Pointer to **string** | Node agent host OS | [optional] [readonly] 
 **Port** | Pointer to **int32** | Node agent server port | [optional] [readonly] 
@@ -160,6 +161,31 @@ SetIp sets Ip field to given value.
 `func (o *NodeAgent) HasIp() bool`
 
 HasIp returns a boolean if a field has been set.
+
+### GetLastError
+
+`func (o *NodeAgent) GetLastError() YBAError`
+
+GetLastError returns the LastError field if non-nil, zero value otherwise.
+
+### GetLastErrorOk
+
+`func (o *NodeAgent) GetLastErrorOk() (*YBAError, bool)`
+
+GetLastErrorOk returns a tuple with the LastError field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastError
+
+`func (o *NodeAgent) SetLastError(v YBAError)`
+
+SetLastError sets LastError field to given value.
+
+### HasLastError
+
+`func (o *NodeAgent) HasLastError() bool`
+
+HasLastError returns a boolean if a field has been set.
 
 ### GetName
 

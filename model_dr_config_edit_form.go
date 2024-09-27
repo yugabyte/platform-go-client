@@ -17,6 +17,7 @@ import (
 // DrConfigEditForm drConfig edit form
 type DrConfigEditForm struct {
 	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
+	PitrParams *PitrParams `json:"pitrParams,omitempty"`
 }
 
 // NewDrConfigEditForm instantiates a new DrConfigEditForm object
@@ -68,10 +69,45 @@ func (o *DrConfigEditForm) SetBootstrapParams(v RestartBootstrapParams) {
 	o.BootstrapParams = &v
 }
 
+// GetPitrParams returns the PitrParams field value if set, zero value otherwise.
+func (o *DrConfigEditForm) GetPitrParams() PitrParams {
+	if o == nil || o.PitrParams == nil {
+		var ret PitrParams
+		return ret
+	}
+	return *o.PitrParams
+}
+
+// GetPitrParamsOk returns a tuple with the PitrParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigEditForm) GetPitrParamsOk() (*PitrParams, bool) {
+	if o == nil || o.PitrParams == nil {
+		return nil, false
+	}
+	return o.PitrParams, true
+}
+
+// HasPitrParams returns a boolean if a field has been set.
+func (o *DrConfigEditForm) HasPitrParams() bool {
+	if o != nil && o.PitrParams != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPitrParams gets a reference to the given PitrParams and assigns it to the PitrParams field.
+func (o *DrConfigEditForm) SetPitrParams(v PitrParams) {
+	o.PitrParams = &v
+}
+
 func (o DrConfigEditForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
+	}
+	if o.PitrParams != nil {
+		toSerialize["pitrParams"] = o.PitrParams
 	}
 	return json.Marshal(toSerialize)
 }

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **ScheduleUUID** | Pointer to **string** | Schedule UUID | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the task. Possible values are _Active_, _Paused_, or _Stopped_. | [optional] [readonly] 
 **TaskType** | Pointer to **string** | Type of task to be scheduled. | [optional] 
+**UseLocalTimezone** | Pointer to **bool** | Whether to use local timezone with cron expression for the schedule | [optional] 
 **UserEmail** | Pointer to **string** | User who created the schedule policy | [optional] [readonly] 
 
 ## Methods
@@ -388,6 +389,31 @@ SetTaskType sets TaskType field to given value.
 `func (o *Schedule) HasTaskType() bool`
 
 HasTaskType returns a boolean if a field has been set.
+
+### GetUseLocalTimezone
+
+`func (o *Schedule) GetUseLocalTimezone() bool`
+
+GetUseLocalTimezone returns the UseLocalTimezone field if non-nil, zero value otherwise.
+
+### GetUseLocalTimezoneOk
+
+`func (o *Schedule) GetUseLocalTimezoneOk() (*bool, bool)`
+
+GetUseLocalTimezoneOk returns a tuple with the UseLocalTimezone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseLocalTimezone
+
+`func (o *Schedule) SetUseLocalTimezone(v bool)`
+
+SetUseLocalTimezone sets UseLocalTimezone field to given value.
+
+### HasUseLocalTimezone
+
+`func (o *Schedule) HasUseLocalTimezone() bool`
+
+HasUseLocalTimezone returns a boolean if a field has been set.
 
 ### GetUserEmail
 
