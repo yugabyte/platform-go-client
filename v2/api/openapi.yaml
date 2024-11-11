@@ -32,6 +32,8 @@ tags:
   name: Isolated Backup
 - description: Job Scheduler
   name: Job Scheduler
+- description: CRUD operations for YBA metrics
+  name: Metrics
 - description: CRUD operations for a Universe
   name: Universe
 paths:
@@ -879,6 +881,33 @@ paths:
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-contentType: application/json
+      x-accepts: application/json
+  /host-info:
+    get:
+      description: Get the Url for the Prometheus instance of the current YBA
+      operationId: GetPrometheusHostInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrometheusHostInfo'
+          description: success
+        "400":
+          description: Client Error
+        "500":
+          description: Server Error
+      security:
+      - apiKeyAuth: []
+      summary: Get Prometheus host info
+      tags:
+      - Metrics
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
       x-accepts: application/json
   /customers/{cUUID}/universes/{uniUUID}:
     delete:
@@ -2162,6 +2191,12 @@ components:
           schema:
             $ref: '#/components/schemas/JobInstancePagedResp'
       description: Job instances
+    PrometheusHostInfoResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PrometheusHostInfo'
+      description: success
     UniverseResp:
       content:
         application/json:
@@ -3134,6 +3169,33 @@ components:
       required:
       - snooze_secs
       title: JobScheduleSnoozeSpec
+      type: object
+    PrometheusHostInfo:
+      description: |
+        PrometheusHostInfo
+
+        Information about the the Prometheus instance for the current YBA. Part of PrometheusHostInfoResp.
+      example:
+        prometheus_url: https://localhost:9000
+        use_browser_fqdn: true
+      exampleSetFlag: true
+      properties:
+        prometheus_url:
+          description: URL for accessing Prometheus
+          example: https://localhost:9000
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        use_browser_fqdn:
+          description: If the Prometheus link in the browser should use the browser's
+            FQDN or use prometheus url directly.
+          exampleSetFlag: false
+          readOnly: true
+          type: boolean
+      required:
+      - prometheus_url
+      - use_browser_fqdn
+      title: PrometheusHostInfo
       type: object
     EncryptionAtRestSpec:
       description: Encryption At Rest specification for the Universe. Part of UniverseSpec.

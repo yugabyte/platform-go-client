@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Details** | [**NodeInstanceData**](NodeInstanceData.md) |  | 
-**DetailsJson** | Pointer to **string** | Node details (as a JSON object) | [optional] 
+**DetailsJson** | Pointer to **string** | Node details (as a JSON object) | [optional] [readonly] 
 **InUse** | Pointer to **bool** | True if the node is in use  &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2024.1.0.0.&lt;/b&gt; Use NodeInstance.state instead | [optional] 
 **InstanceName** | Pointer to **string** | The node instance&#39;s name | [optional] 
 **InstanceTypeCode** | Pointer to **string** | The node&#39;s type code | [optional] 
-**NodeName** | Pointer to **string** | The node&#39;s name | [optional] [readonly] 
+**NodeName** | Pointer to **string** | The node&#39;s name in a universe | [optional] [readonly] 
 **NodeUuid** | Pointer to **string** | The node&#39;s UUID | [optional] [readonly] 
 **State** | Pointer to **string** | State of on-prem node | [optional] [readonly] 
 **ZoneUuid** | Pointer to **string** | The availability zone&#39;s UUID | [optional] 

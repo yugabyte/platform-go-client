@@ -16,18 +16,18 @@ import (
 
 // YBAError struct for YBAError
 type YBAError struct {
-	Code string `json:"code"`
-	Message string `json:"message"`
+	// Error code
+	Code *string `json:"code,omitempty"`
+	// Error message
+	Message *string `json:"message,omitempty"`
 }
 
 // NewYBAError instantiates a new YBAError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYBAError(code string, message string) *YBAError {
+func NewYBAError() *YBAError {
 	this := YBAError{}
-	this.Code = code
-	this.Message = message
 	return &this
 }
 
@@ -39,60 +39,76 @@ func NewYBAErrorWithDefaults() *YBAError {
 	return &this
 }
 
-// GetCode returns the Code field value
+// GetCode returns the Code field value if set, zero value otherwise.
 func (o *YBAError) GetCode() string {
-	if o == nil {
+	if o == nil || o.Code == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Code
+	return *o.Code
 }
 
-// GetCodeOk returns a tuple with the Code field value
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YBAError) GetCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Code == nil {
 		return nil, false
 	}
-	return &o.Code, true
+	return o.Code, true
 }
 
-// SetCode sets field value
+// HasCode returns a boolean if a field has been set.
+func (o *YBAError) HasCode() bool {
+	if o != nil && o.Code != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCode gets a reference to the given string and assigns it to the Code field.
 func (o *YBAError) SetCode(v string) {
-	o.Code = v
+	o.Code = &v
 }
 
-// GetMessage returns the Message field value
+// GetMessage returns the Message field value if set, zero value otherwise.
 func (o *YBAError) GetMessage() string {
-	if o == nil {
+	if o == nil || o.Message == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Message
+	return *o.Message
 }
 
-// GetMessageOk returns a tuple with the Message field value
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YBAError) GetMessageOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Message == nil {
 		return nil, false
 	}
-	return &o.Message, true
+	return o.Message, true
 }
 
-// SetMessage sets field value
+// HasMessage returns a boolean if a field has been set.
+func (o *YBAError) HasMessage() bool {
+	if o != nil && o.Message != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given string and assigns it to the Message field.
 func (o *YBAError) SetMessage(v string) {
-	o.Message = v
+	o.Message = &v
 }
 
 func (o YBAError) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
-	if true {
+	if o.Message != nil {
 		toSerialize["message"] = o.Message
 	}
 	return json.Marshal(toSerialize)

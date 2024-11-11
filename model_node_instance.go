@@ -25,7 +25,7 @@ type NodeInstance struct {
 	InstanceName *string `json:"instanceName,omitempty"`
 	// The node's type code
 	InstanceTypeCode *string `json:"instanceTypeCode,omitempty"`
-	// The node's name
+	// The node's name in a universe
 	NodeName *string `json:"nodeName,omitempty"`
 	// The node's UUID
 	NodeUuid *string `json:"nodeUuid,omitempty"`

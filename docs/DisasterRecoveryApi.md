@@ -11,9 +11,11 @@ Method | HTTP request | Description
 [**GetDrConfig**](DisasterRecoveryApi.md#GetDrConfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 [**GetDrConfigSafetime**](DisasterRecoveryApi.md#GetDrConfigSafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
 [**PauseDrConfig**](DisasterRecoveryApi.md#PauseDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause | Pause DR config
+[**PauseDrUniverses**](DisasterRecoveryApi.md#PauseDrUniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes | Pause DR config and universes associated with DR
 [**ReplaceReplicaDrConfig**](DisasterRecoveryApi.md#ReplaceReplicaDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica | Replace Replica in a disaster recovery config
 [**RestartDrConfig**](DisasterRecoveryApi.md#RestartDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart | Restart disaster recovery config
 [**ResumeDrConfig**](DisasterRecoveryApi.md#ResumeDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume | Resume DR config
+[**ResumeDrUniverses**](DisasterRecoveryApi.md#ResumeDrUniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes | Resume DR config and universes associated with DR
 [**SetDatabasesDrConfig**](DisasterRecoveryApi.md#SetDatabasesDrConfig) | **Put** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs | Set databases in disaster recovery config
 [**SetTablesDrConfig**](DisasterRecoveryApi.md#SetTablesDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables | Set tables in disaster recovery config
 [**SwitchoverDrConfig**](DisasterRecoveryApi.md#SwitchoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover | Switchover a disaster recovery config
@@ -549,6 +551,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PauseDrUniverses
+
+> YBPTask PauseDrUniverses(ctx, cUUID, drUUID).Request(request).Execute()
+
+Pause DR config and universes associated with DR
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.PauseDrUniverses(context.Background(), cUUID, drUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.PauseDrUniverses``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PauseDrUniverses`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.PauseDrUniverses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPauseDrUniversesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ReplaceReplicaDrConfig
 
 > YBPTask ReplaceReplicaDrConfig(ctx, cUUID, drUUID).DisasterRecoveryReplaceReplicaFormData(disasterRecoveryReplaceReplicaFormData).Request(request).Execute()
@@ -754,6 +831,81 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiResumeDrConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResumeDrUniverses
+
+> YBPTask ResumeDrUniverses(ctx, cUUID, drUUID).Request(request).Execute()
+
+Resume DR config and universes associated with DR
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    drUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DisasterRecoveryApi.ResumeDrUniverses(context.Background(), cUUID, drUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DisasterRecoveryApi.ResumeDrUniverses``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ResumeDrUniverses`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `DisasterRecoveryApi.ResumeDrUniverses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**drUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResumeDrUniversesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

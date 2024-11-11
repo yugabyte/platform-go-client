@@ -1956,6 +1956,47 @@ paths:
       summary: Delete a certificate
       tags:
       - Certificate Info
+    post:
+      operationId: getClientCert
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCertParams'
+        description: post certificate info
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateDetails'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Add a client certificate
+      tags:
+      - Certificate Info
+      x-codegen-request-body-name: certificate
   /api/v1/customers/{cUUID}/certificates/{rUUID}/download:
     get:
       operationId: getRootCert
@@ -2784,6 +2825,41 @@ paths:
       summary: Pause DR config
       tags:
       - Disaster Recovery
+  /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes:
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: pauseDrUniverses
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: drUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Pause DR config and universes associated with DR
+      tags:
+      - Disaster Recovery
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica:
     post:
       description: "WARNING: This is a preview API that could change."
@@ -2909,6 +2985,41 @@ paths:
       security:
       - apiKeyAuth: []
       summary: Resume DR config
+      tags:
+      - Disaster Recovery
+  /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes:
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: resumeDrUniverses
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: drUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Resume DR config and universes associated with DR
       tags:
       - Disaster Recovery
   /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime:
@@ -14531,6 +14642,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -14597,6 +14710,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -14738,6 +14853,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -14771,6 +14887,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -17778,7 +17895,10 @@ components:
           type: string
       type: object
     CertificateDetails:
-      exampleSetFlag: false
+      example:
+        yugabytedb.key: yugabytedb.key
+        yugabytedb.crt: yugabytedb.crt
+      exampleSetFlag: true
       properties:
         yugabytedb.crt:
           exampleSetFlag: true
@@ -20789,6 +20909,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -20855,6 +20977,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -20996,6 +21120,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -21029,6 +21154,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -21133,7 +21259,11 @@ components:
       - upgradeOption
       type: object
     ClientCertParams:
-      exampleSetFlag: false
+      example:
+        certStart: 6
+        certExpiry: 0
+        username: username
+      exampleSetFlag: true
       properties:
         certExpiry:
           exampleSetFlag: true
@@ -27223,6 +27353,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -27289,6 +27421,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -27430,6 +27564,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -27463,6 +27598,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -30345,6 +30481,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -30411,6 +30549,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -30552,6 +30692,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -30585,6 +30726,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -34229,6 +34371,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -34295,6 +34439,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -34436,6 +34582,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -34469,6 +34616,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -34719,6 +34867,7 @@ components:
         - groupsToSync
         - groupsToSync
         ldapBindDn: "cn=user,dc=example,dc=com"
+        useLdapSsl: true
         ldapTlsProtocol: TLSv1
         dbUser: dbUser
         ldapBindPassword: ldapBindPassword
@@ -34808,6 +34957,10 @@ components:
           - ycql
           exampleSetFlag: true
           type: string
+        useLdapSsl:
+          description: Use LDAP SSL
+          exampleSetFlag: true
+          type: boolean
         useLdapTls:
           description: Use LDAP TLS
           exampleSetFlag: true
@@ -37927,13 +38080,13 @@ components:
       description: "A single node instance, attached to a provider and availability\
         \ zone"
       example:
-        nodeName: India node
+        nodeName: universe_node1
         instanceName: Mumbai instance
         instanceTypeCode: c5large
         inUse: true
         zoneUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         details:
-          nodeName: India node
+          nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -37956,6 +38109,7 @@ components:
           description: Node details (as a JSON object)
           example: "{\"ip\":\"1.1.1.1\",\"sshUser\":\"centos\"}"
           exampleSetFlag: true
+          readOnly: true
           type: string
         inUse:
           description: True if the node is in use  <b style="color:#ff0000">Deprecated
@@ -37973,8 +38127,8 @@ components:
           exampleSetFlag: true
           type: string
         nodeName:
-          description: The node's name
-          example: India node
+          description: The node's name in a universe
+          example: universe_node1
           exampleSetFlag: true
           readOnly: true
           type: string
@@ -38005,7 +38159,7 @@ components:
       description: Details of a node instance. Used by the API to validate data against
         input constraints.
       example:
-        nodeName: India node
+        nodeName: universe_node1
         instanceName: Mumbai instance
         zone: south-east
         instanceType: c5large
@@ -38042,9 +38196,10 @@ components:
           type: array
           uniqueItems: true
         nodeName:
-          description: Node name
-          example: India node
+          description: Node name in a universe
+          example: universe_node1
           exampleSetFlag: true
+          readOnly: true
           type: string
         region:
           description: Region
@@ -38072,7 +38227,7 @@ components:
     NodeInstanceFormData:
       example:
         nodes:
-        - nodeName: India node
+        - nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -38084,7 +38239,7 @@ components:
             value: value
           sshUser: centos
           region: south-east
-        - nodeName: India node
+        - nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -38096,7 +38251,7 @@ components:
             value: value
           sshUser: centos
           region: south-east
-        - nodeName: India node
+        - nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -38108,7 +38263,7 @@ components:
             value: value
           sshUser: centos
           region: south-east
-        - nodeName: India node
+        - nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -38120,7 +38275,7 @@ components:
             value: value
           sshUser: centos
           region: south-east
-        - nodeName: India node
+        - nodeName: universe_node1
           instanceName: Mumbai instance
           zone: south-east
           instanceType: c5large
@@ -39300,7 +39455,8 @@ components:
           format: int64
           type: integer
         snapshotIntervalSec:
-          description: Time interval between snapshots in seconds
+          description: <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b>
+            Time interval between snapshots in seconds
           exampleSetFlag: true
           format: int64
           type: integer
@@ -40303,6 +40459,7 @@ components:
           $ref: '#/components/schemas/CloudInfo'
         enableNodeAgent:
           exampleSetFlag: true
+          readOnly: true
           type: boolean
         installNodeExporter:
           exampleSetFlag: true
@@ -43044,6 +43201,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -43110,6 +43269,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -43251,6 +43412,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -43284,6 +43446,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -46709,6 +46872,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -46775,6 +46940,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -46916,6 +47083,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -46949,6 +47117,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -49945,6 +50114,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -50011,6 +50182,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -50152,6 +50325,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -50185,6 +50359,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -54400,6 +54575,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -54466,6 +54643,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -54607,6 +54786,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -54640,6 +54820,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -54937,6 +55118,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -55003,6 +55186,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -55144,6 +55329,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -55177,6 +55363,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -55294,6 +55481,8 @@ components:
             - DestroyUniverse
             - PauseUniverse
             - ResumeUniverse
+            - PauseKubernetesUniverse
+            - ResumeKubernetesUniverse
             - DestroyKubernetesUniverse
             - DeleteTable
             - BackupUniverse
@@ -55360,6 +55549,8 @@ components:
             - SwitchoverDrConfig
             - EditDrConfig
             - EditDrConfigParams
+            - PauseXClusterUniverses
+            - ResumeXClusterUniverses
             - ReinstallNodeAgent
             - DeleteCustomerConfig
             - DeleteCustomerStorageConfig
@@ -55501,6 +55692,7 @@ components:
             - XClusterDbReplicationSetup
             - DeleteReplicationOnSource
             - DeleteXClusterBackupRestoreEntries
+            - AddExistingPitrToXClusterConfig
             - SetRestoreState
             - CloudAccessKeyCleanup
             - CloudAccessKeySetup
@@ -55534,6 +55726,7 @@ components:
             - UnivSetCertificate
             - CreateAlertDefinitions
             - ManageAlertDefinitions
+            - MarkSourceMetric
             - UniverseSetTlsParams
             - UniverseUpdateRootCert
             - ResetUniverseVersion
@@ -58551,6 +58744,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -58617,6 +58812,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -58758,6 +58955,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -58791,6 +58989,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -62036,6 +62235,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -62102,6 +62303,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -62243,6 +62446,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -62276,6 +62480,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -65487,6 +65692,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -65553,6 +65760,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -65694,6 +65903,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -65727,6 +65937,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -68530,6 +68741,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -68596,6 +68809,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -68737,6 +68952,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -68770,6 +68986,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -68895,7 +69112,7 @@ components:
       exampleSetFlag: false
       properties:
         apiToken:
-          description: API Token
+          description: YBA API Token
           exampleSetFlag: true
           type: string
         customerUUID:
@@ -68919,6 +69136,10 @@ components:
           type: integer
         metricsUrl:
           description: Metrics URL
+          exampleSetFlag: true
+          type: string
+        tpApiToken:
+          description: TP API Token
           exampleSetFlag: true
           type: string
         tpUrl:
@@ -68949,7 +69170,7 @@ components:
       exampleSetFlag: false
       properties:
         apiToken:
-          description: API Token
+          description: YBA API Token
           exampleSetFlag: true
           type: string
         customerUUID:
@@ -68965,6 +69186,10 @@ components:
           type: integer
         metricsUrl:
           description: Metrics URL
+          exampleSetFlag: true
+          type: string
+        tpApiToken:
+          description: TP API Token
           exampleSetFlag: true
           type: string
         tpUrl:
@@ -71809,6 +72034,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -71875,6 +72102,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -72016,6 +72245,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -72049,6 +72279,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -74810,6 +75041,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -74876,6 +75109,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -75017,6 +75252,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -75050,6 +75286,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -77819,6 +78056,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -77885,6 +78124,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -78026,6 +78267,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -78059,6 +78301,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -83624,6 +83867,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -83690,6 +83935,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -83831,6 +84078,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -83864,6 +84112,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -87426,6 +87675,8 @@ components:
           - DestroyUniverse
           - PauseUniverse
           - ResumeUniverse
+          - PauseKubernetesUniverse
+          - ResumeKubernetesUniverse
           - DestroyKubernetesUniverse
           - DeleteTable
           - BackupUniverse
@@ -87492,6 +87743,8 @@ components:
           - SwitchoverDrConfig
           - EditDrConfig
           - EditDrConfigParams
+          - PauseXClusterUniverses
+          - ResumeXClusterUniverses
           - ReinstallNodeAgent
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
@@ -87633,6 +87886,7 @@ components:
           - XClusterDbReplicationSetup
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
+          - AddExistingPitrToXClusterConfig
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -87666,6 +87920,7 @@ components:
           - UnivSetCertificate
           - CreateAlertDefinitions
           - ManageAlertDefinitions
+          - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
           - ResetUniverseVersion
@@ -88782,6 +89037,7 @@ components:
       exampleSetFlag: true
       properties:
         code:
+          description: Error code
           enum:
           - UNKNOWN_ERROR
           - INTERNAL_ERROR
@@ -88791,13 +89047,13 @@ components:
           - SERVICE_START_ERROR
           - CONNECTION_ERROR
           exampleSetFlag: true
+          readOnly: true
           type: string
         message:
+          description: Error message
           exampleSetFlag: true
+          readOnly: true
           type: string
-      required:
-      - code
-      - message
       type: object
     YBPCreateSuccess:
       example:

@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
 *JobSchedulerApi* | [**PageListJobSchedules**](docs/JobSchedulerApi.md#pagelistjobschedules) | **Post** /customers/{cUUID}/job-schedules/page | List Job Schedules (paginated)
 *JobSchedulerApi* | [**SnoozeJobSchedule**](docs/JobSchedulerApi.md#snoozejobschedule) | **Post** /customers/{cUUID}/job-schedules/{jUUID}/snooze | Snooze Job Schedule
 *JobSchedulerApi* | [**UpdateJobSchedule**](docs/JobSchedulerApi.md#updatejobschedule) | **Put** /customers/{cUUID}/job-schedules/{jUUID} | Update Job Schedule
+*MetricsApi* | [**GetPrometheusHostInfo**](docs/MetricsApi.md#getprometheushostinfo) | **Get** /host-info | Get Prometheus host info
 *UniverseApi* | [**AddCluster**](docs/UniverseApi.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseApi* | [**CreateUniverse**](docs/UniverseApi.md#createuniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
 *UniverseApi* | [**DeleteCluster**](docs/UniverseApi.md#deletecluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
@@ -178,6 +179,7 @@ Class | Method | HTTP request | Description
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementCloud](docs/PlacementCloud.md)
  - [PlacementRegion](docs/PlacementRegion.md)
+ - [PrometheusHostInfo](docs/PrometheusHostInfo.md)
  - [ResourceDefinition](docs/ResourceDefinition.md)
  - [ResourceGroup](docs/ResourceGroup.md)
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)

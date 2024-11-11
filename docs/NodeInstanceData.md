@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **InstanceType** | **string** | Node instance type | 
 **Ip** | **string** | IP address | 
 **NodeConfigs** | Pointer to [**[]NodeConfig**](NodeConfig.md) | Node configurations | [optional] 
-**NodeName** | Pointer to **string** | Node name | [optional] 
+**NodeName** | Pointer to **string** | Node name in a universe | [optional] [readonly] 
 **Region** | **string** | Region | 
 **SshUser** | **string** | SSH user | 
 **Zone** | **string** | Zone | 

@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**ValidateKeyspaceTablesToRestore**](docs/BackupsApi.md#validatekeyspacetablestorestore) | **Post** /api/v1/customers/{cUUID}/restore/validate_restorable_keyspace_tables | Validate keyspace and tables to Restore against Backup
 *CertificateInfoApi* | [**DeleteCertificate**](docs/CertificateInfoApi.md#deletecertificate) | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID} | Delete a certificate
 *CertificateInfoApi* | [**EditCertificate**](docs/CertificateInfoApi.md#editcertificate) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit | Edit TLS certificate config details
+*CertificateInfoApi* | [**GetClientCert**](docs/CertificateInfoApi.md#getclientcert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID} | Add a client certificate
 *CertificateInfoApi* | [**GetListOfCertificate**](docs/CertificateInfoApi.md#getlistofcertificate) | **Get** /api/v1/customers/{cUUID}/certificates | List a customer&#39;s certificates
 *CertificateInfoApi* | [**GetRootCert**](docs/CertificateInfoApi.md#getrootcert) | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download | Get a customer&#39;s root certificate
 *CertificateInfoApi* | [**Upload**](docs/CertificateInfoApi.md#upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
@@ -208,9 +209,11 @@ Class | Method | HTTP request | Description
 *DisasterRecoveryApi* | [**GetDrConfig**](docs/DisasterRecoveryApi.md#getdrconfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
 *DisasterRecoveryApi* | [**GetDrConfigSafetime**](docs/DisasterRecoveryApi.md#getdrconfigsafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
 *DisasterRecoveryApi* | [**PauseDrConfig**](docs/DisasterRecoveryApi.md#pausedrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause | Pause DR config
+*DisasterRecoveryApi* | [**PauseDrUniverses**](docs/DisasterRecoveryApi.md#pausedruniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes | Pause DR config and universes associated with DR
 *DisasterRecoveryApi* | [**ReplaceReplicaDrConfig**](docs/DisasterRecoveryApi.md#replacereplicadrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica | Replace Replica in a disaster recovery config
 *DisasterRecoveryApi* | [**RestartDrConfig**](docs/DisasterRecoveryApi.md#restartdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart | Restart disaster recovery config
 *DisasterRecoveryApi* | [**ResumeDrConfig**](docs/DisasterRecoveryApi.md#resumedrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume | Resume DR config
+*DisasterRecoveryApi* | [**ResumeDrUniverses**](docs/DisasterRecoveryApi.md#resumedruniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes | Resume DR config and universes associated with DR
 *DisasterRecoveryApi* | [**SetDatabasesDrConfig**](docs/DisasterRecoveryApi.md#setdatabasesdrconfig) | **Put** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs | Set databases in disaster recovery config
 *DisasterRecoveryApi* | [**SetTablesDrConfig**](docs/DisasterRecoveryApi.md#settablesdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables | Set tables in disaster recovery config
 *DisasterRecoveryApi* | [**SwitchoverDrConfig**](docs/DisasterRecoveryApi.md#switchoverdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover | Switchover a disaster recovery config
