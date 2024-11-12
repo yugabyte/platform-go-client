@@ -4,11 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiToken** | **string** | API Token | 
+**ApiToken** | **string** | YBA API Token | 
 **CustomerUUID** | **string** | Customer UUID | [readonly] 
 **InUseStatus** | Pointer to **string** | In Use Status | [optional] 
 **MetricsScrapePeriodSecs** | **int64** | Metrics Scrape Period Seconds | 
 **MetricsUrl** | **string** | Metrics URL | 
+**TpApiToken** | Pointer to **string** | TP API Token | [optional] 
 **TpUrl** | **string** | Troubleshooting Platform URL | 
 **Uuid** | **string** | Troubleshooting Platform UUID | [readonly] 
 **YbaUrl** | **string** | YBA URL | 
@@ -136,6 +137,31 @@ and a boolean to check if the value has been set.
 
 SetMetricsUrl sets MetricsUrl field to given value.
 
+
+### GetTpApiToken
+
+`func (o *TroubleshootingPlatformDetailsModel) GetTpApiToken() string`
+
+GetTpApiToken returns the TpApiToken field if non-nil, zero value otherwise.
+
+### GetTpApiTokenOk
+
+`func (o *TroubleshootingPlatformDetailsModel) GetTpApiTokenOk() (*string, bool)`
+
+GetTpApiTokenOk returns a tuple with the TpApiToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTpApiToken
+
+`func (o *TroubleshootingPlatformDetailsModel) SetTpApiToken(v string)`
+
+SetTpApiToken sets TpApiToken field to given value.
+
+### HasTpApiToken
+
+`func (o *TroubleshootingPlatformDetailsModel) HasTpApiToken() bool`
+
+HasTpApiToken returns a boolean if a field has been set.
 
 ### GetTpUrl
 

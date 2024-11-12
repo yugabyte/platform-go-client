@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteCertificate**](CertificateInfoApi.md#DeleteCertificate) | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID} | Delete a certificate
 [**EditCertificate**](CertificateInfoApi.md#EditCertificate) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit | Edit TLS certificate config details
+[**GetClientCert**](CertificateInfoApi.md#GetClientCert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID} | Add a client certificate
 [**GetListOfCertificate**](CertificateInfoApi.md#GetListOfCertificate) | **Get** /api/v1/customers/{cUUID}/certificates | List a customer&#39;s certificates
 [**GetRootCert**](CertificateInfoApi.md#GetRootCert) | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download | Get a customer&#39;s root certificate
 [**Upload**](CertificateInfoApi.md#Upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
@@ -145,6 +146,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetClientCert
+
+> CertificateDetails GetClientCert(ctx, cUUID, rUUID).Certificate(certificate).Request(request).Execute()
+
+Add a client certificate
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    rUUID := TODO // string | 
+    certificate := *openapiclient.NewClientCertParams(int64(123), int64(123), "Username_example") // ClientCertParams | post certificate info
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CertificateInfoApi.GetClientCert(context.Background(), cUUID, rUUID).Certificate(certificate).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CertificateInfoApi.GetClientCert``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetClientCert`: CertificateDetails
+    fmt.Fprintf(os.Stdout, "Response from `CertificateInfoApi.GetClientCert`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**rUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetClientCertRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **certificate** | [**ClientCertParams**](ClientCertParams.md) | post certificate info | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**CertificateDetails**](CertificateDetails.md)
 
 ### Authorization
 

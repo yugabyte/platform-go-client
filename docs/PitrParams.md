@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RetentionPeriodSec** | Pointer to **int64** | Retention period of a snapshot in seconds | [optional] 
-**SnapshotIntervalSec** | Pointer to **int64** | Time interval between snapshots in seconds | [optional] 
+**SnapshotIntervalSec** | Pointer to **int64** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2024.2.0.0.&lt;/b&gt; Time interval between snapshots in seconds | [optional] 
 
 ## Methods
 

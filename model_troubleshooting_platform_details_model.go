@@ -16,7 +16,7 @@ import (
 
 // TroubleshootingPlatformDetailsModel struct for TroubleshootingPlatformDetailsModel
 type TroubleshootingPlatformDetailsModel struct {
-	// API Token
+	// YBA API Token
 	ApiToken string `json:"apiToken"`
 	// Customer UUID
 	CustomerUUID string `json:"customerUUID"`
@@ -26,6 +26,8 @@ type TroubleshootingPlatformDetailsModel struct {
 	MetricsScrapePeriodSecs int64 `json:"metricsScrapePeriodSecs"`
 	// Metrics URL
 	MetricsUrl string `json:"metricsUrl"`
+	// TP API Token
+	TpApiToken *string `json:"tpApiToken,omitempty"`
 	// Troubleshooting Platform URL
 	TpUrl string `json:"tpUrl"`
 	// Troubleshooting Platform UUID
@@ -186,6 +188,38 @@ func (o *TroubleshootingPlatformDetailsModel) SetMetricsUrl(v string) {
 	o.MetricsUrl = v
 }
 
+// GetTpApiToken returns the TpApiToken field value if set, zero value otherwise.
+func (o *TroubleshootingPlatformDetailsModel) GetTpApiToken() string {
+	if o == nil || o.TpApiToken == nil {
+		var ret string
+		return ret
+	}
+	return *o.TpApiToken
+}
+
+// GetTpApiTokenOk returns a tuple with the TpApiToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TroubleshootingPlatformDetailsModel) GetTpApiTokenOk() (*string, bool) {
+	if o == nil || o.TpApiToken == nil {
+		return nil, false
+	}
+	return o.TpApiToken, true
+}
+
+// HasTpApiToken returns a boolean if a field has been set.
+func (o *TroubleshootingPlatformDetailsModel) HasTpApiToken() bool {
+	if o != nil && o.TpApiToken != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTpApiToken gets a reference to the given string and assigns it to the TpApiToken field.
+func (o *TroubleshootingPlatformDetailsModel) SetTpApiToken(v string) {
+	o.TpApiToken = &v
+}
+
 // GetTpUrl returns the TpUrl field value
 func (o *TroubleshootingPlatformDetailsModel) GetTpUrl() string {
 	if o == nil {
@@ -274,6 +308,9 @@ func (o TroubleshootingPlatformDetailsModel) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["metricsUrl"] = o.MetricsUrl
+	}
+	if o.TpApiToken != nil {
+		toSerialize["tpApiToken"] = o.TpApiToken
 	}
 	if true {
 		toSerialize["tpUrl"] = o.TpUrl

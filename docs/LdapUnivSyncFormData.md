@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **LdapTlsProtocol** | Pointer to **string** | TLS versions for LDAPS : TLSv1, TLSv1_1, TLSv1_2 | [optional] 
 **LdapUserfield** | **string** | Dn/Attribute field to get the user&#39;s name from | 
 **TargetApi** | **string** |  | 
+**UseLdapSsl** | Pointer to **bool** | Use LDAP SSL | [optional] 
 **UseLdapTls** | Pointer to **bool** | Use LDAP TLS | [optional] 
 
 ## Methods
@@ -420,6 +421,31 @@ and a boolean to check if the value has been set.
 
 SetTargetApi sets TargetApi field to given value.
 
+
+### GetUseLdapSsl
+
+`func (o *LdapUnivSyncFormData) GetUseLdapSsl() bool`
+
+GetUseLdapSsl returns the UseLdapSsl field if non-nil, zero value otherwise.
+
+### GetUseLdapSslOk
+
+`func (o *LdapUnivSyncFormData) GetUseLdapSslOk() (*bool, bool)`
+
+GetUseLdapSslOk returns a tuple with the UseLdapSsl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseLdapSsl
+
+`func (o *LdapUnivSyncFormData) SetUseLdapSsl(v bool)`
+
+SetUseLdapSsl sets UseLdapSsl field to given value.
+
+### HasUseLdapSsl
+
+`func (o *LdapUnivSyncFormData) HasUseLdapSsl() bool`
+
+HasUseLdapSsl returns a boolean if a field has been set.
 
 ### GetUseLdapTls
 

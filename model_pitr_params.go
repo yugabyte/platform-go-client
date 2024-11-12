@@ -18,7 +18,7 @@ import (
 type PitrParams struct {
 	// Retention period of a snapshot in seconds
 	RetentionPeriodSec *int64 `json:"retentionPeriodSec,omitempty"`
-	// Time interval between snapshots in seconds
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.0.0.</b> Time interval between snapshots in seconds
 	SnapshotIntervalSec *int64 `json:"snapshotIntervalSec,omitempty"`
 }
 

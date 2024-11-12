@@ -24,7 +24,7 @@ type NodeInstanceData struct {
 	Ip string `json:"ip"`
 	// Node configurations
 	NodeConfigs *[]NodeConfig `json:"nodeConfigs,omitempty"`
-	// Node name
+	// Node name in a universe
 	NodeName *string `json:"nodeName,omitempty"`
 	// Region
 	Region string `json:"region"`

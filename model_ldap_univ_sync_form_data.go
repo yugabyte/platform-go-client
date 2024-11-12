@@ -46,6 +46,8 @@ type LdapUnivSyncFormData struct {
 	// Dn/Attribute field to get the user's name from
 	LdapUserfield string `json:"ldapUserfield"`
 	TargetApi string `json:"targetApi"`
+	// Use LDAP SSL
+	UseLdapSsl *bool `json:"useLdapSsl,omitempty"`
 	// Use LDAP TLS
 	UseLdapTls *bool `json:"useLdapTls,omitempty"`
 }
@@ -551,6 +553,38 @@ func (o *LdapUnivSyncFormData) SetTargetApi(v string) {
 	o.TargetApi = v
 }
 
+// GetUseLdapSsl returns the UseLdapSsl field value if set, zero value otherwise.
+func (o *LdapUnivSyncFormData) GetUseLdapSsl() bool {
+	if o == nil || o.UseLdapSsl == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseLdapSsl
+}
+
+// GetUseLdapSslOk returns a tuple with the UseLdapSsl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LdapUnivSyncFormData) GetUseLdapSslOk() (*bool, bool) {
+	if o == nil || o.UseLdapSsl == nil {
+		return nil, false
+	}
+	return o.UseLdapSsl, true
+}
+
+// HasUseLdapSsl returns a boolean if a field has been set.
+func (o *LdapUnivSyncFormData) HasUseLdapSsl() bool {
+	if o != nil && o.UseLdapSsl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseLdapSsl gets a reference to the given bool and assigns it to the UseLdapSsl field.
+func (o *LdapUnivSyncFormData) SetUseLdapSsl(v bool) {
+	o.UseLdapSsl = &v
+}
+
 // GetUseLdapTls returns the UseLdapTls field value if set, zero value otherwise.
 func (o *LdapUnivSyncFormData) GetUseLdapTls() bool {
 	if o == nil || o.UseLdapTls == nil {
@@ -632,6 +666,9 @@ func (o LdapUnivSyncFormData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["targetApi"] = o.TargetApi
+	}
+	if o.UseLdapSsl != nil {
+		toSerialize["useLdapSsl"] = o.UseLdapSsl
 	}
 	if o.UseLdapTls != nil {
 		toSerialize["useLdapTls"] = o.UseLdapTls

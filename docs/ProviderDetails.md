@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AirGapInstall** | Pointer to **bool** |  | [optional] 
 **CloudInfo** | Pointer to [**CloudInfo**](CloudInfo.md) |  | [optional] 
-**EnableNodeAgent** | Pointer to **bool** |  | [optional] 
+**EnableNodeAgent** | Pointer to **bool** |  | [optional] [readonly] 
 **InstallNodeExporter** | Pointer to **bool** |  | [optional] 
 **NodeExporterPort** | Pointer to **int32** |  | [optional] 
 **NodeExporterUser** | Pointer to **string** |  | [optional] 
