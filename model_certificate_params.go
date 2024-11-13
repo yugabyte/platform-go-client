@@ -14,16 +14,16 @@ import (
 	"encoding/json"
 )
 
-// CertificateParams struct for CertificateParams
+// CertificateParams Certificate Params is used to validate constraints for the custom certificate Data
 type CertificateParams struct {
 	CertContent string `json:"certContent"`
 	CertExpiry int64 `json:"certExpiry"`
 	CertStart int64 `json:"certStart"`
 	CertType string `json:"certType"`
-	CustomCertInfo CustomCertInfo `json:"customCertInfo"`
-	CustomServerCertData CustomServerCertData `json:"customServerCertData"`
-	HcVaultCertParams HashicorpVaultConfigParams `json:"hcVaultCertParams"`
-	KeyContent string `json:"keyContent"`
+	CustomCertInfo *CustomCertInfo `json:"customCertInfo,omitempty"`
+	CustomServerCertData *CustomServerCertData `json:"customServerCertData,omitempty"`
+	HcVaultCertParams *HashicorpVaultConfigParams `json:"hcVaultCertParams,omitempty"`
+	KeyContent *string `json:"keyContent,omitempty"`
 	Label string `json:"label"`
 }
 
@@ -31,16 +31,12 @@ type CertificateParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, customCertInfo CustomCertInfo, customServerCertData CustomServerCertData, hcVaultCertParams HashicorpVaultConfigParams, keyContent string, label string) *CertificateParams {
+func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, label string) *CertificateParams {
 	this := CertificateParams{}
 	this.CertContent = certContent
 	this.CertExpiry = certExpiry
 	this.CertStart = certStart
 	this.CertType = certType
-	this.CustomCertInfo = customCertInfo
-	this.CustomServerCertData = customServerCertData
-	this.HcVaultCertParams = hcVaultCertParams
-	this.KeyContent = keyContent
 	this.Label = label
 	return &this
 }
@@ -149,100 +145,132 @@ func (o *CertificateParams) SetCertType(v string) {
 	o.CertType = v
 }
 
-// GetCustomCertInfo returns the CustomCertInfo field value
+// GetCustomCertInfo returns the CustomCertInfo field value if set, zero value otherwise.
 func (o *CertificateParams) GetCustomCertInfo() CustomCertInfo {
-	if o == nil {
+	if o == nil || o.CustomCertInfo == nil {
 		var ret CustomCertInfo
 		return ret
 	}
-
-	return o.CustomCertInfo
+	return *o.CustomCertInfo
 }
 
-// GetCustomCertInfoOk returns a tuple with the CustomCertInfo field value
+// GetCustomCertInfoOk returns a tuple with the CustomCertInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CertificateParams) GetCustomCertInfoOk() (*CustomCertInfo, bool) {
-	if o == nil  {
+	if o == nil || o.CustomCertInfo == nil {
 		return nil, false
 	}
-	return &o.CustomCertInfo, true
+	return o.CustomCertInfo, true
 }
 
-// SetCustomCertInfo sets field value
+// HasCustomCertInfo returns a boolean if a field has been set.
+func (o *CertificateParams) HasCustomCertInfo() bool {
+	if o != nil && o.CustomCertInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomCertInfo gets a reference to the given CustomCertInfo and assigns it to the CustomCertInfo field.
 func (o *CertificateParams) SetCustomCertInfo(v CustomCertInfo) {
-	o.CustomCertInfo = v
+	o.CustomCertInfo = &v
 }
 
-// GetCustomServerCertData returns the CustomServerCertData field value
+// GetCustomServerCertData returns the CustomServerCertData field value if set, zero value otherwise.
 func (o *CertificateParams) GetCustomServerCertData() CustomServerCertData {
-	if o == nil {
+	if o == nil || o.CustomServerCertData == nil {
 		var ret CustomServerCertData
 		return ret
 	}
-
-	return o.CustomServerCertData
+	return *o.CustomServerCertData
 }
 
-// GetCustomServerCertDataOk returns a tuple with the CustomServerCertData field value
+// GetCustomServerCertDataOk returns a tuple with the CustomServerCertData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CertificateParams) GetCustomServerCertDataOk() (*CustomServerCertData, bool) {
-	if o == nil  {
+	if o == nil || o.CustomServerCertData == nil {
 		return nil, false
 	}
-	return &o.CustomServerCertData, true
+	return o.CustomServerCertData, true
 }
 
-// SetCustomServerCertData sets field value
+// HasCustomServerCertData returns a boolean if a field has been set.
+func (o *CertificateParams) HasCustomServerCertData() bool {
+	if o != nil && o.CustomServerCertData != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomServerCertData gets a reference to the given CustomServerCertData and assigns it to the CustomServerCertData field.
 func (o *CertificateParams) SetCustomServerCertData(v CustomServerCertData) {
-	o.CustomServerCertData = v
+	o.CustomServerCertData = &v
 }
 
-// GetHcVaultCertParams returns the HcVaultCertParams field value
+// GetHcVaultCertParams returns the HcVaultCertParams field value if set, zero value otherwise.
 func (o *CertificateParams) GetHcVaultCertParams() HashicorpVaultConfigParams {
-	if o == nil {
+	if o == nil || o.HcVaultCertParams == nil {
 		var ret HashicorpVaultConfigParams
 		return ret
 	}
-
-	return o.HcVaultCertParams
+	return *o.HcVaultCertParams
 }
 
-// GetHcVaultCertParamsOk returns a tuple with the HcVaultCertParams field value
+// GetHcVaultCertParamsOk returns a tuple with the HcVaultCertParams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CertificateParams) GetHcVaultCertParamsOk() (*HashicorpVaultConfigParams, bool) {
-	if o == nil  {
+	if o == nil || o.HcVaultCertParams == nil {
 		return nil, false
 	}
-	return &o.HcVaultCertParams, true
+	return o.HcVaultCertParams, true
 }
 
-// SetHcVaultCertParams sets field value
+// HasHcVaultCertParams returns a boolean if a field has been set.
+func (o *CertificateParams) HasHcVaultCertParams() bool {
+	if o != nil && o.HcVaultCertParams != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHcVaultCertParams gets a reference to the given HashicorpVaultConfigParams and assigns it to the HcVaultCertParams field.
 func (o *CertificateParams) SetHcVaultCertParams(v HashicorpVaultConfigParams) {
-	o.HcVaultCertParams = v
+	o.HcVaultCertParams = &v
 }
 
-// GetKeyContent returns the KeyContent field value
+// GetKeyContent returns the KeyContent field value if set, zero value otherwise.
 func (o *CertificateParams) GetKeyContent() string {
-	if o == nil {
+	if o == nil || o.KeyContent == nil {
 		var ret string
 		return ret
 	}
-
-	return o.KeyContent
+	return *o.KeyContent
 }
 
-// GetKeyContentOk returns a tuple with the KeyContent field value
+// GetKeyContentOk returns a tuple with the KeyContent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CertificateParams) GetKeyContentOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.KeyContent == nil {
 		return nil, false
 	}
-	return &o.KeyContent, true
+	return o.KeyContent, true
 }
 
-// SetKeyContent sets field value
+// HasKeyContent returns a boolean if a field has been set.
+func (o *CertificateParams) HasKeyContent() bool {
+	if o != nil && o.KeyContent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyContent gets a reference to the given string and assigns it to the KeyContent field.
 func (o *CertificateParams) SetKeyContent(v string) {
-	o.KeyContent = v
+	o.KeyContent = &v
 }
 
 // GetLabel returns the Label field value
@@ -283,16 +311,16 @@ func (o CertificateParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["certType"] = o.CertType
 	}
-	if true {
+	if o.CustomCertInfo != nil {
 		toSerialize["customCertInfo"] = o.CustomCertInfo
 	}
-	if true {
+	if o.CustomServerCertData != nil {
 		toSerialize["customServerCertData"] = o.CustomServerCertData
 	}
-	if true {
+	if o.HcVaultCertParams != nil {
 		toSerialize["hcVaultCertParams"] = o.HcVaultCertParams
 	}
-	if true {
+	if o.KeyContent != nil {
 		toSerialize["keyContent"] = o.KeyContent
 	}
 	if true {

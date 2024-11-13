@@ -107,7 +107,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
-    certificate := *openapiclient.NewCertificateParams("CertContent_example", int64(123), int64(123), "CertType_example", *openapiclient.NewCustomCertInfo("ClientCertPath_example", "ClientKeyPath_example", "NodeCertPath_example", "NodeKeyPath_example", "RootCertPath_example"), *openapiclient.NewCustomServerCertData("ServerCertContent_example", "ServerKeyContent_example"), *openapiclient.NewHashicorpVaultConfigParams("Engine_example", "MountPath_example", "Role_example", "VaultAddr_example"), "KeyContent_example", "Label_example") // CertificateParams | certificate params to edit
+    certificate := *openapiclient.NewCertificateParams("CertContent_example", int64(123), int64(123), "CertType_example", "Label_example") // CertificateParams | certificate params to edit
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -397,7 +397,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    certificate := *openapiclient.NewCertificateParams("CertContent_example", int64(123), int64(123), "CertType_example", *openapiclient.NewCustomCertInfo("ClientCertPath_example", "ClientKeyPath_example", "NodeCertPath_example", "NodeKeyPath_example", "RootCertPath_example"), *openapiclient.NewCustomServerCertData("ServerCertContent_example", "ServerKeyContent_example"), *openapiclient.NewHashicorpVaultConfigParams("Engine_example", "MountPath_example", "Role_example", "VaultAddr_example"), "KeyContent_example", "Label_example") // CertificateParams | certificate params of the backup to be restored
+    certificate := *openapiclient.NewCertificateParams("CertContent_example", int64(123), int64(123), "CertType_example", "Label_example") // CertificateParams | certificate params of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

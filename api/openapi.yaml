@@ -18155,6 +18155,8 @@ components:
       - universeDetailSubsets
       type: object
     CertificateParams:
+      description: Certificate Params is used to validate constraints for the custom
+        certificate Data
       example:
         certStart: 6
         customCertInfo:
@@ -18221,10 +18223,6 @@ components:
       - certExpiry
       - certStart
       - certType
-      - customCertInfo
-      - customServerCertData
-      - hcVaultCertParams
-      - keyContent
       - label
       type: object
     CertsRotateParams:

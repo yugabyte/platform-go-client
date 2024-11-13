@@ -8,17 +8,17 @@ Name | Type | Description | Notes
 **CertExpiry** | **int64** |  | 
 **CertStart** | **int64** |  | 
 **CertType** | **string** |  | 
-**CustomCertInfo** | [**CustomCertInfo**](CustomCertInfo.md) |  | 
-**CustomServerCertData** | [**CustomServerCertData**](CustomServerCertData.md) |  | 
-**HcVaultCertParams** | [**HashicorpVaultConfigParams**](HashicorpVaultConfigParams.md) |  | 
-**KeyContent** | **string** |  | 
+**CustomCertInfo** | Pointer to [**CustomCertInfo**](CustomCertInfo.md) |  | [optional] 
+**CustomServerCertData** | Pointer to [**CustomServerCertData**](CustomServerCertData.md) |  | [optional] 
+**HcVaultCertParams** | Pointer to [**HashicorpVaultConfigParams**](HashicorpVaultConfigParams.md) |  | [optional] 
+**KeyContent** | Pointer to **string** |  | [optional] 
 **Label** | **string** |  | 
 
 ## Methods
 
 ### NewCertificateParams
 
-`func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, customCertInfo CustomCertInfo, customServerCertData CustomServerCertData, hcVaultCertParams HashicorpVaultConfigParams, keyContent string, label string, ) *CertificateParams`
+`func NewCertificateParams(certContent string, certExpiry int64, certStart int64, certType string, label string, ) *CertificateParams`
 
 NewCertificateParams instantiates a new CertificateParams object
 This constructor will assign default values to properties that have it defined,
@@ -132,6 +132,11 @@ and a boolean to check if the value has been set.
 
 SetCustomCertInfo sets CustomCertInfo field to given value.
 
+### HasCustomCertInfo
+
+`func (o *CertificateParams) HasCustomCertInfo() bool`
+
+HasCustomCertInfo returns a boolean if a field has been set.
 
 ### GetCustomServerCertData
 
@@ -152,6 +157,11 @@ and a boolean to check if the value has been set.
 
 SetCustomServerCertData sets CustomServerCertData field to given value.
 
+### HasCustomServerCertData
+
+`func (o *CertificateParams) HasCustomServerCertData() bool`
+
+HasCustomServerCertData returns a boolean if a field has been set.
 
 ### GetHcVaultCertParams
 
@@ -172,6 +182,11 @@ and a boolean to check if the value has been set.
 
 SetHcVaultCertParams sets HcVaultCertParams field to given value.
 
+### HasHcVaultCertParams
+
+`func (o *CertificateParams) HasHcVaultCertParams() bool`
+
+HasHcVaultCertParams returns a boolean if a field has been set.
 
 ### GetKeyContent
 
@@ -192,6 +207,11 @@ and a boolean to check if the value has been set.
 
 SetKeyContent sets KeyContent field to given value.
 
+### HasKeyContent
+
+`func (o *CertificateParams) HasKeyContent() bool`
+
+HasKeyContent returns a boolean if a field has been set.
 
 ### GetLabel
 
