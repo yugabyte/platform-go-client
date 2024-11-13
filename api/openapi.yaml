@@ -11038,7 +11038,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/YBPSuccess'
+                $ref: '#/components/schemas/YBPCreateSuccess'
           description: successful operation
       security:
       - apiKeyAuth: []
@@ -11100,8 +11100,11 @@ paths:
         schema:
           exampleSetFlag: false
       responses:
-        default:
-          content: {}
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPCreateSuccess'
           description: successful operation
       security:
       - apiKeyAuth: []

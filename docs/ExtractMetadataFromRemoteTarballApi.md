@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## ExtractMetadata
 
-> YBPSuccess ExtractMetadata(ctx, cUUID).ReleaseURL(releaseURL).Request(request).Execute()
+> YBPCreateSuccess ExtractMetadata(ctx, cUUID).ReleaseURL(releaseURL).Request(request).Execute()
 
 helper to extract release metadata from a remote tarball
 
@@ -41,7 +41,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ExtractMetadataFromRemoteTarballApi.ExtractMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ExtractMetadata`: YBPSuccess
+    // response from `ExtractMetadata`: YBPCreateSuccess
     fmt.Fprintf(os.Stdout, "Response from `ExtractMetadataFromRemoteTarballApi.ExtractMetadata`: %v\n", resp)
 }
 ```
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPCreateSuccess**](YBPCreateSuccess.md)
 
 ### Authorization
 

@@ -44,7 +44,7 @@ func (r ExtractMetadataFromRemoteTarballApiApiExtractMetadataRequest) Request(re
 	return r
 }
 
-func (r ExtractMetadataFromRemoteTarballApiApiExtractMetadataRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
+func (r ExtractMetadataFromRemoteTarballApiApiExtractMetadataRequest) Execute() (YBPCreateSuccess, *_nethttp.Response, error) {
 	return r.ApiService.ExtractMetadataExecute(r)
 }
 
@@ -65,16 +65,16 @@ func (a *ExtractMetadataFromRemoteTarballApiService) ExtractMetadata(ctx _contex
 
 /*
  * Execute executes the request
- * @return YBPSuccess
+ * @return YBPCreateSuccess
  */
-func (a *ExtractMetadataFromRemoteTarballApiService) ExtractMetadataExecute(r ExtractMetadataFromRemoteTarballApiApiExtractMetadataRequest) (YBPSuccess, *_nethttp.Response, error) {
+func (a *ExtractMetadataFromRemoteTarballApiService) ExtractMetadataExecute(r ExtractMetadataFromRemoteTarballApiApiExtractMetadataRequest) (YBPCreateSuccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
+		localVarReturnValue  YBPCreateSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtractMetadataFromRemoteTarballApiService.ExtractMetadata")

@@ -171,7 +171,7 @@ func (r UploadReleasePackagesApiApiUploadReleaseRequest) Request(request interfa
 	return r
 }
 
-func (r UploadReleasePackagesApiApiUploadReleaseRequest) Execute() (*_nethttp.Response, error) {
+func (r UploadReleasePackagesApiApiUploadReleaseRequest) Execute() (YBPCreateSuccess, *_nethttp.Response, error) {
 	return r.ApiService.UploadReleaseExecute(r)
 }
 
@@ -192,19 +192,21 @@ func (a *UploadReleasePackagesApiService) UploadRelease(ctx _context.Context, cU
 
 /*
  * Execute executes the request
+ * @return YBPCreateSuccess
  */
-func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePackagesApiApiUploadReleaseRequest) (*_nethttp.Response, error) {
+func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePackagesApiApiUploadReleaseRequest) (YBPCreateSuccess, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  YBPCreateSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadReleasePackagesApiService.UploadRelease")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/ybdb_release/upload"
@@ -227,7 +229,7 @@ func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePa
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -250,19 +252,19 @@ func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -270,8 +272,17 @@ func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePa
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
