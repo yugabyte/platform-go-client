@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## UploadRelease
 
-> UploadRelease(ctx, cUUID).Request(request).Execute()
+> YBPCreateSuccess UploadRelease(ctx, cUUID).Request(request).Execute()
 
 upload a release tgz
 
@@ -115,6 +115,8 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UploadReleasePackagesApi.UploadRelease``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `UploadRelease`: YBPCreateSuccess
+    fmt.Fprintf(os.Stdout, "Response from `UploadReleasePackagesApi.UploadRelease`: %v\n", resp)
 }
 ```
 
@@ -138,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**YBPCreateSuccess**](YBPCreateSuccess.md)
 
 ### Authorization
 
@@ -147,7 +149,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
