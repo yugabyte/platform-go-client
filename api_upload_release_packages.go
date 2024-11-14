@@ -163,9 +163,14 @@ type UploadReleasePackagesApiApiUploadReleaseRequest struct {
 	ctx _context.Context
 	ApiService *UploadReleasePackagesApiService
 	cUUID string
+	file *string
 	request *interface{}
 }
 
+func (r UploadReleasePackagesApiApiUploadReleaseRequest) File(file string) UploadReleasePackagesApiApiUploadReleaseRequest {
+	r.file = &file
+	return r
+}
 func (r UploadReleasePackagesApiApiUploadReleaseRequest) Request(request interface{}) UploadReleasePackagesApiApiUploadReleaseRequest {
 	r.request = &request
 	return r
@@ -215,12 +220,15 @@ func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.file == nil {
+		return localVarReturnValue, nil, reportError("file is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -236,6 +244,8 @@ func (a *UploadReleasePackagesApiService) UploadReleaseExecute(r UploadReleasePa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.file
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

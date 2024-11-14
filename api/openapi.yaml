@@ -11099,6 +11099,14 @@ paths:
         name: request
         schema:
           exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              exampleSetFlag: false
+              type: string
+        description: Release tgz file to be uploaded
+        required: true
       responses:
         "200":
           content:
@@ -11111,6 +11119,7 @@ paths:
       summary: upload a release tgz
       tags:
       - Upload Release packages
+      x-codegen-request-body-name: file
   /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID}:
     get:
       description: "WARNING: This is a preview API that could change: get uploaded\

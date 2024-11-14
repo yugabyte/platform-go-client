@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## UploadRelease
 
-> YBPCreateSuccess UploadRelease(ctx, cUUID).Request(request).Execute()
+> YBPCreateSuccess UploadRelease(ctx, cUUID).File(file).Request(request).Execute()
 
 upload a release tgz
 
@@ -106,11 +106,12 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    file := "file_example" // string | Release tgz file to be uploaded
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UploadReleasePackagesApi.UploadRelease(context.Background(), cUUID).Request(request).Execute()
+    resp, r, err := api_client.UploadReleasePackagesApi.UploadRelease(context.Background(), cUUID).File(file).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UploadReleasePackagesApi.UploadRelease``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,6 +137,7 @@ Other parameters are passed through a pointer to a apiUploadReleaseRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **file** | **string** | Release tgz file to be uploaded | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -148,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
