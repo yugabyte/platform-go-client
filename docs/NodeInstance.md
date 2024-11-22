@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **InUse** | Pointer to **bool** | True if the node is in use  &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2024.1.0.0.&lt;/b&gt; Use NodeInstance.state instead | [optional] 
 **InstanceName** | Pointer to **string** | The node instance&#39;s name | [optional] 
 **InstanceTypeCode** | Pointer to **string** | The node&#39;s type code | [optional] 
+**ManuallyDecommissioned** | Pointer to **bool** | Manually set to decommissioned state by user | [optional] [readonly] 
 **NodeName** | Pointer to **string** | The node&#39;s name in a universe | [optional] [readonly] 
 **NodeUuid** | Pointer to **string** | The node&#39;s UUID | [optional] [readonly] 
 **State** | Pointer to **string** | State of on-prem node | [optional] [readonly] 
@@ -152,6 +153,31 @@ SetInstanceTypeCode sets InstanceTypeCode field to given value.
 `func (o *NodeInstance) HasInstanceTypeCode() bool`
 
 HasInstanceTypeCode returns a boolean if a field has been set.
+
+### GetManuallyDecommissioned
+
+`func (o *NodeInstance) GetManuallyDecommissioned() bool`
+
+GetManuallyDecommissioned returns the ManuallyDecommissioned field if non-nil, zero value otherwise.
+
+### GetManuallyDecommissionedOk
+
+`func (o *NodeInstance) GetManuallyDecommissionedOk() (*bool, bool)`
+
+GetManuallyDecommissionedOk returns a tuple with the ManuallyDecommissioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManuallyDecommissioned
+
+`func (o *NodeInstance) SetManuallyDecommissioned(v bool)`
+
+SetManuallyDecommissioned sets ManuallyDecommissioned field to given value.
+
+### HasManuallyDecommissioned
+
+`func (o *NodeInstance) HasManuallyDecommissioned() bool`
+
+HasManuallyDecommissioned returns a boolean if a field has been set.
 
 ### GetNodeName
 

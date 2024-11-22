@@ -25,6 +25,8 @@ type NodeInstance struct {
 	InstanceName *string `json:"instanceName,omitempty"`
 	// The node's type code
 	InstanceTypeCode *string `json:"instanceTypeCode,omitempty"`
+	// Manually set to decommissioned state by user
+	ManuallyDecommissioned *bool `json:"manuallyDecommissioned,omitempty"`
 	// The node's name in a universe
 	NodeName *string `json:"nodeName,omitempty"`
 	// The node's UUID
@@ -205,6 +207,38 @@ func (o *NodeInstance) SetInstanceTypeCode(v string) {
 	o.InstanceTypeCode = &v
 }
 
+// GetManuallyDecommissioned returns the ManuallyDecommissioned field value if set, zero value otherwise.
+func (o *NodeInstance) GetManuallyDecommissioned() bool {
+	if o == nil || o.ManuallyDecommissioned == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ManuallyDecommissioned
+}
+
+// GetManuallyDecommissionedOk returns a tuple with the ManuallyDecommissioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeInstance) GetManuallyDecommissionedOk() (*bool, bool) {
+	if o == nil || o.ManuallyDecommissioned == nil {
+		return nil, false
+	}
+	return o.ManuallyDecommissioned, true
+}
+
+// HasManuallyDecommissioned returns a boolean if a field has been set.
+func (o *NodeInstance) HasManuallyDecommissioned() bool {
+	if o != nil && o.ManuallyDecommissioned != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManuallyDecommissioned gets a reference to the given bool and assigns it to the ManuallyDecommissioned field.
+func (o *NodeInstance) SetManuallyDecommissioned(v bool) {
+	o.ManuallyDecommissioned = &v
+}
+
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
 func (o *NodeInstance) GetNodeName() string {
 	if o == nil || o.NodeName == nil {
@@ -349,6 +383,9 @@ func (o NodeInstance) MarshalJSON() ([]byte, error) {
 	}
 	if o.InstanceTypeCode != nil {
 		toSerialize["instanceTypeCode"] = o.InstanceTypeCode
+	}
+	if o.ManuallyDecommissioned != nil {
+		toSerialize["manuallyDecommissioned"] = o.ManuallyDecommissioned
 	}
 	if o.NodeName != nil {
 		toSerialize["nodeName"] = o.NodeName

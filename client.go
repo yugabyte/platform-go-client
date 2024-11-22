@@ -108,6 +108,8 @@ type APIClient struct {
 
 	PreviewApi *PreviewApiService
 
+	RBACManagementApi *RBACManagementApiService
+
 	RegionManagementApi *RegionManagementApiService
 
 	ReleaseManagementApi *ReleaseManagementApiService
@@ -189,6 +191,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.PreviewApi = (*PreviewApiService)(&c.common)
+	c.RBACManagementApi = (*RBACManagementApiService)(&c.common)
 	c.RegionManagementApi = (*RegionManagementApiService)(&c.common)
 	c.ReleaseManagementApi = (*ReleaseManagementApiService)(&c.common)
 	c.RuntimeConfigurationApi = (*RuntimeConfigurationApiService)(&c.common)

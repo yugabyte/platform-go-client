@@ -44,6 +44,7 @@ tags:
 - name: Node instances
 - name: PITR management
 - name: Performance Advisor
+- name: RBAC management
 - name: Region management
 - name: Release management
 - name: Runtime configuration
@@ -5954,6 +5955,293 @@ paths:
       summary: List releases by provider - deprecated
       tags:
       - Release management
+  /api/v1/customers/{cUUID}/rbac/permissions:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: listPermissions
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - description: Optional resource type to filter permission list
+        in: query
+        name: resourceType
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/PermissionInfo'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all the permissions available
+      tags:
+      - RBAC management
+  /api/v1/customers/{cUUID}/rbac/role:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: listRoles
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - description: Optional role type to filter roles list
+        in: query
+        name: roleType
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all the roles available
+      tags:
+      - RBAC management
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: createRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleFormData'
+        description: create role form data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Create a custom role
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleFormData
+  /api/v1/customers/{cUUID}/rbac/role/{rUUID}:
+    delete:
+      description: "WARNING: This is a preview API that could change."
+      operationId: deleteRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPSuccess'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Delete a custom role
+      tags:
+      - RBAC management
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a role's information
+      tags:
+      - RBAC management
+    put:
+      description: "WARNING: This is a preview API that could change."
+      operationId: editRole
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: rUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleFormData'
+        description: edit role form data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Edit a custom role
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleFormData
+  /api/v1/customers/{cUUID}/rbac/role_binding:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getRoleBindings
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - description: Optional user UUID to filter role binding map
+        in: query
+        name: userUUID
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  $ref: '#/components/schemas/RoleBinding'
+                exampleSetFlag: true
+                type: object
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get all the role bindings available
+      tags:
+      - RBAC management
+  /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID}:
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: setRoleBinding
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: userUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleBindingFormData'
+        description: set role bindings form data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleBinding'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Set the role bindings of a user
+      tags:
+      - RBAC management
+      x-codegen-request-body-name: RoleBindingFormData
   /api/v1/customers/{cUUID}/regions:
     get:
       operationId: listAllRegions
@@ -14745,6 +15033,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -21010,6 +21299,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -22338,7 +22628,6 @@ components:
             enum:
             - PUBLIC
             - INTERNAL
-            - BETA
             - FEATURE_FLAG
             exampleSetFlag: true
             type: string
@@ -27454,6 +27743,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -30582,6 +30872,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -30832,7 +31123,14 @@ components:
       - upgradeOption
       type: object
     GroupMappingInfo:
-      exampleSetFlag: false
+      example:
+        groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        identifier: identifier
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        creationDate: 2022-12-12T13:07:18Z
+        type: LDAP
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         creationDate:
           description: Group mapping creation time
@@ -34472,6 +34770,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -38081,6 +38380,7 @@ components:
       description: "A single node instance, attached to a provider and availability\
         \ zone"
       example:
+        manuallyDecommissioned: true
         nodeName: universe_node1
         instanceName: Mumbai instance
         instanceTypeCode: c5large
@@ -38127,6 +38427,11 @@ components:
           example: c5large
           exampleSetFlag: true
           type: string
+        manuallyDecommissioned:
+          description: Manually set to decommissioned state by user
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
         nodeName:
           description: The node's name in a universe
           example: universe_node1
@@ -39262,7 +39567,10 @@ components:
       - totalCount
       type: object
     Permission:
-      exampleSetFlag: false
+      example:
+        action: CREATE
+        resourceType: UNIVERSE
+      exampleSetFlag: true
       properties:
         action:
           enum:
@@ -39288,7 +39596,13 @@ components:
           type: string
       type: object
     PermissionDetails:
-      exampleSetFlag: false
+      example:
+        permissionList:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+      exampleSetFlag: true
       properties:
         permissionList:
           description: Set of permissions
@@ -39299,7 +39613,18 @@ components:
           uniqueItems: true
       type: object
     PermissionInfo:
-      exampleSetFlag: false
+      example:
+        permissionValidOnResource: true
+        prerequisitePermissions:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+        name: name
+        action: CREATE
+        description: description
+        resourceType: UNIVERSE
+      exampleSetFlag: true
       properties:
         action:
           enum:
@@ -39839,7 +40164,12 @@ components:
           type: string
       type: object
     Principal:
-      exampleSetFlag: false
+      example:
+        groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: USER
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         groupUUID:
           exampleSetFlag: true
@@ -43302,6 +43632,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -46973,6 +47304,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -50215,6 +50547,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -51711,7 +52044,21 @@ components:
       - sleepAfterTServerRestartMillis
       type: object
     Role:
-      exampleSetFlag: false
+      example:
+        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        permissionDetails:
+          permissionList:
+          - action: CREATE
+            resourceType: UNIVERSE
+          - action: CREATE
+            resourceType: UNIVERSE
+        name: name
+        description: description
+        updatedOn: 2022-12-12T13:07:18Z
+        roleType: System
+        createdOn: 2022-12-12T13:07:18Z
+        roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         createdOn:
           description: Role create time
@@ -51779,7 +52126,65 @@ components:
       - name
       type: object
     RoleBinding:
-      exampleSetFlag: false
+      example:
+        principal:
+          groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: USER
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        resourceGroup:
+          resourceDefinitionSet:
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+          - allowAll: true
+            resourceUUIDSet:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            resourceType: UNIVERSE
+        role:
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          permissionDetails:
+            permissionList:
+            - action: CREATE
+              resourceType: UNIVERSE
+            - action: CREATE
+              resourceType: UNIVERSE
+          name: name
+          description: description
+          updatedOn: 2022-12-12T13:07:18Z
+          roleType: System
+          createdOn: 2022-12-12T13:07:18Z
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        createTime: 2022-12-12T13:07:18Z
+        updateTime: 2022-12-12T13:07:18Z
+        groupInfo:
+          groupUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          identifier: identifier
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          creationDate: 2022-12-12T13:07:18Z
+          type: LDAP
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: System
+        user:
+          ldapSpecifiedRole: true
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: ConnectOnly
+          authTokenIssueDate: 2021-06-17T15:00:05Z
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          creationDate: 2022-12-12T13:07:18Z
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: username1@example.com
+          primary: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         createTime:
           description: RoleBinding create time
@@ -51821,7 +52226,35 @@ components:
       type: object
     RoleBindingFormData:
       description: Role Binding form metadata
-      exampleSetFlag: false
+      example:
+        roleResourceDefinitions:
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - resourceGroup:
+            resourceDefinitionSet:
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+            - allowAll: true
+              resourceUUIDSet:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              resourceType: UNIVERSE
+          roleUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         roleResourceDefinitions:
           description: List of roles and resource groups defined.
@@ -51834,7 +52267,15 @@ components:
       type: object
     RoleFormData:
       description: Role form metadata
-      exampleSetFlag: false
+      example:
+        name: name
+        description: description
+        permissionList:
+        - action: CREATE
+          resourceType: UNIVERSE
+        - action: CREATE
+          resourceType: UNIVERSE
+      exampleSetFlag: true
       properties:
         description:
           description: Description of the role to be created
@@ -54676,6 +55117,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -55219,6 +55661,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -55582,6 +56025,7 @@ components:
             - ReplaceNodeInUniverse
             - UpdateProxyConfig
             - RecommissionNodeInstance
+            - DecommissionNodeInstance
             - MasterFailover
             - SyncMasterAddresses
             - CreateYbaBackup
@@ -58845,6 +59289,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -62336,6 +62781,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -65793,6 +66239,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -68842,6 +69289,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -72135,6 +72583,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -75142,6 +75591,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -78157,6 +78607,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -83968,6 +84419,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup
@@ -87776,6 +88228,7 @@ components:
           - ReplaceNodeInUniverse
           - UpdateProxyConfig
           - RecommissionNodeInstance
+          - DecommissionNodeInstance
           - MasterFailover
           - SyncMasterAddresses
           - CreateYbaBackup

@@ -7,19 +7,21 @@ Method | HTTP request | Description
 [**CreateRole**](RBACManagementApi.md#CreateRole) | **Post** /api/v1/customers/{cUUID}/rbac/role | Create a custom role
 [**DeleteRole**](RBACManagementApi.md#DeleteRole) | **Delete** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Delete a custom role
 [**EditRole**](RBACManagementApi.md#EditRole) | **Put** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Edit a custom role
-[**EditRoleBinding**](RBACManagementApi.md#EditRoleBinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Edit the role bindings of a user
 [**GetRole**](RBACManagementApi.md#GetRole) | **Get** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Get a role&#39;s information
 [**GetRoleBindings**](RBACManagementApi.md#GetRoleBindings) | **Get** /api/v1/customers/{cUUID}/rbac/role_binding | Get all the role bindings available
 [**ListPermissions**](RBACManagementApi.md#ListPermissions) | **Get** /api/v1/customers/{cUUID}/rbac/permissions | List all the permissions available
 [**ListRoles**](RBACManagementApi.md#ListRoles) | **Get** /api/v1/customers/{cUUID}/rbac/role | List all the roles available
+[**SetRoleBinding**](RBACManagementApi.md#SetRoleBinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Set the role bindings of a user
 
 
 
 ## CreateRole
 
-> Role CreateRole(ctx, cUUID).Request(request).Execute()
+> Role CreateRole(ctx, cUUID).RoleFormData(roleFormData).Request(request).Execute()
 
 Create a custom role
+
+
 
 ### Example
 
@@ -35,11 +37,12 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    roleFormData := *openapiclient.NewRoleFormData("Description_example", "Name_example", []openapiclient.Permission{*openapiclient.NewPermission()}) // RoleFormData | create role form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RBACManagementApi.CreateRole(context.Background(), cUUID).Request(request).Execute()
+    resp, r, err := api_client.RBACManagementApi.CreateRole(context.Background(), cUUID).RoleFormData(roleFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RBACManagementApi.CreateRole``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -65,6 +68,7 @@ Other parameters are passed through a pointer to a apiCreateRoleRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **roleFormData** | [**RoleFormData**](RoleFormData.md) | create role form data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -77,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -90,6 +94,8 @@ Name | Type | Description  | Notes
 > YBPSuccess DeleteRole(ctx, cUUID, rUUID).Request(request).Execute()
 
 Delete a custom role
+
+
 
 ### Example
 
@@ -160,9 +166,11 @@ Name | Type | Description  | Notes
 
 ## EditRole
 
-> Role EditRole(ctx, cUUID, rUUID).Request(request).Execute()
+> Role EditRole(ctx, cUUID, rUUID).RoleFormData(roleFormData).Request(request).Execute()
 
 Edit a custom role
+
+
 
 ### Example
 
@@ -179,11 +187,12 @@ import (
 func main() {
     cUUID := TODO // string | 
     rUUID := TODO // string | 
+    roleFormData := *openapiclient.NewRoleFormData("Description_example", "Name_example", []openapiclient.Permission{*openapiclient.NewPermission()}) // RoleFormData | edit role form data
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RBACManagementApi.EditRole(context.Background(), cUUID, rUUID).Request(request).Execute()
+    resp, r, err := api_client.RBACManagementApi.EditRole(context.Background(), cUUID, rUUID).RoleFormData(roleFormData).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `RBACManagementApi.EditRole``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -211,86 +220,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **roleFormData** | [**RoleFormData**](RoleFormData.md) | edit role form data | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
 [**Role**](Role.md)
-
-### Authorization
-
-[apiKeyAuth](../README.md#apiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## EditRoleBinding
-
-> RoleBinding EditRoleBinding(ctx, cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
-
-Edit the role bindings of a user
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    cUUID := TODO // string | 
-    userUUID := TODO // string | 
-    roleBindingFormData := *openapiclient.NewRoleBindingFormData([]openapiclient.RoleResourceDefinition{*openapiclient.NewRoleResourceDefinition(*openapiclient.NewResourceGroup([]openapiclient.ResourceDefinition{*openapiclient.NewResourceDefinition()}), "RoleUUID_example")}) // RoleBindingFormData | set role bindings form data
-    request := TODO // interface{} |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RBACManagementApi.EditRoleBinding(context.Background(), cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RBACManagementApi.EditRoleBinding``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EditRoleBinding`: RoleBinding
-    fmt.Fprintf(os.Stdout, "Response from `RBACManagementApi.EditRoleBinding`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**cUUID** | [**string**](.md) |  | 
-**userUUID** | [**string**](.md) |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiEditRoleBindingRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **roleBindingFormData** | [**RoleBindingFormData**](RoleBindingFormData.md) | set role bindings form data | 
- **request** | [**interface{}**](interface{}.md) |  | 
-
-### Return type
-
-[**RoleBinding**](RoleBinding.md)
 
 ### Authorization
 
@@ -311,6 +246,8 @@ Name | Type | Description  | Notes
 > Role GetRole(ctx, cUUID, rUUID).Execute()
 
 Get a role's information
+
+
 
 ### Example
 
@@ -383,6 +320,8 @@ Name | Type | Description  | Notes
 
 Get all the role bindings available
 
+
+
 ### Example
 
 ```go
@@ -452,6 +391,8 @@ Name | Type | Description  | Notes
 > []PermissionInfo ListPermissions(ctx, cUUID).ResourceType(resourceType).Execute()
 
 List all the permissions available
+
+
 
 ### Example
 
@@ -523,6 +464,8 @@ Name | Type | Description  | Notes
 
 List all the roles available
 
+
+
 ### Example
 
 ```go
@@ -580,6 +523,83 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SetRoleBinding
+
+> RoleBinding SetRoleBinding(ctx, cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
+
+Set the role bindings of a user
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    userUUID := TODO // string | 
+    roleBindingFormData := *openapiclient.NewRoleBindingFormData([]openapiclient.RoleResourceDefinition{*openapiclient.NewRoleResourceDefinition("RoleUUID_example")}) // RoleBindingFormData | set role bindings form data
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.RBACManagementApi.SetRoleBinding(context.Background(), cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RBACManagementApi.SetRoleBinding``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SetRoleBinding`: RoleBinding
+    fmt.Fprintf(os.Stdout, "Response from `RBACManagementApi.SetRoleBinding`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**userUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSetRoleBindingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **roleBindingFormData** | [**RoleBindingFormData**](RoleBindingFormData.md) | set role bindings form data | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**RoleBinding**](RoleBinding.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
