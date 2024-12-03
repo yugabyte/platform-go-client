@@ -31,9 +31,14 @@ type RBACManagementApiApiCreateRoleRequest struct {
 	ctx _context.Context
 	ApiService *RBACManagementApiService
 	cUUID string
+	roleFormData *RoleFormData
 	request *interface{}
 }
 
+func (r RBACManagementApiApiCreateRoleRequest) RoleFormData(roleFormData RoleFormData) RBACManagementApiApiCreateRoleRequest {
+	r.roleFormData = &roleFormData
+	return r
+}
 func (r RBACManagementApiApiCreateRoleRequest) Request(request interface{}) RBACManagementApiApiCreateRoleRequest {
 	r.request = &request
 	return r
@@ -45,6 +50,7 @@ func (r RBACManagementApiApiCreateRoleRequest) Execute() (Role, *_nethttp.Respon
 
 /*
  * CreateRole Create a custom role
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return RBACManagementApiApiCreateRoleRequest
@@ -82,12 +88,15 @@ func (a *RBACManagementApiService) CreateRoleExecute(r RBACManagementApiApiCreat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.roleFormData == nil {
+		return localVarReturnValue, nil, reportError("roleFormData is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -103,6 +112,8 @@ func (a *RBACManagementApiService) CreateRoleExecute(r RBACManagementApiApiCreat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.roleFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -173,6 +184,7 @@ func (r RBACManagementApiApiDeleteRoleRequest) Execute() (YBPSuccess, *_nethttp.
 
 /*
  * DeleteRole Delete a custom role
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param rUUID
@@ -290,9 +302,14 @@ type RBACManagementApiApiEditRoleRequest struct {
 	ApiService *RBACManagementApiService
 	cUUID string
 	rUUID string
+	roleFormData *RoleFormData
 	request *interface{}
 }
 
+func (r RBACManagementApiApiEditRoleRequest) RoleFormData(roleFormData RoleFormData) RBACManagementApiApiEditRoleRequest {
+	r.roleFormData = &roleFormData
+	return r
+}
 func (r RBACManagementApiApiEditRoleRequest) Request(request interface{}) RBACManagementApiApiEditRoleRequest {
 	r.request = &request
 	return r
@@ -304,6 +321,7 @@ func (r RBACManagementApiApiEditRoleRequest) Execute() (Role, *_nethttp.Response
 
 /*
  * EditRole Edit a custom role
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param rUUID
@@ -344,144 +362,8 @@ func (a *RBACManagementApiService) EditRoleExecute(r RBACManagementApiApiEditRol
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type RBACManagementApiApiEditRoleBindingRequest struct {
-	ctx _context.Context
-	ApiService *RBACManagementApiService
-	cUUID string
-	userUUID string
-	roleBindingFormData *RoleBindingFormData
-	request *interface{}
-}
-
-func (r RBACManagementApiApiEditRoleBindingRequest) RoleBindingFormData(roleBindingFormData RoleBindingFormData) RBACManagementApiApiEditRoleBindingRequest {
-	r.roleBindingFormData = &roleBindingFormData
-	return r
-}
-func (r RBACManagementApiApiEditRoleBindingRequest) Request(request interface{}) RBACManagementApiApiEditRoleBindingRequest {
-	r.request = &request
-	return r
-}
-
-func (r RBACManagementApiApiEditRoleBindingRequest) Execute() (RoleBinding, *_nethttp.Response, error) {
-	return r.ApiService.EditRoleBindingExecute(r)
-}
-
-/*
- * EditRoleBinding Edit the role bindings of a user
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param userUUID
- * @return RBACManagementApiApiEditRoleBindingRequest
- */
-func (a *RBACManagementApiService) EditRoleBinding(ctx _context.Context, cUUID string, userUUID string) RBACManagementApiApiEditRoleBindingRequest {
-	return RBACManagementApiApiEditRoleBindingRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		userUUID: userUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return RoleBinding
- */
-func (a *RBACManagementApiService) EditRoleBindingExecute(r RBACManagementApiApiEditRoleBindingRequest) (RoleBinding, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  RoleBinding
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementApiService.EditRoleBinding")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/rbac/role_binding/{userUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"userUUID"+"}", _neturl.PathEscape(parameterToString(r.userUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.roleBindingFormData == nil {
-		return localVarReturnValue, nil, reportError("roleBindingFormData is required and must be specified")
+	if r.roleFormData == nil {
+		return localVarReturnValue, nil, reportError("roleFormData is required and must be specified")
 	}
 
 	if r.request != nil {
@@ -505,7 +387,7 @@ func (a *RBACManagementApiService) EditRoleBindingExecute(r RBACManagementApiApi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.roleBindingFormData
+	localVarPostBody = r.roleFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -571,6 +453,7 @@ func (r RBACManagementApiApiGetRoleRequest) Execute() (Role, *_nethttp.Response,
 
 /*
  * GetRole Get a role's information
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param rUUID
@@ -698,6 +581,7 @@ func (r RBACManagementApiApiGetRoleBindingsRequest) Execute() (map[string]RoleBi
 
 /*
  * GetRoleBindings Get all the role bindings available
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return RBACManagementApiApiGetRoleBindingsRequest
@@ -825,6 +709,7 @@ func (r RBACManagementApiApiListPermissionsRequest) Execute() ([]PermissionInfo,
 
 /*
  * ListPermissions List all the permissions available
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return RBACManagementApiApiListPermissionsRequest
@@ -952,6 +837,7 @@ func (r RBACManagementApiApiListRolesRequest) Execute() ([]Role, *_nethttp.Respo
 
 /*
  * ListRoles List all the roles available
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return RBACManagementApiApiListRolesRequest
@@ -1010,6 +896,148 @@ func (a *RBACManagementApiService) ListRolesExecute(r RBACManagementApiApiListRo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type RBACManagementApiApiSetRoleBindingRequest struct {
+	ctx _context.Context
+	ApiService *RBACManagementApiService
+	cUUID string
+	userUUID string
+	roleBindingFormData *RoleBindingFormData
+	request *interface{}
+}
+
+func (r RBACManagementApiApiSetRoleBindingRequest) RoleBindingFormData(roleBindingFormData RoleBindingFormData) RBACManagementApiApiSetRoleBindingRequest {
+	r.roleBindingFormData = &roleBindingFormData
+	return r
+}
+func (r RBACManagementApiApiSetRoleBindingRequest) Request(request interface{}) RBACManagementApiApiSetRoleBindingRequest {
+	r.request = &request
+	return r
+}
+
+func (r RBACManagementApiApiSetRoleBindingRequest) Execute() (RoleBinding, *_nethttp.Response, error) {
+	return r.ApiService.SetRoleBindingExecute(r)
+}
+
+/*
+ * SetRoleBinding Set the role bindings of a user
+ * WARNING: This is a preview API that could change.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param userUUID
+ * @return RBACManagementApiApiSetRoleBindingRequest
+ */
+func (a *RBACManagementApiService) SetRoleBinding(ctx _context.Context, cUUID string, userUUID string) RBACManagementApiApiSetRoleBindingRequest {
+	return RBACManagementApiApiSetRoleBindingRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		userUUID: userUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return RoleBinding
+ */
+func (a *RBACManagementApiService) SetRoleBindingExecute(r RBACManagementApiApiSetRoleBindingRequest) (RoleBinding, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  RoleBinding
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementApiService.SetRoleBinding")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/rbac/role_binding/{userUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userUUID"+"}", _neturl.PathEscape(parameterToString(r.userUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.roleBindingFormData == nil {
+		return localVarReturnValue, nil, reportError("roleBindingFormData is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.roleBindingFormData
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

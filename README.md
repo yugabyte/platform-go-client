@@ -290,6 +290,14 @@ Class | Method | HTTP request | Description
 *PreviewApi* | [**EditImageBundle**](docs/PreviewApi.md#editimagebundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
 *PreviewApi* | [**GetImageBundle**](docs/PreviewApi.md#getimagebundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
 *PreviewApi* | [**GetListOfImageBundles**](docs/PreviewApi.md#getlistofimagebundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
+*RBACManagementApi* | [**CreateRole**](docs/RBACManagementApi.md#createrole) | **Post** /api/v1/customers/{cUUID}/rbac/role | Create a custom role
+*RBACManagementApi* | [**DeleteRole**](docs/RBACManagementApi.md#deleterole) | **Delete** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Delete a custom role
+*RBACManagementApi* | [**EditRole**](docs/RBACManagementApi.md#editrole) | **Put** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Edit a custom role
+*RBACManagementApi* | [**GetRole**](docs/RBACManagementApi.md#getrole) | **Get** /api/v1/customers/{cUUID}/rbac/role/{rUUID} | Get a role&#39;s information
+*RBACManagementApi* | [**GetRoleBindings**](docs/RBACManagementApi.md#getrolebindings) | **Get** /api/v1/customers/{cUUID}/rbac/role_binding | Get all the role bindings available
+*RBACManagementApi* | [**ListPermissions**](docs/RBACManagementApi.md#listpermissions) | **Get** /api/v1/customers/{cUUID}/rbac/permissions | List all the permissions available
+*RBACManagementApi* | [**ListRoles**](docs/RBACManagementApi.md#listroles) | **Get** /api/v1/customers/{cUUID}/rbac/role | List all the roles available
+*RBACManagementApi* | [**SetRoleBinding**](docs/RBACManagementApi.md#setrolebinding) | **Post** /api/v1/customers/{cUUID}/rbac/role_binding/{userUUID} | Set the role bindings of a user
 *RegionManagementApi* | [**CreateProviderRegion**](docs/RegionManagementApi.md#createproviderregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions | Create a new region
 *RegionManagementApi* | [**CreateRegion**](docs/RegionManagementApi.md#createregion) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions | Create Region - deprecated
 *RegionManagementApi* | [**DeleteRegion**](docs/RegionManagementApi.md#deleteregion) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID} | Delete a region
