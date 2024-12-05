@@ -227,6 +227,9 @@ Class | Method | HTTP request | Description
 *EncryptionAtRestApi* | [**RemoveKeyRefHistory**](docs/EncryptionAtRestApi.md#removekeyrefhistory) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/kms | This API removes a universe&#39;s key reference history - deprecated
 *ExtractMetadataFromRemoteTarballApi* | [**ExtractMetadata**](docs/ExtractMetadataFromRemoteTarballApi.md#extractmetadata) | **Post** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata | helper to extract release metadata from a remote tarball
 *ExtractMetadataFromRemoteTarballApi* | [**ExtractMetadata_0**](docs/ExtractMetadataFromRemoteTarballApi.md#extractmetadata_0) | **Get** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID} | get the extract release metadata from a remote tarball
+*GFlagsValidationAPIsApi* | [**GetGFlagMetadata**](docs/GFlagsValidationAPIsApi.md#getgflagmetadata) | **Get** /api/v1/metadata/version/{version}/gflag | Get gflag metadata
+*GFlagsValidationAPIsApi* | [**ListGFlags**](docs/GFlagsValidationAPIsApi.md#listgflags) | **Get** /api/v1/metadata/version/{version}/list_gflags | List all gflags for a release
+*GFlagsValidationAPIsApi* | [**ValidateGFlags**](docs/GFlagsValidationAPIsApi.md#validategflags) | **Post** /api/v1/metadata/version/{version}/validate_gflags | Validate gflags
 *GrafanaDashboardApi* | [**GrafanaDashboard**](docs/GrafanaDashboardApi.md#grafanadashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
 *InstanceTypesApi* | [**CreateInstanceType**](docs/InstanceTypesApi.md#createinstancetype) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | Create an instance type
 *InstanceTypesApi* | [**DeleteInstanceType**](docs/InstanceTypesApi.md#deleteinstancetype) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Delete an instance type
@@ -558,7 +561,12 @@ Class | Method | HTTP request | Description
  - [GCPCloudMonitoringConfigAllOf](docs/GCPCloudMonitoringConfigAllOf.md)
  - [GCPRegionCloudInfo](docs/GCPRegionCloudInfo.md)
  - [GCSLocation](docs/GCSLocation.md)
+ - [GFlagDetails](docs/GFlagDetails.md)
+ - [GFlagValidationDetails](docs/GFlagValidationDetails.md)
  - [GFlagsUpgradeParams](docs/GFlagsUpgradeParams.md)
+ - [GFlagsValidationFormData](docs/GFlagsValidationFormData.md)
+ - [GFlagsValidationRequest](docs/GFlagsValidationRequest.md)
+ - [GFlagsValidationResponse](docs/GFlagsValidationResponse.md)
  - [GroupMappingInfo](docs/GroupMappingInfo.md)
  - [HTTPAuthInformation](docs/HTTPAuthInformation.md)
  - [HashedTimestampColumnFinderResponse](docs/HashedTimestampColumnFinderResponse.md)

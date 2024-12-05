@@ -78,6 +78,8 @@ type APIClient struct {
 
 	ExtractMetadataFromRemoteTarballApi *ExtractMetadataFromRemoteTarballApiService
 
+	GFlagsValidationAPIsApi *GFlagsValidationAPIsApiService
+
 	GrafanaDashboardApi *GrafanaDashboardApiService
 
 	InstanceTypesApi *InstanceTypesApiService
@@ -176,6 +178,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DisasterRecoveryApi = (*DisasterRecoveryApiService)(&c.common)
 	c.EncryptionAtRestApi = (*EncryptionAtRestApiService)(&c.common)
 	c.ExtractMetadataFromRemoteTarballApi = (*ExtractMetadataFromRemoteTarballApiService)(&c.common)
+	c.GFlagsValidationAPIsApi = (*GFlagsValidationAPIsApiService)(&c.common)
 	c.GrafanaDashboardApi = (*GrafanaDashboardApiService)(&c.common)
 	c.InstanceTypesApi = (*InstanceTypesApiService)(&c.common)
 	c.KubernetesOverridesControllerApi = (*KubernetesOverridesControllerApiService)(&c.common)

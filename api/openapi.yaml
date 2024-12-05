@@ -30,6 +30,7 @@ tags:
 - name: Disaster Recovery
 - name: Encryption at rest
 - name: Extract metadata from remote tarball
+- name: GFlags Validation APIs
 - name: Grafana Dashboard
 - name: Instance types
 - name: KubernetesOverridesController
@@ -6234,7 +6235,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleBinding'
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/RoleBinding'
+                type: array
           description: successful operation
       security:
       - apiKeyAuth: []
@@ -11909,6 +11913,119 @@ paths:
       summary: List supported GCP disk types
       tags:
       - Instance types
+  /api/v1/metadata/version/{version}/gflag:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getGFlagMetadata
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: name
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: server
+        schema:
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GFlagDetails'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get gflag metadata
+      tags:
+      - GFlags Validation APIs
+  /api/v1/metadata/version/{version}/list_gflags:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: listGFlags
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: name
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: server
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: mostUsedGFlags
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/GFlagDetails'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all gflags for a release
+      tags:
+      - GFlags Validation APIs
+  /api/v1/metadata/version/{version}/validate_gflags:
+    post:
+      description: "WARNING: This is a preview API that could change."
+      operationId: validateGFlags
+      parameters:
+      - in: path
+        name: version
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GFlagsValidationFormData'
+        description: GFlag validation form data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/GFlagsValidationResponse'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Validate gflags
+      tags:
+      - GFlags Validation APIs
+      x-codegen-request-body-name: gflag_validation_form_data
   /api/v1/node_agents/download:
     get:
       operationId: DownloadNodeAgentInstaller
@@ -15174,6 +15291,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -15240,6 +15358,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -21440,6 +21559,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -21506,6 +21626,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -27884,6 +28005,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -27950,6 +28072,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -28081,6 +28204,82 @@ components:
       properties:
         paths:
           $ref: '#/components/schemas/PackagePaths'
+      type: object
+    GFlagDetails:
+      example:
+        current: current
+        default: default
+        file: file
+        initial: initial
+        meaning: meaning
+        name: name
+        type: type
+        tags: tags
+        target: target
+      exampleSetFlag: true
+      properties:
+        current:
+          description: "WARNING: This is a preview API that could change. Current\
+            \ value of the gflag"
+          exampleSetFlag: true
+          type: string
+        default:
+          description: "WARNING: This is a preview API that could change. Default\
+            \ value of the gflag"
+          exampleSetFlag: true
+          type: string
+        file:
+          description: "WARNING: This is a preview API that could change. File where\
+            \ the gflag is defined"
+          exampleSetFlag: true
+          type: string
+        initial:
+          description: "WARNING: This is a preview API that could change. Initial\
+            \ value of the gflag"
+          exampleSetFlag: true
+          type: string
+        meaning:
+          description: "WARNING: This is a preview API that could change. Meaning\
+            \ of the gflag"
+          exampleSetFlag: true
+          type: string
+        name:
+          description: "WARNING: This is a preview API that could change. Name of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+        tags:
+          description: "WARNING: This is a preview API that could change. Tags of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+        target:
+          description: "WARNING: This is a preview API that could change. Target of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+        type:
+          description: "WARNING: This is a preview API that could change. Type of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+      type: object
+    GFlagValidationDetails:
+      example:
+        exist: true
+        error: error
+      exampleSetFlag: true
+      properties:
+        error:
+          description: "WARNING: This is a preview API that could change. Error message\
+            \ if gflag is invalid"
+          exampleSetFlag: true
+          type: string
+        exist:
+          description: "WARNING: This is a preview API that could change. Flag to\
+            \ indicate if gflag exists"
+          exampleSetFlag: true
+          type: boolean
       type: object
     GFlagsUpgradeParams:
       example:
@@ -31013,6 +31212,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -31079,6 +31279,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -31121,6 +31322,69 @@ components:
       - sleepAfterTServerRestartMillis
       - tserverGFlags
       - upgradeOption
+      type: object
+    GFlagsValidationFormData:
+      example:
+        gflags:
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+        - MASTER: MASTER
+          TSERVER: TSERVER
+          Name: Name
+      exampleSetFlag: true
+      properties:
+        gflags:
+          description: "WARNING: This is a preview API that could change. List of\
+            \ gflags to validate"
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/GFlagsValidationRequest'
+          type: array
+      type: object
+    GFlagsValidationRequest:
+      example:
+        MASTER: MASTER
+        TSERVER: TSERVER
+        Name: Name
+      exampleSetFlag: true
+      properties:
+        MASTER:
+          description: "WARNING: This is a preview API that could change. Value of\
+            \ the gflag for master"
+          exampleSetFlag: true
+          type: string
+        Name:
+          description: "WARNING: This is a preview API that could change. Name of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+        TSERVER:
+          description: "WARNING: This is a preview API that could change. Value of\
+            \ the gflag for tserver"
+          exampleSetFlag: true
+          type: string
+      type: object
+    GFlagsValidationResponse:
+      example:
+        MASTER:
+          exist: true
+          error: error
+        TSERVER:
+          exist: true
+          error: error
+        Name: Name
+      exampleSetFlag: true
+      properties:
+        MASTER:
+          $ref: '#/components/schemas/GFlagValidationDetails'
+        Name:
+          description: "WARNING: This is a preview API that could change. Name of\
+            \ the gflag"
+          exampleSetFlag: true
+          type: string
+        TSERVER:
+          $ref: '#/components/schemas/GFlagValidationDetails'
       type: object
     GroupMappingInfo:
       example:
@@ -34911,6 +35175,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -34977,6 +35242,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -43773,6 +44039,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -43839,6 +44106,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -47445,6 +47713,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -47511,6 +47780,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -50688,6 +50958,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -50754,6 +51025,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55258,6 +55530,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -55324,6 +55597,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55802,6 +56076,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -55868,6 +56143,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         useLocalTimezone:
@@ -56166,6 +56442,7 @@ components:
             - KubernetesCommandExecutor
             - KubernetesWaitForPod
             - KubernetesCheckNumPod
+            - PodDisruptionBudgetPolicy
             - SetActiveUniverseKeys
             - WaitForEncryptionKeyInMemory
             - UnivSetCertificate
@@ -56232,6 +56509,7 @@ components:
             - RemoveNodeAgent
             - UpdateUniverseFields
             - RunNodeCommand
+            - MasterLeaderStepdown
             exampleSetFlag: true
             type: string
           type: array
@@ -59430,6 +59708,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -59496,6 +59775,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -62922,6 +63202,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -62988,6 +63269,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -66380,6 +66662,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -66446,6 +66729,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -69430,6 +69714,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -69496,6 +69781,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -72724,6 +73010,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -72790,6 +73077,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -75732,6 +76020,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -75798,6 +76087,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -78748,6 +79038,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -78814,6 +79105,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -84560,6 +84852,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -84626,6 +84919,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -88369,6 +88663,7 @@ components:
           - KubernetesCommandExecutor
           - KubernetesWaitForPod
           - KubernetesCheckNumPod
+          - PodDisruptionBudgetPolicy
           - SetActiveUniverseKeys
           - WaitForEncryptionKeyInMemory
           - UnivSetCertificate
@@ -88435,6 +88730,7 @@ components:
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
+          - MasterLeaderStepdown
           exampleSetFlag: true
           type: string
         updatingTaskUUID:

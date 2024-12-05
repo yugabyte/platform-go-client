@@ -965,7 +965,7 @@ func (r RBACManagementApiApiSetRoleBindingRequest) Request(request interface{}) 
 	return r
 }
 
-func (r RBACManagementApiApiSetRoleBindingRequest) Execute() (RoleBinding, *_nethttp.Response, error) {
+func (r RBACManagementApiApiSetRoleBindingRequest) Execute() ([]RoleBinding, *_nethttp.Response, error) {
 	return r.ApiService.SetRoleBindingExecute(r)
 }
 
@@ -988,16 +988,16 @@ func (a *RBACManagementApiService) SetRoleBinding(ctx _context.Context, cUUID st
 
 /*
  * Execute executes the request
- * @return RoleBinding
+ * @return []RoleBinding
  */
-func (a *RBACManagementApiService) SetRoleBindingExecute(r RBACManagementApiApiSetRoleBindingRequest) (RoleBinding, *_nethttp.Response, error) {
+func (a *RBACManagementApiService) SetRoleBindingExecute(r RBACManagementApiApiSetRoleBindingRequest) ([]RoleBinding, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  RoleBinding
+		localVarReturnValue  []RoleBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementApiService.SetRoleBinding")
