@@ -532,7 +532,7 @@ Name | Type | Description  | Notes
 
 ## SetRoleBinding
 
-> RoleBinding SetRoleBinding(ctx, cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
+> []RoleBinding SetRoleBinding(ctx, cUUID, userUUID).RoleBindingFormData(roleBindingFormData).Request(request).Execute()
 
 Set the role bindings of a user
 
@@ -563,7 +563,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RBACManagementApi.SetRoleBinding``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SetRoleBinding`: RoleBinding
+    // response from `SetRoleBinding`: []RoleBinding
     fmt.Fprintf(os.Stdout, "Response from `RBACManagementApi.SetRoleBinding`: %v\n", resp)
 }
 ```
@@ -591,7 +591,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RoleBinding**](RoleBinding.md)
+[**[]RoleBinding**](RoleBinding.md)
 
 ### Authorization
 
