@@ -17,27 +17,32 @@ import (
 // AWSCloudWatchConfigAllOf AWSCloudWatchConfig Config
 type AWSCloudWatchConfigAllOf struct {
 	// Access Key
-	AccessKey *string `json:"accessKey,omitempty"`
+	AccessKey string `json:"accessKey"`
 	// End Point
 	Endpoint *string `json:"endpoint,omitempty"`
 	// Log Group
-	LogGroup *string `json:"logGroup,omitempty"`
+	LogGroup string `json:"logGroup"`
 	// Log Stream
-	LogStream *string `json:"logStream,omitempty"`
+	LogStream string `json:"logStream"`
 	// Region
-	Region *string `json:"region,omitempty"`
+	Region string `json:"region"`
 	// Role ARN
 	RoleARN *string `json:"roleARN,omitempty"`
 	// Secret Key
-	SecretKey *string `json:"secretKey,omitempty"`
+	SecretKey string `json:"secretKey"`
 }
 
 // NewAWSCloudWatchConfigAllOf instantiates a new AWSCloudWatchConfigAllOf object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAWSCloudWatchConfigAllOf() *AWSCloudWatchConfigAllOf {
+func NewAWSCloudWatchConfigAllOf(accessKey string, logGroup string, logStream string, region string, secretKey string) *AWSCloudWatchConfigAllOf {
 	this := AWSCloudWatchConfigAllOf{}
+	this.AccessKey = accessKey
+	this.LogGroup = logGroup
+	this.LogStream = logStream
+	this.Region = region
+	this.SecretKey = secretKey
 	return &this
 }
 
@@ -49,36 +54,28 @@ func NewAWSCloudWatchConfigAllOfWithDefaults() *AWSCloudWatchConfigAllOf {
 	return &this
 }
 
-// GetAccessKey returns the AccessKey field value if set, zero value otherwise.
+// GetAccessKey returns the AccessKey field value
 func (o *AWSCloudWatchConfigAllOf) GetAccessKey() string {
-	if o == nil || o.AccessKey == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AccessKey
+
+	return o.AccessKey
 }
 
-// GetAccessKeyOk returns a tuple with the AccessKey field value if set, nil otherwise
+// GetAccessKeyOk returns a tuple with the AccessKey field value
 // and a boolean to check if the value has been set.
 func (o *AWSCloudWatchConfigAllOf) GetAccessKeyOk() (*string, bool) {
-	if o == nil || o.AccessKey == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.AccessKey, true
+	return &o.AccessKey, true
 }
 
-// HasAccessKey returns a boolean if a field has been set.
-func (o *AWSCloudWatchConfigAllOf) HasAccessKey() bool {
-	if o != nil && o.AccessKey != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAccessKey gets a reference to the given string and assigns it to the AccessKey field.
+// SetAccessKey sets field value
 func (o *AWSCloudWatchConfigAllOf) SetAccessKey(v string) {
-	o.AccessKey = &v
+	o.AccessKey = v
 }
 
 // GetEndpoint returns the Endpoint field value if set, zero value otherwise.
@@ -113,100 +110,76 @@ func (o *AWSCloudWatchConfigAllOf) SetEndpoint(v string) {
 	o.Endpoint = &v
 }
 
-// GetLogGroup returns the LogGroup field value if set, zero value otherwise.
+// GetLogGroup returns the LogGroup field value
 func (o *AWSCloudWatchConfigAllOf) GetLogGroup() string {
-	if o == nil || o.LogGroup == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LogGroup
+
+	return o.LogGroup
 }
 
-// GetLogGroupOk returns a tuple with the LogGroup field value if set, nil otherwise
+// GetLogGroupOk returns a tuple with the LogGroup field value
 // and a boolean to check if the value has been set.
 func (o *AWSCloudWatchConfigAllOf) GetLogGroupOk() (*string, bool) {
-	if o == nil || o.LogGroup == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.LogGroup, true
+	return &o.LogGroup, true
 }
 
-// HasLogGroup returns a boolean if a field has been set.
-func (o *AWSCloudWatchConfigAllOf) HasLogGroup() bool {
-	if o != nil && o.LogGroup != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLogGroup gets a reference to the given string and assigns it to the LogGroup field.
+// SetLogGroup sets field value
 func (o *AWSCloudWatchConfigAllOf) SetLogGroup(v string) {
-	o.LogGroup = &v
+	o.LogGroup = v
 }
 
-// GetLogStream returns the LogStream field value if set, zero value otherwise.
+// GetLogStream returns the LogStream field value
 func (o *AWSCloudWatchConfigAllOf) GetLogStream() string {
-	if o == nil || o.LogStream == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LogStream
+
+	return o.LogStream
 }
 
-// GetLogStreamOk returns a tuple with the LogStream field value if set, nil otherwise
+// GetLogStreamOk returns a tuple with the LogStream field value
 // and a boolean to check if the value has been set.
 func (o *AWSCloudWatchConfigAllOf) GetLogStreamOk() (*string, bool) {
-	if o == nil || o.LogStream == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.LogStream, true
+	return &o.LogStream, true
 }
 
-// HasLogStream returns a boolean if a field has been set.
-func (o *AWSCloudWatchConfigAllOf) HasLogStream() bool {
-	if o != nil && o.LogStream != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLogStream gets a reference to the given string and assigns it to the LogStream field.
+// SetLogStream sets field value
 func (o *AWSCloudWatchConfigAllOf) SetLogStream(v string) {
-	o.LogStream = &v
+	o.LogStream = v
 }
 
-// GetRegion returns the Region field value if set, zero value otherwise.
+// GetRegion returns the Region field value
 func (o *AWSCloudWatchConfigAllOf) GetRegion() string {
-	if o == nil || o.Region == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Region
+
+	return o.Region
 }
 
-// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
+// GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
 func (o *AWSCloudWatchConfigAllOf) GetRegionOk() (*string, bool) {
-	if o == nil || o.Region == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Region, true
+	return &o.Region, true
 }
 
-// HasRegion returns a boolean if a field has been set.
-func (o *AWSCloudWatchConfigAllOf) HasRegion() bool {
-	if o != nil && o.Region != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRegion gets a reference to the given string and assigns it to the Region field.
+// SetRegion sets field value
 func (o *AWSCloudWatchConfigAllOf) SetRegion(v string) {
-	o.Region = &v
+	o.Region = v
 }
 
 // GetRoleARN returns the RoleARN field value if set, zero value otherwise.
@@ -241,59 +214,51 @@ func (o *AWSCloudWatchConfigAllOf) SetRoleARN(v string) {
 	o.RoleARN = &v
 }
 
-// GetSecretKey returns the SecretKey field value if set, zero value otherwise.
+// GetSecretKey returns the SecretKey field value
 func (o *AWSCloudWatchConfigAllOf) GetSecretKey() string {
-	if o == nil || o.SecretKey == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SecretKey
+
+	return o.SecretKey
 }
 
-// GetSecretKeyOk returns a tuple with the SecretKey field value if set, nil otherwise
+// GetSecretKeyOk returns a tuple with the SecretKey field value
 // and a boolean to check if the value has been set.
 func (o *AWSCloudWatchConfigAllOf) GetSecretKeyOk() (*string, bool) {
-	if o == nil || o.SecretKey == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.SecretKey, true
+	return &o.SecretKey, true
 }
 
-// HasSecretKey returns a boolean if a field has been set.
-func (o *AWSCloudWatchConfigAllOf) HasSecretKey() bool {
-	if o != nil && o.SecretKey != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSecretKey gets a reference to the given string and assigns it to the SecretKey field.
+// SetSecretKey sets field value
 func (o *AWSCloudWatchConfigAllOf) SetSecretKey(v string) {
-	o.SecretKey = &v
+	o.SecretKey = v
 }
 
 func (o AWSCloudWatchConfigAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AccessKey != nil {
+	if true {
 		toSerialize["accessKey"] = o.AccessKey
 	}
 	if o.Endpoint != nil {
 		toSerialize["endpoint"] = o.Endpoint
 	}
-	if o.LogGroup != nil {
+	if true {
 		toSerialize["logGroup"] = o.LogGroup
 	}
-	if o.LogStream != nil {
+	if true {
 		toSerialize["logStream"] = o.LogStream
 	}
-	if o.Region != nil {
+	if true {
 		toSerialize["region"] = o.Region
 	}
 	if o.RoleARN != nil {
 		toSerialize["roleARN"] = o.RoleARN
 	}
-	if o.SecretKey != nil {
+	if true {
 		toSerialize["secretKey"] = o.SecretKey
 	}
 	return json.Marshal(toSerialize)

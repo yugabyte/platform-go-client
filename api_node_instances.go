@@ -968,7 +968,7 @@ func (r NodeInstancesApiApiNodeActionRequest) Execute() (YBPTask, *_nethttp.Resp
 }
 
 /*
- * NodeAction Update a node
+ * NodeAction Perform the specified action on the universe node
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param universeUUID

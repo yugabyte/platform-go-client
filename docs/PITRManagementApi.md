@@ -4,11 +4,93 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CloneNamespace**](PITRManagementApi.md#CloneNamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone | Create clone of a namespace in a universe
 [**CreatePitrConfig**](PITRManagementApi.md#CreatePitrConfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
 [**DeletePitrConfig**](PITRManagementApi.md#DeletePitrConfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
 [**ListOfPitrConfigs**](PITRManagementApi.md#ListOfPitrConfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
 [**PerformPitr**](PITRManagementApi.md#PerformPitr) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr | Perform PITR on a universe
 
+
+
+## CloneNamespace
+
+> YBPTask CloneNamespace(ctx, cUUID, uniUUID, tableType, keyspaceName).NamespaceClone(namespaceClone).Request(request).Execute()
+
+Create clone of a namespace in a universe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    tableType := "tableType_example" // string | 
+    keyspaceName := "keyspaceName_example" // string | 
+    namespaceClone := *openapiclient.NewCloneNamespaceParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CloneNamespaceParams | post namespace clone
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PITRManagementApi.CloneNamespace(context.Background(), cUUID, uniUUID, tableType, keyspaceName).NamespaceClone(namespaceClone).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.CloneNamespace``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CloneNamespace`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `PITRManagementApi.CloneNamespace`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+**tableType** | **string** |  | 
+**keyspaceName** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCloneNamespaceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **namespaceClone** | [**CloneNamespaceParams**](CloneNamespaceParams.md) | post namespace clone | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreatePitrConfig

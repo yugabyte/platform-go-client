@@ -20,6 +20,8 @@ type YBAError struct {
 	Code *string `json:"code,omitempty"`
 	// Error message
 	Message *string `json:"message,omitempty"`
+	// Origin error message
+	OriginMessage *string `json:"originMessage,omitempty"`
 }
 
 // NewYBAError instantiates a new YBAError object
@@ -103,6 +105,38 @@ func (o *YBAError) SetMessage(v string) {
 	o.Message = &v
 }
 
+// GetOriginMessage returns the OriginMessage field value if set, zero value otherwise.
+func (o *YBAError) GetOriginMessage() string {
+	if o == nil || o.OriginMessage == nil {
+		var ret string
+		return ret
+	}
+	return *o.OriginMessage
+}
+
+// GetOriginMessageOk returns a tuple with the OriginMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBAError) GetOriginMessageOk() (*string, bool) {
+	if o == nil || o.OriginMessage == nil {
+		return nil, false
+	}
+	return o.OriginMessage, true
+}
+
+// HasOriginMessage returns a boolean if a field has been set.
+func (o *YBAError) HasOriginMessage() bool {
+	if o != nil && o.OriginMessage != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginMessage gets a reference to the given string and assigns it to the OriginMessage field.
+func (o *YBAError) SetOriginMessage(v string) {
+	o.OriginMessage = &v
+}
+
 func (o YBAError) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Code != nil {
@@ -110,6 +144,9 @@ func (o YBAError) MarshalJSON() ([]byte, error) {
 	}
 	if o.Message != nil {
 		toSerialize["message"] = o.Message
+	}
+	if o.OriginMessage != nil {
+		toSerialize["originMessage"] = o.OriginMessage
 	}
 	return json.Marshal(toSerialize)
 }

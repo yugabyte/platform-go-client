@@ -92,6 +92,8 @@ Name | Type | Description  | Notes
 
 Delete a customer configuration
 
+
+
 ### Example
 
 ```go

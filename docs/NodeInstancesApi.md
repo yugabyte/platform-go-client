@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**GetNodeInstance**](NodeInstancesApi.md#GetNodeInstance) | **Get** /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list | Get a node instance
 [**ListByProvider**](NodeInstancesApi.md#ListByProvider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 [**ListByZone**](NodeInstancesApi.md#ListByZone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
-[**NodeAction**](NodeInstancesApi.md#NodeAction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Update a node
+[**NodeAction**](NodeInstancesApi.md#NodeAction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Perform the specified action on the universe node
 [**UpdateState**](NodeInstancesApi.md#UpdateState) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state | Update node instance state
 [**ValidateNodeInstance**](NodeInstancesApi.md#ValidateNodeInstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
 
@@ -537,7 +537,7 @@ Name | Type | Description  | Notes
 
 > YBPTask NodeAction(ctx, cUUID, universeUUID, nodeName).NodeAction(nodeAction).Request(request).Execute()
 
-Update a node
+Perform the specified action on the universe node
 
 ### Example
 
@@ -555,7 +555,7 @@ func main() {
     cUUID := TODO // string | 
     universeUUID := TODO // string | 
     nodeName := "nodeName_example" // string | 
-    nodeAction := *openapiclient.NewNodeActionFormData("NodeAction_example") // NodeActionFormData | Node action data to be updated
+    nodeAction := *openapiclient.NewNodeActionFormData("NodeAction_example") // NodeActionFormData | Details of the node action to be performed
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -590,7 +590,7 @@ Name | Type | Description  | Notes
 
 
 
- **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Node action data to be updated | 
+ **nodeAction** | [**NodeActionFormData**](NodeActionFormData.md) | Details of the node action to be performed | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
