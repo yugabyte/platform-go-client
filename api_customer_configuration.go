@@ -188,6 +188,7 @@ func (r CustomerConfigurationApiApiDeleteCustomerConfigRequest) Execute() (YBPTa
 
 /*
  * DeleteCustomerConfig Delete a customer configuration
+ * <b style="color:#ff0000">Deprecated since YBA version 2.25.0.0.</b></p>Use 'Delete a customer configuration V2' instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param configUUID

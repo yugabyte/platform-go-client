@@ -273,9 +273,10 @@ Class | Method | HTTP request | Description
 *NodeInstancesApi* | [**GetNodeInstance**](docs/NodeInstancesApi.md#getnodeinstance) | **Get** /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list | Get a node instance
 *NodeInstancesApi* | [**ListByProvider**](docs/NodeInstancesApi.md#listbyprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 *NodeInstancesApi* | [**ListByZone**](docs/NodeInstancesApi.md#listbyzone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
-*NodeInstancesApi* | [**NodeAction**](docs/NodeInstancesApi.md#nodeaction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Update a node
+*NodeInstancesApi* | [**NodeAction**](docs/NodeInstancesApi.md#nodeaction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Perform the specified action on the universe node
 *NodeInstancesApi* | [**UpdateState**](docs/NodeInstancesApi.md#updatestate) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state | Update node instance state
 *NodeInstancesApi* | [**ValidateNodeInstance**](docs/NodeInstancesApi.md#validatenodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
+*PITRManagementApi* | [**CloneNamespace**](docs/PITRManagementApi.md#clonenamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone | Create clone of a namespace in a universe
 *PITRManagementApi* | [**CreatePitrConfig**](docs/PITRManagementApi.md#createpitrconfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
 *PITRManagementApi* | [**DeletePitrConfig**](docs/PITRManagementApi.md#deletepitrconfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
 *PITRManagementApi* | [**ListOfPitrConfigs**](docs/PITRManagementApi.md#listofpitrconfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
@@ -342,9 +343,14 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**CreateSupportBundle**](docs/SupportBundleManagementApi.md#createsupportbundle) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | Create support bundle for specific universe
 *SupportBundleManagementApi* | [**DeleteSupportBundle**](docs/SupportBundleManagementApi.md#deletesupportbundle) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Delete a support bundle
 *SupportBundleManagementApi* | [**DownloadSupportBundle**](docs/SupportBundleManagementApi.md#downloadsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
+*SupportBundleManagementApi* | [**EstimateSupportBundleSize**](docs/SupportBundleManagementApi.md#estimatesupportbundlesize) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
 *SupportBundleManagementApi* | [**GetSupportBundle**](docs/SupportBundleManagementApi.md#getsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 *SupportBundleManagementApi* | [**ListSupportBundleComponents**](docs/SupportBundleManagementApi.md#listsupportbundlecomponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
+*TableManagementApi* | [**DescribeTable**](docs/TableManagementApi.md#describetable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
+*TableManagementApi* | [**GetAllNamespaces**](docs/TableManagementApi.md#getallnamespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces | Get a list of all namespaces in the specified universe.
+*TableManagementApi* | [**GetAllTableSpaces**](docs/TableManagementApi.md#getalltablespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Get a list of all tablespaces of a given universe.
+*TableManagementApi* | [**GetAllTables**](docs/TableManagementApi.md#getalltables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Get a list of all tables in the specified universe
 *UniverseActionsApi* | [**ImportUniverse**](docs/UniverseActionsApi.md#importuniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Import a universe - deprecated
 *UniverseCDCManagementApi* | [**ListReplicationSlot**](docs/UniverseCDCManagementApi.md#listreplicationslot) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_replication_slots | List CDC Replication slot for a cluster
 *UniverseClusterMutationsApi* | [**CreateAllClusters**](docs/UniverseClusterMutationsApi.md#createallclusters) | **Post** /api/v1/customers/{cUUID}/universes/clusters | Create Universe Clusters
@@ -383,6 +389,7 @@ Class | Method | HTTP request | Description
 *UniversePerformanceSuggestionsApi* | [**GetUnusedIndexes**](docs/UniversePerformanceSuggestionsApi.md#getunusedindexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | Return list of each unused index across the universe
 *UniverseUpgradesManagementApi* | [**FinalizeUpgrade**](docs/UniverseUpgradesManagementApi.md#finalizeupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
 *UniverseUpgradesManagementApi* | [**PreFinalizeSoftwareUpgradeInfo**](docs/UniverseUpgradesManagementApi.md#prefinalizesoftwareupgradeinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
+*UniverseUpgradesManagementApi* | [**PreUpgradeValidation**](docs/UniverseUpgradesManagementApi.md#preupgradevalidation) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/pre_upgrade_validation | Run validation for upgrade
 *UniverseUpgradesManagementApi* | [**RebootUniverse**](docs/UniverseUpgradesManagementApi.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementApi* | [**ResizeNode**](docs/UniverseUpgradesManagementApi.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementApi* | [**RestartUniverse**](docs/UniverseUpgradesManagementApi.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
@@ -497,6 +504,7 @@ Class | Method | HTTP request | Description
  - [CertificateParams](docs/CertificateParams.md)
  - [CertsRotateParams](docs/CertsRotateParams.md)
  - [ClientCertParams](docs/ClientCertParams.md)
+ - [CloneNamespaceParams](docs/CloneNamespaceParams.md)
  - [CloudInfo](docs/CloudInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
  - [Cluster](docs/Cluster.md)
@@ -658,6 +666,7 @@ Class | Method | HTTP request | Description
  - [PlacementInfo](docs/PlacementInfo.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PlatformLoggingConfig](docs/PlatformLoggingConfig.md)
+ - [PreUpgradeValidationResponse](docs/PreUpgradeValidationResponse.md)
  - [PresetThrottleValues](docs/PresetThrottleValues.md)
  - [PrevYBSoftwareConfig](docs/PrevYBSoftwareConfig.md)
  - [Principal](docs/Principal.md)
@@ -723,6 +732,7 @@ Class | Method | HTTP request | Description
  - [SubtaskData](docs/SubtaskData.md)
  - [SupportBundle](docs/SupportBundle.md)
  - [SupportBundleFormData](docs/SupportBundleFormData.md)
+ - [SupportBundleSizeEstimateResponse](docs/SupportBundleSizeEstimateResponse.md)
  - [SuppressHealthCheckNotificationsConfig](docs/SuppressHealthCheckNotificationsConfig.md)
  - [SystemdUpgradeParams](docs/SystemdUpgradeParams.md)
  - [TableDefinitionTaskParams](docs/TableDefinitionTaskParams.md)

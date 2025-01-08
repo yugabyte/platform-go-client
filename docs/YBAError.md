@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Code** | Pointer to **string** | Error code | [optional] [readonly] 
 **Message** | Pointer to **string** | Error message | [optional] [readonly] 
+**OriginMessage** | Pointer to **string** | Origin error message | [optional] [readonly] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetMessage sets Message field to given value.
 `func (o *YBAError) HasMessage() bool`
 
 HasMessage returns a boolean if a field has been set.
+
+### GetOriginMessage
+
+`func (o *YBAError) GetOriginMessage() string`
+
+GetOriginMessage returns the OriginMessage field if non-nil, zero value otherwise.
+
+### GetOriginMessageOk
+
+`func (o *YBAError) GetOriginMessageOk() (*string, bool)`
+
+GetOriginMessageOk returns a tuple with the OriginMessage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginMessage
+
+`func (o *YBAError) SetOriginMessage(v string)`
+
+SetOriginMessage sets OriginMessage field to given value.
+
+### HasOriginMessage
+
+`func (o *YBAError) HasOriginMessage() bool`
+
+HasOriginMessage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

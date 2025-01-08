@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**FinalizeUpgrade**](UniverseUpgradesManagementApi.md#FinalizeUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
 [**PreFinalizeSoftwareUpgradeInfo**](UniverseUpgradesManagementApi.md#PreFinalizeSoftwareUpgradeInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
+[**PreUpgradeValidation**](UniverseUpgradesManagementApi.md#PreUpgradeValidation) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/pre_upgrade_validation | Run validation for upgrade
 [**RebootUniverse**](UniverseUpgradesManagementApi.md#RebootUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 [**ResizeNode**](UniverseUpgradesManagementApi.md#ResizeNode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 [**RestartUniverse**](UniverseUpgradesManagementApi.md#RestartUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
@@ -167,6 +168,85 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PreUpgradeValidation
+
+> PreUpgradeValidationResponse PreUpgradeValidation(ctx, cUUID, uniUUID).UpgradeParams(upgradeParams).UpgradeType(upgradeType).Request(request).Execute()
+
+Run validation for upgrade
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    upgradeParams := *openapiclient.NewUpgradeTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UpgradeOption_example") // UpgradeTaskParams | Upgrade Params
+    upgradeType := "upgradeType_example" // string |  (optional)
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseUpgradesManagementApi.PreUpgradeValidation(context.Background(), cUUID, uniUUID).UpgradeParams(upgradeParams).UpgradeType(upgradeType).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementApi.PreUpgradeValidation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PreUpgradeValidation`: PreUpgradeValidationResponse
+    fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementApi.PreUpgradeValidation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPreUpgradeValidationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **upgradeParams** | [**UpgradeTaskParams**](UpgradeTaskParams.md) | Upgrade Params | 
+ **upgradeType** | **string** |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**PreUpgradeValidationResponse**](PreUpgradeValidationResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Force** | Pointer to **bool** | Should ignore errors and proceed with the node action | [optional] 
-**NodeAction** | **string** |  | 
+**Force** | Pointer to **bool** | Should ignore master unavailability and proceed with the node action | [optional] 
+**NodeAction** | **string** | Action to perform on the node. | 
 
 ## Methods
 

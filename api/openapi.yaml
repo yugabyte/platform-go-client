@@ -52,6 +52,7 @@ tags:
 - name: Schedule management
 - name: Session management
 - name: Support Bundle management
+- name: Table management
 - name: Universe CDC Management
 - name: Universe Upgrades Management
 - name: Universe actions
@@ -2180,6 +2181,9 @@ paths:
       x-codegen-request-body-name: Config
   /api/v1/customers/{cUUID}/configs/{configUUID}:
     delete:
+      deprecated: true
+      description: <b style="color:#ff0000">Deprecated since YBA version 2.25.0.0.</b></p>Use
+        'Delete a customer configuration V2' instead.
       operationId: deleteCustomerConfig
       parameters:
       - in: path
@@ -8015,6 +8019,60 @@ paths:
       summary: Return results for the last health check
       tags:
       - Universe information
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone:
+    post:
+      operationId: cloneNamespace
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: tableType
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: path
+        name: keyspaceName
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneNamespaceParams'
+        description: post namespace clone
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBPTask'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Create clone of a namespace in a universe
+      tags:
+      - PITR management
+      x-codegen-request-body-name: namespaceClone
   /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config:
     post:
       operationId: createPitrConfig
@@ -8313,6 +8371,46 @@ paths:
       tags:
       - Backups
       x-codegen-request-body-name: Table backup
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getAllNamespaces
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: includeSystemNamespaces
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/NamespaceInfoResp'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a list of all namespaces in the specified universe.
+      tags:
+      - Table management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/need_bootstrap:
     post:
       description: "WARNING: This is a preview API that could change."
@@ -9170,6 +9268,48 @@ paths:
       tags:
       - Support Bundle management
       x-codegen-request-body-name: supportBundle
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size:
+    get:
+      operationId: estimateSupportBundleSize
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportBundleFormData'
+        description: support bundle info
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportBundleSizeEstimateResponse'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Estimate support bundle size for specific universe
+      tags:
+      - Support Bundle management
+      x-codegen-request-body-name: supportBundle
   /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}:
     delete:
       operationId: deleteSupportBundle
@@ -9285,6 +9425,101 @@ paths:
       summary: Download support bundle
       tags:
       - Support Bundle management
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/tables:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getAllTables
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: includeParentTableInfo
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      - in: query
+        name: excludeColocatedTables
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      - in: query
+        name: includeColocatedParentTables
+        schema:
+          default: true
+          exampleSetFlag: false
+          type: boolean
+      - in: query
+        name: xClusterSupportedOnly
+        schema:
+          default: false
+          exampleSetFlag: false
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/TableInfoResp'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a list of all tables in the specified universe
+      tags:
+      - Table management
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: describeTable
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: tableUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableDefinitionTaskParams'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Describe a table
+      tags:
+      - Table management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/create_backup:
     put:
       deprecated: true
@@ -9337,6 +9572,40 @@ paths:
       tags:
       - Backups
       x-codegen-request-body-name: Backup
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces:
+    get:
+      description: "WARNING: This is a preview API that could change."
+      operationId: getAllTableSpaces
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  $ref: '#/components/schemas/TableSpaceInfo'
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Get a list of all tablespaces of a given universe.
+      tags:
+      - Table management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources:
     get:
       description: Available since YBA version 2.20.0.0. Expects UniverseDefinitionTaskParams
@@ -9732,6 +10001,55 @@ paths:
       tags:
       - Universe Upgrades Management
       x-codegen-request-body-name: Kubernetes_overrides_upgrade_params
+  /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/pre_upgrade_validation:
+    post:
+      description: "WARNING: This is a preview API that could change. Runs all the\
+        \ prechecks and validations for specific upgrade"
+      operationId: preUpgradeValidation
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: uniUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: query
+        name: upgradeType
+        schema:
+          exampleSetFlag: false
+          type: string
+      - in: query
+        name: request
+        schema:
+          exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpgradeTaskParams'
+        description: Upgrade Params
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreUpgradeValidationResponse'
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: Run validation for upgrade
+      tags:
+      - Universe Upgrades Management
+      x-codegen-request-body-name: upgrade params
   /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/proxy_config:
     post:
       description: "WARNING: This is a preview API that could change. Queues a task\
@@ -10553,7 +10871,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NodeActionFormData'
-        description: Node action data to be updated
+        description: Details of the node action to be performed
         required: true
       responses:
         "200":
@@ -10564,7 +10882,7 @@ paths:
           description: successful operation
       security:
       - apiKeyAuth: []
-      summary: Update a node
+      summary: Perform the specified action on the universe node
       tags:
       - Node instances
       x-codegen-request-body-name: Node action
@@ -13093,6 +13411,7 @@ components:
           - HIGH_NUM_YEDIS_CONNECTIONS
           - YSQL_THROUGHPUT
           - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
           - MASTER_LEADER_MISSING
           - MASTER_UNDER_REPLICATED
           - LEADERLESS_TABLETS
@@ -13115,6 +13434,8 @@ components:
           - TABLET_PEERS_GUARDRAIL
           - XCLUSTER_CONFIG_TABLE_BAD_STATE
           - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           exampleSetFlag: true
           type: string
         thresholdUnit:
@@ -13125,6 +13446,7 @@ components:
           - PERCENT
           - MILLISECOND
           - SECOND
+          - MINUTE
           - DAY
           - MEGABYTE
           exampleSetFlag: true
@@ -13262,6 +13584,7 @@ components:
           - HIGH_NUM_YEDIS_CONNECTIONS
           - YSQL_THROUGHPUT
           - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
           - MASTER_LEADER_MISSING
           - MASTER_UNDER_REPLICATED
           - LEADERLESS_TABLETS
@@ -13284,6 +13607,8 @@ components:
           - TABLET_PEERS_GUARDRAIL
           - XCLUSTER_CONFIG_TABLE_BAD_STATE
           - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           exampleSetFlag: true
           type: string
         uuids:
@@ -13644,6 +13969,7 @@ components:
           - HIGH_NUM_YEDIS_CONNECTIONS
           - YSQL_THROUGHPUT
           - YCQL_THROUGHPUT
+          - YCQL_MICROSECOND_TIMESTAMPS_DETECTED
           - MASTER_LEADER_MISSING
           - MASTER_UNDER_REPLICATED
           - LEADERLESS_TABLETS
@@ -13666,6 +13992,8 @@ components:
           - TABLET_PEERS_GUARDRAIL
           - XCLUSTER_CONFIG_TABLE_BAD_STATE
           - NODE_CLOCK_DRIFT
+          - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
+          - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           exampleSetFlag: true
           type: string
         thresholdConditionReadOnly:
@@ -13703,6 +14031,7 @@ components:
           - PERCENT
           - MILLISECOND
           - SECOND
+          - MINUTE
           - DAY
           - MEGABYTE
           exampleSetFlag: true
@@ -14665,6 +14994,7 @@ components:
           - Unlock
           - LdapUniverseSync
           - UpdateProxyConfig
+          - CloneNamespace
           example: Create User
           exampleSetFlag: true
           readOnly: true
@@ -15157,6 +15487,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -15354,11 +15686,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -21425,6 +21760,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -21622,11 +21959,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -21692,6 +22032,298 @@ components:
       - certExpiry
       - certStart
       - username
+      type: object
+    CloneNamespaceParams:
+      description: Clone Namespace parameters
+      example:
+        expectedUniverseVersion: 6
+        platformUrl: platformUrl
+        sourceXClusterConfigs:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodeExporterUser: nodeExporterUser
+        encryptionAtRestConfig:
+          encryptionAtRestEnabled: true
+          opType: ENABLE
+          kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: CMK
+        targetXClusterConfigs:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybPrevSoftwareVersion: ybPrevSoftwareVersion
+        cloneTimeInMillis: 0
+        deviceInfo:
+          diskIops: 6
+          storageClass: storageClass
+          numVolumes: 7
+          mountPoints: mountPoints
+          storageType: IO1
+          throughput: 1
+          volumeSize: 4
+        enableYbc: true
+        errorString: errorString
+        targetKeyspaceName: targetKeyspaceName
+        ybcSoftwareVersion: ybcSoftwareVersion
+        installYbc: true
+        nodeDetailsSet:
+        - nodeName: nodeName
+          nodeExporterPort: 3
+          placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybControllerHttpPort: 3
+          dedicatedTo: MASTER
+          machineImage: machineImage
+          redisServerHttpPort: 2
+          masterState: ToStart
+          tserverRpcPort: 6
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 0
+          otelCollectorMetricsPort: 1
+          isMaster: true
+          sshUserOverride: sshUserOverride
+          cloudInfo:
+            mount_roots: mount_roots
+            kubernetesNamespace: kubernetesNamespace
+            public_ip: public_ip
+            secondary_subnet_id: secondary_subnet_id
+            private_dns: private_dns
+            useTimeSync: true
+            kubernetesPodName: kubernetesPodName
+            root_volume: root_volume
+            secondary_private_ip: secondary_private_ip
+            private_ip: private_ip
+            cloud: cloud
+            lun_indexes:
+            - 6
+            - 6
+            assignPublicIP: true
+            az: az
+            subnet_id: subnet_id
+            public_dns: public_dns
+            region: region
+            instance_type: instance_type
+          sshPortOverride: 6
+          cronsActive: true
+          state: Provisioned
+          nodeIdx: 6
+          masterRpcPort: 6
+          redisServerRpcPort: 6
+          lastVolumeUpdateTime: 2022-12-12T13:07:18Z
+          tserverHttpPort: 5
+          disksAreMountedByUUID: true
+          isRedisServer: true
+          ybPrebuiltAmi: true
+          internalYsqlServerRpcPort: 8
+          isTserver: true
+          nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isYsqlServer: true
+          ybControllerRpcPort: 3
+          isYqlServer: true
+          azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          masterHttpPort: 9
+          ysqlServerRpcPort: 6
+          autoSyncMasterAddrs: true
+          yqlServerHttpPort: 7
+        - nodeName: nodeName
+          nodeExporterPort: 3
+          placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybControllerHttpPort: 3
+          dedicatedTo: MASTER
+          machineImage: machineImage
+          redisServerHttpPort: 2
+          masterState: ToStart
+          tserverRpcPort: 6
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 0
+          otelCollectorMetricsPort: 1
+          isMaster: true
+          sshUserOverride: sshUserOverride
+          cloudInfo:
+            mount_roots: mount_roots
+            kubernetesNamespace: kubernetesNamespace
+            public_ip: public_ip
+            secondary_subnet_id: secondary_subnet_id
+            private_dns: private_dns
+            useTimeSync: true
+            kubernetesPodName: kubernetesPodName
+            root_volume: root_volume
+            secondary_private_ip: secondary_private_ip
+            private_ip: private_ip
+            cloud: cloud
+            lun_indexes:
+            - 6
+            - 6
+            assignPublicIP: true
+            az: az
+            subnet_id: subnet_id
+            public_dns: public_dns
+            region: region
+            instance_type: instance_type
+          sshPortOverride: 6
+          cronsActive: true
+          state: Provisioned
+          nodeIdx: 6
+          masterRpcPort: 6
+          redisServerRpcPort: 6
+          lastVolumeUpdateTime: 2022-12-12T13:07:18Z
+          tserverHttpPort: 5
+          disksAreMountedByUUID: true
+          isRedisServer: true
+          ybPrebuiltAmi: true
+          internalYsqlServerRpcPort: 8
+          isTserver: true
+          nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isYsqlServer: true
+          ybControllerRpcPort: 3
+          isYqlServer: true
+          azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          masterHttpPort: 9
+          ysqlServerRpcPort: 6
+          autoSyncMasterAddrs: true
+          yqlServerHttpPort: 7
+        creatingUser:
+          ldapSpecifiedRole: true
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: ConnectOnly
+          authTokenIssueDate: 2021-06-17T15:00:05Z
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          creationDate: 2022-12-12T13:07:18Z
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: username1@example.com
+          primary: true
+        extraDependencies:
+          installNodeExporter: true
+        platformVersion: platformVersion
+        ybcInstalled: true
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+        cmkArn: cmkArn
+        sleepAfterMasterRestartMillis: 1
+        previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sleepAfterTServerRestartMillis: 5
+      exampleSetFlag: true
+      properties:
+        cloneTimeInMillis:
+          description: "Time in millis at which to clone the source namespace. If\
+            \ not specifed, it is cloned to current state."
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        cmkArn:
+          description: Amazon Resource Name (ARN) of the CMK
+          exampleSetFlag: true
+          type: string
+        communicationPorts:
+          $ref: '#/components/schemas/CommunicationPorts'
+        creatingUser:
+          $ref: '#/components/schemas/Users'
+        deviceInfo:
+          $ref: '#/components/schemas/DeviceInfo'
+        enableYbc:
+          exampleSetFlag: true
+          type: boolean
+        encryptionAtRestConfig:
+          $ref: '#/components/schemas/EncryptionAtRestConfig'
+        errorString:
+          description: Error message
+          exampleSetFlag: true
+          type: string
+        expectedUniverseVersion:
+          description: Expected universe version
+          exampleSetFlag: true
+          format: int32
+          type: integer
+        extraDependencies:
+          $ref: '#/components/schemas/ExtraDependencies'
+        installYbc:
+          exampleSetFlag: true
+          type: boolean
+        nodeDetailsSet:
+          description: Node details
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/NodeDetails'
+          type: array
+          uniqueItems: true
+        nodeExporterUser:
+          description: Node exporter user
+          exampleSetFlag: true
+          type: string
+        platformUrl:
+          exampleSetFlag: true
+          type: string
+        platformVersion:
+          exampleSetFlag: true
+          type: string
+        previousTaskUUID:
+          description: Previous task UUID of a retry
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        sleepAfterMasterRestartMillis:
+          exampleSetFlag: true
+          format: int32
+          type: integer
+        sleepAfterTServerRestartMillis:
+          exampleSetFlag: true
+          format: int32
+          type: integer
+        sourceXClusterConfigs:
+          description: The source universe's xcluster replication relationships
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        targetKeyspaceName:
+          description: Clone namespace name
+          exampleSetFlag: true
+          type: string
+        targetXClusterConfigs:
+          description: The target universe's xcluster replication relationships
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        ybPrevSoftwareVersion:
+          description: Previous software version
+          exampleSetFlag: true
+          type: string
+        ybcInstalled:
+          exampleSetFlag: true
+          type: boolean
+        ybcSoftwareVersion:
+          exampleSetFlag: true
+          type: string
+      required:
+      - creatingUser
+      - platformUrl
+      - platformVersion
+      - sleepAfterMasterRestartMillis
+      - sleepAfterTServerRestartMillis
       type: object
     CloudInfo:
       example:
@@ -22344,7 +22976,16 @@ components:
       type: object
     ColumnDetails:
       description: Details of a CQL database column
-      exampleSetFlag: false
+      example:
+        columnOrder: 5
+        isClusteringKey: true
+        sortOrder: NONE
+        valueType: TINYINT
+        name: name
+        keyType: TINYINT
+        type: TINYINT
+        isPartitionKey: true
+      exampleSetFlag: true
       properties:
         columnOrder:
           description: "Relative position (column order) for this column, in the table\
@@ -27871,6 +28512,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -28068,11 +28711,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -31078,6 +31724,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -31275,11 +31923,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -35041,6 +35692,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -35238,11 +35891,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -37425,10 +38081,12 @@ components:
       exampleSetFlag: true
       properties:
         force:
-          description: Should ignore errors and proceed with the node action
+          description: Should ignore master unavailability and proceed with the node
+            action
           exampleSetFlag: true
           type: boolean
         nodeAction:
+          description: Action to perform on the node.
           enum:
           - ADD
           - REMOVE
@@ -37443,6 +38101,7 @@ components:
           - HARD_REBOOT
           - REPROVISION
           - REPLACE
+          - DECOMMISSION
           exampleSetFlag: true
           type: string
       required:
@@ -37453,6 +38112,7 @@ components:
       example:
         lastError:
           code: UNKNOWN_ERROR
+          originMessage: originMessage
           message: message
         ip: ip
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -37665,6 +38325,7 @@ components:
         entities:
         - lastError:
             code: UNKNOWN_ERROR
+            originMessage: originMessage
             message: message
           versionMatched: true
           ip: ip
@@ -37690,6 +38351,7 @@ components:
           updatedAt: 2022-12-21T13:07:18Z
         - lastError:
             code: UNKNOWN_ERROR
+            originMessage: originMessage
             message: message
           versionMatched: true
           ip: ip
@@ -37744,6 +38406,7 @@ components:
       example:
         lastError:
           code: UNKNOWN_ERROR
+          originMessage: originMessage
           message: message
         versionMatched: true
         ip: ip
@@ -38411,6 +39074,7 @@ components:
             - HARD_REBOOT
             - REPROVISION
             - REPLACE
+            - DECOMMISSION
             exampleSetFlag: true
             type: string
           readOnly: true
@@ -40390,6 +41054,31 @@ components:
       - level
       - maxHistory
       - rolloverPattern
+      type: object
+    PreUpgradeValidationResponse:
+      description: Upgrade Validation Response
+      example:
+        success: true
+        errors:
+        - errors
+        - errors
+      exampleSetFlag: true
+      properties:
+        errors:
+          description: "WARNING: This is a preview API that could change. List of\
+            \ errors that occurred during validation"
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          readOnly: true
+          type: array
+        success:
+          description: "WARNING: This is a preview API that could change. Indicates\
+            \ whether all the checks passed"
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
       type: object
     PresetThrottleValues:
       example:
@@ -43905,6 +44594,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -44102,11 +44793,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -47579,6 +48273,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -47776,11 +48472,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -50824,6 +51523,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -51021,11 +51722,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55396,6 +56100,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -55593,11 +56299,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -55942,6 +56651,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -56139,11 +56850,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         useLocalTimezone:
@@ -56308,6 +57022,8 @@ components:
             - RestoreYbaBackup
             - RestoreContinuousBackup
             - EnableNodeAgentInUniverse
+            - DecommissionNode
+            - CloneNamespace
             - KubernetesCheckVolumeExpansion
             - KubernetesPostExpansionCheckVolume
             - NodeCertReloadTask
@@ -56505,11 +57221,14 @@ components:
             - CheckNodesAreSafeToTakeDown
             - ValidateNodeDiskSize
             - CheckNodeReachable
+            - SupportBundleComponentDownload
             - WaitStartingFromTime
             - RemoveNodeAgent
             - UpdateUniverseFields
             - RunNodeCommand
             - MasterLeaderStepdown
+            - SetupYNP
+            - YNPProvisioning
             exampleSetFlag: true
             type: string
           type: array
@@ -59574,6 +60293,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -59771,11 +60492,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -60066,6 +60790,7 @@ components:
           - INSTALLATION_ERROR
           - SERVICE_START_ERROR
           - CONNECTION_ERROR
+          - TIMED_OUT
           exampleSetFlag: true
           type: string
         errorString:
@@ -60161,6 +60886,7 @@ components:
           - Running
           - Success
           - Failed
+          - Aborted
           exampleSetFlag: true
           type: string
       required:
@@ -60262,6 +60988,26 @@ components:
       - components
       - endDate
       - startDate
+      type: object
+    SupportBundleSizeEstimateResponse:
+      example:
+        data:
+          key:
+            key: 0
+      exampleSetFlag: true
+      properties:
+        data:
+          additionalProperties:
+            additionalProperties:
+              exampleSetFlag: true
+              format: int64
+              type: integer
+            exampleSetFlag: true
+            type: object
+          description: A map of universe node names to component sizes for the given
+            support bundle payload. Global component sizes are mapped to "YBA" node.
+          exampleSetFlag: true
+          type: object
       type: object
     SuppressHealthCheckNotificationsConfig:
       example:
@@ -63068,6 +63814,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -63265,11 +64013,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -63312,7 +64063,216 @@ components:
       - upgradeOption
       type: object
     TableDefinitionTaskParams:
-      exampleSetFlag: false
+      example:
+        expectedUniverseVersion: 0
+        sourceXClusterConfigs:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodeExporterUser: nodeExporterUser
+        encryptionAtRestConfig:
+          encryptionAtRestEnabled: true
+          opType: ENABLE
+          kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: CMK
+        tableType: YQL_TABLE_TYPE
+        ybcSoftwareVersion: ybcSoftwareVersion
+        creatingUser:
+          ldapSpecifiedRole: true
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: ConnectOnly
+          authTokenIssueDate: 2021-06-17T15:00:05Z
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          creationDate: 2022-12-12T13:07:18Z
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: username1@example.com
+          primary: true
+        extraDependencies:
+          installNodeExporter: true
+        platformVersion: platformVersion
+        sleepAfterTServerRestartMillis: 1
+        tableDetails:
+          keyspace: keyspace
+          columns:
+          - columnOrder: 5
+            isClusteringKey: true
+            sortOrder: NONE
+            valueType: TINYINT
+            name: name
+            keyType: TINYINT
+            type: TINYINT
+            isPartitionKey: true
+          - columnOrder: 5
+            isClusteringKey: true
+            sortOrder: NONE
+            valueType: TINYINT
+            name: name
+            keyType: TINYINT
+            type: TINYINT
+            isPartitionKey: true
+          ttlInSeconds: 5
+          splitValues:
+          - splitValues
+          - splitValues
+          tableName: tableName
+        platformUrl: platformUrl
+        targetXClusterConfigs:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybPrevSoftwareVersion: ybPrevSoftwareVersion
+        deviceInfo:
+          diskIops: 6
+          storageClass: storageClass
+          numVolumes: 7
+          mountPoints: mountPoints
+          storageType: IO1
+          throughput: 1
+          volumeSize: 4
+        enableYbc: true
+        tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        errorString: errorString
+        installYbc: true
+        nodeDetailsSet:
+        - nodeName: nodeName
+          nodeExporterPort: 3
+          placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybControllerHttpPort: 3
+          dedicatedTo: MASTER
+          machineImage: machineImage
+          redisServerHttpPort: 2
+          masterState: ToStart
+          tserverRpcPort: 6
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 0
+          otelCollectorMetricsPort: 1
+          isMaster: true
+          sshUserOverride: sshUserOverride
+          cloudInfo:
+            mount_roots: mount_roots
+            kubernetesNamespace: kubernetesNamespace
+            public_ip: public_ip
+            secondary_subnet_id: secondary_subnet_id
+            private_dns: private_dns
+            useTimeSync: true
+            kubernetesPodName: kubernetesPodName
+            root_volume: root_volume
+            secondary_private_ip: secondary_private_ip
+            private_ip: private_ip
+            cloud: cloud
+            lun_indexes:
+            - 6
+            - 6
+            assignPublicIP: true
+            az: az
+            subnet_id: subnet_id
+            public_dns: public_dns
+            region: region
+            instance_type: instance_type
+          sshPortOverride: 6
+          cronsActive: true
+          state: Provisioned
+          nodeIdx: 6
+          masterRpcPort: 6
+          redisServerRpcPort: 6
+          lastVolumeUpdateTime: 2022-12-12T13:07:18Z
+          tserverHttpPort: 5
+          disksAreMountedByUUID: true
+          isRedisServer: true
+          ybPrebuiltAmi: true
+          internalYsqlServerRpcPort: 8
+          isTserver: true
+          nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isYsqlServer: true
+          ybControllerRpcPort: 3
+          isYqlServer: true
+          azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          masterHttpPort: 9
+          ysqlServerRpcPort: 6
+          autoSyncMasterAddrs: true
+          yqlServerHttpPort: 7
+        - nodeName: nodeName
+          nodeExporterPort: 3
+          placementUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          ybControllerHttpPort: 3
+          dedicatedTo: MASTER
+          machineImage: machineImage
+          redisServerHttpPort: 2
+          masterState: ToStart
+          tserverRpcPort: 6
+          ysqlServerHttpPort: 7
+          yqlServerRpcPort: 0
+          otelCollectorMetricsPort: 1
+          isMaster: true
+          sshUserOverride: sshUserOverride
+          cloudInfo:
+            mount_roots: mount_roots
+            kubernetesNamespace: kubernetesNamespace
+            public_ip: public_ip
+            secondary_subnet_id: secondary_subnet_id
+            private_dns: private_dns
+            useTimeSync: true
+            kubernetesPodName: kubernetesPodName
+            root_volume: root_volume
+            secondary_private_ip: secondary_private_ip
+            private_ip: private_ip
+            cloud: cloud
+            lun_indexes:
+            - 6
+            - 6
+            assignPublicIP: true
+            az: az
+            subnet_id: subnet_id
+            public_dns: public_dns
+            region: region
+            instance_type: instance_type
+          sshPortOverride: 6
+          cronsActive: true
+          state: Provisioned
+          nodeIdx: 6
+          masterRpcPort: 6
+          redisServerRpcPort: 6
+          lastVolumeUpdateTime: 2022-12-12T13:07:18Z
+          tserverHttpPort: 5
+          disksAreMountedByUUID: true
+          isRedisServer: true
+          ybPrebuiltAmi: true
+          internalYsqlServerRpcPort: 8
+          isTserver: true
+          nodeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isYsqlServer: true
+          ybControllerRpcPort: 3
+          isYqlServer: true
+          azUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          masterHttpPort: 9
+          ysqlServerRpcPort: 6
+          autoSyncMasterAddrs: true
+          yqlServerHttpPort: 7
+        ybcInstalled: true
+        communicationPorts:
+          nodeExporterPort: 5
+          tserverHttpPort: 9
+          internalYsqlServerRpcPort: 0
+          ybControllerHttpPort: 2
+          redisServerHttpPort: 2
+          ybControllerrRpcPort: 4
+          tserverRpcPort: 3
+          ysqlServerHttpPort: 1
+          yqlServerRpcPort: 1
+          masterHttpPort: 6
+          otelCollectorMetricsPort: 5
+          ysqlServerRpcPort: 1
+          yqlServerHttpPort: 7
+          masterRpcPort: 1
+          redisServerRpcPort: 7
+        cmkArn: cmkArn
+        sleepAfterMasterRestartMillis: 6
+        previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      exampleSetFlag: true
       properties:
         cmkArn:
           description: Amazon Resource Name (ARN) of the CMK
@@ -63432,7 +64392,31 @@ components:
       type: object
     TableDetails:
       description: Table details
-      exampleSetFlag: false
+      example:
+        keyspace: keyspace
+        columns:
+        - columnOrder: 5
+          isClusteringKey: true
+          sortOrder: NONE
+          valueType: TINYINT
+          name: name
+          keyType: TINYINT
+          type: TINYINT
+          isPartitionKey: true
+        - columnOrder: 5
+          isClusteringKey: true
+          sortOrder: NONE
+          valueType: TINYINT
+          name: name
+          keyType: TINYINT
+          type: TINYINT
+          isPartitionKey: true
+        ttlInSeconds: 5
+        splitValues:
+        - splitValues
+        - splitValues
+        tableName: tableName
+      exampleSetFlag: true
       properties:
         columns:
           description: Details of all columns in the table
@@ -63576,7 +64560,36 @@ components:
       type: object
     TableSpaceInfo:
       description: Tablespace information
-      exampleSetFlag: false
+      example:
+        numReplicas: 1
+        name: name
+        placementBlocks:
+        - cloud: cloud
+          leader_preference: 1
+          zone: zone
+          min_num_replicas: 1
+          region: region
+        - cloud: cloud
+          leader_preference: 1
+          zone: zone
+          min_num_replicas: 1
+          region: region
+        - cloud: cloud
+          leader_preference: 1
+          zone: zone
+          min_num_replicas: 1
+          region: region
+        - cloud: cloud
+          leader_preference: 1
+          zone: zone
+          min_num_replicas: 1
+          region: region
+        - cloud: cloud
+          leader_preference: 1
+          zone: zone
+          min_num_replicas: 1
+          region: region
+      exampleSetFlag: true
       properties:
         name:
           description: Tablespace Name
@@ -66528,6 +67541,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -66725,11 +67740,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -69580,6 +70598,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -69777,11 +70797,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -72876,6 +73899,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -73073,11 +74098,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -75886,6 +76914,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -76083,11 +77113,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -78904,6 +79937,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -79101,11 +80136,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -84718,6 +85756,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -84915,11 +85955,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -88529,6 +89572,8 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - DecommissionNode
+          - CloneNamespace
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -88726,11 +89771,14 @@ components:
           - CheckNodesAreSafeToTakeDown
           - ValidateNodeDiskSize
           - CheckNodeReachable
+          - SupportBundleComponentDownload
           - WaitStartingFromTime
           - RemoveNodeAgent
           - UpdateUniverseFields
           - RunNodeCommand
           - MasterLeaderStepdown
+          - SetupYNP
+          - YNPProvisioning
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -89783,6 +90831,7 @@ components:
     YBAError:
       example:
         code: UNKNOWN_ERROR
+        originMessage: originMessage
         message: message
       exampleSetFlag: true
       properties:
@@ -89796,11 +90845,17 @@ components:
           - INSTALLATION_ERROR
           - SERVICE_START_ERROR
           - CONNECTION_ERROR
+          - TIMED_OUT
           exampleSetFlag: true
           readOnly: true
           type: string
         message:
           description: Error message
+          exampleSetFlag: true
+          readOnly: true
+          type: string
+        originMessage:
+          description: Origin error message
           exampleSetFlag: true
           readOnly: true
           type: string
@@ -90159,6 +91214,12 @@ components:
           description: Secret Key
           exampleSetFlag: true
           type: string
+      required:
+      - accessKey
+      - logGroup
+      - logStream
+      - region
+      - secretKey
       type: object
     AlertChannelEmailParams_allOf:
       exampleSetFlag: true

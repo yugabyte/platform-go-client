@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateSupportBundle**](SupportBundleManagementApi.md#CreateSupportBundle) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | Create support bundle for specific universe
 [**DeleteSupportBundle**](SupportBundleManagementApi.md#DeleteSupportBundle) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Delete a support bundle
 [**DownloadSupportBundle**](SupportBundleManagementApi.md#DownloadSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
+[**EstimateSupportBundleSize**](SupportBundleManagementApi.md#EstimateSupportBundleSize) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
 [**GetSupportBundle**](SupportBundleManagementApi.md#GetSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 [**ListSupportBundle**](SupportBundleManagementApi.md#ListSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 [**ListSupportBundleComponents**](SupportBundleManagementApi.md#ListSupportBundleComponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
@@ -233,6 +234,82 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/x-compressed
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## EstimateSupportBundleSize
+
+> SupportBundleSizeEstimateResponse EstimateSupportBundleSize(ctx, cUUID, uniUUID).SupportBundle(supportBundle).Request(request).Execute()
+
+Estimate support bundle size for specific universe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "time"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    supportBundle := *openapiclient.NewSupportBundleFormData([]string{"Components_example"}, time.Now(), time.Now()) // SupportBundleFormData | support bundle info
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SupportBundleManagementApi.EstimateSupportBundleSize(context.Background(), cUUID, uniUUID).SupportBundle(supportBundle).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SupportBundleManagementApi.EstimateSupportBundleSize``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EstimateSupportBundleSize`: SupportBundleSizeEstimateResponse
+    fmt.Fprintf(os.Stdout, "Response from `SupportBundleManagementApi.EstimateSupportBundleSize`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEstimateSupportBundleSizeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **supportBundle** | [**SupportBundleFormData**](SupportBundleFormData.md) | support bundle info | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**SupportBundleSizeEstimateResponse**](SupportBundleSizeEstimateResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

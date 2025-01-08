@@ -24,490 +24,318 @@ var (
 	_ _context.Context
 )
 
-// PITRManagementApiService PITRManagementApi service
-type PITRManagementApiService service
+// TableManagementApiService TableManagementApi service
+type TableManagementApiService service
 
-type PITRManagementApiApiCloneNamespaceRequest struct {
+type TableManagementApiApiDescribeTableRequest struct {
 	ctx _context.Context
-	ApiService *PITRManagementApiService
+	ApiService *TableManagementApiService
 	cUUID string
 	uniUUID string
-	tableType string
-	keyspaceName string
-	namespaceClone *CloneNamespaceParams
-	request *interface{}
+	tableUUID string
 }
 
-func (r PITRManagementApiApiCloneNamespaceRequest) NamespaceClone(namespaceClone CloneNamespaceParams) PITRManagementApiApiCloneNamespaceRequest {
-	r.namespaceClone = &namespaceClone
-	return r
-}
-func (r PITRManagementApiApiCloneNamespaceRequest) Request(request interface{}) PITRManagementApiApiCloneNamespaceRequest {
-	r.request = &request
-	return r
-}
 
-func (r PITRManagementApiApiCloneNamespaceRequest) Execute() (YBPTask, *_nethttp.Response, error) {
-	return r.ApiService.CloneNamespaceExecute(r)
+func (r TableManagementApiApiDescribeTableRequest) Execute() (TableDefinitionTaskParams, *_nethttp.Response, error) {
+	return r.ApiService.DescribeTableExecute(r)
 }
 
 /*
- * CloneNamespace Create clone of a namespace in a universe
+ * DescribeTable Describe a table
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
- * @param tableType
- * @param keyspaceName
- * @return PITRManagementApiApiCloneNamespaceRequest
+ * @param tableUUID
+ * @return TableManagementApiApiDescribeTableRequest
  */
-func (a *PITRManagementApiService) CloneNamespace(ctx _context.Context, cUUID string, uniUUID string, tableType string, keyspaceName string) PITRManagementApiApiCloneNamespaceRequest {
-	return PITRManagementApiApiCloneNamespaceRequest{
+func (a *TableManagementApiService) DescribeTable(ctx _context.Context, cUUID string, uniUUID string, tableUUID string) TableManagementApiApiDescribeTableRequest {
+	return TableManagementApiApiDescribeTableRequest{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
 		uniUUID: uniUUID,
-		tableType: tableType,
-		keyspaceName: keyspaceName,
+		tableUUID: tableUUID,
 	}
 }
 
 /*
  * Execute executes the request
- * @return YBPTask
+ * @return TableDefinitionTaskParams
  */
-func (a *PITRManagementApiService) CloneNamespaceExecute(r PITRManagementApiApiCloneNamespaceRequest) (YBPTask, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPTask
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.CloneNamespace")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"tableType"+"}", _neturl.PathEscape(parameterToString(r.tableType, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyspaceName"+"}", _neturl.PathEscape(parameterToString(r.keyspaceName, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.namespaceClone == nil {
-		return localVarReturnValue, nil, reportError("namespaceClone is required and must be specified")
-	}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.namespaceClone
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type PITRManagementApiApiCreatePitrConfigRequest struct {
-	ctx _context.Context
-	ApiService *PITRManagementApiService
-	cUUID string
-	uniUUID string
-	tableType string
-	keyspaceName string
-	pitrConfig *CreatePitrConfigParams
-	request *interface{}
-}
-
-func (r PITRManagementApiApiCreatePitrConfigRequest) PitrConfig(pitrConfig CreatePitrConfigParams) PITRManagementApiApiCreatePitrConfigRequest {
-	r.pitrConfig = &pitrConfig
-	return r
-}
-func (r PITRManagementApiApiCreatePitrConfigRequest) Request(request interface{}) PITRManagementApiApiCreatePitrConfigRequest {
-	r.request = &request
-	return r
-}
-
-func (r PITRManagementApiApiCreatePitrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
-	return r.ApiService.CreatePitrConfigExecute(r)
-}
-
-/*
- * CreatePitrConfig Create pitr config for a keyspace in a universe
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @param tableType
- * @param keyspaceName
- * @return PITRManagementApiApiCreatePitrConfigRequest
- */
-func (a *PITRManagementApiService) CreatePitrConfig(ctx _context.Context, cUUID string, uniUUID string, tableType string, keyspaceName string) PITRManagementApiApiCreatePitrConfigRequest {
-	return PITRManagementApiApiCreatePitrConfigRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableType: tableType,
-		keyspaceName: keyspaceName,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPTask
- */
-func (a *PITRManagementApiService) CreatePitrConfigExecute(r PITRManagementApiApiCreatePitrConfigRequest) (YBPTask, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPTask
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.CreatePitrConfig")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"tableType"+"}", _neturl.PathEscape(parameterToString(r.tableType, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyspaceName"+"}", _neturl.PathEscape(parameterToString(r.keyspaceName, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-	if r.pitrConfig == nil {
-		return localVarReturnValue, nil, reportError("pitrConfig is required and must be specified")
-	}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.pitrConfig
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type PITRManagementApiApiDeletePitrConfigRequest struct {
-	ctx _context.Context
-	ApiService *PITRManagementApiService
-	cUUID string
-	uniUUID string
-	pUUID string
-	request *interface{}
-}
-
-func (r PITRManagementApiApiDeletePitrConfigRequest) Request(request interface{}) PITRManagementApiApiDeletePitrConfigRequest {
-	r.request = &request
-	return r
-}
-
-func (r PITRManagementApiApiDeletePitrConfigRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
-	return r.ApiService.DeletePitrConfigExecute(r)
-}
-
-/*
- * DeletePitrConfig Delete pitr config on a universe
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @param pUUID
- * @return PITRManagementApiApiDeletePitrConfigRequest
- */
-func (a *PITRManagementApiService) DeletePitrConfig(ctx _context.Context, cUUID string, uniUUID string, pUUID string) PITRManagementApiApiDeletePitrConfigRequest {
-	return PITRManagementApiApiDeletePitrConfigRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		pUUID: pUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return YBPSuccess
- */
-func (a *PITRManagementApiService) DeletePitrConfigExecute(r PITRManagementApiApiDeletePitrConfigRequest) (YBPSuccess, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.DeletePitrConfig")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID}"
-	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"pUUID"+"}", _neturl.PathEscape(parameterToString(r.pUUID, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apiKeyAuth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type PITRManagementApiApiListOfPitrConfigsRequest struct {
-	ctx _context.Context
-	ApiService *PITRManagementApiService
-	cUUID string
-	uniUUID string
-}
-
-
-func (r PITRManagementApiApiListOfPitrConfigsRequest) Execute() ([]PitrConfig, *_nethttp.Response, error) {
-	return r.ApiService.ListOfPitrConfigsExecute(r)
-}
-
-/*
- * ListOfPitrConfigs List the PITR configs of a universe
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cUUID
- * @param uniUUID
- * @return PITRManagementApiApiListOfPitrConfigsRequest
- */
-func (a *PITRManagementApiService) ListOfPitrConfigs(ctx _context.Context, cUUID string, uniUUID string) PITRManagementApiApiListOfPitrConfigsRequest {
-	return PITRManagementApiApiListOfPitrConfigsRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-	}
-}
-
-/*
- * Execute executes the request
- * @return []PitrConfig
- */
-func (a *PITRManagementApiService) ListOfPitrConfigsExecute(r PITRManagementApiApiListOfPitrConfigsRequest) ([]PitrConfig, *_nethttp.Response, error) {
+func (a *TableManagementApiService) DescribeTableExecute(r TableManagementApiApiDescribeTableRequest) (TableDefinitionTaskParams, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []PitrConfig
+		localVarReturnValue  TableDefinitionTaskParams
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.ListOfPitrConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.DescribeTable")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config"
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tableUUID"+"}", _neturl.PathEscape(parameterToString(r.tableUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type TableManagementApiApiGetAllNamespacesRequest struct {
+	ctx _context.Context
+	ApiService *TableManagementApiService
+	cUUID string
+	uniUUID string
+	includeSystemNamespaces *bool
+}
+
+func (r TableManagementApiApiGetAllNamespacesRequest) IncludeSystemNamespaces(includeSystemNamespaces bool) TableManagementApiApiGetAllNamespacesRequest {
+	r.includeSystemNamespaces = &includeSystemNamespaces
+	return r
+}
+
+func (r TableManagementApiApiGetAllNamespacesRequest) Execute() ([]NamespaceInfoResp, *_nethttp.Response, error) {
+	return r.ApiService.GetAllNamespacesExecute(r)
+}
+
+/*
+ * GetAllNamespaces Get a list of all namespaces in the specified universe.
+ * WARNING: This is a preview API that could change.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return TableManagementApiApiGetAllNamespacesRequest
+ */
+func (a *TableManagementApiService) GetAllNamespaces(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiGetAllNamespacesRequest {
+	return TableManagementApiApiGetAllNamespacesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []NamespaceInfoResp
+ */
+func (a *TableManagementApiService) GetAllNamespacesExecute(r TableManagementApiApiGetAllNamespacesRequest) ([]NamespaceInfoResp, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []NamespaceInfoResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.GetAllNamespaces")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.includeSystemNamespaces != nil {
+		localVarQueryParams.Add("includeSystemNamespaces", parameterToString(*r.includeSystemNamespaces, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type TableManagementApiApiGetAllTableSpacesRequest struct {
+	ctx _context.Context
+	ApiService *TableManagementApiService
+	cUUID string
+	uniUUID string
+}
+
+
+func (r TableManagementApiApiGetAllTableSpacesRequest) Execute() ([]TableSpaceInfo, *_nethttp.Response, error) {
+	return r.ApiService.GetAllTableSpacesExecute(r)
+}
+
+/*
+ * GetAllTableSpaces Get a list of all tablespaces of a given universe.
+ * WARNING: This is a preview API that could change.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return TableManagementApiApiGetAllTableSpacesRequest
+ */
+func (a *TableManagementApiService) GetAllTableSpaces(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiGetAllTableSpacesRequest {
+	return TableManagementApiApiGetAllTableSpacesRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return []TableSpaceInfo
+ */
+func (a *TableManagementApiService) GetAllTableSpacesExecute(r TableManagementApiApiGetAllTableSpacesRequest) ([]TableSpaceInfo, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []TableSpaceInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.GetAllTableSpaces")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
 
@@ -583,37 +411,48 @@ func (a *PITRManagementApiService) ListOfPitrConfigsExecute(r PITRManagementApiA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PITRManagementApiApiPerformPitrRequest struct {
+type TableManagementApiApiGetAllTablesRequest struct {
 	ctx _context.Context
-	ApiService *PITRManagementApiService
+	ApiService *TableManagementApiService
 	cUUID string
 	uniUUID string
-	performPitr *RestoreSnapshotScheduleParams
-	request *interface{}
+	includeParentTableInfo *bool
+	excludeColocatedTables *bool
+	includeColocatedParentTables *bool
+	xClusterSupportedOnly *bool
 }
 
-func (r PITRManagementApiApiPerformPitrRequest) PerformPitr(performPitr RestoreSnapshotScheduleParams) PITRManagementApiApiPerformPitrRequest {
-	r.performPitr = &performPitr
+func (r TableManagementApiApiGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementApiApiGetAllTablesRequest {
+	r.includeParentTableInfo = &includeParentTableInfo
 	return r
 }
-func (r PITRManagementApiApiPerformPitrRequest) Request(request interface{}) PITRManagementApiApiPerformPitrRequest {
-	r.request = &request
+func (r TableManagementApiApiGetAllTablesRequest) ExcludeColocatedTables(excludeColocatedTables bool) TableManagementApiApiGetAllTablesRequest {
+	r.excludeColocatedTables = &excludeColocatedTables
+	return r
+}
+func (r TableManagementApiApiGetAllTablesRequest) IncludeColocatedParentTables(includeColocatedParentTables bool) TableManagementApiApiGetAllTablesRequest {
+	r.includeColocatedParentTables = &includeColocatedParentTables
+	return r
+}
+func (r TableManagementApiApiGetAllTablesRequest) XClusterSupportedOnly(xClusterSupportedOnly bool) TableManagementApiApiGetAllTablesRequest {
+	r.xClusterSupportedOnly = &xClusterSupportedOnly
 	return r
 }
 
-func (r PITRManagementApiApiPerformPitrRequest) Execute() (YBPTask, *_nethttp.Response, error) {
-	return r.ApiService.PerformPitrExecute(r)
+func (r TableManagementApiApiGetAllTablesRequest) Execute() ([]TableInfoResp, *_nethttp.Response, error) {
+	return r.ApiService.GetAllTablesExecute(r)
 }
 
 /*
- * PerformPitr Perform PITR on a universe
+ * GetAllTables Get a list of all tables in the specified universe
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
- * @return PITRManagementApiApiPerformPitrRequest
+ * @return TableManagementApiApiGetAllTablesRequest
  */
-func (a *PITRManagementApiService) PerformPitr(ctx _context.Context, cUUID string, uniUUID string) PITRManagementApiApiPerformPitrRequest {
-	return PITRManagementApiApiPerformPitrRequest{
+func (a *TableManagementApiService) GetAllTables(ctx _context.Context, cUUID string, uniUUID string) TableManagementApiApiGetAllTablesRequest {
+	return TableManagementApiApiGetAllTablesRequest{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
@@ -623,39 +462,45 @@ func (a *PITRManagementApiService) PerformPitr(ctx _context.Context, cUUID strin
 
 /*
  * Execute executes the request
- * @return YBPTask
+ * @return []TableInfoResp
  */
-func (a *PITRManagementApiService) PerformPitrExecute(r PITRManagementApiApiPerformPitrRequest) (YBPTask, *_nethttp.Response, error) {
+func (a *TableManagementApiService) GetAllTablesExecute(r TableManagementApiApiGetAllTablesRequest) ([]TableInfoResp, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  YBPTask
+		localVarReturnValue  []TableInfoResp
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.PerformPitr")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementApiService.GetAllTables")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/pitr"
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/tables"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
-	if r.performPitr == nil {
-		return localVarReturnValue, nil, reportError("performPitr is required and must be specified")
-	}
 
-	if r.request != nil {
-		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	if r.includeParentTableInfo != nil {
+		localVarQueryParams.Add("includeParentTableInfo", parameterToString(*r.includeParentTableInfo, ""))
+	}
+	if r.excludeColocatedTables != nil {
+		localVarQueryParams.Add("excludeColocatedTables", parameterToString(*r.excludeColocatedTables, ""))
+	}
+	if r.includeColocatedParentTables != nil {
+		localVarQueryParams.Add("includeColocatedParentTables", parameterToString(*r.includeColocatedParentTables, ""))
+	}
+	if r.xClusterSupportedOnly != nil {
+		localVarQueryParams.Add("xClusterSupportedOnly", parameterToString(*r.xClusterSupportedOnly, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -671,8 +516,6 @@ func (a *PITRManagementApiService) PerformPitrExecute(r PITRManagementApiApiPerf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = r.performPitr
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

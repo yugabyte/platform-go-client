@@ -16,8 +16,9 @@ import (
 
 // NodeActionFormData struct for NodeActionFormData
 type NodeActionFormData struct {
-	// Should ignore errors and proceed with the node action
+	// Should ignore master unavailability and proceed with the node action
 	Force *bool `json:"force,omitempty"`
+	// Action to perform on the node.
 	NodeAction string `json:"nodeAction"`
 }
 

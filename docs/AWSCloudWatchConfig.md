@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccessKey** | Pointer to **string** | Access Key | [optional] 
+**AccessKey** | **string** | Access Key | 
 **Endpoint** | Pointer to **string** | End Point | [optional] 
-**LogGroup** | Pointer to **string** | Log Group | [optional] 
-**LogStream** | Pointer to **string** | Log Stream | [optional] 
-**Region** | Pointer to **string** | Region | [optional] 
+**LogGroup** | **string** | Log Group | 
+**LogStream** | **string** | Log Stream | 
+**Region** | **string** | Region | 
 **RoleARN** | Pointer to **string** | Role ARN | [optional] 
-**SecretKey** | Pointer to **string** | Secret Key | [optional] 
+**SecretKey** | **string** | Secret Key | 
 
 ## Methods
 
 ### NewAWSCloudWatchConfig
 
-`func NewAWSCloudWatchConfig() *AWSCloudWatchConfig`
+`func NewAWSCloudWatchConfig(accessKey string, logGroup string, logStream string, region string, secretKey string, ) *AWSCloudWatchConfig`
 
 NewAWSCloudWatchConfig instantiates a new AWSCloudWatchConfig object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetAccessKey sets AccessKey field to given value.
 
-### HasAccessKey
-
-`func (o *AWSCloudWatchConfig) HasAccessKey() bool`
-
-HasAccessKey returns a boolean if a field has been set.
 
 ### GetEndpoint
 
@@ -100,11 +95,6 @@ and a boolean to check if the value has been set.
 
 SetLogGroup sets LogGroup field to given value.
 
-### HasLogGroup
-
-`func (o *AWSCloudWatchConfig) HasLogGroup() bool`
-
-HasLogGroup returns a boolean if a field has been set.
 
 ### GetLogStream
 
@@ -125,11 +115,6 @@ and a boolean to check if the value has been set.
 
 SetLogStream sets LogStream field to given value.
 
-### HasLogStream
-
-`func (o *AWSCloudWatchConfig) HasLogStream() bool`
-
-HasLogStream returns a boolean if a field has been set.
 
 ### GetRegion
 
@@ -150,11 +135,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *AWSCloudWatchConfig) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetRoleARN
 
@@ -200,11 +180,6 @@ and a boolean to check if the value has been set.
 
 SetSecretKey sets SecretKey field to given value.
 
-### HasSecretKey
-
-`func (o *AWSCloudWatchConfig) HasSecretKey() bool`
-
-HasSecretKey returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
