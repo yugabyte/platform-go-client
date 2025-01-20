@@ -22,6 +22,9 @@ type ImageBundleDetails struct {
 	GlobalYbImage *string `json:"globalYbImage,omitempty"`
 	// Regions override for image bundle
 	Regions *map[string]BundleInfo `json:"regions,omitempty"`
+	SshPort *int32 `json:"sshPort,omitempty"`
+	SshUser *string `json:"sshUser,omitempty"`
+	UseIMDSv2 *bool `json:"useIMDSv2,omitempty"`
 }
 
 // NewImageBundleDetails instantiates a new ImageBundleDetails object
@@ -137,6 +140,102 @@ func (o *ImageBundleDetails) SetRegions(v map[string]BundleInfo) {
 	o.Regions = &v
 }
 
+// GetSshPort returns the SshPort field value if set, zero value otherwise.
+func (o *ImageBundleDetails) GetSshPort() int32 {
+	if o == nil || o.SshPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.SshPort
+}
+
+// GetSshPortOk returns a tuple with the SshPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageBundleDetails) GetSshPortOk() (*int32, bool) {
+	if o == nil || o.SshPort == nil {
+		return nil, false
+	}
+	return o.SshPort, true
+}
+
+// HasSshPort returns a boolean if a field has been set.
+func (o *ImageBundleDetails) HasSshPort() bool {
+	if o != nil && o.SshPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshPort gets a reference to the given int32 and assigns it to the SshPort field.
+func (o *ImageBundleDetails) SetSshPort(v int32) {
+	o.SshPort = &v
+}
+
+// GetSshUser returns the SshUser field value if set, zero value otherwise.
+func (o *ImageBundleDetails) GetSshUser() string {
+	if o == nil || o.SshUser == nil {
+		var ret string
+		return ret
+	}
+	return *o.SshUser
+}
+
+// GetSshUserOk returns a tuple with the SshUser field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageBundleDetails) GetSshUserOk() (*string, bool) {
+	if o == nil || o.SshUser == nil {
+		return nil, false
+	}
+	return o.SshUser, true
+}
+
+// HasSshUser returns a boolean if a field has been set.
+func (o *ImageBundleDetails) HasSshUser() bool {
+	if o != nil && o.SshUser != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUser gets a reference to the given string and assigns it to the SshUser field.
+func (o *ImageBundleDetails) SetSshUser(v string) {
+	o.SshUser = &v
+}
+
+// GetUseIMDSv2 returns the UseIMDSv2 field value if set, zero value otherwise.
+func (o *ImageBundleDetails) GetUseIMDSv2() bool {
+	if o == nil || o.UseIMDSv2 == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseIMDSv2
+}
+
+// GetUseIMDSv2Ok returns a tuple with the UseIMDSv2 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ImageBundleDetails) GetUseIMDSv2Ok() (*bool, bool) {
+	if o == nil || o.UseIMDSv2 == nil {
+		return nil, false
+	}
+	return o.UseIMDSv2, true
+}
+
+// HasUseIMDSv2 returns a boolean if a field has been set.
+func (o *ImageBundleDetails) HasUseIMDSv2() bool {
+	if o != nil && o.UseIMDSv2 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseIMDSv2 gets a reference to the given bool and assigns it to the UseIMDSv2 field.
+func (o *ImageBundleDetails) SetUseIMDSv2(v bool) {
+	o.UseIMDSv2 = &v
+}
+
 func (o ImageBundleDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Arch != nil {
@@ -147,6 +246,15 @@ func (o ImageBundleDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.Regions != nil {
 		toSerialize["regions"] = o.Regions
+	}
+	if o.SshPort != nil {
+		toSerialize["sshPort"] = o.SshPort
+	}
+	if o.SshUser != nil {
+		toSerialize["sshUser"] = o.SshUser
+	}
+	if o.UseIMDSv2 != nil {
+		toSerialize["useIMDSv2"] = o.UseIMDSv2
 	}
 	return json.Marshal(toSerialize)
 }
