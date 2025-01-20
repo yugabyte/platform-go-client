@@ -39,8 +39,14 @@ type Provider struct {
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
+	// Deprecated since YBA version 2.17.2.0, Use details.ntpServers instead.
+	NtpServers *[]string `json:"ntpServers,omitempty"`
 	Regions []Region `json:"regions"`
-	// Deprecated since YBA version 2.17.2.0, Use details.SshPort instead. Only supported in create request
+	// Deprecated since YBA version 2.17.2.0. User details.setUpChrony instead.
+	SetUpChrony *bool `json:"setUpChrony,omitempty"`
+	// Deprecated since YBA version 2.17.2.0. Use details.showSetUpChrony instead.
+	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use details.SshPort instead. Only supported in create request
 	SshPort *int32 `json:"sshPort,omitempty"`
 	// Deprecated since YBA version 2.17.2.0, Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
@@ -58,7 +64,7 @@ type Provider struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProvider(imageBundles []ImageBundle, regions []Region, ) *Provider {
+func NewProvider(imageBundles []ImageBundle, regions []Region) *Provider {
 	this := Provider{}
 	this.ImageBundles = imageBundles
 	this.Regions = regions
@@ -395,7 +401,7 @@ func (o *Provider) SetHostVpcRegion(v string) {
 
 // GetImageBundles returns the ImageBundles field value
 func (o *Provider) GetImageBundles() []ImageBundle {
-	if o == nil  {
+	if o == nil {
 		var ret []ImageBundle
 		return ret
 	}
@@ -481,9 +487,41 @@ func (o *Provider) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNtpServers returns the NtpServers field value if set, zero value otherwise.
+func (o *Provider) GetNtpServers() []string {
+	if o == nil || o.NtpServers == nil {
+		var ret []string
+		return ret
+	}
+	return *o.NtpServers
+}
+
+// GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetNtpServersOk() (*[]string, bool) {
+	if o == nil || o.NtpServers == nil {
+		return nil, false
+	}
+	return o.NtpServers, true
+}
+
+// HasNtpServers returns a boolean if a field has been set.
+func (o *Provider) HasNtpServers() bool {
+	if o != nil && o.NtpServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
+func (o *Provider) SetNtpServers(v []string) {
+	o.NtpServers = &v
+}
+
 // GetRegions returns the Regions field value
 func (o *Provider) GetRegions() []Region {
-	if o == nil  {
+	if o == nil {
 		var ret []Region
 		return ret
 	}
@@ -503,6 +541,70 @@ func (o *Provider) GetRegionsOk() (*[]Region, bool) {
 // SetRegions sets field value
 func (o *Provider) SetRegions(v []Region) {
 	o.Regions = v
+}
+
+// GetSetUpChrony returns the SetUpChrony field value if set, zero value otherwise.
+func (o *Provider) GetSetUpChrony() bool {
+	if o == nil || o.SetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SetUpChrony
+}
+
+// GetSetUpChronyOk returns a tuple with the SetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.SetUpChrony == nil {
+		return nil, false
+	}
+	return o.SetUpChrony, true
+}
+
+// HasSetUpChrony returns a boolean if a field has been set.
+func (o *Provider) HasSetUpChrony() bool {
+	if o != nil && o.SetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSetUpChrony gets a reference to the given bool and assigns it to the SetUpChrony field.
+func (o *Provider) SetSetUpChrony(v bool) {
+	o.SetUpChrony = &v
+}
+
+// GetShowSetUpChrony returns the ShowSetUpChrony field value if set, zero value otherwise.
+func (o *Provider) GetShowSetUpChrony() bool {
+	if o == nil || o.ShowSetUpChrony == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ShowSetUpChrony
+}
+
+// GetShowSetUpChronyOk returns a tuple with the ShowSetUpChrony field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetShowSetUpChronyOk() (*bool, bool) {
+	if o == nil || o.ShowSetUpChrony == nil {
+		return nil, false
+	}
+	return o.ShowSetUpChrony, true
+}
+
+// HasShowSetUpChrony returns a boolean if a field has been set.
+func (o *Provider) HasShowSetUpChrony() bool {
+	if o != nil && o.ShowSetUpChrony != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetShowSetUpChrony gets a reference to the given bool and assigns it to the ShowSetUpChrony field.
+func (o *Provider) SetShowSetUpChrony(v bool) {
+	o.ShowSetUpChrony = &v
 }
 
 // GetSshPort returns the SshPort field value if set, zero value otherwise.
@@ -738,8 +840,17 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.NtpServers != nil {
+		toSerialize["ntpServers"] = o.NtpServers
+	}
 	if true {
 		toSerialize["regions"] = o.Regions
+	}
+	if o.SetUpChrony != nil {
+		toSerialize["setUpChrony"] = o.SetUpChrony
+	}
+	if o.ShowSetUpChrony != nil {
+		toSerialize["showSetUpChrony"] = o.ShowSetUpChrony
 	}
 	if o.SshPort != nil {
 		toSerialize["sshPort"] = o.SshPort
