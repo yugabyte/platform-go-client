@@ -893,6 +893,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/PrometheusHostInfo'
           description: success
+          x-yba-api-visibility: internal
         "400":
           description: Client Error
         "500":
@@ -907,7 +908,7 @@ paths:
       x-yba-api-authz:
         noAuthz: true
       x-yba-api-since: 2024.2.0.0
-      x-yba-api-visibility: preview
+      x-yba-api-visibility: internal
       x-accepts: application/json
   /customers/{cUUID}/universes/{uniUUID}:
     delete:
@@ -2197,6 +2198,7 @@ components:
           schema:
             $ref: '#/components/schemas/PrometheusHostInfo'
       description: success
+      x-yba-api-visibility: internal
     UniverseResp:
       content:
         application/json:
@@ -3197,6 +3199,7 @@ components:
       - use_browser_fqdn
       title: PrometheusHostInfo
       type: object
+      x-yba-api-visibility: internal
     EncryptionAtRestSpec:
       description: Encryption At Rest specification for the Universe. Part of UniverseSpec.
       example:
