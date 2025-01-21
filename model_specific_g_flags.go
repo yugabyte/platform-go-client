@@ -16,6 +16,8 @@ import (
 
 // SpecificGFlags GFlags for current cluster
 type SpecificGFlags struct {
+	// YbaApi Internal. GFlag groups to be applied
+	GflagGroups *[]string `json:"gflagGroups,omitempty"`
 	InheritFromPrimary *bool `json:"inheritFromPrimary,omitempty"`
 	// Overrides for gflags per availability zone
 	PerAZ *map[string]PerProcessFlags `json:"perAZ,omitempty"`
@@ -37,6 +39,38 @@ func NewSpecificGFlags() *SpecificGFlags {
 func NewSpecificGFlagsWithDefaults() *SpecificGFlags {
 	this := SpecificGFlags{}
 	return &this
+}
+
+// GetGflagGroups returns the GflagGroups field value if set, zero value otherwise.
+func (o *SpecificGFlags) GetGflagGroups() []string {
+	if o == nil || o.GflagGroups == nil {
+		var ret []string
+		return ret
+	}
+	return *o.GflagGroups
+}
+
+// GetGflagGroupsOk returns a tuple with the GflagGroups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpecificGFlags) GetGflagGroupsOk() (*[]string, bool) {
+	if o == nil || o.GflagGroups == nil {
+		return nil, false
+	}
+	return o.GflagGroups, true
+}
+
+// HasGflagGroups returns a boolean if a field has been set.
+func (o *SpecificGFlags) HasGflagGroups() bool {
+	if o != nil && o.GflagGroups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGflagGroups gets a reference to the given []string and assigns it to the GflagGroups field.
+func (o *SpecificGFlags) SetGflagGroups(v []string) {
+	o.GflagGroups = &v
 }
 
 // GetInheritFromPrimary returns the InheritFromPrimary field value if set, zero value otherwise.
@@ -137,6 +171,9 @@ func (o *SpecificGFlags) SetPerProcessFlags(v PerProcessFlags) {
 
 func (o SpecificGFlags) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.GflagGroups != nil {
+		toSerialize["gflagGroups"] = o.GflagGroups
+	}
 	if o.InheritFromPrimary != nil {
 		toSerialize["inheritFromPrimary"] = o.InheritFromPrimary
 	}

@@ -20,6 +20,8 @@ type XClusterConfigGetResp struct {
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Dbs *[]string `json:"dbs,omitempty"`
+	// YbaApi Internal. Whether this xCluster replication config was imported
+	Imported *bool `json:"imported,omitempty"`
 	// WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery
 	KeyspacePending *string `json:"keyspacePending,omitempty"`
 	// Lag metric data
@@ -147,6 +149,38 @@ func (o *XClusterConfigGetResp) HasDbs() bool {
 // SetDbs gets a reference to the given []string and assigns it to the Dbs field.
 func (o *XClusterConfigGetResp) SetDbs(v []string) {
 	o.Dbs = &v
+}
+
+// GetImported returns the Imported field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetImported() bool {
+	if o == nil || o.Imported == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Imported
+}
+
+// GetImportedOk returns a tuple with the Imported field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetImportedOk() (*bool, bool) {
+	if o == nil || o.Imported == nil {
+		return nil, false
+	}
+	return o.Imported, true
+}
+
+// HasImported returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasImported() bool {
+	if o != nil && o.Imported != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetImported gets a reference to the given bool and assigns it to the Imported field.
+func (o *XClusterConfigGetResp) SetImported(v bool) {
+	o.Imported = &v
 }
 
 // GetKeyspacePending returns the KeyspacePending field value if set, zero value otherwise.
@@ -876,6 +910,9 @@ func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Dbs != nil {
 		toSerialize["dbs"] = o.Dbs
+	}
+	if o.Imported != nil {
+		toSerialize["imported"] = o.Imported
 	}
 	if o.KeyspacePending != nil {
 		toSerialize["keyspacePending"] = o.KeyspacePending

@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## ListGFlags
 
-> []GFlagDetails ListGFlags(ctx, version).Name(name).Server(server).MostUsedGFlags(mostUsedGFlags).Execute()
+> []GFlagDetails ListGFlags(ctx, version).Name(name).Server(server).MostUsedGFlags(mostUsedGFlags).ShowExperimental(showExperimental).Execute()
 
 List all gflags for a release
 
@@ -109,10 +109,11 @@ func main() {
     name := "name_example" // string |  (optional)
     server := "server_example" // string |  (optional)
     mostUsedGFlags := true // bool |  (optional) (default to false)
+    showExperimental := true // bool |  (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.GFlagsValidationAPIsApi.ListGFlags(context.Background(), version).Name(name).Server(server).MostUsedGFlags(mostUsedGFlags).Execute()
+    resp, r, err := api_client.GFlagsValidationAPIsApi.ListGFlags(context.Background(), version).Name(name).Server(server).MostUsedGFlags(mostUsedGFlags).ShowExperimental(showExperimental).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `GFlagsValidationAPIsApi.ListGFlags``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -141,6 +142,7 @@ Name | Type | Description  | Notes
  **name** | **string** |  | 
  **server** | **string** |  | 
  **mostUsedGFlags** | **bool** |  | [default to false]
+ **showExperimental** | **bool** |  | [default to false]
 
 ### Return type
 

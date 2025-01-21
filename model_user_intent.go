@@ -20,6 +20,7 @@ type UserIntent struct {
 	AssignPublicIP *bool `json:"assignPublicIP,omitempty"`
 	// Whether to assign static public IP
 	AssignStaticPublicIP *bool `json:"assignStaticPublicIP,omitempty"`
+	AuditLogConfig *AuditLogConfig `json:"auditLogConfig,omitempty"`
 	AwsArnString *string `json:"awsArnString,omitempty"`
 	AzOverrides *map[string]string `json:"azOverrides,omitempty"`
 	CgroupSize *int32 `json:"cgroupSize,omitempty"`
@@ -184,6 +185,38 @@ func (o *UserIntent) HasAssignStaticPublicIP() bool {
 // SetAssignStaticPublicIP gets a reference to the given bool and assigns it to the AssignStaticPublicIP field.
 func (o *UserIntent) SetAssignStaticPublicIP(v bool) {
 	o.AssignStaticPublicIP = &v
+}
+
+// GetAuditLogConfig returns the AuditLogConfig field value if set, zero value otherwise.
+func (o *UserIntent) GetAuditLogConfig() AuditLogConfig {
+	if o == nil || o.AuditLogConfig == nil {
+		var ret AuditLogConfig
+		return ret
+	}
+	return *o.AuditLogConfig
+}
+
+// GetAuditLogConfigOk returns a tuple with the AuditLogConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetAuditLogConfigOk() (*AuditLogConfig, bool) {
+	if o == nil || o.AuditLogConfig == nil {
+		return nil, false
+	}
+	return o.AuditLogConfig, true
+}
+
+// HasAuditLogConfig returns a boolean if a field has been set.
+func (o *UserIntent) HasAuditLogConfig() bool {
+	if o != nil && o.AuditLogConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuditLogConfig gets a reference to the given AuditLogConfig and assigns it to the AuditLogConfig field.
+func (o *UserIntent) SetAuditLogConfig(v AuditLogConfig) {
+	o.AuditLogConfig = &v
 }
 
 // GetAwsArnString returns the AwsArnString field value if set, zero value otherwise.
@@ -1700,6 +1733,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.AssignStaticPublicIP != nil {
 		toSerialize["assignStaticPublicIP"] = o.AssignStaticPublicIP
+	}
+	if o.AuditLogConfig != nil {
+		toSerialize["auditLogConfig"] = o.AuditLogConfig
 	}
 	if o.AwsArnString != nil {
 		toSerialize["awsArnString"] = o.AwsArnString

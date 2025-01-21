@@ -17,6 +17,8 @@ import (
 // DatabaseUserFormData struct for DatabaseUserFormData
 type DatabaseUserFormData struct {
 	DbName string `json:"dbName"`
+	// YbaApi Internal.
+	DbRoleAttributes *[]RoleAttribute `json:"dbRoleAttributes,omitempty"`
 	Password string `json:"password"`
 	Username string `json:"username"`
 	YcqlAdminPassword string `json:"ycqlAdminPassword"`
@@ -71,6 +73,38 @@ func (o *DatabaseUserFormData) GetDbNameOk() (*string, bool) {
 // SetDbName sets field value
 func (o *DatabaseUserFormData) SetDbName(v string) {
 	o.DbName = v
+}
+
+// GetDbRoleAttributes returns the DbRoleAttributes field value if set, zero value otherwise.
+func (o *DatabaseUserFormData) GetDbRoleAttributes() []RoleAttribute {
+	if o == nil || o.DbRoleAttributes == nil {
+		var ret []RoleAttribute
+		return ret
+	}
+	return *o.DbRoleAttributes
+}
+
+// GetDbRoleAttributesOk returns a tuple with the DbRoleAttributes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DatabaseUserFormData) GetDbRoleAttributesOk() (*[]RoleAttribute, bool) {
+	if o == nil || o.DbRoleAttributes == nil {
+		return nil, false
+	}
+	return o.DbRoleAttributes, true
+}
+
+// HasDbRoleAttributes returns a boolean if a field has been set.
+func (o *DatabaseUserFormData) HasDbRoleAttributes() bool {
+	if o != nil && o.DbRoleAttributes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDbRoleAttributes gets a reference to the given []RoleAttribute and assigns it to the DbRoleAttributes field.
+func (o *DatabaseUserFormData) SetDbRoleAttributes(v []RoleAttribute) {
+	o.DbRoleAttributes = &v
 }
 
 // GetPassword returns the Password field value
@@ -221,6 +255,9 @@ func (o DatabaseUserFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["dbName"] = o.DbName
+	}
+	if o.DbRoleAttributes != nil {
+		toSerialize["dbRoleAttributes"] = o.DbRoleAttributes
 	}
 	if true {
 		toSerialize["password"] = o.Password

@@ -106,6 +106,8 @@ type APIClient struct {
 
 	PITRManagementApi *PITRManagementApiService
 
+	PackagesControllerApi *PackagesControllerApiService
+
 	PerformanceAdvisorApi *PerformanceAdvisorApiService
 
 	PreviewApi *PreviewApiService
@@ -125,6 +127,12 @@ type APIClient struct {
 	SupportBundleManagementApi *SupportBundleManagementApiService
 
 	TableManagementApi *TableManagementApiService
+
+	TabletServerManagementApi *TabletServerManagementApiService
+
+	TelemetryProviderApi *TelemetryProviderApiService
+
+	TroubleshootingPlatformApi *TroubleshootingPlatformApiService
 
 	UniverseActionsApi *UniverseActionsApiService
 
@@ -147,6 +155,8 @@ type APIClient struct {
 	UploadReleasePackagesApi *UploadReleasePackagesApiService
 
 	UserManagementApi *UserManagementApiService
+
+	YbcManagementApi *YbcManagementApiService
 }
 
 type service struct {
@@ -194,6 +204,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.NodeAgentsApi = (*NodeAgentsApiService)(&c.common)
 	c.NodeInstancesApi = (*NodeInstancesApiService)(&c.common)
 	c.PITRManagementApi = (*PITRManagementApiService)(&c.common)
+	c.PackagesControllerApi = (*PackagesControllerApiService)(&c.common)
 	c.PerformanceAdvisorApi = (*PerformanceAdvisorApiService)(&c.common)
 	c.PreviewApi = (*PreviewApiService)(&c.common)
 	c.RBACManagementApi = (*RBACManagementApiService)(&c.common)
@@ -204,6 +215,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SessionManagementApi = (*SessionManagementApiService)(&c.common)
 	c.SupportBundleManagementApi = (*SupportBundleManagementApiService)(&c.common)
 	c.TableManagementApi = (*TableManagementApiService)(&c.common)
+	c.TabletServerManagementApi = (*TabletServerManagementApiService)(&c.common)
+	c.TelemetryProviderApi = (*TelemetryProviderApiService)(&c.common)
+	c.TroubleshootingPlatformApi = (*TroubleshootingPlatformApiService)(&c.common)
 	c.UniverseActionsApi = (*UniverseActionsApiService)(&c.common)
 	c.UniverseCDCManagementApi = (*UniverseCDCManagementApiService)(&c.common)
 	c.UniverseClusterMutationsApi = (*UniverseClusterMutationsApiService)(&c.common)
@@ -215,6 +229,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.UniverseUpgradesManagementApi = (*UniverseUpgradesManagementApiService)(&c.common)
 	c.UploadReleasePackagesApi = (*UploadReleasePackagesApiService)(&c.common)
 	c.UserManagementApi = (*UserManagementApiService)(&c.common)
+	c.YbcManagementApi = (*YbcManagementApiService)(&c.common)
 
 	return c
 }

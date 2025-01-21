@@ -170,6 +170,7 @@ type GFlagsValidationAPIsApiApiListGFlagsRequest struct {
 	name *string
 	server *string
 	mostUsedGFlags *bool
+	showExperimental *bool
 }
 
 func (r GFlagsValidationAPIsApiApiListGFlagsRequest) Name(name string) GFlagsValidationAPIsApiApiListGFlagsRequest {
@@ -182,6 +183,10 @@ func (r GFlagsValidationAPIsApiApiListGFlagsRequest) Server(server string) GFlag
 }
 func (r GFlagsValidationAPIsApiApiListGFlagsRequest) MostUsedGFlags(mostUsedGFlags bool) GFlagsValidationAPIsApiApiListGFlagsRequest {
 	r.mostUsedGFlags = &mostUsedGFlags
+	return r
+}
+func (r GFlagsValidationAPIsApiApiListGFlagsRequest) ShowExperimental(showExperimental bool) GFlagsValidationAPIsApiApiListGFlagsRequest {
+	r.showExperimental = &showExperimental
 	return r
 }
 
@@ -238,6 +243,9 @@ func (a *GFlagsValidationAPIsApiService) ListGFlagsExecute(r GFlagsValidationAPI
 	}
 	if r.mostUsedGFlags != nil {
 		localVarQueryParams.Add("mostUsedGFlags", parameterToString(*r.mostUsedGFlags, ""))
+	}
+	if r.showExperimental != nil {
+		localVarQueryParams.Add("showExperimental", parameterToString(*r.showExperimental, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

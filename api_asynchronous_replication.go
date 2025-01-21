@@ -737,6 +737,148 @@ func (a *AsynchronousReplicationApiService) NeedBootstrapTableExecute(r Asynchro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest struct {
+	ctx _context.Context
+	ApiService *AsynchronousReplicationApiService
+	cUUID string
+	xccUUID string
+	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
+	request *interface{}
+}
+
+func (r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) XclusterNeedBootstrapFormData(xclusterNeedBootstrapFormData XClusterConfigNeedBootstrapFormData) AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest {
+	r.xclusterNeedBootstrapFormData = &xclusterNeedBootstrapFormData
+	return r
+}
+func (r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) Request(request interface{}) AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest {
+	r.request = &request
+	return r
+}
+
+func (r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) Execute() (map[string]map[string]interface{}, *_nethttp.Response, error) {
+	return r.ApiService.NeedBootstrapXClusterConfigExecute(r)
+}
+
+/*
+ * NeedBootstrapXClusterConfig Whether tables in an xCluster replication config have fallen far behind and need bootstrap
+ * YbaApi Internal.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param xccUUID
+ * @return AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest
+ */
+func (a *AsynchronousReplicationApiService) NeedBootstrapXClusterConfig(ctx _context.Context, cUUID string, xccUUID string) AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest {
+	return AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		xccUUID: xccUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return map[string]map[string]interface{}
+ */
+func (a *AsynchronousReplicationApiService) NeedBootstrapXClusterConfigExecute(r AsynchronousReplicationApiApiNeedBootstrapXClusterConfigRequest) (map[string]map[string]interface{}, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  map[string]map[string]interface{}
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationApiService.NeedBootstrapXClusterConfig")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/xcluster_configs/{xccUUID}/need_bootstrap"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"xccUUID"+"}", _neturl.PathEscape(parameterToString(r.xccUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.xclusterNeedBootstrapFormData == nil {
+		return localVarReturnValue, nil, reportError("xclusterNeedBootstrapFormData is required and must be specified")
+	}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.xclusterNeedBootstrapFormData
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type AsynchronousReplicationApiApiRestartXClusterConfigRequest struct {
 	ctx _context.Context
 	ApiService *AsynchronousReplicationApiService

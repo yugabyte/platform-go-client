@@ -17,6 +17,8 @@ import (
 // ConfigureYSQLFormData YSQL properties
 type ConfigureYSQLFormData struct {
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
+	// YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s.
+	ConnectionPoolingGflags *map[string]string `json:"connectionPoolingGflags,omitempty"`
 	// Enable Connection Pooling for the universe
 	EnableConnectionPooling *bool `json:"enableConnectionPooling,omitempty"`
 	// Enable YSQL Api for the universe
@@ -74,6 +76,38 @@ func (o *ConfigureYSQLFormData) HasCommunicationPorts() bool {
 // SetCommunicationPorts gets a reference to the given CommunicationPorts and assigns it to the CommunicationPorts field.
 func (o *ConfigureYSQLFormData) SetCommunicationPorts(v CommunicationPorts) {
 	o.CommunicationPorts = &v
+}
+
+// GetConnectionPoolingGflags returns the ConnectionPoolingGflags field value if set, zero value otherwise.
+func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]string {
+	if o == nil || o.ConnectionPoolingGflags == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.ConnectionPoolingGflags
+}
+
+// GetConnectionPoolingGflagsOk returns a tuple with the ConnectionPoolingGflags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigureYSQLFormData) GetConnectionPoolingGflagsOk() (*map[string]string, bool) {
+	if o == nil || o.ConnectionPoolingGflags == nil {
+		return nil, false
+	}
+	return o.ConnectionPoolingGflags, true
+}
+
+// HasConnectionPoolingGflags returns a boolean if a field has been set.
+func (o *ConfigureYSQLFormData) HasConnectionPoolingGflags() bool {
+	if o != nil && o.ConnectionPoolingGflags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionPoolingGflags gets a reference to the given map[string]string and assigns it to the ConnectionPoolingGflags field.
+func (o *ConfigureYSQLFormData) SetConnectionPoolingGflags(v map[string]string) {
+	o.ConnectionPoolingGflags = &v
 }
 
 // GetEnableConnectionPooling returns the EnableConnectionPooling field value if set, zero value otherwise.
@@ -208,6 +242,9 @@ func (o ConfigureYSQLFormData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CommunicationPorts != nil {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
+	}
+	if o.ConnectionPoolingGflags != nil {
+		toSerialize["connectionPoolingGflags"] = o.ConnectionPoolingGflags
 	}
 	if o.EnableConnectionPooling != nil {
 		toSerialize["enableConnectionPooling"] = o.EnableConnectionPooling

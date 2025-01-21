@@ -30,6 +30,7 @@ type UniverseResp struct {
 	// Price
 	PricePerHour *float64 `json:"pricePerHour,omitempty"`
 	Resources *UniverseResourceDetails `json:"resources,omitempty"`
+	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
 	// Sample command
 	SampleAppCommandTxt *string `json:"sampleAppCommandTxt,omitempty"`
 	// Task UUID
@@ -316,6 +317,38 @@ func (o *UniverseResp) SetResources(v UniverseResourceDetails) {
 	o.Resources = &v
 }
 
+// GetRollMaxBatchSize returns the RollMaxBatchSize field value if set, zero value otherwise.
+func (o *UniverseResp) GetRollMaxBatchSize() RollMaxBatchSize {
+	if o == nil || o.RollMaxBatchSize == nil {
+		var ret RollMaxBatchSize
+		return ret
+	}
+	return *o.RollMaxBatchSize
+}
+
+// GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool) {
+	if o == nil || o.RollMaxBatchSize == nil {
+		return nil, false
+	}
+	return o.RollMaxBatchSize, true
+}
+
+// HasRollMaxBatchSize returns a boolean if a field has been set.
+func (o *UniverseResp) HasRollMaxBatchSize() bool {
+	if o != nil && o.RollMaxBatchSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRollMaxBatchSize gets a reference to the given RollMaxBatchSize and assigns it to the RollMaxBatchSize field.
+func (o *UniverseResp) SetRollMaxBatchSize(v RollMaxBatchSize) {
+	o.RollMaxBatchSize = &v
+}
+
 // GetSampleAppCommandTxt returns the SampleAppCommandTxt field value if set, zero value otherwise.
 func (o *UniverseResp) GetSampleAppCommandTxt() string {
 	if o == nil || o.SampleAppCommandTxt == nil {
@@ -533,6 +566,9 @@ func (o UniverseResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Resources != nil {
 		toSerialize["resources"] = o.Resources
+	}
+	if o.RollMaxBatchSize != nil {
+		toSerialize["rollMaxBatchSize"] = o.RollMaxBatchSize
 	}
 	if o.SampleAppCommandTxt != nil {
 		toSerialize["sampleAppCommandTxt"] = o.SampleAppCommandTxt

@@ -35,6 +35,8 @@ type UniverseDefinitionTaskParamsResp struct {
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
+	// YbaApi Internal. Install node agent in background if it is true
+	InstallNodeAgent *bool `json:"installNodeAgent,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	// Available since YBA version 2.20.2.0
@@ -47,6 +49,8 @@ type UniverseDefinitionTaskParamsResp struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
+	// YbaApi Internal. OpenTelemetry Collector enabled for universe
+	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
 	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
@@ -602,6 +606,38 @@ func (o *UniverseDefinitionTaskParamsResp) SetImportedState(v string) {
 	o.ImportedState = &v
 }
 
+// GetInstallNodeAgent returns the InstallNodeAgent field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetInstallNodeAgent() bool {
+	if o == nil || o.InstallNodeAgent == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallNodeAgent
+}
+
+// GetInstallNodeAgentOk returns a tuple with the InstallNodeAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetInstallNodeAgentOk() (*bool, bool) {
+	if o == nil || o.InstallNodeAgent == nil {
+		return nil, false
+	}
+	return o.InstallNodeAgent, true
+}
+
+// HasInstallNodeAgent returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasInstallNodeAgent() bool {
+	if o != nil && o.InstallNodeAgent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallNodeAgent gets a reference to the given bool and assigns it to the InstallNodeAgent field.
+func (o *UniverseDefinitionTaskParamsResp) SetInstallNodeAgent(v bool) {
+	o.InstallNodeAgent = &v
+}
+
 // GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParamsResp) GetInstallYbc() bool {
 	if o == nil || o.InstallYbc == nil {
@@ -920,6 +956,38 @@ func (o *UniverseDefinitionTaskParamsResp) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *UniverseDefinitionTaskParamsResp) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetOtelCollectorEnabled returns the OtelCollectorEnabled field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetOtelCollectorEnabled() bool {
+	if o == nil || o.OtelCollectorEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OtelCollectorEnabled
+}
+
+// GetOtelCollectorEnabledOk returns a tuple with the OtelCollectorEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetOtelCollectorEnabledOk() (*bool, bool) {
+	if o == nil || o.OtelCollectorEnabled == nil {
+		return nil, false
+	}
+	return o.OtelCollectorEnabled, true
+}
+
+// HasOtelCollectorEnabled returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasOtelCollectorEnabled() bool {
+	if o != nil && o.OtelCollectorEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOtelCollectorEnabled gets a reference to the given bool and assigns it to the OtelCollectorEnabled field.
+func (o *UniverseDefinitionTaskParamsResp) SetOtelCollectorEnabled(v bool) {
+	o.OtelCollectorEnabled = &v
 }
 
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
@@ -1868,6 +1936,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
+	if o.InstallNodeAgent != nil {
+		toSerialize["installNodeAgent"] = o.InstallNodeAgent
+	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
 	}
@@ -1897,6 +1968,9 @@ func (o UniverseDefinitionTaskParamsResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if o.OtelCollectorEnabled != nil {
+		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled
 	}
 	if o.PlacementModificationTaskUuid != nil {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid

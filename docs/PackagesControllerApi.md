@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Fetch a package
 
+
+
 ### Example
 
 ```go

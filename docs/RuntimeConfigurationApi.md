@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**DeleteKey**](RuntimeConfigurationApi.md#DeleteKey) | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key
 [**GetConfig**](RuntimeConfigurationApi.md#GetConfig) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope} | List configuration entries for a scope
 [**GetConfigurationKey**](RuntimeConfigurationApi.md#GetConfigurationKey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Get a configuration key
+[**ListFeatureFlags**](RuntimeConfigurationApi.md#ListFeatureFlags) | **Get** /api/v1/runtime_config/feature_flags | List all the feature flag runtime config keys and their values.
 [**ListKeyInfo**](RuntimeConfigurationApi.md#ListKeyInfo) | **Get** /api/v1/runtime_config/mutable_key_info | List mutable keys
 [**ListKeys**](RuntimeConfigurationApi.md#ListKeys) | **Get** /api/v1/runtime_config/mutable_keys | List mutable keys
 [**ListScopes**](RuntimeConfigurationApi.md#ListScopes) | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes | List configuration scopes
@@ -237,6 +238,67 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: text/plain
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListFeatureFlags
+
+> []ConfigEntry ListFeatureFlags(ctx).Execute()
+
+List all the feature flag runtime config keys and their values.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.RuntimeConfigurationApi.ListFeatureFlags(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RuntimeConfigurationApi.ListFeatureFlags``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListFeatureFlags`: []ConfigEntry
+    fmt.Fprintf(os.Stdout, "Response from `RuntimeConfigurationApi.ListFeatureFlags`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListFeatureFlagsRequest struct via the builder pattern
+
+
+### Return type
+
+[**[]ConfigEntry**](ConfigEntry.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
