@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListTabletServers**](TabletServerManagementApi.md#ListTabletServers) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablet-servers | List all tablet servers
+[**ListTabletServers**](TabletServerManagementApi.md#ListTabletServers) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablet-servers | List all tablet servers information
 
 
 
@@ -12,7 +12,9 @@ Method | HTTP request | Description
 
 > map[string]map[string]interface{} ListTabletServers(ctx, cUUID, uniUUID).Execute()
 
-List all tablet servers
+List all tablet servers information
+
+
 
 ### Example
 

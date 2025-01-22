@@ -68,6 +68,8 @@ type DrConfigGetResp struct {
 	Uuid *string `json:"uuid,omitempty"`
 	// UUID of the underlying xCluster config that is managing the replication
 	XclusterConfigUuid *string `json:"xclusterConfigUuid,omitempty"`
+	// YbaApi Internal. The list of xCluster configs' uuids that belong to this dr config
+	XclusterConfigsUuid *[]string `json:"xclusterConfigsUuid,omitempty"`
 }
 
 // NewDrConfigGetResp instantiates a new DrConfigGetResp object
@@ -919,6 +921,38 @@ func (o *DrConfigGetResp) SetXclusterConfigUuid(v string) {
 	o.XclusterConfigUuid = &v
 }
 
+// GetXclusterConfigsUuid returns the XclusterConfigsUuid field value if set, zero value otherwise.
+func (o *DrConfigGetResp) GetXclusterConfigsUuid() []string {
+	if o == nil || o.XclusterConfigsUuid == nil {
+		var ret []string
+		return ret
+	}
+	return *o.XclusterConfigsUuid
+}
+
+// GetXclusterConfigsUuidOk returns a tuple with the XclusterConfigsUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetXclusterConfigsUuidOk() (*[]string, bool) {
+	if o == nil || o.XclusterConfigsUuid == nil {
+		return nil, false
+	}
+	return o.XclusterConfigsUuid, true
+}
+
+// HasXclusterConfigsUuid returns a boolean if a field has been set.
+func (o *DrConfigGetResp) HasXclusterConfigsUuid() bool {
+	if o != nil && o.XclusterConfigsUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetXclusterConfigsUuid gets a reference to the given []string and assigns it to the XclusterConfigsUuid field.
+func (o *DrConfigGetResp) SetXclusterConfigsUuid(v []string) {
+	o.XclusterConfigsUuid = &v
+}
+
 func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BootstrapParams != nil {
@@ -998,6 +1032,9 @@ func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.XclusterConfigUuid != nil {
 		toSerialize["xclusterConfigUuid"] = o.XclusterConfigUuid
+	}
+	if o.XclusterConfigsUuid != nil {
+		toSerialize["xclusterConfigsUuid"] = o.XclusterConfigsUuid
 	}
 	return json.Marshal(toSerialize)
 }

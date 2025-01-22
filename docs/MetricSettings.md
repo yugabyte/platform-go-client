@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metric** | **string** | Metric name | 
-**NodeAggregation** | Pointer to **string** | Way of metrics aggregation across nodes | [optional] 
-**ReturnAggregatedValue** | Pointer to **bool** | Defines if we return &#39;mean&#39; line with node lines in case we split nodes | [optional] 
-**SplitCount** | Pointer to **int32** | Defines how many node lines we return in case we split by nodes/tables/etc. | [optional] 
-**SplitMode** | Pointer to **string** | Controls if we split nodes, tables, etc. into own lines OR aggregate  and how we select lines in case of split query | [optional] 
-**SplitType** | Pointer to **string** | Defines set of labels, which we use for a split query | [optional] 
-**TimeAggregation** | Pointer to **string** | Way of metrics aggregation over time | [optional] 
+**AggregatedValueFunction** | Pointer to **string** | YbaApi Internal. Defines the method of metrics aggregation used to obtain additional aggregate time series. The provided aggregator wraps over the final query. Only applicable if &#x60;returnAggregatedValue &#x3D; true&#x60;. | [optional] 
+**Metric** | **string** | YbaApi Internal. Metric name | 
+**NodeAggregation** | Pointer to **string** | YbaApi Internal. Top level aggregation for each metric line. | [optional] 
+**ReturnAggregatedValue** | Pointer to **bool** | YbaApi Internal. Defines if we return additional aggregate time series (ex. avg, min) when we are selecting a subset of time series to return (ex. top K, bottom k). | [optional] 
+**SplitCount** | Pointer to **int32** | YbaApi Internal. Defines how many node lines we return in case we split by nodes/tables/etc. | [optional] 
+**SplitMode** | Pointer to **string** | YbaApi Internal. Controls if we split nodes, tables, etc. into own lines OR aggregate  and how we select lines in case of split query | [optional] 
+**SplitType** | Pointer to **string** | YbaApi Internal. Defines set of labels, which we use for a split query | [optional] 
+**TimeAggregation** | Pointer to **string** | YbaApi Internal. Way of metrics aggregation over time | [optional] 
 
 ## Methods
 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewMetricSettingsWithDefaults instantiates a new MetricSettings object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAggregatedValueFunction
+
+`func (o *MetricSettings) GetAggregatedValueFunction() string`
+
+GetAggregatedValueFunction returns the AggregatedValueFunction field if non-nil, zero value otherwise.
+
+### GetAggregatedValueFunctionOk
+
+`func (o *MetricSettings) GetAggregatedValueFunctionOk() (*string, bool)`
+
+GetAggregatedValueFunctionOk returns a tuple with the AggregatedValueFunction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAggregatedValueFunction
+
+`func (o *MetricSettings) SetAggregatedValueFunction(v string)`
+
+SetAggregatedValueFunction sets AggregatedValueFunction field to given value.
+
+### HasAggregatedValueFunction
+
+`func (o *MetricSettings) HasAggregatedValueFunction() bool`
+
+HasAggregatedValueFunction returns a boolean if a field has been set.
 
 ### GetMetric
 

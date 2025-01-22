@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
+**InstallNodeAgent** | Pointer to **bool** | YbaApi Internal. Install node agent in background if it is true | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
 **IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
@@ -32,6 +33,7 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
+**OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
@@ -522,6 +524,31 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
+### GetInstallNodeAgent
+
+`func (o *UniverseConfigureTaskParams) GetInstallNodeAgent() bool`
+
+GetInstallNodeAgent returns the InstallNodeAgent field if non-nil, zero value otherwise.
+
+### GetInstallNodeAgentOk
+
+`func (o *UniverseConfigureTaskParams) GetInstallNodeAgentOk() (*bool, bool)`
+
+GetInstallNodeAgentOk returns a tuple with the InstallNodeAgent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallNodeAgent
+
+`func (o *UniverseConfigureTaskParams) SetInstallNodeAgent(v bool)`
+
+SetInstallNodeAgent sets InstallNodeAgent field to given value.
+
+### HasInstallNodeAgent
+
+`func (o *UniverseConfigureTaskParams) HasInstallNodeAgent() bool`
+
+HasInstallNodeAgent returns a boolean if a field has been set.
+
 ### GetInstallYbc
 
 `func (o *UniverseConfigureTaskParams) GetInstallYbc() bool`
@@ -771,6 +798,31 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *UniverseConfigureTaskParams) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetOtelCollectorEnabled
+
+`func (o *UniverseConfigureTaskParams) GetOtelCollectorEnabled() bool`
+
+GetOtelCollectorEnabled returns the OtelCollectorEnabled field if non-nil, zero value otherwise.
+
+### GetOtelCollectorEnabledOk
+
+`func (o *UniverseConfigureTaskParams) GetOtelCollectorEnabledOk() (*bool, bool)`
+
+GetOtelCollectorEnabledOk returns a tuple with the OtelCollectorEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtelCollectorEnabled
+
+`func (o *UniverseConfigureTaskParams) SetOtelCollectorEnabled(v bool)`
+
+SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
+
+### HasOtelCollectorEnabled
+
+`func (o *UniverseConfigureTaskParams) HasOtelCollectorEnabled() bool`
+
+HasOtelCollectorEnabled returns a boolean if a field has been set.
 
 ### GetPlacementModificationTaskUuid
 

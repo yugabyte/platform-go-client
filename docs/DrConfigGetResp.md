@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | Whether the config is basic, txn, or db scoped xCluster | [optional] 
 **Uuid** | Pointer to **string** | DR config UUID | [optional] 
 **XclusterConfigUuid** | Pointer to **string** | UUID of the underlying xCluster config that is managing the replication | [optional] 
+**XclusterConfigsUuid** | Pointer to **[]string** | YbaApi Internal. The list of xCluster configs&#39; uuids that belong to this dr config | [optional] 
 
 ## Methods
 
@@ -699,6 +700,31 @@ SetXclusterConfigUuid sets XclusterConfigUuid field to given value.
 `func (o *DrConfigGetResp) HasXclusterConfigUuid() bool`
 
 HasXclusterConfigUuid returns a boolean if a field has been set.
+
+### GetXclusterConfigsUuid
+
+`func (o *DrConfigGetResp) GetXclusterConfigsUuid() []string`
+
+GetXclusterConfigsUuid returns the XclusterConfigsUuid field if non-nil, zero value otherwise.
+
+### GetXclusterConfigsUuidOk
+
+`func (o *DrConfigGetResp) GetXclusterConfigsUuidOk() (*[]string, bool)`
+
+GetXclusterConfigsUuidOk returns a tuple with the XclusterConfigsUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXclusterConfigsUuid
+
+`func (o *DrConfigGetResp) SetXclusterConfigsUuid(v []string)`
+
+SetXclusterConfigsUuid sets XclusterConfigsUuid field to given value.
+
+### HasXclusterConfigsUuid
+
+`func (o *DrConfigGetResp) HasXclusterConfigsUuid() bool`
+
+HasXclusterConfigsUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

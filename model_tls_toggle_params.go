@@ -37,6 +37,8 @@ type TlsToggleParams struct {
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
 	ImportedState *string `json:"importedState,omitempty"`
+	// YbaApi Internal. Install node agent in background if it is true
+	InstallNodeAgent *bool `json:"installNodeAgent,omitempty"`
 	InstallYbc *bool `json:"installYbc,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	// Available since YBA version 2.20.2.0
@@ -51,6 +53,8 @@ type TlsToggleParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
+	// YbaApi Internal. OpenTelemetry Collector enabled for universe
+	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
 	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
@@ -59,9 +63,12 @@ type TlsToggleParams struct {
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
+	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
 	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
 	RootCA *string `json:"rootCA,omitempty"`
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
+	// YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade
+	SkipNodeChecks *bool `json:"skipNodeChecks,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	SoftwareUpgradeState *string `json:"softwareUpgradeState,omitempty"`
@@ -652,6 +659,38 @@ func (o *TlsToggleParams) SetImportedState(v string) {
 	o.ImportedState = &v
 }
 
+// GetInstallNodeAgent returns the InstallNodeAgent field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetInstallNodeAgent() bool {
+	if o == nil || o.InstallNodeAgent == nil {
+		var ret bool
+		return ret
+	}
+	return *o.InstallNodeAgent
+}
+
+// GetInstallNodeAgentOk returns a tuple with the InstallNodeAgent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetInstallNodeAgentOk() (*bool, bool) {
+	if o == nil || o.InstallNodeAgent == nil {
+		return nil, false
+	}
+	return o.InstallNodeAgent, true
+}
+
+// HasInstallNodeAgent returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasInstallNodeAgent() bool {
+	if o != nil && o.InstallNodeAgent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallNodeAgent gets a reference to the given bool and assigns it to the InstallNodeAgent field.
+func (o *TlsToggleParams) SetInstallNodeAgent(v bool) {
+	o.InstallNodeAgent = &v
+}
+
 // GetInstallYbc returns the InstallYbc field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetInstallYbc() bool {
 	if o == nil || o.InstallYbc == nil {
@@ -996,6 +1035,38 @@ func (o *TlsToggleParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
 }
 
+// GetOtelCollectorEnabled returns the OtelCollectorEnabled field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetOtelCollectorEnabled() bool {
+	if o == nil || o.OtelCollectorEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OtelCollectorEnabled
+}
+
+// GetOtelCollectorEnabledOk returns a tuple with the OtelCollectorEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetOtelCollectorEnabledOk() (*bool, bool) {
+	if o == nil || o.OtelCollectorEnabled == nil {
+		return nil, false
+	}
+	return o.OtelCollectorEnabled, true
+}
+
+// HasOtelCollectorEnabled returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasOtelCollectorEnabled() bool {
+	if o != nil && o.OtelCollectorEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOtelCollectorEnabled gets a reference to the given bool and assigns it to the OtelCollectorEnabled field.
+func (o *TlsToggleParams) SetOtelCollectorEnabled(v bool) {
+	o.OtelCollectorEnabled = &v
+}
+
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetPlacementModificationTaskUuid() string {
 	if o == nil || o.PlacementModificationTaskUuid == nil {
@@ -1204,6 +1275,38 @@ func (o *TlsToggleParams) SetResetAZConfig(v bool) {
 	o.ResetAZConfig = &v
 }
 
+// GetRollMaxBatchSize returns the RollMaxBatchSize field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetRollMaxBatchSize() RollMaxBatchSize {
+	if o == nil || o.RollMaxBatchSize == nil {
+		var ret RollMaxBatchSize
+		return ret
+	}
+	return *o.RollMaxBatchSize
+}
+
+// GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool) {
+	if o == nil || o.RollMaxBatchSize == nil {
+		return nil, false
+	}
+	return o.RollMaxBatchSize, true
+}
+
+// HasRollMaxBatchSize returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasRollMaxBatchSize() bool {
+	if o != nil && o.RollMaxBatchSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRollMaxBatchSize gets a reference to the given RollMaxBatchSize and assigns it to the RollMaxBatchSize field.
+func (o *TlsToggleParams) SetRollMaxBatchSize(v RollMaxBatchSize) {
+	o.RollMaxBatchSize = &v
+}
+
 // GetRootAndClientRootCASame returns the RootAndClientRootCASame field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetRootAndClientRootCASame() bool {
 	if o == nil || o.RootAndClientRootCASame == nil {
@@ -1298,6 +1401,38 @@ func (o *TlsToggleParams) HasSetTxnTableWaitCountFlag() bool {
 // SetSetTxnTableWaitCountFlag gets a reference to the given bool and assigns it to the SetTxnTableWaitCountFlag field.
 func (o *TlsToggleParams) SetSetTxnTableWaitCountFlag(v bool) {
 	o.SetTxnTableWaitCountFlag = &v
+}
+
+// GetSkipNodeChecks returns the SkipNodeChecks field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetSkipNodeChecks() bool {
+	if o == nil || o.SkipNodeChecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SkipNodeChecks
+}
+
+// GetSkipNodeChecksOk returns a tuple with the SkipNodeChecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetSkipNodeChecksOk() (*bool, bool) {
+	if o == nil || o.SkipNodeChecks == nil {
+		return nil, false
+	}
+	return o.SkipNodeChecks, true
+}
+
+// HasSkipNodeChecks returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasSkipNodeChecks() bool {
+	if o != nil && o.SkipNodeChecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSkipNodeChecks gets a reference to the given bool and assigns it to the SkipNodeChecks field.
+func (o *TlsToggleParams) SetSkipNodeChecks(v bool) {
+	o.SkipNodeChecks = &v
 }
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
@@ -1972,6 +2107,9 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.ImportedState != nil {
 		toSerialize["importedState"] = o.ImportedState
 	}
+	if o.InstallNodeAgent != nil {
+		toSerialize["installNodeAgent"] = o.InstallNodeAgent
+	}
 	if o.InstallYbc != nil {
 		toSerialize["installYbc"] = o.InstallYbc
 	}
@@ -2005,6 +2143,9 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.NodesResizeAvailable != nil {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
 	}
+	if o.OtelCollectorEnabled != nil {
+		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled
+	}
 	if o.PlacementModificationTaskUuid != nil {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
@@ -2026,6 +2167,9 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	if o.ResetAZConfig != nil {
 		toSerialize["resetAZConfig"] = o.ResetAZConfig
 	}
+	if o.RollMaxBatchSize != nil {
+		toSerialize["rollMaxBatchSize"] = o.RollMaxBatchSize
+	}
 	if o.RootAndClientRootCASame != nil {
 		toSerialize["rootAndClientRootCASame"] = o.RootAndClientRootCASame
 	}
@@ -2034,6 +2178,9 @@ func (o TlsToggleParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SetTxnTableWaitCountFlag != nil {
 		toSerialize["setTxnTableWaitCountFlag"] = o.SetTxnTableWaitCountFlag
+	}
+	if o.SkipNodeChecks != nil {
+		toSerialize["skipNodeChecks"] = o.SkipNodeChecks
 	}
 	if true {
 		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DbName** | **string** |  | 
+**DbRoleAttributes** | Pointer to [**[]RoleAttribute**](RoleAttribute.md) | YbaApi Internal. | [optional] 
 **Password** | **string** |  | 
 **Username** | **string** |  | 
 **YcqlAdminPassword** | **string** |  | 
@@ -50,6 +51,31 @@ and a boolean to check if the value has been set.
 
 SetDbName sets DbName field to given value.
 
+
+### GetDbRoleAttributes
+
+`func (o *DatabaseUserFormData) GetDbRoleAttributes() []RoleAttribute`
+
+GetDbRoleAttributes returns the DbRoleAttributes field if non-nil, zero value otherwise.
+
+### GetDbRoleAttributesOk
+
+`func (o *DatabaseUserFormData) GetDbRoleAttributesOk() (*[]RoleAttribute, bool)`
+
+GetDbRoleAttributesOk returns a tuple with the DbRoleAttributes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDbRoleAttributes
+
+`func (o *DatabaseUserFormData) SetDbRoleAttributes(v []RoleAttribute)`
+
+SetDbRoleAttributes sets DbRoleAttributes field to given value.
+
+### HasDbRoleAttributes
+
+`func (o *DatabaseUserFormData) HasDbRoleAttributes() bool`
+
+HasDbRoleAttributes returns a boolean if a field has been set.
 
 ### GetPassword
 

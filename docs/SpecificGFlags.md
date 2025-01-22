@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**GflagGroups** | Pointer to **[]string** | YbaApi Internal. GFlag groups to be applied | [optional] 
 **InheritFromPrimary** | Pointer to **bool** |  | [optional] 
 **PerAZ** | Pointer to [**map[string]PerProcessFlags**](PerProcessFlags.md) | Overrides for gflags per availability zone | [optional] 
 **PerProcessFlags** | Pointer to [**PerProcessFlags**](PerProcessFlags.md) |  | [optional] 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewSpecificGFlagsWithDefaults instantiates a new SpecificGFlags object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetGflagGroups
+
+`func (o *SpecificGFlags) GetGflagGroups() []string`
+
+GetGflagGroups returns the GflagGroups field if non-nil, zero value otherwise.
+
+### GetGflagGroupsOk
+
+`func (o *SpecificGFlags) GetGflagGroupsOk() (*[]string, bool)`
+
+GetGflagGroupsOk returns a tuple with the GflagGroups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGflagGroups
+
+`func (o *SpecificGFlags) SetGflagGroups(v []string)`
+
+SetGflagGroups sets GflagGroups field to given value.
+
+### HasGflagGroups
+
+`func (o *SpecificGFlags) HasGflagGroups() bool`
+
+HasGflagGroups returns a boolean if a field has been set.
 
 ### GetInheritFromPrimary
 

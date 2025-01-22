@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
 **Dbs** | Pointer to **[]string** |  | [optional] [readonly] 
+**Imported** | Pointer to **bool** | YbaApi Internal. Whether this xCluster replication config was imported | [optional] 
 **KeyspacePending** | Pointer to **string** | WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery | [optional] 
 **Lag** | **map[string]interface{}** | Lag metric data | 
 **ModifyTime** | Pointer to **time.Time** | Last modify time of the xCluster config | [optional] 
@@ -98,6 +99,31 @@ SetDbs sets Dbs field to given value.
 `func (o *XClusterConfigGetResp) HasDbs() bool`
 
 HasDbs returns a boolean if a field has been set.
+
+### GetImported
+
+`func (o *XClusterConfigGetResp) GetImported() bool`
+
+GetImported returns the Imported field if non-nil, zero value otherwise.
+
+### GetImportedOk
+
+`func (o *XClusterConfigGetResp) GetImportedOk() (*bool, bool)`
+
+GetImportedOk returns a tuple with the Imported field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImported
+
+`func (o *XClusterConfigGetResp) SetImported(v bool)`
+
+SetImported sets Imported field to given value.
+
+### HasImported
+
+`func (o *XClusterConfigGetResp) HasImported() bool`
+
+HasImported returns a boolean if a field has been set.
 
 ### GetKeyspacePending
 

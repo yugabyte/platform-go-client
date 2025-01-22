@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Universe name | [optional] 
 **PricePerHour** | Pointer to **float64** | Price | [optional] 
 **Resources** | Pointer to [**UniverseResourceDetails**](UniverseResourceDetails.md) |  | [optional] 
+**RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **SampleAppCommandTxt** | Pointer to **string** | Sample command | [optional] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] 
 **UniverseConfig** | Pointer to **map[string]string** | Universe configuration | [optional] 
@@ -237,6 +238,31 @@ SetResources sets Resources field to given value.
 `func (o *UniverseResp) HasResources() bool`
 
 HasResources returns a boolean if a field has been set.
+
+### GetRollMaxBatchSize
+
+`func (o *UniverseResp) GetRollMaxBatchSize() RollMaxBatchSize`
+
+GetRollMaxBatchSize returns the RollMaxBatchSize field if non-nil, zero value otherwise.
+
+### GetRollMaxBatchSizeOk
+
+`func (o *UniverseResp) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool)`
+
+GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollMaxBatchSize
+
+`func (o *UniverseResp) SetRollMaxBatchSize(v RollMaxBatchSize)`
+
+SetRollMaxBatchSize sets RollMaxBatchSize field to given value.
+
+### HasRollMaxBatchSize
+
+`func (o *UniverseResp) HasRollMaxBatchSize() bool`
+
+HasRollMaxBatchSize returns a boolean if a field has been set.
 
 ### GetSampleAppCommandTxt
 

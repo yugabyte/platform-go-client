@@ -20,6 +20,12 @@ type XClusterTableConfig struct {
 	BackupUuid string `json:"backupUuid"`
 	// Time of the bootstrap of the table
 	BootstrapCreateTime *time.Time `json:"bootstrapCreateTime,omitempty"`
+	// YbaApi Internal. Whether this table is an index table and its main table is in replication
+	IndexTable *bool `json:"indexTable,omitempty"`
+	// YbaApi Internal. Whether this table needs bootstrap process for replication setup
+	NeedBootstrap *bool `json:"needBootstrap,omitempty"`
+	// YbaApi Internal. Whether replication is set up for this table
+	ReplicationSetupDone *bool `json:"replicationSetupDone,omitempty"`
 	// Short human readable replication status error messages
 	ReplicationStatusErrors *[]string `json:"replicationStatusErrors,omitempty"`
 	// Time of the last try to restore data to the target universe
@@ -108,6 +114,102 @@ func (o *XClusterTableConfig) HasBootstrapCreateTime() bool {
 // SetBootstrapCreateTime gets a reference to the given time.Time and assigns it to the BootstrapCreateTime field.
 func (o *XClusterTableConfig) SetBootstrapCreateTime(v time.Time) {
 	o.BootstrapCreateTime = &v
+}
+
+// GetIndexTable returns the IndexTable field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetIndexTable() bool {
+	if o == nil || o.IndexTable == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IndexTable
+}
+
+// GetIndexTableOk returns a tuple with the IndexTable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetIndexTableOk() (*bool, bool) {
+	if o == nil || o.IndexTable == nil {
+		return nil, false
+	}
+	return o.IndexTable, true
+}
+
+// HasIndexTable returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasIndexTable() bool {
+	if o != nil && o.IndexTable != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexTable gets a reference to the given bool and assigns it to the IndexTable field.
+func (o *XClusterTableConfig) SetIndexTable(v bool) {
+	o.IndexTable = &v
+}
+
+// GetNeedBootstrap returns the NeedBootstrap field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetNeedBootstrap() bool {
+	if o == nil || o.NeedBootstrap == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NeedBootstrap
+}
+
+// GetNeedBootstrapOk returns a tuple with the NeedBootstrap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetNeedBootstrapOk() (*bool, bool) {
+	if o == nil || o.NeedBootstrap == nil {
+		return nil, false
+	}
+	return o.NeedBootstrap, true
+}
+
+// HasNeedBootstrap returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasNeedBootstrap() bool {
+	if o != nil && o.NeedBootstrap != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNeedBootstrap gets a reference to the given bool and assigns it to the NeedBootstrap field.
+func (o *XClusterTableConfig) SetNeedBootstrap(v bool) {
+	o.NeedBootstrap = &v
+}
+
+// GetReplicationSetupDone returns the ReplicationSetupDone field value if set, zero value otherwise.
+func (o *XClusterTableConfig) GetReplicationSetupDone() bool {
+	if o == nil || o.ReplicationSetupDone == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ReplicationSetupDone
+}
+
+// GetReplicationSetupDoneOk returns a tuple with the ReplicationSetupDone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterTableConfig) GetReplicationSetupDoneOk() (*bool, bool) {
+	if o == nil || o.ReplicationSetupDone == nil {
+		return nil, false
+	}
+	return o.ReplicationSetupDone, true
+}
+
+// HasReplicationSetupDone returns a boolean if a field has been set.
+func (o *XClusterTableConfig) HasReplicationSetupDone() bool {
+	if o != nil && o.ReplicationSetupDone != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplicationSetupDone gets a reference to the given bool and assigns it to the ReplicationSetupDone field.
+func (o *XClusterTableConfig) SetReplicationSetupDone(v bool) {
+	o.ReplicationSetupDone = &v
 }
 
 // GetReplicationStatusErrors returns the ReplicationStatusErrors field value if set, zero value otherwise.
@@ -365,6 +467,15 @@ func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.BootstrapCreateTime != nil {
 		toSerialize["bootstrapCreateTime"] = o.BootstrapCreateTime
+	}
+	if o.IndexTable != nil {
+		toSerialize["indexTable"] = o.IndexTable
+	}
+	if o.NeedBootstrap != nil {
+		toSerialize["needBootstrap"] = o.NeedBootstrap
+	}
+	if o.ReplicationSetupDone != nil {
+		toSerialize["replicationSetupDone"] = o.ReplicationSetupDone
 	}
 	if o.ReplicationStatusErrors != nil {
 		toSerialize["replicationStatusErrors"] = o.ReplicationStatusErrors

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
+**InstallNodeAgent** | Pointer to **bool** | YbaApi Internal. Install node agent in background if it is true | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
 **IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
@@ -31,6 +32,7 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
+**OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
@@ -38,9 +40,11 @@ Name | Type | Description | Notes
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
+**RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
 **RootCA** | Pointer to **string** |  | [optional] 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
+**SkipNodeChecks** | Pointer to **bool** | YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
@@ -473,6 +477,31 @@ SetImportedState sets ImportedState field to given value.
 
 HasImportedState returns a boolean if a field has been set.
 
+### GetInstallNodeAgent
+
+`func (o *SoftwareUpgradeParams) GetInstallNodeAgent() bool`
+
+GetInstallNodeAgent returns the InstallNodeAgent field if non-nil, zero value otherwise.
+
+### GetInstallNodeAgentOk
+
+`func (o *SoftwareUpgradeParams) GetInstallNodeAgentOk() (*bool, bool)`
+
+GetInstallNodeAgentOk returns a tuple with the InstallNodeAgent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstallNodeAgent
+
+`func (o *SoftwareUpgradeParams) SetInstallNodeAgent(v bool)`
+
+SetInstallNodeAgent sets InstallNodeAgent field to given value.
+
+### HasInstallNodeAgent
+
+`func (o *SoftwareUpgradeParams) HasInstallNodeAgent() bool`
+
+HasInstallNodeAgent returns a boolean if a field has been set.
+
 ### GetInstallYbc
 
 `func (o *SoftwareUpgradeParams) GetInstallYbc() bool`
@@ -743,6 +772,31 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
 
+### GetOtelCollectorEnabled
+
+`func (o *SoftwareUpgradeParams) GetOtelCollectorEnabled() bool`
+
+GetOtelCollectorEnabled returns the OtelCollectorEnabled field if non-nil, zero value otherwise.
+
+### GetOtelCollectorEnabledOk
+
+`func (o *SoftwareUpgradeParams) GetOtelCollectorEnabledOk() (*bool, bool)`
+
+GetOtelCollectorEnabledOk returns a tuple with the OtelCollectorEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOtelCollectorEnabled
+
+`func (o *SoftwareUpgradeParams) SetOtelCollectorEnabled(v bool)`
+
+SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
+
+### HasOtelCollectorEnabled
+
+`func (o *SoftwareUpgradeParams) HasOtelCollectorEnabled() bool`
+
+HasOtelCollectorEnabled returns a boolean if a field has been set.
+
 ### GetPlacementModificationTaskUuid
 
 `func (o *SoftwareUpgradeParams) GetPlacementModificationTaskUuid() string`
@@ -908,6 +962,31 @@ SetResetAZConfig sets ResetAZConfig field to given value.
 
 HasResetAZConfig returns a boolean if a field has been set.
 
+### GetRollMaxBatchSize
+
+`func (o *SoftwareUpgradeParams) GetRollMaxBatchSize() RollMaxBatchSize`
+
+GetRollMaxBatchSize returns the RollMaxBatchSize field if non-nil, zero value otherwise.
+
+### GetRollMaxBatchSizeOk
+
+`func (o *SoftwareUpgradeParams) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool)`
+
+GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollMaxBatchSize
+
+`func (o *SoftwareUpgradeParams) SetRollMaxBatchSize(v RollMaxBatchSize)`
+
+SetRollMaxBatchSize sets RollMaxBatchSize field to given value.
+
+### HasRollMaxBatchSize
+
+`func (o *SoftwareUpgradeParams) HasRollMaxBatchSize() bool`
+
+HasRollMaxBatchSize returns a boolean if a field has been set.
+
 ### GetRootAndClientRootCASame
 
 `func (o *SoftwareUpgradeParams) GetRootAndClientRootCASame() bool`
@@ -982,6 +1061,31 @@ SetSetTxnTableWaitCountFlag sets SetTxnTableWaitCountFlag field to given value.
 `func (o *SoftwareUpgradeParams) HasSetTxnTableWaitCountFlag() bool`
 
 HasSetTxnTableWaitCountFlag returns a boolean if a field has been set.
+
+### GetSkipNodeChecks
+
+`func (o *SoftwareUpgradeParams) GetSkipNodeChecks() bool`
+
+GetSkipNodeChecks returns the SkipNodeChecks field if non-nil, zero value otherwise.
+
+### GetSkipNodeChecksOk
+
+`func (o *SoftwareUpgradeParams) GetSkipNodeChecksOk() (*bool, bool)`
+
+GetSkipNodeChecksOk returns a tuple with the SkipNodeChecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkipNodeChecks
+
+`func (o *SoftwareUpgradeParams) SetSkipNodeChecks(v bool)`
+
+SetSkipNodeChecks sets SkipNodeChecks field to given value.
+
+### HasSkipNodeChecks
+
+`func (o *SoftwareUpgradeParams) HasSkipNodeChecks() bool`
+
+HasSkipNodeChecks returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

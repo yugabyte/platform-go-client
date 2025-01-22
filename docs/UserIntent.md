@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AccessKeyCode** | Pointer to **string** |  | [optional] 
 **AssignPublicIP** | Pointer to **bool** |  | [optional] 
 **AssignStaticPublicIP** | Pointer to **bool** | Whether to assign static public IP | [optional] 
+**AuditLogConfig** | Pointer to [**AuditLogConfig**](AuditLogConfig.md) |  | [optional] 
 **AwsArnString** | Pointer to **string** |  | [optional] 
 **AzOverrides** | Pointer to **map[string]string** |  | [optional] 
 **CgroupSize** | Pointer to **int32** |  | [optional] 
@@ -148,6 +149,31 @@ SetAssignStaticPublicIP sets AssignStaticPublicIP field to given value.
 `func (o *UserIntent) HasAssignStaticPublicIP() bool`
 
 HasAssignStaticPublicIP returns a boolean if a field has been set.
+
+### GetAuditLogConfig
+
+`func (o *UserIntent) GetAuditLogConfig() AuditLogConfig`
+
+GetAuditLogConfig returns the AuditLogConfig field if non-nil, zero value otherwise.
+
+### GetAuditLogConfigOk
+
+`func (o *UserIntent) GetAuditLogConfigOk() (*AuditLogConfig, bool)`
+
+GetAuditLogConfigOk returns a tuple with the AuditLogConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuditLogConfig
+
+`func (o *UserIntent) SetAuditLogConfig(v AuditLogConfig)`
+
+SetAuditLogConfig sets AuditLogConfig field to given value.
+
+### HasAuditLogConfig
+
+`func (o *UserIntent) HasAuditLogConfig() bool`
+
+HasAuditLogConfig returns a boolean if a field has been set.
 
 ### GetAwsArnString
 

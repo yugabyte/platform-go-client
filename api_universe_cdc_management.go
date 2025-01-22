@@ -27,6 +27,357 @@ var (
 // UniverseCDCManagementApiService UniverseCDCManagementApi service
 type UniverseCDCManagementApiService service
 
+type UniverseCDCManagementApiApiCreateCdcStreamRequest struct {
+	ctx _context.Context
+	ApiService *UniverseCDCManagementApiService
+	cUUID string
+	uniUUID string
+	request *interface{}
+}
+
+func (r UniverseCDCManagementApiApiCreateCdcStreamRequest) Request(request interface{}) UniverseCDCManagementApiApiCreateCdcStreamRequest {
+	r.request = &request
+	return r
+}
+
+func (r UniverseCDCManagementApiApiCreateCdcStreamRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.CreateCdcStreamExecute(r)
+}
+
+/*
+ * CreateCdcStream Create CDC Stream for a cluster
+ * YbaApi Internal.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseCDCManagementApiApiCreateCdcStreamRequest
+ */
+func (a *UniverseCDCManagementApiService) CreateCdcStream(ctx _context.Context, cUUID string, uniUUID string) UniverseCDCManagementApiApiCreateCdcStreamRequest {
+	return UniverseCDCManagementApiApiCreateCdcStreamRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *UniverseCDCManagementApiService) CreateCdcStreamExecute(r UniverseCDCManagementApiApiCreateCdcStreamRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementApiService.CreateCdcStream")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.request != nil {
+		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type UniverseCDCManagementApiApiDeleteCdcStreamRequest struct {
+	ctx _context.Context
+	ApiService *UniverseCDCManagementApiService
+	cUUID string
+	uniUUID string
+	streamId string
+}
+
+
+func (r UniverseCDCManagementApiApiDeleteCdcStreamRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteCdcStreamExecute(r)
+}
+
+/*
+ * DeleteCdcStream Delete a CDC stream for a cluster
+ * YbaApi Internal.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @param streamId
+ * @return UniverseCDCManagementApiApiDeleteCdcStreamRequest
+ */
+func (a *UniverseCDCManagementApiService) DeleteCdcStream(ctx _context.Context, cUUID string, uniUUID string, streamId string) UniverseCDCManagementApiApiDeleteCdcStreamRequest {
+	return UniverseCDCManagementApiApiDeleteCdcStreamRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+		streamId: streamId,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *UniverseCDCManagementApiService) DeleteCdcStreamExecute(r UniverseCDCManagementApiApiDeleteCdcStreamRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementApiService.DeleteCdcStream")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"streamId"+"}", _neturl.PathEscape(parameterToString(r.streamId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type UniverseCDCManagementApiApiListCdcStreamsRequest struct {
+	ctx _context.Context
+	ApiService *UniverseCDCManagementApiService
+	cUUID string
+	uniUUID string
+}
+
+
+func (r UniverseCDCManagementApiApiListCdcStreamsRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.ListCdcStreamsExecute(r)
+}
+
+/*
+ * ListCdcStreams List CDC Streams for a cluster
+ * YbaApi Internal.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param cUUID
+ * @param uniUUID
+ * @return UniverseCDCManagementApiApiListCdcStreamsRequest
+ */
+func (a *UniverseCDCManagementApiService) ListCdcStreams(ctx _context.Context, cUUID string, uniUUID string) UniverseCDCManagementApiApiListCdcStreamsRequest {
+	return UniverseCDCManagementApiApiListCdcStreamsRequest{
+		ApiService: a,
+		ctx: ctx,
+		cUUID: cUUID,
+		uniUUID: uniUUID,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *UniverseCDCManagementApiService) ListCdcStreamsExecute(r UniverseCDCManagementApiApiListCdcStreamsRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementApiService.ListCdcStreams")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type UniverseCDCManagementApiApiListReplicationSlotRequest struct {
 	ctx _context.Context
 	ApiService *UniverseCDCManagementApiService
