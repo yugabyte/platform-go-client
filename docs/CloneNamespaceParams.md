@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
+**PitrConfigUUID** | Pointer to **string** | PITR Config UUID | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
@@ -367,6 +368,31 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 `func (o *CloneNamespaceParams) HasNodeExporterUser() bool`
 
 HasNodeExporterUser returns a boolean if a field has been set.
+
+### GetPitrConfigUUID
+
+`func (o *CloneNamespaceParams) GetPitrConfigUUID() string`
+
+GetPitrConfigUUID returns the PitrConfigUUID field if non-nil, zero value otherwise.
+
+### GetPitrConfigUUIDOk
+
+`func (o *CloneNamespaceParams) GetPitrConfigUUIDOk() (*string, bool)`
+
+GetPitrConfigUUIDOk returns a tuple with the PitrConfigUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPitrConfigUUID
+
+`func (o *CloneNamespaceParams) SetPitrConfigUUID(v string)`
+
+SetPitrConfigUUID sets PitrConfigUUID field to given value.
+
+### HasPitrConfigUUID
+
+`func (o *CloneNamespaceParams) HasPitrConfigUUID() bool`
+
+HasPitrConfigUUID returns a boolean if a field has been set.
 
 ### GetPlatformUrl
 

@@ -1813,7 +1813,7 @@ Name | Type | Description  | Notes
 
 ## ListAlertDestinations
 
-> []AlertDefinition ListAlertDestinations(ctx, cUUID).Execute()
+> []AlertDestination ListAlertDestinations(ctx, cUUID).Execute()
 
 List alert destinations
 
@@ -1841,7 +1841,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertDestinations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListAlertDestinations`: []AlertDefinition
+    // response from `ListAlertDestinations`: []AlertDestination
     fmt.Fprintf(os.Stdout, "Response from `AlertsApi.ListAlertDestinations`: %v\n", resp)
 }
 ```
@@ -1865,7 +1865,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AlertDefinition**](AlertDefinition.md)
+[**[]AlertDestination**](AlertDestination.md)
 
 ### Authorization
 

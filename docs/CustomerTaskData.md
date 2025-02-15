@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Abortable** | Pointer to **bool** | Customer task abortable | [optional] 
+**CanRollback** | Pointer to **bool** | Whether the Customer task can be rolled back | [optional] 
 **CompletionTime** | Pointer to **time.Time** | Customer task completion time | [optional] 
 **CorrelationId** | Pointer to **string** | Correlation id | [optional] 
 **CreateTime** | Pointer to **time.Time** | Customer task creation time | [optional] 
@@ -62,6 +63,31 @@ SetAbortable sets Abortable field to given value.
 `func (o *CustomerTaskData) HasAbortable() bool`
 
 HasAbortable returns a boolean if a field has been set.
+
+### GetCanRollback
+
+`func (o *CustomerTaskData) GetCanRollback() bool`
+
+GetCanRollback returns the CanRollback field if non-nil, zero value otherwise.
+
+### GetCanRollbackOk
+
+`func (o *CustomerTaskData) GetCanRollbackOk() (*bool, bool)`
+
+GetCanRollbackOk returns a tuple with the CanRollback field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanRollback
+
+`func (o *CustomerTaskData) SetCanRollback(v bool)`
+
+SetCanRollback sets CanRollback field to given value.
+
+### HasCanRollback
+
+`func (o *CustomerTaskData) HasCanRollback() bool`
+
+HasCanRollback returns a boolean if a field has been set.
 
 ### GetCompletionTime
 

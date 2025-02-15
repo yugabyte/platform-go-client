@@ -16,8 +16,13 @@ import (
 
 // KubernetesRegionInfo struct for KubernetesRegionInfo
 type KubernetesRegionInfo struct {
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
 	CertManagerClusterIssuer *string `json:"certManagerClusterIssuer,omitempty"`
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
 	CertManagerIssuer *string `json:"certManagerIssuer,omitempty"`
+	CertManagerIssuerGroup *string `json:"certManagerIssuerGroup,omitempty"`
+	CertManagerIssuerKind *string `json:"certManagerIssuerKind,omitempty"`
+	CertManagerIssuerName *string `json:"certManagerIssuerName,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	KubeConfig *string `json:"kubeConfig,omitempty"`
 	KubeConfigContent *string `json:"kubeConfigContent,omitempty"`
@@ -118,6 +123,102 @@ func (o *KubernetesRegionInfo) HasCertManagerIssuer() bool {
 // SetCertManagerIssuer gets a reference to the given string and assigns it to the CertManagerIssuer field.
 func (o *KubernetesRegionInfo) SetCertManagerIssuer(v string) {
 	o.CertManagerIssuer = &v
+}
+
+// GetCertManagerIssuerGroup returns the CertManagerIssuerGroup field value if set, zero value otherwise.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerGroup() string {
+	if o == nil || o.CertManagerIssuerGroup == nil {
+		var ret string
+		return ret
+	}
+	return *o.CertManagerIssuerGroup
+}
+
+// GetCertManagerIssuerGroupOk returns a tuple with the CertManagerIssuerGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerGroupOk() (*string, bool) {
+	if o == nil || o.CertManagerIssuerGroup == nil {
+		return nil, false
+	}
+	return o.CertManagerIssuerGroup, true
+}
+
+// HasCertManagerIssuerGroup returns a boolean if a field has been set.
+func (o *KubernetesRegionInfo) HasCertManagerIssuerGroup() bool {
+	if o != nil && o.CertManagerIssuerGroup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCertManagerIssuerGroup gets a reference to the given string and assigns it to the CertManagerIssuerGroup field.
+func (o *KubernetesRegionInfo) SetCertManagerIssuerGroup(v string) {
+	o.CertManagerIssuerGroup = &v
+}
+
+// GetCertManagerIssuerKind returns the CertManagerIssuerKind field value if set, zero value otherwise.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerKind() string {
+	if o == nil || o.CertManagerIssuerKind == nil {
+		var ret string
+		return ret
+	}
+	return *o.CertManagerIssuerKind
+}
+
+// GetCertManagerIssuerKindOk returns a tuple with the CertManagerIssuerKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerKindOk() (*string, bool) {
+	if o == nil || o.CertManagerIssuerKind == nil {
+		return nil, false
+	}
+	return o.CertManagerIssuerKind, true
+}
+
+// HasCertManagerIssuerKind returns a boolean if a field has been set.
+func (o *KubernetesRegionInfo) HasCertManagerIssuerKind() bool {
+	if o != nil && o.CertManagerIssuerKind != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCertManagerIssuerKind gets a reference to the given string and assigns it to the CertManagerIssuerKind field.
+func (o *KubernetesRegionInfo) SetCertManagerIssuerKind(v string) {
+	o.CertManagerIssuerKind = &v
+}
+
+// GetCertManagerIssuerName returns the CertManagerIssuerName field value if set, zero value otherwise.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerName() string {
+	if o == nil || o.CertManagerIssuerName == nil {
+		var ret string
+		return ret
+	}
+	return *o.CertManagerIssuerName
+}
+
+// GetCertManagerIssuerNameOk returns a tuple with the CertManagerIssuerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesRegionInfo) GetCertManagerIssuerNameOk() (*string, bool) {
+	if o == nil || o.CertManagerIssuerName == nil {
+		return nil, false
+	}
+	return o.CertManagerIssuerName, true
+}
+
+// HasCertManagerIssuerName returns a boolean if a field has been set.
+func (o *KubernetesRegionInfo) HasCertManagerIssuerName() bool {
+	if o != nil && o.CertManagerIssuerName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCertManagerIssuerName gets a reference to the given string and assigns it to the CertManagerIssuerName field.
+func (o *KubernetesRegionInfo) SetCertManagerIssuerName(v string) {
+	o.CertManagerIssuerName = &v
 }
 
 // GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
@@ -663,6 +764,15 @@ func (o KubernetesRegionInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.CertManagerIssuer != nil {
 		toSerialize["certManagerIssuer"] = o.CertManagerIssuer
+	}
+	if o.CertManagerIssuerGroup != nil {
+		toSerialize["certManagerIssuerGroup"] = o.CertManagerIssuerGroup
+	}
+	if o.CertManagerIssuerKind != nil {
+		toSerialize["certManagerIssuerKind"] = o.CertManagerIssuerKind
+	}
+	if o.CertManagerIssuerName != nil {
+		toSerialize["certManagerIssuerName"] = o.CertManagerIssuerName
 	}
 	if o.IsKubernetesOperatorControlled != nil {
 		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled

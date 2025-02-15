@@ -32,8 +32,6 @@ type PITRManagementApiApiCloneNamespaceRequest struct {
 	ApiService *PITRManagementApiService
 	cUUID string
 	uniUUID string
-	tableType string
-	keyspaceName string
 	namespaceClone *CloneNamespaceParams
 	request *interface{}
 }
@@ -52,22 +50,19 @@ func (r PITRManagementApiApiCloneNamespaceRequest) Execute() (YBPTask, *_nethttp
 }
 
 /*
- * CloneNamespace Create clone of a namespace in a universe
+ * CloneNamespace Clone namespace via PITR on a universe
+ * YbaApi Internal.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID
- * @param tableType
- * @param keyspaceName
  * @return PITRManagementApiApiCloneNamespaceRequest
  */
-func (a *PITRManagementApiService) CloneNamespace(ctx _context.Context, cUUID string, uniUUID string, tableType string, keyspaceName string) PITRManagementApiApiCloneNamespaceRequest {
+func (a *PITRManagementApiService) CloneNamespace(ctx _context.Context, cUUID string, uniUUID string) PITRManagementApiApiCloneNamespaceRequest {
 	return PITRManagementApiApiCloneNamespaceRequest{
 		ApiService: a,
 		ctx: ctx,
 		cUUID: cUUID,
 		uniUUID: uniUUID,
-		tableType: tableType,
-		keyspaceName: keyspaceName,
 	}
 }
 
@@ -90,11 +85,9 @@ func (a *PITRManagementApiService) CloneNamespaceExecute(r PITRManagementApiApiC
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone"
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/universes/{uniUUID}/clone"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", _neturl.PathEscape(parameterToString(r.cUUID, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", _neturl.PathEscape(parameterToString(r.uniUUID, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"tableType"+"}", _neturl.PathEscape(parameterToString(r.tableType, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"keyspaceName"+"}", _neturl.PathEscape(parameterToString(r.keyspaceName, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
