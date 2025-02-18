@@ -28,8 +28,10 @@ type RestoreBackupParams struct {
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
 	CreatingUser Users `json:"creatingUser"`
-	CurrentIdx int32 `json:"currentIdx"`
-	CurrentYbcTaskId string `json:"currentYbcTaskId"`
+	// Current index
+	CurrentIdx *int32 `json:"currentIdx,omitempty"`
+	// Current ybc task id
+	CurrentYbcTaskId *string `json:"currentYbcTaskId,omitempty"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
@@ -53,12 +55,14 @@ type RestoreBackupParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	NodeIp string `json:"nodeIp"`
+	// Node IP
+	NodeIp *string `json:"nodeIp,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
-	PrefixUUID string `json:"prefixUUID"`
+	// Prefix UUID
+	PrefixUUID *string `json:"prefixUUID,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Restore TimeStamp
@@ -87,15 +91,11 @@ type RestoreBackupParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string) *RestoreBackupParams {
+func NewRestoreBackupParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string) *RestoreBackupParams {
 	this := RestoreBackupParams{}
 	this.CreatingUser = creatingUser
-	this.CurrentIdx = currentIdx
-	this.CurrentYbcTaskId = currentYbcTaskId
-	this.NodeIp = nodeIp
 	this.PlatformUrl = platformUrl
 	this.PlatformVersion = platformVersion
-	this.PrefixUUID = prefixUUID
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.UniverseUUID = universeUUID
@@ -326,52 +326,68 @@ func (o *RestoreBackupParams) SetCreatingUser(v Users) {
 	o.CreatingUser = v
 }
 
-// GetCurrentIdx returns the CurrentIdx field value
+// GetCurrentIdx returns the CurrentIdx field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetCurrentIdx() int32 {
-	if o == nil {
+	if o == nil || o.CurrentIdx == nil {
 		var ret int32
 		return ret
 	}
-
-	return o.CurrentIdx
+	return *o.CurrentIdx
 }
 
-// GetCurrentIdxOk returns a tuple with the CurrentIdx field value
+// GetCurrentIdxOk returns a tuple with the CurrentIdx field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil || o.CurrentIdx == nil {
 		return nil, false
 	}
-	return &o.CurrentIdx, true
+	return o.CurrentIdx, true
 }
 
-// SetCurrentIdx sets field value
+// HasCurrentIdx returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasCurrentIdx() bool {
+	if o != nil && o.CurrentIdx != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentIdx gets a reference to the given int32 and assigns it to the CurrentIdx field.
 func (o *RestoreBackupParams) SetCurrentIdx(v int32) {
-	o.CurrentIdx = v
+	o.CurrentIdx = &v
 }
 
-// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value
+// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetCurrentYbcTaskId() string {
-	if o == nil {
+	if o == nil || o.CurrentYbcTaskId == nil {
 		var ret string
 		return ret
 	}
-
-	return o.CurrentYbcTaskId
+	return *o.CurrentYbcTaskId
 }
 
-// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value
+// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.CurrentYbcTaskId == nil {
 		return nil, false
 	}
-	return &o.CurrentYbcTaskId, true
+	return o.CurrentYbcTaskId, true
 }
 
-// SetCurrentYbcTaskId sets field value
+// HasCurrentYbcTaskId returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasCurrentYbcTaskId() bool {
+	if o != nil && o.CurrentYbcTaskId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentYbcTaskId gets a reference to the given string and assigns it to the CurrentYbcTaskId field.
 func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string) {
-	o.CurrentYbcTaskId = v
+	o.CurrentYbcTaskId = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -822,28 +838,36 @@ func (o *RestoreBackupParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
-// GetNodeIp returns the NodeIp field value
+// GetNodeIp returns the NodeIp field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetNodeIp() string {
-	if o == nil {
+	if o == nil || o.NodeIp == nil {
 		var ret string
 		return ret
 	}
-
-	return o.NodeIp
+	return *o.NodeIp
 }
 
-// GetNodeIpOk returns a tuple with the NodeIp field value
+// GetNodeIpOk returns a tuple with the NodeIp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreBackupParams) GetNodeIpOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.NodeIp == nil {
 		return nil, false
 	}
-	return &o.NodeIp, true
+	return o.NodeIp, true
 }
 
-// SetNodeIp sets field value
+// HasNodeIp returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasNodeIp() bool {
+	if o != nil && o.NodeIp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeIp gets a reference to the given string and assigns it to the NodeIp field.
 func (o *RestoreBackupParams) SetNodeIp(v string) {
-	o.NodeIp = v
+	o.NodeIp = &v
 }
 
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
@@ -926,28 +950,36 @@ func (o *RestoreBackupParams) SetPlatformVersion(v string) {
 	o.PlatformVersion = v
 }
 
-// GetPrefixUUID returns the PrefixUUID field value
+// GetPrefixUUID returns the PrefixUUID field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetPrefixUUID() string {
-	if o == nil {
+	if o == nil || o.PrefixUUID == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PrefixUUID
+	return *o.PrefixUUID
 }
 
-// GetPrefixUUIDOk returns a tuple with the PrefixUUID field value
+// GetPrefixUUIDOk returns a tuple with the PrefixUUID field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreBackupParams) GetPrefixUUIDOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PrefixUUID == nil {
 		return nil, false
 	}
-	return &o.PrefixUUID, true
+	return o.PrefixUUID, true
 }
 
-// SetPrefixUUID sets field value
+// HasPrefixUUID returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasPrefixUUID() bool {
+	if o != nil && o.PrefixUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrefixUUID gets a reference to the given string and assigns it to the PrefixUUID field.
 func (o *RestoreBackupParams) SetPrefixUUID(v string) {
-	o.PrefixUUID = v
+	o.PrefixUUID = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1365,10 +1397,10 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["creatingUser"] = o.CreatingUser
 	}
-	if true {
+	if o.CurrentIdx != nil {
 		toSerialize["currentIdx"] = o.CurrentIdx
 	}
-	if true {
+	if o.CurrentYbcTaskId != nil {
 		toSerialize["currentYbcTaskId"] = o.CurrentYbcTaskId
 	}
 	if o.CustomerUUID != nil {
@@ -1413,7 +1445,7 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
 	}
-	if true {
+	if o.NodeIp != nil {
 		toSerialize["nodeIp"] = o.NodeIp
 	}
 	if o.Parallelism != nil {
@@ -1425,7 +1457,7 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
-	if true {
+	if o.PrefixUUID != nil {
 		toSerialize["prefixUUID"] = o.PrefixUUID
 	}
 	if o.PreviousTaskUUID != nil {

@@ -1376,7 +1376,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), int32(123), "CurrentYbcTaskId_example", "NodeIp_example", "PlatformUrl_example", "PlatformVersion_example", "PrefixUUID_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
+    backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

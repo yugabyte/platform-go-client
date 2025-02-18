@@ -59872,10 +59872,12 @@ components:
         creatingUser:
           $ref: '#/components/schemas/Users'
         currentIdx:
+          description: Current index
           exampleSetFlag: true
           format: int32
           type: integer
         currentYbcTaskId:
+          description: Current ybc task id
           exampleSetFlag: true
           type: string
         customerUUID:
@@ -59933,6 +59935,7 @@ components:
           exampleSetFlag: true
           type: string
         nodeIp:
+          description: Node IP
           exampleSetFlag: true
           type: string
         parallelism:
@@ -59947,6 +59950,7 @@ components:
           exampleSetFlag: true
           type: string
         prefixUUID:
+          description: Prefix UUID
           exampleSetFlag: true
           format: uuid
           type: string
@@ -60016,12 +60020,8 @@ components:
           type: string
       required:
       - creatingUser
-      - currentIdx
-      - currentYbcTaskId
-      - nodeIp
       - platformUrl
       - platformVersion
-      - prefixUUID
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - universeUUID
