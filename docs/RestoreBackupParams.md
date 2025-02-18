@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
-**CurrentIdx** | Pointer to **int32** | Current index | [optional] 
-**CurrentYbcTaskId** | Pointer to **string** | Current ybc task id | [optional] 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -234,56 +232,6 @@ and a boolean to check if the value has been set.
 
 SetCreatingUser sets CreatingUser field to given value.
 
-
-### GetCurrentIdx
-
-`func (o *RestoreBackupParams) GetCurrentIdx() int32`
-
-GetCurrentIdx returns the CurrentIdx field if non-nil, zero value otherwise.
-
-### GetCurrentIdxOk
-
-`func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool)`
-
-GetCurrentIdxOk returns a tuple with the CurrentIdx field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentIdx
-
-`func (o *RestoreBackupParams) SetCurrentIdx(v int32)`
-
-SetCurrentIdx sets CurrentIdx field to given value.
-
-### HasCurrentIdx
-
-`func (o *RestoreBackupParams) HasCurrentIdx() bool`
-
-HasCurrentIdx returns a boolean if a field has been set.
-
-### GetCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) GetCurrentYbcTaskId() string`
-
-GetCurrentYbcTaskId returns the CurrentYbcTaskId field if non-nil, zero value otherwise.
-
-### GetCurrentYbcTaskIdOk
-
-`func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool)`
-
-GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string)`
-
-SetCurrentYbcTaskId sets CurrentYbcTaskId field to given value.
-
-### HasCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) HasCurrentYbcTaskId() bool`
-
-HasCurrentYbcTaskId returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 

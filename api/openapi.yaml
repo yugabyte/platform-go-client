@@ -59638,12 +59638,12 @@ components:
           newOwner: newOwner
           useTablespaces: true
           backupType: YQL_TABLE_TYPE
-        expectedUniverseVersion: 6
+        expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         nodeExporterUser: nodeExporterUser
-        parallelism: 1
+        parallelism: 6
         encryptionAtRestConfig:
           encryptionAtRestEnabled: true
           opType: ENABLE
@@ -59654,7 +59654,6 @@ components:
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         alterLoadBalancer: true
-        currentIdx: 0
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -59676,7 +59675,7 @@ components:
         platformVersion: platformVersion
         disableChecksum: true
         restoreTimeStamp: restoreTimeStamp
-        sleepAfterTServerRestartMillis: 2
+        sleepAfterTServerRestartMillis: 5
         disableMultipart: true
         platformUrl: platformUrl
         kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -59813,9 +59812,8 @@ components:
           ysqlServerRpcPort: 6
           autoSyncMasterAddrs: true
           yqlServerHttpPort: 7
-        restoreToPointInTimeMillis: 5
+        restoreToPointInTimeMillis: 1
         ybcInstalled: true
-        currentYbcTaskId: currentYbcTaskId
         communicationPorts:
           nodeExporterPort: 5
           tserverHttpPort: 9
@@ -59871,15 +59869,6 @@ components:
           $ref: '#/components/schemas/CommunicationPorts'
         creatingUser:
           $ref: '#/components/schemas/Users'
-        currentIdx:
-          description: Current index
-          exampleSetFlag: true
-          format: int32
-          type: integer
-        currentYbcTaskId:
-          description: Current ybc task id
-          exampleSetFlag: true
-          type: string
         customerUUID:
           description: Customer UUID
           exampleSetFlag: true

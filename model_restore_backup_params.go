@@ -28,10 +28,6 @@ type RestoreBackupParams struct {
 	CmkArn *string `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
 	CreatingUser Users `json:"creatingUser"`
-	// Current index
-	CurrentIdx *int32 `json:"currentIdx,omitempty"`
-	// Current ybc task id
-	CurrentYbcTaskId *string `json:"currentYbcTaskId,omitempty"`
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
@@ -324,70 +320,6 @@ func (o *RestoreBackupParams) GetCreatingUserOk() (*Users, bool) {
 // SetCreatingUser sets field value
 func (o *RestoreBackupParams) SetCreatingUser(v Users) {
 	o.CreatingUser = v
-}
-
-// GetCurrentIdx returns the CurrentIdx field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetCurrentIdx() int32 {
-	if o == nil || o.CurrentIdx == nil {
-		var ret int32
-		return ret
-	}
-	return *o.CurrentIdx
-}
-
-// GetCurrentIdxOk returns a tuple with the CurrentIdx field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool) {
-	if o == nil || o.CurrentIdx == nil {
-		return nil, false
-	}
-	return o.CurrentIdx, true
-}
-
-// HasCurrentIdx returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasCurrentIdx() bool {
-	if o != nil && o.CurrentIdx != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentIdx gets a reference to the given int32 and assigns it to the CurrentIdx field.
-func (o *RestoreBackupParams) SetCurrentIdx(v int32) {
-	o.CurrentIdx = &v
-}
-
-// GetCurrentYbcTaskId returns the CurrentYbcTaskId field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetCurrentYbcTaskId() string {
-	if o == nil || o.CurrentYbcTaskId == nil {
-		var ret string
-		return ret
-	}
-	return *o.CurrentYbcTaskId
-}
-
-// GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool) {
-	if o == nil || o.CurrentYbcTaskId == nil {
-		return nil, false
-	}
-	return o.CurrentYbcTaskId, true
-}
-
-// HasCurrentYbcTaskId returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasCurrentYbcTaskId() bool {
-	if o != nil && o.CurrentYbcTaskId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrentYbcTaskId gets a reference to the given string and assigns it to the CurrentYbcTaskId field.
-func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string) {
-	o.CurrentYbcTaskId = &v
 }
 
 // GetCustomerUUID returns the CustomerUUID field value if set, zero value otherwise.
@@ -1396,12 +1328,6 @@ func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["creatingUser"] = o.CreatingUser
-	}
-	if o.CurrentIdx != nil {
-		toSerialize["currentIdx"] = o.CurrentIdx
-	}
-	if o.CurrentYbcTaskId != nil {
-		toSerialize["currentYbcTaskId"] = o.CurrentYbcTaskId
 	}
 	if o.CustomerUUID != nil {
 		toSerialize["customerUUID"] = o.CustomerUUID
