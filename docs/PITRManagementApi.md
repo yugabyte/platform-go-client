@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CloneNamespace**](PITRManagementApi.md#CloneNamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone | Create clone of a namespace in a universe
+[**CloneNamespace**](PITRManagementApi.md#CloneNamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clone | Clone namespace via PITR on a universe
 [**CreatePitrConfig**](PITRManagementApi.md#CreatePitrConfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
 [**DeletePitrConfig**](PITRManagementApi.md#DeletePitrConfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
 [**ListOfPitrConfigs**](PITRManagementApi.md#ListOfPitrConfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
@@ -15,9 +15,11 @@ Method | HTTP request | Description
 
 ## CloneNamespace
 
-> YBPTask CloneNamespace(ctx, cUUID, uniUUID, tableType, keyspaceName).NamespaceClone(namespaceClone).Request(request).Execute()
+> YBPTask CloneNamespace(ctx, cUUID, uniUUID).NamespaceClone(namespaceClone).Request(request).Execute()
 
-Create clone of a namespace in a universe
+Clone namespace via PITR on a universe
+
+
 
 ### Example
 
@@ -34,14 +36,12 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    tableType := "tableType_example" // string | 
-    keyspaceName := "keyspaceName_example" // string | 
-    namespaceClone := *openapiclient.NewCloneNamespaceParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CloneNamespaceParams | post namespace clone
+    namespaceClone := *openapiclient.NewCloneNamespaceParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123)) // CloneNamespaceParams | perform clone via PITR
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PITRManagementApi.CloneNamespace(context.Background(), cUUID, uniUUID, tableType, keyspaceName).NamespaceClone(namespaceClone).Request(request).Execute()
+    resp, r, err := api_client.PITRManagementApi.CloneNamespace(context.Background(), cUUID, uniUUID).NamespaceClone(namespaceClone).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.CloneNamespace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,8 +59,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **cUUID** | [**string**](.md) |  | 
 **uniUUID** | [**string**](.md) |  | 
-**tableType** | **string** |  | 
-**keyspaceName** | **string** |  | 
 
 ### Other Parameters
 
@@ -71,9 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
-
- **namespaceClone** | [**CloneNamespaceParams**](CloneNamespaceParams.md) | post namespace clone | 
+ **namespaceClone** | [**CloneNamespaceParams**](CloneNamespaceParams.md) | perform clone via PITR | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -177,7 +173,7 @@ Name | Type | Description  | Notes
 
 ## DeletePitrConfig
 
-> YBPSuccess DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Request(request).Execute()
+> YBPTask DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Request(request).Execute()
 
 Delete pitr config on a universe
 
@@ -206,7 +202,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.DeletePitrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeletePitrConfig`: YBPSuccess
+    // response from `DeletePitrConfig`: YBPTask
     fmt.Fprintf(os.Stdout, "Response from `PITRManagementApi.DeletePitrConfig`: %v\n", resp)
 }
 ```
@@ -235,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 

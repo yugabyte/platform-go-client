@@ -35,6 +35,8 @@ type CloneNamespaceParams struct {
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	// PITR Config UUID
+	PitrConfigUUID *string `json:"pitrConfigUUID,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
 	PlatformVersion string `json:"platformVersion"`
 	// Previous task UUID of a retry
@@ -483,6 +485,38 @@ func (o *CloneNamespaceParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetPitrConfigUUID returns the PitrConfigUUID field value if set, zero value otherwise.
+func (o *CloneNamespaceParams) GetPitrConfigUUID() string {
+	if o == nil || o.PitrConfigUUID == nil {
+		var ret string
+		return ret
+	}
+	return *o.PitrConfigUUID
+}
+
+// GetPitrConfigUUIDOk returns a tuple with the PitrConfigUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloneNamespaceParams) GetPitrConfigUUIDOk() (*string, bool) {
+	if o == nil || o.PitrConfigUUID == nil {
+		return nil, false
+	}
+	return o.PitrConfigUUID, true
+}
+
+// HasPitrConfigUUID returns a boolean if a field has been set.
+func (o *CloneNamespaceParams) HasPitrConfigUUID() bool {
+	if o != nil && o.PitrConfigUUID != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPitrConfigUUID gets a reference to the given string and assigns it to the PitrConfigUUID field.
+func (o *CloneNamespaceParams) SetPitrConfigUUID(v string) {
+	o.PitrConfigUUID = &v
+}
+
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *CloneNamespaceParams) GetPlatformUrl() string {
 	if o == nil {
@@ -843,6 +877,9 @@ func (o CloneNamespaceParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeExporterUser != nil {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
+	}
+	if o.PitrConfigUUID != nil {
+		toSerialize["pitrConfigUUID"] = o.PitrConfigUUID
 	}
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl

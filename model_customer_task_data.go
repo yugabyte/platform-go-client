@@ -19,6 +19,8 @@ import (
 type CustomerTaskData struct {
 	// Customer task abortable
 	Abortable *bool `json:"abortable,omitempty"`
+	// Whether the Customer task can be rolled back
+	CanRollback *bool `json:"canRollback,omitempty"`
 	// Customer task completion time
 	CompletionTime *time.Time `json:"completionTime,omitempty"`
 	// Correlation id
@@ -94,6 +96,38 @@ func (o *CustomerTaskData) HasAbortable() bool {
 // SetAbortable gets a reference to the given bool and assigns it to the Abortable field.
 func (o *CustomerTaskData) SetAbortable(v bool) {
 	o.Abortable = &v
+}
+
+// GetCanRollback returns the CanRollback field value if set, zero value otherwise.
+func (o *CustomerTaskData) GetCanRollback() bool {
+	if o == nil || o.CanRollback == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CanRollback
+}
+
+// GetCanRollbackOk returns a tuple with the CanRollback field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerTaskData) GetCanRollbackOk() (*bool, bool) {
+	if o == nil || o.CanRollback == nil {
+		return nil, false
+	}
+	return o.CanRollback, true
+}
+
+// HasCanRollback returns a boolean if a field has been set.
+func (o *CustomerTaskData) HasCanRollback() bool {
+	if o != nil && o.CanRollback != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCanRollback gets a reference to the given bool and assigns it to the CanRollback field.
+func (o *CustomerTaskData) SetCanRollback(v bool) {
+	o.CanRollback = &v
 }
 
 // GetCompletionTime returns the CompletionTime field value if set, zero value otherwise.
@@ -516,6 +550,9 @@ func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Abortable != nil {
 		toSerialize["abortable"] = o.Abortable
+	}
+	if o.CanRollback != nil {
+		toSerialize["canRollback"] = o.CanRollback
 	}
 	if o.CompletionTime != nil {
 		toSerialize["completionTime"] = o.CompletionTime
