@@ -11,8 +11,6 @@ Name | Type | Description | Notes
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
-**CurrentIdx** | **int32** |  | 
-**CurrentYbcTaskId** | **string** |  | 
 **CustomerUUID** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -27,11 +25,11 @@ Name | Type | Description | Notes
 **KmsConfigUUID** | Pointer to **string** | KMS configuration UUID | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
-**NodeIp** | **string** |  | 
+**NodeIp** | Pointer to **string** | Node IP | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | **string** |  | 
-**PrefixUUID** | **string** |  | 
+**PrefixUUID** | Pointer to **string** | Prefix UUID | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
 **RestoreToPointInTimeMillis** | Pointer to **int64** | Restore timestamp in millis | [optional] 
@@ -50,7 +48,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreBackupParams
 
-`func NewRestoreBackupParams(creatingUser Users, currentIdx int32, currentYbcTaskId string, nodeIp string, platformUrl string, platformVersion string, prefixUUID string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
+`func NewRestoreBackupParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
 
 NewRestoreBackupParams instantiates a new RestoreBackupParams object
 This constructor will assign default values to properties that have it defined,
@@ -233,46 +231,6 @@ and a boolean to check if the value has been set.
 `func (o *RestoreBackupParams) SetCreatingUser(v Users)`
 
 SetCreatingUser sets CreatingUser field to given value.
-
-
-### GetCurrentIdx
-
-`func (o *RestoreBackupParams) GetCurrentIdx() int32`
-
-GetCurrentIdx returns the CurrentIdx field if non-nil, zero value otherwise.
-
-### GetCurrentIdxOk
-
-`func (o *RestoreBackupParams) GetCurrentIdxOk() (*int32, bool)`
-
-GetCurrentIdxOk returns a tuple with the CurrentIdx field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentIdx
-
-`func (o *RestoreBackupParams) SetCurrentIdx(v int32)`
-
-SetCurrentIdx sets CurrentIdx field to given value.
-
-
-### GetCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) GetCurrentYbcTaskId() string`
-
-GetCurrentYbcTaskId returns the CurrentYbcTaskId field if non-nil, zero value otherwise.
-
-### GetCurrentYbcTaskIdOk
-
-`func (o *RestoreBackupParams) GetCurrentYbcTaskIdOk() (*string, bool)`
-
-GetCurrentYbcTaskIdOk returns a tuple with the CurrentYbcTaskId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) SetCurrentYbcTaskId(v string)`
-
-SetCurrentYbcTaskId sets CurrentYbcTaskId field to given value.
 
 
 ### GetCustomerUUID
@@ -644,6 +602,11 @@ and a boolean to check if the value has been set.
 
 SetNodeIp sets NodeIp field to given value.
 
+### HasNodeIp
+
+`func (o *RestoreBackupParams) HasNodeIp() bool`
+
+HasNodeIp returns a boolean if a field has been set.
 
 ### GetParallelism
 
@@ -729,6 +692,11 @@ and a boolean to check if the value has been set.
 
 SetPrefixUUID sets PrefixUUID field to given value.
 
+### HasPrefixUUID
+
+`func (o *RestoreBackupParams) HasPrefixUUID() bool`
+
+HasPrefixUUID returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 
