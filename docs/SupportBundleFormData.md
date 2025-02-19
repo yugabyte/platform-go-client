@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **MaxNumRecentCores** | Pointer to **int32** | Max number of the most recent cores to collect (if any) | [optional] 
 **PromDumpEndDate** | Pointer to **time.Time** | End date to filter prometheus metrics till | [optional] 
 **PromDumpStartDate** | Pointer to **time.Time** | Start date to filter prometheus metrics from | [optional] 
+**PromQueries** | Pointer to **map[string]string** | Map of query names to custom PromQL queries to collect in promdump | [optional] 
 **PrometheusMetricsTypes** | Pointer to **[]string** | List of exports to be included in the prometheus dump | [optional] 
 **StartDate** | **time.Time** | Start date to filter logs from | 
 
@@ -171,6 +172,31 @@ SetPromDumpStartDate sets PromDumpStartDate field to given value.
 `func (o *SupportBundleFormData) HasPromDumpStartDate() bool`
 
 HasPromDumpStartDate returns a boolean if a field has been set.
+
+### GetPromQueries
+
+`func (o *SupportBundleFormData) GetPromQueries() map[string]string`
+
+GetPromQueries returns the PromQueries field if non-nil, zero value otherwise.
+
+### GetPromQueriesOk
+
+`func (o *SupportBundleFormData) GetPromQueriesOk() (*map[string]string, bool)`
+
+GetPromQueriesOk returns a tuple with the PromQueries field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPromQueries
+
+`func (o *SupportBundleFormData) SetPromQueries(v map[string]string)`
+
+SetPromQueries sets PromQueries field to given value.
+
+### HasPromQueries
+
+`func (o *SupportBundleFormData) HasPromQueries() bool`
+
+HasPromQueries returns a boolean if a field has been set.
 
 ### GetPrometheusMetricsTypes
 

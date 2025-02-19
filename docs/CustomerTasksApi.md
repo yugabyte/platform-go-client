@@ -7,7 +7,9 @@ Method | HTTP request | Description
 [**AbortTask**](CustomerTasksApi.md#AbortTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
 [**FailedSubtasks**](CustomerTasksApi.md#FailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Fetch failed subtasks - deprecated
 [**ListFailedSubtasks**](CustomerTasksApi.md#ListFailedSubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks | Get a list of task&#39;s failed subtasks
+[**ListTasksV2**](CustomerTasksApi.md#ListTasksV2) | **Post** /api/v1/customers/{cUUID}/tasks_list/page | List Tasks (paginated)
 [**RetryTask**](CustomerTasksApi.md#RetryTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
+[**RollbackTask**](CustomerTasksApi.md#RollbackTask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/rollback | Rollback a Universe or Provider task
 [**TaskStatus**](CustomerTasksApi.md#TaskStatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 [**TasksList**](CustomerTasksApi.md#TasksList) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
 
@@ -232,6 +234,80 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ListTasksV2
+
+> TaskPagedApiResponse ListTasksV2(ctx, cUUID).PageTasksRequest(pageTasksRequest).Request(request).Execute()
+
+List Tasks (paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    pageTasksRequest := *openapiclient.NewTaskPagedApiQuery("Direction_example", *openapiclient.NewTaskApiFilter([]string{"Status_example"}, []string{"TargetList_example"}, []string{"TargetUUIDList_example"}, []string{"TypeList_example"}, []string{"TypeNameList_example"}), int32(123), false, int32(123), "SortBy_example") // TaskPagedApiQuery | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CustomerTasksApi.ListTasksV2(context.Background(), cUUID).PageTasksRequest(pageTasksRequest).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomerTasksApi.ListTasksV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListTasksV2`: TaskPagedApiResponse
+    fmt.Fprintf(os.Stdout, "Response from `CustomerTasksApi.ListTasksV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListTasksV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageTasksRequest** | [**TaskPagedApiQuery**](TaskPagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**TaskPagedApiResponse**](TaskPagedApiResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RetryTask
 
 > YBPTask RetryTask(ctx, cUUID, tUUID).Request(request).Execute()
@@ -281,6 +357,81 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRetryTaskRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RollbackTask
+
+> YBPTask RollbackTask(ctx, cUUID, tUUID).Request(request).Execute()
+
+Rollback a Universe or Provider task
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    tUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CustomerTasksApi.RollbackTask(context.Background(), cUUID, tUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomerTasksApi.RollbackTask``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RollbackTask`: YBPTask
+    fmt.Fprintf(os.Stdout, "Response from `CustomerTasksApi.RollbackTask`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**tUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRollbackTaskRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

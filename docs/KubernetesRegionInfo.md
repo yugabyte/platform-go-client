@@ -4,8 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CertManagerClusterIssuer** | Pointer to **string** |  | [optional] 
-**CertManagerIssuer** | Pointer to **string** |  | [optional] 
+**CertManagerClusterIssuer** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2024.2.3.0.&lt;/b&gt;. Use certManagerIssuerKind and certManagerIssuerName instead | [optional] 
+**CertManagerIssuer** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2024.2.3.0.&lt;/b&gt;. Use certManagerIssuerKind and certManagerIssuerName instead | [optional] 
+**CertManagerIssuerGroup** | Pointer to **string** |  | [optional] 
+**CertManagerIssuerKind** | Pointer to **string** |  | [optional] 
+**CertManagerIssuerName** | Pointer to **string** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] [readonly] 
 **KubeConfig** | Pointer to **string** |  | [optional] [readonly] 
 **KubeConfigContent** | Pointer to **string** |  | [optional] 
@@ -92,6 +95,81 @@ SetCertManagerIssuer sets CertManagerIssuer field to given value.
 `func (o *KubernetesRegionInfo) HasCertManagerIssuer() bool`
 
 HasCertManagerIssuer returns a boolean if a field has been set.
+
+### GetCertManagerIssuerGroup
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerGroup() string`
+
+GetCertManagerIssuerGroup returns the CertManagerIssuerGroup field if non-nil, zero value otherwise.
+
+### GetCertManagerIssuerGroupOk
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerGroupOk() (*string, bool)`
+
+GetCertManagerIssuerGroupOk returns a tuple with the CertManagerIssuerGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertManagerIssuerGroup
+
+`func (o *KubernetesRegionInfo) SetCertManagerIssuerGroup(v string)`
+
+SetCertManagerIssuerGroup sets CertManagerIssuerGroup field to given value.
+
+### HasCertManagerIssuerGroup
+
+`func (o *KubernetesRegionInfo) HasCertManagerIssuerGroup() bool`
+
+HasCertManagerIssuerGroup returns a boolean if a field has been set.
+
+### GetCertManagerIssuerKind
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerKind() string`
+
+GetCertManagerIssuerKind returns the CertManagerIssuerKind field if non-nil, zero value otherwise.
+
+### GetCertManagerIssuerKindOk
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerKindOk() (*string, bool)`
+
+GetCertManagerIssuerKindOk returns a tuple with the CertManagerIssuerKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertManagerIssuerKind
+
+`func (o *KubernetesRegionInfo) SetCertManagerIssuerKind(v string)`
+
+SetCertManagerIssuerKind sets CertManagerIssuerKind field to given value.
+
+### HasCertManagerIssuerKind
+
+`func (o *KubernetesRegionInfo) HasCertManagerIssuerKind() bool`
+
+HasCertManagerIssuerKind returns a boolean if a field has been set.
+
+### GetCertManagerIssuerName
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerName() string`
+
+GetCertManagerIssuerName returns the CertManagerIssuerName field if non-nil, zero value otherwise.
+
+### GetCertManagerIssuerNameOk
+
+`func (o *KubernetesRegionInfo) GetCertManagerIssuerNameOk() (*string, bool)`
+
+GetCertManagerIssuerNameOk returns a tuple with the CertManagerIssuerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertManagerIssuerName
+
+`func (o *KubernetesRegionInfo) SetCertManagerIssuerName(v string)`
+
+SetCertManagerIssuerName sets CertManagerIssuerName field to given value.
+
+### HasCertManagerIssuerName
+
+`func (o *KubernetesRegionInfo) HasCertManagerIssuerName() bool`
+
+HasCertManagerIssuerName returns a boolean if a field has been set.
 
 ### GetIsKubernetesOperatorControlled
 

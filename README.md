@@ -204,7 +204,9 @@ Class | Method | HTTP request | Description
 *CustomerTasksApi* | [**AbortTask**](docs/CustomerTasksApi.md#aborttask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/abort | Abort a task
 *CustomerTasksApi* | [**FailedSubtasks**](docs/CustomerTasksApi.md#failedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed | Fetch failed subtasks - deprecated
 *CustomerTasksApi* | [**ListFailedSubtasks**](docs/CustomerTasksApi.md#listfailedsubtasks) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks | Get a list of task&#39;s failed subtasks
+*CustomerTasksApi* | [**ListTasksV2**](docs/CustomerTasksApi.md#listtasksv2) | **Post** /api/v1/customers/{cUUID}/tasks_list/page | List Tasks (paginated)
 *CustomerTasksApi* | [**RetryTask**](docs/CustomerTasksApi.md#retrytask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/retry | Retry a Universe or Provider task
+*CustomerTasksApi* | [**RollbackTask**](docs/CustomerTasksApi.md#rollbacktask) | **Post** /api/v1/customers/{cUUID}/tasks/{tUUID}/rollback | Rollback a Universe or Provider task
 *CustomerTasksApi* | [**TaskStatus**](docs/CustomerTasksApi.md#taskstatus) | **Get** /api/v1/customers/{cUUID}/tasks/{tUUID} | Get a task&#39;s status
 *CustomerTasksApi* | [**TasksList**](docs/CustomerTasksApi.md#taskslist) | **Get** /api/v1/customers/{cUUID}/tasks_list | List task
 *DisasterRecoveryApi* | [**CreateDrConfig**](docs/DisasterRecoveryApi.md#createdrconfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
@@ -284,7 +286,7 @@ Class | Method | HTTP request | Description
 *NodeInstancesApi* | [**NodeAction**](docs/NodeInstancesApi.md#nodeaction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Perform the specified action on the universe node
 *NodeInstancesApi* | [**UpdateState**](docs/NodeInstancesApi.md#updatestate) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state | Update node instance state
 *NodeInstancesApi* | [**ValidateNodeInstance**](docs/NodeInstancesApi.md#validatenodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
-*PITRManagementApi* | [**CloneNamespace**](docs/PITRManagementApi.md#clonenamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/clone | Create clone of a namespace in a universe
+*PITRManagementApi* | [**CloneNamespace**](docs/PITRManagementApi.md#clonenamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clone | Clone namespace via PITR on a universe
 *PITRManagementApi* | [**CreatePitrConfig**](docs/PITRManagementApi.md#createpitrconfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
 *PITRManagementApi* | [**DeletePitrConfig**](docs/PITRManagementApi.md#deletepitrconfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
 *PITRManagementApi* | [**ListOfPitrConfigs**](docs/PITRManagementApi.md#listofpitrconfigs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config | List the PITR configs of a universe
@@ -433,7 +435,6 @@ Class | Method | HTTP request | Description
 *UniverseUpgradesManagementApi* | [**FinalizeUpgrade**](docs/UniverseUpgradesManagementApi.md#finalizeupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
 *UniverseUpgradesManagementApi* | [**ModifyAuditLogging**](docs/UniverseUpgradesManagementApi.md#modifyauditlogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration
 *UniverseUpgradesManagementApi* | [**PreFinalizeSoftwareUpgradeInfo**](docs/UniverseUpgradesManagementApi.md#prefinalizesoftwareupgradeinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
-*UniverseUpgradesManagementApi* | [**PreUpgradeValidation**](docs/UniverseUpgradesManagementApi.md#preupgradevalidation) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/pre_upgrade_validation | Run validation for upgrade
 *UniverseUpgradesManagementApi* | [**RebootUniverse**](docs/UniverseUpgradesManagementApi.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementApi* | [**ResizeNode**](docs/UniverseUpgradesManagementApi.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementApi* | [**RestartUniverse**](docs/UniverseUpgradesManagementApi.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
@@ -716,7 +717,6 @@ Class | Method | HTTP request | Description
  - [PlacementInfo](docs/PlacementInfo.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PlatformLoggingConfig](docs/PlatformLoggingConfig.md)
- - [PreUpgradeValidationResponse](docs/PreUpgradeValidationResponse.md)
  - [PresetThrottleValues](docs/PresetThrottleValues.md)
  - [PrevYBSoftwareConfig](docs/PrevYBSoftwareConfig.md)
  - [Principal](docs/Principal.md)
@@ -791,6 +791,9 @@ Class | Method | HTTP request | Description
  - [TableSpaceInfo](docs/TableSpaceInfo.md)
  - [Tablespace](docs/Tablespace.md)
  - [TablespaceResponse](docs/TablespaceResponse.md)
+ - [TaskApiFilter](docs/TaskApiFilter.md)
+ - [TaskPagedApiQuery](docs/TaskPagedApiQuery.md)
+ - [TaskPagedApiResponse](docs/TaskPagedApiResponse.md)
  - [TelemetryProvider](docs/TelemetryProvider.md)
  - [TelemetryProviderConfig](docs/TelemetryProviderConfig.md)
  - [ThirdpartySoftwareUpgradeParams](docs/ThirdpartySoftwareUpgradeParams.md)

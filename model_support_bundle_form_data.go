@@ -29,6 +29,8 @@ type SupportBundleFormData struct {
 	PromDumpEndDate *time.Time `json:"promDumpEndDate,omitempty"`
 	// Start date to filter prometheus metrics from
 	PromDumpStartDate *time.Time `json:"promDumpStartDate,omitempty"`
+	// Map of query names to custom PromQL queries to collect in promdump
+	PromQueries *map[string]string `json:"promQueries,omitempty"`
 	// List of exports to be included in the prometheus dump
 	PrometheusMetricsTypes *[]string `json:"prometheusMetricsTypes,omitempty"`
 	// Start date to filter logs from
@@ -231,6 +233,38 @@ func (o *SupportBundleFormData) SetPromDumpStartDate(v time.Time) {
 	o.PromDumpStartDate = &v
 }
 
+// GetPromQueries returns the PromQueries field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromQueries() map[string]string {
+	if o == nil || o.PromQueries == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.PromQueries
+}
+
+// GetPromQueriesOk returns a tuple with the PromQueries field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromQueriesOk() (*map[string]string, bool) {
+	if o == nil || o.PromQueries == nil {
+		return nil, false
+	}
+	return o.PromQueries, true
+}
+
+// HasPromQueries returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromQueries() bool {
+	if o != nil && o.PromQueries != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPromQueries gets a reference to the given map[string]string and assigns it to the PromQueries field.
+func (o *SupportBundleFormData) SetPromQueries(v map[string]string) {
+	o.PromQueries = &v
+}
+
 // GetPrometheusMetricsTypes returns the PrometheusMetricsTypes field value if set, zero value otherwise.
 func (o *SupportBundleFormData) GetPrometheusMetricsTypes() []string {
 	if o == nil || o.PrometheusMetricsTypes == nil {
@@ -306,6 +340,9 @@ func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 	}
 	if o.PromDumpStartDate != nil {
 		toSerialize["promDumpStartDate"] = o.PromDumpStartDate
+	}
+	if o.PromQueries != nil {
+		toSerialize["promQueries"] = o.PromQueries
 	}
 	if o.PrometheusMetricsTypes != nil {
 		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes
