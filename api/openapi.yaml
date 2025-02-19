@@ -7370,6 +7370,8 @@ paths:
                   - NodeAgent
                   - SystemLogs
                   - K8sInfo
+                  - SystemLogs
+                  - K8sInfo
                   - YbaMetadata
                   - PrometheusMetrics
                   - ApplicationLogs
@@ -9832,7 +9834,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/YBPSuccess'
+                $ref: '#/components/schemas/YBPTask'
           description: successful operation
       security:
       - apiKeyAuth: []

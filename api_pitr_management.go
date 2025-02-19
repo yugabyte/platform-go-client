@@ -332,7 +332,7 @@ func (r PITRManagementApiApiDeletePitrConfigRequest) Request(request interface{}
 	return r
 }
 
-func (r PITRManagementApiApiDeletePitrConfigRequest) Execute() (YBPSuccess, *_nethttp.Response, error) {
+func (r PITRManagementApiApiDeletePitrConfigRequest) Execute() (YBPTask, *_nethttp.Response, error) {
 	return r.ApiService.DeletePitrConfigExecute(r)
 }
 
@@ -356,16 +356,16 @@ func (a *PITRManagementApiService) DeletePitrConfig(ctx _context.Context, cUUID 
 
 /*
  * Execute executes the request
- * @return YBPSuccess
+ * @return YBPTask
  */
-func (a *PITRManagementApiService) DeletePitrConfigExecute(r PITRManagementApiApiDeletePitrConfigRequest) (YBPSuccess, *_nethttp.Response, error) {
+func (a *PITRManagementApiService) DeletePitrConfigExecute(r PITRManagementApiApiDeletePitrConfigRequest) (YBPTask, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  YBPSuccess
+		localVarReturnValue  YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementApiService.DeletePitrConfig")

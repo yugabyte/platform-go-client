@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 
 ## DeletePitrConfig
 
-> YBPSuccess DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Request(request).Execute()
+> YBPTask DeletePitrConfig(ctx, cUUID, uniUUID, pUUID).Request(request).Execute()
 
 Delete pitr config on a universe
 
@@ -202,7 +202,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PITRManagementApi.DeletePitrConfig``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DeletePitrConfig`: YBPSuccess
+    // response from `DeletePitrConfig`: YBPTask
     fmt.Fprintf(os.Stdout, "Response from `PITRManagementApi.DeletePitrConfig`: %v\n", resp)
 }
 ```
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
