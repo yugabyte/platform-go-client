@@ -232,11 +232,6 @@ and a boolean to check if the value has been set.
 
 SetCreatingUser sets CreatingUser field to given value.
 
-### HasCurrentYbcTaskId
-
-`func (o *RestoreBackupParams) HasCurrentYbcTaskId() bool`
-
-HasCurrentYbcTaskId returns a boolean if a field has been set.
 
 ### GetCustomerUUID
 
