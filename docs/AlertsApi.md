@@ -1759,7 +1759,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    listAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}) // AlertConfigurationApiFilter | 
+    listAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationApiFilter([]string{"Uuids_example"}) // AlertConfigurationApiFilter | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -2187,7 +2187,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationPagedApiQuery("Direction_example", *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertConfigurationPagedApiQuery | 
+    pageAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationPagedApiQuery("Direction_example", *openapiclient.NewAlertConfigurationApiFilter([]string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertConfigurationPagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
