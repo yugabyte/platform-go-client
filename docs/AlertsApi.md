@@ -1759,7 +1759,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    listAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}) // AlertConfigurationApiFilter | 
+    listAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationApiFilter([]string{"Uuids_example"}) // AlertConfigurationApiFilter | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -1813,7 +1813,7 @@ Name | Type | Description  | Notes
 
 ## ListAlertDestinations
 
-> []AlertDefinition ListAlertDestinations(ctx, cUUID).Execute()
+> []AlertDestination ListAlertDestinations(ctx, cUUID).Execute()
 
 List alert destinations
 
@@ -1841,7 +1841,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AlertsApi.ListAlertDestinations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ListAlertDestinations`: []AlertDefinition
+    // response from `ListAlertDestinations`: []AlertDestination
     fmt.Fprintf(os.Stdout, "Response from `AlertsApi.ListAlertDestinations`: %v\n", resp)
 }
 ```
@@ -1865,7 +1865,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]AlertDefinition**](AlertDefinition.md)
+[**[]AlertDestination**](AlertDestination.md)
 
 ### Authorization
 
@@ -2187,7 +2187,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    pageAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationPagedApiQuery("Direction_example", *openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertConfigurationPagedApiQuery | 
+    pageAlertConfigurationsRequest := *openapiclient.NewAlertConfigurationPagedApiQuery("Direction_example", *openapiclient.NewAlertConfigurationApiFilter([]string{"Uuids_example"}), int32(123), false, int32(123), "SortBy_example") // AlertConfigurationPagedApiQuery | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

@@ -16,14 +16,21 @@ import (
 
 // AlertConfigurationApiFilter struct for AlertConfigurationApiFilter
 type AlertConfigurationApiFilter struct {
-	Active bool `json:"active"`
-	DestinationType string `json:"destinationType"`
-	DestinationUuid string `json:"destinationUuid"`
-	Name string `json:"name"`
-	Severity string `json:"severity"`
-	Target AlertConfigurationTarget `json:"target"`
-	TargetType string `json:"targetType"`
-	Template string `json:"template"`
+	// Whether the alert configuration is active.
+	Active *bool `json:"active,omitempty"`
+	// The destination type of the alert configuration. 
+	DestinationType *string `json:"destinationType,omitempty"`
+	// The destination uuid of the alert configuration. 
+	DestinationUuid *string `json:"destinationUuid,omitempty"`
+	// The name of the alert configuration.
+	Name *string `json:"name,omitempty"`
+	// The severity of the alert configuration.
+	Severity *string `json:"severity,omitempty"`
+	Target *AlertConfigurationTarget `json:"target,omitempty"`
+	// The target type of the alert configuration.
+	TargetType *string `json:"targetType,omitempty"`
+	// The template of the alert configuration.
+	Template *string `json:"template,omitempty"`
 	Uuids []string `json:"uuids"`
 }
 
@@ -31,16 +38,8 @@ type AlertConfigurationApiFilter struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationApiFilter(active bool, destinationType string, destinationUuid string, name string, severity string, target AlertConfigurationTarget, targetType string, template string, uuids []string) *AlertConfigurationApiFilter {
+func NewAlertConfigurationApiFilter(uuids []string) *AlertConfigurationApiFilter {
 	this := AlertConfigurationApiFilter{}
-	this.Active = active
-	this.DestinationType = destinationType
-	this.DestinationUuid = destinationUuid
-	this.Name = name
-	this.Severity = severity
-	this.Target = target
-	this.TargetType = targetType
-	this.Template = template
 	this.Uuids = uuids
 	return &this
 }
@@ -53,196 +52,260 @@ func NewAlertConfigurationApiFilterWithDefaults() *AlertConfigurationApiFilter {
 	return &this
 }
 
-// GetActive returns the Active field value
+// GetActive returns the Active field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetActive() bool {
-	if o == nil {
+	if o == nil || o.Active == nil {
 		var ret bool
 		return ret
 	}
-
-	return o.Active
+	return *o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetActiveOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil || o.Active == nil {
 		return nil, false
 	}
-	return &o.Active, true
+	return o.Active, true
 }
 
-// SetActive sets field value
+// HasActive returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasActive() bool {
+	if o != nil && o.Active != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *AlertConfigurationApiFilter) SetActive(v bool) {
-	o.Active = v
+	o.Active = &v
 }
 
-// GetDestinationType returns the DestinationType field value
+// GetDestinationType returns the DestinationType field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetDestinationType() string {
-	if o == nil {
+	if o == nil || o.DestinationType == nil {
 		var ret string
 		return ret
 	}
-
-	return o.DestinationType
+	return *o.DestinationType
 }
 
-// GetDestinationTypeOk returns a tuple with the DestinationType field value
+// GetDestinationTypeOk returns a tuple with the DestinationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetDestinationTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.DestinationType == nil {
 		return nil, false
 	}
-	return &o.DestinationType, true
+	return o.DestinationType, true
 }
 
-// SetDestinationType sets field value
+// HasDestinationType returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasDestinationType() bool {
+	if o != nil && o.DestinationType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationType gets a reference to the given string and assigns it to the DestinationType field.
 func (o *AlertConfigurationApiFilter) SetDestinationType(v string) {
-	o.DestinationType = v
+	o.DestinationType = &v
 }
 
-// GetDestinationUuid returns the DestinationUuid field value
+// GetDestinationUuid returns the DestinationUuid field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetDestinationUuid() string {
-	if o == nil {
+	if o == nil || o.DestinationUuid == nil {
 		var ret string
 		return ret
 	}
-
-	return o.DestinationUuid
+	return *o.DestinationUuid
 }
 
-// GetDestinationUuidOk returns a tuple with the DestinationUuid field value
+// GetDestinationUuidOk returns a tuple with the DestinationUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetDestinationUuidOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.DestinationUuid == nil {
 		return nil, false
 	}
-	return &o.DestinationUuid, true
+	return o.DestinationUuid, true
 }
 
-// SetDestinationUuid sets field value
+// HasDestinationUuid returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasDestinationUuid() bool {
+	if o != nil && o.DestinationUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationUuid gets a reference to the given string and assigns it to the DestinationUuid field.
 func (o *AlertConfigurationApiFilter) SetDestinationUuid(v string) {
-	o.DestinationUuid = v
+	o.DestinationUuid = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetName() string {
-	if o == nil {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *AlertConfigurationApiFilter) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetSeverity returns the Severity field value
+// GetSeverity returns the Severity field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetSeverity() string {
-	if o == nil {
+	if o == nil || o.Severity == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Severity
+	return *o.Severity
 }
 
-// GetSeverityOk returns a tuple with the Severity field value
+// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetSeverityOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Severity == nil {
 		return nil, false
 	}
-	return &o.Severity, true
+	return o.Severity, true
 }
 
-// SetSeverity sets field value
+// HasSeverity returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasSeverity() bool {
+	if o != nil && o.Severity != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverity gets a reference to the given string and assigns it to the Severity field.
 func (o *AlertConfigurationApiFilter) SetSeverity(v string) {
-	o.Severity = v
+	o.Severity = &v
 }
 
-// GetTarget returns the Target field value
+// GetTarget returns the Target field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetTarget() AlertConfigurationTarget {
-	if o == nil {
+	if o == nil || o.Target == nil {
 		var ret AlertConfigurationTarget
 		return ret
 	}
-
-	return o.Target
+	return *o.Target
 }
 
-// GetTargetOk returns a tuple with the Target field value
+// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetTargetOk() (*AlertConfigurationTarget, bool) {
-	if o == nil  {
+	if o == nil || o.Target == nil {
 		return nil, false
 	}
-	return &o.Target, true
+	return o.Target, true
 }
 
-// SetTarget sets field value
+// HasTarget returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasTarget() bool {
+	if o != nil && o.Target != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTarget gets a reference to the given AlertConfigurationTarget and assigns it to the Target field.
 func (o *AlertConfigurationApiFilter) SetTarget(v AlertConfigurationTarget) {
-	o.Target = v
+	o.Target = &v
 }
 
-// GetTargetType returns the TargetType field value
+// GetTargetType returns the TargetType field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetTargetType() string {
-	if o == nil {
+	if o == nil || o.TargetType == nil {
 		var ret string
 		return ret
 	}
-
-	return o.TargetType
+	return *o.TargetType
 }
 
-// GetTargetTypeOk returns a tuple with the TargetType field value
+// GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetTargetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.TargetType == nil {
 		return nil, false
 	}
-	return &o.TargetType, true
+	return o.TargetType, true
 }
 
-// SetTargetType sets field value
+// HasTargetType returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasTargetType() bool {
+	if o != nil && o.TargetType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetType gets a reference to the given string and assigns it to the TargetType field.
 func (o *AlertConfigurationApiFilter) SetTargetType(v string) {
-	o.TargetType = v
+	o.TargetType = &v
 }
 
-// GetTemplate returns the Template field value
+// GetTemplate returns the Template field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetTemplate() string {
-	if o == nil {
+	if o == nil || o.Template == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Template
+	return *o.Template
 }
 
-// GetTemplateOk returns a tuple with the Template field value
+// GetTemplateOk returns a tuple with the Template field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetTemplateOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Template == nil {
 		return nil, false
 	}
-	return &o.Template, true
+	return o.Template, true
 }
 
-// SetTemplate sets field value
+// HasTemplate returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasTemplate() bool {
+	if o != nil && o.Template != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTemplate gets a reference to the given string and assigns it to the Template field.
 func (o *AlertConfigurationApiFilter) SetTemplate(v string) {
-	o.Template = v
+	o.Template = &v
 }
 
 // GetUuids returns the Uuids field value
@@ -271,28 +334,28 @@ func (o *AlertConfigurationApiFilter) SetUuids(v []string) {
 
 func (o AlertConfigurationApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Active != nil {
 		toSerialize["active"] = o.Active
 	}
-	if true {
+	if o.DestinationType != nil {
 		toSerialize["destinationType"] = o.DestinationType
 	}
-	if true {
+	if o.DestinationUuid != nil {
 		toSerialize["destinationUuid"] = o.DestinationUuid
 	}
-	if true {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if true {
+	if o.Severity != nil {
 		toSerialize["severity"] = o.Severity
 	}
-	if true {
+	if o.Target != nil {
 		toSerialize["target"] = o.Target
 	}
-	if true {
+	if o.TargetType != nil {
 		toSerialize["targetType"] = o.TargetType
 	}
-	if true {
+	if o.Template != nil {
 		toSerialize["template"] = o.Template
 	}
 	if true {

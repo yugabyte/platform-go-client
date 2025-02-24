@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | **bool** |  | 
-**DestinationType** | **string** |  | 
-**DestinationUuid** | **string** |  | 
-**Name** | **string** |  | 
-**Severity** | **string** |  | 
-**Target** | [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | 
-**TargetType** | **string** |  | 
-**Template** | **string** |  | 
+**Active** | Pointer to **bool** | Whether the alert configuration is active. | [optional] 
+**DestinationType** | Pointer to **string** | The destination type of the alert configuration.  | [optional] 
+**DestinationUuid** | Pointer to **string** | The destination uuid of the alert configuration.  | [optional] 
+**Name** | Pointer to **string** | The name of the alert configuration. | [optional] 
+**Severity** | Pointer to **string** | The severity of the alert configuration. | [optional] 
+**Target** | Pointer to [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | [optional] 
+**TargetType** | Pointer to **string** | The target type of the alert configuration. | [optional] 
+**Template** | Pointer to **string** | The template of the alert configuration. | [optional] 
 **Uuids** | **[]string** |  | 
 
 ## Methods
 
 ### NewAlertConfigurationApiFilter
 
-`func NewAlertConfigurationApiFilter(active bool, destinationType string, destinationUuid string, name string, severity string, target AlertConfigurationTarget, targetType string, template string, uuids []string, ) *AlertConfigurationApiFilter`
+`func NewAlertConfigurationApiFilter(uuids []string, ) *AlertConfigurationApiFilter`
 
 NewAlertConfigurationApiFilter instantiates a new AlertConfigurationApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -52,6 +52,11 @@ and a boolean to check if the value has been set.
 
 SetActive sets Active field to given value.
 
+### HasActive
+
+`func (o *AlertConfigurationApiFilter) HasActive() bool`
+
+HasActive returns a boolean if a field has been set.
 
 ### GetDestinationType
 
@@ -72,6 +77,11 @@ and a boolean to check if the value has been set.
 
 SetDestinationType sets DestinationType field to given value.
 
+### HasDestinationType
+
+`func (o *AlertConfigurationApiFilter) HasDestinationType() bool`
+
+HasDestinationType returns a boolean if a field has been set.
 
 ### GetDestinationUuid
 
@@ -92,6 +102,11 @@ and a boolean to check if the value has been set.
 
 SetDestinationUuid sets DestinationUuid field to given value.
 
+### HasDestinationUuid
+
+`func (o *AlertConfigurationApiFilter) HasDestinationUuid() bool`
+
+HasDestinationUuid returns a boolean if a field has been set.
 
 ### GetName
 
@@ -112,6 +127,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *AlertConfigurationApiFilter) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetSeverity
 
@@ -132,6 +152,11 @@ and a boolean to check if the value has been set.
 
 SetSeverity sets Severity field to given value.
 
+### HasSeverity
+
+`func (o *AlertConfigurationApiFilter) HasSeverity() bool`
+
+HasSeverity returns a boolean if a field has been set.
 
 ### GetTarget
 
@@ -152,6 +177,11 @@ and a boolean to check if the value has been set.
 
 SetTarget sets Target field to given value.
 
+### HasTarget
+
+`func (o *AlertConfigurationApiFilter) HasTarget() bool`
+
+HasTarget returns a boolean if a field has been set.
 
 ### GetTargetType
 
@@ -172,6 +202,11 @@ and a boolean to check if the value has been set.
 
 SetTargetType sets TargetType field to given value.
 
+### HasTargetType
+
+`func (o *AlertConfigurationApiFilter) HasTargetType() bool`
+
+HasTargetType returns a boolean if a field has been set.
 
 ### GetTemplate
 
@@ -192,6 +227,11 @@ and a boolean to check if the value has been set.
 
 SetTemplate sets Template field to given value.
 
+### HasTemplate
+
+`func (o *AlertConfigurationApiFilter) HasTemplate() bool`
+
+HasTemplate returns a boolean if a field has been set.
 
 ### GetUuids
 

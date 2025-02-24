@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **Namespaces** | [**[]XClusterNamespaceConfig**](XClusterNamespaceConfig.md) |  | 
 **Paused** | Pointer to **bool** | Whether this xCluster replication config is paused | [optional] 
 **PitrConfigs** | Pointer to [**[]PitrConfig**](PitrConfig.md) | WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config | [optional] 
-**ReplicationGroupName** | Pointer to **string** | Replication group name in the target universe cluster config | [optional] 
+**ReplicationGroupName** | Pointer to **string** | Replication group name in the target universe cluster config | [optional] [readonly] 
 **Secondary** | Pointer to **bool** | WARNING: This is a preview API that could change. Whether this xCluster config is used as a secondary config for a DR config | [optional] 
 **SourceActive** | Pointer to **bool** | Whether the source is active in txn xCluster | [optional] 
 **SourceUniverseState** | Pointer to **string** | WARNING: This is a preview API that could change. The replication status of the source universe; used for disaster recovery | [optional] 

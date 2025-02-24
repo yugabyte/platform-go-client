@@ -871,7 +871,7 @@ paths:
               schema:
                 exampleSetFlag: false
                 items:
-                  $ref: '#/components/schemas/AlertDefinition'
+                  $ref: '#/components/schemas/AlertDestination'
                 type: array
           description: successful operation
       security:
@@ -7369,6 +7369,7 @@ paths:
                   - YbcLogs
                   - NodeAgent
                   - SystemLogs
+                  - TabletReport
                   - K8sInfo
                   - YbaMetadata
                   - PrometheusMetrics
@@ -15314,9 +15315,11 @@ components:
       exampleSetFlag: true
       properties:
         active:
+          description: Whether the alert configuration is active.
           exampleSetFlag: true
           type: boolean
         destinationType:
+          description: 'The destination type of the alert configuration. '
           enum:
           - NO_DESTINATION
           - DEFAULT_DESTINATION
@@ -15324,13 +15327,16 @@ components:
           exampleSetFlag: true
           type: string
         destinationUuid:
+          description: 'The destination uuid of the alert configuration. '
           exampleSetFlag: true
           format: uuid
           type: string
         name:
+          description: The name of the alert configuration.
           exampleSetFlag: true
           type: string
         severity:
+          description: The severity of the alert configuration.
           enum:
           - SEVERE
           - WARNING
@@ -15339,12 +15345,14 @@ components:
         target:
           $ref: '#/components/schemas/AlertConfigurationTarget'
         targetType:
+          description: The target type of the alert configuration.
           enum:
           - PLATFORM
           - UNIVERSE
           exampleSetFlag: true
           type: string
         template:
+          description: The template of the alert configuration.
           enum:
           - REPLICATION_LAG
           - CLOCK_SKEW
@@ -15437,14 +15445,6 @@ components:
           type: array
           uniqueItems: true
       required:
-      - active
-      - destinationType
-      - destinationUuid
-      - name
-      - severity
-      - target
-      - targetType
-      - template
       - uuids
       type: object
     AlertConfigurationPagedApiQuery:
@@ -15910,89 +15910,6 @@ components:
       required:
       - condition
       - threshold
-      type: object
-    AlertDefinition:
-      example:
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        configurationUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version: 0
-        labels:
-        - name: name
-          value: value
-          key:
-            name: name
-        - name: name
-          value: value
-          key:
-            name: name
-      exampleSetFlag: true
-      properties:
-        configurationUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        customerUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        labels:
-          exampleSetFlag: false
-          items:
-            $ref: '#/components/schemas/AlertDefinitionLabel'
-          type: array
-        universeUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        uuid:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        version:
-          exampleSetFlag: true
-          format: int32
-          type: integer
-      required:
-      - configurationUUID
-      - customerUUID
-      - labels
-      - universeUUID
-      - uuid
-      - version
-      type: object
-    AlertDefinitionLabel:
-      example:
-        name: name
-        value: value
-        key:
-          name: name
-      exampleSetFlag: true
-      properties:
-        key:
-          $ref: '#/components/schemas/AlertDefinitionLabelKey'
-        name:
-          exampleSetFlag: true
-          type: string
-        value:
-          exampleSetFlag: true
-          type: string
-      required:
-      - key
-      - name
-      - value
-      type: object
-    AlertDefinitionLabelKey:
-      example:
-        name: name
-      exampleSetFlag: true
-      properties:
-        name:
-          exampleSetFlag: true
-          type: string
-      required:
-      - name
       type: object
     AlertDestination:
       description: Alert notification destination
@@ -20152,6 +20069,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -20168,6 +20086,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -20347,6 +20266,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -23465,6 +23385,7 @@ components:
             - YbcLogs
             - NodeAgent
             - SystemLogs
+            - TabletReport
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -26963,6 +26884,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -26979,6 +26901,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -27158,6 +27081,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -34328,6 +34252,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -34344,6 +34269,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -34523,6 +34449,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -37882,6 +37809,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -37898,6 +37826,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -38077,6 +38006,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -42192,6 +42122,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -42208,6 +42139,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -42387,6 +42319,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -51682,6 +51615,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -51698,6 +51632,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -51877,6 +51812,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -55718,6 +55654,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -55734,6 +55671,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -55913,6 +55851,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -59310,6 +59249,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -59326,6 +59266,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -59505,6 +59446,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -64224,6 +64166,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -64240,6 +64183,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -64419,6 +64363,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -64791,6 +64736,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -64807,6 +64753,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -64986,6 +64933,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -65167,6 +65115,7 @@ components:
             - CreateTableSpacesInUniverse
             - ThirdpartySoftwareUpgrade
             - ModifyAuditLoggingConfig
+            - ModifyKubernetesAuditLoggingConfig
             - InstallYbcSoftware
             - UpgradeUniverseYbc
             - UpgradeYbcGFlags
@@ -65183,6 +65132,7 @@ components:
             - SoftwareUpgradeYB
             - SoftwareKubernetesUpgradeYB
             - FinalizeUpgrade
+            - FinalizeKubernetesUpgrade
             - RollbackUpgrade
             - RollbackKubernetesUpgrade
             - LdapUniverseSync
@@ -65362,6 +65312,7 @@ components:
             - CheckMemory
             - CheckLocale
             - CheckGlibc
+            - CheckOpentelemetryOperator
             - PGUpgradeTServerCheck
             - RunYsqlMajorVersionCatalogUpgrade
             - RollbackYsqlMajorVersionCatalogUpgrade
@@ -68780,6 +68731,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -68796,6 +68748,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -68975,6 +68928,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -69462,6 +69416,7 @@ components:
             - YbcLogs
             - NodeAgent
             - SystemLogs
+            - TabletReport
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -72664,6 +72619,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -72680,6 +72636,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -72859,6 +72816,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -77044,6 +77002,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -77060,6 +77019,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -77239,6 +77199,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -80443,6 +80404,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -80459,6 +80421,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -80638,6 +80601,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -84096,6 +84060,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -84112,6 +84077,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -84291,6 +84257,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -87442,6 +87409,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -87458,6 +87426,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -87637,6 +87606,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -90796,6 +90766,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -90812,6 +90783,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -90991,6 +90963,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -97575,6 +97548,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -97591,6 +97565,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -97770,6 +97745,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -101780,6 +101756,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -101796,6 +101773,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -101975,6 +101953,7 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
@@ -102241,6 +102220,7 @@ components:
         replicationGroupName:
           description: Replication group name in the target universe cluster config
           exampleSetFlag: true
+          readOnly: true
           type: string
         secondary:
           description: "WARNING: This is a preview API that could change. Whether\
@@ -102763,6 +102743,7 @@ components:
         replicationGroupName:
           description: Replication group name in the target universe cluster config
           exampleSetFlag: true
+          readOnly: true
           type: string
         secondary:
           description: "WARNING: This is a preview API that could change. Whether\
