@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**TargetType** | **string** |  | 
+**Name** | Pointer to **string** | The name of the alert template. | [optional] 
+**TargetType** | Pointer to **string** | The target type of the alert template. | [optional] 
 
 ## Methods
 
 ### NewAlertTemplateApiFilter
 
-`func NewAlertTemplateApiFilter(name string, targetType string, ) *AlertTemplateApiFilter`
+`func NewAlertTemplateApiFilter() *AlertTemplateApiFilter`
 
 NewAlertTemplateApiFilter instantiates a new AlertTemplateApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *AlertTemplateApiFilter) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetTargetType
 
@@ -65,6 +70,11 @@ and a boolean to check if the value has been set.
 
 SetTargetType sets TargetType field to given value.
 
+### HasTargetType
+
+`func (o *AlertTemplateApiFilter) HasTargetType() bool`
+
+HasTargetType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

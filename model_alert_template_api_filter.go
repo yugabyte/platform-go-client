@@ -16,18 +16,18 @@ import (
 
 // AlertTemplateApiFilter struct for AlertTemplateApiFilter
 type AlertTemplateApiFilter struct {
-	Name string `json:"name"`
-	TargetType string `json:"targetType"`
+	// The name of the alert template.
+	Name *string `json:"name,omitempty"`
+	// The target type of the alert template.
+	TargetType *string `json:"targetType,omitempty"`
 }
 
 // NewAlertTemplateApiFilter instantiates a new AlertTemplateApiFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertTemplateApiFilter(name string, targetType string) *AlertTemplateApiFilter {
+func NewAlertTemplateApiFilter() *AlertTemplateApiFilter {
 	this := AlertTemplateApiFilter{}
-	this.Name = name
-	this.TargetType = targetType
 	return &this
 }
 
@@ -39,60 +39,76 @@ func NewAlertTemplateApiFilterWithDefaults() *AlertTemplateApiFilter {
 	return &this
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *AlertTemplateApiFilter) GetName() string {
-	if o == nil {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertTemplateApiFilter) GetNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *AlertTemplateApiFilter) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *AlertTemplateApiFilter) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
-// GetTargetType returns the TargetType field value
+// GetTargetType returns the TargetType field value if set, zero value otherwise.
 func (o *AlertTemplateApiFilter) GetTargetType() string {
-	if o == nil {
+	if o == nil || o.TargetType == nil {
 		var ret string
 		return ret
 	}
-
-	return o.TargetType
+	return *o.TargetType
 }
 
-// GetTargetTypeOk returns a tuple with the TargetType field value
+// GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertTemplateApiFilter) GetTargetTypeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.TargetType == nil {
 		return nil, false
 	}
-	return &o.TargetType, true
+	return o.TargetType, true
 }
 
-// SetTargetType sets field value
+// HasTargetType returns a boolean if a field has been set.
+func (o *AlertTemplateApiFilter) HasTargetType() bool {
+	if o != nil && o.TargetType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetType gets a reference to the given string and assigns it to the TargetType field.
 func (o *AlertTemplateApiFilter) SetTargetType(v string) {
-	o.TargetType = v
+	o.TargetType = &v
 }
 
 func (o AlertTemplateApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if true {
+	if o.TargetType != nil {
 		toSerialize["targetType"] = o.TargetType
 	}
 	return json.Marshal(toSerialize)

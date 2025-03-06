@@ -77,9 +77,11 @@ type BackupRequestParams struct {
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
+	// YbaApi Internal. Run only prechecks during task run
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	// Schedule Name
 	ScheduleName *string `json:"scheduleName,omitempty"`
 	// Schedule UUID
@@ -116,12 +118,11 @@ type BackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string) *BackupRequestParams {
+func NewBackupRequestParams(backupUUID string, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, universeUUID string) *BackupRequestParams {
 	this := BackupRequestParams{}
 	this.BackupUUID = backupUUID
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
@@ -1233,28 +1234,36 @@ func (o *BackupRequestParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetPlatformVersion() string {
-	if o == nil {
+	if o == nil || o.PlatformVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformVersion
+	return *o.PlatformVersion
 }
 
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BackupRequestParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PlatformVersion == nil {
 		return nil, false
 	}
-	return &o.PlatformVersion, true
+	return o.PlatformVersion, true
 }
 
-// SetPlatformVersion sets field value
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasPlatformVersion() bool {
+	if o != nil && o.PlatformVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
 func (o *BackupRequestParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
+	o.PlatformVersion = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -1287,6 +1296,38 @@ func (o *BackupRequestParams) HasPreviousTaskUUID() bool {
 // SetPreviousTaskUUID gets a reference to the given string and assigns it to the PreviousTaskUUID field.
 func (o *BackupRequestParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
+}
+
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetRunOnlyPrechecks() bool {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasRunOnlyPrechecks() bool {
+	if o != nil && o.RunOnlyPrechecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *BackupRequestParams) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
 }
 
 // GetScheduleName returns the ScheduleName field value if set, zero value otherwise.
@@ -1908,11 +1949,14 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
+	if o.PlatformVersion != nil {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
+	}
+	if o.RunOnlyPrechecks != nil {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
 	}
 	if o.ScheduleName != nil {
 		toSerialize["scheduleName"] = o.ScheduleName

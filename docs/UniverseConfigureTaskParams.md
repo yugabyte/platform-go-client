@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionsChanged** | Pointer to **bool** |  | [optional] 
@@ -44,6 +44,7 @@ Name | Type | Description | Notes
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
 **RootCA** | Pointer to **string** |  | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
@@ -69,7 +70,7 @@ Name | Type | Description | Notes
 
 ### NewUniverseConfigureTaskParams
 
-`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
+`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
 
 NewUniverseConfigureTaskParams instantiates a new UniverseConfigureTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -888,6 +889,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *UniverseConfigureTaskParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrevYBSoftwareConfig
 
@@ -1063,6 +1069,31 @@ SetRootCA sets RootCA field to given value.
 `func (o *UniverseConfigureTaskParams) HasRootCA() bool`
 
 HasRootCA returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *UniverseConfigureTaskParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *UniverseConfigureTaskParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *UniverseConfigureTaskParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *UniverseConfigureTaskParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSetTxnTableWaitCountFlag
 

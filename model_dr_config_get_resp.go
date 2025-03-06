@@ -66,6 +66,7 @@ type DrConfigGetResp struct {
 	Type *string `json:"type,omitempty"`
 	// DR config UUID
 	Uuid *string `json:"uuid,omitempty"`
+	Webhooks []GetWebhookResponse `json:"webhooks"`
 	// UUID of the underlying xCluster config that is managing the replication
 	XclusterConfigUuid *string `json:"xclusterConfigUuid,omitempty"`
 	// YbaApi Internal. The list of xCluster configs' uuids that belong to this dr config
@@ -76,8 +77,9 @@ type DrConfigGetResp struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDrConfigGetResp() *DrConfigGetResp {
+func NewDrConfigGetResp(webhooks []GetWebhookResponse) *DrConfigGetResp {
 	this := DrConfigGetResp{}
+	this.Webhooks = webhooks
 	return &this
 }
 
@@ -889,6 +891,30 @@ func (o *DrConfigGetResp) SetUuid(v string) {
 	o.Uuid = &v
 }
 
+// GetWebhooks returns the Webhooks field value
+func (o *DrConfigGetResp) GetWebhooks() []GetWebhookResponse {
+	if o == nil {
+		var ret []GetWebhookResponse
+		return ret
+	}
+
+	return o.Webhooks
+}
+
+// GetWebhooksOk returns a tuple with the Webhooks field value
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetWebhooksOk() (*[]GetWebhookResponse, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Webhooks, true
+}
+
+// SetWebhooks sets field value
+func (o *DrConfigGetResp) SetWebhooks(v []GetWebhookResponse) {
+	o.Webhooks = v
+}
+
 // GetXclusterConfigUuid returns the XclusterConfigUuid field value if set, zero value otherwise.
 func (o *DrConfigGetResp) GetXclusterConfigUuid() string {
 	if o == nil || o.XclusterConfigUuid == nil {
@@ -1029,6 +1055,9 @@ func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	}
 	if o.Uuid != nil {
 		toSerialize["uuid"] = o.Uuid
+	}
+	if true {
+		toSerialize["webhooks"] = o.Webhooks
 	}
 	if o.XclusterConfigUuid != nil {
 		toSerialize["xclusterConfigUuid"] = o.XclusterConfigUuid

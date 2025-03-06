@@ -3180,7 +3180,7 @@ type AlertsApiApiListAlertDestinationsRequest struct {
 }
 
 
-func (r AlertsApiApiListAlertDestinationsRequest) Execute() ([]AlertDefinition, *_nethttp.Response, error) {
+func (r AlertsApiApiListAlertDestinationsRequest) Execute() ([]AlertDestination, *_nethttp.Response, error) {
 	return r.ApiService.ListAlertDestinationsExecute(r)
 }
 
@@ -3201,16 +3201,16 @@ func (a *AlertsApiService) ListAlertDestinations(ctx _context.Context, cUUID str
 
 /*
  * Execute executes the request
- * @return []AlertDefinition
+ * @return []AlertDestination
  */
-func (a *AlertsApiService) ListAlertDestinationsExecute(r AlertsApiApiListAlertDestinationsRequest) ([]AlertDefinition, *_nethttp.Response, error) {
+func (a *AlertsApiService) ListAlertDestinationsExecute(r AlertsApiApiListAlertDestinationsRequest) ([]AlertDestination, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []AlertDefinition
+		localVarReturnValue  []AlertDestination
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsApiService.ListAlertDestinations")

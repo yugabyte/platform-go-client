@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **Tables** | Pointer to **[]string** | List of table ids in replication | [optional] 
 **Type** | Pointer to **string** | Whether the config is basic, txn, or db scoped xCluster | [optional] 
 **Uuid** | Pointer to **string** | DR config UUID | [optional] 
+**Webhooks** | [**[]GetWebhookResponse**](GetWebhookResponse.md) |  | 
 **XclusterConfigUuid** | Pointer to **string** | UUID of the underlying xCluster config that is managing the replication | [optional] 
 **XclusterConfigsUuid** | Pointer to **[]string** | YbaApi Internal. The list of xCluster configs&#39; uuids that belong to this dr config | [optional] 
 
@@ -36,7 +37,7 @@ Name | Type | Description | Notes
 
 ### NewDrConfigGetResp
 
-`func NewDrConfigGetResp() *DrConfigGetResp`
+`func NewDrConfigGetResp(webhooks []GetWebhookResponse, ) *DrConfigGetResp`
 
 NewDrConfigGetResp instantiates a new DrConfigGetResp object
 This constructor will assign default values to properties that have it defined,
@@ -675,6 +676,26 @@ SetUuid sets Uuid field to given value.
 `func (o *DrConfigGetResp) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
+
+### GetWebhooks
+
+`func (o *DrConfigGetResp) GetWebhooks() []GetWebhookResponse`
+
+GetWebhooks returns the Webhooks field if non-nil, zero value otherwise.
+
+### GetWebhooksOk
+
+`func (o *DrConfigGetResp) GetWebhooksOk() (*[]GetWebhookResponse, bool)`
+
+GetWebhooksOk returns a tuple with the Webhooks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebhooks
+
+`func (o *DrConfigGetResp) SetWebhooks(v []GetWebhookResponse)`
+
+SetWebhooks sets Webhooks field to given value.
+
 
 ### GetXclusterConfigUuid
 

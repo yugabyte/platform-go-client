@@ -17,8 +17,9 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -35,7 +36,7 @@ Name | Type | Description | Notes
 
 ### NewTableDefinitionTaskParams
 
-`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
+`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
 
 NewTableDefinitionTaskParams instantiates a new TableDefinitionTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -384,6 +385,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *TableDefinitionTaskParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 
@@ -409,6 +415,31 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *TableDefinitionTaskParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *TableDefinitionTaskParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *TableDefinitionTaskParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *TableDefinitionTaskParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *TableDefinitionTaskParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

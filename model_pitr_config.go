@@ -25,6 +25,8 @@ type PitrConfig struct {
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// DB Name
 	DbName *string `json:"dbName,omitempty"`
+	// Intermittent min recovery time in millis if retention period is increased
+	IntermittentMinRecoverTimeInMillis *int64 `json:"intermittentMinRecoverTimeInMillis,omitempty"`
 	MaxRecoverTimeInMillis int64 `json:"maxRecoverTimeInMillis"`
 	MinRecoverTimeInMillis int64 `json:"minRecoverTimeInMillis"`
 	// PITR config name
@@ -189,6 +191,38 @@ func (o *PitrConfig) HasDbName() bool {
 // SetDbName gets a reference to the given string and assigns it to the DbName field.
 func (o *PitrConfig) SetDbName(v string) {
 	o.DbName = &v
+}
+
+// GetIntermittentMinRecoverTimeInMillis returns the IntermittentMinRecoverTimeInMillis field value if set, zero value otherwise.
+func (o *PitrConfig) GetIntermittentMinRecoverTimeInMillis() int64 {
+	if o == nil || o.IntermittentMinRecoverTimeInMillis == nil {
+		var ret int64
+		return ret
+	}
+	return *o.IntermittentMinRecoverTimeInMillis
+}
+
+// GetIntermittentMinRecoverTimeInMillisOk returns a tuple with the IntermittentMinRecoverTimeInMillis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PitrConfig) GetIntermittentMinRecoverTimeInMillisOk() (*int64, bool) {
+	if o == nil || o.IntermittentMinRecoverTimeInMillis == nil {
+		return nil, false
+	}
+	return o.IntermittentMinRecoverTimeInMillis, true
+}
+
+// HasIntermittentMinRecoverTimeInMillis returns a boolean if a field has been set.
+func (o *PitrConfig) HasIntermittentMinRecoverTimeInMillis() bool {
+	if o != nil && o.IntermittentMinRecoverTimeInMillis != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIntermittentMinRecoverTimeInMillis gets a reference to the given int64 and assigns it to the IntermittentMinRecoverTimeInMillis field.
+func (o *PitrConfig) SetIntermittentMinRecoverTimeInMillis(v int64) {
+	o.IntermittentMinRecoverTimeInMillis = &v
 }
 
 // GetMaxRecoverTimeInMillis returns the MaxRecoverTimeInMillis field value
@@ -500,6 +534,9 @@ func (o PitrConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.DbName != nil {
 		toSerialize["dbName"] = o.DbName
+	}
+	if o.IntermittentMinRecoverTimeInMillis != nil {
+		toSerialize["intermittentMinRecoverTimeInMillis"] = o.IntermittentMinRecoverTimeInMillis
 	}
 	if true {
 		toSerialize["maxRecoverTimeInMillis"] = o.MaxRecoverTimeInMillis

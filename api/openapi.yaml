@@ -871,7 +871,7 @@ paths:
               schema:
                 exampleSetFlag: false
                 items:
-                  $ref: '#/components/schemas/AlertDefinition'
+                  $ref: '#/components/schemas/AlertDestination'
                 type: array
           description: successful operation
       security:
@@ -7369,6 +7369,7 @@ paths:
                   - YbcLogs
                   - NodeAgent
                   - SystemLogs
+                  - TabletReport
                   - K8sInfo
                   - YbaMetadata
                   - PrometheusMetrics
@@ -14856,6 +14857,7 @@ components:
       exampleSetFlag: true
       properties:
         configurationTypes:
+          description: Alert Configuration Target Types
           exampleSetFlag: false
           items:
             enum:
@@ -14866,10 +14868,12 @@ components:
           type: array
           uniqueItems: true
         configurationUuid:
+          description: The uuid of the alert configuration.
           exampleSetFlag: true
           format: uuid
           type: string
         severities:
+          description: The severity of the alerts.
           exampleSetFlag: false
           items:
             enum:
@@ -14880,9 +14884,11 @@ components:
           type: array
           uniqueItems: true
         sourceName:
+          description: The source name of the alerts.
           exampleSetFlag: true
           type: string
         sourceUUIDs:
+          description: The source uuids of the alerts.
           exampleSetFlag: false
           items:
             exampleSetFlag: true
@@ -14891,6 +14897,7 @@ components:
           type: array
           uniqueItems: true
         states:
+          description: The state of the alerts.
           exampleSetFlag: false
           items:
             enum:
@@ -14903,6 +14910,7 @@ components:
           type: array
           uniqueItems: true
         uuids:
+          description: The uuids of the alerts.
           exampleSetFlag: false
           items:
             exampleSetFlag: true
@@ -14910,14 +14918,6 @@ components:
             type: string
           type: array
           uniqueItems: true
-      required:
-      - configurationTypes
-      - configurationUuid
-      - severities
-      - sourceName
-      - sourceUUIDs
-      - states
-      - uuids
       type: object
     AlertChannel:
       description: Alert notification channel
@@ -15252,6 +15252,7 @@ components:
           - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
           exampleSetFlag: true
           type: string
         thresholdUnit:
@@ -15314,9 +15315,11 @@ components:
       exampleSetFlag: true
       properties:
         active:
+          description: Whether the alert configuration is active.
           exampleSetFlag: true
           type: boolean
         destinationType:
+          description: 'The destination type of the alert configuration. '
           enum:
           - NO_DESTINATION
           - DEFAULT_DESTINATION
@@ -15324,13 +15327,16 @@ components:
           exampleSetFlag: true
           type: string
         destinationUuid:
+          description: 'The destination uuid of the alert configuration. '
           exampleSetFlag: true
           format: uuid
           type: string
         name:
+          description: The name of the alert configuration.
           exampleSetFlag: true
           type: string
         severity:
+          description: The severity of the alert configuration.
           enum:
           - SEVERE
           - WARNING
@@ -15339,12 +15345,14 @@ components:
         target:
           $ref: '#/components/schemas/AlertConfigurationTarget'
         targetType:
+          description: The target type of the alert configuration.
           enum:
           - PLATFORM
           - UNIVERSE
           exampleSetFlag: true
           type: string
         template:
+          description: The template of the alert configuration.
           enum:
           - REPLICATION_LAG
           - CLOCK_SKEW
@@ -15426,9 +15434,11 @@ components:
           - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
           exampleSetFlag: true
           type: string
         uuids:
+          description: The uuids of the alert configurations.
           exampleSetFlag: false
           items:
             exampleSetFlag: true
@@ -15436,16 +15446,6 @@ components:
             type: string
           type: array
           uniqueItems: true
-      required:
-      - active
-      - destinationType
-      - destinationUuid
-      - name
-      - severity
-      - target
-      - targetType
-      - template
-      - uuids
       type: object
     AlertConfigurationPagedApiQuery:
       example:
@@ -15812,6 +15812,7 @@ components:
           - UNIVERSE_UNEXPECTED_MASTERS_RUNNING
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
+          - CONTINUOUS_BACKUPS_STATUS
           exampleSetFlag: true
           type: string
         thresholdConditionReadOnly:
@@ -15910,89 +15911,6 @@ components:
       required:
       - condition
       - threshold
-      type: object
-    AlertDefinition:
-      example:
-        universeUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        configurationUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        version: 0
-        labels:
-        - name: name
-          value: value
-          key:
-            name: name
-        - name: name
-          value: value
-          key:
-            name: name
-      exampleSetFlag: true
-      properties:
-        configurationUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        customerUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        labels:
-          exampleSetFlag: false
-          items:
-            $ref: '#/components/schemas/AlertDefinitionLabel'
-          type: array
-        universeUUID:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        uuid:
-          exampleSetFlag: true
-          format: uuid
-          type: string
-        version:
-          exampleSetFlag: true
-          format: int32
-          type: integer
-      required:
-      - configurationUUID
-      - customerUUID
-      - labels
-      - universeUUID
-      - uuid
-      - version
-      type: object
-    AlertDefinitionLabel:
-      example:
-        name: name
-        value: value
-        key:
-          name: name
-      exampleSetFlag: true
-      properties:
-        key:
-          $ref: '#/components/schemas/AlertDefinitionLabelKey'
-        name:
-          exampleSetFlag: true
-          type: string
-        value:
-          exampleSetFlag: true
-          type: string
-      required:
-      - key
-      - name
-      - value
-      type: object
-    AlertDefinitionLabelKey:
-      example:
-        name: name
-      exampleSetFlag: true
-      properties:
-        name:
-          exampleSetFlag: true
-          type: string
-      required:
-      - name
       type: object
     AlertDestination:
       description: Alert notification destination
@@ -16264,17 +16182,16 @@ components:
       exampleSetFlag: true
       properties:
         name:
+          description: The name of the alert template.
           exampleSetFlag: true
           type: string
         targetType:
+          description: The target type of the alert template.
           enum:
           - PLATFORM
           - UNIVERSE
           exampleSetFlag: true
           type: string
-      required:
-      - name
-      - targetType
       type: object
     AlertTemplateSettings:
       description: Alert template settings
@@ -17078,6 +16995,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -19805,6 +19723,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -19960,6 +19879,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -19983,6 +19903,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -20152,6 +20076,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -20168,6 +20093,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -20291,6 +20217,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -20347,7 +20274,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -20430,7 +20359,6 @@ components:
       - installOtelCollector
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -21027,6 +20955,7 @@ components:
             tablespaceName: tablespaceName
           restoreTimeStamp: restoreTimeStamp
           disableMultipart: true
+          runOnlyPrechecks: true
           platformUrl: platformUrl
           timeBeforeDelete: 7
           ybPrevSoftwareVersion: ybPrevSoftwareVersion
@@ -21788,6 +21717,7 @@ components:
         platformVersion: platformVersion
         useLocalTimezone: true
         disableMultipart: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         timeBeforeDelete: 3
         parallelDBBackups: 0
@@ -21986,12 +21916,17 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         scheduleName:
           description: Schedule Name
           exampleSetFlag: true
@@ -22077,7 +22012,6 @@ components:
       - backupUUID
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - storageConfigUUID
@@ -22704,6 +22638,7 @@ components:
           tablespaceName: tablespaceName
         restoreTimeStamp: restoreTimeStamp
         disableMultipart: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         timeBeforeDelete: 7
         ybPrevSoftwareVersion: ybPrevSoftwareVersion
@@ -22901,6 +22836,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         pointInTimeRestoreEnabled:
           description: Point in time restore available
@@ -22921,6 +22857,10 @@ components:
           description: Restore TimeStamp
           exampleSetFlag: true
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         scheduleName:
           description: Schedule Name
           exampleSetFlag: true
@@ -23054,7 +22994,6 @@ components:
       - creatingUser
       - fullBackup
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - storageConfigUUID
@@ -23152,6 +23091,7 @@ components:
           installNodeExporter: true
         platformVersion: platformVersion
         sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         targetXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -23364,12 +23304,17 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         s3Bucket:
           description: S3 bucket URL
           exampleSetFlag: true
@@ -23431,7 +23376,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - s3Bucket
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
@@ -23465,6 +23409,7 @@ components:
             - YbcLogs
             - NodeAgent
             - SystemLogs
+            - TabletReport
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -23887,6 +23832,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -26615,6 +26561,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -26765,6 +26712,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -26788,6 +26736,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         selfSignedClientCertRotate:
           exampleSetFlag: true
           type: boolean
@@ -26963,6 +26915,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -26979,6 +26932,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -27102,6 +27056,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -27158,7 +27113,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -27239,7 +27196,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - selfSignedClientCertRotate
       - selfSignedServerCertRotate
       - sleepAfterMasterRestartMillis
@@ -27304,6 +27260,7 @@ components:
           installNodeExporter: true
         platformVersion: platformVersion
         sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         pitrConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetXClusterConfigs:
@@ -27514,12 +27471,17 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -27563,7 +27525,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -28817,15 +28778,25 @@ components:
           masterRpcPort: 1
           redisServerRpcPort: 7
         connectionPoolingGflags:
-          key: connectionPoolingGflags
+          key:
+            inheritFromPrimary: true
+            perProcessFlags:
+              value:
+                key:
+                  key: value
+            gflagGroups: "[\"ENHANCED_POSTGRES_COMPATIBILITY\"]"
+            perAZ:
+              key:
+                value:
+                  key:
+                    key: value
       exampleSetFlag: true
       properties:
         communicationPorts:
           $ref: '#/components/schemas/CommunicationPorts'
         connectionPoolingGflags:
           additionalProperties:
-            exampleSetFlag: true
-            type: string
+            $ref: '#/components/schemas/SpecificGFlags'
           description: YbaApi Internal. Extra Connection Pooling gflags for the universe.
             Only Supported for VMs and not yet k8s.
           exampleSetFlag: true
@@ -28881,6 +28852,7 @@ components:
         platformVersion: platformVersion
         intervalInSeconds: 6
         sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         targetXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -29090,6 +29062,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
@@ -29101,6 +29074,10 @@ components:
           exampleSetFlag: true
           format: int64
           type: integer
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -29140,7 +29117,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -30446,6 +30422,9 @@ components:
           backupRequestParams:
             storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             parallelism: 0
+        webhookUrls:
+        - webhookUrls
+        - webhookUrls
         pitrParams:
           snapshotIntervalSec: 1
           retentionPeriodSec: 6
@@ -30455,6 +30434,13 @@ components:
           $ref: '#/components/schemas/RestartBootstrapParams'
         pitrParams:
           $ref: '#/components/schemas/PitrParams'
+        webhookUrls:
+          description: List of urls for webhook
+          exampleSetFlag: false
+          items:
+            exampleSetFlag: true
+            type: string
+          type: array
       type: object
     DrConfigFailoverForm:
       description: drConfig failover form
@@ -30520,12 +30506,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -30544,12 +30530,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -30571,12 +30557,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -30595,12 +30581,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -30639,40 +30625,47 @@ components:
           updateTime: 2022-12-12T13:07:18Z
           createdForDr: true
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          minRecoverTimeInMillis: 6
+          minRecoverTimeInMillis: 1
           scheduleInterval: 5
           tableType: YQL_TABLE_TYPE
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
-          maxRecoverTimeInMillis: 0
+          intermittentMinRecoverTimeInMillis: 0
+          maxRecoverTimeInMillis: 6
           name: name
           usedForXCluster: true
           state: UNKNOWN
-          retentionPeriod: 1
+          retentionPeriod: 5
         - dbName: dbName
           updateTime: 2022-12-12T13:07:18Z
           createdForDr: true
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          minRecoverTimeInMillis: 6
+          minRecoverTimeInMillis: 1
           scheduleInterval: 5
           tableType: YQL_TABLE_TYPE
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
-          maxRecoverTimeInMillis: 0
+          intermittentMinRecoverTimeInMillis: 0
+          maxRecoverTimeInMillis: 6
           name: name
           usedForXCluster: true
           state: UNKNOWN
-          retentionPeriod: 1
+          retentionPeriod: 5
         primaryUniverseActive: true
         dbs:
         - dbs
         - dbs
         createTime: 2022-12-12T13:07:18Z
+        webhooks:
+        - uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          url: url
+        - uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          url: url
         name: name
         drReplicaUniverseUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         keyspacePending: keyspacePending
-        pitrRetentionPeriodSec: 5
-        pitrSnapshotIntervalSec: 2
+        pitrRetentionPeriodSec: 2
+        pitrSnapshotIntervalSec: 7
         status: Initialized
       exampleSetFlag: true
       properties:
@@ -30844,6 +30837,11 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        webhooks:
+          exampleSetFlag: false
+          items:
+            $ref: '#/components/schemas/GetWebhookResponse'
+          type: array
         xclusterConfigUuid:
           description: UUID of the underlying xCluster config that is managing the
             replication
@@ -30859,6 +30857,8 @@ components:
             format: uuid
             type: string
           type: array
+      required:
+      - webhooks
       type: object
     DrConfigReplaceReplicaForm:
       description: drConfig edit form
@@ -31258,6 +31258,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -33986,6 +33987,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -34136,6 +34138,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -34159,6 +34162,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -34328,6 +34335,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -34344,6 +34352,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -34467,6 +34476,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -34523,7 +34533,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -34607,7 +34619,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -34797,6 +34808,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -37528,6 +37540,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -37684,6 +37697,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -37707,6 +37721,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -37882,6 +37900,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -37898,6 +37917,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -38021,6 +38041,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -38077,7 +38098,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -38159,7 +38182,6 @@ components:
       - kubernetesUpgradeSupported
       - masterGFlags
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - tserverGFlags
@@ -38227,6 +38249,23 @@ components:
           type: string
         TSERVER:
           $ref: '#/components/schemas/GFlagValidationDetails'
+      type: object
+    GetWebhookResponse:
+      description: Webhook get response
+      example:
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        url: url
+      exampleSetFlag: true
+      properties:
+        url:
+          description: Webhook url
+          exampleSetFlag: true
+          type: string
+        uuid:
+          description: Webhook UUID
+          exampleSetFlag: true
+          format: uuid
+          type: string
       type: object
     GroupMappingInfo:
       example:
@@ -39113,6 +39152,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -41841,6 +41881,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -41997,6 +42038,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -42020,6 +42062,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -42192,6 +42238,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -42208,6 +42255,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -42331,6 +42379,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -42387,7 +42436,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -42469,7 +42520,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - universeOverrides
@@ -44014,6 +44064,7 @@ components:
             tablespaceName: tablespaceName
           restoreTimeStamp: restoreTimeStamp
           disableMultipart: true
+          runOnlyPrechecks: true
           platformUrl: platformUrl
           timeBeforeDelete: 7
           ybPrevSoftwareVersion: ybPrevSoftwareVersion
@@ -44314,6 +44365,7 @@ components:
             tablespaceName: tablespaceName
           restoreTimeStamp: restoreTimeStamp
           disableMultipart: true
+          runOnlyPrechecks: true
           platformUrl: platformUrl
           timeBeforeDelete: 7
           ybPrevSoftwareVersion: ybPrevSoftwareVersion
@@ -44423,6 +44475,7 @@ components:
           tablespaceName: tablespaceName
         restoreTimeStamp: restoreTimeStamp
         disableMultipart: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         timeBeforeDelete: 3
         ybPrevSoftwareVersion: ybPrevSoftwareVersion
@@ -44620,6 +44673,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         pointInTimeRestoreEnabled:
           description: Point in time restore available
@@ -44640,6 +44694,10 @@ components:
           description: Restore TimeStamp
           exampleSetFlag: true
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         scheduleName:
           description: Schedule Name
           exampleSetFlag: true
@@ -44773,7 +44831,6 @@ components:
       - creatingUser
       - fullBackup
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - storageConfigUUID
@@ -47387,16 +47444,17 @@ components:
         updateTime: 2022-12-12T13:07:18Z
         createdForDr: true
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        minRecoverTimeInMillis: 6
+        minRecoverTimeInMillis: 1
         scheduleInterval: 5
         tableType: YQL_TABLE_TYPE
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         createTime: 2022-12-12T13:07:18Z
-        maxRecoverTimeInMillis: 0
+        intermittentMinRecoverTimeInMillis: 0
+        maxRecoverTimeInMillis: 6
         name: name
         usedForXCluster: true
         state: UNKNOWN
-        retentionPeriod: 1
+        retentionPeriod: 5
       exampleSetFlag: true
       properties:
         createTime:
@@ -47420,6 +47478,12 @@ components:
           description: DB Name
           exampleSetFlag: true
           type: string
+        intermittentMinRecoverTimeInMillis:
+          description: Intermittent min recovery time in millis if retention period
+            is increased
+          exampleSetFlag: true
+          format: int64
+          type: integer
         maxRecoverTimeInMillis:
           exampleSetFlag: true
           format: int64
@@ -47868,6 +47932,7 @@ components:
     PrevYBSoftwareConfig:
       example:
         autoFlagConfigVersion: 3
+        targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
         softwareVersion: softwareVersion
       exampleSetFlag: true
       properties:
@@ -47876,6 +47941,9 @@ components:
           format: int32
           type: integer
         softwareVersion:
+          exampleSetFlag: true
+          type: string
+        targetUpgradeSoftwareVersion:
           exampleSetFlag: true
           type: string
       type: object
@@ -48613,6 +48681,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -51340,6 +51409,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -51490,6 +51560,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -51513,6 +51584,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -51682,6 +51757,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -51698,6 +51774,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -51821,6 +51898,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -51877,7 +51955,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -51958,7 +52038,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -52629,6 +52708,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -55360,6 +55440,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -55520,6 +55601,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -55543,6 +55625,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -55718,6 +55804,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -55734,6 +55821,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -55857,6 +55945,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -55913,7 +56002,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -55996,7 +56087,6 @@ components:
       - kubernetesUpgradeSupported
       - masterGFlags
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - tserverGFlags
@@ -56241,6 +56331,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -58968,6 +59059,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -59118,6 +59210,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -59141,6 +59234,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -59310,6 +59407,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -59326,6 +59424,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -59449,6 +59548,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -59505,7 +59605,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -59586,7 +59688,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -59760,6 +59861,7 @@ components:
         restoreTimeStamp: restoreTimeStamp
         sleepAfterTServerRestartMillis: 5
         disableMultipart: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetXClusterConfigs:
@@ -60020,6 +60122,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prefixUUID:
           description: Prefix UUID
@@ -60040,6 +60143,10 @@ components:
           exampleSetFlag: true
           format: int64
           type: integer
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -60093,7 +60200,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - universeUUID
@@ -60563,6 +60669,7 @@ components:
           installNodeExporter: true
         platformVersion: platformVersion
         sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         pitrConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         restoreTimeInMillis: 6
@@ -60769,6 +60876,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
@@ -60780,6 +60888,10 @@ components:
           exampleSetFlag: true
           format: int64
           type: integer
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -60824,7 +60936,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -61154,6 +61265,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -63882,6 +63994,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -64032,6 +64145,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -64055,6 +64169,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -64224,6 +64342,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -64240,6 +64359,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -64363,6 +64483,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -64419,7 +64540,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -64506,7 +64629,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -64791,6 +64913,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -64807,6 +64930,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -64930,6 +65054,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -64986,7 +65111,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -65167,6 +65294,7 @@ components:
             - CreateTableSpacesInUniverse
             - ThirdpartySoftwareUpgrade
             - ModifyAuditLoggingConfig
+            - ModifyKubernetesAuditLoggingConfig
             - InstallYbcSoftware
             - UpgradeUniverseYbc
             - UpgradeYbcGFlags
@@ -65183,6 +65311,7 @@ components:
             - SoftwareUpgradeYB
             - SoftwareKubernetesUpgradeYB
             - FinalizeUpgrade
+            - FinalizeKubernetesUpgrade
             - RollbackUpgrade
             - RollbackKubernetesUpgrade
             - LdapUniverseSync
@@ -65306,6 +65435,7 @@ components:
             - DeleteReplicationOnSource
             - DeleteXClusterBackupRestoreEntries
             - AddExistingPitrToXClusterConfig
+            - DrConfigWebhookCall
             - SetRestoreState
             - CloudAccessKeyCleanup
             - CloudAccessKeySetup
@@ -65362,7 +65492,9 @@ components:
             - CheckMemory
             - CheckLocale
             - CheckGlibc
+            - CheckOpentelemetryOperator
             - PGUpgradeTServerCheck
+            - CleanUpPGUpgradeDataDir
             - RunYsqlMajorVersionCatalogUpgrade
             - RollbackYsqlMajorVersionCatalogUpgrade
             - FinalizeYsqlMajorCatalogUpgrade
@@ -65678,12 +65810,19 @@ components:
     SoftwareUpgradeInfoResponse:
       description: Software Upgrade Info response
       example:
+        ysqlMajorVersionUpgrade: true
         finalizeRequired: true
       exampleSetFlag: true
       properties:
         finalizeRequired:
           description: "WARNING: This is a preview API that could change. Finalize\
             \ required"
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
+        ysqlMajorVersionUpgrade:
+          description: "WARNING: This is a preview API that could change. YSQL Major\
+            \ version upgrade"
           exampleSetFlag: true
           readOnly: true
           type: boolean
@@ -65709,6 +65848,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -68438,6 +68578,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -68588,6 +68729,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -68611,6 +68753,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -68780,6 +68926,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -68796,6 +68943,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -68919,6 +69067,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -68975,7 +69124,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -69062,7 +69213,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -69462,6 +69612,7 @@ components:
             - YbcLogs
             - NodeAgent
             - SystemLogs
+            - TabletReport
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -69595,6 +69746,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -72322,6 +72474,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -72472,6 +72625,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -72495,6 +72649,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -72664,6 +72822,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -72680,6 +72839,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -72803,6 +72963,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -72859,7 +73020,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -72940,7 +73103,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -73002,6 +73164,7 @@ components:
           - splitValues
           - splitValues
           tableName: tableName
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         targetXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -73202,12 +73365,17 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -73266,7 +73434,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - tableDetails
@@ -73334,12 +73501,12 @@ components:
       example:
         relationType: SYSTEM_TABLE_RELATION
         colocated: true
-        walSizeBytes: 9.301444243932576
+        walSizeBytes: 3.616076749251911
         indexTableIDs:
         - indexTableIDs
         - indexTableIDs
         pgSchemaName: public
-        sizeBytes: 7.061401241503109
+        sizeBytes: 9.301444243932576
         tableName: tableName
         tableSpace: tableSpace
         tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -73972,6 +74139,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -76699,6 +76867,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -76852,6 +77021,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -76875,6 +77045,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -77044,6 +77218,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -77060,6 +77235,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -77183,6 +77359,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -77239,7 +77416,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -77321,7 +77500,6 @@ components:
       - forceAll
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -77366,6 +77544,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -80095,6 +80274,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -80251,6 +80431,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -80274,6 +80455,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -80443,6 +80628,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -80459,6 +80645,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -80582,6 +80769,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -80638,7 +80826,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -80722,7 +80912,6 @@ components:
       - enableNodeToNodeEncrypt
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -80984,6 +81173,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
@@ -81003,7 +81193,6 @@ components:
           format: int64
           type: integer
       required:
-      - platformVersion
       - storageConfigUUID
       type: object
     UniverseConfigureTaskParams:
@@ -81026,6 +81215,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -83755,6 +83945,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -83908,6 +84099,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -83932,6 +84124,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -84096,6 +84292,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -84112,6 +84309,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -84235,6 +84433,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -84291,7 +84490,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -84364,7 +84565,6 @@ components:
       - clusters
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -84387,6 +84587,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -87114,6 +87315,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -87257,6 +87459,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -87278,6 +87481,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -87442,6 +87649,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -87458,6 +87666,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -87581,6 +87790,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -87637,7 +87847,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -87710,7 +87922,6 @@ components:
       - clusters
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -87733,6 +87944,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -90468,6 +90680,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -90611,6 +90824,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -90632,6 +90846,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -90796,6 +91014,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -90812,6 +91031,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -90935,6 +91155,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -90991,7 +91212,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -91064,7 +91287,6 @@ components:
       - clusters
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -91261,6 +91483,7 @@ components:
           installNodeAgent: true
           prevYBSoftwareConfig:
             autoFlagConfigVersion: 3
+            targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
             softwareVersion: softwareVersion
           useNewHelmNamingStyle: true
           otelCollectorEnabled: true
@@ -93996,6 +94219,7 @@ components:
             index: 5
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           mastersInDefaultRegion: true
+          runOnlyPrechecks: true
           platformUrl: platformUrl
           xclusterInfo:
             sourceRootCertDirPath: sourceRootCertDirPath
@@ -94152,7 +94376,6 @@ components:
       description: Update PITR config parameters
       example:
         expectedUniverseVersion: 0
-        platformUrl: platformUrl
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -94162,6 +94385,29 @@ components:
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
+        ybcSoftwareVersion: ybcSoftwareVersion
+        creatingUser:
+          ldapSpecifiedRole: true
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          role: ConnectOnly
+          authTokenIssueDate: 2021-06-17T15:00:05Z
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          creationDate: 2022-12-12T13:07:18Z
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          email: username1@example.com
+          primary: true
+        extraDependencies:
+          installNodeExporter: true
+        platformVersion: platformVersion
+        intervalInSeconds: 6
+        sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
+        platformUrl: platformUrl
         targetXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -94177,7 +94423,6 @@ components:
         enableYbc: true
         errorString: errorString
         retentionPeriodInSeconds: 1
-        ybcSoftwareVersion: ybcSoftwareVersion
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
@@ -94294,26 +94539,7 @@ components:
           ysqlServerRpcPort: 6
           autoSyncMasterAddrs: true
           yqlServerHttpPort: 7
-        creatingUser:
-          ldapSpecifiedRole: true
-          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
-          authTokenIssueDate: 2021-06-17T15:00:05Z
-          timezone: timezone
-          oidcJwtAuthToken: oidcJwtAuthToken
-          groupMemberships:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userType: local
-          creationDate: 2022-12-12T13:07:18Z
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          email: username1@example.com
-          primary: true
-        extraDependencies:
-          installNodeExporter: true
-        platformVersion: platformVersion
         ybcInstalled: true
-        intervalInSeconds: 6
         communicationPorts:
           nodeExporterPort: 5
           tserverHttpPort: 9
@@ -94333,7 +94559,6 @@ components:
         cmkArn: cmkArn
         sleepAfterMasterRestartMillis: 5
         previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        sleepAfterTServerRestartMillis: 5
       exampleSetFlag: true
       properties:
         cmkArn:
@@ -94386,6 +94611,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
@@ -94397,6 +94623,10 @@ components:
           exampleSetFlag: true
           format: int64
           type: integer
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         sleepAfterMasterRestartMillis:
           exampleSetFlag: true
           format: int32
@@ -94436,7 +94666,6 @@ components:
       required:
       - creatingUser
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       type: object
@@ -94506,6 +94735,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -97233,6 +97463,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -97383,6 +97614,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -97406,6 +97638,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -97575,6 +97811,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -97591,6 +97828,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -97714,6 +97952,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -97770,7 +98009,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -97851,7 +98092,6 @@ components:
       - creatingUser
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -98656,6 +98896,7 @@ components:
         installNodeAgent: true
         prevYBSoftwareConfig:
           autoFlagConfigVersion: 3
+          targetUpgradeSoftwareVersion: targetUpgradeSoftwareVersion
           softwareVersion: softwareVersion
         useNewHelmNamingStyle: true
         otelCollectorEnabled: true
@@ -101391,6 +101632,7 @@ components:
           index: 5
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         mastersInDefaultRegion: true
+        runOnlyPrechecks: true
         platformUrl: platformUrl
         xclusterInfo:
           sourceRootCertDirPath: sourceRootCertDirPath
@@ -101576,6 +101818,7 @@ components:
           type: string
         platformVersion:
           exampleSetFlag: true
+          readOnly: true
           type: string
         prevYBSoftwareConfig:
           $ref: '#/components/schemas/PrevYBSoftwareConfig'
@@ -101599,6 +101842,10 @@ components:
           exampleSetFlag: true
           format: uuid
           type: string
+        runOnlyPrechecks:
+          description: YbaApi Internal. Run only prechecks during task run
+          exampleSetFlag: true
+          type: boolean
         setTxnTableWaitCountFlag:
           exampleSetFlag: true
           type: boolean
@@ -101780,6 +102027,7 @@ components:
           - CreateTableSpacesInUniverse
           - ThirdpartySoftwareUpgrade
           - ModifyAuditLoggingConfig
+          - ModifyKubernetesAuditLoggingConfig
           - InstallYbcSoftware
           - UpgradeUniverseYbc
           - UpgradeYbcGFlags
@@ -101796,6 +102044,7 @@ components:
           - SoftwareUpgradeYB
           - SoftwareKubernetesUpgradeYB
           - FinalizeUpgrade
+          - FinalizeKubernetesUpgrade
           - RollbackUpgrade
           - RollbackKubernetesUpgrade
           - LdapUniverseSync
@@ -101919,6 +102168,7 @@ components:
           - DeleteReplicationOnSource
           - DeleteXClusterBackupRestoreEntries
           - AddExistingPitrToXClusterConfig
+          - DrConfigWebhookCall
           - SetRestoreState
           - CloudAccessKeyCleanup
           - CloudAccessKeySetup
@@ -101975,7 +102225,9 @@ components:
           - CheckMemory
           - CheckLocale
           - CheckGlibc
+          - CheckOpentelemetryOperator
           - PGUpgradeTServerCheck
+          - CleanUpPGUpgradeDataDir
           - RunYsqlMajorVersionCatalogUpgrade
           - RollbackYsqlMajorVersionCatalogUpgrade
           - FinalizeYsqlMajorCatalogUpgrade
@@ -102060,7 +102312,6 @@ components:
       - forceVMImageUpgrade
       - kubernetesUpgradeSupported
       - platformUrl
-      - platformVersion
       - sleepAfterMasterRestartMillis
       - sleepAfterTServerRestartMillis
       - upgradeOption
@@ -102241,6 +102492,7 @@ components:
         replicationGroupName:
           description: Replication group name in the target universe cluster config
           exampleSetFlag: true
+          readOnly: true
           type: string
         secondary:
           description: "WARNING: This is a preview API that could change. Whether\
@@ -102539,12 +102791,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -102563,12 +102815,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -102590,12 +102842,12 @@ components:
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -102614,12 +102866,12 @@ components:
           targetTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
-            walSizeBytes: 9.301444243932576
+            walSizeBytes: 3.616076749251911
             indexTableIDs:
             - indexTableIDs
             - indexTableIDs
             pgSchemaName: public
-            sizeBytes: 7.061401241503109
+            sizeBytes: 9.301444243932576
             tableName: tableName
             tableSpace: tableSpace
             tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -102638,30 +102890,32 @@ components:
           updateTime: 2022-12-12T13:07:18Z
           createdForDr: true
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          minRecoverTimeInMillis: 6
+          minRecoverTimeInMillis: 1
           scheduleInterval: 5
           tableType: YQL_TABLE_TYPE
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
-          maxRecoverTimeInMillis: 0
+          intermittentMinRecoverTimeInMillis: 0
+          maxRecoverTimeInMillis: 6
           name: name
           usedForXCluster: true
           state: UNKNOWN
-          retentionPeriod: 1
+          retentionPeriod: 5
         - dbName: dbName
           updateTime: 2022-12-12T13:07:18Z
           createdForDr: true
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          minRecoverTimeInMillis: 6
+          minRecoverTimeInMillis: 1
           scheduleInterval: 5
           tableType: YQL_TABLE_TYPE
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
-          maxRecoverTimeInMillis: 0
+          intermittentMinRecoverTimeInMillis: 0
+          maxRecoverTimeInMillis: 6
           name: name
           usedForXCluster: true
           state: UNKNOWN
-          retentionPeriod: 1
+          retentionPeriod: 5
         secondary: true
         dbs:
         - dbs
@@ -102763,6 +103017,7 @@ components:
         replicationGroupName:
           description: Replication group name in the target universe cluster config
           exampleSetFlag: true
+          readOnly: true
           type: string
         secondary:
           description: "WARNING: This is a preview API that could change. Whether\
@@ -102981,12 +103236,12 @@ components:
         sourceTableInfo:
           relationType: SYSTEM_TABLE_RELATION
           colocated: true
-          walSizeBytes: 9.301444243932576
+          walSizeBytes: 3.616076749251911
           indexTableIDs:
           - indexTableIDs
           - indexTableIDs
           pgSchemaName: public
-          sizeBytes: 7.061401241503109
+          sizeBytes: 9.301444243932576
           tableName: tableName
           tableSpace: tableSpace
           tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -103005,12 +103260,12 @@ components:
         targetTableInfo:
           relationType: SYSTEM_TABLE_RELATION
           colocated: true
-          walSizeBytes: 9.301444243932576
+          walSizeBytes: 3.616076749251911
           indexTableIDs:
           - indexTableIDs
           - indexTableIDs
           pgSchemaName: public
-          sizeBytes: 7.061401241503109
+          sizeBytes: 9.301444243932576
           tableName: tableName
           tableSpace: tableSpace
           tableUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91

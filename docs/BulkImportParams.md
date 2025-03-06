@@ -19,8 +19,9 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **S3Bucket** | **string** | S3 bucket URL | 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
@@ -38,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewBulkImportParams
 
-`func NewBulkImportParams(creatingUser Users, platformUrl string, platformVersion string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams`
+`func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams`
 
 NewBulkImportParams instantiates a new BulkImportParams object
 This constructor will assign default values to properties that have it defined,
@@ -437,6 +438,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *BulkImportParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 
@@ -462,6 +468,31 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *BulkImportParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *BulkImportParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *BulkImportParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *BulkImportParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *BulkImportParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetS3Bucket
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BootstrapParams** | Pointer to [**RestartBootstrapParams**](RestartBootstrapParams.md) |  | [optional] 
 **PitrParams** | Pointer to [**PitrParams**](PitrParams.md) |  | [optional] 
+**WebhookUrls** | Pointer to **[]string** | List of urls for webhook | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetPitrParams sets PitrParams field to given value.
 `func (o *DrConfigEditForm) HasPitrParams() bool`
 
 HasPitrParams returns a boolean if a field has been set.
+
+### GetWebhookUrls
+
+`func (o *DrConfigEditForm) GetWebhookUrls() []string`
+
+GetWebhookUrls returns the WebhookUrls field if non-nil, zero value otherwise.
+
+### GetWebhookUrlsOk
+
+`func (o *DrConfigEditForm) GetWebhookUrlsOk() (*[]string, bool)`
+
+GetWebhookUrlsOk returns a tuple with the WebhookUrls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebhookUrls
+
+`func (o *DrConfigEditForm) SetWebhookUrls(v []string)`
+
+SetWebhookUrls sets WebhookUrls field to given value.
+
+### HasWebhookUrls
+
+`func (o *DrConfigEditForm) HasWebhookUrls() bool`
+
+HasWebhookUrls returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

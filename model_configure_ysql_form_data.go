@@ -18,7 +18,7 @@ import (
 type ConfigureYSQLFormData struct {
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
 	// YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s.
-	ConnectionPoolingGflags *map[string]string `json:"connectionPoolingGflags,omitempty"`
+	ConnectionPoolingGflags *map[string]SpecificGFlags `json:"connectionPoolingGflags,omitempty"`
 	// Enable Connection Pooling for the universe
 	EnableConnectionPooling *bool `json:"enableConnectionPooling,omitempty"`
 	// Enable YSQL Api for the universe
@@ -79,9 +79,9 @@ func (o *ConfigureYSQLFormData) SetCommunicationPorts(v CommunicationPorts) {
 }
 
 // GetConnectionPoolingGflags returns the ConnectionPoolingGflags field value if set, zero value otherwise.
-func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]string {
+func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]SpecificGFlags {
 	if o == nil || o.ConnectionPoolingGflags == nil {
-		var ret map[string]string
+		var ret map[string]SpecificGFlags
 		return ret
 	}
 	return *o.ConnectionPoolingGflags
@@ -89,7 +89,7 @@ func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]string {
 
 // GetConnectionPoolingGflagsOk returns a tuple with the ConnectionPoolingGflags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigureYSQLFormData) GetConnectionPoolingGflagsOk() (*map[string]string, bool) {
+func (o *ConfigureYSQLFormData) GetConnectionPoolingGflagsOk() (*map[string]SpecificGFlags, bool) {
 	if o == nil || o.ConnectionPoolingGflags == nil {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *ConfigureYSQLFormData) HasConnectionPoolingGflags() bool {
 	return false
 }
 
-// SetConnectionPoolingGflags gets a reference to the given map[string]string and assigns it to the ConnectionPoolingGflags field.
-func (o *ConfigureYSQLFormData) SetConnectionPoolingGflags(v map[string]string) {
+// SetConnectionPoolingGflags gets a reference to the given map[string]SpecificGFlags and assigns it to the ConnectionPoolingGflags field.
+func (o *ConfigureYSQLFormData) SetConnectionPoolingGflags(v map[string]SpecificGFlags) {
 	o.ConnectionPoolingGflags = &v
 }
 

@@ -18,7 +18,7 @@ import (
 type UniverseBackupRequestFormData struct {
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
-	PlatformVersion string `json:"platformVersion"`
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// WARNING: This is a preview API that could change.Storage configuration UUID
@@ -31,9 +31,8 @@ type UniverseBackupRequestFormData struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseBackupRequestFormData(platformVersion string, storageConfigUUID string) *UniverseBackupRequestFormData {
+func NewUniverseBackupRequestFormData(storageConfigUUID string) *UniverseBackupRequestFormData {
 	this := UniverseBackupRequestFormData{}
-	this.PlatformVersion = platformVersion
 	this.StorageConfigUUID = storageConfigUUID
 	return &this
 }
@@ -78,28 +77,36 @@ func (o *UniverseBackupRequestFormData) SetErrorString(v string) {
 	o.ErrorString = &v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *UniverseBackupRequestFormData) GetPlatformVersion() string {
-	if o == nil {
+	if o == nil || o.PlatformVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformVersion
+	return *o.PlatformVersion
 }
 
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseBackupRequestFormData) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PlatformVersion == nil {
 		return nil, false
 	}
-	return &o.PlatformVersion, true
+	return o.PlatformVersion, true
 }
 
-// SetPlatformVersion sets field value
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *UniverseBackupRequestFormData) HasPlatformVersion() bool {
+	if o != nil && o.PlatformVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
 func (o *UniverseBackupRequestFormData) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
+	o.PlatformVersion = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -195,7 +202,7 @@ func (o UniverseBackupRequestFormData) MarshalJSON() ([]byte, error) {
 	if o.ErrorString != nil {
 		toSerialize["errorString"] = o.ErrorString
 	}
-	if true {
+	if o.PlatformVersion != nil {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {

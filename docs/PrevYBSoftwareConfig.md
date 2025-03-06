@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AutoFlagConfigVersion** | Pointer to **int32** |  | [optional] 
 **SoftwareVersion** | Pointer to **string** |  | [optional] 
+**TargetUpgradeSoftwareVersion** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetSoftwareVersion sets SoftwareVersion field to given value.
 `func (o *PrevYBSoftwareConfig) HasSoftwareVersion() bool`
 
 HasSoftwareVersion returns a boolean if a field has been set.
+
+### GetTargetUpgradeSoftwareVersion
+
+`func (o *PrevYBSoftwareConfig) GetTargetUpgradeSoftwareVersion() string`
+
+GetTargetUpgradeSoftwareVersion returns the TargetUpgradeSoftwareVersion field if non-nil, zero value otherwise.
+
+### GetTargetUpgradeSoftwareVersionOk
+
+`func (o *PrevYBSoftwareConfig) GetTargetUpgradeSoftwareVersionOk() (*string, bool)`
+
+GetTargetUpgradeSoftwareVersionOk returns a tuple with the TargetUpgradeSoftwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetUpgradeSoftwareVersion
+
+`func (o *PrevYBSoftwareConfig) SetTargetUpgradeSoftwareVersion(v string)`
+
+SetTargetUpgradeSoftwareVersion sets TargetUpgradeSoftwareVersion field to given value.
+
+### HasTargetUpgradeSoftwareVersion
+
+`func (o *PrevYBSoftwareConfig) HasTargetUpgradeSoftwareVersion() bool`
+
+HasTargetUpgradeSoftwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

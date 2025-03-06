@@ -54,7 +54,7 @@ type UniverseDefinitionTaskParams struct {
 	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
 	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
@@ -62,6 +62,8 @@ type UniverseDefinitionTaskParams struct {
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
 	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
 	RootCA *string `json:"rootCA,omitempty"`
+	// YbaApi Internal. Run only prechecks during task run
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
@@ -92,12 +94,11 @@ type UniverseDefinitionTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParams {
+func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParams {
 	this := UniverseDefinitionTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
@@ -1047,28 +1048,36 @@ func (o *UniverseDefinitionTaskParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParams) GetPlatformVersion() string {
-	if o == nil {
+	if o == nil || o.PlatformVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformVersion
+	return *o.PlatformVersion
 }
 
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseDefinitionTaskParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PlatformVersion == nil {
 		return nil, false
 	}
-	return &o.PlatformVersion, true
+	return o.PlatformVersion, true
 }
 
-// SetPlatformVersion sets field value
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParams) HasPlatformVersion() bool {
+	if o != nil && o.PlatformVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
 func (o *UniverseDefinitionTaskParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
+	o.PlatformVersion = &v
 }
 
 // GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field value if set, zero value otherwise.
@@ -1261,6 +1270,38 @@ func (o *UniverseDefinitionTaskParams) HasRootCA() bool {
 // SetRootCA gets a reference to the given string and assigns it to the RootCA field.
 func (o *UniverseDefinitionTaskParams) SetRootCA(v string) {
 	o.RootCA = &v
+}
+
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParams) GetRunOnlyPrechecks() bool {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParams) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParams) HasRunOnlyPrechecks() bool {
+	if o != nil && o.RunOnlyPrechecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *UniverseDefinitionTaskParams) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
 }
 
 // GetSetTxnTableWaitCountFlag returns the SetTxnTableWaitCountFlag field value if set, zero value otherwise.
@@ -1979,7 +2020,7 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
+	if o.PlatformVersion != nil {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PrevYBSoftwareConfig != nil {
@@ -1999,6 +2040,9 @@ func (o UniverseDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.RootCA != nil {
 		toSerialize["rootCA"] = o.RootCA
+	}
+	if o.RunOnlyPrechecks != nil {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
 	}
 	if o.SetTxnTableWaitCountFlag != nil {
 		toSerialize["setTxnTableWaitCountFlag"] = o.SetTxnTableWaitCountFlag

@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
@@ -44,6 +44,7 @@ Name | Type | Description | Notes
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **RootAndClientRootCASame** | Pointer to **bool** |  | [optional] 
 **RootCA** | Pointer to **string** |  | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SkipNodeChecks** | Pointer to **bool** | YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
@@ -71,7 +72,7 @@ Name | Type | Description | Notes
 
 ### NewThirdpartySoftwareUpgradeParams
 
-`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
+`func NewThirdpartySoftwareUpgradeParams(clusters []Cluster, creatingUser Users, forceAll bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *ThirdpartySoftwareUpgradeParams`
 
 NewThirdpartySoftwareUpgradeParams instantiates a new ThirdpartySoftwareUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -880,6 +881,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrevYBSoftwareConfig
 
@@ -1055,6 +1061,31 @@ SetRootCA sets RootCA field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasRootCA() bool`
 
 HasRootCA returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSetTxnTableWaitCountFlag
 

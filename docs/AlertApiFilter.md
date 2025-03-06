@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConfigurationTypes** | **[]string** |  | 
-**ConfigurationUuid** | **string** |  | 
-**Severities** | **[]string** |  | 
-**SourceName** | **string** |  | 
-**SourceUUIDs** | **[]string** |  | 
-**States** | **[]string** |  | 
-**Uuids** | **[]string** |  | 
+**ConfigurationTypes** | Pointer to **[]string** | Alert Configuration Target Types | [optional] 
+**ConfigurationUuid** | Pointer to **string** | The uuid of the alert configuration. | [optional] 
+**Severities** | Pointer to **[]string** | The severity of the alerts. | [optional] 
+**SourceName** | Pointer to **string** | The source name of the alerts. | [optional] 
+**SourceUUIDs** | Pointer to **[]string** | The source uuids of the alerts. | [optional] 
+**States** | Pointer to **[]string** | The state of the alerts. | [optional] 
+**Uuids** | Pointer to **[]string** | The uuids of the alerts. | [optional] 
 
 ## Methods
 
 ### NewAlertApiFilter
 
-`func NewAlertApiFilter(configurationTypes []string, configurationUuid string, severities []string, sourceName string, sourceUUIDs []string, states []string, uuids []string, ) *AlertApiFilter`
+`func NewAlertApiFilter() *AlertApiFilter`
 
 NewAlertApiFilter instantiates a new AlertApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +50,11 @@ and a boolean to check if the value has been set.
 
 SetConfigurationTypes sets ConfigurationTypes field to given value.
 
+### HasConfigurationTypes
+
+`func (o *AlertApiFilter) HasConfigurationTypes() bool`
+
+HasConfigurationTypes returns a boolean if a field has been set.
 
 ### GetConfigurationUuid
 
@@ -70,6 +75,11 @@ and a boolean to check if the value has been set.
 
 SetConfigurationUuid sets ConfigurationUuid field to given value.
 
+### HasConfigurationUuid
+
+`func (o *AlertApiFilter) HasConfigurationUuid() bool`
+
+HasConfigurationUuid returns a boolean if a field has been set.
 
 ### GetSeverities
 
@@ -90,6 +100,11 @@ and a boolean to check if the value has been set.
 
 SetSeverities sets Severities field to given value.
 
+### HasSeverities
+
+`func (o *AlertApiFilter) HasSeverities() bool`
+
+HasSeverities returns a boolean if a field has been set.
 
 ### GetSourceName
 
@@ -110,6 +125,11 @@ and a boolean to check if the value has been set.
 
 SetSourceName sets SourceName field to given value.
 
+### HasSourceName
+
+`func (o *AlertApiFilter) HasSourceName() bool`
+
+HasSourceName returns a boolean if a field has been set.
 
 ### GetSourceUUIDs
 
@@ -130,6 +150,11 @@ and a boolean to check if the value has been set.
 
 SetSourceUUIDs sets SourceUUIDs field to given value.
 
+### HasSourceUUIDs
+
+`func (o *AlertApiFilter) HasSourceUUIDs() bool`
+
+HasSourceUUIDs returns a boolean if a field has been set.
 
 ### GetStates
 
@@ -150,6 +175,11 @@ and a boolean to check if the value has been set.
 
 SetStates sets States field to given value.
 
+### HasStates
+
+`func (o *AlertApiFilter) HasStates() bool`
+
+HasStates returns a boolean if a field has been set.
 
 ### GetUuids
 
@@ -170,6 +200,11 @@ and a boolean to check if the value has been set.
 
 SetUuids sets Uuids field to given value.
 
+### HasUuids
+
+`func (o *AlertApiFilter) HasUuids() bool`
+
+HasUuids returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

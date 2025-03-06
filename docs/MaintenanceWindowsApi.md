@@ -36,7 +36,7 @@ import (
 
 func main() {
     cUUID := TODO // string | 
-    createMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
+    createMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -406,7 +406,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     windowUUID := TODO // string | 
-    updateMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(false, "DestinationType_example", "DestinationUuid_example", "Name_example", "Severity_example", *openapiclient.NewAlertConfigurationTarget(), "TargetType_example", "Template_example", []string{"Uuids_example"}), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
+    updateMaintenanceWindowRequest := *openapiclient.NewMaintenanceWindow(*openapiclient.NewAlertConfigurationApiFilter(), time.Now(), "CustomerUUID_example", "Description_example", time.Now(), "Name_example", time.Now()) // MaintenanceWindow | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

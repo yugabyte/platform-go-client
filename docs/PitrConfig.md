@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CreatedForDr** | Pointer to **bool** | Created for DR | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID of this config | [optional] 
 **DbName** | Pointer to **string** | DB Name | [optional] 
+**IntermittentMinRecoverTimeInMillis** | Pointer to **int64** | Intermittent min recovery time in millis if retention period is increased | [optional] 
 **MaxRecoverTimeInMillis** | **int64** |  | 
 **MinRecoverTimeInMillis** | **int64** |  | 
 **Name** | Pointer to **string** | PITR config name | [optional] 
@@ -137,6 +138,31 @@ SetDbName sets DbName field to given value.
 `func (o *PitrConfig) HasDbName() bool`
 
 HasDbName returns a boolean if a field has been set.
+
+### GetIntermittentMinRecoverTimeInMillis
+
+`func (o *PitrConfig) GetIntermittentMinRecoverTimeInMillis() int64`
+
+GetIntermittentMinRecoverTimeInMillis returns the IntermittentMinRecoverTimeInMillis field if non-nil, zero value otherwise.
+
+### GetIntermittentMinRecoverTimeInMillisOk
+
+`func (o *PitrConfig) GetIntermittentMinRecoverTimeInMillisOk() (*int64, bool)`
+
+GetIntermittentMinRecoverTimeInMillisOk returns a tuple with the IntermittentMinRecoverTimeInMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIntermittentMinRecoverTimeInMillis
+
+`func (o *PitrConfig) SetIntermittentMinRecoverTimeInMillis(v int64)`
+
+SetIntermittentMinRecoverTimeInMillis sets IntermittentMinRecoverTimeInMillis field to given value.
+
+### HasIntermittentMinRecoverTimeInMillis
+
+`func (o *PitrConfig) HasIntermittentMinRecoverTimeInMillis() bool`
+
+HasIntermittentMinRecoverTimeInMillis returns a boolean if a field has been set.
 
 ### GetMaxRecoverTimeInMillis
 
