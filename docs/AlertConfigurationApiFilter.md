@@ -12,13 +12,13 @@ Name | Type | Description | Notes
 **Target** | Pointer to [**AlertConfigurationTarget**](AlertConfigurationTarget.md) |  | [optional] 
 **TargetType** | Pointer to **string** | The target type of the alert configuration. | [optional] 
 **Template** | Pointer to **string** | The template of the alert configuration. | [optional] 
-**Uuids** | **[]string** |  | 
+**Uuids** | Pointer to **[]string** | The uuids of the alert configurations. | [optional] 
 
 ## Methods
 
 ### NewAlertConfigurationApiFilter
 
-`func NewAlertConfigurationApiFilter(uuids []string, ) *AlertConfigurationApiFilter`
+`func NewAlertConfigurationApiFilter() *AlertConfigurationApiFilter`
 
 NewAlertConfigurationApiFilter instantiates a new AlertConfigurationApiFilter object
 This constructor will assign default values to properties that have it defined,
@@ -252,6 +252,11 @@ and a boolean to check if the value has been set.
 
 SetUuids sets Uuids field to given value.
 
+### HasUuids
+
+`func (o *AlertConfigurationApiFilter) HasUuids() bool`
+
+HasUuids returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

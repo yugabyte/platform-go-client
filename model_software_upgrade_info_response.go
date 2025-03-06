@@ -18,6 +18,8 @@ import (
 type SoftwareUpgradeInfoResponse struct {
 	// WARNING: This is a preview API that could change. Finalize required
 	FinalizeRequired *bool `json:"finalizeRequired,omitempty"`
+	// WARNING: This is a preview API that could change. YSQL Major version upgrade
+	YsqlMajorVersionUpgrade *bool `json:"ysqlMajorVersionUpgrade,omitempty"`
 }
 
 // NewSoftwareUpgradeInfoResponse instantiates a new SoftwareUpgradeInfoResponse object
@@ -69,10 +71,45 @@ func (o *SoftwareUpgradeInfoResponse) SetFinalizeRequired(v bool) {
 	o.FinalizeRequired = &v
 }
 
+// GetYsqlMajorVersionUpgrade returns the YsqlMajorVersionUpgrade field value if set, zero value otherwise.
+func (o *SoftwareUpgradeInfoResponse) GetYsqlMajorVersionUpgrade() bool {
+	if o == nil || o.YsqlMajorVersionUpgrade == nil {
+		var ret bool
+		return ret
+	}
+	return *o.YsqlMajorVersionUpgrade
+}
+
+// GetYsqlMajorVersionUpgradeOk returns a tuple with the YsqlMajorVersionUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwareUpgradeInfoResponse) GetYsqlMajorVersionUpgradeOk() (*bool, bool) {
+	if o == nil || o.YsqlMajorVersionUpgrade == nil {
+		return nil, false
+	}
+	return o.YsqlMajorVersionUpgrade, true
+}
+
+// HasYsqlMajorVersionUpgrade returns a boolean if a field has been set.
+func (o *SoftwareUpgradeInfoResponse) HasYsqlMajorVersionUpgrade() bool {
+	if o != nil && o.YsqlMajorVersionUpgrade != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlMajorVersionUpgrade gets a reference to the given bool and assigns it to the YsqlMajorVersionUpgrade field.
+func (o *SoftwareUpgradeInfoResponse) SetYsqlMajorVersionUpgrade(v bool) {
+	o.YsqlMajorVersionUpgrade = &v
+}
+
 func (o SoftwareUpgradeInfoResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.FinalizeRequired != nil {
 		toSerialize["finalizeRequired"] = o.FinalizeRequired
+	}
+	if o.YsqlMajorVersionUpgrade != nil {
+		toSerialize["ysqlMajorVersionUpgrade"] = o.YsqlMajorVersionUpgrade
 	}
 	return json.Marshal(toSerialize)
 }

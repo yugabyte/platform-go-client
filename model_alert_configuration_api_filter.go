@@ -31,16 +31,16 @@ type AlertConfigurationApiFilter struct {
 	TargetType *string `json:"targetType,omitempty"`
 	// The template of the alert configuration.
 	Template *string `json:"template,omitempty"`
-	Uuids []string `json:"uuids"`
+	// The uuids of the alert configurations.
+	Uuids *[]string `json:"uuids,omitempty"`
 }
 
 // NewAlertConfigurationApiFilter instantiates a new AlertConfigurationApiFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertConfigurationApiFilter(uuids []string) *AlertConfigurationApiFilter {
+func NewAlertConfigurationApiFilter() *AlertConfigurationApiFilter {
 	this := AlertConfigurationApiFilter{}
-	this.Uuids = uuids
 	return &this
 }
 
@@ -308,28 +308,36 @@ func (o *AlertConfigurationApiFilter) SetTemplate(v string) {
 	o.Template = &v
 }
 
-// GetUuids returns the Uuids field value
+// GetUuids returns the Uuids field value if set, zero value otherwise.
 func (o *AlertConfigurationApiFilter) GetUuids() []string {
-	if o == nil {
+	if o == nil || o.Uuids == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Uuids
+	return *o.Uuids
 }
 
-// GetUuidsOk returns a tuple with the Uuids field value
+// GetUuidsOk returns a tuple with the Uuids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertConfigurationApiFilter) GetUuidsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Uuids == nil {
 		return nil, false
 	}
-	return &o.Uuids, true
+	return o.Uuids, true
 }
 
-// SetUuids sets field value
+// HasUuids returns a boolean if a field has been set.
+func (o *AlertConfigurationApiFilter) HasUuids() bool {
+	if o != nil && o.Uuids != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUuids gets a reference to the given []string and assigns it to the Uuids field.
 func (o *AlertConfigurationApiFilter) SetUuids(v []string) {
-	o.Uuids = v
+	o.Uuids = &v
 }
 
 func (o AlertConfigurationApiFilter) MarshalJSON() ([]byte, error) {
@@ -358,7 +366,7 @@ func (o AlertConfigurationApiFilter) MarshalJSON() ([]byte, error) {
 	if o.Template != nil {
 		toSerialize["template"] = o.Template
 	}
-	if true {
+	if o.Uuids != nil {
 		toSerialize["uuids"] = o.Uuids
 	}
 	return json.Marshal(toSerialize)

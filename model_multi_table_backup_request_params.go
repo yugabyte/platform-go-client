@@ -84,7 +84,7 @@ type MultiTableBackupRequestParams struct {
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Point in time restore available
 	PointInTimeRestoreEnabled *bool `json:"pointInTimeRestoreEnabled,omitempty"`
 	// Previous task UUID of a retry
@@ -93,6 +93,8 @@ type MultiTableBackupRequestParams struct {
 	RegionLocations *[]RegionLocations `json:"regionLocations,omitempty"`
 	// Restore TimeStamp
 	RestoreTimeStamp *string `json:"restoreTimeStamp,omitempty"`
+	// YbaApi Internal. Run only prechecks during task run
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	// Schedule Name
 	ScheduleName *string `json:"scheduleName,omitempty"`
 	// Schedule UUID
@@ -144,12 +146,11 @@ type MultiTableBackupRequestParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *MultiTableBackupRequestParams {
+func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *MultiTableBackupRequestParams {
 	this := MultiTableBackupRequestParams{}
 	this.CreatingUser = creatingUser
 	this.FullBackup = fullBackup
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
@@ -1389,28 +1390,36 @@ func (o *MultiTableBackupRequestParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetPlatformVersion() string {
-	if o == nil {
+	if o == nil || o.PlatformVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformVersion
+	return *o.PlatformVersion
 }
 
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MultiTableBackupRequestParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PlatformVersion == nil {
 		return nil, false
 	}
-	return &o.PlatformVersion, true
+	return o.PlatformVersion, true
 }
 
-// SetPlatformVersion sets field value
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasPlatformVersion() bool {
+	if o != nil && o.PlatformVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
 func (o *MultiTableBackupRequestParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
+	o.PlatformVersion = &v
 }
 
 // GetPointInTimeRestoreEnabled returns the PointInTimeRestoreEnabled field value if set, zero value otherwise.
@@ -1539,6 +1548,38 @@ func (o *MultiTableBackupRequestParams) HasRestoreTimeStamp() bool {
 // SetRestoreTimeStamp gets a reference to the given string and assigns it to the RestoreTimeStamp field.
 func (o *MultiTableBackupRequestParams) SetRestoreTimeStamp(v string) {
 	o.RestoreTimeStamp = &v
+}
+
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetRunOnlyPrechecks() bool {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasRunOnlyPrechecks() bool {
+	if o != nil && o.RunOnlyPrechecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *MultiTableBackupRequestParams) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
 }
 
 // GetScheduleName returns the ScheduleName field value if set, zero value otherwise.
@@ -2428,7 +2469,7 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
+	if o.PlatformVersion != nil {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PointInTimeRestoreEnabled != nil {
@@ -2442,6 +2483,9 @@ func (o MultiTableBackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.RestoreTimeStamp != nil {
 		toSerialize["restoreTimeStamp"] = o.RestoreTimeStamp
+	}
+	if o.RunOnlyPrechecks != nil {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
 	}
 	if o.ScheduleName != nil {
 		toSerialize["scheduleName"] = o.ScheduleName

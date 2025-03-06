@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FinalizeRequired** | Pointer to **bool** | WARNING: This is a preview API that could change. Finalize required | [optional] [readonly] 
+**YsqlMajorVersionUpgrade** | Pointer to **bool** | WARNING: This is a preview API that could change. YSQL Major version upgrade | [optional] [readonly] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetFinalizeRequired sets FinalizeRequired field to given value.
 `func (o *SoftwareUpgradeInfoResponse) HasFinalizeRequired() bool`
 
 HasFinalizeRequired returns a boolean if a field has been set.
+
+### GetYsqlMajorVersionUpgrade
+
+`func (o *SoftwareUpgradeInfoResponse) GetYsqlMajorVersionUpgrade() bool`
+
+GetYsqlMajorVersionUpgrade returns the YsqlMajorVersionUpgrade field if non-nil, zero value otherwise.
+
+### GetYsqlMajorVersionUpgradeOk
+
+`func (o *SoftwareUpgradeInfoResponse) GetYsqlMajorVersionUpgradeOk() (*bool, bool)`
+
+GetYsqlMajorVersionUpgradeOk returns a tuple with the YsqlMajorVersionUpgrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYsqlMajorVersionUpgrade
+
+`func (o *SoftwareUpgradeInfoResponse) SetYsqlMajorVersionUpgrade(v bool)`
+
+SetYsqlMajorVersionUpgrade sets YsqlMajorVersionUpgrade field to given value.
+
+### HasYsqlMajorVersionUpgrade
+
+`func (o *SoftwareUpgradeInfoResponse) HasYsqlMajorVersionUpgrade() bool`
+
+HasYsqlMajorVersionUpgrade returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

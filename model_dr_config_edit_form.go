@@ -18,6 +18,8 @@ import (
 type DrConfigEditForm struct {
 	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	PitrParams *PitrParams `json:"pitrParams,omitempty"`
+	// List of urls for webhook
+	WebhookUrls *[]string `json:"webhookUrls,omitempty"`
 }
 
 // NewDrConfigEditForm instantiates a new DrConfigEditForm object
@@ -101,6 +103,38 @@ func (o *DrConfigEditForm) SetPitrParams(v PitrParams) {
 	o.PitrParams = &v
 }
 
+// GetWebhookUrls returns the WebhookUrls field value if set, zero value otherwise.
+func (o *DrConfigEditForm) GetWebhookUrls() []string {
+	if o == nil || o.WebhookUrls == nil {
+		var ret []string
+		return ret
+	}
+	return *o.WebhookUrls
+}
+
+// GetWebhookUrlsOk returns a tuple with the WebhookUrls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigEditForm) GetWebhookUrlsOk() (*[]string, bool) {
+	if o == nil || o.WebhookUrls == nil {
+		return nil, false
+	}
+	return o.WebhookUrls, true
+}
+
+// HasWebhookUrls returns a boolean if a field has been set.
+func (o *DrConfigEditForm) HasWebhookUrls() bool {
+	if o != nil && o.WebhookUrls != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookUrls gets a reference to the given []string and assigns it to the WebhookUrls field.
+func (o *DrConfigEditForm) SetWebhookUrls(v []string) {
+	o.WebhookUrls = &v
+}
+
 func (o DrConfigEditForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BootstrapParams != nil {
@@ -108,6 +142,9 @@ func (o DrConfigEditForm) MarshalJSON() ([]byte, error) {
 	}
 	if o.PitrParams != nil {
 		toSerialize["pitrParams"] = o.PitrParams
+	}
+	if o.WebhookUrls != nil {
+		toSerialize["webhookUrls"] = o.WebhookUrls
 	}
 	return json.Marshal(toSerialize)
 }

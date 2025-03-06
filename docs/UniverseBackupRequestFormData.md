@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorString** | Pointer to **string** | Error message | [optional] 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **StorageConfigUUID** | **string** | WARNING: This is a preview API that could change.Storage configuration UUID | 
 **TimeBeforeDelete** | Pointer to **int64** | WARNING: This is a preview API that could change.Time before deleting the backup from storage, in milliseconds | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewUniverseBackupRequestFormData
 
-`func NewUniverseBackupRequestFormData(platformVersion string, storageConfigUUID string, ) *UniverseBackupRequestFormData`
+`func NewUniverseBackupRequestFormData(storageConfigUUID string, ) *UniverseBackupRequestFormData`
 
 NewUniverseBackupRequestFormData instantiates a new UniverseBackupRequestFormData object
 This constructor will assign default values to properties that have it defined,
@@ -73,6 +73,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *UniverseBackupRequestFormData) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 

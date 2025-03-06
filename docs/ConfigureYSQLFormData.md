@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
-**ConnectionPoolingGflags** | Pointer to **map[string]string** | YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s. | [optional] 
+**ConnectionPoolingGflags** | Pointer to [**map[string]SpecificGFlags**](SpecificGFlags.md) | YbaApi Internal. Extra Connection Pooling gflags for the universe. Only Supported for VMs and not yet k8s. | [optional] 
 **EnableConnectionPooling** | Pointer to **bool** | Enable Connection Pooling for the universe | [optional] 
 **EnableYSQL** | Pointer to **bool** | Enable YSQL Api for the universe | [optional] 
 **EnableYSQLAuth** | Pointer to **bool** | Enable YSQL Auth for the universe | [optional] 
@@ -57,20 +57,20 @@ HasCommunicationPorts returns a boolean if a field has been set.
 
 ### GetConnectionPoolingGflags
 
-`func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]string`
+`func (o *ConfigureYSQLFormData) GetConnectionPoolingGflags() map[string]SpecificGFlags`
 
 GetConnectionPoolingGflags returns the ConnectionPoolingGflags field if non-nil, zero value otherwise.
 
 ### GetConnectionPoolingGflagsOk
 
-`func (o *ConfigureYSQLFormData) GetConnectionPoolingGflagsOk() (*map[string]string, bool)`
+`func (o *ConfigureYSQLFormData) GetConnectionPoolingGflagsOk() (*map[string]SpecificGFlags, bool)`
 
 GetConnectionPoolingGflagsOk returns a tuple with the ConnectionPoolingGflags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConnectionPoolingGflags
 
-`func (o *ConfigureYSQLFormData) SetConnectionPoolingGflags(v map[string]string)`
+`func (o *ConfigureYSQLFormData) SetConnectionPoolingGflags(v map[string]SpecificGFlags)`
 
 SetConnectionPoolingGflags sets ConnectionPoolingGflags field to given value.
 

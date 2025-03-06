@@ -18,9 +18,10 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RetentionPeriodInSeconds** | Pointer to **int64** | Retention period of a snapshot | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -33,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewUpdatePitrConfigParams
 
-`func NewUpdatePitrConfigParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UpdatePitrConfigParams`
+`func NewUpdatePitrConfigParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UpdatePitrConfigParams`
 
 NewUpdatePitrConfigParams instantiates a new UpdatePitrConfigParams object
 This constructor will assign default values to properties that have it defined,
@@ -407,6 +408,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *UpdatePitrConfigParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 
@@ -457,6 +463,31 @@ SetRetentionPeriodInSeconds sets RetentionPeriodInSeconds field to given value.
 `func (o *UpdatePitrConfigParams) HasRetentionPeriodInSeconds() bool`
 
 HasRetentionPeriodInSeconds returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *UpdatePitrConfigParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *UpdatePitrConfigParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *UpdatePitrConfigParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *UpdatePitrConfigParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

@@ -34,9 +34,11 @@ type TableDefinitionTaskParams struct {
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion string `json:"platformVersion"`
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
+	// YbaApi Internal. Run only prechecks during task run
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
@@ -58,11 +60,10 @@ type TableDefinitionTaskParams struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string) *TableDefinitionTaskParams {
+func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string) *TableDefinitionTaskParams {
 	this := TableDefinitionTaskParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
-	this.PlatformVersion = platformVersion
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.TableDetails = tableDetails
@@ -479,28 +480,36 @@ func (o *TableDefinitionTaskParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *TableDefinitionTaskParams) GetPlatformVersion() string {
-	if o == nil {
+	if o == nil || o.PlatformVersion == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformVersion
+	return *o.PlatformVersion
 }
 
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TableDefinitionTaskParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PlatformVersion == nil {
 		return nil, false
 	}
-	return &o.PlatformVersion, true
+	return o.PlatformVersion, true
 }
 
-// SetPlatformVersion sets field value
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *TableDefinitionTaskParams) HasPlatformVersion() bool {
+	if o != nil && o.PlatformVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
 func (o *TableDefinitionTaskParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = v
+	o.PlatformVersion = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -533,6 +542,38 @@ func (o *TableDefinitionTaskParams) HasPreviousTaskUUID() bool {
 // SetPreviousTaskUUID gets a reference to the given string and assigns it to the PreviousTaskUUID field.
 func (o *TableDefinitionTaskParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
+}
+
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *TableDefinitionTaskParams) GetRunOnlyPrechecks() bool {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TableDefinitionTaskParams) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || o.RunOnlyPrechecks == nil {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *TableDefinitionTaskParams) HasRunOnlyPrechecks() bool {
+	if o != nil && o.RunOnlyPrechecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *TableDefinitionTaskParams) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
 }
 
 // GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
@@ -888,11 +929,14 @@ func (o TableDefinitionTaskParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["platformUrl"] = o.PlatformUrl
 	}
-	if true {
+	if o.PlatformVersion != nil {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if o.PreviousTaskUUID != nil {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
+	}
+	if o.RunOnlyPrechecks != nil {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
 	}
 	if true {
 		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis

@@ -119,7 +119,7 @@ func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
     tableUUID := TODO // string | 
-    bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", "S3Bucket_example", int32(123), int32(123)) // BulkImportParams | Bulk data to be imported
+    bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "S3Bucket_example", int32(123), int32(123)) // BulkImportParams | Bulk data to be imported
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -198,7 +198,7 @@ import (
 func main() {
     cUUID := TODO // string | 
     uniUUID := TODO // string | 
-    table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "PlatformVersion_example", int32(123), int32(123), *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
+    table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()

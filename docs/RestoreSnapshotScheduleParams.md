@@ -18,9 +18,10 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PitrConfigUUID** | Pointer to **string** | PITR Config UUID | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeInMillis** | Pointer to **int64** | Restore Time In millis | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -34,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreSnapshotScheduleParams
 
-`func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *RestoreSnapshotScheduleParams`
+`func NewRestoreSnapshotScheduleParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *RestoreSnapshotScheduleParams`
 
 NewRestoreSnapshotScheduleParams instantiates a new RestoreSnapshotScheduleParams object
 This constructor will assign default values to properties that have it defined,
@@ -408,6 +409,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *RestoreSnapshotScheduleParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 
@@ -458,6 +464,31 @@ SetRestoreTimeInMillis sets RestoreTimeInMillis field to given value.
 `func (o *RestoreSnapshotScheduleParams) HasRestoreTimeInMillis() bool`
 
 HasRestoreTimeInMillis returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *RestoreSnapshotScheduleParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *RestoreSnapshotScheduleParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *RestoreSnapshotScheduleParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *RestoreSnapshotScheduleParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

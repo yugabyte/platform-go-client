@@ -28,11 +28,12 @@ Name | Type | Description | Notes
 **NodeIp** | Pointer to **string** | Node IP | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | **string** |  | 
+**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrefixUUID** | Pointer to **string** | Prefix UUID | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
 **RestoreToPointInTimeMillis** | Pointer to **int64** | Restore timestamp in millis | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SleepAfterMasterRestartMillis** | **int32** |  | 
 **SleepAfterTServerRestartMillis** | **int32** |  | 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -48,7 +49,7 @@ Name | Type | Description | Notes
 
 ### NewRestoreBackupParams
 
-`func NewRestoreBackupParams(creatingUser Users, platformUrl string, platformVersion string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
+`func NewRestoreBackupParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, universeUUID string, ) *RestoreBackupParams`
 
 NewRestoreBackupParams instantiates a new RestoreBackupParams object
 This constructor will assign default values to properties that have it defined,
@@ -672,6 +673,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformVersion sets PlatformVersion field to given value.
 
+### HasPlatformVersion
+
+`func (o *RestoreBackupParams) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrefixUUID
 
@@ -772,6 +778,31 @@ SetRestoreToPointInTimeMillis sets RestoreToPointInTimeMillis field to given val
 `func (o *RestoreBackupParams) HasRestoreToPointInTimeMillis() bool`
 
 HasRestoreToPointInTimeMillis returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *RestoreBackupParams) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *RestoreBackupParams) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *RestoreBackupParams) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *RestoreBackupParams) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
 
 ### GetSleepAfterMasterRestartMillis
 

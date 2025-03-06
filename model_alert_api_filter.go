@@ -16,28 +16,28 @@ import (
 
 // AlertApiFilter struct for AlertApiFilter
 type AlertApiFilter struct {
-	ConfigurationTypes []string `json:"configurationTypes"`
-	ConfigurationUuid string `json:"configurationUuid"`
-	Severities []string `json:"severities"`
-	SourceName string `json:"sourceName"`
-	SourceUUIDs []string `json:"sourceUUIDs"`
-	States []string `json:"states"`
-	Uuids []string `json:"uuids"`
+	// Alert Configuration Target Types
+	ConfigurationTypes *[]string `json:"configurationTypes,omitempty"`
+	// The uuid of the alert configuration.
+	ConfigurationUuid *string `json:"configurationUuid,omitempty"`
+	// The severity of the alerts.
+	Severities *[]string `json:"severities,omitempty"`
+	// The source name of the alerts.
+	SourceName *string `json:"sourceName,omitempty"`
+	// The source uuids of the alerts.
+	SourceUUIDs *[]string `json:"sourceUUIDs,omitempty"`
+	// The state of the alerts.
+	States *[]string `json:"states,omitempty"`
+	// The uuids of the alerts.
+	Uuids *[]string `json:"uuids,omitempty"`
 }
 
 // NewAlertApiFilter instantiates a new AlertApiFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertApiFilter(configurationTypes []string, configurationUuid string, severities []string, sourceName string, sourceUUIDs []string, states []string, uuids []string) *AlertApiFilter {
+func NewAlertApiFilter() *AlertApiFilter {
 	this := AlertApiFilter{}
-	this.ConfigurationTypes = configurationTypes
-	this.ConfigurationUuid = configurationUuid
-	this.Severities = severities
-	this.SourceName = sourceName
-	this.SourceUUIDs = sourceUUIDs
-	this.States = states
-	this.Uuids = uuids
 	return &this
 }
 
@@ -49,195 +49,251 @@ func NewAlertApiFilterWithDefaults() *AlertApiFilter {
 	return &this
 }
 
-// GetConfigurationTypes returns the ConfigurationTypes field value
+// GetConfigurationTypes returns the ConfigurationTypes field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetConfigurationTypes() []string {
-	if o == nil {
+	if o == nil || o.ConfigurationTypes == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.ConfigurationTypes
+	return *o.ConfigurationTypes
 }
 
-// GetConfigurationTypesOk returns a tuple with the ConfigurationTypes field value
+// GetConfigurationTypesOk returns a tuple with the ConfigurationTypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetConfigurationTypesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.ConfigurationTypes == nil {
 		return nil, false
 	}
-	return &o.ConfigurationTypes, true
+	return o.ConfigurationTypes, true
 }
 
-// SetConfigurationTypes sets field value
+// HasConfigurationTypes returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasConfigurationTypes() bool {
+	if o != nil && o.ConfigurationTypes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationTypes gets a reference to the given []string and assigns it to the ConfigurationTypes field.
 func (o *AlertApiFilter) SetConfigurationTypes(v []string) {
-	o.ConfigurationTypes = v
+	o.ConfigurationTypes = &v
 }
 
-// GetConfigurationUuid returns the ConfigurationUuid field value
+// GetConfigurationUuid returns the ConfigurationUuid field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetConfigurationUuid() string {
-	if o == nil {
+	if o == nil || o.ConfigurationUuid == nil {
 		var ret string
 		return ret
 	}
-
-	return o.ConfigurationUuid
+	return *o.ConfigurationUuid
 }
 
-// GetConfigurationUuidOk returns a tuple with the ConfigurationUuid field value
+// GetConfigurationUuidOk returns a tuple with the ConfigurationUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetConfigurationUuidOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.ConfigurationUuid == nil {
 		return nil, false
 	}
-	return &o.ConfigurationUuid, true
+	return o.ConfigurationUuid, true
 }
 
-// SetConfigurationUuid sets field value
+// HasConfigurationUuid returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasConfigurationUuid() bool {
+	if o != nil && o.ConfigurationUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationUuid gets a reference to the given string and assigns it to the ConfigurationUuid field.
 func (o *AlertApiFilter) SetConfigurationUuid(v string) {
-	o.ConfigurationUuid = v
+	o.ConfigurationUuid = &v
 }
 
-// GetSeverities returns the Severities field value
+// GetSeverities returns the Severities field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetSeverities() []string {
-	if o == nil {
+	if o == nil || o.Severities == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Severities
+	return *o.Severities
 }
 
-// GetSeveritiesOk returns a tuple with the Severities field value
+// GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetSeveritiesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Severities == nil {
 		return nil, false
 	}
-	return &o.Severities, true
+	return o.Severities, true
 }
 
-// SetSeverities sets field value
+// HasSeverities returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasSeverities() bool {
+	if o != nil && o.Severities != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverities gets a reference to the given []string and assigns it to the Severities field.
 func (o *AlertApiFilter) SetSeverities(v []string) {
-	o.Severities = v
+	o.Severities = &v
 }
 
-// GetSourceName returns the SourceName field value
+// GetSourceName returns the SourceName field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetSourceName() string {
-	if o == nil {
+	if o == nil || o.SourceName == nil {
 		var ret string
 		return ret
 	}
-
-	return o.SourceName
+	return *o.SourceName
 }
 
-// GetSourceNameOk returns a tuple with the SourceName field value
+// GetSourceNameOk returns a tuple with the SourceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetSourceNameOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.SourceName == nil {
 		return nil, false
 	}
-	return &o.SourceName, true
+	return o.SourceName, true
 }
 
-// SetSourceName sets field value
+// HasSourceName returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasSourceName() bool {
+	if o != nil && o.SourceName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceName gets a reference to the given string and assigns it to the SourceName field.
 func (o *AlertApiFilter) SetSourceName(v string) {
-	o.SourceName = v
+	o.SourceName = &v
 }
 
-// GetSourceUUIDs returns the SourceUUIDs field value
+// GetSourceUUIDs returns the SourceUUIDs field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetSourceUUIDs() []string {
-	if o == nil {
+	if o == nil || o.SourceUUIDs == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.SourceUUIDs
+	return *o.SourceUUIDs
 }
 
-// GetSourceUUIDsOk returns a tuple with the SourceUUIDs field value
+// GetSourceUUIDsOk returns a tuple with the SourceUUIDs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetSourceUUIDsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.SourceUUIDs == nil {
 		return nil, false
 	}
-	return &o.SourceUUIDs, true
+	return o.SourceUUIDs, true
 }
 
-// SetSourceUUIDs sets field value
+// HasSourceUUIDs returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasSourceUUIDs() bool {
+	if o != nil && o.SourceUUIDs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSourceUUIDs gets a reference to the given []string and assigns it to the SourceUUIDs field.
 func (o *AlertApiFilter) SetSourceUUIDs(v []string) {
-	o.SourceUUIDs = v
+	o.SourceUUIDs = &v
 }
 
-// GetStates returns the States field value
+// GetStates returns the States field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetStates() []string {
-	if o == nil {
+	if o == nil || o.States == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.States
+	return *o.States
 }
 
-// GetStatesOk returns a tuple with the States field value
+// GetStatesOk returns a tuple with the States field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetStatesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.States == nil {
 		return nil, false
 	}
-	return &o.States, true
+	return o.States, true
 }
 
-// SetStates sets field value
+// HasStates returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasStates() bool {
+	if o != nil && o.States != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStates gets a reference to the given []string and assigns it to the States field.
 func (o *AlertApiFilter) SetStates(v []string) {
-	o.States = v
+	o.States = &v
 }
 
-// GetUuids returns the Uuids field value
+// GetUuids returns the Uuids field value if set, zero value otherwise.
 func (o *AlertApiFilter) GetUuids() []string {
-	if o == nil {
+	if o == nil || o.Uuids == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Uuids
+	return *o.Uuids
 }
 
-// GetUuidsOk returns a tuple with the Uuids field value
+// GetUuidsOk returns a tuple with the Uuids field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AlertApiFilter) GetUuidsOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Uuids == nil {
 		return nil, false
 	}
-	return &o.Uuids, true
+	return o.Uuids, true
 }
 
-// SetUuids sets field value
+// HasUuids returns a boolean if a field has been set.
+func (o *AlertApiFilter) HasUuids() bool {
+	if o != nil && o.Uuids != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUuids gets a reference to the given []string and assigns it to the Uuids field.
 func (o *AlertApiFilter) SetUuids(v []string) {
-	o.Uuids = v
+	o.Uuids = &v
 }
 
 func (o AlertApiFilter) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.ConfigurationTypes != nil {
 		toSerialize["configurationTypes"] = o.ConfigurationTypes
 	}
-	if true {
+	if o.ConfigurationUuid != nil {
 		toSerialize["configurationUuid"] = o.ConfigurationUuid
 	}
-	if true {
+	if o.Severities != nil {
 		toSerialize["severities"] = o.Severities
 	}
-	if true {
+	if o.SourceName != nil {
 		toSerialize["sourceName"] = o.SourceName
 	}
-	if true {
+	if o.SourceUUIDs != nil {
 		toSerialize["sourceUUIDs"] = o.SourceUUIDs
 	}
-	if true {
+	if o.States != nil {
 		toSerialize["states"] = o.States
 	}
-	if true {
+	if o.Uuids != nil {
 		toSerialize["uuids"] = o.Uuids
 	}
 	return json.Marshal(toSerialize)
