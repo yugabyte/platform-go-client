@@ -3785,6 +3785,12 @@ paths:
         name: request
         schema:
           exampleSetFlag: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaintenanceWindowApiFilter'
+        required: true
       responses:
         "200":
           content:
@@ -3800,6 +3806,7 @@ paths:
       summary: List maintenance windows
       tags:
       - Maintenance windows
+      x-codegen-request-body-name: ListMaintenanceWindowsRequest
   /api/v1/customers/{cUUID}/maintenance_windows/page:
     post:
       description: "WARNING: This is a preview API that could change."
@@ -20058,8 +20065,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -26897,8 +26904,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -30600,7 +30607,9 @@ components:
           needBootstrap: true
           status: Validated
         dbDetails:
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -30610,7 +30619,9 @@ components:
             name: name
             namespaceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: Validated
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -34317,8 +34328,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -37882,8 +37893,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -42220,8 +42231,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -51739,8 +51750,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -55786,8 +55797,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -59389,8 +59400,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -64324,8 +64335,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -64895,8 +64906,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -65276,8 +65287,8 @@ components:
             - RestartXClusterConfig
             - RestartDrConfig
             - SyncDrConfig
-            - SetTablesDrConfig
             - SetDatabasesDrConfig
+            - SetTablesDrConfig
             - CreateDrConfig
             - DeleteDrConfig
             - FailoverDrConfig
@@ -68908,8 +68919,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -72804,8 +72815,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -77200,8 +77211,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -80610,8 +80621,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -84274,8 +84285,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -87631,8 +87642,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -90996,8 +91007,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -97793,8 +97804,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -102009,8 +102020,8 @@ components:
           - RestartXClusterConfig
           - RestartDrConfig
           - SyncDrConfig
-          - SetTablesDrConfig
           - SetDatabasesDrConfig
+          - SetTablesDrConfig
           - CreateDrConfig
           - DeleteDrConfig
           - FailoverDrConfig
@@ -102761,7 +102772,9 @@ components:
         targetActive: true
         imported: true
         namespaceDetails:
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102771,7 +102784,9 @@ components:
             name: name
             namespaceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: Validated
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102926,7 +102941,9 @@ components:
         keyspacePending: keyspacePending
         sourceActive: true
         namespaces:
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102936,7 +102953,9 @@ components:
             name: name
             namespaceUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: Validated
-        - sourceNamespaceId: sourceNamespaceId
+        - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sourceNamespaceId: sourceNamespaceId
+          backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -103191,7 +103210,9 @@ components:
       type: object
     XClusterNamespaceConfig:
       example:
+        restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sourceNamespaceId: sourceNamespaceId
+        backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sourceNamespaceInfo:
           tableType: YQL_TABLE_TYPE
           name: name
@@ -103203,6 +103224,14 @@ components:
         status: Validated
       exampleSetFlag: true
       properties:
+        backupUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
+        restoreUuid:
+          exampleSetFlag: true
+          format: uuid
+          type: string
         sourceNamespaceId:
           exampleSetFlag: true
           type: string
@@ -103223,6 +103252,8 @@ components:
         targetNamespaceInfo:
           $ref: '#/components/schemas/NamespaceInfoResp'
       required:
+      - backupUuid
+      - restoreUuid
       - sourceNamespaceId
       type: object
     XClusterTableConfig:

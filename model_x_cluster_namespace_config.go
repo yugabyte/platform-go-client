@@ -16,6 +16,8 @@ import (
 
 // XClusterNamespaceConfig struct for XClusterNamespaceConfig
 type XClusterNamespaceConfig struct {
+	BackupUuid string `json:"backupUuid"`
+	RestoreUuid string `json:"restoreUuid"`
 	SourceNamespaceId string `json:"sourceNamespaceId"`
 	SourceNamespaceInfo *NamespaceInfoResp `json:"sourceNamespaceInfo,omitempty"`
 	// Status
@@ -27,8 +29,10 @@ type XClusterNamespaceConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXClusterNamespaceConfig(sourceNamespaceId string) *XClusterNamespaceConfig {
+func NewXClusterNamespaceConfig(backupUuid string, restoreUuid string, sourceNamespaceId string) *XClusterNamespaceConfig {
 	this := XClusterNamespaceConfig{}
+	this.BackupUuid = backupUuid
+	this.RestoreUuid = restoreUuid
 	this.SourceNamespaceId = sourceNamespaceId
 	return &this
 }
@@ -39,6 +43,54 @@ func NewXClusterNamespaceConfig(sourceNamespaceId string) *XClusterNamespaceConf
 func NewXClusterNamespaceConfigWithDefaults() *XClusterNamespaceConfig {
 	this := XClusterNamespaceConfig{}
 	return &this
+}
+
+// GetBackupUuid returns the BackupUuid field value
+func (o *XClusterNamespaceConfig) GetBackupUuid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BackupUuid
+}
+
+// GetBackupUuidOk returns a tuple with the BackupUuid field value
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetBackupUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.BackupUuid, true
+}
+
+// SetBackupUuid sets field value
+func (o *XClusterNamespaceConfig) SetBackupUuid(v string) {
+	o.BackupUuid = v
+}
+
+// GetRestoreUuid returns the RestoreUuid field value
+func (o *XClusterNamespaceConfig) GetRestoreUuid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RestoreUuid
+}
+
+// GetRestoreUuidOk returns a tuple with the RestoreUuid field value
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetRestoreUuidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.RestoreUuid, true
+}
+
+// SetRestoreUuid sets field value
+func (o *XClusterNamespaceConfig) SetRestoreUuid(v string) {
+	o.RestoreUuid = v
 }
 
 // GetSourceNamespaceId returns the SourceNamespaceId field value
@@ -163,6 +215,12 @@ func (o *XClusterNamespaceConfig) SetTargetNamespaceInfo(v NamespaceInfoResp) {
 
 func (o XClusterNamespaceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["backupUuid"] = o.BackupUuid
+	}
+	if true {
+		toSerialize["restoreUuid"] = o.RestoreUuid
+	}
 	if true {
 		toSerialize["sourceNamespaceId"] = o.SourceNamespaceId
 	}
