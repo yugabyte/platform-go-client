@@ -425,9 +425,14 @@ type MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest struct {
 	ctx _context.Context
 	ApiService *MaintenanceWindowsApiService
 	cUUID string
+	listMaintenanceWindowsRequest *MaintenanceWindowApiFilter
 	request *interface{}
 }
 
+func (r MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest) ListMaintenanceWindowsRequest(listMaintenanceWindowsRequest MaintenanceWindowApiFilter) MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest {
+	r.listMaintenanceWindowsRequest = &listMaintenanceWindowsRequest
+	return r
+}
 func (r MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest) Request(request interface{}) MaintenanceWindowsApiApiListOfMaintenanceWindowsRequest {
 	r.request = &request
 	return r
@@ -477,12 +482,15 @@ func (a *MaintenanceWindowsApiService) ListOfMaintenanceWindowsExecute(r Mainten
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
+	if r.listMaintenanceWindowsRequest == nil {
+		return localVarReturnValue, nil, reportError("listMaintenanceWindowsRequest is required and must be specified")
+	}
 
 	if r.request != nil {
 		localVarQueryParams.Add("request", parameterToString(*r.request, ""))
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -498,6 +506,8 @@ func (a *MaintenanceWindowsApiService) ListOfMaintenanceWindowsExecute(r Mainten
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.listMaintenanceWindowsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

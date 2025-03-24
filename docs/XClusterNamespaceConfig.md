@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BackupUuid** | **string** |  | 
+**RestoreUuid** | **string** |  | 
 **SourceNamespaceId** | **string** |  | 
 **SourceNamespaceInfo** | Pointer to [**NamespaceInfoResp**](NamespaceInfoResp.md) |  | [optional] 
 **Status** | Pointer to **string** | Status | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewXClusterNamespaceConfig
 
-`func NewXClusterNamespaceConfig(sourceNamespaceId string, ) *XClusterNamespaceConfig`
+`func NewXClusterNamespaceConfig(backupUuid string, restoreUuid string, sourceNamespaceId string, ) *XClusterNamespaceConfig`
 
 NewXClusterNamespaceConfig instantiates a new XClusterNamespaceConfig object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewXClusterNamespaceConfigWithDefaults instantiates a new XClusterNamespaceConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBackupUuid
+
+`func (o *XClusterNamespaceConfig) GetBackupUuid() string`
+
+GetBackupUuid returns the BackupUuid field if non-nil, zero value otherwise.
+
+### GetBackupUuidOk
+
+`func (o *XClusterNamespaceConfig) GetBackupUuidOk() (*string, bool)`
+
+GetBackupUuidOk returns a tuple with the BackupUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupUuid
+
+`func (o *XClusterNamespaceConfig) SetBackupUuid(v string)`
+
+SetBackupUuid sets BackupUuid field to given value.
+
+
+### GetRestoreUuid
+
+`func (o *XClusterNamespaceConfig) GetRestoreUuid() string`
+
+GetRestoreUuid returns the RestoreUuid field if non-nil, zero value otherwise.
+
+### GetRestoreUuidOk
+
+`func (o *XClusterNamespaceConfig) GetRestoreUuidOk() (*string, bool)`
+
+GetRestoreUuidOk returns a tuple with the RestoreUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestoreUuid
+
+`func (o *XClusterNamespaceConfig) SetRestoreUuid(v string)`
+
+SetRestoreUuid sets RestoreUuid field to given value.
+
 
 ### GetSourceNamespaceId
 

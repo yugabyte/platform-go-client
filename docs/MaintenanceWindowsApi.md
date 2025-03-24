@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 ## ListOfMaintenanceWindows
 
-> []MaintenanceWindow ListOfMaintenanceWindows(ctx, cUUID).Request(request).Execute()
+> []MaintenanceWindow ListOfMaintenanceWindows(ctx, cUUID).ListMaintenanceWindowsRequest(listMaintenanceWindowsRequest).Request(request).Execute()
 
 List maintenance windows
 
@@ -258,11 +258,12 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    listMaintenanceWindowsRequest := *openapiclient.NewMaintenanceWindowApiFilter([]string{"States_example"}, []string{"Uuids_example"}) // MaintenanceWindowApiFilter | 
     request := TODO // interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.MaintenanceWindowsApi.ListOfMaintenanceWindows(context.Background(), cUUID).Request(request).Execute()
+    resp, r, err := api_client.MaintenanceWindowsApi.ListOfMaintenanceWindows(context.Background(), cUUID).ListMaintenanceWindowsRequest(listMaintenanceWindowsRequest).Request(request).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MaintenanceWindowsApi.ListOfMaintenanceWindows``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -288,6 +289,7 @@ Other parameters are passed through a pointer to a apiListOfMaintenanceWindowsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **listMaintenanceWindowsRequest** | [**MaintenanceWindowApiFilter**](MaintenanceWindowApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
@@ -300,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
