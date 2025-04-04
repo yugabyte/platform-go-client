@@ -23,11 +23,13 @@ type YbaComponent string
 const (
 	YBA YbaComponent = "YBA"
 	PROMETHEUS YbaComponent = "PROMETHEUS"
+	RELEASES YbaComponent = "RELEASES"
 )
 
 var allowedYbaComponentEnumValues = []YbaComponent{
 	"YBA",
 	"PROMETHEUS",
+	"RELEASES",
 }
 
 func (v *YbaComponent) UnmarshalJSON(src []byte) error {

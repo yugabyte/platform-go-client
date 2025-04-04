@@ -106,7 +106,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "{protocol}://{host_port}",
+				URL: "{protocol}://{host_port}/api/v2",
 				Description: "API endpoint of YBA server",
 				Variables: map[string]ServerVariable{
 					"protocol": ServerVariable{

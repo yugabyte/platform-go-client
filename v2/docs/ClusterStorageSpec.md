@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **NumVolumes** | **int32** | Number of volumes to be mounted on this instance at the default path | 
 **MountPoints** | Pointer to **string** | Comma-separated list of mount points for the volumes in each instance. Required for an onprem cluster. | [optional] 
 **StorageClass** | Pointer to **string** | Name of the storage class, if this is a kubernetes cluster | [optional] 
-**StorageType** | Pointer to **string** | Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster. | [optional] 
+**StorageType** | Pointer to **string** | Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent, Hyperdisk_Balanced, Hyperdisk_Extreme) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster. | [optional] 
 **DiskIops** | Pointer to **int32** | Desired IOPS for the volumes mounted on this aws, gcp or azu instance | [optional] 
 **Throughput** | Pointer to **int32** | Desired throughput for the volumes mounted on this aws, gcp or azu instance | [optional] 
 

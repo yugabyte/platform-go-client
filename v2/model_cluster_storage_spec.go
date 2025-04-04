@@ -25,7 +25,7 @@ type ClusterStorageSpec struct {
 	MountPoints *string `json:"mount_points,omitempty"`
 	// Name of the storage class, if this is a kubernetes cluster
 	StorageClass *string `json:"storage_class,omitempty"`
-	// Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster.
+	// Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent, Hyperdisk_Balanced, Hyperdisk_Extreme) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster.
 	StorageType *string `json:"storage_type,omitempty"`
 	// Desired IOPS for the volumes mounted on this aws, gcp or azu instance
 	DiskIops *int32 `json:"disk_iops,omitempty"`
