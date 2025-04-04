@@ -12,7 +12,7 @@ info:
   version: v2
 servers:
 - description: API endpoint of YBA server
-  url: "{protocol}://{host_port}"
+  url: "{protocol}://{host_port}/api/v2"
   variables:
     protocol:
       default: http
@@ -2589,6 +2589,7 @@ components:
       enum:
       - YBA
       - PROMETHEUS
+      - RELEASES
       exampleSetFlag: false
       title: YbaComponent
       type: string
@@ -3502,14 +3503,16 @@ components:
           type: string
         storage_type:
           description: "Storage type used for this instance, if this is a aws (IO1,\
-            \ GP2, GP3), gcp (Scratch, Persistent) or azu (StandardSSD_LRS, Premium_LRS,\
-            \ PremiumV2_LRS, UltraSSD_LRS) cluster."
+            \ GP2, GP3), gcp (Scratch, Persistent, Hyperdisk_Balanced, Hyperdisk_Extreme)\
+            \ or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster."
           enum:
           - IO1
           - GP2
           - GP3
           - Scratch
           - Persistent
+          - Hyperdisk_Balanced
+          - Hyperdisk_Extreme
           - StandardSSD_LRS
           - PremiumV2_LRS
           - Premium_LRS
