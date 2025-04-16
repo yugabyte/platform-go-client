@@ -20,17 +20,16 @@ type BootstrapParams struct {
 	AllowBootstrap *bool `json:"allowBootstrap,omitempty"`
 	BackupRequestParams BootstrapBackupParams `json:"backupRequestParams"`
 	// Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body
-	Tables []string `json:"tables"`
+	Tables *[]string `json:"tables,omitempty"`
 }
 
 // NewBootstrapParams instantiates a new BootstrapParams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBootstrapParams(backupRequestParams BootstrapBackupParams, tables []string) *BootstrapParams {
+func NewBootstrapParams(backupRequestParams BootstrapBackupParams) *BootstrapParams {
 	this := BootstrapParams{}
 	this.BackupRequestParams = backupRequestParams
-	this.Tables = tables
 	return &this
 }
 
@@ -98,28 +97,36 @@ func (o *BootstrapParams) SetBackupRequestParams(v BootstrapBackupParams) {
 	o.BackupRequestParams = v
 }
 
-// GetTables returns the Tables field value
+// GetTables returns the Tables field value if set, zero value otherwise.
 func (o *BootstrapParams) GetTables() []string {
-	if o == nil {
+	if o == nil || o.Tables == nil {
 		var ret []string
 		return ret
 	}
-
-	return o.Tables
+	return *o.Tables
 }
 
-// GetTablesOk returns a tuple with the Tables field value
+// GetTablesOk returns a tuple with the Tables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BootstrapParams) GetTablesOk() (*[]string, bool) {
-	if o == nil  {
+	if o == nil || o.Tables == nil {
 		return nil, false
 	}
-	return &o.Tables, true
+	return o.Tables, true
 }
 
-// SetTables sets field value
+// HasTables returns a boolean if a field has been set.
+func (o *BootstrapParams) HasTables() bool {
+	if o != nil && o.Tables != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTables gets a reference to the given []string and assigns it to the Tables field.
 func (o *BootstrapParams) SetTables(v []string) {
-	o.Tables = v
+	o.Tables = &v
 }
 
 func (o BootstrapParams) MarshalJSON() ([]byte, error) {
@@ -130,7 +137,7 @@ func (o BootstrapParams) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["backupRequestParams"] = o.BackupRequestParams
 	}
-	if true {
+	if o.Tables != nil {
 		toSerialize["tables"] = o.Tables
 	}
 	return json.Marshal(toSerialize)

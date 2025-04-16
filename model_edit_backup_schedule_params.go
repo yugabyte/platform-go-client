@@ -28,6 +28,8 @@ type EditBackupScheduleParams struct {
 	IncrementalBackupFrequencyTimeUnit *string `json:"incrementalBackupFrequencyTimeUnit,omitempty"`
 	// State of the schedule
 	Status *string `json:"status,omitempty"`
+	// Time before deleting the backup from storage, in milliseconds
+	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
 }
 
 // NewEditBackupScheduleParams instantiates a new EditBackupScheduleParams object
@@ -239,6 +241,38 @@ func (o *EditBackupScheduleParams) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetTimeBeforeDelete returns the TimeBeforeDelete field value if set, zero value otherwise.
+func (o *EditBackupScheduleParams) GetTimeBeforeDelete() int64 {
+	if o == nil || o.TimeBeforeDelete == nil {
+		var ret int64
+		return ret
+	}
+	return *o.TimeBeforeDelete
+}
+
+// GetTimeBeforeDeleteOk returns a tuple with the TimeBeforeDelete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupScheduleParams) GetTimeBeforeDeleteOk() (*int64, bool) {
+	if o == nil || o.TimeBeforeDelete == nil {
+		return nil, false
+	}
+	return o.TimeBeforeDelete, true
+}
+
+// HasTimeBeforeDelete returns a boolean if a field has been set.
+func (o *EditBackupScheduleParams) HasTimeBeforeDelete() bool {
+	if o != nil && o.TimeBeforeDelete != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBeforeDelete gets a reference to the given int64 and assigns it to the TimeBeforeDelete field.
+func (o *EditBackupScheduleParams) SetTimeBeforeDelete(v int64) {
+	o.TimeBeforeDelete = &v
+}
+
 func (o EditBackupScheduleParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CronExpression != nil {
@@ -258,6 +292,9 @@ func (o EditBackupScheduleParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.TimeBeforeDelete != nil {
+		toSerialize["timeBeforeDelete"] = o.TimeBeforeDelete
 	}
 	return json.Marshal(toSerialize)
 }

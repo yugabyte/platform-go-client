@@ -742,6 +742,7 @@ func (r PITRManagementApiApiUpdatePitrConfigRequest) Execute() (YBPTask, *_netht
 
 /*
  * UpdatePitrConfig Update pitr config for a keyspace in a universe
+ * WARNING: This is a preview API that could change.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

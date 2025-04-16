@@ -2374,6 +2374,40 @@ paths:
       tags:
       - Customer Configuration
       x-codegen-request-body-name: Config
+  /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs:
+    get:
+      operationId: getListOfYbaBackupDirsCustomerConfig
+      parameters:
+      - in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      - in: path
+        name: configUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                exampleSetFlag: false
+                items:
+                  exampleSetFlag: true
+                  type: string
+                type: array
+          description: successful operation
+      security:
+      - apiKeyAuth: []
+      summary: List all backup dirs within a customer configurations
+      tags:
+      - Customer Configuration
   /api/v1/customers/{cUUID}/configs/{configUUID}/delete:
     delete:
       operationId: deleteCustomerConfigV2
@@ -9848,6 +9882,7 @@ paths:
       tags:
       - PITR management
     put:
+      description: "WARNING: This is a preview API that could change."
       operationId: updatePitrConfig
       parameters:
       - in: path
@@ -10505,6 +10540,7 @@ paths:
       x-codegen-request-body-name: supportBundle
   /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size:
     get:
+      description: YbaApi Internal.
       operationId: estimateSupportBundleSize
       parameters:
       - in: path
@@ -17635,6 +17671,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -18143,6 +18180,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -18651,6 +18689,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -19159,6 +19198,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -19667,6 +19707,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -20127,6 +20168,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -22231,6 +22273,7 @@ components:
         cronExpression: cronExpression
         frequencyTimeUnit: NANOSECONDS
         incrementalBackupFrequencyTimeUnit: NANOSECONDS
+        timeBeforeDelete: 1
         schedulingFrequency: 6
         incrementalBackupFrequency: 0
       exampleSetFlag: true
@@ -22274,6 +22317,11 @@ components:
           type: string
         schedulingFrequency:
           description: Frequency of the schedule
+          exampleSetFlag: true
+          format: int64
+          type: integer
+        timeBeforeDelete:
+          description: "Time before deleting the backup from storage, in milliseconds"
           exampleSetFlag: true
           format: int64
           type: integer
@@ -23061,7 +23109,6 @@ components:
           uniqueItems: true
       required:
       - backupRequestParams
-      - tables
       type: object
     BulkImportParams:
       description: Bulk import parameters
@@ -24473,6 +24520,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -24981,6 +25029,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -25489,6 +25538,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -25997,6 +26047,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -26505,6 +26556,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -26966,6 +27018,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -27564,6 +27617,7 @@ components:
           ybFirewallTags: ybFirewallTags
         onprem:
           ybHomeDir: ybHomeDir
+          useClockbound: true
         aws:
           awsAccessKeySecret: awsAccessKeySecret
           hostVpcId: hostVpcId
@@ -27584,6 +27638,7 @@ components:
           azuHostedZoneId: azuHostedZoneId
           azuClientId: azuClientId
         local:
+          hostedZoneId: hostedZoneId
           yugabyteBinDir: yugabyteBinDir
           dataHomeDir: dataHomeDir
           envVars:
@@ -28154,6 +28209,7 @@ components:
                 value:
                   key:
                     key: value
+          useClockbound: true
           providerType: unknown
           tserverGFlags:
             key: tserverGFlags
@@ -30508,8 +30564,8 @@ components:
           streamId: a9d2470786694dc4b34e0e58e592da9e
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
+          - Unknown error
+          - Unknown error
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
@@ -30559,8 +30615,8 @@ components:
           streamId: a9d2470786694dc4b34e0e58e592da9e
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
+          - Unknown error
+          - Unknown error
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
@@ -30610,6 +30666,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -30622,6 +30679,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -31076,6 +31134,7 @@ components:
         cronExpression: cronExpression
         frequencyTimeUnit: NANOSECONDS
         incrementalBackupFrequencyTimeUnit: NANOSECONDS
+        timeBeforeDelete: 1
         incrementalBackupFrequency: 6
         frequency: 0
         status: Deleting
@@ -31135,6 +31194,11 @@ components:
           - Editing
           exampleSetFlag: true
           type: string
+        timeBeforeDelete:
+          description: "Time before deleting the backup from storage, in milliseconds"
+          exampleSetFlag: true
+          format: int64
+          type: integer
       type: object
     EncryptionAtRestConfig:
       description: Encryption at rest configuration
@@ -31903,6 +31967,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -32411,6 +32476,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -32919,6 +32985,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -33427,6 +33494,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -33935,6 +34003,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -34390,6 +34459,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -35456,6 +35526,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -35964,6 +36035,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -36472,6 +36544,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -36980,6 +37053,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -37488,6 +37562,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -37955,6 +38030,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -39797,6 +39873,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -40305,6 +40382,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -40813,6 +40891,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -41321,6 +41400,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -41829,6 +41909,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -42293,6 +42374,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -42805,6 +42887,7 @@ components:
       type: object
     LocalCloudInfo:
       example:
+        hostedZoneId: hostedZoneId
         yugabyteBinDir: yugabyteBinDir
         dataHomeDir: dataHomeDir
         envVars:
@@ -42821,6 +42904,9 @@ components:
             type: string
           exampleSetFlag: true
           type: object
+        hostedZoneId:
+          exampleSetFlag: true
+          type: string
         ybcBinDir:
           exampleSetFlag: true
           type: string
@@ -42830,6 +42916,7 @@ components:
       required:
       - dataHomeDir
       - envVars
+      - hostedZoneId
       - ybcBinDir
       - yugabyteBinDir
       type: object
@@ -46478,8 +46565,13 @@ components:
     OnPremCloudInfo:
       example:
         ybHomeDir: ybHomeDir
+        useClockbound: true
       exampleSetFlag: true
       properties:
+        useClockbound:
+          description: "WARNING: This is a preview API that could change."
+          exampleSetFlag: true
+          type: boolean
         ybHomeDir:
           exampleSetFlag: true
           type: string
@@ -48382,6 +48474,7 @@ components:
               ybFirewallTags: ybFirewallTags
             onprem:
               ybHomeDir: ybHomeDir
+              useClockbound: true
             aws:
               awsAccessKeySecret: awsAccessKeySecret
               hostVpcId: hostVpcId
@@ -48402,6 +48495,7 @@ components:
               azuHostedZoneId: azuHostedZoneId
               azuClientId: azuClientId
             local:
+              hostedZoneId: hostedZoneId
               yugabyteBinDir: yugabyteBinDir
               dataHomeDir: dataHomeDir
               envVars:
@@ -48566,6 +48660,7 @@ components:
             ybFirewallTags: ybFirewallTags
           onprem:
             ybHomeDir: ybHomeDir
+            useClockbound: true
           aws:
             awsAccessKeySecret: awsAccessKeySecret
             hostVpcId: hostVpcId
@@ -48586,6 +48681,7 @@ components:
             azuHostedZoneId: azuHostedZoneId
             azuClientId: azuClientId
           local:
+            hostedZoneId: hostedZoneId
             yugabyteBinDir: yugabyteBinDir
             dataHomeDir: dataHomeDir
             envVars:
@@ -49325,6 +49421,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -49833,6 +49930,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -50341,6 +50439,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -50849,6 +50948,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -51357,6 +51457,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -51812,6 +51913,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -53356,6 +53458,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -53864,6 +53967,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -54372,6 +54476,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -54880,6 +54985,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -55388,6 +55494,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -55859,6 +55966,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -56975,6 +57083,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -57483,6 +57592,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -57991,6 +58101,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -58499,6 +58610,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -59007,6 +59119,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -59462,6 +59575,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -61910,6 +62024,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -62418,6 +62533,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -62926,6 +63042,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -63434,6 +63551,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -63942,6 +64060,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -64397,6 +64516,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -64968,6 +65088,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -65349,6 +65470,7 @@ components:
             - ChangeInstanceType
             - PersistResizeNode
             - PersistSystemdUpgrade
+            - PersistUseClockbound
             - UpdateNodeDetails
             - AddAuthorizedKey
             - AnsibleClusterServerCtl
@@ -66494,6 +66616,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -67002,6 +67125,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -67510,6 +67634,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -68018,6 +68143,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -68526,6 +68652,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -68981,6 +69108,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -70390,6 +70518,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -70898,6 +71027,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -71406,6 +71536,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -71914,6 +72045,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -72422,6 +72554,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -72877,6 +73010,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -74783,6 +74917,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -75291,6 +75426,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -75799,6 +75935,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -76307,6 +76444,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -76815,6 +76953,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -77273,6 +77412,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -78190,6 +78330,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -78698,6 +78839,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -79206,6 +79348,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -79714,6 +79857,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -80222,6 +80366,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -80683,6 +80828,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -81861,6 +82007,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -82369,6 +82516,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -82877,6 +83025,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -83385,6 +83534,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -83893,6 +84043,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -84347,6 +84498,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -85231,6 +85383,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -85739,6 +85892,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -86247,6 +86401,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -86755,6 +86910,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -87263,6 +87419,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -87704,6 +87861,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -88596,6 +88754,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -89104,6 +89263,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -89612,6 +89772,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -90120,6 +90281,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -90628,6 +90790,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -91069,6 +91232,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -92135,6 +92299,7 @@ components:
                     value:
                       key:
                         key: value
+              useClockbound: true
               providerType: unknown
               tserverGFlags:
                 key: tserverGFlags
@@ -92643,6 +92808,7 @@ components:
                     value:
                       key:
                         key: value
+              useClockbound: true
               providerType: unknown
               tserverGFlags:
                 key: tserverGFlags
@@ -93151,6 +93317,7 @@ components:
                     value:
                       key:
                         key: value
+              useClockbound: true
               providerType: unknown
               tserverGFlags:
                 key: tserverGFlags
@@ -93659,6 +93826,7 @@ components:
                     value:
                       key:
                         key: value
+              useClockbound: true
               providerType: unknown
               tserverGFlags:
                 key: tserverGFlags
@@ -94167,6 +94335,7 @@ components:
                     value:
                       key:
                         key: value
+              useClockbound: true
               providerType: unknown
               tserverGFlags:
                 key: tserverGFlags
@@ -95379,6 +95548,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -95887,6 +96057,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -96395,6 +96566,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -96903,6 +97075,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -97411,6 +97584,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -97866,6 +98040,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -98220,6 +98395,7 @@ components:
               value:
                 key:
                   key: value
+        useClockbound: true
         providerType: unknown
         tserverGFlags:
           key: tserverGFlags
@@ -98448,6 +98624,10 @@ components:
         universeOverrides:
           exampleSetFlag: true
           type: string
+        useClockbound:
+          description: YbaApi Internal. Use clockbound as time source
+          exampleSetFlag: true
+          type: boolean
         useHostname:
           exampleSetFlag: true
           type: boolean
@@ -99548,6 +99728,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -100056,6 +100237,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -100564,6 +100746,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -101072,6 +101255,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -101580,6 +101764,7 @@ components:
                   value:
                     key:
                       key: value
+            useClockbound: true
             providerType: unknown
             tserverGFlags:
               key: tserverGFlags
@@ -102082,6 +102267,7 @@ components:
           - ChangeInstanceType
           - PersistResizeNode
           - PersistSystemdUpgrade
+          - PersistUseClockbound
           - UpdateNodeDetails
           - AddAuthorizedKey
           - AnsibleClusterServerCtl
@@ -102775,6 +102961,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102787,6 +102974,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102801,8 +102989,8 @@ components:
           streamId: a9d2470786694dc4b34e0e58e592da9e
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
+          - Unknown error
+          - Unknown error
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
@@ -102852,8 +103040,8 @@ components:
           streamId: a9d2470786694dc4b34e0e58e592da9e
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           replicationStatusErrors:
-          - Missing op ID
-          - Missing op ID
+          - Unknown error
+          - Unknown error
           sourceTableInfo:
             relationType: SYSTEM_TABLE_RELATION
             colocated: true
@@ -102944,6 +103132,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -102956,6 +103145,7 @@ components:
         - restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           sourceNamespaceId: sourceNamespaceId
           backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          replicationSetupTime: 2022-12-12T13:07:18Z
           sourceNamespaceInfo:
             tableType: YQL_TABLE_TYPE
             name: name
@@ -103213,6 +103403,7 @@ components:
         restoreUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         sourceNamespaceId: sourceNamespaceId
         backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        replicationSetupTime: 2022-12-12T13:07:18Z
         sourceNamespaceInfo:
           tableType: YQL_TABLE_TYPE
           name: name
@@ -103227,6 +103418,13 @@ components:
         backupUuid:
           exampleSetFlag: true
           format: uuid
+          type: string
+        replicationSetupTime:
+          description: "Time of replication setup, ie, table added to the replication\
+            \ group on the target universe"
+          example: 2022-12-12T13:07:18Z
+          exampleSetFlag: true
+          format: date-time
           type: string
         restoreUuid:
           exampleSetFlag: true
@@ -103262,8 +103460,8 @@ components:
         streamId: a9d2470786694dc4b34e0e58e592da9e
         backupUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         replicationStatusErrors:
-        - Missing op ID
-        - Missing op ID
+        - Unknown error
+        - Unknown error
         sourceTableInfo:
           relationType: SYSTEM_TABLE_RELATION
           colocated: true
@@ -103340,10 +103538,14 @@ components:
           exampleSetFlag: false
           items:
             enum:
+            - Unknown error
             - Missing op ID
             - Schema mismatch
             - Missing table
+            - Uninitialized
             - Auto flag config mismatch
+            - Source unreachable
+            - System error
             exampleSetFlag: true
             type: string
           type: array

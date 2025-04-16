@@ -26,6 +26,8 @@ type BackupScheduleEditParams struct {
 	IncrementalBackupFrequencyTimeUnit *string `json:"incrementalBackupFrequencyTimeUnit,omitempty"`
 	// Frequency of the schedule
 	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
+	// Time before deleting the backup from storage, in milliseconds
+	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
 }
 
 // NewBackupScheduleEditParams instantiates a new BackupScheduleEditParams object
@@ -205,6 +207,38 @@ func (o *BackupScheduleEditParams) SetSchedulingFrequency(v int64) {
 	o.SchedulingFrequency = &v
 }
 
+// GetTimeBeforeDelete returns the TimeBeforeDelete field value if set, zero value otherwise.
+func (o *BackupScheduleEditParams) GetTimeBeforeDelete() int64 {
+	if o == nil || o.TimeBeforeDelete == nil {
+		var ret int64
+		return ret
+	}
+	return *o.TimeBeforeDelete
+}
+
+// GetTimeBeforeDeleteOk returns a tuple with the TimeBeforeDelete field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupScheduleEditParams) GetTimeBeforeDeleteOk() (*int64, bool) {
+	if o == nil || o.TimeBeforeDelete == nil {
+		return nil, false
+	}
+	return o.TimeBeforeDelete, true
+}
+
+// HasTimeBeforeDelete returns a boolean if a field has been set.
+func (o *BackupScheduleEditParams) HasTimeBeforeDelete() bool {
+	if o != nil && o.TimeBeforeDelete != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBeforeDelete gets a reference to the given int64 and assigns it to the TimeBeforeDelete field.
+func (o *BackupScheduleEditParams) SetTimeBeforeDelete(v int64) {
+	o.TimeBeforeDelete = &v
+}
+
 func (o BackupScheduleEditParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CronExpression != nil {
@@ -221,6 +255,9 @@ func (o BackupScheduleEditParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.SchedulingFrequency != nil {
 		toSerialize["schedulingFrequency"] = o.SchedulingFrequency
+	}
+	if o.TimeBeforeDelete != nil {
+		toSerialize["timeBeforeDelete"] = o.TimeBeforeDelete
 	}
 	return json.Marshal(toSerialize)
 }

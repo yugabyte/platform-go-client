@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**EditCustomerConfig**](CustomerConfigurationApi.md#EditCustomerConfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
 [**EditCustomerConfig_0**](CustomerConfigurationApi.md#EditCustomerConfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
 [**GetListOfCustomerConfig**](CustomerConfigurationApi.md#GetListOfCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
+[**GetListOfYbaBackupDirsCustomerConfig**](CustomerConfigurationApi.md#GetListOfYbaBackupDirsCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs | List all backup dirs within a customer configurations
 [**ListBuckets**](CustomerConfigurationApi.md#ListBuckets) | **Post** /api/v1/customers/{cUUID}/cloud/{cloud}/buckets | List buckets with provided credentials
 
 
@@ -441,6 +442,77 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]CustomerConfigUI**](CustomerConfigUI.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetListOfYbaBackupDirsCustomerConfig
+
+> []string GetListOfYbaBackupDirsCustomerConfig(ctx, cUUID, configUUID).Execute()
+
+List all backup dirs within a customer configurations
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    configUUID := TODO // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CustomerConfigurationApi.GetListOfYbaBackupDirsCustomerConfig(context.Background(), cUUID, configUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CustomerConfigurationApi.GetListOfYbaBackupDirsCustomerConfig``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetListOfYbaBackupDirsCustomerConfig`: []string
+    fmt.Fprintf(os.Stdout, "Response from `CustomerConfigurationApi.GetListOfYbaBackupDirsCustomerConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**configUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetListOfYbaBackupDirsCustomerConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**[]string**
 
 ### Authorization
 
