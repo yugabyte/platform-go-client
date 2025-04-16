@@ -46,6 +46,7 @@ Name | Type | Description | Notes
 **TserverK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **UniverseName** | Pointer to **string** |  | [optional] 
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
+**UseClockbound** | Pointer to **bool** | YbaApi Internal. Use clockbound as time source | [optional] 
 **UseHostname** | Pointer to **bool** |  | [optional] 
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
@@ -1124,6 +1125,31 @@ SetUniverseOverrides sets UniverseOverrides field to given value.
 `func (o *UserIntent) HasUniverseOverrides() bool`
 
 HasUniverseOverrides returns a boolean if a field has been set.
+
+### GetUseClockbound
+
+`func (o *UserIntent) GetUseClockbound() bool`
+
+GetUseClockbound returns the UseClockbound field if non-nil, zero value otherwise.
+
+### GetUseClockboundOk
+
+`func (o *UserIntent) GetUseClockboundOk() (*bool, bool)`
+
+GetUseClockboundOk returns a tuple with the UseClockbound field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseClockbound
+
+`func (o *UserIntent) SetUseClockbound(v bool)`
+
+SetUseClockbound sets UseClockbound field to given value.
+
+### HasUseClockbound
+
+`func (o *UserIntent) HasUseClockbound() bool`
+
+HasUseClockbound returns a boolean if a field has been set.
 
 ### GetUseHostname
 

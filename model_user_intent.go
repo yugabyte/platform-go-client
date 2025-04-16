@@ -63,6 +63,8 @@ type UserIntent struct {
 	TserverK8SNodeResourceSpec *K8SNodeResourceSpec `json:"tserverK8SNodeResourceSpec,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
 	UniverseOverrides *string `json:"universeOverrides,omitempty"`
+	// YbaApi Internal. Use clockbound as time source
+	UseClockbound *bool `json:"useClockbound,omitempty"`
 	UseHostname *bool `json:"useHostname,omitempty"`
 	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
 	UseSystemd *bool `json:"useSystemd,omitempty"`
@@ -1435,6 +1437,38 @@ func (o *UserIntent) SetUniverseOverrides(v string) {
 	o.UniverseOverrides = &v
 }
 
+// GetUseClockbound returns the UseClockbound field value if set, zero value otherwise.
+func (o *UserIntent) GetUseClockbound() bool {
+	if o == nil || o.UseClockbound == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseClockbound
+}
+
+// GetUseClockboundOk returns a tuple with the UseClockbound field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUseClockboundOk() (*bool, bool) {
+	if o == nil || o.UseClockbound == nil {
+		return nil, false
+	}
+	return o.UseClockbound, true
+}
+
+// HasUseClockbound returns a boolean if a field has been set.
+func (o *UserIntent) HasUseClockbound() bool {
+	if o != nil && o.UseClockbound != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseClockbound gets a reference to the given bool and assigns it to the UseClockbound field.
+func (o *UserIntent) SetUseClockbound(v bool) {
+	o.UseClockbound = &v
+}
+
 // GetUseHostname returns the UseHostname field value if set, zero value otherwise.
 func (o *UserIntent) GetUseHostname() bool {
 	if o == nil || o.UseHostname == nil {
@@ -1850,6 +1884,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.UniverseOverrides != nil {
 		toSerialize["universeOverrides"] = o.UniverseOverrides
+	}
+	if o.UseClockbound != nil {
+		toSerialize["useClockbound"] = o.UseClockbound
 	}
 	if o.UseHostname != nil {
 		toSerialize["useHostname"] = o.UseHostname

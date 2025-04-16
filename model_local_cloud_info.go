@@ -18,6 +18,7 @@ import (
 type LocalCloudInfo struct {
 	DataHomeDir string `json:"dataHomeDir"`
 	EnvVars map[string]string `json:"envVars"`
+	HostedZoneId string `json:"hostedZoneId"`
 	YbcBinDir string `json:"ybcBinDir"`
 	YugabyteBinDir string `json:"yugabyteBinDir"`
 }
@@ -26,10 +27,11 @@ type LocalCloudInfo struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, ybcBinDir string, yugabyteBinDir string) *LocalCloudInfo {
+func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, hostedZoneId string, ybcBinDir string, yugabyteBinDir string) *LocalCloudInfo {
 	this := LocalCloudInfo{}
 	this.DataHomeDir = dataHomeDir
 	this.EnvVars = envVars
+	this.HostedZoneId = hostedZoneId
 	this.YbcBinDir = ybcBinDir
 	this.YugabyteBinDir = yugabyteBinDir
 	return &this
@@ -91,6 +93,30 @@ func (o *LocalCloudInfo) SetEnvVars(v map[string]string) {
 	o.EnvVars = v
 }
 
+// GetHostedZoneId returns the HostedZoneId field value
+func (o *LocalCloudInfo) GetHostedZoneId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.HostedZoneId
+}
+
+// GetHostedZoneIdOk returns a tuple with the HostedZoneId field value
+// and a boolean to check if the value has been set.
+func (o *LocalCloudInfo) GetHostedZoneIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.HostedZoneId, true
+}
+
+// SetHostedZoneId sets field value
+func (o *LocalCloudInfo) SetHostedZoneId(v string) {
+	o.HostedZoneId = v
+}
+
 // GetYbcBinDir returns the YbcBinDir field value
 func (o *LocalCloudInfo) GetYbcBinDir() string {
 	if o == nil {
@@ -146,6 +172,9 @@ func (o LocalCloudInfo) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["envVars"] = o.EnvVars
+	}
+	if true {
+		toSerialize["hostedZoneId"] = o.HostedZoneId
 	}
 	if true {
 		toSerialize["ybcBinDir"] = o.YbcBinDir

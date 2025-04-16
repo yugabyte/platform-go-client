@@ -12,11 +12,14 @@ package ywclient
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // XClusterNamespaceConfig struct for XClusterNamespaceConfig
 type XClusterNamespaceConfig struct {
 	BackupUuid string `json:"backupUuid"`
+	// Time of replication setup, ie, table added to the replication group on the target universe
+	ReplicationSetupTime *time.Time `json:"replicationSetupTime,omitempty"`
 	RestoreUuid string `json:"restoreUuid"`
 	SourceNamespaceId string `json:"sourceNamespaceId"`
 	SourceNamespaceInfo *NamespaceInfoResp `json:"sourceNamespaceInfo,omitempty"`
@@ -67,6 +70,38 @@ func (o *XClusterNamespaceConfig) GetBackupUuidOk() (*string, bool) {
 // SetBackupUuid sets field value
 func (o *XClusterNamespaceConfig) SetBackupUuid(v string) {
 	o.BackupUuid = v
+}
+
+// GetReplicationSetupTime returns the ReplicationSetupTime field value if set, zero value otherwise.
+func (o *XClusterNamespaceConfig) GetReplicationSetupTime() time.Time {
+	if o == nil || o.ReplicationSetupTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ReplicationSetupTime
+}
+
+// GetReplicationSetupTimeOk returns a tuple with the ReplicationSetupTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterNamespaceConfig) GetReplicationSetupTimeOk() (*time.Time, bool) {
+	if o == nil || o.ReplicationSetupTime == nil {
+		return nil, false
+	}
+	return o.ReplicationSetupTime, true
+}
+
+// HasReplicationSetupTime returns a boolean if a field has been set.
+func (o *XClusterNamespaceConfig) HasReplicationSetupTime() bool {
+	if o != nil && o.ReplicationSetupTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplicationSetupTime gets a reference to the given time.Time and assigns it to the ReplicationSetupTime field.
+func (o *XClusterNamespaceConfig) SetReplicationSetupTime(v time.Time) {
+	o.ReplicationSetupTime = &v
 }
 
 // GetRestoreUuid returns the RestoreUuid field value
@@ -217,6 +252,9 @@ func (o XClusterNamespaceConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["backupUuid"] = o.BackupUuid
+	}
+	if o.ReplicationSetupTime != nil {
+		toSerialize["replicationSetupTime"] = o.ReplicationSetupTime
 	}
 	if true {
 		toSerialize["restoreUuid"] = o.RestoreUuid

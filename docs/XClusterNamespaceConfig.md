@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupUuid** | **string** |  | 
+**ReplicationSetupTime** | Pointer to **time.Time** | Time of replication setup, ie, table added to the replication group on the target universe | [optional] 
 **RestoreUuid** | **string** |  | 
 **SourceNamespaceId** | **string** |  | 
 **SourceNamespaceInfo** | Pointer to [**NamespaceInfoResp**](NamespaceInfoResp.md) |  | [optional] 
@@ -49,6 +50,31 @@ and a boolean to check if the value has been set.
 
 SetBackupUuid sets BackupUuid field to given value.
 
+
+### GetReplicationSetupTime
+
+`func (o *XClusterNamespaceConfig) GetReplicationSetupTime() time.Time`
+
+GetReplicationSetupTime returns the ReplicationSetupTime field if non-nil, zero value otherwise.
+
+### GetReplicationSetupTimeOk
+
+`func (o *XClusterNamespaceConfig) GetReplicationSetupTimeOk() (*time.Time, bool)`
+
+GetReplicationSetupTimeOk returns a tuple with the ReplicationSetupTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplicationSetupTime
+
+`func (o *XClusterNamespaceConfig) SetReplicationSetupTime(v time.Time)`
+
+SetReplicationSetupTime sets ReplicationSetupTime field to given value.
+
+### HasReplicationSetupTime
+
+`func (o *XClusterNamespaceConfig) HasReplicationSetupTime() bool`
+
+HasReplicationSetupTime returns a boolean if a field has been set.
 
 ### GetRestoreUuid
 

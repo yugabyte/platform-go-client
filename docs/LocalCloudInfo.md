@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DataHomeDir** | **string** |  | 
 **EnvVars** | **map[string]string** |  | 
+**HostedZoneId** | **string** |  | 
 **YbcBinDir** | **string** |  | 
 **YugabyteBinDir** | **string** |  | 
 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewLocalCloudInfo
 
-`func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, ybcBinDir string, yugabyteBinDir string, ) *LocalCloudInfo`
+`func NewLocalCloudInfo(dataHomeDir string, envVars map[string]string, hostedZoneId string, ybcBinDir string, yugabyteBinDir string, ) *LocalCloudInfo`
 
 NewLocalCloudInfo instantiates a new LocalCloudInfo object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +67,26 @@ and a boolean to check if the value has been set.
 `func (o *LocalCloudInfo) SetEnvVars(v map[string]string)`
 
 SetEnvVars sets EnvVars field to given value.
+
+
+### GetHostedZoneId
+
+`func (o *LocalCloudInfo) GetHostedZoneId() string`
+
+GetHostedZoneId returns the HostedZoneId field if non-nil, zero value otherwise.
+
+### GetHostedZoneIdOk
+
+`func (o *LocalCloudInfo) GetHostedZoneIdOk() (*string, bool)`
+
+GetHostedZoneIdOk returns a tuple with the HostedZoneId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostedZoneId
+
+`func (o *LocalCloudInfo) SetHostedZoneId(v string)`
+
+SetHostedZoneId sets HostedZoneId field to given value.
 
 
 ### GetYbcBinDir

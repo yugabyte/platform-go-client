@@ -16,6 +16,8 @@ import (
 
 // OnPremCloudInfo struct for OnPremCloudInfo
 type OnPremCloudInfo struct {
+	// WARNING: This is a preview API that could change.
+	UseClockbound *bool `json:"useClockbound,omitempty"`
 	YbHomeDir *string `json:"ybHomeDir,omitempty"`
 }
 
@@ -34,6 +36,38 @@ func NewOnPremCloudInfo() *OnPremCloudInfo {
 func NewOnPremCloudInfoWithDefaults() *OnPremCloudInfo {
 	this := OnPremCloudInfo{}
 	return &this
+}
+
+// GetUseClockbound returns the UseClockbound field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetUseClockbound() bool {
+	if o == nil || o.UseClockbound == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseClockbound
+}
+
+// GetUseClockboundOk returns a tuple with the UseClockbound field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetUseClockboundOk() (*bool, bool) {
+	if o == nil || o.UseClockbound == nil {
+		return nil, false
+	}
+	return o.UseClockbound, true
+}
+
+// HasUseClockbound returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasUseClockbound() bool {
+	if o != nil && o.UseClockbound != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseClockbound gets a reference to the given bool and assigns it to the UseClockbound field.
+func (o *OnPremCloudInfo) SetUseClockbound(v bool) {
+	o.UseClockbound = &v
 }
 
 // GetYbHomeDir returns the YbHomeDir field value if set, zero value otherwise.
@@ -70,6 +104,9 @@ func (o *OnPremCloudInfo) SetYbHomeDir(v string) {
 
 func (o OnPremCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.UseClockbound != nil {
+		toSerialize["useClockbound"] = o.UseClockbound
+	}
 	if o.YbHomeDir != nil {
 		toSerialize["ybHomeDir"] = o.YbHomeDir
 	}

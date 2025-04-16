@@ -454,6 +454,7 @@ func (r SupportBundleManagementApiApiEstimateSupportBundleSizeRequest) Execute()
 
 /*
  * EstimateSupportBundleSize Estimate support bundle size for specific universe
+ * YbaApi Internal.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @param uniUUID

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**UseClockbound** | Pointer to **bool** | WARNING: This is a preview API that could change. | [optional] 
 **YbHomeDir** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewOnPremCloudInfoWithDefaults instantiates a new OnPremCloudInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetUseClockbound
+
+`func (o *OnPremCloudInfo) GetUseClockbound() bool`
+
+GetUseClockbound returns the UseClockbound field if non-nil, zero value otherwise.
+
+### GetUseClockboundOk
+
+`func (o *OnPremCloudInfo) GetUseClockboundOk() (*bool, bool)`
+
+GetUseClockboundOk returns a tuple with the UseClockbound field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseClockbound
+
+`func (o *OnPremCloudInfo) SetUseClockbound(v bool)`
+
+SetUseClockbound sets UseClockbound field to given value.
+
+### HasUseClockbound
+
+`func (o *OnPremCloudInfo) HasUseClockbound() bool`
+
+HasUseClockbound returns a boolean if a field has been set.
 
 ### GetYbHomeDir
 

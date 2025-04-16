@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AllowBootstrap** | Pointer to **bool** | WARNING: This is a preview API that could change. Allow backup on whole database when only set of tables require bootstrap | [optional] 
 **BackupRequestParams** | [**BootstrapBackupParams**](BootstrapBackupParams.md) |  | 
-**Tables** | **[]string** | Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body | 
+**Tables** | Pointer to **[]string** | Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body | [optional] 
 
 ## Methods
 
 ### NewBootstrapParams
 
-`func NewBootstrapParams(backupRequestParams BootstrapBackupParams, tables []string, ) *BootstrapParams`
+`func NewBootstrapParams(backupRequestParams BootstrapBackupParams, ) *BootstrapParams`
 
 NewBootstrapParams instantiates a new BootstrapParams object
 This constructor will assign default values to properties that have it defined,
@@ -91,6 +91,11 @@ and a boolean to check if the value has been set.
 
 SetTables sets Tables field to given value.
 
+### HasTables
+
+`func (o *BootstrapParams) HasTables() bool`
+
+HasTables returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

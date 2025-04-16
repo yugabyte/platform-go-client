@@ -246,6 +246,8 @@ Name | Type | Description  | Notes
 
 Estimate support bundle size for specific universe
 
+
+
 ### Example
 
 ```go
