@@ -50,7 +50,7 @@ func (r BackupsApiApiAdvancedRestorePreflightRequest) Execute() (RestorePrefligh
 
 /*
  * AdvancedRestorePreflight Advanced Restore Preflight checks
- * WARNING: This is a preview API that could change. Advanced Restore Preflight checks.
+ * WARNING: This is a preview API that could change. Advanced restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this checks whether backup can restore to the timestamp provided, fails otherwise.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiAdvancedRestorePreflightRequest
@@ -2473,6 +2473,7 @@ func (r BackupsApiApiRestoreBackupV2Request) Execute() (YBPTask, *_nethttp.Respo
 
 /*
  * RestoreBackupV2 Restore from a backup V2
+ * Restore from a backup V2. Running restore preflight before calling actual restore is recommended.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiRestoreBackupV2Request
@@ -2610,7 +2611,7 @@ func (r BackupsApiApiRestorePreflightRequest) Execute() (RestorePreflightRespons
 
 /*
  * RestorePreflight Restore preflight checks
- * Restore preflight checks.
+ * Restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this returns the backup from the backup chain which can be restored to the timestamp provided, fails otherwise.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param cUUID
  * @return BackupsApiApiRestorePreflightRequest

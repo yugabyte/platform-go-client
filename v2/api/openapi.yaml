@@ -2051,7 +2051,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
-      x-yba-api-since: 2025.1.0.0
+      x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: internal
       x-contentType: application/json
       x-accepts: application/gzip
@@ -2107,7 +2107,7 @@ paths:
           path: universes
           sourceType: endpoint
       x-yba-api-multipart: true
-      x-yba-api-since: 2025.1.0.0
+      x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: internal
       x-contentType: multipart/form-data
       x-accepts: application/json
@@ -2159,7 +2159,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
-      x-yba-api-since: 2025.1.0.0
+      x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: internal
       x-accepts: application/json
 components:

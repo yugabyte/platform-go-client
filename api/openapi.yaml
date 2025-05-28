@@ -6791,6 +6791,8 @@ paths:
       x-codegen-request-body-name: Users
   /api/v1/customers/{cUUID}/restore:
     post:
+      description: Restore from a backup V2. Running restore preflight before calling
+        actual restore is recommended.
       operationId: restoreBackupV2
       parameters:
       - in: path
@@ -6826,8 +6828,12 @@ paths:
       x-codegen-request-body-name: backup
   /api/v1/customers/{cUUID}/restore/advanced_restore_preflight:
     post:
-      description: "WARNING: This is a preview API that could change. Advanced Restore\
-        \ Preflight checks."
+      description: "WARNING: This is a preview API that could change. Advanced restore\
+        \ preflight checks. Recommended to run before actual restore to retrieve the\
+        \ metadata associated with the backup, as well as check for conflicts with\
+        \ existing keyspaces. Additionally, this checks for unsupported tablespaces.\
+        \ In case of restore to PIT this checks whether backup can restore to the\
+        \ timestamp provided, fails otherwise."
       operationId: advancedRestorePreflight
       parameters:
       - in: path
@@ -6898,7 +6904,11 @@ paths:
       x-codegen-request-body-name: PageRestoresRequest
   /api/v1/customers/{cUUID}/restore/preflight:
     post:
-      description: Restore preflight checks.
+      description: "Restore preflight checks. Recommended to run before actual restore\
+        \ to retrieve the metadata associated with the backup, as well as check for\
+        \ conflicts with existing keyspaces. Additionally, this checks for unsupported\
+        \ tablespaces. In case of restore to PIT this returns the backup from the\
+        \ backup chain which can be restored to the timestamp provided, fails otherwise."
       operationId: restorePreflight
       parameters:
       - in: path
@@ -8368,80 +8378,6 @@ paths:
       summary: Get a universe
       tags:
       - Universe management
-  /api/v1/customers/{cUUID}/universes/{uniUUID}/attach:
-    post:
-      deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2025.2.0.0.</b>.
-        Please use the v2 endpoint for attach universe instead
-      operationId: attachUniverse
-      parameters:
-      - in: path
-        name: cUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: path
-        name: uniUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: query
-        name: request
-        schema:
-          exampleSetFlag: false
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YBPSuccess'
-          description: successful operation
-      security:
-      - apiKeyAuth: []
-      summary: Import universe metadata to (dest) YBA using a given tgz file
-      tags:
-      - Universe management
-  /api/v1/customers/{cUUID}/universes/{uniUUID}/attach_detach_metadata:
-    delete:
-      deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2025.2.0.0.</b>.
-        Please use the v2 endpoint for delete attach detach metadata instead
-      operationId: deleteAttachDetachMetadata
-      parameters:
-      - in: path
-        name: cUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: path
-        name: uniUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: query
-        name: request
-        schema:
-          exampleSetFlag: false
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/YBPSuccess'
-          description: successful operation
-      security:
-      - apiKeyAuth: []
-      summary: Delete metadata of a universe from (source) YBA
-      tags:
-      - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config:
     post:
       description: YbaApi Internal. Modifies the audit logging configuration for a
@@ -9077,49 +9013,6 @@ paths:
       tags:
       - Universe database management
       x-codegen-request-body-name: DatabaseUserFormData
-  /api/v1/customers/{cUUID}/universes/{uniUUID}/detach:
-    post:
-      deprecated: true
-      description: <b style="color:#ff0000">Deprecated since YBA version 2025.2.0.0.</b>.
-        Please use the v2 endpoint for detach universe instead
-      operationId: detachUniverse
-      parameters:
-      - in: path
-        name: cUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: path
-        name: uniUUID
-        required: true
-        schema:
-          exampleSetFlag: false
-          format: uuid
-          type: string
-      - in: query
-        name: request
-        schema:
-          exampleSetFlag: false
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                exampleSetFlag: false
-                items:
-                  exampleSetFlag: true
-                  format: byte
-                  pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                  type: string
-                type: array
-          description: successful operation
-      security:
-      - apiKeyAuth: []
-      summary: Export universe metadata to a tgz file from (source) YBA
-      tags:
-      - Universe management
   /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check:
     get:
       description: "Available since YBA version 2.2.0.0. Checks the health of all\
@@ -20311,6 +20204,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -27217,6 +27111,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -34724,6 +34619,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -38316,6 +38212,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -42681,6 +42578,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -52268,6 +52166,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -56342,6 +56241,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -59972,6 +59872,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -64936,6 +64837,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -65512,6 +65414,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -65898,6 +65801,7 @@ components:
             - EnableNodeAgentInUniverse
             - DecommissionNode
             - CloneNamespace
+            - TlsToggleKubernetes
             - UpdateOOMServiceState
             - SendUserNotification
             - KubernetesCheckVolumeExpansion
@@ -69557,6 +69461,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -73486,6 +73391,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -77913,6 +77819,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -81350,6 +81257,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -85041,6 +84949,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -88425,6 +88334,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -91817,6 +91727,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -98656,6 +98567,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion
@@ -102904,6 +102816,7 @@ components:
           - EnableNodeAgentInUniverse
           - DecommissionNode
           - CloneNamespace
+          - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
           - KubernetesCheckVolumeExpansion

@@ -413,11 +413,8 @@ Class | Method | HTTP request | Description
 *UniverseInformationApi* | [**ResetSlowQueries**](docs/UniverseInformationApi.md#resetslowqueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
 *UniverseInformationApi* | [**TriggerHealthCheck**](docs/UniverseInformationApi.md#triggerhealthcheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
 *UniverseInformationApi* | [**UniverseStatus**](docs/UniverseInformationApi.md#universestatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
-*UniverseManagementApi* | [**AttachUniverse**](docs/UniverseManagementApi.md#attachuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach | Import universe metadata to (dest) YBA using a given tgz file
 *UniverseManagementApi* | [**ConfigureUniverseAlerts**](docs/UniverseManagementApi.md#configureuniversealerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
-*UniverseManagementApi* | [**DeleteAttachDetachMetadata**](docs/UniverseManagementApi.md#deleteattachdetachmetadata) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach_detach_metadata | Delete metadata of a universe from (source) YBA
 *UniverseManagementApi* | [**DeleteUniverse**](docs/UniverseManagementApi.md#deleteuniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
-*UniverseManagementApi* | [**DetachUniverse**](docs/UniverseManagementApi.md#detachuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/detach | Export universe metadata to a tgz file from (source) YBA
 *UniverseManagementApi* | [**GetUniverse**](docs/UniverseManagementApi.md#getuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Get a universe
 *UniverseManagementApi* | [**ListUniverses**](docs/UniverseManagementApi.md#listuniverses) | **Get** /api/v1/customers/{cUUID}/universes | List universes
 *UniverseManagementApi* | [**PauseUniverse**](docs/UniverseManagementApi.md#pauseuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Pause a universe
