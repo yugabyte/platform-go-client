@@ -17,10 +17,12 @@ Name | Type | Description | Notes
 **ImageBundles** | [**[]ImageBundle**](ImageBundle.md) |  | 
 **KeyPairName** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.17.2.0.&lt;/b&gt; Use allAccessKeys[0].keyInfo.keyPairName instead | [optional] 
 **Name** | Pointer to **string** | Provider name | [optional] 
+**PrevUsabilityState** | Pointer to **string** | Previous usability state | [optional] [readonly] 
 **Regions** | [**[]Region**](Region.md) |  | 
 **SshPort** | Pointer to **int32** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.17.2.0.&lt;/b&gt; Use details.SshPort instead. Only supported in create request | [optional] 
 **SshPrivateKeyContent** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.17.2.0.&lt;/b&gt; Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead | [optional] 
 **SshUser** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.17.2.0.&lt;/b&gt; Use details.SshUser instead. Only supported in create request | [optional] 
+**UpdateSource** | Pointer to **string** | Update source if current state is UPDATING | [optional] [readonly] 
 **UsabilityState** | Pointer to **string** | Current usability state | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Provider uuid | [optional] [readonly] 
 **Version** | Pointer to **int64** | Provider version | [optional] [readonly] 
@@ -364,6 +366,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetPrevUsabilityState
+
+`func (o *Provider) GetPrevUsabilityState() string`
+
+GetPrevUsabilityState returns the PrevUsabilityState field if non-nil, zero value otherwise.
+
+### GetPrevUsabilityStateOk
+
+`func (o *Provider) GetPrevUsabilityStateOk() (*string, bool)`
+
+GetPrevUsabilityStateOk returns a tuple with the PrevUsabilityState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrevUsabilityState
+
+`func (o *Provider) SetPrevUsabilityState(v string)`
+
+SetPrevUsabilityState sets PrevUsabilityState field to given value.
+
+### HasPrevUsabilityState
+
+`func (o *Provider) HasPrevUsabilityState() bool`
+
+HasPrevUsabilityState returns a boolean if a field has been set.
+
 ### GetRegions
 
 `func (o *Provider) GetRegions() []Region`
@@ -458,6 +485,31 @@ SetSshUser sets SshUser field to given value.
 `func (o *Provider) HasSshUser() bool`
 
 HasSshUser returns a boolean if a field has been set.
+
+### GetUpdateSource
+
+`func (o *Provider) GetUpdateSource() string`
+
+GetUpdateSource returns the UpdateSource field if non-nil, zero value otherwise.
+
+### GetUpdateSourceOk
+
+`func (o *Provider) GetUpdateSourceOk() (*string, bool)`
+
+GetUpdateSourceOk returns a tuple with the UpdateSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdateSource
+
+`func (o *Provider) SetUpdateSource(v string)`
+
+SetUpdateSource sets UpdateSource field to given value.
+
+### HasUpdateSource
+
+`func (o *Provider) HasUpdateSource() bool`
+
+HasUpdateSource returns a boolean if a field has been set.
 
 ### GetUsabilityState
 

@@ -5,9 +5,12 @@ All URIs are relative to *http://localhost:9000/api/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddCluster**](UniverseApi.md#AddCluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
+[**AttachUniverse**](UniverseApi.md#AttachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
 [**CreateUniverse**](UniverseApi.md#CreateUniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
+[**DeleteAttachDetachMetadata**](UniverseApi.md#DeleteAttachDetachMetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 [**DeleteCluster**](UniverseApi.md#DeleteCluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
 [**DeleteUniverse**](UniverseApi.md#DeleteUniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID} | Delete a universe
+[**DetachUniverse**](UniverseApi.md#DetachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/detach | Detach universe
 [**EditGFlags**](UniverseApi.md#EditGFlags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 [**EditKubernetesOverrides**](UniverseApi.md#EditKubernetesOverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 [**EditUniverse**](UniverseApi.md#EditUniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
@@ -100,6 +103,79 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## AttachUniverse
+
+> AttachUniverse(ctx, cUUID, uniUUID).AttachUniverseSpec(attachUniverseSpec).Execute()
+
+Attach universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    uniUUID := TODO // string | Universe UUID
+    attachUniverseSpec := *openapiclient.NewAttachUniverseSpec() // AttachUniverseSpec | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.AttachUniverse(context.Background(), cUUID, uniUUID).AttachUniverseSpec(attachUniverseSpec).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.AttachUniverse``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+**uniUUID** | [**string**](.md) | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAttachUniverseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **attachUniverseSpec** | [**AttachUniverseSpec**](AttachUniverseSpec.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateUniverse
 
 > YBATask CreateUniverse(ctx, cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
@@ -166,6 +242,77 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAttachDetachMetadata
+
+> DeleteAttachDetachMetadata(ctx, cUUID, uniUUID).Execute()
+
+Delete attach/detach metadata
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    uniUUID := TODO // string | Universe UUID
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.DeleteAttachDetachMetadata(context.Background(), cUUID, uniUUID).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.DeleteAttachDetachMetadata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+**uniUUID** | [**string**](.md) | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAttachDetachMetadataRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -319,6 +466,81 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DetachUniverse
+
+> *os.File DetachUniverse(ctx, cUUID, uniUUID).DetachUniverseSpec(detachUniverseSpec).Execute()
+
+Detach universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    uniUUID := TODO // string | Universe UUID
+    detachUniverseSpec := *openapiclient.NewDetachUniverseSpec() // DetachUniverseSpec | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.DetachUniverse(context.Background(), cUUID, uniUUID).DetachUniverseSpec(detachUniverseSpec).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.DetachUniverse``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DetachUniverse`: *os.File
+    fmt.Fprintf(os.Stdout, "Response from `UniverseApi.DetachUniverse`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+**uniUUID** | [**string**](.md) | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDetachUniverseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **detachUniverseSpec** | [**DetachUniverseSpec**](DetachUniverseSpec.md) |  | 
+
+### Return type
+
+[***os.File**](*os.File.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/gzip
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

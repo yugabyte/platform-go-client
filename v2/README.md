@@ -98,9 +98,12 @@ Class | Method | HTTP request | Description
 *JobSchedulerApi* | [**UpdateJobSchedule**](docs/JobSchedulerApi.md#updatejobschedule) | **Put** /customers/{cUUID}/job-schedules/{jUUID} | Update Job Schedule
 *MetricsApi* | [**GetPrometheusHostInfo**](docs/MetricsApi.md#getprometheushostinfo) | **Get** /host-info | Get Prometheus host info
 *UniverseApi* | [**AddCluster**](docs/UniverseApi.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
+*UniverseApi* | [**AttachUniverse**](docs/UniverseApi.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
 *UniverseApi* | [**CreateUniverse**](docs/UniverseApi.md#createuniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
+*UniverseApi* | [**DeleteAttachDetachMetadata**](docs/UniverseApi.md#deleteattachdetachmetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 *UniverseApi* | [**DeleteCluster**](docs/UniverseApi.md#deletecluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
 *UniverseApi* | [**DeleteUniverse**](docs/UniverseApi.md#deleteuniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID} | Delete a universe
+*UniverseApi* | [**DetachUniverse**](docs/UniverseApi.md#detachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/detach | Detach universe
 *UniverseApi* | [**EditGFlags**](docs/UniverseApi.md#editgflags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 *UniverseApi* | [**EditKubernetesOverrides**](docs/UniverseApi.md#editkubernetesoverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 *UniverseApi* | [**EditUniverse**](docs/UniverseApi.md#edituniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
@@ -120,6 +123,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AllowedTasksOnFailure](docs/AllowedTasksOnFailure.md)
+ - [AttachUniverseSpec](docs/AttachUniverseSpec.md)
  - [AuditLogConfig](docs/AuditLogConfig.md)
  - [AuthGroupToRolesMapping](docs/AuthGroupToRolesMapping.md)
  - [AvailabilityZoneGFlags](docs/AvailabilityZoneGFlags.md)
@@ -146,6 +150,7 @@ Class | Method | HTTP request | Description
  - [ContinuousBackupInfo](docs/ContinuousBackupInfo.md)
  - [ContinuousBackupSpec](docs/ContinuousBackupSpec.md)
  - [ContinuousRestoreSpec](docs/ContinuousRestoreSpec.md)
+ - [DetachUniverseSpec](docs/DetachUniverseSpec.md)
  - [EncryptionAtRestInfo](docs/EncryptionAtRestInfo.md)
  - [EncryptionAtRestSpec](docs/EncryptionAtRestSpec.md)
  - [EncryptionInTransitSpec](docs/EncryptionInTransitSpec.md)

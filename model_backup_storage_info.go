@@ -18,6 +18,8 @@ import (
 type BackupStorageInfo struct {
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
+	// WARNING: This is a preview API that could change. Ignore all restore errors
+	IgnoreErrors *bool `json:"ignoreErrors,omitempty"`
 	// Keyspace name
 	Keyspace *string `json:"keyspace,omitempty"`
 	// User name of the new tables owner
@@ -83,6 +85,38 @@ func (o *BackupStorageInfo) HasBackupType() bool {
 // SetBackupType gets a reference to the given string and assigns it to the BackupType field.
 func (o *BackupStorageInfo) SetBackupType(v string) {
 	o.BackupType = &v
+}
+
+// GetIgnoreErrors returns the IgnoreErrors field value if set, zero value otherwise.
+func (o *BackupStorageInfo) GetIgnoreErrors() bool {
+	if o == nil || o.IgnoreErrors == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IgnoreErrors
+}
+
+// GetIgnoreErrorsOk returns a tuple with the IgnoreErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupStorageInfo) GetIgnoreErrorsOk() (*bool, bool) {
+	if o == nil || o.IgnoreErrors == nil {
+		return nil, false
+	}
+	return o.IgnoreErrors, true
+}
+
+// HasIgnoreErrors returns a boolean if a field has been set.
+func (o *BackupStorageInfo) HasIgnoreErrors() bool {
+	if o != nil && o.IgnoreErrors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIgnoreErrors gets a reference to the given bool and assigns it to the IgnoreErrors field.
+func (o *BackupStorageInfo) SetIgnoreErrors(v bool) {
+	o.IgnoreErrors = &v
 }
 
 // GetKeyspace returns the Keyspace field value if set, zero value otherwise.
@@ -345,6 +379,9 @@ func (o BackupStorageInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.BackupType != nil {
 		toSerialize["backupType"] = o.BackupType
+	}
+	if o.IgnoreErrors != nil {
+		toSerialize["ignoreErrors"] = o.IgnoreErrors
 	}
 	if o.Keyspace != nil {
 		toSerialize["keyspace"] = o.Keyspace

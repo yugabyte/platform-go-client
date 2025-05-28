@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AdditionalServicesStateData** | Pointer to [**AdditionalServicesStateData**](AdditionalServicesStateData.md) |  | [optional] 
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
@@ -32,6 +33,7 @@ Name | Type | Description | Notes
 **MachineImages** | Pointer to **map[string]string** | Map of region UUID to AMI name. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.0.0.&lt;/b&gt; Use imageBundle instead. | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
+**NodeAgentMissing** | Pointer to **bool** | YbaApi Internal. True if a node agent for missing in any of the nodes | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
@@ -91,6 +93,31 @@ will change when the set of required properties is changed
 NewVMImageUpgradeParamsWithDefaults instantiates a new VMImageUpgradeParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAdditionalServicesStateData
+
+`func (o *VMImageUpgradeParams) GetAdditionalServicesStateData() AdditionalServicesStateData`
+
+GetAdditionalServicesStateData returns the AdditionalServicesStateData field if non-nil, zero value otherwise.
+
+### GetAdditionalServicesStateDataOk
+
+`func (o *VMImageUpgradeParams) GetAdditionalServicesStateDataOk() (*AdditionalServicesStateData, bool)`
+
+GetAdditionalServicesStateDataOk returns a tuple with the AdditionalServicesStateData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdditionalServicesStateData
+
+`func (o *VMImageUpgradeParams) SetAdditionalServicesStateData(v AdditionalServicesStateData)`
+
+SetAdditionalServicesStateData sets AdditionalServicesStateData field to given value.
+
+### HasAdditionalServicesStateData
+
+`func (o *VMImageUpgradeParams) HasAdditionalServicesStateData() bool`
+
+HasAdditionalServicesStateData returns a boolean if a field has been set.
 
 ### GetAllowInsecure
 
@@ -771,6 +798,31 @@ SetNextClusterIndex sets NextClusterIndex field to given value.
 `func (o *VMImageUpgradeParams) HasNextClusterIndex() bool`
 
 HasNextClusterIndex returns a boolean if a field has been set.
+
+### GetNodeAgentMissing
+
+`func (o *VMImageUpgradeParams) GetNodeAgentMissing() bool`
+
+GetNodeAgentMissing returns the NodeAgentMissing field if non-nil, zero value otherwise.
+
+### GetNodeAgentMissingOk
+
+`func (o *VMImageUpgradeParams) GetNodeAgentMissingOk() (*bool, bool)`
+
+GetNodeAgentMissingOk returns a tuple with the NodeAgentMissing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeAgentMissing
+
+`func (o *VMImageUpgradeParams) SetNodeAgentMissing(v bool)`
+
+SetNodeAgentMissing sets NodeAgentMissing field to given value.
+
+### HasNodeAgentMissing
+
+`func (o *VMImageUpgradeParams) HasNodeAgentMissing() bool`
+
+HasNodeAgentMissing returns a boolean if a field has been set.
 
 ### GetNodeDetailsSet
 

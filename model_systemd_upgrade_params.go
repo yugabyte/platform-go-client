@@ -16,6 +16,7 @@ import (
 
 // SystemdUpgradeParams struct for SystemdUpgradeParams
 type SystemdUpgradeParams struct {
+	AdditionalServicesStateData *AdditionalServicesStateData `json:"additionalServicesStateData,omitempty"`
 	AllowInsecure *bool `json:"allowInsecure,omitempty"`
 	Arch *string `json:"arch,omitempty"`
 	Capability *string `json:"capability,omitempty"`
@@ -45,6 +46,8 @@ type SystemdUpgradeParams struct {
 	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
 	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
 	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
+	// YbaApi Internal. True if a node agent for missing in any of the nodes
+	NodeAgentMissing *bool `json:"nodeAgentMissing,omitempty"`
 	// Node details
 	NodeDetailsSet *[]NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
@@ -117,6 +120,38 @@ func NewSystemdUpgradeParams(clusters []Cluster, creatingUser Users, kubernetesU
 func NewSystemdUpgradeParamsWithDefaults() *SystemdUpgradeParams {
 	this := SystemdUpgradeParams{}
 	return &this
+}
+
+// GetAdditionalServicesStateData returns the AdditionalServicesStateData field value if set, zero value otherwise.
+func (o *SystemdUpgradeParams) GetAdditionalServicesStateData() AdditionalServicesStateData {
+	if o == nil || o.AdditionalServicesStateData == nil {
+		var ret AdditionalServicesStateData
+		return ret
+	}
+	return *o.AdditionalServicesStateData
+}
+
+// GetAdditionalServicesStateDataOk returns a tuple with the AdditionalServicesStateData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SystemdUpgradeParams) GetAdditionalServicesStateDataOk() (*AdditionalServicesStateData, bool) {
+	if o == nil || o.AdditionalServicesStateData == nil {
+		return nil, false
+	}
+	return o.AdditionalServicesStateData, true
+}
+
+// HasAdditionalServicesStateData returns a boolean if a field has been set.
+func (o *SystemdUpgradeParams) HasAdditionalServicesStateData() bool {
+	if o != nil && o.AdditionalServicesStateData != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalServicesStateData gets a reference to the given AdditionalServicesStateData and assigns it to the AdditionalServicesStateData field.
+func (o *SystemdUpgradeParams) SetAdditionalServicesStateData(v AdditionalServicesStateData) {
+	o.AdditionalServicesStateData = &v
 }
 
 // GetAllowInsecure returns the AllowInsecure field value if set, zero value otherwise.
@@ -861,6 +896,38 @@ func (o *SystemdUpgradeParams) HasNextClusterIndex() bool {
 // SetNextClusterIndex gets a reference to the given int32 and assigns it to the NextClusterIndex field.
 func (o *SystemdUpgradeParams) SetNextClusterIndex(v int32) {
 	o.NextClusterIndex = &v
+}
+
+// GetNodeAgentMissing returns the NodeAgentMissing field value if set, zero value otherwise.
+func (o *SystemdUpgradeParams) GetNodeAgentMissing() bool {
+	if o == nil || o.NodeAgentMissing == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NodeAgentMissing
+}
+
+// GetNodeAgentMissingOk returns a tuple with the NodeAgentMissing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SystemdUpgradeParams) GetNodeAgentMissingOk() (*bool, bool) {
+	if o == nil || o.NodeAgentMissing == nil {
+		return nil, false
+	}
+	return o.NodeAgentMissing, true
+}
+
+// HasNodeAgentMissing returns a boolean if a field has been set.
+func (o *SystemdUpgradeParams) HasNodeAgentMissing() bool {
+	if o != nil && o.NodeAgentMissing != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeAgentMissing gets a reference to the given bool and assigns it to the NodeAgentMissing field.
+func (o *SystemdUpgradeParams) SetNodeAgentMissing(v bool) {
+	o.NodeAgentMissing = &v
 }
 
 // GetNodeDetailsSet returns the NodeDetailsSet field value if set, zero value otherwise.
@@ -2049,6 +2116,9 @@ func (o *SystemdUpgradeParams) SetYbcSoftwareVersion(v string) {
 
 func (o SystemdUpgradeParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AdditionalServicesStateData != nil {
+		toSerialize["additionalServicesStateData"] = o.AdditionalServicesStateData
+	}
 	if o.AllowInsecure != nil {
 		toSerialize["allowInsecure"] = o.AllowInsecure
 	}
@@ -2120,6 +2190,9 @@ func (o SystemdUpgradeParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.NextClusterIndex != nil {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
+	}
+	if o.NodeAgentMissing != nil {
+		toSerialize["nodeAgentMissing"] = o.NodeAgentMissing
 	}
 	if o.NodeDetailsSet != nil {
 		toSerialize["nodeDetailsSet"] = o.NodeDetailsSet

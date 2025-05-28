@@ -1,4 +1,4 @@
-# Go API client for ywclient
+# Go API client for v1
 
 ALPHA - NOT FOR EXTERNAL USE
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./ywclient"
+import sw "./v1"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -359,7 +359,7 @@ Class | Method | HTTP request | Description
 *SupportBundleManagementApi* | [**CreateSupportBundle**](docs/SupportBundleManagementApi.md#createsupportbundle) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | Create support bundle for specific universe
 *SupportBundleManagementApi* | [**DeleteSupportBundle**](docs/SupportBundleManagementApi.md#deletesupportbundle) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Delete a support bundle
 *SupportBundleManagementApi* | [**DownloadSupportBundle**](docs/SupportBundleManagementApi.md#downloadsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
-*SupportBundleManagementApi* | [**EstimateSupportBundleSize**](docs/SupportBundleManagementApi.md#estimatesupportbundlesize) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
+*SupportBundleManagementApi* | [**EstimateSupportBundleSize**](docs/SupportBundleManagementApi.md#estimatesupportbundlesize) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
 *SupportBundleManagementApi* | [**GetSupportBundle**](docs/SupportBundleManagementApi.md#getsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 *SupportBundleManagementApi* | [**ListSupportBundle**](docs/SupportBundleManagementApi.md#listsupportbundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 *SupportBundleManagementApi* | [**ListSupportBundleComponents**](docs/SupportBundleManagementApi.md#listsupportbundlecomponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
@@ -413,8 +413,11 @@ Class | Method | HTTP request | Description
 *UniverseInformationApi* | [**ResetSlowQueries**](docs/UniverseInformationApi.md#resetslowqueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
 *UniverseInformationApi* | [**TriggerHealthCheck**](docs/UniverseInformationApi.md#triggerhealthcheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
 *UniverseInformationApi* | [**UniverseStatus**](docs/UniverseInformationApi.md#universestatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
+*UniverseManagementApi* | [**AttachUniverse**](docs/UniverseManagementApi.md#attachuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach | Import universe metadata to (dest) YBA using a given tgz file
 *UniverseManagementApi* | [**ConfigureUniverseAlerts**](docs/UniverseManagementApi.md#configureuniversealerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
+*UniverseManagementApi* | [**DeleteAttachDetachMetadata**](docs/UniverseManagementApi.md#deleteattachdetachmetadata) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach_detach_metadata | Delete metadata of a universe from (source) YBA
 *UniverseManagementApi* | [**DeleteUniverse**](docs/UniverseManagementApi.md#deleteuniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
+*UniverseManagementApi* | [**DetachUniverse**](docs/UniverseManagementApi.md#detachuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/detach | Export universe metadata to a tgz file from (source) YBA
 *UniverseManagementApi* | [**GetUniverse**](docs/UniverseManagementApi.md#getuniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Get a universe
 *UniverseManagementApi* | [**ListUniverses**](docs/UniverseManagementApi.md#listuniverses) | **Get** /api/v1/customers/{cUUID}/universes | List universes
 *UniverseManagementApi* | [**PauseUniverse**](docs/UniverseManagementApi.md#pauseuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Pause a universe
@@ -479,6 +482,7 @@ Class | Method | HTTP request | Description
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
+ - [AdditionalServicesStateData](docs/AdditionalServicesStateData.md)
  - [AdminNotification](docs/AdminNotification.md)
  - [Alert](docs/Alert.md)
  - [AlertApiFilter](docs/AlertApiFilter.md)
@@ -538,6 +542,7 @@ Class | Method | HTTP request | Description
  - [BackupScheduleToggleParams](docs/BackupScheduleToggleParams.md)
  - [BackupStorageInfo](docs/BackupStorageInfo.md)
  - [BackupTableParams](docs/BackupTableParams.md)
+ - [BasicAuthCredentials](docs/BasicAuthCredentials.md)
  - [BasicAuthInformation](docs/BasicAuthInformation.md)
  - [BasicAuthInformationAllOf](docs/BasicAuthInformationAllOf.md)
  - [BootstrapBackupParams](docs/BootstrapBackupParams.md)
@@ -602,6 +607,7 @@ Class | Method | HTTP request | Description
  - [DrConfigSetDatabasesForm](docs/DrConfigSetDatabasesForm.md)
  - [DrConfigSetTablesForm](docs/DrConfigSetTablesForm.md)
  - [DrConfigSwitchoverForm](docs/DrConfigSwitchoverForm.md)
+ - [EarlyoomConfig](docs/EarlyoomConfig.md)
  - [EditAccessKeyRotationScheduleParams](docs/EditAccessKeyRotationScheduleParams.md)
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
@@ -652,6 +658,8 @@ Class | Method | HTTP request | Description
  - [LdapUnivSyncFormData](docs/LdapUnivSyncFormData.md)
  - [LocalCloudInfo](docs/LocalCloudInfo.md)
  - [LogData](docs/LogData.md)
+ - [LokiConfig](docs/LokiConfig.md)
+ - [LokiConfigAllOf](docs/LokiConfigAllOf.md)
  - [MaintenanceWindow](docs/MaintenanceWindow.md)
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
  - [MaintenanceWindowPagedApiQuery](docs/MaintenanceWindowPagedApiQuery.md)

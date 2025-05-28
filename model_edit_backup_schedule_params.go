@@ -26,6 +26,8 @@ type EditBackupScheduleParams struct {
 	IncrementalBackupFrequency *int64 `json:"incrementalBackupFrequency,omitempty"`
 	// TimeUnit for incremental Backup Schedule frequency
 	IncrementalBackupFrequencyTimeUnit *string `json:"incrementalBackupFrequencyTimeUnit,omitempty"`
+	// Run a full or incremental backup if the schedule is expired when resuming a stopped schedule
+	RunImmediateBackupOnResume *bool `json:"runImmediateBackupOnResume,omitempty"`
 	// State of the schedule
 	Status *string `json:"status,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
@@ -209,6 +211,38 @@ func (o *EditBackupScheduleParams) SetIncrementalBackupFrequencyTimeUnit(v strin
 	o.IncrementalBackupFrequencyTimeUnit = &v
 }
 
+// GetRunImmediateBackupOnResume returns the RunImmediateBackupOnResume field value if set, zero value otherwise.
+func (o *EditBackupScheduleParams) GetRunImmediateBackupOnResume() bool {
+	if o == nil || o.RunImmediateBackupOnResume == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunImmediateBackupOnResume
+}
+
+// GetRunImmediateBackupOnResumeOk returns a tuple with the RunImmediateBackupOnResume field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EditBackupScheduleParams) GetRunImmediateBackupOnResumeOk() (*bool, bool) {
+	if o == nil || o.RunImmediateBackupOnResume == nil {
+		return nil, false
+	}
+	return o.RunImmediateBackupOnResume, true
+}
+
+// HasRunImmediateBackupOnResume returns a boolean if a field has been set.
+func (o *EditBackupScheduleParams) HasRunImmediateBackupOnResume() bool {
+	if o != nil && o.RunImmediateBackupOnResume != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunImmediateBackupOnResume gets a reference to the given bool and assigns it to the RunImmediateBackupOnResume field.
+func (o *EditBackupScheduleParams) SetRunImmediateBackupOnResume(v bool) {
+	o.RunImmediateBackupOnResume = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *EditBackupScheduleParams) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -289,6 +323,9 @@ func (o EditBackupScheduleParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.IncrementalBackupFrequencyTimeUnit != nil {
 		toSerialize["incrementalBackupFrequencyTimeUnit"] = o.IncrementalBackupFrequencyTimeUnit
+	}
+	if o.RunImmediateBackupOnResume != nil {
+		toSerialize["runImmediateBackupOnResume"] = o.RunImmediateBackupOnResume
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status

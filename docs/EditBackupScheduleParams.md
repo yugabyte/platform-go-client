@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **FrequencyTimeUnit** | Pointer to **string** | Time Unit for frequency | [optional] 
 **IncrementalBackupFrequency** | Pointer to **int64** | Frequency of incremental backup schedule | [optional] 
 **IncrementalBackupFrequencyTimeUnit** | Pointer to **string** | TimeUnit for incremental Backup Schedule frequency | [optional] 
+**RunImmediateBackupOnResume** | Pointer to **bool** | Run a full or incremental backup if the schedule is expired when resuming a stopped schedule | [optional] 
 **Status** | Pointer to **string** | State of the schedule | [optional] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 
@@ -155,6 +156,31 @@ SetIncrementalBackupFrequencyTimeUnit sets IncrementalBackupFrequencyTimeUnit fi
 `func (o *EditBackupScheduleParams) HasIncrementalBackupFrequencyTimeUnit() bool`
 
 HasIncrementalBackupFrequencyTimeUnit returns a boolean if a field has been set.
+
+### GetRunImmediateBackupOnResume
+
+`func (o *EditBackupScheduleParams) GetRunImmediateBackupOnResume() bool`
+
+GetRunImmediateBackupOnResume returns the RunImmediateBackupOnResume field if non-nil, zero value otherwise.
+
+### GetRunImmediateBackupOnResumeOk
+
+`func (o *EditBackupScheduleParams) GetRunImmediateBackupOnResumeOk() (*bool, bool)`
+
+GetRunImmediateBackupOnResumeOk returns a tuple with the RunImmediateBackupOnResume field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunImmediateBackupOnResume
+
+`func (o *EditBackupScheduleParams) SetRunImmediateBackupOnResume(v bool)`
+
+SetRunImmediateBackupOnResume sets RunImmediateBackupOnResume field to given value.
+
+### HasRunImmediateBackupOnResume
+
+`func (o *EditBackupScheduleParams) HasRunImmediateBackupOnResume() bool`
+
+HasRunImmediateBackupOnResume returns a boolean if a field has been set.
 
 ### GetStatus
 

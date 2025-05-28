@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupType** | Pointer to **string** | Backup type | [optional] 
+**IgnoreErrors** | Pointer to **bool** | WARNING: This is a preview API that could change. Ignore all restore errors | [optional] 
 **Keyspace** | Pointer to **string** | Keyspace name | [optional] 
 **NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
@@ -57,6 +58,31 @@ SetBackupType sets BackupType field to given value.
 `func (o *BackupStorageInfo) HasBackupType() bool`
 
 HasBackupType returns a boolean if a field has been set.
+
+### GetIgnoreErrors
+
+`func (o *BackupStorageInfo) GetIgnoreErrors() bool`
+
+GetIgnoreErrors returns the IgnoreErrors field if non-nil, zero value otherwise.
+
+### GetIgnoreErrorsOk
+
+`func (o *BackupStorageInfo) GetIgnoreErrorsOk() (*bool, bool)`
+
+GetIgnoreErrorsOk returns a tuple with the IgnoreErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIgnoreErrors
+
+`func (o *BackupStorageInfo) SetIgnoreErrors(v bool)`
+
+SetIgnoreErrors sets IgnoreErrors field to given value.
+
+### HasIgnoreErrors
+
+`func (o *BackupStorageInfo) HasIgnoreErrors() bool`
+
+HasIgnoreErrors returns a boolean if a field has been set.
 
 ### GetKeyspace
 

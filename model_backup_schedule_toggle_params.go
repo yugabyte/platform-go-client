@@ -16,6 +16,8 @@ import (
 
 // BackupScheduleToggleParams struct for BackupScheduleToggleParams
 type BackupScheduleToggleParams struct {
+	// Run a full or incremental backup if required when resuming a stopped schedule. When false (default), the full backup will instead run at its normally scheduled time.
+	RunImmediateBackupOnResume *bool `json:"runImmediateBackupOnResume,omitempty"`
 	// State of the schedule
 	Status string `json:"status"`
 }
@@ -36,6 +38,38 @@ func NewBackupScheduleToggleParams(status string) *BackupScheduleToggleParams {
 func NewBackupScheduleToggleParamsWithDefaults() *BackupScheduleToggleParams {
 	this := BackupScheduleToggleParams{}
 	return &this
+}
+
+// GetRunImmediateBackupOnResume returns the RunImmediateBackupOnResume field value if set, zero value otherwise.
+func (o *BackupScheduleToggleParams) GetRunImmediateBackupOnResume() bool {
+	if o == nil || o.RunImmediateBackupOnResume == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RunImmediateBackupOnResume
+}
+
+// GetRunImmediateBackupOnResumeOk returns a tuple with the RunImmediateBackupOnResume field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupScheduleToggleParams) GetRunImmediateBackupOnResumeOk() (*bool, bool) {
+	if o == nil || o.RunImmediateBackupOnResume == nil {
+		return nil, false
+	}
+	return o.RunImmediateBackupOnResume, true
+}
+
+// HasRunImmediateBackupOnResume returns a boolean if a field has been set.
+func (o *BackupScheduleToggleParams) HasRunImmediateBackupOnResume() bool {
+	if o != nil && o.RunImmediateBackupOnResume != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRunImmediateBackupOnResume gets a reference to the given bool and assigns it to the RunImmediateBackupOnResume field.
+func (o *BackupScheduleToggleParams) SetRunImmediateBackupOnResume(v bool) {
+	o.RunImmediateBackupOnResume = &v
 }
 
 // GetStatus returns the Status field value
@@ -64,6 +98,9 @@ func (o *BackupScheduleToggleParams) SetStatus(v string) {
 
 func (o BackupScheduleToggleParams) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.RunImmediateBackupOnResume != nil {
+		toSerialize["runImmediateBackupOnResume"] = o.RunImmediateBackupOnResume
+	}
 	if true {
 		toSerialize["status"] = o.Status
 	}
