@@ -4,8 +4,11 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AttachUniverse**](UniverseManagementApi.md#AttachUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach | Import universe metadata to (dest) YBA using a given tgz file
 [**ConfigureUniverseAlerts**](UniverseManagementApi.md#ConfigureUniverseAlerts) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/config_alerts | Configure alerts for a universe
+[**DeleteAttachDetachMetadata**](UniverseManagementApi.md#DeleteAttachDetachMetadata) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/attach_detach_metadata | Delete metadata of a universe from (source) YBA
 [**DeleteUniverse**](UniverseManagementApi.md#DeleteUniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID} | Delete a universe
+[**DetachUniverse**](UniverseManagementApi.md#DetachUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/detach | Export universe metadata to a tgz file from (source) YBA
 [**GetUniverse**](UniverseManagementApi.md#GetUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID} | Get a universe
 [**ListUniverses**](UniverseManagementApi.md#ListUniverses) | **Get** /api/v1/customers/{cUUID}/universes | List universes
 [**PauseUniverse**](UniverseManagementApi.md#PauseUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/pause | Pause a universe
@@ -16,6 +19,81 @@ Method | HTTP request | Description
 [**SetUniverseKey**](UniverseManagementApi.md#SetUniverseKey) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/set_key | Set a universe&#39;s key
 [**UpdateLoadBalancerConfig**](UniverseManagementApi.md#UpdateLoadBalancerConfig) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_lb_config | Update load balancer config
 
+
+
+## AttachUniverse
+
+> YBPSuccess AttachUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
+
+Import universe metadata to (dest) YBA using a given tgz file
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseManagementApi.AttachUniverse(context.Background(), cUUID, uniUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.AttachUniverse``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AttachUniverse`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.AttachUniverse`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAttachUniverseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## ConfigureUniverseAlerts
@@ -67,6 +145,81 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiConfigureUniverseAlertsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPSuccess**](YBPSuccess.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteAttachDetachMetadata
+
+> YBPSuccess DeleteAttachDetachMetadata(ctx, cUUID, uniUUID).Request(request).Execute()
+
+Delete metadata of a universe from (source) YBA
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseManagementApi.DeleteAttachDetachMetadata(context.Background(), cUUID, uniUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.DeleteAttachDetachMetadata``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DeleteAttachDetachMetadata`: YBPSuccess
+    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.DeleteAttachDetachMetadata`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteAttachDetachMetadataRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -159,6 +312,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DetachUniverse
+
+> []string DetachUniverse(ctx, cUUID, uniUUID).Request(request).Execute()
+
+Export universe metadata to a tgz file from (source) YBA
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | 
+    uniUUID := TODO // string | 
+    request := TODO // interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseManagementApi.DetachUniverse(context.Background(), cUUID, uniUUID).Request(request).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementApi.DetachUniverse``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DetachUniverse`: []string
+    fmt.Fprintf(os.Stdout, "Response from `UniverseManagementApi.DetachUniverse`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) |  | 
+**uniUUID** | [**string**](.md) |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDetachUniverseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+**[]string**
 
 ### Authorization
 

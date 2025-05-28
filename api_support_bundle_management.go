@@ -475,7 +475,7 @@ func (a *SupportBundleManagementApiService) EstimateSupportBundleSize(ctx _conte
  */
 func (a *SupportBundleManagementApiService) EstimateSupportBundleSizeExecute(r SupportBundleManagementApiApiEstimateSupportBundleSizeRequest) (SupportBundleSizeEstimateResponse, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string

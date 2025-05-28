@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**RunImmediateBackupOnResume** | Pointer to **bool** | Run a full or incremental backup if required when resuming a stopped schedule. When false (default), the full backup will instead run at its normally scheduled time. | [optional] 
 **Status** | **string** | State of the schedule | 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewBackupScheduleToggleParamsWithDefaults instantiates a new BackupScheduleToggleParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetRunImmediateBackupOnResume
+
+`func (o *BackupScheduleToggleParams) GetRunImmediateBackupOnResume() bool`
+
+GetRunImmediateBackupOnResume returns the RunImmediateBackupOnResume field if non-nil, zero value otherwise.
+
+### GetRunImmediateBackupOnResumeOk
+
+`func (o *BackupScheduleToggleParams) GetRunImmediateBackupOnResumeOk() (*bool, bool)`
+
+GetRunImmediateBackupOnResumeOk returns a tuple with the RunImmediateBackupOnResume field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunImmediateBackupOnResume
+
+`func (o *BackupScheduleToggleParams) SetRunImmediateBackupOnResume(v bool)`
+
+SetRunImmediateBackupOnResume sets RunImmediateBackupOnResume field to given value.
+
+### HasRunImmediateBackupOnResume
+
+`func (o *BackupScheduleToggleParams) HasRunImmediateBackupOnResume() bool`
+
+HasRunImmediateBackupOnResume returns a boolean if a field has been set.
 
 ### GetStatus
 

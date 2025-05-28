@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
 **DisableMultipart** | Pointer to **bool** | Disable multipart upload | [optional] 
 **DisableParallelism** | Pointer to **bool** | Don&#39;t add -m flag during gsutil upload dir command | [optional] 
+**DumpRoleChecks** | Pointer to **bool** | WARNING: This is a preview API that could change. Add role exists checks for roles metadata. All GRANT/REVOKE and ALTER sql commands will first check if the role exists | [optional] 
 **EnablePointInTimeRestore** | Pointer to **bool** | Enable Point-In-Time-Restore capability on backup schedules with a limited restore window. Only applicable for YB-Controller enabled universes | [optional] 
 **EnableVerboseLogs** | Pointer to **bool** | Is verbose logging enabled | [optional] 
 **EnableYbc** | Pointer to **bool** |  | [optional] 
@@ -418,6 +419,31 @@ SetDisableParallelism sets DisableParallelism field to given value.
 `func (o *BackupRequestParams) HasDisableParallelism() bool`
 
 HasDisableParallelism returns a boolean if a field has been set.
+
+### GetDumpRoleChecks
+
+`func (o *BackupRequestParams) GetDumpRoleChecks() bool`
+
+GetDumpRoleChecks returns the DumpRoleChecks field if non-nil, zero value otherwise.
+
+### GetDumpRoleChecksOk
+
+`func (o *BackupRequestParams) GetDumpRoleChecksOk() (*bool, bool)`
+
+GetDumpRoleChecksOk returns a tuple with the DumpRoleChecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDumpRoleChecks
+
+`func (o *BackupRequestParams) SetDumpRoleChecks(v bool)`
+
+SetDumpRoleChecks sets DumpRoleChecks field to given value.
+
+### HasDumpRoleChecks
+
+`func (o *BackupRequestParams) HasDumpRoleChecks() bool`
+
+HasDumpRoleChecks returns a boolean if a field has been set.
 
 ### GetEnablePointInTimeRestore
 

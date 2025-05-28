@@ -39,6 +39,8 @@ type Provider struct {
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
+	// Previous usability state
+	PrevUsabilityState *string `json:"prevUsabilityState,omitempty"`
 	Regions []Region `json:"regions"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use details.SshPort instead. Only supported in create request
 	SshPort *int32 `json:"sshPort,omitempty"`
@@ -46,6 +48,8 @@ type Provider struct {
 	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use details.SshUser instead. Only supported in create request
 	SshUser *string `json:"sshUser,omitempty"`
+	// Update source if current state is UPDATING
+	UpdateSource *string `json:"updateSource,omitempty"`
 	// Current usability state
 	UsabilityState *string `json:"usabilityState,omitempty"`
 	// Provider uuid
@@ -481,6 +485,38 @@ func (o *Provider) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPrevUsabilityState returns the PrevUsabilityState field value if set, zero value otherwise.
+func (o *Provider) GetPrevUsabilityState() string {
+	if o == nil || o.PrevUsabilityState == nil {
+		var ret string
+		return ret
+	}
+	return *o.PrevUsabilityState
+}
+
+// GetPrevUsabilityStateOk returns a tuple with the PrevUsabilityState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetPrevUsabilityStateOk() (*string, bool) {
+	if o == nil || o.PrevUsabilityState == nil {
+		return nil, false
+	}
+	return o.PrevUsabilityState, true
+}
+
+// HasPrevUsabilityState returns a boolean if a field has been set.
+func (o *Provider) HasPrevUsabilityState() bool {
+	if o != nil && o.PrevUsabilityState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPrevUsabilityState gets a reference to the given string and assigns it to the PrevUsabilityState field.
+func (o *Provider) SetPrevUsabilityState(v string) {
+	o.PrevUsabilityState = &v
+}
+
 // GetRegions returns the Regions field value
 func (o *Provider) GetRegions() []Region {
 	if o == nil {
@@ -599,6 +635,38 @@ func (o *Provider) HasSshUser() bool {
 // SetSshUser gets a reference to the given string and assigns it to the SshUser field.
 func (o *Provider) SetSshUser(v string) {
 	o.SshUser = &v
+}
+
+// GetUpdateSource returns the UpdateSource field value if set, zero value otherwise.
+func (o *Provider) GetUpdateSource() string {
+	if o == nil || o.UpdateSource == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpdateSource
+}
+
+// GetUpdateSourceOk returns a tuple with the UpdateSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Provider) GetUpdateSourceOk() (*string, bool) {
+	if o == nil || o.UpdateSource == nil {
+		return nil, false
+	}
+	return o.UpdateSource, true
+}
+
+// HasUpdateSource returns a boolean if a field has been set.
+func (o *Provider) HasUpdateSource() bool {
+	if o != nil && o.UpdateSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdateSource gets a reference to the given string and assigns it to the UpdateSource field.
+func (o *Provider) SetUpdateSource(v string) {
+	o.UpdateSource = &v
 }
 
 // GetUsabilityState returns the UsabilityState field value if set, zero value otherwise.
@@ -738,6 +806,9 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.PrevUsabilityState != nil {
+		toSerialize["prevUsabilityState"] = o.PrevUsabilityState
+	}
 	if true {
 		toSerialize["regions"] = o.Regions
 	}
@@ -749,6 +820,9 @@ func (o Provider) MarshalJSON() ([]byte, error) {
 	}
 	if o.SshUser != nil {
 		toSerialize["sshUser"] = o.SshUser
+	}
+	if o.UpdateSource != nil {
+		toSerialize["updateSource"] = o.UpdateSource
 	}
 	if o.UsabilityState != nil {
 		toSerialize["usabilityState"] = o.UsabilityState

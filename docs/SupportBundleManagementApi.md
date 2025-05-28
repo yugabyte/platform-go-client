@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateSupportBundle**](SupportBundleManagementApi.md#CreateSupportBundle) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | Create support bundle for specific universe
 [**DeleteSupportBundle**](SupportBundleManagementApi.md#DeleteSupportBundle) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Delete a support bundle
 [**DownloadSupportBundle**](SupportBundleManagementApi.md#DownloadSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
-[**EstimateSupportBundleSize**](SupportBundleManagementApi.md#EstimateSupportBundleSize) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
+[**EstimateSupportBundleSize**](SupportBundleManagementApi.md#EstimateSupportBundleSize) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
 [**GetSupportBundle**](SupportBundleManagementApi.md#GetSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
 [**ListSupportBundle**](SupportBundleManagementApi.md#ListSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
 [**ListSupportBundleComponents**](SupportBundleManagementApi.md#ListSupportBundleComponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle

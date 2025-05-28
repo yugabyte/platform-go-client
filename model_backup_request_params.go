@@ -40,6 +40,8 @@ type BackupRequestParams struct {
 	DisableMultipart *bool `json:"disableMultipart,omitempty"`
 	// Don't add -m flag during gsutil upload dir command
 	DisableParallelism *bool `json:"disableParallelism,omitempty"`
+	// WARNING: This is a preview API that could change. Add role exists checks for roles metadata. All GRANT/REVOKE and ALTER sql commands will first check if the role exists
+	DumpRoleChecks *bool `json:"dumpRoleChecks,omitempty"`
 	// Enable Point-In-Time-Restore capability on backup schedules with a limited restore window. Only applicable for YB-Controller enabled universes
 	EnablePointInTimeRestore *bool `json:"enablePointInTimeRestore,omitempty"`
 	// Is verbose logging enabled
@@ -568,6 +570,38 @@ func (o *BackupRequestParams) HasDisableParallelism() bool {
 // SetDisableParallelism gets a reference to the given bool and assigns it to the DisableParallelism field.
 func (o *BackupRequestParams) SetDisableParallelism(v bool) {
 	o.DisableParallelism = &v
+}
+
+// GetDumpRoleChecks returns the DumpRoleChecks field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetDumpRoleChecks() bool {
+	if o == nil || o.DumpRoleChecks == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DumpRoleChecks
+}
+
+// GetDumpRoleChecksOk returns a tuple with the DumpRoleChecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetDumpRoleChecksOk() (*bool, bool) {
+	if o == nil || o.DumpRoleChecks == nil {
+		return nil, false
+	}
+	return o.DumpRoleChecks, true
+}
+
+// HasDumpRoleChecks returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasDumpRoleChecks() bool {
+	if o != nil && o.DumpRoleChecks != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDumpRoleChecks gets a reference to the given bool and assigns it to the DumpRoleChecks field.
+func (o *BackupRequestParams) SetDumpRoleChecks(v bool) {
+	o.DumpRoleChecks = &v
 }
 
 // GetEnablePointInTimeRestore returns the EnablePointInTimeRestore field value if set, zero value otherwise.
@@ -1885,6 +1919,9 @@ func (o BackupRequestParams) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisableParallelism != nil {
 		toSerialize["disableParallelism"] = o.DisableParallelism
+	}
+	if o.DumpRoleChecks != nil {
+		toSerialize["dumpRoleChecks"] = o.DumpRoleChecks
 	}
 	if o.EnablePointInTimeRestore != nil {
 		toSerialize["enablePointInTimeRestore"] = o.EnablePointInTimeRestore

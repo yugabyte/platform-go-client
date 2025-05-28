@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Components** | **[]string** | List of components to be included in the support bundle | 
 **EndDate** | **time.Time** | End date to filter logs till | 
+**FilterPgAuditLogs** | Pointer to **bool** | Specifies if Postgres audit logs should be filtered out when collecting universe logs. | [optional] 
 **MaxCoreFileSize** | Pointer to **int64** | Max size in bytes of the recent collected cores (if any) | [optional] 
 **MaxNumRecentCores** | Pointer to **int32** | Max number of the most recent cores to collect (if any) | [optional] 
 **PromDumpEndDate** | Pointer to **time.Time** | End date to filter prometheus metrics till | [optional] 
@@ -72,6 +73,31 @@ and a boolean to check if the value has been set.
 
 SetEndDate sets EndDate field to given value.
 
+
+### GetFilterPgAuditLogs
+
+`func (o *SupportBundleFormData) GetFilterPgAuditLogs() bool`
+
+GetFilterPgAuditLogs returns the FilterPgAuditLogs field if non-nil, zero value otherwise.
+
+### GetFilterPgAuditLogsOk
+
+`func (o *SupportBundleFormData) GetFilterPgAuditLogsOk() (*bool, bool)`
+
+GetFilterPgAuditLogsOk returns a tuple with the FilterPgAuditLogs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilterPgAuditLogs
+
+`func (o *SupportBundleFormData) SetFilterPgAuditLogs(v bool)`
+
+SetFilterPgAuditLogs sets FilterPgAuditLogs field to given value.
+
+### HasFilterPgAuditLogs
+
+`func (o *SupportBundleFormData) HasFilterPgAuditLogs() bool`
+
+HasFilterPgAuditLogs returns a boolean if a field has been set.
 
 ### GetMaxCoreFileSize
 

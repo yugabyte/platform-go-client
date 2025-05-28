@@ -21,6 +21,8 @@ type SupportBundleFormData struct {
 	Components []string `json:"components"`
 	// End date to filter logs till
 	EndDate time.Time `json:"endDate"`
+	// Specifies if Postgres audit logs should be filtered out when collecting universe logs.
+	FilterPgAuditLogs *bool `json:"filterPgAuditLogs,omitempty"`
 	// Max size in bytes of the recent collected cores (if any)
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of the most recent cores to collect (if any)
@@ -103,6 +105,38 @@ func (o *SupportBundleFormData) GetEndDateOk() (*time.Time, bool) {
 // SetEndDate sets field value
 func (o *SupportBundleFormData) SetEndDate(v time.Time) {
 	o.EndDate = v
+}
+
+// GetFilterPgAuditLogs returns the FilterPgAuditLogs field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetFilterPgAuditLogs() bool {
+	if o == nil || o.FilterPgAuditLogs == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FilterPgAuditLogs
+}
+
+// GetFilterPgAuditLogsOk returns a tuple with the FilterPgAuditLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetFilterPgAuditLogsOk() (*bool, bool) {
+	if o == nil || o.FilterPgAuditLogs == nil {
+		return nil, false
+	}
+	return o.FilterPgAuditLogs, true
+}
+
+// HasFilterPgAuditLogs returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasFilterPgAuditLogs() bool {
+	if o != nil && o.FilterPgAuditLogs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterPgAuditLogs gets a reference to the given bool and assigns it to the FilterPgAuditLogs field.
+func (o *SupportBundleFormData) SetFilterPgAuditLogs(v bool) {
+	o.FilterPgAuditLogs = &v
 }
 
 // GetMaxCoreFileSize returns the MaxCoreFileSize field value if set, zero value otherwise.
@@ -328,6 +362,9 @@ func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["endDate"] = o.EndDate
+	}
+	if o.FilterPgAuditLogs != nil {
+		toSerialize["filterPgAuditLogs"] = o.FilterPgAuditLogs
 	}
 	if o.MaxCoreFileSize != nil {
 		toSerialize["maxCoreFileSize"] = o.MaxCoreFileSize
