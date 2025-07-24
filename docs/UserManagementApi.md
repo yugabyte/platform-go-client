@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 
 ## ListUsers
 
-> []UserWithFeatures ListUsers(ctx, cUUID).Execute()
+> []UserWithFeatures ListUsers(ctx, cUUID).Email(email).Execute()
 
 List all users
 
@@ -329,10 +329,11 @@ import (
 
 func main() {
     cUUID := TODO // string | 
+    email := "email_example" // string | Optional email to filter user list (optional) (default to "null")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.UserManagementApi.ListUsers(context.Background(), cUUID).Execute()
+    resp, r, err := api_client.UserManagementApi.ListUsers(context.Background(), cUUID).Email(email).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserManagementApi.ListUsers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -358,6 +359,7 @@ Other parameters are passed through a pointer to a apiListUsersRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **email** | **string** | Optional email to filter user list | [default to &quot;null&quot;]
 
 ### Return type
 

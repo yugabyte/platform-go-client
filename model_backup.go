@@ -34,6 +34,8 @@ type Backup struct {
 	Expiry *time.Time `json:"expiry,omitempty"`
 	// Time unit for backup expiry time
 	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
+	// First snapshot time in this backup
+	FirstSnapshotTime *int64 `json:"firstSnapshotTime,omitempty"`
 	// Whether the backup has KMS history metadata
 	HasKMSHistory *bool `json:"hasKMSHistory,omitempty"`
 	IncrementalBackup bool `json:"incrementalBackup"`
@@ -363,6 +365,38 @@ func (o *Backup) HasExpiryTimeUnit() bool {
 // SetExpiryTimeUnit gets a reference to the given string and assigns it to the ExpiryTimeUnit field.
 func (o *Backup) SetExpiryTimeUnit(v string) {
 	o.ExpiryTimeUnit = &v
+}
+
+// GetFirstSnapshotTime returns the FirstSnapshotTime field value if set, zero value otherwise.
+func (o *Backup) GetFirstSnapshotTime() int64 {
+	if o == nil || o.FirstSnapshotTime == nil {
+		var ret int64
+		return ret
+	}
+	return *o.FirstSnapshotTime
+}
+
+// GetFirstSnapshotTimeOk returns a tuple with the FirstSnapshotTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Backup) GetFirstSnapshotTimeOk() (*int64, bool) {
+	if o == nil || o.FirstSnapshotTime == nil {
+		return nil, false
+	}
+	return o.FirstSnapshotTime, true
+}
+
+// HasFirstSnapshotTime returns a boolean if a field has been set.
+func (o *Backup) HasFirstSnapshotTime() bool {
+	if o != nil && o.FirstSnapshotTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFirstSnapshotTime gets a reference to the given int64 and assigns it to the FirstSnapshotTime field.
+func (o *Backup) SetFirstSnapshotTime(v int64) {
+	o.FirstSnapshotTime = &v
 }
 
 // GetHasKMSHistory returns the HasKMSHistory field value if set, zero value otherwise.
@@ -761,6 +795,9 @@ func (o Backup) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpiryTimeUnit != nil {
 		toSerialize["expiryTimeUnit"] = o.ExpiryTimeUnit
+	}
+	if o.FirstSnapshotTime != nil {
+		toSerialize["firstSnapshotTime"] = o.FirstSnapshotTime
 	}
 	if o.HasKMSHistory != nil {
 		toSerialize["hasKMSHistory"] = o.HasKMSHistory

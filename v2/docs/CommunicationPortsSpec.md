@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **YqlServerRpcPort** | Pointer to **int32** | YQL RPC port | [optional] [default to 9042]
 **YsqlServerHttpPort** | Pointer to **int32** | YSQL HTTP port | [optional] [default to 13000]
 **YsqlServerRpcPort** | Pointer to **int32** | YSQL RPC port | [optional] [default to 5433]
+**InternalYsqlServerRpcPort** | Pointer to **int32** | Internal YSQL RPC port used when connection pooling is enabled | [optional] [default to 6433]
 
 ## Methods
 
@@ -387,6 +388,31 @@ SetYsqlServerRpcPort sets YsqlServerRpcPort field to given value.
 `func (o *CommunicationPortsSpec) HasYsqlServerRpcPort() bool`
 
 HasYsqlServerRpcPort returns a boolean if a field has been set.
+
+### GetInternalYsqlServerRpcPort
+
+`func (o *CommunicationPortsSpec) GetInternalYsqlServerRpcPort() int32`
+
+GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field if non-nil, zero value otherwise.
+
+### GetInternalYsqlServerRpcPortOk
+
+`func (o *CommunicationPortsSpec) GetInternalYsqlServerRpcPortOk() (*int32, bool)`
+
+GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInternalYsqlServerRpcPort
+
+`func (o *CommunicationPortsSpec) SetInternalYsqlServerRpcPort(v int32)`
+
+SetInternalYsqlServerRpcPort sets InternalYsqlServerRpcPort field to given value.
+
+### HasInternalYsqlServerRpcPort
+
+`func (o *CommunicationPortsSpec) HasInternalYsqlServerRpcPort() bool`
+
+HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

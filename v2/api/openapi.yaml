@@ -36,6 +36,8 @@ tags:
   name: Metrics
 - description: CRUD operations for a Universe
   name: Universe
+- description: YBA Instance operations
+  name: YBA Instance
 paths:
   /customers/{cUUID}/auth/group-mappings:
     get:
@@ -1270,6 +1272,57 @@ paths:
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-accepts: application/json
+  /customers/{cUUID}/fetch-universe-resources:
+    post:
+      description: Fetches an estimate of pricing and cpu/memory/storage resource
+        utilisation for the Universe. This is meant to be used before creating the
+        Universe.
+      operationId: getUniverseResources
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          exampleSetFlag: false
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/UniverseCreateReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UniverseResourceDetails'
+          description: success
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Get resource utilisation of a YugabyteDB Universe
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Customer
+        auditTargetId: cUUID.toString()
+        auditActionType: GetUniverseResources
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: READ
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: false
+      x-yba-api-since: 2025.2.0.0
+      x-yba-api-visibility: preview
+      x-contentType: application/json
+      x-accepts: application/json
   /customers/{cUUID}/universes/{uniUUID}/gflags:
     post:
       description: "Queues a task to edit GFlags of a universe. The input set of GFlags\
@@ -1811,8 +1864,9 @@ paths:
       x-accepts: application/json
   /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit:
     post:
-      description: "Enable or disable encryption in transit. Encryption in transit\
-        \ can be both node to node or \nnode to client.\n"
+      description: |
+        Enable or disable encryption in transit. Encryption in transit can be both node to node or
+        node to client.
       operationId: encryptionInTransitToggle
       parameters:
       - description: Customer UUID
@@ -1932,11 +1986,13 @@ paths:
       x-accepts: application/json
   /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides:
     post:
-      description: "Update the kubernetes helm override values. This can be used to\
-        \ add custom settings to \nkubernetes resources managed by YugabyteDB Anywhere.\
-        \ These override values can apply globally \nto a universe or per AZ.\n\n\
-        See https://github.com/yugabyte/charts/blob/master/stable/yugabyte/values.yaml\
-        \ for possible\noverride options.\n"
+      description: |
+        Update the kubernetes helm override values. This can be used to add custom settings to
+        kubernetes resources managed by YugabyteDB Anywhere. These override values can apply globally
+        to a universe or per AZ.
+
+        See https://github.com/yugabyte/charts/blob/master/stable/yugabyte/values.yaml for possible
+        override options.
       operationId: editKubernetesOverrides
       parameters:
       - description: Customer UUID
@@ -2159,6 +2215,34 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
+      x-yba-api-since: 2025.2.0.0
+      x-yba-api-visibility: internal
+      x-accepts: application/json
+  /yba-info:
+    get:
+      description: Get YBA Instance info
+      operationId: GetYBAInstanceInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBAInfo'
+          description: YBA Info
+          x-yba-api-visibility: internal
+        "400":
+          description: Client Error
+        "500":
+          description: Server Error
+      security:
+      - apiKeyAuth: []
+      summary: Get YBAInstance info
+      tags:
+      - YBA Instance
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+        noAuthz: true
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: internal
       x-accepts: application/json
@@ -2389,6 +2473,12 @@ components:
           schema:
             $ref: '#/components/schemas/Universe'
       description: success
+    UniverseResourceDetailsResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UniverseResourceDetails'
+      description: success
     UniverseSoftwareUpgradeFinalizeResp:
       content:
         application/json:
@@ -2409,6 +2499,13 @@ components:
             format: binary
             type: string
       description: Successfully detached universe.
+      x-yba-api-visibility: internal
+    YBAInfoResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/YBAInfo'
+      description: YBA Info
       x-yba-api-visibility: internal
   schemas:
     ResourceDefinition:
@@ -3450,6 +3547,7 @@ components:
       description: YSQL Spec for the Universe. Part of UniverseSpec.
       example:
         password: password
+        enable_connection_pooling: true
         enable: true
         enable_auth: false
       exampleSetFlag: true
@@ -3472,6 +3570,13 @@ components:
           format: password
           type: string
           writeOnly: true
+        enable_connection_pooling:
+          default: false
+          description: Use built-in YSQL service for maximizing the number of simultaneous
+            connections to database.
+          example: true
+          exampleSetFlag: true
+          type: boolean
       title: YSQLSpec
       type: object
     YCQLSpec:
@@ -3505,6 +3610,7 @@ components:
     CommunicationPortsSpec:
       description: Communication Ports used by nodes of this Universe. Part of UniverseNetworkingSpec.
       example:
+        internal_ysql_server_rpc_port: 6433
         ysql_server_http_port: 13000
         yql_server_http_port: 12000
         tserver_http_port: 9000
@@ -3619,6 +3725,13 @@ components:
           exampleSetFlag: true
           format: int32
           type: integer
+        internal_ysql_server_rpc_port:
+          default: 6433
+          description: Internal YSQL RPC port used when connection pooling is enabled
+          example: 6433
+          exampleSetFlag: true
+          format: int32
+          type: integer
       readOnly: false
       title: CommunicationPortsSpec
       type: object
@@ -3628,6 +3741,7 @@ components:
       example:
         enable_ipv6: false
         communication_ports:
+          internal_ysql_server_rpc_port: 6433
           ysql_server_http_port: 13000
           yql_server_http_port: 12000
           tserver_http_port: 9000
@@ -4845,6 +4959,7 @@ components:
         networking_spec:
           enable_ipv6: false
           communication_ports:
+            internal_ysql_server_rpc_port: 6433
             ysql_server_http_port: 13000
             yql_server_http_port: 12000
             tserver_http_port: 9000
@@ -4871,6 +4986,7 @@ components:
         use_time_sync: false
         ysql:
           password: password
+          enable_connection_pooling: true
           enable: true
           enable_auth: false
         ycql:
@@ -6303,6 +6419,8 @@ components:
           - Rebooting
           - HardRebooting
           - VMImageUpgrade
+          - InstanceStopping
+          - InstanceStopped
           example: Provisioned
           exampleSetFlag: true
           type: string
@@ -6772,6 +6890,7 @@ components:
           networking_spec:
             enable_ipv6: false
             communication_ports:
+              internal_ysql_server_rpc_port: 6433
               ysql_server_http_port: 13000
               yql_server_http_port: 12000
               tserver_http_port: 9000
@@ -6798,6 +6917,7 @@ components:
           use_time_sync: false
           ysql:
             password: password
+            enable_connection_pooling: true
             enable: true
             enable_auth: false
           ycql:
@@ -8575,6 +8695,7 @@ components:
           networking_spec:
             enable_ipv6: false
             communication_ports:
+              internal_ysql_server_rpc_port: 6433
               ysql_server_http_port: 13000
               yql_server_http_port: 12000
               tserver_http_port: 9000
@@ -8601,6 +8722,7 @@ components:
           use_time_sync: false
           ysql:
             password: password
+            enable_connection_pooling: true
             enable: true
             enable_auth: false
           ycql:
@@ -9936,6 +10058,22 @@ components:
       title: AttachUniverseSpec
       type: object
       x-yba-api-visibility: internal
+    YBAInfo:
+      description: Describes YBA instance info
+      example:
+        fips_enabled: true
+      exampleSetFlag: true
+      properties:
+        fips_enabled:
+          description: Whether YBA instance is FIPS compliant
+          exampleSetFlag: false
+          readOnly: true
+          type: boolean
+      required:
+      - fips_enabled
+      title: YBAInfo
+      type: object
+      x-yba-api-visibility: internal
     AvailabilityZoneNodeSpec_allOf:
       exampleSetFlag: false
       properties:
@@ -10011,6 +10149,19 @@ components:
           description: GFlags per availability zone uuid
           exampleSetFlag: false
           type: object
+        gflag_groups:
+          description: GFlag groups to be applied
+          example:
+          - ENHANCED_POSTGRES_COMPATIBILITY
+          exampleSetFlag: true
+          items:
+            enum:
+            - ENHANCED_POSTGRES_COMPATIBILITY
+            exampleSetFlag: false
+            type: string
+          type: array
+          x-yba-api-since: 2024.2.0.0
+          x-yba-api-visibility: internal
     UniverseEditGFlags_allOf:
       exampleSetFlag: false
       properties:

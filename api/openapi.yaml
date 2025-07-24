@@ -12647,6 +12647,13 @@ paths:
           exampleSetFlag: false
           format: uuid
           type: string
+      - description: Optional email to filter user list
+        in: query
+        name: email
+        schema:
+          default: "null"
+          exampleSetFlag: false
+          type: string
       responses:
         "200":
           content:
@@ -14645,12 +14652,15 @@ components:
           preferPattern: preferPattern
           availMemoryKillKb: 5
           availMemoryTermKb: 2
-          enabled: true
           availMemoryTermPercent: 7
+        earlyoomEnabled: true
       exampleSetFlag: true
       properties:
         earlyoomConfig:
           $ref: '#/components/schemas/EarlyoomConfig'
+        earlyoomEnabled:
+          exampleSetFlag: true
+          type: boolean
       type: object
     Admin notification:
       example:
@@ -15283,6 +15293,7 @@ components:
           - CLIENT_TO_NODE_CA_CERT_EXPIRY
           - CLIENT_TO_NODE_CERT_EXPIRY
           - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
           - SSH_KEY_EXPIRY
           - SSH_KEY_ROTATION_FAILURE
           - PITR_CONFIG_FAILURE
@@ -15322,6 +15333,8 @@ components:
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
           - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
           exampleSetFlag: true
           type: string
         thresholdUnit:
@@ -15465,6 +15478,7 @@ components:
           - CLIENT_TO_NODE_CA_CERT_EXPIRY
           - CLIENT_TO_NODE_CERT_EXPIRY
           - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
           - SSH_KEY_EXPIRY
           - SSH_KEY_ROTATION_FAILURE
           - PITR_CONFIG_FAILURE
@@ -15504,6 +15518,8 @@ components:
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
           - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
           exampleSetFlag: true
           type: string
         uuids:
@@ -15843,6 +15859,7 @@ components:
           - CLIENT_TO_NODE_CA_CERT_EXPIRY
           - CLIENT_TO_NODE_CERT_EXPIRY
           - ENCRYPTION_AT_REST_CONFIG_EXPIRY
+          - UNIVERSE_KMS_KEY_STATUS
           - SSH_KEY_EXPIRY
           - SSH_KEY_ROTATION_FAILURE
           - PITR_CONFIG_FAILURE
@@ -15882,6 +15899,8 @@ components:
           - UNIVERSE_UNEXPECTED_TSERVERS_RUNNING
           - SAFETIME_LAG
           - CONTINUOUS_BACKUPS_STATUS
+          - THP_RSS_ISSUE
+          - THP_INCORRECT_SETTINGS
           exampleSetFlag: true
           type: string
         thresholdConditionReadOnly:
@@ -17009,8 +17028,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17245,7 +17264,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -20207,6 +20226,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -20350,6 +20371,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -20420,6 +20442,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -20771,6 +20794,7 @@ components:
         expiry: 2022-12-12T13:07:18Z
         state: DELETED
         category: YB_BACKUP_SCRIPT
+        firstSnapshotTime: 1
         backupInfo:
           backupSizeInBytes: 0
           expectedUniverseVersion: 6
@@ -20977,7 +21001,7 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ConnectOnly
+            role: Admin
             authTokenIssueDate: 2021-06-17T15:00:05Z
             timezone: timezone
             oidcJwtAuthToken: oidcJwtAuthToken
@@ -21135,6 +21159,12 @@ components:
           - YEARS
           exampleSetFlag: true
           type: string
+        firstSnapshotTime:
+          description: First snapshot time in this backup
+          exampleSetFlag: true
+          format: int64
+          readOnly: true
+          type: integer
         hasKMSHistory:
           description: Whether the backup has KMS history metadata
           exampleSetFlag: true
@@ -21799,7 +21829,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -22686,7 +22716,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -23214,7 +23244,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -23958,8 +23988,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -24151,7 +24181,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -27114,6 +27144,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -27257,6 +27289,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -27327,6 +27360,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -27411,7 +27445,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -28844,9 +28878,13 @@ components:
         serverCert: serverCert
         offloadable: true
         serverKey: serverKey
+        compressor: compressor
       exampleSetFlag: true
       properties:
         certPath:
+          exampleSetFlag: true
+          type: string
+        compressor:
           exampleSetFlag: true
           type: string
         offloadable:
@@ -28860,6 +28898,7 @@ components:
           type: string
       required:
       - certPath
+      - compressor
       - offloadable
       - serverCert
       - serverKey
@@ -29005,7 +29044,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -31186,7 +31225,6 @@ components:
         preferPattern: preferPattern
         availMemoryKillKb: 5
         availMemoryTermKb: 2
-        enabled: true
         availMemoryTermPercent: 7
       exampleSetFlag: true
       properties:
@@ -31206,9 +31244,6 @@ components:
           exampleSetFlag: true
           format: int32
           type: integer
-        enabled:
-          exampleSetFlag: true
-          type: boolean
         preferPattern:
           exampleSetFlag: true
           type: string
@@ -31473,8 +31508,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -31665,7 +31700,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -34622,6 +34657,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -34765,6 +34802,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -34835,6 +34873,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -35051,8 +35090,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -35246,7 +35285,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -38215,6 +38254,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -38358,6 +38399,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -38428,6 +38470,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -39421,8 +39464,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -39615,7 +39658,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -42581,6 +42624,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -42724,6 +42769,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -42794,6 +42840,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -44308,7 +44355,7 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ConnectOnly
+            role: Admin
             authTokenIssueDate: 2021-06-17T15:00:05Z
             timezone: timezone
             oidcJwtAuthToken: oidcJwtAuthToken
@@ -44609,7 +44656,7 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ConnectOnly
+            role: Admin
             authTokenIssueDate: 2021-06-17T15:00:05Z
             timezone: timezone
             oidcJwtAuthToken: oidcJwtAuthToken
@@ -44719,7 +44766,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -45286,6 +45333,7 @@ components:
           serverCert: serverCert
           offloadable: true
           serverKey: serverKey
+          compressor: compressor
         updatedAt: 2022-12-21T13:07:18Z
       exampleSetFlag: true
       properties:
@@ -45503,6 +45551,7 @@ components:
             serverCert: serverCert
             offloadable: true
             serverKey: serverKey
+            compressor: compressor
           providerName: providerName
           universeName: universeName
           updatedAt: 2022-12-21T13:07:18Z
@@ -45529,6 +45578,7 @@ components:
             serverCert: serverCert
             offloadable: true
             serverKey: serverKey
+            compressor: compressor
           providerName: providerName
           universeName: universeName
           updatedAt: 2022-12-21T13:07:18Z
@@ -45584,6 +45634,7 @@ components:
           serverCert: serverCert
           offloadable: true
           serverKey: serverKey
+          compressor: compressor
         providerName: providerName
         universeName: universeName
         updatedAt: 2022-12-21T13:07:18Z
@@ -46103,6 +46154,8 @@ components:
           - Rebooting
           - HardRebooting
           - VMImageUpgrade
+          - InstanceStopping
+          - InstanceStopped
           example: Provisioned
           exampleSetFlag: true
           type: string
@@ -46416,6 +46469,8 @@ components:
           - Rebooting
           - HardRebooting
           - VMImageUpgrade
+          - InstanceStopping
+          - InstanceStopped
           example: Provisioned
           exampleSetFlag: true
           type: string
@@ -47685,6 +47740,7 @@ components:
           - UPDATE_PROFILE
           - SUPER_ADMIN_ACTIONS
           - XCLUSTER
+          - DEBUG
           exampleSetFlag: true
           type: string
         resourceType:
@@ -47739,6 +47795,7 @@ components:
           - UPDATE_PROFILE
           - SUPER_ADMIN_ACTIONS
           - XCLUSTER
+          - DEBUG
           exampleSetFlag: true
           type: string
         description:
@@ -49021,8 +49078,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -49212,7 +49269,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -52169,6 +52226,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -52312,6 +52371,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -52382,6 +52442,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -53076,8 +53137,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -53271,7 +53332,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -56244,6 +56305,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -56387,6 +56450,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -56457,6 +56521,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -56727,8 +56792,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -56918,7 +56983,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -59875,6 +59940,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -60018,6 +60085,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -60088,6 +60156,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -60279,7 +60348,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -61091,7 +61160,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -61507,7 +61576,7 @@ components:
         user:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -61691,8 +61760,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -61883,7 +61952,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -64840,6 +64909,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -64983,6 +65054,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -65053,6 +65125,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -65417,6 +65490,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -65560,6 +65635,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -65630,6 +65706,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         useLocalTimezone:
@@ -65804,6 +65881,8 @@ components:
             - TlsToggleKubernetes
             - UpdateOOMServiceState
             - SendUserNotification
+            - ImportUniverse
+            - MigrateUniverse
             - KubernetesCheckVolumeExpansion
             - KubernetesPostExpansionCheckVolume
             - NodeCertReloadTask
@@ -65947,6 +66026,7 @@ components:
             - CreateAlertDefinitions
             - ManageAlertDefinitions
             - ManageCatalogUpgradeSuperUser
+            - UpdatePitrConfigIntermittentMinRecoverTime
             - MarkSourceMetric
             - UniverseSetTlsParams
             - UniverseUpdateRootCert
@@ -66017,6 +66097,7 @@ components:
             - YNPProvisioning
             - ConfigureOOMServiceOnNode
             - CheckSshConnection
+            - FetchServerConf
             exampleSetFlag: true
             type: string
           type: array
@@ -66314,8 +66395,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -66507,7 +66588,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -69464,6 +69545,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -69607,6 +69690,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -69677,6 +69761,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -70246,8 +70331,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -70437,7 +70522,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -73394,6 +73479,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -73537,6 +73624,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -73607,6 +73695,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -73664,7 +73753,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -74446,6 +74535,8 @@ components:
             - CloneNamespace
             - UpdateOOMServiceState
             - SendUserNotification
+            - ImportUniverse
+            - MigrateUniverse
             exampleSetFlag: true
             type: string
           type: array
@@ -74670,8 +74761,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         forceAll: true
         sourceXClusterConfigs:
@@ -74862,7 +74953,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -77822,6 +77913,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -77965,6 +78058,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -78035,6 +78129,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -78104,8 +78199,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -78297,7 +78392,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -81260,6 +81355,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -81403,6 +81500,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -81473,6 +81571,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -81804,8 +81903,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -81996,7 +82095,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -84952,6 +85051,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -85095,6 +85196,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -85165,6 +85267,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -85205,8 +85308,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -85394,7 +85497,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -88337,6 +88440,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -88480,6 +88585,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -88550,6 +88656,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -88590,8 +88697,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 9
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -88787,7 +88894,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -91730,6 +91837,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -91873,6 +91982,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -91943,6 +92053,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -92157,8 +92268,8 @@ components:
               preferPattern: preferPattern
               availMemoryKillKb: 5
               availMemoryTermKb: 2
-              enabled: true
               availMemoryTermPercent: 7
+            earlyoomEnabled: true
           expectedUniverseVersion: 9
           sourceXClusterConfigs:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -92354,7 +92465,7 @@ components:
           creatingUser:
             ldapSpecifiedRole: true
             customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            role: ConnectOnly
+            role: Admin
             authTokenIssueDate: 2021-06-17T15:00:05Z
             timezone: timezone
             oidcJwtAuthToken: oidcJwtAuthToken
@@ -95088,7 +95199,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -95422,8 +95533,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -95613,7 +95724,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -98570,6 +98681,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -98713,6 +98826,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -98783,6 +98897,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -99415,7 +99530,7 @@ components:
       example:
         ldapSpecifiedRole: true
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: ConnectOnly
+        role: Admin
         authTokenIssueDate: 2021-06-17T15:00:05Z
         timezone: timezone
         oidcJwtAuthToken: oidcJwtAuthToken
@@ -99474,13 +99589,15 @@ components:
           exampleSetFlag: true
           type: boolean
         role:
-          description: User role
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b>
+            Use  getRoleBindings instead.
           enum:
           - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
           - SuperAdmin
+          example: Admin
           exampleSetFlag: true
           type: string
         timezone:
@@ -99511,7 +99628,7 @@ components:
       example:
         ldapSpecifiedRole: true
         customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        role: ConnectOnly
+        role: Admin
         authTokenIssueDate: 2021-06-17T15:00:05Z
         timezone: timezone
         oidcJwtAuthToken: oidcJwtAuthToken
@@ -99570,13 +99687,15 @@ components:
           exampleSetFlag: true
           type: boolean
         role:
-          description: User role
+          description: <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b>
+            Use  getRoleBindings instead.
           enum:
           - ConnectOnly
           - ReadOnly
           - BackupAdmin
           - Admin
           - SuperAdmin
+          example: Admin
           exampleSetFlag: true
           type: string
         timezone:
@@ -99611,8 +99730,8 @@ components:
             preferPattern: preferPattern
             availMemoryKillKb: 5
             availMemoryTermKb: 2
-            enabled: true
             availMemoryTermPercent: 7
+          earlyoomEnabled: true
         expectedUniverseVersion: 0
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -99808,7 +99927,7 @@ components:
         creatingUser:
           ldapSpecifiedRole: true
           customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          role: ConnectOnly
+          role: Admin
           authTokenIssueDate: 2021-06-17T15:00:05Z
           timezone: timezone
           oidcJwtAuthToken: oidcJwtAuthToken
@@ -102819,6 +102938,8 @@ components:
           - TlsToggleKubernetes
           - UpdateOOMServiceState
           - SendUserNotification
+          - ImportUniverse
+          - MigrateUniverse
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -102962,6 +103083,7 @@ components:
           - CreateAlertDefinitions
           - ManageAlertDefinitions
           - ManageCatalogUpgradeSuperUser
+          - UpdatePitrConfigIntermittentMinRecoverTime
           - MarkSourceMetric
           - UniverseSetTlsParams
           - UniverseUpdateRootCert
@@ -103032,6 +103154,7 @@ components:
           - YNPProvisioning
           - ConfigureOOMServiceOnNode
           - CheckSshConnection
+          - FetchServerConf
           exampleSetFlag: true
           type: string
         updatingTaskUUID:
@@ -103190,6 +103313,10 @@ components:
       description: xcluster config object
       exampleSetFlag: false
       properties:
+        automaticDdlMode:
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
         createTime:
           description: Create time of the xCluster config
           example: 2022-12-12T13:07:18Z
@@ -103683,6 +103810,7 @@ components:
           state: UNKNOWN
           retentionPeriod: 5
         secondary: true
+        automaticDdlMode: true
         dbs:
         - dbs
         - dbs
@@ -103722,6 +103850,10 @@ components:
         status: Initialized
       exampleSetFlag: true
       properties:
+        automaticDdlMode:
+          exampleSetFlag: true
+          readOnly: true
+          type: boolean
         createTime:
           description: Create time of the xCluster config
           example: 2022-12-12T13:07:18Z

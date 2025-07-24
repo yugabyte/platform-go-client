@@ -45,6 +45,8 @@ type CommunicationPortsSpec struct {
 	YsqlServerHttpPort *int32 `json:"ysql_server_http_port,omitempty"`
 	// YSQL RPC port
 	YsqlServerRpcPort *int32 `json:"ysql_server_rpc_port,omitempty"`
+	// Internal YSQL RPC port used when connection pooling is enabled
+	InternalYsqlServerRpcPort *int32 `json:"internal_ysql_server_rpc_port,omitempty"`
 }
 
 // NewCommunicationPortsSpec instantiates a new CommunicationPortsSpec object
@@ -81,6 +83,8 @@ func NewCommunicationPortsSpec() *CommunicationPortsSpec {
 	this.YsqlServerHttpPort = &ysqlServerHttpPort
 	var ysqlServerRpcPort int32 = 5433
 	this.YsqlServerRpcPort = &ysqlServerRpcPort
+	var internalYsqlServerRpcPort int32 = 6433
+	this.InternalYsqlServerRpcPort = &internalYsqlServerRpcPort
 	return &this
 }
 
@@ -117,6 +121,8 @@ func NewCommunicationPortsSpecWithDefaults() *CommunicationPortsSpec {
 	this.YsqlServerHttpPort = &ysqlServerHttpPort
 	var ysqlServerRpcPort int32 = 5433
 	this.YsqlServerRpcPort = &ysqlServerRpcPort
+	var internalYsqlServerRpcPort int32 = 6433
+	this.InternalYsqlServerRpcPort = &internalYsqlServerRpcPort
 	return &this
 }
 
@@ -568,6 +574,38 @@ func (o *CommunicationPortsSpec) SetYsqlServerRpcPort(v int32) {
 	o.YsqlServerRpcPort = &v
 }
 
+// GetInternalYsqlServerRpcPort returns the InternalYsqlServerRpcPort field value if set, zero value otherwise.
+func (o *CommunicationPortsSpec) GetInternalYsqlServerRpcPort() int32 {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		var ret int32
+		return ret
+	}
+	return *o.InternalYsqlServerRpcPort
+}
+
+// GetInternalYsqlServerRpcPortOk returns a tuple with the InternalYsqlServerRpcPort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CommunicationPortsSpec) GetInternalYsqlServerRpcPortOk() (*int32, bool) {
+	if o == nil || o.InternalYsqlServerRpcPort == nil {
+		return nil, false
+	}
+	return o.InternalYsqlServerRpcPort, true
+}
+
+// HasInternalYsqlServerRpcPort returns a boolean if a field has been set.
+func (o *CommunicationPortsSpec) HasInternalYsqlServerRpcPort() bool {
+	if o != nil && o.InternalYsqlServerRpcPort != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInternalYsqlServerRpcPort gets a reference to the given int32 and assigns it to the InternalYsqlServerRpcPort field.
+func (o *CommunicationPortsSpec) SetInternalYsqlServerRpcPort(v int32) {
+	o.InternalYsqlServerRpcPort = &v
+}
+
 func (o CommunicationPortsSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MasterHttpPort != nil {
@@ -611,6 +649,9 @@ func (o CommunicationPortsSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.YsqlServerRpcPort != nil {
 		toSerialize["ysql_server_rpc_port"] = o.YsqlServerRpcPort
+	}
+	if o.InternalYsqlServerRpcPort != nil {
+		toSerialize["internal_ysql_server_rpc_port"] = o.InternalYsqlServerRpcPort
 	}
 	return json.Marshal(toSerialize)
 }

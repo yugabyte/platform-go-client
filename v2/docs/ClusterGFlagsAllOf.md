@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AzGflags** | Pointer to [**map[string]AvailabilityZoneGFlags**](AvailabilityZoneGFlags.md) | GFlags per availability zone uuid | [optional] 
+**GflagGroups** | Pointer to **[]string** | GFlag groups to be applied | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetAzGflags sets AzGflags field to given value.
 `func (o *ClusterGFlagsAllOf) HasAzGflags() bool`
 
 HasAzGflags returns a boolean if a field has been set.
+
+### GetGflagGroups
+
+`func (o *ClusterGFlagsAllOf) GetGflagGroups() []string`
+
+GetGflagGroups returns the GflagGroups field if non-nil, zero value otherwise.
+
+### GetGflagGroupsOk
+
+`func (o *ClusterGFlagsAllOf) GetGflagGroupsOk() (*[]string, bool)`
+
+GetGflagGroupsOk returns a tuple with the GflagGroups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGflagGroups
+
+`func (o *ClusterGFlagsAllOf) SetGflagGroups(v []string)`
+
+SetGflagGroups sets GflagGroups field to given value.
+
+### HasGflagGroups
+
+`func (o *ClusterGFlagsAllOf) HasGflagGroups() bool`
+
+HasGflagGroups returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

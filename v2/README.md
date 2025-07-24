@@ -112,12 +112,14 @@ Class | Method | HTTP request | Description
 *UniverseApi* | [**FinalizeSoftwareUpgrade**](docs/UniverseApi.md#finalizesoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
 *UniverseApi* | [**GetFinalizeSoftwareUpgradeInfo**](docs/UniverseApi.md#getfinalizesoftwareupgradeinfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 *UniverseApi* | [**GetUniverse**](docs/UniverseApi.md#getuniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
+*UniverseApi* | [**GetUniverseResources**](docs/UniverseApi.md#getuniverseresources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
 *UniverseApi* | [**PrecheckSoftwareUpgrade**](docs/UniverseApi.md#prechecksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Precheck YugabyteDB version upgrade
 *UniverseApi* | [**RestartUniverse**](docs/UniverseApi.md#restartuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
 *UniverseApi* | [**RollbackSoftwareUpgrade**](docs/UniverseApi.md#rollbacksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
 *UniverseApi* | [**StartSoftwareUpgrade**](docs/UniverseApi.md#startsoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade YugabyteDB version
 *UniverseApi* | [**StartThirdPartySoftwareUpgrade**](docs/UniverseApi.md#startthirdpartysoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software | Upgrade third party software
 *UniverseApi* | [**SystemdEnable**](docs/UniverseApi.md#systemdenable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
+*YBAInstanceApi* | [**GetYBAInstanceInfo**](docs/YBAInstanceApi.md#getybainstanceinfo) | **Get** /yba-info | Get YBAInstance info
 
 
 ## Documentation For Models
@@ -226,6 +228,7 @@ Class | Method | HTTP request | Description
  - [UserInfo](docs/UserInfo.md)
  - [UserSpec](docs/UserSpec.md)
  - [XClusterInfo](docs/XClusterInfo.md)
+ - [YBAInfo](docs/YBAInfo.md)
  - [YBATask](docs/YBATask.md)
  - [YCQLAuditConfig](docs/YCQLAuditConfig.md)
  - [YCQLSpec](docs/YCQLSpec.md)

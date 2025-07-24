@@ -17,6 +17,7 @@ import (
 // Config struct for Config
 type Config struct {
 	CertPath string `json:"certPath"`
+	Compressor string `json:"compressor"`
 	Offloadable bool `json:"offloadable"`
 	ServerCert string `json:"serverCert"`
 	ServerKey string `json:"serverKey"`
@@ -26,9 +27,10 @@ type Config struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(certPath string, offloadable bool, serverCert string, serverKey string) *Config {
+func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverKey string) *Config {
 	this := Config{}
 	this.CertPath = certPath
+	this.Compressor = compressor
 	this.Offloadable = offloadable
 	this.ServerCert = serverCert
 	this.ServerKey = serverKey
@@ -65,6 +67,30 @@ func (o *Config) GetCertPathOk() (*string, bool) {
 // SetCertPath sets field value
 func (o *Config) SetCertPath(v string) {
 	o.CertPath = v
+}
+
+// GetCompressor returns the Compressor field value
+func (o *Config) GetCompressor() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Compressor
+}
+
+// GetCompressorOk returns a tuple with the Compressor field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetCompressorOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Compressor, true
+}
+
+// SetCompressor sets field value
+func (o *Config) SetCompressor(v string) {
+	o.Compressor = v
 }
 
 // GetOffloadable returns the Offloadable field value
@@ -143,6 +169,9 @@ func (o Config) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["certPath"] = o.CertPath
+	}
+	if true {
+		toSerialize["compressor"] = o.Compressor
 	}
 	if true {
 		toSerialize["offloadable"] = o.Offloadable

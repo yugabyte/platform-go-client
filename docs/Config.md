@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CertPath** | **string** |  | 
+**Compressor** | **string** |  | 
 **Offloadable** | **bool** |  | 
 **ServerCert** | **string** |  | 
 **ServerKey** | **string** |  | 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewConfig
 
-`func NewConfig(certPath string, offloadable bool, serverCert string, serverKey string, ) *Config`
+`func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverKey string, ) *Config`
 
 NewConfig instantiates a new Config object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +47,26 @@ and a boolean to check if the value has been set.
 `func (o *Config) SetCertPath(v string)`
 
 SetCertPath sets CertPath field to given value.
+
+
+### GetCompressor
+
+`func (o *Config) GetCompressor() string`
+
+GetCompressor returns the Compressor field if non-nil, zero value otherwise.
+
+### GetCompressorOk
+
+`func (o *Config) GetCompressorOk() (*string, bool)`
+
+GetCompressorOk returns a tuple with the Compressor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompressor
+
+`func (o *Config) SetCompressor(v string)`
+
+SetCompressor sets Compressor field to given value.
 
 
 ### GetOffloadable

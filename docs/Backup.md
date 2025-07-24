@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **CustomerUUID** | Pointer to **string** | Customer UUID that owns this backup | [optional] 
 **Expiry** | Pointer to **time.Time** | Expiry time (unix timestamp) of the backup | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
+**FirstSnapshotTime** | Pointer to **int64** | First snapshot time in this backup | [optional] [readonly] 
 **HasKMSHistory** | Pointer to **bool** | Whether the backup has KMS history metadata | [optional] [readonly] 
 **IncrementalBackup** | **bool** |  | 
 **ParentBackup** | **bool** |  | 
@@ -269,6 +270,31 @@ SetExpiryTimeUnit sets ExpiryTimeUnit field to given value.
 `func (o *Backup) HasExpiryTimeUnit() bool`
 
 HasExpiryTimeUnit returns a boolean if a field has been set.
+
+### GetFirstSnapshotTime
+
+`func (o *Backup) GetFirstSnapshotTime() int64`
+
+GetFirstSnapshotTime returns the FirstSnapshotTime field if non-nil, zero value otherwise.
+
+### GetFirstSnapshotTimeOk
+
+`func (o *Backup) GetFirstSnapshotTimeOk() (*int64, bool)`
+
+GetFirstSnapshotTimeOk returns a tuple with the FirstSnapshotTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirstSnapshotTime
+
+`func (o *Backup) SetFirstSnapshotTime(v int64)`
+
+SetFirstSnapshotTime sets FirstSnapshotTime field to given value.
+
+### HasFirstSnapshotTime
+
+`func (o *Backup) HasFirstSnapshotTime() bool`
+
+HasFirstSnapshotTime returns a boolean if a field has been set.
 
 ### GetHasKMSHistory
 
