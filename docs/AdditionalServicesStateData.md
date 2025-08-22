@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EarlyoomConfig** | Pointer to [**EarlyoomConfig**](EarlyoomConfig.md) |  | [optional] 
+**EarlyoomEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -49,6 +50,31 @@ SetEarlyoomConfig sets EarlyoomConfig field to given value.
 `func (o *AdditionalServicesStateData) HasEarlyoomConfig() bool`
 
 HasEarlyoomConfig returns a boolean if a field has been set.
+
+### GetEarlyoomEnabled
+
+`func (o *AdditionalServicesStateData) GetEarlyoomEnabled() bool`
+
+GetEarlyoomEnabled returns the EarlyoomEnabled field if non-nil, zero value otherwise.
+
+### GetEarlyoomEnabledOk
+
+`func (o *AdditionalServicesStateData) GetEarlyoomEnabledOk() (*bool, bool)`
+
+GetEarlyoomEnabledOk returns a tuple with the EarlyoomEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEarlyoomEnabled
+
+`func (o *AdditionalServicesStateData) SetEarlyoomEnabled(v bool)`
+
+SetEarlyoomEnabled sets EarlyoomEnabled field to given value.
+
+### HasEarlyoomEnabled
+
+`func (o *AdditionalServicesStateData) HasEarlyoomEnabled() bool`
+
+HasEarlyoomEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

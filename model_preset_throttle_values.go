@@ -16,16 +16,16 @@ import (
 
 // PresetThrottleValues struct for PresetThrottleValues
 type PresetThrottleValues struct {
-	DefaultValue int32 `json:"defaultValue"`
-	MaxValue int32 `json:"maxValue"`
-	MinValue int32 `json:"minValue"`
+	DefaultValue int64 `json:"defaultValue"`
+	MaxValue int64 `json:"maxValue"`
+	MinValue int64 `json:"minValue"`
 }
 
 // NewPresetThrottleValues instantiates a new PresetThrottleValues object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPresetThrottleValues(defaultValue int32, maxValue int32, minValue int32) *PresetThrottleValues {
+func NewPresetThrottleValues(defaultValue int64, maxValue int64, minValue int64) *PresetThrottleValues {
 	this := PresetThrottleValues{}
 	this.DefaultValue = defaultValue
 	this.MaxValue = maxValue
@@ -42,9 +42,9 @@ func NewPresetThrottleValuesWithDefaults() *PresetThrottleValues {
 }
 
 // GetDefaultValue returns the DefaultValue field value
-func (o *PresetThrottleValues) GetDefaultValue() int32 {
+func (o *PresetThrottleValues) GetDefaultValue() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -53,7 +53,7 @@ func (o *PresetThrottleValues) GetDefaultValue() int32 {
 
 // GetDefaultValueOk returns a tuple with the DefaultValue field value
 // and a boolean to check if the value has been set.
-func (o *PresetThrottleValues) GetDefaultValueOk() (*int32, bool) {
+func (o *PresetThrottleValues) GetDefaultValueOk() (*int64, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -61,14 +61,14 @@ func (o *PresetThrottleValues) GetDefaultValueOk() (*int32, bool) {
 }
 
 // SetDefaultValue sets field value
-func (o *PresetThrottleValues) SetDefaultValue(v int32) {
+func (o *PresetThrottleValues) SetDefaultValue(v int64) {
 	o.DefaultValue = v
 }
 
 // GetMaxValue returns the MaxValue field value
-func (o *PresetThrottleValues) GetMaxValue() int32 {
+func (o *PresetThrottleValues) GetMaxValue() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -77,7 +77,7 @@ func (o *PresetThrottleValues) GetMaxValue() int32 {
 
 // GetMaxValueOk returns a tuple with the MaxValue field value
 // and a boolean to check if the value has been set.
-func (o *PresetThrottleValues) GetMaxValueOk() (*int32, bool) {
+func (o *PresetThrottleValues) GetMaxValueOk() (*int64, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -85,14 +85,14 @@ func (o *PresetThrottleValues) GetMaxValueOk() (*int32, bool) {
 }
 
 // SetMaxValue sets field value
-func (o *PresetThrottleValues) SetMaxValue(v int32) {
+func (o *PresetThrottleValues) SetMaxValue(v int64) {
 	o.MaxValue = v
 }
 
 // GetMinValue returns the MinValue field value
-func (o *PresetThrottleValues) GetMinValue() int32 {
+func (o *PresetThrottleValues) GetMinValue() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -101,7 +101,7 @@ func (o *PresetThrottleValues) GetMinValue() int32 {
 
 // GetMinValueOk returns a tuple with the MinValue field value
 // and a boolean to check if the value has been set.
-func (o *PresetThrottleValues) GetMinValueOk() (*int32, bool) {
+func (o *PresetThrottleValues) GetMinValueOk() (*int64, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -109,7 +109,7 @@ func (o *PresetThrottleValues) GetMinValueOk() (*int32, bool) {
 }
 
 // SetMinValue sets field value
-func (o *PresetThrottleValues) SetMinValue(v int32) {
+func (o *PresetThrottleValues) SetMinValue(v int64) {
 	o.MinValue = v
 }
 

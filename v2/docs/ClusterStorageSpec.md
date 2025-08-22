@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **StorageType** | Pointer to **string** | Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent, Hyperdisk_Balanced, Hyperdisk_Extreme) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster. | [optional] 
 **DiskIops** | Pointer to **int32** | Desired IOPS for the volumes mounted on this aws, gcp or azu instance | [optional] 
 **Throughput** | Pointer to **int32** | Desired throughput for the volumes mounted on this aws, gcp or azu instance | [optional] 
+**CloudVolumeEncryption** | Pointer to [**CloudVolumeEncryption**](CloudVolumeEncryption.md) |  | [optional] 
 
 ## Methods
 
@@ -195,6 +196,31 @@ SetThroughput sets Throughput field to given value.
 `func (o *ClusterStorageSpec) HasThroughput() bool`
 
 HasThroughput returns a boolean if a field has been set.
+
+### GetCloudVolumeEncryption
+
+`func (o *ClusterStorageSpec) GetCloudVolumeEncryption() CloudVolumeEncryption`
+
+GetCloudVolumeEncryption returns the CloudVolumeEncryption field if non-nil, zero value otherwise.
+
+### GetCloudVolumeEncryptionOk
+
+`func (o *ClusterStorageSpec) GetCloudVolumeEncryptionOk() (*CloudVolumeEncryption, bool)`
+
+GetCloudVolumeEncryptionOk returns a tuple with the CloudVolumeEncryption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudVolumeEncryption
+
+`func (o *ClusterStorageSpec) SetCloudVolumeEncryption(v CloudVolumeEncryption)`
+
+SetCloudVolumeEncryption sets CloudVolumeEncryption field to given value.
+
+### HasCloudVolumeEncryption
+
+`func (o *ClusterStorageSpec) HasCloudVolumeEncryption() bool`
+
+HasCloudVolumeEncryption returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

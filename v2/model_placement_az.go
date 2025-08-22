@@ -33,6 +33,8 @@ type PlacementAZ struct {
 	LeaderAffinity *bool `json:"leader_affinity,omitempty"`
 	// The Load Balancer id.
 	LbName *string `json:"lb_name,omitempty"`
+	// Priority of zone (for leaders placement). Values have to be contiguous non-zero integers. Multiple zones can have the same value. A lower value indicates higher zone priority.
+	LeaderPreference *int32 `json:"leader_preference,omitempty"`
 }
 
 // NewPlacementAZ instantiates a new PlacementAZ object
@@ -308,6 +310,38 @@ func (o *PlacementAZ) SetLbName(v string) {
 	o.LbName = &v
 }
 
+// GetLeaderPreference returns the LeaderPreference field value if set, zero value otherwise.
+func (o *PlacementAZ) GetLeaderPreference() int32 {
+	if o == nil || o.LeaderPreference == nil {
+		var ret int32
+		return ret
+	}
+	return *o.LeaderPreference
+}
+
+// GetLeaderPreferenceOk returns a tuple with the LeaderPreference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlacementAZ) GetLeaderPreferenceOk() (*int32, bool) {
+	if o == nil || o.LeaderPreference == nil {
+		return nil, false
+	}
+	return o.LeaderPreference, true
+}
+
+// HasLeaderPreference returns a boolean if a field has been set.
+func (o *PlacementAZ) HasLeaderPreference() bool {
+	if o != nil && o.LeaderPreference != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLeaderPreference gets a reference to the given int32 and assigns it to the LeaderPreference field.
+func (o *PlacementAZ) SetLeaderPreference(v int32) {
+	o.LeaderPreference = &v
+}
+
 func (o PlacementAZ) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Uuid != nil {
@@ -333,6 +367,9 @@ func (o PlacementAZ) MarshalJSON() ([]byte, error) {
 	}
 	if o.LbName != nil {
 		toSerialize["lb_name"] = o.LbName
+	}
+	if o.LeaderPreference != nil {
+		toSerialize["leader_preference"] = o.LeaderPreference
 	}
 	return json.Marshal(toSerialize)
 }

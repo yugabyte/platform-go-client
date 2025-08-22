@@ -34,6 +34,8 @@ type ClusterSpec struct {
 	// A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/.
 	InstanceTags *map[string]string `json:"instance_tags,omitempty"`
 	AuditLogConfig *AuditLogConfig `json:"audit_log_config,omitempty"`
+	QueryLogConfig *QueryLogConfig `json:"query_log_config,omitempty"`
+	MetricsExportConfig *MetricsExportConfig `json:"metrics_export_config,omitempty"`
 	Gflags *ClusterGFlags `json:"gflags,omitempty"`
 }
 
@@ -382,6 +384,70 @@ func (o *ClusterSpec) SetAuditLogConfig(v AuditLogConfig) {
 	o.AuditLogConfig = &v
 }
 
+// GetQueryLogConfig returns the QueryLogConfig field value if set, zero value otherwise.
+func (o *ClusterSpec) GetQueryLogConfig() QueryLogConfig {
+	if o == nil || o.QueryLogConfig == nil {
+		var ret QueryLogConfig
+		return ret
+	}
+	return *o.QueryLogConfig
+}
+
+// GetQueryLogConfigOk returns a tuple with the QueryLogConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterSpec) GetQueryLogConfigOk() (*QueryLogConfig, bool) {
+	if o == nil || o.QueryLogConfig == nil {
+		return nil, false
+	}
+	return o.QueryLogConfig, true
+}
+
+// HasQueryLogConfig returns a boolean if a field has been set.
+func (o *ClusterSpec) HasQueryLogConfig() bool {
+	if o != nil && o.QueryLogConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryLogConfig gets a reference to the given QueryLogConfig and assigns it to the QueryLogConfig field.
+func (o *ClusterSpec) SetQueryLogConfig(v QueryLogConfig) {
+	o.QueryLogConfig = &v
+}
+
+// GetMetricsExportConfig returns the MetricsExportConfig field value if set, zero value otherwise.
+func (o *ClusterSpec) GetMetricsExportConfig() MetricsExportConfig {
+	if o == nil || o.MetricsExportConfig == nil {
+		var ret MetricsExportConfig
+		return ret
+	}
+	return *o.MetricsExportConfig
+}
+
+// GetMetricsExportConfigOk returns a tuple with the MetricsExportConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterSpec) GetMetricsExportConfigOk() (*MetricsExportConfig, bool) {
+	if o == nil || o.MetricsExportConfig == nil {
+		return nil, false
+	}
+	return o.MetricsExportConfig, true
+}
+
+// HasMetricsExportConfig returns a boolean if a field has been set.
+func (o *ClusterSpec) HasMetricsExportConfig() bool {
+	if o != nil && o.MetricsExportConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsExportConfig gets a reference to the given MetricsExportConfig and assigns it to the MetricsExportConfig field.
+func (o *ClusterSpec) SetMetricsExportConfig(v MetricsExportConfig) {
+	o.MetricsExportConfig = &v
+}
+
 // GetGflags returns the Gflags field value if set, zero value otherwise.
 func (o *ClusterSpec) GetGflags() ClusterGFlags {
 	if o == nil || o.Gflags == nil {
@@ -448,6 +514,12 @@ func (o ClusterSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.AuditLogConfig != nil {
 		toSerialize["audit_log_config"] = o.AuditLogConfig
+	}
+	if o.QueryLogConfig != nil {
+		toSerialize["query_log_config"] = o.QueryLogConfig
+	}
+	if o.MetricsExportConfig != nil {
+		toSerialize["metrics_export_config"] = o.MetricsExportConfig
 	}
 	if o.Gflags != nil {
 		toSerialize["gflags"] = o.Gflags

@@ -23,6 +23,8 @@ type ClusterGFlags struct {
 	Master *map[string]string `json:"master,omitempty"`
 	// GFlags per availability zone uuid
 	AzGflags *map[string]AvailabilityZoneGFlags `json:"az_gflags,omitempty"`
+	// GFlag groups to be applied
+	GflagGroups *[]string `json:"gflag_groups,omitempty"`
 }
 
 // NewClusterGFlags instantiates a new ClusterGFlags object
@@ -138,6 +140,38 @@ func (o *ClusterGFlags) SetAzGflags(v map[string]AvailabilityZoneGFlags) {
 	o.AzGflags = &v
 }
 
+// GetGflagGroups returns the GflagGroups field value if set, zero value otherwise.
+func (o *ClusterGFlags) GetGflagGroups() []string {
+	if o == nil || o.GflagGroups == nil {
+		var ret []string
+		return ret
+	}
+	return *o.GflagGroups
+}
+
+// GetGflagGroupsOk returns a tuple with the GflagGroups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterGFlags) GetGflagGroupsOk() (*[]string, bool) {
+	if o == nil || o.GflagGroups == nil {
+		return nil, false
+	}
+	return o.GflagGroups, true
+}
+
+// HasGflagGroups returns a boolean if a field has been set.
+func (o *ClusterGFlags) HasGflagGroups() bool {
+	if o != nil && o.GflagGroups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGflagGroups gets a reference to the given []string and assigns it to the GflagGroups field.
+func (o *ClusterGFlags) SetGflagGroups(v []string) {
+	o.GflagGroups = &v
+}
+
 func (o ClusterGFlags) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Tserver != nil {
@@ -148,6 +182,9 @@ func (o ClusterGFlags) MarshalJSON() ([]byte, error) {
 	}
 	if o.AzGflags != nil {
 		toSerialize["az_gflags"] = o.AzGflags
+	}
+	if o.GflagGroups != nil {
+		toSerialize["gflag_groups"] = o.GflagGroups
 	}
 	return json.Marshal(toSerialize)
 }

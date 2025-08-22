@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AutomaticDdlMode** | Pointer to **bool** |  | [optional] [readonly] 
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
 **Dbs** | Pointer to **[]string** |  | [optional] [readonly] 
 **Imported** | Pointer to **bool** | YbaApi Internal. Whether this xCluster replication config was imported | [optional] 
@@ -48,6 +49,31 @@ will change when the set of required properties is changed
 NewXClusterConfigWithDefaults instantiates a new XClusterConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAutomaticDdlMode
+
+`func (o *XClusterConfig) GetAutomaticDdlMode() bool`
+
+GetAutomaticDdlMode returns the AutomaticDdlMode field if non-nil, zero value otherwise.
+
+### GetAutomaticDdlModeOk
+
+`func (o *XClusterConfig) GetAutomaticDdlModeOk() (*bool, bool)`
+
+GetAutomaticDdlModeOk returns a tuple with the AutomaticDdlMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutomaticDdlMode
+
+`func (o *XClusterConfig) SetAutomaticDdlMode(v bool)`
+
+SetAutomaticDdlMode sets AutomaticDdlMode field to given value.
+
+### HasAutomaticDdlMode
+
+`func (o *XClusterConfig) HasAutomaticDdlMode() bool`
+
+HasAutomaticDdlMode returns a boolean if a field has been set.
 
 ### GetCreateTime
 

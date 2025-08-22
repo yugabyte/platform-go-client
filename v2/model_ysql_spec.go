@@ -23,6 +23,8 @@ type YSQLSpec struct {
 	EnableAuth *bool `json:"enable_auth,omitempty"`
 	// Password to set for the YSQL database in this universe. Required if enable_auth is true.
 	Password *string `json:"password,omitempty"`
+	// Use built-in YSQL service for maximizing the number of simultaneous connections to database.
+	EnableConnectionPooling *bool `json:"enable_connection_pooling,omitempty"`
 }
 
 // NewYSQLSpec instantiates a new YSQLSpec object
@@ -31,6 +33,8 @@ type YSQLSpec struct {
 // will change when the set of required properties is changed
 func NewYSQLSpec() *YSQLSpec {
 	this := YSQLSpec{}
+	var enableConnectionPooling bool = false
+	this.EnableConnectionPooling = &enableConnectionPooling
 	return &this
 }
 
@@ -39,6 +43,8 @@ func NewYSQLSpec() *YSQLSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewYSQLSpecWithDefaults() *YSQLSpec {
 	this := YSQLSpec{}
+	var enableConnectionPooling bool = false
+	this.EnableConnectionPooling = &enableConnectionPooling
 	return &this
 }
 
@@ -138,6 +144,38 @@ func (o *YSQLSpec) SetPassword(v string) {
 	o.Password = &v
 }
 
+// GetEnableConnectionPooling returns the EnableConnectionPooling field value if set, zero value otherwise.
+func (o *YSQLSpec) GetEnableConnectionPooling() bool {
+	if o == nil || o.EnableConnectionPooling == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableConnectionPooling
+}
+
+// GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YSQLSpec) GetEnableConnectionPoolingOk() (*bool, bool) {
+	if o == nil || o.EnableConnectionPooling == nil {
+		return nil, false
+	}
+	return o.EnableConnectionPooling, true
+}
+
+// HasEnableConnectionPooling returns a boolean if a field has been set.
+func (o *YSQLSpec) HasEnableConnectionPooling() bool {
+	if o != nil && o.EnableConnectionPooling != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableConnectionPooling gets a reference to the given bool and assigns it to the EnableConnectionPooling field.
+func (o *YSQLSpec) SetEnableConnectionPooling(v bool) {
+	o.EnableConnectionPooling = &v
+}
+
 func (o YSQLSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Enable != nil {
@@ -148,6 +186,9 @@ func (o YSQLSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Password != nil {
 		toSerialize["password"] = o.Password
+	}
+	if o.EnableConnectionPooling != nil {
+		toSerialize["enable_connection_pooling"] = o.EnableConnectionPooling
 	}
 	return json.Marshal(toSerialize)
 }

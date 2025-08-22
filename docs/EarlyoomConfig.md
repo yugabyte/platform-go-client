@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **AvailMemoryKillPercent** | Pointer to **int32** |  | [optional] 
 **AvailMemoryTermKb** | Pointer to **int32** |  | [optional] 
 **AvailMemoryTermPercent** | Pointer to **int32** |  | [optional] 
-**Enabled** | Pointer to **bool** |  | [optional] 
 **PreferPattern** | Pointer to **string** |  | [optional] 
 **ReportInterval** | Pointer to **int32** |  | [optional] 
 
@@ -130,31 +129,6 @@ SetAvailMemoryTermPercent sets AvailMemoryTermPercent field to given value.
 `func (o *EarlyoomConfig) HasAvailMemoryTermPercent() bool`
 
 HasAvailMemoryTermPercent returns a boolean if a field has been set.
-
-### GetEnabled
-
-`func (o *EarlyoomConfig) GetEnabled() bool`
-
-GetEnabled returns the Enabled field if non-nil, zero value otherwise.
-
-### GetEnabledOk
-
-`func (o *EarlyoomConfig) GetEnabledOk() (*bool, bool)`
-
-GetEnabledOk returns a tuple with the Enabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnabled
-
-`func (o *EarlyoomConfig) SetEnabled(v bool)`
-
-SetEnabled sets Enabled field to given value.
-
-### HasEnabled
-
-`func (o *EarlyoomConfig) HasEnabled() bool`
-
-HasEnabled returns a boolean if a field has been set.
 
 ### GetPreferPattern
 

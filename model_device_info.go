@@ -16,6 +16,7 @@ import (
 
 // DeviceInfo Device information
 type DeviceInfo struct {
+	CloudVolumeEncryption *CloudVolumeEncryption `json:"cloudVolumeEncryption,omitempty"`
 	// Desired IOPS for the volumes mounted on this instance
 	DiskIops *int32 `json:"diskIops,omitempty"`
 	// Comma-separated list of mount points for the devices in each instance
@@ -47,6 +48,38 @@ func NewDeviceInfo() *DeviceInfo {
 func NewDeviceInfoWithDefaults() *DeviceInfo {
 	this := DeviceInfo{}
 	return &this
+}
+
+// GetCloudVolumeEncryption returns the CloudVolumeEncryption field value if set, zero value otherwise.
+func (o *DeviceInfo) GetCloudVolumeEncryption() CloudVolumeEncryption {
+	if o == nil || o.CloudVolumeEncryption == nil {
+		var ret CloudVolumeEncryption
+		return ret
+	}
+	return *o.CloudVolumeEncryption
+}
+
+// GetCloudVolumeEncryptionOk returns a tuple with the CloudVolumeEncryption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeviceInfo) GetCloudVolumeEncryptionOk() (*CloudVolumeEncryption, bool) {
+	if o == nil || o.CloudVolumeEncryption == nil {
+		return nil, false
+	}
+	return o.CloudVolumeEncryption, true
+}
+
+// HasCloudVolumeEncryption returns a boolean if a field has been set.
+func (o *DeviceInfo) HasCloudVolumeEncryption() bool {
+	if o != nil && o.CloudVolumeEncryption != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudVolumeEncryption gets a reference to the given CloudVolumeEncryption and assigns it to the CloudVolumeEncryption field.
+func (o *DeviceInfo) SetCloudVolumeEncryption(v CloudVolumeEncryption) {
+	o.CloudVolumeEncryption = &v
 }
 
 // GetDiskIops returns the DiskIops field value if set, zero value otherwise.
@@ -275,6 +308,9 @@ func (o *DeviceInfo) SetVolumeSize(v int32) {
 
 func (o DeviceInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.CloudVolumeEncryption != nil {
+		toSerialize["cloudVolumeEncryption"] = o.CloudVolumeEncryption
+	}
 	if o.DiskIops != nil {
 		toSerialize["diskIops"] = o.DiskIops
 	}

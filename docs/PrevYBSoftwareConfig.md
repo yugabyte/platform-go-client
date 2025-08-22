@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AllTserversUpgradedToYsqlMajorVersion** | Pointer to **bool** |  | [optional] 
 **AutoFlagConfigVersion** | Pointer to **int32** |  | [optional] 
+**CanRollbackCatalogUpgrade** | Pointer to **bool** |  | [optional] 
 **SoftwareVersion** | Pointer to **string** |  | [optional] 
 **TargetUpgradeSoftwareVersion** | Pointer to **string** |  | [optional] 
 
@@ -26,6 +28,31 @@ will change when the set of required properties is changed
 NewPrevYBSoftwareConfigWithDefaults instantiates a new PrevYBSoftwareConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllTserversUpgradedToYsqlMajorVersion
+
+`func (o *PrevYBSoftwareConfig) GetAllTserversUpgradedToYsqlMajorVersion() bool`
+
+GetAllTserversUpgradedToYsqlMajorVersion returns the AllTserversUpgradedToYsqlMajorVersion field if non-nil, zero value otherwise.
+
+### GetAllTserversUpgradedToYsqlMajorVersionOk
+
+`func (o *PrevYBSoftwareConfig) GetAllTserversUpgradedToYsqlMajorVersionOk() (*bool, bool)`
+
+GetAllTserversUpgradedToYsqlMajorVersionOk returns a tuple with the AllTserversUpgradedToYsqlMajorVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllTserversUpgradedToYsqlMajorVersion
+
+`func (o *PrevYBSoftwareConfig) SetAllTserversUpgradedToYsqlMajorVersion(v bool)`
+
+SetAllTserversUpgradedToYsqlMajorVersion sets AllTserversUpgradedToYsqlMajorVersion field to given value.
+
+### HasAllTserversUpgradedToYsqlMajorVersion
+
+`func (o *PrevYBSoftwareConfig) HasAllTserversUpgradedToYsqlMajorVersion() bool`
+
+HasAllTserversUpgradedToYsqlMajorVersion returns a boolean if a field has been set.
 
 ### GetAutoFlagConfigVersion
 
@@ -51,6 +78,31 @@ SetAutoFlagConfigVersion sets AutoFlagConfigVersion field to given value.
 `func (o *PrevYBSoftwareConfig) HasAutoFlagConfigVersion() bool`
 
 HasAutoFlagConfigVersion returns a boolean if a field has been set.
+
+### GetCanRollbackCatalogUpgrade
+
+`func (o *PrevYBSoftwareConfig) GetCanRollbackCatalogUpgrade() bool`
+
+GetCanRollbackCatalogUpgrade returns the CanRollbackCatalogUpgrade field if non-nil, zero value otherwise.
+
+### GetCanRollbackCatalogUpgradeOk
+
+`func (o *PrevYBSoftwareConfig) GetCanRollbackCatalogUpgradeOk() (*bool, bool)`
+
+GetCanRollbackCatalogUpgradeOk returns a tuple with the CanRollbackCatalogUpgrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanRollbackCatalogUpgrade
+
+`func (o *PrevYBSoftwareConfig) SetCanRollbackCatalogUpgrade(v bool)`
+
+SetCanRollbackCatalogUpgrade sets CanRollbackCatalogUpgrade field to given value.
+
+### HasCanRollbackCatalogUpgrade
+
+`func (o *PrevYBSoftwareConfig) HasCanRollbackCatalogUpgrade() bool`
+
+HasCanRollbackCatalogUpgrade returns a boolean if a field has been set.
 
 ### GetSoftwareVersion
 

@@ -16,14 +16,18 @@ import (
 
 // YbcThrottleParameters YB-Controller throttle parameters
 type YbcThrottleParameters struct {
+	// WARNING: This is a preview API that could change. Disk read bytes per second to throttle disk usage during backups
+	DiskReadBytesPerSecond *int64 `json:"diskReadBytesPerSecond,omitempty"`
+	// WARNING: This is a preview API that could change. Disk write bytes per second to throttle disk usage during restore
+	DiskWriteBytesPerSecond *int64 `json:"diskWriteBytesPerSecond,omitempty"`
 	// Max concurrent downloads per node
-	MaxConcurrentDownloads *int32 `json:"maxConcurrentDownloads,omitempty"`
+	MaxConcurrentDownloads *int64 `json:"maxConcurrentDownloads,omitempty"`
 	// Max concurrent uploads per node
-	MaxConcurrentUploads *int32 `json:"maxConcurrentUploads,omitempty"`
+	MaxConcurrentUploads *int64 `json:"maxConcurrentUploads,omitempty"`
 	// Max objects per download per node
-	PerDownloadNumObjects *int32 `json:"perDownloadNumObjects,omitempty"`
+	PerDownloadNumObjects *int64 `json:"perDownloadNumObjects,omitempty"`
 	// Max objects per upload per node
-	PerUploadNumObjects *int32 `json:"perUploadNumObjects,omitempty"`
+	PerUploadNumObjects *int64 `json:"perUploadNumObjects,omitempty"`
 	// Unset Throttle parameters in YB-Controller
 	ResetDefaults *bool `json:"resetDefaults,omitempty"`
 }
@@ -45,10 +49,74 @@ func NewYbcThrottleParametersWithDefaults() *YbcThrottleParameters {
 	return &this
 }
 
+// GetDiskReadBytesPerSecond returns the DiskReadBytesPerSecond field value if set, zero value otherwise.
+func (o *YbcThrottleParameters) GetDiskReadBytesPerSecond() int64 {
+	if o == nil || o.DiskReadBytesPerSecond == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DiskReadBytesPerSecond
+}
+
+// GetDiskReadBytesPerSecondOk returns a tuple with the DiskReadBytesPerSecond field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YbcThrottleParameters) GetDiskReadBytesPerSecondOk() (*int64, bool) {
+	if o == nil || o.DiskReadBytesPerSecond == nil {
+		return nil, false
+	}
+	return o.DiskReadBytesPerSecond, true
+}
+
+// HasDiskReadBytesPerSecond returns a boolean if a field has been set.
+func (o *YbcThrottleParameters) HasDiskReadBytesPerSecond() bool {
+	if o != nil && o.DiskReadBytesPerSecond != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskReadBytesPerSecond gets a reference to the given int64 and assigns it to the DiskReadBytesPerSecond field.
+func (o *YbcThrottleParameters) SetDiskReadBytesPerSecond(v int64) {
+	o.DiskReadBytesPerSecond = &v
+}
+
+// GetDiskWriteBytesPerSecond returns the DiskWriteBytesPerSecond field value if set, zero value otherwise.
+func (o *YbcThrottleParameters) GetDiskWriteBytesPerSecond() int64 {
+	if o == nil || o.DiskWriteBytesPerSecond == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DiskWriteBytesPerSecond
+}
+
+// GetDiskWriteBytesPerSecondOk returns a tuple with the DiskWriteBytesPerSecond field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YbcThrottleParameters) GetDiskWriteBytesPerSecondOk() (*int64, bool) {
+	if o == nil || o.DiskWriteBytesPerSecond == nil {
+		return nil, false
+	}
+	return o.DiskWriteBytesPerSecond, true
+}
+
+// HasDiskWriteBytesPerSecond returns a boolean if a field has been set.
+func (o *YbcThrottleParameters) HasDiskWriteBytesPerSecond() bool {
+	if o != nil && o.DiskWriteBytesPerSecond != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskWriteBytesPerSecond gets a reference to the given int64 and assigns it to the DiskWriteBytesPerSecond field.
+func (o *YbcThrottleParameters) SetDiskWriteBytesPerSecond(v int64) {
+	o.DiskWriteBytesPerSecond = &v
+}
+
 // GetMaxConcurrentDownloads returns the MaxConcurrentDownloads field value if set, zero value otherwise.
-func (o *YbcThrottleParameters) GetMaxConcurrentDownloads() int32 {
+func (o *YbcThrottleParameters) GetMaxConcurrentDownloads() int64 {
 	if o == nil || o.MaxConcurrentDownloads == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.MaxConcurrentDownloads
@@ -56,7 +124,7 @@ func (o *YbcThrottleParameters) GetMaxConcurrentDownloads() int32 {
 
 // GetMaxConcurrentDownloadsOk returns a tuple with the MaxConcurrentDownloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbcThrottleParameters) GetMaxConcurrentDownloadsOk() (*int32, bool) {
+func (o *YbcThrottleParameters) GetMaxConcurrentDownloadsOk() (*int64, bool) {
 	if o == nil || o.MaxConcurrentDownloads == nil {
 		return nil, false
 	}
@@ -72,15 +140,15 @@ func (o *YbcThrottleParameters) HasMaxConcurrentDownloads() bool {
 	return false
 }
 
-// SetMaxConcurrentDownloads gets a reference to the given int32 and assigns it to the MaxConcurrentDownloads field.
-func (o *YbcThrottleParameters) SetMaxConcurrentDownloads(v int32) {
+// SetMaxConcurrentDownloads gets a reference to the given int64 and assigns it to the MaxConcurrentDownloads field.
+func (o *YbcThrottleParameters) SetMaxConcurrentDownloads(v int64) {
 	o.MaxConcurrentDownloads = &v
 }
 
 // GetMaxConcurrentUploads returns the MaxConcurrentUploads field value if set, zero value otherwise.
-func (o *YbcThrottleParameters) GetMaxConcurrentUploads() int32 {
+func (o *YbcThrottleParameters) GetMaxConcurrentUploads() int64 {
 	if o == nil || o.MaxConcurrentUploads == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.MaxConcurrentUploads
@@ -88,7 +156,7 @@ func (o *YbcThrottleParameters) GetMaxConcurrentUploads() int32 {
 
 // GetMaxConcurrentUploadsOk returns a tuple with the MaxConcurrentUploads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbcThrottleParameters) GetMaxConcurrentUploadsOk() (*int32, bool) {
+func (o *YbcThrottleParameters) GetMaxConcurrentUploadsOk() (*int64, bool) {
 	if o == nil || o.MaxConcurrentUploads == nil {
 		return nil, false
 	}
@@ -104,15 +172,15 @@ func (o *YbcThrottleParameters) HasMaxConcurrentUploads() bool {
 	return false
 }
 
-// SetMaxConcurrentUploads gets a reference to the given int32 and assigns it to the MaxConcurrentUploads field.
-func (o *YbcThrottleParameters) SetMaxConcurrentUploads(v int32) {
+// SetMaxConcurrentUploads gets a reference to the given int64 and assigns it to the MaxConcurrentUploads field.
+func (o *YbcThrottleParameters) SetMaxConcurrentUploads(v int64) {
 	o.MaxConcurrentUploads = &v
 }
 
 // GetPerDownloadNumObjects returns the PerDownloadNumObjects field value if set, zero value otherwise.
-func (o *YbcThrottleParameters) GetPerDownloadNumObjects() int32 {
+func (o *YbcThrottleParameters) GetPerDownloadNumObjects() int64 {
 	if o == nil || o.PerDownloadNumObjects == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.PerDownloadNumObjects
@@ -120,7 +188,7 @@ func (o *YbcThrottleParameters) GetPerDownloadNumObjects() int32 {
 
 // GetPerDownloadNumObjectsOk returns a tuple with the PerDownloadNumObjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbcThrottleParameters) GetPerDownloadNumObjectsOk() (*int32, bool) {
+func (o *YbcThrottleParameters) GetPerDownloadNumObjectsOk() (*int64, bool) {
 	if o == nil || o.PerDownloadNumObjects == nil {
 		return nil, false
 	}
@@ -136,15 +204,15 @@ func (o *YbcThrottleParameters) HasPerDownloadNumObjects() bool {
 	return false
 }
 
-// SetPerDownloadNumObjects gets a reference to the given int32 and assigns it to the PerDownloadNumObjects field.
-func (o *YbcThrottleParameters) SetPerDownloadNumObjects(v int32) {
+// SetPerDownloadNumObjects gets a reference to the given int64 and assigns it to the PerDownloadNumObjects field.
+func (o *YbcThrottleParameters) SetPerDownloadNumObjects(v int64) {
 	o.PerDownloadNumObjects = &v
 }
 
 // GetPerUploadNumObjects returns the PerUploadNumObjects field value if set, zero value otherwise.
-func (o *YbcThrottleParameters) GetPerUploadNumObjects() int32 {
+func (o *YbcThrottleParameters) GetPerUploadNumObjects() int64 {
 	if o == nil || o.PerUploadNumObjects == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.PerUploadNumObjects
@@ -152,7 +220,7 @@ func (o *YbcThrottleParameters) GetPerUploadNumObjects() int32 {
 
 // GetPerUploadNumObjectsOk returns a tuple with the PerUploadNumObjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbcThrottleParameters) GetPerUploadNumObjectsOk() (*int32, bool) {
+func (o *YbcThrottleParameters) GetPerUploadNumObjectsOk() (*int64, bool) {
 	if o == nil || o.PerUploadNumObjects == nil {
 		return nil, false
 	}
@@ -168,8 +236,8 @@ func (o *YbcThrottleParameters) HasPerUploadNumObjects() bool {
 	return false
 }
 
-// SetPerUploadNumObjects gets a reference to the given int32 and assigns it to the PerUploadNumObjects field.
-func (o *YbcThrottleParameters) SetPerUploadNumObjects(v int32) {
+// SetPerUploadNumObjects gets a reference to the given int64 and assigns it to the PerUploadNumObjects field.
+func (o *YbcThrottleParameters) SetPerUploadNumObjects(v int64) {
 	o.PerUploadNumObjects = &v
 }
 
@@ -207,6 +275,12 @@ func (o *YbcThrottleParameters) SetResetDefaults(v bool) {
 
 func (o YbcThrottleParameters) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.DiskReadBytesPerSecond != nil {
+		toSerialize["diskReadBytesPerSecond"] = o.DiskReadBytesPerSecond
+	}
+	if o.DiskWriteBytesPerSecond != nil {
+		toSerialize["diskWriteBytesPerSecond"] = o.DiskWriteBytesPerSecond
+	}
 	if o.MaxConcurrentDownloads != nil {
 		toSerialize["maxConcurrentDownloads"] = o.MaxConcurrentDownloads
 	}

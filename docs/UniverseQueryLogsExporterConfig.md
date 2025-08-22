@@ -1,0 +1,150 @@
+# UniverseQueryLogsExporterConfig
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**AdditionalTags** | **map[string]string** | Additional tags | 
+**ExporterUuid** | **string** | Exporter uuid | [readonly] 
+**SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for query logs exporter | [optional] 
+**SendBatchSize** | Pointer to **int32** | Batch size for query logs exporter | [optional] 
+**SendBatchTimeoutSeconds** | Pointer to **int32** | Maximum batch timeout for query logs exporter in seconds | [optional] 
+
+## Methods
+
+### NewUniverseQueryLogsExporterConfig
+
+`func NewUniverseQueryLogsExporterConfig(additionalTags map[string]string, exporterUuid string, ) *UniverseQueryLogsExporterConfig`
+
+NewUniverseQueryLogsExporterConfig instantiates a new UniverseQueryLogsExporterConfig object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewUniverseQueryLogsExporterConfigWithDefaults
+
+`func NewUniverseQueryLogsExporterConfigWithDefaults() *UniverseQueryLogsExporterConfig`
+
+NewUniverseQueryLogsExporterConfigWithDefaults instantiates a new UniverseQueryLogsExporterConfig object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetAdditionalTags
+
+`func (o *UniverseQueryLogsExporterConfig) GetAdditionalTags() map[string]string`
+
+GetAdditionalTags returns the AdditionalTags field if non-nil, zero value otherwise.
+
+### GetAdditionalTagsOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetAdditionalTagsOk() (*map[string]string, bool)`
+
+GetAdditionalTagsOk returns a tuple with the AdditionalTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdditionalTags
+
+`func (o *UniverseQueryLogsExporterConfig) SetAdditionalTags(v map[string]string)`
+
+SetAdditionalTags sets AdditionalTags field to given value.
+
+
+### GetExporterUuid
+
+`func (o *UniverseQueryLogsExporterConfig) GetExporterUuid() string`
+
+GetExporterUuid returns the ExporterUuid field if non-nil, zero value otherwise.
+
+### GetExporterUuidOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetExporterUuidOk() (*string, bool)`
+
+GetExporterUuidOk returns a tuple with the ExporterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExporterUuid
+
+`func (o *UniverseQueryLogsExporterConfig) SetExporterUuid(v string)`
+
+SetExporterUuid sets ExporterUuid field to given value.
+
+
+### GetSendBatchMaxSize
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchMaxSize() int32`
+
+GetSendBatchMaxSize returns the SendBatchMaxSize field if non-nil, zero value otherwise.
+
+### GetSendBatchMaxSizeOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchMaxSizeOk() (*int32, bool)`
+
+GetSendBatchMaxSizeOk returns a tuple with the SendBatchMaxSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendBatchMaxSize
+
+`func (o *UniverseQueryLogsExporterConfig) SetSendBatchMaxSize(v int32)`
+
+SetSendBatchMaxSize sets SendBatchMaxSize field to given value.
+
+### HasSendBatchMaxSize
+
+`func (o *UniverseQueryLogsExporterConfig) HasSendBatchMaxSize() bool`
+
+HasSendBatchMaxSize returns a boolean if a field has been set.
+
+### GetSendBatchSize
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchSize() int32`
+
+GetSendBatchSize returns the SendBatchSize field if non-nil, zero value otherwise.
+
+### GetSendBatchSizeOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchSizeOk() (*int32, bool)`
+
+GetSendBatchSizeOk returns a tuple with the SendBatchSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendBatchSize
+
+`func (o *UniverseQueryLogsExporterConfig) SetSendBatchSize(v int32)`
+
+SetSendBatchSize sets SendBatchSize field to given value.
+
+### HasSendBatchSize
+
+`func (o *UniverseQueryLogsExporterConfig) HasSendBatchSize() bool`
+
+HasSendBatchSize returns a boolean if a field has been set.
+
+### GetSendBatchTimeoutSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchTimeoutSeconds() int32`
+
+GetSendBatchTimeoutSeconds returns the SendBatchTimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetSendBatchTimeoutSecondsOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetSendBatchTimeoutSecondsOk() (*int32, bool)`
+
+GetSendBatchTimeoutSecondsOk returns a tuple with the SendBatchTimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendBatchTimeoutSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) SetSendBatchTimeoutSeconds(v int32)`
+
+SetSendBatchTimeoutSeconds sets SendBatchTimeoutSeconds field to given value.
+
+### HasSendBatchTimeoutSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) HasSendBatchTimeoutSeconds() bool`
+
+HasSendBatchTimeoutSeconds returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

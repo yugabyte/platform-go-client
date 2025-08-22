@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddCluster**](UniverseApi.md#AddCluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 [**AttachUniverse**](UniverseApi.md#AttachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
+[**ConfigureMetricsExport**](UniverseApi.md#ConfigureMetricsExport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
+[**ConfigureQueryLogging**](UniverseApi.md#ConfigureQueryLogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
 [**CreateUniverse**](UniverseApi.md#CreateUniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
 [**DeleteAttachDetachMetadata**](UniverseApi.md#DeleteAttachDetachMetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 [**DeleteCluster**](UniverseApi.md#DeleteCluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
@@ -19,6 +21,7 @@ Method | HTTP request | Description
 [**FinalizeSoftwareUpgrade**](UniverseApi.md#FinalizeSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
 [**GetFinalizeSoftwareUpgradeInfo**](UniverseApi.md#GetFinalizeSoftwareUpgradeInfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 [**GetUniverse**](UniverseApi.md#GetUniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
+[**GetUniverseResources**](UniverseApi.md#GetUniverseResources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
 [**PrecheckSoftwareUpgrade**](UniverseApi.md#PrecheckSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Precheck YugabyteDB version upgrade
 [**RestartUniverse**](UniverseApi.md#RestartUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
 [**RollbackSoftwareUpgrade**](UniverseApi.md#RollbackSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
@@ -170,6 +173,156 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: multipart/form-data
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ConfigureMetricsExport
+
+> YBATask ConfigureMetricsExport(ctx, cUUID, uniUUID).ConfigureMetricsExportSpec(configureMetricsExportSpec).Execute()
+
+Configure metrics export
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    uniUUID := TODO // string | Universe UUID
+    configureMetricsExportSpec := *openapiclient.NewConfigureMetricsExportSpec() // ConfigureMetricsExportSpec | ConfigureMetricsExportReq  Payload to configure metrics export. Part of ConfigureMetricsExportReq  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.ConfigureMetricsExport(context.Background(), cUUID, uniUUID).ConfigureMetricsExportSpec(configureMetricsExportSpec).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.ConfigureMetricsExport``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ConfigureMetricsExport`: YBATask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseApi.ConfigureMetricsExport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+**uniUUID** | [**string**](.md) | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiConfigureMetricsExportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **configureMetricsExportSpec** | [**ConfigureMetricsExportSpec**](ConfigureMetricsExportSpec.md) | ConfigureMetricsExportReq  Payload to configure metrics export. Part of ConfigureMetricsExportReq  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ConfigureQueryLogging
+
+> YBATask ConfigureQueryLogging(ctx, cUUID, uniUUID).UniverseQueryLogsExport(universeQueryLogsExport).Execute()
+
+Configure Query Log for YugabyteDB Universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    uniUUID := TODO // string | Universe UUID
+    universeQueryLogsExport := *openapiclient.NewUniverseQueryLogsExport(false, *openapiclient.NewQueryLogConfig([]openapiclient.UniverseQueryLogsExporterConfig{*openapiclient.NewUniverseQueryLogsExporterConfig("ExporterUuid_example")})) // UniverseQueryLogsExport | UniverseQueryLogsExportReq  Payload to configure export of query logs. Part of UniverseQueryLogsExportReq  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.ConfigureQueryLogging(context.Background(), cUUID, uniUUID).UniverseQueryLogsExport(universeQueryLogsExport).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.ConfigureQueryLogging``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ConfigureQueryLogging`: YBATask
+    fmt.Fprintf(os.Stdout, "Response from `UniverseApi.ConfigureQueryLogging`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+**uniUUID** | [**string**](.md) | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiConfigureQueryLoggingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeQueryLogsExport** | [**UniverseQueryLogsExport**](UniverseQueryLogsExport.md) | UniverseQueryLogsExportReq  Payload to configure export of query logs. Part of UniverseQueryLogsExportReq  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1136,6 +1289,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUniverseResources
+
+> UniverseResourceDetails GetUniverseResources(ctx, cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
+
+Get resource utilisation of a YugabyteDB Universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    cUUID := TODO // string | Customer UUID
+    universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3), *openapiclient.NewClusterNodeSpec(), *openapiclient.NewClusterProviderSpec("89a46d52-4edd-4736-922a-35177a0b990c"))}), "x86_64") // UniverseCreateSpec | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.UniverseApi.GetUniverseResources(context.Background(), cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UniverseApi.GetUniverseResources``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetUniverseResources`: UniverseResourceDetails
+    fmt.Fprintf(os.Stdout, "Response from `UniverseApi.GetUniverseResources`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | [**string**](.md) | Customer UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUniverseResourcesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **universeCreateSpec** | [**UniverseCreateSpec**](UniverseCreateSpec.md) |  | 
+
+### Return type
+
+[**UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

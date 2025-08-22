@@ -15,10 +15,10 @@ import (
 	"encoding/json"
 )
 
-// UniverseLogsExporterConfig Universe Logs Exporter Config. Part of AuditLogConfig.
+// UniverseLogsExporterConfig UniverseLogsExporterConfig Universe Logs Exporter Config. Part of AuditLogConfig. 
 type UniverseLogsExporterConfig struct {
 	// Additional tags
-	AdditionalTags map[string]string `json:"additional_tags"`
+	AdditionalTags *map[string]string `json:"additional_tags,omitempty"`
 	// Exporter uuid
 	ExporterUuid string `json:"exporter_uuid"`
 }
@@ -27,9 +27,8 @@ type UniverseLogsExporterConfig struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseLogsExporterConfig(additionalTags map[string]string, exporterUuid string) *UniverseLogsExporterConfig {
+func NewUniverseLogsExporterConfig(exporterUuid string) *UniverseLogsExporterConfig {
 	this := UniverseLogsExporterConfig{}
-	this.AdditionalTags = additionalTags
 	this.ExporterUuid = exporterUuid
 	return &this
 }
@@ -42,28 +41,36 @@ func NewUniverseLogsExporterConfigWithDefaults() *UniverseLogsExporterConfig {
 	return &this
 }
 
-// GetAdditionalTags returns the AdditionalTags field value
+// GetAdditionalTags returns the AdditionalTags field value if set, zero value otherwise.
 func (o *UniverseLogsExporterConfig) GetAdditionalTags() map[string]string {
-	if o == nil {
+	if o == nil || o.AdditionalTags == nil {
 		var ret map[string]string
 		return ret
 	}
-
-	return o.AdditionalTags
+	return *o.AdditionalTags
 }
 
-// GetAdditionalTagsOk returns a tuple with the AdditionalTags field value
+// GetAdditionalTagsOk returns a tuple with the AdditionalTags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseLogsExporterConfig) GetAdditionalTagsOk() (*map[string]string, bool) {
-	if o == nil  {
+	if o == nil || o.AdditionalTags == nil {
 		return nil, false
 	}
-	return &o.AdditionalTags, true
+	return o.AdditionalTags, true
 }
 
-// SetAdditionalTags sets field value
+// HasAdditionalTags returns a boolean if a field has been set.
+func (o *UniverseLogsExporterConfig) HasAdditionalTags() bool {
+	if o != nil && o.AdditionalTags != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalTags gets a reference to the given map[string]string and assigns it to the AdditionalTags field.
 func (o *UniverseLogsExporterConfig) SetAdditionalTags(v map[string]string) {
-	o.AdditionalTags = v
+	o.AdditionalTags = &v
 }
 
 // GetExporterUuid returns the ExporterUuid field value
@@ -92,7 +99,7 @@ func (o *UniverseLogsExporterConfig) SetExporterUuid(v string) {
 
 func (o UniverseLogsExporterConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.AdditionalTags != nil {
 		toSerialize["additional_tags"] = o.AdditionalTags
 	}
 	if true {

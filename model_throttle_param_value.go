@@ -16,7 +16,7 @@ import (
 
 // ThrottleParamValue struct for ThrottleParamValue
 type ThrottleParamValue struct {
-	CurrentValue int32 `json:"currentValue"`
+	CurrentValue int64 `json:"currentValue"`
 	PresetValues PresetThrottleValues `json:"presetValues"`
 }
 
@@ -24,7 +24,7 @@ type ThrottleParamValue struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThrottleParamValue(currentValue int32, presetValues PresetThrottleValues) *ThrottleParamValue {
+func NewThrottleParamValue(currentValue int64, presetValues PresetThrottleValues) *ThrottleParamValue {
 	this := ThrottleParamValue{}
 	this.CurrentValue = currentValue
 	this.PresetValues = presetValues
@@ -40,9 +40,9 @@ func NewThrottleParamValueWithDefaults() *ThrottleParamValue {
 }
 
 // GetCurrentValue returns the CurrentValue field value
-func (o *ThrottleParamValue) GetCurrentValue() int32 {
+func (o *ThrottleParamValue) GetCurrentValue() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -51,7 +51,7 @@ func (o *ThrottleParamValue) GetCurrentValue() int32 {
 
 // GetCurrentValueOk returns a tuple with the CurrentValue field value
 // and a boolean to check if the value has been set.
-func (o *ThrottleParamValue) GetCurrentValueOk() (*int32, bool) {
+func (o *ThrottleParamValue) GetCurrentValueOk() (*int64, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *ThrottleParamValue) GetCurrentValueOk() (*int32, bool) {
 }
 
 // SetCurrentValue sets field value
-func (o *ThrottleParamValue) SetCurrentValue(v int32) {
+func (o *ThrottleParamValue) SetCurrentValue(v int64) {
 	o.CurrentValue = v
 }
 

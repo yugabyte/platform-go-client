@@ -17,6 +17,7 @@ import (
 
 // XClusterConfigGetResp xcluster get response
 type XClusterConfigGetResp struct {
+	AutomaticDdlMode *bool `json:"automaticDdlMode,omitempty"`
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Dbs *[]string `json:"dbs,omitempty"`
@@ -85,6 +86,38 @@ func NewXClusterConfigGetResp(lag map[string]interface{}, namespaces []XClusterN
 func NewXClusterConfigGetRespWithDefaults() *XClusterConfigGetResp {
 	this := XClusterConfigGetResp{}
 	return &this
+}
+
+// GetAutomaticDdlMode returns the AutomaticDdlMode field value if set, zero value otherwise.
+func (o *XClusterConfigGetResp) GetAutomaticDdlMode() bool {
+	if o == nil || o.AutomaticDdlMode == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutomaticDdlMode
+}
+
+// GetAutomaticDdlModeOk returns a tuple with the AutomaticDdlMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *XClusterConfigGetResp) GetAutomaticDdlModeOk() (*bool, bool) {
+	if o == nil || o.AutomaticDdlMode == nil {
+		return nil, false
+	}
+	return o.AutomaticDdlMode, true
+}
+
+// HasAutomaticDdlMode returns a boolean if a field has been set.
+func (o *XClusterConfigGetResp) HasAutomaticDdlMode() bool {
+	if o != nil && o.AutomaticDdlMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutomaticDdlMode gets a reference to the given bool and assigns it to the AutomaticDdlMode field.
+func (o *XClusterConfigGetResp) SetAutomaticDdlMode(v bool) {
+	o.AutomaticDdlMode = &v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -905,6 +938,9 @@ func (o *XClusterConfigGetResp) SetUuid(v string) {
 
 func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AutomaticDdlMode != nil {
+		toSerialize["automaticDdlMode"] = o.AutomaticDdlMode
+	}
 	if o.CreateTime != nil {
 		toSerialize["createTime"] = o.CreateTime
 	}
