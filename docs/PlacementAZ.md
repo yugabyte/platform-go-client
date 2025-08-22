@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsAffinitized** | Pointer to **bool** |  | [optional] 
 **LbName** | Pointer to **string** |  | [optional] 
+**LeaderPreference** | Pointer to **int32** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **NumNodesInAZ** | Pointer to **int32** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
@@ -81,6 +82,31 @@ SetLbName sets LbName field to given value.
 `func (o *PlacementAZ) HasLbName() bool`
 
 HasLbName returns a boolean if a field has been set.
+
+### GetLeaderPreference
+
+`func (o *PlacementAZ) GetLeaderPreference() int32`
+
+GetLeaderPreference returns the LeaderPreference field if non-nil, zero value otherwise.
+
+### GetLeaderPreferenceOk
+
+`func (o *PlacementAZ) GetLeaderPreferenceOk() (*int32, bool)`
+
+GetLeaderPreferenceOk returns a tuple with the LeaderPreference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLeaderPreference
+
+`func (o *PlacementAZ) SetLeaderPreference(v int32)`
+
+SetLeaderPreference sets LeaderPreference field to given value.
+
+### HasLeaderPreference
+
+`func (o *PlacementAZ) HasLeaderPreference() bool`
+
+HasLeaderPreference returns a boolean if a field has been set.
 
 ### GetName
 

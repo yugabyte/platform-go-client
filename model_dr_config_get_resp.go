@@ -17,6 +17,8 @@ import (
 
 // DrConfigGetResp disaster recovery get response
 type DrConfigGetResp struct {
+	// Whether the config is using automatic DDL replication mode.
+	AutomaticDdlMode *bool `json:"automaticDdlMode,omitempty"`
 	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	// Create time of the DR config
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -89,6 +91,38 @@ func NewDrConfigGetResp(webhooks []GetWebhookResponse) *DrConfigGetResp {
 func NewDrConfigGetRespWithDefaults() *DrConfigGetResp {
 	this := DrConfigGetResp{}
 	return &this
+}
+
+// GetAutomaticDdlMode returns the AutomaticDdlMode field value if set, zero value otherwise.
+func (o *DrConfigGetResp) GetAutomaticDdlMode() bool {
+	if o == nil || o.AutomaticDdlMode == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutomaticDdlMode
+}
+
+// GetAutomaticDdlModeOk returns a tuple with the AutomaticDdlMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DrConfigGetResp) GetAutomaticDdlModeOk() (*bool, bool) {
+	if o == nil || o.AutomaticDdlMode == nil {
+		return nil, false
+	}
+	return o.AutomaticDdlMode, true
+}
+
+// HasAutomaticDdlMode returns a boolean if a field has been set.
+func (o *DrConfigGetResp) HasAutomaticDdlMode() bool {
+	if o != nil && o.AutomaticDdlMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutomaticDdlMode gets a reference to the given bool and assigns it to the AutomaticDdlMode field.
+func (o *DrConfigGetResp) SetAutomaticDdlMode(v bool) {
+	o.AutomaticDdlMode = &v
 }
 
 // GetBootstrapParams returns the BootstrapParams field value if set, zero value otherwise.
@@ -981,6 +1015,9 @@ func (o *DrConfigGetResp) SetXclusterConfigsUuid(v []string) {
 
 func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AutomaticDdlMode != nil {
+		toSerialize["automaticDdlMode"] = o.AutomaticDdlMode
+	}
 	if o.BootstrapParams != nil {
 		toSerialize["bootstrapParams"] = o.BootstrapParams
 	}

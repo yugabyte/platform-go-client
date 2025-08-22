@@ -99,6 +99,8 @@ Class | Method | HTTP request | Description
 *MetricsApi* | [**GetPrometheusHostInfo**](docs/MetricsApi.md#getprometheushostinfo) | **Get** /host-info | Get Prometheus host info
 *UniverseApi* | [**AddCluster**](docs/UniverseApi.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseApi* | [**AttachUniverse**](docs/UniverseApi.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
+*UniverseApi* | [**ConfigureMetricsExport**](docs/UniverseApi.md#configuremetricsexport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
+*UniverseApi* | [**ConfigureQueryLogging**](docs/UniverseApi.md#configurequerylogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
 *UniverseApi* | [**CreateUniverse**](docs/UniverseApi.md#createuniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
 *UniverseApi* | [**DeleteAttachDetachMetadata**](docs/UniverseApi.md#deleteattachdetachmetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 *UniverseApi* | [**DeleteCluster**](docs/UniverseApi.md#deletecluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
@@ -112,12 +114,14 @@ Class | Method | HTTP request | Description
 *UniverseApi* | [**FinalizeSoftwareUpgrade**](docs/UniverseApi.md#finalizesoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
 *UniverseApi* | [**GetFinalizeSoftwareUpgradeInfo**](docs/UniverseApi.md#getfinalizesoftwareupgradeinfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 *UniverseApi* | [**GetUniverse**](docs/UniverseApi.md#getuniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
+*UniverseApi* | [**GetUniverseResources**](docs/UniverseApi.md#getuniverseresources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
 *UniverseApi* | [**PrecheckSoftwareUpgrade**](docs/UniverseApi.md#prechecksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Precheck YugabyteDB version upgrade
 *UniverseApi* | [**RestartUniverse**](docs/UniverseApi.md#restartuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
 *UniverseApi* | [**RollbackSoftwareUpgrade**](docs/UniverseApi.md#rollbacksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
 *UniverseApi* | [**StartSoftwareUpgrade**](docs/UniverseApi.md#startsoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade YugabyteDB version
 *UniverseApi* | [**StartThirdPartySoftwareUpgrade**](docs/UniverseApi.md#startthirdpartysoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software | Upgrade third party software
 *UniverseApi* | [**SystemdEnable**](docs/UniverseApi.md#systemdenable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
+*YBAInstanceApi* | [**GetYBAInstanceInfo**](docs/YBAInstanceApi.md#getybainstanceinfo) | **Get** /yba-info | Get YBAInstance info
 
 
 ## Documentation For Models
@@ -131,6 +135,7 @@ Class | Method | HTTP request | Description
  - [AvailabilityZoneNodeSpec](docs/AvailabilityZoneNodeSpec.md)
  - [AvailabilityZoneNodeSpecAllOf](docs/AvailabilityZoneNodeSpecAllOf.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
+ - [CloudVolumeEncryption](docs/CloudVolumeEncryption.md)
  - [ClusterAddSpec](docs/ClusterAddSpec.md)
  - [ClusterEditSpec](docs/ClusterEditSpec.md)
  - [ClusterGFlags](docs/ClusterGFlags.md)
@@ -146,6 +151,8 @@ Class | Method | HTTP request | Description
  - [ClusterSpec](docs/ClusterSpec.md)
  - [ClusterStorageSpec](docs/ClusterStorageSpec.md)
  - [CommunicationPortsSpec](docs/CommunicationPortsSpec.md)
+ - [ConfigureMetricsExportSpec](docs/ConfigureMetricsExportSpec.md)
+ - [ConfigureMetricsExportSpecAllOf](docs/ConfigureMetricsExportSpecAllOf.md)
  - [ContinuousBackup](docs/ContinuousBackup.md)
  - [ContinuousBackupInfo](docs/ContinuousBackupInfo.md)
  - [ContinuousBackupSpec](docs/ContinuousBackupSpec.md)
@@ -176,6 +183,7 @@ Class | Method | HTTP request | Description
  - [JobScheduleUpdateSpec](docs/JobScheduleUpdateSpec.md)
  - [K8SNodeResourceSpec](docs/K8SNodeResourceSpec.md)
  - [KubernetesResourceDetails](docs/KubernetesResourceDetails.md)
+ - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [NodeDetails](docs/NodeDetails.md)
  - [NodeProxyConfig](docs/NodeProxyConfig.md)
  - [PaginationResp](docs/PaginationResp.md)
@@ -185,6 +193,7 @@ Class | Method | HTTP request | Description
  - [PlacementCloud](docs/PlacementCloud.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PrometheusHostInfo](docs/PrometheusHostInfo.md)
+ - [QueryLogConfig](docs/QueryLogConfig.md)
  - [ResourceDefinition](docs/ResourceDefinition.md)
  - [ResourceGroup](docs/ResourceGroup.md)
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
@@ -202,9 +211,16 @@ Class | Method | HTTP request | Description
  - [UniverseEditGFlagsAllOf](docs/UniverseEditGFlagsAllOf.md)
  - [UniverseEditKubernetesOverrides](docs/UniverseEditKubernetesOverrides.md)
  - [UniverseEditSpec](docs/UniverseEditSpec.md)
+ - [UniverseExporterConfig](docs/UniverseExporterConfig.md)
  - [UniverseInfo](docs/UniverseInfo.md)
  - [UniverseLogsExporterConfig](docs/UniverseLogsExporterConfig.md)
+ - [UniverseMetricsExporterConfig](docs/UniverseMetricsExporterConfig.md)
+ - [UniverseMetricsExporterConfigAllOf](docs/UniverseMetricsExporterConfigAllOf.md)
  - [UniverseNetworkingSpec](docs/UniverseNetworkingSpec.md)
+ - [UniverseQueryLogsExport](docs/UniverseQueryLogsExport.md)
+ - [UniverseQueryLogsExportAllOf](docs/UniverseQueryLogsExportAllOf.md)
+ - [UniverseQueryLogsExporterConfig](docs/UniverseQueryLogsExporterConfig.md)
+ - [UniverseQueryLogsExporterConfigAllOf](docs/UniverseQueryLogsExporterConfigAllOf.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseRestart](docs/UniverseRestart.md)
  - [UniverseRestartAllOf](docs/UniverseRestartAllOf.md)
@@ -226,10 +242,12 @@ Class | Method | HTTP request | Description
  - [UserInfo](docs/UserInfo.md)
  - [UserSpec](docs/UserSpec.md)
  - [XClusterInfo](docs/XClusterInfo.md)
+ - [YBAInfo](docs/YBAInfo.md)
  - [YBATask](docs/YBATask.md)
  - [YCQLAuditConfig](docs/YCQLAuditConfig.md)
  - [YCQLSpec](docs/YCQLSpec.md)
  - [YSQLAuditConfig](docs/YSQLAuditConfig.md)
+ - [YSQLQueryLogConfig](docs/YSQLQueryLogConfig.md)
  - [YSQLSpec](docs/YSQLSpec.md)
  - [YbSoftwareDetails](docs/YbSoftwareDetails.md)
  - [YbaComponent](docs/YbaComponent.md)

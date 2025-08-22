@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdditionalTags** | **map[string]string** | Additional tags | 
+**AdditionalTags** | Pointer to **map[string]string** | Additional tags | [optional] 
 **ExporterUuid** | **string** | Exporter uuid | 
 
 ## Methods
 
 ### NewUniverseLogsExporterConfig
 
-`func NewUniverseLogsExporterConfig(additionalTags map[string]string, exporterUuid string, ) *UniverseLogsExporterConfig`
+`func NewUniverseLogsExporterConfig(exporterUuid string, ) *UniverseLogsExporterConfig`
 
 NewUniverseLogsExporterConfig instantiates a new UniverseLogsExporterConfig object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +45,11 @@ and a boolean to check if the value has been set.
 
 SetAdditionalTags sets AdditionalTags field to given value.
 
+### HasAdditionalTags
+
+`func (o *UniverseLogsExporterConfig) HasAdditionalTags() bool`
+
+HasAdditionalTags returns a boolean if a field has been set.
 
 ### GetExporterUuid
 

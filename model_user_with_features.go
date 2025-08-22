@@ -30,7 +30,7 @@ type UserWithFeatures struct {
 	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
 	OidcJwtAuthToken *string `json:"oidcJwtAuthToken,omitempty"`
 	Primary bool `json:"primary"`
-	// User role
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
 	Role *string `json:"role,omitempty"`
 	// User timezone
 	Timezone *string `json:"timezone,omitempty"`

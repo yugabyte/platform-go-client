@@ -32,6 +32,7 @@ type UserIntent struct {
 	EnableIPV6 *bool `json:"enableIPV6,omitempty"`
 	EnableLB *bool `json:"enableLB,omitempty"`
 	EnableNodeToNodeEncrypt *bool `json:"enableNodeToNodeEncrypt,omitempty"`
+	// <b style=\"color:#ff0000\">Deprecated since YBA version 2025.1.</b> Use userIntent.deviceInfo.cloudVolumeEncryption instead
 	EnableVolumeEncryption *bool `json:"enableVolumeEncryption,omitempty"`
 	EnableYCQL *bool `json:"enableYCQL,omitempty"`
 	EnableYCQLAuth *bool `json:"enableYCQLAuth,omitempty"`
@@ -49,11 +50,13 @@ type UserIntent struct {
 	// Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call
 	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
+	MetricsExportConfig *MetricsExportConfig `json:"metricsExportConfig,omitempty"`
 	NumNodes *int32 `json:"numNodes,omitempty"`
 	PreferredRegion *string `json:"preferredRegion,omitempty"`
 	Provider *string `json:"provider,omitempty"`
 	ProviderType *string `json:"providerType,omitempty"`
 	ProxyConfig *ProxyConfig `json:"proxyConfig,omitempty"`
+	QueryLogConfig *QueryLogConfig `json:"queryLogConfig,omitempty"`
 	RegionList *[]string `json:"regionList,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
 	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
@@ -1021,6 +1024,38 @@ func (o *UserIntent) SetMasterK8SNodeResourceSpec(v K8SNodeResourceSpec) {
 	o.MasterK8SNodeResourceSpec = &v
 }
 
+// GetMetricsExportConfig returns the MetricsExportConfig field value if set, zero value otherwise.
+func (o *UserIntent) GetMetricsExportConfig() MetricsExportConfig {
+	if o == nil || o.MetricsExportConfig == nil {
+		var ret MetricsExportConfig
+		return ret
+	}
+	return *o.MetricsExportConfig
+}
+
+// GetMetricsExportConfigOk returns a tuple with the MetricsExportConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetMetricsExportConfigOk() (*MetricsExportConfig, bool) {
+	if o == nil || o.MetricsExportConfig == nil {
+		return nil, false
+	}
+	return o.MetricsExportConfig, true
+}
+
+// HasMetricsExportConfig returns a boolean if a field has been set.
+func (o *UserIntent) HasMetricsExportConfig() bool {
+	if o != nil && o.MetricsExportConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsExportConfig gets a reference to the given MetricsExportConfig and assigns it to the MetricsExportConfig field.
+func (o *UserIntent) SetMetricsExportConfig(v MetricsExportConfig) {
+	o.MetricsExportConfig = &v
+}
+
 // GetNumNodes returns the NumNodes field value if set, zero value otherwise.
 func (o *UserIntent) GetNumNodes() int32 {
 	if o == nil || o.NumNodes == nil {
@@ -1179,6 +1214,38 @@ func (o *UserIntent) HasProxyConfig() bool {
 // SetProxyConfig gets a reference to the given ProxyConfig and assigns it to the ProxyConfig field.
 func (o *UserIntent) SetProxyConfig(v ProxyConfig) {
 	o.ProxyConfig = &v
+}
+
+// GetQueryLogConfig returns the QueryLogConfig field value if set, zero value otherwise.
+func (o *UserIntent) GetQueryLogConfig() QueryLogConfig {
+	if o == nil || o.QueryLogConfig == nil {
+		var ret QueryLogConfig
+		return ret
+	}
+	return *o.QueryLogConfig
+}
+
+// GetQueryLogConfigOk returns a tuple with the QueryLogConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetQueryLogConfigOk() (*QueryLogConfig, bool) {
+	if o == nil || o.QueryLogConfig == nil {
+		return nil, false
+	}
+	return o.QueryLogConfig, true
+}
+
+// HasQueryLogConfig returns a boolean if a field has been set.
+func (o *UserIntent) HasQueryLogConfig() bool {
+	if o != nil && o.QueryLogConfig != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryLogConfig gets a reference to the given QueryLogConfig and assigns it to the QueryLogConfig field.
+func (o *UserIntent) SetQueryLogConfig(v QueryLogConfig) {
+	o.QueryLogConfig = &v
 }
 
 // GetRegionList returns the RegionList field value if set, zero value otherwise.
@@ -1846,6 +1913,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	if o.MasterK8SNodeResourceSpec != nil {
 		toSerialize["masterK8SNodeResourceSpec"] = o.MasterK8SNodeResourceSpec
 	}
+	if o.MetricsExportConfig != nil {
+		toSerialize["metricsExportConfig"] = o.MetricsExportConfig
+	}
 	if o.NumNodes != nil {
 		toSerialize["numNodes"] = o.NumNodes
 	}
@@ -1860,6 +1930,9 @@ func (o UserIntent) MarshalJSON() ([]byte, error) {
 	}
 	if o.ProxyConfig != nil {
 		toSerialize["proxyConfig"] = o.ProxyConfig
+	}
+	if o.QueryLogConfig != nil {
+		toSerialize["queryLogConfig"] = o.QueryLogConfig
 	}
 	if o.RegionList != nil {
 		toSerialize["regionList"] = o.RegionList

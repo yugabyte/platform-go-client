@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AutomaticDdlMode** | Pointer to **bool** | Whether the config is using automatic DDL replication mode. | [optional] 
 **BootstrapParams** | Pointer to [**RestartBootstrapParams**](RestartBootstrapParams.md) |  | [optional] 
 **CreateTime** | Pointer to **time.Time** | Create time of the DR config | [optional] 
 **DbDetails** | Pointer to [**[]XClusterNamespaceConfig**](XClusterNamespaceConfig.md) | WARNING: This is a preview API that could change. List of db details in replication | [optional] 
@@ -51,6 +52,31 @@ will change when the set of required properties is changed
 NewDrConfigGetRespWithDefaults instantiates a new DrConfigGetResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAutomaticDdlMode
+
+`func (o *DrConfigGetResp) GetAutomaticDdlMode() bool`
+
+GetAutomaticDdlMode returns the AutomaticDdlMode field if non-nil, zero value otherwise.
+
+### GetAutomaticDdlModeOk
+
+`func (o *DrConfigGetResp) GetAutomaticDdlModeOk() (*bool, bool)`
+
+GetAutomaticDdlModeOk returns a tuple with the AutomaticDdlMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutomaticDdlMode
+
+`func (o *DrConfigGetResp) SetAutomaticDdlMode(v bool)`
+
+SetAutomaticDdlMode sets AutomaticDdlMode field to given value.
+
+### HasAutomaticDdlMode
+
+`func (o *DrConfigGetResp) HasAutomaticDdlMode() bool`
+
+HasAutomaticDdlMode returns a boolean if a field has been set.
 
 ### GetBootstrapParams
 

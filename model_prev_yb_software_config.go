@@ -16,7 +16,9 @@ import (
 
 // PrevYBSoftwareConfig struct for PrevYBSoftwareConfig
 type PrevYBSoftwareConfig struct {
+	AllTserversUpgradedToYsqlMajorVersion *bool `json:"allTserversUpgradedToYsqlMajorVersion,omitempty"`
 	AutoFlagConfigVersion *int32 `json:"autoFlagConfigVersion,omitempty"`
+	CanRollbackCatalogUpgrade *bool `json:"canRollbackCatalogUpgrade,omitempty"`
 	SoftwareVersion *string `json:"softwareVersion,omitempty"`
 	TargetUpgradeSoftwareVersion *string `json:"targetUpgradeSoftwareVersion,omitempty"`
 }
@@ -36,6 +38,38 @@ func NewPrevYBSoftwareConfig() *PrevYBSoftwareConfig {
 func NewPrevYBSoftwareConfigWithDefaults() *PrevYBSoftwareConfig {
 	this := PrevYBSoftwareConfig{}
 	return &this
+}
+
+// GetAllTserversUpgradedToYsqlMajorVersion returns the AllTserversUpgradedToYsqlMajorVersion field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetAllTserversUpgradedToYsqlMajorVersion() bool {
+	if o == nil || o.AllTserversUpgradedToYsqlMajorVersion == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AllTserversUpgradedToYsqlMajorVersion
+}
+
+// GetAllTserversUpgradedToYsqlMajorVersionOk returns a tuple with the AllTserversUpgradedToYsqlMajorVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetAllTserversUpgradedToYsqlMajorVersionOk() (*bool, bool) {
+	if o == nil || o.AllTserversUpgradedToYsqlMajorVersion == nil {
+		return nil, false
+	}
+	return o.AllTserversUpgradedToYsqlMajorVersion, true
+}
+
+// HasAllTserversUpgradedToYsqlMajorVersion returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasAllTserversUpgradedToYsqlMajorVersion() bool {
+	if o != nil && o.AllTserversUpgradedToYsqlMajorVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAllTserversUpgradedToYsqlMajorVersion gets a reference to the given bool and assigns it to the AllTserversUpgradedToYsqlMajorVersion field.
+func (o *PrevYBSoftwareConfig) SetAllTserversUpgradedToYsqlMajorVersion(v bool) {
+	o.AllTserversUpgradedToYsqlMajorVersion = &v
 }
 
 // GetAutoFlagConfigVersion returns the AutoFlagConfigVersion field value if set, zero value otherwise.
@@ -68,6 +102,38 @@ func (o *PrevYBSoftwareConfig) HasAutoFlagConfigVersion() bool {
 // SetAutoFlagConfigVersion gets a reference to the given int32 and assigns it to the AutoFlagConfigVersion field.
 func (o *PrevYBSoftwareConfig) SetAutoFlagConfigVersion(v int32) {
 	o.AutoFlagConfigVersion = &v
+}
+
+// GetCanRollbackCatalogUpgrade returns the CanRollbackCatalogUpgrade field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetCanRollbackCatalogUpgrade() bool {
+	if o == nil || o.CanRollbackCatalogUpgrade == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CanRollbackCatalogUpgrade
+}
+
+// GetCanRollbackCatalogUpgradeOk returns a tuple with the CanRollbackCatalogUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetCanRollbackCatalogUpgradeOk() (*bool, bool) {
+	if o == nil || o.CanRollbackCatalogUpgrade == nil {
+		return nil, false
+	}
+	return o.CanRollbackCatalogUpgrade, true
+}
+
+// HasCanRollbackCatalogUpgrade returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasCanRollbackCatalogUpgrade() bool {
+	if o != nil && o.CanRollbackCatalogUpgrade != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCanRollbackCatalogUpgrade gets a reference to the given bool and assigns it to the CanRollbackCatalogUpgrade field.
+func (o *PrevYBSoftwareConfig) SetCanRollbackCatalogUpgrade(v bool) {
+	o.CanRollbackCatalogUpgrade = &v
 }
 
 // GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise.
@@ -136,8 +202,14 @@ func (o *PrevYBSoftwareConfig) SetTargetUpgradeSoftwareVersion(v string) {
 
 func (o PrevYBSoftwareConfig) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.AllTserversUpgradedToYsqlMajorVersion != nil {
+		toSerialize["allTserversUpgradedToYsqlMajorVersion"] = o.AllTserversUpgradedToYsqlMajorVersion
+	}
 	if o.AutoFlagConfigVersion != nil {
 		toSerialize["autoFlagConfigVersion"] = o.AutoFlagConfigVersion
+	}
+	if o.CanRollbackCatalogUpgrade != nil {
+		toSerialize["canRollbackCatalogUpgrade"] = o.CanRollbackCatalogUpgrade
 	}
 	if o.SoftwareVersion != nil {
 		toSerialize["softwareVersion"] = o.SoftwareVersion

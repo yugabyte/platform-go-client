@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **EnableIPV6** | Pointer to **bool** |  | [optional] 
 **EnableLB** | Pointer to **bool** |  | [optional] 
 **EnableNodeToNodeEncrypt** | Pointer to **bool** |  | [optional] 
-**EnableVolumeEncryption** | Pointer to **bool** |  | [optional] 
+**EnableVolumeEncryption** | Pointer to **bool** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2025.1.&lt;/b&gt; Use userIntent.deviceInfo.cloudVolumeEncryption instead | [optional] 
 **EnableYCQL** | Pointer to **bool** |  | [optional] 
 **EnableYCQLAuth** | Pointer to **bool** |  | [optional] 
 **EnableYEDIS** | Pointer to **bool** |  | [optional] 
@@ -33,11 +33,13 @@ Name | Type | Description | Notes
 **MasterGFlags** | Pointer to **map[string]string** | User-defined gflags for master. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.6.0.&lt;/b&gt; Use specificGFlags | [optional] 
 **MasterInstanceType** | Pointer to **string** | Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call | [optional] 
 **MasterK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
+**MetricsExportConfig** | Pointer to [**MetricsExportConfig**](MetricsExportConfig.md) |  | [optional] 
 **NumNodes** | Pointer to **int32** |  | [optional] 
 **PreferredRegion** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
 **ProviderType** | Pointer to **string** |  | [optional] 
 **ProxyConfig** | Pointer to [**ProxyConfig**](ProxyConfig.md) |  | [optional] 
+**QueryLogConfig** | Pointer to [**QueryLogConfig**](QueryLogConfig.md) |  | [optional] 
 **RegionList** | Pointer to **[]string** |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
 **SpecificGFlags** | Pointer to [**SpecificGFlags**](SpecificGFlags.md) |  | [optional] 
@@ -801,6 +803,31 @@ SetMasterK8SNodeResourceSpec sets MasterK8SNodeResourceSpec field to given value
 
 HasMasterK8SNodeResourceSpec returns a boolean if a field has been set.
 
+### GetMetricsExportConfig
+
+`func (o *UserIntent) GetMetricsExportConfig() MetricsExportConfig`
+
+GetMetricsExportConfig returns the MetricsExportConfig field if non-nil, zero value otherwise.
+
+### GetMetricsExportConfigOk
+
+`func (o *UserIntent) GetMetricsExportConfigOk() (*MetricsExportConfig, bool)`
+
+GetMetricsExportConfigOk returns a tuple with the MetricsExportConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetricsExportConfig
+
+`func (o *UserIntent) SetMetricsExportConfig(v MetricsExportConfig)`
+
+SetMetricsExportConfig sets MetricsExportConfig field to given value.
+
+### HasMetricsExportConfig
+
+`func (o *UserIntent) HasMetricsExportConfig() bool`
+
+HasMetricsExportConfig returns a boolean if a field has been set.
+
 ### GetNumNodes
 
 `func (o *UserIntent) GetNumNodes() int32`
@@ -925,6 +952,31 @@ SetProxyConfig sets ProxyConfig field to given value.
 `func (o *UserIntent) HasProxyConfig() bool`
 
 HasProxyConfig returns a boolean if a field has been set.
+
+### GetQueryLogConfig
+
+`func (o *UserIntent) GetQueryLogConfig() QueryLogConfig`
+
+GetQueryLogConfig returns the QueryLogConfig field if non-nil, zero value otherwise.
+
+### GetQueryLogConfigOk
+
+`func (o *UserIntent) GetQueryLogConfigOk() (*QueryLogConfig, bool)`
+
+GetQueryLogConfigOk returns a tuple with the QueryLogConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueryLogConfig
+
+`func (o *UserIntent) SetQueryLogConfig(v QueryLogConfig)`
+
+SetQueryLogConfig sets QueryLogConfig field to given value.
+
+### HasQueryLogConfig
+
+`func (o *UserIntent) HasQueryLogConfig() bool`
+
+HasQueryLogConfig returns a boolean if a field has been set.
 
 ### GetRegionList
 

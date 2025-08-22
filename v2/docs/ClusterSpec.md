@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **UseSpotInstance** | Pointer to **bool** | Whether to use spot instances for nodes in aws/gcp. Used in dev/test environments. | [optional] 
 **InstanceTags** | Pointer to **map[string]string** | A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/. | [optional] 
 **AuditLogConfig** | Pointer to [**AuditLogConfig**](AuditLogConfig.md) |  | [optional] 
+**QueryLogConfig** | Pointer to [**QueryLogConfig**](QueryLogConfig.md) |  | [optional] 
+**MetricsExportConfig** | Pointer to [**MetricsExportConfig**](MetricsExportConfig.md) |  | [optional] 
 **Gflags** | Pointer to [**ClusterGFlags**](ClusterGFlags.md) |  | [optional] 
 
 ## Methods
@@ -290,6 +292,56 @@ SetAuditLogConfig sets AuditLogConfig field to given value.
 `func (o *ClusterSpec) HasAuditLogConfig() bool`
 
 HasAuditLogConfig returns a boolean if a field has been set.
+
+### GetQueryLogConfig
+
+`func (o *ClusterSpec) GetQueryLogConfig() QueryLogConfig`
+
+GetQueryLogConfig returns the QueryLogConfig field if non-nil, zero value otherwise.
+
+### GetQueryLogConfigOk
+
+`func (o *ClusterSpec) GetQueryLogConfigOk() (*QueryLogConfig, bool)`
+
+GetQueryLogConfigOk returns a tuple with the QueryLogConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueryLogConfig
+
+`func (o *ClusterSpec) SetQueryLogConfig(v QueryLogConfig)`
+
+SetQueryLogConfig sets QueryLogConfig field to given value.
+
+### HasQueryLogConfig
+
+`func (o *ClusterSpec) HasQueryLogConfig() bool`
+
+HasQueryLogConfig returns a boolean if a field has been set.
+
+### GetMetricsExportConfig
+
+`func (o *ClusterSpec) GetMetricsExportConfig() MetricsExportConfig`
+
+GetMetricsExportConfig returns the MetricsExportConfig field if non-nil, zero value otherwise.
+
+### GetMetricsExportConfigOk
+
+`func (o *ClusterSpec) GetMetricsExportConfigOk() (*MetricsExportConfig, bool)`
+
+GetMetricsExportConfigOk returns a tuple with the MetricsExportConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetricsExportConfig
+
+`func (o *ClusterSpec) SetMetricsExportConfig(v MetricsExportConfig)`
+
+SetMetricsExportConfig sets MetricsExportConfig field to given value.
+
+### HasMetricsExportConfig
+
+`func (o *ClusterSpec) HasMetricsExportConfig() bool`
+
+HasMetricsExportConfig returns a boolean if a field has been set.
 
 ### GetGflags
 

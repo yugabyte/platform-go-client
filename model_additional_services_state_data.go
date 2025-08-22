@@ -17,6 +17,7 @@ import (
 // AdditionalServicesStateData Additional services state
 type AdditionalServicesStateData struct {
 	EarlyoomConfig *EarlyoomConfig `json:"earlyoomConfig,omitempty"`
+	EarlyoomEnabled *bool `json:"earlyoomEnabled,omitempty"`
 }
 
 // NewAdditionalServicesStateData instantiates a new AdditionalServicesStateData object
@@ -68,10 +69,45 @@ func (o *AdditionalServicesStateData) SetEarlyoomConfig(v EarlyoomConfig) {
 	o.EarlyoomConfig = &v
 }
 
+// GetEarlyoomEnabled returns the EarlyoomEnabled field value if set, zero value otherwise.
+func (o *AdditionalServicesStateData) GetEarlyoomEnabled() bool {
+	if o == nil || o.EarlyoomEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EarlyoomEnabled
+}
+
+// GetEarlyoomEnabledOk returns a tuple with the EarlyoomEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalServicesStateData) GetEarlyoomEnabledOk() (*bool, bool) {
+	if o == nil || o.EarlyoomEnabled == nil {
+		return nil, false
+	}
+	return o.EarlyoomEnabled, true
+}
+
+// HasEarlyoomEnabled returns a boolean if a field has been set.
+func (o *AdditionalServicesStateData) HasEarlyoomEnabled() bool {
+	if o != nil && o.EarlyoomEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEarlyoomEnabled gets a reference to the given bool and assigns it to the EarlyoomEnabled field.
+func (o *AdditionalServicesStateData) SetEarlyoomEnabled(v bool) {
+	o.EarlyoomEnabled = &v
+}
+
 func (o AdditionalServicesStateData) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.EarlyoomConfig != nil {
 		toSerialize["earlyoomConfig"] = o.EarlyoomConfig
+	}
+	if o.EarlyoomEnabled != nil {
+		toSerialize["earlyoomEnabled"] = o.EarlyoomEnabled
 	}
 	return json.Marshal(toSerialize)
 }

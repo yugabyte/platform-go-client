@@ -554,8 +554,13 @@ type UserManagementApiApiListUsersRequest struct {
 	ctx _context.Context
 	ApiService *UserManagementApiService
 	cUUID string
+	email *string
 }
 
+func (r UserManagementApiApiListUsersRequest) Email(email string) UserManagementApiApiListUsersRequest {
+	r.email = &email
+	return r
+}
 
 func (r UserManagementApiApiListUsersRequest) Execute() ([]UserWithFeatures, *_nethttp.Response, error) {
 	return r.ApiService.ListUsersExecute(r)
@@ -601,6 +606,9 @@ func (a *UserManagementApiService) ListUsersExecute(r UserManagementApiApiListUs
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
+	if r.email != nil {
+		localVarQueryParams.Add("email", parameterToString(*r.email, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

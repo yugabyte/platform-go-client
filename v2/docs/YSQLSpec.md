@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Enable** | Pointer to **bool** | Whether to enable YSQL API on this Universe | [optional] 
 **EnableAuth** | Pointer to **bool** | Whether to enable authentication to access YSQL on this Universe | [optional] 
 **Password** | Pointer to **string** | Password to set for the YSQL database in this universe. Required if enable_auth is true. | [optional] 
+**EnableConnectionPooling** | Pointer to **bool** | Use built-in YSQL service for maximizing the number of simultaneous connections to database. | [optional] [default to false]
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetPassword sets Password field to given value.
 `func (o *YSQLSpec) HasPassword() bool`
 
 HasPassword returns a boolean if a field has been set.
+
+### GetEnableConnectionPooling
+
+`func (o *YSQLSpec) GetEnableConnectionPooling() bool`
+
+GetEnableConnectionPooling returns the EnableConnectionPooling field if non-nil, zero value otherwise.
+
+### GetEnableConnectionPoolingOk
+
+`func (o *YSQLSpec) GetEnableConnectionPoolingOk() (*bool, bool)`
+
+GetEnableConnectionPoolingOk returns a tuple with the EnableConnectionPooling field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableConnectionPooling
+
+`func (o *YSQLSpec) SetEnableConnectionPooling(v bool)`
+
+SetEnableConnectionPooling sets EnableConnectionPooling field to given value.
+
+### HasEnableConnectionPooling
+
+`func (o *YSQLSpec) HasEnableConnectionPooling() bool`
+
+HasEnableConnectionPooling returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

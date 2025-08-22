@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CurrentValue** | **int32** |  | 
+**CurrentValue** | **int64** |  | 
 **PresetValues** | [**PresetThrottleValues**](PresetThrottleValues.md) |  | 
 
 ## Methods
 
 ### NewThrottleParamValue
 
-`func NewThrottleParamValue(currentValue int32, presetValues PresetThrottleValues, ) *ThrottleParamValue`
+`func NewThrottleParamValue(currentValue int64, presetValues PresetThrottleValues, ) *ThrottleParamValue`
 
 NewThrottleParamValue instantiates a new ThrottleParamValue object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCurrentValue
 
-`func (o *ThrottleParamValue) GetCurrentValue() int32`
+`func (o *ThrottleParamValue) GetCurrentValue() int64`
 
 GetCurrentValue returns the CurrentValue field if non-nil, zero value otherwise.
 
 ### GetCurrentValueOk
 
-`func (o *ThrottleParamValue) GetCurrentValueOk() (*int32, bool)`
+`func (o *ThrottleParamValue) GetCurrentValueOk() (*int64, bool)`
 
 GetCurrentValueOk returns a tuple with the CurrentValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrentValue
 
-`func (o *ThrottleParamValue) SetCurrentValue(v int32)`
+`func (o *ThrottleParamValue) SetCurrentValue(v int64)`
 
 SetCurrentValue sets CurrentValue field to given value.
 

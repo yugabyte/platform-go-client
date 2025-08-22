@@ -62,6 +62,8 @@ type APIClient struct {
 	MetricsApi *MetricsApiService
 
 	UniverseApi *UniverseApiService
+
+	YBAInstanceApi *YBAInstanceApiService
 }
 
 type service struct {
@@ -87,6 +89,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.JobSchedulerApi = (*JobSchedulerApiService)(&c.common)
 	c.MetricsApi = (*MetricsApiService)(&c.common)
 	c.UniverseApi = (*UniverseApiService)(&c.common)
+	c.YBAInstanceApi = (*YBAInstanceApiService)(&c.common)
 
 	return c
 }

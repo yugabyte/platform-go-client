@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CloudVolumeEncryption** | Pointer to [**CloudVolumeEncryption**](CloudVolumeEncryption.md) |  | [optional] 
 **DiskIops** | Pointer to **int32** | Desired IOPS for the volumes mounted on this instance | [optional] 
 **MountPoints** | Pointer to **string** | Comma-separated list of mount points for the devices in each instance | [optional] 
 **NumVolumes** | Pointer to **int32** | Number of volumes to be mounted on this instance at the default path | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewDeviceInfoWithDefaults instantiates a new DeviceInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCloudVolumeEncryption
+
+`func (o *DeviceInfo) GetCloudVolumeEncryption() CloudVolumeEncryption`
+
+GetCloudVolumeEncryption returns the CloudVolumeEncryption field if non-nil, zero value otherwise.
+
+### GetCloudVolumeEncryptionOk
+
+`func (o *DeviceInfo) GetCloudVolumeEncryptionOk() (*CloudVolumeEncryption, bool)`
+
+GetCloudVolumeEncryptionOk returns a tuple with the CloudVolumeEncryption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloudVolumeEncryption
+
+`func (o *DeviceInfo) SetCloudVolumeEncryption(v CloudVolumeEncryption)`
+
+SetCloudVolumeEncryption sets CloudVolumeEncryption field to given value.
+
+### HasCloudVolumeEncryption
+
+`func (o *DeviceInfo) HasCloudVolumeEncryption() bool`
+
+HasCloudVolumeEncryption returns a boolean if a field has been set.
 
 ### GetDiskIops
 

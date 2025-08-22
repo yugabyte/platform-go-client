@@ -18,6 +18,7 @@ import (
 type PlacementAZ struct {
 	IsAffinitized *bool `json:"isAffinitized,omitempty"`
 	LbName *string `json:"lbName,omitempty"`
+	LeaderPreference *int32 `json:"leaderPreference,omitempty"`
 	Name *string `json:"name,omitempty"`
 	NumNodesInAZ *int32 `json:"numNodesInAZ,omitempty"`
 	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
@@ -105,6 +106,38 @@ func (o *PlacementAZ) HasLbName() bool {
 // SetLbName gets a reference to the given string and assigns it to the LbName field.
 func (o *PlacementAZ) SetLbName(v string) {
 	o.LbName = &v
+}
+
+// GetLeaderPreference returns the LeaderPreference field value if set, zero value otherwise.
+func (o *PlacementAZ) GetLeaderPreference() int32 {
+	if o == nil || o.LeaderPreference == nil {
+		var ret int32
+		return ret
+	}
+	return *o.LeaderPreference
+}
+
+// GetLeaderPreferenceOk returns a tuple with the LeaderPreference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlacementAZ) GetLeaderPreferenceOk() (*int32, bool) {
+	if o == nil || o.LeaderPreference == nil {
+		return nil, false
+	}
+	return o.LeaderPreference, true
+}
+
+// HasLeaderPreference returns a boolean if a field has been set.
+func (o *PlacementAZ) HasLeaderPreference() bool {
+	if o != nil && o.LeaderPreference != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLeaderPreference gets a reference to the given int32 and assigns it to the LeaderPreference field.
+func (o *PlacementAZ) SetLeaderPreference(v int32) {
+	o.LeaderPreference = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -306,6 +339,9 @@ func (o PlacementAZ) MarshalJSON() ([]byte, error) {
 	}
 	if o.LbName != nil {
 		toSerialize["lbName"] = o.LbName
+	}
+	if o.LeaderPreference != nil {
+		toSerialize["leaderPreference"] = o.LeaderPreference
 	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name

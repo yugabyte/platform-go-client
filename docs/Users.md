@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **LdapSpecifiedRole** | Pointer to **bool** | LDAP Specified Role | [optional] 
 **OidcJwtAuthToken** | Pointer to **string** |  | [optional] [readonly] 
 **Primary** | **bool** |  | 
-**Role** | Pointer to **string** | User role | [optional] 
+**Role** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.19.3.0.&lt;/b&gt; Use  getRoleBindings instead. | [optional] 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
 **UserType** | Pointer to **string** | User Type | [optional] 
 **Uuid** | Pointer to **string** | User UUID | [optional] [readonly] 

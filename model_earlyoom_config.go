@@ -20,7 +20,6 @@ type EarlyoomConfig struct {
 	AvailMemoryKillPercent *int32 `json:"availMemoryKillPercent,omitempty"`
 	AvailMemoryTermKb *int32 `json:"availMemoryTermKb,omitempty"`
 	AvailMemoryTermPercent *int32 `json:"availMemoryTermPercent,omitempty"`
-	Enabled *bool `json:"enabled,omitempty"`
 	PreferPattern *string `json:"preferPattern,omitempty"`
 	ReportInterval *int32 `json:"reportInterval,omitempty"`
 }
@@ -170,38 +169,6 @@ func (o *EarlyoomConfig) SetAvailMemoryTermPercent(v int32) {
 	o.AvailMemoryTermPercent = &v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *EarlyoomConfig) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EarlyoomConfig) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
-		return nil, false
-	}
-	return o.Enabled, true
-}
-
-// HasEnabled returns a boolean if a field has been set.
-func (o *EarlyoomConfig) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *EarlyoomConfig) SetEnabled(v bool) {
-	o.Enabled = &v
-}
-
 // GetPreferPattern returns the PreferPattern field value if set, zero value otherwise.
 func (o *EarlyoomConfig) GetPreferPattern() string {
 	if o == nil || o.PreferPattern == nil {
@@ -279,9 +246,6 @@ func (o EarlyoomConfig) MarshalJSON() ([]byte, error) {
 	}
 	if o.AvailMemoryTermPercent != nil {
 		toSerialize["availMemoryTermPercent"] = o.AvailMemoryTermPercent
-	}
-	if o.Enabled != nil {
-		toSerialize["enabled"] = o.Enabled
 	}
 	if o.PreferPattern != nil {
 		toSerialize["preferPattern"] = o.PreferPattern

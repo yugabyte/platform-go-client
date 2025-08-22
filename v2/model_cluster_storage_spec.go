@@ -31,6 +31,7 @@ type ClusterStorageSpec struct {
 	DiskIops *int32 `json:"disk_iops,omitempty"`
 	// Desired throughput for the volumes mounted on this aws, gcp or azu instance
 	Throughput *int32 `json:"throughput,omitempty"`
+	CloudVolumeEncryption *CloudVolumeEncryption `json:"cloud_volume_encryption,omitempty"`
 }
 
 // NewClusterStorageSpec instantiates a new ClusterStorageSpec object
@@ -260,6 +261,38 @@ func (o *ClusterStorageSpec) SetThroughput(v int32) {
 	o.Throughput = &v
 }
 
+// GetCloudVolumeEncryption returns the CloudVolumeEncryption field value if set, zero value otherwise.
+func (o *ClusterStorageSpec) GetCloudVolumeEncryption() CloudVolumeEncryption {
+	if o == nil || o.CloudVolumeEncryption == nil {
+		var ret CloudVolumeEncryption
+		return ret
+	}
+	return *o.CloudVolumeEncryption
+}
+
+// GetCloudVolumeEncryptionOk returns a tuple with the CloudVolumeEncryption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterStorageSpec) GetCloudVolumeEncryptionOk() (*CloudVolumeEncryption, bool) {
+	if o == nil || o.CloudVolumeEncryption == nil {
+		return nil, false
+	}
+	return o.CloudVolumeEncryption, true
+}
+
+// HasCloudVolumeEncryption returns a boolean if a field has been set.
+func (o *ClusterStorageSpec) HasCloudVolumeEncryption() bool {
+	if o != nil && o.CloudVolumeEncryption != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudVolumeEncryption gets a reference to the given CloudVolumeEncryption and assigns it to the CloudVolumeEncryption field.
+func (o *ClusterStorageSpec) SetCloudVolumeEncryption(v CloudVolumeEncryption) {
+	o.CloudVolumeEncryption = &v
+}
+
 func (o ClusterStorageSpec) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -282,6 +315,9 @@ func (o ClusterStorageSpec) MarshalJSON() ([]byte, error) {
 	}
 	if o.Throughput != nil {
 		toSerialize["throughput"] = o.Throughput
+	}
+	if o.CloudVolumeEncryption != nil {
+		toSerialize["cloud_volume_encryption"] = o.CloudVolumeEncryption
 	}
 	return json.Marshal(toSerialize)
 }

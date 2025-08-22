@@ -1,4 +1,4 @@
-# Go API client for ywclient
+# Go API client for v1
 
 ALPHA - NOT FOR EXTERNAL USE
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./ywclient"
+import sw "./v1"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -556,6 +556,7 @@ Class | Method | HTTP request | Description
  - [CloneNamespaceParams](docs/CloneNamespaceParams.md)
  - [CloudInfo](docs/CloudInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
+ - [CloudVolumeEncryption](docs/CloudVolumeEncryption.md)
  - [Cluster](docs/Cluster.md)
  - [ColumnDetails](docs/ColumnDetails.md)
  - [CommonBackupInfo](docs/CommonBackupInfo.md)
@@ -671,6 +672,7 @@ Class | Method | HTTP request | Description
  - [MetricQueryParams](docs/MetricQueryParams.md)
  - [MetricSettings](docs/MetricSettings.md)
  - [MetricValue](docs/MetricValue.md)
+ - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [MultiTableBackupRequestParams](docs/MultiTableBackupRequestParams.md)
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
  - [NamespaceSafetime](docs/NamespaceSafetime.md)
@@ -729,6 +731,7 @@ Class | Method | HTTP request | Description
  - [ProxyConfig](docs/ProxyConfig.md)
  - [ProxyConfigUpdateParams](docs/ProxyConfigUpdateParams.md)
  - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
+ - [QueryLogConfig](docs/QueryLogConfig.md)
  - [Region](docs/Region.md)
  - [RegionCloudInfo](docs/RegionCloudInfo.md)
  - [RegionDetails](docs/RegionDetails.md)
@@ -815,7 +818,9 @@ Class | Method | HTTP request | Description
  - [UniverseDefinitionTaskParamsResp](docs/UniverseDefinitionTaskParamsResp.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
  - [UniverseLogsExporterConfig](docs/UniverseLogsExporterConfig.md)
+ - [UniverseMetricsExporterConfig](docs/UniverseMetricsExporterConfig.md)
  - [UniversePerformanceAdvisorStatus](docs/UniversePerformanceAdvisorStatus.md)
+ - [UniverseQueryLogsExporterConfig](docs/UniverseQueryLogsExporterConfig.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
  - [UnusedIndexFinderResponse](docs/UnusedIndexFinderResponse.md)
@@ -850,6 +855,7 @@ Class | Method | HTTP request | Description
  - [YBPTask](docs/YBPTask.md)
  - [YCQLAuditConfig](docs/YCQLAuditConfig.md)
  - [YSQLAuditConfig](docs/YSQLAuditConfig.md)
+ - [YSQLQueryLogConfig](docs/YSQLQueryLogConfig.md)
  - [YbcThrottleParameters](docs/YbcThrottleParameters.md)
  - [YbcThrottleParametersResponse](docs/YbcThrottleParametersResponse.md)
 
