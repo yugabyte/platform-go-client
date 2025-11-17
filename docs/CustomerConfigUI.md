@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CustomerUUID** | **string** | Customer UUID | [readonly] 
 **Data** | **map[string]interface{}** | Configuration data | 
 **InUse** | Pointer to **bool** | True if there is an in use reference to the object | [optional] [readonly] 
+**KubernetesOperatorControlled** | **bool** |  | 
 **Name** | **string** | Name | 
 **State** | Pointer to **string** | state of the customerConfig. Possible values are Active, QueuedForDeletion. | [optional] [readonly] 
 **Type** | **string** | Config type | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewCustomerConfigUI
 
-`func NewCustomerConfigUI(configName string, customerUUID string, data map[string]interface{}, name string, type_ string, ) *CustomerConfigUI`
+`func NewCustomerConfigUI(configName string, customerUUID string, data map[string]interface{}, kubernetesOperatorControlled bool, name string, type_ string, ) *CustomerConfigUI`
 
 NewCustomerConfigUI instantiates a new CustomerConfigUI object
 This constructor will assign default values to properties that have it defined,
@@ -142,6 +143,26 @@ SetInUse sets InUse field to given value.
 `func (o *CustomerConfigUI) HasInUse() bool`
 
 HasInUse returns a boolean if a field has been set.
+
+### GetKubernetesOperatorControlled
+
+`func (o *CustomerConfigUI) GetKubernetesOperatorControlled() bool`
+
+GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorControlledOk
+
+`func (o *CustomerConfigUI) GetKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorControlled
+
+`func (o *CustomerConfigUI) SetKubernetesOperatorControlled(v bool)`
+
+SetKubernetesOperatorControlled sets KubernetesOperatorControlled field to given value.
+
 
 ### GetName
 

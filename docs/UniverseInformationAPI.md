@@ -1,0 +1,898 @@
+# \UniverseInformationAPI
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DownloadNodeLogs**](UniverseInformationAPI.md#DownloadNodeLogs) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/{nodeName}/download_logs | Download a node&#39;s logs - deprecated
+[**GetLiveQueries**](UniverseInformationAPI.md#GetLiveQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/live_queries | Get live queries for a universe
+[**GetMasterInfos**](UniverseInformationAPI.md#GetMasterInfos) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_infos | Get master information list
+[**GetMasterLeaderIP**](UniverseInformationAPI.md#GetMasterLeaderIP) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/leader | Get IP address of a universe&#39;s master leader
+[**GetSlowQueries**](UniverseInformationAPI.md#GetSlowQueries) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Get slow queries for a universe
+[**GetUniverseCost**](UniverseInformationAPI.md#GetUniverseCost) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/cost | Get a cost estimate for a universe - deprecated
+[**GetUniverseCostForAll**](UniverseInformationAPI.md#GetUniverseCostForAll) | **Get** /api/v1/customers/{cUUID}/cost | Get a cost estimate for all universes
+[**GetUniverseResources**](UniverseInformationAPI.md#GetUniverseResources) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/universe_resources | Get a resource usage estimate for a universe
+[**HealthCheckUniverse**](UniverseInformationAPI.md#HealthCheckUniverse) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/health_check | Return results for the last health check
+[**ResetSlowQueries**](UniverseInformationAPI.md#ResetSlowQueries) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/slow_queries | Reset slow queries for a universe
+[**TriggerHealthCheck**](UniverseInformationAPI.md#TriggerHealthCheck) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/trigger_health_check | Trigger a universe health check
+[**UniverseStatus**](UniverseInformationAPI.md#UniverseStatus) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/status | Get a universe&#39;s status
+
+
+
+## DownloadNodeLogs
+
+> string DownloadNodeLogs(ctx, cUUID, uniUUID, nodeName).Execute()
+
+Download a node's logs - deprecated
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	nodeName := "nodeName_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.DownloadNodeLogs(context.Background(), cUUID, uniUUID, nodeName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.DownloadNodeLogs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DownloadNodeLogs`: string
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.DownloadNodeLogs`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**nodeName** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDownloadNodeLogsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+**string**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/x-compressed
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetLiveQueries
+
+> map[string]interface{} GetLiveQueries(ctx, cUUID, uniUUID).Execute()
+
+Get live queries for a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetLiveQueries(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetLiveQueries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetLiveQueries`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetLiveQueries`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetLiveQueriesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetMasterInfos
+
+> []MasterInfo GetMasterInfos(ctx, cUUID, uniUUID).Execute()
+
+Get master information list
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetMasterInfos(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetMasterInfos``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMasterInfos`: []MasterInfo
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetMasterInfos`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMasterInfosRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]MasterInfo**](MasterInfo.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetMasterLeaderIP
+
+> map[string]interface{} GetMasterLeaderIP(ctx, cUUID, uniUUID).Execute()
+
+Get IP address of a universe's master leader
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetMasterLeaderIP(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetMasterLeaderIP``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMasterLeaderIP`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetMasterLeaderIP`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMasterLeaderIPRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSlowQueries
+
+> map[string]interface{} GetSlowQueries(ctx, cUUID, uniUUID).Execute()
+
+Get slow queries for a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetSlowQueries(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetSlowQueries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSlowQueries`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetSlowQueries`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSlowQueriesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUniverseCost
+
+> UniverseResourceDetails GetUniverseCost(ctx, cUUID, uniUUID).Execute()
+
+Get a cost estimate for a universe - deprecated
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetUniverseCost(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetUniverseCost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUniverseCost`: UniverseResourceDetails
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetUniverseCost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUniverseCostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUniverseCostForAll
+
+> []UniverseResourceDetails GetUniverseCostForAll(ctx, cUUID).Execute()
+
+Get a cost estimate for all universes
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetUniverseCostForAll(context.Background(), cUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetUniverseCostForAll``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUniverseCostForAll`: []UniverseResourceDetails
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetUniverseCostForAll`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUniverseCostForAllRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUniverseResources
+
+> UniverseResourceDetails GetUniverseResources(ctx, cUUID, uniUUID).Execute()
+
+Get a resource usage estimate for a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.GetUniverseResources(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.GetUniverseResources``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUniverseResources`: UniverseResourceDetails
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.GetUniverseResources`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUniverseResourcesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## HealthCheckUniverse
+
+> []Details HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
+
+Return results for the last health check
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.HealthCheckUniverse(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.HealthCheckUniverse``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `HealthCheckUniverse`: []Details
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.HealthCheckUniverse`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiHealthCheckUniverseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**[]Details**](Details.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResetSlowQueries
+
+> map[string]interface{} ResetSlowQueries(ctx, cUUID, uniUUID).Request(request).Execute()
+
+Reset slow queries for a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	request := TODO // interface{} |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.ResetSlowQueries(context.Background(), cUUID, uniUUID).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.ResetSlowQueries``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResetSlowQueries`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.ResetSlowQueries`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResetSlowQueriesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## TriggerHealthCheck
+
+> TriggerHealthCheckResult TriggerHealthCheck(ctx, cUUID, uniUUID).Execute()
+
+Trigger a universe health check
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.TriggerHealthCheck(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.TriggerHealthCheck``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `TriggerHealthCheck`: TriggerHealthCheckResult
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.TriggerHealthCheck`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTriggerHealthCheckRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**TriggerHealthCheckResult**](TriggerHealthCheckResult.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UniverseStatus
+
+> map[string]map[string]interface{} UniverseStatus(ctx, cUUID, uniUUID).Execute()
+
+Get a universe's status
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseInformationAPI.UniverseStatus(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.UniverseStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UniverseStatus`: map[string]map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `UniverseInformationAPI.UniverseStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUniverseStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+**map[string]map[string]interface{}**
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+

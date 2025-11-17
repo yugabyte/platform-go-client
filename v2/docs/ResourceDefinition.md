@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ResourceType** | **string** | Resource Type | 
 **AllowAll** | **bool** | Select all resources (including future resources) | 
-**ResourceUuidSet** | Pointer to **[]string** | Set of resource UUIDs | [optional] [default to []]
+**ResourceUuidSet** | Pointer to **[]string** | Set of resource UUIDs | [optional] [default to {}]
 
 ## Methods
 

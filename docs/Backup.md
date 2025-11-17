@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **FirstSnapshotTime** | Pointer to **int64** | First snapshot time in this backup | [optional] [readonly] 
 **HasKMSHistory** | Pointer to **bool** | Whether the backup has KMS history metadata | [optional] [readonly] 
 **IncrementalBackup** | **bool** |  | 
+**KubernetesOperatorControlled** | **bool** |  | 
 **ParentBackup** | **bool** |  | 
 **RetryCount** | Pointer to **int32** | Retry count for backup deletion | [optional] 
 **ScheduleName** | Pointer to **string** | Schedule Policy Name, if this backup is part of a schedule | [optional] 
@@ -31,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewBackup
 
-`func NewBackup(incrementalBackup bool, parentBackup bool, ) *Backup`
+`func NewBackup(incrementalBackup bool, kubernetesOperatorControlled bool, parentBackup bool, ) *Backup`
 
 NewBackup instantiates a new Backup object
 This constructor will assign default values to properties that have it defined,
@@ -339,6 +340,26 @@ and a boolean to check if the value has been set.
 `func (o *Backup) SetIncrementalBackup(v bool)`
 
 SetIncrementalBackup sets IncrementalBackup field to given value.
+
+
+### GetKubernetesOperatorControlled
+
+`func (o *Backup) GetKubernetesOperatorControlled() bool`
+
+GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorControlledOk
+
+`func (o *Backup) GetKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorControlled
+
+`func (o *Backup) SetKubernetesOperatorControlled(v bool)`
+
+SetKubernetesOperatorControlled sets KubernetesOperatorControlled field to given value.
 
 
 ### GetParentBackup

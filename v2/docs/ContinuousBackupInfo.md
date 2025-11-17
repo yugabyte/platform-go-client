@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uuid** | Pointer to **string** | UUID of the Continuous Backup Config | [optional] [readonly] 
+**Uuid** | **string** | UUID of the Continuous Backup Config | [readonly] 
 **StorageLocation** | Pointer to **string** | bucket or directory where backups are stored | [optional] [readonly] 
 **LastBackup** | Pointer to **time.Time** | time of last backup stored | [optional] [readonly] 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewContinuousBackupInfo
 
-`func NewContinuousBackupInfo() *ContinuousBackupInfo`
+`func NewContinuousBackupInfo(uuid string, ) *ContinuousBackupInfo`
 
 NewContinuousBackupInfo instantiates a new ContinuousBackupInfo object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
-### HasUuid
-
-`func (o *ContinuousBackupInfo) HasUuid() bool`
-
-HasUuid returns a boolean if a field has been set.
 
 ### GetStorageLocation
 

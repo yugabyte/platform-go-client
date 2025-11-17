@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Entities** | Pointer to [**[]JobInstanceInfo**](JobInstanceInfo.md) |  | [optional] 
 **HasNext** | Pointer to **bool** | There are more next records if true. | [optional] 
 **HasPrev** | Pointer to **bool** | There are more previous records if true. | [optional] 
 **TotalCount** | Pointer to **int32** | Total number of records. | [optional] 
+**Entities** | Pointer to [**[]JobInstanceInfo**](JobInstanceInfo.md) |  | [optional] 
 
 ## Methods
 
@@ -27,31 +27,6 @@ will change when the set of required properties is changed
 NewJobInstancePagedRespWithDefaults instantiates a new JobInstancePagedResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetEntities
-
-`func (o *JobInstancePagedResp) GetEntities() []JobInstanceInfo`
-
-GetEntities returns the Entities field if non-nil, zero value otherwise.
-
-### GetEntitiesOk
-
-`func (o *JobInstancePagedResp) GetEntitiesOk() (*[]JobInstanceInfo, bool)`
-
-GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEntities
-
-`func (o *JobInstancePagedResp) SetEntities(v []JobInstanceInfo)`
-
-SetEntities sets Entities field to given value.
-
-### HasEntities
-
-`func (o *JobInstancePagedResp) HasEntities() bool`
-
-HasEntities returns a boolean if a field has been set.
 
 ### GetHasNext
 
@@ -127,6 +102,31 @@ SetTotalCount sets TotalCount field to given value.
 `func (o *JobInstancePagedResp) HasTotalCount() bool`
 
 HasTotalCount returns a boolean if a field has been set.
+
+### GetEntities
+
+`func (o *JobInstancePagedResp) GetEntities() []JobInstanceInfo`
+
+GetEntities returns the Entities field if non-nil, zero value otherwise.
+
+### GetEntitiesOk
+
+`func (o *JobInstancePagedResp) GetEntitiesOk() (*[]JobInstanceInfo, bool)`
+
+GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntities
+
+`func (o *JobInstancePagedResp) SetEntities(v []JobInstanceInfo)`
+
+SetEntities sets Entities field to given value.
+
+### HasEntities
+
+`func (o *JobInstancePagedResp) HasEntities() bool`
+
+HasEntities returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

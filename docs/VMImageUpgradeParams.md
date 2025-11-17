@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AdditionalServicesStateData** | Pointer to [**AdditionalServicesStateData**](AdditionalServicesStateData.md) |  | [optional] 
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
+**AutoRollbackPerformed** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FipsEnabled** | Pointer to **bool** | YbaApi Internal. FIPS compatibility is enabled for universe | [optional] 
 **ForceVMImageUpgrade** | **bool** |  | 
 **ImageBundleUUID** | Pointer to **string** | ImageBundle to be used for upgrade. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.21.1.0.&lt;/b&gt; Use imageBundles instead. | [optional] 
 **ImageBundles** | Pointer to [**[]ImageBundleUpgradeInfo**](ImageBundleUpgradeInfo.md) | Available since YBA version 2.21.1.0. ImageBundles for provider to be used for upgrade | [optional] 
@@ -31,7 +33,7 @@ Name | Type | Description | Notes
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MachineImages** | Pointer to **map[string]string** | Map of region UUID to AMI name. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.0.0.&lt;/b&gt; Use imageBundle instead. | [optional] 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
+**MastersInDefaultRegion** | Pointer to **bool** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2025.2.&lt;/b&gt; With geo partitioning support, default region is replaced with default partition | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeAgentMissing** | Pointer to **bool** | YbaApi Internal. True if a node agent for missing in any of the nodes | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -44,6 +46,7 @@ Name | Type | Description | Notes
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**RawClientRootCA** | **string** |  | 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
@@ -59,6 +62,7 @@ Name | Type | Description | Notes
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **SshUserOverrideMap** | Pointer to **map[string]string** | Map of region UUID to SSH User override. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.0.0.&lt;/b&gt; Use imageBundle instead. | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**UniverseDetached** | Pointer to **bool** | YbaApi Internal. True if a universe has been detached | [optional] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
@@ -79,7 +83,7 @@ Name | Type | Description | Notes
 
 ### NewVMImageUpgradeParams
 
-`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
+`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
 
 NewVMImageUpgradeParams instantiates a new VMImageUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -168,6 +172,31 @@ SetArch sets Arch field to given value.
 `func (o *VMImageUpgradeParams) HasArch() bool`
 
 HasArch returns a boolean if a field has been set.
+
+### GetAutoRollbackPerformed
+
+`func (o *VMImageUpgradeParams) GetAutoRollbackPerformed() bool`
+
+GetAutoRollbackPerformed returns the AutoRollbackPerformed field if non-nil, zero value otherwise.
+
+### GetAutoRollbackPerformedOk
+
+`func (o *VMImageUpgradeParams) GetAutoRollbackPerformedOk() (*bool, bool)`
+
+GetAutoRollbackPerformedOk returns a tuple with the AutoRollbackPerformed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRollbackPerformed
+
+`func (o *VMImageUpgradeParams) SetAutoRollbackPerformed(v bool)`
+
+SetAutoRollbackPerformed sets AutoRollbackPerformed field to given value.
+
+### HasAutoRollbackPerformed
+
+`func (o *VMImageUpgradeParams) HasAutoRollbackPerformed() bool`
+
+HasAutoRollbackPerformed returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -483,6 +512,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 `func (o *VMImageUpgradeParams) HasExtraDependencies() bool`
 
 HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *VMImageUpgradeParams) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *VMImageUpgradeParams) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *VMImageUpgradeParams) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *VMImageUpgradeParams) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetForceVMImageUpgrade
 
@@ -1069,6 +1123,26 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
 
+### GetRawClientRootCA
+
+`func (o *VMImageUpgradeParams) GetRawClientRootCA() string`
+
+GetRawClientRootCA returns the RawClientRootCA field if non-nil, zero value otherwise.
+
+### GetRawClientRootCAOk
+
+`func (o *VMImageUpgradeParams) GetRawClientRootCAOk() (*string, bool)`
+
+GetRawClientRootCAOk returns a tuple with the RawClientRootCA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawClientRootCA
+
+`func (o *VMImageUpgradeParams) SetRawClientRootCA(v string)`
+
+SetRawClientRootCA sets RawClientRootCA field to given value.
+
+
 ### GetRemotePackagePath
 
 `func (o *VMImageUpgradeParams) GetRemotePackagePath() string`
@@ -1433,6 +1507,31 @@ SetTargetXClusterConfigs sets TargetXClusterConfigs field to given value.
 `func (o *VMImageUpgradeParams) HasTargetXClusterConfigs() bool`
 
 HasTargetXClusterConfigs returns a boolean if a field has been set.
+
+### GetUniverseDetached
+
+`func (o *VMImageUpgradeParams) GetUniverseDetached() bool`
+
+GetUniverseDetached returns the UniverseDetached field if non-nil, zero value otherwise.
+
+### GetUniverseDetachedOk
+
+`func (o *VMImageUpgradeParams) GetUniverseDetachedOk() (*bool, bool)`
+
+GetUniverseDetachedOk returns a tuple with the UniverseDetached field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseDetached
+
+`func (o *VMImageUpgradeParams) SetUniverseDetached(v bool)`
+
+SetUniverseDetached sets UniverseDetached field to given value.
+
+### HasUniverseDetached
+
+`func (o *VMImageUpgradeParams) HasUniverseDetached() bool`
+
+HasUniverseDetached returns a boolean if a field has been set.
 
 ### GetUniversePaused
 

@@ -53,6 +53,7 @@ Name | Type | Description | Notes
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
+**UseYbdbInbuiltYbc** | Pointer to **bool** | WARNING: This is a preview API that could change. Use YBDB inbuilt YBC for K8s universe | [optional] 
 **UserIntentOverrides** | Pointer to [**UserIntentOverrides**](UserIntentOverrides.md) |  | [optional] 
 **YbSoftwareVersion** | Pointer to **string** |  | [optional] 
 **YbcFlags** | Pointer to **map[string]string** |  | [optional] 
@@ -1302,6 +1303,31 @@ SetUseTimeSync sets UseTimeSync field to given value.
 `func (o *UserIntent) HasUseTimeSync() bool`
 
 HasUseTimeSync returns a boolean if a field has been set.
+
+### GetUseYbdbInbuiltYbc
+
+`func (o *UserIntent) GetUseYbdbInbuiltYbc() bool`
+
+GetUseYbdbInbuiltYbc returns the UseYbdbInbuiltYbc field if non-nil, zero value otherwise.
+
+### GetUseYbdbInbuiltYbcOk
+
+`func (o *UserIntent) GetUseYbdbInbuiltYbcOk() (*bool, bool)`
+
+GetUseYbdbInbuiltYbcOk returns a tuple with the UseYbdbInbuiltYbc field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseYbdbInbuiltYbc
+
+`func (o *UserIntent) SetUseYbdbInbuiltYbc(v bool)`
+
+SetUseYbdbInbuiltYbc sets UseYbdbInbuiltYbc field to given value.
+
+### HasUseYbdbInbuiltYbc
+
+`func (o *UserIntent) HasUseYbdbInbuiltYbc() bool`
+
+HasUseYbdbInbuiltYbc returns a boolean if a field has been set.
 
 ### GetUserIntentOverrides
 
