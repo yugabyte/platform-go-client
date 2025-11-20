@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **LogDisconnections** | **bool** | Log disconnections, causes session terminations to be logged. The log output provides information similar to log_connections, plus the duration of the session. | 
 **LogDuration** | **bool** | Log duration, causes the duration of every completed statement to be logged | 
 **LogErrorVerbosity** | **string** | Log error verbosity, controls the amount of detail written in the server log for each message that is logged. | 
-**LogLinePrefix** | Pointer to **string** | YbaApi Internal. Log line prefix. This would be applied to both audit and query logs. | [optional] 
 **LogMinDurationStatement** | **int32** | Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time. | 
 **LogMinErrorStatement** | **string** | Log min error statement, controls which SQL statements that cause an error condition are recorded. | 
 **LogStatement** | **string** | Log statement, controls which SQL statements are logged. | 
@@ -153,31 +152,6 @@ and a boolean to check if the value has been set.
 
 SetLogErrorVerbosity sets LogErrorVerbosity field to given value.
 
-
-### GetLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) GetLogLinePrefix() string`
-
-GetLogLinePrefix returns the LogLinePrefix field if non-nil, zero value otherwise.
-
-### GetLogLinePrefixOk
-
-`func (o *YSQLQueryLogConfig) GetLogLinePrefixOk() (*string, bool)`
-
-GetLogLinePrefixOk returns a tuple with the LogLinePrefix field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) SetLogLinePrefix(v string)`
-
-SetLogLinePrefix sets LogLinePrefix field to given value.
-
-### HasLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) HasLogLinePrefix() bool`
-
-HasLogLinePrefix returns a boolean if a field has been set.
 
 ### GetLogMinDurationStatement
 

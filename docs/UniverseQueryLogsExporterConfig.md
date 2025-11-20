@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdditionalTags** | **map[string]string** | Additional tags | 
 **ExporterUuid** | **string** | Exporter uuid | [readonly] 
+**MemoryLimitCheckIntervalSeconds** | Pointer to **int32** | Check interval in seconds for the MemoryLimiterProcessor. | [optional] 
+**MemoryLimitMib** | Pointer to **int32** | Memory limit in MiB for the OpenTelemetry Collector process in the config file. | [optional] 
 **SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for query logs exporter | [optional] 
 **SendBatchSize** | Pointer to **int32** | Batch size for query logs exporter | [optional] 
 **SendBatchTimeoutSeconds** | Pointer to **int32** | Maximum batch timeout for query logs exporter in seconds | [optional] 
@@ -68,6 +70,56 @@ and a boolean to check if the value has been set.
 
 SetExporterUuid sets ExporterUuid field to given value.
 
+
+### GetMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) GetMemoryLimitCheckIntervalSeconds() int32`
+
+GetMemoryLimitCheckIntervalSeconds returns the MemoryLimitCheckIntervalSeconds field if non-nil, zero value otherwise.
+
+### GetMemoryLimitCheckIntervalSecondsOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetMemoryLimitCheckIntervalSecondsOk() (*int32, bool)`
+
+GetMemoryLimitCheckIntervalSecondsOk returns a tuple with the MemoryLimitCheckIntervalSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) SetMemoryLimitCheckIntervalSeconds(v int32)`
+
+SetMemoryLimitCheckIntervalSeconds sets MemoryLimitCheckIntervalSeconds field to given value.
+
+### HasMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseQueryLogsExporterConfig) HasMemoryLimitCheckIntervalSeconds() bool`
+
+HasMemoryLimitCheckIntervalSeconds returns a boolean if a field has been set.
+
+### GetMemoryLimitMib
+
+`func (o *UniverseQueryLogsExporterConfig) GetMemoryLimitMib() int32`
+
+GetMemoryLimitMib returns the MemoryLimitMib field if non-nil, zero value otherwise.
+
+### GetMemoryLimitMibOk
+
+`func (o *UniverseQueryLogsExporterConfig) GetMemoryLimitMibOk() (*int32, bool)`
+
+GetMemoryLimitMibOk returns a tuple with the MemoryLimitMib field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryLimitMib
+
+`func (o *UniverseQueryLogsExporterConfig) SetMemoryLimitMib(v int32)`
+
+SetMemoryLimitMib sets MemoryLimitMib field to given value.
+
+### HasMemoryLimitMib
+
+`func (o *UniverseQueryLogsExporterConfig) HasMemoryLimitMib() bool`
+
+HasMemoryLimitMib returns a boolean if a field has been set.
 
 ### GetSendBatchMaxSize
 

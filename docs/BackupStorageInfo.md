@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupType** | Pointer to **string** | Backup type | [optional] 
+**ErrorIfRolesExists** | Pointer to **bool** | WARNING: This is a preview API that could change. Fail if roles exist with same names.Only applicable with new roles behavior. | [optional] 
+**ErrorIfTablespacesExists** | Pointer to **bool** | WARNING: This is a preview API that could change. Fail if tablespaces exist with same names. Only applicable with new roles behavior. | [optional] 
 **IgnoreErrors** | Pointer to **bool** | WARNING: This is a preview API that could change. Ignore all restore errors | [optional] 
 **Keyspace** | Pointer to **string** | Keyspace name | [optional] 
 **NewOwner** | Pointer to **string** | User name of the new tables owner | [optional] 
@@ -13,6 +15,7 @@ Name | Type | Description | Notes
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **StorageLocation** | Pointer to **string** | Storage location | [optional] 
 **TableNameList** | Pointer to **[]string** | Tables | [optional] 
+**UseRoles** | Pointer to **bool** | Restore global ysql roles | [optional] 
 **UseTablespaces** | Pointer to **bool** | Use tablespaces during restore | [optional] 
 
 ## Methods
@@ -58,6 +61,56 @@ SetBackupType sets BackupType field to given value.
 `func (o *BackupStorageInfo) HasBackupType() bool`
 
 HasBackupType returns a boolean if a field has been set.
+
+### GetErrorIfRolesExists
+
+`func (o *BackupStorageInfo) GetErrorIfRolesExists() bool`
+
+GetErrorIfRolesExists returns the ErrorIfRolesExists field if non-nil, zero value otherwise.
+
+### GetErrorIfRolesExistsOk
+
+`func (o *BackupStorageInfo) GetErrorIfRolesExistsOk() (*bool, bool)`
+
+GetErrorIfRolesExistsOk returns a tuple with the ErrorIfRolesExists field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorIfRolesExists
+
+`func (o *BackupStorageInfo) SetErrorIfRolesExists(v bool)`
+
+SetErrorIfRolesExists sets ErrorIfRolesExists field to given value.
+
+### HasErrorIfRolesExists
+
+`func (o *BackupStorageInfo) HasErrorIfRolesExists() bool`
+
+HasErrorIfRolesExists returns a boolean if a field has been set.
+
+### GetErrorIfTablespacesExists
+
+`func (o *BackupStorageInfo) GetErrorIfTablespacesExists() bool`
+
+GetErrorIfTablespacesExists returns the ErrorIfTablespacesExists field if non-nil, zero value otherwise.
+
+### GetErrorIfTablespacesExistsOk
+
+`func (o *BackupStorageInfo) GetErrorIfTablespacesExistsOk() (*bool, bool)`
+
+GetErrorIfTablespacesExistsOk returns a tuple with the ErrorIfTablespacesExists field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorIfTablespacesExists
+
+`func (o *BackupStorageInfo) SetErrorIfTablespacesExists(v bool)`
+
+SetErrorIfTablespacesExists sets ErrorIfTablespacesExists field to given value.
+
+### HasErrorIfTablespacesExists
+
+`func (o *BackupStorageInfo) HasErrorIfTablespacesExists() bool`
+
+HasErrorIfTablespacesExists returns a boolean if a field has been set.
 
 ### GetIgnoreErrors
 
@@ -258,6 +311,31 @@ SetTableNameList sets TableNameList field to given value.
 `func (o *BackupStorageInfo) HasTableNameList() bool`
 
 HasTableNameList returns a boolean if a field has been set.
+
+### GetUseRoles
+
+`func (o *BackupStorageInfo) GetUseRoles() bool`
+
+GetUseRoles returns the UseRoles field if non-nil, zero value otherwise.
+
+### GetUseRolesOk
+
+`func (o *BackupStorageInfo) GetUseRolesOk() (*bool, bool)`
+
+GetUseRolesOk returns a tuple with the UseRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseRoles
+
+`func (o *BackupStorageInfo) SetUseRoles(v bool)`
+
+SetUseRoles sets UseRoles field to given value.
+
+### HasUseRoles
+
+`func (o *BackupStorageInfo) HasUseRoles() bool`
+
+HasUseRoles returns a boolean if a field has been set.
 
 ### GetUseTablespaces
 

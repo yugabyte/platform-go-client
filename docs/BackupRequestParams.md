@@ -56,6 +56,7 @@ Name | Type | Description | Notes
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
 **UniverseUUID** | **string** | Universe UUID | 
 **UseLocalTimezone** | Pointer to **bool** | Use local timezone for Cron Expression, otherwise use UTC | [optional] 
+**UseRoles** | Pointer to **bool** | Backup global ysql roles | [optional] 
 **UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
 **YbcInstalled** | Pointer to **bool** |  | [optional] 
@@ -1344,6 +1345,31 @@ SetUseLocalTimezone sets UseLocalTimezone field to given value.
 `func (o *BackupRequestParams) HasUseLocalTimezone() bool`
 
 HasUseLocalTimezone returns a boolean if a field has been set.
+
+### GetUseRoles
+
+`func (o *BackupRequestParams) GetUseRoles() bool`
+
+GetUseRoles returns the UseRoles field if non-nil, zero value otherwise.
+
+### GetUseRolesOk
+
+`func (o *BackupRequestParams) GetUseRolesOk() (*bool, bool)`
+
+GetUseRolesOk returns a tuple with the UseRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseRoles
+
+`func (o *BackupRequestParams) SetUseRoles(v bool)`
+
+SetUseRoles sets UseRoles field to given value.
+
+### HasUseRoles
+
+`func (o *BackupRequestParams) HasUseRoles() bool`
+
+HasUseRoles returns a boolean if a field has been set.
 
 ### GetUseTablespaces
 

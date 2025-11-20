@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AdditionalServicesStateData** | Pointer to [**AdditionalServicesStateData**](AdditionalServicesStateData.md) |  | [optional] 
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
+**AutoRollbackPerformed** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FipsEnabled** | Pointer to **bool** | YbaApi Internal. FIPS compatibility is enabled for universe | [optional] 
 **ForceResizeNode** | **bool** |  | 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallNodeAgent** | Pointer to **bool** | YbaApi Internal. Install node agent in background if it is true | [optional] 
@@ -29,7 +31,7 @@ Name | Type | Description | Notes
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **KubernetesUpgradeSupported** | **bool** |  | 
 **MasterGFlags** | **map[string]string** |  | 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
+**MastersInDefaultRegion** | Pointer to **bool** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2025.2.&lt;/b&gt; With geo partitioning support, default region is replaced with default partition | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeAgentMissing** | Pointer to **bool** | YbaApi Internal. True if a node agent for missing in any of the nodes | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -42,6 +44,7 @@ Name | Type | Description | Notes
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
+**RawClientRootCA** | **string** |  | 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
@@ -57,6 +60,7 @@ Name | Type | Description | Notes
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TserverGFlags** | **map[string]string** |  | 
+**UniverseDetached** | Pointer to **bool** | YbaApi Internal. True if a universe has been detached | [optional] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
@@ -76,7 +80,7 @@ Name | Type | Description | Notes
 
 ### NewResizeNodeParams
 
-`func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *ResizeNodeParams`
+`func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string, ) *ResizeNodeParams`
 
 NewResizeNodeParams instantiates a new ResizeNodeParams object
 This constructor will assign default values to properties that have it defined,
@@ -165,6 +169,31 @@ SetArch sets Arch field to given value.
 `func (o *ResizeNodeParams) HasArch() bool`
 
 HasArch returns a boolean if a field has been set.
+
+### GetAutoRollbackPerformed
+
+`func (o *ResizeNodeParams) GetAutoRollbackPerformed() bool`
+
+GetAutoRollbackPerformed returns the AutoRollbackPerformed field if non-nil, zero value otherwise.
+
+### GetAutoRollbackPerformedOk
+
+`func (o *ResizeNodeParams) GetAutoRollbackPerformedOk() (*bool, bool)`
+
+GetAutoRollbackPerformedOk returns a tuple with the AutoRollbackPerformed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRollbackPerformed
+
+`func (o *ResizeNodeParams) SetAutoRollbackPerformed(v bool)`
+
+SetAutoRollbackPerformed sets AutoRollbackPerformed field to given value.
+
+### HasAutoRollbackPerformed
+
+`func (o *ResizeNodeParams) HasAutoRollbackPerformed() bool`
+
+HasAutoRollbackPerformed returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -480,6 +509,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 `func (o *ResizeNodeParams) HasExtraDependencies() bool`
 
 HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *ResizeNodeParams) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *ResizeNodeParams) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *ResizeNodeParams) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *ResizeNodeParams) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetForceResizeNode
 
@@ -1011,6 +1065,26 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
 
+### GetRawClientRootCA
+
+`func (o *ResizeNodeParams) GetRawClientRootCA() string`
+
+GetRawClientRootCA returns the RawClientRootCA field if non-nil, zero value otherwise.
+
+### GetRawClientRootCAOk
+
+`func (o *ResizeNodeParams) GetRawClientRootCAOk() (*string, bool)`
+
+GetRawClientRootCAOk returns a tuple with the RawClientRootCA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawClientRootCA
+
+`func (o *ResizeNodeParams) SetRawClientRootCA(v string)`
+
+SetRawClientRootCA sets RawClientRootCA field to given value.
+
+
 ### GetRemotePackagePath
 
 `func (o *ResizeNodeParams) GetRemotePackagePath() string`
@@ -1370,6 +1444,31 @@ and a boolean to check if the value has been set.
 
 SetTserverGFlags sets TserverGFlags field to given value.
 
+
+### GetUniverseDetached
+
+`func (o *ResizeNodeParams) GetUniverseDetached() bool`
+
+GetUniverseDetached returns the UniverseDetached field if non-nil, zero value otherwise.
+
+### GetUniverseDetachedOk
+
+`func (o *ResizeNodeParams) GetUniverseDetachedOk() (*bool, bool)`
+
+GetUniverseDetachedOk returns a tuple with the UniverseDetached field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseDetached
+
+`func (o *ResizeNodeParams) SetUniverseDetached(v bool)`
+
+SetUniverseDetached sets UniverseDetached field to given value.
+
+### HasUniverseDetached
+
+`func (o *ResizeNodeParams) HasUniverseDetached() bool`
+
+HasUniverseDetached returns a boolean if a field has been set.
 
 ### GetUniversePaused
 

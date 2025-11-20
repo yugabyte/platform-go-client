@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **CreatedForDr** | Pointer to **bool** | Created for DR | [optional] [readonly] 
 **CustomerUUID** | Pointer to **string** | Customer UUID of this config | [optional] 
 **DbName** | Pointer to **string** | DB Name | [optional] 
+**Disabled** | Pointer to **bool** | Whether the PITR config is disabled | [optional] [readonly] 
 **IntermittentMinRecoverTimeInMillis** | Pointer to **int64** | Intermittent min recovery time in millis if retention period is increased | [optional] 
 **MaxRecoverTimeInMillis** | **int64** |  | 
 **MinRecoverTimeInMillis** | **int64** |  | 
@@ -138,6 +139,31 @@ SetDbName sets DbName field to given value.
 `func (o *PitrConfig) HasDbName() bool`
 
 HasDbName returns a boolean if a field has been set.
+
+### GetDisabled
+
+`func (o *PitrConfig) GetDisabled() bool`
+
+GetDisabled returns the Disabled field if non-nil, zero value otherwise.
+
+### GetDisabledOk
+
+`func (o *PitrConfig) GetDisabledOk() (*bool, bool)`
+
+GetDisabledOk returns a tuple with the Disabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisabled
+
+`func (o *PitrConfig) SetDisabled(v bool)`
+
+SetDisabled sets Disabled field to given value.
+
+### HasDisabled
+
+`func (o *PitrConfig) HasDisabled() bool`
+
+HasDisabled returns a boolean if a field has been set.
 
 ### GetIntermittentMinRecoverTimeInMillis
 
