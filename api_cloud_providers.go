@@ -230,16 +230,16 @@ func (a *CloudProvidersAPIService) CreateProvidersExecute(r CloudProvidersAPICre
 	if r.validate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", r.validate, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
-        r.validate = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
+		r.validate = &defaultValue
 	}
 	if r.ignoreValidationErrors != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", r.ignoreValidationErrors, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", defaultValue, "", "")
-        r.ignoreValidationErrors = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", defaultValue, "", "")
+		r.ignoreValidationErrors = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -669,16 +669,16 @@ func (a *CloudProvidersAPIService) EditProviderExecute(r CloudProvidersAPIEditPr
 	if r.validate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", r.validate, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
-        r.validate = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
+		r.validate = &defaultValue
 	}
 	if r.ignoreValidationErrors != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", r.ignoreValidationErrors, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", defaultValue, "", "")
-        r.ignoreValidationErrors = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ignoreValidationErrors", defaultValue, "", "")
+		r.ignoreValidationErrors = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

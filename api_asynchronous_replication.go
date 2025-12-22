@@ -229,9 +229,9 @@ func (a *AsynchronousReplicationAPIService) DeleteXClusterConfigExecute(r Asynch
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -508,9 +508,9 @@ func (a *AsynchronousReplicationAPIService) GetXClusterConfigExecute(r Asynchron
 	if r.syncWithDB != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", r.syncWithDB, "", "")
 	} else {
-        var defaultValue bool = true
-        parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", defaultValue, "", "")
-        r.syncWithDB = &defaultValue
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", defaultValue, "", "")
+		r.syncWithDB = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -668,9 +668,9 @@ func (a *AsynchronousReplicationAPIService) NeedBootstrapTableExecute(r Asynchro
 	if r.includeDetails != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeDetails", r.includeDetails, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeDetails", defaultValue, "", "")
-        r.includeDetails = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeDetails", defaultValue, "", "")
+		r.includeDetails = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -965,9 +965,9 @@ func (a *AsynchronousReplicationAPIService) RestartXClusterConfigExecute(r Async
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

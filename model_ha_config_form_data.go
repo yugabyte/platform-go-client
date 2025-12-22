@@ -109,44 +109,6 @@ func (o HAConfigFormData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *HAConfigFormData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"accept_any_certificate",
-		"cluster_key",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varHAConfigFormData := _HAConfigFormData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHAConfigFormData)
-
-	if err != nil {
-		return err
-	}
-
-	*o = HAConfigFormData(varHAConfigFormData)
-
-	return err
-}
-
 type NullableHAConfigFormData struct {
 	value *HAConfigFormData
 	isSet bool

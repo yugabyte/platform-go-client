@@ -223,9 +223,9 @@ func (a *RuntimeConfigurationAPIService) GetConfigExecute(r RuntimeConfiguration
 	if r.includeInherited != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeInherited", r.includeInherited, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeInherited", defaultValue, "", "")
-        r.includeInherited = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeInherited", defaultValue, "", "")
+		r.includeInherited = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

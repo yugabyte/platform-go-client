@@ -109,44 +109,6 @@ func (o K8SNodeResourceSpec) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *K8SNodeResourceSpec) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"cpuCoreCount",
-		"memoryGib",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varK8SNodeResourceSpec := _K8SNodeResourceSpec{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varK8SNodeResourceSpec)
-
-	if err != nil {
-		return err
-	}
-
-	*o = K8SNodeResourceSpec(varK8SNodeResourceSpec)
-
-	return err
-}
-
 type NullableK8SNodeResourceSpec struct {
 	value *K8SNodeResourceSpec
 	isSet bool

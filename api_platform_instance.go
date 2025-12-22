@@ -466,9 +466,9 @@ func (a *PlatformInstanceAPIService) PromoteInstanceExecute(r PlatformInstanceAP
 	if r.isForcePromote != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForcePromote", r.isForcePromote, "", "")
 	} else {
-        var defaultValue bool = true
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForcePromote", defaultValue, "", "")
-        r.isForcePromote = &defaultValue
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForcePromote", defaultValue, "", "")
+		r.isForcePromote = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

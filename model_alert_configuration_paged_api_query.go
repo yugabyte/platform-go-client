@@ -217,48 +217,6 @@ func (o AlertConfigurationPagedApiQuery) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-func (o *AlertConfigurationPagedApiQuery) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"direction",
-		"filter",
-		"limit",
-		"needTotalCount",
-		"offset",
-		"sortBy",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varAlertConfigurationPagedApiQuery := _AlertConfigurationPagedApiQuery{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAlertConfigurationPagedApiQuery)
-
-	if err != nil {
-		return err
-	}
-
-	*o = AlertConfigurationPagedApiQuery(varAlertConfigurationPagedApiQuery)
-
-	return err
-}
-
 type NullableAlertConfigurationPagedApiQuery struct {
 	value *AlertConfigurationPagedApiQuery
 	isSet bool

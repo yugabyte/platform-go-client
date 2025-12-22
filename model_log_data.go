@@ -82,43 +82,6 @@ func (o LogData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *LogData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"lines",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varLogData := _LogData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLogData)
-
-	if err != nil {
-		return err
-	}
-
-	*o = LogData(varLogData)
-
-	return err
-}
-
 type NullableLogData struct {
 	value *LogData
 	isSet bool

@@ -373,9 +373,9 @@ func (a *UniverseClusterMutationsAPIService) DeleteReadonlyClusterExecute(r Univ
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

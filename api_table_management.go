@@ -907,9 +907,9 @@ func (a *TableManagementAPIService) GetAllNamespacesExecute(r TableManagementAPI
 	if r.includeSystemNamespaces != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeSystemNamespaces", r.includeSystemNamespaces, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeSystemNamespaces", defaultValue, "", "")
-        r.includeSystemNamespaces = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeSystemNamespaces", defaultValue, "", "")
+		r.includeSystemNamespaces = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1180,30 +1180,30 @@ func (a *TableManagementAPIService) GetAllTablesExecute(r TableManagementAPIGetA
 	if r.includeParentTableInfo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeParentTableInfo", r.includeParentTableInfo, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeParentTableInfo", defaultValue, "", "")
-        r.includeParentTableInfo = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeParentTableInfo", defaultValue, "", "")
+		r.includeParentTableInfo = &defaultValue
 	}
 	if r.excludeColocatedTables != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "excludeColocatedTables", r.excludeColocatedTables, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "excludeColocatedTables", defaultValue, "", "")
-        r.excludeColocatedTables = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "excludeColocatedTables", defaultValue, "", "")
+		r.excludeColocatedTables = &defaultValue
 	}
 	if r.includeColocatedParentTables != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeColocatedParentTables", r.includeColocatedParentTables, "", "")
 	} else {
-        var defaultValue bool = true
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeColocatedParentTables", defaultValue, "", "")
-        r.includeColocatedParentTables = &defaultValue
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeColocatedParentTables", defaultValue, "", "")
+		r.includeColocatedParentTables = &defaultValue
 	}
 	if r.xClusterSupportedOnly != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "xClusterSupportedOnly", r.xClusterSupportedOnly, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "xClusterSupportedOnly", defaultValue, "", "")
-        r.xClusterSupportedOnly = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "xClusterSupportedOnly", defaultValue, "", "")
+		r.xClusterSupportedOnly = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

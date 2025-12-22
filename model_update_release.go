@@ -190,47 +190,6 @@ func (o UpdateRelease) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateRelease) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"artifacts",
-		"release_date",
-		"release_notes",
-		"release_tag",
-		"state",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varUpdateRelease := _UpdateRelease{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateRelease)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UpdateRelease(varUpdateRelease)
-
-	return err
-}
-
 type NullableUpdateRelease struct {
 	value *UpdateRelease
 	isSet bool

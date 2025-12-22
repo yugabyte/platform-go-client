@@ -362,9 +362,9 @@ func (a *TroubleshootingPlatformAPIService) DeleteTroubleshootingPlatformExecute
 	if r.force != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "force", r.force, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "force", defaultValue, "", "")
-        r.force = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "force", defaultValue, "", "")
+		r.force = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -514,9 +514,9 @@ func (a *TroubleshootingPlatformAPIService) EditTroubleshootingPlatformExecute(r
 	if r.force != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "force", r.force, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "force", defaultValue, "", "")
-        r.force = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "force", defaultValue, "", "")
+		r.force = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

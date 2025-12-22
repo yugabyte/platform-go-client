@@ -515,44 +515,6 @@ func (o XClusterTableConfig) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *XClusterTableConfig) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"backupUuid",
-		"restoreUuid",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varXClusterTableConfig := _XClusterTableConfig{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varXClusterTableConfig)
-
-	if err != nil {
-		return err
-	}
-
-	*o = XClusterTableConfig(varXClusterTableConfig)
-
-	return err
-}
-
 type NullableXClusterTableConfig struct {
 	value *XClusterTableConfig
 	isSet bool

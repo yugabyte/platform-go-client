@@ -202,9 +202,9 @@ func (a *SessionManagementAPIService) ApiTokenExecute(r SessionManagementAPIApiT
 	if r.apiTokenVersion != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "apiTokenVersion", r.apiTokenVersion, "", "")
 	} else {
-        var defaultValue int64 = -1
-        parameterAddToHeaderOrQuery(localVarQueryParams, "apiTokenVersion", defaultValue, "", "")
-        r.apiTokenVersion = &defaultValue
+		var defaultValue int64 = -1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "apiTokenVersion", defaultValue, "", "")
+		r.apiTokenVersion = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -636,9 +636,9 @@ func (a *SessionManagementAPIService) GetFilteredLogsExecute(r SessionManagement
 	if r.maxLines != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "maxLines", r.maxLines, "", "")
 	} else {
-        var defaultValue int32 = 10000
-        parameterAddToHeaderOrQuery(localVarQueryParams, "maxLines", defaultValue, "", "")
-        r.maxLines = &defaultValue
+		var defaultValue int32 = 10000
+		parameterAddToHeaderOrQuery(localVarQueryParams, "maxLines", defaultValue, "", "")
+		r.maxLines = &defaultValue
 	}
 	if r.universeName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "universeName", r.universeName, "", "")
@@ -1002,9 +1002,9 @@ func (a *SessionManagementAPIService) RegisterCustomerExecute(r SessionManagemen
 	if r.generateApiToken != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "generateApiToken", r.generateApiToken, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "generateApiToken", defaultValue, "", "")
-        r.generateApiToken = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "generateApiToken", defaultValue, "", "")
+		r.generateApiToken = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

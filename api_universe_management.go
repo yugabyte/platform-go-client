@@ -236,23 +236,23 @@ func (a *UniverseManagementAPIService) DeleteUniverseExecute(r UniverseManagemen
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.isDeleteBackups != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", r.isDeleteBackups, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
-        r.isDeleteBackups = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
+		r.isDeleteBackups = &defaultValue
 	}
 	if r.isDeleteAssociatedCerts != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteAssociatedCerts", r.isDeleteAssociatedCerts, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteAssociatedCerts", defaultValue, "", "")
-        r.isDeleteAssociatedCerts = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteAssociatedCerts", defaultValue, "", "")
+		r.isDeleteAssociatedCerts = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

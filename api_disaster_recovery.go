@@ -229,9 +229,9 @@ func (a *DisasterRecoveryAPIService) DeleteXClusterConfigExecute(r DisasterRecov
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -650,9 +650,9 @@ func (a *DisasterRecoveryAPIService) GetDrConfigExecute(r DisasterRecoveryAPIGet
 	if r.syncWithDB != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", r.syncWithDB, "", "")
 	} else {
-        var defaultValue bool = true
-        parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", defaultValue, "", "")
-        r.syncWithDB = &defaultValue
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "syncWithDB", defaultValue, "", "")
+		r.syncWithDB = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1323,9 +1323,9 @@ func (a *DisasterRecoveryAPIService) RestartDrConfigExecute(r DisasterRecoveryAP
 	if r.isForceDelete != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", r.isForceDelete, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
-        r.isForceDelete = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isForceDelete", defaultValue, "", "")
+		r.isForceDelete = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

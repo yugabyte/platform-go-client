@@ -653,60 +653,6 @@ func (o BackupResp) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *BackupResp) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"backupType",
-		"category",
-		"commonBackupInfo",
-		"customerUUID",
-		"expiryTimeUnit",
-		"fullChainSizeInBytes",
-		"hasIncrementalBackups",
-		"isFullBackup",
-		"isStorageConfigPresent",
-		"isUniversePresent",
-		"lastBackupState",
-		"onDemand",
-		"scheduleName",
-		"scheduleUUID",
-		"storageConfigType",
-		"universeName",
-		"universeUUID",
-		"useTablespaces",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varBackupResp := _BackupResp{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBackupResp)
-
-	if err != nil {
-		return err
-	}
-
-	*o = BackupResp(varBackupResp)
-
-	return err
-}
-
 type NullableBackupResp struct {
 	value *BackupResp
 	isSet bool

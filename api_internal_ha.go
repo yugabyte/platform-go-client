@@ -87,9 +87,9 @@ func (a *InternalHAAPIService) DemoteLocalLeaderExecute(r InternalHAAPIDemoteLoc
 	if r.promote != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "promote", r.promote, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "promote", defaultValue, "", "")
-        r.promote = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "promote", defaultValue, "", "")
+		r.promote = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

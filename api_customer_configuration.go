@@ -230,9 +230,9 @@ func (a *CustomerConfigurationAPIService) DeleteCustomerConfigExecute(r Customer
 	if r.isDeleteBackups != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", r.isDeleteBackups, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
-        r.isDeleteBackups = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
+		r.isDeleteBackups = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
@@ -371,9 +371,9 @@ func (a *CustomerConfigurationAPIService) DeleteCustomerConfigV2Execute(r Custom
 	if r.isDeleteBackups != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", r.isDeleteBackups, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
-        r.isDeleteBackups = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isDeleteBackups", defaultValue, "", "")
+		r.isDeleteBackups = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

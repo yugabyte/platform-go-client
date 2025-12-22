@@ -358,9 +358,9 @@ func (a *ReleaseManagementAPIService) GetListOfRegionReleasesExecute(r ReleaseMa
 	if r.includeMetadata != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", r.includeMetadata, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", defaultValue, "", "")
-        r.includeMetadata = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", defaultValue, "", "")
+		r.includeMetadata = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -495,9 +495,9 @@ func (a *ReleaseManagementAPIService) GetListOfReleasesExecute(r ReleaseManageme
 	if r.includeMetadata != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", r.includeMetadata, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", defaultValue, "", "")
-        r.includeMetadata = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMetadata", defaultValue, "", "")
+		r.includeMetadata = &defaultValue
 	}
 	if r.arch != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "arch", r.arch, "", "")

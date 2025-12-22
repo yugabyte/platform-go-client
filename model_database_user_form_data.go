@@ -281,49 +281,6 @@ func (o DatabaseUserFormData) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *DatabaseUserFormData) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"dbName",
-		"password",
-		"username",
-		"ycqlAdminPassword",
-		"ycqlAdminUsername",
-		"ysqlAdminPassword",
-		"ysqlAdminUsername",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varDatabaseUserFormData := _DatabaseUserFormData{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDatabaseUserFormData)
-
-	if err != nil {
-		return err
-	}
-
-	*o = DatabaseUserFormData(varDatabaseUserFormData)
-
-	return err
-}
-
 type NullableDatabaseUserFormData struct {
 	value *DatabaseUserFormData
 	isSet bool

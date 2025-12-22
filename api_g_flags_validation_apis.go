@@ -240,16 +240,16 @@ func (a *GFlagsValidationAPIsAPIService) ListGFlagsExecute(r GFlagsValidationAPI
 	if r.mostUsedGFlags != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "mostUsedGFlags", r.mostUsedGFlags, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "mostUsedGFlags", defaultValue, "", "")
-        r.mostUsedGFlags = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "mostUsedGFlags", defaultValue, "", "")
+		r.mostUsedGFlags = &defaultValue
 	}
 	if r.showExperimental != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "showExperimental", r.showExperimental, "", "")
 	} else {
-        var defaultValue bool = false
-        parameterAddToHeaderOrQuery(localVarQueryParams, "showExperimental", defaultValue, "", "")
-        r.showExperimental = &defaultValue
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "showExperimental", defaultValue, "", "")
+		r.showExperimental = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

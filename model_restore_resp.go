@@ -473,52 +473,6 @@ func (o RestoreResp) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RestoreResp) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"customerUUID",
-		"isSourceUniversePresent",
-		"restoreKeyspaceList",
-		"restoreSizeInBytes",
-		"restoreUUID",
-		"sourceUniverseName",
-		"sourceUniverseUUID",
-		"state",
-		"targetUniverseName",
-		"universeUUID",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varRestoreResp := _RestoreResp{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRestoreResp)
-
-	if err != nil {
-		return err
-	}
-
-	*o = RestoreResp(varRestoreResp)
-
-	return err
-}
-
 type NullableRestoreResp struct {
 	value *RestoreResp
 	isSet bool
