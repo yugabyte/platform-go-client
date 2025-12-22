@@ -643,30 +643,18 @@ func (a *SessionManagementAPIService) GetFilteredLogsExecute(r SessionManagement
 	if r.universeName != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "universeName", r.universeName, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "universeName", defaultValue, "", "")
-        r.universeName = &defaultValue
 	}
 	if r.queryRegex != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "queryRegex", r.queryRegex, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "queryRegex", defaultValue, "", "")
-        r.queryRegex = &defaultValue
 	}
 	if r.startDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "startDate", r.startDate, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "startDate", defaultValue, "", "")
-        r.startDate = &defaultValue
 	}
 	if r.endDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "endDate", r.endDate, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "endDate", defaultValue, "", "")
-        r.endDate = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

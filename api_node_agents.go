@@ -87,9 +87,6 @@ func (a *NodeAgentsAPIService) DownloadNodeAgentInstallerExecute(r NodeAgentsAPI
 	if r.downloadType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "downloadType", r.downloadType, "", "")
 	} else {
-        var defaultValue string = "INSTALLER"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "downloadType", defaultValue, "", "")
-        r.downloadType = &defaultValue
 	}
 	if r.os != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "os", r.os, "", "")

@@ -49,7 +49,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	finalizeUpgradeParams := *openapiclient.NewFinalizeUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example", false) // FinalizeUpgradeParams | Finalize Upgrade Params
+	finalizeUpgradeParams := *openapiclient.NewFinalizeUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example", false) // FinalizeUpgradeParams | Finalize Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -126,7 +126,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	kubernetesToggleImmutableYbc := *openapiclient.NewKubernetesToggleImmutableYbcParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example", false) // KubernetesToggleImmutableYbcParams | Kubernetes Toggle Immutable Ybc Params
+	kubernetesToggleImmutableYbc := *openapiclient.NewKubernetesToggleImmutableYbcParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example", false) // KubernetesToggleImmutableYbcParams | Kubernetes Toggle Immutable Ybc Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -203,7 +203,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	auditLoggingConfig := *openapiclient.NewAuditLogConfigParams(*openapiclient.NewAuditLogConfig([]openapiclient.UniverseLogsExporterConfig{*openapiclient.NewUniverseLogsExporterConfig(map[string]string{"key": "Inner_example"}, "ExporterUuid_example")}), []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // AuditLogConfigParams | Audit Logging Configuration
+	auditLoggingConfig := *openapiclient.NewAuditLogConfigParams(*openapiclient.NewAuditLogConfig([]openapiclient.UniverseLogsExporterConfig{*openapiclient.NewUniverseLogsExporterConfig(map[string]string{"key": "Inner_example"}, "ExporterUuid_example")}), []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // AuditLogConfigParams | Audit Logging Configuration
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -353,7 +353,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	upgradeTaskParams := *openapiclient.NewUpgradeTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // UpgradeTaskParams | Upgrade Task Params
+	upgradeTaskParams := *openapiclient.NewUpgradeTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // UpgradeTaskParams | Upgrade Task Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -430,7 +430,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	resizeNodeParams := *openapiclient.NewResizeNodeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // ResizeNodeParams | Resize Node Params
+	resizeNodeParams := *openapiclient.NewResizeNodeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // ResizeNodeParams | Resize Node Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -507,7 +507,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	restartTaskParams := *openapiclient.NewRestartTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // RestartTaskParams | Restart Task Params
+	restartTaskParams := *openapiclient.NewRestartTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // RestartTaskParams | Restart Task Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -584,7 +584,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	rollbackUpgradeParams := *openapiclient.NewRollbackUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // RollbackUpgradeParams | RollBack Upgrade Params
+	rollbackUpgradeParams := *openapiclient.NewRollbackUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // RollbackUpgradeParams | RollBack Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -738,7 +738,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	updateProxyConfigParams := *openapiclient.NewProxyConfigUpdateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // ProxyConfigUpdateParams | Update Proxy Config Params
+	updateProxyConfigParams := *openapiclient.NewProxyConfigUpdateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // ProxyConfigUpdateParams | Update Proxy Config Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -815,7 +815,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	certsRotateParams := *openapiclient.NewCertsRotateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", false, false, int32(123), int32(123), "UpgradeOption_example") // CertsRotateParams | Certs Rotate Params
+	certsRotateParams := *openapiclient.NewCertsRotateParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", false, false, int32(123), int32(123), "UpgradeOption_example") // CertsRotateParams | Certs Rotate Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -892,7 +892,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
+	softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -969,7 +969,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	gflagsUpgradeParams := *openapiclient.NewGFlagsUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // GFlagsUpgradeParams | GFlags Upgrade Params
+	gflagsUpgradeParams := *openapiclient.NewGFlagsUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, map[string]string{"key": "Inner_example"}, "PlatformUrl_example", int32(123), int32(123), map[string]string{"key": "Inner_example"}, "UpgradeOption_example") // GFlagsUpgradeParams | GFlags Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1046,7 +1046,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	kubernetesOverridesUpgradeParams := *openapiclient.NewKubernetesOverridesUpgradeParams(map[string]string{"key": "Inner_example"}, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UniverseOverrides_example", "UpgradeOption_example") // KubernetesOverridesUpgradeParams | Kubernetes Override Upgrade Params
+	kubernetesOverridesUpgradeParams := *openapiclient.NewKubernetesOverridesUpgradeParams(map[string]string{"key": "Inner_example"}, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UniverseOverrides_example", "UpgradeOption_example") // KubernetesOverridesUpgradeParams | Kubernetes Override Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1123,7 +1123,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
+	softwareUpgradeParams := *openapiclient.NewSoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example", false, "YbSoftwareVersion_example") // SoftwareUpgradeParams | Software Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1200,7 +1200,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	systemdUpgradeParams := *openapiclient.NewSystemdUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // SystemdUpgradeParams | Systemd Upgrade Params
+	systemdUpgradeParams := *openapiclient.NewSystemdUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // SystemdUpgradeParams | Systemd Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1277,7 +1277,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	thirdpartySoftwareUpgradeParams := *openapiclient.NewThirdpartySoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // ThirdpartySoftwareUpgradeParams | Thirdparty Software Upgrade Params
+	thirdpartySoftwareUpgradeParams := *openapiclient.NewThirdpartySoftwareUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // ThirdpartySoftwareUpgradeParams | Thirdparty Software Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1354,7 +1354,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	tlsToggleParams := *openapiclient.NewTlsToggleParams(false, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example") // TlsToggleParams | TLS Toggle Params
+	tlsToggleParams := *openapiclient.NewTlsToggleParams(false, []openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example") // TlsToggleParams | TLS Toggle Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1431,7 +1431,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	vmimageUpgradeParams := *openapiclient.NewVMImageUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", "RawClientRootCA_example", int32(123), int32(123), "UpgradeOption_example", "YbSoftwareVersion_example") // VMImageUpgradeParams | VM Image Upgrade Params
+	vmimageUpgradeParams := *openapiclient.NewVMImageUpgradeParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, false, "PlatformUrl_example", int32(123), int32(123), "UpgradeOption_example", "YbSoftwareVersion_example") // VMImageUpgradeParams | VM Image Upgrade Params
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()

@@ -485,9 +485,6 @@ func (a *NewReleaseManagementAPIService) ListNewReleasesExecute(r NewReleaseMana
 	if r.deploymentType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "deployment_type", r.deploymentType, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "deployment_type", defaultValue, "", "")
-        r.deploymentType = &defaultValue
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")

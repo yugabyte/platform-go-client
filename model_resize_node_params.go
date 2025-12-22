@@ -73,7 +73,6 @@ type ResizeNodeParams struct {
 	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
-	RawClientRootCA string `json:"rawClientRootCA"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
 	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
@@ -119,7 +118,7 @@ type _ResizeNodeParams ResizeNodeParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string) *ResizeNodeParams {
+func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode bool, kubernetesUpgradeSupported bool, masterGFlags map[string]string, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tserverGFlags map[string]string, upgradeOption string) *ResizeNodeParams {
 	this := ResizeNodeParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
@@ -127,7 +126,6 @@ func NewResizeNodeParams(clusters []Cluster, creatingUser Users, forceResizeNode
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.MasterGFlags = masterGFlags
 	this.PlatformUrl = platformUrl
-	this.RawClientRootCA = rawClientRootCA
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.TserverGFlags = tserverGFlags
@@ -1375,30 +1373,6 @@ func (o *ResizeNodeParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
 }
 
-// GetRawClientRootCA returns the RawClientRootCA field value
-func (o *ResizeNodeParams) GetRawClientRootCA() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RawClientRootCA
-}
-
-// GetRawClientRootCAOk returns a tuple with the RawClientRootCA field value
-// and a boolean to check if the value has been set.
-func (o *ResizeNodeParams) GetRawClientRootCAOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RawClientRootCA, true
-}
-
-// SetRawClientRootCA sets field value
-func (o *ResizeNodeParams) SetRawClientRootCA(v string) {
-	o.RawClientRootCA = v
-}
-
 // GetRemotePackagePath returns the RemotePackagePath field value if set, zero value otherwise.
 func (o *ResizeNodeParams) GetRemotePackagePath() string {
 	if o == nil || IsNil(o.RemotePackagePath) {
@@ -2445,7 +2419,6 @@ func (o ResizeNodeParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
-	toSerialize["rawClientRootCA"] = o.RawClientRootCA
 	if !IsNil(o.RemotePackagePath) {
 		toSerialize["remotePackagePath"] = o.RemotePackagePath
 	}
@@ -2542,7 +2515,6 @@ func (o *ResizeNodeParams) UnmarshalJSON(data []byte) (err error) {
 		"kubernetesUpgradeSupported",
 		"masterGFlags",
 		"platformUrl",
-		"rawClientRootCA",
 		"sleepAfterMasterRestartMillis",
 		"sleepAfterTServerRestartMillis",
 		"tserverGFlags",

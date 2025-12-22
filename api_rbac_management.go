@@ -740,9 +740,6 @@ func (a *RBACManagementAPIService) ListPermissionsExecute(r RBACManagementAPILis
 	if r.resourceType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", r.resourceType, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", defaultValue, "", "")
-        r.resourceType = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -871,9 +868,6 @@ func (a *RBACManagementAPIService) ListRolesExecute(r RBACManagementAPIListRoles
 	if r.roleType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "roleType", r.roleType, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "roleType", defaultValue, "", "")
-        r.roleType = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

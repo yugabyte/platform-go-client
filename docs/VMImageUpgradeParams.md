@@ -46,7 +46,6 @@ Name | Type | Description | Notes
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
-**RawClientRootCA** | **string** |  | 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
@@ -83,7 +82,7 @@ Name | Type | Description | Notes
 
 ### NewVMImageUpgradeParams
 
-`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
+`func NewVMImageUpgradeParams(clusters []Cluster, creatingUser Users, forceVMImageUpgrade bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ybSoftwareVersion string, ) *VMImageUpgradeParams`
 
 NewVMImageUpgradeParams instantiates a new VMImageUpgradeParams object
 This constructor will assign default values to properties that have it defined,
@@ -1122,26 +1121,6 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *VMImageUpgradeParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
-
-### GetRawClientRootCA
-
-`func (o *VMImageUpgradeParams) GetRawClientRootCA() string`
-
-GetRawClientRootCA returns the RawClientRootCA field if non-nil, zero value otherwise.
-
-### GetRawClientRootCAOk
-
-`func (o *VMImageUpgradeParams) GetRawClientRootCAOk() (*string, bool)`
-
-GetRawClientRootCAOk returns a tuple with the RawClientRootCA field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRawClientRootCA
-
-`func (o *VMImageUpgradeParams) SetRawClientRootCA(v string)`
-
-SetRawClientRootCA sets RawClientRootCA field to given value.
-
 
 ### GetRemotePackagePath
 

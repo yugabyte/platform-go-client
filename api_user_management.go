@@ -599,9 +599,6 @@ func (a *UserManagementAPIService) ListUsersExecute(r UserManagementAPIListUsers
 	if r.email != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "email", r.email, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "email", defaultValue, "", "")
-        r.email = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

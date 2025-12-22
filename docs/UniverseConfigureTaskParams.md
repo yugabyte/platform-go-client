@@ -43,7 +43,6 @@ Name | Type | Description | Notes
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
-**RawClientRootCA** | **string** |  | 
 **RegionsChanged** | Pointer to **bool** |  | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
 **ResetAZConfig** | Pointer to **bool** |  | [optional] 
@@ -76,7 +75,7 @@ Name | Type | Description | Notes
 
 ### NewUniverseConfigureTaskParams
 
-`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
+`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
 
 NewUniverseConfigureTaskParams instantiates a new UniverseConfigureTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -1050,26 +1049,6 @@ SetPreviousTaskUUID sets PreviousTaskUUID field to given value.
 `func (o *UniverseConfigureTaskParams) HasPreviousTaskUUID() bool`
 
 HasPreviousTaskUUID returns a boolean if a field has been set.
-
-### GetRawClientRootCA
-
-`func (o *UniverseConfigureTaskParams) GetRawClientRootCA() string`
-
-GetRawClientRootCA returns the RawClientRootCA field if non-nil, zero value otherwise.
-
-### GetRawClientRootCAOk
-
-`func (o *UniverseConfigureTaskParams) GetRawClientRootCAOk() (*string, bool)`
-
-GetRawClientRootCAOk returns a tuple with the RawClientRootCA field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRawClientRootCA
-
-`func (o *UniverseConfigureTaskParams) SetRawClientRootCA(v string)`
-
-SetRawClientRootCA sets RawClientRootCA field to given value.
-
 
 ### GetRegionsChanged
 

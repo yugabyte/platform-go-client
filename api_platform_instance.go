@@ -462,9 +462,6 @@ func (a *PlatformInstanceAPIService) PromoteInstanceExecute(r PlatformInstanceAP
 	if r.curLeader != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "curLeader", r.curLeader, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "curLeader", defaultValue, "", "")
-        r.curLeader = &defaultValue
 	}
 	if r.isForcePromote != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "isForcePromote", r.isForcePromote, "", "")

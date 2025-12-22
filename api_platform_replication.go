@@ -185,9 +185,6 @@ func (a *PlatformReplicationAPIService) ListBackupsExecute(r PlatformReplication
 	if r.leader != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "leader", r.leader, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "leader", defaultValue, "", "")
-        r.leader = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

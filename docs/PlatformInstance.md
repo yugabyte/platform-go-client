@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | **string** |  | 
-**ConfigUuid** | [**HighAvailabilityConfig**](HighAvailabilityConfig.md) |  | 
+**ConfigUuid** | Pointer to **string** |  | [optional] 
 **InstanceState** | **string** |  | 
 **IsLeader** | **bool** |  | 
 **IsLocal** | **bool** |  | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewPlatformInstance
 
-`func NewPlatformInstance(address string, configUuid HighAvailabilityConfig, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string, ) *PlatformInstance`
+`func NewPlatformInstance(address string, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string, ) *PlatformInstance`
 
 NewPlatformInstance instantiates a new PlatformInstance object
 This constructor will assign default values to properties that have it defined,
@@ -54,23 +54,28 @@ SetAddress sets Address field to given value.
 
 ### GetConfigUuid
 
-`func (o *PlatformInstance) GetConfigUuid() HighAvailabilityConfig`
+`func (o *PlatformInstance) GetConfigUuid() string`
 
 GetConfigUuid returns the ConfigUuid field if non-nil, zero value otherwise.
 
 ### GetConfigUuidOk
 
-`func (o *PlatformInstance) GetConfigUuidOk() (*HighAvailabilityConfig, bool)`
+`func (o *PlatformInstance) GetConfigUuidOk() (*string, bool)`
 
 GetConfigUuidOk returns a tuple with the ConfigUuid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigUuid
 
-`func (o *PlatformInstance) SetConfigUuid(v HighAvailabilityConfig)`
+`func (o *PlatformInstance) SetConfigUuid(v string)`
 
 SetConfigUuid sets ConfigUuid field to given value.
 
+### HasConfigUuid
+
+`func (o *PlatformInstance) HasConfigUuid() bool`
+
+HasConfigUuid returns a boolean if a field has been set.
 
 ### GetInstanceState
 

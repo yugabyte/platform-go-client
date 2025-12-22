@@ -504,9 +504,6 @@ func (a *UniverseManagementAPIService) ListUniversesExecute(r UniverseManagement
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "name", defaultValue, "", "")
-        r.name = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

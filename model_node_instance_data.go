@@ -27,8 +27,6 @@ type NodeInstanceData struct {
 	InstanceType string `json:"instanceType"`
 	// IP address
 	Ip string `json:"ip"`
-	// Node configurations
-	NodeConfigs []NodeConfig `json:"nodeConfigs,omitempty"`
 	// Node name in a universe
 	NodeName *string `json:"nodeName,omitempty"`
 	// Region
@@ -134,38 +132,6 @@ func (o *NodeInstanceData) GetIpOk() (*string, bool) {
 // SetIp sets field value
 func (o *NodeInstanceData) SetIp(v string) {
 	o.Ip = v
-}
-
-// GetNodeConfigs returns the NodeConfigs field value if set, zero value otherwise.
-func (o *NodeInstanceData) GetNodeConfigs() []NodeConfig {
-	if o == nil || IsNil(o.NodeConfigs) {
-		var ret []NodeConfig
-		return ret
-	}
-	return o.NodeConfigs
-}
-
-// GetNodeConfigsOk returns a tuple with the NodeConfigs field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NodeInstanceData) GetNodeConfigsOk() ([]NodeConfig, bool) {
-	if o == nil || IsNil(o.NodeConfigs) {
-		return nil, false
-	}
-	return o.NodeConfigs, true
-}
-
-// HasNodeConfigs returns a boolean if a field has been set.
-func (o *NodeInstanceData) HasNodeConfigs() bool {
-	if o != nil && !IsNil(o.NodeConfigs) {
-		return true
-	}
-
-	return false
-}
-
-// SetNodeConfigs gets a reference to the given []NodeConfig and assigns it to the NodeConfigs field.
-func (o *NodeInstanceData) SetNodeConfigs(v []NodeConfig) {
-	o.NodeConfigs = v
 }
 
 // GetNodeName returns the NodeName field value if set, zero value otherwise.
@@ -285,9 +251,6 @@ func (o NodeInstanceData) ToMap() (map[string]interface{}, error) {
 	toSerialize["instanceName"] = o.InstanceName
 	toSerialize["instanceType"] = o.InstanceType
 	toSerialize["ip"] = o.Ip
-	if !IsNil(o.NodeConfigs) {
-		toSerialize["nodeConfigs"] = o.NodeConfigs
-	}
 	if !IsNil(o.NodeName) {
 		toSerialize["nodeName"] = o.NodeName
 	}

@@ -71,7 +71,6 @@ type CertsRotateParams struct {
 	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
-	RawClientRootCA string `json:"rawClientRootCA"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
 	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
@@ -118,13 +117,12 @@ type _CertsRotateParams CertsRotateParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertsRotateParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, rawClientRootCA string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *CertsRotateParams {
+func NewCertsRotateParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, selfSignedClientCertRotate bool, selfSignedServerCertRotate bool, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *CertsRotateParams {
 	this := CertsRotateParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.KubernetesUpgradeSupported = kubernetesUpgradeSupported
 	this.PlatformUrl = platformUrl
-	this.RawClientRootCA = rawClientRootCA
 	this.SelfSignedClientCertRotate = selfSignedClientCertRotate
 	this.SelfSignedServerCertRotate = selfSignedServerCertRotate
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
@@ -1325,30 +1323,6 @@ func (o *CertsRotateParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
 }
 
-// GetRawClientRootCA returns the RawClientRootCA field value
-func (o *CertsRotateParams) GetRawClientRootCA() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RawClientRootCA
-}
-
-// GetRawClientRootCAOk returns a tuple with the RawClientRootCA field value
-// and a boolean to check if the value has been set.
-func (o *CertsRotateParams) GetRawClientRootCAOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RawClientRootCA, true
-}
-
-// SetRawClientRootCA sets field value
-func (o *CertsRotateParams) SetRawClientRootCA(v string) {
-	o.RawClientRootCA = v
-}
-
 // GetRemotePackagePath returns the RemotePackagePath field value if set, zero value otherwise.
 func (o *CertsRotateParams) GetRemotePackagePath() string {
 	if o == nil || IsNil(o.RemotePackagePath) {
@@ -2417,7 +2391,6 @@ func (o CertsRotateParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
-	toSerialize["rawClientRootCA"] = o.RawClientRootCA
 	if !IsNil(o.RemotePackagePath) {
 		toSerialize["remotePackagePath"] = o.RemotePackagePath
 	}
@@ -2513,7 +2486,6 @@ func (o *CertsRotateParams) UnmarshalJSON(data []byte) (err error) {
 		"creatingUser",
 		"kubernetesUpgradeSupported",
 		"platformUrl",
-		"rawClientRootCA",
 		"selfSignedClientCertRotate",
 		"selfSignedServerCertRotate",
 		"sleepAfterMasterRestartMillis",

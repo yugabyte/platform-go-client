@@ -502,9 +502,6 @@ func (a *ReleaseManagementAPIService) GetListOfReleasesExecute(r ReleaseManageme
 	if r.arch != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "arch", r.arch, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "arch", defaultValue, "", "")
-        r.arch = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

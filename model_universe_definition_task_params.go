@@ -70,7 +70,6 @@ type UniverseDefinitionTaskParams struct {
 	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
-	RawClientRootCA string `json:"rawClientRootCA"`
 	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
 	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
 	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
@@ -111,12 +110,11 @@ type _UniverseDefinitionTaskParams UniverseDefinitionTaskParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, rawClientRootCA string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParams {
+func NewUniverseDefinitionTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParams {
 	this := UniverseDefinitionTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
-	this.RawClientRootCA = rawClientRootCA
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
@@ -1290,30 +1288,6 @@ func (o *UniverseDefinitionTaskParams) SetPreviousTaskUUID(v string) {
 	o.PreviousTaskUUID = &v
 }
 
-// GetRawClientRootCA returns the RawClientRootCA field value
-func (o *UniverseDefinitionTaskParams) GetRawClientRootCA() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.RawClientRootCA
-}
-
-// GetRawClientRootCAOk returns a tuple with the RawClientRootCA field value
-// and a boolean to check if the value has been set.
-func (o *UniverseDefinitionTaskParams) GetRawClientRootCAOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RawClientRootCA, true
-}
-
-// SetRawClientRootCA sets field value
-func (o *UniverseDefinitionTaskParams) SetRawClientRootCA(v string) {
-	o.RawClientRootCA = v
-}
-
 // GetRemotePackagePath returns the RemotePackagePath field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParams) GetRemotePackagePath() string {
 	if o == nil || IsNil(o.RemotePackagePath) {
@@ -2245,7 +2219,6 @@ func (o UniverseDefinitionTaskParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}
-	toSerialize["rawClientRootCA"] = o.RawClientRootCA
 	if !IsNil(o.RemotePackagePath) {
 		toSerialize["remotePackagePath"] = o.RemotePackagePath
 	}
@@ -2331,7 +2304,6 @@ func (o *UniverseDefinitionTaskParams) UnmarshalJSON(data []byte) (err error) {
 		"clusters",
 		"creatingUser",
 		"platformUrl",
-		"rawClientRootCA",
 		"sleepAfterMasterRestartMillis",
 		"sleepAfterTServerRestartMillis",
 	}

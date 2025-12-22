@@ -23,7 +23,7 @@ var _ MappedNullable = &PlatformInstance{}
 // PlatformInstance struct for PlatformInstance
 type PlatformInstance struct {
 	Address string `json:"address"`
-	ConfigUuid HighAvailabilityConfig `json:"config_uuid"`
+	ConfigUuid *string `json:"config_uuid,omitempty"`
 	InstanceState string `json:"instance_state"`
 	IsLeader bool `json:"is_leader"`
 	IsLocal bool `json:"is_local"`
@@ -39,10 +39,9 @@ type _PlatformInstance PlatformInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlatformInstance(address string, configUuid HighAvailabilityConfig, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string) *PlatformInstance {
+func NewPlatformInstance(address string, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string) *PlatformInstance {
 	this := PlatformInstance{}
 	this.Address = address
-	this.ConfigUuid = configUuid
 	this.InstanceState = instanceState
 	this.IsLeader = isLeader
 	this.IsLocal = isLocal
@@ -83,28 +82,36 @@ func (o *PlatformInstance) SetAddress(v string) {
 	o.Address = v
 }
 
-// GetConfigUuid returns the ConfigUuid field value
-func (o *PlatformInstance) GetConfigUuid() HighAvailabilityConfig {
-	if o == nil {
-		var ret HighAvailabilityConfig
+// GetConfigUuid returns the ConfigUuid field value if set, zero value otherwise.
+func (o *PlatformInstance) GetConfigUuid() string {
+	if o == nil || IsNil(o.ConfigUuid) {
+		var ret string
 		return ret
 	}
-
-	return o.ConfigUuid
+	return *o.ConfigUuid
 }
 
-// GetConfigUuidOk returns a tuple with the ConfigUuid field value
+// GetConfigUuidOk returns a tuple with the ConfigUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlatformInstance) GetConfigUuidOk() (*HighAvailabilityConfig, bool) {
-	if o == nil {
+func (o *PlatformInstance) GetConfigUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.ConfigUuid) {
 		return nil, false
 	}
-	return &o.ConfigUuid, true
+	return o.ConfigUuid, true
 }
 
-// SetConfigUuid sets field value
-func (o *PlatformInstance) SetConfigUuid(v HighAvailabilityConfig) {
-	o.ConfigUuid = v
+// HasConfigUuid returns a boolean if a field has been set.
+func (o *PlatformInstance) HasConfigUuid() bool {
+	if o != nil && !IsNil(o.ConfigUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigUuid gets a reference to the given string and assigns it to the ConfigUuid field.
+func (o *PlatformInstance) SetConfigUuid(v string) {
+	o.ConfigUuid = &v
 }
 
 // GetInstanceState returns the InstanceState field value
@@ -270,7 +277,9 @@ func (o PlatformInstance) MarshalJSON() ([]byte, error) {
 func (o PlatformInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["address"] = o.Address
-	toSerialize["config_uuid"] = o.ConfigUuid
+	if !IsNil(o.ConfigUuid) {
+		toSerialize["config_uuid"] = o.ConfigUuid
+	}
 	toSerialize["instance_state"] = o.InstanceState
 	toSerialize["is_leader"] = o.IsLeader
 	toSerialize["is_local"] = o.IsLocal
@@ -288,7 +297,6 @@ func (o *PlatformInstance) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"address",
-		"config_uuid",
 		"instance_state",
 		"is_leader",
 		"is_local",

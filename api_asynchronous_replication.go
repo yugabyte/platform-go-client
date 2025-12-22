@@ -664,9 +664,6 @@ func (a *AsynchronousReplicationAPIService) NeedBootstrapTableExecute(r Asynchro
 	if r.configType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "configType", r.configType, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "configType", defaultValue, "", "")
-        r.configType = &defaultValue
 	}
 	if r.includeDetails != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "includeDetails", r.includeDetails, "", "")

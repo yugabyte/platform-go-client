@@ -815,16 +815,10 @@ func (a *CloudProvidersAPIService) GetListOfProvidersExecute(r CloudProvidersAPI
 	if r.name != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "name", defaultValue, "", "")
-        r.name = &defaultValue
 	}
 	if r.providerCode != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "providerCode", r.providerCode, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "providerCode", defaultValue, "", "")
-        r.providerCode = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1073,9 +1067,6 @@ func (a *CloudProvidersAPIService) GetRegionMetadataExecute(r CloudProvidersAPIG
 	if r.subType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "subType", r.subType, "", "")
 	} else {
-        var defaultValue string = "null"
-        parameterAddToHeaderOrQuery(localVarQueryParams, "subType", defaultValue, "", "")
-        r.subType = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
