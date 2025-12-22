@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RegionFormData type satisfies the MappedNullable interface at compile time
@@ -21,16 +19,16 @@ var _ MappedNullable = &RegionFormData{}
 
 // RegionFormData struct for RegionFormData
 type RegionFormData struct {
-	Code string `json:"code"`
-	DestVpcId string `json:"destVpcId"`
-	HostVpcId string `json:"hostVpcId"`
-	HostVpcRegion string `json:"hostVpcRegion"`
-	Latitude float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
-	Name string `json:"name"`
-	SecurityGroupId string `json:"securityGroupId"`
-	VnetName string `json:"vnetName"`
-	YbImage string `json:"ybImage"`
+	Code            string  `json:"code"`
+	DestVpcId       string  `json:"destVpcId"`
+	HostVpcId       string  `json:"hostVpcId"`
+	HostVpcRegion   string  `json:"hostVpcRegion"`
+	Latitude        float64 `json:"latitude"`
+	Longitude       float64 `json:"longitude"`
+	Name            string  `json:"name"`
+	SecurityGroupId string  `json:"securityGroupId"`
+	VnetName        string  `json:"vnetName"`
+	YbImage         string  `json:"ybImage"`
 }
 
 type _RegionFormData RegionFormData
@@ -303,7 +301,7 @@ func (o *RegionFormData) SetYbImage(v string) {
 }
 
 func (o RegionFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,5 +358,3 @@ func (v *NullableRegionFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

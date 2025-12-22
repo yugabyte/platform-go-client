@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CommonBackupInfo type satisfies the MappedNullable interface at compile time
@@ -22,20 +20,20 @@ var _ MappedNullable = &CommonBackupInfo{}
 
 // CommonBackupInfo struct for CommonBackupInfo
 type CommonBackupInfo struct {
-	BackupUUID string `json:"backupUUID"`
+	BackupUUID     string `json:"backupUUID"`
 	BaseBackupUUID string `json:"baseBackupUUID"`
 	// Backup completion time.
 	CompletionTime *time.Time `json:"completionTime,omitempty"`
 	// Backup create time.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	KmsConfigUUID string `json:"kmsConfigUUID"`
-	ResponseList []KeyspaceTablesList `json:"responseList"`
-	Sse bool `json:"sse"`
-	State string `json:"state"`
-	StorageConfigUUID string `json:"storageConfigUUID"`
-	TableByTableBackup bool `json:"tableByTableBackup"`
-	TaskUUID string `json:"taskUUID"`
-	TotalBackupSizeInBytes int64 `json:"totalBackupSizeInBytes"`
+	CreateTime             *time.Time           `json:"createTime,omitempty"`
+	KmsConfigUUID          string               `json:"kmsConfigUUID"`
+	ResponseList           []KeyspaceTablesList `json:"responseList"`
+	Sse                    bool                 `json:"sse"`
+	State                  string               `json:"state"`
+	StorageConfigUUID      string               `json:"storageConfigUUID"`
+	TableByTableBackup     bool                 `json:"tableByTableBackup"`
+	TaskUUID               string               `json:"taskUUID"`
+	TotalBackupSizeInBytes int64                `json:"totalBackupSizeInBytes"`
 	// Backup update time.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
@@ -406,7 +404,7 @@ func (o *CommonBackupInfo) SetUpdateTime(v time.Time) {
 }
 
 func (o CommonBackupInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -472,5 +470,3 @@ func (v *NullableCommonBackupInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

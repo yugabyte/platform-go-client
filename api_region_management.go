@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // RegionManagementAPIService RegionManagementAPI service
 type RegionManagementAPIService service
 
 type RegionManagementAPICreateProviderRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
-	region *Region
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	region     *Region
+	request    *interface{}
 }
 
 // Specification of Region to be created
@@ -52,28 +51,29 @@ CreateProviderRegion Create a new region
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return RegionManagementAPICreateProviderRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return RegionManagementAPICreateProviderRegionRequest
 */
 func (a *RegionManagementAPIService) CreateProviderRegion(ctx context.Context, cUUID string, pUUID string) RegionManagementAPICreateProviderRegionRequest {
 	return RegionManagementAPICreateProviderRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Region
+//
+//	@return Region
 func (a *RegionManagementAPIService) CreateProviderRegionExecute(r RegionManagementAPICreateProviderRegionRequest) (*Region, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Region
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Region
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.CreateProviderRegion")
@@ -166,12 +166,12 @@ func (a *RegionManagementAPIService) CreateProviderRegionExecute(r RegionManagem
 }
 
 type RegionManagementAPICreateRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
-	region *RegionFormData
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	region     *RegionFormData
+	request    *interface{}
 }
 
 // region form data for new region to be created
@@ -194,31 +194,33 @@ CreateRegion Create Region - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return RegionManagementAPICreateRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return RegionManagementAPICreateRegionRequest
 
 Deprecated
 */
 func (a *RegionManagementAPIService) CreateRegion(ctx context.Context, cUUID string, pUUID string) RegionManagementAPICreateRegionRequest {
 	return RegionManagementAPICreateRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Region
+//
+//	@return Region
+//
 // Deprecated
 func (a *RegionManagementAPIService) CreateRegionExecute(r RegionManagementAPICreateRegionRequest) (*Region, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Region
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Region
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.CreateRegion")
@@ -311,12 +313,12 @@ func (a *RegionManagementAPIService) CreateRegionExecute(r RegionManagementAPICr
 }
 
 type RegionManagementAPIDeleteRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r RegionManagementAPIDeleteRegionRequest) Request(request interface{}) RegionManagementAPIDeleteRegionRequest {
@@ -331,30 +333,31 @@ func (r RegionManagementAPIDeleteRegionRequest) Execute() (map[string]interface{
 /*
 DeleteRegion Delete a region
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return RegionManagementAPIDeleteRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return RegionManagementAPIDeleteRegionRequest
 */
 func (a *RegionManagementAPIService) DeleteRegion(ctx context.Context, cUUID string, pUUID string, rUUID string) RegionManagementAPIDeleteRegionRequest {
 	return RegionManagementAPIDeleteRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *RegionManagementAPIService) DeleteRegionExecute(r RegionManagementAPIDeleteRegionRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.DeleteRegion")
@@ -443,13 +446,13 @@ func (a *RegionManagementAPIService) DeleteRegionExecute(r RegionManagementAPIDe
 }
 
 type RegionManagementAPIEditProviderRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	region *Region
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	region     *Region
+	request    *interface{}
 }
 
 // Specification of Region to be edited
@@ -472,30 +475,31 @@ EditProviderRegion Modify a region
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return RegionManagementAPIEditProviderRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return RegionManagementAPIEditProviderRegionRequest
 */
 func (a *RegionManagementAPIService) EditProviderRegion(ctx context.Context, cUUID string, pUUID string, rUUID string) RegionManagementAPIEditProviderRegionRequest {
 	return RegionManagementAPIEditProviderRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Region
+//
+//	@return Region
 func (a *RegionManagementAPIService) EditProviderRegionExecute(r RegionManagementAPIEditProviderRegionRequest) (*Region, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Region
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Region
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.EditProviderRegion")
@@ -589,13 +593,13 @@ func (a *RegionManagementAPIService) EditProviderRegionExecute(r RegionManagemen
 }
 
 type RegionManagementAPIEditRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	region *RegionFormData
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	region     *RegionFormData
+	request    *interface{}
 }
 
 // region edit form data
@@ -618,33 +622,35 @@ EditRegion Edit regions - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return RegionManagementAPIEditRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return RegionManagementAPIEditRegionRequest
 
 Deprecated
 */
 func (a *RegionManagementAPIService) EditRegion(ctx context.Context, cUUID string, pUUID string, rUUID string) RegionManagementAPIEditRegionRequest {
 	return RegionManagementAPIEditRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
+//
 // Deprecated
 func (a *RegionManagementAPIService) EditRegionExecute(r RegionManagementAPIEditRegionRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.EditRegion")
@@ -738,10 +744,10 @@ func (a *RegionManagementAPIService) EditRegionExecute(r RegionManagementAPIEdit
 }
 
 type RegionManagementAPIGetRegionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 }
 
 func (r RegionManagementAPIGetRegionRequest) Execute() ([]Region, *http.Response, error) {
@@ -751,28 +757,29 @@ func (r RegionManagementAPIGetRegionRequest) Execute() ([]Region, *http.Response
 /*
 GetRegion List a provider's regions
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return RegionManagementAPIGetRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return RegionManagementAPIGetRegionRequest
 */
 func (a *RegionManagementAPIService) GetRegion(ctx context.Context, cUUID string, pUUID string) RegionManagementAPIGetRegionRequest {
 	return RegionManagementAPIGetRegionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Region
+//
+//	@return []Region
 func (a *RegionManagementAPIService) GetRegionExecute(r RegionManagementAPIGetRegionRequest) ([]Region, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Region
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Region
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.GetRegion")
@@ -848,8 +855,8 @@ func (a *RegionManagementAPIService) GetRegionExecute(r RegionManagementAPIGetRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -867,9 +874,9 @@ func (a *RegionManagementAPIService) GetRegionExecute(r RegionManagementAPIGetRe
 }
 
 type RegionManagementAPIListAllRegionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RegionManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r RegionManagementAPIListAllRegionsRequest) Execute() ([]Region, *http.Response, error) {
@@ -879,26 +886,27 @@ func (r RegionManagementAPIListAllRegionsRequest) Execute() ([]Region, *http.Res
 /*
 ListAllRegions List regions for all providers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RegionManagementAPIListAllRegionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RegionManagementAPIListAllRegionsRequest
 */
 func (a *RegionManagementAPIService) ListAllRegions(ctx context.Context, cUUID string) RegionManagementAPIListAllRegionsRequest {
 	return RegionManagementAPIListAllRegionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Region
+//
+//	@return []Region
 func (a *RegionManagementAPIService) ListAllRegionsExecute(r RegionManagementAPIListAllRegionsRequest) ([]Region, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Region
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Region
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionManagementAPIService.ListAllRegions")

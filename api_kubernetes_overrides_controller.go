@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // KubernetesOverridesControllerAPIService KubernetesOverridesControllerAPI service
 type KubernetesOverridesControllerAPIService service
 
 type KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest struct {
-	ctx context.Context
-	ApiService *KubernetesOverridesControllerAPIService
-	cUUID string
+	ctx                         context.Context
+	ApiService                  *KubernetesOverridesControllerAPIService
+	cUUID                       string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest {
@@ -50,26 +49,27 @@ ValidateKubernetesOverrides Validate kubernetes overrides.
 
 Returns possible errors.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest
 */
 func (a *KubernetesOverridesControllerAPIService) ValidateKubernetesOverrides(ctx context.Context, cUUID string) KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest {
 	return KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return KubernetesOverridesResponse
+//
+//	@return KubernetesOverridesResponse
 func (a *KubernetesOverridesControllerAPIService) ValidateKubernetesOverridesExecute(r KubernetesOverridesControllerAPIValidateKubernetesOverridesRequest) (*KubernetesOverridesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *KubernetesOverridesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *KubernetesOverridesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KubernetesOverridesControllerAPIService.ValidateKubernetesOverrides")

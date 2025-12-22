@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // TroubleshootingPlatformAPIService TroubleshootingPlatformAPI service
 type TroubleshootingPlatformAPIService service
 
 type TroubleshootingPlatformAPICheckRegisteredRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
-	uUUID string
-	request *interface{}
+	cUUID      string
+	tpUUID     string
+	uUUID      string
+	request    *interface{}
 }
 
 func (r TroubleshootingPlatformAPICheckRegisteredRequest) Request(request interface{}) TroubleshootingPlatformAPICheckRegisteredRequest {
@@ -46,30 +45,31 @@ CheckRegistered Check if universe is registered with Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @param uUUID
- @return TroubleshootingPlatformAPICheckRegisteredRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@param uUUID
+	@return TroubleshootingPlatformAPICheckRegisteredRequest
 */
 func (a *TroubleshootingPlatformAPIService) CheckRegistered(ctx context.Context, cUUID string, tpUUID string, uUUID string) TroubleshootingPlatformAPICheckRegisteredRequest {
 	return TroubleshootingPlatformAPICheckRegisteredRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *TroubleshootingPlatformAPIService) CheckRegisteredExecute(r TroubleshootingPlatformAPICheckRegisteredRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.CheckRegistered")
@@ -158,11 +158,11 @@ func (a *TroubleshootingPlatformAPIService) CheckRegisteredExecute(r Troubleshoo
 }
 
 type TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest struct {
-	ctx context.Context
-	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *TroubleshootingPlatformAPIService
+	cUUID        string
 	platformData *TroubleshootingPlatform
-	request *interface{}
+	request      *interface{}
 }
 
 func (r TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest) PlatformData(platformData TroubleshootingPlatform) TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest {
@@ -184,26 +184,27 @@ CreateTroubleshootingPlatform Create Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest
 */
 func (a *TroubleshootingPlatformAPIService) CreateTroubleshootingPlatform(ctx context.Context, cUUID string) TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest {
 	return TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TroubleshootingPlatform
+//
+//	@return TroubleshootingPlatform
 func (a *TroubleshootingPlatformAPIService) CreateTroubleshootingPlatformExecute(r TroubleshootingPlatformAPICreateTroubleshootingPlatformRequest) (*TroubleshootingPlatform, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TroubleshootingPlatform
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TroubleshootingPlatform
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.CreateTroubleshootingPlatform")
@@ -295,12 +296,12 @@ func (a *TroubleshootingPlatformAPIService) CreateTroubleshootingPlatformExecute
 }
 
 type TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
-	force *bool
-	request *interface{}
+	cUUID      string
+	tpUUID     string
+	force      *bool
+	request    *interface{}
 }
 
 func (r TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest) Force(force bool) TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest {
@@ -322,28 +323,29 @@ DeleteTroubleshootingPlatform Delete Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @return TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@return TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest
 */
 func (a *TroubleshootingPlatformAPIService) DeleteTroubleshootingPlatform(ctx context.Context, cUUID string, tpUUID string) TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest {
 	return TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
 	}
 }
 
 // Execute executes the request
-//  @return bool
+//
+//	@return bool
 func (a *TroubleshootingPlatformAPIService) DeleteTroubleshootingPlatformExecute(r TroubleshootingPlatformAPIDeleteTroubleshootingPlatformRequest) (bool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  bool
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue bool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.DeleteTroubleshootingPlatform")
@@ -438,13 +440,13 @@ func (a *TroubleshootingPlatformAPIService) DeleteTroubleshootingPlatformExecute
 }
 
 type TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest struct {
-	ctx context.Context
-	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
+	ctx          context.Context
+	ApiService   *TroubleshootingPlatformAPIService
+	cUUID        string
+	tpUUID       string
 	platformData *TroubleshootingPlatform
-	force *bool
-	request *interface{}
+	force        *bool
+	request      *interface{}
 }
 
 func (r TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest) PlatformData(platformData TroubleshootingPlatform) TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest {
@@ -471,28 +473,29 @@ EditTroubleshootingPlatform Edit Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @return TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@return TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest
 */
 func (a *TroubleshootingPlatformAPIService) EditTroubleshootingPlatform(ctx context.Context, cUUID string, tpUUID string) TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest {
 	return TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TroubleshootingPlatform
+//
+//	@return TroubleshootingPlatform
 func (a *TroubleshootingPlatformAPIService) EditTroubleshootingPlatformExecute(r TroubleshootingPlatformAPIEditTroubleshootingPlatformRequest) (*TroubleshootingPlatform, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TroubleshootingPlatform
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TroubleshootingPlatform
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.EditTroubleshootingPlatform")
@@ -592,10 +595,10 @@ func (a *TroubleshootingPlatformAPIService) EditTroubleshootingPlatformExecute(r
 }
 
 type TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
+	cUUID      string
+	tpUUID     string
 }
 
 func (r TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest) Execute() (*TroubleshootingPlatformDetailsModel, *http.Response, error) {
@@ -607,28 +610,29 @@ GetTroubleshootingPlatform Get Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @return TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@return TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest
 */
 func (a *TroubleshootingPlatformAPIService) GetTroubleshootingPlatform(ctx context.Context, cUUID string, tpUUID string) TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest {
 	return TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TroubleshootingPlatformDetailsModel
+//
+//	@return TroubleshootingPlatformDetailsModel
 func (a *TroubleshootingPlatformAPIService) GetTroubleshootingPlatformExecute(r TroubleshootingPlatformAPIGetTroubleshootingPlatformRequest) (*TroubleshootingPlatformDetailsModel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TroubleshootingPlatformDetailsModel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TroubleshootingPlatformDetailsModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.GetTroubleshootingPlatform")
@@ -713,9 +717,9 @@ func (a *TroubleshootingPlatformAPIService) GetTroubleshootingPlatformExecute(r 
 }
 
 type TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest) Execute() ([]TroubleshootingPlatformDetailsModel, *http.Response, error) {
@@ -727,26 +731,27 @@ ListAllTroubleshootingPlatforms List All Troubleshooting Platforms
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest
 */
 func (a *TroubleshootingPlatformAPIService) ListAllTroubleshootingPlatforms(ctx context.Context, cUUID string) TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest {
 	return TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []TroubleshootingPlatformDetailsModel
+//
+//	@return []TroubleshootingPlatformDetailsModel
 func (a *TroubleshootingPlatformAPIService) ListAllTroubleshootingPlatformsExecute(r TroubleshootingPlatformAPIListAllTroubleshootingPlatformsRequest) ([]TroubleshootingPlatformDetailsModel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []TroubleshootingPlatformDetailsModel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []TroubleshootingPlatformDetailsModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.ListAllTroubleshootingPlatforms")
@@ -830,12 +835,12 @@ func (a *TroubleshootingPlatformAPIService) ListAllTroubleshootingPlatformsExecu
 }
 
 type TroubleshootingPlatformAPIRegisterUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
-	uUUID string
-	request *interface{}
+	cUUID      string
+	tpUUID     string
+	uUUID      string
+	request    *interface{}
 }
 
 func (r TroubleshootingPlatformAPIRegisterUniverseRequest) Request(request interface{}) TroubleshootingPlatformAPIRegisterUniverseRequest {
@@ -852,30 +857,31 @@ RegisterUniverse Register universe with Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @param uUUID
- @return TroubleshootingPlatformAPIRegisterUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@param uUUID
+	@return TroubleshootingPlatformAPIRegisterUniverseRequest
 */
 func (a *TroubleshootingPlatformAPIService) RegisterUniverse(ctx context.Context, cUUID string, tpUUID string, uUUID string) TroubleshootingPlatformAPIRegisterUniverseRequest {
 	return TroubleshootingPlatformAPIRegisterUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *TroubleshootingPlatformAPIService) RegisterUniverseExecute(r TroubleshootingPlatformAPIRegisterUniverseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.RegisterUniverse")
@@ -964,12 +970,12 @@ func (a *TroubleshootingPlatformAPIService) RegisterUniverseExecute(r Troublesho
 }
 
 type TroubleshootingPlatformAPIUnregisterUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TroubleshootingPlatformAPIService
-	cUUID string
-	tpUUID string
-	uUUID string
-	request *interface{}
+	cUUID      string
+	tpUUID     string
+	uUUID      string
+	request    *interface{}
 }
 
 func (r TroubleshootingPlatformAPIUnregisterUniverseRequest) Request(request interface{}) TroubleshootingPlatformAPIUnregisterUniverseRequest {
@@ -986,30 +992,31 @@ UnregisterUniverse Unregister universe from Troubleshooting Platform
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tpUUID
- @param uUUID
- @return TroubleshootingPlatformAPIUnregisterUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tpUUID
+	@param uUUID
+	@return TroubleshootingPlatformAPIUnregisterUniverseRequest
 */
 func (a *TroubleshootingPlatformAPIService) UnregisterUniverse(ctx context.Context, cUUID string, tpUUID string, uUUID string) TroubleshootingPlatformAPIUnregisterUniverseRequest {
 	return TroubleshootingPlatformAPIUnregisterUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tpUUID: tpUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tpUUID:     tpUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *TroubleshootingPlatformAPIService) UnregisterUniverseExecute(r TroubleshootingPlatformAPIUnregisterUniverseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TroubleshootingPlatformAPIService.UnregisterUniverse")

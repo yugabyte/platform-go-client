@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the QueryDistributionSuggestionResponse type satisfies the MappedNullable interface at compile time
@@ -21,12 +19,12 @@ var _ MappedNullable = &QueryDistributionSuggestionResponse{}
 
 // QueryDistributionSuggestionResponse struct for QueryDistributionSuggestionResponse
 type QueryDistributionSuggestionResponse struct {
-	AdviceType string `json:"adviceType"`
-	Description string `json:"description"`
-	Details []NodeQueryDistributionDetails `json:"details"`
-	EndTime string `json:"endTime"`
-	StartTime string `json:"startTime"`
-	Suggestion string `json:"suggestion"`
+	AdviceType  string                         `json:"adviceType"`
+	Description string                         `json:"description"`
+	Details     []NodeQueryDistributionDetails `json:"details"`
+	EndTime     string                         `json:"endTime"`
+	StartTime   string                         `json:"startTime"`
+	Suggestion  string                         `json:"suggestion"`
 }
 
 type _QueryDistributionSuggestionResponse QueryDistributionSuggestionResponse
@@ -199,7 +197,7 @@ func (o *QueryDistributionSuggestionResponse) SetSuggestion(v string) {
 }
 
 func (o QueryDistributionSuggestionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullableQueryDistributionSuggestionResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

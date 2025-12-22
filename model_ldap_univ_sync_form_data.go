@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LdapUnivSyncFormData type satisfies the MappedNullable interface at compile time
@@ -24,8 +22,8 @@ type LdapUnivSyncFormData struct {
 	// Allow the API to create the LDAP groups as DB superusers
 	CreateGroups *bool `json:"createGroups,omitempty"`
 	// Database user to connect: yugabyte for ysql, cassandra for ycql
-	DbUser *string `json:"dbUser,omitempty"`
-	DbuserPassword string `json:"dbuserPassword"`
+	DbUser         *string `json:"dbUser,omitempty"`
+	DbuserPassword string  `json:"dbuserPassword"`
 	// List of users to exclude while revoking and dropping
 	ExcludeUsers []string `json:"excludeUsers,omitempty"`
 	// LDAP groups to sync. In case user belongs to multiple groups & we don't want to sync all of them to DB
@@ -50,7 +48,7 @@ type LdapUnivSyncFormData struct {
 	LdapTlsProtocol *string `json:"ldapTlsProtocol,omitempty"`
 	// Dn/Attribute field to get the user's name from
 	LdapUserfield string `json:"ldapUserfield"`
-	TargetApi string `json:"targetApi"`
+	TargetApi     string `json:"targetApi"`
 	// Use LDAP SSL
 	UseLdapSsl *bool `json:"useLdapSsl,omitempty"`
 	// Use LDAP TLS
@@ -625,7 +623,7 @@ func (o *LdapUnivSyncFormData) SetUseLdapTls(v bool) {
 }
 
 func (o LdapUnivSyncFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -718,5 +716,3 @@ func (v *NullableLdapUnivSyncFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the StateChangeAuditInfo type satisfies the MappedNullable interface at compile time
@@ -21,14 +19,14 @@ var _ MappedNullable = &StateChangeAuditInfo{}
 
 // StateChangeAuditInfo struct for StateChangeAuditInfo
 type StateChangeAuditInfo struct {
-	CustomerId string `json:"customerId"`
-	FieldName string `json:"fieldName"`
-	Id string `json:"id"`
-	New bool `json:"new"`
+	CustomerId    string `json:"customerId"`
+	FieldName     string `json:"fieldName"`
+	Id            string `json:"id"`
+	New           bool   `json:"new"`
 	PreviousValue string `json:"previousValue"`
-	Timestamp int64 `json:"timestamp"`
-	UpdatedValue string `json:"updatedValue"`
-	UserId string `json:"userId"`
+	Timestamp     int64  `json:"timestamp"`
+	UpdatedValue  string `json:"updatedValue"`
+	UserId        string `json:"userId"`
 }
 
 type _StateChangeAuditInfo StateChangeAuditInfo
@@ -251,7 +249,7 @@ func (o *StateChangeAuditInfo) SetUserId(v string) {
 }
 
 func (o StateChangeAuditInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,5 +304,3 @@ func (v *NullableStateChangeAuditInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomCertInfo type satisfies the MappedNullable interface at compile time
@@ -22,10 +20,10 @@ var _ MappedNullable = &CustomCertInfo{}
 // CustomCertInfo struct for CustomCertInfo
 type CustomCertInfo struct {
 	ClientCertPath string `json:"clientCertPath"`
-	ClientKeyPath string `json:"clientKeyPath"`
-	NodeCertPath string `json:"nodeCertPath"`
-	NodeKeyPath string `json:"nodeKeyPath"`
-	RootCertPath string `json:"rootCertPath"`
+	ClientKeyPath  string `json:"clientKeyPath"`
+	NodeCertPath   string `json:"nodeCertPath"`
+	NodeKeyPath    string `json:"nodeKeyPath"`
+	RootCertPath   string `json:"rootCertPath"`
 }
 
 type _CustomCertInfo CustomCertInfo
@@ -173,7 +171,7 @@ func (o *CustomCertInfo) SetRootCertPath(v string) {
 }
 
 func (o CustomCertInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableCustomCertInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

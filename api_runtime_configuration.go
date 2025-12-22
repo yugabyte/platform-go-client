@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // RuntimeConfigurationAPIService RuntimeConfigurationAPI service
 type RuntimeConfigurationAPIService service
 
 type RuntimeConfigurationAPIDeleteKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
-	cUUID string
-	scope string
-	key string
-	request *interface{}
+	cUUID      string
+	scope      string
+	key        string
+	request    *interface{}
 }
 
 func (r RuntimeConfigurationAPIDeleteKeyRequest) Request(request interface{}) RuntimeConfigurationAPIDeleteKeyRequest {
@@ -44,30 +43,31 @@ func (r RuntimeConfigurationAPIDeleteKeyRequest) Execute() (*YBPSuccess, *http.R
 /*
 DeleteKey Delete a configuration key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param scope
- @param key
- @return RuntimeConfigurationAPIDeleteKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param scope
+	@param key
+	@return RuntimeConfigurationAPIDeleteKeyRequest
 */
 func (a *RuntimeConfigurationAPIService) DeleteKey(ctx context.Context, cUUID string, scope string, key string) RuntimeConfigurationAPIDeleteKeyRequest {
 	return RuntimeConfigurationAPIDeleteKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		scope: scope,
-		key: key,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scope:      scope,
+		key:        key,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *RuntimeConfigurationAPIService) DeleteKeyExecute(r RuntimeConfigurationAPIDeleteKeyRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.DeleteKey")
@@ -156,12 +156,12 @@ func (a *RuntimeConfigurationAPIService) DeleteKeyExecute(r RuntimeConfiguration
 }
 
 type RuntimeConfigurationAPIGetConfigRequest struct {
-	ctx context.Context
-	ApiService *RuntimeConfigurationAPIService
-	cUUID string
-	scope string
+	ctx              context.Context
+	ApiService       *RuntimeConfigurationAPIService
+	cUUID            string
+	scope            string
 	includeInherited *bool
-	request *interface{}
+	request          *interface{}
 }
 
 func (r RuntimeConfigurationAPIGetConfigRequest) IncludeInherited(includeInherited bool) RuntimeConfigurationAPIGetConfigRequest {
@@ -183,28 +183,29 @@ GetConfig List configuration entries for a scope
 
 Lists all runtime config entries for a given scope for current customer.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param scope
- @return RuntimeConfigurationAPIGetConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param scope
+	@return RuntimeConfigurationAPIGetConfigRequest
 */
 func (a *RuntimeConfigurationAPIService) GetConfig(ctx context.Context, cUUID string, scope string) RuntimeConfigurationAPIGetConfigRequest {
 	return RuntimeConfigurationAPIGetConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		scope: scope,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scope:      scope,
 	}
 }
 
 // Execute executes the request
-//  @return ScopedConfig
+//
+//	@return ScopedConfig
 func (a *RuntimeConfigurationAPIService) GetConfigExecute(r RuntimeConfigurationAPIGetConfigRequest) (*ScopedConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ScopedConfig
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ScopedConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.GetConfig")
@@ -299,12 +300,12 @@ func (a *RuntimeConfigurationAPIService) GetConfigExecute(r RuntimeConfiguration
 }
 
 type RuntimeConfigurationAPIGetConfigurationKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
-	cUUID string
-	scope string
-	key string
-	request *interface{}
+	cUUID      string
+	scope      string
+	key        string
+	request    *interface{}
 }
 
 func (r RuntimeConfigurationAPIGetConfigurationKeyRequest) Request(request interface{}) RuntimeConfigurationAPIGetConfigurationKeyRequest {
@@ -319,30 +320,31 @@ func (r RuntimeConfigurationAPIGetConfigurationKeyRequest) Execute() (string, *h
 /*
 GetConfigurationKey Get a configuration key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param scope
- @param key
- @return RuntimeConfigurationAPIGetConfigurationKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param scope
+	@param key
+	@return RuntimeConfigurationAPIGetConfigurationKeyRequest
 */
 func (a *RuntimeConfigurationAPIService) GetConfigurationKey(ctx context.Context, cUUID string, scope string, key string) RuntimeConfigurationAPIGetConfigurationKeyRequest {
 	return RuntimeConfigurationAPIGetConfigurationKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		scope: scope,
-		key: key,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scope:      scope,
+		key:        key,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *RuntimeConfigurationAPIService) GetConfigurationKeyExecute(r RuntimeConfigurationAPIGetConfigurationKeyRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.GetConfigurationKey")
@@ -431,7 +433,7 @@ func (a *RuntimeConfigurationAPIService) GetConfigurationKeyExecute(r RuntimeCon
 }
 
 type RuntimeConfigurationAPIListFeatureFlagsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
 }
 
@@ -444,24 +446,25 @@ ListFeatureFlags List all the feature flag runtime config keys and their values.
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return RuntimeConfigurationAPIListFeatureFlagsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return RuntimeConfigurationAPIListFeatureFlagsRequest
 */
 func (a *RuntimeConfigurationAPIService) ListFeatureFlags(ctx context.Context) RuntimeConfigurationAPIListFeatureFlagsRequest {
 	return RuntimeConfigurationAPIListFeatureFlagsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ConfigEntry
+//
+//	@return []ConfigEntry
 func (a *RuntimeConfigurationAPIService) ListFeatureFlagsExecute(r RuntimeConfigurationAPIListFeatureFlagsRequest) ([]ConfigEntry, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ConfigEntry
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ConfigEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.ListFeatureFlags")
@@ -544,7 +547,7 @@ func (a *RuntimeConfigurationAPIService) ListFeatureFlagsExecute(r RuntimeConfig
 }
 
 type RuntimeConfigurationAPIListKeyInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
 }
 
@@ -557,24 +560,25 @@ ListKeyInfo List mutable keys
 
 List all the mutable runtime config keys with metadata
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return RuntimeConfigurationAPIListKeyInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return RuntimeConfigurationAPIListKeyInfoRequest
 */
 func (a *RuntimeConfigurationAPIService) ListKeyInfo(ctx context.Context) RuntimeConfigurationAPIListKeyInfoRequest {
 	return RuntimeConfigurationAPIListKeyInfoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []ConfKeyInfo
+//
+//	@return []ConfKeyInfo
 func (a *RuntimeConfigurationAPIService) ListKeyInfoExecute(r RuntimeConfigurationAPIListKeyInfoRequest) ([]ConfKeyInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ConfKeyInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ConfKeyInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.ListKeyInfo")
@@ -657,7 +661,7 @@ func (a *RuntimeConfigurationAPIService) ListKeyInfoExecute(r RuntimeConfigurati
 }
 
 type RuntimeConfigurationAPIListKeysRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
 }
 
@@ -670,24 +674,25 @@ ListKeys List mutable keys
 
 List all the mutable runtime config keys
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return RuntimeConfigurationAPIListKeysRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return RuntimeConfigurationAPIListKeysRequest
 */
 func (a *RuntimeConfigurationAPIService) ListKeys(ctx context.Context) RuntimeConfigurationAPIListKeysRequest {
 	return RuntimeConfigurationAPIListKeysRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *RuntimeConfigurationAPIService) ListKeysExecute(r RuntimeConfigurationAPIListKeysRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.ListKeys")
@@ -770,10 +775,10 @@ func (a *RuntimeConfigurationAPIService) ListKeysExecute(r RuntimeConfigurationA
 }
 
 type RuntimeConfigurationAPIListScopesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r RuntimeConfigurationAPIListScopesRequest) Request(request interface{}) RuntimeConfigurationAPIListScopesRequest {
@@ -790,26 +795,27 @@ ListScopes List configuration scopes
 
 Lists all (including empty scopes) runtime config scopes for current customer. List includes the Global scope that spans multiple customers, scope for customer specific overrides for current customer and one scope each for each universe and provider.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RuntimeConfigurationAPIListScopesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RuntimeConfigurationAPIListScopesRequest
 */
 func (a *RuntimeConfigurationAPIService) ListScopes(ctx context.Context, cUUID string) RuntimeConfigurationAPIListScopesRequest {
 	return RuntimeConfigurationAPIListScopesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return RuntimeConfigData
+//
+//	@return RuntimeConfigData
 func (a *RuntimeConfigurationAPIService) ListScopesExecute(r RuntimeConfigurationAPIListScopesRequest) (*RuntimeConfigData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RuntimeConfigData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RuntimeConfigData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.ListScopes")
@@ -896,13 +902,13 @@ func (a *RuntimeConfigurationAPIService) ListScopesExecute(r RuntimeConfiguratio
 }
 
 type RuntimeConfigurationAPISetKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RuntimeConfigurationAPIService
-	cUUID string
-	scope string
-	key string
-	newValue *string
-	request *interface{}
+	cUUID      string
+	scope      string
+	key        string
+	newValue   *string
+	request    *interface{}
 }
 
 // New value for config key
@@ -923,30 +929,31 @@ func (r RuntimeConfigurationAPISetKeyRequest) Execute() (*YBPSuccess, *http.Resp
 /*
 SetKey Update a configuration key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param scope
- @param key
- @return RuntimeConfigurationAPISetKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param scope
+	@param key
+	@return RuntimeConfigurationAPISetKeyRequest
 */
 func (a *RuntimeConfigurationAPIService) SetKey(ctx context.Context, cUUID string, scope string, key string) RuntimeConfigurationAPISetKeyRequest {
 	return RuntimeConfigurationAPISetKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		scope: scope,
-		key: key,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scope:      scope,
+		key:        key,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *RuntimeConfigurationAPIService) SetKeyExecute(r RuntimeConfigurationAPISetKeyRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RuntimeConfigurationAPIService.SetKey")

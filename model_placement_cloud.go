@@ -19,10 +19,10 @@ var _ MappedNullable = &PlacementCloud{}
 
 // PlacementCloud struct for PlacementCloud
 type PlacementCloud struct {
-	Code *string `json:"code,omitempty"`
-	DefaultRegion *string `json:"defaultRegion,omitempty"`
-	RegionList []PlacementRegion `json:"regionList,omitempty"`
-	Uuid *string `json:"uuid,omitempty"`
+	Code          *string           `json:"code,omitempty"`
+	DefaultRegion *string           `json:"defaultRegion,omitempty"`
+	RegionList    []PlacementRegion `json:"regionList,omitempty"`
+	Uuid          *string           `json:"uuid,omitempty"`
 }
 
 // NewPlacementCloud instantiates a new PlacementCloud object
@@ -171,7 +171,7 @@ func (o *PlacementCloud) SetUuid(v string) {
 }
 
 func (o PlacementCloud) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullablePlacementCloud) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

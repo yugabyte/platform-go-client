@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the GroupMappingInfo type satisfies the MappedNullable interface at compile time
@@ -24,11 +22,11 @@ var _ MappedNullable = &GroupMappingInfo{}
 type GroupMappingInfo struct {
 	// Group mapping creation time
 	CreationDate *time.Time `json:"creationDate,omitempty"`
-	CustomerUUID string `json:"customerUUID"`
-	GroupUUID string `json:"groupUUID"`
-	Identifier string `json:"identifier"`
-	RoleUUID string `json:"roleUUID"`
-	Type string `json:"type"`
+	CustomerUUID string     `json:"customerUUID"`
+	GroupUUID    string     `json:"groupUUID"`
+	Identifier   string     `json:"identifier"`
+	RoleUUID     string     `json:"roleUUID"`
+	Type         string     `json:"type"`
 }
 
 type _GroupMappingInfo GroupMappingInfo
@@ -208,7 +206,7 @@ func (o *GroupMappingInfo) SetType(v string) {
 }
 
 func (o GroupMappingInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -263,5 +261,3 @@ func (v *NullableGroupMappingInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

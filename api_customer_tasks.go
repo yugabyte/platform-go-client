@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // CustomerTasksAPIService CustomerTasksAPI service
 type CustomerTasksAPIService service
 
 type CustomerTasksAPIAbortTaskRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
-	request *interface{}
+	cUUID      string
+	tUUID      string
+	request    *interface{}
 }
 
 func (r CustomerTasksAPIAbortTaskRequest) Request(request interface{}) CustomerTasksAPIAbortTaskRequest {
@@ -45,28 +44,29 @@ AbortTask Abort a task
 
 Aborts a running task
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPIAbortTaskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPIAbortTaskRequest
 */
 func (a *CustomerTasksAPIService) AbortTask(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPIAbortTaskRequest {
 	return CustomerTasksAPIAbortTaskRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CustomerTasksAPIService) AbortTaskExecute(r CustomerTasksAPIAbortTaskRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.AbortTask")
@@ -154,10 +154,10 @@ func (a *CustomerTasksAPIService) AbortTaskExecute(r CustomerTasksAPIAbortTaskRe
 }
 
 type CustomerTasksAPIFailedSubtasksRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
+	cUUID      string
+	tUUID      string
 }
 
 func (r CustomerTasksAPIFailedSubtasksRequest) Execute() (map[string]map[string]interface{}, *http.Response, error) {
@@ -169,31 +169,33 @@ FailedSubtasks Fetch failed subtasks - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.19.1.0.</b></p>Use /api/v1/customers/{cUUID}/tasks/{tUUID}/failed_subtasks instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPIFailedSubtasksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPIFailedSubtasksRequest
 
 Deprecated
 */
 func (a *CustomerTasksAPIService) FailedSubtasks(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPIFailedSubtasksRequest {
 	return CustomerTasksAPIFailedSubtasksRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
+//
 // Deprecated
 func (a *CustomerTasksAPIService) FailedSubtasksExecute(r CustomerTasksAPIFailedSubtasksRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.FailedSubtasks")
@@ -278,10 +280,10 @@ func (a *CustomerTasksAPIService) FailedSubtasksExecute(r CustomerTasksAPIFailed
 }
 
 type CustomerTasksAPIListFailedSubtasksRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
+	cUUID      string
+	tUUID      string
 }
 
 func (r CustomerTasksAPIListFailedSubtasksRequest) Execute() (*FailedSubtasks, *http.Response, error) {
@@ -291,28 +293,29 @@ func (r CustomerTasksAPIListFailedSubtasksRequest) Execute() (*FailedSubtasks, *
 /*
 ListFailedSubtasks Get a list of task's failed subtasks
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPIListFailedSubtasksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPIListFailedSubtasksRequest
 */
 func (a *CustomerTasksAPIService) ListFailedSubtasks(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPIListFailedSubtasksRequest {
 	return CustomerTasksAPIListFailedSubtasksRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return FailedSubtasks
+//
+//	@return FailedSubtasks
 func (a *CustomerTasksAPIService) ListFailedSubtasksExecute(r CustomerTasksAPIListFailedSubtasksRequest) (*FailedSubtasks, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FailedSubtasks
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FailedSubtasks
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.ListFailedSubtasks")
@@ -397,11 +400,11 @@ func (a *CustomerTasksAPIService) ListFailedSubtasksExecute(r CustomerTasksAPILi
 }
 
 type CustomerTasksAPIListTasksV2Request struct {
-	ctx context.Context
-	ApiService *CustomerTasksAPIService
-	cUUID string
+	ctx              context.Context
+	ApiService       *CustomerTasksAPIService
+	cUUID            string
 	pageTasksRequest *TaskPagedApiQuery
-	request *interface{}
+	request          *interface{}
 }
 
 func (r CustomerTasksAPIListTasksV2Request) PageTasksRequest(pageTasksRequest TaskPagedApiQuery) CustomerTasksAPIListTasksV2Request {
@@ -423,26 +426,27 @@ ListTasksV2 List Tasks (paginated)
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerTasksAPIListTasksV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerTasksAPIListTasksV2Request
 */
 func (a *CustomerTasksAPIService) ListTasksV2(ctx context.Context, cUUID string) CustomerTasksAPIListTasksV2Request {
 	return CustomerTasksAPIListTasksV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TaskPagedApiResponse
+//
+//	@return TaskPagedApiResponse
 func (a *CustomerTasksAPIService) ListTasksV2Execute(r CustomerTasksAPIListTasksV2Request) (*TaskPagedApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TaskPagedApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskPagedApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.ListTasksV2")
@@ -534,11 +538,11 @@ func (a *CustomerTasksAPIService) ListTasksV2Execute(r CustomerTasksAPIListTasks
 }
 
 type CustomerTasksAPIRetryTaskRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
-	request *interface{}
+	cUUID      string
+	tUUID      string
+	request    *interface{}
 }
 
 func (r CustomerTasksAPIRetryTaskRequest) Request(request interface{}) CustomerTasksAPIRetryTaskRequest {
@@ -555,28 +559,29 @@ RetryTask Retry a Universe or Provider task
 
 Retry a Universe or Provider task.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPIRetryTaskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPIRetryTaskRequest
 */
 func (a *CustomerTasksAPIService) RetryTask(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPIRetryTaskRequest {
 	return CustomerTasksAPIRetryTaskRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CustomerTasksAPIService) RetryTaskExecute(r CustomerTasksAPIRetryTaskRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.RetryTask")
@@ -664,11 +669,11 @@ func (a *CustomerTasksAPIService) RetryTaskExecute(r CustomerTasksAPIRetryTaskRe
 }
 
 type CustomerTasksAPIRollbackTaskRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
-	request *interface{}
+	cUUID      string
+	tUUID      string
+	request    *interface{}
 }
 
 func (r CustomerTasksAPIRollbackTaskRequest) Request(request interface{}) CustomerTasksAPIRollbackTaskRequest {
@@ -685,28 +690,29 @@ RollbackTask Rollback a Universe or Provider task
 
 Rollback a Universe or Provider task.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPIRollbackTaskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPIRollbackTaskRequest
 */
 func (a *CustomerTasksAPIService) RollbackTask(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPIRollbackTaskRequest {
 	return CustomerTasksAPIRollbackTaskRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CustomerTasksAPIService) RollbackTaskExecute(r CustomerTasksAPIRollbackTaskRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.RollbackTask")
@@ -794,10 +800,10 @@ func (a *CustomerTasksAPIService) RollbackTaskExecute(r CustomerTasksAPIRollback
 }
 
 type CustomerTasksAPITaskStatusRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	tUUID string
+	cUUID      string
+	tUUID      string
 }
 
 func (r CustomerTasksAPITaskStatusRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -807,28 +813,29 @@ func (r CustomerTasksAPITaskStatusRequest) Execute() (map[string]interface{}, *h
 /*
 TaskStatus Get a task's status
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return CustomerTasksAPITaskStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return CustomerTasksAPITaskStatusRequest
 */
 func (a *CustomerTasksAPIService) TaskStatus(ctx context.Context, cUUID string, tUUID string) CustomerTasksAPITaskStatusRequest {
 	return CustomerTasksAPITaskStatusRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *CustomerTasksAPIService) TaskStatusExecute(r CustomerTasksAPITaskStatusRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.TaskStatus")
@@ -913,10 +920,10 @@ func (a *CustomerTasksAPIService) TaskStatusExecute(r CustomerTasksAPITaskStatus
 }
 
 type CustomerTasksAPITasksListRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerTasksAPIService
-	cUUID string
-	uUUID *string
+	cUUID      string
+	uUUID      *string
 }
 
 func (r CustomerTasksAPITasksListRequest) UUUID(uUUID string) CustomerTasksAPITasksListRequest {
@@ -931,26 +938,27 @@ func (r CustomerTasksAPITasksListRequest) Execute() ([]CustomerTaskData, *http.R
 /*
 TasksList List task
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerTasksAPITasksListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerTasksAPITasksListRequest
 */
 func (a *CustomerTasksAPIService) TasksList(ctx context.Context, cUUID string) CustomerTasksAPITasksListRequest {
 	return CustomerTasksAPITasksListRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []CustomerTaskData
+//
+//	@return []CustomerTaskData
 func (a *CustomerTasksAPIService) TasksListExecute(r CustomerTasksAPITasksListRequest) ([]CustomerTaskData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CustomerTaskData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CustomerTaskData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerTasksAPIService.TasksList")

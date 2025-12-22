@@ -19,8 +19,8 @@ var _ MappedNullable = &AdditionalServicesStateData{}
 
 // AdditionalServicesStateData Additional services state
 type AdditionalServicesStateData struct {
-	EarlyoomConfig *EarlyoomConfig `json:"earlyoomConfig,omitempty"`
-	EarlyoomEnabled *bool `json:"earlyoomEnabled,omitempty"`
+	EarlyoomConfig  *EarlyoomConfig `json:"earlyoomConfig,omitempty"`
+	EarlyoomEnabled *bool           `json:"earlyoomEnabled,omitempty"`
 }
 
 // NewAdditionalServicesStateData instantiates a new AdditionalServicesStateData object
@@ -105,7 +105,7 @@ func (o *AdditionalServicesStateData) SetEarlyoomEnabled(v bool) {
 }
 
 func (o AdditionalServicesStateData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableAdditionalServicesStateData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

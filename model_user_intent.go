@@ -19,69 +19,69 @@ var _ MappedNullable = &UserIntent{}
 
 // UserIntent struct for UserIntent
 type UserIntent struct {
-	AccessKeyCode *string `json:"accessKeyCode,omitempty"`
-	AssignPublicIP *bool `json:"assignPublicIP,omitempty"`
+	AccessKeyCode  *string `json:"accessKeyCode,omitempty"`
+	AssignPublicIP *bool   `json:"assignPublicIP,omitempty"`
 	// Whether to assign static public IP
-	AssignStaticPublicIP *bool `json:"assignStaticPublicIP,omitempty"`
-	AuditLogConfig *AuditLogConfig `json:"auditLogConfig,omitempty"`
-	AwsArnString *string `json:"awsArnString,omitempty"`
-	AzOverrides *map[string]string `json:"azOverrides,omitempty"`
-	CgroupSize *int32 `json:"cgroupSize,omitempty"`
-	DedicatedNodes *bool `json:"dedicatedNodes,omitempty"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	EnableClientToNodeEncrypt *bool `json:"enableClientToNodeEncrypt,omitempty"`
-	EnableConnectionPooling *bool `json:"enableConnectionPooling,omitempty"`
-	EnableExposingService *string `json:"enableExposingService,omitempty"`
-	EnableIPV6 *bool `json:"enableIPV6,omitempty"`
-	EnableLB *bool `json:"enableLB,omitempty"`
-	EnableNodeToNodeEncrypt *bool `json:"enableNodeToNodeEncrypt,omitempty"`
+	AssignStaticPublicIP      *bool              `json:"assignStaticPublicIP,omitempty"`
+	AuditLogConfig            *AuditLogConfig    `json:"auditLogConfig,omitempty"`
+	AwsArnString              *string            `json:"awsArnString,omitempty"`
+	AzOverrides               *map[string]string `json:"azOverrides,omitempty"`
+	CgroupSize                *int32             `json:"cgroupSize,omitempty"`
+	DedicatedNodes            *bool              `json:"dedicatedNodes,omitempty"`
+	DeviceInfo                *DeviceInfo        `json:"deviceInfo,omitempty"`
+	EnableClientToNodeEncrypt *bool              `json:"enableClientToNodeEncrypt,omitempty"`
+	EnableConnectionPooling   *bool              `json:"enableConnectionPooling,omitempty"`
+	EnableExposingService     *string            `json:"enableExposingService,omitempty"`
+	EnableIPV6                *bool              `json:"enableIPV6,omitempty"`
+	EnableLB                  *bool              `json:"enableLB,omitempty"`
+	EnableNodeToNodeEncrypt   *bool              `json:"enableNodeToNodeEncrypt,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2025.1.</b> Use userIntent.deviceInfo.cloudVolumeEncryption instead
-	EnableVolumeEncryption *bool `json:"enableVolumeEncryption,omitempty"`
-	EnableYCQL *bool `json:"enableYCQL,omitempty"`
-	EnableYCQLAuth *bool `json:"enableYCQLAuth,omitempty"`
-	EnableYEDIS *bool `json:"enableYEDIS,omitempty"`
-	EnableYSQL *bool `json:"enableYSQL,omitempty"`
-	EnableYSQLAuth *bool `json:"enableYSQLAuth,omitempty"`
-	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
-	InstanceTags *map[string]string `json:"instanceTags,omitempty"`
+	EnableVolumeEncryption *bool              `json:"enableVolumeEncryption,omitempty"`
+	EnableYCQL             *bool              `json:"enableYCQL,omitempty"`
+	EnableYCQLAuth         *bool              `json:"enableYCQLAuth,omitempty"`
+	EnableYEDIS            *bool              `json:"enableYEDIS,omitempty"`
+	EnableYSQL             *bool              `json:"enableYSQL,omitempty"`
+	EnableYSQLAuth         *bool              `json:"enableYSQLAuth,omitempty"`
+	ImageBundleUUID        *string            `json:"imageBundleUUID,omitempty"`
+	InstanceTags           *map[string]string `json:"instanceTags,omitempty"`
 	// Instance type that is used for tserver nodes in current cluster. Could be modified in payload for /resize_node API call
-	InstanceType *string `json:"instanceType,omitempty"`
-	KubernetesOperatorVersion *int64 `json:"kubernetesOperatorVersion,omitempty"`
-	MasterDeviceInfo *DeviceInfo `json:"masterDeviceInfo,omitempty"`
+	InstanceType              *string     `json:"instanceType,omitempty"`
+	KubernetesOperatorVersion *int64      `json:"kubernetesOperatorVersion,omitempty"`
+	MasterDeviceInfo          *DeviceInfo `json:"masterDeviceInfo,omitempty"`
 	// User-defined gflags for master. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	// Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call
-	MasterInstanceType *string `json:"masterInstanceType,omitempty"`
+	MasterInstanceType        *string              `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
-	MetricsExportConfig *MetricsExportConfig `json:"metricsExportConfig,omitempty"`
-	NumNodes *int32 `json:"numNodes,omitempty"`
-	PreferredRegion *string `json:"preferredRegion,omitempty"`
-	Provider *string `json:"provider,omitempty"`
-	ProviderType *string `json:"providerType,omitempty"`
-	ProxyConfig *ProxyConfig `json:"proxyConfig,omitempty"`
-	QueryLogConfig *QueryLogConfig `json:"queryLogConfig,omitempty"`
-	RegionList []string `json:"regionList,omitempty"`
-	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
-	SpecificGFlags *SpecificGFlags `json:"specificGFlags,omitempty"`
-	SpotPrice *float64 `json:"spotPrice,omitempty"`
+	MetricsExportConfig       *MetricsExportConfig `json:"metricsExportConfig,omitempty"`
+	NumNodes                  *int32               `json:"numNodes,omitempty"`
+	PreferredRegion           *string              `json:"preferredRegion,omitempty"`
+	Provider                  *string              `json:"provider,omitempty"`
+	ProviderType              *string              `json:"providerType,omitempty"`
+	ProxyConfig               *ProxyConfig         `json:"proxyConfig,omitempty"`
+	QueryLogConfig            *QueryLogConfig      `json:"queryLogConfig,omitempty"`
+	RegionList                []string             `json:"regionList,omitempty"`
+	ReplicationFactor         *int32               `json:"replicationFactor,omitempty"`
+	SpecificGFlags            *SpecificGFlags      `json:"specificGFlags,omitempty"`
+	SpotPrice                 *float64             `json:"spotPrice,omitempty"`
 	// User-defined gflags for tserver. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
-	TserverGFlags *map[string]string `json:"tserverGFlags,omitempty"`
+	TserverGFlags              *map[string]string   `json:"tserverGFlags,omitempty"`
 	TserverK8SNodeResourceSpec *K8SNodeResourceSpec `json:"tserverK8SNodeResourceSpec,omitempty"`
-	UniverseName *string `json:"universeName,omitempty"`
-	UniverseOverrides *string `json:"universeOverrides,omitempty"`
+	UniverseName               *string              `json:"universeName,omitempty"`
+	UniverseOverrides          *string              `json:"universeOverrides,omitempty"`
 	// YbaApi Internal. Use clockbound as time source
-	UseClockbound *bool `json:"useClockbound,omitempty"`
-	UseHostname *bool `json:"useHostname,omitempty"`
+	UseClockbound   *bool `json:"useClockbound,omitempty"`
+	UseHostname     *bool `json:"useHostname,omitempty"`
 	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
-	UseSystemd *bool `json:"useSystemd,omitempty"`
-	UseTimeSync *bool `json:"useTimeSync,omitempty"`
+	UseSystemd      *bool `json:"useSystemd,omitempty"`
+	UseTimeSync     *bool `json:"useTimeSync,omitempty"`
 	// WARNING: This is a preview API that could change. Use YBDB inbuilt YBC for K8s universe
-	UseYbdbInbuiltYbc *bool `json:"useYbdbInbuiltYbc,omitempty"`
+	UseYbdbInbuiltYbc   *bool                `json:"useYbdbInbuiltYbc,omitempty"`
 	UserIntentOverrides *UserIntentOverrides `json:"userIntentOverrides,omitempty"`
-	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
-	YbcFlags *map[string]string `json:"ybcFlags,omitempty"`
-	YcqlPassword *string `json:"ycqlPassword,omitempty"`
-	YsqlPassword *string `json:"ysqlPassword,omitempty"`
+	YbSoftwareVersion   *string              `json:"ybSoftwareVersion,omitempty"`
+	YbcFlags            *map[string]string   `json:"ybcFlags,omitempty"`
+	YcqlPassword        *string              `json:"ycqlPassword,omitempty"`
+	YsqlPassword        *string              `json:"ysqlPassword,omitempty"`
 }
 
 // NewUserIntent instantiates a new UserIntent object
@@ -1862,7 +1862,7 @@ func (o *UserIntent) SetYsqlPassword(v string) {
 }
 
 func (o UserIntent) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -2074,5 +2074,3 @@ func (v *NullableUserIntent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

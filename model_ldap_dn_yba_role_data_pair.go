@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LdapDnYbaRoleDataPair type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &LdapDnYbaRoleDataPair{}
 // LdapDnYbaRoleDataPair struct for LdapDnYbaRoleDataPair
 type LdapDnYbaRoleDataPair struct {
 	DistinguishedName string `json:"distinguishedName"`
-	YbaRole string `json:"ybaRole"`
+	YbaRole           string `json:"ybaRole"`
 }
 
 type _LdapDnYbaRoleDataPair LdapDnYbaRoleDataPair
@@ -95,7 +93,7 @@ func (o *LdapDnYbaRoleDataPair) SetYbaRole(v string) {
 }
 
 func (o LdapDnYbaRoleDataPair) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableLdapDnYbaRoleDataPair) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

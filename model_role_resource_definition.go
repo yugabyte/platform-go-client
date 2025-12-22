@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RoleResourceDefinition type satisfies the MappedNullable interface at compile time
@@ -103,7 +101,7 @@ func (o *RoleResourceDefinition) SetRoleUUID(v string) {
 }
 
 func (o RoleResourceDefinition) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -154,5 +152,3 @@ func (v *NullableRoleResourceDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

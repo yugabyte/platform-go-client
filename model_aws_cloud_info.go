@@ -19,13 +19,13 @@ var _ MappedNullable = &AWSCloudInfo{}
 
 // AWSCloudInfo struct for AWSCloudInfo
 type AWSCloudInfo struct {
-	AwsAccessKeyID *string `json:"awsAccessKeyID,omitempty"`
+	AwsAccessKeyID     *string `json:"awsAccessKeyID,omitempty"`
 	AwsAccessKeySecret *string `json:"awsAccessKeySecret,omitempty"`
-	AwsHostedZoneId *string `json:"awsHostedZoneId,omitempty"`
-	AwsHostedZoneName *string `json:"awsHostedZoneName,omitempty"`
-	HostVpcId *string `json:"hostVpcId,omitempty"`
-	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
-	UseIMDSv2 *bool `json:"useIMDSv2,omitempty"`
+	AwsHostedZoneId    *string `json:"awsHostedZoneId,omitempty"`
+	AwsHostedZoneName  *string `json:"awsHostedZoneName,omitempty"`
+	HostVpcId          *string `json:"hostVpcId,omitempty"`
+	HostVpcRegion      *string `json:"hostVpcRegion,omitempty"`
+	UseIMDSv2          *bool   `json:"useIMDSv2,omitempty"`
 	// New/Existing VPC for provider creation
 	VpcType *string `json:"vpcType,omitempty"`
 }
@@ -304,7 +304,7 @@ func (o *AWSCloudInfo) SetVpcType(v string) {
 }
 
 func (o AWSCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -375,5 +375,3 @@ func (v *NullableAWSCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

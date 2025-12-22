@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // AlertsAPIService AlertsAPI service
 type AlertsAPIService service
 
 type AlertsAPIAcknowledgeRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	alertUUID string
-	request *interface{}
+	cUUID      string
+	alertUUID  string
+	request    *interface{}
 }
 
 func (r AlertsAPIAcknowledgeRequest) Request(request interface{}) AlertsAPIAcknowledgeRequest {
@@ -45,28 +44,29 @@ Acknowledge Acknowledge an alert
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param alertUUID
- @return AlertsAPIAcknowledgeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param alertUUID
+	@return AlertsAPIAcknowledgeRequest
 */
 func (a *AlertsAPIService) Acknowledge(ctx context.Context, cUUID string, alertUUID string) AlertsAPIAcknowledgeRequest {
 	return AlertsAPIAcknowledgeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		alertUUID: alertUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		alertUUID:  alertUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Alert
+//
+//	@return Alert
 func (a *AlertsAPIService) AcknowledgeExecute(r AlertsAPIAcknowledgeRequest) (*Alert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Alert
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Alert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.Acknowledge")
@@ -154,11 +154,11 @@ func (a *AlertsAPIService) AcknowledgeExecute(r AlertsAPIAcknowledgeRequest) (*A
 }
 
 type AlertsAPIAcknowledgeByFilterRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                      context.Context
+	ApiService               *AlertsAPIService
+	cUUID                    string
 	acknowledgeAlertsRequest *AlertApiFilter
-	request *interface{}
+	request                  *interface{}
 }
 
 func (r AlertsAPIAcknowledgeByFilterRequest) AcknowledgeAlertsRequest(acknowledgeAlertsRequest AlertApiFilter) AlertsAPIAcknowledgeByFilterRequest {
@@ -180,29 +180,31 @@ AcknowledgeByFilter Acknowledge all alerts - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.8.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIAcknowledgeByFilterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIAcknowledgeByFilterRequest
 
 Deprecated
 */
 func (a *AlertsAPIService) AcknowledgeByFilter(ctx context.Context, cUUID string) AlertsAPIAcknowledgeByFilterRequest {
 	return AlertsAPIAcknowledgeByFilterRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Alert
+//
+//	@return []Alert
+//
 // Deprecated
 func (a *AlertsAPIService) AcknowledgeByFilterExecute(r AlertsAPIAcknowledgeByFilterRequest) ([]Alert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Alert
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Alert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.AcknowledgeByFilter")
@@ -294,11 +296,11 @@ func (a *AlertsAPIService) AcknowledgeByFilterExecute(r AlertsAPIAcknowledgeByFi
 }
 
 type AlertsAPIAlertNotificationPreviewRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                        context.Context
+	ApiService                 *AlertsAPIService
+	cUUID                      string
 	notificationPreviewRequest *AlertTemplateVariablesFormData
-	request *interface{}
+	request                    *interface{}
 }
 
 func (r AlertsAPIAlertNotificationPreviewRequest) NotificationPreviewRequest(notificationPreviewRequest AlertTemplateVariablesFormData) AlertsAPIAlertNotificationPreviewRequest {
@@ -320,26 +322,27 @@ AlertNotificationPreview Prepare alert notification preview
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIAlertNotificationPreviewRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIAlertNotificationPreviewRequest
 */
 func (a *AlertsAPIService) AlertNotificationPreview(ctx context.Context, cUUID string) AlertsAPIAlertNotificationPreviewRequest {
 	return AlertsAPIAlertNotificationPreviewRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertTemplateVariablesList
+//
+//	@return AlertTemplateVariablesList
 func (a *AlertsAPIService) AlertNotificationPreviewExecute(r AlertsAPIAlertNotificationPreviewRequest) (*AlertTemplateVariablesList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertTemplateVariablesList
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertTemplateVariablesList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.AlertNotificationPreview")
@@ -431,11 +434,11 @@ func (a *AlertsAPIService) AlertNotificationPreviewExecute(r AlertsAPIAlertNotif
 }
 
 type AlertsAPICountAlertsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                context.Context
+	ApiService         *AlertsAPIService
+	cUUID              string
 	countAlertsRequest *AlertApiFilter
-	request *interface{}
+	request            *interface{}
 }
 
 func (r AlertsAPICountAlertsRequest) CountAlertsRequest(countAlertsRequest AlertApiFilter) AlertsAPICountAlertsRequest {
@@ -457,26 +460,27 @@ CountAlerts Count alerts
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPICountAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPICountAlertsRequest
 */
 func (a *AlertsAPIService) CountAlerts(ctx context.Context, cUUID string) AlertsAPICountAlertsRequest {
 	return AlertsAPICountAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return int32
+//
+//	@return int32
 func (a *AlertsAPIService) CountAlertsExecute(r AlertsAPICountAlertsRequest) (int32, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  int32
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue int32
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.CountAlerts")
@@ -568,11 +572,11 @@ func (a *AlertsAPIService) CountAlertsExecute(r AlertsAPICountAlertsRequest) (in
 }
 
 type AlertsAPICreateAlertChannelRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                       context.Context
+	ApiService                *AlertsAPIService
+	cUUID                     string
 	createAlertChannelRequest *AlertChannelFormData
-	request *interface{}
+	request                   *interface{}
 }
 
 func (r AlertsAPICreateAlertChannelRequest) CreateAlertChannelRequest(createAlertChannelRequest AlertChannelFormData) AlertsAPICreateAlertChannelRequest {
@@ -594,26 +598,27 @@ CreateAlertChannel Create an alert channel
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPICreateAlertChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPICreateAlertChannelRequest
 */
 func (a *AlertsAPIService) CreateAlertChannel(ctx context.Context, cUUID string) AlertsAPICreateAlertChannelRequest {
 	return AlertsAPICreateAlertChannelRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertChannel
+//
+//	@return AlertChannel
 func (a *AlertsAPIService) CreateAlertChannelExecute(r AlertsAPICreateAlertChannelRequest) (*AlertChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertChannel
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.CreateAlertChannel")
@@ -705,11 +710,11 @@ func (a *AlertsAPIService) CreateAlertChannelExecute(r AlertsAPICreateAlertChann
 }
 
 type AlertsAPICreateAlertConfigurationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                             context.Context
+	ApiService                      *AlertsAPIService
+	cUUID                           string
 	createAlertConfigurationRequest *AlertConfiguration
-	request *interface{}
+	request                         *interface{}
 }
 
 func (r AlertsAPICreateAlertConfigurationRequest) CreateAlertConfigurationRequest(createAlertConfigurationRequest AlertConfiguration) AlertsAPICreateAlertConfigurationRequest {
@@ -731,26 +736,27 @@ CreateAlertConfiguration Create an alert configuration
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPICreateAlertConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPICreateAlertConfigurationRequest
 */
 func (a *AlertsAPIService) CreateAlertConfiguration(ctx context.Context, cUUID string) AlertsAPICreateAlertConfigurationRequest {
 	return AlertsAPICreateAlertConfigurationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertConfiguration
+//
+//	@return AlertConfiguration
 func (a *AlertsAPIService) CreateAlertConfigurationExecute(r AlertsAPICreateAlertConfigurationRequest) (*AlertConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertConfiguration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.CreateAlertConfiguration")
@@ -842,11 +848,11 @@ func (a *AlertsAPIService) CreateAlertConfigurationExecute(r AlertsAPICreateAler
 }
 
 type AlertsAPICreateAlertDestinationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                           context.Context
+	ApiService                    *AlertsAPIService
+	cUUID                         string
 	createAlertDestinationRequest *AlertDestinationFormData
-	request *interface{}
+	request                       *interface{}
 }
 
 func (r AlertsAPICreateAlertDestinationRequest) CreateAlertDestinationRequest(createAlertDestinationRequest AlertDestinationFormData) AlertsAPICreateAlertDestinationRequest {
@@ -868,26 +874,27 @@ CreateAlertDestination Create an alert destination
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPICreateAlertDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPICreateAlertDestinationRequest
 */
 func (a *AlertsAPIService) CreateAlertDestination(ctx context.Context, cUUID string) AlertsAPICreateAlertDestinationRequest {
 	return AlertsAPICreateAlertDestinationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertDestination
+//
+//	@return AlertDestination
 func (a *AlertsAPIService) CreateAlertDestinationExecute(r AlertsAPICreateAlertDestinationRequest) (*AlertDestination, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertDestination
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertDestination
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.CreateAlertDestination")
@@ -979,11 +986,11 @@ func (a *AlertsAPIService) CreateAlertDestinationExecute(r AlertsAPICreateAlertD
 }
 
 type AlertsAPIDeleteAlertChannelRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	acUUID string
-	request *interface{}
+	cUUID      string
+	acUUID     string
+	request    *interface{}
 }
 
 func (r AlertsAPIDeleteAlertChannelRequest) Request(request interface{}) AlertsAPIDeleteAlertChannelRequest {
@@ -1000,28 +1007,29 @@ DeleteAlertChannel Delete an alert channel
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acUUID
- @return AlertsAPIDeleteAlertChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acUUID
+	@return AlertsAPIDeleteAlertChannelRequest
 */
 func (a *AlertsAPIService) DeleteAlertChannel(ctx context.Context, cUUID string, acUUID string) AlertsAPIDeleteAlertChannelRequest {
 	return AlertsAPIDeleteAlertChannelRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acUUID: acUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acUUID:     acUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) DeleteAlertChannelExecute(r AlertsAPIDeleteAlertChannelRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertChannel")
@@ -1109,11 +1117,11 @@ func (a *AlertsAPIService) DeleteAlertChannelExecute(r AlertsAPIDeleteAlertChann
 }
 
 type AlertsAPIDeleteAlertChannelTemplatesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	acType string
-	request *interface{}
+	cUUID      string
+	acType     string
+	request    *interface{}
 }
 
 func (r AlertsAPIDeleteAlertChannelTemplatesRequest) Request(request interface{}) AlertsAPIDeleteAlertChannelTemplatesRequest {
@@ -1130,28 +1138,29 @@ DeleteAlertChannelTemplates Delete alert channel templates
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acType
- @return AlertsAPIDeleteAlertChannelTemplatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acType
+	@return AlertsAPIDeleteAlertChannelTemplatesRequest
 */
 func (a *AlertsAPIService) DeleteAlertChannelTemplates(ctx context.Context, cUUID string, acType string) AlertsAPIDeleteAlertChannelTemplatesRequest {
 	return AlertsAPIDeleteAlertChannelTemplatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acType: acType,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acType:     acType,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) DeleteAlertChannelTemplatesExecute(r AlertsAPIDeleteAlertChannelTemplatesRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertChannelTemplates")
@@ -1239,11 +1248,11 @@ func (a *AlertsAPIService) DeleteAlertChannelTemplatesExecute(r AlertsAPIDeleteA
 }
 
 type AlertsAPIDeleteAlertConfigurationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx               context.Context
+	ApiService        *AlertsAPIService
+	cUUID             string
 	configurationUUID string
-	request *interface{}
+	request           *interface{}
 }
 
 func (r AlertsAPIDeleteAlertConfigurationRequest) Request(request interface{}) AlertsAPIDeleteAlertConfigurationRequest {
@@ -1260,28 +1269,29 @@ DeleteAlertConfiguration Delete an alert configuration
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configurationUUID
- @return AlertsAPIDeleteAlertConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configurationUUID
+	@return AlertsAPIDeleteAlertConfigurationRequest
 */
 func (a *AlertsAPIService) DeleteAlertConfiguration(ctx context.Context, cUUID string, configurationUUID string) AlertsAPIDeleteAlertConfigurationRequest {
 	return AlertsAPIDeleteAlertConfigurationRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:        a,
+		ctx:               ctx,
+		cUUID:             cUUID,
 		configurationUUID: configurationUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) DeleteAlertConfigurationExecute(r AlertsAPIDeleteAlertConfigurationRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertConfiguration")
@@ -1369,11 +1379,11 @@ func (a *AlertsAPIService) DeleteAlertConfigurationExecute(r AlertsAPIDeleteAler
 }
 
 type AlertsAPIDeleteAlertDestinationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	adUUID string
-	request *interface{}
+	cUUID      string
+	adUUID     string
+	request    *interface{}
 }
 
 func (r AlertsAPIDeleteAlertDestinationRequest) Request(request interface{}) AlertsAPIDeleteAlertDestinationRequest {
@@ -1390,28 +1400,29 @@ DeleteAlertDestination Delete an alert destination
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param adUUID
- @return AlertsAPIDeleteAlertDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param adUUID
+	@return AlertsAPIDeleteAlertDestinationRequest
 */
 func (a *AlertsAPIService) DeleteAlertDestination(ctx context.Context, cUUID string, adUUID string) AlertsAPIDeleteAlertDestinationRequest {
 	return AlertsAPIDeleteAlertDestinationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		adUUID: adUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		adUUID:     adUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) DeleteAlertDestinationExecute(r AlertsAPIDeleteAlertDestinationRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertDestination")
@@ -1499,11 +1510,11 @@ func (a *AlertsAPIService) DeleteAlertDestinationExecute(r AlertsAPIDeleteAlertD
 }
 
 type AlertsAPIDeleteAlertTemplateSettingsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *AlertsAPIService
+	cUUID        string
 	settingsUUID string
-	request *interface{}
+	request      *interface{}
 }
 
 func (r AlertsAPIDeleteAlertTemplateSettingsRequest) Request(request interface{}) AlertsAPIDeleteAlertTemplateSettingsRequest {
@@ -1520,31 +1531,33 @@ DeleteAlertTemplateSettings Delete an alert template settings - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param settingsUUID
- @return AlertsAPIDeleteAlertTemplateSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param settingsUUID
+	@return AlertsAPIDeleteAlertTemplateSettingsRequest
 
 Deprecated
 */
 func (a *AlertsAPIService) DeleteAlertTemplateSettings(ctx context.Context, cUUID string, settingsUUID string) AlertsAPIDeleteAlertTemplateSettingsRequest {
 	return AlertsAPIDeleteAlertTemplateSettingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
 		settingsUUID: settingsUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *AlertsAPIService) DeleteAlertTemplateSettingsExecute(r AlertsAPIDeleteAlertTemplateSettingsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertTemplateSettings")
@@ -1632,11 +1645,11 @@ func (a *AlertsAPIService) DeleteAlertTemplateSettingsExecute(r AlertsAPIDeleteA
 }
 
 type AlertsAPIDeleteAlertTemplateVariablesRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *AlertsAPIService
+	cUUID        string
 	variableUUID string
-	request *interface{}
+	request      *interface{}
 }
 
 func (r AlertsAPIDeleteAlertTemplateVariablesRequest) Request(request interface{}) AlertsAPIDeleteAlertTemplateVariablesRequest {
@@ -1653,28 +1666,29 @@ DeleteAlertTemplateVariables Delete an alert template variables
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param variableUUID
- @return AlertsAPIDeleteAlertTemplateVariablesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param variableUUID
+	@return AlertsAPIDeleteAlertTemplateVariablesRequest
 */
 func (a *AlertsAPIService) DeleteAlertTemplateVariables(ctx context.Context, cUUID string, variableUUID string) AlertsAPIDeleteAlertTemplateVariablesRequest {
 	return AlertsAPIDeleteAlertTemplateVariablesRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
 		variableUUID: variableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) DeleteAlertTemplateVariablesExecute(r AlertsAPIDeleteAlertTemplateVariablesRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.DeleteAlertTemplateVariables")
@@ -1762,11 +1776,11 @@ func (a *AlertsAPIService) DeleteAlertTemplateVariablesExecute(r AlertsAPIDelete
 }
 
 type AlertsAPIEditAlertTemplateSettingsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                              context.Context
+	ApiService                       *AlertsAPIService
+	cUUID                            string
 	editAlertTemplateSettingsRequest *AlertTemplateSettingsFormData
-	request *interface{}
+	request                          *interface{}
 }
 
 func (r AlertsAPIEditAlertTemplateSettingsRequest) EditAlertTemplateSettingsRequest(editAlertTemplateSettingsRequest AlertTemplateSettingsFormData) AlertsAPIEditAlertTemplateSettingsRequest {
@@ -1788,29 +1802,31 @@ EditAlertTemplateSettings Create or update alert template settings list - deprec
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIEditAlertTemplateSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIEditAlertTemplateSettingsRequest
 
 Deprecated
 */
 func (a *AlertsAPIService) EditAlertTemplateSettings(ctx context.Context, cUUID string) AlertsAPIEditAlertTemplateSettingsRequest {
 	return AlertsAPIEditAlertTemplateSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertTemplateSettings
+//
+//	@return []AlertTemplateSettings
+//
 // Deprecated
 func (a *AlertsAPIService) EditAlertTemplateSettingsExecute(r AlertsAPIEditAlertTemplateSettingsRequest) ([]AlertTemplateSettings, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertTemplateSettings
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertTemplateSettings
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.EditAlertTemplateSettings")
@@ -1902,11 +1918,11 @@ func (a *AlertsAPIService) EditAlertTemplateSettingsExecute(r AlertsAPIEditAlert
 }
 
 type AlertsAPIEditAlertTemplateVariablesRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                               context.Context
+	ApiService                        *AlertsAPIService
+	cUUID                             string
 	editAlertTemplateVariablesRequest *AlertTemplateVariablesFormData
-	request *interface{}
+	request                           *interface{}
 }
 
 func (r AlertsAPIEditAlertTemplateVariablesRequest) EditAlertTemplateVariablesRequest(editAlertTemplateVariablesRequest AlertTemplateVariablesFormData) AlertsAPIEditAlertTemplateVariablesRequest {
@@ -1928,26 +1944,27 @@ EditAlertTemplateVariables Create or update alert template variables
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIEditAlertTemplateVariablesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIEditAlertTemplateVariablesRequest
 */
 func (a *AlertsAPIService) EditAlertTemplateVariables(ctx context.Context, cUUID string) AlertsAPIEditAlertTemplateVariablesRequest {
 	return AlertsAPIEditAlertTemplateVariablesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertTemplateVariable
+//
+//	@return []AlertTemplateVariable
 func (a *AlertsAPIService) EditAlertTemplateVariablesExecute(r AlertsAPIEditAlertTemplateVariablesRequest) ([]AlertTemplateVariable, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertTemplateVariable
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertTemplateVariable
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.EditAlertTemplateVariables")
@@ -2039,10 +2056,10 @@ func (a *AlertsAPIService) EditAlertTemplateVariablesExecute(r AlertsAPIEditAler
 }
 
 type AlertsAPIGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	alertUUID string
+	cUUID      string
+	alertUUID  string
 }
 
 func (r AlertsAPIGetRequest) Execute() (*Alert, *http.Response, error) {
@@ -2054,28 +2071,29 @@ Get Get details of an alert
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param alertUUID
- @return AlertsAPIGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param alertUUID
+	@return AlertsAPIGetRequest
 */
 func (a *AlertsAPIService) Get(ctx context.Context, cUUID string, alertUUID string) AlertsAPIGetRequest {
 	return AlertsAPIGetRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		alertUUID: alertUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		alertUUID:  alertUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Alert
+//
+//	@return Alert
 func (a *AlertsAPIService) GetExecute(r AlertsAPIGetRequest) (*Alert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Alert
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Alert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.Get")
@@ -2160,10 +2178,10 @@ func (a *AlertsAPIService) GetExecute(r AlertsAPIGetRequest) (*Alert, *http.Resp
 }
 
 type AlertsAPIGetAlertChannelRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	acUUID string
+	cUUID      string
+	acUUID     string
 }
 
 func (r AlertsAPIGetAlertChannelRequest) Execute() (*AlertChannel, *http.Response, error) {
@@ -2175,28 +2193,29 @@ GetAlertChannel Get an alert channel
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acUUID
- @return AlertsAPIGetAlertChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acUUID
+	@return AlertsAPIGetAlertChannelRequest
 */
 func (a *AlertsAPIService) GetAlertChannel(ctx context.Context, cUUID string, acUUID string) AlertsAPIGetAlertChannelRequest {
 	return AlertsAPIGetAlertChannelRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acUUID: acUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acUUID:     acUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertChannel
+//
+//	@return AlertChannel
 func (a *AlertsAPIService) GetAlertChannelExecute(r AlertsAPIGetAlertChannelRequest) (*AlertChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertChannel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.GetAlertChannel")
@@ -2281,10 +2300,10 @@ func (a *AlertsAPIService) GetAlertChannelExecute(r AlertsAPIGetAlertChannelRequ
 }
 
 type AlertsAPIGetAlertChannelTemplatesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	acType string
+	cUUID      string
+	acType     string
 }
 
 func (r AlertsAPIGetAlertChannelTemplatesRequest) Execute() (*AlertChannelTemplatesExtWithDefaultValues, *http.Response, error) {
@@ -2296,28 +2315,29 @@ GetAlertChannelTemplates Get alert channel templates
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acType
- @return AlertsAPIGetAlertChannelTemplatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acType
+	@return AlertsAPIGetAlertChannelTemplatesRequest
 */
 func (a *AlertsAPIService) GetAlertChannelTemplates(ctx context.Context, cUUID string, acType string) AlertsAPIGetAlertChannelTemplatesRequest {
 	return AlertsAPIGetAlertChannelTemplatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acType: acType,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acType:     acType,
 	}
 }
 
 // Execute executes the request
-//  @return AlertChannelTemplatesExtWithDefaultValues
+//
+//	@return AlertChannelTemplatesExtWithDefaultValues
 func (a *AlertsAPIService) GetAlertChannelTemplatesExecute(r AlertsAPIGetAlertChannelTemplatesRequest) (*AlertChannelTemplatesExtWithDefaultValues, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertChannelTemplatesExtWithDefaultValues
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertChannelTemplatesExtWithDefaultValues
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.GetAlertChannelTemplates")
@@ -2402,9 +2422,9 @@ func (a *AlertsAPIService) GetAlertChannelTemplatesExecute(r AlertsAPIGetAlertCh
 }
 
 type AlertsAPIGetAlertConfigurationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx               context.Context
+	ApiService        *AlertsAPIService
+	cUUID             string
 	configurationUUID string
 }
 
@@ -2417,28 +2437,29 @@ GetAlertConfiguration Get an alert configuration
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configurationUUID
- @return AlertsAPIGetAlertConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configurationUUID
+	@return AlertsAPIGetAlertConfigurationRequest
 */
 func (a *AlertsAPIService) GetAlertConfiguration(ctx context.Context, cUUID string, configurationUUID string) AlertsAPIGetAlertConfigurationRequest {
 	return AlertsAPIGetAlertConfigurationRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:        a,
+		ctx:               ctx,
+		cUUID:             cUUID,
 		configurationUUID: configurationUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertConfiguration
+//
+//	@return AlertConfiguration
 func (a *AlertsAPIService) GetAlertConfigurationExecute(r AlertsAPIGetAlertConfigurationRequest) (*AlertConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertConfiguration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.GetAlertConfiguration")
@@ -2523,10 +2544,10 @@ func (a *AlertsAPIService) GetAlertConfigurationExecute(r AlertsAPIGetAlertConfi
 }
 
 type AlertsAPIGetAlertDestinationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
-	adUUID string
+	cUUID      string
+	adUUID     string
 }
 
 func (r AlertsAPIGetAlertDestinationRequest) Execute() (*AlertDestination, *http.Response, error) {
@@ -2538,28 +2559,29 @@ GetAlertDestination Get an alert destination
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param adUUID
- @return AlertsAPIGetAlertDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param adUUID
+	@return AlertsAPIGetAlertDestinationRequest
 */
 func (a *AlertsAPIService) GetAlertDestination(ctx context.Context, cUUID string, adUUID string) AlertsAPIGetAlertDestinationRequest {
 	return AlertsAPIGetAlertDestinationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		adUUID: adUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		adUUID:     adUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertDestination
+//
+//	@return AlertDestination
 func (a *AlertsAPIService) GetAlertDestinationExecute(r AlertsAPIGetAlertDestinationRequest) (*AlertDestination, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertDestination
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertDestination
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.GetAlertDestination")
@@ -2644,9 +2666,9 @@ func (a *AlertsAPIService) GetAlertDestinationExecute(r AlertsAPIGetAlertDestina
 }
 
 type AlertsAPIListActiveRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListActiveRequest) Execute() ([]Alert, *http.Response, error) {
@@ -2658,29 +2680,31 @@ ListActive List active alerts - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.8.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListActiveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListActiveRequest
 
 Deprecated
 */
 func (a *AlertsAPIService) ListActive(ctx context.Context, cUUID string) AlertsAPIListActiveRequest {
 	return AlertsAPIListActiveRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Alert
+//
+//	@return []Alert
+//
 // Deprecated
 func (a *AlertsAPIService) ListActiveExecute(r AlertsAPIListActiveRequest) ([]Alert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Alert
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Alert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListActive")
@@ -2764,9 +2788,9 @@ func (a *AlertsAPIService) ListActiveExecute(r AlertsAPIListActiveRequest) ([]Al
 }
 
 type AlertsAPIListAlertChannelTemplatesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListAlertChannelTemplatesRequest) Execute() ([]AlertChannelTemplatesExtWithDefaultValues, *http.Response, error) {
@@ -2778,26 +2802,27 @@ ListAlertChannelTemplates List all alert channel templates
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertChannelTemplatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertChannelTemplatesRequest
 */
 func (a *AlertsAPIService) ListAlertChannelTemplates(ctx context.Context, cUUID string) AlertsAPIListAlertChannelTemplatesRequest {
 	return AlertsAPIListAlertChannelTemplatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertChannelTemplatesExtWithDefaultValues
+//
+//	@return []AlertChannelTemplatesExtWithDefaultValues
 func (a *AlertsAPIService) ListAlertChannelTemplatesExecute(r AlertsAPIListAlertChannelTemplatesRequest) ([]AlertChannelTemplatesExtWithDefaultValues, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertChannelTemplatesExtWithDefaultValues
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertChannelTemplatesExtWithDefaultValues
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertChannelTemplates")
@@ -2881,9 +2906,9 @@ func (a *AlertsAPIService) ListAlertChannelTemplatesExecute(r AlertsAPIListAlert
 }
 
 type AlertsAPIListAlertChannelsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListAlertChannelsRequest) Execute() ([]AlertChannel, *http.Response, error) {
@@ -2895,26 +2920,27 @@ ListAlertChannels List all alert channels
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertChannelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertChannelsRequest
 */
 func (a *AlertsAPIService) ListAlertChannels(ctx context.Context, cUUID string) AlertsAPIListAlertChannelsRequest {
 	return AlertsAPIListAlertChannelsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertChannel
+//
+//	@return []AlertChannel
 func (a *AlertsAPIService) ListAlertChannelsExecute(r AlertsAPIListAlertChannelsRequest) ([]AlertChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertChannel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertChannels")
@@ -2998,11 +3024,11 @@ func (a *AlertsAPIService) ListAlertChannelsExecute(r AlertsAPIListAlertChannels
 }
 
 type AlertsAPIListAlertConfigurationsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *AlertsAPIService
+	cUUID                          string
 	listAlertConfigurationsRequest *AlertConfigurationApiFilter
-	request *interface{}
+	request                        *interface{}
 }
 
 func (r AlertsAPIListAlertConfigurationsRequest) ListAlertConfigurationsRequest(listAlertConfigurationsRequest AlertConfigurationApiFilter) AlertsAPIListAlertConfigurationsRequest {
@@ -3024,26 +3050,27 @@ ListAlertConfigurations Get filtered list of alert configurations
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertConfigurationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertConfigurationsRequest
 */
 func (a *AlertsAPIService) ListAlertConfigurations(ctx context.Context, cUUID string) AlertsAPIListAlertConfigurationsRequest {
 	return AlertsAPIListAlertConfigurationsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertConfiguration
+//
+//	@return []AlertConfiguration
 func (a *AlertsAPIService) ListAlertConfigurationsExecute(r AlertsAPIListAlertConfigurationsRequest) ([]AlertConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertConfiguration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertConfigurations")
@@ -3135,9 +3162,9 @@ func (a *AlertsAPIService) ListAlertConfigurationsExecute(r AlertsAPIListAlertCo
 }
 
 type AlertsAPIListAlertDestinationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListAlertDestinationsRequest) Execute() ([]AlertDestination, *http.Response, error) {
@@ -3149,26 +3176,27 @@ ListAlertDestinations List alert destinations
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertDestinationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertDestinationsRequest
 */
 func (a *AlertsAPIService) ListAlertDestinations(ctx context.Context, cUUID string) AlertsAPIListAlertDestinationsRequest {
 	return AlertsAPIListAlertDestinationsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertDestination
+//
+//	@return []AlertDestination
 func (a *AlertsAPIService) ListAlertDestinationsExecute(r AlertsAPIListAlertDestinationsRequest) ([]AlertDestination, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertDestination
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertDestination
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertDestinations")
@@ -3252,9 +3280,9 @@ func (a *AlertsAPIService) ListAlertDestinationsExecute(r AlertsAPIListAlertDest
 }
 
 type AlertsAPIListAlertTemplateSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListAlertTemplateSettingsRequest) Execute() ([]AlertTemplateSettings, *http.Response, error) {
@@ -3266,29 +3294,31 @@ ListAlertTemplateSettings Get alert template settings - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertTemplateSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertTemplateSettingsRequest
 
 Deprecated
 */
 func (a *AlertsAPIService) ListAlertTemplateSettings(ctx context.Context, cUUID string) AlertsAPIListAlertTemplateSettingsRequest {
 	return AlertsAPIListAlertTemplateSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertTemplateSettings
+//
+//	@return []AlertTemplateSettings
+//
 // Deprecated
 func (a *AlertsAPIService) ListAlertTemplateSettingsExecute(r AlertsAPIListAlertTemplateSettingsRequest) ([]AlertTemplateSettings, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertTemplateSettings
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertTemplateSettings
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertTemplateSettings")
@@ -3372,9 +3402,9 @@ func (a *AlertsAPIService) ListAlertTemplateSettingsExecute(r AlertsAPIListAlert
 }
 
 type AlertsAPIListAlertTemplateVariablesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListAlertTemplateVariablesRequest) Execute() (*AlertTemplateVariablesList, *http.Response, error) {
@@ -3386,26 +3416,27 @@ ListAlertTemplateVariables List alert template variables
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertTemplateVariablesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertTemplateVariablesRequest
 */
 func (a *AlertsAPIService) ListAlertTemplateVariables(ctx context.Context, cUUID string) AlertsAPIListAlertTemplateVariablesRequest {
 	return AlertsAPIListAlertTemplateVariablesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertTemplateVariablesList
+//
+//	@return AlertTemplateVariablesList
 func (a *AlertsAPIService) ListAlertTemplateVariablesExecute(r AlertsAPIListAlertTemplateVariablesRequest) (*AlertTemplateVariablesList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertTemplateVariablesList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertTemplateVariablesList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertTemplateVariables")
@@ -3489,11 +3520,11 @@ func (a *AlertsAPIService) ListAlertTemplateVariablesExecute(r AlertsAPIListAler
 }
 
 type AlertsAPIListAlertTemplatesRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                  context.Context
+	ApiService           *AlertsAPIService
+	cUUID                string
 	listTemplatesRequest *AlertTemplateApiFilter
-	request *interface{}
+	request              *interface{}
 }
 
 func (r AlertsAPIListAlertTemplatesRequest) ListTemplatesRequest(listTemplatesRequest AlertTemplateApiFilter) AlertsAPIListAlertTemplatesRequest {
@@ -3515,26 +3546,27 @@ ListAlertTemplates Get filtered list of alert configuration templates
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListAlertTemplatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListAlertTemplatesRequest
 */
 func (a *AlertsAPIService) ListAlertTemplates(ctx context.Context, cUUID string) AlertsAPIListAlertTemplatesRequest {
 	return AlertsAPIListAlertTemplatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AlertConfigurationTemplate
+//
+//	@return []AlertConfigurationTemplate
 func (a *AlertsAPIService) ListAlertTemplatesExecute(r AlertsAPIListAlertTemplatesRequest) ([]AlertConfigurationTemplate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AlertConfigurationTemplate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AlertConfigurationTemplate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListAlertTemplates")
@@ -3626,9 +3658,9 @@ func (a *AlertsAPIService) ListAlertTemplatesExecute(r AlertsAPIListAlertTemplat
 }
 
 type AlertsAPIListOfAlertsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AlertsAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AlertsAPIListOfAlertsRequest) Execute() ([]Alert, *http.Response, error) {
@@ -3640,26 +3672,27 @@ ListOfAlerts List all alerts
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIListOfAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIListOfAlertsRequest
 */
 func (a *AlertsAPIService) ListOfAlerts(ctx context.Context, cUUID string) AlertsAPIListOfAlertsRequest {
 	return AlertsAPIListOfAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Alert
+//
+//	@return []Alert
 func (a *AlertsAPIService) ListOfAlertsExecute(r AlertsAPIListOfAlertsRequest) ([]Alert, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Alert
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Alert
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.ListOfAlerts")
@@ -3743,11 +3776,11 @@ func (a *AlertsAPIService) ListOfAlertsExecute(r AlertsAPIListOfAlertsRequest) (
 }
 
 type AlertsAPIPageAlertConfigurationsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *AlertsAPIService
+	cUUID                          string
 	pageAlertConfigurationsRequest *AlertConfigurationPagedApiQuery
-	request *interface{}
+	request                        *interface{}
 }
 
 func (r AlertsAPIPageAlertConfigurationsRequest) PageAlertConfigurationsRequest(pageAlertConfigurationsRequest AlertConfigurationPagedApiQuery) AlertsAPIPageAlertConfigurationsRequest {
@@ -3769,26 +3802,27 @@ PageAlertConfigurations List all alert configurations (paginated)
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIPageAlertConfigurationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIPageAlertConfigurationsRequest
 */
 func (a *AlertsAPIService) PageAlertConfigurations(ctx context.Context, cUUID string) AlertsAPIPageAlertConfigurationsRequest {
 	return AlertsAPIPageAlertConfigurationsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertConfigurationPagedResponse
+//
+//	@return AlertConfigurationPagedResponse
 func (a *AlertsAPIService) PageAlertConfigurationsExecute(r AlertsAPIPageAlertConfigurationsRequest) (*AlertConfigurationPagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertConfigurationPagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertConfigurationPagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.PageAlertConfigurations")
@@ -3880,11 +3914,11 @@ func (a *AlertsAPIService) PageAlertConfigurationsExecute(r AlertsAPIPageAlertCo
 }
 
 type AlertsAPIPageAlertsRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx               context.Context
+	ApiService        *AlertsAPIService
+	cUUID             string
 	pageAlertsRequest *AlertPagedApiQuery
-	request *interface{}
+	request           *interface{}
 }
 
 func (r AlertsAPIPageAlertsRequest) PageAlertsRequest(pageAlertsRequest AlertPagedApiQuery) AlertsAPIPageAlertsRequest {
@@ -3906,26 +3940,27 @@ PageAlerts List alerts (paginated)
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AlertsAPIPageAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AlertsAPIPageAlertsRequest
 */
 func (a *AlertsAPIService) PageAlerts(ctx context.Context, cUUID string) AlertsAPIPageAlertsRequest {
 	return AlertsAPIPageAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertPagedResponse
+//
+//	@return AlertPagedResponse
 func (a *AlertsAPIService) PageAlertsExecute(r AlertsAPIPageAlertsRequest) (*AlertPagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertPagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertPagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.PageAlerts")
@@ -4017,9 +4052,9 @@ func (a *AlertsAPIService) PageAlertsExecute(r AlertsAPIPageAlertsRequest) (*Ale
 }
 
 type AlertsAPISendTestAlertRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
+	ctx               context.Context
+	ApiService        *AlertsAPIService
+	cUUID             string
 	configurationUUID string
 }
 
@@ -4032,28 +4067,29 @@ SendTestAlert Send test alert for alert configuration
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configurationUUID
- @return AlertsAPISendTestAlertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configurationUUID
+	@return AlertsAPISendTestAlertRequest
 */
 func (a *AlertsAPIService) SendTestAlert(ctx context.Context, cUUID string, configurationUUID string) AlertsAPISendTestAlertRequest {
 	return AlertsAPISendTestAlertRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:        a,
+		ctx:               ctx,
+		cUUID:             cUUID,
 		configurationUUID: configurationUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AlertsAPIService) SendTestAlertExecute(r AlertsAPISendTestAlertRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.SendTestAlert")
@@ -4138,12 +4174,12 @@ func (a *AlertsAPIService) SendTestAlertExecute(r AlertsAPISendTestAlertRequest)
 }
 
 type AlertsAPISetAlertChannelTemplatesRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
-	acType string
+	ctx                             context.Context
+	ApiService                      *AlertsAPIService
+	cUUID                           string
+	acType                          string
 	setAlertChannelTemplatesRequest *AlertChannelTemplates
-	request *interface{}
+	request                         *interface{}
 }
 
 func (r AlertsAPISetAlertChannelTemplatesRequest) SetAlertChannelTemplatesRequest(setAlertChannelTemplatesRequest AlertChannelTemplates) AlertsAPISetAlertChannelTemplatesRequest {
@@ -4165,28 +4201,29 @@ SetAlertChannelTemplates Set alert channel templates
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acType
- @return AlertsAPISetAlertChannelTemplatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acType
+	@return AlertsAPISetAlertChannelTemplatesRequest
 */
 func (a *AlertsAPIService) SetAlertChannelTemplates(ctx context.Context, cUUID string, acType string) AlertsAPISetAlertChannelTemplatesRequest {
 	return AlertsAPISetAlertChannelTemplatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acType: acType,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acType:     acType,
 	}
 }
 
 // Execute executes the request
-//  @return AlertChannelTemplates
+//
+//	@return AlertChannelTemplates
 func (a *AlertsAPIService) SetAlertChannelTemplatesExecute(r AlertsAPISetAlertChannelTemplatesRequest) (*AlertChannelTemplates, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertChannelTemplates
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertChannelTemplates
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.SetAlertChannelTemplates")
@@ -4279,12 +4316,12 @@ func (a *AlertsAPIService) SetAlertChannelTemplatesExecute(r AlertsAPISetAlertCh
 }
 
 type AlertsAPIUpdateAlertChannelRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
-	acUUID string
+	ctx                       context.Context
+	ApiService                *AlertsAPIService
+	cUUID                     string
+	acUUID                    string
 	updateAlertChannelRequest *AlertChannelFormData
-	request *interface{}
+	request                   *interface{}
 }
 
 func (r AlertsAPIUpdateAlertChannelRequest) UpdateAlertChannelRequest(updateAlertChannelRequest AlertChannelFormData) AlertsAPIUpdateAlertChannelRequest {
@@ -4306,28 +4343,29 @@ UpdateAlertChannel Update an alert channel
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param acUUID
- @return AlertsAPIUpdateAlertChannelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param acUUID
+	@return AlertsAPIUpdateAlertChannelRequest
 */
 func (a *AlertsAPIService) UpdateAlertChannel(ctx context.Context, cUUID string, acUUID string) AlertsAPIUpdateAlertChannelRequest {
 	return AlertsAPIUpdateAlertChannelRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		acUUID: acUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		acUUID:     acUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertChannel
+//
+//	@return AlertChannel
 func (a *AlertsAPIService) UpdateAlertChannelExecute(r AlertsAPIUpdateAlertChannelRequest) (*AlertChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertChannel
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.UpdateAlertChannel")
@@ -4420,12 +4458,12 @@ func (a *AlertsAPIService) UpdateAlertChannelExecute(r AlertsAPIUpdateAlertChann
 }
 
 type AlertsAPIUpdateAlertConfigurationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
-	configurationUUID string
+	ctx                             context.Context
+	ApiService                      *AlertsAPIService
+	cUUID                           string
+	configurationUUID               string
 	updateAlertConfigurationRequest *AlertConfiguration
-	request *interface{}
+	request                         *interface{}
 }
 
 func (r AlertsAPIUpdateAlertConfigurationRequest) UpdateAlertConfigurationRequest(updateAlertConfigurationRequest AlertConfiguration) AlertsAPIUpdateAlertConfigurationRequest {
@@ -4447,28 +4485,29 @@ UpdateAlertConfiguration Update an alert configuration
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configurationUUID
- @return AlertsAPIUpdateAlertConfigurationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configurationUUID
+	@return AlertsAPIUpdateAlertConfigurationRequest
 */
 func (a *AlertsAPIService) UpdateAlertConfiguration(ctx context.Context, cUUID string, configurationUUID string) AlertsAPIUpdateAlertConfigurationRequest {
 	return AlertsAPIUpdateAlertConfigurationRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:        a,
+		ctx:               ctx,
+		cUUID:             cUUID,
 		configurationUUID: configurationUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertConfiguration
+//
+//	@return AlertConfiguration
 func (a *AlertsAPIService) UpdateAlertConfigurationExecute(r AlertsAPIUpdateAlertConfigurationRequest) (*AlertConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertConfiguration
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.UpdateAlertConfiguration")
@@ -4561,12 +4600,12 @@ func (a *AlertsAPIService) UpdateAlertConfigurationExecute(r AlertsAPIUpdateAler
 }
 
 type AlertsAPIUpdateAlertDestinationRequest struct {
-	ctx context.Context
-	ApiService *AlertsAPIService
-	cUUID string
-	adUUID string
+	ctx                           context.Context
+	ApiService                    *AlertsAPIService
+	cUUID                         string
+	adUUID                        string
 	updateAlertDestinationRequest *AlertDestinationFormData
-	request *interface{}
+	request                       *interface{}
 }
 
 func (r AlertsAPIUpdateAlertDestinationRequest) UpdateAlertDestinationRequest(updateAlertDestinationRequest AlertDestinationFormData) AlertsAPIUpdateAlertDestinationRequest {
@@ -4588,28 +4627,29 @@ UpdateAlertDestination Update an alert destination
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param adUUID
- @return AlertsAPIUpdateAlertDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param adUUID
+	@return AlertsAPIUpdateAlertDestinationRequest
 */
 func (a *AlertsAPIService) UpdateAlertDestination(ctx context.Context, cUUID string, adUUID string) AlertsAPIUpdateAlertDestinationRequest {
 	return AlertsAPIUpdateAlertDestinationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		adUUID: adUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		adUUID:     adUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AlertDestination
+//
+//	@return AlertDestination
 func (a *AlertsAPIService) UpdateAlertDestinationExecute(r AlertsAPIUpdateAlertDestinationRequest) (*AlertDestination, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AlertDestination
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AlertDestination
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertsAPIService.UpdateAlertDestination")

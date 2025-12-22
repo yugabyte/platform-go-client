@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UpdateRelease type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &UpdateRelease{}
 
 // UpdateRelease Release metadata required to create a new release
 type UpdateRelease struct {
-	Artifacts []Artifact `json:"artifacts"`
-	ReleaseDate int64 `json:"release_date"`
-	ReleaseNotes string `json:"release_notes"`
-	ReleaseTag string `json:"release_tag"`
-	State string `json:"state"`
+	Artifacts    []Artifact `json:"artifacts"`
+	ReleaseDate  int64      `json:"release_date"`
+	ReleaseNotes string     `json:"release_notes"`
+	ReleaseTag   string     `json:"release_tag"`
+	State        string     `json:"state"`
 }
 
 type _UpdateRelease UpdateRelease
@@ -173,7 +171,7 @@ func (o *UpdateRelease) SetState(v string) {
 }
 
 func (o UpdateRelease) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableUpdateRelease) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

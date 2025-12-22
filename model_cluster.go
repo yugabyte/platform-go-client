@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Cluster type satisfies the MappedNullable interface at compile time
@@ -22,13 +20,13 @@ var _ MappedNullable = &Cluster{}
 // Cluster struct for Cluster
 type Cluster struct {
 	ClusterType string `json:"clusterType"`
-	Index *int32 `json:"index,omitempty"`
+	Index       *int32 `json:"index,omitempty"`
 	// WARNING: This is a preview API that could change. Geo partitions for cluster
-	Partitions []PartitionInfo `json:"partitions,omitempty"`
-	PlacementInfo *PlacementInfo `json:"placementInfo,omitempty"`
-	Regions []Region `json:"regions,omitempty"`
-	UserIntent UserIntent `json:"userIntent"`
-	Uuid *string `json:"uuid,omitempty"`
+	Partitions    []PartitionInfo `json:"partitions,omitempty"`
+	PlacementInfo *PlacementInfo  `json:"placementInfo,omitempty"`
+	Regions       []Region        `json:"regions,omitempty"`
+	UserIntent    UserIntent      `json:"userIntent"`
+	Uuid          *string         `json:"uuid,omitempty"`
 }
 
 type _Cluster Cluster
@@ -261,7 +259,7 @@ func (o *Cluster) SetUuid(v string) {
 }
 
 func (o Cluster) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -325,5 +323,3 @@ func (v *NullableCluster) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

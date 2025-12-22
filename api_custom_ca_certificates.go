@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // CustomCACertificatesAPIService CustomCACertificatesAPI service
 type CustomCACertificatesAPIService service
 
 type CustomCACertificatesAPIAddCARequest struct {
-	ctx context.Context
-	ApiService *CustomCACertificatesAPIService
-	cUUID string
+	ctx               context.Context
+	ApiService        *CustomCACertificatesAPIService
+	cUUID             string
 	x509CACertificate *CustomCACertParams
-	request *interface{}
+	request           *interface{}
 }
 
 // CA certificate contents in &#39;X509&#39; format
@@ -51,26 +50,27 @@ AddCA Add a named custom CA certificate
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomCACertificatesAPIAddCARequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomCACertificatesAPIAddCARequest
 */
 func (a *CustomCACertificatesAPIService) AddCA(ctx context.Context, cUUID string) CustomCACertificatesAPIAddCARequest {
 	return CustomCACertificatesAPIAddCARequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *CustomCACertificatesAPIService) AddCAExecute(r CustomCACertificatesAPIAddCARequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomCACertificatesAPIService.AddCA")
@@ -162,11 +162,11 @@ func (a *CustomCACertificatesAPIService) AddCAExecute(r CustomCACertificatesAPIA
 }
 
 type CustomCACertificatesAPIDeleteCustomCACertificateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomCACertificatesAPIService
-	cUUID string
-	certUUID string
-	request *interface{}
+	cUUID      string
+	certUUID   string
+	request    *interface{}
 }
 
 func (r CustomCACertificatesAPIDeleteCustomCACertificateRequest) Request(request interface{}) CustomCACertificatesAPIDeleteCustomCACertificateRequest {
@@ -183,28 +183,29 @@ DeleteCustomCACertificate Delete a named custom CA certificate
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param certUUID
- @return CustomCACertificatesAPIDeleteCustomCACertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param certUUID
+	@return CustomCACertificatesAPIDeleteCustomCACertificateRequest
 */
 func (a *CustomCACertificatesAPIService) DeleteCustomCACertificate(ctx context.Context, cUUID string, certUUID string) CustomCACertificatesAPIDeleteCustomCACertificateRequest {
 	return CustomCACertificatesAPIDeleteCustomCACertificateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		certUUID: certUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		certUUID:   certUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CustomCACertificatesAPIService) DeleteCustomCACertificateExecute(r CustomCACertificatesAPIDeleteCustomCACertificateRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomCACertificatesAPIService.DeleteCustomCACertificate")
@@ -292,11 +293,11 @@ func (a *CustomCACertificatesAPIService) DeleteCustomCACertificateExecute(r Cust
 }
 
 type CustomCACertificatesAPIGetAllCustomCaCertificatesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomCACertificatesAPIService
-	cUUID string
-	certUUID string
-	request *interface{}
+	cUUID      string
+	certUUID   string
+	request    *interface{}
 }
 
 func (r CustomCACertificatesAPIGetAllCustomCaCertificatesRequest) Request(request interface{}) CustomCACertificatesAPIGetAllCustomCaCertificatesRequest {
@@ -313,28 +314,29 @@ GetAllCustomCaCertificates Download a custom CA certificates of a customer
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param certUUID
- @return CustomCACertificatesAPIGetAllCustomCaCertificatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param certUUID
+	@return CustomCACertificatesAPIGetAllCustomCaCertificatesRequest
 */
 func (a *CustomCACertificatesAPIService) GetAllCustomCaCertificates(ctx context.Context, cUUID string, certUUID string) CustomCACertificatesAPIGetAllCustomCaCertificatesRequest {
 	return CustomCACertificatesAPIGetAllCustomCaCertificatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		certUUID: certUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		certUUID:   certUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomCaCertificateInfo
+//
+//	@return CustomCaCertificateInfo
 func (a *CustomCACertificatesAPIService) GetAllCustomCaCertificatesExecute(r CustomCACertificatesAPIGetAllCustomCaCertificatesRequest) (*CustomCaCertificateInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomCaCertificateInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomCaCertificateInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomCACertificatesAPIService.GetAllCustomCaCertificates")
@@ -422,9 +424,9 @@ func (a *CustomCACertificatesAPIService) GetAllCustomCaCertificatesExecute(r Cus
 }
 
 type CustomCACertificatesAPIListAllCustomCaCertificatesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomCACertificatesAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r CustomCACertificatesAPIListAllCustomCaCertificatesRequest) Execute() ([]CustomCaCertificateInfo, *http.Response, error) {
@@ -436,26 +438,27 @@ ListAllCustomCaCertificates List all custom CA certificates of a customer
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomCACertificatesAPIListAllCustomCaCertificatesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomCACertificatesAPIListAllCustomCaCertificatesRequest
 */
 func (a *CustomCACertificatesAPIService) ListAllCustomCaCertificates(ctx context.Context, cUUID string) CustomCACertificatesAPIListAllCustomCaCertificatesRequest {
 	return CustomCACertificatesAPIListAllCustomCaCertificatesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []CustomCaCertificateInfo
+//
+//	@return []CustomCaCertificateInfo
 func (a *CustomCACertificatesAPIService) ListAllCustomCaCertificatesExecute(r CustomCACertificatesAPIListAllCustomCaCertificatesRequest) ([]CustomCaCertificateInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CustomCaCertificateInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CustomCaCertificateInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomCACertificatesAPIService.ListAllCustomCaCertificates")
@@ -539,12 +542,12 @@ func (a *CustomCACertificatesAPIService) ListAllCustomCaCertificatesExecute(r Cu
 }
 
 type CustomCACertificatesAPIUpdateCARequest struct {
-	ctx context.Context
-	ApiService *CustomCACertificatesAPIService
-	cUUID string
-	certUUID string
+	ctx               context.Context
+	ApiService        *CustomCACertificatesAPIService
+	cUUID             string
+	certUUID          string
 	x509CACertificate *CustomCACertParams
-	request *interface{}
+	request           *interface{}
 }
 
 // CA certificate contents in &#39;X509&#39; format
@@ -567,28 +570,29 @@ UpdateCA Update a named custom CA certificate
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param certUUID
- @return CustomCACertificatesAPIUpdateCARequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param certUUID
+	@return CustomCACertificatesAPIUpdateCARequest
 */
 func (a *CustomCACertificatesAPIService) UpdateCA(ctx context.Context, cUUID string, certUUID string) CustomCACertificatesAPIUpdateCARequest {
 	return CustomCACertificatesAPIUpdateCARequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		certUUID: certUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		certUUID:   certUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *CustomCACertificatesAPIService) UpdateCAExecute(r CustomCACertificatesAPIUpdateCARequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomCACertificatesAPIService.UpdateCA")

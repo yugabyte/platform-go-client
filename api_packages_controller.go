@@ -18,15 +18,14 @@ import (
 	"net/url"
 )
 
-
 // PackagesControllerAPIService PackagesControllerAPI service
 type PackagesControllerAPIService service
 
 type PackagesControllerAPIFetchPackageRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PackagesControllerAPIService
-	package_ *PackagesRequestParams
-	request *interface{}
+	package_   *PackagesRequestParams
+	request    *interface{}
 }
 
 // Package to be imported
@@ -49,24 +48,25 @@ FetchPackage Fetch a package
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return PackagesControllerAPIFetchPackageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return PackagesControllerAPIFetchPackageRequest
 */
 func (a *PackagesControllerAPIService) FetchPackage(ctx context.Context) PackagesControllerAPIFetchPackageRequest {
 	return PackagesControllerAPIFetchPackageRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *PackagesControllerAPIService) FetchPackageExecute(r PackagesControllerAPIFetchPackageRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesControllerAPIService.FetchPackage")

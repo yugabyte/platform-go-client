@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PlatformLoggingConfig type satisfies the MappedNullable interface at compile time
@@ -22,10 +20,10 @@ var _ MappedNullable = &PlatformLoggingConfig{}
 // PlatformLoggingConfig struct for PlatformLoggingConfig
 type PlatformLoggingConfig struct {
 	// WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \"\". For example, setting this to \"yb-platform-\" will generate application log files as \"yb-platform-application.log\" instead of \"application.log\".
-	FileNamePrefix *string `json:"fileNamePrefix,omitempty"`
-	Level string `json:"level"`
-	MaxHistory int32 `json:"maxHistory"`
-	RolloverPattern string `json:"rolloverPattern"`
+	FileNamePrefix  *string `json:"fileNamePrefix,omitempty"`
+	Level           string  `json:"level"`
+	MaxHistory      int32   `json:"maxHistory"`
+	RolloverPattern string  `json:"rolloverPattern"`
 }
 
 type _PlatformLoggingConfig PlatformLoggingConfig
@@ -155,7 +153,7 @@ func (o *PlatformLoggingConfig) SetRolloverPattern(v string) {
 }
 
 func (o PlatformLoggingConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -208,5 +206,3 @@ func (v *NullablePlatformLoggingConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

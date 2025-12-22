@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ValidationResult type satisfies the MappedNullable interface at compile time
@@ -22,10 +20,10 @@ var _ MappedNullable = &ValidationResult{}
 // ValidationResult Validation result of a node config
 type ValidationResult struct {
 	Description string `json:"description"`
-	Required bool `json:"required"`
-	Type string `json:"type"`
-	Valid bool `json:"valid"`
-	Value string `json:"value"`
+	Required    bool   `json:"required"`
+	Type        string `json:"type"`
+	Valid       bool   `json:"valid"`
+	Value       string `json:"value"`
 }
 
 type _ValidationResult ValidationResult
@@ -173,7 +171,7 @@ func (o *ValidationResult) SetValue(v string) {
 }
 
 func (o ValidationResult) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableValidationResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

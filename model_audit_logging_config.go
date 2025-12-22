@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AuditLoggingConfig type satisfies the MappedNullable interface at compile time
@@ -199,7 +197,7 @@ func (o *AuditLoggingConfig) SetRolloverPattern(v string) {
 }
 
 func (o AuditLoggingConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -257,5 +255,3 @@ func (v *NullableAuditLoggingConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

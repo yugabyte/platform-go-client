@@ -22,25 +22,25 @@ var _ MappedNullable = &NodeAgentResp{}
 type NodeAgentResp struct {
 	// Node agent host machine arch
 	ArchType *string `json:"archType,omitempty"`
-	Config *Config `json:"config,omitempty"`
+	Config   *Config `json:"config,omitempty"`
 	// Customer UUID
 	CustomerUuid *string `json:"customerUuid,omitempty"`
 	// Node agent installation directory
 	Home *string `json:"home,omitempty"`
 	// Node agent server IP
-	Ip *string `json:"ip,omitempty"`
+	Ip        *string   `json:"ip,omitempty"`
 	LastError *YBAError `json:"lastError,omitempty"`
 	// Node agent name
 	Name *string `json:"name,omitempty"`
 	// Node agent host OS
 	OsType *string `json:"osType,omitempty"`
 	// Node agent server port
-	Port *int32 `json:"port,omitempty"`
+	Port         *int32  `json:"port,omitempty"`
 	ProviderName *string `json:"providerName,omitempty"`
 	ProviderUuid *string `json:"providerUuid,omitempty"`
-	Reachable *bool `json:"reachable,omitempty"`
+	Reachable    *bool   `json:"reachable,omitempty"`
 	// Node agent state
-	State *string `json:"state,omitempty"`
+	State        *string `json:"state,omitempty"`
 	UniverseName *string `json:"universeName,omitempty"`
 	UniverseUuid *string `json:"universeUuid,omitempty"`
 	// Updated time
@@ -48,8 +48,8 @@ type NodeAgentResp struct {
 	// Node agent UUID
 	Uuid *string `json:"uuid,omitempty"`
 	// Node agent installed version
-	Version *string `json:"version,omitempty"`
-	VersionMatched *bool `json:"versionMatched,omitempty"`
+	Version        *string `json:"version,omitempty"`
+	VersionMatched *bool   `json:"versionMatched,omitempty"`
 }
 
 // NewNodeAgentResp instantiates a new NodeAgentResp object
@@ -678,7 +678,7 @@ func (o *NodeAgentResp) SetVersionMatched(v bool) {
 }
 
 func (o NodeAgentResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -782,5 +782,3 @@ func (v *NullableNodeAgentResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

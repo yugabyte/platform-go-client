@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // DisasterRecoveryAPIService DisasterRecoveryAPI service
 type DisasterRecoveryAPIService service
 
 type DisasterRecoveryAPICreateDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *DisasterRecoveryAPIService
+	cUUID                          string
 	disasterRecoveryCreateFormData *DrConfigCreateForm
-	request *interface{}
+	request                        *interface{}
 }
 
 // Disaster Recovery Create Form Data
@@ -51,26 +50,27 @@ CreateDrConfig Create disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return DisasterRecoveryAPICreateDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return DisasterRecoveryAPICreateDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) CreateDrConfig(ctx context.Context, cUUID string) DisasterRecoveryAPICreateDrConfigRequest {
 	return DisasterRecoveryAPICreateDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) CreateDrConfigExecute(r DisasterRecoveryAPICreateDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.CreateDrConfig")
@@ -162,12 +162,12 @@ func (a *DisasterRecoveryAPIService) CreateDrConfigExecute(r DisasterRecoveryAPI
 }
 
 type DisasterRecoveryAPIDeleteXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx           context.Context
+	ApiService    *DisasterRecoveryAPIService
+	cUUID         string
+	drUUID        string
 	isForceDelete *bool
-	request *interface{}
+	request       *interface{}
 }
 
 func (r DisasterRecoveryAPIDeleteXClusterConfigRequest) IsForceDelete(isForceDelete bool) DisasterRecoveryAPIDeleteXClusterConfigRequest {
@@ -189,28 +189,29 @@ DeleteXClusterConfig Delete xcluster config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIDeleteXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIDeleteXClusterConfigRequest
 */
 func (a *DisasterRecoveryAPIService) DeleteXClusterConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIDeleteXClusterConfigRequest {
 	return DisasterRecoveryAPIDeleteXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) DeleteXClusterConfigExecute(r DisasterRecoveryAPIDeleteXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.DeleteXClusterConfig")
@@ -305,12 +306,12 @@ func (a *DisasterRecoveryAPIService) DeleteXClusterConfigExecute(r DisasterRecov
 }
 
 type DisasterRecoveryAPIEditDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                          context.Context
+	ApiService                   *DisasterRecoveryAPIService
+	cUUID                        string
+	drUUID                       string
 	disasterRecoveryEditFormData *DrConfigEditForm
-	request *interface{}
+	request                      *interface{}
 }
 
 // Disaster Recovery Edit Form Data
@@ -333,28 +334,29 @@ EditDrConfig Edit disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIEditDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIEditDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) EditDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIEditDrConfigRequest {
 	return DisasterRecoveryAPIEditDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) EditDrConfigExecute(r DisasterRecoveryAPIEditDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.EditDrConfig")
@@ -447,12 +449,12 @@ func (a *DisasterRecoveryAPIService) EditDrConfigExecute(r DisasterRecoveryAPIEd
 }
 
 type DisasterRecoveryAPIFailoverDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                              context.Context
+	ApiService                       *DisasterRecoveryAPIService
+	cUUID                            string
+	drUUID                           string
 	disasterRecoveryFailoverFormData *DrConfigFailoverForm
-	request *interface{}
+	request                          *interface{}
 }
 
 // Disaster Recovery Failover Form Data
@@ -475,28 +477,29 @@ FailoverDrConfig Failover a disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIFailoverDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIFailoverDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) FailoverDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIFailoverDrConfigRequest {
 	return DisasterRecoveryAPIFailoverDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) FailoverDrConfigExecute(r DisasterRecoveryAPIFailoverDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.FailoverDrConfig")
@@ -589,10 +592,10 @@ func (a *DisasterRecoveryAPIService) FailoverDrConfigExecute(r DisasterRecoveryA
 }
 
 type DisasterRecoveryAPIGetDrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	cUUID      string
+	drUUID     string
 	syncWithDB *bool
 }
 
@@ -610,28 +613,29 @@ GetDrConfig Get disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIGetDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIGetDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) GetDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIGetDrConfigRequest {
 	return DisasterRecoveryAPIGetDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return DrConfigGetResp
+//
+//	@return DrConfigGetResp
 func (a *DisasterRecoveryAPIService) GetDrConfigExecute(r DisasterRecoveryAPIGetDrConfigRequest) (*DrConfigGetResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DrConfigGetResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DrConfigGetResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.GetDrConfig")
@@ -723,10 +727,10 @@ func (a *DisasterRecoveryAPIService) GetDrConfigExecute(r DisasterRecoveryAPIGet
 }
 
 type DisasterRecoveryAPIGetDrConfigSafetimeRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	cUUID      string
+	drUUID     string
 }
 
 func (r DisasterRecoveryAPIGetDrConfigSafetimeRequest) Execute() (*DrConfigSafetimeResp, *http.Response, error) {
@@ -738,28 +742,29 @@ GetDrConfigSafetime Get disaster recovery config safetime
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIGetDrConfigSafetimeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIGetDrConfigSafetimeRequest
 */
 func (a *DisasterRecoveryAPIService) GetDrConfigSafetime(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIGetDrConfigSafetimeRequest {
 	return DisasterRecoveryAPIGetDrConfigSafetimeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return DrConfigSafetimeResp
+//
+//	@return DrConfigSafetimeResp
 func (a *DisasterRecoveryAPIService) GetDrConfigSafetimeExecute(r DisasterRecoveryAPIGetDrConfigSafetimeRequest) (*DrConfigSafetimeResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DrConfigSafetimeResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DrConfigSafetimeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.GetDrConfigSafetime")
@@ -844,11 +849,11 @@ func (a *DisasterRecoveryAPIService) GetDrConfigSafetimeExecute(r DisasterRecove
 }
 
 type DisasterRecoveryAPIPauseDrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
-	request *interface{}
+	cUUID      string
+	drUUID     string
+	request    *interface{}
 }
 
 func (r DisasterRecoveryAPIPauseDrConfigRequest) Request(request interface{}) DisasterRecoveryAPIPauseDrConfigRequest {
@@ -865,28 +870,29 @@ PauseDrConfig Pause DR config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIPauseDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIPauseDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) PauseDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIPauseDrConfigRequest {
 	return DisasterRecoveryAPIPauseDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) PauseDrConfigExecute(r DisasterRecoveryAPIPauseDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.PauseDrConfig")
@@ -974,11 +980,11 @@ func (a *DisasterRecoveryAPIService) PauseDrConfigExecute(r DisasterRecoveryAPIP
 }
 
 type DisasterRecoveryAPIPauseDrUniversesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
-	request *interface{}
+	cUUID      string
+	drUUID     string
+	request    *interface{}
 }
 
 func (r DisasterRecoveryAPIPauseDrUniversesRequest) Request(request interface{}) DisasterRecoveryAPIPauseDrUniversesRequest {
@@ -995,28 +1001,29 @@ PauseDrUniverses Pause DR config and universes associated with DR
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIPauseDrUniversesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIPauseDrUniversesRequest
 */
 func (a *DisasterRecoveryAPIService) PauseDrUniverses(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIPauseDrUniversesRequest {
 	return DisasterRecoveryAPIPauseDrUniversesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) PauseDrUniversesExecute(r DisasterRecoveryAPIPauseDrUniversesRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.PauseDrUniverses")
@@ -1104,12 +1111,12 @@ func (a *DisasterRecoveryAPIService) PauseDrUniversesExecute(r DisasterRecoveryA
 }
 
 type DisasterRecoveryAPIReplaceReplicaDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                                    context.Context
+	ApiService                             *DisasterRecoveryAPIService
+	cUUID                                  string
+	drUUID                                 string
 	disasterRecoveryReplaceReplicaFormData *DrConfigReplaceReplicaForm
-	request *interface{}
+	request                                *interface{}
 }
 
 // Disaster Recovery Replace Replica Form Data
@@ -1132,28 +1139,29 @@ ReplaceReplicaDrConfig Replace Replica in a disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIReplaceReplicaDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIReplaceReplicaDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) ReplaceReplicaDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIReplaceReplicaDrConfigRequest {
 	return DisasterRecoveryAPIReplaceReplicaDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) ReplaceReplicaDrConfigExecute(r DisasterRecoveryAPIReplaceReplicaDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.ReplaceReplicaDrConfig")
@@ -1246,13 +1254,13 @@ func (a *DisasterRecoveryAPIService) ReplaceReplicaDrConfigExecute(r DisasterRec
 }
 
 type DisasterRecoveryAPIRestartDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                             context.Context
+	ApiService                      *DisasterRecoveryAPIService
+	cUUID                           string
+	drUUID                          string
 	disasterRecoveryRestartFormData *DrConfigRestartForm
-	isForceDelete *bool
-	request *interface{}
+	isForceDelete                   *bool
+	request                         *interface{}
 }
 
 // Disaster Recovery Restart Form Data
@@ -1280,28 +1288,29 @@ RestartDrConfig Restart disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIRestartDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIRestartDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) RestartDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIRestartDrConfigRequest {
 	return DisasterRecoveryAPIRestartDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) RestartDrConfigExecute(r DisasterRecoveryAPIRestartDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.RestartDrConfig")
@@ -1401,11 +1410,11 @@ func (a *DisasterRecoveryAPIService) RestartDrConfigExecute(r DisasterRecoveryAP
 }
 
 type DisasterRecoveryAPIResumeDrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
-	request *interface{}
+	cUUID      string
+	drUUID     string
+	request    *interface{}
 }
 
 func (r DisasterRecoveryAPIResumeDrConfigRequest) Request(request interface{}) DisasterRecoveryAPIResumeDrConfigRequest {
@@ -1422,28 +1431,29 @@ ResumeDrConfig Resume DR config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIResumeDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIResumeDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) ResumeDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIResumeDrConfigRequest {
 	return DisasterRecoveryAPIResumeDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) ResumeDrConfigExecute(r DisasterRecoveryAPIResumeDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.ResumeDrConfig")
@@ -1531,11 +1541,11 @@ func (a *DisasterRecoveryAPIService) ResumeDrConfigExecute(r DisasterRecoveryAPI
 }
 
 type DisasterRecoveryAPIResumeDrUniversesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
-	request *interface{}
+	cUUID      string
+	drUUID     string
+	request    *interface{}
 }
 
 func (r DisasterRecoveryAPIResumeDrUniversesRequest) Request(request interface{}) DisasterRecoveryAPIResumeDrUniversesRequest {
@@ -1552,28 +1562,29 @@ ResumeDrUniverses Resume DR config and universes associated with DR
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPIResumeDrUniversesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPIResumeDrUniversesRequest
 */
 func (a *DisasterRecoveryAPIService) ResumeDrUniverses(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPIResumeDrUniversesRequest {
 	return DisasterRecoveryAPIResumeDrUniversesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) ResumeDrUniversesExecute(r DisasterRecoveryAPIResumeDrUniversesRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.ResumeDrUniverses")
@@ -1661,12 +1672,12 @@ func (a *DisasterRecoveryAPIService) ResumeDrUniversesExecute(r DisasterRecovery
 }
 
 type DisasterRecoveryAPISetDatabasesDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                                  context.Context
+	ApiService                           *DisasterRecoveryAPIService
+	cUUID                                string
+	drUUID                               string
 	disasterRecoverySetDatabasesFormData *DrConfigSetDatabasesForm
-	request *interface{}
+	request                              *interface{}
 }
 
 // Disaster Recovery Set Databases Form Data
@@ -1689,28 +1700,29 @@ SetDatabasesDrConfig Set databases in disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPISetDatabasesDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPISetDatabasesDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) SetDatabasesDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPISetDatabasesDrConfigRequest {
 	return DisasterRecoveryAPISetDatabasesDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) SetDatabasesDrConfigExecute(r DisasterRecoveryAPISetDatabasesDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.SetDatabasesDrConfig")
@@ -1803,12 +1815,12 @@ func (a *DisasterRecoveryAPIService) SetDatabasesDrConfigExecute(r DisasterRecov
 }
 
 type DisasterRecoveryAPISetTablesDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                               context.Context
+	ApiService                        *DisasterRecoveryAPIService
+	cUUID                             string
+	drUUID                            string
 	disasterRecoverySetTablesFormData *DrConfigSetTablesForm
-	request *interface{}
+	request                           *interface{}
 }
 
 // Disaster Recovery Set Tables Form Data
@@ -1831,28 +1843,29 @@ SetTablesDrConfig Set tables in disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPISetTablesDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPISetTablesDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) SetTablesDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPISetTablesDrConfigRequest {
 	return DisasterRecoveryAPISetTablesDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) SetTablesDrConfigExecute(r DisasterRecoveryAPISetTablesDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.SetTablesDrConfig")
@@ -1945,12 +1958,12 @@ func (a *DisasterRecoveryAPIService) SetTablesDrConfigExecute(r DisasterRecovery
 }
 
 type DisasterRecoveryAPISwitchoverDrConfigRequest struct {
-	ctx context.Context
-	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
+	ctx                                context.Context
+	ApiService                         *DisasterRecoveryAPIService
+	cUUID                              string
+	drUUID                             string
 	disasterRecoverySwitchoverFormData *DrConfigSwitchoverForm
-	request *interface{}
+	request                            *interface{}
 }
 
 // Disaster Recovery Switchover Form Data
@@ -1973,28 +1986,29 @@ SwitchoverDrConfig Switchover a disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPISwitchoverDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPISwitchoverDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) SwitchoverDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPISwitchoverDrConfigRequest {
 	return DisasterRecoveryAPISwitchoverDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) SwitchoverDrConfigExecute(r DisasterRecoveryAPISwitchoverDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.SwitchoverDrConfig")
@@ -2087,11 +2101,11 @@ func (a *DisasterRecoveryAPIService) SwitchoverDrConfigExecute(r DisasterRecover
 }
 
 type DisasterRecoveryAPISyncDrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DisasterRecoveryAPIService
-	cUUID string
-	drUUID string
-	request *interface{}
+	cUUID      string
+	drUUID     string
+	request    *interface{}
 }
 
 func (r DisasterRecoveryAPISyncDrConfigRequest) Request(request interface{}) DisasterRecoveryAPISyncDrConfigRequest {
@@ -2108,28 +2122,29 @@ SyncDrConfig Sync disaster recovery config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param drUUID
- @return DisasterRecoveryAPISyncDrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param drUUID
+	@return DisasterRecoveryAPISyncDrConfigRequest
 */
 func (a *DisasterRecoveryAPIService) SyncDrConfig(ctx context.Context, cUUID string, drUUID string) DisasterRecoveryAPISyncDrConfigRequest {
 	return DisasterRecoveryAPISyncDrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		drUUID: drUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		drUUID:     drUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *DisasterRecoveryAPIService) SyncDrConfigExecute(r DisasterRecoveryAPISyncDrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DisasterRecoveryAPIService.SyncDrConfig")

@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // UniversePerformanceSuggestionsAPIService UniversePerformanceSuggestionsAPI service
 type UniversePerformanceSuggestionsAPIService service
 
 type UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniversePerformanceSuggestionsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest) Execute() (*QueryDistributionSuggestionResponse, *http.Response, error) {
@@ -39,28 +38,29 @@ GetQueryDistributionSuggestions Get query distribution improvement suggestion fo
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest
 */
 func (a *UniversePerformanceSuggestionsAPIService) GetQueryDistributionSuggestions(ctx context.Context, cUUID string, uniUUID string) UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest {
 	return UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return QueryDistributionSuggestionResponse
+//
+//	@return QueryDistributionSuggestionResponse
 func (a *UniversePerformanceSuggestionsAPIService) GetQueryDistributionSuggestionsExecute(r UniversePerformanceSuggestionsAPIGetQueryDistributionSuggestionsRequest) (*QueryDistributionSuggestionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *QueryDistributionSuggestionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *QueryDistributionSuggestionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniversePerformanceSuggestionsAPIService.GetQueryDistributionSuggestions")
@@ -145,10 +145,10 @@ func (a *UniversePerformanceSuggestionsAPIService) GetQueryDistributionSuggestio
 }
 
 type UniversePerformanceSuggestionsAPIGetRangeHashRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniversePerformanceSuggestionsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniversePerformanceSuggestionsAPIGetRangeHashRequest) Execute() (*HashedTimestampColumnFinderResponse, *http.Response, error) {
@@ -160,28 +160,29 @@ GetRangeHash Return list of hash indexes
 
 WARNING: This is a preview API that could change. Returns list of hash indexes on timestamp columns.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniversePerformanceSuggestionsAPIGetRangeHashRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniversePerformanceSuggestionsAPIGetRangeHashRequest
 */
 func (a *UniversePerformanceSuggestionsAPIService) GetRangeHash(ctx context.Context, cUUID string, uniUUID string) UniversePerformanceSuggestionsAPIGetRangeHashRequest {
 	return UniversePerformanceSuggestionsAPIGetRangeHashRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return HashedTimestampColumnFinderResponse
+//
+//	@return HashedTimestampColumnFinderResponse
 func (a *UniversePerformanceSuggestionsAPIService) GetRangeHashExecute(r UniversePerformanceSuggestionsAPIGetRangeHashRequest) (*HashedTimestampColumnFinderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *HashedTimestampColumnFinderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HashedTimestampColumnFinderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniversePerformanceSuggestionsAPIService.GetRangeHash")
@@ -266,10 +267,10 @@ func (a *UniversePerformanceSuggestionsAPIService) GetRangeHashExecute(r Univers
 }
 
 type UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniversePerformanceSuggestionsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest) Execute() (*UnusedIndexFinderResponse, *http.Response, error) {
@@ -281,28 +282,29 @@ GetUnusedIndexes Return list of each unused index across the universe
 
 WARNING: This is a preview API that could change. Returns list of unused indexes, along with their database and table.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest
 */
 func (a *UniversePerformanceSuggestionsAPIService) GetUnusedIndexes(ctx context.Context, cUUID string, uniUUID string) UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest {
 	return UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UnusedIndexFinderResponse
+//
+//	@return UnusedIndexFinderResponse
 func (a *UniversePerformanceSuggestionsAPIService) GetUnusedIndexesExecute(r UniversePerformanceSuggestionsAPIGetUnusedIndexesRequest) (*UnusedIndexFinderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UnusedIndexFinderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UnusedIndexFinderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniversePerformanceSuggestionsAPIService.GetUnusedIndexes")

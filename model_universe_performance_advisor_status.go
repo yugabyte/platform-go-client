@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UniversePerformanceAdvisorStatus type satisfies the MappedNullable interface at compile time
@@ -288,7 +286,7 @@ func (o *UniversePerformanceAdvisorStatus) SetUuid(v string) {
 }
 
 func (o UniversePerformanceAdvisorStatus) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -351,5 +349,3 @@ func (v *NullableUniversePerformanceAdvisorStatus) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

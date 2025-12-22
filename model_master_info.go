@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MasterInfo type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &MasterInfo{}
 
 // MasterInfo Information about master
 type MasterInfo struct {
-	InstanceUUID string `json:"instanceUUID"`
-	PeerRole string `json:"peerRole"`
-	Port int32 `json:"port"`
-	PrivateIp string `json:"privateIp"`
-	UptimeSeconds int64 `json:"uptimeSeconds"`
+	InstanceUUID  string `json:"instanceUUID"`
+	PeerRole      string `json:"peerRole"`
+	Port          int32  `json:"port"`
+	PrivateIp     string `json:"privateIp"`
+	UptimeSeconds int64  `json:"uptimeSeconds"`
 }
 
 type _MasterInfo MasterInfo
@@ -173,7 +171,7 @@ func (o *MasterInfo) SetUptimeSeconds(v int64) {
 }
 
 func (o MasterInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableMasterInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,14 +19,14 @@ var _ MappedNullable = &AzureCloudInfo{}
 
 // AzureCloudInfo struct for AzureCloudInfo
 type AzureCloudInfo struct {
-	AzuClientId *string `json:"azuClientId,omitempty"`
-	AzuClientSecret *string `json:"azuClientSecret,omitempty"`
-	AzuHostedZoneId *string `json:"azuHostedZoneId,omitempty"`
-	AzuNetworkRG *string `json:"azuNetworkRG,omitempty"`
+	AzuClientId              *string `json:"azuClientId,omitempty"`
+	AzuClientSecret          *string `json:"azuClientSecret,omitempty"`
+	AzuHostedZoneId          *string `json:"azuHostedZoneId,omitempty"`
+	AzuNetworkRG             *string `json:"azuNetworkRG,omitempty"`
 	AzuNetworkSubscriptionId *string `json:"azuNetworkSubscriptionId,omitempty"`
-	AzuRG *string `json:"azuRG,omitempty"`
-	AzuSubscriptionId *string `json:"azuSubscriptionId,omitempty"`
-	AzuTenantId *string `json:"azuTenantId,omitempty"`
+	AzuRG                    *string `json:"azuRG,omitempty"`
+	AzuSubscriptionId        *string `json:"azuSubscriptionId,omitempty"`
+	AzuTenantId              *string `json:"azuTenantId,omitempty"`
 	// New/Existing VPC for provider creation
 	VpcType *string `json:"vpcType,omitempty"`
 }
@@ -337,7 +337,7 @@ func (o *AzureCloudInfo) SetVpcType(v string) {
 }
 
 func (o AzureCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -411,5 +411,3 @@ func (v *NullableAzureCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

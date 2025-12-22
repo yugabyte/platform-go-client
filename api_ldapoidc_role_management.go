@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // LDAPOIDCRoleManagementAPIService LDAPOIDCRoleManagementAPI service
 type LDAPOIDCRoleManagementAPIService service
 
 type LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *LDAPOIDCRoleManagementAPIService
-	cUUID string
-	groupName string
-	request *interface{}
+	cUUID      string
+	groupName  string
+	request    *interface{}
 }
 
 func (r LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest) Request(request interface{}) LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest {
@@ -45,31 +44,33 @@ DeleteOidcGroupMapping Delete a OIDC group mapping
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings/{groupUUID} DELETE endpoint instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param groupName
- @return LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param groupName
+	@return LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest
 
 Deprecated
 */
 func (a *LDAPOIDCRoleManagementAPIService) DeleteOidcGroupMapping(ctx context.Context, cUUID string, groupName string) LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest {
 	return LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		groupName: groupName,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		groupName:  groupName,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *LDAPOIDCRoleManagementAPIService) DeleteOidcGroupMappingExecute(r LDAPOIDCRoleManagementAPIDeleteOidcGroupMappingRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPOIDCRoleManagementAPIService.DeleteOidcGroupMapping")
@@ -157,9 +158,9 @@ func (a *LDAPOIDCRoleManagementAPIService) DeleteOidcGroupMappingExecute(r LDAPO
 }
 
 type LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *LDAPOIDCRoleManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest) Execute() (*LdapDnToYbaRoleData, *http.Response, error) {
@@ -171,29 +172,31 @@ ListLdapDnToYbaRoles List LDAP Mappings
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest
 
 Deprecated
 */
 func (a *LDAPOIDCRoleManagementAPIService) ListLdapDnToYbaRoles(ctx context.Context, cUUID string) LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest {
 	return LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return LdapDnToYbaRoleData
+//
+//	@return LdapDnToYbaRoleData
+//
 // Deprecated
 func (a *LDAPOIDCRoleManagementAPIService) ListLdapDnToYbaRolesExecute(r LDAPOIDCRoleManagementAPIListLdapDnToYbaRolesRequest) (*LdapDnToYbaRoleData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *LdapDnToYbaRoleData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LdapDnToYbaRoleData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPOIDCRoleManagementAPIService.ListLdapDnToYbaRoles")
@@ -277,9 +280,9 @@ func (a *LDAPOIDCRoleManagementAPIService) ListLdapDnToYbaRolesExecute(r LDAPOID
 }
 
 type LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *LDAPOIDCRoleManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest) Execute() (*OidcGroupToYbaRolesData, *http.Response, error) {
@@ -291,29 +294,31 @@ ListOidcGroupToYbaRoles List OIDC Group Mappings
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings GET endpoint instead. Note that this API will not return the custom roles assigned to groups via the new /api/v2/customers/{cUUID}/auth/group-mappings API.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest
 
 Deprecated
 */
 func (a *LDAPOIDCRoleManagementAPIService) ListOidcGroupToYbaRoles(ctx context.Context, cUUID string) LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest {
 	return LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return OidcGroupToYbaRolesData
+//
+//	@return OidcGroupToYbaRolesData
+//
 // Deprecated
 func (a *LDAPOIDCRoleManagementAPIService) ListOidcGroupToYbaRolesExecute(r LDAPOIDCRoleManagementAPIListOidcGroupToYbaRolesRequest) (*OidcGroupToYbaRolesData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OidcGroupToYbaRolesData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OidcGroupToYbaRolesData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPOIDCRoleManagementAPIService.ListOidcGroupToYbaRoles")
@@ -397,11 +402,11 @@ func (a *LDAPOIDCRoleManagementAPIService) ListOidcGroupToYbaRolesExecute(r LDAP
 }
 
 type LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest struct {
-	ctx context.Context
-	ApiService *LDAPOIDCRoleManagementAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *LDAPOIDCRoleManagementAPIService
+	cUUID        string
 	oidcMappings *OidcGroupToYbaRolesData
-	request *interface{}
+	request      *interface{}
 }
 
 // New OIDC Mappings to be set
@@ -424,17 +429,17 @@ MapOidcGroupToYbaRoles Set OIDC Mappings
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest
 
 Deprecated
 */
 func (a *LDAPOIDCRoleManagementAPIService) MapOidcGroupToYbaRoles(ctx context.Context, cUUID string) LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest {
 	return LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
@@ -442,9 +447,9 @@ func (a *LDAPOIDCRoleManagementAPIService) MapOidcGroupToYbaRoles(ctx context.Co
 // Deprecated
 func (a *LDAPOIDCRoleManagementAPIService) MapOidcGroupToYbaRolesExecute(r LDAPOIDCRoleManagementAPIMapOidcGroupToYbaRolesRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPOIDCRoleManagementAPIService.MapOidcGroupToYbaRoles")
@@ -527,11 +532,11 @@ func (a *LDAPOIDCRoleManagementAPIService) MapOidcGroupToYbaRolesExecute(r LDAPO
 }
 
 type LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest struct {
-	ctx context.Context
-	ApiService *LDAPOIDCRoleManagementAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *LDAPOIDCRoleManagementAPIService
+	cUUID        string
 	ldapMappings *LdapDnToYbaRoleData
-	request *interface{}
+	request      *interface{}
 }
 
 // New LDAP Mappings to be set
@@ -554,17 +559,17 @@ SetLdapDnToYbaRoles Set LDAP Mappings
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b> Please use the v2 /auth/group-mappings PUT endpoint instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest
 
 Deprecated
 */
 func (a *LDAPOIDCRoleManagementAPIService) SetLdapDnToYbaRoles(ctx context.Context, cUUID string) LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest {
 	return LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
@@ -572,9 +577,9 @@ func (a *LDAPOIDCRoleManagementAPIService) SetLdapDnToYbaRoles(ctx context.Conte
 // Deprecated
 func (a *LDAPOIDCRoleManagementAPIService) SetLdapDnToYbaRolesExecute(r LDAPOIDCRoleManagementAPISetLdapDnToYbaRolesRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPOIDCRoleManagementAPIService.SetLdapDnToYbaRoles")

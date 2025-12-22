@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the S3Config type satisfies the MappedNullable interface at compile time
@@ -424,7 +422,7 @@ func (o *S3Config) SetSecretKey(v string) {
 }
 
 func (o S3Config) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -507,5 +505,3 @@ func (v *NullableS3Config) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

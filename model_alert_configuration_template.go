@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertConfigurationTemplate type satisfies the MappedNullable interface at compile time
@@ -23,7 +21,7 @@ var _ MappedNullable = &AlertConfigurationTemplate{}
 // AlertConfigurationTemplate Alert configuration template
 type AlertConfigurationTemplate struct {
 	// Is configured alerts raised or not
-	Active bool `json:"active"`
+	Active     bool    `json:"active"`
 	AlertCount float64 `json:"alertCount"`
 	// Creation time
 	CreateTime time.Time `json:"createTime"`
@@ -42,7 +40,7 @@ type AlertConfigurationTemplate struct {
 	// Maintenance window UUIDs, applied to this alert config
 	MaintenanceWindowUuids []string `json:"maintenanceWindowUuids,omitempty"`
 	// Name
-	Name string `json:"name"`
+	Name   string                   `json:"name"`
 	Target AlertConfigurationTarget `json:"target"`
 	// Target type
 	TargetType string `json:"targetType"`
@@ -733,7 +731,7 @@ func (o *AlertConfigurationTemplate) SetUuid(v string) {
 }
 
 func (o AlertConfigurationTemplate) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -823,5 +821,3 @@ func (v *NullableAlertConfigurationTemplate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

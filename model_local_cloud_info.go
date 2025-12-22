@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LocalCloudInfo type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &LocalCloudInfo{}
 
 // LocalCloudInfo struct for LocalCloudInfo
 type LocalCloudInfo struct {
-	DataHomeDir string `json:"dataHomeDir"`
-	EnvVars map[string]string `json:"envVars"`
-	HostedZoneId string `json:"hostedZoneId"`
-	YbcBinDir string `json:"ybcBinDir"`
-	YugabyteBinDir string `json:"yugabyteBinDir"`
+	DataHomeDir    string            `json:"dataHomeDir"`
+	EnvVars        map[string]string `json:"envVars"`
+	HostedZoneId   string            `json:"hostedZoneId"`
+	YbcBinDir      string            `json:"ybcBinDir"`
+	YugabyteBinDir string            `json:"yugabyteBinDir"`
 }
 
 type _LocalCloudInfo LocalCloudInfo
@@ -173,7 +171,7 @@ func (o *LocalCloudInfo) SetYugabyteBinDir(v string) {
 }
 
 func (o LocalCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableLocalCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

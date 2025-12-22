@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BackupPointInTimeRestoreWindow type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &BackupPointInTimeRestoreWindow{}
 
 // BackupPointInTimeRestoreWindow struct for BackupPointInTimeRestoreWindow
 type BackupPointInTimeRestoreWindow struct {
-	TimestampRetentionWindowEndMillis int64 `json:"timestampRetentionWindowEndMillis"`
+	TimestampRetentionWindowEndMillis   int64 `json:"timestampRetentionWindowEndMillis"`
 	TimestampRetentionWindowStartMillis int64 `json:"timestampRetentionWindowStartMillis"`
 }
 
@@ -95,7 +93,7 @@ func (o *BackupPointInTimeRestoreWindow) SetTimestampRetentionWindowStartMillis(
 }
 
 func (o BackupPointInTimeRestoreWindow) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableBackupPointInTimeRestoreWindow) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

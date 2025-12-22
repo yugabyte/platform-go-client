@@ -19,8 +19,8 @@ var _ MappedNullable = &AllowedUniverseTasksResp{}
 
 // AllowedUniverseTasksResp struct for AllowedUniverseTasksResp
 type AllowedUniverseTasksResp struct {
-	Restricted *bool `json:"restricted,omitempty"`
-	TaskIds []string `json:"taskIds,omitempty"`
+	Restricted *bool    `json:"restricted,omitempty"`
+	TaskIds    []string `json:"taskIds,omitempty"`
 }
 
 // NewAllowedUniverseTasksResp instantiates a new AllowedUniverseTasksResp object
@@ -105,7 +105,7 @@ func (o *AllowedUniverseTasksResp) SetTaskIds(v []string) {
 }
 
 func (o AllowedUniverseTasksResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableAllowedUniverseTasksResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

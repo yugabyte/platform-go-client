@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the SupportBundle type satisfies the MappedNullable interface at compile time
@@ -23,20 +21,20 @@ var _ MappedNullable = &SupportBundle{}
 // SupportBundle struct for SupportBundle
 type SupportBundle struct {
 	BundleDetails BundleDetails `json:"bundleDetails"`
-	BundleUUID string `json:"bundleUUID"`
+	BundleUUID    string        `json:"bundleUUID"`
 	// Support bundle creation date.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Support bundle end date.
 	EndDate *time.Time `json:"endDate,omitempty"`
 	// Support bundle expiration date.
 	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
-	Path string `json:"path"`
-	ScopeUUID string `json:"scopeUUID"`
+	Path           string     `json:"path"`
+	ScopeUUID      string     `json:"scopeUUID"`
 	// Size in bytes of the support bundle
 	SizeInBytes *int64 `json:"sizeInBytes,omitempty"`
 	// Support bundle start date.
 	StartDate *time.Time `json:"startDate,omitempty"`
-	Status string `json:"status"`
+	Status    string     `json:"status"`
 }
 
 type _SupportBundle SupportBundle
@@ -344,7 +342,7 @@ func (o *SupportBundle) SetStatus(v string) {
 }
 
 func (o SupportBundle) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -411,5 +409,3 @@ func (v *NullableSupportBundle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

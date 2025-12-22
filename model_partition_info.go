@@ -19,11 +19,11 @@ var _ MappedNullable = &PartitionInfo{}
 
 // PartitionInfo WARNING: This is a preview API that could change. Information about Geo partition
 type PartitionInfo struct {
-	DefaultPartition *bool `json:"defaultPartition,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Placement *PlacementInfo `json:"placement,omitempty"`
-	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
-	Uuid *string `json:"uuid,omitempty"`
+	DefaultPartition  *bool          `json:"defaultPartition,omitempty"`
+	Name              *string        `json:"name,omitempty"`
+	Placement         *PlacementInfo `json:"placement,omitempty"`
+	ReplicationFactor *int32         `json:"replicationFactor,omitempty"`
+	Uuid              *string        `json:"uuid,omitempty"`
 }
 
 // NewPartitionInfo instantiates a new PartitionInfo object
@@ -204,7 +204,7 @@ func (o *PartitionInfo) SetUuid(v string) {
 }
 
 func (o PartitionInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullablePartitionInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

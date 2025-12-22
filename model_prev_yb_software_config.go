@@ -19,11 +19,11 @@ var _ MappedNullable = &PrevYBSoftwareConfig{}
 
 // PrevYBSoftwareConfig struct for PrevYBSoftwareConfig
 type PrevYBSoftwareConfig struct {
-	AllTserversUpgradedToYsqlMajorVersion *bool `json:"allTserversUpgradedToYsqlMajorVersion,omitempty"`
-	AutoFlagConfigVersion *int32 `json:"autoFlagConfigVersion,omitempty"`
-	CanRollbackCatalogUpgrade *bool `json:"canRollbackCatalogUpgrade,omitempty"`
-	SoftwareVersion *string `json:"softwareVersion,omitempty"`
-	TargetUpgradeSoftwareVersion *string `json:"targetUpgradeSoftwareVersion,omitempty"`
+	AllTserversUpgradedToYsqlMajorVersion *bool   `json:"allTserversUpgradedToYsqlMajorVersion,omitempty"`
+	AutoFlagConfigVersion                 *int32  `json:"autoFlagConfigVersion,omitempty"`
+	CanRollbackCatalogUpgrade             *bool   `json:"canRollbackCatalogUpgrade,omitempty"`
+	SoftwareVersion                       *string `json:"softwareVersion,omitempty"`
+	TargetUpgradeSoftwareVersion          *string `json:"targetUpgradeSoftwareVersion,omitempty"`
 }
 
 // NewPrevYBSoftwareConfig instantiates a new PrevYBSoftwareConfig object
@@ -204,7 +204,7 @@ func (o *PrevYBSoftwareConfig) SetTargetUpgradeSoftwareVersion(v string) {
 }
 
 func (o PrevYBSoftwareConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullablePrevYBSoftwareConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

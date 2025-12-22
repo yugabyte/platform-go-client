@@ -23,7 +23,7 @@ type NodeDetails struct {
 	// WARNING: This is a preview API that could change. Used by auto master failover
 	AutoSyncMasterAddrs *bool `json:"autoSyncMasterAddrs,omitempty"`
 	// The availability zone's UUID
-	AzUuid *string `json:"azUuid,omitempty"`
+	AzUuid    *string            `json:"azUuid,omitempty"`
 	CloudInfo *CloudSpecificInfo `json:"cloudInfo,omitempty"`
 	// True if cron jobs were properly configured for this node
 	CronsActive *bool `json:"cronsActive,omitempty"`
@@ -1297,7 +1297,7 @@ func (o *NodeDetails) SetYsqlServerRpcPort(v int32) {
 }
 
 func (o NodeDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1455,5 +1455,3 @@ func (v *NullableNodeDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UniverseDetailSubset type satisfies the MappedNullable interface at compile time
@@ -21,12 +19,12 @@ var _ MappedNullable = &UniverseDetailSubset{}
 
 // UniverseDetailSubset A small subset of universe information
 type UniverseDetailSubset struct {
-	CreationDate int64 `json:"creationDate"`
-	Name string `json:"name"`
-	UniversePaused bool `json:"universePaused"`
-	UpdateInProgress bool `json:"updateInProgress"`
-	UpdateSucceeded bool `json:"updateSucceeded"`
-	Uuid string `json:"uuid"`
+	CreationDate     int64  `json:"creationDate"`
+	Name             string `json:"name"`
+	UniversePaused   bool   `json:"universePaused"`
+	UpdateInProgress bool   `json:"updateInProgress"`
+	UpdateSucceeded  bool   `json:"updateSucceeded"`
+	Uuid             string `json:"uuid"`
 }
 
 type _UniverseDetailSubset UniverseDetailSubset
@@ -199,7 +197,7 @@ func (o *UniverseDetailSubset) SetUuid(v string) {
 }
 
 func (o UniverseDetailSubset) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullableUniverseDetailSubset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PlatformInstance type satisfies the MappedNullable interface at compile time
@@ -22,15 +20,15 @@ var _ MappedNullable = &PlatformInstance{}
 
 // PlatformInstance struct for PlatformInstance
 type PlatformInstance struct {
-	Address string `json:"address"`
-	ConfigUuid *string `json:"config_uuid,omitempty"`
-	InstanceState string `json:"instance_state"`
-	IsLeader bool `json:"is_leader"`
-	IsLocal bool `json:"is_local"`
+	Address       string  `json:"address"`
+	ConfigUuid    *string `json:"config_uuid,omitempty"`
+	InstanceState string  `json:"instance_state"`
+	IsLeader      bool    `json:"is_leader"`
+	IsLocal       bool    `json:"is_local"`
 	// Last backup time
 	LastBackup *time.Time `json:"last_backup,omitempty"`
-	Uuid string `json:"uuid"`
-	YbaVersion string `json:"ybaVersion"`
+	Uuid       string     `json:"uuid"`
+	YbaVersion string     `json:"ybaVersion"`
 }
 
 type _PlatformInstance PlatformInstance
@@ -267,7 +265,7 @@ func (o *PlatformInstance) SetYbaVersion(v string) {
 }
 
 func (o PlatformInstance) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -326,5 +324,3 @@ func (v *NullablePlatformInstance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

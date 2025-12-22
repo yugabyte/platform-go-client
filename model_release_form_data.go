@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ReleaseFormData type satisfies the MappedNullable interface at compile time
@@ -21,10 +19,10 @@ var _ MappedNullable = &ReleaseFormData{}
 
 // ReleaseFormData Specification for release locations
 type ReleaseFormData struct {
-	Gcs GCSLocation `json:"gcs"`
-	Http HttpLocation `json:"http"`
-	S3 S3Location `json:"s3"`
-	Version string `json:"version"`
+	Gcs     GCSLocation  `json:"gcs"`
+	Http    HttpLocation `json:"http"`
+	S3      S3Location   `json:"s3"`
+	Version string       `json:"version"`
 }
 
 type _ReleaseFormData ReleaseFormData
@@ -147,7 +145,7 @@ func (o *ReleaseFormData) SetVersion(v string) {
 }
 
 func (o ReleaseFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableReleaseFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

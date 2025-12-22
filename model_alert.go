@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Alert type satisfies the MappedNullable interface at compile time
@@ -33,8 +31,8 @@ type Alert struct {
 	// Customer UUID
 	CustomerUUID string `json:"customerUUID"`
 	// Alert definition UUID
-	DefinitionUuid string `json:"definitionUuid"`
-	Labels []AlertLabel `json:"labels"`
+	DefinitionUuid string       `json:"definitionUuid"`
+	Labels         []AlertLabel `json:"labels"`
 	// The alert's message text
 	Message string `json:"message"`
 	// The alert's name
@@ -50,15 +48,15 @@ type Alert struct {
 	// Timestamp at which the alert was resolved
 	ResolvedTime *time.Time `json:"resolvedTime,omitempty"`
 	// Alert configuration severity
-	Severity string `json:"severity"`
-	SeverityIndex int32 `json:"severityIndex"`
+	Severity      string `json:"severity"`
+	SeverityIndex int32  `json:"severityIndex"`
 	// The source of the alert
 	SourceName string `json:"sourceName"`
 	// The sourceUUID of the alert
 	SourceUUID string `json:"sourceUUID"`
 	// The alert's state
-	State string `json:"state"`
-	StateIndex int32 `json:"stateIndex"`
+	State      string `json:"state"`
+	StateIndex int32  `json:"stateIndex"`
 	// Alert UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -657,7 +655,7 @@ func (o *Alert) SetUuid(v string) {
 }
 
 func (o Alert) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -739,5 +737,3 @@ func (v *NullableAlert) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

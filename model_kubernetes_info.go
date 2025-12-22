@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the KubernetesInfo type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,20 @@ var _ MappedNullable = &KubernetesInfo{}
 
 // KubernetesInfo struct for KubernetesInfo
 type KubernetesInfo struct {
-	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
-	KubeConfig *string `json:"kubeConfig,omitempty"`
-	KubeConfigContent *string `json:"kubeConfigContent,omitempty"`
-	KubeConfigName *string `json:"kubeConfigName,omitempty"`
-	KubernetesImagePullSecretName *string `json:"kubernetesImagePullSecretName,omitempty"`
-	KubernetesImageRegistry *string `json:"kubernetesImageRegistry,omitempty"`
-	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
-	KubernetesProvider *string `json:"kubernetesProvider,omitempty"`
-	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
-	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
-	KubernetesPullSecretName *string `json:"kubernetesPullSecretName,omitempty"`
+	IsKubernetesOperatorControlled *bool   `json:"isKubernetesOperatorControlled,omitempty"`
+	KubeConfig                     *string `json:"kubeConfig,omitempty"`
+	KubeConfigContent              *string `json:"kubeConfigContent,omitempty"`
+	KubeConfigName                 *string `json:"kubeConfigName,omitempty"`
+	KubernetesImagePullSecretName  *string `json:"kubernetesImagePullSecretName,omitempty"`
+	KubernetesImageRegistry        *string `json:"kubernetesImageRegistry,omitempty"`
+	KubernetesOperatorControlled   bool    `json:"kubernetesOperatorControlled"`
+	KubernetesProvider             *string `json:"kubernetesProvider,omitempty"`
+	KubernetesPullSecret           *string `json:"kubernetesPullSecret,omitempty"`
+	KubernetesPullSecretContent    *string `json:"kubernetesPullSecretContent,omitempty"`
+	KubernetesPullSecretName       *string `json:"kubernetesPullSecretName,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.3.0.</b> kubernetes service account is not needed.
 	KubernetesServiceAccount *string `json:"kubernetesServiceAccount,omitempty"`
-	KubernetesStorageClass *string `json:"kubernetesStorageClass,omitempty"`
+	KubernetesStorageClass   *string `json:"kubernetesStorageClass,omitempty"`
 }
 
 type _KubernetesInfo KubernetesInfo
@@ -466,7 +464,7 @@ func (o *KubernetesInfo) SetKubernetesStorageClass(v string) {
 }
 
 func (o KubernetesInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -550,5 +548,3 @@ func (v *NullableKubernetesInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

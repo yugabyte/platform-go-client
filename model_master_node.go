@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MasterNode type satisfies the MappedNullable interface at compile time
@@ -21,8 +19,8 @@ var _ MappedNullable = &MasterNode{}
 
 // MasterNode struct for MasterNode
 type MasterNode struct {
-	CloudInfo CloudSpecificInfo `json:"cloudInfo"`
-	MasterRpcPort int32 `json:"masterRpcPort"`
+	CloudInfo     CloudSpecificInfo `json:"cloudInfo"`
+	MasterRpcPort int32             `json:"masterRpcPort"`
 }
 
 type _MasterNode MasterNode
@@ -95,7 +93,7 @@ func (o *MasterNode) SetMasterRpcPort(v int32) {
 }
 
 func (o MasterNode) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableMasterNode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

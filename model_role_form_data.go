@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RoleFormData type satisfies the MappedNullable interface at compile time
@@ -124,7 +122,7 @@ func (o *RoleFormData) SetPermissionList(v []Permission) {
 }
 
 func (o RoleFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,5 +172,3 @@ func (v *NullableRoleFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

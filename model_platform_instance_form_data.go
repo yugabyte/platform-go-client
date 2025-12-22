@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PlatformInstanceFormData type satisfies the MappedNullable interface at compile time
@@ -21,10 +19,10 @@ var _ MappedNullable = &PlatformInstanceFormData{}
 
 // PlatformInstanceFormData struct for PlatformInstanceFormData
 type PlatformInstanceFormData struct {
-	Address string `json:"address"`
+	Address      string `json:"address"`
 	CleanAddress string `json:"cleanAddress"`
-	IsLeader bool `json:"is_leader"`
-	IsLocal bool `json:"is_local"`
+	IsLeader     bool   `json:"is_leader"`
+	IsLocal      bool   `json:"is_local"`
 }
 
 type _PlatformInstanceFormData PlatformInstanceFormData
@@ -147,7 +145,7 @@ func (o *PlatformInstanceFormData) SetIsLocal(v bool) {
 }
 
 func (o PlatformInstanceFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullablePlatformInstanceFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,7 +19,7 @@ var _ MappedNullable = &FinalizeUpgradeInfoResponse{}
 
 // FinalizeUpgradeInfoResponse Finalize Upgrade Info Response
 type FinalizeUpgradeInfoResponse struct {
-	// WARNING: This is a preview API that could change. List of xCluster connected universes details to be impacted 
+	// WARNING: This is a preview API that could change. List of xCluster connected universes details to be impacted
 	ImpactedXClusterConnectedUniverse []ImpactedXClusterConnectedUniverse `json:"impactedXClusterConnectedUniverse,omitempty"`
 }
 
@@ -73,7 +73,7 @@ func (o *FinalizeUpgradeInfoResponse) SetImpactedXClusterConnectedUniverse(v []I
 }
 
 func (o FinalizeUpgradeInfoResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,5 +123,3 @@ func (v *NullableFinalizeUpgradeInfoResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

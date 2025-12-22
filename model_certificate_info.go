@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CertificateInfo type satisfies the MappedNullable interface at compile time
@@ -27,10 +25,10 @@ type CertificateInfo struct {
 	// Certificate path
 	Certificate *string `json:"certificate,omitempty"`
 	// The certificate file's checksum
-	Checksum *string `json:"checksum,omitempty"`
-	CustomCertPathParams CustomCertInfo `json:"customCertPathParams"`
-	CustomHCPKICertInfo HashicorpVaultConfigParams `json:"customHCPKICertInfo"`
-	CustomServerCertInfo CustomServerCertInfo `json:"customServerCertInfo"`
+	Checksum             *string                    `json:"checksum,omitempty"`
+	CustomCertPathParams CustomCertInfo             `json:"customCertPathParams"`
+	CustomHCPKICertInfo  HashicorpVaultConfigParams `json:"customHCPKICertInfo"`
+	CustomServerCertInfo CustomServerCertInfo       `json:"customServerCertInfo"`
 	// Customer UUID of the backup which it belongs to
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// The certificate's expiry date
@@ -42,7 +40,7 @@ type CertificateInfo struct {
 	// Private key path
 	PrivateKey *string `json:"privateKey,omitempty"`
 	// The certificate's creation date
-	StartDateIso *time.Time `json:"startDateIso,omitempty"`
+	StartDateIso          *time.Time             `json:"startDateIso,omitempty"`
 	UniverseDetailSubsets []UniverseDetailSubset `json:"universeDetailSubsets"`
 	// Associated universe details for the certificate
 	UniverseDetails []UniverseDetailSubset `json:"universeDetails,omitempty"`
@@ -522,7 +520,7 @@ func (o *CertificateInfo) SetUuid(v string) {
 }
 
 func (o CertificateInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -606,5 +604,3 @@ func (v *NullableCertificateInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

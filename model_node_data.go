@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NodeData type satisfies the MappedNullable interface at compile time
@@ -22,17 +20,17 @@ var _ MappedNullable = &NodeData{}
 
 // NodeData struct for NodeData
 type NodeData struct {
-	Details []string `json:"details"`
-	HasError bool `json:"has_error"`
-	HasWarning bool `json:"has_warning"`
-	Message string `json:"message"`
-	Metrics []Metric `json:"metrics"`
-	MetricsOnly bool `json:"metrics_only"`
-	Node string `json:"node"`
-	NodeIdentifier string `json:"node_identifier"`
-	NodeName string `json:"node_name"`
-	Process string `json:"process"`
-	TimestampIso *time.Time `json:"timestamp_iso,omitempty"`
+	Details        []string   `json:"details"`
+	HasError       bool       `json:"has_error"`
+	HasWarning     bool       `json:"has_warning"`
+	Message        string     `json:"message"`
+	Metrics        []Metric   `json:"metrics"`
+	MetricsOnly    bool       `json:"metrics_only"`
+	Node           string     `json:"node"`
+	NodeIdentifier string     `json:"node_identifier"`
+	NodeName       string     `json:"node_name"`
+	Process        string     `json:"process"`
+	TimestampIso   *time.Time `json:"timestamp_iso,omitempty"`
 }
 
 type _NodeData NodeData
@@ -337,7 +335,7 @@ func (o *NodeData) SetTimestampIso(v time.Time) {
 }
 
 func (o NodeData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -397,5 +395,3 @@ func (v *NullableNodeData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

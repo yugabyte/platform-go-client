@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // UniverseDatabaseManagementAPIService UniverseDatabaseManagementAPI service
 type UniverseDatabaseManagementAPIService service
 
 type UniverseDatabaseManagementAPIConfigureYCQLRequest struct {
-	ctx context.Context
-	ApiService *UniverseDatabaseManagementAPIService
-	cUUID string
-	univUUID string
+	ctx                   context.Context
+	ApiService            *UniverseDatabaseManagementAPIService
+	cUUID                 string
+	univUUID              string
 	configureYcqlFormData *ConfigureYCQLFormData
-	request *interface{}
+	request               *interface{}
 }
 
 // Configure YCQL Form Data
@@ -52,28 +51,29 @@ ConfigureYCQL Configure YCQL
 
 WARNING: This is a preview API that could change. Queues a task to configure ycql in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param univUUID
- @return UniverseDatabaseManagementAPIConfigureYCQLRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param univUUID
+	@return UniverseDatabaseManagementAPIConfigureYCQLRequest
 */
 func (a *UniverseDatabaseManagementAPIService) ConfigureYCQL(ctx context.Context, cUUID string, univUUID string) UniverseDatabaseManagementAPIConfigureYCQLRequest {
 	return UniverseDatabaseManagementAPIConfigureYCQLRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		univUUID: univUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		univUUID:   univUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseDatabaseManagementAPIService) ConfigureYCQLExecute(r UniverseDatabaseManagementAPIConfigureYCQLRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementAPIService.ConfigureYCQL")
@@ -166,12 +166,12 @@ func (a *UniverseDatabaseManagementAPIService) ConfigureYCQLExecute(r UniverseDa
 }
 
 type UniverseDatabaseManagementAPIConfigureYSQLRequest struct {
-	ctx context.Context
-	ApiService *UniverseDatabaseManagementAPIService
-	cUUID string
-	univUUID string
+	ctx                   context.Context
+	ApiService            *UniverseDatabaseManagementAPIService
+	cUUID                 string
+	univUUID              string
 	configureYsqlFormData *ConfigureYSQLFormData
-	request *interface{}
+	request               *interface{}
 }
 
 // Configure YSQL Form Data
@@ -194,28 +194,29 @@ ConfigureYSQL Configure YSQL
 
 WARNING: This is a preview API that could change. Queues a task to configure ysql in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param univUUID
- @return UniverseDatabaseManagementAPIConfigureYSQLRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param univUUID
+	@return UniverseDatabaseManagementAPIConfigureYSQLRequest
 */
 func (a *UniverseDatabaseManagementAPIService) ConfigureYSQL(ctx context.Context, cUUID string, univUUID string) UniverseDatabaseManagementAPIConfigureYSQLRequest {
 	return UniverseDatabaseManagementAPIConfigureYSQLRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		univUUID: univUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		univUUID:   univUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseDatabaseManagementAPIService) ConfigureYSQLExecute(r UniverseDatabaseManagementAPIConfigureYSQLRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementAPIService.ConfigureYSQL")
@@ -308,12 +309,12 @@ func (a *UniverseDatabaseManagementAPIService) ConfigureYSQLExecute(r UniverseDa
 }
 
 type UniverseDatabaseManagementAPICreateUserInDBRequest struct {
-	ctx context.Context
-	ApiService *UniverseDatabaseManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                  context.Context
+	ApiService           *UniverseDatabaseManagementAPIService
+	cUUID                string
+	uniUUID              string
 	databaseUserFormData *DatabaseUserFormData
-	request *interface{}
+	request              *interface{}
 }
 
 // The database user to create
@@ -336,28 +337,29 @@ CreateUserInDB Create a database user for a universe
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseDatabaseManagementAPICreateUserInDBRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseDatabaseManagementAPICreateUserInDBRequest
 */
 func (a *UniverseDatabaseManagementAPIService) CreateUserInDB(ctx context.Context, cUUID string, uniUUID string) UniverseDatabaseManagementAPICreateUserInDBRequest {
 	return UniverseDatabaseManagementAPICreateUserInDBRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UniverseDatabaseManagementAPIService) CreateUserInDBExecute(r UniverseDatabaseManagementAPICreateUserInDBRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementAPIService.CreateUserInDB")
@@ -450,12 +452,12 @@ func (a *UniverseDatabaseManagementAPIService) CreateUserInDBExecute(r UniverseD
 }
 
 type UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest struct {
-	ctx context.Context
-	ApiService *UniverseDatabaseManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx              context.Context
+	ApiService       *UniverseDatabaseManagementAPIService
+	cUUID            string
+	uniUUID          string
 	runQueryFormData *RunQueryFormData
-	request *interface{}
+	request          *interface{}
 }
 
 func (r UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest) RunQueryFormData(runQueryFormData RunQueryFormData) UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest {
@@ -477,28 +479,29 @@ RunYsqlQueryUniverse Run a YSQL query in a universe
 
 YbaApi Internal. Runs a YSQL query. Only valid when the platform is running in `OSS` mode.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest
 */
 func (a *UniverseDatabaseManagementAPIService) RunYsqlQueryUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest {
 	return UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *UniverseDatabaseManagementAPIService) RunYsqlQueryUniverseExecute(r UniverseDatabaseManagementAPIRunYsqlQueryUniverseRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementAPIService.RunYsqlQueryUniverse")
@@ -591,12 +594,12 @@ func (a *UniverseDatabaseManagementAPIService) RunYsqlQueryUniverseExecute(r Uni
 }
 
 type UniverseDatabaseManagementAPISetDatabaseCredentialsRequest struct {
-	ctx context.Context
-	ApiService *UniverseDatabaseManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                      context.Context
+	ApiService               *UniverseDatabaseManagementAPIService
+	cUUID                    string
+	uniUUID                  string
 	databaseSecurityFormData *DatabaseSecurityFormData
-	request *interface{}
+	request                  *interface{}
 }
 
 // The database credentials
@@ -619,28 +622,29 @@ SetDatabaseCredentials Set a universe's database credentials
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseDatabaseManagementAPISetDatabaseCredentialsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseDatabaseManagementAPISetDatabaseCredentialsRequest
 */
 func (a *UniverseDatabaseManagementAPIService) SetDatabaseCredentials(ctx context.Context, cUUID string, uniUUID string) UniverseDatabaseManagementAPISetDatabaseCredentialsRequest {
 	return UniverseDatabaseManagementAPISetDatabaseCredentialsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UniverseDatabaseManagementAPIService) SetDatabaseCredentialsExecute(r UniverseDatabaseManagementAPISetDatabaseCredentialsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseDatabaseManagementAPIService.SetDatabaseCredentials")

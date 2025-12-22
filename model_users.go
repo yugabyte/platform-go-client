@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Users type satisfies the MappedNullable interface at compile time
@@ -29,12 +27,12 @@ type Users struct {
 	// Customer UUID
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// User email address
-	Email string `json:"email"`
+	Email            string   `json:"email"`
 	GroupMemberships []string `json:"groupMemberships"`
 	// LDAP Specified Role
-	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
-	OidcJwtAuthToken *string `json:"oidcJwtAuthToken,omitempty"`
-	Primary bool `json:"primary"`
+	LdapSpecifiedRole *bool   `json:"ldapSpecifiedRole,omitempty"`
+	OidcJwtAuthToken  *string `json:"oidcJwtAuthToken,omitempty"`
+	Primary           bool    `json:"primary"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
 	Role *string `json:"role,omitempty"`
 	// User timezone
@@ -428,7 +426,7 @@ func (o *Users) SetUuid(v string) {
 }
 
 func (o Users) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -505,5 +503,3 @@ func (v *NullableUsers) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

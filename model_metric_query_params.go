@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MetricQueryParams type satisfies the MappedNullable interface at compile time
@@ -35,7 +33,7 @@ type MetricQueryParams struct {
 	NodeNames []string `json:"nodeNames,omitempty"`
 	// YbaApi Internal. Node prefix
 	NodePrefix *string `json:"nodePrefix,omitempty"`
-	Recharts bool `json:"recharts"`
+	Recharts   bool    `json:"recharts"`
 	// YbaApi Internal. Region code
 	RegionCodes []string `json:"regionCodes,omitempty"`
 	// YbaApi Internal. Server type
@@ -47,8 +45,8 @@ type MetricQueryParams struct {
 	// YbaApi Internal. Table id
 	TableId *string `json:"tableId,omitempty"`
 	// YbaApi Internal. Table name
-	TableName *string `json:"tableName,omitempty"`
-	XclusterConfigUuid string `json:"xclusterConfigUuid"`
+	TableName          *string `json:"tableName,omitempty"`
+	XclusterConfigUuid string  `json:"xclusterConfigUuid"`
 }
 
 type _MetricQueryParams MetricQueryParams
@@ -530,7 +528,7 @@ func (o *MetricQueryParams) SetXclusterConfigUuid(v string) {
 }
 
 func (o MetricQueryParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -616,5 +614,3 @@ func (v *NullableMetricQueryParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

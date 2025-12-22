@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // ScheduleManagementAPIService ScheduleManagementAPI service
 type ScheduleManagementAPIService service
 
 type ScheduleManagementAPIDeleteBackupScheduleAsyncRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	uniUUID string
-	sUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	sUUID      string
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) Request(request interface{}) ScheduleManagementAPIDeleteBackupScheduleAsyncRequest {
@@ -46,30 +45,31 @@ DeleteBackupScheduleAsync Delete a backup schedule async
 
 WARNING: This is a preview API that could change. Delete a backup schedule async.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sUUID
- @return ScheduleManagementAPIDeleteBackupScheduleAsyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sUUID
+	@return ScheduleManagementAPIDeleteBackupScheduleAsyncRequest
 */
 func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsync(ctx context.Context, cUUID string, uniUUID string, sUUID string) ScheduleManagementAPIDeleteBackupScheduleAsyncRequest {
 	return ScheduleManagementAPIDeleteBackupScheduleAsyncRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsyncExecute(r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.DeleteBackupScheduleAsync")
@@ -158,11 +158,11 @@ func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsyncExecute(r Schedu
 }
 
 type ScheduleManagementAPIDeleteScheduleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	sUUID string
-	request *interface{}
+	cUUID      string
+	sUUID      string
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIDeleteScheduleRequest) Request(request interface{}) ScheduleManagementAPIDeleteScheduleRequest {
@@ -179,31 +179,33 @@ DeleteSchedule Delete a schedule  - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Delete a schedule V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param sUUID
- @return ScheduleManagementAPIDeleteScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param sUUID
+	@return ScheduleManagementAPIDeleteScheduleRequest
 
 Deprecated
 */
 func (a *ScheduleManagementAPIService) DeleteSchedule(ctx context.Context, cUUID string, sUUID string) ScheduleManagementAPIDeleteScheduleRequest {
 	return ScheduleManagementAPIDeleteScheduleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *ScheduleManagementAPIService) DeleteScheduleExecute(r ScheduleManagementAPIDeleteScheduleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.DeleteSchedule")
@@ -291,11 +293,11 @@ func (a *ScheduleManagementAPIService) DeleteScheduleExecute(r ScheduleManagemen
 }
 
 type ScheduleManagementAPIDeleteScheduleV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	sUUID string
-	request *interface{}
+	cUUID      string
+	sUUID      string
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIDeleteScheduleV2Request) Request(request interface{}) ScheduleManagementAPIDeleteScheduleV2Request {
@@ -312,31 +314,33 @@ DeleteScheduleV2 Delete a schedule V2 - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b></p>Use 'Delete a backup schedule async' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param sUUID
- @return ScheduleManagementAPIDeleteScheduleV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param sUUID
+	@return ScheduleManagementAPIDeleteScheduleV2Request
 
 Deprecated
 */
 func (a *ScheduleManagementAPIService) DeleteScheduleV2(ctx context.Context, cUUID string, sUUID string) ScheduleManagementAPIDeleteScheduleV2Request {
 	return ScheduleManagementAPIDeleteScheduleV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *ScheduleManagementAPIService) DeleteScheduleV2Execute(r ScheduleManagementAPIDeleteScheduleV2Request) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.DeleteScheduleV2")
@@ -424,13 +428,13 @@ func (a *ScheduleManagementAPIService) DeleteScheduleV2Execute(r ScheduleManagem
 }
 
 type ScheduleManagementAPIEditBackupScheduleAsyncRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	uniUUID string
-	sUUID string
-	body *BackupScheduleEditParams
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	sUUID      string
+	body       *BackupScheduleEditParams
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIEditBackupScheduleAsyncRequest) Body(body BackupScheduleEditParams) ScheduleManagementAPIEditBackupScheduleAsyncRequest {
@@ -452,30 +456,31 @@ EditBackupScheduleAsync Edit a backup schedule async
 
 WARNING: This is a preview API that could change. Edit a backup schedule async.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sUUID
- @return ScheduleManagementAPIEditBackupScheduleAsyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sUUID
+	@return ScheduleManagementAPIEditBackupScheduleAsyncRequest
 */
 func (a *ScheduleManagementAPIService) EditBackupScheduleAsync(ctx context.Context, cUUID string, uniUUID string, sUUID string) ScheduleManagementAPIEditBackupScheduleAsyncRequest {
 	return ScheduleManagementAPIEditBackupScheduleAsyncRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *ScheduleManagementAPIService) EditBackupScheduleAsyncExecute(r ScheduleManagementAPIEditBackupScheduleAsyncRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.EditBackupScheduleAsync")
@@ -569,12 +574,12 @@ func (a *ScheduleManagementAPIService) EditBackupScheduleAsyncExecute(r Schedule
 }
 
 type ScheduleManagementAPIEditBackupScheduleV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	sUUID string
-	body *EditBackupScheduleParams
-	request *interface{}
+	cUUID      string
+	sUUID      string
+	body       *EditBackupScheduleParams
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIEditBackupScheduleV2Request) Body(body EditBackupScheduleParams) ScheduleManagementAPIEditBackupScheduleV2Request {
@@ -596,31 +601,33 @@ EditBackupScheduleV2 Edit a backup schedule V2 - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.2.0.0.</b></p>Use 'Edit a backup schedule async' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param sUUID
- @return ScheduleManagementAPIEditBackupScheduleV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param sUUID
+	@return ScheduleManagementAPIEditBackupScheduleV2Request
 
 Deprecated
 */
 func (a *ScheduleManagementAPIService) EditBackupScheduleV2(ctx context.Context, cUUID string, sUUID string) ScheduleManagementAPIEditBackupScheduleV2Request {
 	return ScheduleManagementAPIEditBackupScheduleV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
+//
 // Deprecated
 func (a *ScheduleManagementAPIService) EditBackupScheduleV2Execute(r ScheduleManagementAPIEditBackupScheduleV2Request) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.EditBackupScheduleV2")
@@ -713,10 +720,10 @@ func (a *ScheduleManagementAPIService) EditBackupScheduleV2Execute(r ScheduleMan
 }
 
 type ScheduleManagementAPIGetScheduleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	sUUID string
+	cUUID      string
+	sUUID      string
 }
 
 func (r ScheduleManagementAPIGetScheduleRequest) Execute() (*Schedule, *http.Response, error) {
@@ -726,28 +733,29 @@ func (r ScheduleManagementAPIGetScheduleRequest) Execute() (*Schedule, *http.Res
 /*
 GetSchedule Get Schedule
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param sUUID
- @return ScheduleManagementAPIGetScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param sUUID
+	@return ScheduleManagementAPIGetScheduleRequest
 */
 func (a *ScheduleManagementAPIService) GetSchedule(ctx context.Context, cUUID string, sUUID string) ScheduleManagementAPIGetScheduleRequest {
 	return ScheduleManagementAPIGetScheduleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *ScheduleManagementAPIService) GetScheduleExecute(r ScheduleManagementAPIGetScheduleRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.GetSchedule")
@@ -832,9 +840,9 @@ func (a *ScheduleManagementAPIService) GetScheduleExecute(r ScheduleManagementAP
 }
 
 type ScheduleManagementAPIListSchedulesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r ScheduleManagementAPIListSchedulesRequest) Execute() ([]Schedule, *http.Response, error) {
@@ -846,29 +854,31 @@ ListSchedules List schedules - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p> Use 'List schedules V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ScheduleManagementAPIListSchedulesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ScheduleManagementAPIListSchedulesRequest
 
 Deprecated
 */
 func (a *ScheduleManagementAPIService) ListSchedules(ctx context.Context, cUUID string) ScheduleManagementAPIListSchedulesRequest {
 	return ScheduleManagementAPIListSchedulesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Schedule
+//
+//	@return []Schedule
+//
 // Deprecated
 func (a *ScheduleManagementAPIService) ListSchedulesExecute(r ScheduleManagementAPIListSchedulesRequest) ([]Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Schedule
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.ListSchedules")
@@ -952,11 +962,11 @@ func (a *ScheduleManagementAPIService) ListSchedulesExecute(r ScheduleManagement
 }
 
 type ScheduleManagementAPIListSchedulesV2Request struct {
-	ctx context.Context
-	ApiService *ScheduleManagementAPIService
-	cUUID string
+	ctx                 context.Context
+	ApiService          *ScheduleManagementAPIService
+	cUUID               string
 	pageScheduleRequest *SchedulePagedApiQuery
-	request *interface{}
+	request             *interface{}
 }
 
 func (r ScheduleManagementAPIListSchedulesV2Request) PageScheduleRequest(pageScheduleRequest SchedulePagedApiQuery) ScheduleManagementAPIListSchedulesV2Request {
@@ -976,26 +986,27 @@ func (r ScheduleManagementAPIListSchedulesV2Request) Execute() (*SchedulePagedRe
 /*
 ListSchedulesV2 List schedules V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ScheduleManagementAPIListSchedulesV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ScheduleManagementAPIListSchedulesV2Request
 */
 func (a *ScheduleManagementAPIService) ListSchedulesV2(ctx context.Context, cUUID string) ScheduleManagementAPIListSchedulesV2Request {
 	return ScheduleManagementAPIListSchedulesV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return SchedulePagedResponse
+//
+//	@return SchedulePagedResponse
 func (a *ScheduleManagementAPIService) ListSchedulesV2Execute(r ScheduleManagementAPIListSchedulesV2Request) (*SchedulePagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SchedulePagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SchedulePagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.ListSchedulesV2")
@@ -1087,13 +1098,13 @@ func (a *ScheduleManagementAPIService) ListSchedulesV2Execute(r ScheduleManageme
 }
 
 type ScheduleManagementAPIToggleBackupScheduleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ScheduleManagementAPIService
-	cUUID string
-	uniUUID string
-	sUUID string
-	body *BackupScheduleToggleParams
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	sUUID      string
+	body       *BackupScheduleToggleParams
+	request    *interface{}
 }
 
 func (r ScheduleManagementAPIToggleBackupScheduleRequest) Body(body BackupScheduleToggleParams) ScheduleManagementAPIToggleBackupScheduleRequest {
@@ -1115,30 +1126,31 @@ ToggleBackupSchedule Toggle a backup schedule
 
 WARNING: This is a preview API that could change. Toggle a backup schedule. Only allowed to toggle backup schedule state between Active and Stopped.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sUUID
- @return ScheduleManagementAPIToggleBackupScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sUUID
+	@return ScheduleManagementAPIToggleBackupScheduleRequest
 */
 func (a *ScheduleManagementAPIService) ToggleBackupSchedule(ctx context.Context, cUUID string, uniUUID string, sUUID string) ScheduleManagementAPIToggleBackupScheduleRequest {
 	return ScheduleManagementAPIToggleBackupScheduleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *ScheduleManagementAPIService) ToggleBackupScheduleExecute(r ScheduleManagementAPIToggleBackupScheduleRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.ToggleBackupSchedule")

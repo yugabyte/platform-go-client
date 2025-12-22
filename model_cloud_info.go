@@ -19,12 +19,12 @@ var _ MappedNullable = &CloudInfo{}
 
 // CloudInfo struct for CloudInfo
 type CloudInfo struct {
-	Aws *AWSCloudInfo `json:"aws,omitempty"`
-	Azu *AzureCloudInfo `json:"azu,omitempty"`
-	Gcp *GCPCloudInfo `json:"gcp,omitempty"`
-	Kubernetes *KubernetesInfo `json:"kubernetes,omitempty"`
-	Local *LocalCloudInfo `json:"local,omitempty"`
-	Onprem *OnPremCloudInfo `json:"onprem,omitempty"`
+	Aws        *AWSCloudInfo    `json:"aws,omitempty"`
+	Azu        *AzureCloudInfo  `json:"azu,omitempty"`
+	Gcp        *GCPCloudInfo    `json:"gcp,omitempty"`
+	Kubernetes *KubernetesInfo  `json:"kubernetes,omitempty"`
+	Local      *LocalCloudInfo  `json:"local,omitempty"`
+	Onprem     *OnPremCloudInfo `json:"onprem,omitempty"`
 }
 
 // NewCloudInfo instantiates a new CloudInfo object
@@ -237,7 +237,7 @@ func (o *CloudInfo) SetOnprem(v OnPremCloudInfo) {
 }
 
 func (o CloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,5 +302,3 @@ func (v *NullableCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // LDAPRoleManagementAPIService LDAPRoleManagementAPI service
 type LDAPRoleManagementAPIService service
 
 type LDAPRoleManagementAPISyncLdapUniverseRequest struct {
-	ctx context.Context
-	ApiService *LDAPRoleManagementAPIService
-	cUUID string
-	univUUID string
+	ctx              context.Context
+	ApiService       *LDAPRoleManagementAPIService
+	cUUID            string
+	univUUID         string
 	syncLdapUniverse *LdapUnivSyncFormData
-	request *interface{}
+	request          *interface{}
 }
 
 // config to sync universe roles with ldap users
@@ -52,28 +51,29 @@ SyncLdapUniverse Perform an LDAP users sync on the universe
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param univUUID
- @return LDAPRoleManagementAPISyncLdapUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param univUUID
+	@return LDAPRoleManagementAPISyncLdapUniverseRequest
 */
 func (a *LDAPRoleManagementAPIService) SyncLdapUniverse(ctx context.Context, cUUID string, univUUID string) LDAPRoleManagementAPISyncLdapUniverseRequest {
 	return LDAPRoleManagementAPISyncLdapUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		univUUID: univUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		univUUID:   univUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *LDAPRoleManagementAPIService) SyncLdapUniverseExecute(r LDAPRoleManagementAPISyncLdapUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LDAPRoleManagementAPIService.SyncLdapUniverse")

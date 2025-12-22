@@ -20,10 +20,10 @@ var _ MappedNullable = &PlacementRegion{}
 // PlacementRegion struct for PlacementRegion
 type PlacementRegion struct {
 	AzList []PlacementAZ `json:"azList,omitempty"`
-	Code *string `json:"code,omitempty"`
-	LbFQDN *string `json:"lbFQDN,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Uuid *string `json:"uuid,omitempty"`
+	Code   *string       `json:"code,omitempty"`
+	LbFQDN *string       `json:"lbFQDN,omitempty"`
+	Name   *string       `json:"name,omitempty"`
+	Uuid   *string       `json:"uuid,omitempty"`
 }
 
 // NewPlacementRegion instantiates a new PlacementRegion object
@@ -204,7 +204,7 @@ func (o *PlacementRegion) SetUuid(v string) {
 }
 
 func (o PlacementRegion) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullablePlacementRegion) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

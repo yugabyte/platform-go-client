@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Principal type satisfies the MappedNullable interface at compile time
@@ -22,9 +20,9 @@ var _ MappedNullable = &Principal{}
 // Principal struct for Principal
 type Principal struct {
 	GroupUUID string `json:"groupUUID"`
-	Type string `json:"type"`
-	UserUUID string `json:"userUUID"`
-	Uuid string `json:"uuid"`
+	Type      string `json:"type"`
+	UserUUID  string `json:"userUUID"`
+	Uuid      string `json:"uuid"`
 }
 
 type _Principal Principal
@@ -147,7 +145,7 @@ func (o *Principal) SetUuid(v string) {
 }
 
 func (o Principal) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullablePrincipal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

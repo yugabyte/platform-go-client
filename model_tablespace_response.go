@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TablespaceResponse type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &TablespaceResponse{}
 // TablespaceResponse struct for TablespaceResponse
 type TablespaceResponse struct {
 	ConflictingTablespaces []string `json:"conflictingTablespaces"`
-	ContainsTablespaces bool `json:"containsTablespaces"`
+	ContainsTablespaces    bool     `json:"containsTablespaces"`
 	UnsupportedTablespaces []string `json:"unsupportedTablespaces"`
 }
 
@@ -121,7 +119,7 @@ func (o *TablespaceResponse) SetUnsupportedTablespaces(v []string) {
 }
 
 func (o TablespaceResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableTablespaceResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

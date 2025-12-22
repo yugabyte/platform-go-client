@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DrConfigGetResp type satisfies the MappedNullable interface at compile time
@@ -23,8 +21,8 @@ var _ MappedNullable = &DrConfigGetResp{}
 // DrConfigGetResp disaster recovery get response
 type DrConfigGetResp struct {
 	// Whether the config is using automatic DDL replication mode.
-	AutomaticDdlMode *bool `json:"automaticDdlMode,omitempty"`
-	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
+	AutomaticDdlMode *bool                   `json:"automaticDdlMode,omitempty"`
+	BootstrapParams  *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	// Create time of the DR config
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// WARNING: This is a preview API that could change. List of db details in replication
@@ -72,7 +70,7 @@ type DrConfigGetResp struct {
 	// Whether the config is basic, txn, or db scoped xCluster
 	Type *string `json:"type,omitempty"`
 	// DR config UUID
-	Uuid *string `json:"uuid,omitempty"`
+	Uuid     *string              `json:"uuid,omitempty"`
 	Webhooks []GetWebhookResponse `json:"webhooks"`
 	// UUID of the underlying xCluster config that is managing the replication
 	XclusterConfigUuid *string `json:"xclusterConfigUuid,omitempty"`
@@ -1021,7 +1019,7 @@ func (o *DrConfigGetResp) SetXclusterConfigsUuid(v []string) {
 }
 
 func (o DrConfigGetResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1153,5 +1151,3 @@ func (v *NullableDrConfigGetResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

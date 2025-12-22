@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertLabel type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &AlertLabel{}
 
 // AlertLabel struct for AlertLabel
 type AlertLabel struct {
-	Key AlertLabelKey `json:"key"`
-	Name string `json:"name"`
-	Value string `json:"value"`
+	Key   AlertLabelKey `json:"key"`
+	Name  string        `json:"name"`
+	Value string        `json:"value"`
 }
 
 type _AlertLabel AlertLabel
@@ -121,7 +119,7 @@ func (o *AlertLabel) SetValue(v string) {
 }
 
 func (o AlertLabel) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableAlertLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

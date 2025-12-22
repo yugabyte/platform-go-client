@@ -19,12 +19,12 @@ var _ MappedNullable = &EarlyoomConfig{}
 
 // EarlyoomConfig State for earlyoom service
 type EarlyoomConfig struct {
-	AvailMemoryKillKb *int32 `json:"availMemoryKillKb,omitempty"`
-	AvailMemoryKillPercent *int32 `json:"availMemoryKillPercent,omitempty"`
-	AvailMemoryTermKb *int32 `json:"availMemoryTermKb,omitempty"`
-	AvailMemoryTermPercent *int32 `json:"availMemoryTermPercent,omitempty"`
-	PreferPattern *string `json:"preferPattern,omitempty"`
-	ReportInterval *int32 `json:"reportInterval,omitempty"`
+	AvailMemoryKillKb      *int32  `json:"availMemoryKillKb,omitempty"`
+	AvailMemoryKillPercent *int32  `json:"availMemoryKillPercent,omitempty"`
+	AvailMemoryTermKb      *int32  `json:"availMemoryTermKb,omitempty"`
+	AvailMemoryTermPercent *int32  `json:"availMemoryTermPercent,omitempty"`
+	PreferPattern          *string `json:"preferPattern,omitempty"`
+	ReportInterval         *int32  `json:"reportInterval,omitempty"`
 }
 
 // NewEarlyoomConfig instantiates a new EarlyoomConfig object
@@ -237,7 +237,7 @@ func (o *EarlyoomConfig) SetReportInterval(v int32) {
 }
 
 func (o EarlyoomConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -302,5 +302,3 @@ func (v *NullableEarlyoomConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

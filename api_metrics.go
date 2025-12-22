@@ -18,14 +18,13 @@ import (
 	"net/url"
 )
 
-
 // MetricsAPIService MetricsAPI service
 type MetricsAPIService service
 
 type MetricsAPIMetricsDetailRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *MetricsAPIService
-	request *interface{}
+	request    *interface{}
 }
 
 func (r MetricsAPIMetricsDetailRequest) Request(request interface{}) MetricsAPIMetricsDetailRequest {
@@ -42,24 +41,25 @@ MetricsDetail Get Prometheus metrics
 
 Available since YBA version 2.8.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return MetricsAPIMetricsDetailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return MetricsAPIMetricsDetailRequest
 */
 func (a *MetricsAPIService) MetricsDetail(ctx context.Context) MetricsAPIMetricsDetailRequest {
 	return MetricsAPIMetricsDetailRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *MetricsAPIService) MetricsDetailExecute(r MetricsAPIMetricsDetailRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsAPIService.MetricsDetail")

@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // UniverseManagementAPIService UniverseManagementAPI service
 type UniverseManagementAPIService service
 
 type UniverseManagementAPIConfigureUniverseAlertsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPIConfigureUniverseAlertsRequest) Request(request interface{}) UniverseManagementAPIConfigureUniverseAlertsRequest {
@@ -45,31 +44,33 @@ ConfigureUniverseAlerts Configure alerts for a universe
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.5.0.</b> Deprcated since YBA version 2.20.5.0. Use 'Create maintenance window' API instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIConfigureUniverseAlertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIConfigureUniverseAlertsRequest
 
 Deprecated
 */
 func (a *UniverseManagementAPIService) ConfigureUniverseAlerts(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIConfigureUniverseAlertsRequest {
 	return UniverseManagementAPIConfigureUniverseAlertsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *UniverseManagementAPIService) ConfigureUniverseAlertsExecute(r UniverseManagementAPIConfigureUniverseAlertsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.ConfigureUniverseAlerts")
@@ -157,14 +158,14 @@ func (a *UniverseManagementAPIService) ConfigureUniverseAlertsExecute(r Universe
 }
 
 type UniverseManagementAPIDeleteUniverseRequest struct {
-	ctx context.Context
-	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	isForceDelete *bool
-	isDeleteBackups *bool
+	ctx                     context.Context
+	ApiService              *UniverseManagementAPIService
+	cUUID                   string
+	uniUUID                 string
+	isForceDelete           *bool
+	isDeleteBackups         *bool
 	isDeleteAssociatedCerts *bool
-	request *interface{}
+	request                 *interface{}
 }
 
 func (r UniverseManagementAPIDeleteUniverseRequest) IsForceDelete(isForceDelete bool) UniverseManagementAPIDeleteUniverseRequest {
@@ -196,28 +197,29 @@ DeleteUniverse Delete a universe
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIDeleteUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIDeleteUniverseRequest
 */
 func (a *UniverseManagementAPIService) DeleteUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIDeleteUniverseRequest {
 	return UniverseManagementAPIDeleteUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseManagementAPIService) DeleteUniverseExecute(r UniverseManagementAPIDeleteUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.DeleteUniverse")
@@ -326,10 +328,10 @@ func (a *UniverseManagementAPIService) DeleteUniverseExecute(r UniverseManagemen
 }
 
 type UniverseManagementAPIGetUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseManagementAPIGetUniverseRequest) Execute() (*UniverseResp, *http.Response, error) {
@@ -341,28 +343,29 @@ GetUniverse Get a universe
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIGetUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIGetUniverseRequest
 */
 func (a *UniverseManagementAPIService) GetUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIGetUniverseRequest {
 	return UniverseManagementAPIGetUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UniverseResp
+//
+//	@return UniverseResp
 func (a *UniverseManagementAPIService) GetUniverseExecute(r UniverseManagementAPIGetUniverseRequest) (*UniverseResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UniverseResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UniverseResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.GetUniverse")
@@ -447,10 +450,10 @@ func (a *UniverseManagementAPIService) GetUniverseExecute(r UniverseManagementAP
 }
 
 type UniverseManagementAPIListUniversesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	name *string
+	cUUID      string
+	name       *string
 }
 
 func (r UniverseManagementAPIListUniversesRequest) Name(name string) UniverseManagementAPIListUniversesRequest {
@@ -467,26 +470,27 @@ ListUniverses List universes
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UniverseManagementAPIListUniversesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UniverseManagementAPIListUniversesRequest
 */
 func (a *UniverseManagementAPIService) ListUniverses(ctx context.Context, cUUID string) UniverseManagementAPIListUniversesRequest {
 	return UniverseManagementAPIListUniversesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []UniverseResp
+//
+//	@return []UniverseResp
 func (a *UniverseManagementAPIService) ListUniversesExecute(r UniverseManagementAPIListUniversesRequest) ([]UniverseResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []UniverseResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []UniverseResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.ListUniverses")
@@ -574,11 +578,11 @@ func (a *UniverseManagementAPIService) ListUniversesExecute(r UniverseManagement
 }
 
 type UniverseManagementAPIPauseUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPIPauseUniverseRequest) Request(request interface{}) UniverseManagementAPIPauseUniverseRequest {
@@ -595,28 +599,29 @@ PauseUniverse Pause a universe
 
 Available since YBA version 2.6.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIPauseUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIPauseUniverseRequest
 */
 func (a *UniverseManagementAPIService) PauseUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIPauseUniverseRequest {
 	return UniverseManagementAPIPauseUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseManagementAPIService) PauseUniverseExecute(r UniverseManagementAPIPauseUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.PauseUniverse")
@@ -704,11 +709,11 @@ func (a *UniverseManagementAPIService) PauseUniverseExecute(r UniverseManagement
 }
 
 type UniverseManagementAPIResetUniverseVersionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPIResetUniverseVersionRequest) Request(request interface{}) UniverseManagementAPIResetUniverseVersionRequest {
@@ -725,28 +730,29 @@ ResetUniverseVersion Reset universe version
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIResetUniverseVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIResetUniverseVersionRequest
 */
 func (a *UniverseManagementAPIService) ResetUniverseVersion(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIResetUniverseVersionRequest {
 	return UniverseManagementAPIResetUniverseVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UniverseManagementAPIService) ResetUniverseVersionExecute(r UniverseManagementAPIResetUniverseVersionRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.ResetUniverseVersion")
@@ -834,11 +840,11 @@ func (a *UniverseManagementAPIService) ResetUniverseVersionExecute(r UniverseMan
 }
 
 type UniverseManagementAPIResumeUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPIResumeUniverseRequest) Request(request interface{}) UniverseManagementAPIResumeUniverseRequest {
@@ -855,28 +861,29 @@ ResumeUniverse Resume a paused universe
 
 Available since YBA version 2.6.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIResumeUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIResumeUniverseRequest
 */
 func (a *UniverseManagementAPIService) ResumeUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIResumeUniverseRequest {
 	return UniverseManagementAPIResumeUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseManagementAPIService) ResumeUniverseExecute(r UniverseManagementAPIResumeUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.ResumeUniverse")
@@ -964,12 +971,12 @@ func (a *UniverseManagementAPIService) ResumeUniverseExecute(r UniverseManagemen
 }
 
 type UniverseManagementAPISetUniverseBackupFlagRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 	markActive *bool
-	request *interface{}
+	request    *interface{}
 }
 
 func (r UniverseManagementAPISetUniverseBackupFlagRequest) MarkActive(markActive bool) UniverseManagementAPISetUniverseBackupFlagRequest {
@@ -991,28 +998,29 @@ SetUniverseBackupFlag Set a universe's backup flag
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPISetUniverseBackupFlagRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPISetUniverseBackupFlagRequest
 */
 func (a *UniverseManagementAPIService) SetUniverseBackupFlag(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPISetUniverseBackupFlagRequest {
 	return UniverseManagementAPISetUniverseBackupFlagRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UniverseManagementAPIService) SetUniverseBackupFlagExecute(r UniverseManagementAPISetUniverseBackupFlagRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.SetUniverseBackupFlag")
@@ -1103,11 +1111,11 @@ func (a *UniverseManagementAPIService) SetUniverseBackupFlagExecute(r UniverseMa
 }
 
 type UniverseManagementAPISetUniverseHelm3CompatibleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPISetUniverseHelm3CompatibleRequest) Request(request interface{}) UniverseManagementAPISetUniverseHelm3CompatibleRequest {
@@ -1124,28 +1132,29 @@ SetUniverseHelm3Compatible Flag a universe as Helm 3-compatible - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPISetUniverseHelm3CompatibleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPISetUniverseHelm3CompatibleRequest
 */
 func (a *UniverseManagementAPIService) SetUniverseHelm3Compatible(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPISetUniverseHelm3CompatibleRequest {
 	return UniverseManagementAPISetUniverseHelm3CompatibleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UniverseManagementAPIService) SetUniverseHelm3CompatibleExecute(r UniverseManagementAPISetUniverseHelm3CompatibleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.SetUniverseHelm3Compatible")
@@ -1233,12 +1242,12 @@ func (a *UniverseManagementAPIService) SetUniverseHelm3CompatibleExecute(r Unive
 }
 
 type UniverseManagementAPISetUniverseKeyRequest struct {
-	ctx context.Context
-	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                   context.Context
+	ApiService            *UniverseManagementAPIService
+	cUUID                 string
+	uniUUID               string
 	setUniverseKeyRequest *EncryptionAtRestConfig
-	request *interface{}
+	request               *interface{}
 }
 
 func (r UniverseManagementAPISetUniverseKeyRequest) SetUniverseKeyRequest(setUniverseKeyRequest EncryptionAtRestConfig) UniverseManagementAPISetUniverseKeyRequest {
@@ -1260,28 +1269,29 @@ SetUniverseKey Set a universe's key
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPISetUniverseKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPISetUniverseKeyRequest
 */
 func (a *UniverseManagementAPIService) SetUniverseKey(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPISetUniverseKeyRequest {
 	return UniverseManagementAPISetUniverseKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UniverseResp
+//
+//	@return UniverseResp
 func (a *UniverseManagementAPIService) SetUniverseKeyExecute(r UniverseManagementAPISetUniverseKeyRequest) (*UniverseResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UniverseResp
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UniverseResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.SetUniverseKey")
@@ -1374,11 +1384,11 @@ func (a *UniverseManagementAPIService) SetUniverseKeyExecute(r UniverseManagemen
 }
 
 type UniverseManagementAPIUpdateLoadBalancerConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) Request(request interface{}) UniverseManagementAPIUpdateLoadBalancerConfigRequest {
@@ -1395,28 +1405,29 @@ UpdateLoadBalancerConfig Update load balancer config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseManagementAPIUpdateLoadBalancerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseManagementAPIUpdateLoadBalancerConfigRequest
 */
 func (a *UniverseManagementAPIService) UpdateLoadBalancerConfig(ctx context.Context, cUUID string, uniUUID string) UniverseManagementAPIUpdateLoadBalancerConfigRequest {
 	return UniverseManagementAPIUpdateLoadBalancerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateLoadBalancerConfig
+//
+//	@return UpdateLoadBalancerConfig
 func (a *UniverseManagementAPIService) UpdateLoadBalancerConfigExecute(r UniverseManagementAPIUpdateLoadBalancerConfigRequest) (*UpdateLoadBalancerConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateLoadBalancerConfig
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateLoadBalancerConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.UpdateLoadBalancerConfig")

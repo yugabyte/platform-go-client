@@ -19,18 +19,17 @@ import (
 	"strings"
 )
 
-
 // AvailabilityZonesAPIService AvailabilityZonesAPI service
 type AvailabilityZonesAPIService service
 
 type AvailabilityZonesAPICreateAZRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
+	cUUID      string
+	pUUID      string
+	rUUID      string
 	azFormData *AvailabilityZoneFormData
-	request *interface{}
+	request    *interface{}
 }
 
 // Availability zone form data
@@ -53,33 +52,35 @@ CreateAZ Create an availability zone - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return AvailabilityZonesAPICreateAZRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return AvailabilityZonesAPICreateAZRequest
 
 Deprecated
 */
 func (a *AvailabilityZonesAPIService) CreateAZ(ctx context.Context, cUUID string, pUUID string, rUUID string) AvailabilityZonesAPICreateAZRequest {
 	return AvailabilityZonesAPICreateAZRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]AvailabilityZone
+//
+//	@return map[string]AvailabilityZone
+//
 // Deprecated
 func (a *AvailabilityZonesAPIService) CreateAZExecute(r AvailabilityZonesAPICreateAZRequest) (*map[string]AvailabilityZone, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]AvailabilityZone
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *map[string]AvailabilityZone
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.CreateAZ")
@@ -173,13 +174,13 @@ func (a *AvailabilityZonesAPIService) CreateAZExecute(r AvailabilityZonesAPICrea
 }
 
 type AvailabilityZonesAPICreateZoneRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	azData *AvailabilityZone
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	azData     *AvailabilityZone
+	request    *interface{}
 }
 
 // Availability Zone to create
@@ -202,30 +203,31 @@ CreateZone Create an availability zone
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return AvailabilityZonesAPICreateZoneRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return AvailabilityZonesAPICreateZoneRequest
 */
 func (a *AvailabilityZonesAPIService) CreateZone(ctx context.Context, cUUID string, pUUID string, rUUID string) AvailabilityZonesAPICreateZoneRequest {
 	return AvailabilityZonesAPICreateZoneRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]AvailabilityZone
+//
+//	@return map[string]AvailabilityZone
 func (a *AvailabilityZonesAPIService) CreateZoneExecute(r AvailabilityZonesAPICreateZoneRequest) (*map[string]AvailabilityZone, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]AvailabilityZone
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *map[string]AvailabilityZone
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.CreateZone")
@@ -319,13 +321,13 @@ func (a *AvailabilityZonesAPIService) CreateZoneExecute(r AvailabilityZonesAPICr
 }
 
 type AvailabilityZonesAPIDeleteAZRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	azUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	azUUID     string
+	request    *interface{}
 }
 
 func (r AvailabilityZonesAPIDeleteAZRequest) Request(request interface{}) AvailabilityZonesAPIDeleteAZRequest {
@@ -340,32 +342,33 @@ func (r AvailabilityZonesAPIDeleteAZRequest) Execute() (*YBPSuccess, *http.Respo
 /*
 DeleteAZ Delete an availability zone
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @param azUUID
- @return AvailabilityZonesAPIDeleteAZRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@param azUUID
+	@return AvailabilityZonesAPIDeleteAZRequest
 */
 func (a *AvailabilityZonesAPIService) DeleteAZ(ctx context.Context, cUUID string, pUUID string, rUUID string, azUUID string) AvailabilityZonesAPIDeleteAZRequest {
 	return AvailabilityZonesAPIDeleteAZRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AvailabilityZonesAPIService) DeleteAZExecute(r AvailabilityZonesAPIDeleteAZRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.DeleteAZ")
@@ -455,14 +458,14 @@ func (a *AvailabilityZonesAPIService) DeleteAZExecute(r AvailabilityZonesAPIDele
 }
 
 type AvailabilityZonesAPIEditAZRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	azUUID string
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	azUUID     string
 	azFormData *AvailabilityZoneFormData
-	request *interface{}
+	request    *interface{}
 }
 
 // Availability zone edit form data
@@ -485,35 +488,37 @@ EditAZ Edit an Availabilty Zone - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.18.2.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/provider_regions/:rUUID/region_zones/:zUUID instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @param azUUID
- @return AvailabilityZonesAPIEditAZRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@param azUUID
+	@return AvailabilityZonesAPIEditAZRequest
 
 Deprecated
 */
 func (a *AvailabilityZonesAPIService) EditAZ(ctx context.Context, cUUID string, pUUID string, rUUID string, azUUID string) AvailabilityZonesAPIEditAZRequest {
 	return AvailabilityZonesAPIEditAZRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AvailabilityZone
+//
+//	@return AvailabilityZone
+//
 // Deprecated
 func (a *AvailabilityZonesAPIService) EditAZExecute(r AvailabilityZonesAPIEditAZRequest) (*AvailabilityZone, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AvailabilityZone
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AvailabilityZone
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.EditAZ")
@@ -608,14 +613,14 @@ func (a *AvailabilityZonesAPIService) EditAZExecute(r AvailabilityZonesAPIEditAZ
 }
 
 type AvailabilityZonesAPIEditZoneRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
-	azUUID string
-	azData *AvailabilityZone
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	rUUID      string
+	azUUID     string
+	azData     *AvailabilityZone
+	request    *interface{}
 }
 
 // Availability zone to edit
@@ -638,32 +643,33 @@ EditZone Modify an availability zone
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @param azUUID
- @return AvailabilityZonesAPIEditZoneRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@param azUUID
+	@return AvailabilityZonesAPIEditZoneRequest
 */
 func (a *AvailabilityZonesAPIService) EditZone(ctx context.Context, cUUID string, pUUID string, rUUID string, azUUID string) AvailabilityZonesAPIEditZoneRequest {
 	return AvailabilityZonesAPIEditZoneRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AvailabilityZone
+//
+//	@return AvailabilityZone
 func (a *AvailabilityZonesAPIService) EditZoneExecute(r AvailabilityZonesAPIEditZoneRequest) (*AvailabilityZone, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AvailabilityZone
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AvailabilityZone
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.EditZone")
@@ -758,11 +764,11 @@ func (a *AvailabilityZonesAPIService) EditZoneExecute(r AvailabilityZonesAPIEdit
 }
 
 type AvailabilityZonesAPIListOfAZRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AvailabilityZonesAPIService
-	cUUID string
-	pUUID string
-	rUUID string
+	cUUID      string
+	pUUID      string
+	rUUID      string
 }
 
 func (r AvailabilityZonesAPIListOfAZRequest) Execute() ([]AvailabilityZone, *http.Response, error) {
@@ -772,30 +778,31 @@ func (r AvailabilityZonesAPIListOfAZRequest) Execute() ([]AvailabilityZone, *htt
 /*
 ListOfAZ List availability zones
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param rUUID
- @return AvailabilityZonesAPIListOfAZRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param rUUID
+	@return AvailabilityZonesAPIListOfAZRequest
 */
 func (a *AvailabilityZonesAPIService) ListOfAZ(ctx context.Context, cUUID string, pUUID string, rUUID string) AvailabilityZonesAPIListOfAZRequest {
 	return AvailabilityZonesAPIListOfAZRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AvailabilityZone
+//
+//	@return []AvailabilityZone
 func (a *AvailabilityZonesAPIService) ListOfAZExecute(r AvailabilityZonesAPIListOfAZRequest) ([]AvailabilityZone, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AvailabilityZone
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AvailabilityZone
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AvailabilityZonesAPIService.ListOfAZ")

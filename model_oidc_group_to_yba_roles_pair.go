@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OidcGroupToYbaRolesPair type satisfies the MappedNullable interface at compile time
@@ -21,8 +19,8 @@ var _ MappedNullable = &OidcGroupToYbaRolesPair{}
 
 // OidcGroupToYbaRolesPair struct for OidcGroupToYbaRolesPair
 type OidcGroupToYbaRolesPair struct {
-	GroupName string `json:"groupName"`
-	Roles []string `json:"roles"`
+	GroupName string   `json:"groupName"`
+	Roles     []string `json:"roles"`
 }
 
 type _OidcGroupToYbaRolesPair OidcGroupToYbaRolesPair
@@ -95,7 +93,7 @@ func (o *OidcGroupToYbaRolesPair) SetRoles(v []string) {
 }
 
 func (o OidcGroupToYbaRolesPair) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableOidcGroupToYbaRolesPair) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

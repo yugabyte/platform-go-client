@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NodeQueryDistributionDetails type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &NodeQueryDistributionDetails{}
 
 // NodeQueryDistributionDetails struct for NodeQueryDistributionDetails
 type NodeQueryDistributionDetails struct {
-	Node string `json:"node"`
-	NumDelete int32 `json:"numDelete"`
-	NumInsert int32 `json:"numInsert"`
-	NumSelect int32 `json:"numSelect"`
-	NumUpdate int32 `json:"numUpdate"`
+	Node      string `json:"node"`
+	NumDelete int32  `json:"numDelete"`
+	NumInsert int32  `json:"numInsert"`
+	NumSelect int32  `json:"numSelect"`
+	NumUpdate int32  `json:"numUpdate"`
 }
 
 type _NodeQueryDistributionDetails NodeQueryDistributionDetails
@@ -173,7 +171,7 @@ func (o *NodeQueryDistributionDetails) SetNumUpdate(v int32) {
 }
 
 func (o NodeQueryDistributionDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableNodeQueryDistributionDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

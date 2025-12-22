@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Artifact type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &Artifact{}
 
 // Artifact struct for Artifact
 type Artifact struct {
-	Architecture string `json:"architecture"`
+	Architecture  string `json:"architecture"`
 	PackageFileId string `json:"package_file_id"`
-	PackageUrl string `json:"package_url"`
-	Platform string `json:"platform"`
-	Sha256 string `json:"sha256"`
+	PackageUrl    string `json:"package_url"`
+	Platform      string `json:"platform"`
+	Sha256        string `json:"sha256"`
 }
 
 type _Artifact Artifact
@@ -173,7 +171,7 @@ func (o *Artifact) SetSha256(v string) {
 }
 
 func (o Artifact) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableArtifact) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

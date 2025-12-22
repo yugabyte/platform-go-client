@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CloneNamespaceParams type satisfies the MappedNullable interface at compile time
@@ -24,31 +22,31 @@ type CloneNamespaceParams struct {
 	// Time in millis at which to clone the source namespace. If not specifed, it is cloned to current state.
 	CloneTimeInMillis *int64 `json:"cloneTimeInMillis,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
-	CmkArn *string `json:"cmkArn,omitempty"`
-	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
-	CreatingUser Users `json:"creatingUser"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
+	CmkArn                 *string                 `json:"cmkArn,omitempty"`
+	CommunicationPorts     *CommunicationPorts     `json:"communicationPorts,omitempty"`
+	CreatingUser           Users                   `json:"creatingUser"`
+	DeviceInfo             *DeviceInfo             `json:"deviceInfo,omitempty"`
+	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
-	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
-	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	ExpectedUniverseVersion *int32             `json:"expectedUniverseVersion,omitempty"`
+	ExtraDependencies       *ExtraDependencies `json:"extraDependencies,omitempty"`
+	InstallYbc              *bool              `json:"installYbc,omitempty"`
 	// Node details
 	NodeDetailsSet []NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	// PITR Config UUID
-	PitrConfigUUID *string `json:"pitrConfigUUID,omitempty"`
-	PlatformUrl string `json:"platformUrl"`
+	PitrConfigUUID  *string `json:"pitrConfigUUID,omitempty"`
+	PlatformUrl     string  `json:"platformUrl"`
 	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
-	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
+	RunOnlyPrechecks               *bool `json:"runOnlyPrechecks,omitempty"`
+	SleepAfterMasterRestartMillis  int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
@@ -58,8 +56,8 @@ type CloneNamespaceParams struct {
 	TargetXClusterConfigs []string `json:"targetXClusterConfigs,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
+	YbcInstalled          *bool   `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion    *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 type _CloneNamespaceParams CloneNamespaceParams
@@ -886,7 +884,7 @@ func (o *CloneNamespaceParams) SetYbcSoftwareVersion(v string) {
 }
 
 func (o CloneNamespaceParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1003,5 +1001,3 @@ func (v *NullableCloneNamespaceParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

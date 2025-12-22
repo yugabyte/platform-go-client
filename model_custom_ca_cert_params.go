@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomCACertParams type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &CustomCACertParams{}
 // CustomCACertParams struct for CustomCACertParams
 type CustomCACertParams struct {
 	Contents string `json:"contents"`
-	Name string `json:"name"`
+	Name     string `json:"name"`
 }
 
 type _CustomCACertParams CustomCACertParams
@@ -95,7 +93,7 @@ func (o *CustomCACertParams) SetName(v string) {
 }
 
 func (o CustomCACertParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableCustomCACertParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

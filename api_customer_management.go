@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // CustomerManagementAPIService CustomerManagementAPI service
 type CustomerManagementAPIService service
 
 type CustomerManagementAPICustomerDetailRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r CustomerManagementAPICustomerDetailRequest) Execute() (*CustomerDetailsData, *http.Response, error) {
@@ -36,26 +35,27 @@ func (r CustomerManagementAPICustomerDetailRequest) Execute() (*CustomerDetailsD
 /*
 CustomerDetail Get a customer's details
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerManagementAPICustomerDetailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerManagementAPICustomerDetailRequest
 */
 func (a *CustomerManagementAPIService) CustomerDetail(ctx context.Context, cUUID string) CustomerManagementAPICustomerDetailRequest {
 	return CustomerManagementAPICustomerDetailRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerDetailsData
+//
+//	@return CustomerDetailsData
 func (a *CustomerManagementAPIService) CustomerDetailExecute(r CustomerManagementAPICustomerDetailRequest) (*CustomerDetailsData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerDetailsData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerDetailsData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.CustomerDetail")
@@ -139,10 +139,10 @@ func (a *CustomerManagementAPIService) CustomerDetailExecute(r CustomerManagemen
 }
 
 type CustomerManagementAPIDeleteCustomerRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r CustomerManagementAPIDeleteCustomerRequest) Request(request interface{}) CustomerManagementAPIDeleteCustomerRequest {
@@ -157,26 +157,27 @@ func (r CustomerManagementAPIDeleteCustomerRequest) Execute() (*YBPSuccess, *htt
 /*
 DeleteCustomer Delete a customer
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerManagementAPIDeleteCustomerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerManagementAPIDeleteCustomerRequest
 */
 func (a *CustomerManagementAPIService) DeleteCustomer(ctx context.Context, cUUID string) CustomerManagementAPIDeleteCustomerRequest {
 	return CustomerManagementAPIDeleteCustomerRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CustomerManagementAPIService) DeleteCustomerExecute(r CustomerManagementAPIDeleteCustomerRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.DeleteCustomer")
@@ -263,9 +264,9 @@ func (a *CustomerManagementAPIService) DeleteCustomerExecute(r CustomerManagemen
 }
 
 type CustomerManagementAPIGetHostInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r CustomerManagementAPIGetHostInfoRequest) Execute() (map[string]map[string]interface{}, *http.Response, error) {
@@ -275,26 +276,27 @@ func (r CustomerManagementAPIGetHostInfoRequest) Execute() (map[string]map[strin
 /*
 GetHostInfo Get a customer's host info
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerManagementAPIGetHostInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerManagementAPIGetHostInfoRequest
 */
 func (a *CustomerManagementAPIService) GetHostInfo(ctx context.Context, cUUID string) CustomerManagementAPIGetHostInfoRequest {
 	return CustomerManagementAPIGetHostInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *CustomerManagementAPIService) GetHostInfoExecute(r CustomerManagementAPIGetHostInfoRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.GetHostInfo")
@@ -378,9 +380,9 @@ func (a *CustomerManagementAPIService) GetHostInfoExecute(r CustomerManagementAP
 }
 
 type CustomerManagementAPIListOfCustomersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	request *interface{}
+	request    *interface{}
 }
 
 func (r CustomerManagementAPIListOfCustomersRequest) Request(request interface{}) CustomerManagementAPIListOfCustomersRequest {
@@ -395,24 +397,25 @@ func (r CustomerManagementAPIListOfCustomersRequest) Execute() ([]Customer, *htt
 /*
 ListOfCustomers List customers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CustomerManagementAPIListOfCustomersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return CustomerManagementAPIListOfCustomersRequest
 */
 func (a *CustomerManagementAPIService) ListOfCustomers(ctx context.Context) CustomerManagementAPIListOfCustomersRequest {
 	return CustomerManagementAPIListOfCustomersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []Customer
+//
+//	@return []Customer
 func (a *CustomerManagementAPIService) ListOfCustomersExecute(r CustomerManagementAPIListOfCustomersRequest) ([]Customer, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Customer
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Customer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.ListOfCustomers")
@@ -498,11 +501,11 @@ func (a *CustomerManagementAPIService) ListOfCustomersExecute(r CustomerManageme
 }
 
 type CustomerManagementAPIMetricsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	cUUID string
-	metrics *MetricQueryParams
-	request *interface{}
+	cUUID      string
+	metrics    *MetricQueryParams
+	request    *interface{}
 }
 
 // Metrics to be added
@@ -525,26 +528,27 @@ Metrics Add metrics to a customer
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerManagementAPIMetricsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerManagementAPIMetricsRequest
 */
 func (a *CustomerManagementAPIService) Metrics(ctx context.Context, cUUID string) CustomerManagementAPIMetricsRequest {
 	return CustomerManagementAPIMetricsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *CustomerManagementAPIService) MetricsExecute(r CustomerManagementAPIMetricsRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.Metrics")
@@ -627,8 +631,8 @@ func (a *CustomerManagementAPIService) MetricsExecute(r CustomerManagementAPIMet
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -646,11 +650,11 @@ func (a *CustomerManagementAPIService) MetricsExecute(r CustomerManagementAPIMet
 }
 
 type CustomerManagementAPIUpdateCustomerRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerManagementAPIService
-	cUUID string
-	customer *CustomerAlertData
-	request *interface{}
+	cUUID      string
+	customer   *CustomerAlertData
+	request    *interface{}
 }
 
 // Customer data to be updated
@@ -671,26 +675,27 @@ func (r CustomerManagementAPIUpdateCustomerRequest) Execute() (*Customer, *http.
 /*
 UpdateCustomer Update a customer
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerManagementAPIUpdateCustomerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerManagementAPIUpdateCustomerRequest
 */
 func (a *CustomerManagementAPIService) UpdateCustomer(ctx context.Context, cUUID string) CustomerManagementAPIUpdateCustomerRequest {
 	return CustomerManagementAPIUpdateCustomerRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Customer
+//
+//	@return Customer
 func (a *CustomerManagementAPIService) UpdateCustomerExecute(r CustomerManagementAPIUpdateCustomerRequest) (*Customer, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Customer
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Customer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerManagementAPIService.UpdateCustomer")

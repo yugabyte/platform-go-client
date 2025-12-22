@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // AccessKeysAPIService AccessKeysAPI service
 type AccessKeysAPIService service
 
 type AccessKeysAPICreateAccesskeyRequest struct {
-	ctx context.Context
-	ApiService *AccessKeysAPIService
-	cUUID string
-	pUUID string
+	ctx               context.Context
+	ApiService        *AccessKeysAPIService
+	cUUID             string
+	pUUID             string
 	accessKeyFormData *AccessKeyFormData
-	request *interface{}
+	request           *interface{}
 }
 
 func (r AccessKeysAPICreateAccesskeyRequest) AccessKeyFormData(accessKeyFormData AccessKeyFormData) AccessKeysAPICreateAccesskeyRequest {
@@ -51,31 +50,33 @@ CreateAccesskey Create/Upload Access Key for onprem provider region - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/provider/{pUUID}/edit instead for adding the key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return AccessKeysAPICreateAccesskeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return AccessKeysAPICreateAccesskeyRequest
 
 Deprecated
 */
 func (a *AccessKeysAPIService) CreateAccesskey(ctx context.Context, cUUID string, pUUID string) AccessKeysAPICreateAccesskeyRequest {
 	return AccessKeysAPICreateAccesskeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return AccessKey
+//
+//	@return AccessKey
+//
 // Deprecated
 func (a *AccessKeysAPIService) CreateAccesskeyExecute(r AccessKeysAPICreateAccesskeyRequest) (*AccessKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AccessKey
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AccessKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.CreateAccesskey")
@@ -168,12 +169,12 @@ func (a *AccessKeysAPIService) CreateAccesskeyExecute(r AccessKeysAPICreateAcces
 }
 
 type AccessKeysAPIDeleteAccesskeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AccessKeysAPIService
-	cUUID string
-	pUUID string
-	keyCode string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	keyCode    string
+	request    *interface{}
 }
 
 func (r AccessKeysAPIDeleteAccesskeyRequest) Request(request interface{}) AccessKeysAPIDeleteAccesskeyRequest {
@@ -188,30 +189,31 @@ func (r AccessKeysAPIDeleteAccesskeyRequest) Execute() (*YBPSuccess, *http.Respo
 /*
 DeleteAccesskey Delete an access key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param keyCode
- @return AccessKeysAPIDeleteAccesskeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param keyCode
+	@return AccessKeysAPIDeleteAccesskeyRequest
 */
 func (a *AccessKeysAPIService) DeleteAccesskey(ctx context.Context, cUUID string, pUUID string, keyCode string) AccessKeysAPIDeleteAccesskeyRequest {
 	return AccessKeysAPIDeleteAccesskeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		keyCode: keyCode,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		keyCode:    keyCode,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *AccessKeysAPIService) DeleteAccesskeyExecute(r AccessKeysAPIDeleteAccesskeyRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.DeleteAccesskey")
@@ -300,13 +302,13 @@ func (a *AccessKeysAPIService) DeleteAccesskeyExecute(r AccessKeysAPIDeleteAcces
 }
 
 type AccessKeysAPIEditAccesskeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AccessKeysAPIService
-	cUUID string
-	pUUID string
-	keyCode string
-	accesskey *AccessKey
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	keyCode    string
+	accesskey  *AccessKey
+	request    *interface{}
 }
 
 // access key edit form data
@@ -329,30 +331,31 @@ EditAccesskey Modify the existing access Key
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param keyCode
- @return AccessKeysAPIEditAccesskeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param keyCode
+	@return AccessKeysAPIEditAccesskeyRequest
 */
 func (a *AccessKeysAPIService) EditAccesskey(ctx context.Context, cUUID string, pUUID string, keyCode string) AccessKeysAPIEditAccesskeyRequest {
 	return AccessKeysAPIEditAccesskeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		keyCode: keyCode,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		keyCode:    keyCode,
 	}
 }
 
 // Execute executes the request
-//  @return AccessKey
+//
+//	@return AccessKey
 func (a *AccessKeysAPIService) EditAccesskeyExecute(r AccessKeysAPIEditAccesskeyRequest) (*AccessKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AccessKey
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AccessKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.EditAccesskey")
@@ -446,11 +449,11 @@ func (a *AccessKeysAPIService) EditAccesskeyExecute(r AccessKeysAPIEditAccesskey
 }
 
 type AccessKeysAPIIndexRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AccessKeysAPIService
-	cUUID string
-	pUUID string
-	keyCode string
+	cUUID      string
+	pUUID      string
+	keyCode    string
 }
 
 func (r AccessKeysAPIIndexRequest) Execute() (*AccessKey, *http.Response, error) {
@@ -460,30 +463,31 @@ func (r AccessKeysAPIIndexRequest) Execute() (*AccessKey, *http.Response, error)
 /*
 Index Get an access key
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param keyCode
- @return AccessKeysAPIIndexRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param keyCode
+	@return AccessKeysAPIIndexRequest
 */
 func (a *AccessKeysAPIService) Index(ctx context.Context, cUUID string, pUUID string, keyCode string) AccessKeysAPIIndexRequest {
 	return AccessKeysAPIIndexRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		keyCode: keyCode,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		keyCode:    keyCode,
 	}
 }
 
 // Execute executes the request
-//  @return AccessKey
+//
+//	@return AccessKey
 func (a *AccessKeysAPIService) IndexExecute(r AccessKeysAPIIndexRequest) (*AccessKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AccessKey
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AccessKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.Index")
@@ -569,10 +573,10 @@ func (a *AccessKeysAPIService) IndexExecute(r AccessKeysAPIIndexRequest) (*Acces
 }
 
 type AccessKeysAPIListRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AccessKeysAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 }
 
 func (r AccessKeysAPIListRequest) Execute() ([]AccessKey, *http.Response, error) {
@@ -582,28 +586,29 @@ func (r AccessKeysAPIListRequest) Execute() ([]AccessKey, *http.Response, error)
 /*
 List List access keys for a specific provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return AccessKeysAPIListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return AccessKeysAPIListRequest
 */
 func (a *AccessKeysAPIService) List(ctx context.Context, cUUID string, pUUID string) AccessKeysAPIListRequest {
 	return AccessKeysAPIListRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AccessKey
+//
+//	@return []AccessKey
 func (a *AccessKeysAPIService) ListExecute(r AccessKeysAPIListRequest) ([]AccessKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AccessKey
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AccessKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.List")
@@ -688,9 +693,9 @@ func (a *AccessKeysAPIService) ListExecute(r AccessKeysAPIListRequest) ([]Access
 }
 
 type AccessKeysAPIListAllForCustomerRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AccessKeysAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r AccessKeysAPIListAllForCustomerRequest) Execute() ([]AccessKey, *http.Response, error) {
@@ -700,26 +705,27 @@ func (r AccessKeysAPIListAllForCustomerRequest) Execute() ([]AccessKey, *http.Re
 /*
 ListAllForCustomer List access keys for all providers of a customer
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AccessKeysAPIListAllForCustomerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AccessKeysAPIListAllForCustomerRequest
 */
 func (a *AccessKeysAPIService) ListAllForCustomer(ctx context.Context, cUUID string) AccessKeysAPIListAllForCustomerRequest {
 	return AccessKeysAPIListAllForCustomerRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []AccessKey
+//
+//	@return []AccessKey
 func (a *AccessKeysAPIService) ListAllForCustomerExecute(r AccessKeysAPIListAllForCustomerRequest) ([]AccessKey, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []AccessKey
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []AccessKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccessKeysAPIService.ListAllForCustomer")

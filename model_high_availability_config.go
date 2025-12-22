@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the HighAvailabilityConfig type satisfies the MappedNullable interface at compile time
@@ -22,12 +20,12 @@ var _ MappedNullable = &HighAvailabilityConfig{}
 
 // HighAvailabilityConfig struct for HighAvailabilityConfig
 type HighAvailabilityConfig struct {
-	AcceptAnyCertificate *bool `json:"accept_any_certificate,omitempty"`
-	ClusterKey *string `json:"cluster_key,omitempty"`
-	Instances []PlatformInstance `json:"instances"`
+	AcceptAnyCertificate *bool              `json:"accept_any_certificate,omitempty"`
+	ClusterKey           *string            `json:"cluster_key,omitempty"`
+	Instances            []PlatformInstance `json:"instances"`
 	// HA last failover
 	LastFailover *time.Time `json:"last_failover,omitempty"`
-	Uuid string `json:"uuid"`
+	Uuid         string     `json:"uuid"`
 }
 
 type _HighAvailabilityConfig HighAvailabilityConfig
@@ -196,7 +194,7 @@ func (o *HighAvailabilityConfig) SetUuid(v string) {
 }
 
 func (o HighAvailabilityConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -254,5 +252,3 @@ func (v *NullableHighAvailabilityConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

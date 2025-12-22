@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Provider type satisfies the MappedNullable interface at compile time
@@ -24,7 +22,7 @@ type Provider struct {
 	// Provider active status
 	Active *bool `json:"active,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use details.airGapInstall. Only supported in Create Request
-	AirGapInstall *bool `json:"airGapInstall,omitempty"`
+	AirGapInstall *bool       `json:"airGapInstall,omitempty"`
 	AllAccessKeys []AccessKey `json:"allAccessKeys,omitempty"`
 	// Provider cloud code
 	Code *string `json:"code,omitempty"`
@@ -33,20 +31,20 @@ type Provider struct {
 	// Customer uuid
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b>
-	DestVpcId *string `json:"destVpcId,omitempty"`
-	Details *ProviderDetails `json:"details,omitempty"`
+	DestVpcId *string          `json:"destVpcId,omitempty"`
+	Details   *ProviderDetails `json:"details,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b>
 	HostVpcId *string `json:"hostVpcId,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b>
-	HostVpcRegion *string `json:"hostVpcRegion,omitempty"`
-	ImageBundles []ImageBundle `json:"imageBundles"`
+	HostVpcRegion *string       `json:"hostVpcRegion,omitempty"`
+	ImageBundles  []ImageBundle `json:"imageBundles"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use allAccessKeys[0].keyInfo.keyPairName instead
 	KeyPairName *string `json:"keyPairName,omitempty"`
 	// Provider name
 	Name *string `json:"name,omitempty"`
 	// Previous usability state
-	PrevUsabilityState *string `json:"prevUsabilityState,omitempty"`
-	Regions []Region `json:"regions"`
+	PrevUsabilityState *string  `json:"prevUsabilityState,omitempty"`
+	Regions            []Region `json:"regions"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use details.SshPort instead. Only supported in create request
 	SshPort *int32 `json:"sshPort,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use allAccessKeys[0].keyInfo.sshPrivateKeyContent instead
@@ -773,7 +771,7 @@ func (o *Provider) SetVersion(v int64) {
 }
 
 func (o Provider) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -882,5 +880,3 @@ func (v *NullableProvider) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

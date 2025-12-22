@@ -23,7 +23,7 @@ type BundleInfo struct {
 	SshPortOverride *int32 `json:"sshPortOverride,omitempty"`
 	// sshUserOverride for the bundle. <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
 	SshUserOverride *string `json:"sshUserOverride,omitempty"`
-	YbImage *string `json:"ybImage,omitempty"`
+	YbImage         *string `json:"ybImage,omitempty"`
 }
 
 // NewBundleInfo instantiates a new BundleInfo object
@@ -140,7 +140,7 @@ func (o *BundleInfo) SetYbImage(v string) {
 }
 
 func (o BundleInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableBundleInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

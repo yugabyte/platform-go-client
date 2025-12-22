@@ -73,7 +73,7 @@ func (o *CurrentAdminNotificationMessages) SetMessages(v []AdminNotification) {
 }
 
 func (o CurrentAdminNotificationMessages) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,5 +123,3 @@ func (v *NullableCurrentAdminNotificationMessages) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

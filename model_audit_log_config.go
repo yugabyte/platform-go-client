@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AuditLogConfig type satisfies the MappedNullable interface at compile time
@@ -25,8 +23,8 @@ type AuditLogConfig struct {
 	ExportActive *bool `json:"exportActive,omitempty"`
 	// Universe logs exporter config
 	UniverseLogsExporterConfig []UniverseLogsExporterConfig `json:"universeLogsExporterConfig"`
-	YcqlAuditConfig *YCQLAuditConfig `json:"ycqlAuditConfig,omitempty"`
-	YsqlAuditConfig *YSQLAuditConfig `json:"ysqlAuditConfig,omitempty"`
+	YcqlAuditConfig            *YCQLAuditConfig             `json:"ycqlAuditConfig,omitempty"`
+	YsqlAuditConfig            *YSQLAuditConfig             `json:"ysqlAuditConfig,omitempty"`
 }
 
 type _AuditLogConfig AuditLogConfig
@@ -170,7 +168,7 @@ func (o *AuditLogConfig) SetYsqlAuditConfig(v YSQLAuditConfig) {
 }
 
 func (o AuditLogConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -227,5 +225,3 @@ func (v *NullableAuditLogConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

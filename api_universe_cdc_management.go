@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // UniverseCDCManagementAPIService UniverseCDCManagementAPI service
 type UniverseCDCManagementAPIService service
 
 type UniverseCDCManagementAPICreateCdcStreamRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseCDCManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r UniverseCDCManagementAPICreateCdcStreamRequest) Request(request interface{}) UniverseCDCManagementAPICreateCdcStreamRequest {
@@ -45,26 +44,26 @@ CreateCdcStream Create CDC Stream for a cluster
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseCDCManagementAPICreateCdcStreamRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseCDCManagementAPICreateCdcStreamRequest
 */
 func (a *UniverseCDCManagementAPIService) CreateCdcStream(ctx context.Context, cUUID string, uniUUID string) UniverseCDCManagementAPICreateCdcStreamRequest {
 	return UniverseCDCManagementAPICreateCdcStreamRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
 func (a *UniverseCDCManagementAPIService) CreateCdcStreamExecute(r UniverseCDCManagementAPICreateCdcStreamRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementAPIService.CreateCdcStream")
@@ -143,11 +142,11 @@ func (a *UniverseCDCManagementAPIService) CreateCdcStreamExecute(r UniverseCDCMa
 }
 
 type UniverseCDCManagementAPIDeleteCdcStreamRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseCDCManagementAPIService
-	cUUID string
-	uniUUID string
-	streamId string
+	cUUID      string
+	uniUUID    string
+	streamId   string
 }
 
 func (r UniverseCDCManagementAPIDeleteCdcStreamRequest) Execute() (*http.Response, error) {
@@ -159,28 +158,28 @@ DeleteCdcStream Delete a CDC stream for a cluster
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param streamId
- @return UniverseCDCManagementAPIDeleteCdcStreamRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param streamId
+	@return UniverseCDCManagementAPIDeleteCdcStreamRequest
 */
 func (a *UniverseCDCManagementAPIService) DeleteCdcStream(ctx context.Context, cUUID string, uniUUID string, streamId string) UniverseCDCManagementAPIDeleteCdcStreamRequest {
 	return UniverseCDCManagementAPIDeleteCdcStreamRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		streamId: streamId,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		streamId:   streamId,
 	}
 }
 
 // Execute executes the request
 func (a *UniverseCDCManagementAPIService) DeleteCdcStreamExecute(r UniverseCDCManagementAPIDeleteCdcStreamRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementAPIService.DeleteCdcStream")
@@ -257,10 +256,10 @@ func (a *UniverseCDCManagementAPIService) DeleteCdcStreamExecute(r UniverseCDCMa
 }
 
 type UniverseCDCManagementAPIListCdcStreamsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseCDCManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseCDCManagementAPIListCdcStreamsRequest) Execute() (*http.Response, error) {
@@ -272,26 +271,26 @@ ListCdcStreams List CDC Streams for a cluster
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseCDCManagementAPIListCdcStreamsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseCDCManagementAPIListCdcStreamsRequest
 */
 func (a *UniverseCDCManagementAPIService) ListCdcStreams(ctx context.Context, cUUID string, uniUUID string) UniverseCDCManagementAPIListCdcStreamsRequest {
 	return UniverseCDCManagementAPIListCdcStreamsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
 func (a *UniverseCDCManagementAPIService) ListCdcStreamsExecute(r UniverseCDCManagementAPIListCdcStreamsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementAPIService.ListCdcStreams")
@@ -367,10 +366,10 @@ func (a *UniverseCDCManagementAPIService) ListCdcStreamsExecute(r UniverseCDCMan
 }
 
 type UniverseCDCManagementAPIListReplicationSlotRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseCDCManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseCDCManagementAPIListReplicationSlotRequest) Execute() (*http.Response, error) {
@@ -382,26 +381,26 @@ ListReplicationSlot List CDC Replication slot for a cluster
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseCDCManagementAPIListReplicationSlotRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseCDCManagementAPIListReplicationSlotRequest
 */
 func (a *UniverseCDCManagementAPIService) ListReplicationSlot(ctx context.Context, cUUID string, uniUUID string) UniverseCDCManagementAPIListReplicationSlotRequest {
 	return UniverseCDCManagementAPIListReplicationSlotRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
 func (a *UniverseCDCManagementAPIService) ListReplicationSlotExecute(r UniverseCDCManagementAPIListReplicationSlotRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseCDCManagementAPIService.ListReplicationSlot")

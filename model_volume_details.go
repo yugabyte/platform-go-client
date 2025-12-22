@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the VolumeDetails type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &VolumeDetails{}
 
 // VolumeDetails struct for VolumeDetails
 type VolumeDetails struct {
-	MountPath string `json:"mountPath"`
-	VolumeSizeGB int32 `json:"volumeSizeGB"`
-	VolumeType string `json:"volumeType"`
+	MountPath    string `json:"mountPath"`
+	VolumeSizeGB int32  `json:"volumeSizeGB"`
+	VolumeType   string `json:"volumeType"`
 }
 
 type _VolumeDetails VolumeDetails
@@ -121,7 +119,7 @@ func (o *VolumeDetails) SetVolumeType(v string) {
 }
 
 func (o VolumeDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableVolumeDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

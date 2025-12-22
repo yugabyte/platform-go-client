@@ -19,7 +19,7 @@ var _ MappedNullable = &PerfAdvisorSettingsWithDefaults{}
 
 // PerfAdvisorSettingsWithDefaults struct for PerfAdvisorSettingsWithDefaults
 type PerfAdvisorSettingsWithDefaults struct {
-	DefaultSettings *PerfAdvisorSettingsFormData `json:"defaultSettings,omitempty"`
+	DefaultSettings  *PerfAdvisorSettingsFormData `json:"defaultSettings,omitempty"`
 	UniverseSettings *PerfAdvisorSettingsFormData `json:"universeSettings,omitempty"`
 }
 
@@ -105,7 +105,7 @@ func (o *PerfAdvisorSettingsWithDefaults) SetUniverseSettings(v PerfAdvisorSetti
 }
 
 func (o PerfAdvisorSettingsWithDefaults) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullablePerfAdvisorSettingsWithDefaults) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

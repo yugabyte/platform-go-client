@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // TableManagementAPIService TableManagementAPI service
 type TableManagementAPIService service
 
 type TableManagementAPIAlterTableRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	tableUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	tableUUID  string
+	request    *interface{}
 }
 
 func (r TableManagementAPIAlterTableRequest) Request(request interface{}) TableManagementAPIAlterTableRequest {
@@ -46,30 +45,31 @@ AlterTable Alter a YugabyteDB table
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableUUID
- @return TableManagementAPIAlterTableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableUUID
+	@return TableManagementAPIAlterTableRequest
 */
 func (a *TableManagementAPIService) AlterTable(ctx context.Context, cUUID string, uniUUID string, tableUUID string) TableManagementAPIAlterTableRequest {
 	return TableManagementAPIAlterTableRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableUUID: tableUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tableUUID:  tableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *TableManagementAPIService) AlterTableExecute(r TableManagementAPIAlterTableRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.AlterTable")
@@ -158,13 +158,13 @@ func (a *TableManagementAPIService) AlterTableExecute(r TableManagementAPIAlterT
 }
 
 type TableManagementAPIBulkImportDataRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	tableUUID string
+	cUUID      string
+	uniUUID    string
+	tableUUID  string
 	bulkImport *BulkImportParams
-	request *interface{}
+	request    *interface{}
 }
 
 // Bulk data to be imported
@@ -187,30 +187,31 @@ BulkImportData Bulk import data
 
 YbaApi Internal. Bulk import data into the specified table. This is currently AWS-only.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableUUID
- @return TableManagementAPIBulkImportDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableUUID
+	@return TableManagementAPIBulkImportDataRequest
 */
 func (a *TableManagementAPIService) BulkImportData(ctx context.Context, cUUID string, uniUUID string, tableUUID string) TableManagementAPIBulkImportDataRequest {
 	return TableManagementAPIBulkImportDataRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableUUID: tableUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tableUUID:  tableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *TableManagementAPIService) BulkImportDataExecute(r TableManagementAPIBulkImportDataRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.BulkImportData")
@@ -304,12 +305,12 @@ func (a *TableManagementAPIService) BulkImportDataExecute(r TableManagementAPIBu
 }
 
 type TableManagementAPICreateTableRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	table *TableDefinitionTaskParams
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	table      *TableDefinitionTaskParams
+	request    *interface{}
 }
 
 // Table definition to be created
@@ -332,28 +333,29 @@ CreateTable Create a YugabyteDB table
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TableManagementAPICreateTableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TableManagementAPICreateTableRequest
 */
 func (a *TableManagementAPIService) CreateTable(ctx context.Context, cUUID string, uniUUID string) TableManagementAPICreateTableRequest {
 	return TableManagementAPICreateTableRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *TableManagementAPIService) CreateTableExecute(r TableManagementAPICreateTableRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.CreateTable")
@@ -446,12 +448,12 @@ func (a *TableManagementAPIService) CreateTableExecute(r TableManagementAPICreat
 }
 
 type TableManagementAPICreateTableSpacesRequest struct {
-	ctx context.Context
-	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                      context.Context
+	ApiService               *TableManagementAPIService
+	cUUID                    string
+	uniUUID                  string
 	createTableSpacesRequest *CreateTablespaceParams
-	request *interface{}
+	request                  *interface{}
 }
 
 func (r TableManagementAPICreateTableSpacesRequest) CreateTableSpacesRequest(createTableSpacesRequest CreateTablespaceParams) TableManagementAPICreateTableSpacesRequest {
@@ -473,28 +475,29 @@ CreateTableSpaces Create tableSpaces
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TableManagementAPICreateTableSpacesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TableManagementAPICreateTableSpacesRequest
 */
 func (a *TableManagementAPIService) CreateTableSpaces(ctx context.Context, cUUID string, uniUUID string) TableManagementAPICreateTableSpacesRequest {
 	return TableManagementAPICreateTableSpacesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *TableManagementAPIService) CreateTableSpacesExecute(r TableManagementAPICreateTableSpacesRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.CreateTableSpaces")
@@ -587,11 +590,11 @@ func (a *TableManagementAPIService) CreateTableSpacesExecute(r TableManagementAP
 }
 
 type TableManagementAPIDescribeTableRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	tableUUID string
+	cUUID      string
+	uniUUID    string
+	tableUUID  string
 }
 
 func (r TableManagementAPIDescribeTableRequest) Execute() (*TableDefinitionTaskParams, *http.Response, error) {
@@ -603,30 +606,31 @@ DescribeTable Describe a table
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableUUID
- @return TableManagementAPIDescribeTableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableUUID
+	@return TableManagementAPIDescribeTableRequest
 */
 func (a *TableManagementAPIService) DescribeTable(ctx context.Context, cUUID string, uniUUID string, tableUUID string) TableManagementAPIDescribeTableRequest {
 	return TableManagementAPIDescribeTableRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableUUID: tableUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tableUUID:  tableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TableDefinitionTaskParams
+//
+//	@return TableDefinitionTaskParams
 func (a *TableManagementAPIService) DescribeTableExecute(r TableManagementAPIDescribeTableRequest) (*TableDefinitionTaskParams, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TableDefinitionTaskParams
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TableDefinitionTaskParams
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.DescribeTable")
@@ -712,12 +716,12 @@ func (a *TableManagementAPIService) DescribeTableExecute(r TableManagementAPIDes
 }
 
 type TableManagementAPIDropTableRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	tableUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	tableUUID  string
+	request    *interface{}
 }
 
 func (r TableManagementAPIDropTableRequest) Request(request interface{}) TableManagementAPIDropTableRequest {
@@ -734,30 +738,31 @@ DropTable Drop a YugabyteDB table
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableUUID
- @return TableManagementAPIDropTableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableUUID
+	@return TableManagementAPIDropTableRequest
 */
 func (a *TableManagementAPIService) DropTable(ctx context.Context, cUUID string, uniUUID string, tableUUID string) TableManagementAPIDropTableRequest {
 	return TableManagementAPIDropTableRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableUUID: tableUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tableUUID:  tableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *TableManagementAPIService) DropTableExecute(r TableManagementAPIDropTableRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.DropTable")
@@ -846,10 +851,10 @@ func (a *TableManagementAPIService) DropTableExecute(r TableManagementAPIDropTab
 }
 
 type TableManagementAPIGetAllNamespacesRequest struct {
-	ctx context.Context
-	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                     context.Context
+	ApiService              *TableManagementAPIService
+	cUUID                   string
+	uniUUID                 string
 	includeSystemNamespaces *bool
 }
 
@@ -867,28 +872,29 @@ GetAllNamespaces Get a list of all namespaces in the specified universe.
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TableManagementAPIGetAllNamespacesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TableManagementAPIGetAllNamespacesRequest
 */
 func (a *TableManagementAPIService) GetAllNamespaces(ctx context.Context, cUUID string, uniUUID string) TableManagementAPIGetAllNamespacesRequest {
 	return TableManagementAPIGetAllNamespacesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []NamespaceInfoResp
+//
+//	@return []NamespaceInfoResp
 func (a *TableManagementAPIService) GetAllNamespacesExecute(r TableManagementAPIGetAllNamespacesRequest) ([]NamespaceInfoResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []NamespaceInfoResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []NamespaceInfoResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.GetAllNamespaces")
@@ -980,10 +986,10 @@ func (a *TableManagementAPIService) GetAllNamespacesExecute(r TableManagementAPI
 }
 
 type TableManagementAPIGetAllTableSpacesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r TableManagementAPIGetAllTableSpacesRequest) Execute() ([]TableSpaceInfo, *http.Response, error) {
@@ -995,28 +1001,29 @@ GetAllTableSpaces Get a list of all tablespaces of a given universe.
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TableManagementAPIGetAllTableSpacesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TableManagementAPIGetAllTableSpacesRequest
 */
 func (a *TableManagementAPIService) GetAllTableSpaces(ctx context.Context, cUUID string, uniUUID string) TableManagementAPIGetAllTableSpacesRequest {
 	return TableManagementAPIGetAllTableSpacesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []TableSpaceInfo
+//
+//	@return []TableSpaceInfo
 func (a *TableManagementAPIService) GetAllTableSpacesExecute(r TableManagementAPIGetAllTableSpacesRequest) ([]TableSpaceInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []TableSpaceInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []TableSpaceInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.GetAllTableSpaces")
@@ -1101,14 +1108,14 @@ func (a *TableManagementAPIService) GetAllTableSpacesExecute(r TableManagementAP
 }
 
 type TableManagementAPIGetAllTablesRequest struct {
-	ctx context.Context
-	ApiService *TableManagementAPIService
-	cUUID string
-	uniUUID string
-	includeParentTableInfo *bool
-	excludeColocatedTables *bool
+	ctx                          context.Context
+	ApiService                   *TableManagementAPIService
+	cUUID                        string
+	uniUUID                      string
+	includeParentTableInfo       *bool
+	excludeColocatedTables       *bool
 	includeColocatedParentTables *bool
-	xClusterSupportedOnly *bool
+	xClusterSupportedOnly        *bool
 }
 
 func (r TableManagementAPIGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementAPIGetAllTablesRequest {
@@ -1140,28 +1147,29 @@ GetAllTables Get a list of all tables in the specified universe
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TableManagementAPIGetAllTablesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TableManagementAPIGetAllTablesRequest
 */
 func (a *TableManagementAPIService) GetAllTables(ctx context.Context, cUUID string, uniUUID string) TableManagementAPIGetAllTablesRequest {
 	return TableManagementAPIGetAllTablesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []TableInfoResp
+//
+//	@return []TableInfoResp
 func (a *TableManagementAPIService) GetAllTablesExecute(r TableManagementAPIGetAllTablesRequest) ([]TableInfoResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []TableInfoResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []TableInfoResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.GetAllTables")
@@ -1274,7 +1282,7 @@ func (a *TableManagementAPIService) GetAllTablesExecute(r TableManagementAPIGetA
 }
 
 type TableManagementAPIGetYQLDataTypesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TableManagementAPIService
 }
 
@@ -1287,24 +1295,25 @@ GetYQLDataTypes List column types
 
 YbaApi Internal. Get a list of all defined column types.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TableManagementAPIGetYQLDataTypesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return TableManagementAPIGetYQLDataTypesRequest
 */
 func (a *TableManagementAPIService) GetYQLDataTypes(ctx context.Context) TableManagementAPIGetYQLDataTypesRequest {
 	return TableManagementAPIGetYQLDataTypesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *TableManagementAPIService) GetYQLDataTypesExecute(r TableManagementAPIGetYQLDataTypesRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TableManagementAPIService.GetYQLDataTypes")

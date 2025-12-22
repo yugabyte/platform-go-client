@@ -31,15 +31,15 @@ type UniverseResp struct {
 	// Universe name
 	Name *string `json:"name,omitempty"`
 	// Price
-	PricePerHour *float64 `json:"pricePerHour,omitempty"`
-	Resources *UniverseResourceDetails `json:"resources,omitempty"`
-	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
+	PricePerHour     *float64                 `json:"pricePerHour,omitempty"`
+	Resources        *UniverseResourceDetails `json:"resources,omitempty"`
+	RollMaxBatchSize *RollMaxBatchSize        `json:"rollMaxBatchSize,omitempty"`
 	// Sample command
 	SampleAppCommandTxt *string `json:"sampleAppCommandTxt,omitempty"`
 	// Task UUID
 	TaskUUID *string `json:"taskUUID,omitempty"`
 	// Universe configuration
-	UniverseConfig *map[string]string `json:"universeConfig,omitempty"`
+	UniverseConfig  *map[string]string                `json:"universeConfig,omitempty"`
 	UniverseDetails *UniverseDefinitionTaskParamsResp `json:"universeDetails,omitempty"`
 	// Universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
@@ -545,7 +545,7 @@ func (o *UniverseResp) SetVersion(v int32) {
 }
 
 func (o UniverseResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -637,5 +637,3 @@ func (v *NullableUniverseResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

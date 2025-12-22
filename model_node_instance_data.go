@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NodeInstanceData type satisfies the MappedNullable interface at compile time
@@ -239,7 +237,7 @@ func (o *NodeInstanceData) SetZone(v string) {
 }
 
 func (o NodeInstanceData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -295,5 +293,3 @@ func (v *NullableNodeInstanceData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

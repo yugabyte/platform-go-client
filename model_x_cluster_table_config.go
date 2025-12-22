@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the XClusterTableConfig type satisfies the MappedNullable interface at compile time
@@ -34,15 +32,15 @@ type XClusterTableConfig struct {
 	// Short human readable replication status error messages
 	ReplicationStatusErrors []string `json:"replicationStatusErrors,omitempty"`
 	// Time of the last try to restore data to the target universe
-	RestoreTime *time.Time `json:"restoreTime,omitempty"`
-	RestoreUuid string `json:"restoreUuid"`
+	RestoreTime     *time.Time     `json:"restoreTime,omitempty"`
+	RestoreUuid     string         `json:"restoreUuid"`
 	SourceTableInfo *TableInfoResp `json:"sourceTableInfo,omitempty"`
 	// Status
 	Status *string `json:"status,omitempty"`
 	// Stream ID if replication is setup; bootstrap ID if the table is bootstrapped
 	StreamId *string `json:"streamId,omitempty"`
 	// Table ID
-	TableId *string `json:"tableId,omitempty"`
+	TableId         *string        `json:"tableId,omitempty"`
 	TargetTableInfo *TableInfoResp `json:"targetTableInfo,omitempty"`
 }
 
@@ -468,7 +466,7 @@ func (o *XClusterTableConfig) SetTargetTableInfo(v TableInfoResp) {
 }
 
 func (o XClusterTableConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -550,5 +548,3 @@ func (v *NullableXClusterTableConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

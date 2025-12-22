@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // AuditAPIService AuditAPI service
 type AuditAPIService service
 
 type AuditAPIGetTaskAuditRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AuditAPIService
-	cUUID string
-	tUUID string
+	cUUID      string
+	tUUID      string
 }
 
 func (r AuditAPIGetTaskAuditRequest) Execute() (*Audit, *http.Response, error) {
@@ -37,28 +36,29 @@ func (r AuditAPIGetTaskAuditRequest) Execute() (*Audit, *http.Response, error) {
 /*
 GetTaskAudit Get audit info for a task
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return AuditAPIGetTaskAuditRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return AuditAPIGetTaskAuditRequest
 */
 func (a *AuditAPIService) GetTaskAudit(ctx context.Context, cUUID string, tUUID string) AuditAPIGetTaskAuditRequest {
 	return AuditAPIGetTaskAuditRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Audit
+//
+//	@return Audit
 func (a *AuditAPIService) GetTaskAuditExecute(r AuditAPIGetTaskAuditRequest) (*Audit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Audit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Audit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditAPIService.GetTaskAudit")
@@ -143,10 +143,10 @@ func (a *AuditAPIService) GetTaskAuditExecute(r AuditAPIGetTaskAuditRequest) (*A
 }
 
 type AuditAPIGetUserFromTaskRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AuditAPIService
-	cUUID string
-	tUUID string
+	cUUID      string
+	tUUID      string
 }
 
 func (r AuditAPIGetUserFromTaskRequest) Execute() (*Audit, *http.Response, error) {
@@ -156,28 +156,29 @@ func (r AuditAPIGetUserFromTaskRequest) Execute() (*Audit, *http.Response, error
 /*
 GetUserFromTask Get the user associated with a task
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param tUUID
- @return AuditAPIGetUserFromTaskRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param tUUID
+	@return AuditAPIGetUserFromTaskRequest
 */
 func (a *AuditAPIService) GetUserFromTask(ctx context.Context, cUUID string, tUUID string) AuditAPIGetUserFromTaskRequest {
 	return AuditAPIGetUserFromTaskRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Audit
+//
+//	@return Audit
 func (a *AuditAPIService) GetUserFromTaskExecute(r AuditAPIGetUserFromTaskRequest) (*Audit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Audit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Audit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditAPIService.GetUserFromTask")
@@ -262,10 +263,10 @@ func (a *AuditAPIService) GetUserFromTaskExecute(r AuditAPIGetUserFromTaskReques
 }
 
 type AuditAPIListOfAuditRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AuditAPIService
-	cUUID string
-	uUUID string
+	cUUID      string
+	uUUID      string
 }
 
 func (r AuditAPIListOfAuditRequest) Execute() ([]Audit, *http.Response, error) {
@@ -275,28 +276,29 @@ func (r AuditAPIListOfAuditRequest) Execute() ([]Audit, *http.Response, error) {
 /*
 ListOfAudit List a user's audit entries
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return AuditAPIListOfAuditRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return AuditAPIListOfAuditRequest
 */
 func (a *AuditAPIService) ListOfAudit(ctx context.Context, cUUID string, uUUID string) AuditAPIListOfAuditRequest {
 	return AuditAPIListOfAuditRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Audit
+//
+//	@return []Audit
 func (a *AuditAPIService) ListOfAuditExecute(r AuditAPIListOfAuditRequest) ([]Audit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Audit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Audit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditAPIService.ListOfAudit")

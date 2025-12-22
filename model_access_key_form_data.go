@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AccessKeyFormData type satisfies the MappedNullable interface at compile time
@@ -22,9 +20,9 @@ var _ MappedNullable = &AccessKeyFormData{}
 // AccessKeyFormData struct for AccessKeyFormData
 type AccessKeyFormData struct {
 	ExpirationThresholdDays *int32 `json:"expirationThresholdDays,omitempty"`
-	KeyCode string `json:"keyCode"`
-	KeyContent string `json:"keyContent"`
-	KeyType string `json:"keyType"`
+	KeyCode                 string `json:"keyCode"`
+	KeyContent              string `json:"keyContent"`
+	KeyType                 string `json:"keyType"`
 }
 
 type _AccessKeyFormData AccessKeyFormData
@@ -154,7 +152,7 @@ func (o *AccessKeyFormData) SetKeyType(v string) {
 }
 
 func (o AccessKeyFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -207,5 +205,3 @@ func (v *NullableAccessKeyFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Backup type satisfies the MappedNullable interface at compile time
@@ -42,10 +40,10 @@ type Backup struct {
 	// First snapshot time in this backup
 	FirstSnapshotTime *int64 `json:"firstSnapshotTime,omitempty"`
 	// Whether the backup has KMS history metadata
-	HasKMSHistory *bool `json:"hasKMSHistory,omitempty"`
-	IncrementalBackup bool `json:"incrementalBackup"`
-	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
-	ParentBackup bool `json:"parentBackup"`
+	HasKMSHistory                *bool `json:"hasKMSHistory,omitempty"`
+	IncrementalBackup            bool  `json:"incrementalBackup"`
+	KubernetesOperatorControlled bool  `json:"kubernetesOperatorControlled"`
+	ParentBackup                 bool  `json:"parentBackup"`
 	// Retry count for backup deletion
 	RetryCount *int32 `json:"retryCount,omitempty"`
 	// Schedule Policy Name, if this backup is part of a schedule
@@ -801,7 +799,7 @@ func (o *Backup) SetVersion(v string) {
 }
 
 func (o Backup) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -911,5 +909,3 @@ func (v *NullableBackup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

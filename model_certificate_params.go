@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CertificateParams type satisfies the MappedNullable interface at compile time
@@ -21,15 +19,15 @@ var _ MappedNullable = &CertificateParams{}
 
 // CertificateParams Certificate Params is used to validate constraints for the custom certificate Data
 type CertificateParams struct {
-	CertContent string `json:"certContent"`
-	CertExpiry int64 `json:"certExpiry"`
-	CertStart int64 `json:"certStart"`
-	CertType string `json:"certType"`
-	CustomCertInfo *CustomCertInfo `json:"customCertInfo,omitempty"`
-	CustomServerCertData *CustomServerCertData `json:"customServerCertData,omitempty"`
-	HcVaultCertParams *HashicorpVaultConfigParams `json:"hcVaultCertParams,omitempty"`
-	KeyContent *string `json:"keyContent,omitempty"`
-	Label string `json:"label"`
+	CertContent          string                      `json:"certContent"`
+	CertExpiry           int64                       `json:"certExpiry"`
+	CertStart            int64                       `json:"certStart"`
+	CertType             string                      `json:"certType"`
+	CustomCertInfo       *CustomCertInfo             `json:"customCertInfo,omitempty"`
+	CustomServerCertData *CustomServerCertData       `json:"customServerCertData,omitempty"`
+	HcVaultCertParams    *HashicorpVaultConfigParams `json:"hcVaultCertParams,omitempty"`
+	KeyContent           *string                     `json:"keyContent,omitempty"`
+	Label                string                      `json:"label"`
 }
 
 type _CertificateParams CertificateParams
@@ -305,7 +303,7 @@ func (o *CertificateParams) SetLabel(v string) {
 }
 
 func (o CertificateParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -369,5 +367,3 @@ func (v *NullableCertificateParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

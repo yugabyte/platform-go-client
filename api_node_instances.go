@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // NodeInstancesAPIService NodeInstancesAPI service
 type NodeInstancesAPIService service
 
 type NodeInstancesAPICreateNodeInstanceRequest struct {
-	ctx context.Context
-	ApiService *NodeInstancesAPIService
-	cUUID string
-	azUUID string
+	ctx          context.Context
+	ApiService   *NodeInstancesAPIService
+	cUUID        string
+	azUUID       string
 	nodeInstance *NodeInstanceFormData
-	request *interface{}
+	request      *interface{}
 }
 
 // Node instance data to be created
@@ -50,28 +49,29 @@ func (r NodeInstancesAPICreateNodeInstanceRequest) Execute() (*map[string]NodeIn
 /*
 CreateNodeInstance Create a node instance
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param azUUID
- @return NodeInstancesAPICreateNodeInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param azUUID
+	@return NodeInstancesAPICreateNodeInstanceRequest
 */
 func (a *NodeInstancesAPIService) CreateNodeInstance(ctx context.Context, cUUID string, azUUID string) NodeInstancesAPICreateNodeInstanceRequest {
 	return NodeInstancesAPICreateNodeInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]NodeInstance
+//
+//	@return map[string]NodeInstance
 func (a *NodeInstancesAPIService) CreateNodeInstanceExecute(r NodeInstancesAPICreateNodeInstanceRequest) (*map[string]NodeInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]NodeInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *map[string]NodeInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.CreateNodeInstance")
@@ -164,12 +164,12 @@ func (a *NodeInstancesAPIService) CreateNodeInstanceExecute(r NodeInstancesAPICr
 }
 
 type NodeInstancesAPIDeleteInstanceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 	instanceIP string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r NodeInstancesAPIDeleteInstanceRequest) Request(request interface{}) NodeInstancesAPIDeleteInstanceRequest {
@@ -184,30 +184,31 @@ func (r NodeInstancesAPIDeleteInstanceRequest) Execute() (*YBPSuccess, *http.Res
 /*
 DeleteInstance Delete a node instance
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param instanceIP
- @return NodeInstancesAPIDeleteInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param instanceIP
+	@return NodeInstancesAPIDeleteInstanceRequest
 */
 func (a *NodeInstancesAPIService) DeleteInstance(ctx context.Context, cUUID string, pUUID string, instanceIP string) NodeInstancesAPIDeleteInstanceRequest {
 	return NodeInstancesAPIDeleteInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 		instanceIP: instanceIP,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *NodeInstancesAPIService) DeleteInstanceExecute(r NodeInstancesAPIDeleteInstanceRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.DeleteInstance")
@@ -296,13 +297,13 @@ func (a *NodeInstancesAPIService) DeleteInstanceExecute(r NodeInstancesAPIDelete
 }
 
 type NodeInstancesAPIDetachedNodeActionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 	instanceIP string
 	nodeAction *NodeActionFormData
-	request *interface{}
+	request    *interface{}
 }
 
 // Node action data to be updated
@@ -323,30 +324,31 @@ func (r NodeInstancesAPIDetachedNodeActionRequest) Execute() (*YBPTask, *http.Re
 /*
 DetachedNodeAction Detached node action
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param instanceIP
- @return NodeInstancesAPIDetachedNodeActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param instanceIP
+	@return NodeInstancesAPIDetachedNodeActionRequest
 */
 func (a *NodeInstancesAPIService) DetachedNodeAction(ctx context.Context, cUUID string, pUUID string, instanceIP string) NodeInstancesAPIDetachedNodeActionRequest {
 	return NodeInstancesAPIDetachedNodeActionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 		instanceIP: instanceIP,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *NodeInstancesAPIService) DetachedNodeActionExecute(r NodeInstancesAPIDetachedNodeActionRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.DetachedNodeAction")
@@ -440,11 +442,11 @@ func (a *NodeInstancesAPIService) DetachedNodeActionExecute(r NodeInstancesAPIDe
 }
 
 type NodeInstancesAPIGetNodeDetailsRequest struct {
-	ctx context.Context
-	ApiService *NodeInstancesAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *NodeInstancesAPIService
+	cUUID        string
 	universeUUID string
-	nodeName string
+	nodeName     string
 }
 
 func (r NodeInstancesAPIGetNodeDetailsRequest) Execute() (*NodeDetailsResp, *http.Response, error) {
@@ -454,30 +456,31 @@ func (r NodeInstancesAPIGetNodeDetailsRequest) Execute() (*NodeDetailsResp, *htt
 /*
 GetNodeDetails Get node details
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param universeUUID
- @param nodeName
- @return NodeInstancesAPIGetNodeDetailsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param universeUUID
+	@param nodeName
+	@return NodeInstancesAPIGetNodeDetailsRequest
 */
 func (a *NodeInstancesAPIService) GetNodeDetails(ctx context.Context, cUUID string, universeUUID string, nodeName string) NodeInstancesAPIGetNodeDetailsRequest {
 	return NodeInstancesAPIGetNodeDetailsRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
 		universeUUID: universeUUID,
-		nodeName: nodeName,
+		nodeName:     nodeName,
 	}
 }
 
 // Execute executes the request
-//  @return NodeDetailsResp
+//
+//	@return NodeDetailsResp
 func (a *NodeInstancesAPIService) GetNodeDetailsExecute(r NodeInstancesAPIGetNodeDetailsRequest) (*NodeDetailsResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NodeDetailsResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NodeDetailsResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.GetNodeDetails")
@@ -563,10 +566,10 @@ func (a *NodeInstancesAPIService) GetNodeDetailsExecute(r NodeInstancesAPIGetNod
 }
 
 type NodeInstancesAPIGetNodeInstanceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	nodeUUID string
+	cUUID      string
+	nodeUUID   string
 }
 
 func (r NodeInstancesAPIGetNodeInstanceRequest) Execute() (*NodeInstance, *http.Response, error) {
@@ -576,28 +579,29 @@ func (r NodeInstancesAPIGetNodeInstanceRequest) Execute() (*NodeInstance, *http.
 /*
 GetNodeInstance Get a node instance
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param nodeUUID
- @return NodeInstancesAPIGetNodeInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param nodeUUID
+	@return NodeInstancesAPIGetNodeInstanceRequest
 */
 func (a *NodeInstancesAPIService) GetNodeInstance(ctx context.Context, cUUID string, nodeUUID string) NodeInstancesAPIGetNodeInstanceRequest {
 	return NodeInstancesAPIGetNodeInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		nodeUUID: nodeUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		nodeUUID:   nodeUUID,
 	}
 }
 
 // Execute executes the request
-//  @return NodeInstance
+//
+//	@return NodeInstance
 func (a *NodeInstancesAPIService) GetNodeInstanceExecute(r NodeInstancesAPIGetNodeInstanceRequest) (*NodeInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NodeInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NodeInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.GetNodeInstance")
@@ -682,10 +686,10 @@ func (a *NodeInstancesAPIService) GetNodeInstanceExecute(r NodeInstancesAPIGetNo
 }
 
 type NodeInstancesAPIListByProviderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 }
 
 func (r NodeInstancesAPIListByProviderRequest) Execute() ([]NodeInstance, *http.Response, error) {
@@ -695,28 +699,29 @@ func (r NodeInstancesAPIListByProviderRequest) Execute() ([]NodeInstance, *http.
 /*
 ListByProvider List all of a provider's node instances
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return NodeInstancesAPIListByProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return NodeInstancesAPIListByProviderRequest
 */
 func (a *NodeInstancesAPIService) ListByProvider(ctx context.Context, cUUID string, pUUID string) NodeInstancesAPIListByProviderRequest {
 	return NodeInstancesAPIListByProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []NodeInstance
+//
+//	@return []NodeInstance
 func (a *NodeInstancesAPIService) ListByProviderExecute(r NodeInstancesAPIListByProviderRequest) ([]NodeInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []NodeInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []NodeInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.ListByProvider")
@@ -801,10 +806,10 @@ func (a *NodeInstancesAPIService) ListByProviderExecute(r NodeInstancesAPIListBy
 }
 
 type NodeInstancesAPIListByZoneRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	azUUID string
+	cUUID      string
+	azUUID     string
 }
 
 func (r NodeInstancesAPIListByZoneRequest) Execute() ([]NodeInstance, *http.Response, error) {
@@ -814,28 +819,29 @@ func (r NodeInstancesAPIListByZoneRequest) Execute() ([]NodeInstance, *http.Resp
 /*
 ListByZone List all of a zone's node instances
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param azUUID
- @return NodeInstancesAPIListByZoneRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param azUUID
+	@return NodeInstancesAPIListByZoneRequest
 */
 func (a *NodeInstancesAPIService) ListByZone(ctx context.Context, cUUID string, azUUID string) NodeInstancesAPIListByZoneRequest {
 	return NodeInstancesAPIListByZoneRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []NodeInstance
+//
+//	@return []NodeInstance
 func (a *NodeInstancesAPIService) ListByZoneExecute(r NodeInstancesAPIListByZoneRequest) ([]NodeInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []NodeInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []NodeInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.ListByZone")
@@ -920,13 +926,13 @@ func (a *NodeInstancesAPIService) ListByZoneExecute(r NodeInstancesAPIListByZone
 }
 
 type NodeInstancesAPINodeActionRequest struct {
-	ctx context.Context
-	ApiService *NodeInstancesAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *NodeInstancesAPIService
+	cUUID        string
 	universeUUID string
-	nodeName string
-	nodeAction *NodeActionFormData
-	request *interface{}
+	nodeName     string
+	nodeAction   *NodeActionFormData
+	request      *interface{}
 }
 
 // Details of the node action to be performed
@@ -947,30 +953,31 @@ func (r NodeInstancesAPINodeActionRequest) Execute() (*YBPTask, *http.Response, 
 /*
 NodeAction Perform the specified action on the universe node
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param universeUUID
- @param nodeName
- @return NodeInstancesAPINodeActionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param universeUUID
+	@param nodeName
+	@return NodeInstancesAPINodeActionRequest
 */
 func (a *NodeInstancesAPIService) NodeAction(ctx context.Context, cUUID string, universeUUID string, nodeName string) NodeInstancesAPINodeActionRequest {
 	return NodeInstancesAPINodeActionRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
 		universeUUID: universeUUID,
-		nodeName: nodeName,
+		nodeName:     nodeName,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *NodeInstancesAPIService) NodeActionExecute(r NodeInstancesAPINodeActionRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.NodeAction")
@@ -1064,13 +1071,13 @@ func (a *NodeInstancesAPIService) NodeActionExecute(r NodeInstancesAPINodeAction
 }
 
 type NodeInstancesAPIUpdateStateRequest struct {
-	ctx context.Context
-	ApiService *NodeInstancesAPIService
-	cUUID string
-	pUUID string
-	instanceIP string
+	ctx                       context.Context
+	ApiService                *NodeInstancesAPIService
+	cUUID                     string
+	pUUID                     string
+	instanceIP                string
 	nodeInstanceStateFormData *NodeInstanceStateFormData
-	request *interface{}
+	request                   *interface{}
 }
 
 // Resultant node instance state to transition to
@@ -1093,30 +1100,31 @@ UpdateState Update node instance state
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param instanceIP
- @return NodeInstancesAPIUpdateStateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param instanceIP
+	@return NodeInstancesAPIUpdateStateRequest
 */
 func (a *NodeInstancesAPIService) UpdateState(ctx context.Context, cUUID string, pUUID string, instanceIP string) NodeInstancesAPIUpdateStateRequest {
 	return NodeInstancesAPIUpdateStateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 		instanceIP: instanceIP,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *NodeInstancesAPIService) UpdateStateExecute(r NodeInstancesAPIUpdateStateRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.UpdateState")
@@ -1210,11 +1218,11 @@ func (a *NodeInstancesAPIService) UpdateStateExecute(r NodeInstancesAPIUpdateSta
 }
 
 type NodeInstancesAPIValidateNodeInstanceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeInstancesAPIService
-	cUUID string
-	azUUID string
-	request *interface{}
+	cUUID      string
+	azUUID     string
+	request    *interface{}
 }
 
 func (r NodeInstancesAPIValidateNodeInstanceRequest) Request(request interface{}) NodeInstancesAPIValidateNodeInstanceRequest {
@@ -1229,28 +1237,29 @@ func (r NodeInstancesAPIValidateNodeInstanceRequest) Execute() (*map[string]Vali
 /*
 ValidateNodeInstance Validate a node instance
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param azUUID
- @return NodeInstancesAPIValidateNodeInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param azUUID
+	@return NodeInstancesAPIValidateNodeInstanceRequest
 */
 func (a *NodeInstancesAPIService) ValidateNodeInstance(ctx context.Context, cUUID string, azUUID string) NodeInstancesAPIValidateNodeInstanceRequest {
 	return NodeInstancesAPIValidateNodeInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		azUUID: azUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		azUUID:     azUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]ValidationResult
+//
+//	@return map[string]ValidationResult
 func (a *NodeInstancesAPIService) ValidateNodeInstanceExecute(r NodeInstancesAPIValidateNodeInstanceRequest) (*map[string]ValidationResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]ValidationResult
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *map[string]ValidationResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeInstancesAPIService.ValidateNodeInstance")

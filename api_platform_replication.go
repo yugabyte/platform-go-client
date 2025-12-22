@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // PlatformReplicationAPIService PlatformReplicationAPI service
 type PlatformReplicationAPIService service
 
 type PlatformReplicationAPIGetBackupInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PlatformReplicationAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r PlatformReplicationAPIGetBackupInfoRequest) Execute() (*http.Response, error) {
@@ -36,24 +35,24 @@ func (r PlatformReplicationAPIGetBackupInfoRequest) Execute() (*http.Response, e
 /*
 GetBackupInfo Method for GetBackupInfo
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformReplicationAPIGetBackupInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformReplicationAPIGetBackupInfoRequest
 */
 func (a *PlatformReplicationAPIService) GetBackupInfo(ctx context.Context, cUUID string) PlatformReplicationAPIGetBackupInfoRequest {
 	return PlatformReplicationAPIGetBackupInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformReplicationAPIService) GetBackupInfoExecute(r PlatformReplicationAPIGetBackupInfoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformReplicationAPIService.GetBackupInfo")
@@ -128,10 +127,10 @@ func (a *PlatformReplicationAPIService) GetBackupInfoExecute(r PlatformReplicati
 }
 
 type PlatformReplicationAPIListBackupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PlatformReplicationAPIService
-	cUUID string
-	leader *string
+	cUUID      string
+	leader     *string
 }
 
 func (r PlatformReplicationAPIListBackupsRequest) Leader(leader string) PlatformReplicationAPIListBackupsRequest {
@@ -148,26 +147,27 @@ ListBackups List backups
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformReplicationAPIListBackupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformReplicationAPIListBackupsRequest
 */
 func (a *PlatformReplicationAPIService) ListBackups(ctx context.Context, cUUID string) PlatformReplicationAPIListBackupsRequest {
 	return PlatformReplicationAPIListBackupsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *PlatformReplicationAPIService) ListBackupsExecute(r PlatformReplicationAPIListBackupsRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformReplicationAPIService.ListBackups")
@@ -255,11 +255,11 @@ func (a *PlatformReplicationAPIService) ListBackupsExecute(r PlatformReplication
 }
 
 type PlatformReplicationAPIStartPeriodicBackupRequest struct {
-	ctx context.Context
-	ApiService *PlatformReplicationAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *PlatformReplicationAPIService
+	cUUID                          string
 	platformBackupFrequencyRequest *PlatformBackupFrequencyFormData
-	request *interface{}
+	request                        *interface{}
 }
 
 func (r PlatformReplicationAPIStartPeriodicBackupRequest) PlatformBackupFrequencyRequest(platformBackupFrequencyRequest PlatformBackupFrequencyFormData) PlatformReplicationAPIStartPeriodicBackupRequest {
@@ -281,24 +281,24 @@ StartPeriodicBackup Start periodic backup
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformReplicationAPIStartPeriodicBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformReplicationAPIStartPeriodicBackupRequest
 */
 func (a *PlatformReplicationAPIService) StartPeriodicBackup(ctx context.Context, cUUID string) PlatformReplicationAPIStartPeriodicBackupRequest {
 	return PlatformReplicationAPIStartPeriodicBackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformReplicationAPIService) StartPeriodicBackupExecute(r PlatformReplicationAPIStartPeriodicBackupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformReplicationAPIService.StartPeriodicBackup")
@@ -381,10 +381,10 @@ func (a *PlatformReplicationAPIService) StartPeriodicBackupExecute(r PlatformRep
 }
 
 type PlatformReplicationAPIStopPeriodicBackupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PlatformReplicationAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r PlatformReplicationAPIStopPeriodicBackupRequest) Request(request interface{}) PlatformReplicationAPIStopPeriodicBackupRequest {
@@ -399,24 +399,24 @@ func (r PlatformReplicationAPIStopPeriodicBackupRequest) Execute() (*http.Respon
 /*
 StopPeriodicBackup Method for StopPeriodicBackup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformReplicationAPIStopPeriodicBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformReplicationAPIStopPeriodicBackupRequest
 */
 func (a *PlatformReplicationAPIService) StopPeriodicBackup(ctx context.Context, cUUID string) PlatformReplicationAPIStopPeriodicBackupRequest {
 	return PlatformReplicationAPIStopPeriodicBackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformReplicationAPIService) StopPeriodicBackupExecute(r PlatformReplicationAPIStopPeriodicBackupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformReplicationAPIService.StopPeriodicBackup")

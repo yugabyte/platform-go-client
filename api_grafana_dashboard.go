@@ -18,12 +18,11 @@ import (
 	"net/url"
 )
 
-
 // GrafanaDashboardAPIService GrafanaDashboardAPI service
 type GrafanaDashboardAPIService service
 
 type GrafanaDashboardAPIGrafanaDashboardRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *GrafanaDashboardAPIService
 }
 
@@ -36,24 +35,25 @@ GrafanaDashboard Get Grafana Dashboard
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return GrafanaDashboardAPIGrafanaDashboardRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return GrafanaDashboardAPIGrafanaDashboardRequest
 */
 func (a *GrafanaDashboardAPIService) GrafanaDashboard(ctx context.Context) GrafanaDashboardAPIGrafanaDashboardRequest {
 	return GrafanaDashboardAPIGrafanaDashboardRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *GrafanaDashboardAPIService) GrafanaDashboardExecute(r GrafanaDashboardAPIGrafanaDashboardRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GrafanaDashboardAPIService.GrafanaDashboard")

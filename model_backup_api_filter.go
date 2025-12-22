@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BackupApiFilter type satisfies the MappedNullable interface at compile time
@@ -26,16 +24,16 @@ type BackupApiFilter struct {
 	// The end date for backup filter.
 	DateRangeEnd *time.Time `json:"dateRangeEnd,omitempty"`
 	// The start date for backup filter.
-	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
-	KeyspaceList []string `json:"keyspaceList"`
-	OnlyShowDeletedConfigs bool `json:"onlyShowDeletedConfigs"`
-	OnlyShowDeletedUniverses bool `json:"onlyShowDeletedUniverses"`
-	ScheduleUUIDList []string `json:"scheduleUUIDList"`
-	ShowHidden bool `json:"showHidden"`
-	States []string `json:"states"`
-	StorageConfigUUIDList []string `json:"storageConfigUUIDList"`
-	UniverseNameList []string `json:"universeNameList"`
-	UniverseUUIDList []string `json:"universeUUIDList"`
+	DateRangeStart           *time.Time `json:"dateRangeStart,omitempty"`
+	KeyspaceList             []string   `json:"keyspaceList"`
+	OnlyShowDeletedConfigs   bool       `json:"onlyShowDeletedConfigs"`
+	OnlyShowDeletedUniverses bool       `json:"onlyShowDeletedUniverses"`
+	ScheduleUUIDList         []string   `json:"scheduleUUIDList"`
+	ShowHidden               bool       `json:"showHidden"`
+	States                   []string   `json:"states"`
+	StorageConfigUUIDList    []string   `json:"storageConfigUUIDList"`
+	UniverseNameList         []string   `json:"universeNameList"`
+	UniverseUUIDList         []string   `json:"universeUUIDList"`
 }
 
 type _BackupApiFilter BackupApiFilter
@@ -372,7 +370,7 @@ func (o *BackupApiFilter) SetUniverseUUIDList(v []string) {
 }
 
 func (o BackupApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -435,5 +433,3 @@ func (v *NullableBackupApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

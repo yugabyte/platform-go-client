@@ -19,28 +19,28 @@ var _ MappedNullable = &KeyInfo{}
 
 // KeyInfo struct for KeyInfo
 type KeyInfo struct {
-	AirGapInstall *bool `json:"airGapInstall,omitempty"`
-	DeleteRemote *bool `json:"deleteRemote,omitempty"`
-	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
-	KeyPairName *string `json:"keyPairName,omitempty"`
+	AirGapInstall       *bool   `json:"airGapInstall,omitempty"`
+	DeleteRemote        *bool   `json:"deleteRemote,omitempty"`
+	InstallNodeExporter *bool   `json:"installNodeExporter,omitempty"`
+	KeyPairName         *string `json:"keyPairName,omitempty"`
 	// Key Management state
-	ManagementState *string `json:"managementState,omitempty"`
-	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
-	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	NtpServers []string `json:"ntpServers,omitempty"`
-	PasswordlessSudoAccess *bool `json:"passwordlessSudoAccess,omitempty"`
-	PrivateKey *string `json:"privateKey,omitempty"`
-	ProvisionInstanceScript *string `json:"provisionInstanceScript,omitempty"`
-	PublicKey *string `json:"publicKey,omitempty"`
-	SetUpChrony *bool `json:"setUpChrony,omitempty"`
-	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
-	SkipKeyValidateAndUpload *bool `json:"skipKeyValidateAndUpload,omitempty"`
-	SkipProvisioning *bool `json:"skipProvisioning,omitempty"`
-	SshPort *int32 `json:"sshPort,omitempty"`
-	SshPrivateKeyContent *string `json:"sshPrivateKeyContent,omitempty"`
-	SshUser *string `json:"sshUser,omitempty"`
-	VaultFile *string `json:"vaultFile,omitempty"`
-	VaultPasswordFile *string `json:"vaultPasswordFile,omitempty"`
+	ManagementState          *string  `json:"managementState,omitempty"`
+	NodeExporterPort         *int32   `json:"nodeExporterPort,omitempty"`
+	NodeExporterUser         *string  `json:"nodeExporterUser,omitempty"`
+	NtpServers               []string `json:"ntpServers,omitempty"`
+	PasswordlessSudoAccess   *bool    `json:"passwordlessSudoAccess,omitempty"`
+	PrivateKey               *string  `json:"privateKey,omitempty"`
+	ProvisionInstanceScript  *string  `json:"provisionInstanceScript,omitempty"`
+	PublicKey                *string  `json:"publicKey,omitempty"`
+	SetUpChrony              *bool    `json:"setUpChrony,omitempty"`
+	ShowSetUpChrony          *bool    `json:"showSetUpChrony,omitempty"`
+	SkipKeyValidateAndUpload *bool    `json:"skipKeyValidateAndUpload,omitempty"`
+	SkipProvisioning         *bool    `json:"skipProvisioning,omitempty"`
+	SshPort                  *int32   `json:"sshPort,omitempty"`
+	SshPrivateKeyContent     *string  `json:"sshPrivateKeyContent,omitempty"`
+	SshUser                  *string  `json:"sshUser,omitempty"`
+	VaultFile                *string  `json:"vaultFile,omitempty"`
+	VaultPasswordFile        *string  `json:"vaultPasswordFile,omitempty"`
 }
 
 // NewKeyInfo instantiates a new KeyInfo object
@@ -733,7 +733,7 @@ func (o *KeyInfo) SetVaultPasswordFile(v string) {
 }
 
 func (o KeyInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -843,5 +843,3 @@ func (v *NullableKeyInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

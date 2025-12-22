@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the StateChangeAuditInfoPagedQuery type satisfies the MappedNullable interface at compile time
@@ -21,12 +19,12 @@ var _ MappedNullable = &StateChangeAuditInfoPagedQuery{}
 
 // StateChangeAuditInfoPagedQuery struct for StateChangeAuditInfoPagedQuery
 type StateChangeAuditInfoPagedQuery struct {
-	Direction string `json:"direction"`
-	Filter StateChangeAuditInfoFilter `json:"filter"`
-	Limit int32 `json:"limit"`
-	NeedTotalCount bool `json:"needTotalCount"`
-	Offset int32 `json:"offset"`
-	SortBy string `json:"sortBy"`
+	Direction      string                     `json:"direction"`
+	Filter         StateChangeAuditInfoFilter `json:"filter"`
+	Limit          int32                      `json:"limit"`
+	NeedTotalCount bool                       `json:"needTotalCount"`
+	Offset         int32                      `json:"offset"`
+	SortBy         string                     `json:"sortBy"`
 }
 
 type _StateChangeAuditInfoPagedQuery StateChangeAuditInfoPagedQuery
@@ -199,7 +197,7 @@ func (o *StateChangeAuditInfoPagedQuery) SetSortBy(v string) {
 }
 
 func (o StateChangeAuditInfoPagedQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullableStateChangeAuditInfoPagedQuery) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

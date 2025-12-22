@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the XClusterConfigGetResp type satisfies the MappedNullable interface at compile time
@@ -25,7 +23,7 @@ type XClusterConfigGetResp struct {
 	AutomaticDdlMode *bool `json:"automaticDdlMode,omitempty"`
 	// Create time of the xCluster config
 	CreateTime *time.Time `json:"createTime,omitempty"`
-	Dbs []string `json:"dbs,omitempty"`
+	Dbs        []string   `json:"dbs,omitempty"`
 	// YbaApi Internal. Whether this xCluster replication config was imported
 	Imported *bool `json:"imported,omitempty"`
 	// WARNING: This is a preview API that could change. The keyspace name that the xCluster task is working on; used for disaster recovery
@@ -38,7 +36,7 @@ type XClusterConfigGetResp struct {
 	Name *string `json:"name,omitempty"`
 	// Namespaces participating in this xCluster config
 	NamespaceDetails []XClusterNamespaceConfig `json:"namespaceDetails,omitempty"`
-	Namespaces []XClusterNamespaceConfig `json:"namespaces"`
+	Namespaces       []XClusterNamespaceConfig `json:"namespaces"`
 	// Whether this xCluster replication config is paused
 	Paused *bool `json:"paused,omitempty"`
 	// WARNING: This is a preview API that could change. The list of PITR configs used for the txn xCluster config
@@ -58,8 +56,8 @@ type XClusterConfigGetResp struct {
 	// Tables participating in this xCluster config
 	TableDetails []XClusterTableConfig `json:"tableDetails,omitempty"`
 	// tableType
-	TableType *string `json:"tableType,omitempty"`
-	Tables []string `json:"tables,omitempty"`
+	TableType *string  `json:"tableType,omitempty"`
+	Tables    []string `json:"tables,omitempty"`
 	// Whether the target is active in txn xCluster
 	TargetActive *bool `json:"targetActive,omitempty"`
 	// WARNING: This is a preview API that could change. The replication status of the target universe; used for disaster recovery
@@ -944,7 +942,7 @@ func (o *XClusterConfigGetResp) SetUuid(v string) {
 }
 
 func (o XClusterConfigGetResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1068,5 +1066,3 @@ func (v *NullableXClusterConfigGetResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

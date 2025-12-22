@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AlertDestinationFormData type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &AlertDestinationFormData{}
 
 // AlertDestinationFormData struct for AlertDestinationFormData
 type AlertDestinationFormData struct {
-	Channels []string `json:"channels"`
-	DefaultDestination bool `json:"defaultDestination"`
-	Name string `json:"name"`
+	Channels           []string `json:"channels"`
+	DefaultDestination bool     `json:"defaultDestination"`
+	Name               string   `json:"name"`
 }
 
 type _AlertDestinationFormData AlertDestinationFormData
@@ -121,7 +119,7 @@ func (o *AlertDestinationFormData) SetName(v string) {
 }
 
 func (o AlertDestinationFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableAlertDestinationFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

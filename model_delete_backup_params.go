@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DeleteBackupParams type satisfies the MappedNullable interface at compile time
@@ -104,7 +102,7 @@ func (o *DeleteBackupParams) SetDeleteForcefully(v bool) {
 }
 
 func (o DeleteBackupParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -155,5 +153,3 @@ func (v *NullableDeleteBackupParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

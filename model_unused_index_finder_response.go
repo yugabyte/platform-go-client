@@ -20,10 +20,10 @@ var _ MappedNullable = &UnusedIndexFinderResponse{}
 // UnusedIndexFinderResponse struct for UnusedIndexFinderResponse
 type UnusedIndexFinderResponse struct {
 	CurrentDatabase *string `json:"current_database,omitempty"`
-	Description *string `json:"description,omitempty"`
-	IndexCommand *string `json:"index_command,omitempty"`
-	IndexName *string `json:"index_name,omitempty"`
-	TableName *string `json:"table_name,omitempty"`
+	Description     *string `json:"description,omitempty"`
+	IndexCommand    *string `json:"index_command,omitempty"`
+	IndexName       *string `json:"index_name,omitempty"`
+	TableName       *string `json:"table_name,omitempty"`
 }
 
 // NewUnusedIndexFinderResponse instantiates a new UnusedIndexFinderResponse object
@@ -204,7 +204,7 @@ func (o *UnusedIndexFinderResponse) SetTableName(v string) {
 }
 
 func (o UnusedIndexFinderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullableUnusedIndexFinderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

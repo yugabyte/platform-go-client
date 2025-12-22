@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // LicenseManagementAPIService LicenseManagementAPI service
 type LicenseManagementAPIService service
 
 type LicenseManagementAPIDeleteLicenseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *LicenseManagementAPIService
-	cUUID string
-	lUUID string
-	request *interface{}
+	cUUID      string
+	lUUID      string
+	request    *interface{}
 }
 
 func (r LicenseManagementAPIDeleteLicenseRequest) Request(request interface{}) LicenseManagementAPIDeleteLicenseRequest {
@@ -43,28 +42,29 @@ func (r LicenseManagementAPIDeleteLicenseRequest) Execute() (*YBPSuccess, *http.
 /*
 DeleteLicense Delete a license
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param lUUID
- @return LicenseManagementAPIDeleteLicenseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param lUUID
+	@return LicenseManagementAPIDeleteLicenseRequest
 */
 func (a *LicenseManagementAPIService) DeleteLicense(ctx context.Context, cUUID string, lUUID string) LicenseManagementAPIDeleteLicenseRequest {
 	return LicenseManagementAPIDeleteLicenseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		lUUID: lUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		lUUID:      lUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *LicenseManagementAPIService) DeleteLicenseExecute(r LicenseManagementAPIDeleteLicenseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseManagementAPIService.DeleteLicense")
@@ -152,10 +152,10 @@ func (a *LicenseManagementAPIService) DeleteLicenseExecute(r LicenseManagementAP
 }
 
 type LicenseManagementAPIUploadLicenseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *LicenseManagementAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r LicenseManagementAPIUploadLicenseRequest) Request(request interface{}) LicenseManagementAPIUploadLicenseRequest {
@@ -170,26 +170,27 @@ func (r LicenseManagementAPIUploadLicenseRequest) Execute() (*CustomerLicense, *
 /*
 UploadLicense Uploads the license
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return LicenseManagementAPIUploadLicenseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return LicenseManagementAPIUploadLicenseRequest
 */
 func (a *LicenseManagementAPIService) UploadLicense(ctx context.Context, cUUID string) LicenseManagementAPIUploadLicenseRequest {
 	return LicenseManagementAPIUploadLicenseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerLicense
+//
+//	@return CustomerLicense
 func (a *LicenseManagementAPIService) UploadLicenseExecute(r LicenseManagementAPIUploadLicenseRequest) (*CustomerLicense, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerLicense
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerLicense
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseManagementAPIService.UploadLicense")

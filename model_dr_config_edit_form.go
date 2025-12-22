@@ -20,7 +20,7 @@ var _ MappedNullable = &DrConfigEditForm{}
 // DrConfigEditForm drConfig edit form
 type DrConfigEditForm struct {
 	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
-	PitrParams *PitrParams `json:"pitrParams,omitempty"`
+	PitrParams      *PitrParams             `json:"pitrParams,omitempty"`
 	// List of urls for webhook
 	WebhookUrls []string `json:"webhookUrls,omitempty"`
 }
@@ -139,7 +139,7 @@ func (o *DrConfigEditForm) SetWebhookUrls(v []string) {
 }
 
 func (o DrConfigEditForm) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,5 +195,3 @@ func (v *NullableDrConfigEditForm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CertificateInfoExt type satisfies the MappedNullable interface at compile time
@@ -27,10 +25,10 @@ type CertificateInfoExt struct {
 	// Certificate path
 	Certificate *string `json:"certificate,omitempty"`
 	// The certificate file's checksum
-	Checksum *string `json:"checksum,omitempty"`
-	CustomCertPathParams CustomCertInfo `json:"customCertPathParams"`
-	CustomHCPKICertInfo HashicorpVaultConfigParams `json:"customHCPKICertInfo"`
-	CustomServerCertInfo CustomServerCertInfo `json:"customServerCertInfo"`
+	Checksum             *string                    `json:"checksum,omitempty"`
+	CustomCertPathParams CustomCertInfo             `json:"customCertPathParams"`
+	CustomHCPKICertInfo  HashicorpVaultConfigParams `json:"customHCPKICertInfo"`
+	CustomServerCertInfo CustomServerCertInfo       `json:"customServerCertInfo"`
 	// Customer UUID of the backup which it belongs to
 	CustomerUUID *string `json:"customerUUID,omitempty"`
 	// The certificate's expiry date. <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use expirtyDateIso instead
@@ -46,7 +44,7 @@ type CertificateInfoExt struct {
 	// The certificate's creation date. <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Use stateDateIso instead
 	StartDate *time.Time `json:"startDate,omitempty"`
 	// The certificate's creation date
-	StartDateIso *time.Time `json:"startDateIso,omitempty"`
+	StartDateIso          *time.Time             `json:"startDateIso,omitempty"`
 	UniverseDetailSubsets []UniverseDetailSubset `json:"universeDetailSubsets"`
 	// Associated universe details for the certificate
 	UniverseDetails []UniverseDetailSubset `json:"universeDetails,omitempty"`
@@ -590,7 +588,7 @@ func (o *CertificateInfoExt) SetUuid(v string) {
 }
 
 func (o CertificateInfoExt) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -680,5 +678,3 @@ func (v *NullableCertificateInfoExt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // SupportBundleManagementAPIService SupportBundleManagementAPI service
 type SupportBundleManagementAPIService service
 
 type SupportBundleManagementAPICreateSupportBundleRequest struct {
-	ctx context.Context
-	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx           context.Context
+	ApiService    *SupportBundleManagementAPIService
+	cUUID         string
+	uniUUID       string
 	supportBundle *SupportBundleFormData
-	request *interface{}
+	request       *interface{}
 }
 
 // post support bundle info
@@ -50,28 +49,29 @@ func (r SupportBundleManagementAPICreateSupportBundleRequest) Execute() (*YBPTas
 /*
 CreateSupportBundle Create support bundle for specific universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return SupportBundleManagementAPICreateSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return SupportBundleManagementAPICreateSupportBundleRequest
 */
 func (a *SupportBundleManagementAPIService) CreateSupportBundle(ctx context.Context, cUUID string, uniUUID string) SupportBundleManagementAPICreateSupportBundleRequest {
 	return SupportBundleManagementAPICreateSupportBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *SupportBundleManagementAPIService) CreateSupportBundleExecute(r SupportBundleManagementAPICreateSupportBundleRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.CreateSupportBundle")
@@ -164,12 +164,12 @@ func (a *SupportBundleManagementAPIService) CreateSupportBundleExecute(r Support
 }
 
 type SupportBundleManagementAPIDeleteSupportBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
-	sbUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	sbUUID     string
+	request    *interface{}
 }
 
 func (r SupportBundleManagementAPIDeleteSupportBundleRequest) Request(request interface{}) SupportBundleManagementAPIDeleteSupportBundleRequest {
@@ -184,30 +184,31 @@ func (r SupportBundleManagementAPIDeleteSupportBundleRequest) Execute() (*YBPSuc
 /*
 DeleteSupportBundle Delete a support bundle
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sbUUID
- @return SupportBundleManagementAPIDeleteSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sbUUID
+	@return SupportBundleManagementAPIDeleteSupportBundleRequest
 */
 func (a *SupportBundleManagementAPIService) DeleteSupportBundle(ctx context.Context, cUUID string, uniUUID string, sbUUID string) SupportBundleManagementAPIDeleteSupportBundleRequest {
 	return SupportBundleManagementAPIDeleteSupportBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sbUUID: sbUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sbUUID:     sbUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *SupportBundleManagementAPIService) DeleteSupportBundleExecute(r SupportBundleManagementAPIDeleteSupportBundleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.DeleteSupportBundle")
@@ -296,11 +297,11 @@ func (a *SupportBundleManagementAPIService) DeleteSupportBundleExecute(r Support
 }
 
 type SupportBundleManagementAPIDownloadSupportBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
-	sbUUID string
+	cUUID      string
+	uniUUID    string
+	sbUUID     string
 }
 
 func (r SupportBundleManagementAPIDownloadSupportBundleRequest) Execute() (string, *http.Response, error) {
@@ -310,30 +311,31 @@ func (r SupportBundleManagementAPIDownloadSupportBundleRequest) Execute() (strin
 /*
 DownloadSupportBundle Download support bundle
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sbUUID
- @return SupportBundleManagementAPIDownloadSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sbUUID
+	@return SupportBundleManagementAPIDownloadSupportBundleRequest
 */
 func (a *SupportBundleManagementAPIService) DownloadSupportBundle(ctx context.Context, cUUID string, uniUUID string, sbUUID string) SupportBundleManagementAPIDownloadSupportBundleRequest {
 	return SupportBundleManagementAPIDownloadSupportBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sbUUID: sbUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sbUUID:     sbUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *SupportBundleManagementAPIService) DownloadSupportBundleExecute(r SupportBundleManagementAPIDownloadSupportBundleRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.DownloadSupportBundle")
@@ -419,12 +421,12 @@ func (a *SupportBundleManagementAPIService) DownloadSupportBundleExecute(r Suppo
 }
 
 type SupportBundleManagementAPIEstimateSupportBundleSizeRequest struct {
-	ctx context.Context
-	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx           context.Context
+	ApiService    *SupportBundleManagementAPIService
+	cUUID         string
+	uniUUID       string
 	supportBundle *SupportBundleFormData
-	request *interface{}
+	request       *interface{}
 }
 
 // support bundle info
@@ -447,28 +449,29 @@ EstimateSupportBundleSize Estimate support bundle size for specific universe
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return SupportBundleManagementAPIEstimateSupportBundleSizeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return SupportBundleManagementAPIEstimateSupportBundleSizeRequest
 */
 func (a *SupportBundleManagementAPIService) EstimateSupportBundleSize(ctx context.Context, cUUID string, uniUUID string) SupportBundleManagementAPIEstimateSupportBundleSizeRequest {
 	return SupportBundleManagementAPIEstimateSupportBundleSizeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return SupportBundleSizeEstimateResponse
+//
+//	@return SupportBundleSizeEstimateResponse
 func (a *SupportBundleManagementAPIService) EstimateSupportBundleSizeExecute(r SupportBundleManagementAPIEstimateSupportBundleSizeRequest) (*SupportBundleSizeEstimateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SupportBundleSizeEstimateResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SupportBundleSizeEstimateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.EstimateSupportBundleSize")
@@ -561,11 +564,11 @@ func (a *SupportBundleManagementAPIService) EstimateSupportBundleSizeExecute(r S
 }
 
 type SupportBundleManagementAPIGetSupportBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
-	sbUUID string
+	cUUID      string
+	uniUUID    string
+	sbUUID     string
 }
 
 func (r SupportBundleManagementAPIGetSupportBundleRequest) Execute() (*SupportBundle, *http.Response, error) {
@@ -575,30 +578,31 @@ func (r SupportBundleManagementAPIGetSupportBundleRequest) Execute() (*SupportBu
 /*
 GetSupportBundle Get a support bundle from a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param sbUUID
- @return SupportBundleManagementAPIGetSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param sbUUID
+	@return SupportBundleManagementAPIGetSupportBundleRequest
 */
 func (a *SupportBundleManagementAPIService) GetSupportBundle(ctx context.Context, cUUID string, uniUUID string, sbUUID string) SupportBundleManagementAPIGetSupportBundleRequest {
 	return SupportBundleManagementAPIGetSupportBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		sbUUID: sbUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		sbUUID:     sbUUID,
 	}
 }
 
 // Execute executes the request
-//  @return SupportBundle
+//
+//	@return SupportBundle
 func (a *SupportBundleManagementAPIService) GetSupportBundleExecute(r SupportBundleManagementAPIGetSupportBundleRequest) (*SupportBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SupportBundle
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SupportBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.GetSupportBundle")
@@ -684,10 +688,10 @@ func (a *SupportBundleManagementAPIService) GetSupportBundleExecute(r SupportBun
 }
 
 type SupportBundleManagementAPIListSupportBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SupportBundleManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r SupportBundleManagementAPIListSupportBundleRequest) Execute() ([]SupportBundle, *http.Response, error) {
@@ -697,28 +701,29 @@ func (r SupportBundleManagementAPIListSupportBundleRequest) Execute() ([]Support
 /*
 ListSupportBundle List all support bundles from a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return SupportBundleManagementAPIListSupportBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return SupportBundleManagementAPIListSupportBundleRequest
 */
 func (a *SupportBundleManagementAPIService) ListSupportBundle(ctx context.Context, cUUID string, uniUUID string) SupportBundleManagementAPIListSupportBundleRequest {
 	return SupportBundleManagementAPIListSupportBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []SupportBundle
+//
+//	@return []SupportBundle
 func (a *SupportBundleManagementAPIService) ListSupportBundleExecute(r SupportBundleManagementAPIListSupportBundleRequest) ([]SupportBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []SupportBundle
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []SupportBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.ListSupportBundle")
@@ -803,9 +808,9 @@ func (a *SupportBundleManagementAPIService) ListSupportBundleExecute(r SupportBu
 }
 
 type SupportBundleManagementAPIListSupportBundleComponentsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SupportBundleManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r SupportBundleManagementAPIListSupportBundleComponentsRequest) Execute() ([]string, *http.Response, error) {
@@ -815,26 +820,27 @@ func (r SupportBundleManagementAPIListSupportBundleComponentsRequest) Execute() 
 /*
 ListSupportBundleComponents List all components available in support bundle
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return SupportBundleManagementAPIListSupportBundleComponentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return SupportBundleManagementAPIListSupportBundleComponentsRequest
 */
 func (a *SupportBundleManagementAPIService) ListSupportBundleComponents(ctx context.Context, cUUID string) SupportBundleManagementAPIListSupportBundleComponentsRequest {
 	return SupportBundleManagementAPIListSupportBundleComponentsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *SupportBundleManagementAPIService) ListSupportBundleComponentsExecute(r SupportBundleManagementAPIListSupportBundleComponentsRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleManagementAPIService.ListSupportBundleComponents")

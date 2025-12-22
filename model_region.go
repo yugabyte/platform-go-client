@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Region type satisfies the MappedNullable interface at compile time
@@ -23,9 +21,9 @@ var _ MappedNullable = &Region{}
 type Region struct {
 	Active *bool `json:"active,omitempty"`
 	// Cloud provider region code
-	Code *string `json:"code,omitempty"`
-	Config *map[string]string `json:"config,omitempty"`
-	Details *RegionDetails `json:"details,omitempty"`
+	Code    *string            `json:"code,omitempty"`
+	Config  *map[string]string `json:"config,omitempty"`
+	Details *RegionDetails     `json:"details,omitempty"`
 	// The region's latitude
 	Latitude *float64 `json:"latitude,omitempty"`
 	// The region's longitude
@@ -39,8 +37,8 @@ type Region struct {
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Moved to regionDetails.cloudInfo aws/azure vnet property
 	VnetName *string `json:"vnetName,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.2.0.</b> Moved to details.cloudInfo aws/gcp/azure ybImage property
-	YbImage *string `json:"ybImage,omitempty"`
-	Zones []AvailabilityZone `json:"zones"`
+	YbImage *string            `json:"ybImage,omitempty"`
+	Zones   []AvailabilityZone `json:"zones"`
 }
 
 type _Region Region
@@ -440,7 +438,7 @@ func (o *Region) SetZones(v []AvailabilityZone) {
 }
 
 func (o Region) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -521,5 +519,3 @@ func (v *NullableRegion) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ClientCertParams type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &ClientCertParams{}
 
 // ClientCertParams struct for ClientCertParams
 type ClientCertParams struct {
-	CertExpiry int64 `json:"certExpiry"`
-	CertStart int64 `json:"certStart"`
-	Username string `json:"username"`
+	CertExpiry int64  `json:"certExpiry"`
+	CertStart  int64  `json:"certStart"`
+	Username   string `json:"username"`
 }
 
 type _ClientCertParams ClientCertParams
@@ -121,7 +119,7 @@ func (o *ClientCertParams) SetUsername(v string) {
 }
 
 func (o ClientCertParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableClientCertParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

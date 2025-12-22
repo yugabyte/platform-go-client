@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // InternalHAAPIService InternalHAAPI service
 type InternalHAAPIService service
 
 type InternalHAAPIDemoteLocalLeaderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InternalHAAPIService
-	timestamp int64
-	promote *bool
-	request *interface{}
+	timestamp  int64
+	promote    *bool
+	request    *interface{}
 }
 
 func (r InternalHAAPIDemoteLocalLeaderRequest) Promote(promote bool) InternalHAAPIDemoteLocalLeaderRequest {
@@ -50,26 +49,27 @@ DemoteLocalLeader Demote local leader
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param timestamp
- @return InternalHAAPIDemoteLocalLeaderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param timestamp
+	@return InternalHAAPIDemoteLocalLeaderRequest
 */
 func (a *InternalHAAPIService) DemoteLocalLeader(ctx context.Context, timestamp int64) InternalHAAPIDemoteLocalLeaderRequest {
 	return InternalHAAPIDemoteLocalLeaderRequest{
 		ApiService: a,
-		ctx: ctx,
-		timestamp: timestamp,
+		ctx:        ctx,
+		timestamp:  timestamp,
 	}
 }
 
 // Execute executes the request
-//  @return PlatformInstance
+//
+//	@return PlatformInstance
 func (a *InternalHAAPIService) DemoteLocalLeaderExecute(r InternalHAAPIDemoteLocalLeaderRequest) (*PlatformInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PlatformInstance
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PlatformInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InternalHAAPIService.DemoteLocalLeader")
@@ -149,9 +149,9 @@ func (a *InternalHAAPIService) DemoteLocalLeaderExecute(r InternalHAAPIDemoteLoc
 }
 
 type InternalHAAPIGetHAConfigByClusterKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InternalHAAPIService
-	request *interface{}
+	request    *interface{}
 }
 
 func (r InternalHAAPIGetHAConfigByClusterKeyRequest) Request(request interface{}) InternalHAAPIGetHAConfigByClusterKeyRequest {
@@ -166,22 +166,22 @@ func (r InternalHAAPIGetHAConfigByClusterKeyRequest) Execute() (*http.Response, 
 /*
 GetHAConfigByClusterKey Method for GetHAConfigByClusterKey
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InternalHAAPIGetHAConfigByClusterKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return InternalHAAPIGetHAConfigByClusterKeyRequest
 */
 func (a *InternalHAAPIService) GetHAConfigByClusterKey(ctx context.Context) InternalHAAPIGetHAConfigByClusterKeyRequest {
 	return InternalHAAPIGetHAConfigByClusterKeyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *InternalHAAPIService) GetHAConfigByClusterKeyExecute(r InternalHAAPIGetHAConfigByClusterKeyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InternalHAAPIService.GetHAConfigByClusterKey")
@@ -244,9 +244,9 @@ func (a *InternalHAAPIService) GetHAConfigByClusterKeyExecute(r InternalHAAPIGet
 }
 
 type InternalHAAPISyncBackupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InternalHAAPIService
-	request *interface{}
+	request    *interface{}
 }
 
 func (r InternalHAAPISyncBackupsRequest) Request(request interface{}) InternalHAAPISyncBackupsRequest {
@@ -261,22 +261,22 @@ func (r InternalHAAPISyncBackupsRequest) Execute() (*http.Response, error) {
 /*
 SyncBackups Method for SyncBackups
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InternalHAAPISyncBackupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return InternalHAAPISyncBackupsRequest
 */
 func (a *InternalHAAPIService) SyncBackups(ctx context.Context) InternalHAAPISyncBackupsRequest {
 	return InternalHAAPISyncBackupsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *InternalHAAPIService) SyncBackupsExecute(r InternalHAAPISyncBackupsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InternalHAAPIService.SyncBackups")
@@ -339,10 +339,10 @@ func (a *InternalHAAPIService) SyncBackupsExecute(r InternalHAAPISyncBackupsRequ
 }
 
 type InternalHAAPISyncInstancesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InternalHAAPIService
-	timestamp int64
-	request *interface{}
+	timestamp  int64
+	request    *interface{}
 }
 
 func (r InternalHAAPISyncInstancesRequest) Request(request interface{}) InternalHAAPISyncInstancesRequest {
@@ -357,24 +357,24 @@ func (r InternalHAAPISyncInstancesRequest) Execute() (*http.Response, error) {
 /*
 SyncInstances Method for SyncInstances
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param timestamp
- @return InternalHAAPISyncInstancesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param timestamp
+	@return InternalHAAPISyncInstancesRequest
 */
 func (a *InternalHAAPIService) SyncInstances(ctx context.Context, timestamp int64) InternalHAAPISyncInstancesRequest {
 	return InternalHAAPISyncInstancesRequest{
 		ApiService: a,
-		ctx: ctx,
-		timestamp: timestamp,
+		ctx:        ctx,
+		timestamp:  timestamp,
 	}
 }
 
 // Execute executes the request
 func (a *InternalHAAPIService) SyncInstancesExecute(r InternalHAAPISyncInstancesRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InternalHAAPIService.SyncInstances")

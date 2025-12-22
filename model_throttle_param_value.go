@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ThrottleParamValue type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &ThrottleParamValue{}
 
 // ThrottleParamValue struct for ThrottleParamValue
 type ThrottleParamValue struct {
-	CurrentValue int64 `json:"currentValue"`
+	CurrentValue int64                `json:"currentValue"`
 	PresetValues PresetThrottleValues `json:"presetValues"`
 }
 
@@ -95,7 +93,7 @@ func (o *ThrottleParamValue) SetPresetValues(v PresetThrottleValues) {
 }
 
 func (o ThrottleParamValue) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableThrottleParamValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

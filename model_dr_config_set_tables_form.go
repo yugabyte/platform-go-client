@@ -20,8 +20,8 @@ var _ MappedNullable = &DrConfigSetTablesForm{}
 // DrConfigSetTablesForm dr config set tables form
 type DrConfigSetTablesForm struct {
 	// Whether or not YBA should also include all index tables from any provided main tables.
-	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
-	BootstrapParams *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
+	AutoIncludeIndexTables *bool                   `json:"autoIncludeIndexTables,omitempty"`
+	BootstrapParams        *RestartBootstrapParams `json:"bootstrapParams,omitempty"`
 	// Source universe table IDs
 	Tables []string `json:"tables,omitempty"`
 }
@@ -140,7 +140,7 @@ func (o *DrConfigSetTablesForm) SetTables(v []string) {
 }
 
 func (o DrConfigSetTablesForm) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableDrConfigSetTablesForm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

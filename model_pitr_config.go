@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PitrConfig type satisfies the MappedNullable interface at compile time
@@ -34,20 +32,20 @@ type PitrConfig struct {
 	Disabled *bool `json:"disabled,omitempty"`
 	// Intermittent min recovery time in millis if retention period is increased
 	IntermittentMinRecoverTimeInMillis *int64 `json:"intermittentMinRecoverTimeInMillis,omitempty"`
-	MaxRecoverTimeInMillis int64 `json:"maxRecoverTimeInMillis"`
-	MinRecoverTimeInMillis int64 `json:"minRecoverTimeInMillis"`
+	MaxRecoverTimeInMillis             int64  `json:"maxRecoverTimeInMillis"`
+	MinRecoverTimeInMillis             int64  `json:"minRecoverTimeInMillis"`
 	// PITR config name
 	Name *string `json:"name,omitempty"`
 	// Retention Period in seconds
 	RetentionPeriod *int64 `json:"retentionPeriod,omitempty"`
 	// Interval between snasphots in seconds
 	ScheduleInterval *int64 `json:"scheduleInterval,omitempty"`
-	State string `json:"state"`
+	State            string `json:"state"`
 	// Table Type
 	TableType *string `json:"tableType,omitempty"`
 	// Update time of the PITR con
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	UsedForXCluster *bool `json:"usedForXCluster,omitempty"`
+	UpdateTime      *time.Time `json:"updateTime,omitempty"`
+	UsedForXCluster *bool      `json:"usedForXCluster,omitempty"`
 	// PITR config UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -563,7 +561,7 @@ func (o *PitrConfig) SetUuid(v string) {
 }
 
 func (o PitrConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -652,5 +650,3 @@ func (v *NullablePitrConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

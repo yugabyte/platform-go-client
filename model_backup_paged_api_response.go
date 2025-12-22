@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BackupPagedApiResponse type satisfies the MappedNullable interface at compile time
@@ -21,10 +19,10 @@ var _ MappedNullable = &BackupPagedApiResponse{}
 
 // BackupPagedApiResponse struct for BackupPagedApiResponse
 type BackupPagedApiResponse struct {
-	Entities []BackupResp `json:"entities"`
-	HasNext bool `json:"hasNext"`
-	HasPrev bool `json:"hasPrev"`
-	TotalCount int32 `json:"totalCount"`
+	Entities   []BackupResp `json:"entities"`
+	HasNext    bool         `json:"hasNext"`
+	HasPrev    bool         `json:"hasPrev"`
+	TotalCount int32        `json:"totalCount"`
 }
 
 type _BackupPagedApiResponse BackupPagedApiResponse
@@ -147,7 +145,7 @@ func (o *BackupPagedApiResponse) SetTotalCount(v int32) {
 }
 
 func (o BackupPagedApiResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableBackupPagedApiResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

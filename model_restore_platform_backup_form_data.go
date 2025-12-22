@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestorePlatformBackupFormData type satisfies the MappedNullable interface at compile time
@@ -69,7 +67,7 @@ func (o *RestorePlatformBackupFormData) SetBackupFile(v string) {
 }
 
 func (o RestorePlatformBackupFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,5 +115,3 @@ func (v *NullableRestorePlatformBackupFormData) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

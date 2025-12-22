@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the XClusterConfigCreateFormData type satisfies the MappedNullable interface at compile time
@@ -252,7 +250,7 @@ func (o *XClusterConfigCreateFormData) SetTargetUniverseUUID(v string) {
 }
 
 func (o XClusterConfigCreateFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -312,5 +310,3 @@ func (v *NullableXClusterConfigCreateFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

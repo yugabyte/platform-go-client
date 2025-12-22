@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UniverseMetricsExporterConfig type satisfies the MappedNullable interface at compile time
@@ -301,7 +299,7 @@ func (o *UniverseMetricsExporterConfig) SetSendBatchTimeoutSeconds(v int32) {
 }
 
 func (o UniverseMetricsExporterConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -368,5 +366,3 @@ func (v *NullableUniverseMetricsExporterConfig) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

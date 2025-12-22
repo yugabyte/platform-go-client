@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ResponseExtractMetadata type satisfies the MappedNullable interface at compile time
@@ -21,16 +19,16 @@ var _ MappedNullable = &ResponseExtractMetadata{}
 
 // ResponseExtractMetadata struct for ResponseExtractMetadata
 type ResponseExtractMetadata struct {
-	Architecture string `json:"architecture"`
-	MetadataUuid string `json:"metadata_uuid"`
-	Platform string `json:"platform"`
-	ReleaseDateMsecs int64 `json:"release_date_msecs"`
-	ReleaseNotes string `json:"release_notes"`
-	ReleaseType string `json:"release_type"`
-	Sha256 string `json:"sha256"`
-	Status string `json:"status"`
-	Version string `json:"version"`
-	YbType string `json:"yb_type"`
+	Architecture     string `json:"architecture"`
+	MetadataUuid     string `json:"metadata_uuid"`
+	Platform         string `json:"platform"`
+	ReleaseDateMsecs int64  `json:"release_date_msecs"`
+	ReleaseNotes     string `json:"release_notes"`
+	ReleaseType      string `json:"release_type"`
+	Sha256           string `json:"sha256"`
+	Status           string `json:"status"`
+	Version          string `json:"version"`
+	YbType           string `json:"yb_type"`
 }
 
 type _ResponseExtractMetadata ResponseExtractMetadata
@@ -303,7 +301,7 @@ func (o *ResponseExtractMetadata) SetYbType(v string) {
 }
 
 func (o ResponseExtractMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,5 +358,3 @@ func (v *NullableResponseExtractMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

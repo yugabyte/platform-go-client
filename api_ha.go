@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // HAAPIService HAAPI service
 type HAAPIService service
 
 type HAAPICreateHAConfigRequest struct {
-	ctx context.Context
-	ApiService *HAAPIService
+	ctx                 context.Context
+	ApiService          *HAAPIService
 	hAConfigFormRequest *HAConfigFormData
-	request *interface{}
+	request             *interface{}
 }
 
 func (r HAAPICreateHAConfigRequest) HAConfigFormRequest(hAConfigFormRequest HAConfigFormData) HAAPICreateHAConfigRequest {
@@ -49,24 +48,25 @@ CreateHAConfig Create high availability config
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return HAAPICreateHAConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return HAAPICreateHAConfigRequest
 */
 func (a *HAAPIService) CreateHAConfig(ctx context.Context) HAAPICreateHAConfigRequest {
 	return HAAPICreateHAConfigRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return HighAvailabilityConfig
+//
+//	@return HighAvailabilityConfig
 func (a *HAAPIService) CreateHAConfigExecute(r HAAPICreateHAConfigRequest) (*HighAvailabilityConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *HighAvailabilityConfig
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HighAvailabilityConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HAAPIService.CreateHAConfig")
@@ -157,10 +157,10 @@ func (a *HAAPIService) CreateHAConfigExecute(r HAAPICreateHAConfigRequest) (*Hig
 }
 
 type HAAPIDeleteHAConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HAAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r HAAPIDeleteHAConfigRequest) Request(request interface{}) HAAPIDeleteHAConfigRequest {
@@ -175,24 +175,24 @@ func (r HAAPIDeleteHAConfigRequest) Execute() (*http.Response, error) {
 /*
 DeleteHAConfig Method for DeleteHAConfig
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return HAAPIDeleteHAConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return HAAPIDeleteHAConfigRequest
 */
 func (a *HAAPIService) DeleteHAConfig(ctx context.Context, cUUID string) HAAPIDeleteHAConfigRequest {
 	return HAAPIDeleteHAConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *HAAPIService) DeleteHAConfigExecute(r HAAPIDeleteHAConfigRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HAAPIService.DeleteHAConfig")
@@ -270,10 +270,10 @@ func (a *HAAPIService) DeleteHAConfigExecute(r HAAPIDeleteHAConfigRequest) (*htt
 }
 
 type HAAPIEditHAConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HAAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r HAAPIEditHAConfigRequest) Request(request interface{}) HAAPIEditHAConfigRequest {
@@ -288,24 +288,24 @@ func (r HAAPIEditHAConfigRequest) Execute() (*http.Response, error) {
 /*
 EditHAConfig Method for EditHAConfig
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return HAAPIEditHAConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return HAAPIEditHAConfigRequest
 */
 func (a *HAAPIService) EditHAConfig(ctx context.Context, cUUID string) HAAPIEditHAConfigRequest {
 	return HAAPIEditHAConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *HAAPIService) EditHAConfigExecute(r HAAPIEditHAConfigRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HAAPIService.EditHAConfig")
@@ -383,7 +383,7 @@ func (a *HAAPIService) EditHAConfigExecute(r HAAPIEditHAConfigRequest) (*http.Re
 }
 
 type HAAPIGenerateClusterKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HAAPIService
 }
 
@@ -396,22 +396,22 @@ GenerateClusterKey Generate cluster key
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return HAAPIGenerateClusterKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return HAAPIGenerateClusterKeyRequest
 */
 func (a *HAAPIService) GenerateClusterKey(ctx context.Context) HAAPIGenerateClusterKeyRequest {
 	return HAAPIGenerateClusterKeyRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *HAAPIService) GenerateClusterKeyExecute(r HAAPIGenerateClusterKeyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HAAPIService.GenerateClusterKey")
@@ -485,7 +485,7 @@ func (a *HAAPIService) GenerateClusterKeyExecute(r HAAPIGenerateClusterKeyReques
 }
 
 type HAAPIGetHAConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HAAPIService
 }
 
@@ -496,24 +496,25 @@ func (r HAAPIGetHAConfigRequest) Execute() (*HAConfigGetResp, *http.Response, er
 /*
 GetHAConfig Get high availability config
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return HAAPIGetHAConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return HAAPIGetHAConfigRequest
 */
 func (a *HAAPIService) GetHAConfig(ctx context.Context) HAAPIGetHAConfigRequest {
 	return HAAPIGetHAConfigRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return HAConfigGetResp
+//
+//	@return HAConfigGetResp
 func (a *HAAPIService) GetHAConfigExecute(r HAAPIGetHAConfigRequest) (*HAConfigGetResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *HAConfigGetResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *HAConfigGetResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HAAPIService.GetHAConfig")

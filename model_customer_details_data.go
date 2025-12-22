@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomerDetailsData type satisfies the MappedNullable interface at compile time
@@ -32,7 +30,7 @@ type CustomerDetailsData struct {
 	// Customer ID
 	CustomerId *int32 `json:"customerId,omitempty"`
 	// Customer name
-	Name string `json:"name"`
+	Name     string    `json:"name"`
 	SmtpData *SmtpData `json:"smtpData,omitempty"`
 	// Associated universe IDs
 	UniverseUUIDs []string `json:"universeUUIDs,omitempty"`
@@ -334,7 +332,7 @@ func (o *CustomerDetailsData) SetUuid(v string) {
 }
 
 func (o CustomerDetailsData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -404,5 +402,3 @@ func (v *NullableCustomerDetailsData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

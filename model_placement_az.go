@@ -19,15 +19,15 @@ var _ MappedNullable = &PlacementAZ{}
 
 // PlacementAZ struct for PlacementAZ
 type PlacementAZ struct {
-	IsAffinitized *bool `json:"isAffinitized,omitempty"`
-	LbName *string `json:"lbName,omitempty"`
-	LeaderPreference *int32 `json:"leaderPreference,omitempty"`
-	Name *string `json:"name,omitempty"`
-	NumNodesInAZ *int32 `json:"numNodesInAZ,omitempty"`
-	ReplicationFactor *int32 `json:"replicationFactor,omitempty"`
-	SecondarySubnet *string `json:"secondarySubnet,omitempty"`
-	Subnet *string `json:"subnet,omitempty"`
-	Uuid *string `json:"uuid,omitempty"`
+	IsAffinitized     *bool   `json:"isAffinitized,omitempty"`
+	LbName            *string `json:"lbName,omitempty"`
+	LeaderPreference  *int32  `json:"leaderPreference,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	NumNodesInAZ      *int32  `json:"numNodesInAZ,omitempty"`
+	ReplicationFactor *int32  `json:"replicationFactor,omitempty"`
+	SecondarySubnet   *string `json:"secondarySubnet,omitempty"`
+	Subnet            *string `json:"subnet,omitempty"`
+	Uuid              *string `json:"uuid,omitempty"`
 }
 
 // NewPlacementAZ instantiates a new PlacementAZ object
@@ -336,7 +336,7 @@ func (o *PlacementAZ) SetUuid(v string) {
 }
 
 func (o PlacementAZ) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,5 +410,3 @@ func (v *NullablePlacementAZ) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

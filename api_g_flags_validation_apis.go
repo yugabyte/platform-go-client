@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // GFlagsValidationAPIsAPIService GFlagsValidationAPIsAPI service
 type GFlagsValidationAPIsAPIService service
 
 type GFlagsValidationAPIsAPIGetGFlagMetadataRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *GFlagsValidationAPIsAPIService
-	version string
-	name *string
-	server *string
+	version    string
+	name       *string
+	server     *string
 }
 
 func (r GFlagsValidationAPIsAPIGetGFlagMetadataRequest) Name(name string) GFlagsValidationAPIsAPIGetGFlagMetadataRequest {
@@ -50,26 +49,27 @@ GetGFlagMetadata Get gflag metadata
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param version
- @return GFlagsValidationAPIsAPIGetGFlagMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param version
+	@return GFlagsValidationAPIsAPIGetGFlagMetadataRequest
 */
 func (a *GFlagsValidationAPIsAPIService) GetGFlagMetadata(ctx context.Context, version string) GFlagsValidationAPIsAPIGetGFlagMetadataRequest {
 	return GFlagsValidationAPIsAPIGetGFlagMetadataRequest{
 		ApiService: a,
-		ctx: ctx,
-		version: version,
+		ctx:        ctx,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return GFlagDetails
+//
+//	@return GFlagDetails
 func (a *GFlagsValidationAPIsAPIService) GetGFlagMetadataExecute(r GFlagsValidationAPIsAPIGetGFlagMetadataRequest) (*GFlagDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GFlagDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GFlagDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GFlagsValidationAPIsAPIService.GetGFlagMetadata")
@@ -159,12 +159,12 @@ func (a *GFlagsValidationAPIsAPIService) GetGFlagMetadataExecute(r GFlagsValidat
 }
 
 type GFlagsValidationAPIsAPIListGFlagsRequest struct {
-	ctx context.Context
-	ApiService *GFlagsValidationAPIsAPIService
-	version string
-	name *string
-	server *string
-	mostUsedGFlags *bool
+	ctx              context.Context
+	ApiService       *GFlagsValidationAPIsAPIService
+	version          string
+	name             *string
+	server           *string
+	mostUsedGFlags   *bool
 	showExperimental *bool
 }
 
@@ -197,26 +197,27 @@ ListGFlags List all gflags for a release
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param version
- @return GFlagsValidationAPIsAPIListGFlagsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param version
+	@return GFlagsValidationAPIsAPIListGFlagsRequest
 */
 func (a *GFlagsValidationAPIsAPIService) ListGFlags(ctx context.Context, version string) GFlagsValidationAPIsAPIListGFlagsRequest {
 	return GFlagsValidationAPIsAPIListGFlagsRequest{
 		ApiService: a,
-		ctx: ctx,
-		version: version,
+		ctx:        ctx,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return []GFlagDetails
+//
+//	@return []GFlagDetails
 func (a *GFlagsValidationAPIsAPIService) ListGFlagsExecute(r GFlagsValidationAPIsAPIListGFlagsRequest) ([]GFlagDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []GFlagDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []GFlagDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GFlagsValidationAPIsAPIService.ListGFlags")
@@ -320,11 +321,11 @@ func (a *GFlagsValidationAPIsAPIService) ListGFlagsExecute(r GFlagsValidationAPI
 }
 
 type GFlagsValidationAPIsAPIValidateGFlagsRequest struct {
-	ctx context.Context
-	ApiService *GFlagsValidationAPIsAPIService
-	version string
+	ctx                     context.Context
+	ApiService              *GFlagsValidationAPIsAPIService
+	version                 string
 	gflagValidationFormData *GFlagsValidationFormData
-	request *interface{}
+	request                 *interface{}
 }
 
 // GFlag validation form data
@@ -347,26 +348,27 @@ ValidateGFlags Validate gflags
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param version
- @return GFlagsValidationAPIsAPIValidateGFlagsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param version
+	@return GFlagsValidationAPIsAPIValidateGFlagsRequest
 */
 func (a *GFlagsValidationAPIsAPIService) ValidateGFlags(ctx context.Context, version string) GFlagsValidationAPIsAPIValidateGFlagsRequest {
 	return GFlagsValidationAPIsAPIValidateGFlagsRequest{
 		ApiService: a,
-		ctx: ctx,
-		version: version,
+		ctx:        ctx,
+		version:    version,
 	}
 }
 
 // Execute executes the request
-//  @return []GFlagsValidationResponse
+//
+//	@return []GFlagsValidationResponse
 func (a *GFlagsValidationAPIsAPIService) ValidateGFlagsExecute(r GFlagsValidationAPIsAPIValidateGFlagsRequest) ([]GFlagsValidationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []GFlagsValidationResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []GFlagsValidationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GFlagsValidationAPIsAPIService.ValidateGFlags")

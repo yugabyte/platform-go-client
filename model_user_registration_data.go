@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UserRegistrationData type satisfies the MappedNullable interface at compile time
@@ -274,7 +272,7 @@ func (o *UserRegistrationData) SetTimezone(v string) {
 }
 
 func (o UserRegistrationData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,5 +338,3 @@ func (v *NullableUserRegistrationData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

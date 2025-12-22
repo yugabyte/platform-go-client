@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NodeAgentPagedApiResponse type satisfies the MappedNullable interface at compile time
@@ -21,10 +19,10 @@ var _ MappedNullable = &NodeAgentPagedApiResponse{}
 
 // NodeAgentPagedApiResponse struct for NodeAgentPagedApiResponse
 type NodeAgentPagedApiResponse struct {
-	Entities []NodeAgentResp `json:"entities"`
-	HasNext bool `json:"hasNext"`
-	HasPrev bool `json:"hasPrev"`
-	TotalCount int32 `json:"totalCount"`
+	Entities   []NodeAgentResp `json:"entities"`
+	HasNext    bool            `json:"hasNext"`
+	HasPrev    bool            `json:"hasPrev"`
+	TotalCount int32           `json:"totalCount"`
 }
 
 type _NodeAgentPagedApiResponse NodeAgentPagedApiResponse
@@ -147,7 +145,7 @@ func (o *NodeAgentPagedApiResponse) SetTotalCount(v int32) {
 }
 
 func (o NodeAgentPagedApiResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableNodeAgentPagedApiResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

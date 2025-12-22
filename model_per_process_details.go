@@ -19,8 +19,8 @@ var _ MappedNullable = &PerProcessDetails{}
 
 // PerProcessDetails WARNING: This is a preview API that could change. User intent Properties that can be overriden on per-process basis.
 type PerProcessDetails struct {
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	InstanceType *string `json:"instanceType,omitempty"`
+	DeviceInfo   *DeviceInfo `json:"deviceInfo,omitempty"`
+	InstanceType *string     `json:"instanceType,omitempty"`
 }
 
 // NewPerProcessDetails instantiates a new PerProcessDetails object
@@ -105,7 +105,7 @@ func (o *PerProcessDetails) SetInstanceType(v string) {
 }
 
 func (o PerProcessDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullablePerProcessDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

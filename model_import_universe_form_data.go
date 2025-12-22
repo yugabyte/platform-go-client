@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ImportUniverseFormData type satisfies the MappedNullable interface at compile time
@@ -21,20 +19,20 @@ var _ MappedNullable = &ImportUniverseFormData{}
 
 // ImportUniverseFormData struct for ImportUniverseFormData
 type ImportUniverseFormData struct {
-	CloudName string `json:"cloudName"`
+	CloudName         string `json:"cloudName"`
 	CloudProviderType string `json:"cloudProviderType"`
-	CurrentState string `json:"currentState"`
-	InstanceType string `json:"instanceType"`
-	MasterAddresses string `json:"masterAddresses"`
-	ProviderType string `json:"providerType"`
-	RegionCode string `json:"regionCode"`
-	RegionName string `json:"regionName"`
-	ReplicationFactor int32 `json:"replicationFactor"`
-	SingleStep bool `json:"singleStep"`
-	UniverseName string `json:"universeName"`
-	UniverseUUID string `json:"universeUUID"`
-	ZoneCode string `json:"zoneCode"`
-	ZoneName string `json:"zoneName"`
+	CurrentState      string `json:"currentState"`
+	InstanceType      string `json:"instanceType"`
+	MasterAddresses   string `json:"masterAddresses"`
+	ProviderType      string `json:"providerType"`
+	RegionCode        string `json:"regionCode"`
+	RegionName        string `json:"regionName"`
+	ReplicationFactor int32  `json:"replicationFactor"`
+	SingleStep        bool   `json:"singleStep"`
+	UniverseName      string `json:"universeName"`
+	UniverseUUID      string `json:"universeUUID"`
+	ZoneCode          string `json:"zoneCode"`
+	ZoneName          string `json:"zoneName"`
 }
 
 type _ImportUniverseFormData ImportUniverseFormData
@@ -407,7 +405,7 @@ func (o *ImportUniverseFormData) SetZoneName(v string) {
 }
 
 func (o ImportUniverseFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -468,5 +466,3 @@ func (v *NullableImportUniverseFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

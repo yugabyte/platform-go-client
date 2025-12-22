@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the OTLPConfig type satisfies the MappedNullable interface at compile time
@@ -23,9 +21,9 @@ var _ MappedNullable = &OTLPConfig{}
 type OTLPConfig struct {
 	TelemetryProviderConfig
 	// Auth Type
-	AuthType string `json:"authType"`
-	BasicAuth *BasicAuthCredentials `json:"basicAuth,omitempty"`
-	BearerToken *BearerToken `json:"bearerToken,omitempty"`
+	AuthType    string                `json:"authType"`
+	BasicAuth   *BasicAuthCredentials `json:"basicAuth,omitempty"`
+	BearerToken *BearerToken          `json:"bearerToken,omitempty"`
 	// Compression
 	Compression *string `json:"compression,omitempty"`
 	// End Point. For HTTP protcol logs export \"/v1/logs\" will be appended.
@@ -334,7 +332,7 @@ func (o *OTLPConfig) SetTimeoutSeconds(v int32) {
 }
 
 func (o OTLPConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -412,5 +410,3 @@ func (v *NullableOTLPConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

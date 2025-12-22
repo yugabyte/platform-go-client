@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UpdateLoadBalancerConfig type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &UpdateLoadBalancerConfig{}
 
 // UpdateLoadBalancerConfig struct for UpdateLoadBalancerConfig
 type UpdateLoadBalancerConfig struct {
-	FirstTry bool `json:"firstTry"`
-	Name string `json:"name"`
-	RetryLimit int32 `json:"retryLimit"`
-	SleepMultiplier int32 `json:"sleepMultiplier"`
-	TaskInfo string `json:"taskInfo"`
+	FirstTry        bool   `json:"firstTry"`
+	Name            string `json:"name"`
+	RetryLimit      int32  `json:"retryLimit"`
+	SleepMultiplier int32  `json:"sleepMultiplier"`
+	TaskInfo        string `json:"taskInfo"`
 }
 
 type _UpdateLoadBalancerConfig UpdateLoadBalancerConfig
@@ -173,7 +171,7 @@ func (o *UpdateLoadBalancerConfig) SetTaskInfo(v string) {
 }
 
 func (o UpdateLoadBalancerConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableUpdateLoadBalancerConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

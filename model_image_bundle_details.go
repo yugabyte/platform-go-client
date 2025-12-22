@@ -24,10 +24,10 @@ type ImageBundleDetails struct {
 	// Global YB image for the bundle
 	GlobalYbImage *string `json:"globalYbImage,omitempty"`
 	// Regions override for image bundle
-	Regions *map[string]BundleInfo `json:"regions,omitempty"`
-	SshPort *int32 `json:"sshPort,omitempty"`
-	SshUser *string `json:"sshUser,omitempty"`
-	UseIMDSv2 *bool `json:"useIMDSv2,omitempty"`
+	Regions   *map[string]BundleInfo `json:"regions,omitempty"`
+	SshPort   *int32                 `json:"sshPort,omitempty"`
+	SshUser   *string                `json:"sshUser,omitempty"`
+	UseIMDSv2 *bool                  `json:"useIMDSv2,omitempty"`
 }
 
 // NewImageBundleDetails instantiates a new ImageBundleDetails object
@@ -240,7 +240,7 @@ func (o *ImageBundleDetails) SetUseIMDSv2(v bool) {
 }
 
 func (o ImageBundleDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,5 +305,3 @@ func (v *NullableImageBundleDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

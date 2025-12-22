@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BulkImportParams type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,18 @@ var _ MappedNullable = &BulkImportParams{}
 // BulkImportParams Bulk import parameters
 type BulkImportParams struct {
 	// Amazon Resource Name (ARN) of the CMK
-	CmkArn *string `json:"cmkArn,omitempty"`
-	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
-	CreatingUser Users `json:"creatingUser"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
+	CmkArn                 *string                 `json:"cmkArn,omitempty"`
+	CommunicationPorts     *CommunicationPorts     `json:"communicationPorts,omitempty"`
+	CreatingUser           Users                   `json:"creatingUser"`
+	DeviceInfo             *DeviceInfo             `json:"deviceInfo,omitempty"`
+	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
-	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
-	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	ExpectedUniverseVersion *int32             `json:"expectedUniverseVersion,omitempty"`
+	ExtraDependencies       *ExtraDependencies `json:"extraDependencies,omitempty"`
+	InstallYbc              *bool              `json:"installYbc,omitempty"`
 	// Instance count
 	InstanceCount *int32 `json:"instanceCount,omitempty"`
 	// Key space
@@ -42,16 +40,16 @@ type BulkImportParams struct {
 	NodeDetailsSet []NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	PlatformUrl      string  `json:"platformUrl"`
+	PlatformVersion  *string `json:"platformVersion,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
 	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	// S3 bucket URL
-	S3Bucket string `json:"s3Bucket"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
+	S3Bucket                       string `json:"s3Bucket"`
+	SleepAfterMasterRestartMillis  int32  `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32  `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -66,8 +64,8 @@ type BulkImportParams struct {
 	UniverseUUID *string `json:"universeUUID,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
+	YbcInstalled          *bool   `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion    *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 type _BulkImportParams BulkImportParams
@@ -1015,7 +1013,7 @@ func (o *BulkImportParams) SetYbcSoftwareVersion(v string) {
 }
 
 func (o BulkImportParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1142,5 +1140,3 @@ func (v *NullableBulkImportParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

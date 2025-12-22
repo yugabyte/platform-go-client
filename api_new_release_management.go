@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // NewReleaseManagementAPIService NewReleaseManagementAPI service
 type NewReleaseManagementAPIService service
 
 type NewReleaseManagementAPICreateNewReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NewReleaseManagementAPIService
-	cUUID string
-	release *CreateRelease
-	request *interface{}
+	cUUID      string
+	release    *CreateRelease
+	request    *interface{}
 }
 
 // Release data to be created
@@ -51,26 +50,27 @@ CreateNewRelease Create a release
 
 WARNING: This is a preview API that could change: create a ybdb release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return NewReleaseManagementAPICreateNewReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return NewReleaseManagementAPICreateNewReleaseRequest
 */
 func (a *NewReleaseManagementAPIService) CreateNewRelease(ctx context.Context, cUUID string) NewReleaseManagementAPICreateNewReleaseRequest {
 	return NewReleaseManagementAPICreateNewReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPCreateSuccess
+//
+//	@return YBPCreateSuccess
 func (a *NewReleaseManagementAPIService) CreateNewReleaseExecute(r NewReleaseManagementAPICreateNewReleaseRequest) (*YBPCreateSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPCreateSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPCreateSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewReleaseManagementAPIService.CreateNewRelease")
@@ -162,11 +162,11 @@ func (a *NewReleaseManagementAPIService) CreateNewReleaseExecute(r NewReleaseMan
 }
 
 type NewReleaseManagementAPIDeleteNewReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NewReleaseManagementAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r NewReleaseManagementAPIDeleteNewReleaseRequest) Request(request interface{}) NewReleaseManagementAPIDeleteNewReleaseRequest {
@@ -183,28 +183,29 @@ DeleteNewRelease delete a release
 
 WARNING: This is a preview API that could change: delete a ybdb release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return NewReleaseManagementAPIDeleteNewReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return NewReleaseManagementAPIDeleteNewReleaseRequest
 */
 func (a *NewReleaseManagementAPIService) DeleteNewRelease(ctx context.Context, cUUID string, rUUID string) NewReleaseManagementAPIDeleteNewReleaseRequest {
 	return NewReleaseManagementAPIDeleteNewReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *NewReleaseManagementAPIService) DeleteNewReleaseExecute(r NewReleaseManagementAPIDeleteNewReleaseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewReleaseManagementAPIService.DeleteNewRelease")
@@ -292,11 +293,11 @@ func (a *NewReleaseManagementAPIService) DeleteNewReleaseExecute(r NewReleaseMan
 }
 
 type NewReleaseManagementAPIGetNewReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NewReleaseManagementAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r NewReleaseManagementAPIGetNewReleaseRequest) Request(request interface{}) NewReleaseManagementAPIGetNewReleaseRequest {
@@ -313,28 +314,29 @@ GetNewRelease Get a release
 
 WARNING: This is a preview API that could change: get a specific ybdb release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return NewReleaseManagementAPIGetNewReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return NewReleaseManagementAPIGetNewReleaseRequest
 */
 func (a *NewReleaseManagementAPIService) GetNewRelease(ctx context.Context, cUUID string, rUUID string) NewReleaseManagementAPIGetNewReleaseRequest {
 	return NewReleaseManagementAPIGetNewReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ResponseRelease
+//
+//	@return ResponseRelease
 func (a *NewReleaseManagementAPIService) GetNewReleaseExecute(r NewReleaseManagementAPIGetNewReleaseRequest) (*ResponseRelease, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ResponseRelease
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResponseRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewReleaseManagementAPIService.GetNewRelease")
@@ -422,11 +424,11 @@ func (a *NewReleaseManagementAPIService) GetNewReleaseExecute(r NewReleaseManage
 }
 
 type NewReleaseManagementAPIListNewReleasesRequest struct {
-	ctx context.Context
-	ApiService *NewReleaseManagementAPIService
-	cUUID string
+	ctx            context.Context
+	ApiService     *NewReleaseManagementAPIService
+	cUUID          string
 	deploymentType *string
-	request *interface{}
+	request        *interface{}
 }
 
 func (r NewReleaseManagementAPIListNewReleasesRequest) DeploymentType(deploymentType string) NewReleaseManagementAPIListNewReleasesRequest {
@@ -448,26 +450,27 @@ ListNewReleases List releases
 
 WARNING: This is a preview API that could change: list ybdb releases
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return NewReleaseManagementAPIListNewReleasesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return NewReleaseManagementAPIListNewReleasesRequest
 */
 func (a *NewReleaseManagementAPIService) ListNewReleases(ctx context.Context, cUUID string) NewReleaseManagementAPIListNewReleasesRequest {
 	return NewReleaseManagementAPIListNewReleasesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []ResponseRelease
+//
+//	@return []ResponseRelease
 func (a *NewReleaseManagementAPIService) ListNewReleasesExecute(r NewReleaseManagementAPIListNewReleasesRequest) ([]ResponseRelease, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ResponseRelease
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ResponseRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewReleaseManagementAPIService.ListNewReleases")
@@ -558,12 +561,12 @@ func (a *NewReleaseManagementAPIService) ListNewReleasesExecute(r NewReleaseMana
 }
 
 type NewReleaseManagementAPIUpdateNewReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NewReleaseManagementAPIService
-	cUUID string
-	rUUID string
-	release *UpdateRelease
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	release    *UpdateRelease
+	request    *interface{}
 }
 
 // Release data to be updated
@@ -586,28 +589,29 @@ UpdateNewRelease Update a release
 
 WARNING: This is a preview API that could change: update or edit a ybdb release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return NewReleaseManagementAPIUpdateNewReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return NewReleaseManagementAPIUpdateNewReleaseRequest
 */
 func (a *NewReleaseManagementAPIService) UpdateNewRelease(ctx context.Context, cUUID string, rUUID string) NewReleaseManagementAPIUpdateNewReleaseRequest {
 	return NewReleaseManagementAPIUpdateNewReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *NewReleaseManagementAPIService) UpdateNewReleaseExecute(r NewReleaseManagementAPIUpdateNewReleaseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NewReleaseManagementAPIService.UpdateNewRelease")

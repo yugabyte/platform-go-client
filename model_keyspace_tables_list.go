@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the KeyspaceTablesList type satisfies the MappedNullable interface at compile time
@@ -21,14 +19,14 @@ var _ MappedNullable = &KeyspaceTablesList{}
 
 // KeyspaceTablesList struct for KeyspaceTablesList
 type KeyspaceTablesList struct {
-	AllTables bool `json:"allTables"`
+	AllTables                      bool                           `json:"allTables"`
 	BackupPointInTimeRestoreWindow BackupPointInTimeRestoreWindow `json:"backupPointInTimeRestoreWindow"`
-	BackupSizeInBytes int64 `json:"backupSizeInBytes"`
-	DefaultLocation string `json:"defaultLocation"`
-	Keyspace string `json:"keyspace"`
-	PerRegionLocations []RegionLocations `json:"perRegionLocations"`
-	TableUUIDList []string `json:"tableUUIDList"`
-	TablesList []string `json:"tablesList"`
+	BackupSizeInBytes              int64                          `json:"backupSizeInBytes"`
+	DefaultLocation                string                         `json:"defaultLocation"`
+	Keyspace                       string                         `json:"keyspace"`
+	PerRegionLocations             []RegionLocations              `json:"perRegionLocations"`
+	TableUUIDList                  []string                       `json:"tableUUIDList"`
+	TablesList                     []string                       `json:"tablesList"`
 }
 
 type _KeyspaceTablesList KeyspaceTablesList
@@ -251,7 +249,7 @@ func (o *KeyspaceTablesList) SetTablesList(v []string) {
 }
 
 func (o KeyspaceTablesList) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,5 +304,3 @@ func (v *NullableKeyspaceTablesList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RunQueryFormData type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &RunQueryFormData{}
 
 // RunQueryFormData struct for RunQueryFormData
 type RunQueryFormData struct {
-	DbName string `json:"db_name"`
-	NodeName string `json:"node_name"`
-	Query string `json:"query"`
+	DbName    string `json:"db_name"`
+	NodeName  string `json:"node_name"`
+	Query     string `json:"query"`
 	TableType string `json:"table_type"`
 }
 
@@ -147,7 +145,7 @@ func (o *RunQueryFormData) SetTableType(v string) {
 }
 
 func (o RunQueryFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableRunQueryFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

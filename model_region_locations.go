@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RegionLocations type satisfies the MappedNullable interface at compile time
@@ -22,8 +20,8 @@ var _ MappedNullable = &RegionLocations{}
 // RegionLocations struct for RegionLocations
 type RegionLocations struct {
 	HOST_BASE string `json:"HOST_BASE"`
-	LOCATION string `json:"LOCATION"`
-	REGION string `json:"REGION"`
+	LOCATION  string `json:"LOCATION"`
+	REGION    string `json:"REGION"`
 }
 
 type _RegionLocations RegionLocations
@@ -121,7 +119,7 @@ func (o *RegionLocations) SetREGION(v string) {
 }
 
 func (o RegionLocations) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableRegionLocations) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

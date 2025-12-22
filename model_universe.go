@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Universe type satisfies the MappedNullable interface at compile time
@@ -24,8 +22,8 @@ var _ MappedNullable = &Universe{}
 type Universe struct {
 	// Universe creation date
 	CreationDate *time.Time `json:"creation_date,omitempty"`
-	Name string `json:"name"`
-	Uuid string `json:"uuid"`
+	Name         string     `json:"name"`
+	Uuid         string     `json:"uuid"`
 }
 
 type _Universe Universe
@@ -130,7 +128,7 @@ func (o *Universe) SetUuid(v string) {
 }
 
 func (o Universe) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -182,5 +180,3 @@ func (v *NullableUniverse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,20 +19,20 @@ var _ MappedNullable = &ProviderDetails{}
 
 // ProviderDetails struct for ProviderDetails
 type ProviderDetails struct {
-	AirGapInstall *bool `json:"airGapInstall,omitempty"`
-	CloudInfo *CloudInfo `json:"cloudInfo,omitempty"`
-	EnableNodeAgent *bool `json:"enableNodeAgent,omitempty"`
-	InstallNodeExporter *bool `json:"installNodeExporter,omitempty"`
-	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
-	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	NtpServers []string `json:"ntpServers,omitempty"`
-	PasswordlessSudoAccess *bool `json:"passwordlessSudoAccess,omitempty"`
-	ProvisionInstanceScript *string `json:"provisionInstanceScript,omitempty"`
-	SetUpChrony *bool `json:"setUpChrony,omitempty"`
-	ShowSetUpChrony *bool `json:"showSetUpChrony,omitempty"`
-	SkipProvisioning *bool `json:"skipProvisioning,omitempty"`
-	SshPort *int32 `json:"sshPort,omitempty"`
-	SshUser *string `json:"sshUser,omitempty"`
+	AirGapInstall           *bool      `json:"airGapInstall,omitempty"`
+	CloudInfo               *CloudInfo `json:"cloudInfo,omitempty"`
+	EnableNodeAgent         *bool      `json:"enableNodeAgent,omitempty"`
+	InstallNodeExporter     *bool      `json:"installNodeExporter,omitempty"`
+	NodeExporterPort        *int32     `json:"nodeExporterPort,omitempty"`
+	NodeExporterUser        *string    `json:"nodeExporterUser,omitempty"`
+	NtpServers              []string   `json:"ntpServers,omitempty"`
+	PasswordlessSudoAccess  *bool      `json:"passwordlessSudoAccess,omitempty"`
+	ProvisionInstanceScript *string    `json:"provisionInstanceScript,omitempty"`
+	SetUpChrony             *bool      `json:"setUpChrony,omitempty"`
+	ShowSetUpChrony         *bool      `json:"showSetUpChrony,omitempty"`
+	SkipProvisioning        *bool      `json:"skipProvisioning,omitempty"`
+	SshPort                 *int32     `json:"sshPort,omitempty"`
+	SshUser                 *string    `json:"sshUser,omitempty"`
 }
 
 // NewProviderDetails instantiates a new ProviderDetails object
@@ -501,7 +501,7 @@ func (o *ProviderDetails) SetSshUser(v string) {
 }
 
 func (o ProviderDetails) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -590,5 +590,3 @@ func (v *NullableProviderDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

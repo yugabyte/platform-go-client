@@ -19,9 +19,9 @@ var _ MappedNullable = &RegionCloudInfo{}
 
 // RegionCloudInfo struct for RegionCloudInfo
 type RegionCloudInfo struct {
-	Aws *AWSRegionCloudInfo `json:"aws,omitempty"`
-	Azu *AzureRegionCloudInfo `json:"azu,omitempty"`
-	Gcp *GCPRegionCloudInfo `json:"gcp,omitempty"`
+	Aws        *AWSRegionCloudInfo   `json:"aws,omitempty"`
+	Azu        *AzureRegionCloudInfo `json:"azu,omitempty"`
+	Gcp        *GCPRegionCloudInfo   `json:"gcp,omitempty"`
 	Kubernetes *KubernetesRegionInfo `json:"kubernetes,omitempty"`
 }
 
@@ -171,7 +171,7 @@ func (o *RegionCloudInfo) SetKubernetes(v KubernetesRegionInfo) {
 }
 
 func (o RegionCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableRegionCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PerProcessFlags type satisfies the MappedNullable interface at compile time
@@ -69,7 +67,7 @@ func (o *PerProcessFlags) SetValue(v map[string]map[string]string) {
 }
 
 func (o PerProcessFlags) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -117,5 +115,3 @@ func (v *NullablePerProcessFlags) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

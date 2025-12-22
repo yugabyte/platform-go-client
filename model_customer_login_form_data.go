@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomerLoginFormData type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &CustomerLoginFormData{}
 
 // CustomerLoginFormData struct for CustomerLoginFormData
 type CustomerLoginFormData struct {
-	Email string `json:"email"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
@@ -95,7 +93,7 @@ func (o *CustomerLoginFormData) SetPassword(v string) {
 }
 
 func (o CustomerLoginFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableCustomerLoginFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

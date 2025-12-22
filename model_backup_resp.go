@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BackupResp type satisfies the MappedNullable interface at compile time
@@ -22,30 +20,30 @@ var _ MappedNullable = &BackupResp{}
 
 // BackupResp struct for BackupResp
 type BackupResp struct {
-	BackupType string `json:"backupType"`
-	Category string `json:"category"`
+	BackupType       string           `json:"backupType"`
+	Category         string           `json:"category"`
 	CommonBackupInfo CommonBackupInfo `json:"commonBackupInfo"`
-	CustomerUUID string `json:"customerUUID"`
+	CustomerUUID     string           `json:"customerUUID"`
 	// The expiry time for backup.
-	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
-	ExpiryTimeUnit string `json:"expiryTimeUnit"`
-	FullChainSizeInBytes int64 `json:"fullChainSizeInBytes"`
-	HasIncrementalBackups bool `json:"hasIncrementalBackups"`
-	IsFullBackup bool `json:"isFullBackup"`
-	IsStorageConfigPresent bool `json:"isStorageConfigPresent"`
-	IsUniversePresent bool `json:"isUniversePresent"`
-	LastBackupState string `json:"lastBackupState"`
+	ExpiryTime             *time.Time `json:"expiryTime,omitempty"`
+	ExpiryTimeUnit         string     `json:"expiryTimeUnit"`
+	FullChainSizeInBytes   int64      `json:"fullChainSizeInBytes"`
+	HasIncrementalBackups  bool       `json:"hasIncrementalBackups"`
+	IsFullBackup           bool       `json:"isFullBackup"`
+	IsStorageConfigPresent bool       `json:"isStorageConfigPresent"`
+	IsUniversePresent      bool       `json:"isUniversePresent"`
+	LastBackupState        string     `json:"lastBackupState"`
 	// Time for last incremenatal backup.
 	LastIncrementalBackupTime *time.Time `json:"lastIncrementalBackupTime,omitempty"`
-	OnDemand bool `json:"onDemand"`
-	ScheduleName string `json:"scheduleName"`
-	ScheduleUUID string `json:"scheduleUUID"`
-	StorageConfigType string `json:"storageConfigType"`
-	UniverseName string `json:"universeName"`
-	UniverseUUID string `json:"universeUUID"`
+	OnDemand                  bool       `json:"onDemand"`
+	ScheduleName              string     `json:"scheduleName"`
+	ScheduleUUID              string     `json:"scheduleUUID"`
+	StorageConfigType         string     `json:"storageConfigType"`
+	UniverseName              string     `json:"universeName"`
+	UniverseUUID              string     `json:"universeUUID"`
 	// WARNING: This is a preview API that could change. Indicates if role objects were backed up
-	UseRoles *bool `json:"useRoles,omitempty"`
-	UseTablespaces bool `json:"useTablespaces"`
+	UseRoles       *bool `json:"useRoles,omitempty"`
+	UseTablespaces bool  `json:"useTablespaces"`
 }
 
 type _BackupResp BackupResp
@@ -614,7 +612,7 @@ func (o *BackupResp) SetUseTablespaces(v bool) {
 }
 
 func (o BackupResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -688,5 +686,3 @@ func (v *NullableBackupResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -16,21 +16,20 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"reflect"
+	"strings"
 )
-
 
 // InstanceTypesAPIService InstanceTypesAPI service
 type InstanceTypesAPIService service
 
 type InstanceTypesAPICreateInstanceTypeRequest struct {
-	ctx context.Context
-	ApiService *InstanceTypesAPIService
-	cUUID string
-	pUUID string
+	ctx          context.Context
+	ApiService   *InstanceTypesAPIService
+	cUUID        string
+	pUUID        string
 	instanceType *InstanceType
-	request *interface{}
+	request      *interface{}
 }
 
 // Instance type data of the instance to be stored
@@ -51,28 +50,29 @@ func (r InstanceTypesAPICreateInstanceTypeRequest) Execute() (*InstanceTypeResp,
 /*
 CreateInstanceType Create an instance type
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return InstanceTypesAPICreateInstanceTypeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return InstanceTypesAPICreateInstanceTypeRequest
 */
 func (a *InstanceTypesAPIService) CreateInstanceType(ctx context.Context, cUUID string, pUUID string) InstanceTypesAPICreateInstanceTypeRequest {
 	return InstanceTypesAPICreateInstanceTypeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return InstanceTypeResp
+//
+//	@return InstanceTypeResp
 func (a *InstanceTypesAPIService) CreateInstanceTypeExecute(r InstanceTypesAPICreateInstanceTypeRequest) (*InstanceTypeResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *InstanceTypeResp
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.CreateInstanceType")
@@ -165,12 +165,12 @@ func (a *InstanceTypesAPIService) CreateInstanceTypeExecute(r InstanceTypesAPICr
 }
 
 type InstanceTypesAPIDeleteInstanceTypeRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
-	cUUID string
-	pUUID string
-	code string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	code       string
+	request    *interface{}
 }
 
 func (r InstanceTypesAPIDeleteInstanceTypeRequest) Request(request interface{}) InstanceTypesAPIDeleteInstanceTypeRequest {
@@ -185,30 +185,31 @@ func (r InstanceTypesAPIDeleteInstanceTypeRequest) Execute() (*YBPSuccess, *http
 /*
 DeleteInstanceType Delete an instance type
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param code
- @return InstanceTypesAPIDeleteInstanceTypeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param code
+	@return InstanceTypesAPIDeleteInstanceTypeRequest
 */
 func (a *InstanceTypesAPIService) DeleteInstanceType(ctx context.Context, cUUID string, pUUID string, code string) InstanceTypesAPIDeleteInstanceTypeRequest {
 	return InstanceTypesAPIDeleteInstanceTypeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		code: code,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		code:       code,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *InstanceTypesAPIService) DeleteInstanceTypeExecute(r InstanceTypesAPIDeleteInstanceTypeRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.DeleteInstanceType")
@@ -297,7 +298,7 @@ func (a *InstanceTypesAPIService) DeleteInstanceTypeExecute(r InstanceTypesAPIDe
 }
 
 type InstanceTypesAPIGetAZUTypesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
 }
 
@@ -308,24 +309,25 @@ func (r InstanceTypesAPIGetAZUTypesRequest) Execute() ([]string, *http.Response,
 /*
 GetAZUTypes List supported Azure disk types
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InstanceTypesAPIGetAZUTypesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return InstanceTypesAPIGetAZUTypesRequest
 */
 func (a *InstanceTypesAPIService) GetAZUTypes(ctx context.Context) InstanceTypesAPIGetAZUTypesRequest {
 	return InstanceTypesAPIGetAZUTypesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *InstanceTypesAPIService) GetAZUTypesExecute(r InstanceTypesAPIGetAZUTypesRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.GetAZUTypes")
@@ -408,7 +410,7 @@ func (a *InstanceTypesAPIService) GetAZUTypesExecute(r InstanceTypesAPIGetAZUTyp
 }
 
 type InstanceTypesAPIGetEBSTypesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
 }
 
@@ -419,24 +421,25 @@ func (r InstanceTypesAPIGetEBSTypesRequest) Execute() ([]string, *http.Response,
 /*
 GetEBSTypes List supported EBS volume types
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InstanceTypesAPIGetEBSTypesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return InstanceTypesAPIGetEBSTypesRequest
 */
 func (a *InstanceTypesAPIService) GetEBSTypes(ctx context.Context) InstanceTypesAPIGetEBSTypesRequest {
 	return InstanceTypesAPIGetEBSTypesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *InstanceTypesAPIService) GetEBSTypesExecute(r InstanceTypesAPIGetEBSTypesRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.GetEBSTypes")
@@ -519,7 +522,7 @@ func (a *InstanceTypesAPIService) GetEBSTypesExecute(r InstanceTypesAPIGetEBSTyp
 }
 
 type InstanceTypesAPIGetGCPTypesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
 }
 
@@ -530,24 +533,25 @@ func (r InstanceTypesAPIGetGCPTypesRequest) Execute() ([]string, *http.Response,
 /*
 GetGCPTypes List supported GCP disk types
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return InstanceTypesAPIGetGCPTypesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return InstanceTypesAPIGetGCPTypesRequest
 */
 func (a *InstanceTypesAPIService) GetGCPTypes(ctx context.Context) InstanceTypesAPIGetGCPTypesRequest {
 	return InstanceTypesAPIGetGCPTypesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *InstanceTypesAPIService) GetGCPTypesExecute(r InstanceTypesAPIGetGCPTypesRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.GetGCPTypes")
@@ -630,11 +634,11 @@ func (a *InstanceTypesAPIService) GetGCPTypesExecute(r InstanceTypesAPIGetGCPTyp
 }
 
 type InstanceTypesAPIInstanceTypeDetailRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
-	cUUID string
-	pUUID string
-	code string
+	cUUID      string
+	pUUID      string
+	code       string
 }
 
 func (r InstanceTypesAPIInstanceTypeDetailRequest) Execute() (*InstanceTypeResp, *http.Response, error) {
@@ -644,30 +648,31 @@ func (r InstanceTypesAPIInstanceTypeDetailRequest) Execute() (*InstanceTypeResp,
 /*
 InstanceTypeDetail Get details of an instance type
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param code
- @return InstanceTypesAPIInstanceTypeDetailRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param code
+	@return InstanceTypesAPIInstanceTypeDetailRequest
 */
 func (a *InstanceTypesAPIService) InstanceTypeDetail(ctx context.Context, cUUID string, pUUID string, code string) InstanceTypesAPIInstanceTypeDetailRequest {
 	return InstanceTypesAPIInstanceTypeDetailRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		code: code,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		code:       code,
 	}
 }
 
 // Execute executes the request
-//  @return InstanceTypeResp
+//
+//	@return InstanceTypeResp
 func (a *InstanceTypesAPIService) InstanceTypeDetailExecute(r InstanceTypesAPIInstanceTypeDetailRequest) (*InstanceTypeResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *InstanceTypeResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.InstanceTypeDetail")
@@ -753,12 +758,12 @@ func (a *InstanceTypesAPIService) InstanceTypeDetailExecute(r InstanceTypesAPIIn
 }
 
 type InstanceTypesAPIListOfInstanceTypeRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InstanceTypesAPIService
-	cUUID string
-	pUUID string
-	zone *[]string
-	arch *string
+	cUUID      string
+	pUUID      string
+	zone       *[]string
+	arch       *string
 }
 
 func (r InstanceTypesAPIListOfInstanceTypeRequest) Zone(zone []string) InstanceTypesAPIListOfInstanceTypeRequest {
@@ -778,28 +783,29 @@ func (r InstanceTypesAPIListOfInstanceTypeRequest) Execute() ([]InstanceTypeResp
 /*
 ListOfInstanceType List a provider's instance types
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return InstanceTypesAPIListOfInstanceTypeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return InstanceTypesAPIListOfInstanceTypeRequest
 */
 func (a *InstanceTypesAPIService) ListOfInstanceType(ctx context.Context, cUUID string, pUUID string) InstanceTypesAPIListOfInstanceTypeRequest {
 	return InstanceTypesAPIListOfInstanceTypeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []InstanceTypeResp
+//
+//	@return []InstanceTypeResp
 func (a *InstanceTypesAPIService) ListOfInstanceTypeExecute(r InstanceTypesAPIListOfInstanceTypeRequest) ([]InstanceTypeResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []InstanceTypeResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []InstanceTypeResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InstanceTypesAPIService.ListOfInstanceType")
@@ -890,8 +896,8 @@ func (a *InstanceTypesAPIService) ListOfInstanceTypeExecute(r InstanceTypesAPILi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

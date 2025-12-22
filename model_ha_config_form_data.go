@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the HAConfigFormData type satisfies the MappedNullable interface at compile time
@@ -21,8 +19,8 @@ var _ MappedNullable = &HAConfigFormData{}
 
 // HAConfigFormData struct for HAConfigFormData
 type HAConfigFormData struct {
-	AcceptAnyCertificate bool `json:"accept_any_certificate"`
-	ClusterKey string `json:"cluster_key"`
+	AcceptAnyCertificate bool   `json:"accept_any_certificate"`
+	ClusterKey           string `json:"cluster_key"`
 }
 
 type _HAConfigFormData HAConfigFormData
@@ -95,7 +93,7 @@ func (o *HAConfigFormData) SetClusterKey(v string) {
 }
 
 func (o HAConfigFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableHAConfigFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

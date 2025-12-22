@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PerformanceRecommendation type satisfies the MappedNullable interface at compile time
@@ -21,21 +19,21 @@ var _ MappedNullable = &PerformanceRecommendation{}
 
 // PerformanceRecommendation struct for PerformanceRecommendation
 type PerformanceRecommendation struct {
-	CustomerId string `json:"customerId"`
-	EntityNames string `json:"entityNames"`
-	EntityType string `json:"entityType"`
-	Id string `json:"id"`
-	IsStale bool `json:"isStale"`
-	New bool `json:"new"`
-	Observation string `json:"observation"`
-	Recommendation string `json:"recommendation"`
-	RecommendationInfo map[string]map[string]interface{} `json:"recommendationInfo"`
-	RecommendationPriority string `json:"recommendationPriority"`
-	RecommendationState string `json:"recommendationState"`
-	RecommendationTimestamp int64 `json:"recommendationTimestamp"`
-	RecommendationType string `json:"recommendationType"`
-	StateChangeAuditInfoList []StateChangeAuditInfo `json:"stateChangeAuditInfoList"`
-	UniverseId string `json:"universeId"`
+	CustomerId               string                            `json:"customerId"`
+	EntityNames              string                            `json:"entityNames"`
+	EntityType               string                            `json:"entityType"`
+	Id                       string                            `json:"id"`
+	IsStale                  bool                              `json:"isStale"`
+	New                      bool                              `json:"new"`
+	Observation              string                            `json:"observation"`
+	Recommendation           string                            `json:"recommendation"`
+	RecommendationInfo       map[string]map[string]interface{} `json:"recommendationInfo"`
+	RecommendationPriority   string                            `json:"recommendationPriority"`
+	RecommendationState      string                            `json:"recommendationState"`
+	RecommendationTimestamp  int64                             `json:"recommendationTimestamp"`
+	RecommendationType       string                            `json:"recommendationType"`
+	StateChangeAuditInfoList []StateChangeAuditInfo            `json:"stateChangeAuditInfoList"`
+	UniverseId               string                            `json:"universeId"`
 }
 
 type _PerformanceRecommendation PerformanceRecommendation
@@ -433,7 +431,7 @@ func (o *PerformanceRecommendation) SetUniverseId(v string) {
 }
 
 func (o PerformanceRecommendation) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -495,5 +493,3 @@ func (v *NullablePerformanceRecommendation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

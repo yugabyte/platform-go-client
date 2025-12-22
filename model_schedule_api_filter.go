@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ScheduleApiFilter type satisfies the MappedNullable interface at compile time
@@ -21,8 +19,8 @@ var _ MappedNullable = &ScheduleApiFilter{}
 
 // ScheduleApiFilter struct for ScheduleApiFilter
 type ScheduleApiFilter struct {
-	Status []string `json:"status"`
-	TaskTypes []string `json:"taskTypes"`
+	Status           []string `json:"status"`
+	TaskTypes        []string `json:"taskTypes"`
 	UniverseUUIDList []string `json:"universeUUIDList"`
 }
 
@@ -121,7 +119,7 @@ func (o *ScheduleApiFilter) SetUniverseUUIDList(v []string) {
 }
 
 func (o ScheduleApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -171,5 +169,3 @@ func (v *NullableScheduleApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

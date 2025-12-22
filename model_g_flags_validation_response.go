@@ -21,7 +21,7 @@ var _ MappedNullable = &GFlagsValidationResponse{}
 type GFlagsValidationResponse struct {
 	MASTER *GFlagValidationDetails `json:"MASTER,omitempty"`
 	// WARNING: This is a preview API that could change. Name of the gflag
-	Name *string `json:"Name,omitempty"`
+	Name    *string                 `json:"Name,omitempty"`
 	TSERVER *GFlagValidationDetails `json:"TSERVER,omitempty"`
 }
 
@@ -139,7 +139,7 @@ func (o *GFlagsValidationResponse) SetTSERVER(v GFlagValidationDetails) {
 }
 
 func (o GFlagsValidationResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -195,5 +195,3 @@ func (v *NullableGFlagsValidationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

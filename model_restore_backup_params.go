@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestoreBackupParams type satisfies the MappedNullable interface at compile time
@@ -30,26 +28,26 @@ type RestoreBackupParams struct {
 	// Category of the backup
 	Category *string `json:"category,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
-	CmkArn *string `json:"cmkArn,omitempty"`
+	CmkArn             *string             `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
-	CreatingUser Users `json:"creatingUser"`
+	CreatingUser       Users               `json:"creatingUser"`
 	// Customer UUID
-	CustomerUUID *string `json:"customerUUID,omitempty"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	CustomerUUID *string     `json:"customerUUID,omitempty"`
+	DeviceInfo   *DeviceInfo `json:"deviceInfo,omitempty"`
 	// Disable checksum
 	DisableChecksum *bool `json:"disableChecksum,omitempty"`
 	// Disable multipart upload
 	DisableMultipart *bool `json:"disableMultipart,omitempty"`
 	// Is verbose logging enabled
-	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
+	EnableVerboseLogs      *bool                   `json:"enableVerboseLogs,omitempty"`
+	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
-	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
-	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	ExpectedUniverseVersion *int32             `json:"expectedUniverseVersion,omitempty"`
+	ExtraDependencies       *ExtraDependencies `json:"extraDependencies,omitempty"`
+	InstallYbc              *bool              `json:"installYbc,omitempty"`
 	// KMS configuration UUID
 	KmsConfigUUID *string `json:"kmsConfigUUID,omitempty"`
 	// Node details
@@ -59,8 +57,8 @@ type RestoreBackupParams struct {
 	// Node IP
 	NodeIp *string `json:"nodeIp,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
-	Parallelism *int32 `json:"parallelism,omitempty"`
-	PlatformUrl string `json:"platformUrl"`
+	Parallelism     *int32  `json:"parallelism,omitempty"`
+	PlatformUrl     string  `json:"platformUrl"`
 	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Prefix UUID
 	PrefixUUID *string `json:"prefixUUID,omitempty"`
@@ -71,8 +69,8 @@ type RestoreBackupParams struct {
 	// Restore timestamp in millis
 	RestoreToPointInTimeMillis *int64 `json:"restoreToPointInTimeMillis,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
-	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
+	RunOnlyPrechecks               *bool `json:"runOnlyPrechecks,omitempty"`
+	SleepAfterMasterRestartMillis  int32 `json:"sleepAfterMasterRestartMillis"`
 	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
@@ -86,8 +84,8 @@ type RestoreBackupParams struct {
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
+	YbcInstalled          *bool   `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion    *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 type _RestoreBackupParams RestoreBackupParams
@@ -1355,7 +1353,7 @@ func (o *RestoreBackupParams) SetYbcSoftwareVersion(v string) {
 }
 
 func (o RestoreBackupParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1512,5 +1510,3 @@ func (v *NullableRestoreBackupParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

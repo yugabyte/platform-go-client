@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // PreviewAPIService PreviewAPI service
 type PreviewAPIService service
 
 type PreviewAPICreateImageBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PreviewAPIService
-	cUUID string
-	pUUID string
-	body *ImageBundle
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	body       *ImageBundle
+	request    *interface{}
 }
 
 // CreateImageBundleRequest
@@ -52,28 +51,29 @@ CreateImageBundle Create a image bundle
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return PreviewAPICreateImageBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return PreviewAPICreateImageBundleRequest
 */
 func (a *PreviewAPIService) CreateImageBundle(ctx context.Context, cUUID string, pUUID string) PreviewAPICreateImageBundleRequest {
 	return PreviewAPICreateImageBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ImageBundle
+//
+//	@return ImageBundle
 func (a *PreviewAPIService) CreateImageBundleExecute(r PreviewAPICreateImageBundleRequest) (*ImageBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ImageBundle
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ImageBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PreviewAPIService.CreateImageBundle")
@@ -166,12 +166,12 @@ func (a *PreviewAPIService) CreateImageBundleExecute(r PreviewAPICreateImageBund
 }
 
 type PreviewAPIDeleteRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PreviewAPIService
-	cUUID string
-	pUUID string
-	iBUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	iBUUID     string
+	request    *interface{}
 }
 
 func (r PreviewAPIDeleteRequest) Request(request interface{}) PreviewAPIDeleteRequest {
@@ -188,30 +188,31 @@ Delete Delete a image bundle
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param iBUUID
- @return PreviewAPIDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param iBUUID
+	@return PreviewAPIDeleteRequest
 */
 func (a *PreviewAPIService) Delete(ctx context.Context, cUUID string, pUUID string, iBUUID string) PreviewAPIDeleteRequest {
 	return PreviewAPIDeleteRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		iBUUID: iBUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		iBUUID:     iBUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PreviewAPIService) DeleteExecute(r PreviewAPIDeleteRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PreviewAPIService.Delete")
@@ -300,13 +301,13 @@ func (a *PreviewAPIService) DeleteExecute(r PreviewAPIDeleteRequest) (*YBPSucces
 }
 
 type PreviewAPIEditImageBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PreviewAPIService
-	cUUID string
-	pUUID string
-	iBUUID string
-	body *ImageBundle
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	iBUUID     string
+	body       *ImageBundle
+	request    *interface{}
 }
 
 // EditImageBundleRequest
@@ -329,30 +330,31 @@ EditImageBundle Update a image bundle
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param iBUUID
- @return PreviewAPIEditImageBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param iBUUID
+	@return PreviewAPIEditImageBundleRequest
 */
 func (a *PreviewAPIService) EditImageBundle(ctx context.Context, cUUID string, pUUID string, iBUUID string) PreviewAPIEditImageBundleRequest {
 	return PreviewAPIEditImageBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		iBUUID: iBUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		iBUUID:     iBUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ImageBundle
+//
+//	@return ImageBundle
 func (a *PreviewAPIService) EditImageBundleExecute(r PreviewAPIEditImageBundleRequest) (*ImageBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ImageBundle
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ImageBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PreviewAPIService.EditImageBundle")
@@ -446,11 +448,11 @@ func (a *PreviewAPIService) EditImageBundleExecute(r PreviewAPIEditImageBundleRe
 }
 
 type PreviewAPIGetImageBundleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PreviewAPIService
-	cUUID string
-	pUUID string
-	iBUUID string
+	cUUID      string
+	pUUID      string
+	iBUUID     string
 }
 
 func (r PreviewAPIGetImageBundleRequest) Execute() (*ImageBundle, *http.Response, error) {
@@ -462,30 +464,31 @@ GetImageBundle Get a image bundle
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param iBUUID
- @return PreviewAPIGetImageBundleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param iBUUID
+	@return PreviewAPIGetImageBundleRequest
 */
 func (a *PreviewAPIService) GetImageBundle(ctx context.Context, cUUID string, pUUID string, iBUUID string) PreviewAPIGetImageBundleRequest {
 	return PreviewAPIGetImageBundleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		iBUUID: iBUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		iBUUID:     iBUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ImageBundle
+//
+//	@return ImageBundle
 func (a *PreviewAPIService) GetImageBundleExecute(r PreviewAPIGetImageBundleRequest) (*ImageBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ImageBundle
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ImageBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PreviewAPIService.GetImageBundle")
@@ -571,11 +574,11 @@ func (a *PreviewAPIService) GetImageBundleExecute(r PreviewAPIGetImageBundleRequ
 }
 
 type PreviewAPIGetListOfImageBundlesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PreviewAPIService
-	cUUID string
-	pUUID string
-	arch *string
+	cUUID      string
+	pUUID      string
+	arch       *string
 }
 
 func (r PreviewAPIGetListOfImageBundlesRequest) Arch(arch string) PreviewAPIGetListOfImageBundlesRequest {
@@ -592,28 +595,29 @@ GetListOfImageBundles List image bundles
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return PreviewAPIGetListOfImageBundlesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return PreviewAPIGetListOfImageBundlesRequest
 */
 func (a *PreviewAPIService) GetListOfImageBundles(ctx context.Context, cUUID string, pUUID string) PreviewAPIGetListOfImageBundlesRequest {
 	return PreviewAPIGetListOfImageBundlesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []ImageBundle
+//
+//	@return []ImageBundle
 func (a *PreviewAPIService) GetListOfImageBundlesExecute(r PreviewAPIGetListOfImageBundlesRequest) ([]ImageBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []ImageBundle
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []ImageBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PreviewAPIService.GetListOfImageBundles")

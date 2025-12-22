@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the InstanceTypeResp type satisfies the MappedNullable interface at compile time
@@ -22,10 +20,10 @@ var _ MappedNullable = &InstanceTypeResp{}
 // InstanceTypeResp Details of a cloud instance type
 type InstanceTypeResp struct {
 	// True if the instance is active
-	Active *bool `json:"active,omitempty"`
-	IdKey InstanceTypeKey `json:"idKey"`
+	Active *bool           `json:"active,omitempty"`
+	IdKey  InstanceTypeKey `json:"idKey"`
 	// Instance type code
-	InstanceTypeCode *string `json:"instanceTypeCode,omitempty"`
+	InstanceTypeCode    *string              `json:"instanceTypeCode,omitempty"`
 	InstanceTypeDetails *InstanceTypeDetails `json:"instanceTypeDetails,omitempty"`
 	// The instance's memory size, in gigabytes
 	MemSizeGB *float64 `json:"memSizeGB,omitempty"`
@@ -306,7 +304,7 @@ func (o *InstanceTypeResp) SetProviderUuid(v string) {
 }
 
 func (o InstanceTypeResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -375,5 +373,3 @@ func (v *NullableInstanceTypeResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // NodeAgentsAPIService NodeAgentsAPI service
 type NodeAgentsAPIService service
 
 type NodeAgentsAPIDownloadNodeAgentInstallerRequest struct {
-	ctx context.Context
-	ApiService *NodeAgentsAPIService
+	ctx          context.Context
+	ApiService   *NodeAgentsAPIService
 	downloadType *string
-	os *string
-	arch *string
+	os           *string
+	arch         *string
 }
 
 func (r NodeAgentsAPIDownloadNodeAgentInstallerRequest) DownloadType(downloadType string) NodeAgentsAPIDownloadNodeAgentInstallerRequest {
@@ -53,24 +52,25 @@ func (r NodeAgentsAPIDownloadNodeAgentInstallerRequest) Execute() (string, *http
 /*
 DownloadNodeAgentInstaller Download Node Agent Installer or Package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return NodeAgentsAPIDownloadNodeAgentInstallerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return NodeAgentsAPIDownloadNodeAgentInstallerRequest
 */
 func (a *NodeAgentsAPIService) DownloadNodeAgentInstaller(ctx context.Context) NodeAgentsAPIDownloadNodeAgentInstallerRequest {
 	return NodeAgentsAPIDownloadNodeAgentInstallerRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *NodeAgentsAPIService) DownloadNodeAgentInstallerExecute(r NodeAgentsAPIDownloadNodeAgentInstallerRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeAgentsAPIService.DownloadNodeAgentInstaller")
@@ -163,10 +163,10 @@ func (a *NodeAgentsAPIService) DownloadNodeAgentInstallerExecute(r NodeAgentsAPI
 }
 
 type NodeAgentsAPIGetNodeAgentRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeAgentsAPIService
-	cUUID string
-	nUUID string
+	cUUID      string
+	nUUID      string
 }
 
 func (r NodeAgentsAPIGetNodeAgentRequest) Execute() (*NodeAgentResp, *http.Response, error) {
@@ -176,28 +176,29 @@ func (r NodeAgentsAPIGetNodeAgentRequest) Execute() (*NodeAgentResp, *http.Respo
 /*
 GetNodeAgent Get Node Agent
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param nUUID
- @return NodeAgentsAPIGetNodeAgentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param nUUID
+	@return NodeAgentsAPIGetNodeAgentRequest
 */
 func (a *NodeAgentsAPIService) GetNodeAgent(ctx context.Context, cUUID string, nUUID string) NodeAgentsAPIGetNodeAgentRequest {
 	return NodeAgentsAPIGetNodeAgentRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		nUUID: nUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		nUUID:      nUUID,
 	}
 }
 
 // Execute executes the request
-//  @return NodeAgentResp
+//
+//	@return NodeAgentResp
 func (a *NodeAgentsAPIService) GetNodeAgentExecute(r NodeAgentsAPIGetNodeAgentRequest) (*NodeAgentResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NodeAgentResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NodeAgentResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeAgentsAPIService.GetNodeAgent")
@@ -282,10 +283,10 @@ func (a *NodeAgentsAPIService) GetNodeAgentExecute(r NodeAgentsAPIGetNodeAgentRe
 }
 
 type NodeAgentsAPIListNodeAgentsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *NodeAgentsAPIService
-	cUUID string
-	nodeIp *string
+	cUUID      string
+	nodeIp     *string
 }
 
 func (r NodeAgentsAPIListNodeAgentsRequest) NodeIp(nodeIp string) NodeAgentsAPIListNodeAgentsRequest {
@@ -300,26 +301,27 @@ func (r NodeAgentsAPIListNodeAgentsRequest) Execute() ([]NodeAgentResp, *http.Re
 /*
 ListNodeAgents List Node Agents
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return NodeAgentsAPIListNodeAgentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return NodeAgentsAPIListNodeAgentsRequest
 */
 func (a *NodeAgentsAPIService) ListNodeAgents(ctx context.Context, cUUID string) NodeAgentsAPIListNodeAgentsRequest {
 	return NodeAgentsAPIListNodeAgentsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []NodeAgentResp
+//
+//	@return []NodeAgentResp
 func (a *NodeAgentsAPIService) ListNodeAgentsExecute(r NodeAgentsAPIListNodeAgentsRequest) ([]NodeAgentResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []NodeAgentResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []NodeAgentResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeAgentsAPIService.ListNodeAgents")
@@ -406,11 +408,11 @@ func (a *NodeAgentsAPIService) ListNodeAgentsExecute(r NodeAgentsAPIListNodeAgen
 }
 
 type NodeAgentsAPIPageListNodeAgentsRequest struct {
-	ctx context.Context
-	ApiService *NodeAgentsAPIService
-	cUUID string
+	ctx                  context.Context
+	ApiService           *NodeAgentsAPIService
+	cUUID                string
 	pageNodeAgentRequest *NodeAgentPagedApiQuery
-	request *interface{}
+	request              *interface{}
 }
 
 func (r NodeAgentsAPIPageListNodeAgentsRequest) PageNodeAgentRequest(pageNodeAgentRequest NodeAgentPagedApiQuery) NodeAgentsAPIPageListNodeAgentsRequest {
@@ -430,26 +432,27 @@ func (r NodeAgentsAPIPageListNodeAgentsRequest) Execute() (*NodeAgentPagedApiRes
 /*
 PageListNodeAgents List Node Agents (paginated)
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return NodeAgentsAPIPageListNodeAgentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return NodeAgentsAPIPageListNodeAgentsRequest
 */
 func (a *NodeAgentsAPIService) PageListNodeAgents(ctx context.Context, cUUID string) NodeAgentsAPIPageListNodeAgentsRequest {
 	return NodeAgentsAPIPageListNodeAgentsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return NodeAgentPagedApiResponse
+//
+//	@return NodeAgentPagedApiResponse
 func (a *NodeAgentsAPIService) PageListNodeAgentsExecute(r NodeAgentsAPIPageListNodeAgentsRequest) (*NodeAgentPagedApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NodeAgentPagedApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NodeAgentPagedApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeAgentsAPIService.PageListNodeAgents")
@@ -541,12 +544,12 @@ func (a *NodeAgentsAPIService) PageListNodeAgentsExecute(r NodeAgentsAPIPageList
 }
 
 type NodeAgentsAPIReinstallNodeAgentRequest struct {
-	ctx context.Context
-	ApiService *NodeAgentsAPIService
-	cUUID string
-	uniUUID string
+	ctx                    context.Context
+	ApiService             *NodeAgentsAPIService
+	cUUID                  string
+	uniUUID                string
 	reinstallNodeAgentForm *ReinstallNodeAgentForm
-	request *interface{}
+	request                *interface{}
 }
 
 func (r NodeAgentsAPIReinstallNodeAgentRequest) ReinstallNodeAgentForm(reinstallNodeAgentForm ReinstallNodeAgentForm) NodeAgentsAPIReinstallNodeAgentRequest {
@@ -566,28 +569,29 @@ func (r NodeAgentsAPIReinstallNodeAgentRequest) Execute() (*NodeAgent, *http.Res
 /*
 ReinstallNodeAgent Reinstall Node Agent
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return NodeAgentsAPIReinstallNodeAgentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return NodeAgentsAPIReinstallNodeAgentRequest
 */
 func (a *NodeAgentsAPIService) ReinstallNodeAgent(ctx context.Context, cUUID string, uniUUID string) NodeAgentsAPIReinstallNodeAgentRequest {
 	return NodeAgentsAPIReinstallNodeAgentRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return NodeAgent
+//
+//	@return NodeAgent
 func (a *NodeAgentsAPIService) ReinstallNodeAgentExecute(r NodeAgentsAPIReinstallNodeAgentRequest) (*NodeAgent, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *NodeAgent
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NodeAgent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NodeAgentsAPIService.ReinstallNodeAgent")

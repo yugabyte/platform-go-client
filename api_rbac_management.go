@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // RBACManagementAPIService RBACManagementAPI service
 type RBACManagementAPIService service
 
 type RBACManagementAPICreateRoleRequest struct {
-	ctx context.Context
-	ApiService *RBACManagementAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *RBACManagementAPIService
+	cUUID        string
 	roleFormData *RoleFormData
-	request *interface{}
+	request      *interface{}
 }
 
 // create role form data
@@ -51,26 +50,27 @@ CreateRole Create a custom role
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RBACManagementAPICreateRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RBACManagementAPICreateRoleRequest
 */
 func (a *RBACManagementAPIService) CreateRole(ctx context.Context, cUUID string) RBACManagementAPICreateRoleRequest {
 	return RBACManagementAPICreateRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Role
+//
+//	@return Role
 func (a *RBACManagementAPIService) CreateRoleExecute(r RBACManagementAPICreateRoleRequest) (*Role, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Role
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Role
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.CreateRole")
@@ -162,11 +162,11 @@ func (a *RBACManagementAPIService) CreateRoleExecute(r RBACManagementAPICreateRo
 }
 
 type RBACManagementAPIDeleteRoleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RBACManagementAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r RBACManagementAPIDeleteRoleRequest) Request(request interface{}) RBACManagementAPIDeleteRoleRequest {
@@ -183,28 +183,29 @@ DeleteRole Delete a custom role
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return RBACManagementAPIDeleteRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return RBACManagementAPIDeleteRoleRequest
 */
 func (a *RBACManagementAPIService) DeleteRole(ctx context.Context, cUUID string, rUUID string) RBACManagementAPIDeleteRoleRequest {
 	return RBACManagementAPIDeleteRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *RBACManagementAPIService) DeleteRoleExecute(r RBACManagementAPIDeleteRoleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.DeleteRole")
@@ -292,12 +293,12 @@ func (a *RBACManagementAPIService) DeleteRoleExecute(r RBACManagementAPIDeleteRo
 }
 
 type RBACManagementAPIEditRoleRequest struct {
-	ctx context.Context
-	ApiService *RBACManagementAPIService
-	cUUID string
-	rUUID string
+	ctx          context.Context
+	ApiService   *RBACManagementAPIService
+	cUUID        string
+	rUUID        string
 	roleFormData *RoleFormData
-	request *interface{}
+	request      *interface{}
 }
 
 // edit role form data
@@ -320,28 +321,29 @@ EditRole Edit a custom role
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return RBACManagementAPIEditRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return RBACManagementAPIEditRoleRequest
 */
 func (a *RBACManagementAPIService) EditRole(ctx context.Context, cUUID string, rUUID string) RBACManagementAPIEditRoleRequest {
 	return RBACManagementAPIEditRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Role
+//
+//	@return Role
 func (a *RBACManagementAPIService) EditRoleExecute(r RBACManagementAPIEditRoleRequest) (*Role, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Role
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Role
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.EditRole")
@@ -434,10 +436,10 @@ func (a *RBACManagementAPIService) EditRoleExecute(r RBACManagementAPIEditRoleRe
 }
 
 type RBACManagementAPIGetRoleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RBACManagementAPIService
-	cUUID string
-	rUUID string
+	cUUID      string
+	rUUID      string
 }
 
 func (r RBACManagementAPIGetRoleRequest) Execute() (*Role, *http.Response, error) {
@@ -449,28 +451,29 @@ GetRole Get a role's information
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return RBACManagementAPIGetRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return RBACManagementAPIGetRoleRequest
 */
 func (a *RBACManagementAPIService) GetRole(ctx context.Context, cUUID string, rUUID string) RBACManagementAPIGetRoleRequest {
 	return RBACManagementAPIGetRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Role
+//
+//	@return Role
 func (a *RBACManagementAPIService) GetRoleExecute(r RBACManagementAPIGetRoleRequest) (*Role, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Role
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Role
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.GetRole")
@@ -555,10 +558,10 @@ func (a *RBACManagementAPIService) GetRoleExecute(r RBACManagementAPIGetRoleRequ
 }
 
 type RBACManagementAPIGetRoleBindingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RBACManagementAPIService
-	cUUID string
-	userUUID *string
+	cUUID      string
+	userUUID   *string
 }
 
 // Optional user UUID to filter role binding map
@@ -576,26 +579,27 @@ GetRoleBindings Get all the role bindings available
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RBACManagementAPIGetRoleBindingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RBACManagementAPIGetRoleBindingsRequest
 */
 func (a *RBACManagementAPIService) GetRoleBindings(ctx context.Context, cUUID string) RBACManagementAPIGetRoleBindingsRequest {
 	return RBACManagementAPIGetRoleBindingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]RoleBinding
+//
+//	@return map[string]RoleBinding
 func (a *RBACManagementAPIService) GetRoleBindingsExecute(r RBACManagementAPIGetRoleBindingsRequest) (*map[string]RoleBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *map[string]RoleBinding
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *map[string]RoleBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.GetRoleBindings")
@@ -682,9 +686,9 @@ func (a *RBACManagementAPIService) GetRoleBindingsExecute(r RBACManagementAPIGet
 }
 
 type RBACManagementAPIListPermissionsRequest struct {
-	ctx context.Context
-	ApiService *RBACManagementAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *RBACManagementAPIService
+	cUUID        string
 	resourceType *string
 }
 
@@ -703,26 +707,27 @@ ListPermissions List all the permissions available
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RBACManagementAPIListPermissionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RBACManagementAPIListPermissionsRequest
 */
 func (a *RBACManagementAPIService) ListPermissions(ctx context.Context, cUUID string) RBACManagementAPIListPermissionsRequest {
 	return RBACManagementAPIListPermissionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []PermissionInfo
+//
+//	@return []PermissionInfo
 func (a *RBACManagementAPIService) ListPermissionsExecute(r RBACManagementAPIListPermissionsRequest) ([]PermissionInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []PermissionInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []PermissionInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.ListPermissions")
@@ -810,10 +815,10 @@ func (a *RBACManagementAPIService) ListPermissionsExecute(r RBACManagementAPILis
 }
 
 type RBACManagementAPIListRolesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RBACManagementAPIService
-	cUUID string
-	roleType *string
+	cUUID      string
+	roleType   *string
 }
 
 // Optional role type to filter roles list
@@ -831,26 +836,27 @@ ListRoles List all the roles available
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return RBACManagementAPIListRolesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return RBACManagementAPIListRolesRequest
 */
 func (a *RBACManagementAPIService) ListRoles(ctx context.Context, cUUID string) RBACManagementAPIListRolesRequest {
 	return RBACManagementAPIListRolesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Role
+//
+//	@return []Role
 func (a *RBACManagementAPIService) ListRolesExecute(r RBACManagementAPIListRolesRequest) ([]Role, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Role
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Role
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.ListRoles")
@@ -938,12 +944,12 @@ func (a *RBACManagementAPIService) ListRolesExecute(r RBACManagementAPIListRoles
 }
 
 type RBACManagementAPISetRoleBindingRequest struct {
-	ctx context.Context
-	ApiService *RBACManagementAPIService
-	cUUID string
-	userUUID string
+	ctx                 context.Context
+	ApiService          *RBACManagementAPIService
+	cUUID               string
+	userUUID            string
 	roleBindingFormData *RoleBindingFormData
-	request *interface{}
+	request             *interface{}
 }
 
 // set role bindings form data
@@ -966,28 +972,29 @@ SetRoleBinding Set the role bindings of a user
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param userUUID
- @return RBACManagementAPISetRoleBindingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param userUUID
+	@return RBACManagementAPISetRoleBindingRequest
 */
 func (a *RBACManagementAPIService) SetRoleBinding(ctx context.Context, cUUID string, userUUID string) RBACManagementAPISetRoleBindingRequest {
 	return RBACManagementAPISetRoleBindingRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		userUUID: userUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		userUUID:   userUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []RoleBinding
+//
+//	@return []RoleBinding
 func (a *RBACManagementAPIService) SetRoleBindingExecute(r RBACManagementAPISetRoleBindingRequest) ([]RoleBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []RoleBinding
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []RoleBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RBACManagementAPIService.SetRoleBinding")

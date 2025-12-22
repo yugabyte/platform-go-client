@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // CertificateInfoAPIService CertificateInfoAPI service
 type CertificateInfoAPIService service
 
 type CertificateInfoAPICreateSelfSignedCertRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
-	label *string
-	request *interface{}
+	cUUID      string
+	label      *string
+	request    *interface{}
 }
 
 // certificate label
@@ -51,26 +50,27 @@ CreateSelfSignedCert Create a self signed certificate
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CertificateInfoAPICreateSelfSignedCertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CertificateInfoAPICreateSelfSignedCertRequest
 */
 func (a *CertificateInfoAPIService) CreateSelfSignedCert(ctx context.Context, cUUID string) CertificateInfoAPICreateSelfSignedCertRequest {
 	return CertificateInfoAPICreateSelfSignedCertRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *CertificateInfoAPIService) CreateSelfSignedCertExecute(r CertificateInfoAPICreateSelfSignedCertRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.CreateSelfSignedCert")
@@ -162,11 +162,11 @@ func (a *CertificateInfoAPIService) CreateSelfSignedCertExecute(r CertificateInf
 }
 
 type CertificateInfoAPIDeleteCertificateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r CertificateInfoAPIDeleteCertificateRequest) Request(request interface{}) CertificateInfoAPIDeleteCertificateRequest {
@@ -181,28 +181,29 @@ func (r CertificateInfoAPIDeleteCertificateRequest) Execute() (*YBPSuccess, *htt
 /*
 DeleteCertificate Delete a certificate
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return CertificateInfoAPIDeleteCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return CertificateInfoAPIDeleteCertificateRequest
 */
 func (a *CertificateInfoAPIService) DeleteCertificate(ctx context.Context, cUUID string, rUUID string) CertificateInfoAPIDeleteCertificateRequest {
 	return CertificateInfoAPIDeleteCertificateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CertificateInfoAPIService) DeleteCertificateExecute(r CertificateInfoAPIDeleteCertificateRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.DeleteCertificate")
@@ -290,12 +291,12 @@ func (a *CertificateInfoAPIService) DeleteCertificateExecute(r CertificateInfoAP
 }
 
 type CertificateInfoAPIEditCertificateRequest struct {
-	ctx context.Context
-	ApiService *CertificateInfoAPIService
-	cUUID string
-	rUUID string
+	ctx         context.Context
+	ApiService  *CertificateInfoAPIService
+	cUUID       string
+	rUUID       string
 	certificate *CertificateParams
-	request *interface{}
+	request     *interface{}
 }
 
 // certificate params to edit
@@ -316,28 +317,29 @@ func (r CertificateInfoAPIEditCertificateRequest) Execute() (*YBPSuccess, *http.
 /*
 EditCertificate Edit TLS certificate config details
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return CertificateInfoAPIEditCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return CertificateInfoAPIEditCertificateRequest
 */
 func (a *CertificateInfoAPIService) EditCertificate(ctx context.Context, cUUID string, rUUID string) CertificateInfoAPIEditCertificateRequest {
 	return CertificateInfoAPIEditCertificateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CertificateInfoAPIService) EditCertificateExecute(r CertificateInfoAPIEditCertificateRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.EditCertificate")
@@ -430,10 +432,10 @@ func (a *CertificateInfoAPIService) EditCertificateExecute(r CertificateInfoAPIE
 }
 
 type CertificateInfoAPIGetCertificateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
-	name string
+	cUUID      string
+	name       string
 }
 
 func (r CertificateInfoAPIGetCertificateRequest) Execute() (string, *http.Response, error) {
@@ -445,28 +447,29 @@ GetCertificate Get a certificate's UUID
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param name
- @return CertificateInfoAPIGetCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param name
+	@return CertificateInfoAPIGetCertificateRequest
 */
 func (a *CertificateInfoAPIService) GetCertificate(ctx context.Context, cUUID string, name string) CertificateInfoAPIGetCertificateRequest {
 	return CertificateInfoAPIGetCertificateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		name: name,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *CertificateInfoAPIService) GetCertificateExecute(r CertificateInfoAPIGetCertificateRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.GetCertificate")
@@ -551,12 +554,12 @@ func (a *CertificateInfoAPIService) GetCertificateExecute(r CertificateInfoAPIGe
 }
 
 type CertificateInfoAPIGetClientCertRequest struct {
-	ctx context.Context
-	ApiService *CertificateInfoAPIService
-	cUUID string
-	rUUID string
+	ctx         context.Context
+	ApiService  *CertificateInfoAPIService
+	cUUID       string
+	rUUID       string
 	certificate *ClientCertParams
-	request *interface{}
+	request     *interface{}
 }
 
 // post certificate info
@@ -577,28 +580,29 @@ func (r CertificateInfoAPIGetClientCertRequest) Execute() (*CertificateDetails, 
 /*
 GetClientCert Add a client certificate
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return CertificateInfoAPIGetClientCertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return CertificateInfoAPIGetClientCertRequest
 */
 func (a *CertificateInfoAPIService) GetClientCert(ctx context.Context, cUUID string, rUUID string) CertificateInfoAPIGetClientCertRequest {
 	return CertificateInfoAPIGetClientCertRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CertificateDetails
+//
+//	@return CertificateDetails
 func (a *CertificateInfoAPIService) GetClientCertExecute(r CertificateInfoAPIGetClientCertRequest) (*CertificateDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CertificateDetails
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CertificateDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.GetClientCert")
@@ -691,9 +695,9 @@ func (a *CertificateInfoAPIService) GetClientCertExecute(r CertificateInfoAPIGet
 }
 
 type CertificateInfoAPIGetListOfCertificateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r CertificateInfoAPIGetListOfCertificateRequest) Execute() ([]CertificateInfoExt, *http.Response, error) {
@@ -703,26 +707,27 @@ func (r CertificateInfoAPIGetListOfCertificateRequest) Execute() ([]CertificateI
 /*
 GetListOfCertificate List a customer's certificates
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CertificateInfoAPIGetListOfCertificateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CertificateInfoAPIGetListOfCertificateRequest
 */
 func (a *CertificateInfoAPIService) GetListOfCertificate(ctx context.Context, cUUID string) CertificateInfoAPIGetListOfCertificateRequest {
 	return CertificateInfoAPIGetListOfCertificateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []CertificateInfoExt
+//
+//	@return []CertificateInfoExt
 func (a *CertificateInfoAPIService) GetListOfCertificateExecute(r CertificateInfoAPIGetListOfCertificateRequest) ([]CertificateInfoExt, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CertificateInfoExt
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CertificateInfoExt
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.GetListOfCertificate")
@@ -797,8 +802,8 @@ func (a *CertificateInfoAPIService) GetListOfCertificateExecute(r CertificateInf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -816,11 +821,11 @@ func (a *CertificateInfoAPIService) GetListOfCertificateExecute(r CertificateInf
 }
 
 type CertificateInfoAPIGetRootCertRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r CertificateInfoAPIGetRootCertRequest) Request(request interface{}) CertificateInfoAPIGetRootCertRequest {
@@ -835,28 +840,29 @@ func (r CertificateInfoAPIGetRootCertRequest) Execute() (map[string]interface{},
 /*
 GetRootCert Get a customer's root certificate
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return CertificateInfoAPIGetRootCertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return CertificateInfoAPIGetRootCertRequest
 */
 func (a *CertificateInfoAPIService) GetRootCert(ctx context.Context, cUUID string, rUUID string) CertificateInfoAPIGetRootCertRequest {
 	return CertificateInfoAPIGetRootCertRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *CertificateInfoAPIService) GetRootCertExecute(r CertificateInfoAPIGetRootCertRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.GetRootCert")
@@ -944,11 +950,11 @@ func (a *CertificateInfoAPIService) GetRootCertExecute(r CertificateInfoAPIGetRo
 }
 
 type CertificateInfoAPIUpdateEmptyCustomCertRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CertificateInfoAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r CertificateInfoAPIUpdateEmptyCustomCertRequest) Request(request interface{}) CertificateInfoAPIUpdateEmptyCustomCertRequest {
@@ -965,28 +971,29 @@ UpdateEmptyCustomCert Update an empty certificate
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return CertificateInfoAPIUpdateEmptyCustomCertRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return CertificateInfoAPIUpdateEmptyCustomCertRequest
 */
 func (a *CertificateInfoAPIService) UpdateEmptyCustomCert(ctx context.Context, cUUID string, rUUID string) CertificateInfoAPIUpdateEmptyCustomCertRequest {
 	return CertificateInfoAPIUpdateEmptyCustomCertRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CertificateInfoExt
+//
+//	@return CertificateInfoExt
 func (a *CertificateInfoAPIService) UpdateEmptyCustomCertExecute(r CertificateInfoAPIUpdateEmptyCustomCertRequest) (*CertificateInfoExt, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CertificateInfoExt
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CertificateInfoExt
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.UpdateEmptyCustomCert")
@@ -1074,11 +1081,11 @@ func (a *CertificateInfoAPIService) UpdateEmptyCustomCertExecute(r CertificateIn
 }
 
 type CertificateInfoAPIUploadRequest struct {
-	ctx context.Context
-	ApiService *CertificateInfoAPIService
-	cUUID string
+	ctx         context.Context
+	ApiService  *CertificateInfoAPIService
+	cUUID       string
 	certificate *CertificateParams
-	request *interface{}
+	request     *interface{}
 }
 
 // certificate params of the backup to be restored
@@ -1099,26 +1106,27 @@ func (r CertificateInfoAPIUploadRequest) Execute() (string, *http.Response, erro
 /*
 Upload Restore a certificate from backup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CertificateInfoAPIUploadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CertificateInfoAPIUploadRequest
 */
 func (a *CertificateInfoAPIService) Upload(ctx context.Context, cUUID string) CertificateInfoAPIUploadRequest {
 	return CertificateInfoAPIUploadRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *CertificateInfoAPIService) UploadExecute(r CertificateInfoAPIUploadRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CertificateInfoAPIService.Upload")

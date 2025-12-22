@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the MaintenanceWindow type satisfies the MappedNullable interface at compile time
@@ -36,7 +34,7 @@ type MaintenanceWindow struct {
 	// Start time
 	StartTime time.Time `json:"startTime"`
 	// State
-	State *string `json:"state,omitempty"`
+	State                                  *string                                 `json:"state,omitempty"`
 	SuppressHealthCheckNotificationsConfig *SuppressHealthCheckNotificationsConfig `json:"suppressHealthCheckNotificationsConfig,omitempty"`
 	// Maintenance window UUID
 	Uuid *string `json:"uuid,omitempty"`
@@ -333,7 +331,7 @@ func (o *MaintenanceWindow) SetUuid(v string) {
 }
 
 func (o MaintenanceWindow) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -396,5 +394,3 @@ func (v *NullableMaintenanceWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

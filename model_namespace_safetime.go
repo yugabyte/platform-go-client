@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NamespaceSafetime type satisfies the MappedNullable interface at compile time
@@ -22,11 +20,11 @@ var _ MappedNullable = &NamespaceSafetime{}
 // NamespaceSafetime struct for NamespaceSafetime
 type NamespaceSafetime struct {
 	EstimatedDataLossMs float64 `json:"estimatedDataLossMs"`
-	NamespaceId string `json:"namespaceId"`
-	NamespaceName string `json:"namespaceName"`
-	SafetimeEpochUs int64 `json:"safetimeEpochUs"`
-	SafetimeLagUs int64 `json:"safetimeLagUs"`
-	SafetimeSkewUs int64 `json:"safetimeSkewUs"`
+	NamespaceId         string  `json:"namespaceId"`
+	NamespaceName       string  `json:"namespaceName"`
+	SafetimeEpochUs     int64   `json:"safetimeEpochUs"`
+	SafetimeLagUs       int64   `json:"safetimeLagUs"`
+	SafetimeSkewUs      int64   `json:"safetimeSkewUs"`
 }
 
 type _NamespaceSafetime NamespaceSafetime
@@ -199,7 +197,7 @@ func (o *NamespaceSafetime) SetSafetimeSkewUs(v int64) {
 }
 
 func (o NamespaceSafetime) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullableNamespaceSafetime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

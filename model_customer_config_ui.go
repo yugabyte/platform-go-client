@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomerConfigUI type satisfies the MappedNullable interface at compile time
@@ -30,8 +28,8 @@ type CustomerConfigUI struct {
 	// Configuration data
 	Data map[string]interface{} `json:"data"`
 	// True if there is an in use reference to the object
-	InUse *bool `json:"inUse,omitempty"`
-	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
+	InUse                        *bool `json:"inUse,omitempty"`
+	KubernetesOperatorControlled bool  `json:"kubernetesOperatorControlled"`
 	// Name
 	Name string `json:"name"`
 	// state of the customerConfig. Possible values are Active, QueuedForDeletion.
@@ -340,7 +338,7 @@ func (o *CustomerConfigUI) SetUniverseDetails(v []UniverseDetailSubset) {
 }
 
 func (o CustomerConfigUI) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -405,5 +403,3 @@ func (v *NullableCustomerConfigUI) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,8 +19,8 @@ var _ MappedNullable = &UserIntentOverrides{}
 
 // UserIntentOverrides WARNING: This is a preview API that could change. User Intent overrides
 type UserIntentOverrides struct {
-	AzOverrides *map[string]AZOverrides `json:"azOverrides,omitempty"`
-	PerProcess *map[string]PerProcessDetails `json:"perProcess,omitempty"`
+	AzOverrides *map[string]AZOverrides       `json:"azOverrides,omitempty"`
+	PerProcess  *map[string]PerProcessDetails `json:"perProcess,omitempty"`
 }
 
 // NewUserIntentOverrides instantiates a new UserIntentOverrides object
@@ -105,7 +105,7 @@ func (o *UserIntentOverrides) SetPerProcess(v map[string]PerProcessDetails) {
 }
 
 func (o UserIntentOverrides) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableUserIntentOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

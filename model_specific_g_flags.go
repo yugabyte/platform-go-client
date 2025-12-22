@@ -20,11 +20,11 @@ var _ MappedNullable = &SpecificGFlags{}
 // SpecificGFlags GFlags for current cluster
 type SpecificGFlags struct {
 	// YbaApi Internal. GFlag groups to be applied
-	GflagGroups []string `json:"gflagGroups,omitempty"`
-	InheritFromPrimary *bool `json:"inheritFromPrimary,omitempty"`
+	GflagGroups        []string `json:"gflagGroups,omitempty"`
+	InheritFromPrimary *bool    `json:"inheritFromPrimary,omitempty"`
 	// Overrides for gflags per availability zone
-	PerAZ *map[string]PerProcessFlags `json:"perAZ,omitempty"`
-	PerProcessFlags *PerProcessFlags `json:"perProcessFlags,omitempty"`
+	PerAZ           *map[string]PerProcessFlags `json:"perAZ,omitempty"`
+	PerProcessFlags *PerProcessFlags            `json:"perProcessFlags,omitempty"`
 }
 
 // NewSpecificGFlags instantiates a new SpecificGFlags object
@@ -173,7 +173,7 @@ func (o *SpecificGFlags) SetPerProcessFlags(v PerProcessFlags) {
 }
 
 func (o SpecificGFlags) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,5 +232,3 @@ func (v *NullableSpecificGFlags) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

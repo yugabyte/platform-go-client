@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PerformanceRecommendationFilter type satisfies the MappedNullable interface at compile time
@@ -21,14 +19,14 @@ var _ MappedNullable = &PerformanceRecommendationFilter{}
 
 // PerformanceRecommendationFilter struct for PerformanceRecommendationFilter
 type PerformanceRecommendationFilter struct {
-	CreatedInstantBefore int64 `json:"createdInstantBefore"`
-	CustomerId string `json:"customerId"`
-	Ids []string `json:"ids"`
-	IsStale bool `json:"isStale"`
-	Priorities []string `json:"priorities"`
-	States []string `json:"states"`
-	Types []string `json:"types"`
-	UniverseId string `json:"universeId"`
+	CreatedInstantBefore int64    `json:"createdInstantBefore"`
+	CustomerId           string   `json:"customerId"`
+	Ids                  []string `json:"ids"`
+	IsStale              bool     `json:"isStale"`
+	Priorities           []string `json:"priorities"`
+	States               []string `json:"states"`
+	Types                []string `json:"types"`
+	UniverseId           string   `json:"universeId"`
 }
 
 type _PerformanceRecommendationFilter PerformanceRecommendationFilter
@@ -251,7 +249,7 @@ func (o *PerformanceRecommendationFilter) SetUniverseId(v string) {
 }
 
 func (o PerformanceRecommendationFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,5 +304,3 @@ func (v *NullablePerformanceRecommendationFilter) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

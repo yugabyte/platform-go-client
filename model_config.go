@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Config type satisfies the MappedNullable interface at compile time
@@ -21,11 +19,11 @@ var _ MappedNullable = &Config{}
 
 // Config struct for Config
 type Config struct {
-	CertPath string `json:"certPath"`
-	Compressor string `json:"compressor"`
-	Offloadable bool `json:"offloadable"`
-	ServerCert string `json:"serverCert"`
-	ServerKey string `json:"serverKey"`
+	CertPath    string `json:"certPath"`
+	Compressor  string `json:"compressor"`
+	Offloadable bool   `json:"offloadable"`
+	ServerCert  string `json:"serverCert"`
+	ServerKey   string `json:"serverKey"`
 }
 
 type _Config Config
@@ -173,7 +171,7 @@ func (o *Config) SetServerKey(v string) {
 }
 
 func (o Config) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,5 +223,3 @@ func (v *NullableConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

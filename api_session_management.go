@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // SessionManagementAPIService SessionManagementAPI service
 type SessionManagementAPIService service
 
 type SessionManagementAPIApiLoginRequest struct {
-	ctx context.Context
-	ApiService *SessionManagementAPIService
+	ctx                   context.Context
+	ApiService            *SessionManagementAPIService
 	customerLoginFormData *CustomerLoginFormData
-	request *interface{}
+	request               *interface{}
 }
 
 func (r SessionManagementAPIApiLoginRequest) CustomerLoginFormData(customerLoginFormData CustomerLoginFormData) SessionManagementAPIApiLoginRequest {
@@ -47,24 +46,25 @@ func (r SessionManagementAPIApiLoginRequest) Execute() (*SessionInfo, *http.Resp
 /*
 ApiLogin Authenticate user using email and password
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPIApiLoginRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPIApiLoginRequest
 */
 func (a *SessionManagementAPIService) ApiLogin(ctx context.Context) SessionManagementAPIApiLoginRequest {
 	return SessionManagementAPIApiLoginRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SessionInfo
+//
+//	@return SessionInfo
 func (a *SessionManagementAPIService) ApiLoginExecute(r SessionManagementAPIApiLoginRequest) (*SessionInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SessionInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SessionInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.ApiLogin")
@@ -141,11 +141,11 @@ func (a *SessionManagementAPIService) ApiLoginExecute(r SessionManagementAPIApiL
 }
 
 type SessionManagementAPIApiTokenRequest struct {
-	ctx context.Context
-	ApiService *SessionManagementAPIService
-	cUUID string
+	ctx             context.Context
+	ApiService      *SessionManagementAPIService
+	cUUID           string
 	apiTokenVersion *int64
-	request *interface{}
+	request         *interface{}
 }
 
 func (r SessionManagementAPIApiTokenRequest) ApiTokenVersion(apiTokenVersion int64) SessionManagementAPIApiTokenRequest {
@@ -165,26 +165,27 @@ func (r SessionManagementAPIApiTokenRequest) Execute() (*SessionInfo, *http.Resp
 /*
 ApiToken Regenerate and fetch API token
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return SessionManagementAPIApiTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return SessionManagementAPIApiTokenRequest
 */
 func (a *SessionManagementAPIService) ApiToken(ctx context.Context, cUUID string) SessionManagementAPIApiTokenRequest {
 	return SessionManagementAPIApiTokenRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return SessionInfo
+//
+//	@return SessionInfo
 func (a *SessionManagementAPIService) ApiTokenExecute(r SessionManagementAPIApiTokenRequest) (*SessionInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SessionInfo
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SessionInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.ApiToken")
@@ -264,7 +265,7 @@ func (a *SessionManagementAPIService) ApiTokenExecute(r SessionManagementAPIApiT
 }
 
 type SessionManagementAPIAppVersionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SessionManagementAPIService
 }
 
@@ -275,24 +276,25 @@ func (r SessionManagementAPIAppVersionRequest) Execute() (map[string]string, *ht
 /*
 AppVersion appVersion
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPIAppVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPIAppVersionRequest
 */
 func (a *SessionManagementAPIService) AppVersion(ctx context.Context) SessionManagementAPIAppVersionRequest {
 	return SessionManagementAPIAppVersionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]string
+//
+//	@return map[string]string
 func (a *SessionManagementAPIService) AppVersionExecute(r SessionManagementAPIAppVersionRequest) (map[string]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.AppVersion")
@@ -361,7 +363,7 @@ func (a *SessionManagementAPIService) AppVersionExecute(r SessionManagementAPIAp
 }
 
 type SessionManagementAPICustomerCountRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SessionManagementAPIService
 }
 
@@ -372,24 +374,25 @@ func (r SessionManagementAPICustomerCountRequest) Execute() (*CustomerCountResp,
 /*
 CustomerCount customerCount
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPICustomerCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPICustomerCountRequest
 */
 func (a *SessionManagementAPIService) CustomerCount(ctx context.Context) SessionManagementAPICustomerCountRequest {
 	return SessionManagementAPICustomerCountRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerCountResp
+//
+//	@return CustomerCountResp
 func (a *SessionManagementAPIService) CustomerCountExecute(r SessionManagementAPICustomerCountRequest) (*CustomerCountResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerCountResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerCountResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.CustomerCount")
@@ -458,9 +461,9 @@ func (a *SessionManagementAPIService) CustomerCountExecute(r SessionManagementAP
 }
 
 type SessionManagementAPIGetAdminNotificationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SessionManagementAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r SessionManagementAPIGetAdminNotificationsRequest) Execute() (*CurrentAdminNotificationMessages, *http.Response, error) {
@@ -472,26 +475,27 @@ GetAdminNotifications Current list of notifications for admin
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return SessionManagementAPIGetAdminNotificationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return SessionManagementAPIGetAdminNotificationsRequest
 */
 func (a *SessionManagementAPIService) GetAdminNotifications(ctx context.Context, cUUID string) SessionManagementAPIGetAdminNotificationsRequest {
 	return SessionManagementAPIGetAdminNotificationsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CurrentAdminNotificationMessages
+//
+//	@return CurrentAdminNotificationMessages
 func (a *SessionManagementAPIService) GetAdminNotificationsExecute(r SessionManagementAPIGetAdminNotificationsRequest) (*CurrentAdminNotificationMessages, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CurrentAdminNotificationMessages
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CurrentAdminNotificationMessages
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.GetAdminNotifications")
@@ -561,13 +565,13 @@ func (a *SessionManagementAPIService) GetAdminNotificationsExecute(r SessionMana
 }
 
 type SessionManagementAPIGetFilteredLogsRequest struct {
-	ctx context.Context
-	ApiService *SessionManagementAPIService
-	maxLines *int32
+	ctx          context.Context
+	ApiService   *SessionManagementAPIService
+	maxLines     *int32
 	universeName *string
-	queryRegex *string
-	startDate *string
-	endDate *string
+	queryRegex   *string
+	startDate    *string
+	endDate      *string
 }
 
 func (r SessionManagementAPIGetFilteredLogsRequest) MaxLines(maxLines int32) SessionManagementAPIGetFilteredLogsRequest {
@@ -602,24 +606,25 @@ func (r SessionManagementAPIGetFilteredLogsRequest) Execute() (string, *http.Res
 /*
 GetFilteredLogs getFilteredLogs
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPIGetFilteredLogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPIGetFilteredLogsRequest
 */
 func (a *SessionManagementAPIService) GetFilteredLogs(ctx context.Context) SessionManagementAPIGetFilteredLogsRequest {
 	return SessionManagementAPIGetFilteredLogsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *SessionManagementAPIService) GetFilteredLogsExecute(r SessionManagementAPIGetFilteredLogsRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.GetFilteredLogs")
@@ -711,9 +716,9 @@ func (a *SessionManagementAPIService) GetFilteredLogsExecute(r SessionManagement
 }
 
 type SessionManagementAPIGetLogsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SessionManagementAPIService
-	maxLines int32
+	maxLines   int32
 }
 
 func (r SessionManagementAPIGetLogsRequest) Execute() (*LogData, *http.Response, error) {
@@ -723,26 +728,27 @@ func (r SessionManagementAPIGetLogsRequest) Execute() (*LogData, *http.Response,
 /*
 GetLogs getLogs
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param maxLines
- @return SessionManagementAPIGetLogsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param maxLines
+	@return SessionManagementAPIGetLogsRequest
 */
 func (a *SessionManagementAPIService) GetLogs(ctx context.Context, maxLines int32) SessionManagementAPIGetLogsRequest {
 	return SessionManagementAPIGetLogsRequest{
 		ApiService: a,
-		ctx: ctx,
-		maxLines: maxLines,
+		ctx:        ctx,
+		maxLines:   maxLines,
 	}
 }
 
 // Execute executes the request
-//  @return LogData
+//
+//	@return LogData
 func (a *SessionManagementAPIService) GetLogsExecute(r SessionManagementAPIGetLogsRequest) (*LogData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *LogData
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *LogData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.GetLogs")
@@ -812,9 +818,9 @@ func (a *SessionManagementAPIService) GetLogsExecute(r SessionManagementAPIGetLo
 }
 
 type SessionManagementAPIGetSessionInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SessionManagementAPIService
-	request *interface{}
+	request    *interface{}
 }
 
 func (r SessionManagementAPIGetSessionInfoRequest) Request(request interface{}) SessionManagementAPIGetSessionInfoRequest {
@@ -831,24 +837,25 @@ GetSessionInfo Get current user and customer uuid. This will not generate or ret
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPIGetSessionInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPIGetSessionInfoRequest
 */
 func (a *SessionManagementAPIService) GetSessionInfo(ctx context.Context) SessionManagementAPIGetSessionInfoRequest {
 	return SessionManagementAPIGetSessionInfoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SessionInfo
+//
+//	@return SessionInfo
 func (a *SessionManagementAPIService) GetSessionInfoExecute(r SessionManagementAPIGetSessionInfoRequest) (*SessionInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SessionInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SessionInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.GetSessionInfo")
@@ -934,11 +941,11 @@ func (a *SessionManagementAPIService) GetSessionInfoExecute(r SessionManagementA
 }
 
 type SessionManagementAPIRegisterCustomerRequest struct {
-	ctx context.Context
-	ApiService *SessionManagementAPIService
+	ctx                      context.Context
+	ApiService               *SessionManagementAPIService
 	customerRegisterFormData *CustomerRegisterFormData
-	generateApiToken *bool
-	request *interface{}
+	generateApiToken         *bool
+	request                  *interface{}
 }
 
 func (r SessionManagementAPIRegisterCustomerRequest) CustomerRegisterFormData(customerRegisterFormData CustomerRegisterFormData) SessionManagementAPIRegisterCustomerRequest {
@@ -965,24 +972,25 @@ RegisterCustomer Register a customer
 
 Creates new customer and user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return SessionManagementAPIRegisterCustomerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return SessionManagementAPIRegisterCustomerRequest
 */
 func (a *SessionManagementAPIService) RegisterCustomer(ctx context.Context) SessionManagementAPIRegisterCustomerRequest {
 	return SessionManagementAPIRegisterCustomerRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SessionInfo
+//
+//	@return SessionInfo
 func (a *SessionManagementAPIService) RegisterCustomerExecute(r SessionManagementAPIRegisterCustomerRequest) (*SessionInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SessionInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SessionInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SessionManagementAPIService.RegisterCustomer")

@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Details type satisfies the MappedNullable interface at compile time
@@ -22,11 +20,11 @@ var _ MappedNullable = &Details{}
 
 // Details struct for Details
 type Details struct {
-	Data []NodeData `json:"data"`
-	HasError bool `json:"has_error"`
-	HasWarning bool `json:"has_warning"`
+	Data         []NodeData `json:"data"`
+	HasError     bool       `json:"has_error"`
+	HasWarning   bool       `json:"has_warning"`
 	TimestampIso *time.Time `json:"timestamp_iso,omitempty"`
-	YbVersion string `json:"yb_version"`
+	YbVersion    string     `json:"yb_version"`
 }
 
 type _Details Details
@@ -181,7 +179,7 @@ func (o *Details) SetYbVersion(v string) {
 }
 
 func (o Details) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,5 +233,3 @@ func (v *NullableDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the AccessKey type satisfies the MappedNullable interface at compile time
@@ -25,9 +23,9 @@ type AccessKey struct {
 	// Creation date of key
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Expiration date of key
-	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
-	IdKey AccessKeyId `json:"idKey"`
-	KeyInfo KeyInfo `json:"keyInfo"`
+	ExpirationDate *time.Time  `json:"expirationDate,omitempty"`
+	IdKey          AccessKeyId `json:"idKey"`
+	KeyInfo        KeyInfo     `json:"keyInfo"`
 }
 
 type _AccessKey AccessKey
@@ -164,7 +162,7 @@ func (o *AccessKey) SetKeyInfo(v KeyInfo) {
 }
 
 func (o AccessKey) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -219,5 +217,3 @@ func (v *NullableAccessKey) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

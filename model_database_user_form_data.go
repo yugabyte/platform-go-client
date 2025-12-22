@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DatabaseUserFormData type satisfies the MappedNullable interface at compile time
@@ -23,13 +21,13 @@ var _ MappedNullable = &DatabaseUserFormData{}
 type DatabaseUserFormData struct {
 	DbName string `json:"dbName"`
 	// YbaApi Internal.
-	DbRoleAttributes []RoleAttribute `json:"dbRoleAttributes,omitempty"`
-	Password string `json:"password"`
-	Username string `json:"username"`
-	YcqlAdminPassword string `json:"ycqlAdminPassword"`
-	YcqlAdminUsername string `json:"ycqlAdminUsername"`
-	YsqlAdminPassword string `json:"ysqlAdminPassword"`
-	YsqlAdminUsername string `json:"ysqlAdminUsername"`
+	DbRoleAttributes  []RoleAttribute `json:"dbRoleAttributes,omitempty"`
+	Password          string          `json:"password"`
+	Username          string          `json:"username"`
+	YcqlAdminPassword string          `json:"ycqlAdminPassword"`
+	YcqlAdminUsername string          `json:"ycqlAdminUsername"`
+	YsqlAdminPassword string          `json:"ysqlAdminPassword"`
+	YsqlAdminUsername string          `json:"ysqlAdminUsername"`
 }
 
 type _DatabaseUserFormData DatabaseUserFormData
@@ -259,7 +257,7 @@ func (o *DatabaseUserFormData) SetYsqlAdminUsername(v string) {
 }
 
 func (o DatabaseUserFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,5 +314,3 @@ func (v *NullableDatabaseUserFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

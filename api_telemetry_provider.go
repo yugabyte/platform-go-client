@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // TelemetryProviderAPIService TelemetryProviderAPI service
 type TelemetryProviderAPIService service
 
 type TelemetryProviderAPICreateTelemetryRequest struct {
-	ctx context.Context
-	ApiService *TelemetryProviderAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *TelemetryProviderAPIService
+	cUUID        string
 	providerData *TelemetryProvider
-	request *interface{}
+	request      *interface{}
 }
 
 func (r TelemetryProviderAPICreateTelemetryRequest) ProviderData(providerData TelemetryProvider) TelemetryProviderAPICreateTelemetryRequest {
@@ -50,26 +49,27 @@ CreateTelemetry Create Telemetry Provider
 
 WARNING: This is a preview API that could change. Create Telemetry Provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return TelemetryProviderAPICreateTelemetryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return TelemetryProviderAPICreateTelemetryRequest
 */
 func (a *TelemetryProviderAPIService) CreateTelemetry(ctx context.Context, cUUID string) TelemetryProviderAPICreateTelemetryRequest {
 	return TelemetryProviderAPICreateTelemetryRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TelemetryProvider
+//
+//	@return TelemetryProvider
 func (a *TelemetryProviderAPIService) CreateTelemetryExecute(r TelemetryProviderAPICreateTelemetryRequest) (*TelemetryProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TelemetryProvider
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TelemetryProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryProviderAPIService.CreateTelemetry")
@@ -161,11 +161,11 @@ func (a *TelemetryProviderAPIService) CreateTelemetryExecute(r TelemetryProvider
 }
 
 type TelemetryProviderAPIDeleteTelemetryProviderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TelemetryProviderAPIService
-	cUUID string
-	intUUID string
-	request *interface{}
+	cUUID      string
+	intUUID    string
+	request    *interface{}
 }
 
 func (r TelemetryProviderAPIDeleteTelemetryProviderRequest) Request(request interface{}) TelemetryProviderAPIDeleteTelemetryProviderRequest {
@@ -182,28 +182,29 @@ DeleteTelemetryProvider Delete a telemetry provider
 
 WARNING: This is a preview API that could change. Delete a Telemetry Provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param intUUID
- @return TelemetryProviderAPIDeleteTelemetryProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param intUUID
+	@return TelemetryProviderAPIDeleteTelemetryProviderRequest
 */
 func (a *TelemetryProviderAPIService) DeleteTelemetryProvider(ctx context.Context, cUUID string, intUUID string) TelemetryProviderAPIDeleteTelemetryProviderRequest {
 	return TelemetryProviderAPIDeleteTelemetryProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		intUUID: intUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		intUUID:    intUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *TelemetryProviderAPIService) DeleteTelemetryProviderExecute(r TelemetryProviderAPIDeleteTelemetryProviderRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryProviderAPIService.DeleteTelemetryProvider")
@@ -291,10 +292,10 @@ func (a *TelemetryProviderAPIService) DeleteTelemetryProviderExecute(r Telemetry
 }
 
 type TelemetryProviderAPIGetTelemetryProviderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TelemetryProviderAPIService
-	cUUID string
-	intUUID string
+	cUUID      string
+	intUUID    string
 }
 
 func (r TelemetryProviderAPIGetTelemetryProviderRequest) Execute() (*TelemetryProvider, *http.Response, error) {
@@ -306,28 +307,29 @@ GetTelemetryProvider Get Telemetry Provider
 
 WARNING: This is a preview API that could change. Get Telemetry Provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param intUUID
- @return TelemetryProviderAPIGetTelemetryProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param intUUID
+	@return TelemetryProviderAPIGetTelemetryProviderRequest
 */
 func (a *TelemetryProviderAPIService) GetTelemetryProvider(ctx context.Context, cUUID string, intUUID string) TelemetryProviderAPIGetTelemetryProviderRequest {
 	return TelemetryProviderAPIGetTelemetryProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		intUUID: intUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		intUUID:    intUUID,
 	}
 }
 
 // Execute executes the request
-//  @return TelemetryProvider
+//
+//	@return TelemetryProvider
 func (a *TelemetryProviderAPIService) GetTelemetryProviderExecute(r TelemetryProviderAPIGetTelemetryProviderRequest) (*TelemetryProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *TelemetryProvider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TelemetryProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryProviderAPIService.GetTelemetryProvider")
@@ -412,9 +414,9 @@ func (a *TelemetryProviderAPIService) GetTelemetryProviderExecute(r TelemetryPro
 }
 
 type TelemetryProviderAPIListAllTelemetryProvidersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TelemetryProviderAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r TelemetryProviderAPIListAllTelemetryProvidersRequest) Execute() ([]TelemetryProvider, *http.Response, error) {
@@ -426,26 +428,27 @@ ListAllTelemetryProviders List All Telemetry Providers
 
 WARNING: This is a preview API that could change. List All Telemetry Providers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return TelemetryProviderAPIListAllTelemetryProvidersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return TelemetryProviderAPIListAllTelemetryProvidersRequest
 */
 func (a *TelemetryProviderAPIService) ListAllTelemetryProviders(ctx context.Context, cUUID string) TelemetryProviderAPIListAllTelemetryProvidersRequest {
 	return TelemetryProviderAPIListAllTelemetryProvidersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []TelemetryProvider
+//
+//	@return []TelemetryProvider
 func (a *TelemetryProviderAPIService) ListAllTelemetryProvidersExecute(r TelemetryProviderAPIListAllTelemetryProvidersRequest) ([]TelemetryProvider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []TelemetryProvider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []TelemetryProvider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryProviderAPIService.ListAllTelemetryProviders")

@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // UniverseClusterMutationsAPIService UniverseClusterMutationsAPI service
 type UniverseClusterMutationsAPIService service
 
 type UniverseClusterMutationsAPICreateAllClustersRequest struct {
-	ctx context.Context
-	ApiService *UniverseClusterMutationsAPIService
-	cUUID string
+	ctx                         context.Context
+	ApiService                  *UniverseClusterMutationsAPIService
+	cUUID                       string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r UniverseClusterMutationsAPICreateAllClustersRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsAPICreateAllClustersRequest {
@@ -50,26 +49,27 @@ CreateAllClusters Create Universe Clusters
 
 This will configure and create universe with (optionally) multiple clusters. Just fill in the userIntent for PRIMARY and (optionally) an ASYNC cluster
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UniverseClusterMutationsAPICreateAllClustersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UniverseClusterMutationsAPICreateAllClustersRequest
 */
 func (a *UniverseClusterMutationsAPIService) CreateAllClusters(ctx context.Context, cUUID string) UniverseClusterMutationsAPICreateAllClustersRequest {
 	return UniverseClusterMutationsAPICreateAllClustersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseClusterMutationsAPIService) CreateAllClustersExecute(r UniverseClusterMutationsAPICreateAllClustersRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseClusterMutationsAPIService.CreateAllClusters")
@@ -161,12 +161,12 @@ func (a *UniverseClusterMutationsAPIService) CreateAllClustersExecute(r Universe
 }
 
 type UniverseClusterMutationsAPICreateReadOnlyClusterRequest struct {
-	ctx context.Context
-	ApiService *UniverseClusterMutationsAPIService
-	cUUID string
-	uniUUID string
+	ctx                         context.Context
+	ApiService                  *UniverseClusterMutationsAPIService
+	cUUID                       string
+	uniUUID                     string
 	universeConfigureTaskParams *UniverseDefinitionTaskParams
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r UniverseClusterMutationsAPICreateReadOnlyClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseDefinitionTaskParams) UniverseClusterMutationsAPICreateReadOnlyClusterRequest {
@@ -188,28 +188,29 @@ CreateReadOnlyCluster Create ReadOnly Cluster
 
 This will add a readonly cluster to existing universe. Just fill in the userIntent for ASYNC cluster.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseClusterMutationsAPICreateReadOnlyClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseClusterMutationsAPICreateReadOnlyClusterRequest
 */
 func (a *UniverseClusterMutationsAPIService) CreateReadOnlyCluster(ctx context.Context, cUUID string, uniUUID string) UniverseClusterMutationsAPICreateReadOnlyClusterRequest {
 	return UniverseClusterMutationsAPICreateReadOnlyClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseClusterMutationsAPIService) CreateReadOnlyClusterExecute(r UniverseClusterMutationsAPICreateReadOnlyClusterRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseClusterMutationsAPIService.CreateReadOnlyCluster")
@@ -302,13 +303,13 @@ func (a *UniverseClusterMutationsAPIService) CreateReadOnlyClusterExecute(r Univ
 }
 
 type UniverseClusterMutationsAPIDeleteReadonlyClusterRequest struct {
-	ctx context.Context
-	ApiService *UniverseClusterMutationsAPIService
-	cUUID string
-	uniUUID string
-	clustUUID string
+	ctx           context.Context
+	ApiService    *UniverseClusterMutationsAPIService
+	cUUID         string
+	uniUUID       string
+	clustUUID     string
 	isForceDelete *bool
-	request *interface{}
+	request       *interface{}
 }
 
 func (r UniverseClusterMutationsAPIDeleteReadonlyClusterRequest) IsForceDelete(isForceDelete bool) UniverseClusterMutationsAPIDeleteReadonlyClusterRequest {
@@ -330,30 +331,31 @@ DeleteReadonlyCluster Delete Readonly Cluster
 
 This will delete readonly cluster of existing universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param clustUUID
- @return UniverseClusterMutationsAPIDeleteReadonlyClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param clustUUID
+	@return UniverseClusterMutationsAPIDeleteReadonlyClusterRequest
 */
 func (a *UniverseClusterMutationsAPIService) DeleteReadonlyCluster(ctx context.Context, cUUID string, uniUUID string, clustUUID string) UniverseClusterMutationsAPIDeleteReadonlyClusterRequest {
 	return UniverseClusterMutationsAPIDeleteReadonlyClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		clustUUID: clustUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		clustUUID:  clustUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseClusterMutationsAPIService) DeleteReadonlyClusterExecute(r UniverseClusterMutationsAPIDeleteReadonlyClusterRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseClusterMutationsAPIService.DeleteReadonlyCluster")
@@ -449,12 +451,12 @@ func (a *UniverseClusterMutationsAPIService) DeleteReadonlyClusterExecute(r Univ
 }
 
 type UniverseClusterMutationsAPIUpdatePrimaryClusterRequest struct {
-	ctx context.Context
-	ApiService *UniverseClusterMutationsAPIService
-	cUUID string
-	uniUUID string
+	ctx                         context.Context
+	ApiService                  *UniverseClusterMutationsAPIService
+	cUUID                       string
+	uniUUID                     string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r UniverseClusterMutationsAPIUpdatePrimaryClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsAPIUpdatePrimaryClusterRequest {
@@ -476,28 +478,29 @@ UpdatePrimaryCluster Update Primary Cluster
 
 This will update primary cluster of existing universe.Use API to GET current universe. Lookup universeDetails attribute of the universe resource returned. Update the necessary field (e.g. numNodes) Use this updated universeDetails as request body. See https://github.com/yugabyte/yugabyte-db/blob/master/managed/api-examples/python-simple/edit-universe.ipynb
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseClusterMutationsAPIUpdatePrimaryClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseClusterMutationsAPIUpdatePrimaryClusterRequest
 */
 func (a *UniverseClusterMutationsAPIService) UpdatePrimaryCluster(ctx context.Context, cUUID string, uniUUID string) UniverseClusterMutationsAPIUpdatePrimaryClusterRequest {
 	return UniverseClusterMutationsAPIUpdatePrimaryClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseClusterMutationsAPIService) UpdatePrimaryClusterExecute(r UniverseClusterMutationsAPIUpdatePrimaryClusterRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseClusterMutationsAPIService.UpdatePrimaryCluster")
@@ -590,12 +593,12 @@ func (a *UniverseClusterMutationsAPIService) UpdatePrimaryClusterExecute(r Unive
 }
 
 type UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest struct {
-	ctx context.Context
-	ApiService *UniverseClusterMutationsAPIService
-	cUUID string
-	uniUUID string
+	ctx                         context.Context
+	ApiService                  *UniverseClusterMutationsAPIService
+	cUUID                       string
+	uniUUID                     string
 	universeConfigureTaskParams *UniverseConfigureTaskParams
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest) UniverseConfigureTaskParams(universeConfigureTaskParams UniverseConfigureTaskParams) UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest {
@@ -617,28 +620,29 @@ UpdateReadOnlyCluster Update Readonly Cluster
 
 This will update readonly cluster of existing universe.Use API to GET current universe. Lookup universeDetails attribute of the universe resource returned. Update the necessary field (e.g. numNodes) Use this updated universeDetails as request body. See https://github.com/yugabyte/yugabyte-db/blob/master/managed/api-examples/python-simple/edit-universe.ipynb
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest
 */
 func (a *UniverseClusterMutationsAPIService) UpdateReadOnlyCluster(ctx context.Context, cUUID string, uniUUID string) UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest {
 	return UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseClusterMutationsAPIService) UpdateReadOnlyClusterExecute(r UniverseClusterMutationsAPIUpdateReadOnlyClusterRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseClusterMutationsAPIService.UpdateReadOnlyCluster")

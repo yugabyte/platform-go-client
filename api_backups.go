@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // BackupsAPIService BackupsAPI service
 type BackupsAPIService service
 
 type BackupsAPIAdvancedRestorePreflightRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *BackupsAPIService
+	cUUID                          string
 	advancedRestorePreflightParams *ParametersForAdvancedRestorePreflightChecks
-	request *interface{}
+	request                        *interface{}
 }
 
 // Parameters for advanced restore preflight checks
@@ -51,26 +50,27 @@ AdvancedRestorePreflight Advanced Restore Preflight checks
 
 WARNING: This is a preview API that could change. Advanced restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this checks whether backup can restore to the timestamp provided, fails otherwise.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIAdvancedRestorePreflightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIAdvancedRestorePreflightRequest
 */
 func (a *BackupsAPIService) AdvancedRestorePreflight(ctx context.Context, cUUID string) BackupsAPIAdvancedRestorePreflightRequest {
 	return BackupsAPIAdvancedRestorePreflightRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return RestorePreflightResponse
+//
+//	@return RestorePreflightResponse
 func (a *BackupsAPIService) AdvancedRestorePreflightExecute(r BackupsAPIAdvancedRestorePreflightRequest) (*RestorePreflightResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RestorePreflightResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RestorePreflightResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.AdvancedRestorePreflight")
@@ -162,11 +162,11 @@ func (a *BackupsAPIService) AdvancedRestorePreflightExecute(r BackupsAPIAdvanced
 }
 
 type BackupsAPICreateBackupScheduleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	backup *BackupRequestParams
-	request *interface{}
+	cUUID      string
+	backup     *BackupRequestParams
+	request    *interface{}
 }
 
 // Parameters of the backup to be restored
@@ -189,29 +189,31 @@ CreateBackupSchedule Create Backup Schedule - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Create Backup Schedule Async' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPICreateBackupScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPICreateBackupScheduleRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) CreateBackupSchedule(ctx context.Context, cUUID string) BackupsAPICreateBackupScheduleRequest {
 	return BackupsAPICreateBackupScheduleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
+//
 // Deprecated
 func (a *BackupsAPIService) CreateBackupScheduleExecute(r BackupsAPICreateBackupScheduleRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.CreateBackupSchedule")
@@ -303,11 +305,11 @@ func (a *BackupsAPIService) CreateBackupScheduleExecute(r BackupsAPICreateBackup
 }
 
 type BackupsAPICreateBackupScheduleAsyncRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	backup *BackupRequestParams
-	request *interface{}
+	cUUID      string
+	backup     *BackupRequestParams
+	request    *interface{}
 }
 
 // Parameters of the backup to be restored
@@ -328,26 +330,27 @@ func (r BackupsAPICreateBackupScheduleAsyncRequest) Execute() (*YBPTask, *http.R
 /*
 CreateBackupScheduleAsync Create Backup Schedule Async
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPICreateBackupScheduleAsyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPICreateBackupScheduleAsyncRequest
 */
 func (a *BackupsAPIService) CreateBackupScheduleAsync(ctx context.Context, cUUID string) BackupsAPICreateBackupScheduleAsyncRequest {
 	return BackupsAPICreateBackupScheduleAsyncRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *BackupsAPIService) CreateBackupScheduleAsyncExecute(r BackupsAPICreateBackupScheduleAsyncRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.CreateBackupScheduleAsync")
@@ -439,12 +442,12 @@ func (a *BackupsAPIService) CreateBackupScheduleAsyncExecute(r BackupsAPICreateB
 }
 
 type BackupsAPICreateMultiTableBackupRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
+	ctx         context.Context
+	ApiService  *BackupsAPIService
+	cUUID       string
+	uniUUID     string
 	tableBackup *MultiTableBackupRequestParams
-	request *interface{}
+	request     *interface{}
 }
 
 // Table backup data to be created
@@ -467,31 +470,33 @@ CreateMultiTableBackup Create a multi-table backup - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPICreateMultiTableBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPICreateMultiTableBackupRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) CreateMultiTableBackup(ctx context.Context, cUUID string, uniUUID string) BackupsAPICreateMultiTableBackupRequest {
 	return BackupsAPICreateMultiTableBackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
+//
 // Deprecated
 func (a *BackupsAPIService) CreateMultiTableBackupExecute(r BackupsAPICreateMultiTableBackupRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.CreateMultiTableBackup")
@@ -584,13 +589,13 @@ func (a *BackupsAPIService) CreateMultiTableBackupExecute(r BackupsAPICreateMult
 }
 
 type BackupsAPICreateSingleTableBackupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
-	tableUUID string
-	backup *BackupTableParams
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	tableUUID  string
+	backup     *BackupTableParams
+	request    *interface{}
 }
 
 // Backup data to be created
@@ -613,33 +618,35 @@ CreateSingleTableBackup Create a single-table backup - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use BackupsController.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableUUID
- @return BackupsAPICreateSingleTableBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableUUID
+	@return BackupsAPICreateSingleTableBackupRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) CreateSingleTableBackup(ctx context.Context, cUUID string, uniUUID string, tableUUID string) BackupsAPICreateSingleTableBackupRequest {
 	return BackupsAPICreateSingleTableBackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableUUID: tableUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tableUUID:  tableUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
+//
 // Deprecated
 func (a *BackupsAPIService) CreateSingleTableBackupExecute(r BackupsAPICreateSingleTableBackupRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.CreateSingleTableBackup")
@@ -733,11 +740,11 @@ func (a *BackupsAPIService) CreateSingleTableBackupExecute(r BackupsAPICreateSin
 }
 
 type BackupsAPICreatebackupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	backup *BackupRequestParams
-	request *interface{}
+	cUUID      string
+	backup     *BackupRequestParams
+	request    *interface{}
 }
 
 // Backup data to be created
@@ -758,26 +765,27 @@ func (r BackupsAPICreatebackupRequest) Execute() (*YBPTask, *http.Response, erro
 /*
 Createbackup Create a backup V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPICreatebackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPICreatebackupRequest
 */
 func (a *BackupsAPIService) Createbackup(ctx context.Context, cUUID string) BackupsAPICreatebackupRequest {
 	return BackupsAPICreatebackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *BackupsAPIService) CreatebackupExecute(r BackupsAPICreatebackupRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.Createbackup")
@@ -869,10 +877,10 @@ func (a *BackupsAPIService) CreatebackupExecute(r BackupsAPICreatebackupRequest)
 }
 
 type BackupsAPIDeleteBackupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r BackupsAPIDeleteBackupsRequest) Request(request interface{}) BackupsAPIDeleteBackupsRequest {
@@ -889,29 +897,31 @@ DeleteBackups Delete Backups - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Delete backups V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIDeleteBackupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIDeleteBackupsRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) DeleteBackups(ctx context.Context, cUUID string) BackupsAPIDeleteBackupsRequest {
 	return BackupsAPIDeleteBackupsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
+//
 // Deprecated
 func (a *BackupsAPIService) DeleteBackupsExecute(r BackupsAPIDeleteBackupsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.DeleteBackups")
@@ -998,11 +1008,11 @@ func (a *BackupsAPIService) DeleteBackupsExecute(r BackupsAPIDeleteBackupsReques
 }
 
 type BackupsAPIDeleteBackupsV2Request struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx          context.Context
+	ApiService   *BackupsAPIService
+	cUUID        string
 	deleteBackup *DeleteBackupParams
-	request *interface{}
+	request      *interface{}
 }
 
 // Parameters of the backup to be deleted
@@ -1023,26 +1033,27 @@ func (r BackupsAPIDeleteBackupsV2Request) Execute() (map[string]interface{}, *ht
 /*
 DeleteBackupsV2 Delete backups V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIDeleteBackupsV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIDeleteBackupsV2Request
 */
 func (a *BackupsAPIService) DeleteBackupsV2(ctx context.Context, cUUID string) BackupsAPIDeleteBackupsV2Request {
 	return BackupsAPIDeleteBackupsV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *BackupsAPIService) DeleteBackupsV2Execute(r BackupsAPIDeleteBackupsV2Request) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.DeleteBackupsV2")
@@ -1134,12 +1145,12 @@ func (a *BackupsAPIService) DeleteBackupsV2Execute(r BackupsAPIDeleteBackupsV2Re
 }
 
 type BackupsAPIEditBackupV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
+	cUUID      string
 	backupUUID string
-	backup *EditBackupParams
-	request *interface{}
+	backup     *EditBackupParams
+	request    *interface{}
 }
 
 // Parameters of the backup to be edited
@@ -1162,28 +1173,29 @@ EditBackupV2 Edit a backup V2
 
 Edit a backup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param backupUUID
- @return BackupsAPIEditBackupV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param backupUUID
+	@return BackupsAPIEditBackupV2Request
 */
 func (a *BackupsAPIService) EditBackupV2(ctx context.Context, cUUID string, backupUUID string) BackupsAPIEditBackupV2Request {
 	return BackupsAPIEditBackupV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		backupUUID: backupUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Backup
+//
+//	@return Backup
 func (a *BackupsAPIService) EditBackupV2Execute(r BackupsAPIEditBackupV2Request) (*Backup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Backup
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Backup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.EditBackupV2")
@@ -1276,11 +1288,11 @@ func (a *BackupsAPIService) EditBackupV2Execute(r BackupsAPIEditBackupV2Request)
 }
 
 type BackupsAPIFetchBackupsByTaskUUIDRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
-	tUUID string
+	cUUID      string
+	uniUUID    string
+	tUUID      string
 }
 
 func (r BackupsAPIFetchBackupsByTaskUUIDRequest) Execute() ([]Backup, *http.Response, error) {
@@ -1290,30 +1302,31 @@ func (r BackupsAPIFetchBackupsByTaskUUIDRequest) Execute() ([]Backup, *http.Resp
 /*
 FetchBackupsByTaskUUID List backups associated with a task
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tUUID
- @return BackupsAPIFetchBackupsByTaskUUIDRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tUUID
+	@return BackupsAPIFetchBackupsByTaskUUIDRequest
 */
 func (a *BackupsAPIService) FetchBackupsByTaskUUID(ctx context.Context, cUUID string, uniUUID string, tUUID string) BackupsAPIFetchBackupsByTaskUUIDRequest {
 	return BackupsAPIFetchBackupsByTaskUUIDRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tUUID: tUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		tUUID:      tUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Backup
+//
+//	@return []Backup
 func (a *BackupsAPIService) FetchBackupsByTaskUUIDExecute(r BackupsAPIFetchBackupsByTaskUUIDRequest) ([]Backup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Backup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Backup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.FetchBackupsByTaskUUID")
@@ -1390,8 +1403,8 @@ func (a *BackupsAPIService) FetchBackupsByTaskUUIDExecute(r BackupsAPIFetchBacku
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1409,9 +1422,9 @@ func (a *BackupsAPIService) FetchBackupsByTaskUUIDExecute(r BackupsAPIFetchBacku
 }
 
 type BackupsAPIGetBackupV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
+	cUUID      string
 	backupUUID string
 }
 
@@ -1422,28 +1435,29 @@ func (r BackupsAPIGetBackupV2Request) Execute() (*Backup, *http.Response, error)
 /*
 GetBackupV2 Get Backup V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param backupUUID
- @return BackupsAPIGetBackupV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param backupUUID
+	@return BackupsAPIGetBackupV2Request
 */
 func (a *BackupsAPIService) GetBackupV2(ctx context.Context, cUUID string, backupUUID string) BackupsAPIGetBackupV2Request {
 	return BackupsAPIGetBackupV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		backupUUID: backupUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Backup
+//
+//	@return Backup
 func (a *BackupsAPIService) GetBackupV2Execute(r BackupsAPIGetBackupV2Request) (*Backup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Backup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Backup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.GetBackupV2")
@@ -1528,10 +1542,10 @@ func (a *BackupsAPIService) GetBackupV2Execute(r BackupsAPIGetBackupV2Request) (
 }
 
 type BackupsAPIGetThrottleParamsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r BackupsAPIGetThrottleParamsRequest) Execute() (*YbcThrottleParametersResponse, *http.Response, error) {
@@ -1541,28 +1555,29 @@ func (r BackupsAPIGetThrottleParamsRequest) Execute() (*YbcThrottleParametersRes
 /*
 GetThrottleParams Get throttle params from YB-Controller
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPIGetThrottleParamsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPIGetThrottleParamsRequest
 */
 func (a *BackupsAPIService) GetThrottleParams(ctx context.Context, cUUID string, uniUUID string) BackupsAPIGetThrottleParamsRequest {
 	return BackupsAPIGetThrottleParamsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YbcThrottleParametersResponse
+//
+//	@return YbcThrottleParametersResponse
 func (a *BackupsAPIService) GetThrottleParamsExecute(r BackupsAPIGetThrottleParamsRequest) (*YbcThrottleParametersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YbcThrottleParametersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YbcThrottleParametersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.GetThrottleParams")
@@ -1647,11 +1662,11 @@ func (a *BackupsAPIService) GetThrottleParamsExecute(r BackupsAPIGetThrottlePara
 }
 
 type BackupsAPIListBackupRestoresV2Request struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx                 context.Context
+	ApiService          *BackupsAPIService
+	cUUID               string
 	pageRestoresRequest *RestorePagedApiQuery
-	request *interface{}
+	request             *interface{}
 }
 
 func (r BackupsAPIListBackupRestoresV2Request) PageRestoresRequest(pageRestoresRequest RestorePagedApiQuery) BackupsAPIListBackupRestoresV2Request {
@@ -1671,26 +1686,27 @@ func (r BackupsAPIListBackupRestoresV2Request) Execute() (*RestorePagedApiRespon
 /*
 ListBackupRestoresV2 List Backup Restores (paginated)
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIListBackupRestoresV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIListBackupRestoresV2Request
 */
 func (a *BackupsAPIService) ListBackupRestoresV2(ctx context.Context, cUUID string) BackupsAPIListBackupRestoresV2Request {
 	return BackupsAPIListBackupRestoresV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return RestorePagedApiResponse
+//
+//	@return RestorePagedApiResponse
 func (a *BackupsAPIService) ListBackupRestoresV2Execute(r BackupsAPIListBackupRestoresV2Request) (*RestorePagedApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RestorePagedApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RestorePagedApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ListBackupRestoresV2")
@@ -1782,11 +1798,11 @@ func (a *BackupsAPIService) ListBackupRestoresV2Execute(r BackupsAPIListBackupRe
 }
 
 type BackupsAPIListBackupsV2Request struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx                context.Context
+	ApiService         *BackupsAPIService
+	cUUID              string
 	pageBackupsRequest *BackupPagedApiQuery
-	request *interface{}
+	request            *interface{}
 }
 
 func (r BackupsAPIListBackupsV2Request) PageBackupsRequest(pageBackupsRequest BackupPagedApiQuery) BackupsAPIListBackupsV2Request {
@@ -1806,26 +1822,27 @@ func (r BackupsAPIListBackupsV2Request) Execute() (*BackupPagedApiResponse, *htt
 /*
 ListBackupsV2 List Backups (paginated) V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIListBackupsV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIListBackupsV2Request
 */
 func (a *BackupsAPIService) ListBackupsV2(ctx context.Context, cUUID string) BackupsAPIListBackupsV2Request {
 	return BackupsAPIListBackupsV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return BackupPagedApiResponse
+//
+//	@return BackupPagedApiResponse
 func (a *BackupsAPIService) ListBackupsV2Execute(r BackupsAPIListBackupsV2Request) (*BackupPagedApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BackupPagedApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BackupPagedApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ListBackupsV2")
@@ -1917,9 +1934,9 @@ func (a *BackupsAPIService) ListBackupsV2Execute(r BackupsAPIListBackupsV2Reques
 }
 
 type BackupsAPIListIncrementalBackupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
+	cUUID      string
 	backupUUID string
 }
 
@@ -1930,28 +1947,29 @@ func (r BackupsAPIListIncrementalBackupsRequest) Execute() ([]CommonBackupInfo, 
 /*
 ListIncrementalBackups List Incremental backups
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param backupUUID
- @return BackupsAPIListIncrementalBackupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param backupUUID
+	@return BackupsAPIListIncrementalBackupsRequest
 */
 func (a *BackupsAPIService) ListIncrementalBackups(ctx context.Context, cUUID string, backupUUID string) BackupsAPIListIncrementalBackupsRequest {
 	return BackupsAPIListIncrementalBackupsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		backupUUID: backupUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []CommonBackupInfo
+//
+//	@return []CommonBackupInfo
 func (a *BackupsAPIService) ListIncrementalBackupsExecute(r BackupsAPIListIncrementalBackupsRequest) ([]CommonBackupInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CommonBackupInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CommonBackupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ListIncrementalBackups")
@@ -2036,10 +2054,10 @@ func (a *BackupsAPIService) ListIncrementalBackupsExecute(r BackupsAPIListIncrem
 }
 
 type BackupsAPIListOfBackupsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r BackupsAPIListOfBackupsRequest) Execute() ([]Backup, *http.Response, error) {
@@ -2051,31 +2069,33 @@ ListOfBackups List a customer's backups - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'List Backups (paginated) V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPIListOfBackupsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPIListOfBackupsRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) ListOfBackups(ctx context.Context, cUUID string, uniUUID string) BackupsAPIListOfBackupsRequest {
 	return BackupsAPIListOfBackupsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Backup
+//
+//	@return []Backup
+//
 // Deprecated
 func (a *BackupsAPIService) ListOfBackupsExecute(r BackupsAPIListOfBackupsRequest) ([]Backup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Backup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Backup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ListOfBackups")
@@ -2151,8 +2171,8 @@ func (a *BackupsAPIService) ListOfBackupsExecute(r BackupsAPIListOfBackupsReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2170,9 +2190,9 @@ func (a *BackupsAPIService) ListOfBackupsExecute(r BackupsAPIListOfBackupsReques
 }
 
 type BackupsAPIListRestorableKeyspaceTablesRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx            context.Context
+	ApiService     *BackupsAPIService
+	cUUID          string
 	baseBackupUUID string
 }
 
@@ -2185,28 +2205,29 @@ ListRestorableKeyspaceTables List of all restorable entities in the incremental 
 
 WARNING: This is a preview API that could change. List of all restorable entities in the incremental backup chain.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param baseBackupUUID
- @return BackupsAPIListRestorableKeyspaceTablesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param baseBackupUUID
+	@return BackupsAPIListRestorableKeyspaceTablesRequest
 */
 func (a *BackupsAPIService) ListRestorableKeyspaceTables(ctx context.Context, cUUID string, baseBackupUUID string) BackupsAPIListRestorableKeyspaceTablesRequest {
 	return BackupsAPIListRestorableKeyspaceTablesRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:     a,
+		ctx:            ctx,
+		cUUID:          cUUID,
 		baseBackupUUID: baseBackupUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []KeyspaceTables
+//
+//	@return []KeyspaceTables
 func (a *BackupsAPIService) ListRestorableKeyspaceTablesExecute(r BackupsAPIListRestorableKeyspaceTablesRequest) ([]KeyspaceTables, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []KeyspaceTables
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []KeyspaceTables
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ListRestorableKeyspaceTables")
@@ -2291,12 +2312,12 @@ func (a *BackupsAPIService) ListRestorableKeyspaceTablesExecute(r BackupsAPIList
 }
 
 type BackupsAPIRestoreRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
-	backup *BackupTableParams
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	backup     *BackupTableParams
+	request    *interface{}
 }
 
 // Parameters of the backup to be restored
@@ -2319,31 +2340,33 @@ Restore Restore from a backup - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use 'Restore from a backup V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPIRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPIRestoreRequest
 
 Deprecated
 */
 func (a *BackupsAPIService) Restore(ctx context.Context, cUUID string, uniUUID string) BackupsAPIRestoreRequest {
 	return BackupsAPIRestoreRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
+//
 // Deprecated
 func (a *BackupsAPIService) RestoreExecute(r BackupsAPIRestoreRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.Restore")
@@ -2436,11 +2459,11 @@ func (a *BackupsAPIService) RestoreExecute(r BackupsAPIRestoreRequest) (*YBPTask
 }
 
 type BackupsAPIRestoreBackupV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	backup *RestoreBackupParams
-	request *interface{}
+	cUUID      string
+	backup     *RestoreBackupParams
+	request    *interface{}
 }
 
 // Parameters of the backup to be restored
@@ -2463,26 +2486,27 @@ RestoreBackupV2 Restore from a backup V2
 
 Restore from a backup V2. Running restore preflight before calling actual restore is recommended.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIRestoreBackupV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIRestoreBackupV2Request
 */
 func (a *BackupsAPIService) RestoreBackupV2(ctx context.Context, cUUID string) BackupsAPIRestoreBackupV2Request {
 	return BackupsAPIRestoreBackupV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *BackupsAPIService) RestoreBackupV2Execute(r BackupsAPIRestoreBackupV2Request) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.RestoreBackupV2")
@@ -2574,11 +2598,11 @@ func (a *BackupsAPIService) RestoreBackupV2Execute(r BackupsAPIRestoreBackupV2Re
 }
 
 type BackupsAPIRestorePreflightRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx                    context.Context
+	ApiService             *BackupsAPIService
+	cUUID                  string
 	restorePreflightParams *ParametersForRestorePreflightChecks
-	request *interface{}
+	request                *interface{}
 }
 
 // Parameters for restore preflight check
@@ -2601,26 +2625,27 @@ RestorePreflight Restore preflight checks
 
 Restore preflight checks. Recommended to run before actual restore to retrieve the metadata associated with the backup, as well as check for conflicts with existing keyspaces. Additionally, this checks for unsupported tablespaces. In case of restore to PIT this returns the backup from the backup chain which can be restored to the timestamp provided, fails otherwise.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIRestorePreflightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIRestorePreflightRequest
 */
 func (a *BackupsAPIService) RestorePreflight(ctx context.Context, cUUID string) BackupsAPIRestorePreflightRequest {
 	return BackupsAPIRestorePreflightRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return RestorePreflightResponse
+//
+//	@return RestorePreflightResponse
 func (a *BackupsAPIService) RestorePreflightExecute(r BackupsAPIRestorePreflightRequest) (*RestorePreflightResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RestorePreflightResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RestorePreflightResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.RestorePreflight")
@@ -2712,12 +2737,12 @@ func (a *BackupsAPIService) RestorePreflightExecute(r BackupsAPIRestorePreflight
 }
 
 type BackupsAPISetThrottleParamsRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
+	ctx            context.Context
+	ApiService     *BackupsAPIService
+	cUUID          string
+	uniUUID        string
 	throttleParams *YbcThrottleParameters
-	request *interface{}
+	request        *interface{}
 }
 
 // Parameters for YB-Controller throttling
@@ -2740,28 +2765,29 @@ SetThrottleParams Set throttle params in YB-Controller - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2025.2.0.0.</b></p>Use 'Set throttle params in YB-Controller( async )' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPISetThrottleParamsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPISetThrottleParamsRequest
 */
 func (a *BackupsAPIService) SetThrottleParams(ctx context.Context, cUUID string, uniUUID string) BackupsAPISetThrottleParamsRequest {
 	return BackupsAPISetThrottleParamsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *BackupsAPIService) SetThrottleParamsExecute(r BackupsAPISetThrottleParamsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.SetThrottleParams")
@@ -2854,12 +2880,12 @@ func (a *BackupsAPIService) SetThrottleParamsExecute(r BackupsAPISetThrottlePara
 }
 
 type BackupsAPISetUniverseBackupFlagRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 	markActive *bool
-	request *interface{}
+	request    *interface{}
 }
 
 func (r BackupsAPISetUniverseBackupFlagRequest) MarkActive(markActive bool) BackupsAPISetUniverseBackupFlagRequest {
@@ -2881,28 +2907,29 @@ SetUniverseBackupFlag Set a universe's backup flag
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return BackupsAPISetUniverseBackupFlagRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return BackupsAPISetUniverseBackupFlagRequest
 */
 func (a *BackupsAPIService) SetUniverseBackupFlag(ctx context.Context, cUUID string, uniUUID string) BackupsAPISetUniverseBackupFlagRequest {
 	return BackupsAPISetUniverseBackupFlagRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *BackupsAPIService) SetUniverseBackupFlagExecute(r BackupsAPISetUniverseBackupFlagRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.SetUniverseBackupFlag")
@@ -2993,11 +3020,11 @@ func (a *BackupsAPIService) SetUniverseBackupFlagExecute(r BackupsAPISetUniverse
 }
 
 type BackupsAPIStopBackupRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BackupsAPIService
-	cUUID string
+	cUUID      string
 	backupUUID string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r BackupsAPIStopBackupRequest) Request(request interface{}) BackupsAPIStopBackupRequest {
@@ -3014,28 +3041,29 @@ StopBackup Stop a backup
 
 Stop an in-progress backup
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param backupUUID
- @return BackupsAPIStopBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param backupUUID
+	@return BackupsAPIStopBackupRequest
 */
 func (a *BackupsAPIService) StopBackup(ctx context.Context, cUUID string, backupUUID string) BackupsAPIStopBackupRequest {
 	return BackupsAPIStopBackupRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		backupUUID: backupUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *BackupsAPIService) StopBackupExecute(r BackupsAPIStopBackupRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.StopBackup")
@@ -3123,12 +3151,12 @@ func (a *BackupsAPIService) StopBackupExecute(r BackupsAPIStopBackupRequest) (*Y
 }
 
 type BackupsAPIUniverseBackupRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	customerUUID string
-	universeUUID string
+	ctx            context.Context
+	ApiService     *BackupsAPIService
+	customerUUID   string
+	universeUUID   string
 	backupUniverse *UniverseBackupRequestFormData
-	request *interface{}
+	request        *interface{}
 }
 
 // Universe Backup data to be created
@@ -3151,28 +3179,29 @@ UniverseBackup Create a Universe Backup
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customerUUID
- @param universeUUID
- @return BackupsAPIUniverseBackupRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param customerUUID
+	@param universeUUID
+	@return BackupsAPIUniverseBackupRequest
 */
 func (a *BackupsAPIService) UniverseBackup(ctx context.Context, customerUUID string, universeUUID string) BackupsAPIUniverseBackupRequest {
 	return BackupsAPIUniverseBackupRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		customerUUID: customerUUID,
 		universeUUID: universeUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *BackupsAPIService) UniverseBackupExecute(r BackupsAPIUniverseBackupRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.UniverseBackup")
@@ -3265,11 +3294,11 @@ func (a *BackupsAPIService) UniverseBackupExecute(r BackupsAPIUniverseBackupRequ
 }
 
 type BackupsAPIValidateKeyspaceTablesToRestoreRequest struct {
-	ctx context.Context
-	ApiService *BackupsAPIService
-	cUUID string
+	ctx                          context.Context
+	ApiService                   *BackupsAPIService
+	cUUID                        string
 	restoreItemsValidationParams *ParametersForValidatingRestorableKeyspaceAndTablesInBackup
-	request *interface{}
+	request                      *interface{}
 }
 
 // Parameters for validating Restorable keyspace and tables
@@ -3292,26 +3321,27 @@ ValidateKeyspaceTablesToRestore Validate keyspace and tables to Restore against 
 
 WARNING: This is a preview API that could change. Validate keyspace and tables to Restore against Backup.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return BackupsAPIValidateKeyspaceTablesToRestoreRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return BackupsAPIValidateKeyspaceTablesToRestoreRequest
 */
 func (a *BackupsAPIService) ValidateKeyspaceTablesToRestore(ctx context.Context, cUUID string) BackupsAPIValidateKeyspaceTablesToRestoreRequest {
 	return BackupsAPIValidateKeyspaceTablesToRestoreRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *BackupsAPIService) ValidateKeyspaceTablesToRestoreExecute(r BackupsAPIValidateKeyspaceTablesToRestoreRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupsAPIService.ValidateKeyspaceTablesToRestore")

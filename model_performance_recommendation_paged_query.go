@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PerformanceRecommendationPagedQuery type satisfies the MappedNullable interface at compile time
@@ -21,12 +19,12 @@ var _ MappedNullable = &PerformanceRecommendationPagedQuery{}
 
 // PerformanceRecommendationPagedQuery struct for PerformanceRecommendationPagedQuery
 type PerformanceRecommendationPagedQuery struct {
-	Direction string `json:"direction"`
-	Filter PerformanceRecommendationFilter `json:"filter"`
-	Limit int32 `json:"limit"`
-	NeedTotalCount bool `json:"needTotalCount"`
-	Offset int32 `json:"offset"`
-	SortBy string `json:"sortBy"`
+	Direction      string                          `json:"direction"`
+	Filter         PerformanceRecommendationFilter `json:"filter"`
+	Limit          int32                           `json:"limit"`
+	NeedTotalCount bool                            `json:"needTotalCount"`
+	Offset         int32                           `json:"offset"`
+	SortBy         string                          `json:"sortBy"`
 }
 
 type _PerformanceRecommendationPagedQuery PerformanceRecommendationPagedQuery
@@ -199,7 +197,7 @@ func (o *PerformanceRecommendationPagedQuery) SetSortBy(v string) {
 }
 
 func (o PerformanceRecommendationPagedQuery) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullablePerformanceRecommendationPagedQuery) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

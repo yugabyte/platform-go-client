@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the NodeAgentApiFilter type satisfies the MappedNullable interface at compile time
@@ -21,12 +19,12 @@ var _ MappedNullable = &NodeAgentApiFilter{}
 
 // NodeAgentApiFilter struct for NodeAgentApiFilter
 type NodeAgentApiFilter struct {
-	CloudType string `json:"cloudType"`
-	NodeIps []string `json:"nodeIps"`
-	ProviderUuid string `json:"providerUuid"`
-	RegionUuid string `json:"regionUuid"`
-	UniverseUuid string `json:"universeUuid"`
-	ZoneUuid string `json:"zoneUuid"`
+	CloudType    string   `json:"cloudType"`
+	NodeIps      []string `json:"nodeIps"`
+	ProviderUuid string   `json:"providerUuid"`
+	RegionUuid   string   `json:"regionUuid"`
+	UniverseUuid string   `json:"universeUuid"`
+	ZoneUuid     string   `json:"zoneUuid"`
 }
 
 type _NodeAgentApiFilter NodeAgentApiFilter
@@ -199,7 +197,7 @@ func (o *NodeAgentApiFilter) SetZoneUuid(v string) {
 }
 
 func (o NodeAgentApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -252,5 +250,3 @@ func (v *NullableNodeAgentApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // MaintenanceWindowsAPIService MaintenanceWindowsAPI service
 type MaintenanceWindowsAPIService service
 
 type MaintenanceWindowsAPICreateRequest struct {
-	ctx context.Context
-	ApiService *MaintenanceWindowsAPIService
-	cUUID string
+	ctx                            context.Context
+	ApiService                     *MaintenanceWindowsAPIService
+	cUUID                          string
 	createMaintenanceWindowRequest *MaintenanceWindow
-	request *interface{}
+	request                        *interface{}
 }
 
 func (r MaintenanceWindowsAPICreateRequest) CreateMaintenanceWindowRequest(createMaintenanceWindowRequest MaintenanceWindow) MaintenanceWindowsAPICreateRequest {
@@ -50,26 +49,27 @@ Create Create maintenance window
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return MaintenanceWindowsAPICreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return MaintenanceWindowsAPICreateRequest
 */
 func (a *MaintenanceWindowsAPIService) Create(ctx context.Context, cUUID string) MaintenanceWindowsAPICreateRequest {
 	return MaintenanceWindowsAPICreateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MaintenanceWindow
+//
+//	@return MaintenanceWindow
 func (a *MaintenanceWindowsAPIService) CreateExecute(r MaintenanceWindowsAPICreateRequest) (*MaintenanceWindow, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MaintenanceWindow
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MaintenanceWindow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.Create")
@@ -161,11 +161,11 @@ func (a *MaintenanceWindowsAPIService) CreateExecute(r MaintenanceWindowsAPICrea
 }
 
 type MaintenanceWindowsAPIDeleteRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *MaintenanceWindowsAPIService
-	cUUID string
+	cUUID      string
 	windowUUID string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r MaintenanceWindowsAPIDeleteRequest) Request(request interface{}) MaintenanceWindowsAPIDeleteRequest {
@@ -182,28 +182,29 @@ Delete Delete maintenance window
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param windowUUID
- @return MaintenanceWindowsAPIDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param windowUUID
+	@return MaintenanceWindowsAPIDeleteRequest
 */
 func (a *MaintenanceWindowsAPIService) Delete(ctx context.Context, cUUID string, windowUUID string) MaintenanceWindowsAPIDeleteRequest {
 	return MaintenanceWindowsAPIDeleteRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		windowUUID: windowUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *MaintenanceWindowsAPIService) DeleteExecute(r MaintenanceWindowsAPIDeleteRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.Delete")
@@ -291,9 +292,9 @@ func (a *MaintenanceWindowsAPIService) DeleteExecute(r MaintenanceWindowsAPIDele
 }
 
 type MaintenanceWindowsAPIGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *MaintenanceWindowsAPIService
-	cUUID string
+	cUUID      string
 	windowUUID string
 }
 
@@ -306,28 +307,29 @@ Get Get details of a maintenance window
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param windowUUID
- @return MaintenanceWindowsAPIGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param windowUUID
+	@return MaintenanceWindowsAPIGetRequest
 */
 func (a *MaintenanceWindowsAPIService) Get(ctx context.Context, cUUID string, windowUUID string) MaintenanceWindowsAPIGetRequest {
 	return MaintenanceWindowsAPIGetRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		windowUUID: windowUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MaintenanceWindow
+//
+//	@return MaintenanceWindow
 func (a *MaintenanceWindowsAPIService) GetExecute(r MaintenanceWindowsAPIGetRequest) (*MaintenanceWindow, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MaintenanceWindow
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MaintenanceWindow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.Get")
@@ -412,11 +414,11 @@ func (a *MaintenanceWindowsAPIService) GetExecute(r MaintenanceWindowsAPIGetRequ
 }
 
 type MaintenanceWindowsAPIListOfMaintenanceWindowsRequest struct {
-	ctx context.Context
-	ApiService *MaintenanceWindowsAPIService
-	cUUID string
+	ctx                           context.Context
+	ApiService                    *MaintenanceWindowsAPIService
+	cUUID                         string
 	listMaintenanceWindowsRequest *MaintenanceWindowApiFilter
-	request *interface{}
+	request                       *interface{}
 }
 
 func (r MaintenanceWindowsAPIListOfMaintenanceWindowsRequest) ListMaintenanceWindowsRequest(listMaintenanceWindowsRequest MaintenanceWindowApiFilter) MaintenanceWindowsAPIListOfMaintenanceWindowsRequest {
@@ -438,26 +440,27 @@ ListOfMaintenanceWindows List maintenance windows
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return MaintenanceWindowsAPIListOfMaintenanceWindowsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return MaintenanceWindowsAPIListOfMaintenanceWindowsRequest
 */
 func (a *MaintenanceWindowsAPIService) ListOfMaintenanceWindows(ctx context.Context, cUUID string) MaintenanceWindowsAPIListOfMaintenanceWindowsRequest {
 	return MaintenanceWindowsAPIListOfMaintenanceWindowsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []MaintenanceWindow
+//
+//	@return []MaintenanceWindow
 func (a *MaintenanceWindowsAPIService) ListOfMaintenanceWindowsExecute(r MaintenanceWindowsAPIListOfMaintenanceWindowsRequest) ([]MaintenanceWindow, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []MaintenanceWindow
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []MaintenanceWindow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.ListOfMaintenanceWindows")
@@ -549,11 +552,11 @@ func (a *MaintenanceWindowsAPIService) ListOfMaintenanceWindowsExecute(r Mainten
 }
 
 type MaintenanceWindowsAPIPageRequest struct {
-	ctx context.Context
-	ApiService *MaintenanceWindowsAPIService
-	cUUID string
+	ctx                           context.Context
+	ApiService                    *MaintenanceWindowsAPIService
+	cUUID                         string
 	pageMaintenanceWindowsRequest *MaintenanceWindowPagedApiQuery
-	request *interface{}
+	request                       *interface{}
 }
 
 func (r MaintenanceWindowsAPIPageRequest) PageMaintenanceWindowsRequest(pageMaintenanceWindowsRequest MaintenanceWindowPagedApiQuery) MaintenanceWindowsAPIPageRequest {
@@ -575,26 +578,27 @@ Page List maintenance windows (paginated)
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return MaintenanceWindowsAPIPageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return MaintenanceWindowsAPIPageRequest
 */
 func (a *MaintenanceWindowsAPIService) Page(ctx context.Context, cUUID string) MaintenanceWindowsAPIPageRequest {
 	return MaintenanceWindowsAPIPageRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MaintenanceWindowPagedResponse
+//
+//	@return MaintenanceWindowPagedResponse
 func (a *MaintenanceWindowsAPIService) PageExecute(r MaintenanceWindowsAPIPageRequest) (*MaintenanceWindowPagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MaintenanceWindowPagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MaintenanceWindowPagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.Page")
@@ -686,12 +690,12 @@ func (a *MaintenanceWindowsAPIService) PageExecute(r MaintenanceWindowsAPIPageRe
 }
 
 type MaintenanceWindowsAPIUpdateRequest struct {
-	ctx context.Context
-	ApiService *MaintenanceWindowsAPIService
-	cUUID string
-	windowUUID string
+	ctx                            context.Context
+	ApiService                     *MaintenanceWindowsAPIService
+	cUUID                          string
+	windowUUID                     string
 	updateMaintenanceWindowRequest *MaintenanceWindow
-	request *interface{}
+	request                        *interface{}
 }
 
 func (r MaintenanceWindowsAPIUpdateRequest) UpdateMaintenanceWindowRequest(updateMaintenanceWindowRequest MaintenanceWindow) MaintenanceWindowsAPIUpdateRequest {
@@ -713,28 +717,29 @@ Update Update maintenance window
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param windowUUID
- @return MaintenanceWindowsAPIUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param windowUUID
+	@return MaintenanceWindowsAPIUpdateRequest
 */
 func (a *MaintenanceWindowsAPIService) Update(ctx context.Context, cUUID string, windowUUID string) MaintenanceWindowsAPIUpdateRequest {
 	return MaintenanceWindowsAPIUpdateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		windowUUID: windowUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MaintenanceWindow
+//
+//	@return MaintenanceWindow
 func (a *MaintenanceWindowsAPIService) UpdateExecute(r MaintenanceWindowsAPIUpdateRequest) (*MaintenanceWindow, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MaintenanceWindow
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MaintenanceWindow
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MaintenanceWindowsAPIService.Update")

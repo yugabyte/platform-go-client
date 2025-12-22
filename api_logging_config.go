@@ -18,15 +18,14 @@ import (
 	"net/url"
 )
 
-
 // LoggingConfigAPIService LoggingConfigAPI service
 type LoggingConfigAPIService service
 
 type LoggingConfigAPISetAuditLoggingSettingsRequest struct {
-	ctx context.Context
-	ApiService *LoggingConfigAPIService
+	ctx                context.Context
+	ApiService         *LoggingConfigAPIService
 	auditLoggingConfig *AuditLoggingConfig
-	request *interface{}
+	request            *interface{}
 }
 
 // Audit Logging config to be updated
@@ -47,24 +46,25 @@ func (r LoggingConfigAPISetAuditLoggingSettingsRequest) Execute() (*AuditLogging
 /*
 SetAuditLoggingSettings Set Audit Logging Level
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LoggingConfigAPISetAuditLoggingSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LoggingConfigAPISetAuditLoggingSettingsRequest
 */
 func (a *LoggingConfigAPIService) SetAuditLoggingSettings(ctx context.Context) LoggingConfigAPISetAuditLoggingSettingsRequest {
 	return LoggingConfigAPISetAuditLoggingSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AuditLoggingConfig
+//
+//	@return AuditLoggingConfig
 func (a *LoggingConfigAPIService) SetAuditLoggingSettingsExecute(r LoggingConfigAPISetAuditLoggingSettingsRequest) (*AuditLoggingConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AuditLoggingConfig
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AuditLoggingConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LoggingConfigAPIService.SetAuditLoggingSettings")
@@ -155,10 +155,10 @@ func (a *LoggingConfigAPIService) SetAuditLoggingSettingsExecute(r LoggingConfig
 }
 
 type LoggingConfigAPISetLoggingSettingsRequest struct {
-	ctx context.Context
-	ApiService *LoggingConfigAPIService
+	ctx           context.Context
+	ApiService    *LoggingConfigAPIService
 	loggingConfig *PlatformLoggingConfig
-	request *interface{}
+	request       *interface{}
 }
 
 // Logging config to be updated
@@ -179,24 +179,25 @@ func (r LoggingConfigAPISetLoggingSettingsRequest) Execute() (*PlatformLoggingCo
 /*
 SetLoggingSettings Set Logging Level
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return LoggingConfigAPISetLoggingSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return LoggingConfigAPISetLoggingSettingsRequest
 */
 func (a *LoggingConfigAPIService) SetLoggingSettings(ctx context.Context) LoggingConfigAPISetLoggingSettingsRequest {
 	return LoggingConfigAPISetLoggingSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PlatformLoggingConfig
+//
+//	@return PlatformLoggingConfig
 func (a *LoggingConfigAPIService) SetLoggingSettingsExecute(r LoggingConfigAPISetLoggingSettingsRequest) (*PlatformLoggingConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PlatformLoggingConfig
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PlatformLoggingConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LoggingConfigAPIService.SetLoggingSettings")

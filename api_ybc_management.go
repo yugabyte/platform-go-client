@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // YbcManagementAPIService YbcManagementAPI service
 type YbcManagementAPIService service
 
 type YbcManagementAPIDisableYbcRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *YbcManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r YbcManagementAPIDisableYbcRequest) Request(request interface{}) YbcManagementAPIDisableYbcRequest {
@@ -45,28 +44,29 @@ DisableYbc Disable YBC on the universe nodes
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return YbcManagementAPIDisableYbcRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return YbcManagementAPIDisableYbcRequest
 */
 func (a *YbcManagementAPIService) DisableYbc(ctx context.Context, cUUID string, uniUUID string) YbcManagementAPIDisableYbcRequest {
 	return YbcManagementAPIDisableYbcRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *YbcManagementAPIService) DisableYbcExecute(r YbcManagementAPIDisableYbcRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "YbcManagementAPIService.DisableYbc")
@@ -154,12 +154,12 @@ func (a *YbcManagementAPIService) DisableYbcExecute(r YbcManagementAPIDisableYbc
 }
 
 type YbcManagementAPIInstallYbcRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *YbcManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 	ybcVersion *string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r YbcManagementAPIInstallYbcRequest) YbcVersion(ybcVersion string) YbcManagementAPIInstallYbcRequest {
@@ -181,28 +181,29 @@ InstallYbc Install YBC on the universe nodes
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return YbcManagementAPIInstallYbcRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return YbcManagementAPIInstallYbcRequest
 */
 func (a *YbcManagementAPIService) InstallYbc(ctx context.Context, cUUID string, uniUUID string) YbcManagementAPIInstallYbcRequest {
 	return YbcManagementAPIInstallYbcRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *YbcManagementAPIService) InstallYbcExecute(r YbcManagementAPIInstallYbcRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "YbcManagementAPIService.InstallYbc")
@@ -293,12 +294,12 @@ func (a *YbcManagementAPIService) InstallYbcExecute(r YbcManagementAPIInstallYbc
 }
 
 type YbcManagementAPISetThrottleParamsRequest struct {
-	ctx context.Context
-	ApiService *YbcManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx            context.Context
+	ApiService     *YbcManagementAPIService
+	cUUID          string
+	uniUUID        string
 	throttleParams *YbcThrottleParameters
-	request *interface{}
+	request        *interface{}
 }
 
 // Parameters for YB-Controller throttling
@@ -319,28 +320,29 @@ func (r YbcManagementAPISetThrottleParamsRequest) Execute() (*YBPSuccess, *http.
 /*
 SetThrottleParams Set throttle params in YB-Controller( async )
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return YbcManagementAPISetThrottleParamsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return YbcManagementAPISetThrottleParamsRequest
 */
 func (a *YbcManagementAPIService) SetThrottleParams(ctx context.Context, cUUID string, uniUUID string) YbcManagementAPISetThrottleParamsRequest {
 	return YbcManagementAPISetThrottleParamsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *YbcManagementAPIService) SetThrottleParamsExecute(r YbcManagementAPISetThrottleParamsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "YbcManagementAPIService.SetThrottleParams")
@@ -433,12 +435,12 @@ func (a *YbcManagementAPIService) SetThrottleParamsExecute(r YbcManagementAPISet
 }
 
 type YbcManagementAPIUpgradeYbcRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *YbcManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 	ybcVersion *string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r YbcManagementAPIUpgradeYbcRequest) YbcVersion(ybcVersion string) YbcManagementAPIUpgradeYbcRequest {
@@ -460,28 +462,29 @@ UpgradeYbc Upgrade YBC on the universe nodes
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return YbcManagementAPIUpgradeYbcRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return YbcManagementAPIUpgradeYbcRequest
 */
 func (a *YbcManagementAPIService) UpgradeYbc(ctx context.Context, cUUID string, uniUUID string) YbcManagementAPIUpgradeYbcRequest {
 	return YbcManagementAPIUpgradeYbcRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *YbcManagementAPIService) UpgradeYbcExecute(r YbcManagementAPIUpgradeYbcRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "YbcManagementAPIService.UpgradeYbc")
@@ -572,11 +575,11 @@ func (a *YbcManagementAPIService) UpgradeYbcExecute(r YbcManagementAPIUpgradeYbc
 }
 
 type YbcManagementAPIUpgradeYbcGflagsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *YbcManagementAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r YbcManagementAPIUpgradeYbcGflagsRequest) Request(request interface{}) YbcManagementAPIUpgradeYbcGflagsRequest {
@@ -593,28 +596,29 @@ UpgradeYbcGflags Upgrade YBC gflags on the universe nodes
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return YbcManagementAPIUpgradeYbcGflagsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return YbcManagementAPIUpgradeYbcGflagsRequest
 */
 func (a *YbcManagementAPIService) UpgradeYbcGflags(ctx context.Context, cUUID string, uniUUID string) YbcManagementAPIUpgradeYbcGflagsRequest {
 	return YbcManagementAPIUpgradeYbcGflagsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *YbcManagementAPIService) UpgradeYbcGflagsExecute(r YbcManagementAPIUpgradeYbcGflagsRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "YbcManagementAPIService.UpgradeYbcGflags")

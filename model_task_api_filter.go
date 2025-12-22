@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the TaskApiFilter type satisfies the MappedNullable interface at compile time
@@ -26,11 +24,11 @@ type TaskApiFilter struct {
 	DateRangeEnd *time.Time `json:"dateRangeEnd,omitempty"`
 	// The start date to filter paged query.
 	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
-	Status []string `json:"status"`
-	TargetList []string `json:"targetList"`
-	TargetUUIDList []string `json:"targetUUIDList"`
-	TypeList []string `json:"typeList"`
-	TypeNameList []string `json:"typeNameList"`
+	Status         []string   `json:"status"`
+	TargetList     []string   `json:"targetList"`
+	TargetUUIDList []string   `json:"targetUUIDList"`
+	TypeList       []string   `json:"typeList"`
+	TypeNameList   []string   `json:"typeNameList"`
 }
 
 type _TaskApiFilter TaskApiFilter
@@ -242,7 +240,7 @@ func (o *TaskApiFilter) SetTypeNameList(v []string) {
 }
 
 func (o TaskApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -300,5 +298,3 @@ func (v *NullableTaskApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

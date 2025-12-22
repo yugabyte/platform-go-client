@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // CloudProvidersAPIService CloudProvidersAPI service
 type CloudProvidersAPIService service
 
 type CloudProvidersAPIAccessKeyRotationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	request    *interface{}
 }
 
 func (r CloudProvidersAPIAccessKeyRotationRequest) Request(request interface{}) CloudProvidersAPIAccessKeyRotationRequest {
@@ -45,28 +44,29 @@ AccessKeyRotation Rotate access key for a provider
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIAccessKeyRotationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIAccessKeyRotationRequest
 */
 func (a *CloudProvidersAPIService) AccessKeyRotation(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIAccessKeyRotationRequest {
 	return CloudProvidersAPIAccessKeyRotationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CloudProvidersAPIService) AccessKeyRotationExecute(r CloudProvidersAPIAccessKeyRotationRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.AccessKeyRotation")
@@ -154,13 +154,13 @@ func (a *CloudProvidersAPIService) AccessKeyRotationExecute(r CloudProvidersAPIA
 }
 
 type CloudProvidersAPICreateProvidersRequest struct {
-	ctx context.Context
-	ApiService *CloudProvidersAPIService
-	cUUID string
-	createProviderRequest *Provider
-	validate *bool
+	ctx                    context.Context
+	ApiService             *CloudProvidersAPIService
+	cUUID                  string
+	createProviderRequest  *Provider
+	validate               *bool
 	ignoreValidationErrors *bool
-	request *interface{}
+	request                *interface{}
 }
 
 func (r CloudProvidersAPICreateProvidersRequest) CreateProviderRequest(createProviderRequest Provider) CloudProvidersAPICreateProvidersRequest {
@@ -190,26 +190,27 @@ func (r CloudProvidersAPICreateProvidersRequest) Execute() (*YBPTask, *http.Resp
 /*
 CreateProviders Create a provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CloudProvidersAPICreateProvidersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CloudProvidersAPICreateProvidersRequest
 */
 func (a *CloudProvidersAPIService) CreateProviders(ctx context.Context, cUUID string) CloudProvidersAPICreateProvidersRequest {
 	return CloudProvidersAPICreateProvidersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CloudProvidersAPIService) CreateProvidersExecute(r CloudProvidersAPICreateProvidersRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.CreateProviders")
@@ -315,11 +316,11 @@ func (a *CloudProvidersAPIService) CreateProvidersExecute(r CloudProvidersAPICre
 }
 
 type CloudProvidersAPIDeleteRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	request    *interface{}
 }
 
 func (r CloudProvidersAPIDeleteRequest) Request(request interface{}) CloudProvidersAPIDeleteRequest {
@@ -334,28 +335,29 @@ func (r CloudProvidersAPIDeleteRequest) Execute() (*YBPTask, *http.Response, err
 /*
 Delete Delete a cloud provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIDeleteRequest
 */
 func (a *CloudProvidersAPIService) Delete(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIDeleteRequest {
 	return CloudProvidersAPIDeleteRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CloudProvidersAPIService) DeleteExecute(r CloudProvidersAPIDeleteRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.Delete")
@@ -443,13 +445,13 @@ func (a *CloudProvidersAPIService) DeleteExecute(r CloudProvidersAPIDeleteReques
 }
 
 type CloudProvidersAPIEditAccessKeyRotationScheduleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	sUUID string
-	body *EditAccessKeyRotationScheduleParams
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	sUUID      string
+	body       *EditAccessKeyRotationScheduleParams
+	request    *interface{}
 }
 
 func (r CloudProvidersAPIEditAccessKeyRotationScheduleRequest) Body(body EditAccessKeyRotationScheduleParams) CloudProvidersAPIEditAccessKeyRotationScheduleRequest {
@@ -471,30 +473,31 @@ EditAccessKeyRotationSchedule Edit a access key rotation schedule
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @param sUUID
- @return CloudProvidersAPIEditAccessKeyRotationScheduleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@param sUUID
+	@return CloudProvidersAPIEditAccessKeyRotationScheduleRequest
 */
 func (a *CloudProvidersAPIService) EditAccessKeyRotationSchedule(ctx context.Context, cUUID string, pUUID string, sUUID string) CloudProvidersAPIEditAccessKeyRotationScheduleRequest {
 	return CloudProvidersAPIEditAccessKeyRotationScheduleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
-		sUUID: sUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
+		sUUID:      sUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *CloudProvidersAPIService) EditAccessKeyRotationScheduleExecute(r CloudProvidersAPIEditAccessKeyRotationScheduleRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.EditAccessKeyRotationSchedule")
@@ -588,14 +591,14 @@ func (a *CloudProvidersAPIService) EditAccessKeyRotationScheduleExecute(r CloudP
 }
 
 type CloudProvidersAPIEditProviderRequest struct {
-	ctx context.Context
-	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	editProviderRequest *Provider
-	validate *bool
+	ctx                    context.Context
+	ApiService             *CloudProvidersAPIService
+	cUUID                  string
+	pUUID                  string
+	editProviderRequest    *Provider
+	validate               *bool
 	ignoreValidationErrors *bool
-	request *interface{}
+	request                *interface{}
 }
 
 // edit provider form data
@@ -626,28 +629,29 @@ func (r CloudProvidersAPIEditProviderRequest) Execute() (*YBPTask, *http.Respons
 /*
 EditProvider Update a provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIEditProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIEditProviderRequest
 */
 func (a *CloudProvidersAPIService) EditProvider(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIEditProviderRequest {
 	return CloudProvidersAPIEditProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CloudProvidersAPIService) EditProviderExecute(r CloudProvidersAPIEditProviderRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.EditProvider")
@@ -754,10 +758,10 @@ func (a *CloudProvidersAPIService) EditProviderExecute(r CloudProvidersAPIEditPr
 }
 
 type CloudProvidersAPIGetListOfProvidersRequest struct {
-	ctx context.Context
-	ApiService *CloudProvidersAPIService
-	cUUID string
-	name *string
+	ctx          context.Context
+	ApiService   *CloudProvidersAPIService
+	cUUID        string
+	name         *string
 	providerCode *string
 }
 
@@ -778,26 +782,27 @@ func (r CloudProvidersAPIGetListOfProvidersRequest) Execute() ([]Provider, *http
 /*
 GetListOfProviders List cloud providers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CloudProvidersAPIGetListOfProvidersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CloudProvidersAPIGetListOfProvidersRequest
 */
 func (a *CloudProvidersAPIService) GetListOfProviders(ctx context.Context, cUUID string) CloudProvidersAPIGetListOfProvidersRequest {
 	return CloudProvidersAPIGetListOfProvidersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Provider
+//
+//	@return []Provider
 func (a *CloudProvidersAPIService) GetListOfProvidersExecute(r CloudProvidersAPIGetListOfProvidersRequest) ([]Provider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Provider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Provider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.GetListOfProviders")
@@ -889,10 +894,10 @@ func (a *CloudProvidersAPIService) GetListOfProvidersExecute(r CloudProvidersAPI
 }
 
 type CloudProvidersAPIGetProviderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 }
 
 func (r CloudProvidersAPIGetProviderRequest) Execute() (*Provider, *http.Response, error) {
@@ -902,28 +907,29 @@ func (r CloudProvidersAPIGetProviderRequest) Execute() (*Provider, *http.Respons
 /*
 GetProvider Get a cloud provider
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIGetProviderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIGetProviderRequest
 */
 func (a *CloudProvidersAPIService) GetProvider(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIGetProviderRequest {
 	return CloudProvidersAPIGetProviderRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Provider
+//
+//	@return Provider
 func (a *CloudProvidersAPIService) GetProviderExecute(r CloudProvidersAPIGetProviderRequest) (*Provider, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Provider
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Provider
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.GetProvider")
@@ -1008,11 +1014,11 @@ func (a *CloudProvidersAPIService) GetProviderExecute(r CloudProvidersAPIGetProv
 }
 
 type CloudProvidersAPIGetRegionMetadataRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	code string
-	subType *string
+	cUUID      string
+	code       string
+	subType    *string
 }
 
 func (r CloudProvidersAPIGetRegionMetadataRequest) SubType(subType string) CloudProvidersAPIGetRegionMetadataRequest {
@@ -1027,28 +1033,29 @@ func (r CloudProvidersAPIGetRegionMetadataRequest) Execute() (*RegionMetadata, *
 /*
 GetRegionMetadata Retrieves the region metadata for the cloud providers
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param code
- @return CloudProvidersAPIGetRegionMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param code
+	@return CloudProvidersAPIGetRegionMetadataRequest
 */
 func (a *CloudProvidersAPIService) GetRegionMetadata(ctx context.Context, cUUID string, code string) CloudProvidersAPIGetRegionMetadataRequest {
 	return CloudProvidersAPIGetRegionMetadataRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		code: code,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		code:       code,
 	}
 }
 
 // Execute executes the request
-//  @return RegionMetadata
+//
+//	@return RegionMetadata
 func (a *CloudProvidersAPIService) GetRegionMetadataExecute(r CloudProvidersAPIGetRegionMetadataRequest) (*RegionMetadata, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RegionMetadata
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RegionMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.GetRegionMetadata")
@@ -1137,10 +1144,10 @@ func (a *CloudProvidersAPIService) GetRegionMetadataExecute(r CloudProvidersAPIG
 }
 
 type CloudProvidersAPIListSchedulesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
+	cUUID      string
+	pUUID      string
 }
 
 func (r CloudProvidersAPIListSchedulesRequest) Execute() ([]Schedule, *http.Response, error) {
@@ -1152,28 +1159,29 @@ ListSchedules List all schedules for a provider's access key rotation
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIListSchedulesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIListSchedulesRequest
 */
 func (a *CloudProvidersAPIService) ListSchedules(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIListSchedulesRequest {
 	return CloudProvidersAPIListSchedulesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []Schedule
+//
+//	@return []Schedule
 func (a *CloudProvidersAPIService) ListSchedulesExecute(r CloudProvidersAPIListSchedulesRequest) ([]Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []Schedule
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.ListSchedules")
@@ -1258,11 +1266,11 @@ func (a *CloudProvidersAPIService) ListSchedulesExecute(r CloudProvidersAPIListS
 }
 
 type CloudProvidersAPIRefreshPricingRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	request    *interface{}
 }
 
 func (r CloudProvidersAPIRefreshPricingRequest) Request(request interface{}) CloudProvidersAPIRefreshPricingRequest {
@@ -1279,28 +1287,29 @@ RefreshPricing Refresh provider pricing info
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIRefreshPricingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIRefreshPricingRequest
 */
 func (a *CloudProvidersAPIService) RefreshPricing(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIRefreshPricingRequest {
 	return CloudProvidersAPIRefreshPricingRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *CloudProvidersAPIService) RefreshPricingExecute(r CloudProvidersAPIRefreshPricingRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.RefreshPricing")
@@ -1388,11 +1397,11 @@ func (a *CloudProvidersAPIService) RefreshPricingExecute(r CloudProvidersAPIRefr
 }
 
 type CloudProvidersAPIScheduledAccessKeyRotationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CloudProvidersAPIService
-	cUUID string
-	pUUID string
-	request *interface{}
+	cUUID      string
+	pUUID      string
+	request    *interface{}
 }
 
 func (r CloudProvidersAPIScheduledAccessKeyRotationRequest) Request(request interface{}) CloudProvidersAPIScheduledAccessKeyRotationRequest {
@@ -1409,28 +1418,29 @@ ScheduledAccessKeyRotation Rotate access key for a provider - Scheduled
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return CloudProvidersAPIScheduledAccessKeyRotationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return CloudProvidersAPIScheduledAccessKeyRotationRequest
 */
 func (a *CloudProvidersAPIService) ScheduledAccessKeyRotation(ctx context.Context, cUUID string, pUUID string) CloudProvidersAPIScheduledAccessKeyRotationRequest {
 	return CloudProvidersAPIScheduledAccessKeyRotationRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Schedule
+//
+//	@return Schedule
 func (a *CloudProvidersAPIService) ScheduledAccessKeyRotationExecute(r CloudProvidersAPIScheduledAccessKeyRotationRequest) (*Schedule, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Schedule
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Schedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudProvidersAPIService.ScheduledAccessKeyRotation")

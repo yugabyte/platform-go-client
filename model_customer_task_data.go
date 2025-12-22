@@ -550,7 +550,7 @@ func (o *CustomerTaskData) SetUserEmail(v string) {
 }
 
 func (o CustomerTaskData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -642,5 +642,3 @@ func (v *NullableCustomerTaskData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

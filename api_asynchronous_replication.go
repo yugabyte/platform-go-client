@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // AsynchronousReplicationAPIService AsynchronousReplicationAPI service
 type AsynchronousReplicationAPIService service
 
 type AsynchronousReplicationAPICreateXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
+	ctx                               context.Context
+	ApiService                        *AsynchronousReplicationAPIService
+	cUUID                             string
 	xclusterReplicationCreateFormData *XClusterConfigCreateFormData
-	request *interface{}
+	request                           *interface{}
 }
 
 // XCluster Replication Create Form Data
@@ -51,26 +50,27 @@ CreateXClusterConfig Create xcluster config
 
 Available since YBA version 2.16.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AsynchronousReplicationAPICreateXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AsynchronousReplicationAPICreateXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) CreateXClusterConfig(ctx context.Context, cUUID string) AsynchronousReplicationAPICreateXClusterConfigRequest {
 	return AsynchronousReplicationAPICreateXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *AsynchronousReplicationAPIService) CreateXClusterConfigExecute(r AsynchronousReplicationAPICreateXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.CreateXClusterConfig")
@@ -162,12 +162,12 @@ func (a *AsynchronousReplicationAPIService) CreateXClusterConfigExecute(r Asynch
 }
 
 type AsynchronousReplicationAPIDeleteXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
+	ctx           context.Context
+	ApiService    *AsynchronousReplicationAPIService
+	cUUID         string
+	xccUUID       string
 	isForceDelete *bool
-	request *interface{}
+	request       *interface{}
 }
 
 func (r AsynchronousReplicationAPIDeleteXClusterConfigRequest) IsForceDelete(isForceDelete bool) AsynchronousReplicationAPIDeleteXClusterConfigRequest {
@@ -189,28 +189,29 @@ DeleteXClusterConfig Delete xcluster config
 
 Available since YBA version 2.16.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPIDeleteXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPIDeleteXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) DeleteXClusterConfig(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPIDeleteXClusterConfigRequest {
 	return AsynchronousReplicationAPIDeleteXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *AsynchronousReplicationAPIService) DeleteXClusterConfigExecute(r AsynchronousReplicationAPIDeleteXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.DeleteXClusterConfig")
@@ -305,12 +306,12 @@ func (a *AsynchronousReplicationAPIService) DeleteXClusterConfigExecute(r Asynch
 }
 
 type AsynchronousReplicationAPIEditXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
+	ctx                             context.Context
+	ApiService                      *AsynchronousReplicationAPIService
+	cUUID                           string
+	xccUUID                         string
 	xclusterReplicationEditFormData *XClusterConfigEditFormData
-	request *interface{}
+	request                         *interface{}
 }
 
 // XCluster Replication Edit Form Data
@@ -333,28 +334,29 @@ EditXClusterConfig Edit xcluster config
 
 Available since YBA version 2.16.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPIEditXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPIEditXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) EditXClusterConfig(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPIEditXClusterConfigRequest {
 	return AsynchronousReplicationAPIEditXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *AsynchronousReplicationAPIService) EditXClusterConfigExecute(r AsynchronousReplicationAPIEditXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.EditXClusterConfig")
@@ -447,10 +449,10 @@ func (a *AsynchronousReplicationAPIService) EditXClusterConfigExecute(r Asynchro
 }
 
 type AsynchronousReplicationAPIGetXClusterConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
+	cUUID      string
+	xccUUID    string
 	syncWithDB *bool
 }
 
@@ -468,28 +470,29 @@ GetXClusterConfig Get xcluster config
 
 Available since YBA version 2.16.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPIGetXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPIGetXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) GetXClusterConfig(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPIGetXClusterConfigRequest {
 	return AsynchronousReplicationAPIGetXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return XClusterConfigGetResp
+//
+//	@return XClusterConfigGetResp
 func (a *AsynchronousReplicationAPIService) GetXClusterConfigExecute(r AsynchronousReplicationAPIGetXClusterConfigRequest) (*XClusterConfigGetResp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *XClusterConfigGetResp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *XClusterConfigGetResp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.GetXClusterConfig")
@@ -581,14 +584,14 @@ func (a *AsynchronousReplicationAPIService) GetXClusterConfigExecute(r Asynchron
 }
 
 type AsynchronousReplicationAPINeedBootstrapTableRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	uniUUID string
+	ctx                           context.Context
+	ApiService                    *AsynchronousReplicationAPIService
+	cUUID                         string
+	uniUUID                       string
 	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
-	configType *string
-	includeDetails *bool
-	request *interface{}
+	configType                    *string
+	includeDetails                *bool
+	request                       *interface{}
 }
 
 // XCluster Need Bootstrap Form Data
@@ -621,28 +624,29 @@ NeedBootstrapTable Whether tables need bootstrap before setting up cross cluster
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return AsynchronousReplicationAPINeedBootstrapTableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return AsynchronousReplicationAPINeedBootstrapTableRequest
 */
 func (a *AsynchronousReplicationAPIService) NeedBootstrapTable(ctx context.Context, cUUID string, uniUUID string) AsynchronousReplicationAPINeedBootstrapTableRequest {
 	return AsynchronousReplicationAPINeedBootstrapTableRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *AsynchronousReplicationAPIService) NeedBootstrapTableExecute(r AsynchronousReplicationAPINeedBootstrapTableRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.NeedBootstrapTable")
@@ -746,12 +750,12 @@ func (a *AsynchronousReplicationAPIService) NeedBootstrapTableExecute(r Asynchro
 }
 
 type AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
+	ctx                           context.Context
+	ApiService                    *AsynchronousReplicationAPIService
+	cUUID                         string
+	xccUUID                       string
 	xclusterNeedBootstrapFormData *XClusterConfigNeedBootstrapFormData
-	request *interface{}
+	request                       *interface{}
 }
 
 // XCluster Need Bootstrap Form Data
@@ -774,28 +778,29 @@ NeedBootstrapXClusterConfig Whether tables in an xCluster replication config hav
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) NeedBootstrapXClusterConfig(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest {
 	return AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *AsynchronousReplicationAPIService) NeedBootstrapXClusterConfigExecute(r AsynchronousReplicationAPINeedBootstrapXClusterConfigRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.NeedBootstrapXClusterConfig")
@@ -888,13 +893,13 @@ func (a *AsynchronousReplicationAPIService) NeedBootstrapXClusterConfigExecute(r
 }
 
 type AsynchronousReplicationAPIRestartXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
+	ctx                                context.Context
+	ApiService                         *AsynchronousReplicationAPIService
+	cUUID                              string
+	xccUUID                            string
 	xclusterReplicationRestartFormData *XClusterConfigRestartFormData
-	isForceDelete *bool
-	request *interface{}
+	isForceDelete                      *bool
+	request                            *interface{}
 }
 
 // XCluster Replication Restart Form Data
@@ -922,28 +927,29 @@ RestartXClusterConfig Restart xcluster config
 
 Available since YBA version 2.16.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPIRestartXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPIRestartXClusterConfigRequest
 */
 func (a *AsynchronousReplicationAPIService) RestartXClusterConfig(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPIRestartXClusterConfigRequest {
 	return AsynchronousReplicationAPIRestartXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *AsynchronousReplicationAPIService) RestartXClusterConfigExecute(r AsynchronousReplicationAPIRestartXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.RestartXClusterConfig")
@@ -1043,11 +1049,11 @@ func (a *AsynchronousReplicationAPIService) RestartXClusterConfigExecute(r Async
 }
 
 type AsynchronousReplicationAPISyncXClusterConfigRequest struct {
-	ctx context.Context
-	ApiService *AsynchronousReplicationAPIService
-	cUUID string
+	ctx                context.Context
+	ApiService         *AsynchronousReplicationAPIService
+	cUUID              string
 	targetUniverseUUID *string
-	request *interface{}
+	request            *interface{}
 }
 
 func (r AsynchronousReplicationAPISyncXClusterConfigRequest) TargetUniverseUUID(targetUniverseUUID string) AsynchronousReplicationAPISyncXClusterConfigRequest {
@@ -1069,29 +1075,31 @@ SyncXClusterConfig Sync xcluster config - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.23.0.0.</b></p> Sync xcluster config (V2) instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return AsynchronousReplicationAPISyncXClusterConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return AsynchronousReplicationAPISyncXClusterConfigRequest
 
 Deprecated
 */
 func (a *AsynchronousReplicationAPIService) SyncXClusterConfig(ctx context.Context, cUUID string) AsynchronousReplicationAPISyncXClusterConfigRequest {
 	return AsynchronousReplicationAPISyncXClusterConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
+//
 // Deprecated
 func (a *AsynchronousReplicationAPIService) SyncXClusterConfigExecute(r AsynchronousReplicationAPISyncXClusterConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.SyncXClusterConfig")
@@ -1181,11 +1189,11 @@ func (a *AsynchronousReplicationAPIService) SyncXClusterConfigExecute(r Asynchro
 }
 
 type AsynchronousReplicationAPISyncXClusterConfigV2Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *AsynchronousReplicationAPIService
-	cUUID string
-	xccUUID string
-	request *interface{}
+	cUUID      string
+	xccUUID    string
+	request    *interface{}
 }
 
 func (r AsynchronousReplicationAPISyncXClusterConfigV2Request) Request(request interface{}) AsynchronousReplicationAPISyncXClusterConfigV2Request {
@@ -1202,28 +1210,29 @@ SyncXClusterConfigV2 Sync xcluster config (V2)
 
 Available since YBA version 2.23.0.0
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param xccUUID
- @return AsynchronousReplicationAPISyncXClusterConfigV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param xccUUID
+	@return AsynchronousReplicationAPISyncXClusterConfigV2Request
 */
 func (a *AsynchronousReplicationAPIService) SyncXClusterConfigV2(ctx context.Context, cUUID string, xccUUID string) AsynchronousReplicationAPISyncXClusterConfigV2Request {
 	return AsynchronousReplicationAPISyncXClusterConfigV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		xccUUID: xccUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		xccUUID:    xccUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *AsynchronousReplicationAPIService) SyncXClusterConfigV2Execute(r AsynchronousReplicationAPISyncXClusterConfigV2Request) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AsynchronousReplicationAPIService.SyncXClusterConfigV2")

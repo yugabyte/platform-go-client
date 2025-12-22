@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // UniverseNodeMetadataMetamasterAPIService UniverseNodeMetadataMetamasterAPI service
 type UniverseNodeMetadataMetamasterAPIService service
 
 type UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseNodeMetadataMetamasterAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest) Execute() (string, *http.Response, error) {
@@ -39,28 +38,29 @@ GetMasterAddresses List a master node's addresses
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterAddresses(ctx context.Context, cUUID string, uniUUID string) UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest {
 	return UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterAddressesExecute(r UniverseNodeMetadataMetamasterAPIGetMasterAddressesRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetMasterAddresses")
@@ -145,10 +145,10 @@ func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterAddressesExecute(r U
 }
 
 type UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseNodeMetadataMetamasterAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest) Execute() (*MasterLBStateResponse, *http.Response, error) {
@@ -160,28 +160,29 @@ GetMasterLBState Get the state of master load balancing ops
 
 YbaApi Internal. Available since YBA version 2024.2.0
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterLBState(ctx context.Context, cUUID string, uniUUID string) UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest {
 	return UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MasterLBStateResponse
+//
+//	@return MasterLBStateResponse
 func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterLBStateExecute(r UniverseNodeMetadataMetamasterAPIGetMasterLBStateRequest) (*MasterLBStateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MasterLBStateResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MasterLBStateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetMasterLBState")
@@ -266,10 +267,10 @@ func (a *UniverseNodeMetadataMetamasterAPIService) GetMasterLBStateExecute(r Uni
 }
 
 type UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseNodeMetadataMetamasterAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest) Execute() (string, *http.Response, error) {
@@ -281,28 +282,29 @@ GetRedisServerAddresses List a REDIS server's addresses
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetRedisServerAddresses(ctx context.Context, cUUID string, uniUUID string) UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest {
 	return UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *UniverseNodeMetadataMetamasterAPIService) GetRedisServerAddressesExecute(r UniverseNodeMetadataMetamasterAPIGetRedisServerAddressesRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetRedisServerAddresses")
@@ -387,8 +389,8 @@ func (a *UniverseNodeMetadataMetamasterAPIService) GetRedisServerAddressesExecut
 }
 
 type UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest struct {
-	ctx context.Context
-	ApiService *UniverseNodeMetadataMetamasterAPIService
+	ctx          context.Context
+	ApiService   *UniverseNodeMetadataMetamasterAPIService
 	universeUUID string
 }
 
@@ -399,26 +401,27 @@ func (r UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest) Execute(
 /*
 GetUniverseMasterNodes List a universe's master nodes
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param universeUUID
- @return UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param universeUUID
+	@return UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetUniverseMasterNodes(ctx context.Context, universeUUID string) UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest {
 	return UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:   a,
+		ctx:          ctx,
 		universeUUID: universeUUID,
 	}
 }
 
 // Execute executes the request
-//  @return MastersList
+//
+//	@return MastersList
 func (a *UniverseNodeMetadataMetamasterAPIService) GetUniverseMasterNodesExecute(r UniverseNodeMetadataMetamasterAPIGetUniverseMasterNodesRequest) (*MastersList, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *MastersList
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MastersList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetUniverseMasterNodes")
@@ -502,10 +505,10 @@ func (a *UniverseNodeMetadataMetamasterAPIService) GetUniverseMasterNodesExecute
 }
 
 type UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseNodeMetadataMetamasterAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest) Execute() (string, *http.Response, error) {
@@ -517,28 +520,29 @@ GetYQLServerAddresses List a YQL server's addresses
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetYQLServerAddresses(ctx context.Context, cUUID string, uniUUID string) UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest {
 	return UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *UniverseNodeMetadataMetamasterAPIService) GetYQLServerAddressesExecute(r UniverseNodeMetadataMetamasterAPIGetYQLServerAddressesRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetYQLServerAddresses")
@@ -623,10 +627,10 @@ func (a *UniverseNodeMetadataMetamasterAPIService) GetYQLServerAddressesExecute(
 }
 
 type UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseNodeMetadataMetamasterAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest) Execute() (string, *http.Response, error) {
@@ -638,28 +642,29 @@ GetYSQLServerAddresses List a YSQL server's addresses
 
 Available since YBA version 2.2.0.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest
 */
 func (a *UniverseNodeMetadataMetamasterAPIService) GetYSQLServerAddresses(ctx context.Context, cUUID string, uniUUID string) UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest {
 	return UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return string
+//
+//	@return string
 func (a *UniverseNodeMetadataMetamasterAPIService) GetYSQLServerAddressesExecute(r UniverseNodeMetadataMetamasterAPIGetYSQLServerAddressesRequest) (string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseNodeMetadataMetamasterAPIService.GetYSQLServerAddresses")

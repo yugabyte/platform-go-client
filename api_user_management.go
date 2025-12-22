@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // UserManagementAPIService UserManagementAPI service
 type UserManagementAPIService service
 
 type UserManagementAPIChangePasswordRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
-	users *UserRegistrationData
-	request *interface{}
+	cUUID      string
+	uUUID      string
+	users      *UserRegistrationData
+	request    *interface{}
 }
 
 // User data containing the new password
@@ -52,19 +51,19 @@ ChangePassword Change password - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2024.1.0.0.</b></p>
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIChangePasswordRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIChangePasswordRequest
 
 Deprecated
 */
 func (a *UserManagementAPIService) ChangePassword(ctx context.Context, cUUID string, uUUID string) UserManagementAPIChangePasswordRequest {
 	return UserManagementAPIChangePasswordRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
@@ -72,9 +71,9 @@ func (a *UserManagementAPIService) ChangePassword(ctx context.Context, cUUID str
 // Deprecated
 func (a *UserManagementAPIService) ChangePasswordExecute(r UserManagementAPIChangePasswordRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.ChangePassword")
@@ -158,11 +157,11 @@ func (a *UserManagementAPIService) ChangePasswordExecute(r UserManagementAPIChan
 }
 
 type UserManagementAPICreateUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	user *UserRegistrationData
-	request *interface{}
+	cUUID      string
+	user       *UserRegistrationData
+	request    *interface{}
 }
 
 // Details of the new user
@@ -183,26 +182,27 @@ func (r UserManagementAPICreateUserRequest) Execute() (*UserWithFeatures, *http.
 /*
 CreateUser Create a user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UserManagementAPICreateUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UserManagementAPICreateUserRequest
 */
 func (a *UserManagementAPIService) CreateUser(ctx context.Context, cUUID string) UserManagementAPICreateUserRequest {
 	return UserManagementAPICreateUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UserWithFeatures
+//
+//	@return UserWithFeatures
 func (a *UserManagementAPIService) CreateUserExecute(r UserManagementAPICreateUserRequest) (*UserWithFeatures, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UserWithFeatures
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UserWithFeatures
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.CreateUser")
@@ -294,11 +294,11 @@ func (a *UserManagementAPIService) CreateUserExecute(r UserManagementAPICreateUs
 }
 
 type UserManagementAPIDeleteUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
-	request *interface{}
+	cUUID      string
+	uUUID      string
+	request    *interface{}
 }
 
 func (r UserManagementAPIDeleteUserRequest) Request(request interface{}) UserManagementAPIDeleteUserRequest {
@@ -315,28 +315,29 @@ DeleteUser Delete a user
 
 Deletes the specified user. Note that you can't delete a customer's primary user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIDeleteUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIDeleteUserRequest
 */
 func (a *UserManagementAPIService) DeleteUser(ctx context.Context, cUUID string, uUUID string) UserManagementAPIDeleteUserRequest {
 	return UserManagementAPIDeleteUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UserManagementAPIService) DeleteUserExecute(r UserManagementAPIDeleteUserRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.DeleteUser")
@@ -424,10 +425,10 @@ func (a *UserManagementAPIService) DeleteUserExecute(r UserManagementAPIDeleteUs
 }
 
 type UserManagementAPIGetUserDetailsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
+	cUUID      string
+	uUUID      string
 }
 
 func (r UserManagementAPIGetUserDetailsRequest) Execute() (*UserWithFeatures, *http.Response, error) {
@@ -437,28 +438,29 @@ func (r UserManagementAPIGetUserDetailsRequest) Execute() (*UserWithFeatures, *h
 /*
 GetUserDetails Get a user's details
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIGetUserDetailsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIGetUserDetailsRequest
 */
 func (a *UserManagementAPIService) GetUserDetails(ctx context.Context, cUUID string, uUUID string) UserManagementAPIGetUserDetailsRequest {
 	return UserManagementAPIGetUserDetailsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UserWithFeatures
+//
+//	@return UserWithFeatures
 func (a *UserManagementAPIService) GetUserDetailsExecute(r UserManagementAPIGetUserDetailsRequest) (*UserWithFeatures, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UserWithFeatures
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UserWithFeatures
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.GetUserDetails")
@@ -543,10 +545,10 @@ func (a *UserManagementAPIService) GetUserDetailsExecute(r UserManagementAPIGetU
 }
 
 type UserManagementAPIListUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	email *string
+	cUUID      string
+	email      *string
 }
 
 // Optional email to filter user list
@@ -562,26 +564,27 @@ func (r UserManagementAPIListUsersRequest) Execute() ([]UserWithFeatures, *http.
 /*
 ListUsers List all users
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UserManagementAPIListUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UserManagementAPIListUsersRequest
 */
 func (a *UserManagementAPIService) ListUsers(ctx context.Context, cUUID string) UserManagementAPIListUsersRequest {
 	return UserManagementAPIListUsersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []UserWithFeatures
+//
+//	@return []UserWithFeatures
 func (a *UserManagementAPIService) ListUsersExecute(r UserManagementAPIListUsersRequest) ([]UserWithFeatures, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []UserWithFeatures
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []UserWithFeatures
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.ListUsers")
@@ -669,11 +672,11 @@ func (a *UserManagementAPIService) ListUsersExecute(r UserManagementAPIListUsers
 }
 
 type UserManagementAPIResetUserPasswordRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	users *UserPasswordChangeFormData
-	request *interface{}
+	cUUID      string
+	users      *UserPasswordChangeFormData
+	request    *interface{}
 }
 
 // User data containing the current, new password
@@ -694,26 +697,27 @@ func (r UserManagementAPIResetUserPasswordRequest) Execute() (*YBPSuccess, *http
 /*
 ResetUserPassword Reset the user's password
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UserManagementAPIResetUserPasswordRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UserManagementAPIResetUserPasswordRequest
 */
 func (a *UserManagementAPIService) ResetUserPassword(ctx context.Context, cUUID string) UserManagementAPIResetUserPasswordRequest {
 	return UserManagementAPIResetUserPasswordRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *UserManagementAPIService) ResetUserPasswordExecute(r UserManagementAPIResetUserPasswordRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.ResetUserPassword")
@@ -805,11 +809,11 @@ func (a *UserManagementAPIService) ResetUserPasswordExecute(r UserManagementAPIR
 }
 
 type UserManagementAPIRetrieveOIDCAuthTokenRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
-	request *interface{}
+	cUUID      string
+	uUUID      string
+	request    *interface{}
 }
 
 func (r UserManagementAPIRetrieveOIDCAuthTokenRequest) Request(request interface{}) UserManagementAPIRetrieveOIDCAuthTokenRequest {
@@ -824,28 +828,29 @@ func (r UserManagementAPIRetrieveOIDCAuthTokenRequest) Execute() (*UserOIDCAuthT
 /*
 RetrieveOIDCAuthToken Retrieve OIDC auth token
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIRetrieveOIDCAuthTokenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIRetrieveOIDCAuthTokenRequest
 */
 func (a *UserManagementAPIService) RetrieveOIDCAuthToken(ctx context.Context, cUUID string, uUUID string) UserManagementAPIRetrieveOIDCAuthTokenRequest {
 	return UserManagementAPIRetrieveOIDCAuthTokenRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return UserOIDCAuthToken
+//
+//	@return UserOIDCAuthToken
 func (a *UserManagementAPIService) RetrieveOIDCAuthTokenExecute(r UserManagementAPIRetrieveOIDCAuthTokenRequest) (*UserOIDCAuthToken, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UserOIDCAuthToken
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UserOIDCAuthToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.RetrieveOIDCAuthToken")
@@ -933,12 +938,12 @@ func (a *UserManagementAPIService) RetrieveOIDCAuthTokenExecute(r UserManagement
 }
 
 type UserManagementAPIUpdateUserProfileRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
-	users *UserProfileData
-	request *interface{}
+	cUUID      string
+	uUUID      string
+	users      *UserProfileData
+	request    *interface{}
 }
 
 // User data in profile to be updated
@@ -959,28 +964,29 @@ func (r UserManagementAPIUpdateUserProfileRequest) Execute() (*Users, *http.Resp
 /*
 UpdateUserProfile Update a user's profile
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIUpdateUserProfileRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIUpdateUserProfileRequest
 */
 func (a *UserManagementAPIService) UpdateUserProfile(ctx context.Context, cUUID string, uUUID string) UserManagementAPIUpdateUserProfileRequest {
 	return UserManagementAPIUpdateUserProfileRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return Users
+//
+//	@return Users
 func (a *UserManagementAPIService) UpdateUserProfileExecute(r UserManagementAPIUpdateUserProfileRequest) (*Users, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Users
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Users
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.UpdateUserProfile")
@@ -1073,12 +1079,12 @@ func (a *UserManagementAPIService) UpdateUserProfileExecute(r UserManagementAPIU
 }
 
 type UserManagementAPIUpdateUserRoleRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserManagementAPIService
-	cUUID string
-	uUUID string
-	role *string
-	request *interface{}
+	cUUID      string
+	uUUID      string
+	role       *string
+	request    *interface{}
 }
 
 func (r UserManagementAPIUpdateUserRoleRequest) Role(role string) UserManagementAPIUpdateUserRoleRequest {
@@ -1100,31 +1106,33 @@ UpdateUserRole Change a user's role
 
 Deprecated. Use this method instead: setRoleBinding.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uUUID
- @return UserManagementAPIUpdateUserRoleRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uUUID
+	@return UserManagementAPIUpdateUserRoleRequest
 
 Deprecated
 */
 func (a *UserManagementAPIService) UpdateUserRole(ctx context.Context, cUUID string, uUUID string) UserManagementAPIUpdateUserRoleRequest {
 	return UserManagementAPIUpdateUserRoleRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uUUID: uUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uUUID:      uUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *UserManagementAPIService) UpdateUserRoleExecute(r UserManagementAPIUpdateUserRoleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserManagementAPIService.UpdateUserRole")

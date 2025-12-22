@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // PITRManagementAPIService PITRManagementAPI service
 type PITRManagementAPIService service
 
 type PITRManagementAPICloneNamespaceRequest struct {
-	ctx context.Context
-	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx            context.Context
+	ApiService     *PITRManagementAPIService
+	cUUID          string
+	uniUUID        string
 	namespaceClone *CloneNamespaceParams
-	request *interface{}
+	request        *interface{}
 }
 
 // perform clone via PITR
@@ -52,28 +51,29 @@ CloneNamespace Clone namespace via PITR on a universe
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PITRManagementAPICloneNamespaceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PITRManagementAPICloneNamespaceRequest
 */
 func (a *PITRManagementAPIService) CloneNamespace(ctx context.Context, cUUID string, uniUUID string) PITRManagementAPICloneNamespaceRequest {
 	return PITRManagementAPICloneNamespaceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *PITRManagementAPIService) CloneNamespaceExecute(r PITRManagementAPICloneNamespaceRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.CloneNamespace")
@@ -166,14 +166,14 @@ func (a *PITRManagementAPIService) CloneNamespaceExecute(r PITRManagementAPIClon
 }
 
 type PITRManagementAPICreatePitrConfigRequest struct {
-	ctx context.Context
-	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
-	tableType string
+	ctx          context.Context
+	ApiService   *PITRManagementAPIService
+	cUUID        string
+	uniUUID      string
+	tableType    string
 	keyspaceName string
-	pitrConfig *CreatePitrConfigParams
-	request *interface{}
+	pitrConfig   *CreatePitrConfigParams
+	request      *interface{}
 }
 
 // post pitr config
@@ -194,32 +194,33 @@ func (r PITRManagementAPICreatePitrConfigRequest) Execute() (*YBPTask, *http.Res
 /*
 CreatePitrConfig Create pitr config for a keyspace in a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param tableType
- @param keyspaceName
- @return PITRManagementAPICreatePitrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param tableType
+	@param keyspaceName
+	@return PITRManagementAPICreatePitrConfigRequest
 */
 func (a *PITRManagementAPIService) CreatePitrConfig(ctx context.Context, cUUID string, uniUUID string, tableType string, keyspaceName string) PITRManagementAPICreatePitrConfigRequest {
 	return PITRManagementAPICreatePitrConfigRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		tableType: tableType,
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
+		uniUUID:      uniUUID,
+		tableType:    tableType,
 		keyspaceName: keyspaceName,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *PITRManagementAPIService) CreatePitrConfigExecute(r PITRManagementAPICreatePitrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.CreatePitrConfig")
@@ -314,12 +315,12 @@ func (a *PITRManagementAPIService) CreatePitrConfigExecute(r PITRManagementAPICr
 }
 
 type PITRManagementAPIDeletePitrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
-	pUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	pUUID      string
+	request    *interface{}
 }
 
 func (r PITRManagementAPIDeletePitrConfigRequest) Request(request interface{}) PITRManagementAPIDeletePitrConfigRequest {
@@ -334,30 +335,31 @@ func (r PITRManagementAPIDeletePitrConfigRequest) Execute() (*YBPTask, *http.Res
 /*
 DeletePitrConfig Delete pitr config on a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param pUUID
- @return PITRManagementAPIDeletePitrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param pUUID
+	@return PITRManagementAPIDeletePitrConfigRequest
 */
 func (a *PITRManagementAPIService) DeletePitrConfig(ctx context.Context, cUUID string, uniUUID string, pUUID string) PITRManagementAPIDeletePitrConfigRequest {
 	return PITRManagementAPIDeletePitrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *PITRManagementAPIService) DeletePitrConfigExecute(r PITRManagementAPIDeletePitrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.DeletePitrConfig")
@@ -446,10 +448,10 @@ func (a *PITRManagementAPIService) DeletePitrConfigExecute(r PITRManagementAPIDe
 }
 
 type PITRManagementAPIListOfPitrConfigsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r PITRManagementAPIListOfPitrConfigsRequest) Execute() ([]PitrConfig, *http.Response, error) {
@@ -459,28 +461,29 @@ func (r PITRManagementAPIListOfPitrConfigsRequest) Execute() ([]PitrConfig, *htt
 /*
 ListOfPitrConfigs List the PITR configs of a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PITRManagementAPIListOfPitrConfigsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PITRManagementAPIListOfPitrConfigsRequest
 */
 func (a *PITRManagementAPIService) ListOfPitrConfigs(ctx context.Context, cUUID string, uniUUID string) PITRManagementAPIListOfPitrConfigsRequest {
 	return PITRManagementAPIListOfPitrConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []PitrConfig
+//
+//	@return []PitrConfig
 func (a *PITRManagementAPIService) ListOfPitrConfigsExecute(r PITRManagementAPIListOfPitrConfigsRequest) ([]PitrConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []PitrConfig
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []PitrConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.ListOfPitrConfigs")
@@ -565,12 +568,12 @@ func (a *PITRManagementAPIService) ListOfPitrConfigsExecute(r PITRManagementAPIL
 }
 
 type PITRManagementAPIPerformPitrRequest struct {
-	ctx context.Context
-	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx         context.Context
+	ApiService  *PITRManagementAPIService
+	cUUID       string
+	uniUUID     string
 	performPitr *RestoreSnapshotScheduleParams
-	request *interface{}
+	request     *interface{}
 }
 
 // perform PITR
@@ -591,28 +594,29 @@ func (r PITRManagementAPIPerformPitrRequest) Execute() (*YBPTask, *http.Response
 /*
 PerformPitr Perform PITR on a universe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PITRManagementAPIPerformPitrRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PITRManagementAPIPerformPitrRequest
 */
 func (a *PITRManagementAPIService) PerformPitr(ctx context.Context, cUUID string, uniUUID string) PITRManagementAPIPerformPitrRequest {
 	return PITRManagementAPIPerformPitrRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *PITRManagementAPIService) PerformPitrExecute(r PITRManagementAPIPerformPitrRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.PerformPitr")
@@ -705,13 +709,13 @@ func (a *PITRManagementAPIService) PerformPitrExecute(r PITRManagementAPIPerform
 }
 
 type PITRManagementAPIUpdatePitrConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PITRManagementAPIService
-	cUUID string
-	uniUUID string
-	pUUID string
+	cUUID      string
+	uniUUID    string
+	pUUID      string
 	pitrConfig *UpdatePitrConfigParams
-	request *interface{}
+	request    *interface{}
 }
 
 // put pitr config
@@ -734,30 +738,31 @@ UpdatePitrConfig Update pitr config for a keyspace in a universe
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @param pUUID
- @return PITRManagementAPIUpdatePitrConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@param pUUID
+	@return PITRManagementAPIUpdatePitrConfigRequest
 */
 func (a *PITRManagementAPIService) UpdatePitrConfig(ctx context.Context, cUUID string, uniUUID string, pUUID string) PITRManagementAPIUpdatePitrConfigRequest {
 	return PITRManagementAPIUpdatePitrConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *PITRManagementAPIService) UpdatePitrConfigExecute(r PITRManagementAPIUpdatePitrConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PITRManagementAPIService.UpdatePitrConfig")

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RegionMetadataInfo type satisfies the MappedNullable interface at compile time
@@ -22,9 +20,9 @@ var _ MappedNullable = &RegionMetadataInfo{}
 // RegionMetadataInfo struct for RegionMetadataInfo
 type RegionMetadataInfo struct {
 	AvailabilityZones []string `json:"availabilityZones"`
-	Latitude float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
-	Name string `json:"name"`
+	Latitude          float64  `json:"latitude"`
+	Longitude         float64  `json:"longitude"`
+	Name              string   `json:"name"`
 }
 
 type _RegionMetadataInfo RegionMetadataInfo
@@ -147,7 +145,7 @@ func (o *RegionMetadataInfo) SetName(v string) {
 }
 
 func (o RegionMetadataInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableRegionMetadataInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

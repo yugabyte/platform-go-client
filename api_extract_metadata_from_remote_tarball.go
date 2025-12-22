@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // ExtractMetadataFromRemoteTarballAPIService ExtractMetadataFromRemoteTarballAPI service
 type ExtractMetadataFromRemoteTarballAPIService service
 
 type ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ExtractMetadataFromRemoteTarballAPIService
-	cUUID string
+	cUUID      string
 	releaseURL *ExtractMetadata
-	request *interface{}
+	request    *interface{}
 }
 
 // Release URL to extract metadata from
@@ -51,26 +50,27 @@ ExtractMetadata helper to extract release metadata from a remote tarball
 
 WARNING: This is a preview API that could change: start extracting metadata from a remote tgz url
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest
 */
 func (a *ExtractMetadataFromRemoteTarballAPIService) ExtractMetadata(ctx context.Context, cUUID string) ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest {
 	return ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPCreateSuccess
+//
+//	@return YBPCreateSuccess
 func (a *ExtractMetadataFromRemoteTarballAPIService) ExtractMetadataExecute(r ExtractMetadataFromRemoteTarballAPIExtractMetadataRequest) (*YBPCreateSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPCreateSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPCreateSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtractMetadataFromRemoteTarballAPIService.ExtractMetadata")
@@ -162,11 +162,11 @@ func (a *ExtractMetadataFromRemoteTarballAPIService) ExtractMetadataExecute(r Ex
 }
 
 type ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ExtractMetadataFromRemoteTarballAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request) Request(request interface{}) ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request {
@@ -183,28 +183,29 @@ ExtractMetadata_0 get the extract release metadata from a remote tarball
 
 WARNING: This is a preview API that could change: Get extract metadata and its progress.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request
 */
 func (a *ExtractMetadataFromRemoteTarballAPIService) ExtractMetadata_1(ctx context.Context, cUUID string, rUUID string) ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request {
 	return ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ResponseExtractMetadata
+//
+//	@return ResponseExtractMetadata
 func (a *ExtractMetadataFromRemoteTarballAPIService) ExtractMetadata_1Execute(r ExtractMetadataFromRemoteTarballAPIExtractMetadata_0Request) (*ResponseExtractMetadata, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ResponseExtractMetadata
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResponseExtractMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExtractMetadataFromRemoteTarballAPIService.ExtractMetadata_1")

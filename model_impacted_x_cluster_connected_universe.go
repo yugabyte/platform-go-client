@@ -19,11 +19,11 @@ var _ MappedNullable = &ImpactedXClusterConnectedUniverse{}
 
 // ImpactedXClusterConnectedUniverse struct for ImpactedXClusterConnectedUniverse
 type ImpactedXClusterConnectedUniverse struct {
-	// WARNING: This is a preview API that could change. Impacted Universe name 
+	// WARNING: This is a preview API that could change. Impacted Universe name
 	UniverseName *string `json:"universeName,omitempty"`
-	// WARNING: This is a preview API that could change. Impacted Universe UUID 
+	// WARNING: This is a preview API that could change. Impacted Universe UUID
 	UniverseUUID *string `json:"universeUUID,omitempty"`
-	// WARNING: This is a preview API that could change. Impacted Universe version 
+	// WARNING: This is a preview API that could change. Impacted Universe version
 	YbSoftwareVersion *string `json:"ybSoftwareVersion,omitempty"`
 }
 
@@ -141,7 +141,7 @@ func (o *ImpactedXClusterConnectedUniverse) SetYbSoftwareVersion(v string) {
 }
 
 func (o ImpactedXClusterConnectedUniverse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,5 +197,3 @@ func (v *NullableImpactedXClusterConnectedUniverse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

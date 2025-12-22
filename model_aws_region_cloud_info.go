@@ -20,9 +20,9 @@ var _ MappedNullable = &AWSRegionCloudInfo{}
 // AWSRegionCloudInfo struct for AWSRegionCloudInfo
 type AWSRegionCloudInfo struct {
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
-	Arch *string `json:"arch,omitempty"`
+	Arch            *string `json:"arch,omitempty"`
 	SecurityGroupId *string `json:"securityGroupId,omitempty"`
-	Vnet *string `json:"vnet,omitempty"`
+	Vnet            *string `json:"vnet,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
 	YbImage *string `json:"ybImage,omitempty"`
 }
@@ -173,7 +173,7 @@ func (o *AWSRegionCloudInfo) SetYbImage(v string) {
 }
 
 func (o AWSRegionCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -232,5 +232,3 @@ func (v *NullableAWSRegionCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

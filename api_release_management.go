@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // ReleaseManagementAPIService ReleaseManagementAPI service
 type ReleaseManagementAPIService service
 
 type ReleaseManagementAPICreateReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReleaseManagementAPIService
-	cUUID string
-	release *ReleaseFormData
-	request *interface{}
+	cUUID      string
+	release    *ReleaseFormData
+	request    *interface{}
 }
 
 // Release data for remote downloading to be created
@@ -49,29 +48,31 @@ func (r ReleaseManagementAPICreateReleaseRequest) Execute() (*YBPSuccess, *http.
 /*
 CreateRelease Deprecated: sinceVersion 2024.1. Use ReleasesController.create instead. Create a release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ReleaseManagementAPICreateReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ReleaseManagementAPICreateReleaseRequest
 
 Deprecated
 */
 func (a *ReleaseManagementAPIService) CreateRelease(ctx context.Context, cUUID string) ReleaseManagementAPICreateReleaseRequest {
 	return ReleaseManagementAPICreateReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *ReleaseManagementAPIService) CreateReleaseExecute(r ReleaseManagementAPICreateReleaseRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.CreateRelease")
@@ -163,11 +164,11 @@ func (a *ReleaseManagementAPIService) CreateReleaseExecute(r ReleaseManagementAP
 }
 
 type ReleaseManagementAPIDeleteReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReleaseManagementAPIService
-	cUUID string
-	name string
-	request *interface{}
+	cUUID      string
+	name       string
+	request    *interface{}
 }
 
 func (r ReleaseManagementAPIDeleteReleaseRequest) Request(request interface{}) ReleaseManagementAPIDeleteReleaseRequest {
@@ -182,31 +183,33 @@ func (r ReleaseManagementAPIDeleteReleaseRequest) Execute() (*ReleaseMetadata, *
 /*
 DeleteRelease Deprecated: sinceVersion: 2024.1. Use ReleasesController.delete instead. Delete a release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param name
- @return ReleaseManagementAPIDeleteReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param name
+	@return ReleaseManagementAPIDeleteReleaseRequest
 
 Deprecated
 */
 func (a *ReleaseManagementAPIService) DeleteRelease(ctx context.Context, cUUID string, name string) ReleaseManagementAPIDeleteReleaseRequest {
 	return ReleaseManagementAPIDeleteReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		name: name,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return ReleaseMetadata
+//
+//	@return ReleaseMetadata
+//
 // Deprecated
 func (a *ReleaseManagementAPIService) DeleteReleaseExecute(r ReleaseManagementAPIDeleteReleaseRequest) (*ReleaseMetadata, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReleaseMetadata
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReleaseMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.DeleteRelease")
@@ -294,10 +297,10 @@ func (a *ReleaseManagementAPIService) DeleteReleaseExecute(r ReleaseManagementAP
 }
 
 type ReleaseManagementAPIGetListOfRegionReleasesRequest struct {
-	ctx context.Context
-	ApiService *ReleaseManagementAPIService
-	cUUID string
-	pUUID string
+	ctx             context.Context
+	ApiService      *ReleaseManagementAPIService
+	cUUID           string
+	pUUID           string
 	includeMetadata *bool
 }
 
@@ -315,31 +318,33 @@ GetListOfRegionReleases List releases by provider - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Use /api/v1/customers/{cUUID}/releases/:arch instead
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param pUUID
- @return ReleaseManagementAPIGetListOfRegionReleasesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param pUUID
+	@return ReleaseManagementAPIGetListOfRegionReleasesRequest
 
 Deprecated
 */
 func (a *ReleaseManagementAPIService) GetListOfRegionReleases(ctx context.Context, cUUID string, pUUID string) ReleaseManagementAPIGetListOfRegionReleasesRequest {
 	return ReleaseManagementAPIGetListOfRegionReleasesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		pUUID: pUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		pUUID:      pUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
+//
 // Deprecated
 func (a *ReleaseManagementAPIService) GetListOfRegionReleasesExecute(r ReleaseManagementAPIGetListOfRegionReleasesRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.GetListOfRegionReleases")
@@ -431,11 +436,11 @@ func (a *ReleaseManagementAPIService) GetListOfRegionReleasesExecute(r ReleaseMa
 }
 
 type ReleaseManagementAPIGetListOfReleasesRequest struct {
-	ctx context.Context
-	ApiService *ReleaseManagementAPIService
-	cUUID string
+	ctx             context.Context
+	ApiService      *ReleaseManagementAPIService
+	cUUID           string
 	includeMetadata *bool
-	arch *string
+	arch            *string
 }
 
 func (r ReleaseManagementAPIGetListOfReleasesRequest) IncludeMetadata(includeMetadata bool) ReleaseManagementAPIGetListOfReleasesRequest {
@@ -455,29 +460,31 @@ func (r ReleaseManagementAPIGetListOfReleasesRequest) Execute() (map[string]map[
 /*
 GetListOfReleases Deprecated: sinceVersion: 2024.1. Use ReleasesController.list instead. List all releases
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ReleaseManagementAPIGetListOfReleasesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ReleaseManagementAPIGetListOfReleasesRequest
 
 Deprecated
 */
 func (a *ReleaseManagementAPIService) GetListOfReleases(ctx context.Context, cUUID string) ReleaseManagementAPIGetListOfReleasesRequest {
 	return ReleaseManagementAPIGetListOfReleasesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
+//
 // Deprecated
 func (a *ReleaseManagementAPIService) GetListOfReleasesExecute(r ReleaseManagementAPIGetListOfReleasesRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.GetListOfReleases")
@@ -572,10 +579,10 @@ func (a *ReleaseManagementAPIService) GetListOfReleasesExecute(r ReleaseManageme
 }
 
 type ReleaseManagementAPIRefreshRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReleaseManagementAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r ReleaseManagementAPIRefreshRequest) Request(request interface{}) ReleaseManagementAPIRefreshRequest {
@@ -590,26 +597,27 @@ func (r ReleaseManagementAPIRefreshRequest) Execute() (*YBPSuccess, *http.Respon
 /*
 Refresh Refresh a release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return ReleaseManagementAPIRefreshRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return ReleaseManagementAPIRefreshRequest
 */
 func (a *ReleaseManagementAPIService) Refresh(ctx context.Context, cUUID string) ReleaseManagementAPIRefreshRequest {
 	return ReleaseManagementAPIRefreshRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *ReleaseManagementAPIService) RefreshExecute(r ReleaseManagementAPIRefreshRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.Refresh")
@@ -696,12 +704,12 @@ func (a *ReleaseManagementAPIService) RefreshExecute(r ReleaseManagementAPIRefre
 }
 
 type ReleaseManagementAPIUpdateReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReleaseManagementAPIService
-	cUUID string
-	name string
-	release *map[string]interface{}
-	request *interface{}
+	cUUID      string
+	name       string
+	release    *map[string]interface{}
+	request    *interface{}
 }
 
 // Release data to be updated
@@ -722,31 +730,33 @@ func (r ReleaseManagementAPIUpdateReleaseRequest) Execute() (*ReleaseMetadata, *
 /*
 UpdateRelease Deprecated: sinceVersion: 2024.1. Use ReleasesController.update instead. Update a release
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param name
- @return ReleaseManagementAPIUpdateReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param name
+	@return ReleaseManagementAPIUpdateReleaseRequest
 
 Deprecated
 */
 func (a *ReleaseManagementAPIService) UpdateRelease(ctx context.Context, cUUID string, name string) ReleaseManagementAPIUpdateReleaseRequest {
 	return ReleaseManagementAPIUpdateReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		name: name,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		name:       name,
 	}
 }
 
 // Execute executes the request
-//  @return ReleaseMetadata
+//
+//	@return ReleaseMetadata
+//
 // Deprecated
 func (a *ReleaseManagementAPIService) UpdateReleaseExecute(r ReleaseManagementAPIUpdateReleaseRequest) (*ReleaseMetadata, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReleaseMetadata
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReleaseMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReleaseManagementAPIService.UpdateRelease")

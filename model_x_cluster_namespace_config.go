@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the XClusterNamespaceConfig type satisfies the MappedNullable interface at compile time
@@ -24,12 +22,12 @@ var _ MappedNullable = &XClusterNamespaceConfig{}
 type XClusterNamespaceConfig struct {
 	BackupUuid string `json:"backupUuid"`
 	// Time of replication setup, ie, table added to the replication group on the target universe
-	ReplicationSetupTime *time.Time `json:"replicationSetupTime,omitempty"`
-	RestoreUuid string `json:"restoreUuid"`
-	SourceNamespaceId string `json:"sourceNamespaceId"`
-	SourceNamespaceInfo *NamespaceInfoResp `json:"sourceNamespaceInfo,omitempty"`
+	ReplicationSetupTime *time.Time         `json:"replicationSetupTime,omitempty"`
+	RestoreUuid          string             `json:"restoreUuid"`
+	SourceNamespaceId    string             `json:"sourceNamespaceId"`
+	SourceNamespaceInfo  *NamespaceInfoResp `json:"sourceNamespaceInfo,omitempty"`
 	// Status
-	Status *string `json:"status,omitempty"`
+	Status              *string            `json:"status,omitempty"`
 	TargetNamespaceInfo *NamespaceInfoResp `json:"targetNamespaceInfo,omitempty"`
 }
 
@@ -256,7 +254,7 @@ func (o *XClusterNamespaceConfig) SetTargetNamespaceInfo(v NamespaceInfoResp) {
 }
 
 func (o XClusterNamespaceConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -318,5 +316,3 @@ func (v *NullableXClusterNamespaceConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

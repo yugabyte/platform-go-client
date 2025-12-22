@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // TabletServerManagementAPIService TabletServerManagementAPI service
 type TabletServerManagementAPIService service
 
 type TabletServerManagementAPIListTabletServersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TabletServerManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r TabletServerManagementAPIListTabletServersRequest) Execute() (map[string]map[string]interface{}, *http.Response, error) {
@@ -39,28 +38,29 @@ ListTabletServers List all tablet servers information
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return TabletServerManagementAPIListTabletServersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return TabletServerManagementAPIListTabletServersRequest
 */
 func (a *TabletServerManagementAPIService) ListTabletServers(ctx context.Context, cUUID string, uniUUID string) TabletServerManagementAPIListTabletServersRequest {
 	return TabletServerManagementAPIListTabletServersRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *TabletServerManagementAPIService) ListTabletServersExecute(r TabletServerManagementAPIListTabletServersRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TabletServerManagementAPIService.ListTabletServers")

@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // PlatformInstanceAPIService PlatformInstanceAPI service
 type PlatformInstanceAPIService service
 
 type PlatformInstanceAPICreateInstanceRequest struct {
-	ctx context.Context
-	ApiService *PlatformInstanceAPIService
-	cUUID string
+	ctx                         context.Context
+	ApiService                  *PlatformInstanceAPIService
+	cUUID                       string
 	platformInstanceFormRequest *PlatformInstanceFormData
-	request *interface{}
+	request                     *interface{}
 }
 
 func (r PlatformInstanceAPICreateInstanceRequest) PlatformInstanceFormRequest(platformInstanceFormRequest PlatformInstanceFormData) PlatformInstanceAPICreateInstanceRequest {
@@ -50,26 +49,27 @@ CreateInstance Create platform instance
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformInstanceAPICreateInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformInstanceAPICreateInstanceRequest
 */
 func (a *PlatformInstanceAPIService) CreateInstance(ctx context.Context, cUUID string) PlatformInstanceAPICreateInstanceRequest {
 	return PlatformInstanceAPICreateInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return PlatformInstance
+//
+//	@return PlatformInstance
 func (a *PlatformInstanceAPIService) CreateInstanceExecute(r PlatformInstanceAPICreateInstanceRequest) (*PlatformInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PlatformInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PlatformInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformInstanceAPIService.CreateInstance")
@@ -161,11 +161,11 @@ func (a *PlatformInstanceAPIService) CreateInstanceExecute(r PlatformInstanceAPI
 }
 
 type PlatformInstanceAPIDeleteInstanceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PlatformInstanceAPIService
-	cUUID string
-	iUUID string
-	request *interface{}
+	cUUID      string
+	iUUID      string
+	request    *interface{}
 }
 
 func (r PlatformInstanceAPIDeleteInstanceRequest) Request(request interface{}) PlatformInstanceAPIDeleteInstanceRequest {
@@ -180,26 +180,26 @@ func (r PlatformInstanceAPIDeleteInstanceRequest) Execute() (*http.Response, err
 /*
 DeleteInstance Method for DeleteInstance
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param iUUID
- @return PlatformInstanceAPIDeleteInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param iUUID
+	@return PlatformInstanceAPIDeleteInstanceRequest
 */
 func (a *PlatformInstanceAPIService) DeleteInstance(ctx context.Context, cUUID string, iUUID string) PlatformInstanceAPIDeleteInstanceRequest {
 	return PlatformInstanceAPIDeleteInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		iUUID: iUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		iUUID:      iUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformInstanceAPIService) DeleteInstanceExecute(r PlatformInstanceAPIDeleteInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformInstanceAPIService.DeleteInstance")
@@ -278,9 +278,9 @@ func (a *PlatformInstanceAPIService) DeleteInstanceExecute(r PlatformInstanceAPI
 }
 
 type PlatformInstanceAPIGetLocalRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PlatformInstanceAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r PlatformInstanceAPIGetLocalRequest) Execute() (*http.Response, error) {
@@ -290,24 +290,24 @@ func (r PlatformInstanceAPIGetLocalRequest) Execute() (*http.Response, error) {
 /*
 GetLocal Method for GetLocal
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PlatformInstanceAPIGetLocalRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PlatformInstanceAPIGetLocalRequest
 */
 func (a *PlatformInstanceAPIService) GetLocal(ctx context.Context, cUUID string) PlatformInstanceAPIGetLocalRequest {
 	return PlatformInstanceAPIGetLocalRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformInstanceAPIService) GetLocalExecute(r PlatformInstanceAPIGetLocalRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformInstanceAPIService.GetLocal")
@@ -382,14 +382,14 @@ func (a *PlatformInstanceAPIService) GetLocalExecute(r PlatformInstanceAPIGetLoc
 }
 
 type PlatformInstanceAPIPromoteInstanceRequest struct {
-	ctx context.Context
-	ApiService *PlatformInstanceAPIService
-	cUUID string
-	iUUID string
+	ctx                          context.Context
+	ApiService                   *PlatformInstanceAPIService
+	cUUID                        string
+	iUUID                        string
 	platformBackupRestoreRequest *RestorePlatformBackupFormData
-	curLeader *string
-	isForcePromote *bool
-	request *interface{}
+	curLeader                    *string
+	isForcePromote               *bool
+	request                      *interface{}
 }
 
 func (r PlatformInstanceAPIPromoteInstanceRequest) PlatformBackupRestoreRequest(platformBackupRestoreRequest RestorePlatformBackupFormData) PlatformInstanceAPIPromoteInstanceRequest {
@@ -421,26 +421,26 @@ PromoteInstance Promote platform instance
 
 Available since YBA version 2.20.0.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param iUUID
- @return PlatformInstanceAPIPromoteInstanceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param iUUID
+	@return PlatformInstanceAPIPromoteInstanceRequest
 */
 func (a *PlatformInstanceAPIService) PromoteInstance(ctx context.Context, cUUID string, iUUID string) PlatformInstanceAPIPromoteInstanceRequest {
 	return PlatformInstanceAPIPromoteInstanceRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		iUUID: iUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		iUUID:      iUUID,
 	}
 }
 
 // Execute executes the request
 func (a *PlatformInstanceAPIService) PromoteInstanceExecute(r PlatformInstanceAPIPromoteInstanceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PlatformInstanceAPIService.PromoteInstance")

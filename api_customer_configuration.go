@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // CustomerConfigurationAPIService CustomerConfigurationAPI service
 type CustomerConfigurationAPIService service
 
 type CustomerConfigurationAPICreateCustomerConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerConfigurationAPIService
-	cUUID string
-	config *CustomerConfig
-	request *interface{}
+	cUUID      string
+	config     *CustomerConfig
+	request    *interface{}
 }
 
 // Configuration data to be created
@@ -49,26 +48,27 @@ func (r CustomerConfigurationAPICreateCustomerConfigRequest) Execute() (*Custome
 /*
 CreateCustomerConfig Create a customer configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerConfigurationAPICreateCustomerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerConfigurationAPICreateCustomerConfigRequest
 */
 func (a *CustomerConfigurationAPIService) CreateCustomerConfig(ctx context.Context, cUUID string) CustomerConfigurationAPICreateCustomerConfigRequest {
 	return CustomerConfigurationAPICreateCustomerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerConfig
+//
+//	@return CustomerConfig
 func (a *CustomerConfigurationAPIService) CreateCustomerConfigExecute(r CustomerConfigurationAPICreateCustomerConfigRequest) (*CustomerConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerConfig
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.CreateCustomerConfig")
@@ -160,12 +160,12 @@ func (a *CustomerConfigurationAPIService) CreateCustomerConfigExecute(r Customer
 }
 
 type CustomerConfigurationAPIDeleteCustomerConfigRequest struct {
-	ctx context.Context
-	ApiService *CustomerConfigurationAPIService
-	cUUID string
-	configUUID string
+	ctx             context.Context
+	ApiService      *CustomerConfigurationAPIService
+	cUUID           string
+	configUUID      string
 	isDeleteBackups *bool
-	request *interface{}
+	request         *interface{}
 }
 
 func (r CustomerConfigurationAPIDeleteCustomerConfigRequest) IsDeleteBackups(isDeleteBackups bool) CustomerConfigurationAPIDeleteCustomerConfigRequest {
@@ -187,31 +187,33 @@ DeleteCustomerConfig Delete a customer configuration
 
 <b style="color:#ff0000">Deprecated since YBA version 2.25.0.0.</b></p>Use 'Delete a customer configuration V2' instead.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return CustomerConfigurationAPIDeleteCustomerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return CustomerConfigurationAPIDeleteCustomerConfigRequest
 
 Deprecated
 */
 func (a *CustomerConfigurationAPIService) DeleteCustomerConfig(ctx context.Context, cUUID string, configUUID string) CustomerConfigurationAPIDeleteCustomerConfigRequest {
 	return CustomerConfigurationAPIDeleteCustomerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
+//
 // Deprecated
 func (a *CustomerConfigurationAPIService) DeleteCustomerConfigExecute(r CustomerConfigurationAPIDeleteCustomerConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.DeleteCustomerConfig")
@@ -306,12 +308,12 @@ func (a *CustomerConfigurationAPIService) DeleteCustomerConfigExecute(r Customer
 }
 
 type CustomerConfigurationAPIDeleteCustomerConfigV2Request struct {
-	ctx context.Context
-	ApiService *CustomerConfigurationAPIService
-	cUUID string
-	configUUID string
+	ctx             context.Context
+	ApiService      *CustomerConfigurationAPIService
+	cUUID           string
+	configUUID      string
 	isDeleteBackups *bool
-	request *interface{}
+	request         *interface{}
 }
 
 func (r CustomerConfigurationAPIDeleteCustomerConfigV2Request) IsDeleteBackups(isDeleteBackups bool) CustomerConfigurationAPIDeleteCustomerConfigV2Request {
@@ -331,28 +333,29 @@ func (r CustomerConfigurationAPIDeleteCustomerConfigV2Request) Execute() (*YBPTa
 /*
 DeleteCustomerConfigV2 Delete a customer configuration V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return CustomerConfigurationAPIDeleteCustomerConfigV2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return CustomerConfigurationAPIDeleteCustomerConfigV2Request
 */
 func (a *CustomerConfigurationAPIService) DeleteCustomerConfigV2(ctx context.Context, cUUID string, configUUID string) CustomerConfigurationAPIDeleteCustomerConfigV2Request {
 	return CustomerConfigurationAPIDeleteCustomerConfigV2Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *CustomerConfigurationAPIService) DeleteCustomerConfigV2Execute(r CustomerConfigurationAPIDeleteCustomerConfigV2Request) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.DeleteCustomerConfigV2")
@@ -447,12 +450,12 @@ func (a *CustomerConfigurationAPIService) DeleteCustomerConfigV2Execute(r Custom
 }
 
 type CustomerConfigurationAPIEditCustomerConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerConfigurationAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
-	config *CustomerConfig
-	request *interface{}
+	config     *CustomerConfig
+	request    *interface{}
 }
 
 // Configuration data to be updated
@@ -473,28 +476,29 @@ func (r CustomerConfigurationAPIEditCustomerConfigRequest) Execute() (*CustomerC
 /*
 EditCustomerConfig Update a customer configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return CustomerConfigurationAPIEditCustomerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return CustomerConfigurationAPIEditCustomerConfigRequest
 */
 func (a *CustomerConfigurationAPIService) EditCustomerConfig(ctx context.Context, cUUID string, configUUID string) CustomerConfigurationAPIEditCustomerConfigRequest {
 	return CustomerConfigurationAPIEditCustomerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerConfig
+//
+//	@return CustomerConfig
 func (a *CustomerConfigurationAPIService) EditCustomerConfigExecute(r CustomerConfigurationAPIEditCustomerConfigRequest) (*CustomerConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerConfig
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.EditCustomerConfig")
@@ -587,12 +591,12 @@ func (a *CustomerConfigurationAPIService) EditCustomerConfigExecute(r CustomerCo
 }
 
 type CustomerConfigurationAPIEditCustomerConfig_0Request struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerConfigurationAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
-	config *CustomerConfig
-	request *interface{}
+	config     *CustomerConfig
+	request    *interface{}
 }
 
 // Configuration data to be updated
@@ -613,28 +617,29 @@ func (r CustomerConfigurationAPIEditCustomerConfig_0Request) Execute() (*Custome
 /*
 EditCustomerConfig_0 Update a customer configuration V2
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return CustomerConfigurationAPIEditCustomerConfig_0Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return CustomerConfigurationAPIEditCustomerConfig_0Request
 */
 func (a *CustomerConfigurationAPIService) EditCustomerConfig_1(ctx context.Context, cUUID string, configUUID string) CustomerConfigurationAPIEditCustomerConfig_0Request {
 	return CustomerConfigurationAPIEditCustomerConfig_0Request{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return CustomerConfig
+//
+//	@return CustomerConfig
 func (a *CustomerConfigurationAPIService) EditCustomerConfig_1Execute(r CustomerConfigurationAPIEditCustomerConfig_0Request) (*CustomerConfig, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CustomerConfig
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CustomerConfig
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.EditCustomerConfig_1")
@@ -727,9 +732,9 @@ func (a *CustomerConfigurationAPIService) EditCustomerConfig_1Execute(r Customer
 }
 
 type CustomerConfigurationAPIGetListOfCustomerConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerConfigurationAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r CustomerConfigurationAPIGetListOfCustomerConfigRequest) Execute() ([]CustomerConfigUI, *http.Response, error) {
@@ -739,26 +744,27 @@ func (r CustomerConfigurationAPIGetListOfCustomerConfigRequest) Execute() ([]Cus
 /*
 GetListOfCustomerConfig List all customer configurations
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return CustomerConfigurationAPIGetListOfCustomerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return CustomerConfigurationAPIGetListOfCustomerConfigRequest
 */
 func (a *CustomerConfigurationAPIService) GetListOfCustomerConfig(ctx context.Context, cUUID string) CustomerConfigurationAPIGetListOfCustomerConfigRequest {
 	return CustomerConfigurationAPIGetListOfCustomerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []CustomerConfigUI
+//
+//	@return []CustomerConfigUI
 func (a *CustomerConfigurationAPIService) GetListOfCustomerConfigExecute(r CustomerConfigurationAPIGetListOfCustomerConfigRequest) ([]CustomerConfigUI, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []CustomerConfigUI
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []CustomerConfigUI
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.GetListOfCustomerConfig")
@@ -842,9 +848,9 @@ func (a *CustomerConfigurationAPIService) GetListOfCustomerConfigExecute(r Custo
 }
 
 type CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CustomerConfigurationAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
 }
 
@@ -855,28 +861,29 @@ func (r CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest) Exe
 /*
 GetListOfYbaBackupDirsCustomerConfig List all backup dirs within a customer configurations
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest
 */
 func (a *CustomerConfigurationAPIService) GetListOfYbaBackupDirsCustomerConfig(ctx context.Context, cUUID string, configUUID string) CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest {
 	return CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []string
+//
+//	@return []string
 func (a *CustomerConfigurationAPIService) GetListOfYbaBackupDirsCustomerConfigExecute(r CustomerConfigurationAPIGetListOfYbaBackupDirsCustomerConfigRequest) ([]string, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []string
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []string
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.GetListOfYbaBackupDirsCustomerConfig")
@@ -961,12 +968,12 @@ func (a *CustomerConfigurationAPIService) GetListOfYbaBackupDirsCustomerConfigEx
 }
 
 type CustomerConfigurationAPIListBucketsRequest struct {
-	ctx context.Context
-	ApiService *CustomerConfigurationAPIService
-	cUUID string
-	cloud string
+	ctx         context.Context
+	ApiService  *CustomerConfigurationAPIService
+	cUUID       string
+	cloud       string
 	credentials *map[string]interface{}
-	request *interface{}
+	request     *interface{}
 }
 
 // Credentials to list buckets
@@ -987,28 +994,29 @@ func (r CustomerConfigurationAPIListBucketsRequest) Execute() (map[string]interf
 /*
 ListBuckets List buckets with provided credentials
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param cloud
- @return CustomerConfigurationAPIListBucketsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param cloud
+	@return CustomerConfigurationAPIListBucketsRequest
 */
 func (a *CustomerConfigurationAPIService) ListBuckets(ctx context.Context, cUUID string, cloud string) CustomerConfigurationAPIListBucketsRequest {
 	return CustomerConfigurationAPIListBucketsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		cloud: cloud,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		cloud:      cloud,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *CustomerConfigurationAPIService) ListBucketsExecute(r CustomerConfigurationAPIListBucketsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CustomerConfigurationAPIService.ListBuckets")

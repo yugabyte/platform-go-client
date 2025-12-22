@@ -20,9 +20,9 @@ var _ MappedNullable = &AzureRegionCloudInfo{}
 // AzureRegionCloudInfo struct for AzureRegionCloudInfo
 type AzureRegionCloudInfo struct {
 	AzuNetworkRGOverride *string `json:"azuNetworkRGOverride,omitempty"`
-	AzuRGOverride *string `json:"azuRGOverride,omitempty"`
-	SecurityGroupId *string `json:"securityGroupId,omitempty"`
-	Vnet *string `json:"vnet,omitempty"`
+	AzuRGOverride        *string `json:"azuRGOverride,omitempty"`
+	SecurityGroupId      *string `json:"securityGroupId,omitempty"`
+	Vnet                 *string `json:"vnet,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.0.</b> Use provider.imageBundle instead
 	YbImage *string `json:"ybImage,omitempty"`
 }
@@ -205,7 +205,7 @@ func (o *AzureRegionCloudInfo) SetYbImage(v string) {
 }
 
 func (o AzureRegionCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -267,5 +267,3 @@ func (v *NullableAzureRegionCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

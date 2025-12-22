@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestoreApiFilter type satisfies the MappedNullable interface at compile time
@@ -25,15 +23,15 @@ type RestoreApiFilter struct {
 	// The end date to filter paged query.
 	DateRangeEnd *time.Time `json:"dateRangeEnd,omitempty"`
 	// The start date to filter paged query.
-	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
-	OnlyShowDeletedSourceUniverses bool `json:"onlyShowDeletedSourceUniverses"`
-	RestoreUUIDList []string `json:"restoreUUIDList"`
-	ShowHidden bool `json:"showHidden"`
-	SourceUniverseNameList []string `json:"sourceUniverseNameList"`
-	States []string `json:"states"`
-	StorageConfigUUIDList []string `json:"storageConfigUUIDList"`
-	UniverseNameList []string `json:"universeNameList"`
-	UniverseUUIDList []string `json:"universeUUIDList"`
+	DateRangeStart                 *time.Time `json:"dateRangeStart,omitempty"`
+	OnlyShowDeletedSourceUniverses bool       `json:"onlyShowDeletedSourceUniverses"`
+	RestoreUUIDList                []string   `json:"restoreUUIDList"`
+	ShowHidden                     bool       `json:"showHidden"`
+	SourceUniverseNameList         []string   `json:"sourceUniverseNameList"`
+	States                         []string   `json:"states"`
+	StorageConfigUUIDList          []string   `json:"storageConfigUUIDList"`
+	UniverseNameList               []string   `json:"universeNameList"`
+	UniverseUUIDList               []string   `json:"universeUUIDList"`
 }
 
 type _RestoreApiFilter RestoreApiFilter
@@ -320,7 +318,7 @@ func (o *RestoreApiFilter) SetUniverseUUIDList(v []string) {
 }
 
 func (o RestoreApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -381,5 +379,3 @@ func (v *NullableRestoreApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

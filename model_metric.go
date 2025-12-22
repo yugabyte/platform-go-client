@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the Metric type satisfies the MappedNullable interface at compile time
@@ -21,9 +19,9 @@ var _ MappedNullable = &Metric{}
 
 // Metric struct for Metric
 type Metric struct {
-	Help string `json:"help"`
-	Name string `json:"name"`
-	Unit string `json:"unit"`
+	Help   string        `json:"help"`
+	Name   string        `json:"name"`
+	Unit   string        `json:"unit"`
 	Values []MetricValue `json:"values"`
 }
 
@@ -147,7 +145,7 @@ func (o *Metric) SetValues(v []MetricValue) {
 }
 
 func (o Metric) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullableMetric) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

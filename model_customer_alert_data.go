@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomerAlertData type satisfies the MappedNullable interface at compile time
@@ -21,8 +19,8 @@ var _ MappedNullable = &CustomerAlertData{}
 
 // CustomerAlertData Format of an alert, used by the API and UI to validate data against input constraints
 type CustomerAlertData struct {
-	AlertingData AlertingData `json:"alertingData"`
-	CallhomeLevel string `json:"callhomeLevel"`
+	AlertingData  AlertingData `json:"alertingData"`
+	CallhomeLevel string       `json:"callhomeLevel"`
 	// Alert code
 	Code *string `json:"code,omitempty"`
 	// Email password confirmation
@@ -34,7 +32,7 @@ type CustomerAlertData struct {
 	// Alert name
 	Name *string `json:"name,omitempty"`
 	// Email password
-	Password *string `json:"password,omitempty"`
+	Password *string  `json:"password,omitempty"`
 	SmtpData SmtpData `json:"smtpData"`
 }
 
@@ -325,7 +323,7 @@ func (o *CustomerAlertData) SetSmtpData(v SmtpData) {
 }
 
 func (o CustomerAlertData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -393,5 +391,3 @@ func (v *NullableCustomerAlertData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

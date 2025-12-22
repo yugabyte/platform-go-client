@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // UploadReleasePackagesAPIService UploadReleasePackagesAPI service
 type UploadReleasePackagesAPIService service
 
 type UploadReleasePackagesAPIGetUploadReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UploadReleasePackagesAPIService
-	cUUID string
-	rUUID string
-	request *interface{}
+	cUUID      string
+	rUUID      string
+	request    *interface{}
 }
 
 func (r UploadReleasePackagesAPIGetUploadReleaseRequest) Request(request interface{}) UploadReleasePackagesAPIGetUploadReleaseRequest {
@@ -45,28 +44,29 @@ GetUploadRelease get an uploaded release metadata
 
 WARNING: This is a preview API that could change: get uploaded release metadata
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return UploadReleasePackagesAPIGetUploadReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return UploadReleasePackagesAPIGetUploadReleaseRequest
 */
 func (a *UploadReleasePackagesAPIService) GetUploadRelease(ctx context.Context, cUUID string, rUUID string) UploadReleasePackagesAPIGetUploadReleaseRequest {
 	return UploadReleasePackagesAPIGetUploadReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ResponseExtractMetadata
+//
+//	@return ResponseExtractMetadata
 func (a *UploadReleasePackagesAPIService) GetUploadReleaseExecute(r UploadReleasePackagesAPIGetUploadReleaseRequest) (*ResponseExtractMetadata, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ResponseExtractMetadata
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ResponseExtractMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadReleasePackagesAPIService.GetUploadRelease")
@@ -154,10 +154,10 @@ func (a *UploadReleasePackagesAPIService) GetUploadReleaseExecute(r UploadReleas
 }
 
 type UploadReleasePackagesAPIUploadReleaseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UploadReleasePackagesAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r UploadReleasePackagesAPIUploadReleaseRequest) Request(request interface{}) UploadReleasePackagesAPIUploadReleaseRequest {
@@ -174,26 +174,27 @@ UploadRelease upload a release tgz
 
 WARNING: This is a preview API that could change: upload release tgz file
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UploadReleasePackagesAPIUploadReleaseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UploadReleasePackagesAPIUploadReleaseRequest
 */
 func (a *UploadReleasePackagesAPIService) UploadRelease(ctx context.Context, cUUID string) UploadReleasePackagesAPIUploadReleaseRequest {
 	return UploadReleasePackagesAPIUploadReleaseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPCreateSuccess
+//
+//	@return YBPCreateSuccess
 func (a *UploadReleasePackagesAPIService) UploadReleaseExecute(r UploadReleasePackagesAPIUploadReleaseRequest) (*YBPCreateSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPCreateSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPCreateSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UploadReleasePackagesAPIService.UploadRelease")

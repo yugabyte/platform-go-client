@@ -19,7 +19,7 @@ var _ MappedNullable = &AccessKeyId{}
 
 // AccessKeyId struct for AccessKeyId
 type AccessKeyId struct {
-	KeyCode *string `json:"keyCode,omitempty"`
+	KeyCode      *string `json:"keyCode,omitempty"`
 	ProviderUUID *string `json:"providerUUID,omitempty"`
 }
 
@@ -105,7 +105,7 @@ func (o *AccessKeyId) SetProviderUUID(v string) {
 }
 
 func (o AccessKeyId) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableAccessKeyId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

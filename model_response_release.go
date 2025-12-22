@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ResponseRelease type satisfies the MappedNullable interface at compile time
@@ -21,16 +19,16 @@ var _ MappedNullable = &ResponseRelease{}
 
 // ResponseRelease struct for ResponseRelease
 type ResponseRelease struct {
-	Artifacts []Artifact `json:"artifacts"`
-	ReleaseDateMsecs int64 `json:"release_date_msecs"`
-	ReleaseNotes string `json:"release_notes"`
-	ReleaseTag string `json:"release_tag"`
-	ReleaseType string `json:"release_type"`
-	ReleaseUuid string `json:"release_uuid"`
-	State string `json:"state"`
-	Universes []Universe `json:"universes"`
-	Version string `json:"version"`
-	YbType string `json:"yb_type"`
+	Artifacts        []Artifact `json:"artifacts"`
+	ReleaseDateMsecs int64      `json:"release_date_msecs"`
+	ReleaseNotes     string     `json:"release_notes"`
+	ReleaseTag       string     `json:"release_tag"`
+	ReleaseType      string     `json:"release_type"`
+	ReleaseUuid      string     `json:"release_uuid"`
+	State            string     `json:"state"`
+	Universes        []Universe `json:"universes"`
+	Version          string     `json:"version"`
+	YbType           string     `json:"yb_type"`
 }
 
 type _ResponseRelease ResponseRelease
@@ -303,7 +301,7 @@ func (o *ResponseRelease) SetYbType(v string) {
 }
 
 func (o ResponseRelease) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -360,5 +358,3 @@ func (v *NullableResponseRelease) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

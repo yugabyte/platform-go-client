@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the DrConfigCreateForm type satisfies the MappedNullable interface at compile time
@@ -27,7 +25,7 @@ type DrConfigCreateForm struct {
 	// Run the pre-checks without actually running the subtasks
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Name
-	Name string `json:"name"`
+	Name       string      `json:"name"`
 	PitrParams *PitrParams `json:"pitrParams,omitempty"`
 	// Source Universe UUID
 	SourceUniverseUUID string `json:"sourceUniverseUUID"`
@@ -251,7 +249,7 @@ func (o *DrConfigCreateForm) SetTargetUniverseUUID(v string) {
 }
 
 func (o DrConfigCreateForm) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -311,5 +309,3 @@ func (v *NullableDrConfigCreateForm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

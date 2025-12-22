@@ -22,16 +22,16 @@ type ReleaseMetadata struct {
 	// Helm chart path
 	ChartPath *string `json:"chartPath,omitempty"`
 	// Release file path
-	FilePath *string `json:"filePath,omitempty"`
-	Gcs *GCSLocation `json:"gcs,omitempty"`
-	Http *HttpLocation `json:"http,omitempty"`
+	FilePath *string       `json:"filePath,omitempty"`
+	Gcs      *GCSLocation  `json:"gcs,omitempty"`
+	Http     *HttpLocation `json:"http,omitempty"`
 	// Release image tag
 	ImageTag *string `json:"imageTag,omitempty"`
 	// Release notes
 	Notes []string `json:"notes,omitempty"`
 	// Release packages
-	Packages []Package `json:"packages,omitempty"`
-	S3 *S3Location `json:"s3,omitempty"`
+	Packages []Package   `json:"packages,omitempty"`
+	S3       *S3Location `json:"s3,omitempty"`
 	// Release state
 	State *string `json:"state,omitempty"`
 }
@@ -342,7 +342,7 @@ func (o *ReleaseMetadata) SetState(v string) {
 }
 
 func (o ReleaseMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -416,5 +416,3 @@ func (v *NullableReleaseMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

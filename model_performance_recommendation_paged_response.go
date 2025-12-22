@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the PerformanceRecommendationPagedResponse type satisfies the MappedNullable interface at compile time
@@ -21,10 +19,10 @@ var _ MappedNullable = &PerformanceRecommendationPagedResponse{}
 
 // PerformanceRecommendationPagedResponse struct for PerformanceRecommendationPagedResponse
 type PerformanceRecommendationPagedResponse struct {
-	Entities []PerformanceRecommendation `json:"entities"`
-	HasNext bool `json:"hasNext"`
-	HasPrev bool `json:"hasPrev"`
-	TotalCount int32 `json:"totalCount"`
+	Entities   []PerformanceRecommendation `json:"entities"`
+	HasNext    bool                        `json:"hasNext"`
+	HasPrev    bool                        `json:"hasPrev"`
+	TotalCount int32                       `json:"totalCount"`
 }
 
 type _PerformanceRecommendationPagedResponse PerformanceRecommendationPagedResponse
@@ -147,7 +145,7 @@ func (o *PerformanceRecommendationPagedResponse) SetTotalCount(v int32) {
 }
 
 func (o PerformanceRecommendationPagedResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -198,5 +196,3 @@ func (v *NullablePerformanceRecommendationPagedResponse) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

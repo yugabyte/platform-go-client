@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the VMImageUpgradeParams type satisfies the MappedNullable interface at compile time
@@ -22,101 +20,101 @@ var _ MappedNullable = &VMImageUpgradeParams{}
 // VMImageUpgradeParams struct for VMImageUpgradeParams
 type VMImageUpgradeParams struct {
 	AdditionalServicesStateData *AdditionalServicesStateData `json:"additionalServicesStateData,omitempty"`
-	AllowInsecure *bool `json:"allowInsecure,omitempty"`
-	Arch *string `json:"arch,omitempty"`
-	AutoRollbackPerformed *bool `json:"autoRollbackPerformed,omitempty"`
-	Capability *string `json:"capability,omitempty"`
-	ClientRootCA *string `json:"clientRootCA,omitempty"`
-	Clusters []Cluster `json:"clusters"`
+	AllowInsecure               *bool                        `json:"allowInsecure,omitempty"`
+	Arch                        *string                      `json:"arch,omitempty"`
+	AutoRollbackPerformed       *bool                        `json:"autoRollbackPerformed,omitempty"`
+	Capability                  *string                      `json:"capability,omitempty"`
+	ClientRootCA                *string                      `json:"clientRootCA,omitempty"`
+	Clusters                    []Cluster                    `json:"clusters"`
 	// Amazon Resource Name (ARN) of the CMK
-	CmkArn *string `json:"cmkArn,omitempty"`
-	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
-	CreatingUser Users `json:"creatingUser"`
-	CurrentClusterType *string `json:"currentClusterType,omitempty"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
+	CmkArn                 *string                 `json:"cmkArn,omitempty"`
+	CommunicationPorts     *CommunicationPorts     `json:"communicationPorts,omitempty"`
+	CreatingUser           Users                   `json:"creatingUser"`
+	CurrentClusterType     *string                 `json:"currentClusterType,omitempty"`
+	DeviceInfo             *DeviceInfo             `json:"deviceInfo,omitempty"`
+	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
-	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
-	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
+	ExpectedUniverseVersion *int32             `json:"expectedUniverseVersion,omitempty"`
+	ExtraDependencies       *ExtraDependencies `json:"extraDependencies,omitempty"`
 	// YbaApi Internal. FIPS compatibility is enabled for universe
-	FipsEnabled *bool `json:"fipsEnabled,omitempty"`
-	ForceVMImageUpgrade bool `json:"forceVMImageUpgrade"`
+	FipsEnabled         *bool `json:"fipsEnabled,omitempty"`
+	ForceVMImageUpgrade bool  `json:"forceVMImageUpgrade"`
 	// ImageBundle to be used for upgrade. <b style=\"color:#ff0000\">Deprecated since YBA version 2.21.1.0.</b> Use imageBundles instead.
 	ImageBundleUUID *string `json:"imageBundleUUID,omitempty"`
 	// Available since YBA version 2.21.1.0. ImageBundles for provider to be used for upgrade
-	ImageBundles []ImageBundleUpgradeInfo `json:"imageBundles,omitempty"`
-	ImportedState *string `json:"importedState,omitempty"`
+	ImageBundles  []ImageBundleUpgradeInfo `json:"imageBundles,omitempty"`
+	ImportedState *string                  `json:"importedState,omitempty"`
 	// YbaApi Internal. Install node agent in background if it is true
-	InstallNodeAgent *bool `json:"installNodeAgent,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	InstallNodeAgent               *bool `json:"installNodeAgent,omitempty"`
+	InstallYbc                     *bool `json:"installYbc,omitempty"`
 	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	// Available since YBA version 2.20.2.0
-	IsSoftwareRollbackAllowed *bool `json:"isSoftwareRollbackAllowed,omitempty"`
-	ItestS3PackagePath *string `json:"itestS3PackagePath,omitempty"`
-	KubernetesUpgradeSupported bool `json:"kubernetesUpgradeSupported"`
+	IsSoftwareRollbackAllowed  *bool   `json:"isSoftwareRollbackAllowed,omitempty"`
+	ItestS3PackagePath         *string `json:"itestS3PackagePath,omitempty"`
+	KubernetesUpgradeSupported bool    `json:"kubernetesUpgradeSupported"`
 	// Map of region UUID to AMI name. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.0.0.</b> Use imageBundle instead.
 	MachineImages *map[string]string `json:"machineImages,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2025.2.</b> With geo partitioning support, default region is replaced with default partition
-	MastersInDefaultRegion *bool `json:"mastersInDefaultRegion,omitempty"`
-	NextClusterIndex *int32 `json:"nextClusterIndex,omitempty"`
+	MastersInDefaultRegion *bool  `json:"mastersInDefaultRegion,omitempty"`
+	NextClusterIndex       *int32 `json:"nextClusterIndex,omitempty"`
 	// YbaApi Internal. True if a node agent for missing in any of the nodes
 	NodeAgentMissing *bool `json:"nodeAgentMissing,omitempty"`
 	// Node details
 	NodeDetailsSet []NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
-	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
-	NodePrefix *string `json:"nodePrefix,omitempty"`
-	NodesResizeAvailable *bool `json:"nodesResizeAvailable,omitempty"`
+	NodeExporterUser     *string `json:"nodeExporterUser,omitempty"`
+	NodePrefix           *string `json:"nodePrefix,omitempty"`
+	NodesResizeAvailable *bool   `json:"nodesResizeAvailable,omitempty"`
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
-	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
-	PlacementModificationTaskUuid *string `json:"placementModificationTaskUuid,omitempty"`
-	PlatformUrl string `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
-	PrevYBSoftwareConfig *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
+	OtelCollectorEnabled          *bool                 `json:"otelCollectorEnabled,omitempty"`
+	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
+	PlatformUrl                   string                `json:"platformUrl"`
+	PlatformVersion               *string               `json:"platformVersion,omitempty"`
+	PrevYBSoftwareConfig          *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
-	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
-	RemotePackagePath *string `json:"remotePackagePath,omitempty"`
-	ResetAZConfig *bool `json:"resetAZConfig,omitempty"`
-	RollMaxBatchSize *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
-	RootAndClientRootCASame *bool `json:"rootAndClientRootCASame,omitempty"`
-	RootCA *string `json:"rootCA,omitempty"`
+	PreviousTaskUUID        *string           `json:"previousTaskUUID,omitempty"`
+	RemotePackagePath       *string           `json:"remotePackagePath,omitempty"`
+	ResetAZConfig           *bool             `json:"resetAZConfig,omitempty"`
+	RollMaxBatchSize        *RollMaxBatchSize `json:"rollMaxBatchSize,omitempty"`
+	RootAndClientRootCASame *bool             `json:"rootAndClientRootCASame,omitempty"`
+	RootCA                  *string           `json:"rootCA,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
-	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
+	RunOnlyPrechecks         *bool `json:"runOnlyPrechecks,omitempty"`
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
 	// YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade
-	SkipNodeChecks *bool `json:"skipNodeChecks,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
-	SoftwareUpgradeState *string `json:"softwareUpgradeState,omitempty"`
+	SkipNodeChecks                 *bool   `json:"skipNodeChecks,omitempty"`
+	SleepAfterMasterRestartMillis  int32   `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32   `json:"sleepAfterTServerRestartMillis"`
+	SoftwareUpgradeState           *string `json:"softwareUpgradeState,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
-	SshUserOverride *string `json:"sshUserOverride,omitempty"`
+	SshUserOverride       *string  `json:"sshUserOverride,omitempty"`
 	// Map of region UUID to SSH User override. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.0.0.</b> Use imageBundle instead.
 	SshUserOverrideMap *map[string]string `json:"sshUserOverrideMap,omitempty"`
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs []string `json:"targetXClusterConfigs,omitempty"`
 	// YbaApi Internal. True if a universe has been detached
 	UniverseDetached *bool `json:"universeDetached,omitempty"`
-	UniversePaused *bool `json:"universePaused,omitempty"`
+	UniversePaused   *bool `json:"universePaused,omitempty"`
 	// Associated universe UUID
-	UniverseUUID *string `json:"universeUUID,omitempty"`
-	UpdateInProgress *bool `json:"updateInProgress,omitempty"`
-	UpdateOptions []string `json:"updateOptions,omitempty"`
-	UpdateSucceeded *bool `json:"updateSucceeded,omitempty"`
-	UpdatingTask *string `json:"updatingTask,omitempty"`
-	UpdatingTaskUUID *string `json:"updatingTaskUUID,omitempty"`
-	UpgradeOption string `json:"upgradeOption"`
-	UseNewHelmNamingStyle *bool `json:"useNewHelmNamingStyle,omitempty"`
-	UserAZSelected *bool `json:"userAZSelected,omitempty"`
-	XclusterInfo *XClusterInfo `json:"xclusterInfo,omitempty"`
+	UniverseUUID          *string       `json:"universeUUID,omitempty"`
+	UpdateInProgress      *bool         `json:"updateInProgress,omitempty"`
+	UpdateOptions         []string      `json:"updateOptions,omitempty"`
+	UpdateSucceeded       *bool         `json:"updateSucceeded,omitempty"`
+	UpdatingTask          *string       `json:"updatingTask,omitempty"`
+	UpdatingTaskUUID      *string       `json:"updatingTaskUUID,omitempty"`
+	UpgradeOption         string        `json:"upgradeOption"`
+	UseNewHelmNamingStyle *bool         `json:"useNewHelmNamingStyle,omitempty"`
+	UserAZSelected        *bool         `json:"userAZSelected,omitempty"`
+	XclusterInfo          *XClusterInfo `json:"xclusterInfo,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbSoftwareVersion string `json:"ybSoftwareVersion"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
+	YbSoftwareVersion     string  `json:"ybSoftwareVersion"`
+	YbcInstalled          *bool   `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion    *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 type _VMImageUpgradeParams VMImageUpgradeParams
@@ -2412,7 +2410,7 @@ func (o *VMImageUpgradeParams) SetYbcSoftwareVersion(v string) {
 }
 
 func (o VMImageUpgradeParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -2660,5 +2658,3 @@ func (v *NullableVMImageUpgradeParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

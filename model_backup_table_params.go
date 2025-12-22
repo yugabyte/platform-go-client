@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BackupTableParams type satisfies the MappedNullable interface at compile time
@@ -28,7 +26,7 @@ type BackupTableParams struct {
 	// Alter load balancer state
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Backups
-	BackupList []BackupTableParams `json:"backupList,omitempty"`
+	BackupList                     []BackupTableParams             `json:"backupList,omitempty"`
 	BackupPointInTimeRestoreWindow *BackupPointInTimeRestoreWindow `json:"backupPointInTimeRestoreWindow,omitempty"`
 	// Backup size in bytes
 	BackupSizeInBytes *int64 `json:"backupSizeInBytes,omitempty"`
@@ -39,14 +37,14 @@ type BackupTableParams struct {
 	// Base backup UUID
 	BaseBackupUUID *string `json:"baseBackupUUID,omitempty"`
 	// Amazon Resource Name (ARN) of the CMK
-	CmkArn *string `json:"cmkArn,omitempty"`
+	CmkArn             *string             `json:"cmkArn,omitempty"`
 	CommunicationPorts *CommunicationPorts `json:"communicationPorts,omitempty"`
-	CreatingUser Users `json:"creatingUser"`
+	CreatingUser       Users               `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
 	// Customer UUID
-	CustomerUuid *string `json:"customerUuid,omitempty"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
+	CustomerUuid *string     `json:"customerUuid,omitempty"`
+	DeviceInfo   *DeviceInfo `json:"deviceInfo,omitempty"`
 	// Disable checksum
 	DisableChecksum *bool `json:"disableChecksum,omitempty"`
 	// Disable multipart upload
@@ -54,22 +52,22 @@ type BackupTableParams struct {
 	// Don't add -m flag during gsutil upload dir command
 	DisableParallelism *bool `json:"disableParallelism,omitempty"`
 	// Is verbose logging enabled
-	EnableVerboseLogs *bool `json:"enableVerboseLogs,omitempty"`
-	EnableYbc *bool `json:"enableYbc,omitempty"`
+	EnableVerboseLogs      *bool                   `json:"enableVerboseLogs,omitempty"`
+	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
 	EncryptionAtRestConfig *EncryptionAtRestConfig `json:"encryptionAtRestConfig,omitempty"`
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
 	// Expected universe version
 	ExpectedUniverseVersion *int32 `json:"expectedUniverseVersion,omitempty"`
 	// Time unit for backup expiry time
-	ExpiryTimeUnit *string `json:"expiryTimeUnit,omitempty"`
+	ExpiryTimeUnit    *string            `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	FullBackup bool `json:"fullBackup"`
+	FullBackup        bool               `json:"fullBackup"`
 	// Incremental backups chain size
 	FullChainSizeInBytes *int64 `json:"fullChainSizeInBytes,omitempty"`
 	// Should table backup errors be ignored
 	IgnoreErrors *bool `json:"ignoreErrors,omitempty"`
-	InstallYbc *bool `json:"installYbc,omitempty"`
+	InstallYbc   *bool `json:"installYbc,omitempty"`
 	// Full Table type backup
 	IsFullBackup *bool `json:"isFullBackup,omitempty"`
 	// Key space
@@ -87,8 +85,8 @@ type BackupTableParams struct {
 	// User name of the current tables owner
 	OldOwner *string `json:"oldOwner,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
-	Parallelism *int32 `json:"parallelism,omitempty"`
-	PlatformUrl string `json:"platformUrl"`
+	Parallelism     *int32  `json:"parallelism,omitempty"`
+	PlatformUrl     string  `json:"platformUrl"`
 	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Point in time restore available
 	PointInTimeRestoreEnabled *bool `json:"pointInTimeRestoreEnabled,omitempty"`
@@ -105,9 +103,9 @@ type BackupTableParams struct {
 	// Schedule UUID
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
-	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
-	SleepAfterMasterRestartMillis int32 `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32 `json:"sleepAfterTServerRestartMillis"`
+	SchedulingFrequency            *int64 `json:"schedulingFrequency,omitempty"`
+	SleepAfterMasterRestartMillis  int32  `json:"sleepAfterMasterRestartMillis"`
+	SleepAfterTServerRestartMillis int32  `json:"sleepAfterTServerRestartMillis"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -134,7 +132,7 @@ type BackupTableParams struct {
 	TargetXClusterConfigs []string `json:"targetXClusterConfigs,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
 	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
-	TimeTakenPartial int64 `json:"timeTakenPartial"`
+	TimeTakenPartial int64  `json:"timeTakenPartial"`
 	// Is backup transactional across tables
 	TransactionalBackup *bool `json:"transactionalBackup,omitempty"`
 	// Associated universe UUID
@@ -145,8 +143,8 @@ type BackupTableParams struct {
 	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 	// Previous software version
 	YbPrevSoftwareVersion *string `json:"ybPrevSoftwareVersion,omitempty"`
-	YbcInstalled *bool `json:"ybcInstalled,omitempty"`
-	YbcSoftwareVersion *string `json:"ybcSoftwareVersion,omitempty"`
+	YbcInstalled          *bool   `json:"ybcInstalled,omitempty"`
+	YbcSoftwareVersion    *string `json:"ybcSoftwareVersion,omitempty"`
 }
 
 type _BackupTableParams BackupTableParams
@@ -2392,7 +2390,7 @@ func (o *BackupTableParams) SetYbcSoftwareVersion(v string) {
 }
 
 func (o BackupTableParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -2638,5 +2636,3 @@ func (v *NullableBackupTableParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

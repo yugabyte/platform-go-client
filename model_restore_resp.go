@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestoreResp type satisfies the MappedNullable interface at compile time
@@ -24,19 +22,19 @@ var _ MappedNullable = &RestoreResp{}
 type RestoreResp struct {
 	// Backup details.
 	BackupCreatedOnDate *time.Time `json:"backupCreatedOnDate,omitempty"`
-	BackupType *string `json:"backupType,omitempty"`
+	BackupType          *string    `json:"backupType,omitempty"`
 	// Restore creation time.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	CustomerUUID string `json:"customerUUID"`
-	IsSourceUniversePresent bool `json:"isSourceUniversePresent"`
-	RestoreKeyspaceList []RestoreKeyspace `json:"restoreKeyspaceList"`
-	RestoreSizeInBytes int64 `json:"restoreSizeInBytes"`
-	RestoreUUID string `json:"restoreUUID"`
-	SourceUniverseName string `json:"sourceUniverseName"`
-	SourceUniverseUUID string `json:"sourceUniverseUUID"`
-	State string `json:"state"`
-	TargetUniverseName string `json:"targetUniverseName"`
-	UniverseUUID string `json:"universeUUID"`
+	CreateTime              *time.Time        `json:"createTime,omitempty"`
+	CustomerUUID            string            `json:"customerUUID"`
+	IsSourceUniversePresent bool              `json:"isSourceUniversePresent"`
+	RestoreKeyspaceList     []RestoreKeyspace `json:"restoreKeyspaceList"`
+	RestoreSizeInBytes      int64             `json:"restoreSizeInBytes"`
+	RestoreUUID             string            `json:"restoreUUID"`
+	SourceUniverseName      string            `json:"sourceUniverseName"`
+	SourceUniverseUUID      string            `json:"sourceUniverseUUID"`
+	State                   string            `json:"state"`
+	TargetUniverseName      string            `json:"targetUniverseName"`
+	UniverseUUID            string            `json:"universeUUID"`
 	// Restore update time.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
@@ -439,7 +437,7 @@ func (o *RestoreResp) SetUpdateTime(v time.Time) {
 }
 
 func (o RestoreResp) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -508,5 +506,3 @@ func (v *NullableRestoreResp) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the LokiConfig type satisfies the MappedNullable interface at compile time
@@ -23,7 +21,7 @@ var _ MappedNullable = &LokiConfig{}
 type LokiConfig struct {
 	TelemetryProviderConfig
 	// Auth Type
-	AuthType string `json:"authType"`
+	AuthType  string                `json:"authType"`
 	BasicAuth *BasicAuthCredentials `json:"basicAuth,omitempty"`
 	// End Point
 	Endpoint string `json:"endpoint"`
@@ -165,7 +163,7 @@ func (o *LokiConfig) SetOrganizationID(v string) {
 }
 
 func (o LokiConfig) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,5 +226,3 @@ func (v *NullableLokiConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

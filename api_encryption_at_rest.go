@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // EncryptionAtRestAPIService EncryptionAtRestAPI service
 type EncryptionAtRestAPIService service
 
 type EncryptionAtRestAPICreateKMSConfigRequest struct {
-	ctx context.Context
-	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	ctx         context.Context
+	ApiService  *EncryptionAtRestAPIService
+	cUUID       string
 	kmsProvider string
-	kMSConfig *map[string]interface{}
-	request *interface{}
+	kMSConfig   *map[string]interface{}
+	request     *interface{}
 }
 
 // KMS config to be created
@@ -50,28 +49,29 @@ func (r EncryptionAtRestAPICreateKMSConfigRequest) Execute() (*YBPTask, *http.Re
 /*
 CreateKMSConfig Create a KMS configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param kmsProvider
- @return EncryptionAtRestAPICreateKMSConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param kmsProvider
+	@return EncryptionAtRestAPICreateKMSConfigRequest
 */
 func (a *EncryptionAtRestAPIService) CreateKMSConfig(ctx context.Context, cUUID string, kmsProvider string) EncryptionAtRestAPICreateKMSConfigRequest {
 	return EncryptionAtRestAPICreateKMSConfigRequest{
-		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ApiService:  a,
+		ctx:         ctx,
+		cUUID:       cUUID,
 		kmsProvider: kmsProvider,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *EncryptionAtRestAPIService) CreateKMSConfigExecute(r EncryptionAtRestAPICreateKMSConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.CreateKMSConfig")
@@ -164,11 +164,11 @@ func (a *EncryptionAtRestAPIService) CreateKMSConfigExecute(r EncryptionAtRestAP
 }
 
 type EncryptionAtRestAPIDeleteKMSConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r EncryptionAtRestAPIDeleteKMSConfigRequest) Request(request interface{}) EncryptionAtRestAPIDeleteKMSConfigRequest {
@@ -183,28 +183,29 @@ func (r EncryptionAtRestAPIDeleteKMSConfigRequest) Execute() (*YBPTask, *http.Re
 /*
 DeleteKMSConfig Delete a KMS configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return EncryptionAtRestAPIDeleteKMSConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return EncryptionAtRestAPIDeleteKMSConfigRequest
 */
 func (a *EncryptionAtRestAPIService) DeleteKMSConfig(ctx context.Context, cUUID string, configUUID string) EncryptionAtRestAPIDeleteKMSConfigRequest {
 	return EncryptionAtRestAPIDeleteKMSConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *EncryptionAtRestAPIService) DeleteKMSConfigExecute(r EncryptionAtRestAPIDeleteKMSConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.DeleteKMSConfig")
@@ -292,12 +293,12 @@ func (a *EncryptionAtRestAPIService) DeleteKMSConfigExecute(r EncryptionAtRestAP
 }
 
 type EncryptionAtRestAPIEditKMSConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
-	kMSConfig *map[string]interface{}
-	request *interface{}
+	kMSConfig  *map[string]interface{}
+	request    *interface{}
 }
 
 // KMS config to be edited
@@ -318,28 +319,29 @@ func (r EncryptionAtRestAPIEditKMSConfigRequest) Execute() (*YBPTask, *http.Resp
 /*
 EditKMSConfig Edit a KMS configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return EncryptionAtRestAPIEditKMSConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return EncryptionAtRestAPIEditKMSConfigRequest
 */
 func (a *EncryptionAtRestAPIService) EditKMSConfig(ctx context.Context, cUUID string, configUUID string) EncryptionAtRestAPIEditKMSConfigRequest {
 	return EncryptionAtRestAPIEditKMSConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *EncryptionAtRestAPIService) EditKMSConfigExecute(r EncryptionAtRestAPIEditKMSConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.EditKMSConfig")
@@ -432,10 +434,10 @@ func (a *EncryptionAtRestAPIService) EditKMSConfigExecute(r EncryptionAtRestAPIE
 }
 
 type EncryptionAtRestAPIGetCurrentKeyRefRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r EncryptionAtRestAPIGetCurrentKeyRefRequest) Execute() (map[string]map[string]interface{}, *http.Response, error) {
@@ -447,28 +449,29 @@ GetCurrentKeyRef Get a universe's key reference
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return EncryptionAtRestAPIGetCurrentKeyRefRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return EncryptionAtRestAPIGetCurrentKeyRefRequest
 */
 func (a *EncryptionAtRestAPIService) GetCurrentKeyRef(ctx context.Context, cUUID string, uniUUID string) EncryptionAtRestAPIGetCurrentKeyRefRequest {
 	return EncryptionAtRestAPIGetCurrentKeyRefRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *EncryptionAtRestAPIService) GetCurrentKeyRefExecute(r EncryptionAtRestAPIGetCurrentKeyRefRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.GetCurrentKeyRef")
@@ -553,9 +556,9 @@ func (a *EncryptionAtRestAPIService) GetCurrentKeyRefExecute(r EncryptionAtRestA
 }
 
 type EncryptionAtRestAPIGetKMSConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
 }
 
@@ -566,28 +569,29 @@ func (r EncryptionAtRestAPIGetKMSConfigRequest) Execute() (map[string]map[string
 /*
 GetKMSConfig Get details of a KMS configuration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return EncryptionAtRestAPIGetKMSConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return EncryptionAtRestAPIGetKMSConfigRequest
 */
 func (a *EncryptionAtRestAPIService) GetKMSConfig(ctx context.Context, cUUID string, configUUID string) EncryptionAtRestAPIGetKMSConfigRequest {
 	return EncryptionAtRestAPIGetKMSConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *EncryptionAtRestAPIService) GetKMSConfigExecute(r EncryptionAtRestAPIGetKMSConfigRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.GetKMSConfig")
@@ -672,10 +676,10 @@ func (a *EncryptionAtRestAPIService) GetKMSConfigExecute(r EncryptionAtRestAPIGe
 }
 
 type EncryptionAtRestAPIGetKeyRefHistoryRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r EncryptionAtRestAPIGetKeyRefHistoryRequest) Execute() ([]map[string]interface{}, *http.Response, error) {
@@ -687,28 +691,29 @@ GetKeyRefHistory Get a universe's key reference history
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return EncryptionAtRestAPIGetKeyRefHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return EncryptionAtRestAPIGetKeyRefHistoryRequest
 */
 func (a *EncryptionAtRestAPIService) GetKeyRefHistory(ctx context.Context, cUUID string, uniUUID string) EncryptionAtRestAPIGetKeyRefHistoryRequest {
 	return EncryptionAtRestAPIGetKeyRefHistoryRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []map[string]interface{}
+//
+//	@return []map[string]interface{}
 func (a *EncryptionAtRestAPIService) GetKeyRefHistoryExecute(r EncryptionAtRestAPIGetKeyRefHistoryRequest) ([]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.GetKeyRefHistory")
@@ -793,9 +798,9 @@ func (a *EncryptionAtRestAPIService) GetKeyRefHistoryExecute(r EncryptionAtRestA
 }
 
 type EncryptionAtRestAPIListKMSConfigsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	cUUID      string
 }
 
 func (r EncryptionAtRestAPIListKMSConfigsRequest) Execute() ([]map[string]interface{}, *http.Response, error) {
@@ -805,26 +810,27 @@ func (r EncryptionAtRestAPIListKMSConfigsRequest) Execute() ([]map[string]interf
 /*
 ListKMSConfigs List KMS configurations
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return EncryptionAtRestAPIListKMSConfigsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return EncryptionAtRestAPIListKMSConfigsRequest
 */
 func (a *EncryptionAtRestAPIService) ListKMSConfigs(ctx context.Context, cUUID string) EncryptionAtRestAPIListKMSConfigsRequest {
 	return EncryptionAtRestAPIListKMSConfigsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []map[string]interface{}
+//
+//	@return []map[string]interface{}
 func (a *EncryptionAtRestAPIService) ListKMSConfigsExecute(r EncryptionAtRestAPIListKMSConfigsRequest) ([]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.ListKMSConfigs")
@@ -908,11 +914,11 @@ func (a *EncryptionAtRestAPIService) ListKMSConfigsExecute(r EncryptionAtRestAPI
 }
 
 type EncryptionAtRestAPIRefreshKMSConfigRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
+	cUUID      string
 	configUUID string
-	request *interface{}
+	request    *interface{}
 }
 
 func (r EncryptionAtRestAPIRefreshKMSConfigRequest) Request(request interface{}) EncryptionAtRestAPIRefreshKMSConfigRequest {
@@ -929,28 +935,29 @@ RefreshKMSConfig Refresh KMS Config
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param configUUID
- @return EncryptionAtRestAPIRefreshKMSConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param configUUID
+	@return EncryptionAtRestAPIRefreshKMSConfigRequest
 */
 func (a *EncryptionAtRestAPIService) RefreshKMSConfig(ctx context.Context, cUUID string, configUUID string) EncryptionAtRestAPIRefreshKMSConfigRequest {
 	return EncryptionAtRestAPIRefreshKMSConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 		configUUID: configUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *EncryptionAtRestAPIService) RefreshKMSConfigExecute(r EncryptionAtRestAPIRefreshKMSConfigRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.RefreshKMSConfig")
@@ -1029,8 +1036,8 @@ func (a *EncryptionAtRestAPIService) RefreshKMSConfigExecute(r EncryptionAtRestA
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1048,11 +1055,11 @@ func (a *EncryptionAtRestAPIService) RefreshKMSConfigExecute(r EncryptionAtRestA
 }
 
 type EncryptionAtRestAPIRemoveKeyRefHistoryRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r EncryptionAtRestAPIRemoveKeyRefHistoryRequest) Request(request interface{}) EncryptionAtRestAPIRemoveKeyRefHistoryRequest {
@@ -1069,31 +1076,33 @@ RemoveKeyRefHistory This API removes a universe's key reference history - deprec
 
 <b style="color:#ff0000">Deprecated since YBA version 2.20.0.0.</b></p>Do not use.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return EncryptionAtRestAPIRemoveKeyRefHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return EncryptionAtRestAPIRemoveKeyRefHistoryRequest
 
 Deprecated
 */
 func (a *EncryptionAtRestAPIService) RemoveKeyRefHistory(ctx context.Context, cUUID string, uniUUID string) EncryptionAtRestAPIRemoveKeyRefHistoryRequest {
 	return EncryptionAtRestAPIRemoveKeyRefHistoryRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
+//
 // Deprecated
 func (a *EncryptionAtRestAPIService) RemoveKeyRefHistoryExecute(r EncryptionAtRestAPIRemoveKeyRefHistoryRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.RemoveKeyRefHistory")
@@ -1181,11 +1190,11 @@ func (a *EncryptionAtRestAPIService) RemoveKeyRefHistoryExecute(r EncryptionAtRe
 }
 
 type EncryptionAtRestAPIRetrieveKeyRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EncryptionAtRestAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r EncryptionAtRestAPIRetrieveKeyRequest) Request(request interface{}) EncryptionAtRestAPIRetrieveKeyRequest {
@@ -1202,28 +1211,29 @@ RetrieveKey Retrive a universe's KMS key
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return EncryptionAtRestAPIRetrieveKeyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return EncryptionAtRestAPIRetrieveKeyRequest
 */
 func (a *EncryptionAtRestAPIService) RetrieveKey(ctx context.Context, cUUID string, uniUUID string) EncryptionAtRestAPIRetrieveKeyRequest {
 	return EncryptionAtRestAPIRetrieveKeyRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]map[string]interface{}
+//
+//	@return map[string]map[string]interface{}
 func (a *EncryptionAtRestAPIService) RetrieveKeyExecute(r EncryptionAtRestAPIRetrieveKeyRequest) (map[string]map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]map[string]interface{}
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EncryptionAtRestAPIService.RetrieveKey")

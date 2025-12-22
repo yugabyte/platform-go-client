@@ -19,16 +19,15 @@ import (
 	"strings"
 )
 
-
 // PerformanceAdvisorAPIService PerformanceAdvisorAPI service
 type PerformanceAdvisorAPIService service
 
 type PerformanceAdvisorAPIDeleteRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
+	ctx                                     context.Context
+	ApiService                              *PerformanceAdvisorAPIService
+	cUUID                                   string
 	deletePerformanceRecommendationsRequest *PerformanceRecommendationFilter
-	request *interface{}
+	request                                 *interface{}
 }
 
 func (r PerformanceAdvisorAPIDeleteRequest) DeletePerformanceRecommendationsRequest(deletePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorAPIDeleteRequest {
@@ -50,26 +49,27 @@ Delete Delete performance recommendations
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PerformanceAdvisorAPIDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PerformanceAdvisorAPIDeleteRequest
 */
 func (a *PerformanceAdvisorAPIService) Delete(ctx context.Context, cUUID string) PerformanceAdvisorAPIDeleteRequest {
 	return PerformanceAdvisorAPIDeleteRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PerformanceAdvisorAPIService) DeleteExecute(r PerformanceAdvisorAPIDeleteRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.Delete")
@@ -161,10 +161,10 @@ func (a *PerformanceAdvisorAPIService) DeleteExecute(r PerformanceAdvisorAPIDele
 }
 
 type PerformanceAdvisorAPIGetRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PerformanceAdvisorAPIService
-	cUUID string
-	rUUID string
+	cUUID      string
+	rUUID      string
 }
 
 func (r PerformanceAdvisorAPIGetRequest) Execute() (*PerformanceRecommendation, *http.Response, error) {
@@ -176,28 +176,29 @@ Get Get performance recommendation details
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param rUUID
- @return PerformanceAdvisorAPIGetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param rUUID
+	@return PerformanceAdvisorAPIGetRequest
 */
 func (a *PerformanceAdvisorAPIService) Get(ctx context.Context, cUUID string, rUUID string) PerformanceAdvisorAPIGetRequest {
 	return PerformanceAdvisorAPIGetRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		rUUID: rUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
 	}
 }
 
 // Execute executes the request
-//  @return PerformanceRecommendation
+//
+//	@return PerformanceRecommendation
 func (a *PerformanceAdvisorAPIService) GetExecute(r PerformanceAdvisorAPIGetRequest) (*PerformanceRecommendation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PerformanceRecommendation
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PerformanceRecommendation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.Get")
@@ -282,10 +283,10 @@ func (a *PerformanceAdvisorAPIService) GetExecute(r PerformanceAdvisorAPIGetRequ
 }
 
 type PerformanceAdvisorAPIGetLatestRunRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PerformanceAdvisorAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r PerformanceAdvisorAPIGetLatestRunRequest) Execute() (*YBPSuccess, *http.Response, error) {
@@ -297,28 +298,29 @@ GetLatestRun Get last performance advisor run details
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PerformanceAdvisorAPIGetLatestRunRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PerformanceAdvisorAPIGetLatestRunRequest
 */
 func (a *PerformanceAdvisorAPIService) GetLatestRun(ctx context.Context, cUUID string, uniUUID string) PerformanceAdvisorAPIGetLatestRunRequest {
 	return PerformanceAdvisorAPIGetLatestRunRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PerformanceAdvisorAPIService) GetLatestRunExecute(r PerformanceAdvisorAPIGetLatestRunRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.GetLatestRun")
@@ -403,11 +405,11 @@ func (a *PerformanceAdvisorAPIService) GetLatestRunExecute(r PerformanceAdvisorA
 }
 
 type PerformanceAdvisorAPIGetSettingsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PerformanceAdvisorAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r PerformanceAdvisorAPIGetSettingsRequest) Request(request interface{}) PerformanceAdvisorAPIGetSettingsRequest {
@@ -424,28 +426,29 @@ GetSettings Get universe performance advisor settings
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PerformanceAdvisorAPIGetSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PerformanceAdvisorAPIGetSettingsRequest
 */
 func (a *PerformanceAdvisorAPIService) GetSettings(ctx context.Context, cUUID string, uniUUID string) PerformanceAdvisorAPIGetSettingsRequest {
 	return PerformanceAdvisorAPIGetSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return PerfAdvisorSettingsWithDefaults
+//
+//	@return PerfAdvisorSettingsWithDefaults
 func (a *PerformanceAdvisorAPIService) GetSettingsExecute(r PerformanceAdvisorAPIGetSettingsRequest) (*PerfAdvisorSettingsWithDefaults, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PerfAdvisorSettingsWithDefaults
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PerfAdvisorSettingsWithDefaults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.GetSettings")
@@ -533,11 +536,11 @@ func (a *PerformanceAdvisorAPIService) GetSettingsExecute(r PerformanceAdvisorAP
 }
 
 type PerformanceAdvisorAPIHideRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
+	ctx                                   context.Context
+	ApiService                            *PerformanceAdvisorAPIService
+	cUUID                                 string
 	hidePerformanceRecommendationsRequest *PerformanceRecommendationFilter
-	request *interface{}
+	request                               *interface{}
 }
 
 func (r PerformanceAdvisorAPIHideRequest) HidePerformanceRecommendationsRequest(hidePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorAPIHideRequest {
@@ -559,26 +562,27 @@ Hide Hide performance recommendations
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PerformanceAdvisorAPIHideRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PerformanceAdvisorAPIHideRequest
 */
 func (a *PerformanceAdvisorAPIService) Hide(ctx context.Context, cUUID string) PerformanceAdvisorAPIHideRequest {
 	return PerformanceAdvisorAPIHideRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PerformanceAdvisorAPIService) HideExecute(r PerformanceAdvisorAPIHideRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.Hide")
@@ -670,11 +674,11 @@ func (a *PerformanceAdvisorAPIService) HideExecute(r PerformanceAdvisorAPIHideRe
 }
 
 type PerformanceAdvisorAPIPageRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
+	ctx                                  context.Context
+	ApiService                           *PerformanceAdvisorAPIService
+	cUUID                                string
 	pagePerformanceRecommendationRequest *PerformanceRecommendationPagedQuery
-	request *interface{}
+	request                              *interface{}
 }
 
 func (r PerformanceAdvisorAPIPageRequest) PagePerformanceRecommendationRequest(pagePerformanceRecommendationRequest PerformanceRecommendationPagedQuery) PerformanceAdvisorAPIPageRequest {
@@ -696,26 +700,27 @@ Page List performance recommendations (paginated)
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PerformanceAdvisorAPIPageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PerformanceAdvisorAPIPageRequest
 */
 func (a *PerformanceAdvisorAPIService) Page(ctx context.Context, cUUID string) PerformanceAdvisorAPIPageRequest {
 	return PerformanceAdvisorAPIPageRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return PerformanceRecommendationPagedResponse
+//
+//	@return PerformanceRecommendationPagedResponse
 func (a *PerformanceAdvisorAPIService) PageExecute(r PerformanceAdvisorAPIPageRequest) (*PerformanceRecommendationPagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PerformanceRecommendationPagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PerformanceRecommendationPagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.Page")
@@ -807,11 +812,11 @@ func (a *PerformanceAdvisorAPIService) PageExecute(r PerformanceAdvisorAPIPageRe
 }
 
 type PerformanceAdvisorAPIPageAuditInfoRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
+	ctx                             context.Context
+	ApiService                      *PerformanceAdvisorAPIService
+	cUUID                           string
 	pageStateChangeAuditInfoRequest *StateChangeAuditInfoPagedQuery
-	request *interface{}
+	request                         *interface{}
 }
 
 func (r PerformanceAdvisorAPIPageAuditInfoRequest) PageStateChangeAuditInfoRequest(pageStateChangeAuditInfoRequest StateChangeAuditInfoPagedQuery) PerformanceAdvisorAPIPageAuditInfoRequest {
@@ -833,26 +838,27 @@ PageAuditInfo List performance recommendations state change audit events (pagina
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PerformanceAdvisorAPIPageAuditInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PerformanceAdvisorAPIPageAuditInfoRequest
 */
 func (a *PerformanceAdvisorAPIService) PageAuditInfo(ctx context.Context, cUUID string) PerformanceAdvisorAPIPageAuditInfoRequest {
 	return PerformanceAdvisorAPIPageAuditInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return StateChangeAuditInfoPagedResponse
+//
+//	@return StateChangeAuditInfoPagedResponse
 func (a *PerformanceAdvisorAPIService) PageAuditInfoExecute(r PerformanceAdvisorAPIPageAuditInfoRequest) (*StateChangeAuditInfoPagedResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *StateChangeAuditInfoPagedResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *StateChangeAuditInfoPagedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.PageAuditInfo")
@@ -944,11 +950,11 @@ func (a *PerformanceAdvisorAPIService) PageAuditInfoExecute(r PerformanceAdvisor
 }
 
 type PerformanceAdvisorAPIResolveRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
+	ctx                                      context.Context
+	ApiService                               *PerformanceAdvisorAPIService
+	cUUID                                    string
 	resolvePerformanceRecommendationsRequest *PerformanceRecommendationFilter
-	request *interface{}
+	request                                  *interface{}
 }
 
 func (r PerformanceAdvisorAPIResolveRequest) ResolvePerformanceRecommendationsRequest(resolvePerformanceRecommendationsRequest PerformanceRecommendationFilter) PerformanceAdvisorAPIResolveRequest {
@@ -970,26 +976,27 @@ Resolve Resolve performance recommendations
 
 YbaApi Internal.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return PerformanceAdvisorAPIResolveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return PerformanceAdvisorAPIResolveRequest
 */
 func (a *PerformanceAdvisorAPIService) Resolve(ctx context.Context, cUUID string) PerformanceAdvisorAPIResolveRequest {
 	return PerformanceAdvisorAPIResolveRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PerformanceAdvisorAPIService) ResolveExecute(r PerformanceAdvisorAPIResolveRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.Resolve")
@@ -1081,11 +1088,11 @@ func (a *PerformanceAdvisorAPIService) ResolveExecute(r PerformanceAdvisorAPIRes
 }
 
 type PerformanceAdvisorAPIRunPerfAdvisorRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *PerformanceAdvisorAPIService
-	cUUID string
-	uniUUID string
-	request *interface{}
+	cUUID      string
+	uniUUID    string
+	request    *interface{}
 }
 
 func (r PerformanceAdvisorAPIRunPerfAdvisorRequest) Request(request interface{}) PerformanceAdvisorAPIRunPerfAdvisorRequest {
@@ -1102,28 +1109,29 @@ RunPerfAdvisor Start performance advisor run for universe
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PerformanceAdvisorAPIRunPerfAdvisorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PerformanceAdvisorAPIRunPerfAdvisorRequest
 */
 func (a *PerformanceAdvisorAPIService) RunPerfAdvisor(ctx context.Context, cUUID string, uniUUID string) PerformanceAdvisorAPIRunPerfAdvisorRequest {
 	return PerformanceAdvisorAPIRunPerfAdvisorRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return PerfAdvisorManualRunStatus
+//
+//	@return PerfAdvisorManualRunStatus
 func (a *PerformanceAdvisorAPIService) RunPerfAdvisorExecute(r PerformanceAdvisorAPIRunPerfAdvisorRequest) (*PerfAdvisorManualRunStatus, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *PerfAdvisorManualRunStatus
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PerfAdvisorManualRunStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.RunPerfAdvisor")
@@ -1211,12 +1219,12 @@ func (a *PerformanceAdvisorAPIService) RunPerfAdvisorExecute(r PerformanceAdviso
 }
 
 type PerformanceAdvisorAPIUpdateSettingsRequest struct {
-	ctx context.Context
-	ApiService *PerformanceAdvisorAPIService
-	cUUID string
-	uniUUID string
+	ctx                               context.Context
+	ApiService                        *PerformanceAdvisorAPIService
+	cUUID                             string
+	uniUUID                           string
 	performanceAdvisorSettingsRequest *PerfAdvisorSettingsFormData
-	request *interface{}
+	request                           *interface{}
 }
 
 func (r PerformanceAdvisorAPIUpdateSettingsRequest) PerformanceAdvisorSettingsRequest(performanceAdvisorSettingsRequest PerfAdvisorSettingsFormData) PerformanceAdvisorAPIUpdateSettingsRequest {
@@ -1238,28 +1246,29 @@ UpdateSettings Update universe performance advisor settings
 
 WARNING: This is a preview API that could change.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return PerformanceAdvisorAPIUpdateSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return PerformanceAdvisorAPIUpdateSettingsRequest
 */
 func (a *PerformanceAdvisorAPIService) UpdateSettings(ctx context.Context, cUUID string, uniUUID string) PerformanceAdvisorAPIUpdateSettingsRequest {
 	return PerformanceAdvisorAPIUpdateSettingsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPSuccess
+//
+//	@return YBPSuccess
 func (a *PerformanceAdvisorAPIService) UpdateSettingsExecute(r PerformanceAdvisorAPIUpdateSettingsRequest) (*YBPSuccess, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPSuccess
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PerformanceAdvisorAPIService.UpdateSettings")

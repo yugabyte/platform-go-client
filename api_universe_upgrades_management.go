@@ -19,17 +19,16 @@ import (
 	"strings"
 )
 
-
 // UniverseUpgradesManagementAPIService UniverseUpgradesManagementAPI service
 type UniverseUpgradesManagementAPIService service
 
 type UniverseUpgradesManagementAPIFinalizeUpgradeRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                   context.Context
+	ApiService            *UniverseUpgradesManagementAPIService
+	cUUID                 string
+	uniUUID               string
 	finalizeUpgradeParams *FinalizeUpgradeParams
-	request *interface{}
+	request               *interface{}
 }
 
 // Finalize Upgrade Params
@@ -52,28 +51,29 @@ FinalizeUpgrade Finalize Upgrade
 
 WARNING: This is a preview API that could change. Queues a task to finalize upgrade in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIFinalizeUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIFinalizeUpgradeRequest
 */
 func (a *UniverseUpgradesManagementAPIService) FinalizeUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIFinalizeUpgradeRequest {
 	return UniverseUpgradesManagementAPIFinalizeUpgradeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) FinalizeUpgradeExecute(r UniverseUpgradesManagementAPIFinalizeUpgradeRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.FinalizeUpgrade")
@@ -166,12 +166,12 @@ func (a *UniverseUpgradesManagementAPIService) FinalizeUpgradeExecute(r Universe
 }
 
 type UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                          context.Context
+	ApiService                   *UniverseUpgradesManagementAPIService
+	cUUID                        string
+	uniUUID                      string
 	kubernetesToggleImmutableYbc *KubernetesToggleImmutableYbcParams
-	request *interface{}
+	request                      *interface{}
 }
 
 // Kubernetes Toggle Immutable Ybc Params
@@ -194,28 +194,29 @@ KubernetesToggleImmutableYbc Upgrade Kubernetes universe to toggle immutable YBC
 
 WARNING: This is a preview API that could change. Queues a task to toggle immutable YBC on Kubernetes universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest
 */
 func (a *UniverseUpgradesManagementAPIService) KubernetesToggleImmutableYbc(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest {
 	return UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) KubernetesToggleImmutableYbcExecute(r UniverseUpgradesManagementAPIKubernetesToggleImmutableYbcRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.KubernetesToggleImmutableYbc")
@@ -308,12 +309,12 @@ func (a *UniverseUpgradesManagementAPIService) KubernetesToggleImmutableYbcExecu
 }
 
 type UniverseUpgradesManagementAPIModifyAuditLoggingRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                context.Context
+	ApiService         *UniverseUpgradesManagementAPIService
+	cUUID              string
+	uniUUID            string
 	auditLoggingConfig *AuditLogConfigParams
-	request *interface{}
+	request            *interface{}
 }
 
 // Audit Logging Configuration
@@ -336,28 +337,29 @@ ModifyAuditLogging Modify Audit Logging Configuration
 
 WARNING: This is a preview API that could change. Modifies the audit logging configuration for a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIModifyAuditLoggingRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIModifyAuditLoggingRequest
 */
 func (a *UniverseUpgradesManagementAPIService) ModifyAuditLogging(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIModifyAuditLoggingRequest {
 	return UniverseUpgradesManagementAPIModifyAuditLoggingRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) ModifyAuditLoggingExecute(r UniverseUpgradesManagementAPIModifyAuditLoggingRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.ModifyAuditLogging")
@@ -450,10 +452,10 @@ func (a *UniverseUpgradesManagementAPIService) ModifyAuditLoggingExecute(r Unive
 }
 
 type UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	cUUID      string
+	uniUUID    string
 }
 
 func (r UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest) Execute() (*FinalizeUpgradeInfoResponse, *http.Response, error) {
@@ -465,28 +467,29 @@ PreFinalizeSoftwareUpgradeInfo Finalize Software Upgrade info
 
 WARNING: This is a preview API that could change. Provides pre-finalize software upgrade info.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest
 */
 func (a *UniverseUpgradesManagementAPIService) PreFinalizeSoftwareUpgradeInfo(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest {
 	return UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return FinalizeUpgradeInfoResponse
+//
+//	@return FinalizeUpgradeInfoResponse
 func (a *UniverseUpgradesManagementAPIService) PreFinalizeSoftwareUpgradeInfoExecute(r UniverseUpgradesManagementAPIPreFinalizeSoftwareUpgradeInfoRequest) (*FinalizeUpgradeInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FinalizeUpgradeInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FinalizeUpgradeInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.PreFinalizeSoftwareUpgradeInfo")
@@ -571,12 +574,12 @@ func (a *UniverseUpgradesManagementAPIService) PreFinalizeSoftwareUpgradeInfoExe
 }
 
 type UniverseUpgradesManagementAPIRebootUniverseRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx               context.Context
+	ApiService        *UniverseUpgradesManagementAPIService
+	cUUID             string
+	uniUUID           string
 	upgradeTaskParams *UpgradeTaskParams
-	request *interface{}
+	request           *interface{}
 }
 
 // Upgrade Task Params
@@ -599,28 +602,29 @@ RebootUniverse Reboot universe
 
 Queues a task to perform a rolling reboot in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIRebootUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIRebootUniverseRequest
 */
 func (a *UniverseUpgradesManagementAPIService) RebootUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIRebootUniverseRequest {
 	return UniverseUpgradesManagementAPIRebootUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) RebootUniverseExecute(r UniverseUpgradesManagementAPIRebootUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.RebootUniverse")
@@ -713,12 +717,12 @@ func (a *UniverseUpgradesManagementAPIService) RebootUniverseExecute(r UniverseU
 }
 
 type UniverseUpgradesManagementAPIResizeNodeRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx              context.Context
+	ApiService       *UniverseUpgradesManagementAPIService
+	cUUID            string
+	uniUUID          string
 	resizeNodeParams *ResizeNodeParams
-	request *interface{}
+	request          *interface{}
 }
 
 // Resize Node Params
@@ -741,28 +745,29 @@ ResizeNode Resize Node
 
 Queues a task to perform node resize and rolling restart in a universe.<p>This API can be used to change the deviceInfo.volumeSize, masterDeviceInfo.volumeSize,instanceType, masterInstanceType of all the nodes of a Universe simultaneously without moving data from old nodes to new nodes. Refer: https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/edit-universe/#smart-resize
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIResizeNodeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIResizeNodeRequest
 */
 func (a *UniverseUpgradesManagementAPIService) ResizeNode(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIResizeNodeRequest {
 	return UniverseUpgradesManagementAPIResizeNodeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) ResizeNodeExecute(r UniverseUpgradesManagementAPIResizeNodeRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.ResizeNode")
@@ -855,12 +860,12 @@ func (a *UniverseUpgradesManagementAPIService) ResizeNodeExecute(r UniverseUpgra
 }
 
 type UniverseUpgradesManagementAPIRestartUniverseRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx               context.Context
+	ApiService        *UniverseUpgradesManagementAPIService
+	cUUID             string
+	uniUUID           string
 	restartTaskParams *RestartTaskParams
-	request *interface{}
+	request           *interface{}
 }
 
 // Restart Task Params
@@ -883,28 +888,29 @@ RestartUniverse Restart Universe
 
 Queues a task to perform a rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIRestartUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIRestartUniverseRequest
 */
 func (a *UniverseUpgradesManagementAPIService) RestartUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIRestartUniverseRequest {
 	return UniverseUpgradesManagementAPIRestartUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) RestartUniverseExecute(r UniverseUpgradesManagementAPIRestartUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.RestartUniverse")
@@ -997,12 +1003,12 @@ func (a *UniverseUpgradesManagementAPIService) RestartUniverseExecute(r Universe
 }
 
 type UniverseUpgradesManagementAPIRollbackUpgradeRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                   context.Context
+	ApiService            *UniverseUpgradesManagementAPIService
+	cUUID                 string
+	uniUUID               string
 	rollbackUpgradeParams *RollbackUpgradeParams
-	request *interface{}
+	request               *interface{}
 }
 
 // RollBack Upgrade Params
@@ -1025,28 +1031,29 @@ RollbackUpgrade Rollback Upgrade
 
 WARNING: This is a preview API that could change. Queues a task to rollback upgrade in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIRollbackUpgradeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIRollbackUpgradeRequest
 */
 func (a *UniverseUpgradesManagementAPIService) RollbackUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIRollbackUpgradeRequest {
 	return UniverseUpgradesManagementAPIRollbackUpgradeRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) RollbackUpgradeExecute(r UniverseUpgradesManagementAPIRollbackUpgradeRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.RollbackUpgrade")
@@ -1139,12 +1146,12 @@ func (a *UniverseUpgradesManagementAPIService) RollbackUpgradeExecute(r Universe
 }
 
 type UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                        context.Context
+	ApiService                 *UniverseUpgradesManagementAPIService
+	cUUID                      string
+	uniUUID                    string
 	softwareUpgradeInfoRequest *SoftwareUpgradeInfoRequest
-	request *interface{}
+	request                    *interface{}
 }
 
 // Software Upgrade Info Request
@@ -1167,28 +1174,29 @@ SoftwareUpgradePreCheck Software Upgrade universe pre-check
 
 WARNING: This is a preview API that could change. Performs pre-checks and provides pre-upgrade info.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest
 */
 func (a *UniverseUpgradesManagementAPIService) SoftwareUpgradePreCheck(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest {
 	return UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return SoftwareUpgradeInfoResponse
+//
+//	@return SoftwareUpgradeInfoResponse
 func (a *UniverseUpgradesManagementAPIService) SoftwareUpgradePreCheckExecute(r UniverseUpgradesManagementAPISoftwareUpgradePreCheckRequest) (*SoftwareUpgradeInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SoftwareUpgradeInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SoftwareUpgradeInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.SoftwareUpgradePreCheck")
@@ -1281,12 +1289,12 @@ func (a *UniverseUpgradesManagementAPIService) SoftwareUpgradePreCheckExecute(r 
 }
 
 type UniverseUpgradesManagementAPIUpdateProxyConfigRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                     context.Context
+	ApiService              *UniverseUpgradesManagementAPIService
+	cUUID                   string
+	uniUUID                 string
 	updateProxyConfigParams *ProxyConfigUpdateParams
-	request *interface{}
+	request                 *interface{}
 }
 
 // Update Proxy Config Params
@@ -1309,28 +1317,29 @@ UpdateProxyConfig Update Proxy Config
 
 WARNING: This is a preview API that could change. Queues a task to perform Proxy config update in the Universe details.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpdateProxyConfigRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpdateProxyConfigRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpdateProxyConfig(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpdateProxyConfigRequest {
 	return UniverseUpgradesManagementAPIUpdateProxyConfigRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpdateProxyConfigExecute(r UniverseUpgradesManagementAPIUpdateProxyConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpdateProxyConfig")
@@ -1423,12 +1432,12 @@ func (a *UniverseUpgradesManagementAPIService) UpdateProxyConfigExecute(r Univer
 }
 
 type UniverseUpgradesManagementAPIUpgradeCertsRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx               context.Context
+	ApiService        *UniverseUpgradesManagementAPIService
+	cUUID             string
+	uniUUID           string
 	certsRotateParams *CertsRotateParams
-	request *interface{}
+	request           *interface{}
 }
 
 // Certs Rotate Params
@@ -1451,28 +1460,29 @@ UpgradeCerts Upgrade Certs
 
 Queues a task to perform certificate rotation and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeCertsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeCertsRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeCerts(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeCertsRequest {
 	return UniverseUpgradesManagementAPIUpgradeCertsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeCertsExecute(r UniverseUpgradesManagementAPIUpgradeCertsRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeCerts")
@@ -1565,12 +1575,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeCertsExecute(r UniverseUpg
 }
 
 type UniverseUpgradesManagementAPIUpgradeDBVersionRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                   context.Context
+	ApiService            *UniverseUpgradesManagementAPIService
+	cUUID                 string
+	uniUUID               string
 	softwareUpgradeParams *SoftwareUpgradeParams
-	request *interface{}
+	request               *interface{}
 }
 
 // Software Upgrade Params
@@ -1591,30 +1601,31 @@ func (r UniverseUpgradesManagementAPIUpgradeDBVersionRequest) Execute() (*YBPTas
 /*
 UpgradeDBVersion Upgrade DB version
 
-WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize. 
+WARNING: This is a preview API that could change. This is a two step DB software version upgrade, Upgrade DB version and then finalize software which would be same as of upgrade software but additionally support rollback before upgrade finalize.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeDBVersionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeDBVersionRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeDBVersion(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeDBVersionRequest {
 	return UniverseUpgradesManagementAPIUpgradeDBVersionRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeDBVersionExecute(r UniverseUpgradesManagementAPIUpgradeDBVersionRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeDBVersion")
@@ -1707,12 +1718,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeDBVersionExecute(r Univers
 }
 
 type UniverseUpgradesManagementAPIUpgradeGFlagsRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                 context.Context
+	ApiService          *UniverseUpgradesManagementAPIService
+	cUUID               string
+	uniUUID             string
 	gflagsUpgradeParams *GFlagsUpgradeParams
-	request *interface{}
+	request             *interface{}
 }
 
 // GFlags Upgrade Params
@@ -1735,28 +1746,29 @@ UpgradeGFlags Upgrade GFlags
 
 Queues a task to perform gflags upgrade and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeGFlagsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeGFlagsRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeGFlags(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeGFlagsRequest {
 	return UniverseUpgradesManagementAPIUpgradeGFlagsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeGFlagsExecute(r UniverseUpgradesManagementAPIUpgradeGFlagsRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeGFlags")
@@ -1849,12 +1861,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeGFlagsExecute(r UniverseUp
 }
 
 type UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                              context.Context
+	ApiService                       *UniverseUpgradesManagementAPIService
+	cUUID                            string
+	uniUUID                          string
 	kubernetesOverridesUpgradeParams *KubernetesOverridesUpgradeParams
-	request *interface{}
+	request                          *interface{}
 }
 
 // Kubernetes Override Upgrade Params
@@ -1877,28 +1889,29 @@ UpgradeKubernetesOverrides Upgrade KubernetesOverrides
 
 Queues a task to perform Kubernetesoverrides upgrade for a kubernetes universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeKubernetesOverrides(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest {
 	return UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeKubernetesOverridesExecute(r UniverseUpgradesManagementAPIUpgradeKubernetesOverridesRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeKubernetesOverrides")
@@ -1991,12 +2004,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeKubernetesOverridesExecute
 }
 
 type UniverseUpgradesManagementAPIUpgradeSoftwareRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                   context.Context
+	ApiService            *UniverseUpgradesManagementAPIService
+	cUUID                 string
+	uniUUID               string
 	softwareUpgradeParams *SoftwareUpgradeParams
-	request *interface{}
+	request               *interface{}
 }
 
 // Software Upgrade Params
@@ -2019,28 +2032,29 @@ UpgradeSoftware Upgrade Software
 
 Queues a task to perform software upgrade and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeSoftwareRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeSoftwareRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeSoftware(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeSoftwareRequest {
 	return UniverseUpgradesManagementAPIUpgradeSoftwareRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeSoftwareExecute(r UniverseUpgradesManagementAPIUpgradeSoftwareRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeSoftware")
@@ -2133,12 +2147,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeSoftwareExecute(r Universe
 }
 
 type UniverseUpgradesManagementAPIUpgradeSystemdRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                  context.Context
+	ApiService           *UniverseUpgradesManagementAPIService
+	cUUID                string
+	uniUUID              string
 	systemdUpgradeParams *SystemdUpgradeParams
-	request *interface{}
+	request              *interface{}
 }
 
 // Systemd Upgrade Params
@@ -2161,28 +2175,29 @@ UpgradeSystemd Upgrade Systemd
 
 Queues a task to perform systemd upgrade and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeSystemdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeSystemdRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeSystemd(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeSystemdRequest {
 	return UniverseUpgradesManagementAPIUpgradeSystemdRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeSystemdExecute(r UniverseUpgradesManagementAPIUpgradeSystemdRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeSystemd")
@@ -2275,12 +2290,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeSystemdExecute(r UniverseU
 }
 
 type UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                             context.Context
+	ApiService                      *UniverseUpgradesManagementAPIService
+	cUUID                           string
+	uniUUID                         string
 	thirdpartySoftwareUpgradeParams *ThirdpartySoftwareUpgradeParams
-	request *interface{}
+	request                         *interface{}
 }
 
 // Thirdparty Software Upgrade Params
@@ -2303,28 +2318,29 @@ UpgradeThirdpartySoftware Upgrade third-party software
 
 Queues a task to perform upgrade third-party software in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeThirdpartySoftware(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest {
 	return UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeThirdpartySoftwareExecute(r UniverseUpgradesManagementAPIUpgradeThirdpartySoftwareRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeThirdpartySoftware")
@@ -2417,12 +2433,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeThirdpartySoftwareExecute(
 }
 
 type UniverseUpgradesManagementAPIUpgradeTlsRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx             context.Context
+	ApiService      *UniverseUpgradesManagementAPIService
+	cUUID           string
+	uniUUID         string
 	tlsToggleParams *TlsToggleParams
-	request *interface{}
+	request         *interface{}
 }
 
 // TLS Toggle Params
@@ -2445,28 +2461,29 @@ UpgradeTls Upgrade TLS
 
 Queues a task to perform TLS ugprade and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeTlsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeTlsRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeTls(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeTlsRequest {
 	return UniverseUpgradesManagementAPIUpgradeTlsRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeTlsExecute(r UniverseUpgradesManagementAPIUpgradeTlsRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeTls")
@@ -2559,12 +2576,12 @@ func (a *UniverseUpgradesManagementAPIService) UpgradeTlsExecute(r UniverseUpgra
 }
 
 type UniverseUpgradesManagementAPIUpgradeVMImageRequest struct {
-	ctx context.Context
-	ApiService *UniverseUpgradesManagementAPIService
-	cUUID string
-	uniUUID string
+	ctx                  context.Context
+	ApiService           *UniverseUpgradesManagementAPIService
+	cUUID                string
+	uniUUID              string
 	vmimageUpgradeParams *VMImageUpgradeParams
-	request *interface{}
+	request              *interface{}
 }
 
 // VM Image Upgrade Params
@@ -2587,28 +2604,29 @@ UpgradeVMImage Upgrade VM Image
 
 Queues a task to perform VM Image upgrade and rolling restart in a universe.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @param uniUUID
- @return UniverseUpgradesManagementAPIUpgradeVMImageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param uniUUID
+	@return UniverseUpgradesManagementAPIUpgradeVMImageRequest
 */
 func (a *UniverseUpgradesManagementAPIService) UpgradeVMImage(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIUpgradeVMImageRequest {
 	return UniverseUpgradesManagementAPIUpgradeVMImageRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
-		uniUUID: uniUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
 	}
 }
 
 // Execute executes the request
-//  @return YBPTask
+//
+//	@return YBPTask
 func (a *UniverseUpgradesManagementAPIService) UpgradeVMImageExecute(r UniverseUpgradesManagementAPIUpgradeVMImageRequest) (*YBPTask, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *YBPTask
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseUpgradesManagementAPIService.UpgradeVMImage")

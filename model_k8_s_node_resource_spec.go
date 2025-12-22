@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the K8SNodeResourceSpec type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &K8SNodeResourceSpec{}
 // K8SNodeResourceSpec struct for K8SNodeResourceSpec
 type K8SNodeResourceSpec struct {
 	CpuCoreCount float64 `json:"cpuCoreCount"`
-	MemoryGib float64 `json:"memoryGib"`
+	MemoryGib    float64 `json:"memoryGib"`
 }
 
 type _K8SNodeResourceSpec K8SNodeResourceSpec
@@ -95,7 +93,7 @@ func (o *K8SNodeResourceSpec) SetMemoryGib(v float64) {
 }
 
 func (o K8SNodeResourceSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableK8SNodeResourceSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

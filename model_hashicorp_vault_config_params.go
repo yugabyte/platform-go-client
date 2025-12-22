@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the HashicorpVaultConfigParams type satisfies the MappedNullable interface at compile time
@@ -21,16 +19,16 @@ var _ MappedNullable = &HashicorpVaultConfigParams{}
 
 // HashicorpVaultConfigParams struct for HashicorpVaultConfigParams
 type HashicorpVaultConfigParams struct {
-	Engine string `json:"engine"`
-	MountPath string `json:"mountPath"`
-	Role string `json:"role"`
-	Ttl *int64 `json:"ttl,omitempty"`
-	TtlExpiry *int64 `json:"ttlExpiry,omitempty"`
-	VaultAddr string `json:"vaultAddr"`
+	Engine             string  `json:"engine"`
+	MountPath          string  `json:"mountPath"`
+	Role               string  `json:"role"`
+	Ttl                *int64  `json:"ttl,omitempty"`
+	TtlExpiry          *int64  `json:"ttlExpiry,omitempty"`
+	VaultAddr          string  `json:"vaultAddr"`
 	VaultAuthNamespace *string `json:"vaultAuthNamespace,omitempty"`
-	VaultRoleID *string `json:"vaultRoleID,omitempty"`
-	VaultSecretID *string `json:"vaultSecretID,omitempty"`
-	VaultToken *string `json:"vaultToken,omitempty"`
+	VaultRoleID        *string `json:"vaultRoleID,omitempty"`
+	VaultSecretID      *string `json:"vaultSecretID,omitempty"`
+	VaultToken         *string `json:"vaultToken,omitempty"`
 }
 
 type _HashicorpVaultConfigParams HashicorpVaultConfigParams
@@ -345,7 +343,7 @@ func (o *HashicorpVaultConfigParams) SetVaultToken(v string) {
 }
 
 func (o HashicorpVaultConfigParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -414,5 +412,3 @@ func (v *NullableHashicorpVaultConfigParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

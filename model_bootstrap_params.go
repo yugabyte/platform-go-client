@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the BootstrapParams type satisfies the MappedNullable interface at compile time
@@ -22,7 +20,7 @@ var _ MappedNullable = &BootstrapParams{}
 // BootstrapParams Bootstrap parameters
 type BootstrapParams struct {
 	// WARNING: This is a preview API that could change. Allow backup on whole database when only set of tables require bootstrap
-	AllowBootstrap *bool `json:"allowBootstrap,omitempty"`
+	AllowBootstrap      *bool                 `json:"allowBootstrap,omitempty"`
 	BackupRequestParams BootstrapBackupParams `json:"backupRequestParams"`
 	// Source Universe table IDs that need bootstrapping; must be a subset of tables in the main body
 	Tables []string `json:"tables,omitempty"`
@@ -137,7 +135,7 @@ func (o *BootstrapParams) SetTables(v []string) {
 }
 
 func (o BootstrapParams) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -191,5 +189,3 @@ func (v *NullableBootstrapParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

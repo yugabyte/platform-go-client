@@ -19,16 +19,16 @@ var _ MappedNullable = &GCPCloudInfo{}
 
 // GCPCloudInfo struct for GCPCloudInfo
 type GCPCloudInfo struct {
-	DestVpcId *string `json:"destVpcId,omitempty"`
-	GceApplicationCredentials *string `json:"gceApplicationCredentials,omitempty"`
+	DestVpcId                     *string `json:"destVpcId,omitempty"`
+	GceApplicationCredentials     *string `json:"gceApplicationCredentials,omitempty"`
 	GceApplicationCredentialsPath *string `json:"gceApplicationCredentialsPath,omitempty"`
-	GceProject *string `json:"gceProject,omitempty"`
-	HostVpcId *string `json:"hostVpcId,omitempty"`
-	SharedVPCProject *string `json:"sharedVPCProject,omitempty"`
-	UseHostCredentials *bool `json:"useHostCredentials,omitempty"`
-	UseHostVPC *bool `json:"useHostVPC,omitempty"`
+	GceProject                    *string `json:"gceProject,omitempty"`
+	HostVpcId                     *string `json:"hostVpcId,omitempty"`
+	SharedVPCProject              *string `json:"sharedVPCProject,omitempty"`
+	UseHostCredentials            *bool   `json:"useHostCredentials,omitempty"`
+	UseHostVPC                    *bool   `json:"useHostVPC,omitempty"`
 	// New/Existing VPC for provider creation
-	VpcType *string `json:"vpcType,omitempty"`
+	VpcType        *string `json:"vpcType,omitempty"`
 	YbFirewallTags *string `json:"ybFirewallTags,omitempty"`
 }
 
@@ -370,7 +370,7 @@ func (o *GCPCloudInfo) SetYbFirewallTags(v string) {
 }
 
 func (o GCPCloudInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -447,5 +447,3 @@ func (v *NullableGCPCloudInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

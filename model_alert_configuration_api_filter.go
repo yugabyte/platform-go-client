@@ -21,15 +21,15 @@ var _ MappedNullable = &AlertConfigurationApiFilter{}
 type AlertConfigurationApiFilter struct {
 	// Whether the alert configuration is active.
 	Active *bool `json:"active,omitempty"`
-	// The destination type of the alert configuration. 
+	// The destination type of the alert configuration.
 	DestinationType *string `json:"destinationType,omitempty"`
-	// The destination uuid of the alert configuration. 
+	// The destination uuid of the alert configuration.
 	DestinationUuid *string `json:"destinationUuid,omitempty"`
 	// The name of the alert configuration.
 	Name *string `json:"name,omitempty"`
 	// The severity of the alert configuration.
-	Severity *string `json:"severity,omitempty"`
-	Target *AlertConfigurationTarget `json:"target,omitempty"`
+	Severity *string                   `json:"severity,omitempty"`
+	Target   *AlertConfigurationTarget `json:"target,omitempty"`
 	// The target type of the alert configuration.
 	TargetType *string `json:"targetType,omitempty"`
 	// The template of the alert configuration.
@@ -344,7 +344,7 @@ func (o *AlertConfigurationApiFilter) SetUuids(v []string) {
 }
 
 func (o AlertConfigurationApiFilter) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -418,5 +418,3 @@ func (v *NullableAlertConfigurationApiFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

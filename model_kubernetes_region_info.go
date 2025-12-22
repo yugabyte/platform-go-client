@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the KubernetesRegionInfo type satisfies the MappedNullable interface at compile time
@@ -24,28 +22,28 @@ type KubernetesRegionInfo struct {
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
 	CertManagerClusterIssuer *string `json:"certManagerClusterIssuer,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2024.2.3.0.</b>. Use certManagerIssuerKind and certManagerIssuerName instead
-	CertManagerIssuer *string `json:"certManagerIssuer,omitempty"`
-	CertManagerIssuerGroup *string `json:"certManagerIssuerGroup,omitempty"`
-	CertManagerIssuerKind *string `json:"certManagerIssuerKind,omitempty"`
-	CertManagerIssuerName *string `json:"certManagerIssuerName,omitempty"`
-	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
-	KubeConfig *string `json:"kubeConfig,omitempty"`
-	KubeConfigContent *string `json:"kubeConfigContent,omitempty"`
-	KubeConfigName *string `json:"kubeConfigName,omitempty"`
-	KubeDomain *string `json:"kubeDomain,omitempty"`
-	KubeNamespace *string `json:"kubeNamespace,omitempty"`
-	KubePodAddressTemplate *string `json:"kubePodAddressTemplate,omitempty"`
-	KubernetesImagePullSecretName *string `json:"kubernetesImagePullSecretName,omitempty"`
-	KubernetesImageRegistry *string `json:"kubernetesImageRegistry,omitempty"`
-	KubernetesOperatorControlled bool `json:"kubernetesOperatorControlled"`
-	KubernetesProvider *string `json:"kubernetesProvider,omitempty"`
-	KubernetesPullSecret *string `json:"kubernetesPullSecret,omitempty"`
-	KubernetesPullSecretContent *string `json:"kubernetesPullSecretContent,omitempty"`
-	KubernetesPullSecretName *string `json:"kubernetesPullSecretName,omitempty"`
+	CertManagerIssuer              *string `json:"certManagerIssuer,omitempty"`
+	CertManagerIssuerGroup         *string `json:"certManagerIssuerGroup,omitempty"`
+	CertManagerIssuerKind          *string `json:"certManagerIssuerKind,omitempty"`
+	CertManagerIssuerName          *string `json:"certManagerIssuerName,omitempty"`
+	IsKubernetesOperatorControlled *bool   `json:"isKubernetesOperatorControlled,omitempty"`
+	KubeConfig                     *string `json:"kubeConfig,omitempty"`
+	KubeConfigContent              *string `json:"kubeConfigContent,omitempty"`
+	KubeConfigName                 *string `json:"kubeConfigName,omitempty"`
+	KubeDomain                     *string `json:"kubeDomain,omitempty"`
+	KubeNamespace                  *string `json:"kubeNamespace,omitempty"`
+	KubePodAddressTemplate         *string `json:"kubePodAddressTemplate,omitempty"`
+	KubernetesImagePullSecretName  *string `json:"kubernetesImagePullSecretName,omitempty"`
+	KubernetesImageRegistry        *string `json:"kubernetesImageRegistry,omitempty"`
+	KubernetesOperatorControlled   bool    `json:"kubernetesOperatorControlled"`
+	KubernetesProvider             *string `json:"kubernetesProvider,omitempty"`
+	KubernetesPullSecret           *string `json:"kubernetesPullSecret,omitempty"`
+	KubernetesPullSecretContent    *string `json:"kubernetesPullSecretContent,omitempty"`
+	KubernetesPullSecretName       *string `json:"kubernetesPullSecretName,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.17.3.0.</b> kubernetes service account is not needed.
 	KubernetesServiceAccount *string `json:"kubernetesServiceAccount,omitempty"`
-	KubernetesStorageClass *string `json:"kubernetesStorageClass,omitempty"`
-	Overrides *string `json:"overrides,omitempty"`
+	KubernetesStorageClass   *string `json:"kubernetesStorageClass,omitempty"`
+	Overrides                *string `json:"overrides,omitempty"`
 }
 
 type _KubernetesRegionInfo KubernetesRegionInfo
@@ -765,7 +763,7 @@ func (o *KubernetesRegionInfo) SetOverrides(v string) {
 }
 
 func (o KubernetesRegionInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -876,5 +874,3 @@ func (v *NullableKubernetesRegionInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

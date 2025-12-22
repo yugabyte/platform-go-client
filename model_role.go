@@ -27,7 +27,7 @@ type Role struct {
 	// Role description
 	Description *string `json:"description,omitempty"`
 	// Role name
-	Name *string `json:"name,omitempty"`
+	Name              *string            `json:"name,omitempty"`
 	PermissionDetails *PermissionDetails `json:"permissionDetails,omitempty"`
 	// Type of the role
 	RoleType *string `json:"roleType,omitempty"`
@@ -311,7 +311,7 @@ func (o *Role) SetUpdatedOn(v time.Time) {
 }
 
 func (o Role) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -382,5 +382,3 @@ func (v *NullableRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

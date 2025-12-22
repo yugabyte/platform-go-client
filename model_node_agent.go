@@ -22,13 +22,13 @@ var _ MappedNullable = &NodeAgent{}
 type NodeAgent struct {
 	// Node agent host machine arch
 	ArchType *string `json:"archType,omitempty"`
-	Config *Config `json:"config,omitempty"`
+	Config   *Config `json:"config,omitempty"`
 	// Customer UUID
 	CustomerUuid *string `json:"customerUuid,omitempty"`
 	// Node agent installation directory
 	Home *string `json:"home,omitempty"`
 	// Node agent server IP
-	Ip *string `json:"ip,omitempty"`
+	Ip        *string   `json:"ip,omitempty"`
 	LastError *YBAError `json:"lastError,omitempty"`
 	// Node agent name
 	Name *string `json:"name,omitempty"`
@@ -480,7 +480,7 @@ func (o *NodeAgent) SetVersion(v string) {
 }
 
 func (o NodeAgent) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -566,5 +566,3 @@ func (v *NullableNodeAgent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

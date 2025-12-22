@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RoleBinding type satisfies the MappedNullable interface at compile time
@@ -23,16 +21,16 @@ var _ MappedNullable = &RoleBinding{}
 // RoleBinding struct for RoleBinding
 type RoleBinding struct {
 	// RoleBinding create time
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	GroupInfo *GroupMappingInfo `json:"groupInfo,omitempty"`
-	Principal Principal `json:"principal"`
-	ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
-	Role *Role `json:"role,omitempty"`
+	CreateTime    *time.Time        `json:"createTime,omitempty"`
+	GroupInfo     *GroupMappingInfo `json:"groupInfo,omitempty"`
+	Principal     Principal         `json:"principal"`
+	ResourceGroup *ResourceGroup    `json:"resourceGroup,omitempty"`
+	Role          *Role             `json:"role,omitempty"`
 	// Role binding type
 	Type *string `json:"type,omitempty"`
 	// RoleBinding last updated time
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	User *Users `json:"user,omitempty"`
+	User       *Users     `json:"user,omitempty"`
 	// UUID
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -338,7 +336,7 @@ func (o *RoleBinding) SetUuid(v string) {
 }
 
 func (o RoleBinding) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -410,5 +408,3 @@ func (v *NullableRoleBinding) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

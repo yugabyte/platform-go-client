@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the RestoreKeyspace type satisfies the MappedNullable interface at compile time
@@ -410,7 +408,7 @@ func (o *RestoreKeyspace) SetUuid(v string) {
 }
 
 func (o RestoreKeyspace) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -488,5 +486,3 @@ func (v *NullableRestoreKeyspace) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

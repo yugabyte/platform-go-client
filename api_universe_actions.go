@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // UniverseActionsAPIService UniverseActionsAPI service
 type UniverseActionsAPIService service
 
 type UniverseActionsAPIImportUniverseRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UniverseActionsAPIService
-	cUUID string
-	request *interface{}
+	cUUID      string
+	request    *interface{}
 }
 
 func (r UniverseActionsAPIImportUniverseRequest) Request(request interface{}) UniverseActionsAPIImportUniverseRequest {
@@ -44,29 +43,31 @@ ImportUniverse Import a universe - deprecated
 
 <b style="color:#ff0000">Deprecated since YBA version 2.19.3.0.</b></p>Do not use, this will be removed soon.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID
- @return UniverseActionsAPIImportUniverseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@return UniverseActionsAPIImportUniverseRequest
 
 Deprecated
 */
 func (a *UniverseActionsAPIService) ImportUniverse(ctx context.Context, cUUID string) UniverseActionsAPIImportUniverseRequest {
 	return UniverseActionsAPIImportUniverseRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return ImportUniverseFormData
+//
+//	@return ImportUniverseFormData
+//
 // Deprecated
 func (a *UniverseActionsAPIService) ImportUniverseExecute(r UniverseActionsAPIImportUniverseRequest) (*ImportUniverseFormData, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ImportUniverseFormData
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ImportUniverseFormData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseActionsAPIService.ImportUniverse")

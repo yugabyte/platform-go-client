@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ExtractMetadata type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &ExtractMetadata{}
 
 // ExtractMetadata url to release TGZ to extract metadata from
 type ExtractMetadata struct {
-	Url string `json:"url"`
+	Url  string `json:"url"`
 	Uuid string `json:"uuid"`
 }
 
@@ -95,7 +93,7 @@ func (o *ExtractMetadata) SetUuid(v string) {
 }
 
 func (o ExtractMetadata) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableExtractMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

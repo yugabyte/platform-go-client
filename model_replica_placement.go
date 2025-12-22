@@ -12,8 +12,6 @@ package ywclient
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ReplicaPlacement type satisfies the MappedNullable interface at compile time
@@ -21,7 +19,7 @@ var _ MappedNullable = &ReplicaPlacement{}
 
 // ReplicaPlacement struct for ReplicaPlacement
 type ReplicaPlacement struct {
-	NumReplicas int32 `json:"numReplicas"`
+	NumReplicas     int32            `json:"numReplicas"`
 	PlacementBlocks []PlacementBlock `json:"placementBlocks"`
 }
 
@@ -95,7 +93,7 @@ func (o *ReplicaPlacement) SetPlacementBlocks(v []PlacementBlock) {
 }
 
 func (o ReplicaPlacement) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -144,5 +142,3 @@ func (v *NullableReplicaPlacement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

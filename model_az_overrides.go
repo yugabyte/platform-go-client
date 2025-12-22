@@ -19,11 +19,11 @@ var _ MappedNullable = &AZOverrides{}
 
 // AZOverrides WARNING: This is a preview API that could change. Availability zone level overrides
 type AZOverrides struct {
-	CgroupSize *int32 `json:"cgroupSize,omitempty"`
-	DeviceInfo *DeviceInfo `json:"deviceInfo,omitempty"`
-	InstanceType *string `json:"instanceType,omitempty"`
-	PerProcess *map[string]PerProcessDetails `json:"perProcess,omitempty"`
-	ProxyConfig *ProxyConfig `json:"proxyConfig,omitempty"`
+	CgroupSize   *int32                        `json:"cgroupSize,omitempty"`
+	DeviceInfo   *DeviceInfo                   `json:"deviceInfo,omitempty"`
+	InstanceType *string                       `json:"instanceType,omitempty"`
+	PerProcess   *map[string]PerProcessDetails `json:"perProcess,omitempty"`
+	ProxyConfig  *ProxyConfig                  `json:"proxyConfig,omitempty"`
 }
 
 // NewAZOverrides instantiates a new AZOverrides object
@@ -204,7 +204,7 @@ func (o *AZOverrides) SetProxyConfig(v ProxyConfig) {
 }
 
 func (o AZOverrides) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullableAZOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

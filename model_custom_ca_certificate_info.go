@@ -13,8 +13,6 @@ package ywclient
 import (
 	"encoding/json"
 	"time"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CustomCaCertificateInfo type satisfies the MappedNullable interface at compile time
@@ -27,11 +25,11 @@ type CustomCaCertificateInfo struct {
 	Contents *string `json:"contents,omitempty"`
 	// Date when certificate was added.
 	CreatedTime *time.Time `json:"createdTime,omitempty"`
-	CustomerId string `json:"customerId"`
+	CustomerId  string     `json:"customerId"`
 	// End date of certificate validity.
 	ExpiryDate *time.Time `json:"expiryDate,omitempty"`
-	Id string `json:"id"`
-	Name string `json:"name"`
+	Id         string     `json:"id"`
+	Name       string     `json:"name"`
 	// Start date of certificate validity.
 	StartDate *time.Time `json:"startDate,omitempty"`
 }
@@ -284,7 +282,7 @@ func (o *CustomCaCertificateInfo) SetStartDate(v time.Time) {
 }
 
 func (o CustomCaCertificateInfo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -347,5 +345,3 @@ func (v *NullableCustomCaCertificateInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

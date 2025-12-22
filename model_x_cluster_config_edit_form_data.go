@@ -20,8 +20,8 @@ var _ MappedNullable = &XClusterConfigEditFormData{}
 // XClusterConfigEditFormData xcluster edit form
 type XClusterConfigEditFormData struct {
 	// Whether or not YBA should also include all index tables from any provided main tables.
-	AutoIncludeIndexTables *bool `json:"autoIncludeIndexTables,omitempty"`
-	BootstrapParams *BootstrapParams `json:"bootstrapParams,omitempty"`
+	AutoIncludeIndexTables *bool            `json:"autoIncludeIndexTables,omitempty"`
+	BootstrapParams        *BootstrapParams `json:"bootstrapParams,omitempty"`
 	// WARNING: This is a preview API that could change. Source universe database IDs
 	Dbs []string `json:"dbs,omitempty"`
 	// Run the pre-checks without actually running the subtasks
@@ -344,7 +344,7 @@ func (o *XClusterConfigEditFormData) SetTargetRole(v string) {
 }
 
 func (o XClusterConfigEditFormData) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -418,5 +418,3 @@ func (v *NullableXClusterConfigEditFormData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
