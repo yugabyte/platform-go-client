@@ -70,6 +70,7 @@ Name | Type | Description | Notes
 **TimeTakenPartial** | **int64** |  | 
 **TransactionalBackup** | Pointer to **bool** | Is backup transactional across tables | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
+**UseRoles** | Pointer to **bool** | Backup global ysql roles | [optional] 
 **UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 **YbPrevSoftwareVersion** | Pointer to **string** | Previous software version | [optional] 
 **YbcInstalled** | Pointer to **bool** |  | [optional] 
@@ -1708,6 +1709,31 @@ SetUniverseUUID sets UniverseUUID field to given value.
 `func (o *MultiTableBackupRequestParams) HasUniverseUUID() bool`
 
 HasUniverseUUID returns a boolean if a field has been set.
+
+### GetUseRoles
+
+`func (o *MultiTableBackupRequestParams) GetUseRoles() bool`
+
+GetUseRoles returns the UseRoles field if non-nil, zero value otherwise.
+
+### GetUseRolesOk
+
+`func (o *MultiTableBackupRequestParams) GetUseRolesOk() (*bool, bool)`
+
+GetUseRolesOk returns a tuple with the UseRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseRoles
+
+`func (o *MultiTableBackupRequestParams) SetUseRoles(v bool)`
+
+SetUseRoles sets UseRoles field to given value.
+
+### HasUseRoles
+
+`func (o *MultiTableBackupRequestParams) HasUseRoles() bool`
+
+HasUseRoles returns a boolean if a field has been set.
 
 ### GetUseTablespaces
 

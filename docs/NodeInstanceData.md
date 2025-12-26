@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **InstanceName** | **string** | Node instance name | 
 **InstanceType** | **string** | Node instance type | 
 **Ip** | **string** | IP address | 
-**NodeConfigs** | Pointer to [**[]NodeConfig**](NodeConfig.md) | Node configurations | [optional] 
 **NodeName** | Pointer to **string** | Node name in a universe | [optional] [readonly] 
 **Region** | **string** | Region | 
 **SshUser** | **string** | SSH user | 
@@ -91,31 +90,6 @@ and a boolean to check if the value has been set.
 
 SetIp sets Ip field to given value.
 
-
-### GetNodeConfigs
-
-`func (o *NodeInstanceData) GetNodeConfigs() []NodeConfig`
-
-GetNodeConfigs returns the NodeConfigs field if non-nil, zero value otherwise.
-
-### GetNodeConfigsOk
-
-`func (o *NodeInstanceData) GetNodeConfigsOk() (*[]NodeConfig, bool)`
-
-GetNodeConfigsOk returns a tuple with the NodeConfigs field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNodeConfigs
-
-`func (o *NodeInstanceData) SetNodeConfigs(v []NodeConfig)`
-
-SetNodeConfigs sets NodeConfigs field to given value.
-
-### HasNodeConfigs
-
-`func (o *NodeInstanceData) HasNodeConfigs() bool`
-
-HasNodeConfigs returns a boolean if a field has been set.
 
 ### GetNodeName
 

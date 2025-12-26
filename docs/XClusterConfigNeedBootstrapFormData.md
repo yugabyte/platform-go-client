@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**IsDrConfig** | Pointer to **bool** | WARNING: This is a preview API that could change. Whether this check is being done as part of a DR configuration setup | [optional] 
 **Tables** | **[]string** | Source universe table IDs to check whether they need bootstrap | 
 **TargetUniverseUUID** | Pointer to **string** | If specified and tables do not exist on the target universe, bootstrapping is required. | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewXClusterConfigNeedBootstrapFormDataWithDefaults instantiates a new XClusterConfigNeedBootstrapFormData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetIsDrConfig
+
+`func (o *XClusterConfigNeedBootstrapFormData) GetIsDrConfig() bool`
+
+GetIsDrConfig returns the IsDrConfig field if non-nil, zero value otherwise.
+
+### GetIsDrConfigOk
+
+`func (o *XClusterConfigNeedBootstrapFormData) GetIsDrConfigOk() (*bool, bool)`
+
+GetIsDrConfigOk returns a tuple with the IsDrConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDrConfig
+
+`func (o *XClusterConfigNeedBootstrapFormData) SetIsDrConfig(v bool)`
+
+SetIsDrConfig sets IsDrConfig field to given value.
+
+### HasIsDrConfig
+
+`func (o *XClusterConfigNeedBootstrapFormData) HasIsDrConfig() bool`
+
+HasIsDrConfig returns a boolean if a field has been set.
 
 ### GetTables
 

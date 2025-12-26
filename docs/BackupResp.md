@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **StorageConfigType** | **string** |  | 
 **UniverseName** | **string** |  | 
 **UniverseUUID** | **string** |  | 
+**UseRoles** | Pointer to **bool** | WARNING: This is a preview API that could change. Indicates if role objects were backed up | [optional] 
 **UseTablespaces** | **bool** |  | 
 
 ## Methods
@@ -433,6 +434,31 @@ and a boolean to check if the value has been set.
 
 SetUniverseUUID sets UniverseUUID field to given value.
 
+
+### GetUseRoles
+
+`func (o *BackupResp) GetUseRoles() bool`
+
+GetUseRoles returns the UseRoles field if non-nil, zero value otherwise.
+
+### GetUseRolesOk
+
+`func (o *BackupResp) GetUseRolesOk() (*bool, bool)`
+
+GetUseRolesOk returns a tuple with the UseRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseRoles
+
+`func (o *BackupResp) SetUseRoles(v bool)`
+
+SetUseRoles sets UseRoles field to given value.
+
+### HasUseRoles
+
+`func (o *BackupResp) HasUseRoles() bool`
+
+HasUseRoles returns a boolean if a field has been set.
 
 ### GetUseTablespaces
 

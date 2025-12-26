@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CollectionLevel** | Pointer to **string** | The level of metrics collection. Allowed values are: ALL, NORMAL, MINIMAL, OFF | [optional] 
+**ScrapeConfigTargets** | Pointer to **[]string** | Set of target types to include in scrape configuration. If not specified, all supported target types will be included. | [optional] 
 **ScrapeIntervalSeconds** | Pointer to **int32** | Scrape interval in seconds. Applied on all scrape jobs commonly. | [optional] 
 **ScrapeTimeoutSeconds** | Pointer to **int32** | Scrape timeout in seconds. Applied on all scrape jobs commonly. | [optional] 
 **UniverseMetricsExporterConfig** | [**[]UniverseMetricsExporterConfig**](UniverseMetricsExporterConfig.md) | List of universe metrics exporter configurations. If empty, no metrics will be sent anywhere. | 
@@ -52,6 +53,31 @@ SetCollectionLevel sets CollectionLevel field to given value.
 `func (o *MetricsExportConfig) HasCollectionLevel() bool`
 
 HasCollectionLevel returns a boolean if a field has been set.
+
+### GetScrapeConfigTargets
+
+`func (o *MetricsExportConfig) GetScrapeConfigTargets() []string`
+
+GetScrapeConfigTargets returns the ScrapeConfigTargets field if non-nil, zero value otherwise.
+
+### GetScrapeConfigTargetsOk
+
+`func (o *MetricsExportConfig) GetScrapeConfigTargetsOk() (*[]string, bool)`
+
+GetScrapeConfigTargetsOk returns a tuple with the ScrapeConfigTargets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScrapeConfigTargets
+
+`func (o *MetricsExportConfig) SetScrapeConfigTargets(v []string)`
+
+SetScrapeConfigTargets sets ScrapeConfigTargets field to given value.
+
+### HasScrapeConfigTargets
+
+`func (o *MetricsExportConfig) HasScrapeConfigTargets() bool`
+
+HasScrapeConfigTargets returns a boolean if a field has been set.
 
 ### GetScrapeIntervalSeconds
 

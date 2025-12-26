@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ConfigUUID** | Pointer to **string** | Config UUID | [optional] [readonly] 
 **CustomerUUID** | **string** | Customer UUID | [readonly] 
 **Data** | **map[string]interface{}** | Configuration data | 
+**KubernetesOperatorControlled** | **bool** |  | 
 **Name** | **string** | Name | 
 **State** | Pointer to **string** | state of the customerConfig. Possible values are Active, QueuedForDeletion. | [optional] [readonly] 
 **Type** | **string** | Config type | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCustomerConfig
 
-`func NewCustomerConfig(configName string, customerUUID string, data map[string]interface{}, name string, type_ string, ) *CustomerConfig`
+`func NewCustomerConfig(configName string, customerUUID string, data map[string]interface{}, kubernetesOperatorControlled bool, name string, type_ string, ) *CustomerConfig`
 
 NewCustomerConfig instantiates a new CustomerConfig object
 This constructor will assign default values to properties that have it defined,
@@ -114,6 +115,26 @@ and a boolean to check if the value has been set.
 `func (o *CustomerConfig) SetData(v map[string]interface{})`
 
 SetData sets Data field to given value.
+
+
+### GetKubernetesOperatorControlled
+
+`func (o *CustomerConfig) GetKubernetesOperatorControlled() bool`
+
+GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorControlledOk
+
+`func (o *CustomerConfig) GetKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorControlled
+
+`func (o *CustomerConfig) SetKubernetesOperatorControlled(v bool)`
+
+SetKubernetesOperatorControlled sets KubernetesOperatorControlled field to given value.
 
 
 ### GetName

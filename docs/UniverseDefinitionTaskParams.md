@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AdditionalServicesStateData** | Pointer to [**AdditionalServicesStateData**](AdditionalServicesStateData.md) |  | [optional] 
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
+**AutoRollbackPerformed** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -20,13 +21,14 @@ Name | Type | Description | Notes
 **ErrorString** | Pointer to **string** | Error message | [optional] 
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FipsEnabled** | Pointer to **bool** | YbaApi Internal. FIPS compatibility is enabled for universe | [optional] 
 **ImportedState** | Pointer to **string** |  | [optional] 
 **InstallNodeAgent** | Pointer to **bool** | YbaApi Internal. Install node agent in background if it is true | [optional] 
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** |  | [optional] 
 **IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
-**MastersInDefaultRegion** | Pointer to **bool** |  | [optional] 
+**MastersInDefaultRegion** | Pointer to **bool** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2025.2.&lt;/b&gt; With geo partitioning support, default region is replaced with default partition | [optional] 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeAgentMissing** | Pointer to **bool** | YbaApi Internal. True if a node agent for missing in any of the nodes | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -51,6 +53,7 @@ Name | Type | Description | Notes
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
+**UniverseDetached** | Pointer to **bool** | YbaApi Internal. True if a universe has been detached | [optional] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
@@ -158,6 +161,31 @@ SetArch sets Arch field to given value.
 `func (o *UniverseDefinitionTaskParams) HasArch() bool`
 
 HasArch returns a boolean if a field has been set.
+
+### GetAutoRollbackPerformed
+
+`func (o *UniverseDefinitionTaskParams) GetAutoRollbackPerformed() bool`
+
+GetAutoRollbackPerformed returns the AutoRollbackPerformed field if non-nil, zero value otherwise.
+
+### GetAutoRollbackPerformedOk
+
+`func (o *UniverseDefinitionTaskParams) GetAutoRollbackPerformedOk() (*bool, bool)`
+
+GetAutoRollbackPerformedOk returns a tuple with the AutoRollbackPerformed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoRollbackPerformed
+
+`func (o *UniverseDefinitionTaskParams) SetAutoRollbackPerformed(v bool)`
+
+SetAutoRollbackPerformed sets AutoRollbackPerformed field to given value.
+
+### HasAutoRollbackPerformed
+
+`func (o *UniverseDefinitionTaskParams) HasAutoRollbackPerformed() bool`
+
+HasAutoRollbackPerformed returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -473,6 +501,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 `func (o *UniverseDefinitionTaskParams) HasExtraDependencies() bool`
 
 HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *UniverseDefinitionTaskParams) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *UniverseDefinitionTaskParams) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *UniverseDefinitionTaskParams) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *UniverseDefinitionTaskParams) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetImportedState
 
@@ -1233,6 +1286,31 @@ SetTargetXClusterConfigs sets TargetXClusterConfigs field to given value.
 `func (o *UniverseDefinitionTaskParams) HasTargetXClusterConfigs() bool`
 
 HasTargetXClusterConfigs returns a boolean if a field has been set.
+
+### GetUniverseDetached
+
+`func (o *UniverseDefinitionTaskParams) GetUniverseDetached() bool`
+
+GetUniverseDetached returns the UniverseDetached field if non-nil, zero value otherwise.
+
+### GetUniverseDetachedOk
+
+`func (o *UniverseDefinitionTaskParams) GetUniverseDetachedOk() (*bool, bool)`
+
+GetUniverseDetachedOk returns a tuple with the UniverseDetached field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseDetached
+
+`func (o *UniverseDefinitionTaskParams) SetUniverseDetached(v bool)`
+
+SetUniverseDetached sets UniverseDetached field to given value.
+
+### HasUniverseDetached
+
+`func (o *UniverseDefinitionTaskParams) HasUniverseDetached() bool`
+
+HasUniverseDetached returns a boolean if a field has been set.
 
 ### GetUniversePaused
 

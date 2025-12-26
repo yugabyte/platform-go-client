@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Frequency** | Pointer to **int64** | Frequency of the schedule, in milli seconds | [optional] 
 **FrequencyTimeUnit** | Pointer to **string** | Time unit of frequency | [optional] 
 **IncrementBacklogStatus** | Pointer to **bool** | Backlog status of schedule of incremental backups arose due to conflicts | [optional] [readonly] 
+**KubernetesOperatorControlled** | **bool** |  | 
 **NextIncrementScheduleTaskTime** | Pointer to **time.Time** | Time on which schedule is expected to run for incremental backups | [optional] [readonly] 
 **NextScheduleTaskTime** | Pointer to **time.Time** | Time on which schedule is expected to run | [optional] [readonly] 
 **OwnerUUID** | Pointer to **string** | Owner UUID for the schedule | [optional] [readonly] 
@@ -25,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewSchedule
 
-`func NewSchedule() *Schedule`
+`func NewSchedule(kubernetesOperatorControlled bool, ) *Schedule`
 
 NewSchedule instantiates a new Schedule object
 This constructor will assign default values to properties that have it defined,
@@ -189,6 +190,26 @@ SetIncrementBacklogStatus sets IncrementBacklogStatus field to given value.
 `func (o *Schedule) HasIncrementBacklogStatus() bool`
 
 HasIncrementBacklogStatus returns a boolean if a field has been set.
+
+### GetKubernetesOperatorControlled
+
+`func (o *Schedule) GetKubernetesOperatorControlled() bool`
+
+GetKubernetesOperatorControlled returns the KubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetKubernetesOperatorControlledOk
+
+`func (o *Schedule) GetKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetKubernetesOperatorControlledOk returns a tuple with the KubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKubernetesOperatorControlled
+
+`func (o *Schedule) SetKubernetesOperatorControlled(v bool)`
+
+SetKubernetesOperatorControlled sets KubernetesOperatorControlled field to given value.
+
 
 ### GetNextIncrementScheduleTaskTime
 

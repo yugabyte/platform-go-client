@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClusterType** | **string** |  | 
 **Index** | Pointer to **int32** |  | [optional] 
+**Partitions** | Pointer to [**[]PartitionInfo**](PartitionInfo.md) | WARNING: This is a preview API that could change. Geo partitions for cluster | [optional] 
 **PlacementInfo** | Pointer to [**PlacementInfo**](PlacementInfo.md) |  | [optional] 
 **Regions** | Pointer to [**[]Region**](Region.md) |  | [optional] [readonly] 
 **UserIntent** | [**UserIntent**](UserIntent.md) |  | 
@@ -74,6 +75,31 @@ SetIndex sets Index field to given value.
 `func (o *Cluster) HasIndex() bool`
 
 HasIndex returns a boolean if a field has been set.
+
+### GetPartitions
+
+`func (o *Cluster) GetPartitions() []PartitionInfo`
+
+GetPartitions returns the Partitions field if non-nil, zero value otherwise.
+
+### GetPartitionsOk
+
+`func (o *Cluster) GetPartitionsOk() (*[]PartitionInfo, bool)`
+
+GetPartitionsOk returns a tuple with the Partitions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitions
+
+`func (o *Cluster) SetPartitions(v []PartitionInfo)`
+
+SetPartitions sets Partitions field to given value.
+
+### HasPartitions
+
+`func (o *Cluster) HasPartitions() bool`
+
+HasPartitions returns a boolean if a field has been set.
 
 ### GetPlacementInfo
 
