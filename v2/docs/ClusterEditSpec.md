@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **NodeSpec** | Pointer to [**ClusterNodeSpec**](ClusterNodeSpec.md) |  | [optional] 
 **ProviderSpec** | Pointer to [**ClusterProviderEditSpec**](ClusterProviderEditSpec.md) |  | [optional] 
 **PlacementSpec** | Pointer to [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | [optional] 
+**PartitionsSpec** | Pointer to [**[]ClusterPartitionSpec**](ClusterPartitionSpec.md) |  | [optional] 
 **InstanceTags** | Pointer to **map[string]string** | A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/. | [optional] 
 
 ## Methods
@@ -149,6 +150,31 @@ SetPlacementSpec sets PlacementSpec field to given value.
 `func (o *ClusterEditSpec) HasPlacementSpec() bool`
 
 HasPlacementSpec returns a boolean if a field has been set.
+
+### GetPartitionsSpec
+
+`func (o *ClusterEditSpec) GetPartitionsSpec() []ClusterPartitionSpec`
+
+GetPartitionsSpec returns the PartitionsSpec field if non-nil, zero value otherwise.
+
+### GetPartitionsSpecOk
+
+`func (o *ClusterEditSpec) GetPartitionsSpecOk() (*[]ClusterPartitionSpec, bool)`
+
+GetPartitionsSpecOk returns a tuple with the PartitionsSpec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionsSpec
+
+`func (o *ClusterEditSpec) SetPartitionsSpec(v []ClusterPartitionSpec)`
+
+SetPartitionsSpec sets PartitionsSpec field to given value.
+
+### HasPartitionsSpec
+
+`func (o *ClusterEditSpec) HasPartitionsSpec() bool`
+
+HasPartitionsSpec returns a boolean if a field has been set.
 
 ### GetInstanceTags
 

@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **DebugPrintPlan** | **bool** | Debug print plan, these parameters enable various debugging output to be emitted. When set, they print the resulting parse tree, the query rewriter output, or the execution plan for each executed query. | [default to false]
 **LogConnections** | **bool** | Log connections, causes each attempted connection to the server to be logged, as well as successful completion of both client authentication (if necessary) and authorization | [default to false]
 **LogDisconnections** | **bool** | Log disconnections, causes session terminations to be logged. The log output provides information similar to log_connections, plus the duration of the session. | [default to false]
-**LogLinePrefix** | Pointer to **string** | Log line prefix. This would be applied to both audit and query logs. | [optional] 
 **LogMinDurationStatement** | **int32** | Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time. | [default to -1]
 
 ## Methods
@@ -193,31 +192,6 @@ and a boolean to check if the value has been set.
 
 SetLogDisconnections sets LogDisconnections field to given value.
 
-
-### GetLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) GetLogLinePrefix() string`
-
-GetLogLinePrefix returns the LogLinePrefix field if non-nil, zero value otherwise.
-
-### GetLogLinePrefixOk
-
-`func (o *YSQLQueryLogConfig) GetLogLinePrefixOk() (*string, bool)`
-
-GetLogLinePrefixOk returns a tuple with the LogLinePrefix field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) SetLogLinePrefix(v string)`
-
-SetLogLinePrefix sets LogLinePrefix field to given value.
-
-### HasLogLinePrefix
-
-`func (o *YSQLQueryLogConfig) HasLogLinePrefix() bool`
-
-HasLogLinePrefix returns a boolean if a field has been set.
 
 ### GetLogMinDurationStatement
 

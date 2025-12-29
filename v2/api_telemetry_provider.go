@@ -20,14 +20,13 @@ import (
 	"strings"
 )
 
-
 // TelemetryProviderAPIService TelemetryProviderAPI service
 type TelemetryProviderAPIService service
 
 type TelemetryProviderAPIListTelemetryProviderTypesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TelemetryProviderAPIService
-	cUUID string
+	cUUID      string
 	exportType *string
 }
 
@@ -46,26 +45,27 @@ ListTelemetryProviderTypes List Available Telemetry Provider Types
 
 Get list of all available telemetry provider types with their capabilities
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param cUUID Customer UUID
- @return TelemetryProviderAPIListTelemetryProviderTypesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return TelemetryProviderAPIListTelemetryProviderTypesRequest
 */
 func (a *TelemetryProviderAPIService) ListTelemetryProviderTypes(ctx context.Context, cUUID string) TelemetryProviderAPIListTelemetryProviderTypesRequest {
 	return TelemetryProviderAPIListTelemetryProviderTypesRequest{
 		ApiService: a,
-		ctx: ctx,
-		cUUID: cUUID,
+		ctx:        ctx,
+		cUUID:      cUUID,
 	}
 }
 
 // Execute executes the request
-//  @return []TelemetryProviderTypeInfo
+//
+//	@return []TelemetryProviderTypeInfo
 func (a *TelemetryProviderAPIService) ListTelemetryProviderTypesExecute(r TelemetryProviderAPIListTelemetryProviderTypesRequest) ([]TelemetryProviderTypeInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []TelemetryProviderTypeInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []TelemetryProviderTypeInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TelemetryProviderAPIService.ListTelemetryProviderTypes")

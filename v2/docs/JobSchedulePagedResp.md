@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Entities** | Pointer to [**[]JobSchedule**](JobSchedule.md) |  | [optional] 
 **HasNext** | Pointer to **bool** | There are more next records if true. | [optional] 
 **HasPrev** | Pointer to **bool** | There are more previous records if true. | [optional] 
 **TotalCount** | Pointer to **int32** | Total number of records. | [optional] 
+**Entities** | Pointer to [**[]JobSchedule**](JobSchedule.md) |  | [optional] 
 
 ## Methods
 
@@ -27,31 +27,6 @@ will change when the set of required properties is changed
 NewJobSchedulePagedRespWithDefaults instantiates a new JobSchedulePagedResp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetEntities
-
-`func (o *JobSchedulePagedResp) GetEntities() []JobSchedule`
-
-GetEntities returns the Entities field if non-nil, zero value otherwise.
-
-### GetEntitiesOk
-
-`func (o *JobSchedulePagedResp) GetEntitiesOk() (*[]JobSchedule, bool)`
-
-GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEntities
-
-`func (o *JobSchedulePagedResp) SetEntities(v []JobSchedule)`
-
-SetEntities sets Entities field to given value.
-
-### HasEntities
-
-`func (o *JobSchedulePagedResp) HasEntities() bool`
-
-HasEntities returns a boolean if a field has been set.
 
 ### GetHasNext
 
@@ -127,6 +102,31 @@ SetTotalCount sets TotalCount field to given value.
 `func (o *JobSchedulePagedResp) HasTotalCount() bool`
 
 HasTotalCount returns a boolean if a field has been set.
+
+### GetEntities
+
+`func (o *JobSchedulePagedResp) GetEntities() []JobSchedule`
+
+GetEntities returns the Entities field if non-nil, zero value otherwise.
+
+### GetEntitiesOk
+
+`func (o *JobSchedulePagedResp) GetEntitiesOk() (*[]JobSchedule, bool)`
+
+GetEntitiesOk returns a tuple with the Entities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEntities
+
+`func (o *JobSchedulePagedResp) SetEntities(v []JobSchedule)`
+
+SetEntities sets Entities field to given value.
+
+### HasEntities
+
+`func (o *JobSchedulePagedResp) HasEntities() bool`
+
+HasEntities returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

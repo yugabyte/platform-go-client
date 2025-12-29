@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** | The cloud provider id. | [optional] 
 **Code** | Pointer to **string** | The cloud provider code. | [optional] 
 **RegionList** | Pointer to [**[]PlacementRegion**](PlacementRegion.md) | The list of region in this cloud we want to place data in. | [optional] 
-**DefaultRegion** | Pointer to **string** | UUID of default region. For universes with more AZs than RF, the default placement for user tables will be RF AZs in the default region. This is commonly encountered in geo-partitioning use cases. | [optional] 
+**DefaultRegion** | Pointer to **string** | UUID of default region. For universes with more AZs than RF, the default placement for user tables will be RF AZs in the default region. This is commonly encountered in geo-partitioning use cases. Deprecated, replaced with default partition. | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** | Whether to place all masters in the default region. Defaults to true. | [optional] [default to true]
 
 ## Methods
