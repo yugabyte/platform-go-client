@@ -16,18 +16,18 @@ import (
 	"fmt"
 )
 
-// ScrapeConfigTargetType Enum for target types that support metrics export scrape configuration. 
+// ScrapeConfigTargetType Enum for target types that support metrics export scrape configuration.
 type ScrapeConfigTargetType string
 
 // List of ScrapeConfigTargetType
 const (
-	MASTER_EXPORT ScrapeConfigTargetType = "MASTER_EXPORT"
-	TSERVER_EXPORT ScrapeConfigTargetType = "TSERVER_EXPORT"
-	YSQL_EXPORT ScrapeConfigTargetType = "YSQL_EXPORT"
-	CQL_EXPORT ScrapeConfigTargetType = "CQL_EXPORT"
-	NODE_EXPORT ScrapeConfigTargetType = "NODE_EXPORT"
+	MASTER_EXPORT     ScrapeConfigTargetType = "MASTER_EXPORT"
+	TSERVER_EXPORT    ScrapeConfigTargetType = "TSERVER_EXPORT"
+	YSQL_EXPORT       ScrapeConfigTargetType = "YSQL_EXPORT"
+	CQL_EXPORT        ScrapeConfigTargetType = "CQL_EXPORT"
+	NODE_EXPORT       ScrapeConfigTargetType = "NODE_EXPORT"
 	NODE_AGENT_EXPORT ScrapeConfigTargetType = "NODE_AGENT_EXPORT"
-	OTEL_EXPORT ScrapeConfigTargetType = "OTEL_EXPORT"
+	OTEL_EXPORT       ScrapeConfigTargetType = "OTEL_EXPORT"
 )
 
 // All allowed values of ScrapeConfigTargetType enum
@@ -119,4 +119,3 @@ func (v *NullableScrapeConfigTargetType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

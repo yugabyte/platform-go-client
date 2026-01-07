@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NetworkingSpec** | Pointer to [**ClusterNetworkingSpec**](ClusterNetworkingSpec.md) |  | [optional] 
 **ProviderSpec** | [**ClusterProviderSpec**](ClusterProviderSpec.md) |  | 
 **PlacementSpec** | Pointer to [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | [optional] 
+**PartitionsSpec** | Pointer to [**[]ClusterPartitionSpec**](ClusterPartitionSpec.md) |  | [optional] 
 **UseSpotInstance** | Pointer to **bool** | Whether to use spot instances for nodes in aws/gcp. Used in dev/test environments. | [optional] 
 **InstanceTags** | Pointer to **map[string]string** | A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/. | [optional] 
 **AuditLogConfig** | Pointer to [**AuditLogConfig**](AuditLogConfig.md) |  | [optional] 
@@ -217,6 +218,31 @@ SetPlacementSpec sets PlacementSpec field to given value.
 `func (o *ClusterSpec) HasPlacementSpec() bool`
 
 HasPlacementSpec returns a boolean if a field has been set.
+
+### GetPartitionsSpec
+
+`func (o *ClusterSpec) GetPartitionsSpec() []ClusterPartitionSpec`
+
+GetPartitionsSpec returns the PartitionsSpec field if non-nil, zero value otherwise.
+
+### GetPartitionsSpecOk
+
+`func (o *ClusterSpec) GetPartitionsSpecOk() (*[]ClusterPartitionSpec, bool)`
+
+GetPartitionsSpecOk returns a tuple with the PartitionsSpec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartitionsSpec
+
+`func (o *ClusterSpec) SetPartitionsSpec(v []ClusterPartitionSpec)`
+
+SetPartitionsSpec sets PartitionsSpec field to given value.
+
+### HasPartitionsSpec
+
+`func (o *ClusterSpec) HasPartitionsSpec() bool`
+
+HasPartitionsSpec returns a boolean if a field has been set.
 
 ### GetUseSpotInstance
 

@@ -13,8 +13,6 @@ package v2
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the ClusterPartitionSpec type satisfies the MappedNullable interface at compile time
@@ -29,8 +27,8 @@ type ClusterPartitionSpec struct {
 	// Whether the partition is default (all masters are put only into this partition)
 	DefaultPartition bool `json:"default_partition"`
 	// The replication factor for the partition.
-	ReplicationFactor int32 `json:"replication_factor"`
-	Placement ClusterPlacementSpec `json:"placement"`
+	ReplicationFactor int32                `json:"replication_factor"`
+	Placement         ClusterPlacementSpec `json:"placement"`
 }
 
 type _ClusterPartitionSpec ClusterPartitionSpec
@@ -185,7 +183,7 @@ func (o *ClusterPartitionSpec) SetPlacement(v ClusterPlacementSpec) {
 }
 
 func (o ClusterPartitionSpec) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -202,46 +200,6 @@ func (o ClusterPartitionSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize["replication_factor"] = o.ReplicationFactor
 	toSerialize["placement"] = o.Placement
 	return toSerialize, nil
-}
-
-func (o *ClusterPartitionSpec) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-		"default_partition",
-		"replication_factor",
-		"placement",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varClusterPartitionSpec := _ClusterPartitionSpec{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varClusterPartitionSpec)
-
-	if err != nil {
-		return err
-	}
-
-	*o = ClusterPartitionSpec(varClusterPartitionSpec)
-
-	return err
 }
 
 type NullableClusterPartitionSpec struct {
@@ -279,5 +237,3 @@ func (v *NullableClusterPartitionSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

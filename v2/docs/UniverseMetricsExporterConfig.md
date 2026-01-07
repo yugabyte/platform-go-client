@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for sending metrics. Can be customised to each exporter differently. | [optional] [default to 1000]
 **SendBatchSize** | Pointer to **int32** | Batch size for sending metrics. Can be customised to each exporter differently. | [optional] [default to 100]
 **SendBatchTimeoutSeconds** | Pointer to **int32** | Batch timeout in seconds for sending metrics. Can be customised to each exporter differently. | [optional] [default to 10]
-**MetricsPrefix** | Pointer to **string** | Custom prefix to be added to all the metrics. Can be customised to each exporter differently. | [optional] [default to "ybdb."]
+**MetricsPrefix** | Pointer to **string** | Custom prefix to be added to all the metrics. Can be customised to each exporter differently. | [optional] [default to ""]
+**MemoryLimitMib** | Pointer to **int32** | Memory limit in MiB for the OpenTelemetry Collector process in the config file. | [optional] [default to 2048]
+**MemoryLimitCheckIntervalSeconds** | Pointer to **int32** | Check interval in seconds for the MemoryLimiterProcessor. | [optional] [default to 10]
 
 ## Methods
 
@@ -174,6 +176,56 @@ SetMetricsPrefix sets MetricsPrefix field to given value.
 `func (o *UniverseMetricsExporterConfig) HasMetricsPrefix() bool`
 
 HasMetricsPrefix returns a boolean if a field has been set.
+
+### GetMemoryLimitMib
+
+`func (o *UniverseMetricsExporterConfig) GetMemoryLimitMib() int32`
+
+GetMemoryLimitMib returns the MemoryLimitMib field if non-nil, zero value otherwise.
+
+### GetMemoryLimitMibOk
+
+`func (o *UniverseMetricsExporterConfig) GetMemoryLimitMibOk() (*int32, bool)`
+
+GetMemoryLimitMibOk returns a tuple with the MemoryLimitMib field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryLimitMib
+
+`func (o *UniverseMetricsExporterConfig) SetMemoryLimitMib(v int32)`
+
+SetMemoryLimitMib sets MemoryLimitMib field to given value.
+
+### HasMemoryLimitMib
+
+`func (o *UniverseMetricsExporterConfig) HasMemoryLimitMib() bool`
+
+HasMemoryLimitMib returns a boolean if a field has been set.
+
+### GetMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseMetricsExporterConfig) GetMemoryLimitCheckIntervalSeconds() int32`
+
+GetMemoryLimitCheckIntervalSeconds returns the MemoryLimitCheckIntervalSeconds field if non-nil, zero value otherwise.
+
+### GetMemoryLimitCheckIntervalSecondsOk
+
+`func (o *UniverseMetricsExporterConfig) GetMemoryLimitCheckIntervalSecondsOk() (*int32, bool)`
+
+GetMemoryLimitCheckIntervalSecondsOk returns a tuple with the MemoryLimitCheckIntervalSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseMetricsExporterConfig) SetMemoryLimitCheckIntervalSeconds(v int32)`
+
+SetMemoryLimitCheckIntervalSeconds sets MemoryLimitCheckIntervalSeconds field to given value.
+
+### HasMemoryLimitCheckIntervalSeconds
+
+`func (o *UniverseMetricsExporterConfig) HasMemoryLimitCheckIntervalSeconds() bool`
+
+HasMemoryLimitCheckIntervalSeconds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

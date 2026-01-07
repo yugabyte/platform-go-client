@@ -18,7 +18,7 @@ import (
 // checks if the UniverseOperatorImportReq type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UniverseOperatorImportReq{}
 
-// UniverseOperatorImportReq UniverseOperatorImportReq  Payload to import a universe to the operator. Part of UniverseOperatorImportReq 
+// UniverseOperatorImportReq UniverseOperatorImportReq  Payload to import a universe to the operator. Part of UniverseOperatorImportReq
 type UniverseOperatorImportReq struct {
 	// The namespace in which the universe custom resource will be created in.
 	Namespace *string `json:"namespace,omitempty"`
@@ -74,7 +74,7 @@ func (o *UniverseOperatorImportReq) SetNamespace(v string) {
 }
 
 func (o UniverseOperatorImportReq) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,5 +124,3 @@ func (v *NullableUniverseOperatorImportReq) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

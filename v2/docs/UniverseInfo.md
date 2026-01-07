@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **NodesResizeAvailable** | Pointer to **bool** | Set to true if nodes of this Universe can be resized without a full move | [optional] [readonly] 
 **IsKubernetesOperatorControlled** | Pointer to **bool** | Whether this Universe is created and controlled by the Kubernetes Operator | [optional] [readonly] 
 **OtelCollectorEnabled** | Pointer to **bool** | Whether OpenTelemetry Collector is enabled for universe | [optional] 
+**FipsEnabled** | Pointer to **bool** | Whether FIPS compatibility is enabled for universe | [optional] 
 **XClusterInfo** | Pointer to [**XClusterInfo**](XClusterInfo.md) |  | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **Clusters** | Pointer to [**[]ClusterInfo**](ClusterInfo.md) |  | [optional] 
@@ -655,6 +656,31 @@ SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
 `func (o *UniverseInfo) HasOtelCollectorEnabled() bool`
 
 HasOtelCollectorEnabled returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *UniverseInfo) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *UniverseInfo) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *UniverseInfo) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *UniverseInfo) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetXClusterInfo
 
