@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **SecondarySubnet** | Pointer to **string** | The secondary subnet in the AZ. | [optional] 
 **NumNodesInAz** | Pointer to **int32** | Number of nodes in each AZ. | [optional] 
 **LeaderAffinity** | Pointer to **bool** | Affinitizes raft leaders to this AZ. | [optional] 
-**LeaderPreference** | Pointer to **int32** | Priority of zone (for leaders placement). Values have to be contiguous non-zero integers. Multiple zones can have the same value. A lower value indicates higher zone priority. | [optional] 
+**LeaderPreference** | Pointer to **int32** | Priority of zone (for leaders placement). Values have to be contiguous non-negative integers. Zero means non-prioritized. Multiple zones can have the same value. A lower value indicates higher zone priority. | [optional] 
 **LbName** | Pointer to **string** | The Load Balancer id. | [optional] 
 
 ## Methods

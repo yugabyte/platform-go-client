@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                    | HTTP request                                                              | Description                                     |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------- |
-| [**AddCA**](CustomCACertificatesAPI.md#AddCA)                                             | **Post** /api/v1/customers/{cUUID}/customCAStore                          | Add a named custom CA certificate               |
-| [**DeleteCustomCACertificate**](CustomCACertificatesAPI.md#DeleteCustomCACertificate)     | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Delete a named custom CA certificate            |
-| [**GetAllCustomCaCertificates**](CustomCACertificatesAPI.md#GetAllCustomCaCertificates)   | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID}    | Download a custom CA certificates of a customer |
-| [**ListAllCustomCaCertificates**](CustomCACertificatesAPI.md#ListAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates               | List all custom CA certificates of a customer   |
-| [**UpdateCA**](CustomCACertificatesAPI.md#UpdateCA)                                       | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID}               | Update a named custom CA certificate            |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**AddCA**](CustomCACertificatesAPI.md#AddCA) | **Post** /api/v1/customers/{cUUID}/customCAStore | Add a named custom CA certificate
+[**DeleteCustomCACertificate**](CustomCACertificatesAPI.md#DeleteCustomCACertificate) | **Delete** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Delete a named custom CA certificate
+[**GetAllCustomCaCertificates**](CustomCACertificatesAPI.md#GetAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates/{certUUID} | Download a custom CA certificates of a customer
+[**ListAllCustomCaCertificates**](CustomCACertificatesAPI.md#ListAllCustomCaCertificates) | **Get** /api/v1/customers/{cUUID}/customCAStoreCertificates | List all custom CA certificates of a customer
+[**UpdateCA**](CustomCACertificatesAPI.md#UpdateCA) | **Post** /api/v1/customers/{cUUID}/customCAStore/{certUUID} | Update a named custom CA certificate
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,18 +52,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAddCARequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **x509CACertificate** | [**CustomCACertParams**](CustomCACertParams.md) | CA certificate contents in &#39;X509&#39; format | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -126,19 +126,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **certUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**certUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCustomCACertificateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -178,7 +178,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -201,19 +201,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **certUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**certUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllCustomCaCertificatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -253,7 +253,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -274,18 +274,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAllCustomCaCertificatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -323,7 +323,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -347,19 +347,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **certUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**certUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateCARequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **x509CACertificate** | [**CustomCACertParams**](CustomCACertParams.md) | CA certificate contents in &#39;X509&#39; format | 

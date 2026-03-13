@@ -23,6 +23,7 @@ type SoftwareUpgradeParams struct {
 	AllowInsecure               *bool                        `json:"allowInsecure,omitempty"`
 	Arch                        *string                      `json:"arch,omitempty"`
 	AutoRollbackPerformed       *bool                        `json:"autoRollbackPerformed,omitempty"`
+	CanaryUpgradeConfig         *CanaryUpgradeConfig         `json:"canaryUpgradeConfig,omitempty"`
 	Capability                  *string                      `json:"capability,omitempty"`
 	ClientRootCA                *string                      `json:"clientRootCA,omitempty"`
 	Clusters                    []Cluster                    `json:"clusters"`
@@ -62,7 +63,9 @@ type SoftwareUpgradeParams struct {
 	NodePrefix           *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool   `json:"nodesResizeAvailable,omitempty"`
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
-	OtelCollectorEnabled          *bool                 `json:"otelCollectorEnabled,omitempty"`
+	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
+	// YbaApi Internal. PA Collector UUID
+	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   string                `json:"platformUrl"`
 	PlatformVersion               *string               `json:"platformVersion,omitempty"`
@@ -263,6 +266,38 @@ func (o *SoftwareUpgradeParams) HasAutoRollbackPerformed() bool {
 // SetAutoRollbackPerformed gets a reference to the given bool and assigns it to the AutoRollbackPerformed field.
 func (o *SoftwareUpgradeParams) SetAutoRollbackPerformed(v bool) {
 	o.AutoRollbackPerformed = &v
+}
+
+// GetCanaryUpgradeConfig returns the CanaryUpgradeConfig field value if set, zero value otherwise.
+func (o *SoftwareUpgradeParams) GetCanaryUpgradeConfig() CanaryUpgradeConfig {
+	if o == nil || IsNil(o.CanaryUpgradeConfig) {
+		var ret CanaryUpgradeConfig
+		return ret
+	}
+	return *o.CanaryUpgradeConfig
+}
+
+// GetCanaryUpgradeConfigOk returns a tuple with the CanaryUpgradeConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwareUpgradeParams) GetCanaryUpgradeConfigOk() (*CanaryUpgradeConfig, bool) {
+	if o == nil || IsNil(o.CanaryUpgradeConfig) {
+		return nil, false
+	}
+	return o.CanaryUpgradeConfig, true
+}
+
+// HasCanaryUpgradeConfig returns a boolean if a field has been set.
+func (o *SoftwareUpgradeParams) HasCanaryUpgradeConfig() bool {
+	if o != nil && !IsNil(o.CanaryUpgradeConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanaryUpgradeConfig gets a reference to the given CanaryUpgradeConfig and assigns it to the CanaryUpgradeConfig field.
+func (o *SoftwareUpgradeParams) SetCanaryUpgradeConfig(v CanaryUpgradeConfig) {
+	o.CanaryUpgradeConfig = &v
 }
 
 // GetCapability returns the Capability field value if set, zero value otherwise.
@@ -1167,6 +1202,38 @@ func (o *SoftwareUpgradeParams) HasOtelCollectorEnabled() bool {
 // SetOtelCollectorEnabled gets a reference to the given bool and assigns it to the OtelCollectorEnabled field.
 func (o *SoftwareUpgradeParams) SetOtelCollectorEnabled(v bool) {
 	o.OtelCollectorEnabled = &v
+}
+
+// GetPaCollectorUuid returns the PaCollectorUuid field value if set, zero value otherwise.
+func (o *SoftwareUpgradeParams) GetPaCollectorUuid() string {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaCollectorUuid
+}
+
+// GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwareUpgradeParams) GetPaCollectorUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		return nil, false
+	}
+	return o.PaCollectorUuid, true
+}
+
+// HasPaCollectorUuid returns a boolean if a field has been set.
+func (o *SoftwareUpgradeParams) HasPaCollectorUuid() bool {
+	if o != nil && !IsNil(o.PaCollectorUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaCollectorUuid gets a reference to the given string and assigns it to the PaCollectorUuid field.
+func (o *SoftwareUpgradeParams) SetPaCollectorUuid(v string) {
+	o.PaCollectorUuid = &v
 }
 
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
@@ -2295,6 +2362,9 @@ func (o SoftwareUpgradeParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutoRollbackPerformed) {
 		toSerialize["autoRollbackPerformed"] = o.AutoRollbackPerformed
 	}
+	if !IsNil(o.CanaryUpgradeConfig) {
+		toSerialize["canaryUpgradeConfig"] = o.CanaryUpgradeConfig
+	}
 	if !IsNil(o.Capability) {
 		toSerialize["capability"] = o.Capability
 	}
@@ -2375,6 +2445,9 @@ func (o SoftwareUpgradeParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OtelCollectorEnabled) {
 		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled
+	}
+	if !IsNil(o.PaCollectorUuid) {
+		toSerialize["paCollectorUuid"] = o.PaCollectorUuid
 	}
 	if !IsNil(o.PlacementModificationTaskUuid) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid

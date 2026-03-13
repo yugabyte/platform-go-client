@@ -2,9 +2,9 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                             | HTTP request                                                     | Description                    |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------ |
-| [**ValidateKubernetesOverrides**](KubernetesOverridesControllerAPI.md#ValidateKubernetesOverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides. |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**ValidateKubernetesOverrides**](KubernetesOverridesControllerAPI.md#ValidateKubernetesOverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides.
 
 
 
@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -48,18 +48,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiValidateKubernetesOverridesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 

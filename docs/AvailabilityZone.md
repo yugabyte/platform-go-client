@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Name** | **string** | AZ name | 
 **SecondarySubnet** | Pointer to **string** | AZ secondary subnet | [optional] 
 **Subnet** | Pointer to **string** | AZ subnet | [optional] 
-**Uuid** | Pointer to **string** | AZ UUID | [optional] [readonly] 
+**Uuid** | Pointer to **string** | AZ UUID. This must be specified for existing AZs on update | [optional] 
 
 ## Methods
 

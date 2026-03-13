@@ -30,7 +30,7 @@ type NodeInstanceData struct {
 	// Region
 	Region string `json:"region"`
 	// SSH user
-	SshUser string `json:"sshUser"`
+	SshUser *string `json:"sshUser,omitempty"`
 	// Zone
 	Zone string `json:"zone"`
 }
@@ -41,13 +41,12 @@ type _NodeInstanceData NodeInstanceData
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, sshUser string, zone string) *NodeInstanceData {
+func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, zone string) *NodeInstanceData {
 	this := NodeInstanceData{}
 	this.InstanceName = instanceName
 	this.InstanceType = instanceType
 	this.Ip = ip
 	this.Region = region
-	this.SshUser = sshUser
 	this.Zone = zone
 	return &this
 }
@@ -188,28 +187,36 @@ func (o *NodeInstanceData) SetRegion(v string) {
 	o.Region = v
 }
 
-// GetSshUser returns the SshUser field value
+// GetSshUser returns the SshUser field value if set, zero value otherwise.
 func (o *NodeInstanceData) GetSshUser() string {
-	if o == nil {
+	if o == nil || IsNil(o.SshUser) {
 		var ret string
 		return ret
 	}
-
-	return o.SshUser
+	return *o.SshUser
 }
 
-// GetSshUserOk returns a tuple with the SshUser field value
+// GetSshUserOk returns a tuple with the SshUser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NodeInstanceData) GetSshUserOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SshUser) {
 		return nil, false
 	}
-	return &o.SshUser, true
+	return o.SshUser, true
 }
 
-// SetSshUser sets field value
+// HasSshUser returns a boolean if a field has been set.
+func (o *NodeInstanceData) HasSshUser() bool {
+	if o != nil && !IsNil(o.SshUser) {
+		return true
+	}
+
+	return false
+}
+
+// SetSshUser gets a reference to the given string and assigns it to the SshUser field.
 func (o *NodeInstanceData) SetSshUser(v string) {
-	o.SshUser = v
+	o.SshUser = &v
 }
 
 // GetZone returns the Zone field value
@@ -253,7 +260,9 @@ func (o NodeInstanceData) ToMap() (map[string]interface{}, error) {
 		toSerialize["nodeName"] = o.NodeName
 	}
 	toSerialize["region"] = o.Region
-	toSerialize["sshUser"] = o.SshUser
+	if !IsNil(o.SshUser) {
+		toSerialize["sshUser"] = o.SshUser
+	}
 	toSerialize["zone"] = o.Zone
 	return toSerialize, nil
 }

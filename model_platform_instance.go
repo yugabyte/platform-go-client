@@ -24,9 +24,10 @@ type PlatformInstance struct {
 	ConfigUuid    *string `json:"config_uuid,omitempty"`
 	InstanceState string  `json:"instance_state"`
 	IsLeader      bool    `json:"is_leader"`
-	IsLocal       bool    `json:"is_local"`
+	IsLocal       *bool   `json:"is_local,omitempty"`
 	// Last backup time
 	LastBackup *time.Time `json:"last_backup,omitempty"`
+	State      string     `json:"state"`
 	Uuid       string     `json:"uuid"`
 	YbaVersion string     `json:"ybaVersion"`
 }
@@ -37,12 +38,12 @@ type _PlatformInstance PlatformInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlatformInstance(address string, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string) *PlatformInstance {
+func NewPlatformInstance(address string, instanceState string, isLeader bool, state string, uuid string, ybaVersion string) *PlatformInstance {
 	this := PlatformInstance{}
 	this.Address = address
 	this.InstanceState = instanceState
 	this.IsLeader = isLeader
-	this.IsLocal = isLocal
+	this.State = state
 	this.Uuid = uuid
 	this.YbaVersion = ybaVersion
 	return &this
@@ -160,28 +161,36 @@ func (o *PlatformInstance) SetIsLeader(v bool) {
 	o.IsLeader = v
 }
 
-// GetIsLocal returns the IsLocal field value
+// GetIsLocal returns the IsLocal field value if set, zero value otherwise.
 func (o *PlatformInstance) GetIsLocal() bool {
-	if o == nil {
+	if o == nil || IsNil(o.IsLocal) {
 		var ret bool
 		return ret
 	}
-
-	return o.IsLocal
+	return *o.IsLocal
 }
 
-// GetIsLocalOk returns a tuple with the IsLocal field value
+// GetIsLocalOk returns a tuple with the IsLocal field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PlatformInstance) GetIsLocalOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IsLocal) {
 		return nil, false
 	}
-	return &o.IsLocal, true
+	return o.IsLocal, true
 }
 
-// SetIsLocal sets field value
+// HasIsLocal returns a boolean if a field has been set.
+func (o *PlatformInstance) HasIsLocal() bool {
+	if o != nil && !IsNil(o.IsLocal) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsLocal gets a reference to the given bool and assigns it to the IsLocal field.
 func (o *PlatformInstance) SetIsLocal(v bool) {
-	o.IsLocal = v
+	o.IsLocal = &v
 }
 
 // GetLastBackup returns the LastBackup field value if set, zero value otherwise.
@@ -214,6 +223,30 @@ func (o *PlatformInstance) HasLastBackup() bool {
 // SetLastBackup gets a reference to the given time.Time and assigns it to the LastBackup field.
 func (o *PlatformInstance) SetLastBackup(v time.Time) {
 	o.LastBackup = &v
+}
+
+// GetState returns the State field value
+func (o *PlatformInstance) GetState() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *PlatformInstance) GetStateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.State, true
+}
+
+// SetState sets field value
+func (o *PlatformInstance) SetState(v string) {
+	o.State = v
 }
 
 // GetUuid returns the Uuid field value
@@ -280,10 +313,13 @@ func (o PlatformInstance) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["instance_state"] = o.InstanceState
 	toSerialize["is_leader"] = o.IsLeader
-	toSerialize["is_local"] = o.IsLocal
+	if !IsNil(o.IsLocal) {
+		toSerialize["is_local"] = o.IsLocal
+	}
 	if !IsNil(o.LastBackup) {
 		toSerialize["last_backup"] = o.LastBackup
 	}
+	toSerialize["state"] = o.State
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["ybaVersion"] = o.YbaVersion
 	return toSerialize, nil

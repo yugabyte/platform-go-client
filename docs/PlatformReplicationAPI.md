@@ -2,12 +2,12 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                   | HTTP request                                                          | Description           |
-| ------------------------------------------------------------------------ | --------------------------------------------------------------------- | --------------------- |
-| [**GetBackupInfo**](PlatformReplicationAPI.md#GetBackupInfo)             | **Get** /api/v1/settings/ha/config/{cUUID}/replication_schedule       |
-| [**ListBackups**](PlatformReplicationAPI.md#ListBackups)                 | **Get** /api/v1/settings/ha/config/{cUUID}/backup/list                | List backups          |
-| [**StartPeriodicBackup**](PlatformReplicationAPI.md#StartPeriodicBackup) | **Put** /api/v1/settings/ha/config/{cUUID}/replication_schedule/start | Start periodic backup |
-| [**StopPeriodicBackup**](PlatformReplicationAPI.md#StopPeriodicBackup)   | **Put** /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop  |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetBackupInfo**](PlatformReplicationAPI.md#GetBackupInfo) | **Get** /api/v1/settings/ha/config/{cUUID}/replication_schedule | 
+[**ListBackups**](PlatformReplicationAPI.md#ListBackups) | **Get** /api/v1/settings/ha/config/{cUUID}/backup/list | List backups
+[**StartPeriodicBackup**](PlatformReplicationAPI.md#StartPeriodicBackup) | **Put** /api/v1/settings/ha/config/{cUUID}/replication_schedule/start | Start periodic backup
+[**StopPeriodicBackup**](PlatformReplicationAPI.md#StopPeriodicBackup) | **Put** /api/v1/settings/ha/config/{cUUID}/replication_schedule/stop | 
 
 
 
@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -45,18 +45,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetBackupInfoRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -94,7 +94,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -116,18 +116,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListBackupsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **leader** | **string** |  | [default to &quot;null&quot;]
 
@@ -166,7 +166,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -187,18 +187,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiStartPeriodicBackupRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **platformBackupFrequencyRequest** | [**PlatformBackupFrequencyFormData**](PlatformBackupFrequencyFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -236,7 +236,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -256,18 +256,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiStopPeriodicBackupRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 

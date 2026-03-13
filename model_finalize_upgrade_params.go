@@ -62,7 +62,9 @@ type FinalizeUpgradeParams struct {
 	NodePrefix           *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool   `json:"nodesResizeAvailable,omitempty"`
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
-	OtelCollectorEnabled          *bool                 `json:"otelCollectorEnabled,omitempty"`
+	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
+	// YbaApi Internal. PA Collector UUID
+	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   string                `json:"platformUrl"`
 	PlatformVersion               *string               `json:"platformVersion,omitempty"`
@@ -1165,6 +1167,38 @@ func (o *FinalizeUpgradeParams) HasOtelCollectorEnabled() bool {
 // SetOtelCollectorEnabled gets a reference to the given bool and assigns it to the OtelCollectorEnabled field.
 func (o *FinalizeUpgradeParams) SetOtelCollectorEnabled(v bool) {
 	o.OtelCollectorEnabled = &v
+}
+
+// GetPaCollectorUuid returns the PaCollectorUuid field value if set, zero value otherwise.
+func (o *FinalizeUpgradeParams) GetPaCollectorUuid() string {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaCollectorUuid
+}
+
+// GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FinalizeUpgradeParams) GetPaCollectorUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		return nil, false
+	}
+	return o.PaCollectorUuid, true
+}
+
+// HasPaCollectorUuid returns a boolean if a field has been set.
+func (o *FinalizeUpgradeParams) HasPaCollectorUuid() bool {
+	if o != nil && !IsNil(o.PaCollectorUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaCollectorUuid gets a reference to the given string and assigns it to the PaCollectorUuid field.
+func (o *FinalizeUpgradeParams) SetPaCollectorUuid(v string) {
+	o.PaCollectorUuid = &v
 }
 
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
@@ -2349,6 +2383,9 @@ func (o FinalizeUpgradeParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OtelCollectorEnabled) {
 		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled
+	}
+	if !IsNil(o.PaCollectorUuid) {
+		toSerialize["paCollectorUuid"] = o.PaCollectorUuid
 	}
 	if !IsNil(o.PlacementModificationTaskUuid) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid

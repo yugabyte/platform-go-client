@@ -2,9 +2,9 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                    | HTTP request                   | Description     |
-| --------------------------------------------------------- | ------------------------------ | --------------- |
-| [**FetchPackage**](PackagesControllerAPI.md#FetchPackage) | **Post** /api/v1/fetch_package | Fetch a package |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**FetchPackage**](PackagesControllerAPI.md#FetchPackage) | **Post** /api/v1/fetch_package | Fetch a package
 
 
 
@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -53,10 +53,10 @@ func main() {
 Other parameters are passed through a pointer to a apiFetchPackageRequest struct via the builder pattern
 
 
-| Name         | Type                                                  | Description            | Notes |
-| ------------ | ----------------------------------------------------- | ---------------------- | ----- |
-| **package_** | [**PackagesRequestParams**](PackagesRequestParams.md) | Package to be imported |
-| **request**  | [**interface{}**](interface{}.md)                     |                        |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **package_** | [**PackagesRequestParams**](PackagesRequestParams.md) | Package to be imported | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

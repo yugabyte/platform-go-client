@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **ConfigUuid** | Pointer to **string** |  | [optional] 
 **InstanceState** | **string** |  | 
 **IsLeader** | **bool** |  | 
-**IsLocal** | **bool** |  | 
+**IsLocal** | Pointer to **bool** |  | [optional] 
 **LastBackup** | Pointer to **time.Time** | Last backup time | [optional] 
+**State** | **string** |  | 
 **Uuid** | **string** |  | 
 **YbaVersion** | **string** |  | 
 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewPlatformInstance
 
-`func NewPlatformInstance(address string, instanceState string, isLeader bool, isLocal bool, uuid string, ybaVersion string, ) *PlatformInstance`
+`func NewPlatformInstance(address string, instanceState string, isLeader bool, state string, uuid string, ybaVersion string, ) *PlatformInstance`
 
 NewPlatformInstance instantiates a new PlatformInstance object
 This constructor will assign default values to properties that have it defined,
@@ -136,6 +137,11 @@ and a boolean to check if the value has been set.
 
 SetIsLocal sets IsLocal field to given value.
 
+### HasIsLocal
+
+`func (o *PlatformInstance) HasIsLocal() bool`
+
+HasIsLocal returns a boolean if a field has been set.
 
 ### GetLastBackup
 
@@ -161,6 +167,26 @@ SetLastBackup sets LastBackup field to given value.
 `func (o *PlatformInstance) HasLastBackup() bool`
 
 HasLastBackup returns a boolean if a field has been set.
+
+### GetState
+
+`func (o *PlatformInstance) GetState() string`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *PlatformInstance) GetStateOk() (*string, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *PlatformInstance) SetState(v string)`
+
+SetState sets State field to given value.
+
 
 ### GetUuid
 

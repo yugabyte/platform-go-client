@@ -25,10 +25,20 @@ type BundleDetails struct {
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of most recent cores to collect (if any)
 	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
+	// End date to filter Perf Advisor data
+	PaDumpEndDate *time.Time `json:"paDumpEndDate,omitempty"`
+	// Start date to filter Perf Advisor data
+	PaDumpStartDate *time.Time `json:"paDumpStartDate,omitempty"`
+	// Specifies PA Dump metrics format.
+	PaMetricsFormat *string `json:"paMetricsFormat,omitempty"`
 	// End date to filter prometheus metrics till
 	PromDumpEndDate *time.Time `json:"promDumpEndDate,omitempty"`
 	// Start date to filter prometheus metrics from
 	PromDumpStartDate *time.Time `json:"promDumpStartDate,omitempty"`
+	// Specifies Prom Dump metrics format.
+	PromMetricsFormat *string `json:"promMetricsFormat,omitempty"`
+	// Specifies Prom Dump metrics step in seconds.
+	PromMetricsStepSec *int32 `json:"promMetricsStepSec,omitempty"`
 	// List of exports to be included in the prometheus dump
 	PrometheusMetricsTypes []string `json:"prometheusMetricsTypes,omitempty"`
 }
@@ -141,6 +151,102 @@ func (o *BundleDetails) SetMaxNumRecentCores(v int32) {
 	o.MaxNumRecentCores = &v
 }
 
+// GetPaDumpEndDate returns the PaDumpEndDate field value if set, zero value otherwise.
+func (o *BundleDetails) GetPaDumpEndDate() time.Time {
+	if o == nil || IsNil(o.PaDumpEndDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.PaDumpEndDate
+}
+
+// GetPaDumpEndDateOk returns a tuple with the PaDumpEndDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPaDumpEndDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.PaDumpEndDate) {
+		return nil, false
+	}
+	return o.PaDumpEndDate, true
+}
+
+// HasPaDumpEndDate returns a boolean if a field has been set.
+func (o *BundleDetails) HasPaDumpEndDate() bool {
+	if o != nil && !IsNil(o.PaDumpEndDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaDumpEndDate gets a reference to the given time.Time and assigns it to the PaDumpEndDate field.
+func (o *BundleDetails) SetPaDumpEndDate(v time.Time) {
+	o.PaDumpEndDate = &v
+}
+
+// GetPaDumpStartDate returns the PaDumpStartDate field value if set, zero value otherwise.
+func (o *BundleDetails) GetPaDumpStartDate() time.Time {
+	if o == nil || IsNil(o.PaDumpStartDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.PaDumpStartDate
+}
+
+// GetPaDumpStartDateOk returns a tuple with the PaDumpStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPaDumpStartDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.PaDumpStartDate) {
+		return nil, false
+	}
+	return o.PaDumpStartDate, true
+}
+
+// HasPaDumpStartDate returns a boolean if a field has been set.
+func (o *BundleDetails) HasPaDumpStartDate() bool {
+	if o != nil && !IsNil(o.PaDumpStartDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaDumpStartDate gets a reference to the given time.Time and assigns it to the PaDumpStartDate field.
+func (o *BundleDetails) SetPaDumpStartDate(v time.Time) {
+	o.PaDumpStartDate = &v
+}
+
+// GetPaMetricsFormat returns the PaMetricsFormat field value if set, zero value otherwise.
+func (o *BundleDetails) GetPaMetricsFormat() string {
+	if o == nil || IsNil(o.PaMetricsFormat) {
+		var ret string
+		return ret
+	}
+	return *o.PaMetricsFormat
+}
+
+// GetPaMetricsFormatOk returns a tuple with the PaMetricsFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPaMetricsFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.PaMetricsFormat) {
+		return nil, false
+	}
+	return o.PaMetricsFormat, true
+}
+
+// HasPaMetricsFormat returns a boolean if a field has been set.
+func (o *BundleDetails) HasPaMetricsFormat() bool {
+	if o != nil && !IsNil(o.PaMetricsFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaMetricsFormat gets a reference to the given string and assigns it to the PaMetricsFormat field.
+func (o *BundleDetails) SetPaMetricsFormat(v string) {
+	o.PaMetricsFormat = &v
+}
+
 // GetPromDumpEndDate returns the PromDumpEndDate field value if set, zero value otherwise.
 func (o *BundleDetails) GetPromDumpEndDate() time.Time {
 	if o == nil || IsNil(o.PromDumpEndDate) {
@@ -205,6 +311,70 @@ func (o *BundleDetails) SetPromDumpStartDate(v time.Time) {
 	o.PromDumpStartDate = &v
 }
 
+// GetPromMetricsFormat returns the PromMetricsFormat field value if set, zero value otherwise.
+func (o *BundleDetails) GetPromMetricsFormat() string {
+	if o == nil || IsNil(o.PromMetricsFormat) {
+		var ret string
+		return ret
+	}
+	return *o.PromMetricsFormat
+}
+
+// GetPromMetricsFormatOk returns a tuple with the PromMetricsFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPromMetricsFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.PromMetricsFormat) {
+		return nil, false
+	}
+	return o.PromMetricsFormat, true
+}
+
+// HasPromMetricsFormat returns a boolean if a field has been set.
+func (o *BundleDetails) HasPromMetricsFormat() bool {
+	if o != nil && !IsNil(o.PromMetricsFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromMetricsFormat gets a reference to the given string and assigns it to the PromMetricsFormat field.
+func (o *BundleDetails) SetPromMetricsFormat(v string) {
+	o.PromMetricsFormat = &v
+}
+
+// GetPromMetricsStepSec returns the PromMetricsStepSec field value if set, zero value otherwise.
+func (o *BundleDetails) GetPromMetricsStepSec() int32 {
+	if o == nil || IsNil(o.PromMetricsStepSec) {
+		var ret int32
+		return ret
+	}
+	return *o.PromMetricsStepSec
+}
+
+// GetPromMetricsStepSecOk returns a tuple with the PromMetricsStepSec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetPromMetricsStepSecOk() (*int32, bool) {
+	if o == nil || IsNil(o.PromMetricsStepSec) {
+		return nil, false
+	}
+	return o.PromMetricsStepSec, true
+}
+
+// HasPromMetricsStepSec returns a boolean if a field has been set.
+func (o *BundleDetails) HasPromMetricsStepSec() bool {
+	if o != nil && !IsNil(o.PromMetricsStepSec) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromMetricsStepSec gets a reference to the given int32 and assigns it to the PromMetricsStepSec field.
+func (o *BundleDetails) SetPromMetricsStepSec(v int32) {
+	o.PromMetricsStepSec = &v
+}
+
 // GetPrometheusMetricsTypes returns the PrometheusMetricsTypes field value if set, zero value otherwise.
 func (o *BundleDetails) GetPrometheusMetricsTypes() []string {
 	if o == nil || IsNil(o.PrometheusMetricsTypes) {
@@ -254,11 +424,26 @@ func (o BundleDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxNumRecentCores) {
 		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
 	}
+	if !IsNil(o.PaDumpEndDate) {
+		toSerialize["paDumpEndDate"] = o.PaDumpEndDate
+	}
+	if !IsNil(o.PaDumpStartDate) {
+		toSerialize["paDumpStartDate"] = o.PaDumpStartDate
+	}
+	if !IsNil(o.PaMetricsFormat) {
+		toSerialize["paMetricsFormat"] = o.PaMetricsFormat
+	}
 	if !IsNil(o.PromDumpEndDate) {
 		toSerialize["promDumpEndDate"] = o.PromDumpEndDate
 	}
 	if !IsNil(o.PromDumpStartDate) {
 		toSerialize["promDumpStartDate"] = o.PromDumpStartDate
+	}
+	if !IsNil(o.PromMetricsFormat) {
+		toSerialize["promMetricsFormat"] = o.PromMetricsFormat
+	}
+	if !IsNil(o.PromMetricsStepSec) {
+		toSerialize["promMetricsStepSec"] = o.PromMetricsStepSec
 	}
 	if !IsNil(o.PrometheusMetricsTypes) {
 		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes

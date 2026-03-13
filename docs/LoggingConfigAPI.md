@@ -2,10 +2,10 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                     | HTTP request                          | Description             |
-| -------------------------------------------------------------------------- | ------------------------------------- | ----------------------- |
-| [**SetAuditLoggingSettings**](LoggingConfigAPI.md#SetAuditLoggingSettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level |
-| [**SetLoggingSettings**](LoggingConfigAPI.md#SetLoggingSettings)           | **Post** /api/v1/logging_config       | Set Logging Level       |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**SetAuditLoggingSettings**](LoggingConfigAPI.md#SetAuditLoggingSettings) | **Post** /api/v1/audit_logging_config | Set Audit Logging Level
+[**SetLoggingSettings**](LoggingConfigAPI.md#SetLoggingSettings) | **Post** /api/v1/logging_config | Set Logging Level
 
 
 
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,10 +52,10 @@ func main() {
 Other parameters are passed through a pointer to a apiSetAuditLoggingSettingsRequest struct via the builder pattern
 
 
-| Name                   | Type                                            | Description                        | Notes |
-| ---------------------- | ----------------------------------------------- | ---------------------------------- | ----- |
-| **auditLoggingConfig** | [**AuditLoggingConfig**](AuditLoggingConfig.md) | Audit Logging config to be updated |
-| **request**            | [**interface{}**](interface{}.md)               |                                    |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **auditLoggingConfig** | [**AuditLoggingConfig**](AuditLoggingConfig.md) | Audit Logging config to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -90,7 +90,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -118,10 +118,10 @@ func main() {
 Other parameters are passed through a pointer to a apiSetLoggingSettingsRequest struct via the builder pattern
 
 
-| Name              | Type                                                  | Description                  | Notes |
-| ----------------- | ----------------------------------------------------- | ---------------------------- | ----- |
-| **loggingConfig** | [**PlatformLoggingConfig**](PlatformLoggingConfig.md) | Logging config to be updated |
-| **request**       | [**interface{}**](interface{}.md)                     |                              |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **loggingConfig** | [**PlatformLoggingConfig**](PlatformLoggingConfig.md) | Logging config to be updated | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

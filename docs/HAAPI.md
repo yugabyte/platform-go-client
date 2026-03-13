@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                | HTTP request                                  | Description                     |
-| ----------------------------------------------------- | --------------------------------------------- | ------------------------------- |
-| [**CreateHAConfig**](HAAPI.md#CreateHAConfig)         | **Post** /api/v1/settings/ha/config           | Create high availability config |
-| [**DeleteHAConfig**](HAAPI.md#DeleteHAConfig)         | **Delete** /api/v1/settings/ha/config/{cUUID} |
-| [**EditHAConfig**](HAAPI.md#EditHAConfig)             | **Put** /api/v1/settings/ha/config/{cUUID}    |
-| [**GenerateClusterKey**](HAAPI.md#GenerateClusterKey) | **Get** /api/v1/settings/ha/generate_key      | Generate cluster key            |
-| [**GetHAConfig**](HAAPI.md#GetHAConfig)               | **Get** /api/v1/settings/ha/config            | Get high availability config    |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateHAConfig**](HAAPI.md#CreateHAConfig) | **Post** /api/v1/settings/ha/config | Create high availability config
+[**DeleteHAConfig**](HAAPI.md#DeleteHAConfig) | **Delete** /api/v1/settings/ha/config/{cUUID} | 
+[**EditHAConfig**](HAAPI.md#EditHAConfig) | **Put** /api/v1/settings/ha/config/{cUUID} | 
+[**GenerateClusterKey**](HAAPI.md#GenerateClusterKey) | **Get** /api/v1/settings/ha/generate_key | Generate cluster key
+[**GetHAConfig**](HAAPI.md#GetHAConfig) | **Get** /api/v1/settings/ha/config | Get high availability config
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -57,10 +57,10 @@ func main() {
 Other parameters are passed through a pointer to a apiCreateHAConfigRequest struct via the builder pattern
 
 
-| Name                    | Type                                        | Description | Notes |
-| ----------------------- | ------------------------------------------- | ----------- | ----- |
-| **hAConfigFormRequest** | [**HAConfigFormData**](HAConfigFormData.md) |             |
-| **request**             | [**interface{}**](interface{}.md)           |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hAConfigFormRequest** | [**HAConfigFormData**](HAConfigFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -95,7 +95,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -115,18 +115,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteHAConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 
@@ -163,7 +163,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -183,18 +183,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditHAConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 
@@ -233,7 +233,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -290,7 +290,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {

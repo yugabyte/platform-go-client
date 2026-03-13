@@ -20,6 +20,8 @@ var _ MappedNullable = &GCPCloudMonitoringConfig{}
 // GCPCloudMonitoringConfig struct for GCPCloudMonitoringConfig
 type GCPCloudMonitoringConfig struct {
 	TelemetryProviderConfig
+	// WARNING: This is a preview API that could change. GCP service account credentials as JSON string (content of the credentials JSON file)
+	CredentialsString *string `json:"credentialsString,omitempty"`
 	// Project ID
 	Project *string `json:"project,omitempty"`
 }
@@ -39,6 +41,38 @@ func NewGCPCloudMonitoringConfig() *GCPCloudMonitoringConfig {
 func NewGCPCloudMonitoringConfigWithDefaults() *GCPCloudMonitoringConfig {
 	this := GCPCloudMonitoringConfig{}
 	return &this
+}
+
+// GetCredentialsString returns the CredentialsString field value if set, zero value otherwise.
+func (o *GCPCloudMonitoringConfig) GetCredentialsString() string {
+	if o == nil || IsNil(o.CredentialsString) {
+		var ret string
+		return ret
+	}
+	return *o.CredentialsString
+}
+
+// GetCredentialsStringOk returns a tuple with the CredentialsString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudMonitoringConfig) GetCredentialsStringOk() (*string, bool) {
+	if o == nil || IsNil(o.CredentialsString) {
+		return nil, false
+	}
+	return o.CredentialsString, true
+}
+
+// HasCredentialsString returns a boolean if a field has been set.
+func (o *GCPCloudMonitoringConfig) HasCredentialsString() bool {
+	if o != nil && !IsNil(o.CredentialsString) {
+		return true
+	}
+
+	return false
+}
+
+// SetCredentialsString gets a reference to the given string and assigns it to the CredentialsString field.
+func (o *GCPCloudMonitoringConfig) SetCredentialsString(v string) {
+	o.CredentialsString = &v
 }
 
 // GetProject returns the Project field value if set, zero value otherwise.
@@ -90,6 +124,9 @@ func (o GCPCloudMonitoringConfig) ToMap() (map[string]interface{}, error) {
 	errTelemetryProviderConfig = json.Unmarshal([]byte(serializedTelemetryProviderConfig), &toSerialize)
 	if errTelemetryProviderConfig != nil {
 		return map[string]interface{}{}, errTelemetryProviderConfig
+	}
+	if !IsNil(o.CredentialsString) {
+		toSerialize["credentialsString"] = o.CredentialsString
 	}
 	if !IsNil(o.Project) {
 		toSerialize["project"] = o.Project

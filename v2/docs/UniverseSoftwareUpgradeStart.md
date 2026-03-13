@@ -10,7 +10,9 @@ Name | Type | Description | Notes
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **AllowRollback** | Pointer to **bool** | perform an upgrade where rollback is allowed | [optional] [default to true]
 **UpgradeSystemCatalog** | Pointer to **bool** | Upgrade the YugabyteDB Catalog | [optional] [default to true]
+**RunOnlyPrechecks** | Pointer to **bool** | If true, only run prechecks for the upgrade without executing the upgrade. | [optional] [default to false]
 **Version** | **string** | The target release version to upgrade to. | 
+**CanaryUpgradeConfig** | Pointer to [**CanaryUpgradeConfigSpec**](CanaryUpgradeConfigSpec.md) |  | [optional] 
 
 ## Methods
 
@@ -181,6 +183,31 @@ SetUpgradeSystemCatalog sets UpgradeSystemCatalog field to given value.
 
 HasUpgradeSystemCatalog returns a boolean if a field has been set.
 
+### GetRunOnlyPrechecks
+
+`func (o *UniverseSoftwareUpgradeStart) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *UniverseSoftwareUpgradeStart) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *UniverseSoftwareUpgradeStart) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *UniverseSoftwareUpgradeStart) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
+
 ### GetVersion
 
 `func (o *UniverseSoftwareUpgradeStart) GetVersion() string`
@@ -200,6 +227,31 @@ and a boolean to check if the value has been set.
 
 SetVersion sets Version field to given value.
 
+
+### GetCanaryUpgradeConfig
+
+`func (o *UniverseSoftwareUpgradeStart) GetCanaryUpgradeConfig() CanaryUpgradeConfigSpec`
+
+GetCanaryUpgradeConfig returns the CanaryUpgradeConfig field if non-nil, zero value otherwise.
+
+### GetCanaryUpgradeConfigOk
+
+`func (o *UniverseSoftwareUpgradeStart) GetCanaryUpgradeConfigOk() (*CanaryUpgradeConfigSpec, bool)`
+
+GetCanaryUpgradeConfigOk returns a tuple with the CanaryUpgradeConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanaryUpgradeConfig
+
+`func (o *UniverseSoftwareUpgradeStart) SetCanaryUpgradeConfig(v CanaryUpgradeConfigSpec)`
+
+SetCanaryUpgradeConfig sets CanaryUpgradeConfig field to given value.
+
+### HasCanaryUpgradeConfig
+
+`func (o *UniverseSoftwareUpgradeStart) HasCanaryUpgradeConfig() bool`
+
+HasCanaryUpgradeConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CredentialsString** | Pointer to **string** | WARNING: This is a preview API that could change. GCP service account credentials as JSON string (content of the credentials JSON file) | [optional] 
 **Project** | Pointer to **string** | Project ID | [optional] 
 
 ## Methods
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewGCPCloudMonitoringConfigWithDefaults instantiates a new GCPCloudMonitoringConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCredentialsString
+
+`func (o *GCPCloudMonitoringConfig) GetCredentialsString() string`
+
+GetCredentialsString returns the CredentialsString field if non-nil, zero value otherwise.
+
+### GetCredentialsStringOk
+
+`func (o *GCPCloudMonitoringConfig) GetCredentialsStringOk() (*string, bool)`
+
+GetCredentialsStringOk returns a tuple with the CredentialsString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCredentialsString
+
+`func (o *GCPCloudMonitoringConfig) SetCredentialsString(v string)`
+
+SetCredentialsString sets CredentialsString field to given value.
+
+### HasCredentialsString
+
+`func (o *GCPCloudMonitoringConfig) HasCredentialsString() bool`
+
+HasCredentialsString returns a boolean if a field has been set.
 
 ### GetProject
 

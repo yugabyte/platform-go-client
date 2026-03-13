@@ -2,17 +2,17 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                     | HTTP request                                          | Description                                                                                                      |
-| -------------------------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [**ApiLogin**](SessionManagementAPI.md#ApiLogin)                           | **Post** /api/v1/api_login                            | Authenticate user using email and password                                                                       |
-| [**ApiToken**](SessionManagementAPI.md#ApiToken)                           | **Put** /api/v1/customers/{cUUID}/api_token           | Regenerate and fetch API token                                                                                   |
-| [**AppVersion**](SessionManagementAPI.md#AppVersion)                       | **Get** /api/v1/app_version                           | appVersion                                                                                                       |
-| [**CustomerCount**](SessionManagementAPI.md#CustomerCount)                 | **Get** /api/v1/customer_count                        | customerCount                                                                                                    |
-| [**GetAdminNotifications**](SessionManagementAPI.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin                                                                          |
-| [**GetFilteredLogs**](SessionManagementAPI.md#GetFilteredLogs)             | **Get** /api/v1/logs                                  | getFilteredLogs                                                                                                  |
-| [**GetLogs**](SessionManagementAPI.md#GetLogs)                             | **Get** /api/v1/logs/{maxLines}                       | getLogs                                                                                                          |
-| [**GetSessionInfo**](SessionManagementAPI.md#GetSessionInfo)               | **Get** /api/v1/session_info                          | Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that. |
-| [**RegisterCustomer**](SessionManagementAPI.md#RegisterCustomer)           | **Post** /api/v1/register                             | Register a customer                                                                                              |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**ApiLogin**](SessionManagementAPI.md#ApiLogin) | **Post** /api/v1/api_login | Authenticate user using email and password
+[**ApiToken**](SessionManagementAPI.md#ApiToken) | **Put** /api/v1/customers/{cUUID}/api_token | Regenerate and fetch API token
+[**AppVersion**](SessionManagementAPI.md#AppVersion) | **Get** /api/v1/app_version | appVersion
+[**CustomerCount**](SessionManagementAPI.md#CustomerCount) | **Get** /api/v1/customer_count | customerCount
+[**GetAdminNotifications**](SessionManagementAPI.md#GetAdminNotifications) | **Get** /api/v1/customers/{cUUID}/admin_notifications | Current list of notifications for admin
+[**GetFilteredLogs**](SessionManagementAPI.md#GetFilteredLogs) | **Get** /api/v1/logs | getFilteredLogs
+[**GetLogs**](SessionManagementAPI.md#GetLogs) | **Get** /api/v1/logs/{maxLines} | getLogs
+[**GetSessionInfo**](SessionManagementAPI.md#GetSessionInfo) | **Get** /api/v1/session_info | Get current user and customer uuid. This will not generate or return the API token, use /api_token API for that.
+[**RegisterCustomer**](SessionManagementAPI.md#RegisterCustomer) | **Post** /api/v1/register | Register a customer
 
 
 
@@ -31,7 +31,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -59,10 +59,10 @@ func main() {
 Other parameters are passed through a pointer to a apiApiLoginRequest struct via the builder pattern
 
 
-| Name                      | Type                                                  | Description | Notes |
-| ------------------------- | ----------------------------------------------------- | ----------- | ----- |
-| **customerLoginFormData** | [**CustomerLoginFormData**](CustomerLoginFormData.md) |             |
-| **request**               | [**interface{}**](interface{}.md)                     |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customerLoginFormData** | [**CustomerLoginFormData**](CustomerLoginFormData.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -97,7 +97,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -120,18 +120,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiApiTokenRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **apiTokenVersion** | **int64** |  | [default to -1]
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -169,7 +169,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -228,7 +228,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -289,7 +289,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -310,18 +310,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAdminNotificationsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -357,7 +357,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -388,13 +388,13 @@ func main() {
 Other parameters are passed through a pointer to a apiGetFilteredLogsRequest struct via the builder pattern
 
 
-| Name             | Type       | Description | Notes                         |
-| ---------------- | ---------- | ----------- | ----------------------------- |
-| **maxLines**     | **int32**  |             | [default to 10000]            |
-| **universeName** | **string** |             | [default to &quot;null&quot;] |
-| **queryRegex**   | **string** |             | [default to &quot;null&quot;] |
-| **startDate**    | **string** |             | [default to &quot;null&quot;] |
-| **endDate**      | **string** |             | [default to &quot;null&quot;] |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **maxLines** | **int32** |  | [default to 10000]
+ **universeName** | **string** |  | [default to &quot;null&quot;]
+ **queryRegex** | **string** |  | [default to &quot;null&quot;]
+ **startDate** | **string** |  | [default to &quot;null&quot;]
+ **endDate** | **string** |  | [default to &quot;null&quot;]
 
 ### Return type
 
@@ -429,7 +429,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -450,18 +450,18 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **maxLines** | **int32**           |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**maxLines** | **int32** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetLogsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -499,7 +499,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -526,9 +526,9 @@ func main() {
 Other parameters are passed through a pointer to a apiGetSessionInfoRequest struct via the builder pattern
 
 
-| Name        | Type                              | Description | Notes |
-| ----------- | --------------------------------- | ----------- | ----- |
-| **request** | [**interface{}**](interface{}.md) |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -565,7 +565,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -594,11 +594,11 @@ func main() {
 Other parameters are passed through a pointer to a apiRegisterCustomerRequest struct via the builder pattern
 
 
-| Name                         | Type                                                        | Description | Notes              |
-| ---------------------------- | ----------------------------------------------------------- | ----------- | ------------------ |
-| **customerRegisterFormData** | [**CustomerRegisterFormData**](CustomerRegisterFormData.md) |             |
-| **generateApiToken**         | **bool**                                                    |             | [default to false] |
-| **request**                  | [**interface{}**](interface{}.md)                           |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customerRegisterFormData** | [**CustomerRegisterFormData**](CustomerRegisterFormData.md) |  | 
+ **generateApiToken** | **bool** |  | [default to false]
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

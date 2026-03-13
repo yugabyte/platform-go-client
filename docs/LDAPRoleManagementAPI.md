@@ -2,9 +2,9 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                            | HTTP request                                                            | Description                                |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------ |
-| [**SyncLdapUniverse**](LDAPRoleManagementAPI.md#SyncLdapUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync | Perform an LDAP users sync on the universe |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**SyncLdapUniverse**](LDAPRoleManagementAPI.md#SyncLdapUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/ldap_roles_sync | Perform an LDAP users sync on the universe
 
 
 
@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -49,19 +49,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **univUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**univUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSyncLdapUniverseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **syncLdapUniverse** | [**LdapUnivSyncFormData**](LdapUnivSyncFormData.md) | config to sync universe roles with ldap users | 

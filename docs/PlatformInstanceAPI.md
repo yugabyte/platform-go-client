@@ -2,12 +2,12 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                        | HTTP request                                                         | Description               |
-| ------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------- |
-| [**CreateInstance**](PlatformInstanceAPI.md#CreateInstance)   | **Post** /api/v1/settings/ha/config/{cUUID}/instance                 | Create platform instance  |
-| [**DeleteInstance**](PlatformInstanceAPI.md#DeleteInstance)   | **Delete** /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}       |
-| [**GetLocal**](PlatformInstanceAPI.md#GetLocal)               | **Get** /api/v1/settings/ha/config/{cUUID}/instance/local            |
-| [**PromoteInstance**](PlatformInstanceAPI.md#PromoteInstance) | **Post** /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}/promote | Promote platform instance |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateInstance**](PlatformInstanceAPI.md#CreateInstance) | **Post** /api/v1/settings/ha/config/{cUUID}/instance | Create platform instance
+[**DeleteInstance**](PlatformInstanceAPI.md#DeleteInstance) | **Delete** /api/v1/settings/ha/config/{cUUID}/instance/{iUUID} | 
+[**GetLocal**](PlatformInstanceAPI.md#GetLocal) | **Get** /api/v1/settings/ha/config/{cUUID}/instance/local | 
+[**PromoteInstance**](PlatformInstanceAPI.md#PromoteInstance) | **Post** /api/v1/settings/ha/config/{cUUID}/instance/{iUUID}/promote | Promote platform instance
 
 
 
@@ -28,7 +28,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -51,18 +51,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateInstanceRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **platformInstanceFormRequest** | [**PlatformInstanceFormData**](PlatformInstanceFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -100,7 +100,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -121,19 +121,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **iUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**iUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteInstanceRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -171,7 +171,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -190,18 +190,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetLocalRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -239,7 +239,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -263,19 +263,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **iUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**iUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPromoteInstanceRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **platformBackupRestoreRequest** | [**RestorePlatformBackupFormData**](RestorePlatformBackupFormData.md) |  | 

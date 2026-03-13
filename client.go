@@ -108,6 +108,8 @@ type APIClient struct {
 
 	NodeInstancesAPI *NodeInstancesAPIService
 
+	PACollectorAPI *PACollectorAPIService
+
 	PITRManagementAPI *PITRManagementAPIService
 
 	PackagesControllerAPI *PackagesControllerAPIService
@@ -139,8 +141,6 @@ type APIClient struct {
 	TabletServerManagementAPI *TabletServerManagementAPIService
 
 	TelemetryProviderAPI *TelemetryProviderAPIService
-
-	TroubleshootingPlatformAPI *TroubleshootingPlatformAPIService
 
 	UniverseActionsAPI *UniverseActionsAPIService
 
@@ -213,6 +213,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.NewReleaseManagementAPI = (*NewReleaseManagementAPIService)(&c.common)
 	c.NodeAgentsAPI = (*NodeAgentsAPIService)(&c.common)
 	c.NodeInstancesAPI = (*NodeInstancesAPIService)(&c.common)
+	c.PACollectorAPI = (*PACollectorAPIService)(&c.common)
 	c.PITRManagementAPI = (*PITRManagementAPIService)(&c.common)
 	c.PackagesControllerAPI = (*PackagesControllerAPIService)(&c.common)
 	c.PerformanceAdvisorAPI = (*PerformanceAdvisorAPIService)(&c.common)
@@ -229,7 +230,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.TableManagementAPI = (*TableManagementAPIService)(&c.common)
 	c.TabletServerManagementAPI = (*TabletServerManagementAPIService)(&c.common)
 	c.TelemetryProviderAPI = (*TelemetryProviderAPIService)(&c.common)
-	c.TroubleshootingPlatformAPI = (*TroubleshootingPlatformAPIService)(&c.common)
 	c.UniverseActionsAPI = (*UniverseActionsAPIService)(&c.common)
 	c.UniverseCDCManagementAPI = (*UniverseCDCManagementAPIService)(&c.common)
 	c.UniverseClusterMutationsAPI = (*UniverseClusterMutationsAPIService)(&c.common)

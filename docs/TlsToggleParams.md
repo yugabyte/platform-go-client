@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdditionalServicesStateData** | Pointer to [**AdditionalServicesStateData**](AdditionalServicesStateData.md) |  | [optional] 
-**AllowInsecure** | **bool** |  | 
+**AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
 **AutoRollbackPerformed** | Pointer to **bool** |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
+**PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
@@ -78,7 +79,7 @@ Name | Type | Description | Notes
 
 ### NewTlsToggleParams
 
-`func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
+`func NewTlsToggleParams(clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *TlsToggleParams`
 
 NewTlsToggleParams instantiates a new TlsToggleParams object
 This constructor will assign default values to properties that have it defined,
@@ -137,6 +138,11 @@ and a boolean to check if the value has been set.
 
 SetAllowInsecure sets AllowInsecure field to given value.
 
+### HasAllowInsecure
+
+`func (o *TlsToggleParams) HasAllowInsecure() bool`
+
+HasAllowInsecure returns a boolean if a field has been set.
 
 ### GetArch
 
@@ -937,6 +943,31 @@ SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
 `func (o *TlsToggleParams) HasOtelCollectorEnabled() bool`
 
 HasOtelCollectorEnabled returns a boolean if a field has been set.
+
+### GetPaCollectorUuid
+
+`func (o *TlsToggleParams) GetPaCollectorUuid() string`
+
+GetPaCollectorUuid returns the PaCollectorUuid field if non-nil, zero value otherwise.
+
+### GetPaCollectorUuidOk
+
+`func (o *TlsToggleParams) GetPaCollectorUuidOk() (*string, bool)`
+
+GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaCollectorUuid
+
+`func (o *TlsToggleParams) SetPaCollectorUuid(v string)`
+
+SetPaCollectorUuid sets PaCollectorUuid field to given value.
+
+### HasPaCollectorUuid
+
+`func (o *TlsToggleParams) HasPaCollectorUuid() bool`
+
+HasPaCollectorUuid returns a boolean if a field has been set.
 
 ### GetPlacementModificationTaskUuid
 

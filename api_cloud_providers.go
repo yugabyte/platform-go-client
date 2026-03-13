@@ -231,7 +231,7 @@ func (a *CloudProvidersAPIService) CreateProvidersExecute(r CloudProvidersAPICre
 	if r.validate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", r.validate, "", "")
 	} else {
-		var defaultValue bool = false
+		var defaultValue bool = true
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
 		r.validate = &defaultValue
 	}
@@ -673,7 +673,7 @@ func (a *CloudProvidersAPIService) EditProviderExecute(r CloudProvidersAPIEditPr
 	if r.validate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", r.validate, "", "")
 	} else {
-		var defaultValue bool = false
+		var defaultValue bool = true
 		parameterAddToHeaderOrQuery(localVarQueryParams, "validate", defaultValue, "", "")
 		r.validate = &defaultValue
 	}

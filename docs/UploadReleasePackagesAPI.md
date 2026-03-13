@@ -2,10 +2,10 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                               | HTTP request                                                  | Description                      |
-| -------------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------- |
-| [**GetUploadRelease**](UploadReleasePackagesAPI.md#GetUploadRelease) | **Get** /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID} | get an uploaded release metadata |
-| [**UploadRelease**](UploadReleasePackagesAPI.md#UploadRelease)       | **Post** /api/v1/customers/{cUUID}/ybdb_release/upload        | upload a release tgz             |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetUploadRelease**](UploadReleasePackagesAPI.md#GetUploadRelease) | **Get** /api/v1/customers/{cUUID}/ybdb_release/upload/{rUUID} | get an uploaded release metadata
+[**UploadRelease**](UploadReleasePackagesAPI.md#UploadRelease) | **Post** /api/v1/customers/{cUUID}/ybdb_release/upload | upload a release tgz
 
 
 
@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -49,19 +49,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetUploadReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -101,7 +101,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -123,18 +123,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUploadReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 

@@ -7,8 +7,13 @@ Name | Type | Description | Notes
 **Components** | **[]string** |  | 
 **MaxCoreFileSize** | Pointer to **int64** | Max size of the collected cores (if any) | [optional] 
 **MaxNumRecentCores** | Pointer to **int32** | Max number of most recent cores to collect (if any) | [optional] 
+**PaDumpEndDate** | Pointer to **time.Time** | End date to filter Perf Advisor data | [optional] 
+**PaDumpStartDate** | Pointer to **time.Time** | Start date to filter Perf Advisor data | [optional] 
+**PaMetricsFormat** | Pointer to **string** | Specifies PA Dump metrics format. | [optional] 
 **PromDumpEndDate** | Pointer to **time.Time** | End date to filter prometheus metrics till | [optional] 
 **PromDumpStartDate** | Pointer to **time.Time** | Start date to filter prometheus metrics from | [optional] 
+**PromMetricsFormat** | Pointer to **string** | Specifies Prom Dump metrics format. | [optional] 
+**PromMetricsStepSec** | Pointer to **int32** | Specifies Prom Dump metrics step in seconds. | [optional] 
 **PrometheusMetricsTypes** | Pointer to **[]string** | List of exports to be included in the prometheus dump | [optional] 
 
 ## Methods
@@ -100,6 +105,81 @@ SetMaxNumRecentCores sets MaxNumRecentCores field to given value.
 
 HasMaxNumRecentCores returns a boolean if a field has been set.
 
+### GetPaDumpEndDate
+
+`func (o *BundleDetails) GetPaDumpEndDate() time.Time`
+
+GetPaDumpEndDate returns the PaDumpEndDate field if non-nil, zero value otherwise.
+
+### GetPaDumpEndDateOk
+
+`func (o *BundleDetails) GetPaDumpEndDateOk() (*time.Time, bool)`
+
+GetPaDumpEndDateOk returns a tuple with the PaDumpEndDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaDumpEndDate
+
+`func (o *BundleDetails) SetPaDumpEndDate(v time.Time)`
+
+SetPaDumpEndDate sets PaDumpEndDate field to given value.
+
+### HasPaDumpEndDate
+
+`func (o *BundleDetails) HasPaDumpEndDate() bool`
+
+HasPaDumpEndDate returns a boolean if a field has been set.
+
+### GetPaDumpStartDate
+
+`func (o *BundleDetails) GetPaDumpStartDate() time.Time`
+
+GetPaDumpStartDate returns the PaDumpStartDate field if non-nil, zero value otherwise.
+
+### GetPaDumpStartDateOk
+
+`func (o *BundleDetails) GetPaDumpStartDateOk() (*time.Time, bool)`
+
+GetPaDumpStartDateOk returns a tuple with the PaDumpStartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaDumpStartDate
+
+`func (o *BundleDetails) SetPaDumpStartDate(v time.Time)`
+
+SetPaDumpStartDate sets PaDumpStartDate field to given value.
+
+### HasPaDumpStartDate
+
+`func (o *BundleDetails) HasPaDumpStartDate() bool`
+
+HasPaDumpStartDate returns a boolean if a field has been set.
+
+### GetPaMetricsFormat
+
+`func (o *BundleDetails) GetPaMetricsFormat() string`
+
+GetPaMetricsFormat returns the PaMetricsFormat field if non-nil, zero value otherwise.
+
+### GetPaMetricsFormatOk
+
+`func (o *BundleDetails) GetPaMetricsFormatOk() (*string, bool)`
+
+GetPaMetricsFormatOk returns a tuple with the PaMetricsFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaMetricsFormat
+
+`func (o *BundleDetails) SetPaMetricsFormat(v string)`
+
+SetPaMetricsFormat sets PaMetricsFormat field to given value.
+
+### HasPaMetricsFormat
+
+`func (o *BundleDetails) HasPaMetricsFormat() bool`
+
+HasPaMetricsFormat returns a boolean if a field has been set.
+
 ### GetPromDumpEndDate
 
 `func (o *BundleDetails) GetPromDumpEndDate() time.Time`
@@ -149,6 +229,56 @@ SetPromDumpStartDate sets PromDumpStartDate field to given value.
 `func (o *BundleDetails) HasPromDumpStartDate() bool`
 
 HasPromDumpStartDate returns a boolean if a field has been set.
+
+### GetPromMetricsFormat
+
+`func (o *BundleDetails) GetPromMetricsFormat() string`
+
+GetPromMetricsFormat returns the PromMetricsFormat field if non-nil, zero value otherwise.
+
+### GetPromMetricsFormatOk
+
+`func (o *BundleDetails) GetPromMetricsFormatOk() (*string, bool)`
+
+GetPromMetricsFormatOk returns a tuple with the PromMetricsFormat field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPromMetricsFormat
+
+`func (o *BundleDetails) SetPromMetricsFormat(v string)`
+
+SetPromMetricsFormat sets PromMetricsFormat field to given value.
+
+### HasPromMetricsFormat
+
+`func (o *BundleDetails) HasPromMetricsFormat() bool`
+
+HasPromMetricsFormat returns a boolean if a field has been set.
+
+### GetPromMetricsStepSec
+
+`func (o *BundleDetails) GetPromMetricsStepSec() int32`
+
+GetPromMetricsStepSec returns the PromMetricsStepSec field if non-nil, zero value otherwise.
+
+### GetPromMetricsStepSecOk
+
+`func (o *BundleDetails) GetPromMetricsStepSecOk() (*int32, bool)`
+
+GetPromMetricsStepSecOk returns a tuple with the PromMetricsStepSec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPromMetricsStepSec
+
+`func (o *BundleDetails) SetPromMetricsStepSec(v int32)`
+
+SetPromMetricsStepSec sets PromMetricsStepSec field to given value.
+
+### HasPromMetricsStepSec
+
+`func (o *BundleDetails) HasPromMetricsStepSec() bool`
+
+HasPromMetricsStepSec returns a boolean if a field has been set.
 
 ### GetPrometheusMetricsTypes
 

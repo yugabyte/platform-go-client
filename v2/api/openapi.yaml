@@ -2542,6 +2542,338 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /customers/{cUUID}/universes/{uniUUID}/run-script:
+    post:
+      description: |
+        Execute a bash script on one or more nodes in the universe. The script can be provided
+        inline as content or as a path to a file on the YugabyteDB Anywhere node. Results including stdout,
+        stderr, and exit codes are returned for each node.
+
+        This API requires the runtime configuration `yb.node_script.enabled` to be set to true
+        for the universe.
+
+        **Important**: Scripts are executed remotely on database nodes via SSH or Node Agent. Once a
+        script starts executing on a node, it cannot be cancelled remotely. If this API times out or
+        fails while waiting for results, scripts that have already started may continue running on
+        the remote nodes until completion. For this reason, scripts should ideally be:
+        - **Short-lived**: Avoid long-running operations
+        - **Idempotent**: Safe to run multiple times if retried
+        - **Self-terminating**: Include appropriate timeouts within the script itself
+      operationId: runScript
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/RunScriptReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunScriptResponse'
+          description: Script execution results from all targeted nodes
+          x-yba-api-visibility: internal
+        "400":
+          description: Invalid input or feature not enabled
+        "403":
+          description: Feature not enabled for this universe
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Run a script on database nodes
+      tags:
+      - Universe
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: TROUBLESHOOT
+        resourceLocation:
+          path: UNIVERSES
+          sourceType: ENDPOINT
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: internal
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/universes/{uniUUID}/file-collections:
+    post:
+      description: |
+        Collect specified files from one or more nodes in the universe. Files can be collected
+        by specifying individual file paths or directory paths. The files are packaged into a
+        tar.gz archive on each database node.
+
+        This API requires the runtime configuration `yb.node_script.enabled` to be set to true
+        for the universe.
+
+        **Important**: The response includes `collection_uuid` which can be used with the
+        download and cleanup endpoints. The tar files are stored on the database nodes and
+        can be downloaded using GET /file-collections/{collectionUUID}/download.
+
+        **Security**: This API is restricted to localhost access only. It can only be called from
+        the same machine where YugabyteDB Anywhere is running.
+      operationId: createFileCollection
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CollectFilesReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectFilesResponse'
+          description: File collection results from all targeted nodes
+          x-yba-api-visibility: internal
+        "400":
+          description: Invalid input or feature not enabled
+        "403":
+          description: Feature not enabled for this universe or not accessed from
+            localhost
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Collect files from database nodes
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Universe
+        auditTargetId: uniUUID.toString()
+        auditActionType: CreateFileCollection
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: TROUBLESHOOT
+        resourceLocation:
+          path: UNIVERSES
+          sourceType: ENDPOINT
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: internal
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}/download:
+    get:
+      description: "Download previously collected files from database nodes. Use the\
+        \ collection_uuid \nreturned by the create file collection API (POST /file-collections)\
+        \ to identify \nwhich files to download.\n\nThis API downloads the tar.gz\
+        \ archives from each database node and streams them\nback to the client as\
+        \ a combined archive.\n\n**Note**: By default, this API does NOT have localhost\
+        \ restriction and can be\ncalled from any authorized client. However, if cleanup_db_nodes_after=true\
+        \ is specified,\nlocalhost restriction applies since it modifies files on\
+        \ database nodes.\n"
+      operationId: downloadFileCollection
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Collection UUID returned by create file collection API
+        explode: false
+        in: path
+        name: collectionUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: "If true, automatically delete the collected files from DB nodes\
+          \ after successful download.\nThis is equivalent to calling DELETE /file-collections/{collectionUUID}\
+          \ with \ndelete_from_db_nodes=true after the download completes.\nDefault\
+          \ is false (files remain on DB nodes until explicitly deleted).\n**Security**:\
+          \ When this is set to true, localhost restriction applies.\n"
+        explode: true
+        in: query
+        name: cleanup_db_nodes_after
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/gzip:
+              schema:
+                format: binary
+                type: string
+          description: Binary tar.gz archive containing all collected files
+        "400":
+          description: Collection not found or already cleaned up
+        "403":
+          description: "Feature not enabled for this universe, or cleanup_db_nodes_after=true\
+            \ but not accessed from localhost"
+        "404":
+          description: Collection not found
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Download collected files
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Universe
+        auditTargetId: uniUUID.toString()
+        auditActionType: DownloadFileCollection
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: DEBUG
+        resourceLocation:
+          path: UNIVERSES
+          sourceType: ENDPOINT
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: internal
+      x-accepts:
+      - application/gzip
+  /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}:
+    delete:
+      description: |
+        Delete tar archives created by the create file collection API. By default, this only
+        deletes files from DB nodes. Use `delete_from_yba=true` to also remove downloaded
+        files from YBA local storage.
+
+        Use this API when you are done downloading the collected files and want to free up
+        disk space on the database nodes and/or YBA server.
+
+        **Security**: This API can only be called from localhost (the YBA server itself).
+        This restriction exists because it modifies files on database nodes.
+      operationId: deleteFileCollection
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Collection UUID returned by create file collection API
+        explode: false
+        in: path
+        name: collectionUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Whether to delete tar files from database nodes
+        explode: true
+        in: query
+        name: delete_from_db_nodes
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
+      - description: Whether to delete downloaded files from YBA local storage
+        explode: true
+        in: query
+        name: delete_from_yba
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CleanupCollectionInfo'
+          description: Cleanup successful
+          x-yba-api-visibility: internal
+        "400":
+          description: Collection not found or already cleaned up
+        "403":
+          description: API not called from localhost or feature not enabled
+        "404":
+          description: Collection not found
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Delete collected files from database nodes and/or YBA
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Universe
+        auditTargetId: uniUUID.toString()
+        auditActionType: DeleteFileCollection
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: TROUBLESHOOT
+        resourceLocation:
+          path: UNIVERSES
+          sourceType: ENDPOINT
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
   /yba-info:
     get:
       description: Get YBA Instance info
@@ -2768,6 +3100,20 @@ components:
           schema:
             $ref: '#/components/schemas/UniverseOperatorImportReq'
       required: true
+    RunScriptReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RunScriptRequest'
+      required: true
+      x-yba-api-visibility: internal
+    CollectFilesReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CollectFilesRequest'
+      required: true
+      x-yba-api-visibility: internal
   responses:
     AuthGroupToRolesMappingResp:
       content:
@@ -2855,6 +3201,27 @@ components:
       description: Successfully detached universe.
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
+    RunScriptResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RunScriptResponse'
+      description: Script execution results from all targeted nodes
+      x-yba-api-visibility: internal
+    CollectFilesResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CollectFilesResponse'
+      description: File collection results from all targeted nodes
+      x-yba-api-visibility: internal
+    CleanupCollectionResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CleanupCollectionInfo'
+      description: Cleanup successful
+      x-yba-api-visibility: internal
     YBAInfoResp:
       content:
         application/json:
@@ -4636,8 +5003,8 @@ components:
           type: boolean
         leader_preference:
           description: Priority of zone (for leaders placement). Values have to be
-            contiguous non-zero integers. Multiple zones can have the same value.
-            A lower value indicates higher zone priority.
+            contiguous non-negative integers. Zero means non-prioritized. Multiple
+            zones can have the same value. A lower value indicates higher zone priority.
           format: int32
           type: integer
         lb_name:
@@ -5378,6 +5745,7 @@ components:
         log_min_duration_statement: 1
         enabled: true
         log_duration: false
+        log_line_prefix: "%m [%p] "
       properties:
         enabled:
           description: Enabled
@@ -5438,6 +5806,12 @@ components:
             \ amount of time."
           format: int32
           type: integer
+        log_line_prefix:
+          description: YbaApi Internal. Log line prefix format for PostgreSQL logs.
+            User-configured log_line_prefix in gflags takes precedence over this value
+            when specified.
+          example: "%m [%p] "
+          type: string
       required:
       - debug_print_plan
       - enabled
@@ -5481,6 +5855,7 @@ components:
           log_min_duration_statement: 1
           enabled: true
           log_duration: false
+          log_line_prefix: "%m [%p] "
         export_active: true
       properties:
         export_active:
@@ -6299,6 +6674,7 @@ components:
             log_min_duration_statement: 1
             enabled: true
             log_duration: false
+            log_line_prefix: "%m [%p] "
           export_active: true
       properties:
         uuid:
@@ -6989,6 +7365,7 @@ components:
               log_min_duration_statement: 1
               enabled: true
               log_duration: false
+              log_line_prefix: "%m [%p] "
             export_active: true
         - replication_factor: 3
           placement_spec:
@@ -7563,6 +7940,7 @@ components:
               log_min_duration_statement: 1
               enabled: true
               log_duration: false
+              log_line_prefix: "%m [%p] "
             export_active: true
         - replication_factor: 3
           placement_spec:
@@ -8137,6 +8515,7 @@ components:
               log_min_duration_statement: 1
               enabled: true
               log_duration: false
+              log_line_prefix: "%m [%p] "
             export_active: true
         - replication_factor: 3
           placement_spec:
@@ -8711,6 +9090,7 @@ components:
               log_min_duration_statement: 1
               enabled: true
               log_duration: false
+              log_line_prefix: "%m [%p] "
             export_active: true
         - replication_factor: 3
           placement_spec:
@@ -9285,6 +9665,7 @@ components:
               log_min_duration_statement: 1
               enabled: true
               log_duration: false
+              log_line_prefix: "%m [%p] "
             export_active: true
       properties:
         name:
@@ -10838,6 +11219,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -11412,6 +11794,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -11986,6 +12369,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -12560,6 +12944,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -13134,6 +13519,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
         info:
           creating_user:
@@ -16546,6 +16932,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -17120,6 +17507,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -17694,6 +18082,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -18268,6 +18657,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
           - replication_factor: 3
             placement_spec:
@@ -18842,6 +19232,7 @@ components:
                 log_min_duration_statement: 1
                 enabled: true
                 log_duration: false
+                log_line_prefix: "%m [%p] "
               export_active: true
       properties:
         spec:
@@ -19448,6 +19839,68 @@ components:
         roll_max_batch_size:
           $ref: '#/components/schemas/RollMaxBatchSize'
       title: UniverseUpgradeOptionRolling
+    SoftwareUpgradeAZStep:
+      description: |
+        AZ upgrade step: order is list order; pause_after_tserver_upgrade controls canary
+        pause after this AZ. Used for canary upgrade configuration.
+      example:
+        pause_after_tserver_upgrade: false
+        az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        az_uuid:
+          description: Availability zone UUID
+          format: uuid
+          type: string
+        pause_after_tserver_upgrade:
+          default: false
+          description: "If true, upgrade pauses after all tservers in this AZ are\
+            \ upgraded"
+          type: boolean
+      required:
+      - az_uuid
+      title: SoftwareUpgradeAZStep
+      type: object
+      x-yba-api-visibility: preview
+      x-yba-api-since: 2026.1.0.0-b0
+    CanaryUpgradeConfigSpec:
+      description: |
+        Configuration for canary upgrade. Defines AZ order and pause points for
+        primary and optional read-replica clusters. Part of UniverseSoftwareUpgradeStart.
+      example:
+        primary_cluster_az_steps:
+        - pause_after_tserver_upgrade: false
+          az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - pause_after_tserver_upgrade: false
+          az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        pause_after_masters: false
+        read_replica_cluster_az_steps:
+        - pause_after_tserver_upgrade: false
+          az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - pause_after_tserver_upgrade: false
+          az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        pause_after_masters:
+          default: false
+          description: Whether to pause after all masters are upgraded
+          type: boolean
+        primary_cluster_az_steps:
+          description: |
+            Primary cluster: ordered list of AZ upgrade steps. List order = upgrade order.
+            Each step can optionally pause after tserver upgrade. Null = use default AZ order.
+          items:
+            $ref: '#/components/schemas/SoftwareUpgradeAZStep'
+          type: array
+        read_replica_cluster_az_steps:
+          description: |
+            Read replica cluster: ordered list of AZ upgrade steps. Only applicable if
+            universe has read replica clusters. Null = use default AZ order.
+          items:
+            $ref: '#/components/schemas/SoftwareUpgradeAZStep'
+          type: array
+      title: CanaryUpgradeConfigSpec
+      type: object
+      x-yba-api-visibility: preview
+      x-yba-api-since: 2026.1.0.0-b0
     UniverseSoftwareUpgradeStart:
       allOf:
       - $ref: '#/components/schemas/SleepAfterRestartSchema'
@@ -19461,9 +19914,16 @@ components:
             default: true
             description: Upgrade the YugabyteDB Catalog
             type: boolean
+          run_only_prechecks:
+            default: false
+            description: "If true, only run prechecks for the upgrade without executing\
+              \ the upgrade."
+            type: boolean
           version:
             description: The target release version to upgrade to.
             type: string
+          canary_upgrade_config:
+            $ref: '#/components/schemas/CanaryUpgradeConfigSpec'
         required:
         - version
         type: object
@@ -19474,6 +19934,19 @@ components:
       example:
         sleep_after_tserver_restart_millis: 6
         allow_rollback: true
+        canary_upgrade_config:
+          primary_cluster_az_steps:
+          - pause_after_tserver_upgrade: false
+            az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - pause_after_tserver_upgrade: false
+            az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          pause_after_masters: false
+          read_replica_cluster_az_steps:
+          - pause_after_tserver_upgrade: false
+            az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - pause_after_tserver_upgrade: false
+            az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        run_only_prechecks: false
         upgrade_system_catalog: true
         rolling_upgrade: true
         version: version
@@ -19597,10 +20070,16 @@ components:
         \ Part of UniverseSoftwareUpgradePrecheckResponse.\n"
       example:
         finalize_required: true
+        ysql_major_version_upgrade: true
       properties:
         finalize_required:
           description: "If the upgrade requires a finalize step. If true, the user\
             \ must call the finalize \nendpoint to complete the upgrade.\n"
+          type: boolean
+        ysql_major_version_upgrade:
+          description: |
+            If the upgrade requires a YSQL catalog major version upgrade (e.g. when upgrading
+            across YSQL major versions and YSQL is enabled on the universe).
           type: boolean
       required:
       - finalize_required
@@ -19825,6 +20304,7 @@ components:
             log_min_duration_statement: 1
             enabled: true
             log_duration: false
+            log_line_prefix: "%m [%p] "
           export_active: true
         sleep_after_master_restart_millis: 0
         roll_max_batch_size:
@@ -19900,6 +20380,681 @@ components:
           type: string
       title: UniverseOperatorImportReq
       type: object
+    ScriptOptions:
+      description: Configuration options for the script to be executed
+      example:
+        script_content: |
+          #!/bin/bash
+          echo "Node hostname: $(hostname)"
+          df -h
+        max_script_file_size_bytes: 1048576
+        linux_user: yugabyte
+        params:
+        - --verbose
+        - --output=/tmp/result.log
+        script_file: /opt/yugabyte/scripts/diagnostics.sh
+        timeout_secs: 300
+      properties:
+        script_content:
+          description: |
+            The inline script content to execute on nodes.
+            Either script_content or script_file must be provided, but not both.
+          example: |
+            #!/bin/bash
+            echo "Node hostname: $(hostname)"
+            df -h
+          type: string
+        script_file:
+          description: |
+            Path to a script file on the YugabyteDB Anywhere node to execute on database nodes.
+            Either script_content or script_file must be provided, but not both.
+          example: /opt/yugabyte/scripts/diagnostics.sh
+          type: string
+        params:
+          description: Parameters to pass to the script as command-line arguments.
+          example:
+          - --verbose
+          - --output=/tmp/result.log
+          items:
+            type: string
+          type: array
+        timeout_secs:
+          default: 60
+          description: |
+            Timeout in seconds for the script execution on each node.
+            If elevated privileges are needed, include sudo commands directly in your script.
+          example: 300
+          format: int64
+          maximum: 3600
+          minimum: 1
+          type: integer
+        linux_user:
+          default: yugabyte
+          description: |
+            Run the script as a particular Linux user.
+            Defaults to yugabyte. When using Node Agent, the command is executed as this user.
+            When using SSH fallback, this sets the SSH user.
+          example: yugabyte
+          type: string
+        max_script_file_size_bytes:
+          default: 1048576
+          description: |
+            Maximum size in bytes for script file content to be captured in audit logs.
+            Script files larger than this limit will be executed, but their content will not
+            be recorded in the audit log. This only applies when using script_file.
+          example: 1048576
+          format: int64
+          minimum: 0
+          type: integer
+      title: ScriptOptions
+      type: object
+      x-yba-api-visibility: internal
+    NodeSelection:
+      description: Options for selecting which nodes to run the script on
+      example:
+        tservers_only: false
+        cluster_uuid: 5e8e5e8e-5e8e-5e8e-5e8e-5e8e5e8e5e8e
+        node_names:
+        - yb-15-universe-n1
+        - yb-15-universe-n2
+        max_parallel_nodes: 50
+        masters_only: false
+      properties:
+        node_names:
+          description: List of specific node names to run the script on.
+          example:
+          - yb-15-universe-n1
+          - yb-15-universe-n2
+          items:
+            type: string
+          type: array
+        masters_only:
+          default: false
+          description: Run the script only on master nodes from the specified node_names
+            (or all masters if node_names is not provided).
+          example: false
+          type: boolean
+        tservers_only:
+          default: false
+          description: Run the script only on tserver nodes from the specified node_names
+            (or all tservers if node_names is not provided).
+          example: false
+          type: boolean
+        cluster_uuid:
+          description: |
+            Run the script only on nodes belonging to a specific cluster (e.g., primary or read replica).
+            If not provided, runs on nodes across all clusters in the universe.
+          example: 5e8e5e8e-5e8e-5e8e-5e8e-5e8e5e8e5e8e
+          format: uuid
+          type: string
+        max_parallel_nodes:
+          default: 50
+          description: |
+            Maximum number of nodes to execute the script on in parallel.
+            Higher values complete faster but use more resources.
+            Set to 1 for sequential execution.
+          example: 50
+          minimum: 1
+          type: integer
+      title: NodeSelection
+      type: object
+      x-yba-api-visibility: internal
+    RunScriptRequest:
+      description: Request body for running a script on database nodes
+      example:
+        nodes:
+          tservers_only: false
+          cluster_uuid: 5e8e5e8e-5e8e-5e8e-5e8e-5e8e5e8e5e8e
+          node_names:
+          - yb-15-universe-n1
+          - yb-15-universe-n2
+          max_parallel_nodes: 50
+          masters_only: false
+        script_options:
+          script_content: |
+            #!/bin/bash
+            echo "Node hostname: $(hostname)"
+            df -h
+          max_script_file_size_bytes: 1048576
+          linux_user: yugabyte
+          params:
+          - --verbose
+          - --output=/tmp/result.log
+          script_file: /opt/yugabyte/scripts/diagnostics.sh
+          timeout_secs: 300
+      properties:
+        script_options:
+          $ref: '#/components/schemas/ScriptOptions'
+        nodes:
+          $ref: '#/components/schemas/NodeSelection'
+      required:
+      - script_options
+      title: RunScriptRequest
+      type: object
+      x-yba-api-visibility: internal
+    ExecutionSummary:
+      description: Summary of script execution across all targeted nodes
+      example:
+        successful_nodes: 3
+        all_succeeded: true
+        total_execution_time_ms: 4521
+        total_nodes: 3
+        failed_nodes: 0
+      properties:
+        total_nodes:
+          description: Total number of nodes targeted for script execution
+          example: 3
+          type: integer
+        successful_nodes:
+          description: Number of nodes where the script executed successfully (exit_code
+            == 0)
+          example: 3
+          type: integer
+        failed_nodes:
+          description: Number of nodes where the script execution failed
+          example: 0
+          type: integer
+        total_execution_time_ms:
+          description: Total time taken for the entire operation in milliseconds
+          example: 4521
+          format: int64
+          type: integer
+        all_succeeded:
+          description: Whether the script executed successfully on all targeted nodes
+          example: true
+          type: boolean
+      required:
+      - all_succeeded
+      - failed_nodes
+      - successful_nodes
+      - total_nodes
+      title: ExecutionSummary
+      type: object
+      x-yba-api-visibility: internal
+    NodeScriptResult:
+      description: Result of script execution on a single node
+      example:
+        error_message: error_message
+        node_address: 10.0.0.5
+        stdout: |
+          Node hostname: yb-15-universe-n1
+          Filesystem      Size  Used Avail Use% Mounted on
+          /dev/sda1       100G   20G   80G  20% /
+        execution_time_ms: 1523
+        success: true
+        node_name: yb-15-universe-n1
+        exit_code: 0
+        stderr: ""
+      properties:
+        node_name:
+          description: Name of the node
+          example: yb-15-universe-n1
+          type: string
+        node_address:
+          description: IP address or hostname of the node
+          example: 10.0.0.5
+          type: string
+        exit_code:
+          description: Exit code of the script. 0 indicates success.
+          example: 0
+          type: integer
+        stdout:
+          description: Standard output from the script execution
+          example: |
+            Node hostname: yb-15-universe-n1
+            Filesystem      Size  Used Avail Use% Mounted on
+            /dev/sda1       100G   20G   80G  20% /
+          type: string
+        stderr:
+          description: Standard error from the script execution
+          example: ""
+          type: string
+        execution_time_ms:
+          description: Time taken to execute the script in milliseconds
+          example: 1523
+          format: int64
+          type: integer
+        success:
+          description: Whether the script execution was successful (exit_code == 0)
+          example: true
+          type: boolean
+        error_message:
+          description: "Error message if the execution failed (e.g., timeout, connection\
+            \ error)"
+          type: string
+          example: null
+      required:
+      - exit_code
+      - node_name
+      - success
+      title: NodeScriptResult
+      type: object
+      x-yba-api-visibility: internal
+    RunScriptResponse:
+      description: Response from running a script on database nodes
+      example:
+        summary:
+          successful_nodes: 3
+          all_succeeded: true
+          total_execution_time_ms: 4521
+          total_nodes: 3
+          failed_nodes: 0
+        results:
+          key:
+            error_message: error_message
+            node_address: 10.0.0.5
+            stdout: |
+              Node hostname: yb-15-universe-n1
+              Filesystem      Size  Used Avail Use% Mounted on
+              /dev/sda1       100G   20G   80G  20% /
+            execution_time_ms: 1523
+            success: true
+            node_name: yb-15-universe-n1
+            exit_code: 0
+            stderr: ""
+      properties:
+        summary:
+          $ref: '#/components/schemas/ExecutionSummary'
+        results:
+          additionalProperties:
+            $ref: '#/components/schemas/NodeScriptResult'
+          description: Map of node name to execution result
+          type: object
+      required:
+      - results
+      - summary
+      title: RunScriptResponse
+      type: object
+      x-yba-api-visibility: internal
+    FileCollectionOptions:
+      description: Configuration options for collecting files from database nodes
+      example:
+        directory_paths:
+        - /home/yugabyte/tserver/logs
+        max_total_size_bytes: 104857600
+        max_file_size_bytes: 10485760
+        file_paths:
+        - /home/yugabyte/tserver/logs/yb-tserver.INFO
+        - /home/yugabyte/master/logs/yb-master.INFO
+        max_depth: 1
+        linux_user: yugabyte
+        timeout_secs: 300
+      properties:
+        file_paths:
+          description: |
+            List of file paths to collect from each node. Paths can be absolute or relative
+            to the yugabyte home directory. Glob patterns are not supported.
+          example:
+          - /home/yugabyte/tserver/logs/yb-tserver.INFO
+          - /home/yugabyte/master/logs/yb-master.INFO
+          items:
+            type: string
+          type: array
+        directory_paths:
+          description: |
+            List of directory paths to collect files from. All files in these directories
+            will be collected (non-recursive). Use max_depth for recursive collection.
+          example:
+          - /home/yugabyte/tserver/logs
+          items:
+            type: string
+          type: array
+        max_depth:
+          default: 1
+          description: |
+            Maximum depth for directory traversal when collecting from directories.
+            1 means only immediate files, 2 includes one level of subdirectories, etc.
+          example: 1
+          maximum: 10
+          minimum: 1
+          type: integer
+        max_file_size_bytes:
+          default: 10485760
+          description: |
+            Maximum size of individual files to collect in bytes.
+            Files larger than this will be skipped and reported in the response.
+          example: 10485760
+          format: int64
+          minimum: 1
+          type: integer
+        max_total_size_bytes:
+          default: 104857600
+          description: |
+            Maximum total size of all files to collect per node in bytes.
+            Collection stops when this limit is reached.
+          example: 104857600
+          format: int64
+          minimum: 1
+          type: integer
+        timeout_secs:
+          default: 300
+          description: |
+            Timeout in seconds for file collection on each node.
+          example: 300
+          format: int64
+          maximum: 3600
+          minimum: 1
+          type: integer
+        linux_user:
+          default: yugabyte
+          description: |
+            Run file collection as a particular Linux user.
+            Defaults to yugabyte. When using Node Agent, the command is executed as this user.
+            When using SSH fallback, this sets the SSH user.
+          example: yugabyte
+          type: string
+      required:
+      - file_paths
+      title: FileCollectionOptions
+      type: object
+      x-yba-api-visibility: internal
+    CollectFilesRequest:
+      description: Request body for collecting files from database nodes
+      example:
+        nodes:
+          tservers_only: false
+          cluster_uuid: 5e8e5e8e-5e8e-5e8e-5e8e-5e8e5e8e5e8e
+          node_names:
+          - yb-15-universe-n1
+          - yb-15-universe-n2
+          max_parallel_nodes: 50
+          masters_only: false
+        collection_options:
+          directory_paths:
+          - /home/yugabyte/tserver/logs
+          max_total_size_bytes: 104857600
+          max_file_size_bytes: 10485760
+          file_paths:
+          - /home/yugabyte/tserver/logs/yb-tserver.INFO
+          - /home/yugabyte/master/logs/yb-master.INFO
+          max_depth: 1
+          linux_user: yugabyte
+          timeout_secs: 300
+      properties:
+        collection_options:
+          $ref: '#/components/schemas/FileCollectionOptions'
+        nodes:
+          $ref: '#/components/schemas/NodeSelection'
+      required:
+      - collection_options
+      title: CollectFilesRequest
+      type: object
+      x-yba-api-visibility: internal
+    FileCollectionSummary:
+      description: Summary of file collection across all nodes
+      example:
+        successful_nodes: 3
+        total_bytes_collected: 15728640
+        all_succeeded: true
+        total_execution_time_ms: 5000
+        total_files_collected: 15
+        total_files_skipped: 2
+        collection_uuid: f47ac10b-58cc-4372-a567-0e02b2c3d479
+        total_nodes: 3
+        total_files_failed: 0
+        failed_nodes: 0
+      properties:
+        collection_uuid:
+          description: |
+            Unique identifier for this collection. Use this UUID with the download-collection
+            API to download the collected files to YBA. Collections expire after 1 hour.
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          format: uuid
+          type: string
+        total_nodes:
+          description: Total number of nodes targeted
+          example: 3
+          type: integer
+        successful_nodes:
+          description: Number of nodes where collection succeeded
+          example: 3
+          type: integer
+        failed_nodes:
+          description: Number of nodes where collection failed
+          example: 0
+          type: integer
+        total_files_collected:
+          description: Total number of files collected across all nodes
+          example: 15
+          type: integer
+        total_files_skipped:
+          description: Total number of files skipped across all nodes
+          example: 2
+          type: integer
+        total_files_failed:
+          description: Total number of files that failed to collect across all nodes
+          example: 0
+          type: integer
+        total_bytes_collected:
+          description: Total bytes collected across all nodes
+          example: 15728640
+          format: int64
+          type: integer
+        total_execution_time_ms:
+          description: Total time taken for file collection in milliseconds
+          example: 5000
+          format: int64
+          type: integer
+        all_succeeded:
+          description: Whether all node file collections succeeded
+          example: true
+          type: boolean
+      required:
+      - all_succeeded
+      - failed_nodes
+      - successful_nodes
+      - total_execution_time_ms
+      - total_files_collected
+      - total_nodes
+      title: FileCollectionSummary
+      type: object
+      x-yba-api-visibility: internal
+    CollectedFileResult:
+      description: Result of collecting a single file from a node
+      example:
+        error_message: File not found
+        success: true
+        remote_path: /home/yugabyte/tserver/logs/yb-tserver.INFO
+        file_size_bytes: 1048576
+        skip_reason: File exceeds max_file_size_bytes limit
+        skipped: false
+      properties:
+        remote_path:
+          description: The original path of the file on the remote node
+          example: /home/yugabyte/tserver/logs/yb-tserver.INFO
+          type: string
+        file_size_bytes:
+          description: Size of the file in bytes
+          example: 1048576
+          format: int64
+          type: integer
+        success:
+          description: Whether the file was successfully collected
+          example: true
+          type: boolean
+        error_message:
+          description: Error message if collection failed
+          example: File not found
+          type: string
+        skipped:
+          default: false
+          description: "Whether the file was skipped (e.g., exceeded size limit)"
+          example: false
+          type: boolean
+        skip_reason:
+          description: Reason why the file was skipped
+          example: File exceeds max_file_size_bytes limit
+          type: string
+      required:
+      - remote_path
+      - success
+      title: CollectedFileResult
+      type: object
+      x-yba-api-visibility: internal
+    NodeFileCollectionResult:
+      description: Result of collecting files from a single node
+      example:
+        total_bytes_collected: 5242880
+        error_message: error_message
+        node_address: 10.150.1.100
+        files_collected: 5
+        success: true
+        execution_time_ms: 2500
+        node_name: yb-15-universe-n1
+        files:
+        - error_message: File not found
+          success: true
+          remote_path: /home/yugabyte/tserver/logs/yb-tserver.INFO
+          file_size_bytes: 1048576
+          skip_reason: File exceeds max_file_size_bytes limit
+          skipped: false
+        - error_message: File not found
+          success: true
+          remote_path: /home/yugabyte/tserver/logs/yb-tserver.INFO
+          file_size_bytes: 1048576
+          skip_reason: File exceeds max_file_size_bytes limit
+          skipped: false
+        remote_tar_path: /tmp/collected-files-yb-15-universe-n1-abc123.tar.gz
+        files_skipped: 1
+        files_failed: 0
+      properties:
+        node_name:
+          description: Name of the node
+          example: yb-15-universe-n1
+          type: string
+        node_address:
+          description: IP address of the node
+          example: 10.150.1.100
+          type: string
+        success:
+          description: Whether file collection succeeded on this node
+          example: true
+          type: boolean
+        files_collected:
+          description: Number of files successfully collected
+          example: 5
+          type: integer
+        files_skipped:
+          description: Number of files skipped (due to size limits or other reasons)
+          example: 1
+          type: integer
+        files_failed:
+          description: Number of files that failed to collect
+          example: 0
+          type: integer
+        total_bytes_collected:
+          description: Total bytes of files collected from this node
+          example: 5242880
+          format: int64
+          type: integer
+        execution_time_ms:
+          description: Time taken to collect files from this node in milliseconds
+          example: 2500
+          format: int64
+          type: integer
+        error_message:
+          description: Error message if the overall collection failed on this node
+          type: string
+        remote_tar_path:
+          description: |
+            Path to the tar.gz archive created on the remote node containing all collected files.
+            The tar file remains on the database node and is NOT downloaded to YBA.
+            Use a separate API to retrieve the tar file if needed.
+          example: /tmp/collected-files-yb-15-universe-n1-abc123.tar.gz
+          type: string
+        files:
+          description: List of collected file results
+          items:
+            $ref: '#/components/schemas/CollectedFileResult'
+          type: array
+      required:
+      - execution_time_ms
+      - files_collected
+      - files_failed
+      - files_skipped
+      - node_address
+      - node_name
+      - success
+      title: NodeFileCollectionResult
+      type: object
+      x-yba-api-visibility: internal
+    CollectFilesResponse:
+      description: Response from collecting files from database nodes
+      example:
+        summary:
+          successful_nodes: 3
+          total_bytes_collected: 15728640
+          all_succeeded: true
+          total_execution_time_ms: 5000
+          total_files_collected: 15
+          total_files_skipped: 2
+          collection_uuid: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          total_nodes: 3
+          total_files_failed: 0
+          failed_nodes: 0
+        results:
+          key:
+            total_bytes_collected: 5242880
+            error_message: error_message
+            node_address: 10.150.1.100
+            files_collected: 5
+            success: true
+            execution_time_ms: 2500
+            node_name: yb-15-universe-n1
+            files:
+            - error_message: File not found
+              success: true
+              remote_path: /home/yugabyte/tserver/logs/yb-tserver.INFO
+              file_size_bytes: 1048576
+              skip_reason: File exceeds max_file_size_bytes limit
+              skipped: false
+            - error_message: File not found
+              success: true
+              remote_path: /home/yugabyte/tserver/logs/yb-tserver.INFO
+              file_size_bytes: 1048576
+              skip_reason: File exceeds max_file_size_bytes limit
+              skipped: false
+            remote_tar_path: /tmp/collected-files-yb-15-universe-n1-abc123.tar.gz
+            files_skipped: 1
+            files_failed: 0
+      properties:
+        summary:
+          $ref: '#/components/schemas/FileCollectionSummary'
+        results:
+          additionalProperties:
+            $ref: '#/components/schemas/NodeFileCollectionResult'
+          description: Map of node name to file collection result
+          type: object
+      required:
+      - results
+      - summary
+      title: CollectFilesResponse
+      type: object
+      x-yba-api-visibility: internal
+    CleanupCollectionInfo:
+      description: Result of cleaning up collected files from database nodes
+      example:
+        collection_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        nodes_cleaned: 0
+        message: message
+      properties:
+        collection_uuid:
+          description: The collection UUID that was cleaned up
+          format: uuid
+          type: string
+        nodes_cleaned:
+          description: Number of nodes where files were successfully deleted
+          type: integer
+        message:
+          description: Status message
+          type: string
+      required:
+      - collection_uuid
+      - message
+      - nodes_cleaned
+      title: CleanupCollectionInfo
+      type: object
+      x-yba-api-visibility: internal
     YBAInfo:
       description: Describes YBA instance info
       example:

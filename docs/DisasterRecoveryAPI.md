@@ -2,24 +2,24 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                      | HTTP request                                                            | Description                                       |
-| --------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------- |
-| [**CreateDrConfig**](DisasterRecoveryAPI.md#CreateDrConfig)                 | **Post** /api/v1/customers/{cUUID}/dr_configs                           | Create disaster recovery config                   |
-| [**DeleteXClusterConfig**](DisasterRecoveryAPI.md#DeleteXClusterConfig)     | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID}                | Delete xcluster config                            |
-| [**EditDrConfig**](DisasterRecoveryAPI.md#EditDrConfig)                     | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/edit             | Edit disaster recovery config                     |
-| [**FailoverDrConfig**](DisasterRecoveryAPI.md#FailoverDrConfig)             | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover         | Failover a disaster recovery config               |
-| [**GetDrConfig**](DisasterRecoveryAPI.md#GetDrConfig)                       | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}                   | Get disaster recovery config                      |
-| [**GetDrConfigSafetime**](DisasterRecoveryAPI.md#GetDrConfigSafetime)       | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime          | Get disaster recovery config safetime             |
-| [**PauseDrConfig**](DisasterRecoveryAPI.md#PauseDrConfig)                   | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause            | Pause DR config                                   |
-| [**PauseDrUniverses**](DisasterRecoveryAPI.md#PauseDrUniverses)             | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes  | Pause DR config and universes associated with DR  |
-| [**ReplaceReplicaDrConfig**](DisasterRecoveryAPI.md#ReplaceReplicaDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica  | Replace Replica in a disaster recovery config     |
-| [**RestartDrConfig**](DisasterRecoveryAPI.md#RestartDrConfig)               | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart          | Restart disaster recovery config                  |
-| [**ResumeDrConfig**](DisasterRecoveryAPI.md#ResumeDrConfig)                 | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume           | Resume DR config                                  |
-| [**ResumeDrUniverses**](DisasterRecoveryAPI.md#ResumeDrUniverses)           | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes | Resume DR config and universes associated with DR |
-| [**SetDatabasesDrConfig**](DisasterRecoveryAPI.md#SetDatabasesDrConfig)     | **Put** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs           | Set databases in disaster recovery config         |
-| [**SetTablesDrConfig**](DisasterRecoveryAPI.md#SetTablesDrConfig)           | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables       | Set tables in disaster recovery config            |
-| [**SwitchoverDrConfig**](DisasterRecoveryAPI.md#SwitchoverDrConfig)         | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover       | Switchover a disaster recovery config             |
-| [**SyncDrConfig**](DisasterRecoveryAPI.md#SyncDrConfig)                     | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync             | Sync disaster recovery config                     |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateDrConfig**](DisasterRecoveryAPI.md#CreateDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs | Create disaster recovery config
+[**DeleteXClusterConfig**](DisasterRecoveryAPI.md#DeleteXClusterConfig) | **Delete** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Delete xcluster config
+[**EditDrConfig**](DisasterRecoveryAPI.md#EditDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/edit | Edit disaster recovery config
+[**FailoverDrConfig**](DisasterRecoveryAPI.md#FailoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/failover | Failover a disaster recovery config
+[**GetDrConfig**](DisasterRecoveryAPI.md#GetDrConfig) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID} | Get disaster recovery config
+[**GetDrConfigSafetime**](DisasterRecoveryAPI.md#GetDrConfigSafetime) | **Get** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/safetime | Get disaster recovery config safetime
+[**PauseDrConfig**](DisasterRecoveryAPI.md#PauseDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause | Pause DR config
+[**PauseDrUniverses**](DisasterRecoveryAPI.md#PauseDrUniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/pause_universes | Pause DR config and universes associated with DR
+[**ReplaceReplicaDrConfig**](DisasterRecoveryAPI.md#ReplaceReplicaDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/replace_replica | Replace Replica in a disaster recovery config
+[**RestartDrConfig**](DisasterRecoveryAPI.md#RestartDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/restart | Restart disaster recovery config
+[**ResumeDrConfig**](DisasterRecoveryAPI.md#ResumeDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume | Resume DR config
+[**ResumeDrUniverses**](DisasterRecoveryAPI.md#ResumeDrUniverses) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/resume_universes | Resume DR config and universes associated with DR
+[**SetDatabasesDrConfig**](DisasterRecoveryAPI.md#SetDatabasesDrConfig) | **Put** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_dbs | Set databases in disaster recovery config
+[**SetTablesDrConfig**](DisasterRecoveryAPI.md#SetTablesDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/set_tables | Set tables in disaster recovery config
+[**SwitchoverDrConfig**](DisasterRecoveryAPI.md#SwitchoverDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/switchover | Switchover a disaster recovery config
+[**SyncDrConfig**](DisasterRecoveryAPI.md#SyncDrConfig) | **Post** /api/v1/customers/{cUUID}/dr_configs/{drUUID}/sync | Sync disaster recovery config
 
 
 
@@ -40,7 +40,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -63,18 +63,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **disasterRecoveryCreateFormData** | [**DrConfigCreateForm**](DrConfigCreateForm.md) | Disaster Recovery Create Form Data | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -114,7 +114,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -138,19 +138,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteXClusterConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **isForceDelete** | **bool** |  | [default to false]
@@ -191,7 +191,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -215,19 +215,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoveryEditFormData** | [**DrConfigEditForm**](DrConfigEditForm.md) | Disaster Recovery Edit Form Data | 
@@ -268,7 +268,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -292,19 +292,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiFailoverDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoveryFailoverFormData** | [**DrConfigFailoverForm**](DrConfigFailoverForm.md) | Disaster Recovery Failover Form Data | 
@@ -345,7 +345,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -368,19 +368,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **syncWithDB** | **bool** |  | [default to true]
@@ -420,7 +420,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -442,19 +442,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetDrConfigSafetimeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -493,7 +493,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -516,19 +516,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPauseDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -568,7 +568,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -591,19 +591,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPauseDrUniversesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -643,7 +643,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -667,19 +667,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiReplaceReplicaDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoveryReplaceReplicaFormData** | [**DrConfigReplaceReplicaForm**](DrConfigReplaceReplicaForm.md) | Disaster Recovery Replace Replica Form Data | 
@@ -720,7 +720,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -745,19 +745,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRestartDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoveryRestartFormData** | [**DrConfigRestartForm**](DrConfigRestartForm.md) | Disaster Recovery Restart Form Data | 
@@ -799,7 +799,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -822,19 +822,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiResumeDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -874,7 +874,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -897,19 +897,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiResumeDrUniversesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -949,7 +949,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -973,19 +973,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetDatabasesDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoverySetDatabasesFormData** | [**DrConfigSetDatabasesForm**](DrConfigSetDatabasesForm.md) | Disaster Recovery Set Databases Form Data | 
@@ -1026,7 +1026,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1050,19 +1050,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetTablesDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoverySetTablesFormData** | [**DrConfigSetTablesForm**](DrConfigSetTablesForm.md) | Disaster Recovery Set Tables Form Data | 
@@ -1103,7 +1103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1127,19 +1127,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSwitchoverDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **disasterRecoverySwitchoverFormData** | [**DrConfigSwitchoverForm**](DrConfigSwitchoverForm.md) | Disaster Recovery Switchover Form Data | 
@@ -1180,7 +1180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1203,19 +1203,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **drUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**drUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSyncDrConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 

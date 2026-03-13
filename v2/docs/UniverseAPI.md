@@ -8,11 +8,14 @@ Method | HTTP request | Description
 [**AttachUniverse**](UniverseAPI.md#AttachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
 [**ConfigureMetricsExport**](UniverseAPI.md#ConfigureMetricsExport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
 [**ConfigureQueryLogging**](UniverseAPI.md#ConfigureQueryLogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
+[**CreateFileCollection**](UniverseAPI.md#CreateFileCollection) | **Post** /customers/{cUUID}/universes/{uniUUID}/file-collections | Collect files from database nodes
 [**CreateUniverse**](UniverseAPI.md#CreateUniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
 [**DeleteAttachDetachMetadata**](UniverseAPI.md#DeleteAttachDetachMetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 [**DeleteCluster**](UniverseAPI.md#DeleteCluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
+[**DeleteFileCollection**](UniverseAPI.md#DeleteFileCollection) | **Delete** /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID} | Delete collected files from database nodes and/or YBA
 [**DeleteUniverse**](UniverseAPI.md#DeleteUniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID} | Delete a universe
 [**DetachUniverse**](UniverseAPI.md#DetachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/detach | Detach universe
+[**DownloadFileCollection**](UniverseAPI.md#DownloadFileCollection) | **Get** /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}/download | Download collected files
 [**EditGFlags**](UniverseAPI.md#EditGFlags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 [**EditKubernetesOverrides**](UniverseAPI.md#EditKubernetesOverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 [**EditUniverse**](UniverseAPI.md#EditUniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
@@ -28,6 +31,7 @@ Method | HTTP request | Description
 [**RestartUniverse**](UniverseAPI.md#RestartUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
 [**RollbackDetachUniverse**](UniverseAPI.md#RollbackDetachUniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID}/detach | Rollback detach universe
 [**RollbackSoftwareUpgrade**](UniverseAPI.md#RollbackSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
+[**RunScript**](UniverseAPI.md#RunScript) | **Post** /customers/{cUUID}/universes/{uniUUID}/run-script | Run a script on database nodes
 [**StartSoftwareUpgrade**](UniverseAPI.md#StartSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade YugabyteDB version
 [**StartThirdPartySoftwareUpgrade**](UniverseAPI.md#StartThirdPartySoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software | Upgrade third party software
 [**SystemdEnable**](UniverseAPI.md#SystemdEnable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
@@ -332,6 +336,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateFileCollection
+
+> CollectFilesResponse CreateFileCollection(ctx, cUUID, uniUUID).CollectFilesRequest(collectFilesRequest).Execute()
+
+Collect files from database nodes
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	collectFilesRequest := *openapiclient.NewCollectFilesRequest(*openapiclient.NewFileCollectionOptions([]string{"FilePaths_example"})) // CollectFilesRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.CreateFileCollection(context.Background(), cUUID, uniUUID).CollectFilesRequest(collectFilesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.CreateFileCollection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateFileCollection`: CollectFilesResponse
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.CreateFileCollection`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateFileCollectionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **collectFilesRequest** | [**CollectFilesRequest**](CollectFilesRequest.md) |  | 
+
+### Return type
+
+[**CollectFilesResponse**](CollectFilesResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateUniverse
 
 > YBATask CreateUniverse(ctx, cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
@@ -553,6 +632,86 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteFileCollection
+
+> CleanupCollectionInfo DeleteFileCollection(ctx, cUUID, uniUUID, collectionUUID).DeleteFromDbNodes(deleteFromDbNodes).DeleteFromYba(deleteFromYba).Execute()
+
+Delete collected files from database nodes and/or YBA
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	collectionUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Collection UUID returned by create file collection API
+	deleteFromDbNodes := true // bool | Whether to delete tar files from database nodes (optional) (default to true)
+	deleteFromYba := true // bool | Whether to delete downloaded files from YBA local storage (optional) (default to false)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.DeleteFileCollection(context.Background(), cUUID, uniUUID, collectionUUID).DeleteFromDbNodes(deleteFromDbNodes).DeleteFromYba(deleteFromYba).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.DeleteFileCollection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteFileCollection`: CleanupCollectionInfo
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.DeleteFileCollection`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+**collectionUUID** | **string** | Collection UUID returned by create file collection API | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteFileCollectionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **deleteFromDbNodes** | **bool** | Whether to delete tar files from database nodes | [default to true]
+ **deleteFromYba** | **bool** | Whether to delete downloaded files from YBA local storage | [default to false]
+
+### Return type
+
+[**CleanupCollectionInfo**](CleanupCollectionInfo.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteUniverse
 
 > YBATask DeleteUniverse(ctx, cUUID, uniUUID).UniverseDeleteSpec(universeDeleteSpec).Execute()
@@ -696,6 +855,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/gzip
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DownloadFileCollection
+
+> *os.File DownloadFileCollection(ctx, cUUID, uniUUID, collectionUUID).CleanupDbNodesAfter(cleanupDbNodesAfter).Execute()
+
+Download collected files
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	collectionUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Collection UUID returned by create file collection API
+	cleanupDbNodesAfter := true // bool | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with  delete_from_db_nodes=true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  (optional) (default to false)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.DownloadFileCollection(context.Background(), cUUID, uniUUID, collectionUUID).CleanupDbNodesAfter(cleanupDbNodesAfter).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.DownloadFileCollection``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DownloadFileCollection`: *os.File
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.DownloadFileCollection`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+**collectionUUID** | **string** | Collection UUID returned by create file collection API | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDownloadFileCollectionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **cleanupDbNodesAfter** | **bool** | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with  delete_from_db_nodes&#x3D;true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  | [default to false]
+
+### Return type
+
+[***os.File**](*os.File.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/gzip
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1802,6 +2039,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## RunScript
+
+> RunScriptResponse RunScript(ctx, cUUID, uniUUID).RunScriptRequest(runScriptRequest).Execute()
+
+Run a script on database nodes
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	runScriptRequest := *openapiclient.NewRunScriptRequest(*openapiclient.NewScriptOptions()) // RunScriptRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.RunScript(context.Background(), cUUID, uniUUID).RunScriptRequest(runScriptRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.RunScript``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RunScript`: RunScriptResponse
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.RunScript`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRunScriptRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **runScriptRequest** | [**RunScriptRequest**](RunScriptRequest.md) |  | 
+
+### Return type
+
+[**RunScriptResponse**](RunScriptResponse.md)
 
 ### Authorization
 

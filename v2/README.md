@@ -102,11 +102,14 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**AttachUniverse**](docs/UniverseAPI.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
 *UniverseAPI* | [**ConfigureMetricsExport**](docs/UniverseAPI.md#configuremetricsexport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
 *UniverseAPI* | [**ConfigureQueryLogging**](docs/UniverseAPI.md#configurequerylogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
+*UniverseAPI* | [**CreateFileCollection**](docs/UniverseAPI.md#createfilecollection) | **Post** /customers/{cUUID}/universes/{uniUUID}/file-collections | Collect files from database nodes
 *UniverseAPI* | [**CreateUniverse**](docs/UniverseAPI.md#createuniverse) | **Post** /customers/{cUUID}/universes | Create a YugabyteDB Universe
 *UniverseAPI* | [**DeleteAttachDetachMetadata**](docs/UniverseAPI.md#deleteattachdetachmetadata) | **Delete** /customers/{cUUID}/universes/{uniUUID}/attach-detach-metadata | Delete attach/detach metadata
 *UniverseAPI* | [**DeleteCluster**](docs/UniverseAPI.md#deletecluster) | **Delete** /customers/{cUUID}/universes/{uniUUID}/clusters/{clsUUID} | Delete an additional cluster(s) of a YugabyteDB Universe
+*UniverseAPI* | [**DeleteFileCollection**](docs/UniverseAPI.md#deletefilecollection) | **Delete** /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID} | Delete collected files from database nodes and/or YBA
 *UniverseAPI* | [**DeleteUniverse**](docs/UniverseAPI.md#deleteuniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID} | Delete a universe
 *UniverseAPI* | [**DetachUniverse**](docs/UniverseAPI.md#detachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/detach | Detach universe
+*UniverseAPI* | [**DownloadFileCollection**](docs/UniverseAPI.md#downloadfilecollection) | **Get** /customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}/download | Download collected files
 *UniverseAPI* | [**EditGFlags**](docs/UniverseAPI.md#editgflags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 *UniverseAPI* | [**EditKubernetesOverrides**](docs/UniverseAPI.md#editkubernetesoverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 *UniverseAPI* | [**EditUniverse**](docs/UniverseAPI.md#edituniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
@@ -122,6 +125,7 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**RestartUniverse**](docs/UniverseAPI.md#restartuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
 *UniverseAPI* | [**RollbackDetachUniverse**](docs/UniverseAPI.md#rollbackdetachuniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID}/detach | Rollback detach universe
 *UniverseAPI* | [**RollbackSoftwareUpgrade**](docs/UniverseAPI.md#rollbacksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
+*UniverseAPI* | [**RunScript**](docs/UniverseAPI.md#runscript) | **Post** /customers/{cUUID}/universes/{uniUUID}/run-script | Run a script on database nodes
 *UniverseAPI* | [**StartSoftwareUpgrade**](docs/UniverseAPI.md#startsoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade YugabyteDB version
 *UniverseAPI* | [**StartThirdPartySoftwareUpgrade**](docs/UniverseAPI.md#startthirdpartysoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software | Upgrade third party software
 *UniverseAPI* | [**SystemdEnable**](docs/UniverseAPI.md#systemdenable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
@@ -137,6 +141,8 @@ Class | Method | HTTP request | Description
  - [AvailabilityZoneGFlags](docs/AvailabilityZoneGFlags.md)
  - [AvailabilityZoneNetworking](docs/AvailabilityZoneNetworking.md)
  - [AvailabilityZoneNodeSpec](docs/AvailabilityZoneNodeSpec.md)
+ - [CanaryUpgradeConfigSpec](docs/CanaryUpgradeConfigSpec.md)
+ - [CleanupCollectionInfo](docs/CleanupCollectionInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
  - [CloudVolumeEncryption](docs/CloudVolumeEncryption.md)
  - [ClusterAddSpec](docs/ClusterAddSpec.md)
@@ -151,6 +157,9 @@ Class | Method | HTTP request | Description
  - [ClusterProviderSpec](docs/ClusterProviderSpec.md)
  - [ClusterSpec](docs/ClusterSpec.md)
  - [ClusterStorageSpec](docs/ClusterStorageSpec.md)
+ - [CollectFilesRequest](docs/CollectFilesRequest.md)
+ - [CollectFilesResponse](docs/CollectFilesResponse.md)
+ - [CollectedFileResult](docs/CollectedFileResult.md)
  - [CommunicationPortsSpec](docs/CommunicationPortsSpec.md)
  - [ConfigureMetricsExportSpec](docs/ConfigureMetricsExportSpec.md)
  - [ContinuousBackup](docs/ContinuousBackup.md)
@@ -161,6 +170,9 @@ Class | Method | HTTP request | Description
  - [EncryptionAtRestInfo](docs/EncryptionAtRestInfo.md)
  - [EncryptionAtRestSpec](docs/EncryptionAtRestSpec.md)
  - [EncryptionInTransitSpec](docs/EncryptionInTransitSpec.md)
+ - [ExecutionSummary](docs/ExecutionSummary.md)
+ - [FileCollectionOptions](docs/FileCollectionOptions.md)
+ - [FileCollectionSummary](docs/FileCollectionSummary.md)
  - [GflagMetadata](docs/GflagMetadata.md)
  - [IsolatedBackupCreateSpec](docs/IsolatedBackupCreateSpec.md)
  - [IsolatedBackupRestoreSpec](docs/IsolatedBackupRestoreSpec.md)
@@ -185,7 +197,10 @@ Class | Method | HTTP request | Description
  - [KubernetesResourceDetails](docs/KubernetesResourceDetails.md)
  - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [NodeDetails](docs/NodeDetails.md)
+ - [NodeFileCollectionResult](docs/NodeFileCollectionResult.md)
  - [NodeProxyConfig](docs/NodeProxyConfig.md)
+ - [NodeScriptResult](docs/NodeScriptResult.md)
+ - [NodeSelection](docs/NodeSelection.md)
  - [PaginationResp](docs/PaginationResp.md)
  - [PaginationSpec](docs/PaginationSpec.md)
  - [PerProcessNodeSpec](docs/PerProcessNodeSpec.md)
@@ -198,8 +213,12 @@ Class | Method | HTTP request | Description
  - [ResourceGroup](docs/ResourceGroup.md)
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
  - [RollMaxBatchSize](docs/RollMaxBatchSize.md)
+ - [RunScriptRequest](docs/RunScriptRequest.md)
+ - [RunScriptResponse](docs/RunScriptResponse.md)
  - [ScrapeConfigTargetType](docs/ScrapeConfigTargetType.md)
+ - [ScriptOptions](docs/ScriptOptions.md)
  - [SleepAfterRestartSchema](docs/SleepAfterRestartSchema.md)
+ - [SoftwareUpgradeAZStep](docs/SoftwareUpgradeAZStep.md)
  - [TelemetryProviderTypeInfo](docs/TelemetryProviderTypeInfo.md)
  - [TimeUnitType](docs/TimeUnitType.md)
  - [Universe](docs/Universe.md)

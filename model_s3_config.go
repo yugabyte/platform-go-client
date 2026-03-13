@@ -34,6 +34,8 @@ type S3Config struct {
 	FilePrefix *string `json:"filePrefix,omitempty"`
 	// Force Path Style. Set this to true to force the request to use path-style addressing
 	ForcePathStyle *bool `json:"forcePathStyle,omitempty"`
+	// When true, appends universe UUID and node name to the S3 prefix. Example: 'yb-logs/<universe-uuid>/<node-name>'
+	IncludeUniverseAndNodeInPrefix *bool `json:"includeUniverseAndNodeInPrefix,omitempty"`
 	// Marshaler
 	Marshaler *string `json:"marshaler,omitempty"`
 	// S3 Partition
@@ -277,6 +279,38 @@ func (o *S3Config) SetForcePathStyle(v bool) {
 	o.ForcePathStyle = &v
 }
 
+// GetIncludeUniverseAndNodeInPrefix returns the IncludeUniverseAndNodeInPrefix field value if set, zero value otherwise.
+func (o *S3Config) GetIncludeUniverseAndNodeInPrefix() bool {
+	if o == nil || IsNil(o.IncludeUniverseAndNodeInPrefix) {
+		var ret bool
+		return ret
+	}
+	return *o.IncludeUniverseAndNodeInPrefix
+}
+
+// GetIncludeUniverseAndNodeInPrefixOk returns a tuple with the IncludeUniverseAndNodeInPrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *S3Config) GetIncludeUniverseAndNodeInPrefixOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeUniverseAndNodeInPrefix) {
+		return nil, false
+	}
+	return o.IncludeUniverseAndNodeInPrefix, true
+}
+
+// HasIncludeUniverseAndNodeInPrefix returns a boolean if a field has been set.
+func (o *S3Config) HasIncludeUniverseAndNodeInPrefix() bool {
+	if o != nil && !IsNil(o.IncludeUniverseAndNodeInPrefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludeUniverseAndNodeInPrefix gets a reference to the given bool and assigns it to the IncludeUniverseAndNodeInPrefix field.
+func (o *S3Config) SetIncludeUniverseAndNodeInPrefix(v bool) {
+	o.IncludeUniverseAndNodeInPrefix = &v
+}
+
 // GetMarshaler returns the Marshaler field value if set, zero value otherwise.
 func (o *S3Config) GetMarshaler() string {
 	if o == nil || IsNil(o.Marshaler) {
@@ -455,6 +489,9 @@ func (o S3Config) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ForcePathStyle) {
 		toSerialize["forcePathStyle"] = o.ForcePathStyle
+	}
+	if !IsNil(o.IncludeUniverseAndNodeInPrefix) {
+		toSerialize["includeUniverseAndNodeInPrefix"] = o.IncludeUniverseAndNodeInPrefix
 	}
 	if !IsNil(o.Marshaler) {
 		toSerialize["marshaler"] = o.Marshaler

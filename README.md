@@ -258,6 +258,7 @@ Class | Method | HTTP request | Description
 *InternalHAAPI* | [**GetHAConfigByClusterKey**](docs/InternalHAAPI.md#gethaconfigbyclusterkey) | **Get** /api/v1/settings/ha/internal/config | 
 *InternalHAAPI* | [**SyncBackups**](docs/InternalHAAPI.md#syncbackups) | **Post** /api/v1/settings/ha/internal/upload | 
 *InternalHAAPI* | [**SyncInstances**](docs/InternalHAAPI.md#syncinstances) | **Put** /api/v1/settings/ha/internal/config/sync/{timestamp} | 
+*InternalHAAPI* | [**ValidateBackup**](docs/InternalHAAPI.md#validatebackup) | **Get** /api/v1/settings/ha/internal/backups/{backupName}/validate | 
 *KubernetesOverridesControllerAPI* | [**ValidateKubernetesOverrides**](docs/KubernetesOverridesControllerAPI.md#validatekubernetesoverrides) | **Post** /api/v1/customers/{cUUID}/validate_kubernetes_overrides | Validate kubernetes overrides.
 *LDAPOIDCRoleManagementAPI* | [**DeleteOidcGroupMapping**](docs/LDAPOIDCRoleManagementAPI.md#deleteoidcgroupmapping) | **Delete** /api/v1/customers/{cUUID}/oidc_mappings/{groupName} | Delete a OIDC group mapping
 *LDAPOIDCRoleManagementAPI* | [**ListLdapDnToYbaRoles**](docs/LDAPOIDCRoleManagementAPI.md#listldapdntoybaroles) | **Get** /api/v1/customers/{cUUID}/ldap_mappings | List LDAP Mappings
@@ -291,11 +292,20 @@ Class | Method | HTTP request | Description
 *NodeInstancesAPI* | [**DetachedNodeAction**](docs/NodeInstancesAPI.md#detachednodeaction) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP} | Detached node action
 *NodeInstancesAPI* | [**GetNodeDetails**](docs/NodeInstancesAPI.md#getnodedetails) | **Get** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName}/details | Get node details
 *NodeInstancesAPI* | [**GetNodeInstance**](docs/NodeInstancesAPI.md#getnodeinstance) | **Get** /api/v1/customers/{cUUID}/nodes/{nodeUUID}/list | Get a node instance
+*NodeInstancesAPI* | [**List**](docs/NodeInstancesAPI.md#list) | **Get** /api/v1/customers/{cUUID}/nodes | List all node instances of a customer
 *NodeInstancesAPI* | [**ListByProvider**](docs/NodeInstancesAPI.md#listbyprovider) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/nodes/list | List all of a provider&#39;s node instances
 *NodeInstancesAPI* | [**ListByZone**](docs/NodeInstancesAPI.md#listbyzone) | **Get** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/list | List all of a zone&#39;s node instances
 *NodeInstancesAPI* | [**NodeAction**](docs/NodeInstancesAPI.md#nodeaction) | **Put** /api/v1/customers/{cUUID}/universes/{universeUUID}/nodes/{nodeName} | Perform the specified action on the universe node
 *NodeInstancesAPI* | [**UpdateState**](docs/NodeInstancesAPI.md#updatestate) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/instances/{instanceIP}/state | Update node instance state
 *NodeInstancesAPI* | [**ValidateNodeInstance**](docs/NodeInstancesAPI.md#validatenodeinstance) | **Post** /api/v1/customers/{cUUID}/zones/{azUUID}/nodes/validate | Validate a node instance
+*PACollectorAPI* | [**CheckRegistered**](docs/PACollectorAPI.md#checkregistered) | **Get** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector | Check if universe is registered with PA Collector
+*PACollectorAPI* | [**CreatePACollector**](docs/PACollectorAPI.md#createpacollector) | **Post** /api/v1/customers/{cUUID}/pa_collector | Create PA Collector
+*PACollectorAPI* | [**DeletePACollector**](docs/PACollectorAPI.md#deletepacollector) | **Delete** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Delete PA Collector
+*PACollectorAPI* | [**EditPACollector**](docs/PACollectorAPI.md#editpacollector) | **Put** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Edit PA Collector
+*PACollectorAPI* | [**GetPACollector**](docs/PACollectorAPI.md#getpacollector) | **Get** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Get PA Collector
+*PACollectorAPI* | [**ListAllPACollectors**](docs/PACollectorAPI.md#listallpacollectors) | **Get** /api/v1/customers/{cUUID}/pa_collector | List All PA Collectors
+*PACollectorAPI* | [**RegisterUniverse**](docs/PACollectorAPI.md#registeruniverse) | **Put** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID} | Register universe with PA Collector
+*PACollectorAPI* | [**UnregisterUniverse**](docs/PACollectorAPI.md#unregisteruniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector | Unregister universe from PA Collector
 *PITRManagementAPI* | [**CloneNamespace**](docs/PITRManagementAPI.md#clonenamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clone | Clone namespace via PITR on a universe
 *PITRManagementAPI* | [**CreatePitrConfig**](docs/PITRManagementAPI.md#createpitrconfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/keyspaces/{tableType}/{keyspaceName}/pitr_config | Create pitr config for a keyspace in a universe
 *PITRManagementAPI* | [**DeletePitrConfig**](docs/PITRManagementAPI.md#deletepitrconfig) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/pitr_config/{pUUID} | Delete pitr config on a universe
@@ -395,14 +405,6 @@ Class | Method | HTTP request | Description
 *TelemetryProviderAPI* | [**DeleteTelemetryProvider**](docs/TelemetryProviderAPI.md#deletetelemetryprovider) | **Delete** /api/v1/customers/{cUUID}/telemetry_provider/{intUUID} | Delete a telemetry provider
 *TelemetryProviderAPI* | [**GetTelemetryProvider**](docs/TelemetryProviderAPI.md#gettelemetryprovider) | **Get** /api/v1/customers/{cUUID}/telemetry_provider/{intUUID} | Get Telemetry Provider
 *TelemetryProviderAPI* | [**ListAllTelemetryProviders**](docs/TelemetryProviderAPI.md#listalltelemetryproviders) | **Get** /api/v1/customers/{cUUID}/telemetry_provider | List All Telemetry Providers
-*TroubleshootingPlatformAPI* | [**CheckRegistered**](docs/TroubleshootingPlatformAPI.md#checkregistered) | **Get** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID}/universes/{uUUID} | Check if universe is registered with Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**CreateTroubleshootingPlatform**](docs/TroubleshootingPlatformAPI.md#createtroubleshootingplatform) | **Post** /api/v1/customers/{cUUID}/troubleshooting_platform | Create Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**DeleteTroubleshootingPlatform**](docs/TroubleshootingPlatformAPI.md#deletetroubleshootingplatform) | **Delete** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID} | Delete Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**EditTroubleshootingPlatform**](docs/TroubleshootingPlatformAPI.md#edittroubleshootingplatform) | **Put** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID} | Edit Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**GetTroubleshootingPlatform**](docs/TroubleshootingPlatformAPI.md#gettroubleshootingplatform) | **Get** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID} | Get Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**ListAllTroubleshootingPlatforms**](docs/TroubleshootingPlatformAPI.md#listalltroubleshootingplatforms) | **Get** /api/v1/customers/{cUUID}/troubleshooting_platform | List All Troubleshooting Platforms
-*TroubleshootingPlatformAPI* | [**RegisterUniverse**](docs/TroubleshootingPlatformAPI.md#registeruniverse) | **Put** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID}/universes/{uUUID} | Register universe with Troubleshooting Platform
-*TroubleshootingPlatformAPI* | [**UnregisterUniverse**](docs/TroubleshootingPlatformAPI.md#unregisteruniverse) | **Delete** /api/v1/customers/{cUUID}/troubleshooting_platform/{tpUUID}/universes/{uUUID} | Unregister universe from Troubleshooting Platform
 *UniverseActionsAPI* | [**ImportUniverse**](docs/UniverseActionsAPI.md#importuniverse) | **Post** /api/v1/customers/{cUUID}/universes/import | Import a universe - deprecated
 *UniverseCDCManagementAPI* | [**CreateCdcStream**](docs/UniverseCDCManagementAPI.md#createcdcstream) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams | Create CDC Stream for a cluster
 *UniverseCDCManagementAPI* | [**DeleteCdcStream**](docs/UniverseCDCManagementAPI.md#deletecdcstream) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/cdc_streams/{streamId} | Delete a CDC stream for a cluster
@@ -454,6 +456,7 @@ Class | Method | HTTP request | Description
 *UniverseUpgradesManagementAPI* | [**KubernetesToggleImmutableYbc**](docs/UniverseUpgradesManagementAPI.md#kubernetestoggleimmutableybc) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/k8s_immutable_ybc | Upgrade Kubernetes universe to toggle immutable YBC
 *UniverseUpgradesManagementAPI* | [**ModifyAuditLogging**](docs/UniverseUpgradesManagementAPI.md#modifyauditlogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration
 *UniverseUpgradesManagementAPI* | [**PreFinalizeSoftwareUpgradeInfo**](docs/UniverseUpgradesManagementAPI.md#prefinalizesoftwareupgradeinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
+*UniverseUpgradesManagementAPI* | [**ProvisionUniverseNodes**](docs/UniverseUpgradesManagementAPI.md#provisionuniversenodes) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/provision_nodes | Provision universe nodes
 *UniverseUpgradesManagementAPI* | [**RebootUniverse**](docs/UniverseUpgradesManagementAPI.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementAPI* | [**ResizeNode**](docs/UniverseUpgradesManagementAPI.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementAPI* | [**RestartUniverse**](docs/UniverseUpgradesManagementAPI.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
@@ -494,6 +497,7 @@ Class | Method | HTTP request | Description
  - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
  - [AZCloudInfo](docs/AZCloudInfo.md)
  - [AZOverrides](docs/AZOverrides.md)
+ - [AZUpgradeStep](docs/AZUpgradeStep.md)
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
  - [AccessKeyId](docs/AccessKeyId.md)
@@ -544,6 +548,7 @@ Class | Method | HTTP request | Description
  - [AzureRegionCloudInfo](docs/AzureRegionCloudInfo.md)
  - [Backup](docs/Backup.md)
  - [BackupApiFilter](docs/BackupApiFilter.md)
+ - [BackupInfo](docs/BackupInfo.md)
  - [BackupPagedApiQuery](docs/BackupPagedApiQuery.md)
  - [BackupPagedApiResponse](docs/BackupPagedApiResponse.md)
  - [BackupPointInTimeRestoreWindow](docs/BackupPointInTimeRestoreWindow.md)
@@ -561,6 +566,7 @@ Class | Method | HTTP request | Description
  - [BulkImportParams](docs/BulkImportParams.md)
  - [BundleDetails](docs/BundleDetails.md)
  - [BundleInfo](docs/BundleInfo.md)
+ - [CanaryUpgradeConfig](docs/CanaryUpgradeConfig.md)
  - [CertificateDetails](docs/CertificateDetails.md)
  - [CertificateInfo](docs/CertificateInfo.md)
  - [CertificateInfoExt](docs/CertificateInfoExt.md)
@@ -624,6 +630,7 @@ Class | Method | HTTP request | Description
  - [EditBackupParams](docs/EditBackupParams.md)
  - [EditBackupScheduleParams](docs/EditBackupScheduleParams.md)
  - [EncryptionAtRestConfig](docs/EncryptionAtRestConfig.md)
+ - [ExporterRetryConfig](docs/ExporterRetryConfig.md)
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [ExtractMetadata](docs/ExtractMetadata.md)
  - [FailedSubtasks](docs/FailedSubtasks.md)
@@ -711,6 +718,9 @@ Class | Method | HTTP request | Description
  - [OidcGroupToYbaRolesData](docs/OidcGroupToYbaRolesData.md)
  - [OidcGroupToYbaRolesPair](docs/OidcGroupToYbaRolesPair.md)
  - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
+ - [PACollector](docs/PACollector.md)
+ - [PACollectorDetailsModel](docs/PACollectorDetailsModel.md)
+ - [PACollectorUniverseRegistrationStatus](docs/PACollectorUniverseRegistrationStatus.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
@@ -748,6 +758,7 @@ Class | Method | HTTP request | Description
  - [Principal](docs/Principal.md)
  - [Provider](docs/Provider.md)
  - [ProviderDetails](docs/ProviderDetails.md)
+ - [ProvisionUniverseNodesParams](docs/ProvisionUniverseNodesParams.md)
  - [ProxyConfig](docs/ProxyConfig.md)
  - [ProxyConfigUpdateParams](docs/ProxyConfigUpdateParams.md)
  - [QueryDistributionSuggestionResponse](docs/QueryDistributionSuggestionResponse.md)
@@ -794,7 +805,8 @@ Class | Method | HTTP request | Description
  - [Schedule](docs/Schedule.md)
  - [ScheduleApiFilter](docs/ScheduleApiFilter.md)
  - [SchedulePagedApiQuery](docs/SchedulePagedApiQuery.md)
- - [SchedulePagedResponse](docs/SchedulePagedResponse.md)
+ - [SchedulePagedApiResponse](docs/SchedulePagedApiResponse.md)
+ - [ScheduleResp](docs/ScheduleResp.md)
  - [ScopedConfig](docs/ScopedConfig.md)
  - [SessionInfo](docs/SessionInfo.md)
  - [SmtpData](docs/SmtpData.md)
@@ -829,8 +841,6 @@ Class | Method | HTTP request | Description
  - [TlsToggleParams](docs/TlsToggleParams.md)
  - [TokenAuthInformation](docs/TokenAuthInformation.md)
  - [TriggerHealthCheckResult](docs/TriggerHealthCheckResult.md)
- - [TroubleshootingPlatform](docs/TroubleshootingPlatform.md)
- - [TroubleshootingPlatformDetailsModel](docs/TroubleshootingPlatformDetailsModel.md)
  - [Universe](docs/Universe.md)
  - [UniverseBackupRequestFormData](docs/UniverseBackupRequestFormData.md)
  - [UniverseConfigureTaskParams](docs/UniverseConfigureTaskParams.md)

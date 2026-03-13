@@ -2,10 +2,10 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                            | HTTP request                                                            | Description                                              |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------- |
-| [**ExtractMetadata**](ExtractMetadataFromRemoteTarballAPI.md#ExtractMetadata)     | **Post** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata        | helper to extract release metadata from a remote tarball |
-| [**ExtractMetadata_0**](ExtractMetadataFromRemoteTarballAPI.md#ExtractMetadata_0) | **Get** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID} | get the extract release metadata from a remote tarball   |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**ExtractMetadata**](ExtractMetadataFromRemoteTarballAPI.md#ExtractMetadata) | **Post** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata | helper to extract release metadata from a remote tarball
+[**ExtractMetadata_0**](ExtractMetadataFromRemoteTarballAPI.md#ExtractMetadata_0) | **Get** /api/v1/customers/{cUUID}/ybdb_release/extract_metadata/{rUUID} | get the extract release metadata from a remote tarball
 
 
 
@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -49,18 +49,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiExtractMetadataRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **releaseURL** | [**ExtractMetadata**](ExtractMetadata.md) | Release URL to extract metadata from | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -100,7 +100,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -123,19 +123,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiExtractMetadata_1Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 

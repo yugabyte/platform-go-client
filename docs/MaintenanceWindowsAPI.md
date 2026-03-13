@@ -2,14 +2,14 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                            | HTTP request                                                          | Description                          |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------ |
-| [**Create**](MaintenanceWindowsAPI.md#Create)                                     | **Post** /api/v1/customers/{cUUID}/maintenance_windows                | Create maintenance window            |
-| [**Delete**](MaintenanceWindowsAPI.md#Delete)                                     | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Delete maintenance window            |
-| [**Get**](MaintenanceWindowsAPI.md#Get)                                           | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}    | Get details of a maintenance window  |
-| [**ListOfMaintenanceWindows**](MaintenanceWindowsAPI.md#ListOfMaintenanceWindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list           | List maintenance windows             |
-| [**Page**](MaintenanceWindowsAPI.md#Page)                                         | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page           | List maintenance windows (paginated) |
-| [**Update**](MaintenanceWindowsAPI.md#Update)                                     | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID}    | Update maintenance window            |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Create**](MaintenanceWindowsAPI.md#Create) | **Post** /api/v1/customers/{cUUID}/maintenance_windows | Create maintenance window
+[**Delete**](MaintenanceWindowsAPI.md#Delete) | **Delete** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Delete maintenance window
+[**Get**](MaintenanceWindowsAPI.md#Get) | **Get** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Get details of a maintenance window
+[**ListOfMaintenanceWindows**](MaintenanceWindowsAPI.md#ListOfMaintenanceWindows) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/list | List maintenance windows
+[**Page**](MaintenanceWindowsAPI.md#Page) | **Post** /api/v1/customers/{cUUID}/maintenance_windows/page | List maintenance windows (paginated)
+[**Update**](MaintenanceWindowsAPI.md#Update) | **Put** /api/v1/customers/{cUUID}/maintenance_windows/{windowUUID} | Update maintenance window
 
 
 
@@ -31,7 +31,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -54,18 +54,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **createMaintenanceWindowRequest** | [**MaintenanceWindow**](MaintenanceWindow.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -105,7 +105,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -128,19 +128,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **windowUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**windowUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -180,7 +180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -202,19 +202,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **windowUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**windowUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -253,7 +253,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -276,18 +276,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOfMaintenanceWindowsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **listMaintenanceWindowsRequest** | [**MaintenanceWindowApiFilter**](MaintenanceWindowApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -327,7 +327,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -350,18 +350,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPageRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **pageMaintenanceWindowsRequest** | [**MaintenanceWindowPagedApiQuery**](MaintenanceWindowPagedApiQuery.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -402,7 +402,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -426,19 +426,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **windowUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**windowUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **updateMaintenanceWindowRequest** | [**MaintenanceWindow**](MaintenanceWindow.md) |  | 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Endpoint** | Pointer to **string** | Endpoint. Overrides the endpoint used by the exporter instead of constructing it from region and bucket | [optional] 
 **FilePrefix** | Pointer to **string** | File prefix | [optional] 
 **ForcePathStyle** | Pointer to **bool** | Force Path Style. Set this to true to force the request to use path-style addressing | [optional] 
+**IncludeUniverseAndNodeInPrefix** | Pointer to **bool** | When true, appends universe UUID and node name to the S3 prefix. Example: &#39;yb-logs/&lt;universe-uuid&gt;/&lt;node-name&gt;&#39; | [optional] 
 **Marshaler** | Pointer to **string** | Marshaler | [optional] 
 **Partition** | Pointer to **string** | S3 Partition | [optional] 
 **Region** | **string** | Region | 
@@ -200,6 +201,31 @@ SetForcePathStyle sets ForcePathStyle field to given value.
 `func (o *S3Config) HasForcePathStyle() bool`
 
 HasForcePathStyle returns a boolean if a field has been set.
+
+### GetIncludeUniverseAndNodeInPrefix
+
+`func (o *S3Config) GetIncludeUniverseAndNodeInPrefix() bool`
+
+GetIncludeUniverseAndNodeInPrefix returns the IncludeUniverseAndNodeInPrefix field if non-nil, zero value otherwise.
+
+### GetIncludeUniverseAndNodeInPrefixOk
+
+`func (o *S3Config) GetIncludeUniverseAndNodeInPrefixOk() (*bool, bool)`
+
+GetIncludeUniverseAndNodeInPrefixOk returns a tuple with the IncludeUniverseAndNodeInPrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncludeUniverseAndNodeInPrefix
+
+`func (o *S3Config) SetIncludeUniverseAndNodeInPrefix(v bool)`
+
+SetIncludeUniverseAndNodeInPrefix sets IncludeUniverseAndNodeInPrefix field to given value.
+
+### HasIncludeUniverseAndNodeInPrefix
+
+`func (o *S3Config) HasIncludeUniverseAndNodeInPrefix() bool`
+
+HasIncludeUniverseAndNodeInPrefix returns a boolean if a field has been set.
 
 ### GetMarshaler
 

@@ -31,8 +31,11 @@ type UniverseSoftwareUpgradeStart struct {
 	AllowRollback *bool `json:"allow_rollback,omitempty"`
 	// Upgrade the YugabyteDB Catalog
 	UpgradeSystemCatalog *bool `json:"upgrade_system_catalog,omitempty"`
+	// If true, only run prechecks for the upgrade without executing the upgrade.
+	RunOnlyPrechecks *bool `json:"run_only_prechecks,omitempty"`
 	// The target release version to upgrade to.
-	Version string `json:"version"`
+	Version             string                   `json:"version"`
+	CanaryUpgradeConfig *CanaryUpgradeConfigSpec `json:"canary_upgrade_config,omitempty"`
 }
 
 type _UniverseSoftwareUpgradeStart UniverseSoftwareUpgradeStart
@@ -53,6 +56,8 @@ func NewUniverseSoftwareUpgradeStart(version string) *UniverseSoftwareUpgradeSta
 	this.AllowRollback = &allowRollback
 	var upgradeSystemCatalog bool = true
 	this.UpgradeSystemCatalog = &upgradeSystemCatalog
+	var runOnlyPrechecks bool = false
+	this.RunOnlyPrechecks = &runOnlyPrechecks
 	this.Version = version
 	return &this
 }
@@ -72,6 +77,8 @@ func NewUniverseSoftwareUpgradeStartWithDefaults() *UniverseSoftwareUpgradeStart
 	this.AllowRollback = &allowRollback
 	var upgradeSystemCatalog bool = true
 	this.UpgradeSystemCatalog = &upgradeSystemCatalog
+	var runOnlyPrechecks bool = false
+	this.RunOnlyPrechecks = &runOnlyPrechecks
 	return &this
 }
 
@@ -267,6 +274,38 @@ func (o *UniverseSoftwareUpgradeStart) SetUpgradeSystemCatalog(v bool) {
 	o.UpgradeSystemCatalog = &v
 }
 
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *UniverseSoftwareUpgradeStart) GetRunOnlyPrechecks() bool {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseSoftwareUpgradeStart) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *UniverseSoftwareUpgradeStart) HasRunOnlyPrechecks() bool {
+	if o != nil && !IsNil(o.RunOnlyPrechecks) {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *UniverseSoftwareUpgradeStart) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
+}
+
 // GetVersion returns the Version field value
 func (o *UniverseSoftwareUpgradeStart) GetVersion() string {
 	if o == nil {
@@ -289,6 +328,38 @@ func (o *UniverseSoftwareUpgradeStart) GetVersionOk() (*string, bool) {
 // SetVersion sets field value
 func (o *UniverseSoftwareUpgradeStart) SetVersion(v string) {
 	o.Version = v
+}
+
+// GetCanaryUpgradeConfig returns the CanaryUpgradeConfig field value if set, zero value otherwise.
+func (o *UniverseSoftwareUpgradeStart) GetCanaryUpgradeConfig() CanaryUpgradeConfigSpec {
+	if o == nil || IsNil(o.CanaryUpgradeConfig) {
+		var ret CanaryUpgradeConfigSpec
+		return ret
+	}
+	return *o.CanaryUpgradeConfig
+}
+
+// GetCanaryUpgradeConfigOk returns a tuple with the CanaryUpgradeConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseSoftwareUpgradeStart) GetCanaryUpgradeConfigOk() (*CanaryUpgradeConfigSpec, bool) {
+	if o == nil || IsNil(o.CanaryUpgradeConfig) {
+		return nil, false
+	}
+	return o.CanaryUpgradeConfig, true
+}
+
+// HasCanaryUpgradeConfig returns a boolean if a field has been set.
+func (o *UniverseSoftwareUpgradeStart) HasCanaryUpgradeConfig() bool {
+	if o != nil && !IsNil(o.CanaryUpgradeConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanaryUpgradeConfig gets a reference to the given CanaryUpgradeConfigSpec and assigns it to the CanaryUpgradeConfig field.
+func (o *UniverseSoftwareUpgradeStart) SetCanaryUpgradeConfig(v CanaryUpgradeConfigSpec) {
+	o.CanaryUpgradeConfig = &v
 }
 
 func (o UniverseSoftwareUpgradeStart) MarshalJSON() ([]byte, error) {
@@ -319,7 +390,13 @@ func (o UniverseSoftwareUpgradeStart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpgradeSystemCatalog) {
 		toSerialize["upgrade_system_catalog"] = o.UpgradeSystemCatalog
 	}
+	if !IsNil(o.RunOnlyPrechecks) {
+		toSerialize["run_only_prechecks"] = o.RunOnlyPrechecks
+	}
 	toSerialize["version"] = o.Version
+	if !IsNil(o.CanaryUpgradeConfig) {
+		toSerialize["canary_upgrade_config"] = o.CanaryUpgradeConfig
+	}
 	return toSerialize, nil
 }
 

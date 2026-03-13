@@ -2,23 +2,23 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                              | HTTP request                                                                                            | Description                            |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| [**DeleteBackupScheduleAsync**](ScheduleManagementAPI.md#DeleteBackupScheduleAsync) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/delete_backup_schedule_async | Delete a backup schedule async         |
-| [**DeleteSchedule**](ScheduleManagementAPI.md#DeleteSchedule)                       | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}                                                  | Delete a schedule  - deprecated        |
-| [**DeleteScheduleV2**](ScheduleManagementAPI.md#DeleteScheduleV2)                   | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete                                           | Delete a schedule V2 - deprecated      |
-| [**EditBackupScheduleAsync**](ScheduleManagementAPI.md#EditBackupScheduleAsync)     | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/edit_backup_schedule_async      | Edit a backup schedule async           |
-| [**EditBackupScheduleV2**](ScheduleManagementAPI.md#EditBackupScheduleV2)           | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID}                                                     | Edit a backup schedule V2 - deprecated |
-| [**GetSchedule**](ScheduleManagementAPI.md#GetSchedule)                             | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID}                                                     | Get Schedule                           |
-| [**ListSchedules**](ScheduleManagementAPI.md#ListSchedules)                         | **Get** /api/v1/customers/{cUUID}/schedules                                                             | List schedules - deprecated            |
-| [**ListSchedulesV2**](ScheduleManagementAPI.md#ListSchedulesV2)                     | **Post** /api/v1/customers/{cUUID}/schedules/page                                                       | List schedules V2                      |
-| [**ToggleBackupSchedule**](ScheduleManagementAPI.md#ToggleBackupSchedule)           | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/pause_resume                    | Toggle a backup schedule               |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteBackupScheduleAsync**](ScheduleManagementAPI.md#DeleteBackupScheduleAsync) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/delete_backup_schedule_async | Delete a backup schedule async
+[**DeleteSchedule**](ScheduleManagementAPI.md#DeleteSchedule) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID} | Delete a schedule  - deprecated
+[**DeleteScheduleV2**](ScheduleManagementAPI.md#DeleteScheduleV2) | **Delete** /api/v1/customers/{cUUID}/schedules/{sUUID}/delete | Delete a schedule V2 - deprecated
+[**EditBackupScheduleAsync**](ScheduleManagementAPI.md#EditBackupScheduleAsync) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/edit_backup_schedule_async | Edit a backup schedule async
+[**EditBackupScheduleV2**](ScheduleManagementAPI.md#EditBackupScheduleV2) | **Put** /api/v1/customers/{cUUID}/schedules/{sUUID} | Edit a backup schedule V2 - deprecated
+[**GetSchedule**](ScheduleManagementAPI.md#GetSchedule) | **Get** /api/v1/customers/{cUUID}/schedules/{sUUID} | Get Schedule
+[**ListSchedules**](ScheduleManagementAPI.md#ListSchedules) | **Get** /api/v1/customers/{cUUID}/schedules | List schedules - deprecated
+[**ListSchedulesV2**](ScheduleManagementAPI.md#ListSchedulesV2) | **Post** /api/v1/customers/{cUUID}/schedules/page | List schedules V2
+[**ToggleBackupSchedule**](ScheduleManagementAPI.md#ToggleBackupSchedule) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/schedules/{sUUID}/pause_resume | Toggle a backup schedule
 
 
 
 ## DeleteBackupScheduleAsync
 
-> Schedule DeleteBackupScheduleAsync(ctx, cUUID, uniUUID, sUUID).Request(request).Execute()
+> YBPTask DeleteBackupScheduleAsync(ctx, cUUID, uniUUID, sUUID).Request(request).Execute()
 
 Delete a backup schedule async
 
@@ -33,7 +33,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -49,7 +49,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementAPI.DeleteBackupScheduleAsync``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeleteBackupScheduleAsync`: Schedule
+	// response from `DeleteBackupScheduleAsync`: YBPTask
 	fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementAPI.DeleteBackupScheduleAsync`: %v\n", resp)
 }
 ```
@@ -57,20 +57,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sUUID**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteBackupScheduleAsyncRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -78,7 +78,7 @@ Other parameters are passed through a pointer to a apiDeleteBackupScheduleAsyncR
 
 ### Return type
 
-[**Schedule**](Schedule.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -111,7 +111,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -134,19 +134,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **sUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteScheduleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -186,7 +186,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -209,19 +209,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **sUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteScheduleV2Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -246,7 +246,7 @@ Other parameters are passed through a pointer to a apiDeleteScheduleV2Request st
 
 ## EditBackupScheduleAsync
 
-> Schedule EditBackupScheduleAsync(ctx, cUUID, uniUUID, sUUID).Body(body).Request(request).Execute()
+> YBPTask EditBackupScheduleAsync(ctx, cUUID, uniUUID, sUUID).Body(body).Request(request).Execute()
 
 Edit a backup schedule async
 
@@ -261,7 +261,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -278,7 +278,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementAPI.EditBackupScheduleAsync``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `EditBackupScheduleAsync`: Schedule
+	// response from `EditBackupScheduleAsync`: YBPTask
 	fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementAPI.EditBackupScheduleAsync`: %v\n", resp)
 }
 ```
@@ -286,20 +286,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sUUID**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditBackupScheduleAsyncRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -308,7 +308,7 @@ Other parameters are passed through a pointer to a apiEditBackupScheduleAsyncReq
 
 ### Return type
 
-[**Schedule**](Schedule.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -341,7 +341,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -365,19 +365,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **sUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditBackupScheduleV2Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **body** | [**EditBackupScheduleParams**](EditBackupScheduleParams.md) |  | 
@@ -416,7 +416,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -438,19 +438,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **sUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetScheduleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -489,7 +489,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -510,18 +510,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListSchedulesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -544,7 +544,7 @@ Other parameters are passed through a pointer to a apiListSchedulesRequest struc
 
 ## ListSchedulesV2
 
-> SchedulePagedResponse ListSchedulesV2(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Request(request).Execute()
+> SchedulePagedApiResponse ListSchedulesV2(ctx, cUUID).PageScheduleRequest(pageScheduleRequest).Request(request).Execute()
 
 List schedules V2
 
@@ -557,7 +557,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -572,7 +572,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementAPI.ListSchedulesV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListSchedulesV2`: SchedulePagedResponse
+	// response from `ListSchedulesV2`: SchedulePagedApiResponse
 	fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementAPI.ListSchedulesV2`: %v\n", resp)
 }
 ```
@@ -580,25 +580,25 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListSchedulesV2Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **pageScheduleRequest** | [**SchedulePagedApiQuery**](SchedulePagedApiQuery.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
-[**SchedulePagedResponse**](SchedulePagedResponse.md)
+[**SchedulePagedApiResponse**](SchedulePagedApiResponse.md)
 
 ### Authorization
 
@@ -616,7 +616,7 @@ Other parameters are passed through a pointer to a apiListSchedulesV2Request str
 
 ## ToggleBackupSchedule
 
-> Schedule ToggleBackupSchedule(ctx, cUUID, uniUUID, sUUID).Body(body).Request(request).Execute()
+> YBPSuccess ToggleBackupSchedule(ctx, cUUID, uniUUID, sUUID).Body(body).Request(request).Execute()
 
 Toggle a backup schedule
 
@@ -631,7 +631,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -648,7 +648,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ScheduleManagementAPI.ToggleBackupSchedule``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ToggleBackupSchedule`: Schedule
+	// response from `ToggleBackupSchedule`: YBPSuccess
 	fmt.Fprintf(os.Stdout, "Response from `ScheduleManagementAPI.ToggleBackupSchedule`: %v\n", resp)
 }
 ```
@@ -656,20 +656,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sUUID**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiToggleBackupScheduleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -678,7 +678,7 @@ Other parameters are passed through a pointer to a apiToggleBackupScheduleReques
 
 ### Return type
 
-[**Schedule**](Schedule.md)
+[**YBPSuccess**](YBPSuccess.md)
 
 ### Authorization
 

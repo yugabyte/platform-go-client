@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
+**PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
@@ -943,6 +944,31 @@ SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
 `func (o *ResizeNodeParams) HasOtelCollectorEnabled() bool`
 
 HasOtelCollectorEnabled returns a boolean if a field has been set.
+
+### GetPaCollectorUuid
+
+`func (o *ResizeNodeParams) GetPaCollectorUuid() string`
+
+GetPaCollectorUuid returns the PaCollectorUuid field if non-nil, zero value otherwise.
+
+### GetPaCollectorUuidOk
+
+`func (o *ResizeNodeParams) GetPaCollectorUuidOk() (*string, bool)`
+
+GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaCollectorUuid
+
+`func (o *ResizeNodeParams) SetPaCollectorUuid(v string)`
+
+SetPaCollectorUuid sets PaCollectorUuid field to given value.
+
+### HasPaCollectorUuid
+
+`func (o *ResizeNodeParams) HasPaCollectorUuid() bool`
+
+HasPaCollectorUuid returns a boolean if a field has been set.
 
 ### GetPlacementModificationTaskUuid
 

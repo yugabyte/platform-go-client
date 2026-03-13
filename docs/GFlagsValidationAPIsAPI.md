@@ -2,11 +2,11 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                              | HTTP request                                                | Description                   |
-| ------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------- |
-| [**GetGFlagMetadata**](GFlagsValidationAPIsAPI.md#GetGFlagMetadata) | **Get** /api/v1/metadata/version/{version}/gflag            | Get gflag metadata            |
-| [**ListGFlags**](GFlagsValidationAPIsAPI.md#ListGFlags)             | **Get** /api/v1/metadata/version/{version}/list_gflags      | List all gflags for a release |
-| [**ValidateGFlags**](GFlagsValidationAPIsAPI.md#ValidateGFlags)     | **Post** /api/v1/metadata/version/{version}/validate_gflags | Validate gflags               |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetGFlagMetadata**](GFlagsValidationAPIsAPI.md#GetGFlagMetadata) | **Get** /api/v1/metadata/version/{version}/gflag | Get gflag metadata
+[**ListGFlags**](GFlagsValidationAPIsAPI.md#ListGFlags) | **Get** /api/v1/metadata/version/{version}/list_gflags | List all gflags for a release
+[**ValidateGFlags**](GFlagsValidationAPIsAPI.md#ValidateGFlags) | **Post** /api/v1/metadata/version/{version}/validate_gflags | Validate gflags
 
 
 
@@ -27,7 +27,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -50,18 +50,18 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **version** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**version** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetGFlagMetadataRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **name** | **string** |  | 
  **server** | **string** |  | 
@@ -101,7 +101,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -126,18 +126,18 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **version** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**version** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListGFlagsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **name** | **string** |  | 
  **server** | **string** |  | 
@@ -179,7 +179,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -202,18 +202,18 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **version** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**version** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiValidateGFlagsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **gflagValidationFormData** | [**GFlagsValidationFormData**](GFlagsValidationFormData.md) | GFlag validation form data | 
  **request** | [**interface{}**](interface{}.md) |  | 

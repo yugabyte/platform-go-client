@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                        | HTTP request                                                       | Description                              |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------- |
-| [**DownloadNodeAgentInstaller**](NodeAgentsAPI.md#DownloadNodeAgentInstaller) | **Get** /api/v1/node_agents/download                               | Download Node Agent Installer or Package |
-| [**GetNodeAgent**](NodeAgentsAPI.md#GetNodeAgent)                             | **Get** /api/v1/customers/{cUUID}/node_agents/{nUUID}              | Get Node Agent                           |
-| [**ListNodeAgents**](NodeAgentsAPI.md#ListNodeAgents)                         | **Get** /api/v1/customers/{cUUID}/node_agents                      | List Node Agents                         |
-| [**PageListNodeAgents**](NodeAgentsAPI.md#PageListNodeAgents)                 | **Post** /api/v1/customers/{cUUID}/node_agents/page                | List Node Agents (paginated)             |
-| [**ReinstallNodeAgent**](NodeAgentsAPI.md#ReinstallNodeAgent)                 | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/node_agents | Reinstall Node Agent                     |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DownloadNodeAgentInstaller**](NodeAgentsAPI.md#DownloadNodeAgentInstaller) | **Get** /api/v1/node_agents/download | Download Node Agent Installer or Package
+[**GetNodeAgent**](NodeAgentsAPI.md#GetNodeAgent) | **Get** /api/v1/customers/{cUUID}/node_agents/{nUUID} | Get Node Agent
+[**ListNodeAgents**](NodeAgentsAPI.md#ListNodeAgents) | **Get** /api/v1/customers/{cUUID}/node_agents | List Node Agents
+[**PageListNodeAgents**](NodeAgentsAPI.md#PageListNodeAgents) | **Post** /api/v1/customers/{cUUID}/node_agents/page | List Node Agents (paginated)
+[**ReinstallNodeAgent**](NodeAgentsAPI.md#ReinstallNodeAgent) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/node_agents | Reinstall Node Agent
 
 
 
@@ -27,7 +27,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -56,11 +56,11 @@ func main() {
 Other parameters are passed through a pointer to a apiDownloadNodeAgentInstallerRequest struct via the builder pattern
 
 
-| Name             | Type       | Description | Notes                              |
-| ---------------- | ---------- | ----------- | ---------------------------------- |
-| **downloadType** | **string** |             | [default to &quot;INSTALLER&quot;] |
-| **os**           | **string** |             |
-| **arch**         | **string** |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **downloadType** | **string** |  | [default to &quot;INSTALLER&quot;]
+ **os** | **string** |  | 
+ **arch** | **string** |  | 
 
 ### Return type
 
@@ -95,7 +95,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -117,19 +117,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **nUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**nUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetNodeAgentRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -166,7 +166,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -188,18 +188,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListNodeAgentsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **nodeIp** | **string** |  | 
 
@@ -236,7 +236,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -259,18 +259,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPageListNodeAgentsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **pageNodeAgentRequest** | [**NodeAgentPagedApiQuery**](NodeAgentPagedApiQuery.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -308,7 +308,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -332,19 +332,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiReinstallNodeAgentRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **reinstallNodeAgentForm** | [**ReinstallNodeAgentForm**](ReinstallNodeAgentForm.md) |  | 
