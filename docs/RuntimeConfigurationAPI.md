@@ -2,16 +2,16 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                    | HTTP request                                                          | Description                                                     |
-| ------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [**DeleteKey**](RuntimeConfigurationAPI.md#DeleteKey)                     | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key                                      |
-| [**GetConfig**](RuntimeConfigurationAPI.md#GetConfig)                     | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}              | List configuration entries for a scope                          |
-| [**GetConfigurationKey**](RuntimeConfigurationAPI.md#GetConfigurationKey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key}    | Get a configuration key                                         |
-| [**ListFeatureFlags**](RuntimeConfigurationAPI.md#ListFeatureFlags)       | **Get** /api/v1/runtime_config/feature_flags                          | List all the feature flag runtime config keys and their values. |
-| [**ListKeyInfo**](RuntimeConfigurationAPI.md#ListKeyInfo)                 | **Get** /api/v1/runtime_config/mutable_key_info                       | List mutable keys                                               |
-| [**ListKeys**](RuntimeConfigurationAPI.md#ListKeys)                       | **Get** /api/v1/runtime_config/mutable_keys                           | List mutable keys                                               |
-| [**ListScopes**](RuntimeConfigurationAPI.md#ListScopes)                   | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes               | List configuration scopes                                       |
-| [**SetKey**](RuntimeConfigurationAPI.md#SetKey)                           | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key}    | Update a configuration key                                      |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteKey**](RuntimeConfigurationAPI.md#DeleteKey) | **Delete** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Delete a configuration key
+[**GetConfig**](RuntimeConfigurationAPI.md#GetConfig) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope} | List configuration entries for a scope
+[**GetConfigurationKey**](RuntimeConfigurationAPI.md#GetConfigurationKey) | **Get** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Get a configuration key
+[**ListFeatureFlags**](RuntimeConfigurationAPI.md#ListFeatureFlags) | **Get** /api/v1/runtime_config/feature_flags | List all the feature flag runtime config keys and their values.
+[**ListKeyInfo**](RuntimeConfigurationAPI.md#ListKeyInfo) | **Get** /api/v1/runtime_config/mutable_key_info | List mutable keys
+[**ListKeys**](RuntimeConfigurationAPI.md#ListKeys) | **Get** /api/v1/runtime_config/mutable_keys | List mutable keys
+[**ListScopes**](RuntimeConfigurationAPI.md#ListScopes) | **Get** /api/v1/customers/{cUUID}/runtime_config/scopes | List configuration scopes
+[**SetKey**](RuntimeConfigurationAPI.md#SetKey) | **Put** /api/v1/customers/{cUUID}/runtime_config/{scope}/key/{key} | Update a configuration key
 
 
 
@@ -30,7 +30,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -54,20 +54,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **scope** | **string**          |                                                                             |
-| **key**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**scope** | **string** |  | 
+**key** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteKeyRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -108,7 +108,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -132,19 +132,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **scope** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**scope** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **includeInherited** | **bool** |  | [default to false]
@@ -183,7 +183,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -207,20 +207,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **scope** | **string**          |                                                                             |
-| **key**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**scope** | **string** |  | 
+**key** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetConfigurationKeyRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -261,7 +261,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -322,7 +322,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -383,7 +383,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -444,7 +444,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -466,18 +466,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListScopesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 
@@ -514,7 +514,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -539,20 +539,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **scope** | **string**          |                                                                             |
-| **key**   | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**scope** | **string** |  | 
+**key** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetKeyRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 

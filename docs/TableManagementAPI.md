@@ -2,18 +2,18 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                           | HTTP request                                                                         | Description                                             |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- |
-| [**AlterTable**](TableManagementAPI.md#AlterTable)               | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}             | Alter a YugabyteDB table                                |
-| [**BulkImportData**](TableManagementAPI.md#BulkImportData)       | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data                                        |
-| [**CreateTable**](TableManagementAPI.md#CreateTable)             | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables                        | Create a YugabyteDB table                               |
-| [**CreateTableSpaces**](TableManagementAPI.md#CreateTableSpaces) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces                   | Create tableSpaces                                      |
-| [**DescribeTable**](TableManagementAPI.md#DescribeTable)         | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}             | Describe a table                                        |
-| [**DropTable**](TableManagementAPI.md#DropTable)                 | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}          | Drop a YugabyteDB table                                 |
-| [**GetAllNamespaces**](TableManagementAPI.md#GetAllNamespaces)   | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces                     | Get a list of all namespaces in the specified universe. |
-| [**GetAllTableSpaces**](TableManagementAPI.md#GetAllTableSpaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces                    | Get a list of all tablespaces of a given universe.      |
-| [**GetAllTables**](TableManagementAPI.md#GetAllTables)           | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables                         | Get a list of all tables in the specified universe      |
-| [**GetYQLDataTypes**](TableManagementAPI.md#GetYQLDataTypes)     | **Get** /api/v1/metadata/yql_data_types                                              | List column types                                       |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**AlterTable**](TableManagementAPI.md#AlterTable) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Alter a YugabyteDB table
+[**BulkImportData**](TableManagementAPI.md#BulkImportData) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID}/bulk_import | Bulk import data
+[**CreateTable**](TableManagementAPI.md#CreateTable) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Create a YugabyteDB table
+[**CreateTableSpaces**](TableManagementAPI.md#CreateTableSpaces) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Create tableSpaces
+[**DescribeTable**](TableManagementAPI.md#DescribeTable) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Describe a table
+[**DropTable**](TableManagementAPI.md#DropTable) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables/{tableUUID} | Drop a YugabyteDB table
+[**GetAllNamespaces**](TableManagementAPI.md#GetAllNamespaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/namespaces | Get a list of all namespaces in the specified universe.
+[**GetAllTableSpaces**](TableManagementAPI.md#GetAllTableSpaces) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tablespaces | Get a list of all tablespaces of a given universe.
+[**GetAllTables**](TableManagementAPI.md#GetAllTables) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/tables | Get a list of all tables in the specified universe
+[**GetYQLDataTypes**](TableManagementAPI.md#GetYQLDataTypes) | **Get** /api/v1/metadata/yql_data_types | List column types
 
 
 
@@ -34,7 +34,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -58,20 +58,20 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **uniUUID**   | **string**          |                                                                             |
-| **tableUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**tableUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAlterTableRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -112,7 +112,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -137,20 +137,20 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **uniUUID**   | **string**          |                                                                             |
-| **tableUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**tableUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiBulkImportDataRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -192,7 +192,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -216,19 +216,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateTableRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **table** | [**TableDefinitionTaskParams**](TableDefinitionTaskParams.md) | Table definition to be created | 
@@ -269,7 +269,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -293,19 +293,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateTableSpacesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **createTableSpacesRequest** | [**CreateTablespaceParams**](CreateTablespaceParams.md) |  | 
@@ -346,7 +346,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -369,20 +369,20 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **uniUUID**   | **string**          |                                                                             |
-| **tableUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**tableUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDescribeTableRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -422,7 +422,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -446,20 +446,20 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **uniUUID**   | **string**          |                                                                             |
-| **tableUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**tableUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDropTableRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -500,7 +500,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -523,19 +523,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllNamespacesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **includeSystemNamespaces** | **bool** |  | [default to false]
@@ -575,7 +575,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -597,19 +597,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllTableSpacesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -648,7 +648,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -674,19 +674,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAllTablesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **includeParentTableInfo** | **bool** |  | [default to false]
@@ -729,7 +729,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {

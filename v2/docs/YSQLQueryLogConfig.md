@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **LogConnections** | **bool** | Log connections, causes each attempted connection to the server to be logged, as well as successful completion of both client authentication (if necessary) and authorization | [default to false]
 **LogDisconnections** | **bool** | Log disconnections, causes session terminations to be logged. The log output provides information similar to log_connections, plus the duration of the session. | [default to false]
 **LogMinDurationStatement** | **int32** | Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time. | [default to -1]
+**LogLinePrefix** | Pointer to **string** | YbaApi Internal. Log line prefix format for PostgreSQL logs. User-configured log_line_prefix in gflags takes precedence over this value when specified. | [optional] 
 
 ## Methods
 
@@ -212,6 +213,31 @@ and a boolean to check if the value has been set.
 
 SetLogMinDurationStatement sets LogMinDurationStatement field to given value.
 
+
+### GetLogLinePrefix
+
+`func (o *YSQLQueryLogConfig) GetLogLinePrefix() string`
+
+GetLogLinePrefix returns the LogLinePrefix field if non-nil, zero value otherwise.
+
+### GetLogLinePrefixOk
+
+`func (o *YSQLQueryLogConfig) GetLogLinePrefixOk() (*string, bool)`
+
+GetLogLinePrefixOk returns a tuple with the LogLinePrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogLinePrefix
+
+`func (o *YSQLQueryLogConfig) SetLogLinePrefix(v string)`
+
+SetLogLinePrefix sets LogLinePrefix field to given value.
+
+### HasLogLinePrefix
+
+`func (o *YSQLQueryLogConfig) HasLogLinePrefix() bool`
+
+HasLogLinePrefix returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -2,15 +2,15 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                           | HTTP request                                                                 | Description                          |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------ |
-| [**CreateInstanceType**](InstanceTypesAPI.md#CreateInstanceType) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types          | Create an instance type              |
-| [**DeleteInstanceType**](InstanceTypesAPI.md#DeleteInstanceType) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Delete an instance type              |
-| [**GetAZUTypes**](InstanceTypesAPI.md#GetAZUTypes)               | **Get** /api/v1/metadata/azu_types                                           | List supported Azure disk types      |
-| [**GetEBSTypes**](InstanceTypesAPI.md#GetEBSTypes)               | **Get** /api/v1/metadata/ebs_types                                           | List supported EBS volume types      |
-| [**GetGCPTypes**](InstanceTypesAPI.md#GetGCPTypes)               | **Get** /api/v1/metadata/gcp_types                                           | List supported GCP disk types        |
-| [**InstanceTypeDetail**](InstanceTypesAPI.md#InstanceTypeDetail) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code}    | Get details of an instance type      |
-| [**ListOfInstanceType**](InstanceTypesAPI.md#ListOfInstanceType) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types           | List a provider&#39;s instance types |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateInstanceType**](InstanceTypesAPI.md#CreateInstanceType) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | Create an instance type
+[**DeleteInstanceType**](InstanceTypesAPI.md#DeleteInstanceType) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Delete an instance type
+[**GetAZUTypes**](InstanceTypesAPI.md#GetAZUTypes) | **Get** /api/v1/metadata/azu_types | List supported Azure disk types
+[**GetEBSTypes**](InstanceTypesAPI.md#GetEBSTypes) | **Get** /api/v1/metadata/ebs_types | List supported EBS volume types
+[**GetGCPTypes**](InstanceTypesAPI.md#GetGCPTypes) | **Get** /api/v1/metadata/gcp_types | List supported GCP disk types
+[**InstanceTypeDetail**](InstanceTypesAPI.md#InstanceTypeDetail) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types/{code} | Get details of an instance type
+[**ListOfInstanceType**](InstanceTypesAPI.md#ListOfInstanceType) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/instance_types | List a provider&#39;s instance types
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -53,19 +53,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateInstanceTypeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **instanceType** | [**InstanceType**](InstanceType.md) | Instance type data of the instance to be stored | 
@@ -104,7 +104,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -128,20 +128,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
-| **code**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**code** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteInstanceTypeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -180,7 +180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -239,7 +239,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -298,7 +298,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -357,7 +357,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -380,20 +380,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
-| **code**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**code** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiInstanceTypeDetailRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -431,7 +431,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -455,19 +455,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOfInstanceTypeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **zone** | **[]string** |  | 

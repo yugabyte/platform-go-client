@@ -34,7 +34,7 @@ type PlacementAZ struct {
 	NumNodesInAz *int32 `json:"num_nodes_in_az,omitempty"`
 	// Affinitizes raft leaders to this AZ.
 	LeaderAffinity *bool `json:"leader_affinity,omitempty"`
-	// Priority of zone (for leaders placement). Values have to be contiguous non-zero integers. Multiple zones can have the same value. A lower value indicates higher zone priority.
+	// Priority of zone (for leaders placement). Values have to be contiguous non-negative integers. Zero means non-prioritized. Multiple zones can have the same value. A lower value indicates higher zone priority.
 	LeaderPreference *int32 `json:"leader_preference,omitempty"`
 	// The Load Balancer id.
 	LbName *string `json:"lb_name,omitempty"`

@@ -2,15 +2,15 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                       | HTTP request                                                                           | Description                                        |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [**CreateSupportBundle**](SupportBundleManagementAPI.md#CreateSupportBundle)                 | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle                  | Create support bundle for specific universe        |
-| [**DeleteSupportBundle**](SupportBundleManagementAPI.md#DeleteSupportBundle)                 | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}       | Delete a support bundle                            |
-| [**DownloadSupportBundle**](SupportBundleManagementAPI.md#DownloadSupportBundle)             | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle                            |
-| [**EstimateSupportBundleSize**](SupportBundleManagementAPI.md#EstimateSupportBundleSize)     | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size    | Estimate support bundle size for specific universe |
-| [**GetSupportBundle**](SupportBundleManagementAPI.md#GetSupportBundle)                       | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}          | Get a support bundle from a universe               |
-| [**ListSupportBundle**](SupportBundleManagementAPI.md#ListSupportBundle)                     | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle                   | List all support bundles from a universe           |
-| [**ListSupportBundleComponents**](SupportBundleManagementAPI.md#ListSupportBundleComponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components                            | List all components available in support bundle    |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateSupportBundle**](SupportBundleManagementAPI.md#CreateSupportBundle) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | Create support bundle for specific universe
+[**DeleteSupportBundle**](SupportBundleManagementAPI.md#DeleteSupportBundle) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Delete a support bundle
+[**DownloadSupportBundle**](SupportBundleManagementAPI.md#DownloadSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID}/download | Download support bundle
+[**EstimateSupportBundleSize**](SupportBundleManagementAPI.md#EstimateSupportBundleSize) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/estimate_size | Estimate support bundle size for specific universe
+[**GetSupportBundle**](SupportBundleManagementAPI.md#GetSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle/{sbUUID} | Get a support bundle from a universe
+[**ListSupportBundle**](SupportBundleManagementAPI.md#ListSupportBundle) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/support_bundle | List all support bundles from a universe
+[**ListSupportBundleComponents**](SupportBundleManagementAPI.md#ListSupportBundleComponents) | **Get** /api/v1/customers/{cUUID}/support_bundle/components | List all components available in support bundle
 
 
 
@@ -30,7 +30,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -54,19 +54,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateSupportBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **supportBundle** | [**SupportBundleFormData**](SupportBundleFormData.md) | post support bundle info | 
@@ -105,7 +105,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -129,20 +129,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sbUUID**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sbUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteSupportBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -181,7 +181,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -204,20 +204,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sbUUID**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sbUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDownloadSupportBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -258,7 +258,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -282,19 +282,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEstimateSupportBundleSizeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **supportBundle** | [**SupportBundleFormData**](SupportBundleFormData.md) | support bundle info | 
@@ -333,7 +333,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -356,20 +356,20 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
-| **sbUUID**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**sbUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSupportBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -407,7 +407,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -429,19 +429,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListSupportBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -478,7 +478,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -499,18 +499,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListSupportBundleComponentsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type

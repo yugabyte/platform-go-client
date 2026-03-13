@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **Ip** | **string** | IP address | 
 **NodeName** | Pointer to **string** | Node name in a universe | [optional] [readonly] 
 **Region** | **string** | Region | 
-**SshUser** | **string** | SSH user | 
+**SshUser** | Pointer to **string** | SSH user | [optional] 
 **Zone** | **string** | Zone | 
 
 ## Methods
 
 ### NewNodeInstanceData
 
-`func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, sshUser string, zone string, ) *NodeInstanceData`
+`func NewNodeInstanceData(instanceName string, instanceType string, ip string, region string, zone string, ) *NodeInstanceData`
 
 NewNodeInstanceData instantiates a new NodeInstanceData object
 This constructor will assign default values to properties that have it defined,
@@ -155,6 +155,11 @@ and a boolean to check if the value has been set.
 
 SetSshUser sets SshUser field to given value.
 
+### HasSshUser
+
+`func (o *NodeInstanceData) HasSshUser() bool`
+
+HasSshUser returns a boolean if a field has been set.
 
 ### GetZone
 

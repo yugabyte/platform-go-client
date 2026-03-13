@@ -2,9 +2,9 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                           | HTTP request                       | Description            |
-| ------------------------------------------------ | ---------------------------------- | ---------------------- |
-| [**MetricsDetail**](MetricsAPI.md#MetricsDetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**MetricsDetail**](MetricsAPI.md#MetricsDetail) | **Get** /api/v1/prometheus_metrics | Get Prometheus metrics
 
 
 
@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,9 +52,9 @@ func main() {
 Other parameters are passed through a pointer to a apiMetricsDetailRequest struct via the builder pattern
 
 
-| Name        | Type                              | Description | Notes |
-| ----------- | --------------------------------- | ----------- | ----- |
-| **request** | [**interface{}**](interface{}.md) |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 

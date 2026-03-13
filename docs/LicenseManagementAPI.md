@@ -2,10 +2,10 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                     | HTTP request                                          | Description         |
-| ---------------------------------------------------------- | ----------------------------------------------------- | ------------------- |
-| [**DeleteLicense**](LicenseManagementAPI.md#DeleteLicense) | **Delete** /api/v1/customers/{cUUID}/licenses/{lUUID} | Delete a license    |
-| [**UploadLicense**](LicenseManagementAPI.md#UploadLicense) | **Post** /api/v1/customers/{cUUID}/licenses           | Uploads the license |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteLicense**](LicenseManagementAPI.md#DeleteLicense) | **Delete** /api/v1/customers/{cUUID}/licenses/{lUUID} | Delete a license
+[**UploadLicense**](LicenseManagementAPI.md#UploadLicense) | **Post** /api/v1/customers/{cUUID}/licenses | Uploads the license
 
 
 
@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -47,19 +47,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **lUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**lUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteLicenseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -97,7 +97,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -119,18 +119,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUploadLicenseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 

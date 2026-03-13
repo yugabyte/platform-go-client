@@ -2,17 +2,17 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                   | HTTP request                                                              | Description                           |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ------------------------------------- |
-| [**CreateSelfSignedCert**](CertificateInfoAPI.md#CreateSelfSignedCert)   | **Post** /api/v1/customers/{cUUID}/certificates/create_self_signed_cert   | Create a self signed certificate      |
-| [**DeleteCertificate**](CertificateInfoAPI.md#DeleteCertificate)         | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID}                 | Delete a certificate                  |
-| [**EditCertificate**](CertificateInfoAPI.md#EditCertificate)             | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit              | Edit TLS certificate config details   |
-| [**GetCertificate**](CertificateInfoAPI.md#GetCertificate)               | **Get** /api/v1/customers/{cUUID}/certificates/{name}                     | Get a certificate&#39;s UUID          |
-| [**GetClientCert**](CertificateInfoAPI.md#GetClientCert)                 | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}                   | Add a client certificate              |
-| [**GetListOfCertificate**](CertificateInfoAPI.md#GetListOfCertificate)   | **Get** /api/v1/customers/{cUUID}/certificates                            | List a customer&#39;s certificates    |
-| [**GetRootCert**](CertificateInfoAPI.md#GetRootCert)                     | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download           | Get a customer&#39;s root certificate |
-| [**UpdateEmptyCustomCert**](CertificateInfoAPI.md#UpdateEmptyCustomCert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/update_empty_cert | Update an empty certificate           |
-| [**Upload**](CertificateInfoAPI.md#Upload)                               | **Post** /api/v1/customers/{cUUID}/certificates                           | Restore a certificate from backup     |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateSelfSignedCert**](CertificateInfoAPI.md#CreateSelfSignedCert) | **Post** /api/v1/customers/{cUUID}/certificates/create_self_signed_cert | Create a self signed certificate
+[**DeleteCertificate**](CertificateInfoAPI.md#DeleteCertificate) | **Delete** /api/v1/customers/{cUUID}/certificates/{rUUID} | Delete a certificate
+[**EditCertificate**](CertificateInfoAPI.md#EditCertificate) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/edit | Edit TLS certificate config details
+[**GetCertificate**](CertificateInfoAPI.md#GetCertificate) | **Get** /api/v1/customers/{cUUID}/certificates/{name} | Get a certificate&#39;s UUID
+[**GetClientCert**](CertificateInfoAPI.md#GetClientCert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID} | Add a client certificate
+[**GetListOfCertificate**](CertificateInfoAPI.md#GetListOfCertificate) | **Get** /api/v1/customers/{cUUID}/certificates | List a customer&#39;s certificates
+[**GetRootCert**](CertificateInfoAPI.md#GetRootCert) | **Get** /api/v1/customers/{cUUID}/certificates/{rUUID}/download | Get a customer&#39;s root certificate
+[**UpdateEmptyCustomCert**](CertificateInfoAPI.md#UpdateEmptyCustomCert) | **Post** /api/v1/customers/{cUUID}/certificates/{rUUID}/update_empty_cert | Update an empty certificate
+[**Upload**](CertificateInfoAPI.md#Upload) | **Post** /api/v1/customers/{cUUID}/certificates | Restore a certificate from backup
 
 
 
@@ -33,7 +33,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -56,18 +56,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateSelfSignedCertRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **label** | **string** | certificate label | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -105,7 +105,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -128,19 +128,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCertificateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -178,7 +178,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -202,19 +202,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditCertificateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **certificate** | [**CertificateParams**](CertificateParams.md) | certificate params to edit | 
@@ -255,7 +255,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -277,19 +277,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **name**  | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**name** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetCertificateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -326,7 +326,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -350,19 +350,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetClientCertRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **certificate** | [**ClientCertParams**](ClientCertParams.md) | post certificate info | 
@@ -401,7 +401,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -422,18 +422,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetListOfCertificateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -469,7 +469,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -492,19 +492,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRootCertRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -544,7 +544,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -567,19 +567,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateEmptyCustomCertRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -617,7 +617,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -640,18 +640,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUploadRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **certificate** | [**CertificateParams**](CertificateParams.md) | certificate params of the backup to be restored | 
  **request** | [**interface{}**](interface{}.md) |  | 

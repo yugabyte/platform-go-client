@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AlterLoadBalancer** | Pointer to **bool** | Alter load balancer state | [optional] 
 **BackupCategory** | Pointer to **string** | Overrides whether you want to use YBC based or script based backup. | [optional] 
+**BackupStats** | Pointer to **bool** | WARNING: This is a preview API that could change. Backup stats with YSQL dump. | [optional] 
 **BackupType** | Pointer to **string** | Backup type | [optional] 
 **BackupUUID** | **string** |  | 
 **BaseBackupUUID** | Pointer to **string** | UUID of the parent backup | [optional] 
@@ -130,6 +131,31 @@ SetBackupCategory sets BackupCategory field to given value.
 `func (o *BackupRequestParams) HasBackupCategory() bool`
 
 HasBackupCategory returns a boolean if a field has been set.
+
+### GetBackupStats
+
+`func (o *BackupRequestParams) GetBackupStats() bool`
+
+GetBackupStats returns the BackupStats field if non-nil, zero value otherwise.
+
+### GetBackupStatsOk
+
+`func (o *BackupRequestParams) GetBackupStatsOk() (*bool, bool)`
+
+GetBackupStatsOk returns a tuple with the BackupStats field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupStats
+
+`func (o *BackupRequestParams) SetBackupStats(v bool)`
+
+SetBackupStats sets BackupStats field to given value.
+
+### HasBackupStats
+
+`func (o *BackupRequestParams) HasBackupStats() bool`
+
+HasBackupStats returns a boolean if a field has been set.
 
 ### GetBackupType
 

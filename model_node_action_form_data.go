@@ -23,6 +23,8 @@ type NodeActionFormData struct {
 	Force *bool `json:"force,omitempty"`
 	// Action to perform on the node.
 	NodeAction string `json:"nodeAction"`
+	// YbaApi Internal. Run only prechecks during task run
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 }
 
 type _NodeActionFormData NodeActionFormData
@@ -101,6 +103,38 @@ func (o *NodeActionFormData) SetNodeAction(v string) {
 	o.NodeAction = v
 }
 
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *NodeActionFormData) GetRunOnlyPrechecks() bool {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeActionFormData) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *NodeActionFormData) HasRunOnlyPrechecks() bool {
+	if o != nil && !IsNil(o.RunOnlyPrechecks) {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *NodeActionFormData) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
+}
+
 func (o NodeActionFormData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -115,6 +149,9 @@ func (o NodeActionFormData) ToMap() (map[string]interface{}, error) {
 		toSerialize["force"] = o.Force
 	}
 	toSerialize["nodeAction"] = o.NodeAction
+	if !IsNil(o.RunOnlyPrechecks) {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
+	}
 	return toSerialize, nil
 }
 

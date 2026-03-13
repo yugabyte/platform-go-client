@@ -2,14 +2,14 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                      | HTTP request                                                          | Description                                |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
-| [**GetMasterAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetMasterAddresses)           | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters         | List a master node&#39;s addresses         |
-| [**GetMasterLBState**](UniverseNodeMetadataMetamasterAPI.md#GetMasterLBState)               | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_lb_state | Get the state of master load balancing ops |
-| [**GetRedisServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetRedisServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers    | List a REDIS server&#39;s addresses        |
-| [**GetUniverseMasterNodes**](UniverseNodeMetadataMetamasterAPI.md#GetUniverseMasterNodes)   | **Get** /metamaster/universe/{universeUUID}                           | List a universe&#39;s master nodes         |
-| [**GetYQLServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetYQLServerAddresses)     | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers      | List a YQL server&#39;s addresses          |
-| [**GetYSQLServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetYSQLServerAddresses)   | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers     | List a YSQL server&#39;s addresses         |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetMasterAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetMasterAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/masters | List a master node&#39;s addresses
+[**GetMasterLBState**](UniverseNodeMetadataMetamasterAPI.md#GetMasterLBState) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/master_lb_state | Get the state of master load balancing ops
+[**GetRedisServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetRedisServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/redisservers | List a REDIS server&#39;s addresses
+[**GetUniverseMasterNodes**](UniverseNodeMetadataMetamasterAPI.md#GetUniverseMasterNodes) | **Get** /metamaster/universe/{universeUUID} | List a universe&#39;s master nodes
+[**GetYQLServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetYQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/yqlservers | List a YQL server&#39;s addresses
+[**GetYSQLServerAddresses**](UniverseNodeMetadataMetamasterAPI.md#GetYSQLServerAddresses) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/ysqlservers | List a YSQL server&#39;s addresses
 
 
 
@@ -30,7 +30,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,19 +52,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetMasterAddressesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -125,19 +125,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetMasterLBStateRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -176,7 +176,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -198,19 +198,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRedisServerAddressesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -247,7 +247,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -268,18 +268,18 @@ func main() {
 ### Path Parameters
 
 
-| Name             | Type                | Description                                                                 | Notes |
-| ---------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**          | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **universeUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**universeUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetUniverseMasterNodesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -317,7 +317,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -339,19 +339,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetYQLServerAddressesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -390,7 +390,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -412,19 +412,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetYSQLServerAddressesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 

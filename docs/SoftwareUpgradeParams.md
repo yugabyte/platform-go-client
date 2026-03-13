@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AllowInsecure** | Pointer to **bool** |  | [optional] 
 **Arch** | Pointer to **string** |  | [optional] 
 **AutoRollbackPerformed** | Pointer to **bool** |  | [optional] 
+**CanaryUpgradeConfig** | Pointer to [**CanaryUpgradeConfig**](CanaryUpgradeConfig.md) |  | [optional] 
 **Capability** | Pointer to **string** |  | [optional] 
 **ClientRootCA** | Pointer to **string** |  | [optional] 
 **Clusters** | [**[]Cluster**](Cluster.md) |  | 
@@ -37,6 +38,7 @@ Name | Type | Description | Notes
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
+**PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
@@ -192,6 +194,31 @@ SetAutoRollbackPerformed sets AutoRollbackPerformed field to given value.
 `func (o *SoftwareUpgradeParams) HasAutoRollbackPerformed() bool`
 
 HasAutoRollbackPerformed returns a boolean if a field has been set.
+
+### GetCanaryUpgradeConfig
+
+`func (o *SoftwareUpgradeParams) GetCanaryUpgradeConfig() CanaryUpgradeConfig`
+
+GetCanaryUpgradeConfig returns the CanaryUpgradeConfig field if non-nil, zero value otherwise.
+
+### GetCanaryUpgradeConfigOk
+
+`func (o *SoftwareUpgradeParams) GetCanaryUpgradeConfigOk() (*CanaryUpgradeConfig, bool)`
+
+GetCanaryUpgradeConfigOk returns a tuple with the CanaryUpgradeConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanaryUpgradeConfig
+
+`func (o *SoftwareUpgradeParams) SetCanaryUpgradeConfig(v CanaryUpgradeConfig)`
+
+SetCanaryUpgradeConfig sets CanaryUpgradeConfig field to given value.
+
+### HasCanaryUpgradeConfig
+
+`func (o *SoftwareUpgradeParams) HasCanaryUpgradeConfig() bool`
+
+HasCanaryUpgradeConfig returns a boolean if a field has been set.
 
 ### GetCapability
 
@@ -902,6 +929,31 @@ SetOtelCollectorEnabled sets OtelCollectorEnabled field to given value.
 `func (o *SoftwareUpgradeParams) HasOtelCollectorEnabled() bool`
 
 HasOtelCollectorEnabled returns a boolean if a field has been set.
+
+### GetPaCollectorUuid
+
+`func (o *SoftwareUpgradeParams) GetPaCollectorUuid() string`
+
+GetPaCollectorUuid returns the PaCollectorUuid field if non-nil, zero value otherwise.
+
+### GetPaCollectorUuidOk
+
+`func (o *SoftwareUpgradeParams) GetPaCollectorUuidOk() (*string, bool)`
+
+GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaCollectorUuid
+
+`func (o *SoftwareUpgradeParams) SetPaCollectorUuid(v string)`
+
+SetPaCollectorUuid sets PaCollectorUuid field to given value.
+
+### HasPaCollectorUuid
+
+`func (o *SoftwareUpgradeParams) HasPaCollectorUuid() bool`
+
+HasPaCollectorUuid returns a boolean if a field has been set.
 
 ### GetPlacementModificationTaskUuid
 

@@ -20,6 +20,8 @@ var _ MappedNullable = &SupportBundleFormData{}
 
 // SupportBundleFormData Support bundle form metadata
 type SupportBundleFormData struct {
+	// Batch duration for the prometheus dump (in minutes). Overrides global default. Use with stepPromDumpSecs to get longer historical trends while keeping the same number of data points
+	BatchDurationPromDumpMins *int32 `json:"batchDurationPromDumpMins,omitempty"`
 	// List of components to be included in the support bundle
 	Components []string `json:"components"`
 	// End date to filter logs till
@@ -30,16 +32,30 @@ type SupportBundleFormData struct {
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of the most recent cores to collect (if any)
 	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
+	// End date to filter Perf Advisor data
+	PaDumpEndDate *time.Time `json:"paDumpEndDate,omitempty"`
+	// Start date to filter Perf Advisor data
+	PaDumpStartDate *time.Time `json:"paDumpStartDate,omitempty"`
+	// Specifies metrics format.
+	PaMetricsFormat *string `json:"paMetricsFormat,omitempty"`
+	// When promExportType is REMOTE_READ, whether to downsample raw data points by yb.support_bundle.step_prom_dump_secs or stepPromDumpSecs. Ignored for PROMQL (always downsampled). Default true.
+	PromDumpDownSample *bool `json:"promDumpDownSample,omitempty"`
 	// End date to filter prometheus metrics till
 	PromDumpEndDate *time.Time `json:"promDumpEndDate,omitempty"`
 	// Start date to filter prometheus metrics from
 	PromDumpStartDate *time.Time `json:"promDumpStartDate,omitempty"`
+	// How to export Prometheus metrics: PROMQL (query_range) or REMOTE_READ. Default PROMQL for backward compatibility.
+	PromExportType *string `json:"promExportType,omitempty"`
+	// When promExportType is REMOTE_READ, format for remote read export: PROMQL_JSON or PROM_CHUNK. Default PROMQL_JSON for backward compatibility.
+	PromMetricsFormat *string `json:"promMetricsFormat,omitempty"`
 	// Map of query names to custom PromQL queries to collect in promdump
 	PromQueries *map[string]string `json:"promQueries,omitempty"`
 	// List of exports to be included in the prometheus dump
 	PrometheusMetricsTypes []string `json:"prometheusMetricsTypes,omitempty"`
 	// Start date to filter logs from
 	StartDate time.Time `json:"startDate"`
+	// Metrics downsample step (in seconds). Overrides global default. Use with batchDurationPromDumpMins to get longer historical trends while keeping the same number of data points
+	StepPromDumpSecs *int32 `json:"stepPromDumpSecs,omitempty"`
 }
 
 type _SupportBundleFormData SupportBundleFormData
@@ -62,6 +78,38 @@ func NewSupportBundleFormData(components []string, endDate time.Time, startDate 
 func NewSupportBundleFormDataWithDefaults() *SupportBundleFormData {
 	this := SupportBundleFormData{}
 	return &this
+}
+
+// GetBatchDurationPromDumpMins returns the BatchDurationPromDumpMins field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetBatchDurationPromDumpMins() int32 {
+	if o == nil || IsNil(o.BatchDurationPromDumpMins) {
+		var ret int32
+		return ret
+	}
+	return *o.BatchDurationPromDumpMins
+}
+
+// GetBatchDurationPromDumpMinsOk returns a tuple with the BatchDurationPromDumpMins field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetBatchDurationPromDumpMinsOk() (*int32, bool) {
+	if o == nil || IsNil(o.BatchDurationPromDumpMins) {
+		return nil, false
+	}
+	return o.BatchDurationPromDumpMins, true
+}
+
+// HasBatchDurationPromDumpMins returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasBatchDurationPromDumpMins() bool {
+	if o != nil && !IsNil(o.BatchDurationPromDumpMins) {
+		return true
+	}
+
+	return false
+}
+
+// SetBatchDurationPromDumpMins gets a reference to the given int32 and assigns it to the BatchDurationPromDumpMins field.
+func (o *SupportBundleFormData) SetBatchDurationPromDumpMins(v int32) {
+	o.BatchDurationPromDumpMins = &v
 }
 
 // GetComponents returns the Components field value
@@ -208,6 +256,134 @@ func (o *SupportBundleFormData) SetMaxNumRecentCores(v int32) {
 	o.MaxNumRecentCores = &v
 }
 
+// GetPaDumpEndDate returns the PaDumpEndDate field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPaDumpEndDate() time.Time {
+	if o == nil || IsNil(o.PaDumpEndDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.PaDumpEndDate
+}
+
+// GetPaDumpEndDateOk returns a tuple with the PaDumpEndDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPaDumpEndDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.PaDumpEndDate) {
+		return nil, false
+	}
+	return o.PaDumpEndDate, true
+}
+
+// HasPaDumpEndDate returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPaDumpEndDate() bool {
+	if o != nil && !IsNil(o.PaDumpEndDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaDumpEndDate gets a reference to the given time.Time and assigns it to the PaDumpEndDate field.
+func (o *SupportBundleFormData) SetPaDumpEndDate(v time.Time) {
+	o.PaDumpEndDate = &v
+}
+
+// GetPaDumpStartDate returns the PaDumpStartDate field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPaDumpStartDate() time.Time {
+	if o == nil || IsNil(o.PaDumpStartDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.PaDumpStartDate
+}
+
+// GetPaDumpStartDateOk returns a tuple with the PaDumpStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPaDumpStartDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.PaDumpStartDate) {
+		return nil, false
+	}
+	return o.PaDumpStartDate, true
+}
+
+// HasPaDumpStartDate returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPaDumpStartDate() bool {
+	if o != nil && !IsNil(o.PaDumpStartDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaDumpStartDate gets a reference to the given time.Time and assigns it to the PaDumpStartDate field.
+func (o *SupportBundleFormData) SetPaDumpStartDate(v time.Time) {
+	o.PaDumpStartDate = &v
+}
+
+// GetPaMetricsFormat returns the PaMetricsFormat field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPaMetricsFormat() string {
+	if o == nil || IsNil(o.PaMetricsFormat) {
+		var ret string
+		return ret
+	}
+	return *o.PaMetricsFormat
+}
+
+// GetPaMetricsFormatOk returns a tuple with the PaMetricsFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPaMetricsFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.PaMetricsFormat) {
+		return nil, false
+	}
+	return o.PaMetricsFormat, true
+}
+
+// HasPaMetricsFormat returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPaMetricsFormat() bool {
+	if o != nil && !IsNil(o.PaMetricsFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaMetricsFormat gets a reference to the given string and assigns it to the PaMetricsFormat field.
+func (o *SupportBundleFormData) SetPaMetricsFormat(v string) {
+	o.PaMetricsFormat = &v
+}
+
+// GetPromDumpDownSample returns the PromDumpDownSample field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromDumpDownSample() bool {
+	if o == nil || IsNil(o.PromDumpDownSample) {
+		var ret bool
+		return ret
+	}
+	return *o.PromDumpDownSample
+}
+
+// GetPromDumpDownSampleOk returns a tuple with the PromDumpDownSample field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromDumpDownSampleOk() (*bool, bool) {
+	if o == nil || IsNil(o.PromDumpDownSample) {
+		return nil, false
+	}
+	return o.PromDumpDownSample, true
+}
+
+// HasPromDumpDownSample returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromDumpDownSample() bool {
+	if o != nil && !IsNil(o.PromDumpDownSample) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromDumpDownSample gets a reference to the given bool and assigns it to the PromDumpDownSample field.
+func (o *SupportBundleFormData) SetPromDumpDownSample(v bool) {
+	o.PromDumpDownSample = &v
+}
+
 // GetPromDumpEndDate returns the PromDumpEndDate field value if set, zero value otherwise.
 func (o *SupportBundleFormData) GetPromDumpEndDate() time.Time {
 	if o == nil || IsNil(o.PromDumpEndDate) {
@@ -270,6 +446,70 @@ func (o *SupportBundleFormData) HasPromDumpStartDate() bool {
 // SetPromDumpStartDate gets a reference to the given time.Time and assigns it to the PromDumpStartDate field.
 func (o *SupportBundleFormData) SetPromDumpStartDate(v time.Time) {
 	o.PromDumpStartDate = &v
+}
+
+// GetPromExportType returns the PromExportType field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromExportType() string {
+	if o == nil || IsNil(o.PromExportType) {
+		var ret string
+		return ret
+	}
+	return *o.PromExportType
+}
+
+// GetPromExportTypeOk returns a tuple with the PromExportType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromExportTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.PromExportType) {
+		return nil, false
+	}
+	return o.PromExportType, true
+}
+
+// HasPromExportType returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromExportType() bool {
+	if o != nil && !IsNil(o.PromExportType) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromExportType gets a reference to the given string and assigns it to the PromExportType field.
+func (o *SupportBundleFormData) SetPromExportType(v string) {
+	o.PromExportType = &v
+}
+
+// GetPromMetricsFormat returns the PromMetricsFormat field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetPromMetricsFormat() string {
+	if o == nil || IsNil(o.PromMetricsFormat) {
+		var ret string
+		return ret
+	}
+	return *o.PromMetricsFormat
+}
+
+// GetPromMetricsFormatOk returns a tuple with the PromMetricsFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetPromMetricsFormatOk() (*string, bool) {
+	if o == nil || IsNil(o.PromMetricsFormat) {
+		return nil, false
+	}
+	return o.PromMetricsFormat, true
+}
+
+// HasPromMetricsFormat returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasPromMetricsFormat() bool {
+	if o != nil && !IsNil(o.PromMetricsFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetPromMetricsFormat gets a reference to the given string and assigns it to the PromMetricsFormat field.
+func (o *SupportBundleFormData) SetPromMetricsFormat(v string) {
+	o.PromMetricsFormat = &v
 }
 
 // GetPromQueries returns the PromQueries field value if set, zero value otherwise.
@@ -360,6 +600,38 @@ func (o *SupportBundleFormData) SetStartDate(v time.Time) {
 	o.StartDate = v
 }
 
+// GetStepPromDumpSecs returns the StepPromDumpSecs field value if set, zero value otherwise.
+func (o *SupportBundleFormData) GetStepPromDumpSecs() int32 {
+	if o == nil || IsNil(o.StepPromDumpSecs) {
+		var ret int32
+		return ret
+	}
+	return *o.StepPromDumpSecs
+}
+
+// GetStepPromDumpSecsOk returns a tuple with the StepPromDumpSecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupportBundleFormData) GetStepPromDumpSecsOk() (*int32, bool) {
+	if o == nil || IsNil(o.StepPromDumpSecs) {
+		return nil, false
+	}
+	return o.StepPromDumpSecs, true
+}
+
+// HasStepPromDumpSecs returns a boolean if a field has been set.
+func (o *SupportBundleFormData) HasStepPromDumpSecs() bool {
+	if o != nil && !IsNil(o.StepPromDumpSecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetStepPromDumpSecs gets a reference to the given int32 and assigns it to the StepPromDumpSecs field.
+func (o *SupportBundleFormData) SetStepPromDumpSecs(v int32) {
+	o.StepPromDumpSecs = &v
+}
+
 func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -370,6 +642,9 @@ func (o SupportBundleFormData) MarshalJSON() ([]byte, error) {
 
 func (o SupportBundleFormData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BatchDurationPromDumpMins) {
+		toSerialize["batchDurationPromDumpMins"] = o.BatchDurationPromDumpMins
+	}
 	toSerialize["components"] = o.Components
 	toSerialize["endDate"] = o.EndDate
 	if !IsNil(o.FilterPgAuditLogs) {
@@ -381,11 +656,29 @@ func (o SupportBundleFormData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxNumRecentCores) {
 		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
 	}
+	if !IsNil(o.PaDumpEndDate) {
+		toSerialize["paDumpEndDate"] = o.PaDumpEndDate
+	}
+	if !IsNil(o.PaDumpStartDate) {
+		toSerialize["paDumpStartDate"] = o.PaDumpStartDate
+	}
+	if !IsNil(o.PaMetricsFormat) {
+		toSerialize["paMetricsFormat"] = o.PaMetricsFormat
+	}
+	if !IsNil(o.PromDumpDownSample) {
+		toSerialize["promDumpDownSample"] = o.PromDumpDownSample
+	}
 	if !IsNil(o.PromDumpEndDate) {
 		toSerialize["promDumpEndDate"] = o.PromDumpEndDate
 	}
 	if !IsNil(o.PromDumpStartDate) {
 		toSerialize["promDumpStartDate"] = o.PromDumpStartDate
+	}
+	if !IsNil(o.PromExportType) {
+		toSerialize["promExportType"] = o.PromExportType
+	}
+	if !IsNil(o.PromMetricsFormat) {
+		toSerialize["promMetricsFormat"] = o.PromMetricsFormat
 	}
 	if !IsNil(o.PromQueries) {
 		toSerialize["promQueries"] = o.PromQueries
@@ -394,6 +687,9 @@ func (o SupportBundleFormData) ToMap() (map[string]interface{}, error) {
 		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes
 	}
 	toSerialize["startDate"] = o.StartDate
+	if !IsNil(o.StepPromDumpSecs) {
+		toSerialize["stepPromDumpSecs"] = o.StepPromDumpSecs
+	}
 	return toSerialize, nil
 }
 

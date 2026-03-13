@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                            | HTTP request                                                                            | Description              |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------ |
-| [**CreateAllClusters**](UniverseClusterMutationsAPI.md#CreateAllClusters)         | **Post** /api/v1/customers/{cUUID}/universes/clusters                                   | Create Universe Clusters |
-| [**CreateReadOnlyCluster**](UniverseClusterMutationsAPI.md#CreateReadOnlyCluster) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only               | Create ReadOnly Cluster  |
-| [**DeleteReadonlyCluster**](UniverseClusterMutationsAPI.md#DeleteReadonlyCluster) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only/{clustUUID} | Delete Readonly Cluster  |
-| [**UpdatePrimaryCluster**](UniverseClusterMutationsAPI.md#UpdatePrimaryCluster)   | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary                  | Update Primary Cluster   |
-| [**UpdateReadOnlyCluster**](UniverseClusterMutationsAPI.md#UpdateReadOnlyCluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only                | Update Readonly Cluster  |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateAllClusters**](UniverseClusterMutationsAPI.md#CreateAllClusters) | **Post** /api/v1/customers/{cUUID}/universes/clusters | Create Universe Clusters
+[**CreateReadOnlyCluster**](UniverseClusterMutationsAPI.md#CreateReadOnlyCluster) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Create ReadOnly Cluster
+[**DeleteReadonlyCluster**](UniverseClusterMutationsAPI.md#DeleteReadonlyCluster) | **Delete** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only/{clustUUID} | Delete Readonly Cluster
+[**UpdatePrimaryCluster**](UniverseClusterMutationsAPI.md#UpdatePrimaryCluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/primary | Update Primary Cluster
+[**UpdateReadOnlyCluster**](UniverseClusterMutationsAPI.md#UpdateReadOnlyCluster) | **Put** /api/v1/customers/{cUUID}/universes/{uniUUID}/clusters/read_only | Update Readonly Cluster
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,18 +52,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAllClustersRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -127,19 +127,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateReadOnlyClusterRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **universeConfigureTaskParams** | [**UniverseDefinitionTaskParams**](UniverseDefinitionTaskParams.md) |  | 
@@ -180,7 +180,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -205,20 +205,20 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **uniUUID**   | **string**          |                                                                             |
-| **clustUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+**clustUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteReadonlyClusterRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -260,7 +260,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -284,19 +284,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdatePrimaryClusterRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 
@@ -337,7 +337,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -361,19 +361,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateReadOnlyClusterRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **universeConfigureTaskParams** | [**UniverseConfigureTaskParams**](UniverseConfigureTaskParams.md) |  | 

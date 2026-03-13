@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                              | HTTP request                                              | Description      |
-| ------------------------------------------------------------------- | --------------------------------------------------------- | ---------------- |
-| [**CreateNewRelease**](NewReleaseManagementAPI.md#CreateNewRelease) | **Post** /api/v1/customers/{cUUID}/ybdb_release           | Create a release |
-| [**DeleteNewRelease**](NewReleaseManagementAPI.md#DeleteNewRelease) | **Delete** /api/v1/customers/{cUUID}/ybdb_release/{rUUID} | delete a release |
-| [**GetNewRelease**](NewReleaseManagementAPI.md#GetNewRelease)       | **Get** /api/v1/customers/{cUUID}/ybdb_release/{rUUID}    | Get a release    |
-| [**ListNewReleases**](NewReleaseManagementAPI.md#ListNewReleases)   | **Get** /api/v1/customers/{cUUID}/ybdb_release            | List releases    |
-| [**UpdateNewRelease**](NewReleaseManagementAPI.md#UpdateNewRelease) | **Put** /api/v1/customers/{cUUID}/ybdb_release/{rUUID}    | Update a release |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateNewRelease**](NewReleaseManagementAPI.md#CreateNewRelease) | **Post** /api/v1/customers/{cUUID}/ybdb_release | Create a release
+[**DeleteNewRelease**](NewReleaseManagementAPI.md#DeleteNewRelease) | **Delete** /api/v1/customers/{cUUID}/ybdb_release/{rUUID} | delete a release
+[**GetNewRelease**](NewReleaseManagementAPI.md#GetNewRelease) | **Get** /api/v1/customers/{cUUID}/ybdb_release/{rUUID} | Get a release
+[**ListNewReleases**](NewReleaseManagementAPI.md#ListNewReleases) | **Get** /api/v1/customers/{cUUID}/ybdb_release | List releases
+[**UpdateNewRelease**](NewReleaseManagementAPI.md#UpdateNewRelease) | **Put** /api/v1/customers/{cUUID}/ybdb_release/{rUUID} | Update a release
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,18 +52,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateNewReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **release** | [**CreateRelease**](CreateRelease.md) | Release data to be created | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -126,19 +126,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteNewReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -178,7 +178,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -201,19 +201,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetNewReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -253,7 +253,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -276,18 +276,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListNewReleasesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **deploymentType** | **string** |  | [default to &quot;null&quot;]
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -327,7 +327,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -351,19 +351,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateNewReleaseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **release** | [**UpdateRelease**](UpdateRelease.md) | Release data to be updated | 

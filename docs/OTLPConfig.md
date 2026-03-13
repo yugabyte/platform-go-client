@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 **Compression** | Pointer to **string** | Compression | [optional] 
 **Endpoint** | **string** | End Point. For HTTP protcol logs export \&quot;/v1/logs\&quot; will be appended. | 
 **Headers** | Pointer to **map[string]string** | Headers | [optional] 
-**LogsEndpoint** | Pointer to **string** | Logs endpoint. The target URL to send log data to (e.g.: https://example.com:4318/v1/logs). If this setting is present the endpoint setting is ignored logs. Allowed only for HTTP protocol | [optional] 
+**LogsEndpoint** | Pointer to **string** | Logs endpoint. The target URL to send log data to (e.g.: https://example.com:4318/v1/logs). If this setting is present the endpoint setting is ignored for logs. Allowed only for HTTP protocol | [optional] 
+**MetricsEndpoint** | Pointer to **string** | Metrics endpoint. The target URL to send metric data to (e.g.: https://example.com:4318/v1/metrics). If this setting is present the endpoint setting is ignored for metrics. Allowed only for HTTP protocol | [optional] 
 **Protocol** | Pointer to **string** | Protocol | [optional] 
+**RetryOnFailure** | Pointer to [**ExporterRetryConfig**](ExporterRetryConfig.md) |  | [optional] 
 **TimeoutSeconds** | Pointer to **int32** | Timeout in seconds | [optional] 
 
 ## Methods
@@ -198,6 +200,31 @@ SetLogsEndpoint sets LogsEndpoint field to given value.
 
 HasLogsEndpoint returns a boolean if a field has been set.
 
+### GetMetricsEndpoint
+
+`func (o *OTLPConfig) GetMetricsEndpoint() string`
+
+GetMetricsEndpoint returns the MetricsEndpoint field if non-nil, zero value otherwise.
+
+### GetMetricsEndpointOk
+
+`func (o *OTLPConfig) GetMetricsEndpointOk() (*string, bool)`
+
+GetMetricsEndpointOk returns a tuple with the MetricsEndpoint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetricsEndpoint
+
+`func (o *OTLPConfig) SetMetricsEndpoint(v string)`
+
+SetMetricsEndpoint sets MetricsEndpoint field to given value.
+
+### HasMetricsEndpoint
+
+`func (o *OTLPConfig) HasMetricsEndpoint() bool`
+
+HasMetricsEndpoint returns a boolean if a field has been set.
+
 ### GetProtocol
 
 `func (o *OTLPConfig) GetProtocol() string`
@@ -222,6 +249,31 @@ SetProtocol sets Protocol field to given value.
 `func (o *OTLPConfig) HasProtocol() bool`
 
 HasProtocol returns a boolean if a field has been set.
+
+### GetRetryOnFailure
+
+`func (o *OTLPConfig) GetRetryOnFailure() ExporterRetryConfig`
+
+GetRetryOnFailure returns the RetryOnFailure field if non-nil, zero value otherwise.
+
+### GetRetryOnFailureOk
+
+`func (o *OTLPConfig) GetRetryOnFailureOk() (*ExporterRetryConfig, bool)`
+
+GetRetryOnFailureOk returns a tuple with the RetryOnFailure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRetryOnFailure
+
+`func (o *OTLPConfig) SetRetryOnFailure(v ExporterRetryConfig)`
+
+SetRetryOnFailure sets RetryOnFailure field to given value.
+
+### HasRetryOnFailure
+
+`func (o *OTLPConfig) HasRetryOnFailure() bool`
+
+HasRetryOnFailure returns a boolean if a field has been set.
 
 ### GetTimeoutSeconds
 

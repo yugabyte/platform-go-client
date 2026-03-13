@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                | HTTP request                                                                 | Description                               |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------- |
-| [**ConfigureYCQL**](UniverseDatabaseManagementAPI.md#ConfigureYCQL)                   | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql       | Configure YCQL                            |
-| [**ConfigureYSQL**](UniverseDatabaseManagementAPI.md#ConfigureYSQL)                   | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql       | Configure YSQL                            |
-| [**CreateUserInDB**](UniverseDatabaseManagementAPI.md#CreateUserInDB)                 | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe     |
-| [**RunYsqlQueryUniverse**](UniverseDatabaseManagementAPI.md#RunYsqlQueryUniverse)     | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query             | Run a YSQL query in a universe            |
-| [**SetDatabaseCredentials**](UniverseDatabaseManagementAPI.md#SetDatabaseCredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**ConfigureYCQL**](UniverseDatabaseManagementAPI.md#ConfigureYCQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ycql | Configure YCQL
+[**ConfigureYSQL**](UniverseDatabaseManagementAPI.md#ConfigureYSQL) | **Post** /api/v1/customers/{cUUID}/universes/{univUUID}/configure/ysql | Configure YSQL
+[**CreateUserInDB**](UniverseDatabaseManagementAPI.md#CreateUserInDB) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/create_db_credentials | Create a database user for a universe
+[**RunYsqlQueryUniverse**](UniverseDatabaseManagementAPI.md#RunYsqlQueryUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/run_query | Run a YSQL query in a universe
+[**SetDatabaseCredentials**](UniverseDatabaseManagementAPI.md#SetDatabaseCredentials) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/update_db_credentials | Set a universe&#39;s database credentials
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -53,19 +53,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **univUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**univUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiConfigureYCQLRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **configureYcqlFormData** | [**ConfigureYCQLFormData**](ConfigureYCQLFormData.md) | Configure YCQL Form Data | 
@@ -106,7 +106,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -130,19 +130,19 @@ func main() {
 ### Path Parameters
 
 
-| Name         | Type                | Description                                                                 | Notes |
-| ------------ | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**      | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**    | **string**          |                                                                             |
-| **univUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**univUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiConfigureYSQLRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **configureYsqlFormData** | [**ConfigureYSQLFormData**](ConfigureYSQLFormData.md) | Configure YSQL Form Data | 
@@ -183,7 +183,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -207,19 +207,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateUserInDBRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **databaseUserFormData** | [**DatabaseUserFormData**](DatabaseUserFormData.md) | The database user to create | 
@@ -260,7 +260,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -284,19 +284,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRunYsqlQueryUniverseRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **runQueryFormData** | [**RunQueryFormData**](RunQueryFormData.md) |  | 
@@ -337,7 +337,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -361,19 +361,19 @@ func main() {
 ### Path Parameters
 
 
-| Name        | Type                | Description                                                                 | Notes |
-| ----------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**     | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**   | **string**          |                                                                             |
-| **uniUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetDatabaseCredentialsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **databaseSecurityFormData** | [**DatabaseSecurityFormData**](DatabaseSecurityFormData.md) | The database credentials | 

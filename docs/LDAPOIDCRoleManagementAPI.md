@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                              | HTTP request                                                   | Description                 |
-| ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | --------------------------- |
-| [**DeleteOidcGroupMapping**](LDAPOIDCRoleManagementAPI.md#DeleteOidcGroupMapping)   | **Delete** /api/v1/customers/{cUUID}/oidc_mappings/{groupName} | Delete a OIDC group mapping |
-| [**ListLdapDnToYbaRoles**](LDAPOIDCRoleManagementAPI.md#ListLdapDnToYbaRoles)       | **Get** /api/v1/customers/{cUUID}/ldap_mappings                | List LDAP Mappings          |
-| [**ListOidcGroupToYbaRoles**](LDAPOIDCRoleManagementAPI.md#ListOidcGroupToYbaRoles) | **Get** /api/v1/customers/{cUUID}/oidc_mappings                | List OIDC Group Mappings    |
-| [**MapOidcGroupToYbaRoles**](LDAPOIDCRoleManagementAPI.md#MapOidcGroupToYbaRoles)   | **Put** /api/v1/customers/{cUUID}/oidc_mappings                | Set OIDC Mappings           |
-| [**SetLdapDnToYbaRoles**](LDAPOIDCRoleManagementAPI.md#SetLdapDnToYbaRoles)         | **Put** /api/v1/customers/{cUUID}/ldap_mappings                | Set LDAP Mappings           |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteOidcGroupMapping**](LDAPOIDCRoleManagementAPI.md#DeleteOidcGroupMapping) | **Delete** /api/v1/customers/{cUUID}/oidc_mappings/{groupName} | Delete a OIDC group mapping
+[**ListLdapDnToYbaRoles**](LDAPOIDCRoleManagementAPI.md#ListLdapDnToYbaRoles) | **Get** /api/v1/customers/{cUUID}/ldap_mappings | List LDAP Mappings
+[**ListOidcGroupToYbaRoles**](LDAPOIDCRoleManagementAPI.md#ListOidcGroupToYbaRoles) | **Get** /api/v1/customers/{cUUID}/oidc_mappings | List OIDC Group Mappings
+[**MapOidcGroupToYbaRoles**](LDAPOIDCRoleManagementAPI.md#MapOidcGroupToYbaRoles) | **Put** /api/v1/customers/{cUUID}/oidc_mappings | Set OIDC Mappings
+[**SetLdapDnToYbaRoles**](LDAPOIDCRoleManagementAPI.md#SetLdapDnToYbaRoles) | **Put** /api/v1/customers/{cUUID}/ldap_mappings | Set LDAP Mappings
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -52,19 +52,19 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **groupName** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**groupName** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteOidcGroupMappingRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -104,7 +104,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -125,18 +125,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListLdapDnToYbaRolesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -174,7 +174,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -195,18 +195,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOidcGroupToYbaRolesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -244,7 +244,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -265,18 +265,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiMapOidcGroupToYbaRolesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **oidcMappings** | [**OidcGroupToYbaRolesData**](OidcGroupToYbaRolesData.md) | New OIDC Mappings to be set | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -316,7 +316,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -337,18 +337,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetLdapDnToYbaRolesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **ldapMappings** | [**LdapDnToYbaRoleData**](LdapDnToYbaRoleData.md) | New LDAP Mappings to be set | 
  **request** | [**interface{}**](interface{}.md) |  | 

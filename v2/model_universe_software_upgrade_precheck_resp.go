@@ -22,6 +22,8 @@ var _ MappedNullable = &UniverseSoftwareUpgradePrecheckResp{}
 type UniverseSoftwareUpgradePrecheckResp struct {
 	// If the upgrade requires a finalize step. If true, the user must call the finalize  endpoint to complete the upgrade.
 	FinalizeRequired bool `json:"finalize_required"`
+	// If the upgrade requires a YSQL catalog major version upgrade (e.g. when upgrading across YSQL major versions and YSQL is enabled on the universe).
+	YsqlMajorVersionUpgrade *bool `json:"ysql_major_version_upgrade,omitempty"`
 }
 
 type _UniverseSoftwareUpgradePrecheckResp UniverseSoftwareUpgradePrecheckResp
@@ -68,6 +70,38 @@ func (o *UniverseSoftwareUpgradePrecheckResp) SetFinalizeRequired(v bool) {
 	o.FinalizeRequired = v
 }
 
+// GetYsqlMajorVersionUpgrade returns the YsqlMajorVersionUpgrade field value if set, zero value otherwise.
+func (o *UniverseSoftwareUpgradePrecheckResp) GetYsqlMajorVersionUpgrade() bool {
+	if o == nil || IsNil(o.YsqlMajorVersionUpgrade) {
+		var ret bool
+		return ret
+	}
+	return *o.YsqlMajorVersionUpgrade
+}
+
+// GetYsqlMajorVersionUpgradeOk returns a tuple with the YsqlMajorVersionUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseSoftwareUpgradePrecheckResp) GetYsqlMajorVersionUpgradeOk() (*bool, bool) {
+	if o == nil || IsNil(o.YsqlMajorVersionUpgrade) {
+		return nil, false
+	}
+	return o.YsqlMajorVersionUpgrade, true
+}
+
+// HasYsqlMajorVersionUpgrade returns a boolean if a field has been set.
+func (o *UniverseSoftwareUpgradePrecheckResp) HasYsqlMajorVersionUpgrade() bool {
+	if o != nil && !IsNil(o.YsqlMajorVersionUpgrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlMajorVersionUpgrade gets a reference to the given bool and assigns it to the YsqlMajorVersionUpgrade field.
+func (o *UniverseSoftwareUpgradePrecheckResp) SetYsqlMajorVersionUpgrade(v bool) {
+	o.YsqlMajorVersionUpgrade = &v
+}
+
 func (o UniverseSoftwareUpgradePrecheckResp) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -79,6 +113,9 @@ func (o UniverseSoftwareUpgradePrecheckResp) MarshalJSON() ([]byte, error) {
 func (o UniverseSoftwareUpgradePrecheckResp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["finalize_required"] = o.FinalizeRequired
+	if !IsNil(o.YsqlMajorVersionUpgrade) {
+		toSerialize["ysql_major_version_upgrade"] = o.YsqlMajorVersionUpgrade
+	}
 	return toSerialize, nil
 }
 

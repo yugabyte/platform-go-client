@@ -2,44 +2,44 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                        | HTTP request                                                                           | Description                                                |
-| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| [**Acknowledge**](AlertsAPI.md#Acknowledge)                                   | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge                      | Acknowledge an alert                                       |
-| [**AcknowledgeByFilter**](AlertsAPI.md#AcknowledgeByFilter)                   | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge                                  | Acknowledge all alerts - deprecated                        |
-| [**AlertNotificationPreview**](AlertsAPI.md#AlertNotificationPreview)         | **Post** /api/v1/customers/{cUUID}/alert_notification_preview                          | Prepare alert notification preview                         |
-| [**CountAlerts**](AlertsAPI.md#CountAlerts)                                   | **Post** /api/v1/customers/{cUUID}/alerts/count                                        | Count alerts                                               |
-| [**CreateAlertChannel**](AlertsAPI.md#CreateAlertChannel)                     | **Post** /api/v1/customers/{cUUID}/alert_channels                                      | Create an alert channel                                    |
-| [**CreateAlertConfiguration**](AlertsAPI.md#CreateAlertConfiguration)         | **Post** /api/v1/customers/{cUUID}/alert_configurations                                | Create an alert configuration                              |
-| [**CreateAlertDestination**](AlertsAPI.md#CreateAlertDestination)             | **Post** /api/v1/customers/{cUUID}/alert_destinations                                  | Create an alert destination                                |
-| [**DeleteAlertChannel**](AlertsAPI.md#DeleteAlertChannel)                     | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID}                           | Delete an alert channel                                    |
-| [**DeleteAlertChannelTemplates**](AlertsAPI.md#DeleteAlertChannelTemplates)   | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType}                  | Delete alert channel templates                             |
-| [**DeleteAlertConfiguration**](AlertsAPI.md#DeleteAlertConfiguration)         | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}          | Delete an alert configuration                              |
-| [**DeleteAlertDestination**](AlertsAPI.md#DeleteAlertDestination)             | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID}                       | Delete an alert destination                                |
-| [**DeleteAlertTemplateSettings**](AlertsAPI.md#DeleteAlertTemplateSettings)   | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID}            | Delete an alert template settings - deprecated             |
-| [**DeleteAlertTemplateVariables**](AlertsAPI.md#DeleteAlertTemplateVariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID}           | Delete an alert template variables                         |
-| [**EditAlertTemplateSettings**](AlertsAPI.md#EditAlertTemplateSettings)       | **Put** /api/v1/customers/{cUUID}/alert_template_settings                              | Create or update alert template settings list - deprecated |
-| [**EditAlertTemplateVariables**](AlertsAPI.md#EditAlertTemplateVariables)     | **Put** /api/v1/customers/{cUUID}/alert_template_variables                             | Create or update alert template variables                  |
-| [**Get**](AlertsAPI.md#Get)                                                   | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID}                                   | Get details of an alert                                    |
-| [**GetAlertChannel**](AlertsAPI.md#GetAlertChannel)                           | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID}                              | Get an alert channel                                       |
-| [**GetAlertChannelTemplates**](AlertsAPI.md#GetAlertChannelTemplates)         | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType}                     | Get alert channel templates                                |
-| [**GetAlertConfiguration**](AlertsAPI.md#GetAlertConfiguration)               | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}             | Get an alert configuration                                 |
-| [**GetAlertDestination**](AlertsAPI.md#GetAlertDestination)                   | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID}                          | Get an alert destination                                   |
-| [**ListActive**](AlertsAPI.md#ListActive)                                     | **Get** /api/v1/customers/{cUUID}/alerts/active                                        | List active alerts - deprecated                            |
-| [**ListAlertChannelTemplates**](AlertsAPI.md#ListAlertChannelTemplates)       | **Get** /api/v1/customers/{cUUID}/alert_channel_templates                              | List all alert channel templates                           |
-| [**ListAlertChannels**](AlertsAPI.md#ListAlertChannels)                       | **Get** /api/v1/customers/{cUUID}/alert_channels                                       | List all alert channels                                    |
-| [**ListAlertConfigurations**](AlertsAPI.md#ListAlertConfigurations)           | **Post** /api/v1/customers/{cUUID}/alert_configurations/list                           | Get filtered list of alert configurations                  |
-| [**ListAlertDestinations**](AlertsAPI.md#ListAlertDestinations)               | **Get** /api/v1/customers/{cUUID}/alert_destinations                                   | List alert destinations                                    |
-| [**ListAlertTemplateSettings**](AlertsAPI.md#ListAlertTemplateSettings)       | **Get** /api/v1/customers/{cUUID}/alert_template_settings                              | Get alert template settings - deprecated                   |
-| [**ListAlertTemplateVariables**](AlertsAPI.md#ListAlertTemplateVariables)     | **Get** /api/v1/customers/{cUUID}/alert_template_variables                             | List alert template variables                              |
-| [**ListAlertTemplates**](AlertsAPI.md#ListAlertTemplates)                     | **Post** /api/v1/customers/{cUUID}/alert_templates                                     | Get filtered list of alert configuration templates         |
-| [**ListOfAlerts**](AlertsAPI.md#ListOfAlerts)                                 | **Get** /api/v1/customers/{cUUID}/alerts                                               | List all alerts                                            |
-| [**PageAlertConfigurations**](AlertsAPI.md#PageAlertConfigurations)           | **Post** /api/v1/customers/{cUUID}/alert_configurations/page                           | List all alert configurations (paginated)                  |
-| [**PageAlerts**](AlertsAPI.md#PageAlerts)                                     | **Post** /api/v1/customers/{cUUID}/alerts/page                                         | List alerts (paginated)                                    |
-| [**SendTestAlert**](AlertsAPI.md#SendTestAlert)                               | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration                    |
-| [**SetAlertChannelTemplates**](AlertsAPI.md#SetAlertChannelTemplates)         | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType}                    | Set alert channel templates                                |
-| [**UpdateAlertChannel**](AlertsAPI.md#UpdateAlertChannel)                     | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID}                              | Update an alert channel                                    |
-| [**UpdateAlertConfiguration**](AlertsAPI.md#UpdateAlertConfiguration)         | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}             | Update an alert configuration                              |
-| [**UpdateAlertDestination**](AlertsAPI.md#UpdateAlertDestination)             | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID}                          | Update an alert destination                                |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Acknowledge**](AlertsAPI.md#Acknowledge) | **Post** /api/v1/customers/{cUUID}/alerts/{alertUUID}/acknowledge | Acknowledge an alert
+[**AcknowledgeByFilter**](AlertsAPI.md#AcknowledgeByFilter) | **Post** /api/v1/customers/{cUUID}/alerts/acknowledge | Acknowledge all alerts - deprecated
+[**AlertNotificationPreview**](AlertsAPI.md#AlertNotificationPreview) | **Post** /api/v1/customers/{cUUID}/alert_notification_preview | Prepare alert notification preview
+[**CountAlerts**](AlertsAPI.md#CountAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/count | Count alerts
+[**CreateAlertChannel**](AlertsAPI.md#CreateAlertChannel) | **Post** /api/v1/customers/{cUUID}/alert_channels | Create an alert channel
+[**CreateAlertConfiguration**](AlertsAPI.md#CreateAlertConfiguration) | **Post** /api/v1/customers/{cUUID}/alert_configurations | Create an alert configuration
+[**CreateAlertDestination**](AlertsAPI.md#CreateAlertDestination) | **Post** /api/v1/customers/{cUUID}/alert_destinations | Create an alert destination
+[**DeleteAlertChannel**](AlertsAPI.md#DeleteAlertChannel) | **Delete** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Delete an alert channel
+[**DeleteAlertChannelTemplates**](AlertsAPI.md#DeleteAlertChannelTemplates) | **Delete** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Delete alert channel templates
+[**DeleteAlertConfiguration**](AlertsAPI.md#DeleteAlertConfiguration) | **Delete** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Delete an alert configuration
+[**DeleteAlertDestination**](AlertsAPI.md#DeleteAlertDestination) | **Delete** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Delete an alert destination
+[**DeleteAlertTemplateSettings**](AlertsAPI.md#DeleteAlertTemplateSettings) | **Delete** /api/v1/customers/{cUUID}/alert_template_settings/{settingsUUID} | Delete an alert template settings - deprecated
+[**DeleteAlertTemplateVariables**](AlertsAPI.md#DeleteAlertTemplateVariables) | **Delete** /api/v1/customers/{cUUID}/alert_template_variables/{variableUUID} | Delete an alert template variables
+[**EditAlertTemplateSettings**](AlertsAPI.md#EditAlertTemplateSettings) | **Put** /api/v1/customers/{cUUID}/alert_template_settings | Create or update alert template settings list - deprecated
+[**EditAlertTemplateVariables**](AlertsAPI.md#EditAlertTemplateVariables) | **Put** /api/v1/customers/{cUUID}/alert_template_variables | Create or update alert template variables
+[**Get**](AlertsAPI.md#Get) | **Get** /api/v1/customers/{cUUID}/alerts/{alertUUID} | Get details of an alert
+[**GetAlertChannel**](AlertsAPI.md#GetAlertChannel) | **Get** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Get an alert channel
+[**GetAlertChannelTemplates**](AlertsAPI.md#GetAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Get alert channel templates
+[**GetAlertConfiguration**](AlertsAPI.md#GetAlertConfiguration) | **Get** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Get an alert configuration
+[**GetAlertDestination**](AlertsAPI.md#GetAlertDestination) | **Get** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Get an alert destination
+[**ListActive**](AlertsAPI.md#ListActive) | **Get** /api/v1/customers/{cUUID}/alerts/active | List active alerts - deprecated
+[**ListAlertChannelTemplates**](AlertsAPI.md#ListAlertChannelTemplates) | **Get** /api/v1/customers/{cUUID}/alert_channel_templates | List all alert channel templates
+[**ListAlertChannels**](AlertsAPI.md#ListAlertChannels) | **Get** /api/v1/customers/{cUUID}/alert_channels | List all alert channels
+[**ListAlertConfigurations**](AlertsAPI.md#ListAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/list | Get filtered list of alert configurations
+[**ListAlertDestinations**](AlertsAPI.md#ListAlertDestinations) | **Get** /api/v1/customers/{cUUID}/alert_destinations | List alert destinations
+[**ListAlertTemplateSettings**](AlertsAPI.md#ListAlertTemplateSettings) | **Get** /api/v1/customers/{cUUID}/alert_template_settings | Get alert template settings - deprecated
+[**ListAlertTemplateVariables**](AlertsAPI.md#ListAlertTemplateVariables) | **Get** /api/v1/customers/{cUUID}/alert_template_variables | List alert template variables
+[**ListAlertTemplates**](AlertsAPI.md#ListAlertTemplates) | **Post** /api/v1/customers/{cUUID}/alert_templates | Get filtered list of alert configuration templates
+[**ListOfAlerts**](AlertsAPI.md#ListOfAlerts) | **Get** /api/v1/customers/{cUUID}/alerts | List all alerts
+[**PageAlertConfigurations**](AlertsAPI.md#PageAlertConfigurations) | **Post** /api/v1/customers/{cUUID}/alert_configurations/page | List all alert configurations (paginated)
+[**PageAlerts**](AlertsAPI.md#PageAlerts) | **Post** /api/v1/customers/{cUUID}/alerts/page | List alerts (paginated)
+[**SendTestAlert**](AlertsAPI.md#SendTestAlert) | **Post** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID}/test_alert | Send test alert for alert configuration
+[**SetAlertChannelTemplates**](AlertsAPI.md#SetAlertChannelTemplates) | **Post** /api/v1/customers/{cUUID}/alert_channel_templates/{acType} | Set alert channel templates
+[**UpdateAlertChannel**](AlertsAPI.md#UpdateAlertChannel) | **Put** /api/v1/customers/{cUUID}/alert_channels/{acUUID} | Update an alert channel
+[**UpdateAlertConfiguration**](AlertsAPI.md#UpdateAlertConfiguration) | **Put** /api/v1/customers/{cUUID}/alert_configurations/{configurationUUID} | Update an alert configuration
+[**UpdateAlertDestination**](AlertsAPI.md#UpdateAlertDestination) | **Put** /api/v1/customers/{cUUID}/alert_destinations/{adUUID} | Update an alert destination
 
 
 
@@ -60,7 +60,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -83,19 +83,19 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **alertUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**alertUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAcknowledgeRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -135,7 +135,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -158,18 +158,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAcknowledgeByFilterRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **acknowledgeAlertsRequest** | [**AlertApiFilter**](AlertApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -209,7 +209,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -232,18 +232,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAlertNotificationPreviewRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **notificationPreviewRequest** | [**AlertTemplateVariablesFormData**](AlertTemplateVariablesFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -283,7 +283,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -306,18 +306,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCountAlertsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **countAlertsRequest** | [**AlertApiFilter**](AlertApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -357,7 +357,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -380,18 +380,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAlertChannelRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **createAlertChannelRequest** | [**AlertChannelFormData**](AlertChannelFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -432,7 +432,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -455,18 +455,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAlertConfigurationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **createAlertConfigurationRequest** | [**AlertConfiguration**](AlertConfiguration.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -506,7 +506,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -529,18 +529,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAlertDestinationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **createAlertDestinationRequest** | [**AlertDestinationFormData**](AlertDestinationFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -580,7 +580,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -603,19 +603,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertChannelRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -655,7 +655,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -678,19 +678,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acType** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acType** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertChannelTemplatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -730,7 +730,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -753,19 +753,19 @@ func main() {
 ### Path Parameters
 
 
-| Name                  | Type                | Description                                                                 | Notes |
-| --------------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**               | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**             | **string**          |                                                                             |
-| **configurationUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configurationUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertConfigurationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -805,7 +805,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -828,19 +828,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **adUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**adUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertDestinationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -880,7 +880,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -903,19 +903,19 @@ func main() {
 ### Path Parameters
 
 
-| Name             | Type                | Description                                                                 | Notes |
-| ---------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**          | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**        | **string**          |                                                                             |
-| **settingsUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**settingsUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertTemplateSettingsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -955,7 +955,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -978,19 +978,19 @@ func main() {
 ### Path Parameters
 
 
-| Name             | Type                | Description                                                                 | Notes |
-| ---------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**          | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**        | **string**          |                                                                             |
-| **variableUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**variableUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAlertTemplateVariablesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -1031,7 +1031,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1054,18 +1054,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditAlertTemplateSettingsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **editAlertTemplateSettingsRequest** | [**AlertTemplateSettingsFormData**](AlertTemplateSettingsFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -1105,7 +1105,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1128,18 +1128,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditAlertTemplateVariablesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **editAlertTemplateVariablesRequest** | [**AlertTemplateVariablesFormData**](AlertTemplateVariablesFormData.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -1179,7 +1179,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1201,19 +1201,19 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**     | **string**          |                                                                             |
-| **alertUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**alertUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -1252,7 +1252,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1274,19 +1274,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAlertChannelRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -1325,7 +1325,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1347,19 +1347,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acType** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acType** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAlertChannelTemplatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -1398,7 +1398,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1420,19 +1420,19 @@ func main() {
 ### Path Parameters
 
 
-| Name                  | Type                | Description                                                                 | Notes |
-| --------------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**               | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**             | **string**          |                                                                             |
-| **configurationUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configurationUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAlertConfigurationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -1471,7 +1471,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1493,19 +1493,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **adUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**adUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetAlertDestinationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -1544,7 +1544,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1565,18 +1565,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListActiveRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1614,7 +1614,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1635,18 +1635,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertChannelTemplatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1684,7 +1684,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1705,18 +1705,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertChannelsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1754,7 +1754,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1777,18 +1777,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertConfigurationsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **listAlertConfigurationsRequest** | [**AlertConfigurationApiFilter**](AlertConfigurationApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -1828,7 +1828,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1849,18 +1849,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertDestinationsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1898,7 +1898,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1919,18 +1919,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertTemplateSettingsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -1968,7 +1968,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -1989,18 +1989,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertTemplateVariablesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -2038,7 +2038,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2061,18 +2061,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListAlertTemplatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **listTemplatesRequest** | [**AlertTemplateApiFilter**](AlertTemplateApiFilter.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -2112,7 +2112,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2133,18 +2133,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOfAlertsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -2182,7 +2182,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2205,18 +2205,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPageAlertConfigurationsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **pageAlertConfigurationsRequest** | [**AlertConfigurationPagedApiQuery**](AlertConfigurationPagedApiQuery.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -2256,7 +2256,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2279,18 +2279,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiPageAlertsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **pageAlertsRequest** | [**AlertPagedApiQuery**](AlertPagedApiQuery.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -2330,7 +2330,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2352,19 +2352,19 @@ func main() {
 ### Path Parameters
 
 
-| Name                  | Type                | Description                                                                 | Notes |
-| --------------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**               | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**             | **string**          |                                                                             |
-| **configurationUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configurationUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSendTestAlertRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -2403,7 +2403,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2427,19 +2427,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acType** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acType** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSetAlertChannelTemplatesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **setAlertChannelTemplatesRequest** | [**AlertChannelTemplates**](AlertChannelTemplates.md) |  | 
@@ -2480,7 +2480,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2504,19 +2504,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **acUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**acUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateAlertChannelRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **updateAlertChannelRequest** | [**AlertChannelFormData**](AlertChannelFormData.md) |  | 
@@ -2558,7 +2558,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2582,19 +2582,19 @@ func main() {
 ### Path Parameters
 
 
-| Name                  | Type                | Description                                                                 | Notes |
-| --------------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**               | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**             | **string**          |                                                                             |
-| **configurationUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configurationUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateAlertConfigurationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **updateAlertConfigurationRequest** | [**AlertConfiguration**](AlertConfiguration.md) |  | 
@@ -2635,7 +2635,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -2659,19 +2659,19 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **adUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**adUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUpdateAlertDestinationRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **updateAlertDestinationRequest** | [**AlertDestinationFormData**](AlertDestinationFormData.md) |  | 

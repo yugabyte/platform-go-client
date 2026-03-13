@@ -30,10 +30,13 @@ type OTLPConfig struct {
 	Endpoint string `json:"endpoint"`
 	// Headers
 	Headers *map[string]string `json:"headers,omitempty"`
-	// Logs endpoint. The target URL to send log data to (e.g.: https://example.com:4318/v1/logs). If this setting is present the endpoint setting is ignored logs. Allowed only for HTTP protocol
+	// Logs endpoint. The target URL to send log data to (e.g.: https://example.com:4318/v1/logs). If this setting is present the endpoint setting is ignored for logs. Allowed only for HTTP protocol
 	LogsEndpoint *string `json:"logsEndpoint,omitempty"`
+	// Metrics endpoint. The target URL to send metric data to (e.g.: https://example.com:4318/v1/metrics). If this setting is present the endpoint setting is ignored for metrics. Allowed only for HTTP protocol
+	MetricsEndpoint *string `json:"metricsEndpoint,omitempty"`
 	// Protocol
-	Protocol *string `json:"protocol,omitempty"`
+	Protocol       *string              `json:"protocol,omitempty"`
+	RetryOnFailure *ExporterRetryConfig `json:"retryOnFailure,omitempty"`
 	// Timeout in seconds
 	TimeoutSeconds *int32 `json:"timeoutSeconds,omitempty"`
 }
@@ -267,6 +270,38 @@ func (o *OTLPConfig) SetLogsEndpoint(v string) {
 	o.LogsEndpoint = &v
 }
 
+// GetMetricsEndpoint returns the MetricsEndpoint field value if set, zero value otherwise.
+func (o *OTLPConfig) GetMetricsEndpoint() string {
+	if o == nil || IsNil(o.MetricsEndpoint) {
+		var ret string
+		return ret
+	}
+	return *o.MetricsEndpoint
+}
+
+// GetMetricsEndpointOk returns a tuple with the MetricsEndpoint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OTLPConfig) GetMetricsEndpointOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricsEndpoint) {
+		return nil, false
+	}
+	return o.MetricsEndpoint, true
+}
+
+// HasMetricsEndpoint returns a boolean if a field has been set.
+func (o *OTLPConfig) HasMetricsEndpoint() bool {
+	if o != nil && !IsNil(o.MetricsEndpoint) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsEndpoint gets a reference to the given string and assigns it to the MetricsEndpoint field.
+func (o *OTLPConfig) SetMetricsEndpoint(v string) {
+	o.MetricsEndpoint = &v
+}
+
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *OTLPConfig) GetProtocol() string {
 	if o == nil || IsNil(o.Protocol) {
@@ -297,6 +332,38 @@ func (o *OTLPConfig) HasProtocol() bool {
 // SetProtocol gets a reference to the given string and assigns it to the Protocol field.
 func (o *OTLPConfig) SetProtocol(v string) {
 	o.Protocol = &v
+}
+
+// GetRetryOnFailure returns the RetryOnFailure field value if set, zero value otherwise.
+func (o *OTLPConfig) GetRetryOnFailure() ExporterRetryConfig {
+	if o == nil || IsNil(o.RetryOnFailure) {
+		var ret ExporterRetryConfig
+		return ret
+	}
+	return *o.RetryOnFailure
+}
+
+// GetRetryOnFailureOk returns a tuple with the RetryOnFailure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OTLPConfig) GetRetryOnFailureOk() (*ExporterRetryConfig, bool) {
+	if o == nil || IsNil(o.RetryOnFailure) {
+		return nil, false
+	}
+	return o.RetryOnFailure, true
+}
+
+// HasRetryOnFailure returns a boolean if a field has been set.
+func (o *OTLPConfig) HasRetryOnFailure() bool {
+	if o != nil && !IsNil(o.RetryOnFailure) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryOnFailure gets a reference to the given ExporterRetryConfig and assigns it to the RetryOnFailure field.
+func (o *OTLPConfig) SetRetryOnFailure(v ExporterRetryConfig) {
+	o.RetryOnFailure = &v
 }
 
 // GetTimeoutSeconds returns the TimeoutSeconds field value if set, zero value otherwise.
@@ -366,8 +433,14 @@ func (o OTLPConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogsEndpoint) {
 		toSerialize["logsEndpoint"] = o.LogsEndpoint
 	}
+	if !IsNil(o.MetricsEndpoint) {
+		toSerialize["metricsEndpoint"] = o.MetricsEndpoint
+	}
 	if !IsNil(o.Protocol) {
 		toSerialize["protocol"] = o.Protocol
+	}
+	if !IsNil(o.RetryOnFailure) {
+		toSerialize["retryOnFailure"] = o.RetryOnFailure
 	}
 	if !IsNil(o.TimeoutSeconds) {
 		toSerialize["timeoutSeconds"] = o.TimeoutSeconds

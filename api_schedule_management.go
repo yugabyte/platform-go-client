@@ -36,7 +36,7 @@ func (r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) Request(request i
 	return r
 }
 
-func (r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) Execute() (*Schedule, *http.Response, error) {
+func (r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) Execute() (*YBPTask, *http.Response, error) {
 	return r.ApiService.DeleteBackupScheduleAsyncExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsync(ctx context.Con
 
 // Execute executes the request
 //
-//	@return Schedule
-func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsyncExecute(r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) (*Schedule, *http.Response, error) {
+//	@return YBPTask
+func (a *ScheduleManagementAPIService) DeleteBackupScheduleAsyncExecute(r ScheduleManagementAPIDeleteBackupScheduleAsyncRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Schedule
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.DeleteBackupScheduleAsync")
@@ -447,7 +447,7 @@ func (r ScheduleManagementAPIEditBackupScheduleAsyncRequest) Request(request int
 	return r
 }
 
-func (r ScheduleManagementAPIEditBackupScheduleAsyncRequest) Execute() (*Schedule, *http.Response, error) {
+func (r ScheduleManagementAPIEditBackupScheduleAsyncRequest) Execute() (*YBPTask, *http.Response, error) {
 	return r.ApiService.EditBackupScheduleAsyncExecute(r)
 }
 
@@ -474,13 +474,13 @@ func (a *ScheduleManagementAPIService) EditBackupScheduleAsync(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return Schedule
-func (a *ScheduleManagementAPIService) EditBackupScheduleAsyncExecute(r ScheduleManagementAPIEditBackupScheduleAsyncRequest) (*Schedule, *http.Response, error) {
+//	@return YBPTask
+func (a *ScheduleManagementAPIService) EditBackupScheduleAsyncExecute(r ScheduleManagementAPIEditBackupScheduleAsyncRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Schedule
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.EditBackupScheduleAsync")
@@ -979,7 +979,7 @@ func (r ScheduleManagementAPIListSchedulesV2Request) Request(request interface{}
 	return r
 }
 
-func (r ScheduleManagementAPIListSchedulesV2Request) Execute() (*SchedulePagedResponse, *http.Response, error) {
+func (r ScheduleManagementAPIListSchedulesV2Request) Execute() (*SchedulePagedApiResponse, *http.Response, error) {
 	return r.ApiService.ListSchedulesV2Execute(r)
 }
 
@@ -1000,13 +1000,13 @@ func (a *ScheduleManagementAPIService) ListSchedulesV2(ctx context.Context, cUUI
 
 // Execute executes the request
 //
-//	@return SchedulePagedResponse
-func (a *ScheduleManagementAPIService) ListSchedulesV2Execute(r ScheduleManagementAPIListSchedulesV2Request) (*SchedulePagedResponse, *http.Response, error) {
+//	@return SchedulePagedApiResponse
+func (a *ScheduleManagementAPIService) ListSchedulesV2Execute(r ScheduleManagementAPIListSchedulesV2Request) (*SchedulePagedApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *SchedulePagedResponse
+		localVarReturnValue *SchedulePagedApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.ListSchedulesV2")
@@ -1117,7 +1117,7 @@ func (r ScheduleManagementAPIToggleBackupScheduleRequest) Request(request interf
 	return r
 }
 
-func (r ScheduleManagementAPIToggleBackupScheduleRequest) Execute() (*Schedule, *http.Response, error) {
+func (r ScheduleManagementAPIToggleBackupScheduleRequest) Execute() (*YBPSuccess, *http.Response, error) {
 	return r.ApiService.ToggleBackupScheduleExecute(r)
 }
 
@@ -1144,13 +1144,13 @@ func (a *ScheduleManagementAPIService) ToggleBackupSchedule(ctx context.Context,
 
 // Execute executes the request
 //
-//	@return Schedule
-func (a *ScheduleManagementAPIService) ToggleBackupScheduleExecute(r ScheduleManagementAPIToggleBackupScheduleRequest) (*Schedule, *http.Response, error) {
+//	@return YBPSuccess
+func (a *ScheduleManagementAPIService) ToggleBackupScheduleExecute(r ScheduleManagementAPIToggleBackupScheduleRequest) (*YBPSuccess, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Schedule
+		localVarReturnValue *YBPSuccess
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ScheduleManagementAPIService.ToggleBackupSchedule")

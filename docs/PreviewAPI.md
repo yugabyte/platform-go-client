@@ -2,13 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                           | HTTP request                                                                 | Description           |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------- |
-| [**CreateImageBundle**](PreviewAPI.md#CreateImageBundle)         | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle            | Create a image bundle |
-| [**Delete**](PreviewAPI.md#Delete)                               | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle |
-| [**EditImageBundle**](PreviewAPI.md#EditImageBundle)             | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}    | Update a image bundle |
-| [**GetImageBundle**](PreviewAPI.md#GetImageBundle)               | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID}    | Get a image bundle    |
-| [**GetListOfImageBundles**](PreviewAPI.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle             | List image bundles    |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateImageBundle**](PreviewAPI.md#CreateImageBundle) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | Create a image bundle
+[**Delete**](PreviewAPI.md#Delete) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Delete a image bundle
+[**EditImageBundle**](PreviewAPI.md#EditImageBundle) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Update a image bundle
+[**GetImageBundle**](PreviewAPI.md#GetImageBundle) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle/{iBUUID} | Get a image bundle
+[**GetListOfImageBundles**](PreviewAPI.md#GetListOfImageBundles) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/image_bundle | List image bundles
 
 
 
@@ -29,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -53,19 +53,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateImageBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **body** | [**ImageBundle**](ImageBundle.md) | CreateImageBundleRequest | 
@@ -106,7 +106,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -130,20 +130,20 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **iBUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**iBUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -184,7 +184,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -209,20 +209,20 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **iBUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**iBUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditImageBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -264,7 +264,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -287,20 +287,20 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **iBUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**iBUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetImageBundleRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -340,7 +340,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -363,19 +363,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetListOfImageBundlesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **arch** | **string** |  | [default to &quot;null&quot;]

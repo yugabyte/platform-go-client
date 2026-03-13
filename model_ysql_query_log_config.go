@@ -31,6 +31,8 @@ type YSQLQueryLogConfig struct {
 	LogDuration bool `json:"logDuration"`
 	// Log error verbosity, controls the amount of detail written in the server log for each message that is logged.
 	LogErrorVerbosity string `json:"logErrorVerbosity"`
+	// YbaApi Internal. Log line prefix format for PostgreSQL logs. User-configured log_line_prefix in gflags takes precedence over this value when specified.
+	LogLinePrefix *string `json:"logLinePrefix,omitempty"`
 	// Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time.
 	LogMinDurationStatement int32 `json:"logMinDurationStatement"`
 	// Log min error statement, controls which SQL statements that cause an error condition are recorded.
@@ -211,6 +213,38 @@ func (o *YSQLQueryLogConfig) SetLogErrorVerbosity(v string) {
 	o.LogErrorVerbosity = v
 }
 
+// GetLogLinePrefix returns the LogLinePrefix field value if set, zero value otherwise.
+func (o *YSQLQueryLogConfig) GetLogLinePrefix() string {
+	if o == nil || IsNil(o.LogLinePrefix) {
+		var ret string
+		return ret
+	}
+	return *o.LogLinePrefix
+}
+
+// GetLogLinePrefixOk returns a tuple with the LogLinePrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YSQLQueryLogConfig) GetLogLinePrefixOk() (*string, bool) {
+	if o == nil || IsNil(o.LogLinePrefix) {
+		return nil, false
+	}
+	return o.LogLinePrefix, true
+}
+
+// HasLogLinePrefix returns a boolean if a field has been set.
+func (o *YSQLQueryLogConfig) HasLogLinePrefix() bool {
+	if o != nil && !IsNil(o.LogLinePrefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogLinePrefix gets a reference to the given string and assigns it to the LogLinePrefix field.
+func (o *YSQLQueryLogConfig) SetLogLinePrefix(v string) {
+	o.LogLinePrefix = &v
+}
+
 // GetLogMinDurationStatement returns the LogMinDurationStatement field value
 func (o *YSQLQueryLogConfig) GetLogMinDurationStatement() int32 {
 	if o == nil {
@@ -299,6 +333,9 @@ func (o YSQLQueryLogConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize["logDisconnections"] = o.LogDisconnections
 	toSerialize["logDuration"] = o.LogDuration
 	toSerialize["logErrorVerbosity"] = o.LogErrorVerbosity
+	if !IsNil(o.LogLinePrefix) {
+		toSerialize["logLinePrefix"] = o.LogLinePrefix
+	}
 	toSerialize["logMinDurationStatement"] = o.LogMinDurationStatement
 	toSerialize["logMinErrorStatement"] = o.LogMinErrorStatement
 	toSerialize["logStatement"] = o.LogStatement

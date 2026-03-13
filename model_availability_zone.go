@@ -34,7 +34,7 @@ type AvailabilityZone struct {
 	SecondarySubnet *string `json:"secondarySubnet,omitempty"`
 	// AZ subnet
 	Subnet *string `json:"subnet,omitempty"`
-	// AZ UUID
+	// AZ UUID. This must be specified for existing AZs on update
 	Uuid *string `json:"uuid,omitempty"`
 }
 

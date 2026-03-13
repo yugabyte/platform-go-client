@@ -2,16 +2,16 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                                                       | HTTP request                                                       | Description                                           |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ | ----------------------------------------------------- |
-| [**CreateCustomerConfig**](CustomerConfigurationAPI.md#CreateCustomerConfig)                                 | **Post** /api/v1/customers/{cUUID}/configs                         | Create a customer configuration                       |
-| [**DeleteCustomerConfig**](CustomerConfigurationAPI.md#DeleteCustomerConfig)                                 | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}          | Delete a customer configuration                       |
-| [**DeleteCustomerConfigV2**](CustomerConfigurationAPI.md#DeleteCustomerConfigV2)                             | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete   | Delete a customer configuration V2                    |
-| [**EditCustomerConfig**](CustomerConfigurationAPI.md#EditCustomerConfig)                                     | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}             | Update a customer configuration                       |
-| [**EditCustomerConfig_0**](CustomerConfigurationAPI.md#EditCustomerConfig_0)                                 | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit        | Update a customer configuration V2                    |
-| [**GetListOfCustomerConfig**](CustomerConfigurationAPI.md#GetListOfCustomerConfig)                           | **Get** /api/v1/customers/{cUUID}/configs                          | List all customer configurations                      |
-| [**GetListOfYbaBackupDirsCustomerConfig**](CustomerConfigurationAPI.md#GetListOfYbaBackupDirsCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs | List all backup dirs within a customer configurations |
-| [**ListBuckets**](CustomerConfigurationAPI.md#ListBuckets)                                                   | **Post** /api/v1/customers/{cUUID}/cloud/{cloud}/buckets           | List buckets with provided credentials                |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateCustomerConfig**](CustomerConfigurationAPI.md#CreateCustomerConfig) | **Post** /api/v1/customers/{cUUID}/configs | Create a customer configuration
+[**DeleteCustomerConfig**](CustomerConfigurationAPI.md#DeleteCustomerConfig) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID} | Delete a customer configuration
+[**DeleteCustomerConfigV2**](CustomerConfigurationAPI.md#DeleteCustomerConfigV2) | **Delete** /api/v1/customers/{cUUID}/configs/{configUUID}/delete | Delete a customer configuration V2
+[**EditCustomerConfig**](CustomerConfigurationAPI.md#EditCustomerConfig) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID} | Update a customer configuration
+[**EditCustomerConfig_0**](CustomerConfigurationAPI.md#EditCustomerConfig_0) | **Put** /api/v1/customers/{cUUID}/configs/{configUUID}/edit | Update a customer configuration V2
+[**GetListOfCustomerConfig**](CustomerConfigurationAPI.md#GetListOfCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs | List all customer configurations
+[**GetListOfYbaBackupDirsCustomerConfig**](CustomerConfigurationAPI.md#GetListOfYbaBackupDirsCustomerConfig) | **Get** /api/v1/customers/{cUUID}/configs/{configUUID}/backup_dirs | List all backup dirs within a customer configurations
+[**ListBuckets**](CustomerConfigurationAPI.md#ListBuckets) | **Post** /api/v1/customers/{cUUID}/cloud/{cloud}/buckets | List buckets with provided credentials
 
 
 
@@ -30,7 +30,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -53,18 +53,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateCustomerConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be created | 
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -104,7 +104,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -128,19 +128,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **configUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCustomerConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **isDeleteBackups** | **bool** |  | [default to false]
@@ -179,7 +179,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -203,19 +203,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **configUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteCustomerConfigV2Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **isDeleteBackups** | **bool** |  | [default to false]
@@ -254,7 +254,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -278,19 +278,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **configUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditCustomerConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
@@ -329,7 +329,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -353,19 +353,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **configUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditCustomerConfig_1Request struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **config** | [**CustomerConfig**](CustomerConfig.md) | Configuration data to be updated | 
@@ -404,7 +404,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -425,18 +425,18 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetListOfCustomerConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
@@ -472,7 +472,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -494,19 +494,19 @@ func main() {
 ### Path Parameters
 
 
-| Name           | Type                | Description                                                                 | Notes |
-| -------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**        | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**      | **string**          |                                                                             |
-| **configUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**configUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetListOfYbaBackupDirsCustomerConfigRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -543,7 +543,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -567,19 +567,19 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **cloud** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**cloud** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListBucketsRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
  **credentials** | **map[string]interface{}** | Credentials to list buckets | 

@@ -540,6 +540,151 @@ func (a *UniverseAPIService) ConfigureQueryLoggingExecute(r UniverseAPIConfigure
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type UniverseAPICreateFileCollectionRequest struct {
+	ctx                 context.Context
+	ApiService          *UniverseAPIService
+	cUUID               string
+	uniUUID             string
+	collectFilesRequest *CollectFilesRequest
+}
+
+func (r UniverseAPICreateFileCollectionRequest) CollectFilesRequest(collectFilesRequest CollectFilesRequest) UniverseAPICreateFileCollectionRequest {
+	r.collectFilesRequest = &collectFilesRequest
+	return r
+}
+
+func (r UniverseAPICreateFileCollectionRequest) Execute() (*CollectFilesResponse, *http.Response, error) {
+	return r.ApiService.CreateFileCollectionExecute(r)
+}
+
+/*
+CreateFileCollection Collect files from database nodes
+
+Collect specified files from one or more nodes in the universe. Files can be collected
+by specifying individual file paths or directory paths. The files are packaged into a
+tar.gz archive on each database node.
+
+This API requires the runtime configuration `yb.node_script.enabled` to be set to true
+for the universe.
+
+**Important**: The response includes `collection_uuid` which can be used with the
+download and cleanup endpoints. The tar files are stored on the database nodes and
+can be downloaded using GET /file-collections/{collectionUUID}/download.
+
+**Security**: This API is restricted to localhost access only. It can only be called from
+the same machine where YugabyteDB Anywhere is running.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPICreateFileCollectionRequest
+*/
+func (a *UniverseAPIService) CreateFileCollection(ctx context.Context, cUUID string, uniUUID string) UniverseAPICreateFileCollectionRequest {
+	return UniverseAPICreateFileCollectionRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CollectFilesResponse
+func (a *UniverseAPIService) CreateFileCollectionExecute(r UniverseAPICreateFileCollectionRequest) (*CollectFilesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CollectFilesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.CreateFileCollection")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/file-collections"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.collectFilesRequest == nil {
+		return localVarReturnValue, nil, reportError("collectFilesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.collectFilesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseAPICreateUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
@@ -919,6 +1064,168 @@ func (a *UniverseAPIService) DeleteClusterExecute(r UniverseAPIDeleteClusterRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type UniverseAPIDeleteFileCollectionRequest struct {
+	ctx               context.Context
+	ApiService        *UniverseAPIService
+	cUUID             string
+	uniUUID           string
+	collectionUUID    string
+	deleteFromDbNodes *bool
+	deleteFromYba     *bool
+}
+
+// Whether to delete tar files from database nodes
+func (r UniverseAPIDeleteFileCollectionRequest) DeleteFromDbNodes(deleteFromDbNodes bool) UniverseAPIDeleteFileCollectionRequest {
+	r.deleteFromDbNodes = &deleteFromDbNodes
+	return r
+}
+
+// Whether to delete downloaded files from YBA local storage
+func (r UniverseAPIDeleteFileCollectionRequest) DeleteFromYba(deleteFromYba bool) UniverseAPIDeleteFileCollectionRequest {
+	r.deleteFromYba = &deleteFromYba
+	return r
+}
+
+func (r UniverseAPIDeleteFileCollectionRequest) Execute() (*CleanupCollectionInfo, *http.Response, error) {
+	return r.ApiService.DeleteFileCollectionExecute(r)
+}
+
+/*
+DeleteFileCollection Delete collected files from database nodes and/or YBA
+
+Delete tar archives created by the create file collection API. By default, this only
+deletes files from DB nodes. Use `delete_from_yba=true` to also remove downloaded
+files from YBA local storage.
+
+Use this API when you are done downloading the collected files and want to free up
+disk space on the database nodes and/or YBA server.
+
+**Security**: This API can only be called from localhost (the YBA server itself).
+This restriction exists because it modifies files on database nodes.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@param collectionUUID Collection UUID returned by create file collection API
+	@return UniverseAPIDeleteFileCollectionRequest
+*/
+func (a *UniverseAPIService) DeleteFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) UniverseAPIDeleteFileCollectionRequest {
+	return UniverseAPIDeleteFileCollectionRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		cUUID:          cUUID,
+		uniUUID:        uniUUID,
+		collectionUUID: collectionUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CleanupCollectionInfo
+func (a *UniverseAPIService) DeleteFileCollectionExecute(r UniverseAPIDeleteFileCollectionRequest) (*CleanupCollectionInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CleanupCollectionInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.DeleteFileCollection")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"collectionUUID"+"}", url.PathEscape(parameterValueToString(r.collectionUUID, "collectionUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.deleteFromDbNodes != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_from_db_nodes", r.deleteFromDbNodes, "form", "")
+	} else {
+		var defaultValue bool = true
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_from_db_nodes", defaultValue, "form", "")
+		r.deleteFromDbNodes = &defaultValue
+	}
+	if r.deleteFromYba != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_from_yba", r.deleteFromYba, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_from_yba", defaultValue, "form", "")
+		r.deleteFromYba = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseAPIDeleteUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
@@ -1131,6 +1438,155 @@ func (a *UniverseAPIService) DetachUniverseExecute(r UniverseAPIDetachUniverseRe
 	}
 	// body params
 	localVarPostBody = r.detachUniverseSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIDownloadFileCollectionRequest struct {
+	ctx                 context.Context
+	ApiService          *UniverseAPIService
+	cUUID               string
+	uniUUID             string
+	collectionUUID      string
+	cleanupDbNodesAfter *bool
+}
+
+// If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with  delete_from_db_nodes&#x3D;true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.
+func (r UniverseAPIDownloadFileCollectionRequest) CleanupDbNodesAfter(cleanupDbNodesAfter bool) UniverseAPIDownloadFileCollectionRequest {
+	r.cleanupDbNodesAfter = &cleanupDbNodesAfter
+	return r
+}
+
+func (r UniverseAPIDownloadFileCollectionRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadFileCollectionExecute(r)
+}
+
+/*
+DownloadFileCollection Download collected files
+
+Download previously collected files from database nodes. Use the collection_uuid
+returned by the create file collection API (POST /file-collections) to identify
+which files to download.
+
+This API downloads the tar.gz archives from each database node and streams them
+back to the client as a combined archive.
+
+**Note**: By default, this API does NOT have localhost restriction and can be
+called from any authorized client. However, if cleanup_db_nodes_after=true is specified,
+localhost restriction applies since it modifies files on database nodes.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@param collectionUUID Collection UUID returned by create file collection API
+	@return UniverseAPIDownloadFileCollectionRequest
+*/
+func (a *UniverseAPIService) DownloadFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) UniverseAPIDownloadFileCollectionRequest {
+	return UniverseAPIDownloadFileCollectionRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		cUUID:          cUUID,
+		uniUUID:        uniUUID,
+		collectionUUID: collectionUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return *os.File
+func (a *UniverseAPIService) DownloadFileCollectionExecute(r UniverseAPIDownloadFileCollectionRequest) (*os.File, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.DownloadFileCollection")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/file-collections/{collectionUUID}/download"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"collectionUUID"+"}", url.PathEscape(parameterValueToString(r.collectionUUID, "collectionUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.cleanupDbNodesAfter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cleanup_db_nodes_after", r.cleanupDbNodesAfter, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cleanup_db_nodes_after", defaultValue, "form", "")
+		r.cleanupDbNodesAfter = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/gzip"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -3081,6 +3537,152 @@ func (a *UniverseAPIService) RollbackSoftwareUpgradeExecute(r UniverseAPIRollbac
 	}
 	// body params
 	localVarPostBody = r.universeRollbackUpgradeReq
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIRunScriptRequest struct {
+	ctx              context.Context
+	ApiService       *UniverseAPIService
+	cUUID            string
+	uniUUID          string
+	runScriptRequest *RunScriptRequest
+}
+
+func (r UniverseAPIRunScriptRequest) RunScriptRequest(runScriptRequest RunScriptRequest) UniverseAPIRunScriptRequest {
+	r.runScriptRequest = &runScriptRequest
+	return r
+}
+
+func (r UniverseAPIRunScriptRequest) Execute() (*RunScriptResponse, *http.Response, error) {
+	return r.ApiService.RunScriptExecute(r)
+}
+
+/*
+RunScript Run a script on database nodes
+
+Execute a bash script on one or more nodes in the universe. The script can be provided
+inline as content or as a path to a file on the YugabyteDB Anywhere node. Results including stdout,
+stderr, and exit codes are returned for each node.
+
+This API requires the runtime configuration `yb.node_script.enabled` to be set to true
+for the universe.
+
+**Important**: Scripts are executed remotely on database nodes via SSH or Node Agent. Once a
+script starts executing on a node, it cannot be cancelled remotely. If this API times out or
+fails while waiting for results, scripts that have already started may continue running on
+the remote nodes until completion. For this reason, scripts should ideally be:
+- **Short-lived**: Avoid long-running operations
+- **Idempotent**: Safe to run multiple times if retried
+- **Self-terminating**: Include appropriate timeouts within the script itself
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPIRunScriptRequest
+*/
+func (a *UniverseAPIService) RunScript(ctx context.Context, cUUID string, uniUUID string) UniverseAPIRunScriptRequest {
+	return UniverseAPIRunScriptRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return RunScriptResponse
+func (a *UniverseAPIService) RunScriptExecute(r UniverseAPIRunScriptRequest) (*RunScriptResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RunScriptResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.RunScript")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/run-script"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.runScriptRequest == nil {
+		return localVarReturnValue, nil, reportError("runScriptRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.runScriptRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

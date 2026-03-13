@@ -2,14 +2,14 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                               | HTTP request                                                                                       | Description                              |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| [**CreateAZ**](AvailabilityZonesAPI.md#CreateAZ)     | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones                         | Create an availability zone - deprecated |
-| [**CreateZone**](AvailabilityZonesAPI.md#CreateZone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones         | Create an availability zone              |
-| [**DeleteAZ**](AvailabilityZonesAPI.md#DeleteAZ)     | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID}              | Delete an availability zone              |
-| [**EditAZ**](AvailabilityZonesAPI.md#EditAZ)         | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID}                 | Edit an Availabilty Zone - deprecated    |
-| [**EditZone**](AvailabilityZonesAPI.md#EditZone)     | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone              |
-| [**ListOfAZ**](AvailabilityZonesAPI.md#ListOfAZ)     | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones                          | List availability zones                  |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateAZ**](AvailabilityZonesAPI.md#CreateAZ) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | Create an availability zone - deprecated
+[**CreateZone**](AvailabilityZonesAPI.md#CreateZone) | **Post** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones | Create an availability zone
+[**DeleteAZ**](AvailabilityZonesAPI.md#DeleteAZ) | **Delete** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Delete an availability zone
+[**EditAZ**](AvailabilityZonesAPI.md#EditAZ) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones/{azUUID} | Edit an Availabilty Zone - deprecated
+[**EditZone**](AvailabilityZonesAPI.md#EditZone) | **Put** /api/v1/customers/{cUUID}/providers/{pUUID}/provider_regions/{rUUID}/region_zones/{azUUID} | Modify an availability zone
+[**ListOfAZ**](AvailabilityZonesAPI.md#ListOfAZ) | **Get** /api/v1/customers/{cUUID}/providers/{pUUID}/regions/{rUUID}/zones | List availability zones
 
 
 
@@ -30,7 +30,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -55,20 +55,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateAZRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -110,7 +110,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -135,20 +135,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateZoneRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -188,7 +188,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -213,21 +213,21 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **rUUID**  | **string**          |                                                                             |
-| **azUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
+**azUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteAZRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -269,7 +269,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -295,21 +295,21 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **rUUID**  | **string**          |                                                                             |
-| **azUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
+**azUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditAZRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -352,7 +352,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -378,21 +378,21 @@ func main() {
 ### Path Parameters
 
 
-| Name       | Type                | Description                                                                 | Notes |
-| ---------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**    | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID**  | **string**          |                                                                             |
-| **pUUID**  | **string**          |                                                                             |
-| **rUUID**  | **string**          |                                                                             |
-| **azUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
+**azUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiEditZoneRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 
@@ -433,7 +433,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -456,20 +456,20 @@ func main() {
 ### Path Parameters
 
 
-| Name      | Type                | Description                                                                 | Notes |
-| --------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**   | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **cUUID** | **string**          |                                                                             |
-| **pUUID** | **string**          |                                                                             |
-| **rUUID** | **string**          |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**pUUID** | **string** |  | 
+**rUUID** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiListOfAZRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &TlsToggleParams{}
 // TlsToggleParams struct for TlsToggleParams
 type TlsToggleParams struct {
 	AdditionalServicesStateData *AdditionalServicesStateData `json:"additionalServicesStateData,omitempty"`
-	AllowInsecure               bool                         `json:"allowInsecure"`
+	AllowInsecure               *bool                        `json:"allowInsecure,omitempty"`
 	Arch                        *string                      `json:"arch,omitempty"`
 	AutoRollbackPerformed       *bool                        `json:"autoRollbackPerformed,omitempty"`
 	Capability                  *string                      `json:"capability,omitempty"`
@@ -64,7 +64,9 @@ type TlsToggleParams struct {
 	NodePrefix           *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool   `json:"nodesResizeAvailable,omitempty"`
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
-	OtelCollectorEnabled          *bool                 `json:"otelCollectorEnabled,omitempty"`
+	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
+	// YbaApi Internal. PA Collector UUID
+	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   string                `json:"platformUrl"`
 	PlatformVersion               *string               `json:"platformVersion,omitempty"`
@@ -115,9 +117,8 @@ type _TlsToggleParams TlsToggleParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTlsToggleParams(allowInsecure bool, clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *TlsToggleParams {
+func NewTlsToggleParams(clusters []Cluster, creatingUser Users, enableClientToNodeEncrypt bool, enableNodeToNodeEncrypt bool, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string) *TlsToggleParams {
 	this := TlsToggleParams{}
-	this.AllowInsecure = allowInsecure
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.EnableClientToNodeEncrypt = enableClientToNodeEncrypt
@@ -170,28 +171,36 @@ func (o *TlsToggleParams) SetAdditionalServicesStateData(v AdditionalServicesSta
 	o.AdditionalServicesStateData = &v
 }
 
-// GetAllowInsecure returns the AllowInsecure field value
+// GetAllowInsecure returns the AllowInsecure field value if set, zero value otherwise.
 func (o *TlsToggleParams) GetAllowInsecure() bool {
-	if o == nil {
+	if o == nil || IsNil(o.AllowInsecure) {
 		var ret bool
 		return ret
 	}
-
-	return o.AllowInsecure
+	return *o.AllowInsecure
 }
 
-// GetAllowInsecureOk returns a tuple with the AllowInsecure field value
+// GetAllowInsecureOk returns a tuple with the AllowInsecure field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TlsToggleParams) GetAllowInsecureOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AllowInsecure) {
 		return nil, false
 	}
-	return &o.AllowInsecure, true
+	return o.AllowInsecure, true
 }
 
-// SetAllowInsecure sets field value
+// HasAllowInsecure returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasAllowInsecure() bool {
+	if o != nil && !IsNil(o.AllowInsecure) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowInsecure gets a reference to the given bool and assigns it to the AllowInsecure field.
 func (o *TlsToggleParams) SetAllowInsecure(v bool) {
-	o.AllowInsecure = v
+	o.AllowInsecure = &v
 }
 
 // GetArch returns the Arch field value if set, zero value otherwise.
@@ -1208,6 +1217,38 @@ func (o *TlsToggleParams) HasOtelCollectorEnabled() bool {
 // SetOtelCollectorEnabled gets a reference to the given bool and assigns it to the OtelCollectorEnabled field.
 func (o *TlsToggleParams) SetOtelCollectorEnabled(v bool) {
 	o.OtelCollectorEnabled = &v
+}
+
+// GetPaCollectorUuid returns the PaCollectorUuid field value if set, zero value otherwise.
+func (o *TlsToggleParams) GetPaCollectorUuid() string {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaCollectorUuid
+}
+
+// GetPaCollectorUuidOk returns a tuple with the PaCollectorUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TlsToggleParams) GetPaCollectorUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaCollectorUuid) {
+		return nil, false
+	}
+	return o.PaCollectorUuid, true
+}
+
+// HasPaCollectorUuid returns a boolean if a field has been set.
+func (o *TlsToggleParams) HasPaCollectorUuid() bool {
+	if o != nil && !IsNil(o.PaCollectorUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaCollectorUuid gets a reference to the given string and assigns it to the PaCollectorUuid field.
+func (o *TlsToggleParams) SetPaCollectorUuid(v string) {
+	o.PaCollectorUuid = &v
 }
 
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
@@ -2279,7 +2320,9 @@ func (o TlsToggleParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdditionalServicesStateData) {
 		toSerialize["additionalServicesStateData"] = o.AdditionalServicesStateData
 	}
-	toSerialize["allowInsecure"] = o.AllowInsecure
+	if !IsNil(o.AllowInsecure) {
+		toSerialize["allowInsecure"] = o.AllowInsecure
+	}
 	if !IsNil(o.Arch) {
 		toSerialize["arch"] = o.Arch
 	}
@@ -2368,6 +2411,9 @@ func (o TlsToggleParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OtelCollectorEnabled) {
 		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled
+	}
+	if !IsNil(o.PaCollectorUuid) {
+		toSerialize["paCollectorUuid"] = o.PaCollectorUuid
 	}
 	if !IsNil(o.PlacementModificationTaskUuid) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid

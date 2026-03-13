@@ -23,6 +23,8 @@ type BackupRequestParams struct {
 	AlterLoadBalancer *bool `json:"alterLoadBalancer,omitempty"`
 	// Overrides whether you want to use YBC based or script based backup.
 	BackupCategory *string `json:"backupCategory,omitempty"`
+	// WARNING: This is a preview API that could change. Backup stats with YSQL dump.
+	BackupStats *bool `json:"backupStats,omitempty"`
 	// Backup type
 	BackupType *string `json:"backupType,omitempty"`
 	BackupUUID string  `json:"backupUUID"`
@@ -209,6 +211,38 @@ func (o *BackupRequestParams) HasBackupCategory() bool {
 // SetBackupCategory gets a reference to the given string and assigns it to the BackupCategory field.
 func (o *BackupRequestParams) SetBackupCategory(v string) {
 	o.BackupCategory = &v
+}
+
+// GetBackupStats returns the BackupStats field value if set, zero value otherwise.
+func (o *BackupRequestParams) GetBackupStats() bool {
+	if o == nil || IsNil(o.BackupStats) {
+		var ret bool
+		return ret
+	}
+	return *o.BackupStats
+}
+
+// GetBackupStatsOk returns a tuple with the BackupStats field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupRequestParams) GetBackupStatsOk() (*bool, bool) {
+	if o == nil || IsNil(o.BackupStats) {
+		return nil, false
+	}
+	return o.BackupStats, true
+}
+
+// HasBackupStats returns a boolean if a field has been set.
+func (o *BackupRequestParams) HasBackupStats() bool {
+	if o != nil && !IsNil(o.BackupStats) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupStats gets a reference to the given bool and assigns it to the BackupStats field.
+func (o *BackupRequestParams) SetBackupStats(v bool) {
+	o.BackupStats = &v
 }
 
 // GetBackupType returns the BackupType field value if set, zero value otherwise.
@@ -1930,6 +1964,9 @@ func (o BackupRequestParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.BackupCategory) {
 		toSerialize["backupCategory"] = o.BackupCategory
+	}
+	if !IsNil(o.BackupStats) {
+		toSerialize["backupStats"] = o.BackupStats
 	}
 	if !IsNil(o.BackupType) {
 		toSerialize["backupType"] = o.BackupType

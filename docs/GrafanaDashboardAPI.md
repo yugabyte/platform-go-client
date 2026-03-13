@@ -2,9 +2,9 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                          | HTTP request                      | Description           |
-| --------------------------------------------------------------- | --------------------------------- | --------------------- |
-| [**GrafanaDashboard**](GrafanaDashboardAPI.md#GrafanaDashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GrafanaDashboard**](GrafanaDashboardAPI.md#GrafanaDashboard) | **Get** /api/v1/grafana_dashboard | Get Grafana Dashboard
 
 
 
@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {

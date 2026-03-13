@@ -2,12 +2,13 @@
 
 All URIs are relative to *http://localhost*
 
-| Method                                                                  | HTTP request                                                   | Description         |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------- |
-| [**DemoteLocalLeader**](InternalHAAPI.md#DemoteLocalLeader)             | **Put** /api/v1/settings/ha/internal/config/demote/{timestamp} | Demote local leader |
-| [**GetHAConfigByClusterKey**](InternalHAAPI.md#GetHAConfigByClusterKey) | **Get** /api/v1/settings/ha/internal/config                    |
-| [**SyncBackups**](InternalHAAPI.md#SyncBackups)                         | **Post** /api/v1/settings/ha/internal/upload                   |
-| [**SyncInstances**](InternalHAAPI.md#SyncInstances)                     | **Put** /api/v1/settings/ha/internal/config/sync/{timestamp}   |
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DemoteLocalLeader**](InternalHAAPI.md#DemoteLocalLeader) | **Put** /api/v1/settings/ha/internal/config/demote/{timestamp} | Demote local leader
+[**GetHAConfigByClusterKey**](InternalHAAPI.md#GetHAConfigByClusterKey) | **Get** /api/v1/settings/ha/internal/config | 
+[**SyncBackups**](InternalHAAPI.md#SyncBackups) | **Post** /api/v1/settings/ha/internal/upload | 
+[**SyncInstances**](InternalHAAPI.md#SyncInstances) | **Put** /api/v1/settings/ha/internal/config/sync/{timestamp} | 
+[**ValidateBackup**](InternalHAAPI.md#ValidateBackup) | **Get** /api/v1/settings/ha/internal/backups/{backupName}/validate | 
 
 
 
@@ -28,7 +29,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -51,18 +52,18 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **timestamp** | **int64**           |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**timestamp** | **int64** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDemoteLocalLeaderRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **promote** | **bool** |  | [default to false]
  **request** | [**interface{}**](interface{}.md) |  | 
@@ -100,7 +101,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -125,9 +126,9 @@ func main() {
 Other parameters are passed through a pointer to a apiGetHAConfigByClusterKeyRequest struct via the builder pattern
 
 
-| Name        | Type                              | Description | Notes |
-| ----------- | --------------------------------- | ----------- | ----- |
-| **request** | [**interface{}**](interface{}.md) |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -162,7 +163,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -187,9 +188,9 @@ func main() {
 Other parameters are passed through a pointer to a apiSyncBackupsRequest struct via the builder pattern
 
 
-| Name        | Type                              | Description | Notes |
-| ----------- | --------------------------------- | ----------- | ----- |
-| **request** | [**interface{}**](interface{}.md) |             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
@@ -224,7 +225,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
 )
 
 func main() {
@@ -244,18 +245,86 @@ func main() {
 ### Path Parameters
 
 
-| Name          | Type                | Description                                                                 | Notes |
-| ------------- | ------------------- | --------------------------------------------------------------------------- | ----- |
-| **ctx**       | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. |
-| **timestamp** | **int64**           |                                                                             |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**timestamp** | **int64** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSyncInstancesRequest struct via the builder pattern
 
 
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ValidateBackup
+
+> ValidateBackup(ctx, backupName).Request(request).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	backupName := "backupName_example" // string | 
+	request := TODO // interface{} |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.InternalHAAPI.ValidateBackup(context.Background(), backupName).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `InternalHAAPI.ValidateBackup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**backupName** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateBackupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
  **request** | [**interface{}**](interface{}.md) |  | 
 
