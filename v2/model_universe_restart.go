@@ -20,9 +20,9 @@ var _ MappedNullable = &UniverseRestart{}
 
 // UniverseRestart UniverseRestart  Payload to restart a Universe. Part of UniverseRestartReq. This will restart all nodes in the  universe or just restart the master and tserver processes.
 type UniverseRestart struct {
-	// Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
 	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
-	// Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 	// Perform a rolling restart of the universe. Otherwise, all nodes will be restarted at the same time.
 	RollingRestart *bool `json:"rolling_restart,omitempty"`
@@ -36,10 +36,6 @@ type UniverseRestart struct {
 // will change when the set of required properties is changed
 func NewUniverseRestart() *UniverseRestart {
 	this := UniverseRestart{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var rollingRestart bool = true
 	this.RollingRestart = &rollingRestart
 	var restartType string = "SERVICE"
@@ -52,10 +48,6 @@ func NewUniverseRestart() *UniverseRestart {
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseRestartWithDefaults() *UniverseRestart {
 	this := UniverseRestart{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var rollingRestart bool = true
 	this.RollingRestart = &rollingRestart
 	var restartType string = "SERVICE"

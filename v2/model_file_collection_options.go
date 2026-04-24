@@ -18,10 +18,10 @@ import (
 // checks if the FileCollectionOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileCollectionOptions{}
 
-// FileCollectionOptions Configuration options for collecting files from database nodes
+// FileCollectionOptions Configuration options for collecting files from database nodes. At least one of file_paths or directory_paths must be provided.
 type FileCollectionOptions struct {
 	// List of file paths to collect from each node. Paths can be absolute or relative to the yugabyte home directory. Glob patterns are not supported.
-	FilePaths []string `json:"file_paths"`
+	FilePaths []string `json:"file_paths,omitempty"`
 	// List of directory paths to collect files from. All files in these directories will be collected (non-recursive). Use max_depth for recursive collection.
 	DirectoryPaths []string `json:"directory_paths,omitempty"`
 	// Maximum depth for directory traversal when collecting from directories. 1 means only immediate files, 2 includes one level of subdirectories, etc.
@@ -36,15 +36,12 @@ type FileCollectionOptions struct {
 	LinuxUser *string `json:"linux_user,omitempty"`
 }
 
-type _FileCollectionOptions FileCollectionOptions
-
 // NewFileCollectionOptions instantiates a new FileCollectionOptions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileCollectionOptions(filePaths []string) *FileCollectionOptions {
+func NewFileCollectionOptions() *FileCollectionOptions {
 	this := FileCollectionOptions{}
-	this.FilePaths = filePaths
 	var maxDepth int32 = 1
 	this.MaxDepth = &maxDepth
 	var maxFileSizeBytes int64 = 10485760
@@ -76,26 +73,34 @@ func NewFileCollectionOptionsWithDefaults() *FileCollectionOptions {
 	return &this
 }
 
-// GetFilePaths returns the FilePaths field value
+// GetFilePaths returns the FilePaths field value if set, zero value otherwise.
 func (o *FileCollectionOptions) GetFilePaths() []string {
-	if o == nil {
+	if o == nil || IsNil(o.FilePaths) {
 		var ret []string
 		return ret
 	}
-
 	return o.FilePaths
 }
 
-// GetFilePathsOk returns a tuple with the FilePaths field value
+// GetFilePathsOk returns a tuple with the FilePaths field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *FileCollectionOptions) GetFilePathsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FilePaths) {
 		return nil, false
 	}
 	return o.FilePaths, true
 }
 
-// SetFilePaths sets field value
+// HasFilePaths returns a boolean if a field has been set.
+func (o *FileCollectionOptions) HasFilePaths() bool {
+	if o != nil && !IsNil(o.FilePaths) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilePaths gets a reference to the given []string and assigns it to the FilePaths field.
 func (o *FileCollectionOptions) SetFilePaths(v []string) {
 	o.FilePaths = v
 }
@@ -302,7 +307,9 @@ func (o FileCollectionOptions) MarshalJSON() ([]byte, error) {
 
 func (o FileCollectionOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["file_paths"] = o.FilePaths
+	if !IsNil(o.FilePaths) {
+		toSerialize["file_paths"] = o.FilePaths
+	}
 	if !IsNil(o.DirectoryPaths) {
 		toSerialize["directory_paths"] = o.DirectoryPaths
 	}

@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of geo partition | 
 **DefaultPartition** | **bool** | Whether the partition is default (all masters are put only into this partition) | 
 **ReplicationFactor** | **int32** | The replication factor for the partition. | 
+**TablespaceName** | **string** | The name of corresponding tablespace. | 
 **Placement** | [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | 
 
 ## Methods
 
 ### NewClusterPartitionSpec
 
-`func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, placement ClusterPlacementSpec, ) *ClusterPartitionSpec`
+`func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, tablespaceName string, placement ClusterPlacementSpec, ) *ClusterPartitionSpec`
 
 NewClusterPartitionSpec instantiates a new ClusterPartitionSpec object
 This constructor will assign default values to properties that have it defined,
@@ -112,6 +113,26 @@ and a boolean to check if the value has been set.
 `func (o *ClusterPartitionSpec) SetReplicationFactor(v int32)`
 
 SetReplicationFactor sets ReplicationFactor field to given value.
+
+
+### GetTablespaceName
+
+`func (o *ClusterPartitionSpec) GetTablespaceName() string`
+
+GetTablespaceName returns the TablespaceName field if non-nil, zero value otherwise.
+
+### GetTablespaceNameOk
+
+`func (o *ClusterPartitionSpec) GetTablespaceNameOk() (*string, bool)`
+
+GetTablespaceNameOk returns a tuple with the TablespaceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTablespaceName
+
+`func (o *ClusterPartitionSpec) SetTablespaceName(v string)`
+
+SetTablespaceName sets TablespaceName field to given value.
 
 
 ### GetPlacement

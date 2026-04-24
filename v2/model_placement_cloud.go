@@ -21,23 +21,28 @@ var _ MappedNullable = &PlacementCloud{}
 // PlacementCloud YBA Placement Cloud. Part of ClusterPlacementSpec.
 type PlacementCloud struct {
 	// The cloud provider id.
-	Uuid *string `json:"uuid,omitempty"`
+	Uuid string `json:"uuid"`
 	// The cloud provider code.
-	Code *string `json:"code,omitempty"`
+	Code string `json:"code"`
 	// The list of region in this cloud we want to place data in.
-	RegionList []PlacementRegion `json:"region_list,omitempty"`
+	RegionList []PlacementRegion `json:"region_list"`
 	// UUID of default region. For universes with more AZs than RF, the default placement for user tables will be RF AZs in the default region. This is commonly encountered in geo-partitioning use cases. Deprecated, replaced with default partition.
 	DefaultRegion *string `json:"default_region,omitempty"`
 	// Whether to place all masters in the default region. Defaults to true.
 	MastersInDefaultRegion *bool `json:"masters_in_default_region,omitempty"`
 }
 
+type _PlacementCloud PlacementCloud
+
 // NewPlacementCloud instantiates a new PlacementCloud object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlacementCloud() *PlacementCloud {
+func NewPlacementCloud(uuid string, code string, regionList []PlacementRegion) *PlacementCloud {
 	this := PlacementCloud{}
+	this.Uuid = uuid
+	this.Code = code
+	this.RegionList = regionList
 	var mastersInDefaultRegion bool = true
 	this.MastersInDefaultRegion = &mastersInDefaultRegion
 	return &this
@@ -53,98 +58,74 @@ func NewPlacementCloudWithDefaults() *PlacementCloud {
 	return &this
 }
 
-// GetUuid returns the Uuid field value if set, zero value otherwise.
+// GetUuid returns the Uuid field value
 func (o *PlacementCloud) GetUuid() string {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Uuid
+
+	return o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// GetUuidOk returns a tuple with the Uuid field value
 // and a boolean to check if the value has been set.
 func (o *PlacementCloud) GetUuidOk() (*string, bool) {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Uuid, true
+	return &o.Uuid, true
 }
 
-// HasUuid returns a boolean if a field has been set.
-func (o *PlacementCloud) HasUuid() bool {
-	if o != nil && !IsNil(o.Uuid) {
-		return true
-	}
-
-	return false
-}
-
-// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+// SetUuid sets field value
 func (o *PlacementCloud) SetUuid(v string) {
-	o.Uuid = &v
+	o.Uuid = v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
+// GetCode returns the Code field value
 func (o *PlacementCloud) GetCode() string {
-	if o == nil || IsNil(o.Code) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Code
+
+	return o.Code
 }
 
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
 func (o *PlacementCloud) GetCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.Code) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Code, true
+	return &o.Code, true
 }
 
-// HasCode returns a boolean if a field has been set.
-func (o *PlacementCloud) HasCode() bool {
-	if o != nil && !IsNil(o.Code) {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given string and assigns it to the Code field.
+// SetCode sets field value
 func (o *PlacementCloud) SetCode(v string) {
-	o.Code = &v
+	o.Code = v
 }
 
-// GetRegionList returns the RegionList field value if set, zero value otherwise.
+// GetRegionList returns the RegionList field value
 func (o *PlacementCloud) GetRegionList() []PlacementRegion {
-	if o == nil || IsNil(o.RegionList) {
+	if o == nil {
 		var ret []PlacementRegion
 		return ret
 	}
+
 	return o.RegionList
 }
 
-// GetRegionListOk returns a tuple with the RegionList field value if set, nil otherwise
+// GetRegionListOk returns a tuple with the RegionList field value
 // and a boolean to check if the value has been set.
 func (o *PlacementCloud) GetRegionListOk() ([]PlacementRegion, bool) {
-	if o == nil || IsNil(o.RegionList) {
+	if o == nil {
 		return nil, false
 	}
 	return o.RegionList, true
 }
 
-// HasRegionList returns a boolean if a field has been set.
-func (o *PlacementCloud) HasRegionList() bool {
-	if o != nil && !IsNil(o.RegionList) {
-		return true
-	}
-
-	return false
-}
-
-// SetRegionList gets a reference to the given []PlacementRegion and assigns it to the RegionList field.
+// SetRegionList sets field value
 func (o *PlacementCloud) SetRegionList(v []PlacementRegion) {
 	o.RegionList = v
 }
@@ -223,15 +204,9 @@ func (o PlacementCloud) MarshalJSON() ([]byte, error) {
 
 func (o PlacementCloud) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Uuid) {
-		toSerialize["uuid"] = o.Uuid
-	}
-	if !IsNil(o.Code) {
-		toSerialize["code"] = o.Code
-	}
-	if !IsNil(o.RegionList) {
-		toSerialize["region_list"] = o.RegionList
-	}
+	toSerialize["uuid"] = o.Uuid
+	toSerialize["code"] = o.Code
+	toSerialize["region_list"] = o.RegionList
 	if !IsNil(o.DefaultRegion) {
 		toSerialize["default_region"] = o.DefaultRegion
 	}

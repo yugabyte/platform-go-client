@@ -27,8 +27,10 @@ type ClusterPartitionSpec struct {
 	// Whether the partition is default (all masters are put only into this partition)
 	DefaultPartition bool `json:"default_partition"`
 	// The replication factor for the partition.
-	ReplicationFactor int32                `json:"replication_factor"`
-	Placement         ClusterPlacementSpec `json:"placement"`
+	ReplicationFactor int32 `json:"replication_factor"`
+	// The name of corresponding tablespace.
+	TablespaceName string               `json:"tablespace_name"`
+	Placement      ClusterPlacementSpec `json:"placement"`
 }
 
 type _ClusterPartitionSpec ClusterPartitionSpec
@@ -37,11 +39,12 @@ type _ClusterPartitionSpec ClusterPartitionSpec
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, placement ClusterPlacementSpec) *ClusterPartitionSpec {
+func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, tablespaceName string, placement ClusterPlacementSpec) *ClusterPartitionSpec {
 	this := ClusterPartitionSpec{}
 	this.Name = name
 	this.DefaultPartition = defaultPartition
 	this.ReplicationFactor = replicationFactor
+	this.TablespaceName = tablespaceName
 	this.Placement = placement
 	return &this
 }
@@ -158,6 +161,30 @@ func (o *ClusterPartitionSpec) SetReplicationFactor(v int32) {
 	o.ReplicationFactor = v
 }
 
+// GetTablespaceName returns the TablespaceName field value
+func (o *ClusterPartitionSpec) GetTablespaceName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.TablespaceName
+}
+
+// GetTablespaceNameOk returns a tuple with the TablespaceName field value
+// and a boolean to check if the value has been set.
+func (o *ClusterPartitionSpec) GetTablespaceNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TablespaceName, true
+}
+
+// SetTablespaceName sets field value
+func (o *ClusterPartitionSpec) SetTablespaceName(v string) {
+	o.TablespaceName = v
+}
+
 // GetPlacement returns the Placement field value
 func (o *ClusterPartitionSpec) GetPlacement() ClusterPlacementSpec {
 	if o == nil {
@@ -198,6 +225,7 @@ func (o ClusterPartitionSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["default_partition"] = o.DefaultPartition
 	toSerialize["replication_factor"] = o.ReplicationFactor
+	toSerialize["tablespace_name"] = o.TablespaceName
 	toSerialize["placement"] = o.Placement
 	return toSerialize, nil
 }

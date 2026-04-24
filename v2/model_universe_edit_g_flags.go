@@ -20,9 +20,9 @@ var _ MappedNullable = &UniverseEditGFlags{}
 
 // UniverseEditGFlags UniverseEditGFlags  Request payload to edit GFlags of a Universe.
 type UniverseEditGFlags struct {
-	// Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
 	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
-	// Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 	// Option for an upgrade to be rolling (one node at a time) or non-rolling (all nodes at once, with downtime)
 	UpgradeOption             *string                    `json:"upgrade_option,omitempty"`
@@ -38,10 +38,6 @@ type UniverseEditGFlags struct {
 // will change when the set of required properties is changed
 func NewUniverseEditGFlags() *UniverseEditGFlags {
 	this := UniverseEditGFlags{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var upgradeOption string = "Rolling"
 	this.UpgradeOption = &upgradeOption
 	return &this
@@ -52,10 +48,6 @@ func NewUniverseEditGFlags() *UniverseEditGFlags {
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseEditGFlagsWithDefaults() *UniverseEditGFlags {
 	this := UniverseEditGFlags{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var upgradeOption string = "Rolling"
 	this.UpgradeOption = &upgradeOption
 	return &this

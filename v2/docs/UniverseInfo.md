@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **DnsName** | Pointer to **string** | DNS name | [optional] [readonly] 
 **YbcSoftwareVersion** | Pointer to **string** | YBC Software version installed in DB nodes of this Universe | [optional] [readonly] 
 **YbaUrl** | Pointer to **string** | YBAnywhere host name that is managing this Universe | [optional] [readonly] 
+**PlatformVersion** | Pointer to **string** | YugabyteDB Anywhere platform software version for this YBA instance | [optional] [readonly] 
 **NodePrefix** | Pointer to **string** | A globally unique name generated as a combination of the customer id and the universe name. This is used as the prefix of node names in the universe. Can be configured at the time of universe creation. | [optional] [readonly] 
 **EncryptionAtRestInfo** | Pointer to [**EncryptionAtRestInfo**](EncryptionAtRestInfo.md) |  | [optional] 
 **UpdateInProgress** | Pointer to **bool** | Whether a create/edit/destroy intent on the universe is currently running. | [optional] [readonly] 
@@ -256,6 +257,31 @@ SetYbaUrl sets YbaUrl field to given value.
 `func (o *UniverseInfo) HasYbaUrl() bool`
 
 HasYbaUrl returns a boolean if a field has been set.
+
+### GetPlatformVersion
+
+`func (o *UniverseInfo) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *UniverseInfo) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *UniverseInfo) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
+
+### HasPlatformVersion
+
+`func (o *UniverseInfo) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetNodePrefix
 

@@ -21,23 +21,28 @@ var _ MappedNullable = &PlacementRegion{}
 // PlacementRegion YBA Placement Region. Part of PlacementCloud.
 type PlacementRegion struct {
 	// The region provider id.
-	Uuid *string `json:"uuid,omitempty"`
+	Uuid string `json:"uuid"`
 	// The actual provider given region code.
-	Code *string `json:"code,omitempty"`
+	Code string `json:"code"`
 	// The region name.
 	Name *string `json:"name,omitempty"`
 	// The list of AZs inside this region into which we want to place data.
-	AzList []PlacementAZ `json:"az_list,omitempty"`
+	AzList []PlacementAZ `json:"az_list"`
 	// The Load Balancer FQDN.
 	LbFqdn *string `json:"lb_fqdn,omitempty"`
 }
+
+type _PlacementRegion PlacementRegion
 
 // NewPlacementRegion instantiates a new PlacementRegion object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlacementRegion() *PlacementRegion {
+func NewPlacementRegion(uuid string, code string, azList []PlacementAZ) *PlacementRegion {
 	this := PlacementRegion{}
+	this.Uuid = uuid
+	this.Code = code
+	this.AzList = azList
 	return &this
 }
 
@@ -49,68 +54,52 @@ func NewPlacementRegionWithDefaults() *PlacementRegion {
 	return &this
 }
 
-// GetUuid returns the Uuid field value if set, zero value otherwise.
+// GetUuid returns the Uuid field value
 func (o *PlacementRegion) GetUuid() string {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Uuid
+
+	return o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// GetUuidOk returns a tuple with the Uuid field value
 // and a boolean to check if the value has been set.
 func (o *PlacementRegion) GetUuidOk() (*string, bool) {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Uuid, true
+	return &o.Uuid, true
 }
 
-// HasUuid returns a boolean if a field has been set.
-func (o *PlacementRegion) HasUuid() bool {
-	if o != nil && !IsNil(o.Uuid) {
-		return true
-	}
-
-	return false
-}
-
-// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+// SetUuid sets field value
 func (o *PlacementRegion) SetUuid(v string) {
-	o.Uuid = &v
+	o.Uuid = v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise.
+// GetCode returns the Code field value
 func (o *PlacementRegion) GetCode() string {
-	if o == nil || IsNil(o.Code) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Code
+
+	return o.Code
 }
 
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
 func (o *PlacementRegion) GetCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.Code) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Code, true
+	return &o.Code, true
 }
 
-// HasCode returns a boolean if a field has been set.
-func (o *PlacementRegion) HasCode() bool {
-	if o != nil && !IsNil(o.Code) {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given string and assigns it to the Code field.
+// SetCode sets field value
 func (o *PlacementRegion) SetCode(v string) {
-	o.Code = &v
+	o.Code = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -145,34 +134,26 @@ func (o *PlacementRegion) SetName(v string) {
 	o.Name = &v
 }
 
-// GetAzList returns the AzList field value if set, zero value otherwise.
+// GetAzList returns the AzList field value
 func (o *PlacementRegion) GetAzList() []PlacementAZ {
-	if o == nil || IsNil(o.AzList) {
+	if o == nil {
 		var ret []PlacementAZ
 		return ret
 	}
+
 	return o.AzList
 }
 
-// GetAzListOk returns a tuple with the AzList field value if set, nil otherwise
+// GetAzListOk returns a tuple with the AzList field value
 // and a boolean to check if the value has been set.
 func (o *PlacementRegion) GetAzListOk() ([]PlacementAZ, bool) {
-	if o == nil || IsNil(o.AzList) {
+	if o == nil {
 		return nil, false
 	}
 	return o.AzList, true
 }
 
-// HasAzList returns a boolean if a field has been set.
-func (o *PlacementRegion) HasAzList() bool {
-	if o != nil && !IsNil(o.AzList) {
-		return true
-	}
-
-	return false
-}
-
-// SetAzList gets a reference to the given []PlacementAZ and assigns it to the AzList field.
+// SetAzList sets field value
 func (o *PlacementRegion) SetAzList(v []PlacementAZ) {
 	o.AzList = v
 }
@@ -219,18 +200,12 @@ func (o PlacementRegion) MarshalJSON() ([]byte, error) {
 
 func (o PlacementRegion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Uuid) {
-		toSerialize["uuid"] = o.Uuid
-	}
-	if !IsNil(o.Code) {
-		toSerialize["code"] = o.Code
-	}
+	toSerialize["uuid"] = o.Uuid
+	toSerialize["code"] = o.Code
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.AzList) {
-		toSerialize["az_list"] = o.AzList
-	}
+	toSerialize["az_list"] = o.AzList
 	if !IsNil(o.LbFqdn) {
 		toSerialize["lb_fqdn"] = o.LbFqdn
 	}

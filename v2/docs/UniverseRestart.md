@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SleepAfterMasterRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000. | [optional] [default to 180000]
-**SleepAfterTserverRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000. | [optional] [default to 180000]
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used. | [optional] 
+**SleepAfterTserverRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used. | [optional] 
 **RollingRestart** | Pointer to **bool** | Perform a rolling restart of the universe. Otherwise, all nodes will be restarted at the same time. | [optional] [default to true]
 **RestartType** | Pointer to **string** | The method to reboot the node. This is not required for kubernetes universes, as the pods  will get restarted no matter what. \&quot;HARD\&quot; reboots are not supported today.  OS: Restarts the node via the operating system. SERVICE: Restart the YugabyteDB Process only (master, tserver, etc).  | [optional] [default to "SERVICE"]
 

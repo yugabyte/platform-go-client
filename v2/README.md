@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
 *TelemetryProviderAPI* | [**ListTelemetryProviderTypes**](docs/TelemetryProviderAPI.md#listtelemetryprovidertypes) | **Get** /customers/{cUUID}/telemetry-provider/types | List Available Telemetry Provider Types
 *UniverseAPI* | [**AddCluster**](docs/UniverseAPI.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseAPI* | [**AttachUniverse**](docs/UniverseAPI.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
+*UniverseAPI* | [**ConfigureExportTelemetryConfig**](docs/UniverseAPI.md#configureexporttelemetryconfig) | **Post** /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs | Configure export telemetry configs (unified API)
 *UniverseAPI* | [**ConfigureMetricsExport**](docs/UniverseAPI.md#configuremetricsexport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
 *UniverseAPI* | [**ConfigureQueryLogging**](docs/UniverseAPI.md#configurequerylogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
 *UniverseAPI* | [**CreateFileCollection**](docs/UniverseAPI.md#createfilecollection) | **Post** /customers/{cUUID}/universes/{uniUUID}/file-collections | Collect files from database nodes
@@ -121,8 +122,11 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**GetUniverseResources**](docs/UniverseAPI.md#getuniverseresources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
 *UniverseAPI* | [**OperatorImportUniverse**](docs/UniverseAPI.md#operatorimportuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import | Import universe to operator
 *UniverseAPI* | [**OperatorImportUniversePrecheck**](docs/UniverseAPI.md#operatorimportuniverseprecheck) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck | Precheck universe import to operator
+*UniverseAPI* | [**PageListUniverses**](docs/UniverseAPI.md#pagelistuniverses) | **Post** /customers/{cUUID}/universes/page | List universes
 *UniverseAPI* | [**PrecheckSoftwareUpgrade**](docs/UniverseAPI.md#prechecksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Precheck YugabyteDB version upgrade
+*UniverseAPI* | [**ResizeNodes**](docs/UniverseAPI.md#resizenodes) | **Post** /customers/{cUUID}/universes/{uniUUID}/resize-nodes | Resize nodes in YBDB Universe.
 *UniverseAPI* | [**RestartUniverse**](docs/UniverseAPI.md#restartuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
+*UniverseAPI* | [**ResumeCanarySoftwareUpgrade**](docs/UniverseAPI.md#resumecanarysoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/resume-canary | Resume canary software upgrade
 *UniverseAPI* | [**RollbackDetachUniverse**](docs/UniverseAPI.md#rollbackdetachuniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID}/detach | Rollback detach universe
 *UniverseAPI* | [**RollbackSoftwareUpgrade**](docs/UniverseAPI.md#rollbacksoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
 *UniverseAPI* | [**RunScript**](docs/UniverseAPI.md#runscript) | **Post** /customers/{cUUID}/universes/{uniUUID}/run-script | Run a script on database nodes
@@ -137,10 +141,12 @@ Class | Method | HTTP request | Description
  - [AllowedTasksOnFailure](docs/AllowedTasksOnFailure.md)
  - [AttachUniverseSpec](docs/AttachUniverseSpec.md)
  - [AuditLogConfig](docs/AuditLogConfig.md)
+ - [AuditLogsTelemetrySpec](docs/AuditLogsTelemetrySpec.md)
  - [AuthGroupToRolesMapping](docs/AuthGroupToRolesMapping.md)
  - [AvailabilityZoneGFlags](docs/AvailabilityZoneGFlags.md)
  - [AvailabilityZoneNetworking](docs/AvailabilityZoneNetworking.md)
  - [AvailabilityZoneNodeSpec](docs/AvailabilityZoneNodeSpec.md)
+ - [AvailabilityZoneResizeNodeSpec](docs/AvailabilityZoneResizeNodeSpec.md)
  - [CanaryUpgradeConfigSpec](docs/CanaryUpgradeConfigSpec.md)
  - [CleanupCollectionInfo](docs/CleanupCollectionInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
@@ -155,6 +161,8 @@ Class | Method | HTTP request | Description
  - [ClusterPlacementSpec](docs/ClusterPlacementSpec.md)
  - [ClusterProviderEditSpec](docs/ClusterProviderEditSpec.md)
  - [ClusterProviderSpec](docs/ClusterProviderSpec.md)
+ - [ClusterResizeNodeSpec](docs/ClusterResizeNodeSpec.md)
+ - [ClusterResizeStorageSpec](docs/ClusterResizeStorageSpec.md)
  - [ClusterSpec](docs/ClusterSpec.md)
  - [ClusterStorageSpec](docs/ClusterStorageSpec.md)
  - [CollectFilesRequest](docs/CollectFilesRequest.md)
@@ -171,6 +179,8 @@ Class | Method | HTTP request | Description
  - [EncryptionAtRestSpec](docs/EncryptionAtRestSpec.md)
  - [EncryptionInTransitSpec](docs/EncryptionInTransitSpec.md)
  - [ExecutionSummary](docs/ExecutionSummary.md)
+ - [ExportTelemetryConfigSpec](docs/ExportTelemetryConfigSpec.md)
+ - [ExportTelemetryUpgradeOptions](docs/ExportTelemetryUpgradeOptions.md)
  - [FileCollectionOptions](docs/FileCollectionOptions.md)
  - [FileCollectionSummary](docs/FileCollectionSummary.md)
  - [GflagMetadata](docs/GflagMetadata.md)
@@ -196,6 +206,8 @@ Class | Method | HTTP request | Description
  - [K8SNodeResourceSpec](docs/K8SNodeResourceSpec.md)
  - [KubernetesResourceDetails](docs/KubernetesResourceDetails.md)
  - [MetricsExportConfig](docs/MetricsExportConfig.md)
+ - [MetricsExportConfigBase](docs/MetricsExportConfigBase.md)
+ - [MetricsTelemetrySpec](docs/MetricsTelemetrySpec.md)
  - [NodeDetails](docs/NodeDetails.md)
  - [NodeFileCollectionResult](docs/NodeFileCollectionResult.md)
  - [NodeProxyConfig](docs/NodeProxyConfig.md)
@@ -204,11 +216,13 @@ Class | Method | HTTP request | Description
  - [PaginationResp](docs/PaginationResp.md)
  - [PaginationSpec](docs/PaginationSpec.md)
  - [PerProcessNodeSpec](docs/PerProcessNodeSpec.md)
+ - [PerProcessResizeNodeSpec](docs/PerProcessResizeNodeSpec.md)
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementCloud](docs/PlacementCloud.md)
  - [PlacementRegion](docs/PlacementRegion.md)
  - [PrometheusHostInfo](docs/PrometheusHostInfo.md)
  - [QueryLogConfig](docs/QueryLogConfig.md)
+ - [QueryLogsTelemetrySpec](docs/QueryLogsTelemetrySpec.md)
  - [ResourceDefinition](docs/ResourceDefinition.md)
  - [ResourceGroup](docs/ResourceGroup.md)
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
@@ -219,6 +233,8 @@ Class | Method | HTTP request | Description
  - [ScriptOptions](docs/ScriptOptions.md)
  - [SleepAfterRestartSchema](docs/SleepAfterRestartSchema.md)
  - [SoftwareUpgradeAZStep](docs/SoftwareUpgradeAZStep.md)
+ - [TelemetryConfig](docs/TelemetryConfig.md)
+ - [TelemetryExporterEntry](docs/TelemetryExporterEntry.md)
  - [TelemetryProviderTypeInfo](docs/TelemetryProviderTypeInfo.md)
  - [TimeUnitType](docs/TimeUnitType.md)
  - [Universe](docs/Universe.md)
@@ -231,14 +247,20 @@ Class | Method | HTTP request | Description
  - [UniverseEditSpec](docs/UniverseEditSpec.md)
  - [UniverseExporterConfig](docs/UniverseExporterConfig.md)
  - [UniverseInfo](docs/UniverseInfo.md)
+ - [UniverseListApiFilter](docs/UniverseListApiFilter.md)
  - [UniverseLogsExporterConfig](docs/UniverseLogsExporterConfig.md)
  - [UniverseMetricsExporterConfig](docs/UniverseMetricsExporterConfig.md)
  - [UniverseNetworkingSpec](docs/UniverseNetworkingSpec.md)
  - [UniverseOperatorImportReq](docs/UniverseOperatorImportReq.md)
+ - [UniversePagedQuerySpec](docs/UniversePagedQuerySpec.md)
+ - [UniversePagedResp](docs/UniversePagedResp.md)
  - [UniverseQueryLogsExport](docs/UniverseQueryLogsExport.md)
  - [UniverseQueryLogsExporterConfig](docs/UniverseQueryLogsExporterConfig.md)
+ - [UniverseResizeNodes](docs/UniverseResizeNodes.md)
+ - [UniverseResizeNodesCluster](docs/UniverseResizeNodesCluster.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseRestart](docs/UniverseRestart.md)
+ - [UniverseResumeCanaryUpgrade](docs/UniverseResumeCanaryUpgrade.md)
  - [UniverseRollbackUpgradeReq](docs/UniverseRollbackUpgradeReq.md)
  - [UniverseSoftwareFinalizeImpactedXCluster](docs/UniverseSoftwareFinalizeImpactedXCluster.md)
  - [UniverseSoftwareUpgradeFinalize](docs/UniverseSoftwareUpgradeFinalize.md)

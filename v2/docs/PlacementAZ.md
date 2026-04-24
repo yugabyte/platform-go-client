@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uuid** | Pointer to **string** | The AZ id | [optional] 
-**Name** | Pointer to **string** | The AZ name | [optional] 
-**ReplicationFactor** | Pointer to **int32** | The minimum number of copies of data we should place into this AZ. | [optional] 
+**Uuid** | **string** | The AZ id | 
+**Name** | **string** | The AZ name | 
+**ReplicationFactor** | **int32** | The minimum number of copies of data we should place into this AZ. | 
 **Subnet** | Pointer to **string** | The subnet in the AZ. | [optional] 
 **SecondarySubnet** | Pointer to **string** | The secondary subnet in the AZ. | [optional] 
-**NumNodesInAz** | Pointer to **int32** | Number of nodes in each AZ. | [optional] 
+**NumNodesInAz** | **int32** | Number of nodes in each AZ. | 
 **LeaderAffinity** | Pointer to **bool** | Affinitizes raft leaders to this AZ. | [optional] 
 **LeaderPreference** | Pointer to **int32** | Priority of zone (for leaders placement). Values have to be contiguous non-negative integers. Zero means non-prioritized. Multiple zones can have the same value. A lower value indicates higher zone priority. | [optional] 
 **LbName** | Pointer to **string** | The Load Balancer id. | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewPlacementAZ
 
-`func NewPlacementAZ() *PlacementAZ`
+`func NewPlacementAZ(uuid string, name string, replicationFactor int32, numNodesInAz int32, ) *PlacementAZ`
 
 NewPlacementAZ instantiates a new PlacementAZ object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
-### HasUuid
-
-`func (o *PlacementAZ) HasUuid() bool`
-
-HasUuid returns a boolean if a field has been set.
 
 ### GetName
 
@@ -77,11 +72,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *PlacementAZ) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetReplicationFactor
 
@@ -102,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetReplicationFactor sets ReplicationFactor field to given value.
 
-### HasReplicationFactor
-
-`func (o *PlacementAZ) HasReplicationFactor() bool`
-
-HasReplicationFactor returns a boolean if a field has been set.
 
 ### GetSubnet
 
@@ -177,11 +162,6 @@ and a boolean to check if the value has been set.
 
 SetNumNodesInAz sets NumNodesInAz field to given value.
 
-### HasNumNodesInAz
-
-`func (o *PlacementAZ) HasNumNodesInAz() bool`
-
-HasNumNodesInAz returns a boolean if a field has been set.
 
 ### GetLeaderAffinity
 

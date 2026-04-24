@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddCluster**](UniverseAPI.md#AddCluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 [**AttachUniverse**](UniverseAPI.md#AttachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
+[**ConfigureExportTelemetryConfig**](UniverseAPI.md#ConfigureExportTelemetryConfig) | **Post** /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs | Configure export telemetry configs (unified API)
 [**ConfigureMetricsExport**](UniverseAPI.md#ConfigureMetricsExport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
 [**ConfigureQueryLogging**](UniverseAPI.md#ConfigureQueryLogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
 [**CreateFileCollection**](UniverseAPI.md#CreateFileCollection) | **Post** /customers/{cUUID}/universes/{uniUUID}/file-collections | Collect files from database nodes
@@ -27,8 +28,11 @@ Method | HTTP request | Description
 [**GetUniverseResources**](UniverseAPI.md#GetUniverseResources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
 [**OperatorImportUniverse**](UniverseAPI.md#OperatorImportUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import | Import universe to operator
 [**OperatorImportUniversePrecheck**](UniverseAPI.md#OperatorImportUniversePrecheck) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck | Precheck universe import to operator
+[**PageListUniverses**](UniverseAPI.md#PageListUniverses) | **Post** /customers/{cUUID}/universes/page | List universes
 [**PrecheckSoftwareUpgrade**](UniverseAPI.md#PrecheckSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Precheck YugabyteDB version upgrade
+[**ResizeNodes**](UniverseAPI.md#ResizeNodes) | **Post** /customers/{cUUID}/universes/{uniUUID}/resize-nodes | Resize nodes in YBDB Universe.
 [**RestartUniverse**](UniverseAPI.md#RestartUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/restart | Restart a YugabyteDB Universe
+[**ResumeCanarySoftwareUpgrade**](UniverseAPI.md#ResumeCanarySoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/resume-canary | Resume canary software upgrade
 [**RollbackDetachUniverse**](UniverseAPI.md#RollbackDetachUniverse) | **Delete** /customers/{cUUID}/universes/{uniUUID}/detach | Rollback detach universe
 [**RollbackSoftwareUpgrade**](UniverseAPI.md#RollbackSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/rollback | Rollback YugabyteDB version
 [**RunScript**](UniverseAPI.md#RunScript) | **Post** /customers/{cUUID}/universes/{uniUUID}/run-script | Run a script on database nodes
@@ -180,6 +184,81 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ConfigureExportTelemetryConfig
+
+> YBATask ConfigureExportTelemetryConfig(ctx, cUUID, uniUUID).ExportTelemetryConfigSpec(exportTelemetryConfigSpec).Execute()
+
+Configure export telemetry configs (unified API)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	exportTelemetryConfigSpec := *openapiclient.NewExportTelemetryConfigSpec() // ExportTelemetryConfigSpec | Export telemetry config request (unified telemetry configs + upgrade options) (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.ConfigureExportTelemetryConfig(context.Background(), cUUID, uniUUID).ExportTelemetryConfigSpec(exportTelemetryConfigSpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.ConfigureExportTelemetryConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ConfigureExportTelemetryConfig`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.ConfigureExportTelemetryConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiConfigureExportTelemetryConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **exportTelemetryConfigSpec** | [**ExportTelemetryConfigSpec**](ExportTelemetryConfigSpec.md) | Export telemetry config request (unified telemetry configs + upgrade options) | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -359,7 +438,7 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
-	collectFilesRequest := *openapiclient.NewCollectFilesRequest(*openapiclient.NewFileCollectionOptions([]string{"FilePaths_example"})) // CollectFilesRequest | 
+	collectFilesRequest := *openapiclient.NewCollectFilesRequest(*openapiclient.NewFileCollectionOptions()) // CollectFilesRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -886,7 +965,7 @@ func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
 	collectionUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Collection UUID returned by create file collection API
-	cleanupDbNodesAfter := true // bool | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with  delete_from_db_nodes=true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  (optional) (default to false)
+	cleanupDbNodesAfter := true // bool | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with delete_from_db_nodes=true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -920,7 +999,7 @@ Name | Type | Description  | Notes
 
 
 
- **cleanupDbNodesAfter** | **bool** | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with  delete_from_db_nodes&#x3D;true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  | [default to false]
+ **cleanupDbNodesAfter** | **bool** | If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with delete_from_db_nodes&#x3D;true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.  | [default to false]
 
 ### Return type
 
@@ -1756,6 +1835,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PageListUniverses
+
+> UniversePagedResp PageListUniverses(ctx, cUUID).UniversePagedQuerySpec(universePagedQuerySpec).Execute()
+
+List universes
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	universePagedQuerySpec := *openapiclient.NewUniversePagedQuerySpec() // UniversePagedQuerySpec | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.PageListUniverses(context.Background(), cUUID).UniversePagedQuerySpec(universePagedQuerySpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.PageListUniverses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PageListUniverses`: UniversePagedResp
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.PageListUniverses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPageListUniversesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **universePagedQuerySpec** | [**UniversePagedQuerySpec**](UniversePagedQuerySpec.md) |  | 
+
+### Return type
+
+[**UniversePagedResp**](UniversePagedResp.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PrecheckSoftwareUpgrade
 
 > UniverseSoftwareUpgradePrecheckResp PrecheckSoftwareUpgrade(ctx, cUUID, uniUUID).UniverseSoftwareUpgradePrecheckReq(universeSoftwareUpgradePrecheckReq).Execute()
@@ -1831,6 +1982,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## ResizeNodes
+
+> YBATask ResizeNodes(ctx, cUUID, uniUUID).UniverseResizeNodes(universeResizeNodes).Execute()
+
+Resize nodes in YBDB Universe.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	universeResizeNodes := *openapiclient.NewUniverseResizeNodes() // UniverseResizeNodes | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.ResizeNodes(context.Background(), cUUID, uniUUID).UniverseResizeNodes(universeResizeNodes).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.ResizeNodes``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResizeNodes`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.ResizeNodes`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResizeNodesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeResizeNodes** | [**UniverseResizeNodes**](UniverseResizeNodes.md) |  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RestartUniverse
 
 > YBATask RestartUniverse(ctx, cUUID, uniUUID).UniverseRestart(universeRestart).Execute()
@@ -1887,6 +2113,81 @@ Name | Type | Description  | Notes
 
 
  **universeRestart** | [**UniverseRestart**](UniverseRestart.md) |  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResumeCanarySoftwareUpgrade
+
+> YBATask ResumeCanarySoftwareUpgrade(ctx, cUUID, uniUUID).UniverseResumeCanaryUpgrade(universeResumeCanaryUpgrade).Execute()
+
+Resume canary software upgrade
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	universeResumeCanaryUpgrade := *openapiclient.NewUniverseResumeCanaryUpgrade("TaskUuid_example") // UniverseResumeCanaryUpgrade | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.ResumeCanarySoftwareUpgrade(context.Background(), cUUID, uniUUID).UniverseResumeCanaryUpgrade(universeResumeCanaryUpgrade).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.ResumeCanarySoftwareUpgrade``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResumeCanarySoftwareUpgrade`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.ResumeCanarySoftwareUpgrade`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResumeCanarySoftwareUpgradeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeResumeCanaryUpgrade** | [**UniverseResumeCanaryUpgrade**](UniverseResumeCanaryUpgrade.md) |  | 
 
 ### Return type
 

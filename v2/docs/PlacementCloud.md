@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uuid** | Pointer to **string** | The cloud provider id. | [optional] 
-**Code** | Pointer to **string** | The cloud provider code. | [optional] 
-**RegionList** | Pointer to [**[]PlacementRegion**](PlacementRegion.md) | The list of region in this cloud we want to place data in. | [optional] 
+**Uuid** | **string** | The cloud provider id. | 
+**Code** | **string** | The cloud provider code. | 
+**RegionList** | [**[]PlacementRegion**](PlacementRegion.md) | The list of region in this cloud we want to place data in. | 
 **DefaultRegion** | Pointer to **string** | UUID of default region. For universes with more AZs than RF, the default placement for user tables will be RF AZs in the default region. This is commonly encountered in geo-partitioning use cases. Deprecated, replaced with default partition. | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** | Whether to place all masters in the default region. Defaults to true. | [optional] [default to true]
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewPlacementCloud
 
-`func NewPlacementCloud() *PlacementCloud`
+`func NewPlacementCloud(uuid string, code string, regionList []PlacementRegion, ) *PlacementCloud`
 
 NewPlacementCloud instantiates a new PlacementCloud object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
-### HasUuid
-
-`func (o *PlacementCloud) HasUuid() bool`
-
-HasUuid returns a boolean if a field has been set.
 
 ### GetCode
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetCode sets Code field to given value.
 
-### HasCode
-
-`func (o *PlacementCloud) HasCode() bool`
-
-HasCode returns a boolean if a field has been set.
 
 ### GetRegionList
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetRegionList sets RegionList field to given value.
 
-### HasRegionList
-
-`func (o *PlacementCloud) HasRegionList() bool`
-
-HasRegionList returns a boolean if a field has been set.
 
 ### GetDefaultRegion
 
