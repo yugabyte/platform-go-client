@@ -20,9 +20,9 @@ var _ MappedNullable = &UniverseQueryLogsExport{}
 
 // UniverseQueryLogsExport UniverseQueryLogsExport  Payload to configure export of query logs. Part of UniverseQueryLogsExportReq
 type UniverseQueryLogsExport struct {
-	// Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
 	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
-	// Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 	// Perform a rolling upgrade where only one node is upgraded at a time. This is the default behavior. False will perform a non-rolling upgrade where all nodes are upgraded at the same
 	RollingUpgrade   *bool             `json:"rolling_upgrade,omitempty"`
@@ -40,10 +40,6 @@ type _UniverseQueryLogsExport UniverseQueryLogsExport
 // will change when the set of required properties is changed
 func NewUniverseQueryLogsExport(installOtelCollector bool, queryLogConfig QueryLogConfig) *UniverseQueryLogsExport {
 	this := UniverseQueryLogsExport{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var rollingUpgrade bool = true
 	this.RollingUpgrade = &rollingUpgrade
 	this.InstallOtelCollector = installOtelCollector
@@ -56,10 +52,6 @@ func NewUniverseQueryLogsExport(installOtelCollector bool, queryLogConfig QueryL
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseQueryLogsExportWithDefaults() *UniverseQueryLogsExport {
 	this := UniverseQueryLogsExport{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var rollingUpgrade bool = true
 	this.RollingUpgrade = &rollingUpgrade
 	return &this

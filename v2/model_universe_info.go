@@ -36,6 +36,8 @@ type UniverseInfo struct {
 	YbcSoftwareVersion *string `json:"ybc_software_version,omitempty"`
 	// YBAnywhere host name that is managing this Universe
 	YbaUrl *string `json:"yba_url,omitempty"`
+	// YugabyteDB Anywhere platform software version for this YBA instance
+	PlatformVersion *string `json:"platform_version,omitempty"`
 	// A globally unique name generated as a combination of the customer id and the universe name. This is used as the prefix of node names in the universe. Can be configured at the time of universe creation.
 	NodePrefix           *string               `json:"node_prefix,omitempty"`
 	EncryptionAtRestInfo *EncryptionAtRestInfo `json:"encryption_at_rest_info,omitempty"`
@@ -352,6 +354,38 @@ func (o *UniverseInfo) HasYbaUrl() bool {
 // SetYbaUrl gets a reference to the given string and assigns it to the YbaUrl field.
 func (o *UniverseInfo) SetYbaUrl(v string) {
 	o.YbaUrl = &v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
+func (o *UniverseInfo) GetPlatformVersion() string {
+	if o == nil || IsNil(o.PlatformVersion) {
+		var ret string
+		return ret
+	}
+	return *o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseInfo) GetPlatformVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.PlatformVersion) {
+		return nil, false
+	}
+	return o.PlatformVersion, true
+}
+
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *UniverseInfo) HasPlatformVersion() bool {
+	if o != nil && !IsNil(o.PlatformVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
+func (o *UniverseInfo) SetPlatformVersion(v string) {
+	o.PlatformVersion = &v
 }
 
 // GetNodePrefix returns the NodePrefix field value if set, zero value otherwise.
@@ -1187,6 +1221,9 @@ func (o UniverseInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.YbaUrl) {
 		toSerialize["yba_url"] = o.YbaUrl
+	}
+	if !IsNil(o.PlatformVersion) {
+		toSerialize["platform_version"] = o.PlatformVersion
 	}
 	if !IsNil(o.NodePrefix) {
 		toSerialize["node_prefix"] = o.NodePrefix

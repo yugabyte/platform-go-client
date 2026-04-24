@@ -21,17 +21,17 @@ var _ MappedNullable = &PlacementAZ{}
 // PlacementAZ YBA Placement Availability Zone within Placement Region. Part of PlacementRegion.
 type PlacementAZ struct {
 	// The AZ id
-	Uuid *string `json:"uuid,omitempty"`
+	Uuid string `json:"uuid"`
 	// The AZ name
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The minimum number of copies of data we should place into this AZ.
-	ReplicationFactor *int32 `json:"replication_factor,omitempty"`
+	ReplicationFactor int32 `json:"replication_factor"`
 	// The subnet in the AZ.
 	Subnet *string `json:"subnet,omitempty"`
 	// The secondary subnet in the AZ.
 	SecondarySubnet *string `json:"secondary_subnet,omitempty"`
 	// Number of nodes in each AZ.
-	NumNodesInAz *int32 `json:"num_nodes_in_az,omitempty"`
+	NumNodesInAz int32 `json:"num_nodes_in_az"`
 	// Affinitizes raft leaders to this AZ.
 	LeaderAffinity *bool `json:"leader_affinity,omitempty"`
 	// Priority of zone (for leaders placement). Values have to be contiguous non-negative integers. Zero means non-prioritized. Multiple zones can have the same value. A lower value indicates higher zone priority.
@@ -40,12 +40,18 @@ type PlacementAZ struct {
 	LbName *string `json:"lb_name,omitempty"`
 }
 
+type _PlacementAZ PlacementAZ
+
 // NewPlacementAZ instantiates a new PlacementAZ object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlacementAZ() *PlacementAZ {
+func NewPlacementAZ(uuid string, name string, replicationFactor int32, numNodesInAz int32) *PlacementAZ {
 	this := PlacementAZ{}
+	this.Uuid = uuid
+	this.Name = name
+	this.ReplicationFactor = replicationFactor
+	this.NumNodesInAz = numNodesInAz
 	return &this
 }
 
@@ -57,100 +63,76 @@ func NewPlacementAZWithDefaults() *PlacementAZ {
 	return &this
 }
 
-// GetUuid returns the Uuid field value if set, zero value otherwise.
+// GetUuid returns the Uuid field value
 func (o *PlacementAZ) GetUuid() string {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Uuid
+
+	return o.Uuid
 }
 
-// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// GetUuidOk returns a tuple with the Uuid field value
 // and a boolean to check if the value has been set.
 func (o *PlacementAZ) GetUuidOk() (*string, bool) {
-	if o == nil || IsNil(o.Uuid) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Uuid, true
+	return &o.Uuid, true
 }
 
-// HasUuid returns a boolean if a field has been set.
-func (o *PlacementAZ) HasUuid() bool {
-	if o != nil && !IsNil(o.Uuid) {
-		return true
-	}
-
-	return false
-}
-
-// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+// SetUuid sets field value
 func (o *PlacementAZ) SetUuid(v string) {
-	o.Uuid = &v
+	o.Uuid = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *PlacementAZ) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *PlacementAZ) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *PlacementAZ) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *PlacementAZ) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetReplicationFactor returns the ReplicationFactor field value if set, zero value otherwise.
+// GetReplicationFactor returns the ReplicationFactor field value
 func (o *PlacementAZ) GetReplicationFactor() int32 {
-	if o == nil || IsNil(o.ReplicationFactor) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.ReplicationFactor
+
+	return o.ReplicationFactor
 }
 
-// GetReplicationFactorOk returns a tuple with the ReplicationFactor field value if set, nil otherwise
+// GetReplicationFactorOk returns a tuple with the ReplicationFactor field value
 // and a boolean to check if the value has been set.
 func (o *PlacementAZ) GetReplicationFactorOk() (*int32, bool) {
-	if o == nil || IsNil(o.ReplicationFactor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplicationFactor, true
+	return &o.ReplicationFactor, true
 }
 
-// HasReplicationFactor returns a boolean if a field has been set.
-func (o *PlacementAZ) HasReplicationFactor() bool {
-	if o != nil && !IsNil(o.ReplicationFactor) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplicationFactor gets a reference to the given int32 and assigns it to the ReplicationFactor field.
+// SetReplicationFactor sets field value
 func (o *PlacementAZ) SetReplicationFactor(v int32) {
-	o.ReplicationFactor = &v
+	o.ReplicationFactor = v
 }
 
 // GetSubnet returns the Subnet field value if set, zero value otherwise.
@@ -217,36 +199,28 @@ func (o *PlacementAZ) SetSecondarySubnet(v string) {
 	o.SecondarySubnet = &v
 }
 
-// GetNumNodesInAz returns the NumNodesInAz field value if set, zero value otherwise.
+// GetNumNodesInAz returns the NumNodesInAz field value
 func (o *PlacementAZ) GetNumNodesInAz() int32 {
-	if o == nil || IsNil(o.NumNodesInAz) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.NumNodesInAz
+
+	return o.NumNodesInAz
 }
 
-// GetNumNodesInAzOk returns a tuple with the NumNodesInAz field value if set, nil otherwise
+// GetNumNodesInAzOk returns a tuple with the NumNodesInAz field value
 // and a boolean to check if the value has been set.
 func (o *PlacementAZ) GetNumNodesInAzOk() (*int32, bool) {
-	if o == nil || IsNil(o.NumNodesInAz) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NumNodesInAz, true
+	return &o.NumNodesInAz, true
 }
 
-// HasNumNodesInAz returns a boolean if a field has been set.
-func (o *PlacementAZ) HasNumNodesInAz() bool {
-	if o != nil && !IsNil(o.NumNodesInAz) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumNodesInAz gets a reference to the given int32 and assigns it to the NumNodesInAz field.
+// SetNumNodesInAz sets field value
 func (o *PlacementAZ) SetNumNodesInAz(v int32) {
-	o.NumNodesInAz = &v
+	o.NumNodesInAz = v
 }
 
 // GetLeaderAffinity returns the LeaderAffinity field value if set, zero value otherwise.
@@ -355,24 +329,16 @@ func (o PlacementAZ) MarshalJSON() ([]byte, error) {
 
 func (o PlacementAZ) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Uuid) {
-		toSerialize["uuid"] = o.Uuid
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.ReplicationFactor) {
-		toSerialize["replication_factor"] = o.ReplicationFactor
-	}
+	toSerialize["uuid"] = o.Uuid
+	toSerialize["name"] = o.Name
+	toSerialize["replication_factor"] = o.ReplicationFactor
 	if !IsNil(o.Subnet) {
 		toSerialize["subnet"] = o.Subnet
 	}
 	if !IsNil(o.SecondarySubnet) {
 		toSerialize["secondary_subnet"] = o.SecondarySubnet
 	}
-	if !IsNil(o.NumNodesInAz) {
-		toSerialize["num_nodes_in_az"] = o.NumNodesInAz
-	}
+	toSerialize["num_nodes_in_az"] = o.NumNodesInAz
 	if !IsNil(o.LeaderAffinity) {
 		toSerialize["leader_affinity"] = o.LeaderAffinity
 	}

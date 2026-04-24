@@ -20,9 +20,9 @@ var _ MappedNullable = &UniverseThirdPartySoftwareUpgradeStart{}
 
 // UniverseThirdPartySoftwareUpgradeStart UniverseThirdPartyUpgradeStart  Payload to start a third party software upgrade on a Universe. Part of  UniverseThirdPartyUpgradeReq
 type UniverseThirdPartySoftwareUpgradeStart struct {
-	// Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
 	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
-	// Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 	// force all thirdparty softwares to be upgraded.
 	ForceAll *bool `json:"force_all,omitempty"`
@@ -34,10 +34,6 @@ type UniverseThirdPartySoftwareUpgradeStart struct {
 // will change when the set of required properties is changed
 func NewUniverseThirdPartySoftwareUpgradeStart() *UniverseThirdPartySoftwareUpgradeStart {
 	this := UniverseThirdPartySoftwareUpgradeStart{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var forceAll bool = false
 	this.ForceAll = &forceAll
 	return &this
@@ -48,10 +44,6 @@ func NewUniverseThirdPartySoftwareUpgradeStart() *UniverseThirdPartySoftwareUpgr
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseThirdPartySoftwareUpgradeStartWithDefaults() *UniverseThirdPartySoftwareUpgradeStart {
 	this := UniverseThirdPartySoftwareUpgradeStart{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	var forceAll bool = false
 	this.ForceAll = &forceAll
 	return &this

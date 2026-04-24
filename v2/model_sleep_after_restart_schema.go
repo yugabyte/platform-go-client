@@ -20,9 +20,9 @@ var _ MappedNullable = &SleepAfterRestartSchema{}
 
 // SleepAfterRestartSchema Time to wait after restarting a tserver or master process
 type SleepAfterRestartSchema struct {
-	// Applicable for rolling restarts. Time to wait between master restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
 	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
-	// Applicable for rolling restarts. Time to wait between tserver restarts. Defaults to 180000.
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 }
 
@@ -32,10 +32,6 @@ type SleepAfterRestartSchema struct {
 // will change when the set of required properties is changed
 func NewSleepAfterRestartSchema() *SleepAfterRestartSchema {
 	this := SleepAfterRestartSchema{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	return &this
 }
 
@@ -44,10 +40,6 @@ func NewSleepAfterRestartSchema() *SleepAfterRestartSchema {
 // but it doesn't guarantee that properties required by API are set
 func NewSleepAfterRestartSchemaWithDefaults() *SleepAfterRestartSchema {
 	this := SleepAfterRestartSchema{}
-	var sleepAfterMasterRestartMillis int32 = 180000
-	this.SleepAfterMasterRestartMillis = &sleepAfterMasterRestartMillis
-	var sleepAfterTserverRestartMillis int32 = 180000
-	this.SleepAfterTserverRestartMillis = &sleepAfterTserverRestartMillis
 	return &this
 }
 

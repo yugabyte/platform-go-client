@@ -26,7 +26,7 @@ type MetricsExportConfig struct {
 	ScrapeTimeoutSeconds *int32 `json:"scrape_timeout_seconds,omitempty"`
 	// The level of metrics collection. Allowed values are:   - ALL: Collect all available metrics.   - NORMAL: Collect standard set of metrics.   - TABLE_OFF: Disable table level metrics collection.   - MINIMAL: Collect minimal set of metrics.   - OFF: Disable metrics collection.
 	CollectionLevel *string `json:"collection_level,omitempty"`
-	// Set of target types to include in scrape configuration. If not specified, all supported target types will be included. Allowed values are:   - MASTER_EXPORT: Master server metrics   - TSERVER_EXPORT: Tserver metrics     - YSQL_EXPORT: YSQL server metrics   - CQL_EXPORT: YCQL server metrics   - NODE_EXPORT: Node exporter metrics   - NODE_AGENT_EXPORT: Node agent metrics   - OTEL_EXPORT: OpenTelemetry collector internal metrics
+	// Set of target types to include in scrape configuration. If not specified, all supported target types will be included. Allowed values are:   - MASTER_EXPORT: Master server metrics   - TSERVER_EXPORT: Tserver metrics   - YSQL_EXPORT: YSQL server metrics   - CQL_EXPORT: YCQL server metrics   - NODE_EXPORT: Node exporter metrics   - NODE_AGENT_EXPORT: Node agent metrics   - OTEL_EXPORT: OpenTelemetry collector internal metrics
 	ScrapeConfigTargets []ScrapeConfigTargetType `json:"scrape_config_targets,omitempty"`
 	// List of universe metrics exporter configurations. If empty, no metrics will be sent anywhere.
 	UniverseMetricsExporterConfig []UniverseMetricsExporterConfig `json:"universe_metrics_exporter_config"`

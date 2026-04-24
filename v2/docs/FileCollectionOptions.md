@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FilePaths** | **[]string** | List of file paths to collect from each node. Paths can be absolute or relative to the yugabyte home directory. Glob patterns are not supported.  | 
+**FilePaths** | Pointer to **[]string** | List of file paths to collect from each node. Paths can be absolute or relative to the yugabyte home directory. Glob patterns are not supported.  | [optional] 
 **DirectoryPaths** | Pointer to **[]string** | List of directory paths to collect files from. All files in these directories will be collected (non-recursive). Use max_depth for recursive collection.  | [optional] 
 **MaxDepth** | Pointer to **int32** | Maximum depth for directory traversal when collecting from directories. 1 means only immediate files, 2 includes one level of subdirectories, etc.  | [optional] [default to 1]
 **MaxFileSizeBytes** | Pointer to **int64** | Maximum size of individual files to collect in bytes. Files larger than this will be skipped and reported in the response.  | [optional] [default to 10485760]
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFileCollectionOptions
 
-`func NewFileCollectionOptions(filePaths []string, ) *FileCollectionOptions`
+`func NewFileCollectionOptions() *FileCollectionOptions`
 
 NewFileCollectionOptions instantiates a new FileCollectionOptions object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +50,11 @@ and a boolean to check if the value has been set.
 
 SetFilePaths sets FilePaths field to given value.
 
+### HasFilePaths
+
+`func (o *FileCollectionOptions) HasFilePaths() bool`
+
+HasFilePaths returns a boolean if a field has been set.
 
 ### GetDirectoryPaths
 

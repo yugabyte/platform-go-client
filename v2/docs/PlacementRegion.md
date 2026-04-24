@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uuid** | Pointer to **string** | The region provider id. | [optional] 
-**Code** | Pointer to **string** | The actual provider given region code. | [optional] 
+**Uuid** | **string** | The region provider id. | 
+**Code** | **string** | The actual provider given region code. | 
 **Name** | Pointer to **string** | The region name. | [optional] 
-**AzList** | Pointer to [**[]PlacementAZ**](PlacementAZ.md) | The list of AZs inside this region into which we want to place data. | [optional] 
+**AzList** | [**[]PlacementAZ**](PlacementAZ.md) | The list of AZs inside this region into which we want to place data. | 
 **LbFqdn** | Pointer to **string** | The Load Balancer FQDN. | [optional] 
 
 ## Methods
 
 ### NewPlacementRegion
 
-`func NewPlacementRegion() *PlacementRegion`
+`func NewPlacementRegion(uuid string, code string, azList []PlacementAZ, ) *PlacementRegion`
 
 NewPlacementRegion instantiates a new PlacementRegion object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetUuid sets Uuid field to given value.
 
-### HasUuid
-
-`func (o *PlacementRegion) HasUuid() bool`
-
-HasUuid returns a boolean if a field has been set.
 
 ### GetCode
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetCode sets Code field to given value.
 
-### HasCode
-
-`func (o *PlacementRegion) HasCode() bool`
-
-HasCode returns a boolean if a field has been set.
 
 ### GetName
 
@@ -123,11 +113,6 @@ and a boolean to check if the value has been set.
 
 SetAzList sets AzList field to given value.
 
-### HasAzList
-
-`func (o *PlacementRegion) HasAzList() bool`
-
-HasAzList returns a boolean if a field has been set.
 
 ### GetLbFqdn
 
