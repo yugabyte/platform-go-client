@@ -304,6 +304,7 @@ Class | Method | HTTP request | Description
 *PACollectorAPI* | [**EditPACollector**](docs/PACollectorAPI.md#editpacollector) | **Put** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Edit PA Collector
 *PACollectorAPI* | [**GetPACollector**](docs/PACollectorAPI.md#getpacollector) | **Get** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Get PA Collector
 *PACollectorAPI* | [**ListAllPACollectors**](docs/PACollectorAPI.md#listallpacollectors) | **Get** /api/v1/customers/{cUUID}/pa_collector | List All PA Collectors
+*PACollectorAPI* | [**PageRegisteredUniverses**](docs/PACollectorAPI.md#pageregistereduniverses) | **Post** /api/v1/customers/{cUUID}/pa_collector/{paUUID}/universes/page | List universes registered with PA Collector (paginated)
 *PACollectorAPI* | [**RegisterUniverse**](docs/PACollectorAPI.md#registeruniverse) | **Put** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID} | Register universe with PA Collector
 *PACollectorAPI* | [**UnregisterUniverse**](docs/PACollectorAPI.md#unregisteruniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector | Unregister universe from PA Collector
 *PITRManagementAPI* | [**CloneNamespace**](docs/PITRManagementAPI.md#clonenamespace) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/clone | Clone namespace via PITR on a universe
@@ -460,6 +461,7 @@ Class | Method | HTTP request | Description
 *UniverseUpgradesManagementAPI* | [**RebootUniverse**](docs/UniverseUpgradesManagementAPI.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 *UniverseUpgradesManagementAPI* | [**ResizeNode**](docs/UniverseUpgradesManagementAPI.md#resizenode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 *UniverseUpgradesManagementAPI* | [**RestartUniverse**](docs/UniverseUpgradesManagementAPI.md#restartuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
+*UniverseUpgradesManagementAPI* | [**ResumeCanarySoftwareUpgrade**](docs/UniverseUpgradesManagementAPI.md#resumecanarysoftwareupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resume_canary | Resume canary software upgrade
 *UniverseUpgradesManagementAPI* | [**RollbackUpgrade**](docs/UniverseUpgradesManagementAPI.md#rollbackupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | Rollback Upgrade
 *UniverseUpgradesManagementAPI* | [**SoftwareUpgradePreCheck**](docs/UniverseUpgradesManagementAPI.md#softwareupgradeprecheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Software Upgrade universe pre-check
 *UniverseUpgradesManagementAPI* | [**UpdateProxyConfig**](docs/UniverseUpgradesManagementAPI.md#updateproxyconfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/proxy_config | Update Proxy Config
@@ -497,6 +499,7 @@ Class | Method | HTTP request | Description
  - [AWSRegionCloudInfo](docs/AWSRegionCloudInfo.md)
  - [AZCloudInfo](docs/AZCloudInfo.md)
  - [AZOverrides](docs/AZOverrides.md)
+ - [AZUpgradeState](docs/AZUpgradeState.md)
  - [AZUpgradeStep](docs/AZUpgradeStep.md)
  - [AccessKey](docs/AccessKey.md)
  - [AccessKeyFormData](docs/AccessKeyFormData.md)
@@ -697,6 +700,7 @@ Class | Method | HTTP request | Description
  - [MetricValue](docs/MetricValue.md)
  - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [MultiTableBackupRequestParams](docs/MultiTableBackupRequestParams.md)
+ - [MultiTenancyConfig](docs/MultiTenancyConfig.md)
  - [NamespaceInfoResp](docs/NamespaceInfoResp.md)
  - [NamespaceSafetime](docs/NamespaceSafetime.md)
  - [NoAuth](docs/NoAuth.md)
@@ -714,13 +718,18 @@ Class | Method | HTTP request | Description
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeInstanceStateFormData](docs/NodeInstanceStateFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
+ - [OCICloudInfo](docs/OCICloudInfo.md)
  - [OTLPConfig](docs/OTLPConfig.md)
  - [OidcGroupToYbaRolesData](docs/OidcGroupToYbaRolesData.md)
  - [OidcGroupToYbaRolesPair](docs/OidcGroupToYbaRolesPair.md)
  - [OnPremCloudInfo](docs/OnPremCloudInfo.md)
  - [PACollector](docs/PACollector.md)
  - [PACollectorDetailsModel](docs/PACollectorDetailsModel.md)
+ - [PACollectorRegisteredUniverseInfo](docs/PACollectorRegisteredUniverseInfo.md)
  - [PACollectorUniverseRegistrationStatus](docs/PACollectorUniverseRegistrationStatus.md)
+ - [PaUniverseApiFilter](docs/PaUniverseApiFilter.md)
+ - [PaUniversePagedApiQuery](docs/PaUniversePagedApiQuery.md)
+ - [PaUniversePagedApiResponse](docs/PaUniversePagedApiResponse.md)
  - [Package](docs/Package.md)
  - [PackagePaths](docs/PackagePaths.md)
  - [PackagesRequestParams](docs/PackagesRequestParams.md)
@@ -790,6 +799,7 @@ Class | Method | HTTP request | Description
  - [RestorePreflightResponse](docs/RestorePreflightResponse.md)
  - [RestoreResp](docs/RestoreResp.md)
  - [RestoreSnapshotScheduleParams](docs/RestoreSnapshotScheduleParams.md)
+ - [ResumeCanaryUpgradeParams](docs/ResumeCanaryUpgradeParams.md)
  - [Role](docs/Role.md)
  - [RoleAttribute](docs/RoleAttribute.md)
  - [RoleBinding](docs/RoleBinding.md)

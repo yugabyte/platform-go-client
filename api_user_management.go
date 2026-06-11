@@ -313,7 +313,7 @@ func (r UserManagementAPIDeleteUserRequest) Execute() (*YBPSuccess, *http.Respon
 /*
 DeleteUser Delete a user
 
-Deletes the specified user. Note that you can't delete a customer's primary user.
+Deletes the specified user. Note that an Admin user can't delete a SuperAdmin user.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID

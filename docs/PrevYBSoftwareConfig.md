@@ -7,14 +7,18 @@ Name | Type | Description | Notes
 **AllTserversUpgradedToYsqlMajorVersion** | Pointer to **bool** |  | [optional] 
 **AutoFlagConfigVersion** | Pointer to **int32** |  | [optional] 
 **CanRollbackCatalogUpgrade** | Pointer to **bool** |  | [optional] 
+**CanaryPauseState** | Pointer to **string** | WARNING: This is a preview API that could change. Canary pause state when upgrade is paused at a canary point | [optional] 
+**CanaryUpgrade** | **bool** |  | 
+**MasterAZUpgradeStatesList** | Pointer to [**[]AZUpgradeState**](AZUpgradeState.md) | WARNING: This is a preview API that could change. Per-AZ master upgrade progress (standard and canary) | [optional] 
 **SoftwareVersion** | Pointer to **string** |  | [optional] 
 **TargetUpgradeSoftwareVersion** | Pointer to **string** |  | [optional] 
+**TserverAZUpgradeStatesList** | Pointer to [**[]AZUpgradeState**](AZUpgradeState.md) | WARNING: This is a preview API that could change. Per-AZ tserver upgrade progress (standard and canary) | [optional] 
 
 ## Methods
 
 ### NewPrevYBSoftwareConfig
 
-`func NewPrevYBSoftwareConfig() *PrevYBSoftwareConfig`
+`func NewPrevYBSoftwareConfig(canaryUpgrade bool, ) *PrevYBSoftwareConfig`
 
 NewPrevYBSoftwareConfig instantiates a new PrevYBSoftwareConfig object
 This constructor will assign default values to properties that have it defined,
@@ -104,6 +108,76 @@ SetCanRollbackCatalogUpgrade sets CanRollbackCatalogUpgrade field to given value
 
 HasCanRollbackCatalogUpgrade returns a boolean if a field has been set.
 
+### GetCanaryPauseState
+
+`func (o *PrevYBSoftwareConfig) GetCanaryPauseState() string`
+
+GetCanaryPauseState returns the CanaryPauseState field if non-nil, zero value otherwise.
+
+### GetCanaryPauseStateOk
+
+`func (o *PrevYBSoftwareConfig) GetCanaryPauseStateOk() (*string, bool)`
+
+GetCanaryPauseStateOk returns a tuple with the CanaryPauseState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanaryPauseState
+
+`func (o *PrevYBSoftwareConfig) SetCanaryPauseState(v string)`
+
+SetCanaryPauseState sets CanaryPauseState field to given value.
+
+### HasCanaryPauseState
+
+`func (o *PrevYBSoftwareConfig) HasCanaryPauseState() bool`
+
+HasCanaryPauseState returns a boolean if a field has been set.
+
+### GetCanaryUpgrade
+
+`func (o *PrevYBSoftwareConfig) GetCanaryUpgrade() bool`
+
+GetCanaryUpgrade returns the CanaryUpgrade field if non-nil, zero value otherwise.
+
+### GetCanaryUpgradeOk
+
+`func (o *PrevYBSoftwareConfig) GetCanaryUpgradeOk() (*bool, bool)`
+
+GetCanaryUpgradeOk returns a tuple with the CanaryUpgrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanaryUpgrade
+
+`func (o *PrevYBSoftwareConfig) SetCanaryUpgrade(v bool)`
+
+SetCanaryUpgrade sets CanaryUpgrade field to given value.
+
+
+### GetMasterAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) GetMasterAZUpgradeStatesList() []AZUpgradeState`
+
+GetMasterAZUpgradeStatesList returns the MasterAZUpgradeStatesList field if non-nil, zero value otherwise.
+
+### GetMasterAZUpgradeStatesListOk
+
+`func (o *PrevYBSoftwareConfig) GetMasterAZUpgradeStatesListOk() (*[]AZUpgradeState, bool)`
+
+GetMasterAZUpgradeStatesListOk returns a tuple with the MasterAZUpgradeStatesList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMasterAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) SetMasterAZUpgradeStatesList(v []AZUpgradeState)`
+
+SetMasterAZUpgradeStatesList sets MasterAZUpgradeStatesList field to given value.
+
+### HasMasterAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) HasMasterAZUpgradeStatesList() bool`
+
+HasMasterAZUpgradeStatesList returns a boolean if a field has been set.
+
 ### GetSoftwareVersion
 
 `func (o *PrevYBSoftwareConfig) GetSoftwareVersion() string`
@@ -153,6 +227,31 @@ SetTargetUpgradeSoftwareVersion sets TargetUpgradeSoftwareVersion field to given
 `func (o *PrevYBSoftwareConfig) HasTargetUpgradeSoftwareVersion() bool`
 
 HasTargetUpgradeSoftwareVersion returns a boolean if a field has been set.
+
+### GetTserverAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) GetTserverAZUpgradeStatesList() []AZUpgradeState`
+
+GetTserverAZUpgradeStatesList returns the TserverAZUpgradeStatesList field if non-nil, zero value otherwise.
+
+### GetTserverAZUpgradeStatesListOk
+
+`func (o *PrevYBSoftwareConfig) GetTserverAZUpgradeStatesListOk() (*[]AZUpgradeState, bool)`
+
+GetTserverAZUpgradeStatesListOk returns a tuple with the TserverAZUpgradeStatesList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTserverAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) SetTserverAZUpgradeStatesList(v []AZUpgradeState)`
+
+SetTserverAZUpgradeStatesList sets TserverAZUpgradeStatesList field to given value.
+
+### HasTserverAZUpgradeStatesList
+
+`func (o *PrevYBSoftwareConfig) HasTserverAZUpgradeStatesList() bool`
+
+HasTserverAZUpgradeStatesList returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -24,18 +24,18 @@ type UniverseMetricsExporterConfig struct {
 	AdditionalTags *map[string]string `json:"additional_tags,omitempty"`
 	// Exporter uuid
 	ExporterUuid string `json:"exporter_uuid"`
-	// Maximum batch size for sending metrics. Can be customised to each exporter differently.
+	// Send batch max size
 	SendBatchMaxSize *int32 `json:"send_batch_max_size,omitempty"`
-	// Batch size for sending metrics. Can be customised to each exporter differently.
+	// Send batch size
 	SendBatchSize *int32 `json:"send_batch_size,omitempty"`
-	// Batch timeout in seconds for sending metrics. Can be customised to each exporter differently.
+	// Send batch timeout in seconds
 	SendBatchTimeoutSeconds *int32 `json:"send_batch_timeout_seconds,omitempty"`
-	// Custom prefix to be added to all the metrics. Can be customised to each exporter differently.
-	MetricsPrefix *string `json:"metrics_prefix,omitempty"`
 	// Memory limit in MiB for the OpenTelemetry Collector process in the config file.
 	MemoryLimitMib *int32 `json:"memory_limit_mib,omitempty"`
 	// Check interval in seconds for the MemoryLimiterProcessor.
 	MemoryLimitCheckIntervalSeconds *int32 `json:"memory_limit_check_interval_seconds,omitempty"`
+	// Custom prefix to be added to all the metrics. Can be customised to each exporter differently.
+	MetricsPrefix *string `json:"metrics_prefix,omitempty"`
 }
 
 type _UniverseMetricsExporterConfig UniverseMetricsExporterConfig
@@ -53,12 +53,12 @@ func NewUniverseMetricsExporterConfig(exporterUuid string) *UniverseMetricsExpor
 	this.SendBatchSize = &sendBatchSize
 	var sendBatchTimeoutSeconds int32 = 10
 	this.SendBatchTimeoutSeconds = &sendBatchTimeoutSeconds
-	var metricsPrefix string = ""
-	this.MetricsPrefix = &metricsPrefix
 	var memoryLimitMib int32 = 2048
 	this.MemoryLimitMib = &memoryLimitMib
 	var memoryLimitCheckIntervalSeconds int32 = 10
 	this.MemoryLimitCheckIntervalSeconds = &memoryLimitCheckIntervalSeconds
+	var metricsPrefix string = ""
+	this.MetricsPrefix = &metricsPrefix
 	return &this
 }
 
@@ -73,12 +73,12 @@ func NewUniverseMetricsExporterConfigWithDefaults() *UniverseMetricsExporterConf
 	this.SendBatchSize = &sendBatchSize
 	var sendBatchTimeoutSeconds int32 = 10
 	this.SendBatchTimeoutSeconds = &sendBatchTimeoutSeconds
-	var metricsPrefix string = ""
-	this.MetricsPrefix = &metricsPrefix
 	var memoryLimitMib int32 = 2048
 	this.MemoryLimitMib = &memoryLimitMib
 	var memoryLimitCheckIntervalSeconds int32 = 10
 	this.MemoryLimitCheckIntervalSeconds = &memoryLimitCheckIntervalSeconds
+	var metricsPrefix string = ""
+	this.MetricsPrefix = &metricsPrefix
 	return &this
 }
 
@@ -234,38 +234,6 @@ func (o *UniverseMetricsExporterConfig) SetSendBatchTimeoutSeconds(v int32) {
 	o.SendBatchTimeoutSeconds = &v
 }
 
-// GetMetricsPrefix returns the MetricsPrefix field value if set, zero value otherwise.
-func (o *UniverseMetricsExporterConfig) GetMetricsPrefix() string {
-	if o == nil || IsNil(o.MetricsPrefix) {
-		var ret string
-		return ret
-	}
-	return *o.MetricsPrefix
-}
-
-// GetMetricsPrefixOk returns a tuple with the MetricsPrefix field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseMetricsExporterConfig) GetMetricsPrefixOk() (*string, bool) {
-	if o == nil || IsNil(o.MetricsPrefix) {
-		return nil, false
-	}
-	return o.MetricsPrefix, true
-}
-
-// HasMetricsPrefix returns a boolean if a field has been set.
-func (o *UniverseMetricsExporterConfig) HasMetricsPrefix() bool {
-	if o != nil && !IsNil(o.MetricsPrefix) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricsPrefix gets a reference to the given string and assigns it to the MetricsPrefix field.
-func (o *UniverseMetricsExporterConfig) SetMetricsPrefix(v string) {
-	o.MetricsPrefix = &v
-}
-
 // GetMemoryLimitMib returns the MemoryLimitMib field value if set, zero value otherwise.
 func (o *UniverseMetricsExporterConfig) GetMemoryLimitMib() int32 {
 	if o == nil || IsNil(o.MemoryLimitMib) {
@@ -330,6 +298,38 @@ func (o *UniverseMetricsExporterConfig) SetMemoryLimitCheckIntervalSeconds(v int
 	o.MemoryLimitCheckIntervalSeconds = &v
 }
 
+// GetMetricsPrefix returns the MetricsPrefix field value if set, zero value otherwise.
+func (o *UniverseMetricsExporterConfig) GetMetricsPrefix() string {
+	if o == nil || IsNil(o.MetricsPrefix) {
+		var ret string
+		return ret
+	}
+	return *o.MetricsPrefix
+}
+
+// GetMetricsPrefixOk returns a tuple with the MetricsPrefix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseMetricsExporterConfig) GetMetricsPrefixOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricsPrefix) {
+		return nil, false
+	}
+	return o.MetricsPrefix, true
+}
+
+// HasMetricsPrefix returns a boolean if a field has been set.
+func (o *UniverseMetricsExporterConfig) HasMetricsPrefix() bool {
+	if o != nil && !IsNil(o.MetricsPrefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricsPrefix gets a reference to the given string and assigns it to the MetricsPrefix field.
+func (o *UniverseMetricsExporterConfig) SetMetricsPrefix(v string) {
+	o.MetricsPrefix = &v
+}
+
 func (o UniverseMetricsExporterConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -353,14 +353,14 @@ func (o UniverseMetricsExporterConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SendBatchTimeoutSeconds) {
 		toSerialize["send_batch_timeout_seconds"] = o.SendBatchTimeoutSeconds
 	}
-	if !IsNil(o.MetricsPrefix) {
-		toSerialize["metrics_prefix"] = o.MetricsPrefix
-	}
 	if !IsNil(o.MemoryLimitMib) {
 		toSerialize["memory_limit_mib"] = o.MemoryLimitMib
 	}
 	if !IsNil(o.MemoryLimitCheckIntervalSeconds) {
 		toSerialize["memory_limit_check_interval_seconds"] = o.MemoryLimitCheckIntervalSeconds
+	}
+	if !IsNil(o.MetricsPrefix) {
+		toSerialize["metrics_prefix"] = o.MetricsPrefix
 	}
 	return toSerialize, nil
 }

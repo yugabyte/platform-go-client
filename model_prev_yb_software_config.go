@@ -19,19 +19,29 @@ var _ MappedNullable = &PrevYBSoftwareConfig{}
 
 // PrevYBSoftwareConfig struct for PrevYBSoftwareConfig
 type PrevYBSoftwareConfig struct {
-	AllTserversUpgradedToYsqlMajorVersion *bool   `json:"allTserversUpgradedToYsqlMajorVersion,omitempty"`
-	AutoFlagConfigVersion                 *int32  `json:"autoFlagConfigVersion,omitempty"`
-	CanRollbackCatalogUpgrade             *bool   `json:"canRollbackCatalogUpgrade,omitempty"`
-	SoftwareVersion                       *string `json:"softwareVersion,omitempty"`
-	TargetUpgradeSoftwareVersion          *string `json:"targetUpgradeSoftwareVersion,omitempty"`
+	AllTserversUpgradedToYsqlMajorVersion *bool  `json:"allTserversUpgradedToYsqlMajorVersion,omitempty"`
+	AutoFlagConfigVersion                 *int32 `json:"autoFlagConfigVersion,omitempty"`
+	CanRollbackCatalogUpgrade             *bool  `json:"canRollbackCatalogUpgrade,omitempty"`
+	// WARNING: This is a preview API that could change. Canary pause state when upgrade is paused at a canary point
+	CanaryPauseState *string `json:"canaryPauseState,omitempty"`
+	CanaryUpgrade    bool    `json:"canaryUpgrade"`
+	// WARNING: This is a preview API that could change. Per-AZ master upgrade progress (standard and canary)
+	MasterAZUpgradeStatesList    []AZUpgradeState `json:"masterAZUpgradeStatesList,omitempty"`
+	SoftwareVersion              *string          `json:"softwareVersion,omitempty"`
+	TargetUpgradeSoftwareVersion *string          `json:"targetUpgradeSoftwareVersion,omitempty"`
+	// WARNING: This is a preview API that could change. Per-AZ tserver upgrade progress (standard and canary)
+	TserverAZUpgradeStatesList []AZUpgradeState `json:"tserverAZUpgradeStatesList,omitempty"`
 }
+
+type _PrevYBSoftwareConfig PrevYBSoftwareConfig
 
 // NewPrevYBSoftwareConfig instantiates a new PrevYBSoftwareConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrevYBSoftwareConfig() *PrevYBSoftwareConfig {
+func NewPrevYBSoftwareConfig(canaryUpgrade bool) *PrevYBSoftwareConfig {
 	this := PrevYBSoftwareConfig{}
+	this.CanaryUpgrade = canaryUpgrade
 	return &this
 }
 
@@ -139,6 +149,94 @@ func (o *PrevYBSoftwareConfig) SetCanRollbackCatalogUpgrade(v bool) {
 	o.CanRollbackCatalogUpgrade = &v
 }
 
+// GetCanaryPauseState returns the CanaryPauseState field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetCanaryPauseState() string {
+	if o == nil || IsNil(o.CanaryPauseState) {
+		var ret string
+		return ret
+	}
+	return *o.CanaryPauseState
+}
+
+// GetCanaryPauseStateOk returns a tuple with the CanaryPauseState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetCanaryPauseStateOk() (*string, bool) {
+	if o == nil || IsNil(o.CanaryPauseState) {
+		return nil, false
+	}
+	return o.CanaryPauseState, true
+}
+
+// HasCanaryPauseState returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasCanaryPauseState() bool {
+	if o != nil && !IsNil(o.CanaryPauseState) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanaryPauseState gets a reference to the given string and assigns it to the CanaryPauseState field.
+func (o *PrevYBSoftwareConfig) SetCanaryPauseState(v string) {
+	o.CanaryPauseState = &v
+}
+
+// GetCanaryUpgrade returns the CanaryUpgrade field value
+func (o *PrevYBSoftwareConfig) GetCanaryUpgrade() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanaryUpgrade
+}
+
+// GetCanaryUpgradeOk returns a tuple with the CanaryUpgrade field value
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetCanaryUpgradeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanaryUpgrade, true
+}
+
+// SetCanaryUpgrade sets field value
+func (o *PrevYBSoftwareConfig) SetCanaryUpgrade(v bool) {
+	o.CanaryUpgrade = v
+}
+
+// GetMasterAZUpgradeStatesList returns the MasterAZUpgradeStatesList field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetMasterAZUpgradeStatesList() []AZUpgradeState {
+	if o == nil || IsNil(o.MasterAZUpgradeStatesList) {
+		var ret []AZUpgradeState
+		return ret
+	}
+	return o.MasterAZUpgradeStatesList
+}
+
+// GetMasterAZUpgradeStatesListOk returns a tuple with the MasterAZUpgradeStatesList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetMasterAZUpgradeStatesListOk() ([]AZUpgradeState, bool) {
+	if o == nil || IsNil(o.MasterAZUpgradeStatesList) {
+		return nil, false
+	}
+	return o.MasterAZUpgradeStatesList, true
+}
+
+// HasMasterAZUpgradeStatesList returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasMasterAZUpgradeStatesList() bool {
+	if o != nil && !IsNil(o.MasterAZUpgradeStatesList) {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterAZUpgradeStatesList gets a reference to the given []AZUpgradeState and assigns it to the MasterAZUpgradeStatesList field.
+func (o *PrevYBSoftwareConfig) SetMasterAZUpgradeStatesList(v []AZUpgradeState) {
+	o.MasterAZUpgradeStatesList = v
+}
+
 // GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise.
 func (o *PrevYBSoftwareConfig) GetSoftwareVersion() string {
 	if o == nil || IsNil(o.SoftwareVersion) {
@@ -203,6 +301,38 @@ func (o *PrevYBSoftwareConfig) SetTargetUpgradeSoftwareVersion(v string) {
 	o.TargetUpgradeSoftwareVersion = &v
 }
 
+// GetTserverAZUpgradeStatesList returns the TserverAZUpgradeStatesList field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetTserverAZUpgradeStatesList() []AZUpgradeState {
+	if o == nil || IsNil(o.TserverAZUpgradeStatesList) {
+		var ret []AZUpgradeState
+		return ret
+	}
+	return o.TserverAZUpgradeStatesList
+}
+
+// GetTserverAZUpgradeStatesListOk returns a tuple with the TserverAZUpgradeStatesList field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetTserverAZUpgradeStatesListOk() ([]AZUpgradeState, bool) {
+	if o == nil || IsNil(o.TserverAZUpgradeStatesList) {
+		return nil, false
+	}
+	return o.TserverAZUpgradeStatesList, true
+}
+
+// HasTserverAZUpgradeStatesList returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasTserverAZUpgradeStatesList() bool {
+	if o != nil && !IsNil(o.TserverAZUpgradeStatesList) {
+		return true
+	}
+
+	return false
+}
+
+// SetTserverAZUpgradeStatesList gets a reference to the given []AZUpgradeState and assigns it to the TserverAZUpgradeStatesList field.
+func (o *PrevYBSoftwareConfig) SetTserverAZUpgradeStatesList(v []AZUpgradeState) {
+	o.TserverAZUpgradeStatesList = v
+}
+
 func (o PrevYBSoftwareConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -222,11 +352,21 @@ func (o PrevYBSoftwareConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CanRollbackCatalogUpgrade) {
 		toSerialize["canRollbackCatalogUpgrade"] = o.CanRollbackCatalogUpgrade
 	}
+	if !IsNil(o.CanaryPauseState) {
+		toSerialize["canaryPauseState"] = o.CanaryPauseState
+	}
+	toSerialize["canaryUpgrade"] = o.CanaryUpgrade
+	if !IsNil(o.MasterAZUpgradeStatesList) {
+		toSerialize["masterAZUpgradeStatesList"] = o.MasterAZUpgradeStatesList
+	}
 	if !IsNil(o.SoftwareVersion) {
 		toSerialize["softwareVersion"] = o.SoftwareVersion
 	}
 	if !IsNil(o.TargetUpgradeSoftwareVersion) {
 		toSerialize["targetUpgradeSoftwareVersion"] = o.TargetUpgradeSoftwareVersion
+	}
+	if !IsNil(o.TserverAZUpgradeStatesList) {
+		toSerialize["tserverAZUpgradeStatesList"] = o.TserverAZUpgradeStatesList
 	}
 	return toSerialize, nil
 }

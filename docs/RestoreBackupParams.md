@@ -28,7 +28,6 @@ Name | Type | Description | Notes
 **NodeIp** | Pointer to **string** | Node IP | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrefixUUID** | Pointer to **string** | Prefix UUID | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RestoreTimeStamp** | Pointer to **string** | Restore TimeStamp | [optional] 
@@ -653,31 +652,6 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
-
-### GetPlatformVersion
-
-`func (o *RestoreBackupParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *RestoreBackupParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *RestoreBackupParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *RestoreBackupParams) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrefixUUID
 

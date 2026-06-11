@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ScriptFile** | Pointer to **string** | Path to a script file on the YugabyteDB Anywhere node to execute on database nodes. Either script_content or script_file must be provided, but not both.  | [optional] 
 **Params** | Pointer to **[]string** | Parameters to pass to the script as command-line arguments. | [optional] 
 **TimeoutSecs** | Pointer to **int64** | Timeout in seconds for the script execution on each node. If elevated privileges are needed, include sudo commands directly in your script.  | [optional] [default to 60]
-**LinuxUser** | Pointer to **string** | Run the script as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user.  | [optional] [default to "yugabyte"]
+**LinuxUser** | Pointer to **string** | Run the script as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user. If your script invokes sudo, the chosen linux_user must have NOPASSWD sudo configured for those commands; otherwise the script will block on the password prompt and surface as a timeout rather than an authorization error.  | [optional] [default to "yugabyte"]
 **MaxScriptFileSizeBytes** | Pointer to **int64** | Maximum size in bytes for script file content to be captured in audit logs. Script files larger than this limit will be executed, but their content will not be recorded in the audit log. This only applies when using script_file.  | [optional] [default to 1048576]
 
 ## Methods

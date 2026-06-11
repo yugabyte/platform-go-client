@@ -30,9 +30,11 @@ type UserWithFeatures struct {
 	Email            string   `json:"email"`
 	GroupMemberships []string `json:"groupMemberships"`
 	// LDAP Specified Role
-	LdapSpecifiedRole *bool   `json:"ldapSpecifiedRole,omitempty"`
-	OidcJwtAuthToken  *string `json:"oidcJwtAuthToken,omitempty"`
-	Primary           bool    `json:"primary"`
+	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
+	// YbaApi Internal. Used to turn off new UI feature for particular user
+	NewUniverseUiEnabled *bool   `json:"newUniverseUiEnabled,omitempty"`
+	OidcJwtAuthToken     *string `json:"oidcJwtAuthToken,omitempty"`
+	Primary              bool    `json:"primary"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
 	Role *string `json:"role,omitempty"`
 	// User timezone
@@ -239,6 +241,38 @@ func (o *UserWithFeatures) HasLdapSpecifiedRole() bool {
 // SetLdapSpecifiedRole gets a reference to the given bool and assigns it to the LdapSpecifiedRole field.
 func (o *UserWithFeatures) SetLdapSpecifiedRole(v bool) {
 	o.LdapSpecifiedRole = &v
+}
+
+// GetNewUniverseUiEnabled returns the NewUniverseUiEnabled field value if set, zero value otherwise.
+func (o *UserWithFeatures) GetNewUniverseUiEnabled() bool {
+	if o == nil || IsNil(o.NewUniverseUiEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.NewUniverseUiEnabled
+}
+
+// GetNewUniverseUiEnabledOk returns a tuple with the NewUniverseUiEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserWithFeatures) GetNewUniverseUiEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.NewUniverseUiEnabled) {
+		return nil, false
+	}
+	return o.NewUniverseUiEnabled, true
+}
+
+// HasNewUniverseUiEnabled returns a boolean if a field has been set.
+func (o *UserWithFeatures) HasNewUniverseUiEnabled() bool {
+	if o != nil && !IsNil(o.NewUniverseUiEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNewUniverseUiEnabled gets a reference to the given bool and assigns it to the NewUniverseUiEnabled field.
+func (o *UserWithFeatures) SetNewUniverseUiEnabled(v bool) {
+	o.NewUniverseUiEnabled = &v
 }
 
 // GetOidcJwtAuthToken returns the OidcJwtAuthToken field value if set, zero value otherwise.
@@ -448,6 +482,9 @@ func (o UserWithFeatures) ToMap() (map[string]interface{}, error) {
 	toSerialize["groupMemberships"] = o.GroupMemberships
 	if !IsNil(o.LdapSpecifiedRole) {
 		toSerialize["ldapSpecifiedRole"] = o.LdapSpecifiedRole
+	}
+	if !IsNil(o.NewUniverseUiEnabled) {
+		toSerialize["newUniverseUiEnabled"] = o.NewUniverseUiEnabled
 	}
 	if !IsNil(o.OidcJwtAuthToken) {
 		toSerialize["oidcJwtAuthToken"] = o.OidcJwtAuthToken

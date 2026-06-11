@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Gcp** | Pointer to [**GCPCloudInfo**](GCPCloudInfo.md) |  | [optional] 
 **Kubernetes** | Pointer to [**KubernetesInfo**](KubernetesInfo.md) |  | [optional] 
 **Local** | Pointer to [**LocalCloudInfo**](LocalCloudInfo.md) |  | [optional] 
+**Oci** | Pointer to [**OCICloudInfo**](OCICloudInfo.md) |  | [optional] 
 **Onprem** | Pointer to [**OnPremCloudInfo**](OnPremCloudInfo.md) |  | [optional] 
 
 ## Methods
@@ -154,6 +155,31 @@ SetLocal sets Local field to given value.
 `func (o *CloudInfo) HasLocal() bool`
 
 HasLocal returns a boolean if a field has been set.
+
+### GetOci
+
+`func (o *CloudInfo) GetOci() OCICloudInfo`
+
+GetOci returns the Oci field if non-nil, zero value otherwise.
+
+### GetOciOk
+
+`func (o *CloudInfo) GetOciOk() (*OCICloudInfo, bool)`
+
+GetOciOk returns a tuple with the Oci field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOci
+
+`func (o *CloudInfo) SetOci(v OCICloudInfo)`
+
+SetOci sets Oci field to given value.
+
+### HasOci
+
+`func (o *CloudInfo) HasOci() bool`
+
+HasOci returns a boolean if a field has been set.
 
 ### GetOnprem
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AdditionalTags** | Pointer to **map[string]string** | Additional tags | [optional] 
 **ExporterUuid** | **string** | Exporter uuid | 
 **SendBatchMaxSize** | Pointer to **int32** | Send batch max size | [optional] [default to 1000]
-**SendBatchSize** | Pointer to **int32** | Send batch max size | [optional] [default to 100]
+**SendBatchSize** | Pointer to **int32** | Send batch size | [optional] [default to 100]
 **SendBatchTimeoutSeconds** | Pointer to **int32** | Send batch timeout in seconds | [optional] [default to 10]
 **MemoryLimitMib** | Pointer to **int32** | Memory limit in MiB for the OpenTelemetry Collector process in the config file. | [optional] [default to 2048]
 **MemoryLimitCheckIntervalSeconds** | Pointer to **int32** | Check interval in seconds for the MemoryLimiterProcessor. | [optional] [default to 10]

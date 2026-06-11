@@ -83,11 +83,15 @@ Class | Method | HTTP request | Description
 *AuthenticationAPI* | [**ListMappings**](docs/AuthenticationAPI.md#listmappings) | **Get** /customers/{cUUID}/auth/group-mappings | List Group Mappings
 *AuthenticationAPI* | [**UpdateGroupMappings**](docs/AuthenticationAPI.md#updategroupmappings) | **Put** /customers/{cUUID}/auth/group-mappings | Create Group Mappings
 *BackupAndRestoreAPI* | [**ListYbcGflagsMetadata**](docs/BackupAndRestoreAPI.md#listybcgflagsmetadata) | **Get** /ybc/gflags-metadata | List YBC Gflags metadata
+*BackupAndRestoreAPI* | [**PageListBackups**](docs/BackupAndRestoreAPI.md#pagelistbackups) | **Post** /customers/{cUUID}/backups/page | List universe backups.
 *ContinuousBackupAPI* | [**CreateContinuousBackup**](docs/ContinuousBackupAPI.md#createcontinuousbackup) | **Post** /customers/{cUUID}/auto-yba-backups | Create Continous Backup
 *ContinuousBackupAPI* | [**DeleteContinuousBackup**](docs/ContinuousBackupAPI.md#deletecontinuousbackup) | **Delete** /customers/{cUUID}/auto-yba-backups/{bUUID} | Delete Continuous Backup config
 *ContinuousBackupAPI* | [**EditContinuousBackup**](docs/ContinuousBackupAPI.md#editcontinuousbackup) | **Put** /customers/{cUUID}/auto-yba-backups/{bUUID} | Edit Continuous Backup config
 *ContinuousBackupAPI* | [**GetContinuousBackup**](docs/ContinuousBackupAPI.md#getcontinuousbackup) | **Get** /customers/{cUUID}/auto-yba-backups | Get Continuous Backup
 *ContinuousBackupAPI* | [**RestoreContinuousBackup**](docs/ContinuousBackupAPI.md#restorecontinuousbackup) | **Post** /customers/{cUUID}/auto-yba-backups/restore | Restore Continuous Backup
+*CustomerConfigurationAPI* | [**PageListCustomerConfigs**](docs/CustomerConfigurationAPI.md#pagelistcustomerconfigs) | **Post** /customers/{cUUID}/customer-configs/page | List customer configurations (paged)
+*EncryptionAtRestAPI* | [**PageListKmsConfigs**](docs/EncryptionAtRestAPI.md#pagelistkmsconfigs) | **Post** /customers/{cUUID}/kms-configs/page | List KMS configurations (paged)
+*ImageBundleAPI* | [**PageListImageBundles**](docs/ImageBundleAPI.md#pagelistimagebundles) | **Post** /customers/{cUUID}/providers/{providerUUID}/image-bundles/page | List image bundles (paged)
 *IsolatedBackupAPI* | [**CreateYbaBackup**](docs/IsolatedBackupAPI.md#createybabackup) | **Post** /customers/{cUUID}/yba-backups | Create YBA Backup
 *IsolatedBackupAPI* | [**RestoreYbaBackup**](docs/IsolatedBackupAPI.md#restoreybabackup) | **Post** /customers/{cUUID}/yba-backups/restore | Restore YBA Backup
 *JobSchedulerAPI* | [**DeleteJobSchedule**](docs/JobSchedulerAPI.md#deletejobschedule) | **Delete** /customers/{cUUID}/job-schedules/{jUUID} | Delete Job Schedule
@@ -97,6 +101,7 @@ Class | Method | HTTP request | Description
 *JobSchedulerAPI* | [**SnoozeJobSchedule**](docs/JobSchedulerAPI.md#snoozejobschedule) | **Post** /customers/{cUUID}/job-schedules/{jUUID}/snooze | Snooze Job Schedule
 *JobSchedulerAPI* | [**UpdateJobSchedule**](docs/JobSchedulerAPI.md#updatejobschedule) | **Put** /customers/{cUUID}/job-schedules/{jUUID} | Update Job Schedule
 *MetricsAPI* | [**GetPrometheusHostInfo**](docs/MetricsAPI.md#getprometheushostinfo) | **Get** /host-info | Get Prometheus host info
+*PITRAPI* | [**PageListPitrConfigs**](docs/PITRAPI.md#pagelistpitrconfigs) | **Post** /customers/{cUUID}/universes/{uniUUID}/pitr-configs/page | List PITR configurations (paged)
 *TelemetryProviderAPI* | [**ListTelemetryProviderTypes**](docs/TelemetryProviderAPI.md#listtelemetryprovidertypes) | **Get** /customers/{cUUID}/telemetry-provider/types | List Available Telemetry Provider Types
 *UniverseAPI* | [**AddCluster**](docs/UniverseAPI.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseAPI* | [**AttachUniverse**](docs/UniverseAPI.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
@@ -117,6 +122,7 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**EncryptionInTransitCertRotate**](docs/UniverseAPI.md#encryptionintransitcertrotate) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit/rotate | Rotate TLS Certs
 *UniverseAPI* | [**EncryptionInTransitToggle**](docs/UniverseAPI.md#encryptionintransittoggle) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit | Enable or disable encryption in transit
 *UniverseAPI* | [**FinalizeSoftwareUpgrade**](docs/UniverseAPI.md#finalizesoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
+*UniverseAPI* | [**GetExportTelemetryConfig**](docs/UniverseAPI.md#getexporttelemetryconfig) | **Get** /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs | Get configured export telemetry configs for a universe
 *UniverseAPI* | [**GetFinalizeSoftwareUpgradeInfo**](docs/UniverseAPI.md#getfinalizesoftwareupgradeinfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 *UniverseAPI* | [**GetUniverse**](docs/UniverseAPI.md#getuniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
 *UniverseAPI* | [**GetUniverseResources**](docs/UniverseAPI.md#getuniverseresources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
@@ -147,6 +153,17 @@ Class | Method | HTTP request | Description
  - [AvailabilityZoneNetworking](docs/AvailabilityZoneNetworking.md)
  - [AvailabilityZoneNodeSpec](docs/AvailabilityZoneNodeSpec.md)
  - [AvailabilityZoneResizeNodeSpec](docs/AvailabilityZoneResizeNodeSpec.md)
+ - [Backup](docs/Backup.md)
+ - [BackupApiFilter](docs/BackupApiFilter.md)
+ - [BackupInfo](docs/BackupInfo.md)
+ - [BackupKeyspaceTables](docs/BackupKeyspaceTables.md)
+ - [BackupPagedQuerySpec](docs/BackupPagedQuerySpec.md)
+ - [BackupPagedResp](docs/BackupPagedResp.md)
+ - [BackupPointInTimeRestoreWindow](docs/BackupPointInTimeRestoreWindow.md)
+ - [BackupRegionLocation](docs/BackupRegionLocation.md)
+ - [BackupSpec](docs/BackupSpec.md)
+ - [BackupState](docs/BackupState.md)
+ - [BatchedExporterConfig](docs/BatchedExporterConfig.md)
  - [CanaryUpgradeConfigSpec](docs/CanaryUpgradeConfigSpec.md)
  - [CleanupCollectionInfo](docs/CleanupCollectionInfo.md)
  - [CloudSpecificInfo](docs/CloudSpecificInfo.md)
@@ -174,6 +191,11 @@ Class | Method | HTTP request | Description
  - [ContinuousBackupInfo](docs/ContinuousBackupInfo.md)
  - [ContinuousBackupSpec](docs/ContinuousBackupSpec.md)
  - [ContinuousRestoreSpec](docs/ContinuousRestoreSpec.md)
+ - [CustomerConfig](docs/CustomerConfig.md)
+ - [CustomerConfigInfo](docs/CustomerConfigInfo.md)
+ - [CustomerConfigPagedQuerySpec](docs/CustomerConfigPagedQuerySpec.md)
+ - [CustomerConfigPagedResp](docs/CustomerConfigPagedResp.md)
+ - [CustomerConfigSpec](docs/CustomerConfigSpec.md)
  - [DetachUniverseSpec](docs/DetachUniverseSpec.md)
  - [EncryptionAtRestInfo](docs/EncryptionAtRestInfo.md)
  - [EncryptionAtRestSpec](docs/EncryptionAtRestSpec.md)
@@ -184,6 +206,15 @@ Class | Method | HTTP request | Description
  - [FileCollectionOptions](docs/FileCollectionOptions.md)
  - [FileCollectionSummary](docs/FileCollectionSummary.md)
  - [GflagMetadata](docs/GflagMetadata.md)
+ - [ImageBundle](docs/ImageBundle.md)
+ - [ImageBundleApiFilter](docs/ImageBundleApiFilter.md)
+ - [ImageBundleDetails](docs/ImageBundleDetails.md)
+ - [ImageBundleInfo](docs/ImageBundleInfo.md)
+ - [ImageBundleMetadata](docs/ImageBundleMetadata.md)
+ - [ImageBundlePagedQuerySpec](docs/ImageBundlePagedQuerySpec.md)
+ - [ImageBundlePagedResp](docs/ImageBundlePagedResp.md)
+ - [ImageBundleRegionInfo](docs/ImageBundleRegionInfo.md)
+ - [ImageBundleSpec](docs/ImageBundleSpec.md)
  - [IsolatedBackupCreateSpec](docs/IsolatedBackupCreateSpec.md)
  - [IsolatedBackupRestoreSpec](docs/IsolatedBackupRestoreSpec.md)
  - [JobConfigSpec](docs/JobConfigSpec.md)
@@ -204,7 +235,13 @@ Class | Method | HTTP request | Description
  - [JobScheduleType](docs/JobScheduleType.md)
  - [JobScheduleUpdateSpec](docs/JobScheduleUpdateSpec.md)
  - [K8SNodeResourceSpec](docs/K8SNodeResourceSpec.md)
+ - [KmsConfigPagedQuerySpec](docs/KmsConfigPagedQuerySpec.md)
+ - [KmsConfigPagedResp](docs/KmsConfigPagedResp.md)
+ - [KmsConfiguration](docs/KmsConfiguration.md)
+ - [KmsConfigurationInfo](docs/KmsConfigurationInfo.md)
+ - [KmsConfigurationSpec](docs/KmsConfigurationSpec.md)
  - [KubernetesResourceDetails](docs/KubernetesResourceDetails.md)
+ - [MemoryLimitedExporterConfig](docs/MemoryLimitedExporterConfig.md)
  - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [MetricsExportConfigBase](docs/MetricsExportConfigBase.md)
  - [MetricsTelemetrySpec](docs/MetricsTelemetrySpec.md)
@@ -217,6 +254,12 @@ Class | Method | HTTP request | Description
  - [PaginationSpec](docs/PaginationSpec.md)
  - [PerProcessNodeSpec](docs/PerProcessNodeSpec.md)
  - [PerProcessResizeNodeSpec](docs/PerProcessResizeNodeSpec.md)
+ - [PitrConfig](docs/PitrConfig.md)
+ - [PitrConfigApiFilter](docs/PitrConfigApiFilter.md)
+ - [PitrConfigInfo](docs/PitrConfigInfo.md)
+ - [PitrConfigPagedQuerySpec](docs/PitrConfigPagedQuerySpec.md)
+ - [PitrConfigPagedResp](docs/PitrConfigPagedResp.md)
+ - [PitrConfigSpec](docs/PitrConfigSpec.md)
  - [PlacementAZ](docs/PlacementAZ.md)
  - [PlacementCloud](docs/PlacementCloud.md)
  - [PlacementRegion](docs/PlacementRegion.md)
@@ -234,13 +277,13 @@ Class | Method | HTTP request | Description
  - [SleepAfterRestartSchema](docs/SleepAfterRestartSchema.md)
  - [SoftwareUpgradeAZStep](docs/SoftwareUpgradeAZStep.md)
  - [TelemetryConfig](docs/TelemetryConfig.md)
- - [TelemetryExporterEntry](docs/TelemetryExporterEntry.md)
  - [TelemetryProviderTypeInfo](docs/TelemetryProviderTypeInfo.md)
  - [TimeUnitType](docs/TimeUnitType.md)
  - [Universe](docs/Universe.md)
  - [UniverseCertRotateSpec](docs/UniverseCertRotateSpec.md)
  - [UniverseCreateSpec](docs/UniverseCreateSpec.md)
  - [UniverseDeleteSpec](docs/UniverseDeleteSpec.md)
+ - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
  - [UniverseEditEncryptionInTransit](docs/UniverseEditEncryptionInTransit.md)
  - [UniverseEditGFlags](docs/UniverseEditGFlags.md)
  - [UniverseEditKubernetesOverrides](docs/UniverseEditKubernetesOverrides.md)

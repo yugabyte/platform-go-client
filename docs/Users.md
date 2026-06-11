@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Email** | **string** | User email address | 
 **GroupMemberships** | **[]string** |  | 
 **LdapSpecifiedRole** | Pointer to **bool** | LDAP Specified Role | [optional] 
+**NewUniverseUiEnabled** | Pointer to **bool** | YbaApi Internal. Used to turn off new UI feature for particular user | [optional] 
 **OidcJwtAuthToken** | Pointer to **string** |  | [optional] [readonly] 
 **Primary** | **bool** |  | 
 **Role** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.19.3.0.&lt;/b&gt; Use  getRoleBindings instead. | [optional] 
@@ -175,6 +176,31 @@ SetLdapSpecifiedRole sets LdapSpecifiedRole field to given value.
 `func (o *Users) HasLdapSpecifiedRole() bool`
 
 HasLdapSpecifiedRole returns a boolean if a field has been set.
+
+### GetNewUniverseUiEnabled
+
+`func (o *Users) GetNewUniverseUiEnabled() bool`
+
+GetNewUniverseUiEnabled returns the NewUniverseUiEnabled field if non-nil, zero value otherwise.
+
+### GetNewUniverseUiEnabledOk
+
+`func (o *Users) GetNewUniverseUiEnabledOk() (*bool, bool)`
+
+GetNewUniverseUiEnabledOk returns a tuple with the NewUniverseUiEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewUniverseUiEnabled
+
+`func (o *Users) SetNewUniverseUiEnabled(v bool)`
+
+SetNewUniverseUiEnabled sets NewUniverseUiEnabled field to given value.
+
+### HasNewUniverseUiEnabled
+
+`func (o *Users) HasNewUniverseUiEnabled() bool`
+
+HasNewUniverseUiEnabled returns a boolean if a field has been set.
 
 ### GetOidcJwtAuthToken
 

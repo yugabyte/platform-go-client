@@ -43,7 +43,6 @@ Name | Type | Description | Notes
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PointInTimeRestoreEnabled** | Pointer to **bool** | Point in time restore available | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionLocations** | Pointer to [**[]RegionLocations**](RegionLocations.md) | Per region locations | [optional] 
@@ -1054,31 +1053,6 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
-
-### GetPlatformVersion
-
-`func (o *BackupTableParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *BackupTableParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *BackupTableParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *BackupTableParams) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPointInTimeRestoreEnabled
 

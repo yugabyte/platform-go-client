@@ -54,6 +54,7 @@ type UserIntent struct {
 	MasterInstanceType        *string              `json:"masterInstanceType,omitempty"`
 	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
 	MetricsExportConfig       *MetricsExportConfig `json:"metricsExportConfig,omitempty"`
+	MultiTenancy              *MultiTenancyConfig  `json:"multiTenancy,omitempty"`
 	NumNodes                  *int32               `json:"numNodes,omitempty"`
 	PreferredRegion           *string              `json:"preferredRegion,omitempty"`
 	Provider                  *string              `json:"provider,omitempty"`
@@ -1061,6 +1062,38 @@ func (o *UserIntent) SetMetricsExportConfig(v MetricsExportConfig) {
 	o.MetricsExportConfig = &v
 }
 
+// GetMultiTenancy returns the MultiTenancy field value if set, zero value otherwise.
+func (o *UserIntent) GetMultiTenancy() MultiTenancyConfig {
+	if o == nil || IsNil(o.MultiTenancy) {
+		var ret MultiTenancyConfig
+		return ret
+	}
+	return *o.MultiTenancy
+}
+
+// GetMultiTenancyOk returns a tuple with the MultiTenancy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetMultiTenancyOk() (*MultiTenancyConfig, bool) {
+	if o == nil || IsNil(o.MultiTenancy) {
+		return nil, false
+	}
+	return o.MultiTenancy, true
+}
+
+// HasMultiTenancy returns a boolean if a field has been set.
+func (o *UserIntent) HasMultiTenancy() bool {
+	if o != nil && !IsNil(o.MultiTenancy) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiTenancy gets a reference to the given MultiTenancyConfig and assigns it to the MultiTenancy field.
+func (o *UserIntent) SetMultiTenancy(v MultiTenancyConfig) {
+	o.MultiTenancy = &v
+}
+
 // GetNumNodes returns the NumNodes field value if set, zero value otherwise.
 func (o *UserIntent) GetNumNodes() int32 {
 	if o == nil || IsNil(o.NumNodes) {
@@ -1960,6 +1993,9 @@ func (o UserIntent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MetricsExportConfig) {
 		toSerialize["metricsExportConfig"] = o.MetricsExportConfig
+	}
+	if !IsNil(o.MultiTenancy) {
+		toSerialize["multiTenancy"] = o.MultiTenancy
 	}
 	if !IsNil(o.NumNodes) {
 		toSerialize["numNodes"] = o.NumNodes

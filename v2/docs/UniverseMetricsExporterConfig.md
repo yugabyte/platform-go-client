@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdditionalTags** | Pointer to **map[string]string** | Additional tags | [optional] 
 **ExporterUuid** | **string** | Exporter uuid | 
-**SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for sending metrics. Can be customised to each exporter differently. | [optional] [default to 1000]
-**SendBatchSize** | Pointer to **int32** | Batch size for sending metrics. Can be customised to each exporter differently. | [optional] [default to 100]
-**SendBatchTimeoutSeconds** | Pointer to **int32** | Batch timeout in seconds for sending metrics. Can be customised to each exporter differently. | [optional] [default to 10]
-**MetricsPrefix** | Pointer to **string** | Custom prefix to be added to all the metrics. Can be customised to each exporter differently. | [optional] [default to ""]
+**SendBatchMaxSize** | Pointer to **int32** | Send batch max size | [optional] [default to 1000]
+**SendBatchSize** | Pointer to **int32** | Send batch size | [optional] [default to 100]
+**SendBatchTimeoutSeconds** | Pointer to **int32** | Send batch timeout in seconds | [optional] [default to 10]
 **MemoryLimitMib** | Pointer to **int32** | Memory limit in MiB for the OpenTelemetry Collector process in the config file. | [optional] [default to 2048]
 **MemoryLimitCheckIntervalSeconds** | Pointer to **int32** | Check interval in seconds for the MemoryLimiterProcessor. | [optional] [default to 10]
+**MetricsPrefix** | Pointer to **string** | Custom prefix to be added to all the metrics. Can be customised to each exporter differently. | [optional] [default to ""]
 
 ## Methods
 
@@ -152,31 +152,6 @@ SetSendBatchTimeoutSeconds sets SendBatchTimeoutSeconds field to given value.
 
 HasSendBatchTimeoutSeconds returns a boolean if a field has been set.
 
-### GetMetricsPrefix
-
-`func (o *UniverseMetricsExporterConfig) GetMetricsPrefix() string`
-
-GetMetricsPrefix returns the MetricsPrefix field if non-nil, zero value otherwise.
-
-### GetMetricsPrefixOk
-
-`func (o *UniverseMetricsExporterConfig) GetMetricsPrefixOk() (*string, bool)`
-
-GetMetricsPrefixOk returns a tuple with the MetricsPrefix field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMetricsPrefix
-
-`func (o *UniverseMetricsExporterConfig) SetMetricsPrefix(v string)`
-
-SetMetricsPrefix sets MetricsPrefix field to given value.
-
-### HasMetricsPrefix
-
-`func (o *UniverseMetricsExporterConfig) HasMetricsPrefix() bool`
-
-HasMetricsPrefix returns a boolean if a field has been set.
-
 ### GetMemoryLimitMib
 
 `func (o *UniverseMetricsExporterConfig) GetMemoryLimitMib() int32`
@@ -226,6 +201,31 @@ SetMemoryLimitCheckIntervalSeconds sets MemoryLimitCheckIntervalSeconds field to
 `func (o *UniverseMetricsExporterConfig) HasMemoryLimitCheckIntervalSeconds() bool`
 
 HasMemoryLimitCheckIntervalSeconds returns a boolean if a field has been set.
+
+### GetMetricsPrefix
+
+`func (o *UniverseMetricsExporterConfig) GetMetricsPrefix() string`
+
+GetMetricsPrefix returns the MetricsPrefix field if non-nil, zero value otherwise.
+
+### GetMetricsPrefixOk
+
+`func (o *UniverseMetricsExporterConfig) GetMetricsPrefixOk() (*string, bool)`
+
+GetMetricsPrefixOk returns a tuple with the MetricsPrefix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetricsPrefix
+
+`func (o *UniverseMetricsExporterConfig) SetMetricsPrefix(v string)`
+
+SetMetricsPrefix sets MetricsPrefix field to given value.
+
+### HasMetricsPrefix
+
+`func (o *UniverseMetricsExporterConfig) HasMetricsPrefix() bool`
+
+HasMetricsPrefix returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

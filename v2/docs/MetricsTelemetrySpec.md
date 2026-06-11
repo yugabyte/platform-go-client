@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ScrapeTimeoutSeconds** | Pointer to **int32** | Scrape timeout in seconds. Applied on all scrape jobs commonly. | [optional] [default to 20]
 **CollectionLevel** | Pointer to **string** | The level of metrics collection. Allowed values are:   - ALL: Collect all available metrics.   - NORMAL: Collect standard set of metrics.   - TABLE_OFF: Disable table level metrics collection.   - MINIMAL: Collect minimal set of metrics.   - OFF: Disable metrics collection.  | [optional] [default to "NORMAL"]
 **ScrapeConfigTargets** | Pointer to [**[]ScrapeConfigTargetType**](ScrapeConfigTargetType.md) | Set of target types to include in scrape configuration. If not specified, all supported target types will be included. Allowed values are:   - MASTER_EXPORT: Master server metrics   - TSERVER_EXPORT: Tserver metrics   - YSQL_EXPORT: YSQL server metrics   - CQL_EXPORT: YCQL server metrics   - NODE_EXPORT: Node exporter metrics   - NODE_AGENT_EXPORT: Node agent metrics   - OTEL_EXPORT: OpenTelemetry collector internal metrics  | [optional] [default to [MASTER_EXPORT, TSERVER_EXPORT, YSQL_EXPORT, CQL_EXPORT, NODE_EXPORT, NODE_AGENT_EXPORT, OTEL_EXPORT]]
-**Exporters** | Pointer to [**[]TelemetryExporterEntry**](TelemetryExporterEntry.md) | List of exporters. Empty &#x3D; no export. | [optional] 
+**Exporters** | Pointer to [**[]UniverseMetricsExporterConfig**](UniverseMetricsExporterConfig.md) | List of exporters. Empty &#x3D; no export. | [optional] 
 
 ## Methods
 
@@ -131,20 +131,20 @@ HasScrapeConfigTargets returns a boolean if a field has been set.
 
 ### GetExporters
 
-`func (o *MetricsTelemetrySpec) GetExporters() []TelemetryExporterEntry`
+`func (o *MetricsTelemetrySpec) GetExporters() []UniverseMetricsExporterConfig`
 
 GetExporters returns the Exporters field if non-nil, zero value otherwise.
 
 ### GetExportersOk
 
-`func (o *MetricsTelemetrySpec) GetExportersOk() (*[]TelemetryExporterEntry, bool)`
+`func (o *MetricsTelemetrySpec) GetExportersOk() (*[]UniverseMetricsExporterConfig, bool)`
 
 GetExportersOk returns a tuple with the Exporters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExporters
 
-`func (o *MetricsTelemetrySpec) SetExporters(v []TelemetryExporterEntry)`
+`func (o *MetricsTelemetrySpec) SetExporters(v []UniverseMetricsExporterConfig)`
 
 SetExporters sets Exporters field to given value.
 

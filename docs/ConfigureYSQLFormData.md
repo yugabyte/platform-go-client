@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **EnableConnectionPooling** | Pointer to **bool** | Enable Connection Pooling for the universe | [optional] 
 **EnableYSQL** | Pointer to **bool** | Enable YSQL Api for the universe | [optional] 
 **EnableYSQLAuth** | Pointer to **bool** | Enable YSQL Auth for the universe | [optional] 
+**MultiTenancy** | Pointer to [**MultiTenancyConfig**](MultiTenancyConfig.md) |  | [optional] 
+**RunOnlyPrechecks** | Pointer to **bool** | WARNING: This is a preview API that could change. If true, only run the prechecks for the configure YSQL task without performing the actual upgrade. Cannot be set together with validateParams. | [optional] 
+**ValidateParams** | Pointer to **bool** | WARNING: This is a preview API that could change. If true, only validate the request parameters without submitting any task or running prechecks. Cannot be set together with runOnlyPrechecks. | [optional] 
 **YsqlPassword** | Pointer to **string** | YSQL Auth password | [optional] 
 
 ## Methods
@@ -154,6 +157,81 @@ SetEnableYSQLAuth sets EnableYSQLAuth field to given value.
 `func (o *ConfigureYSQLFormData) HasEnableYSQLAuth() bool`
 
 HasEnableYSQLAuth returns a boolean if a field has been set.
+
+### GetMultiTenancy
+
+`func (o *ConfigureYSQLFormData) GetMultiTenancy() MultiTenancyConfig`
+
+GetMultiTenancy returns the MultiTenancy field if non-nil, zero value otherwise.
+
+### GetMultiTenancyOk
+
+`func (o *ConfigureYSQLFormData) GetMultiTenancyOk() (*MultiTenancyConfig, bool)`
+
+GetMultiTenancyOk returns a tuple with the MultiTenancy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMultiTenancy
+
+`func (o *ConfigureYSQLFormData) SetMultiTenancy(v MultiTenancyConfig)`
+
+SetMultiTenancy sets MultiTenancy field to given value.
+
+### HasMultiTenancy
+
+`func (o *ConfigureYSQLFormData) HasMultiTenancy() bool`
+
+HasMultiTenancy returns a boolean if a field has been set.
+
+### GetRunOnlyPrechecks
+
+`func (o *ConfigureYSQLFormData) GetRunOnlyPrechecks() bool`
+
+GetRunOnlyPrechecks returns the RunOnlyPrechecks field if non-nil, zero value otherwise.
+
+### GetRunOnlyPrechecksOk
+
+`func (o *ConfigureYSQLFormData) GetRunOnlyPrechecksOk() (*bool, bool)`
+
+GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRunOnlyPrechecks
+
+`func (o *ConfigureYSQLFormData) SetRunOnlyPrechecks(v bool)`
+
+SetRunOnlyPrechecks sets RunOnlyPrechecks field to given value.
+
+### HasRunOnlyPrechecks
+
+`func (o *ConfigureYSQLFormData) HasRunOnlyPrechecks() bool`
+
+HasRunOnlyPrechecks returns a boolean if a field has been set.
+
+### GetValidateParams
+
+`func (o *ConfigureYSQLFormData) GetValidateParams() bool`
+
+GetValidateParams returns the ValidateParams field if non-nil, zero value otherwise.
+
+### GetValidateParamsOk
+
+`func (o *ConfigureYSQLFormData) GetValidateParamsOk() (*bool, bool)`
+
+GetValidateParamsOk returns a tuple with the ValidateParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValidateParams
+
+`func (o *ConfigureYSQLFormData) SetValidateParams(v bool)`
+
+SetValidateParams sets ValidateParams field to given value.
+
+### HasValidateParams
+
+`func (o *ConfigureYSQLFormData) HasValidateParams() bool`
+
+HasValidateParams returns a boolean if a field has been set.
 
 ### GetYsqlPassword
 

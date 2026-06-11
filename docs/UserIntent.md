@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **MasterInstanceType** | Pointer to **string** | Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call | [optional] 
 **MasterK8SNodeResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **MetricsExportConfig** | Pointer to [**MetricsExportConfig**](MetricsExportConfig.md) |  | [optional] 
+**MultiTenancy** | Pointer to [**MultiTenancyConfig**](MultiTenancyConfig.md) |  | [optional] 
 **NumNodes** | Pointer to **int32** |  | [optional] 
 **PreferredRegion** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
@@ -828,6 +829,31 @@ SetMetricsExportConfig sets MetricsExportConfig field to given value.
 `func (o *UserIntent) HasMetricsExportConfig() bool`
 
 HasMetricsExportConfig returns a boolean if a field has been set.
+
+### GetMultiTenancy
+
+`func (o *UserIntent) GetMultiTenancy() MultiTenancyConfig`
+
+GetMultiTenancy returns the MultiTenancy field if non-nil, zero value otherwise.
+
+### GetMultiTenancyOk
+
+`func (o *UserIntent) GetMultiTenancyOk() (*MultiTenancyConfig, bool)`
+
+GetMultiTenancyOk returns a tuple with the MultiTenancy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMultiTenancy
+
+`func (o *UserIntent) SetMultiTenancy(v MultiTenancyConfig)`
+
+SetMultiTenancy sets MultiTenancy field to given value.
+
+### HasMultiTenancy
+
+`func (o *UserIntent) HasMultiTenancy() bool`
+
+HasMultiTenancy returns a boolean if a field has been set.
 
 ### GetNumNodes
 

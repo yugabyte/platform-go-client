@@ -21,9 +21,10 @@ type YbaComponent string
 
 // List of YbaComponent
 const (
-	YBA        YbaComponent = "YBA"
-	PROMETHEUS YbaComponent = "PROMETHEUS"
-	RELEASES   YbaComponent = "RELEASES"
+	YBA          YbaComponent = "YBA"
+	PROMETHEUS   YbaComponent = "PROMETHEUS"
+	RELEASES     YbaComponent = "RELEASES"
+	PA_COLLECTOR YbaComponent = "PA_COLLECTOR"
 )
 
 // All allowed values of YbaComponent enum
@@ -31,6 +32,7 @@ var AllowedYbaComponentEnumValues = []YbaComponent{
 	"YBA",
 	"PROMETHEUS",
 	"RELEASES",
+	"PA_COLLECTOR",
 }
 
 func (v *YbaComponent) UnmarshalJSON(src []byte) error {

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Initial** | Pointer to **string** | WARNING: This is a preview API that could change. Initial value of the gflag | [optional] 
 **Meaning** | Pointer to **string** | WARNING: This is a preview API that could change. Meaning of the gflag | [optional] 
 **Name** | Pointer to **string** | WARNING: This is a preview API that could change. Name of the gflag | [optional] 
+**RequiresRestart** | Pointer to **bool** | WARNING: This is a preview API that could change. True if a restart or rolling restart is needed for the gflag change to take effect; false for runtime flags. | [optional] 
 **Tags** | Pointer to **string** | WARNING: This is a preview API that could change. Tags of the gflag | [optional] 
 **Target** | Pointer to **string** | WARNING: This is a preview API that could change. Target of the gflag | [optional] 
 **Type** | Pointer to **string** | WARNING: This is a preview API that could change. Type of the gflag | [optional] 
@@ -182,6 +183,31 @@ SetName sets Name field to given value.
 `func (o *GFlagDetails) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetRequiresRestart
+
+`func (o *GFlagDetails) GetRequiresRestart() bool`
+
+GetRequiresRestart returns the RequiresRestart field if non-nil, zero value otherwise.
+
+### GetRequiresRestartOk
+
+`func (o *GFlagDetails) GetRequiresRestartOk() (*bool, bool)`
+
+GetRequiresRestartOk returns a tuple with the RequiresRestart field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresRestart
+
+`func (o *GFlagDetails) SetRequiresRestart(v bool)`
+
+SetRequiresRestart sets RequiresRestart field to given value.
+
+### HasRequiresRestart
+
+`func (o *GFlagDetails) HasRequiresRestart() bool`
+
+HasRequiresRestart returns a boolean if a field has been set.
 
 ### GetTags
 

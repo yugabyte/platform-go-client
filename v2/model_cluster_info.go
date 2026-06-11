@@ -22,6 +22,8 @@ var _ MappedNullable = &ClusterInfo{}
 type ClusterInfo struct {
 	// cluster uuid
 	Uuid *string `json:"uuid,omitempty"`
+	// Whether universe is treated as geo partitioned (i.e. tablespaces are created).
+	GeoPartitioned *bool `json:"geo_partitioned,omitempty"`
 	// TBD
 	SpotPrice *float64 `json:"spot_price,omitempty"`
 }
@@ -75,6 +77,38 @@ func (o *ClusterInfo) SetUuid(v string) {
 	o.Uuid = &v
 }
 
+// GetGeoPartitioned returns the GeoPartitioned field value if set, zero value otherwise.
+func (o *ClusterInfo) GetGeoPartitioned() bool {
+	if o == nil || IsNil(o.GeoPartitioned) {
+		var ret bool
+		return ret
+	}
+	return *o.GeoPartitioned
+}
+
+// GetGeoPartitionedOk returns a tuple with the GeoPartitioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterInfo) GetGeoPartitionedOk() (*bool, bool) {
+	if o == nil || IsNil(o.GeoPartitioned) {
+		return nil, false
+	}
+	return o.GeoPartitioned, true
+}
+
+// HasGeoPartitioned returns a boolean if a field has been set.
+func (o *ClusterInfo) HasGeoPartitioned() bool {
+	if o != nil && !IsNil(o.GeoPartitioned) {
+		return true
+	}
+
+	return false
+}
+
+// SetGeoPartitioned gets a reference to the given bool and assigns it to the GeoPartitioned field.
+func (o *ClusterInfo) SetGeoPartitioned(v bool) {
+	o.GeoPartitioned = &v
+}
+
 // GetSpotPrice returns the SpotPrice field value if set, zero value otherwise.
 func (o *ClusterInfo) GetSpotPrice() float64 {
 	if o == nil || IsNil(o.SpotPrice) {
@@ -119,6 +153,9 @@ func (o ClusterInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
+	}
+	if !IsNil(o.GeoPartitioned) {
+		toSerialize["geo_partitioned"] = o.GeoPartitioned
 	}
 	if !IsNil(o.SpotPrice) {
 		toSerialize["spot_price"] = o.SpotPrice

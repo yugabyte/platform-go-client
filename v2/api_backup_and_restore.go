@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // BackupAndRestoreAPIService BackupAndRestoreAPI service
@@ -85,6 +86,136 @@ func (a *BackupAndRestoreAPIService) ListYbcGflagsMetadataExecute(r BackupAndRes
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupAndRestoreAPIPageListBackupsRequest struct {
+	ctx                  context.Context
+	ApiService           *BackupAndRestoreAPIService
+	cUUID                string
+	backupPagedQuerySpec *BackupPagedQuerySpec
+}
+
+func (r BackupAndRestoreAPIPageListBackupsRequest) BackupPagedQuerySpec(backupPagedQuerySpec BackupPagedQuerySpec) BackupAndRestoreAPIPageListBackupsRequest {
+	r.backupPagedQuerySpec = &backupPagedQuerySpec
+	return r
+}
+
+func (r BackupAndRestoreAPIPageListBackupsRequest) Execute() (*BackupPagedResp, *http.Response, error) {
+	return r.ApiService.PageListBackupsExecute(r)
+}
+
+/*
+PageListBackups List universe backups.
+
+Returns universe backups for the specified customer with pagination and optional filters.
+WARNING: This is a preview API that could change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return BackupAndRestoreAPIPageListBackupsRequest
+*/
+func (a *BackupAndRestoreAPIService) PageListBackups(ctx context.Context, cUUID string) BackupAndRestoreAPIPageListBackupsRequest {
+	return BackupAndRestoreAPIPageListBackupsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return BackupPagedResp
+func (a *BackupAndRestoreAPIService) PageListBackupsExecute(r BackupAndRestoreAPIPageListBackupsRequest) (*BackupPagedResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BackupPagedResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupAndRestoreAPIService.PageListBackups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/backups/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.backupPagedQuerySpec == nil {
+		return localVarReturnValue, nil, reportError("backupPagedQuerySpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.backupPagedQuerySpec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

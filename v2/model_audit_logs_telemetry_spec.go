@@ -23,7 +23,7 @@ type AuditLogsTelemetrySpec struct {
 	YsqlAuditConfig *YSQLAuditConfig `json:"ysql_audit_config,omitempty"`
 	YcqlAuditConfig *YCQLAuditConfig `json:"ycql_audit_config,omitempty"`
 	// List of exporters. Empty = no export.
-	Exporters []TelemetryExporterEntry `json:"exporters,omitempty"`
+	Exporters []UniverseLogsExporterConfig `json:"exporters,omitempty"`
 }
 
 // NewAuditLogsTelemetrySpec instantiates a new AuditLogsTelemetrySpec object
@@ -108,9 +108,9 @@ func (o *AuditLogsTelemetrySpec) SetYcqlAuditConfig(v YCQLAuditConfig) {
 }
 
 // GetExporters returns the Exporters field value if set, zero value otherwise.
-func (o *AuditLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
+func (o *AuditLogsTelemetrySpec) GetExporters() []UniverseLogsExporterConfig {
 	if o == nil || IsNil(o.Exporters) {
-		var ret []TelemetryExporterEntry
+		var ret []UniverseLogsExporterConfig
 		return ret
 	}
 	return o.Exporters
@@ -118,7 +118,7 @@ func (o *AuditLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
 
 // GetExportersOk returns a tuple with the Exporters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditLogsTelemetrySpec) GetExportersOk() ([]TelemetryExporterEntry, bool) {
+func (o *AuditLogsTelemetrySpec) GetExportersOk() ([]UniverseLogsExporterConfig, bool) {
 	if o == nil || IsNil(o.Exporters) {
 		return nil, false
 	}
@@ -134,8 +134,8 @@ func (o *AuditLogsTelemetrySpec) HasExporters() bool {
 	return false
 }
 
-// SetExporters gets a reference to the given []TelemetryExporterEntry and assigns it to the Exporters field.
-func (o *AuditLogsTelemetrySpec) SetExporters(v []TelemetryExporterEntry) {
+// SetExporters gets a reference to the given []UniverseLogsExporterConfig and assigns it to the Exporters field.
+func (o *AuditLogsTelemetrySpec) SetExporters(v []UniverseLogsExporterConfig) {
 	o.Exporters = v
 }
 

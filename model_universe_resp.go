@@ -30,6 +30,8 @@ type UniverseResp struct {
 	DrConfigUuidsAsTarget []string `json:"drConfigUuidsAsTarget,omitempty"`
 	// Universe name
 	Name *string `json:"name,omitempty"`
+	// YugabyteDB Anywhere platform software version for this YBA instance
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Price
 	PricePerHour     *float64                 `json:"pricePerHour,omitempty"`
 	Resources        *UniverseResourceDetails `json:"resources,omitempty"`
@@ -254,6 +256,38 @@ func (o *UniverseResp) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *UniverseResp) SetName(v string) {
 	o.Name = &v
+}
+
+// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
+func (o *UniverseResp) GetPlatformVersion() string {
+	if o == nil || IsNil(o.PlatformVersion) {
+		var ret string
+		return ret
+	}
+	return *o.PlatformVersion
+}
+
+// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetPlatformVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.PlatformVersion) {
+		return nil, false
+	}
+	return o.PlatformVersion, true
+}
+
+// HasPlatformVersion returns a boolean if a field has been set.
+func (o *UniverseResp) HasPlatformVersion() bool {
+	if o != nil && !IsNil(o.PlatformVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
+func (o *UniverseResp) SetPlatformVersion(v string) {
+	o.PlatformVersion = &v
 }
 
 // GetPricePerHour returns the PricePerHour field value if set, zero value otherwise.
@@ -571,6 +605,9 @@ func (o UniverseResp) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.PlatformVersion) {
+		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if !IsNil(o.PricePerHour) {
 		toSerialize["pricePerHour"] = o.PricePerHour

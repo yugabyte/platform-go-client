@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Offset** | Pointer to **int32** | Start offset of the records. | [optional] 
-**Limit** | Pointer to **int32** | Maximum number of records to be fetched. | [optional] 
+**Offset** | Pointer to **int32** | Start offset of the records. | [optional] [default to 0]
+**Limit** | Pointer to **int32** | Maximum number of records to be fetched. | [optional] [default to 10]
 **Direction** | Pointer to **string** | Sort order of the records. | [optional] 
 
 ## Methods

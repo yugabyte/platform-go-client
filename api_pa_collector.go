@@ -821,6 +821,148 @@ func (a *PACollectorAPIService) ListAllPACollectorsExecute(r PACollectorAPIListA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type PACollectorAPIPageRegisteredUniversesRequest struct {
+	ctx                   context.Context
+	ApiService            *PACollectorAPIService
+	cUUID                 string
+	paUUID                string
+	pagePaUniverseRequest *PaUniversePagedApiQuery
+	request               *interface{}
+}
+
+func (r PACollectorAPIPageRegisteredUniversesRequest) PagePaUniverseRequest(pagePaUniverseRequest PaUniversePagedApiQuery) PACollectorAPIPageRegisteredUniversesRequest {
+	r.pagePaUniverseRequest = &pagePaUniverseRequest
+	return r
+}
+
+func (r PACollectorAPIPageRegisteredUniversesRequest) Request(request interface{}) PACollectorAPIPageRegisteredUniversesRequest {
+	r.request = &request
+	return r
+}
+
+func (r PACollectorAPIPageRegisteredUniversesRequest) Execute() (*PaUniversePagedApiResponse, *http.Response, error) {
+	return r.ApiService.PageRegisteredUniversesExecute(r)
+}
+
+/*
+PageRegisteredUniverses List universes registered with PA Collector (paginated)
+
+YbaApi Internal.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID
+	@param paUUID
+	@return PACollectorAPIPageRegisteredUniversesRequest
+*/
+func (a *PACollectorAPIService) PageRegisteredUniverses(ctx context.Context, cUUID string, paUUID string) PACollectorAPIPageRegisteredUniversesRequest {
+	return PACollectorAPIPageRegisteredUniversesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		paUUID:     paUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return PaUniversePagedApiResponse
+func (a *PACollectorAPIService) PageRegisteredUniversesExecute(r PACollectorAPIPageRegisteredUniversesRequest) (*PaUniversePagedApiResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PaUniversePagedApiResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PACollectorAPIService.PageRegisteredUniverses")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/customers/{cUUID}/pa_collector/{paUUID}/universes/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"paUUID"+"}", url.PathEscape(parameterValueToString(r.paUUID, "paUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.pagePaUniverseRequest == nil {
+		return localVarReturnValue, nil, reportError("pagePaUniverseRequest is required and must be specified")
+	}
+
+	if r.request != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.pagePaUniverseRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type PACollectorAPIRegisterUniverseRequest struct {
 	ctx                   context.Context
 	ApiService            *PACollectorAPIService
@@ -841,7 +983,7 @@ func (r PACollectorAPIRegisterUniverseRequest) Request(request interface{}) PACo
 	return r
 }
 
-func (r PACollectorAPIRegisterUniverseRequest) Execute() (*YBPSuccess, *http.Response, error) {
+func (r PACollectorAPIRegisterUniverseRequest) Execute() (*YBPTask, *http.Response, error) {
 	return r.ApiService.RegisterUniverseExecute(r)
 }
 
@@ -868,13 +1010,13 @@ func (a *PACollectorAPIService) RegisterUniverse(ctx context.Context, cUUID stri
 
 // Execute executes the request
 //
-//	@return YBPSuccess
-func (a *PACollectorAPIService) RegisterUniverseExecute(r PACollectorAPIRegisterUniverseRequest) (*YBPSuccess, *http.Response, error) {
+//	@return YBPTask
+func (a *PACollectorAPIService) RegisterUniverseExecute(r PACollectorAPIRegisterUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *YBPSuccess
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PACollectorAPIService.RegisterUniverse")
@@ -982,7 +1124,7 @@ func (r PACollectorAPIUnregisterUniverseRequest) Request(request interface{}) PA
 	return r
 }
 
-func (r PACollectorAPIUnregisterUniverseRequest) Execute() (*YBPSuccess, *http.Response, error) {
+func (r PACollectorAPIUnregisterUniverseRequest) Execute() (*YBPTask, *http.Response, error) {
 	return r.ApiService.UnregisterUniverseExecute(r)
 }
 
@@ -1007,13 +1149,13 @@ func (a *PACollectorAPIService) UnregisterUniverse(ctx context.Context, cUUID st
 
 // Execute executes the request
 //
-//	@return YBPSuccess
-func (a *PACollectorAPIService) UnregisterUniverseExecute(r PACollectorAPIUnregisterUniverseRequest) (*YBPSuccess, *http.Response, error) {
+//	@return YBPTask
+func (a *PACollectorAPIService) UnregisterUniverseExecute(r PACollectorAPIUnregisterUniverseRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *YBPSuccess
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PACollectorAPIService.UnregisterUniverse")

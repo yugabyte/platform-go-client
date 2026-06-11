@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Placement** | Pointer to [**PlacementInfo**](PlacementInfo.md) |  | [optional] 
 **ReplicationFactor** | Pointer to **int32** |  | [optional] 
+**TablespaceName** | Pointer to **string** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -128,6 +129,31 @@ SetReplicationFactor sets ReplicationFactor field to given value.
 `func (o *PartitionInfo) HasReplicationFactor() bool`
 
 HasReplicationFactor returns a boolean if a field has been set.
+
+### GetTablespaceName
+
+`func (o *PartitionInfo) GetTablespaceName() string`
+
+GetTablespaceName returns the TablespaceName field if non-nil, zero value otherwise.
+
+### GetTablespaceNameOk
+
+`func (o *PartitionInfo) GetTablespaceNameOk() (*string, bool)`
+
+GetTablespaceNameOk returns a tuple with the TablespaceName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTablespaceName
+
+`func (o *PartitionInfo) SetTablespaceName(v string)`
+
+SetTablespaceName sets TablespaceName field to given value.
+
+### HasTablespaceName
+
+`func (o *PartitionInfo) HasTablespaceName() bool`
+
+HasTablespaceName returns a boolean if a field has been set.
 
 ### GetUuid
 

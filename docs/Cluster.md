@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClusterType** | **string** |  | 
+**GeoPartitioned** | Pointer to **bool** | Property indicating that tablespaces are created for partitions.WARNING: This is a preview API that could change | [optional] 
 **Index** | Pointer to **int32** |  | [optional] 
-**Partitions** | Pointer to [**[]PartitionInfo**](PartitionInfo.md) | WARNING: This is a preview API that could change. Geo partitions for cluster | [optional] 
+**Partitions** | Pointer to [**[]PartitionInfo**](PartitionInfo.md) | List of current partitions. WARNING: This is a preview API that could change | [optional] 
 **PlacementInfo** | Pointer to [**PlacementInfo**](PlacementInfo.md) |  | [optional] 
 **Regions** | Pointer to [**[]Region**](Region.md) |  | [optional] [readonly] 
 **UserIntent** | [**UserIntent**](UserIntent.md) |  | 
@@ -50,6 +51,31 @@ and a boolean to check if the value has been set.
 
 SetClusterType sets ClusterType field to given value.
 
+
+### GetGeoPartitioned
+
+`func (o *Cluster) GetGeoPartitioned() bool`
+
+GetGeoPartitioned returns the GeoPartitioned field if non-nil, zero value otherwise.
+
+### GetGeoPartitionedOk
+
+`func (o *Cluster) GetGeoPartitionedOk() (*bool, bool)`
+
+GetGeoPartitionedOk returns a tuple with the GeoPartitioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGeoPartitioned
+
+`func (o *Cluster) SetGeoPartitioned(v bool)`
+
+SetGeoPartitioned sets GeoPartitioned field to given value.
+
+### HasGeoPartitioned
+
+`func (o *Cluster) HasGeoPartitioned() bool`
+
+HasGeoPartitioned returns a boolean if a field has been set.
 
 ### GetIndex
 

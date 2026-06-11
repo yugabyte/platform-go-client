@@ -38,8 +38,7 @@ Name | Type | Description | Notes
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
-**PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
+**PlatformUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
@@ -73,7 +72,7 @@ Name | Type | Description | Notes
 
 ### NewUniverseDefinitionTaskParamsResp
 
-`func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParamsResp`
+`func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, creatingUser Users, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseDefinitionTaskParamsResp`
 
 NewUniverseDefinitionTaskParamsResp instantiates a new UniverseDefinitionTaskParamsResp object
 This constructor will assign default values to properties that have it defined,
@@ -947,31 +946,11 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
+### HasPlatformUrl
 
-### GetPlatformVersion
+`func (o *UniverseDefinitionTaskParamsResp) HasPlatformUrl() bool`
 
-`func (o *UniverseDefinitionTaskParamsResp) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *UniverseDefinitionTaskParamsResp) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *UniverseDefinitionTaskParamsResp) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *UniverseDefinitionTaskParamsResp) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
+HasPlatformUrl returns a boolean if a field has been set.
 
 ### GetPrevYBSoftwareConfig
 

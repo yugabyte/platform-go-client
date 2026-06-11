@@ -20,13 +20,8 @@ var _ MappedNullable = &JobSchedulePagedResp{}
 
 // JobSchedulePagedResp struct for JobSchedulePagedResp
 type JobSchedulePagedResp struct {
-	// There are more next records if true.
-	HasNext *bool `json:"has_next,omitempty"`
-	// There are more previous records if true.
-	HasPrev *bool `json:"has_prev,omitempty"`
-	// Total number of records.
-	TotalCount *int32        `json:"total_count,omitempty"`
-	Entities   []JobSchedule `json:"entities,omitempty"`
+	PaginationResp
+	Entities []JobSchedule `json:"entities,omitempty"`
 }
 
 // NewJobSchedulePagedResp instantiates a new JobSchedulePagedResp object
@@ -44,102 +39,6 @@ func NewJobSchedulePagedResp() *JobSchedulePagedResp {
 func NewJobSchedulePagedRespWithDefaults() *JobSchedulePagedResp {
 	this := JobSchedulePagedResp{}
 	return &this
-}
-
-// GetHasNext returns the HasNext field value if set, zero value otherwise.
-func (o *JobSchedulePagedResp) GetHasNext() bool {
-	if o == nil || IsNil(o.HasNext) {
-		var ret bool
-		return ret
-	}
-	return *o.HasNext
-}
-
-// GetHasNextOk returns a tuple with the HasNext field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobSchedulePagedResp) GetHasNextOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasNext) {
-		return nil, false
-	}
-	return o.HasNext, true
-}
-
-// HasHasNext returns a boolean if a field has been set.
-func (o *JobSchedulePagedResp) HasHasNext() bool {
-	if o != nil && !IsNil(o.HasNext) {
-		return true
-	}
-
-	return false
-}
-
-// SetHasNext gets a reference to the given bool and assigns it to the HasNext field.
-func (o *JobSchedulePagedResp) SetHasNext(v bool) {
-	o.HasNext = &v
-}
-
-// GetHasPrev returns the HasPrev field value if set, zero value otherwise.
-func (o *JobSchedulePagedResp) GetHasPrev() bool {
-	if o == nil || IsNil(o.HasPrev) {
-		var ret bool
-		return ret
-	}
-	return *o.HasPrev
-}
-
-// GetHasPrevOk returns a tuple with the HasPrev field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobSchedulePagedResp) GetHasPrevOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasPrev) {
-		return nil, false
-	}
-	return o.HasPrev, true
-}
-
-// HasHasPrev returns a boolean if a field has been set.
-func (o *JobSchedulePagedResp) HasHasPrev() bool {
-	if o != nil && !IsNil(o.HasPrev) {
-		return true
-	}
-
-	return false
-}
-
-// SetHasPrev gets a reference to the given bool and assigns it to the HasPrev field.
-func (o *JobSchedulePagedResp) SetHasPrev(v bool) {
-	o.HasPrev = &v
-}
-
-// GetTotalCount returns the TotalCount field value if set, zero value otherwise.
-func (o *JobSchedulePagedResp) GetTotalCount() int32 {
-	if o == nil || IsNil(o.TotalCount) {
-		var ret int32
-		return ret
-	}
-	return *o.TotalCount
-}
-
-// GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobSchedulePagedResp) GetTotalCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.TotalCount) {
-		return nil, false
-	}
-	return o.TotalCount, true
-}
-
-// HasTotalCount returns a boolean if a field has been set.
-func (o *JobSchedulePagedResp) HasTotalCount() bool {
-	if o != nil && !IsNil(o.TotalCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalCount gets a reference to the given int32 and assigns it to the TotalCount field.
-func (o *JobSchedulePagedResp) SetTotalCount(v int32) {
-	o.TotalCount = &v
 }
 
 // GetEntities returns the Entities field value if set, zero value otherwise.
@@ -184,15 +83,6 @@ func (o JobSchedulePagedResp) MarshalJSON() ([]byte, error) {
 
 func (o JobSchedulePagedResp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.HasNext) {
-		toSerialize["has_next"] = o.HasNext
-	}
-	if !IsNil(o.HasPrev) {
-		toSerialize["has_prev"] = o.HasPrev
-	}
-	if !IsNil(o.TotalCount) {
-		toSerialize["total_count"] = o.TotalCount
-	}
 	if !IsNil(o.Entities) {
 		toSerialize["entities"] = o.Entities
 	}

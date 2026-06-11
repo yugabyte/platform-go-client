@@ -24,6 +24,7 @@ type CloudInfo struct {
 	Gcp        *GCPCloudInfo    `json:"gcp,omitempty"`
 	Kubernetes *KubernetesInfo  `json:"kubernetes,omitempty"`
 	Local      *LocalCloudInfo  `json:"local,omitempty"`
+	Oci        *OCICloudInfo    `json:"oci,omitempty"`
 	Onprem     *OnPremCloudInfo `json:"onprem,omitempty"`
 }
 
@@ -204,6 +205,38 @@ func (o *CloudInfo) SetLocal(v LocalCloudInfo) {
 	o.Local = &v
 }
 
+// GetOci returns the Oci field value if set, zero value otherwise.
+func (o *CloudInfo) GetOci() OCICloudInfo {
+	if o == nil || IsNil(o.Oci) {
+		var ret OCICloudInfo
+		return ret
+	}
+	return *o.Oci
+}
+
+// GetOciOk returns a tuple with the Oci field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudInfo) GetOciOk() (*OCICloudInfo, bool) {
+	if o == nil || IsNil(o.Oci) {
+		return nil, false
+	}
+	return o.Oci, true
+}
+
+// HasOci returns a boolean if a field has been set.
+func (o *CloudInfo) HasOci() bool {
+	if o != nil && !IsNil(o.Oci) {
+		return true
+	}
+
+	return false
+}
+
+// SetOci gets a reference to the given OCICloudInfo and assigns it to the Oci field.
+func (o *CloudInfo) SetOci(v OCICloudInfo) {
+	o.Oci = &v
+}
+
 // GetOnprem returns the Onprem field value if set, zero value otherwise.
 func (o *CloudInfo) GetOnprem() OnPremCloudInfo {
 	if o == nil || IsNil(o.Onprem) {
@@ -260,6 +293,9 @@ func (o CloudInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Local) {
 		toSerialize["local"] = o.Local
+	}
+	if !IsNil(o.Oci) {
+		toSerialize["oci"] = o.Oci
 	}
 	if !IsNil(o.Onprem) {
 		toSerialize["onprem"] = o.Onprem

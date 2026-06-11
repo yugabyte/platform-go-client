@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RetentionPeriodInSeconds** | Pointer to **int64** | Retention period of a snapshot | [optional] 
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
@@ -388,31 +387,6 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
-
-### GetPlatformVersion
-
-`func (o *UpdatePitrConfigParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *UpdatePitrConfigParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *UpdatePitrConfigParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *UpdatePitrConfigParams) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 

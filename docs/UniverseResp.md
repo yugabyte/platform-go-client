@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **DrConfigUuidsAsSource** | Pointer to **[]string** | UUIDs of DR configs where this universe is the source (primary) | [optional] 
 **DrConfigUuidsAsTarget** | Pointer to **[]string** | UUIDs of DR configs where this universe is the target (secondary) | [optional] 
 **Name** | Pointer to **string** | Universe name | [optional] 
+**PlatformVersion** | Pointer to **string** | YugabyteDB Anywhere platform software version for this YBA instance | [optional] 
 **PricePerHour** | Pointer to **float64** | Price | [optional] 
 **Resources** | Pointer to [**UniverseResourceDetails**](UniverseResourceDetails.md) |  | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
@@ -188,6 +189,31 @@ SetName sets Name field to given value.
 `func (o *UniverseResp) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPlatformVersion
+
+`func (o *UniverseResp) GetPlatformVersion() string`
+
+GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
+
+### GetPlatformVersionOk
+
+`func (o *UniverseResp) GetPlatformVersionOk() (*string, bool)`
+
+GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlatformVersion
+
+`func (o *UniverseResp) SetPlatformVersion(v string)`
+
+SetPlatformVersion sets PlatformVersion field to given value.
+
+### HasPlatformVersion
+
+`func (o *UniverseResp) HasPlatformVersion() bool`
+
+HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPricePerHour
 

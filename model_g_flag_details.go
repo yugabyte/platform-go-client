@@ -31,6 +31,8 @@ type GFlagDetails struct {
 	Meaning *string `json:"meaning,omitempty"`
 	// WARNING: This is a preview API that could change. Name of the gflag
 	Name *string `json:"name,omitempty"`
+	// WARNING: This is a preview API that could change. True if a restart or rolling restart is needed for the gflag change to take effect; false for runtime flags.
+	RequiresRestart *bool `json:"requiresRestart,omitempty"`
 	// WARNING: This is a preview API that could change. Tags of the gflag
 	Tags *string `json:"tags,omitempty"`
 	// WARNING: This is a preview API that could change. Target of the gflag
@@ -248,6 +250,38 @@ func (o *GFlagDetails) SetName(v string) {
 	o.Name = &v
 }
 
+// GetRequiresRestart returns the RequiresRestart field value if set, zero value otherwise.
+func (o *GFlagDetails) GetRequiresRestart() bool {
+	if o == nil || IsNil(o.RequiresRestart) {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresRestart
+}
+
+// GetRequiresRestartOk returns a tuple with the RequiresRestart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GFlagDetails) GetRequiresRestartOk() (*bool, bool) {
+	if o == nil || IsNil(o.RequiresRestart) {
+		return nil, false
+	}
+	return o.RequiresRestart, true
+}
+
+// HasRequiresRestart returns a boolean if a field has been set.
+func (o *GFlagDetails) HasRequiresRestart() bool {
+	if o != nil && !IsNil(o.RequiresRestart) {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresRestart gets a reference to the given bool and assigns it to the RequiresRestart field.
+func (o *GFlagDetails) SetRequiresRestart(v bool) {
+	o.RequiresRestart = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise.
 func (o *GFlagDetails) GetTags() string {
 	if o == nil || IsNil(o.Tags) {
@@ -371,6 +405,9 @@ func (o GFlagDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.RequiresRestart) {
+		toSerialize["requiresRestart"] = o.RequiresRestart
 	}
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags

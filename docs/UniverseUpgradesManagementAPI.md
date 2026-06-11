@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**RebootUniverse**](UniverseUpgradesManagementAPI.md#RebootUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
 [**ResizeNode**](UniverseUpgradesManagementAPI.md#ResizeNode) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resize_node | Resize Node
 [**RestartUniverse**](UniverseUpgradesManagementAPI.md#RestartUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/restart | Restart Universe
+[**ResumeCanarySoftwareUpgrade**](UniverseUpgradesManagementAPI.md#ResumeCanarySoftwareUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/resume_canary | Resume canary software upgrade
 [**RollbackUpgrade**](UniverseUpgradesManagementAPI.md#RollbackUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/rollback | Rollback Upgrade
 [**SoftwareUpgradePreCheck**](UniverseUpgradesManagementAPI.md#SoftwareUpgradePreCheck) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/software/precheck | Software Upgrade universe pre-check
 [**UpdateProxyConfig**](UniverseUpgradesManagementAPI.md#UpdateProxyConfig) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/proxy_config | Update Proxy Config
@@ -619,6 +620,83 @@ Name | Type | Description  | Notes
 
 
  **restartTaskParams** | [**RestartTaskParams**](RestartTaskParams.md) | Restart Task Params | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**YBPTask**](YBPTask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ResumeCanarySoftwareUpgrade
+
+> YBPTask ResumeCanarySoftwareUpgrade(ctx, cUUID, uniUUID).ResumeCanaryUpgradeParams(resumeCanaryUpgradeParams).Request(request).Execute()
+
+Resume canary software upgrade
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	resumeCanaryUpgradeParams := *openapiclient.NewResumeCanaryUpgradeParams("TaskUUID_example") // ResumeCanaryUpgradeParams | Resume Canary Upgrade Params
+	request := TODO // interface{} |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseUpgradesManagementAPI.ResumeCanarySoftwareUpgrade(context.Background(), cUUID, uniUUID).ResumeCanaryUpgradeParams(resumeCanaryUpgradeParams).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseUpgradesManagementAPI.ResumeCanarySoftwareUpgrade``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResumeCanarySoftwareUpgrade`: YBPTask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseUpgradesManagementAPI.ResumeCanarySoftwareUpgrade`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**uniUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiResumeCanarySoftwareUpgradeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **resumeCanaryUpgradeParams** | [**ResumeCanaryUpgradeParams**](ResumeCanaryUpgradeParams.md) | Resume Canary Upgrade Params | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
