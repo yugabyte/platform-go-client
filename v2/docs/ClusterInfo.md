@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | Pointer to **string** | cluster uuid | [optional] 
+**GeoPartitioned** | Pointer to **bool** | Whether universe is treated as geo partitioned (i.e. tablespaces are created). | [optional] 
 **SpotPrice** | Pointer to **float64** | TBD | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetUuid sets Uuid field to given value.
 `func (o *ClusterInfo) HasUuid() bool`
 
 HasUuid returns a boolean if a field has been set.
+
+### GetGeoPartitioned
+
+`func (o *ClusterInfo) GetGeoPartitioned() bool`
+
+GetGeoPartitioned returns the GeoPartitioned field if non-nil, zero value otherwise.
+
+### GetGeoPartitionedOk
+
+`func (o *ClusterInfo) GetGeoPartitionedOk() (*bool, bool)`
+
+GetGeoPartitionedOk returns a tuple with the GeoPartitioned field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGeoPartitioned
+
+`func (o *ClusterInfo) SetGeoPartitioned(v bool)`
+
+SetGeoPartitioned sets GeoPartitioned field to given value.
+
+### HasGeoPartitioned
+
+`func (o *ClusterInfo) HasGeoPartitioned() bool`
+
+HasGeoPartitioned returns a boolean if a field has been set.
 
 ### GetSpotPrice
 

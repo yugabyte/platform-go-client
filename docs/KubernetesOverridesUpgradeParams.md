@@ -41,7 +41,6 @@ Name | Type | Description | Notes
 **PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RemotePackagePath** | Pointer to **string** |  | [optional] 
@@ -993,31 +992,6 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
-
-### GetPlatformVersion
-
-`func (o *KubernetesOverridesUpgradeParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *KubernetesOverridesUpgradeParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *KubernetesOverridesUpgradeParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *KubernetesOverridesUpgradeParams) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrevYBSoftwareConfig
 

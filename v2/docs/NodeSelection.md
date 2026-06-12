@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **NodeNames** | Pointer to **[]string** | List of specific node names to run the script on. | [optional] 
-**MastersOnly** | Pointer to **bool** | Run the script only on master nodes from the specified node_names (or all masters if node_names is not provided). | [optional] [default to false]
-**TserversOnly** | Pointer to **bool** | Run the script only on tserver nodes from the specified node_names (or all tservers if node_names is not provided). | [optional] [default to false]
+**MastersOnly** | Pointer to **bool** | Run the script only on master nodes from the specified node_names (or all masters if node_names is not provided). Mutually exclusive with tservers_only. | [optional] [default to false]
+**TserversOnly** | Pointer to **bool** | Run the script only on tserver nodes from the specified node_names (or all tservers if node_names is not provided). Mutually exclusive with masters_only. | [optional] [default to false]
 **ClusterUuid** | Pointer to **string** | Run the script only on nodes belonging to a specific cluster (e.g., primary or read replica). If not provided, runs on nodes across all clusters in the universe.  | [optional] 
 **MaxParallelNodes** | Pointer to **int32** | Maximum number of nodes to execute the script on in parallel. Higher values complete faster but use more resources. Set to 1 for sequential execution.  | [optional] [default to 50]
 

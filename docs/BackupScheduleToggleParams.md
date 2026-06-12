@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RunImmediateBackupOnResume** | Pointer to **bool** | Run a full or incremental backup if required when resuming a stopped schedule. When false (default), the full backup will instead run at its normally scheduled time. | [optional] 
+**RunImmediateBackupOnResume** | Pointer to **bool** | Run a full or incremental backup if required when resuming a stopped schedule. When false, the full backup will instead run at its normally scheduled time. When true, the full backup will run immediately, and then the schedule will continue as normal. If not specified, the value is determined by the yb.backup.run_immediate_backup_on_resume runtime config. | [optional] 
 **Status** | **string** | State of the schedule | 
 
 ## Methods

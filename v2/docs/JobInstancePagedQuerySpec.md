@@ -4,9 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Offset** | Pointer to **int32** | Start offset of the records. | [optional] 
-**Limit** | Pointer to **int32** | Maximum number of records to be fetched. | [optional] 
-**Direction** | Pointer to **string** | Sort order of the records. | [optional] 
 **Filter** | Pointer to [**JobInstanceApiFilter**](JobInstanceApiFilter.md) |  | [optional] 
 **SortBy** | Pointer to **string** | Sort fields of the records. | [optional] 
 
@@ -28,81 +25,6 @@ will change when the set of required properties is changed
 NewJobInstancePagedQuerySpecWithDefaults instantiates a new JobInstancePagedQuerySpec object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetOffset
-
-`func (o *JobInstancePagedQuerySpec) GetOffset() int32`
-
-GetOffset returns the Offset field if non-nil, zero value otherwise.
-
-### GetOffsetOk
-
-`func (o *JobInstancePagedQuerySpec) GetOffsetOk() (*int32, bool)`
-
-GetOffsetOk returns a tuple with the Offset field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOffset
-
-`func (o *JobInstancePagedQuerySpec) SetOffset(v int32)`
-
-SetOffset sets Offset field to given value.
-
-### HasOffset
-
-`func (o *JobInstancePagedQuerySpec) HasOffset() bool`
-
-HasOffset returns a boolean if a field has been set.
-
-### GetLimit
-
-`func (o *JobInstancePagedQuerySpec) GetLimit() int32`
-
-GetLimit returns the Limit field if non-nil, zero value otherwise.
-
-### GetLimitOk
-
-`func (o *JobInstancePagedQuerySpec) GetLimitOk() (*int32, bool)`
-
-GetLimitOk returns a tuple with the Limit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLimit
-
-`func (o *JobInstancePagedQuerySpec) SetLimit(v int32)`
-
-SetLimit sets Limit field to given value.
-
-### HasLimit
-
-`func (o *JobInstancePagedQuerySpec) HasLimit() bool`
-
-HasLimit returns a boolean if a field has been set.
-
-### GetDirection
-
-`func (o *JobInstancePagedQuerySpec) GetDirection() string`
-
-GetDirection returns the Direction field if non-nil, zero value otherwise.
-
-### GetDirectionOk
-
-`func (o *JobInstancePagedQuerySpec) GetDirectionOk() (*string, bool)`
-
-GetDirectionOk returns a tuple with the Direction field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDirection
-
-`func (o *JobInstancePagedQuerySpec) SetDirection(v string)`
-
-SetDirection sets Direction field to given value.
-
-### HasDirection
-
-`func (o *JobInstancePagedQuerySpec) HasDirection() bool`
-
-HasDirection returns a boolean if a field has been set.
 
 ### GetFilter
 

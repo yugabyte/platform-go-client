@@ -21,6 +21,8 @@ var _ MappedNullable = &UserProfileData{}
 type UserProfileData struct {
 	// Password confirmation
 	ConfirmPassword *string `json:"confirmPassword,omitempty"`
+	// YbaApi Internal. Used to turn off new UI feature for particular user
+	NewUniverseUiEnabled *bool `json:"newUniverseUiEnabled,omitempty"`
 	// Password
 	Password *string `json:"password,omitempty"`
 	// User role
@@ -79,6 +81,38 @@ func (o *UserProfileData) HasConfirmPassword() bool {
 // SetConfirmPassword gets a reference to the given string and assigns it to the ConfirmPassword field.
 func (o *UserProfileData) SetConfirmPassword(v string) {
 	o.ConfirmPassword = &v
+}
+
+// GetNewUniverseUiEnabled returns the NewUniverseUiEnabled field value if set, zero value otherwise.
+func (o *UserProfileData) GetNewUniverseUiEnabled() bool {
+	if o == nil || IsNil(o.NewUniverseUiEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.NewUniverseUiEnabled
+}
+
+// GetNewUniverseUiEnabledOk returns a tuple with the NewUniverseUiEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserProfileData) GetNewUniverseUiEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.NewUniverseUiEnabled) {
+		return nil, false
+	}
+	return o.NewUniverseUiEnabled, true
+}
+
+// HasNewUniverseUiEnabled returns a boolean if a field has been set.
+func (o *UserProfileData) HasNewUniverseUiEnabled() bool {
+	if o != nil && !IsNil(o.NewUniverseUiEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNewUniverseUiEnabled gets a reference to the given bool and assigns it to the NewUniverseUiEnabled field.
+func (o *UserProfileData) SetNewUniverseUiEnabled(v bool) {
+	o.NewUniverseUiEnabled = &v
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
@@ -181,6 +215,9 @@ func (o UserProfileData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ConfirmPassword) {
 		toSerialize["confirmPassword"] = o.ConfirmPassword
+	}
+	if !IsNil(o.NewUniverseUiEnabled) {
+		toSerialize["newUniverseUiEnabled"] = o.NewUniverseUiEnabled
 	}
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password

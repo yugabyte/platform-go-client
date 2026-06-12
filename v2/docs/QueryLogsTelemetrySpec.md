@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **YsqlQueryLogConfig** | Pointer to [**YSQLQueryLogConfig**](YSQLQueryLogConfig.md) |  | [optional] 
-**Exporters** | Pointer to [**[]TelemetryExporterEntry**](TelemetryExporterEntry.md) | List of exporters. Empty &#x3D; no export. | [optional] 
+**Exporters** | Pointer to [**[]UniverseQueryLogsExporterConfig**](UniverseQueryLogsExporterConfig.md) | List of exporters. Empty &#x3D; no export. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasYsqlQueryLogConfig returns a boolean if a field has been set.
 
 ### GetExporters
 
-`func (o *QueryLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry`
+`func (o *QueryLogsTelemetrySpec) GetExporters() []UniverseQueryLogsExporterConfig`
 
 GetExporters returns the Exporters field if non-nil, zero value otherwise.
 
 ### GetExportersOk
 
-`func (o *QueryLogsTelemetrySpec) GetExportersOk() (*[]TelemetryExporterEntry, bool)`
+`func (o *QueryLogsTelemetrySpec) GetExportersOk() (*[]UniverseQueryLogsExporterConfig, bool)`
 
 GetExportersOk returns a tuple with the Exporters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExporters
 
-`func (o *QueryLogsTelemetrySpec) SetExporters(v []TelemetryExporterEntry)`
+`func (o *QueryLogsTelemetrySpec) SetExporters(v []UniverseQueryLogsExporterConfig)`
 
 SetExporters sets Exporters field to given value.
 

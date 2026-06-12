@@ -26,7 +26,7 @@ type UniverseQueryLogsExporterConfig struct {
 	ExporterUuid string `json:"exporter_uuid"`
 	// Send batch max size
 	SendBatchMaxSize *int32 `json:"send_batch_max_size,omitempty"`
-	// Send batch max size
+	// Send batch size
 	SendBatchSize *int32 `json:"send_batch_size,omitempty"`
 	// Send batch timeout in seconds
 	SendBatchTimeoutSeconds *int32 `json:"send_batch_timeout_seconds,omitempty"`

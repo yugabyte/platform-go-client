@@ -27,7 +27,12 @@ type ConfigureYSQLFormData struct {
 	// Enable YSQL Api for the universe
 	EnableYSQL *bool `json:"enableYSQL,omitempty"`
 	// Enable YSQL Auth for the universe
-	EnableYSQLAuth *bool `json:"enableYSQLAuth,omitempty"`
+	EnableYSQLAuth *bool               `json:"enableYSQLAuth,omitempty"`
+	MultiTenancy   *MultiTenancyConfig `json:"multiTenancy,omitempty"`
+	// WARNING: This is a preview API that could change. If true, only run the prechecks for the configure YSQL task without performing the actual upgrade. Cannot be set together with validateParams.
+	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
+	// WARNING: This is a preview API that could change. If true, only validate the request parameters without submitting any task or running prechecks. Cannot be set together with runOnlyPrechecks.
+	ValidateParams *bool `json:"validateParams,omitempty"`
 	// YSQL Auth password
 	YsqlPassword *string `json:"ysqlPassword,omitempty"`
 }
@@ -209,6 +214,102 @@ func (o *ConfigureYSQLFormData) SetEnableYSQLAuth(v bool) {
 	o.EnableYSQLAuth = &v
 }
 
+// GetMultiTenancy returns the MultiTenancy field value if set, zero value otherwise.
+func (o *ConfigureYSQLFormData) GetMultiTenancy() MultiTenancyConfig {
+	if o == nil || IsNil(o.MultiTenancy) {
+		var ret MultiTenancyConfig
+		return ret
+	}
+	return *o.MultiTenancy
+}
+
+// GetMultiTenancyOk returns a tuple with the MultiTenancy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigureYSQLFormData) GetMultiTenancyOk() (*MultiTenancyConfig, bool) {
+	if o == nil || IsNil(o.MultiTenancy) {
+		return nil, false
+	}
+	return o.MultiTenancy, true
+}
+
+// HasMultiTenancy returns a boolean if a field has been set.
+func (o *ConfigureYSQLFormData) HasMultiTenancy() bool {
+	if o != nil && !IsNil(o.MultiTenancy) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiTenancy gets a reference to the given MultiTenancyConfig and assigns it to the MultiTenancy field.
+func (o *ConfigureYSQLFormData) SetMultiTenancy(v MultiTenancyConfig) {
+	o.MultiTenancy = &v
+}
+
+// GetRunOnlyPrechecks returns the RunOnlyPrechecks field value if set, zero value otherwise.
+func (o *ConfigureYSQLFormData) GetRunOnlyPrechecks() bool {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		var ret bool
+		return ret
+	}
+	return *o.RunOnlyPrechecks
+}
+
+// GetRunOnlyPrechecksOk returns a tuple with the RunOnlyPrechecks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigureYSQLFormData) GetRunOnlyPrechecksOk() (*bool, bool) {
+	if o == nil || IsNil(o.RunOnlyPrechecks) {
+		return nil, false
+	}
+	return o.RunOnlyPrechecks, true
+}
+
+// HasRunOnlyPrechecks returns a boolean if a field has been set.
+func (o *ConfigureYSQLFormData) HasRunOnlyPrechecks() bool {
+	if o != nil && !IsNil(o.RunOnlyPrechecks) {
+		return true
+	}
+
+	return false
+}
+
+// SetRunOnlyPrechecks gets a reference to the given bool and assigns it to the RunOnlyPrechecks field.
+func (o *ConfigureYSQLFormData) SetRunOnlyPrechecks(v bool) {
+	o.RunOnlyPrechecks = &v
+}
+
+// GetValidateParams returns the ValidateParams field value if set, zero value otherwise.
+func (o *ConfigureYSQLFormData) GetValidateParams() bool {
+	if o == nil || IsNil(o.ValidateParams) {
+		var ret bool
+		return ret
+	}
+	return *o.ValidateParams
+}
+
+// GetValidateParamsOk returns a tuple with the ValidateParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigureYSQLFormData) GetValidateParamsOk() (*bool, bool) {
+	if o == nil || IsNil(o.ValidateParams) {
+		return nil, false
+	}
+	return o.ValidateParams, true
+}
+
+// HasValidateParams returns a boolean if a field has been set.
+func (o *ConfigureYSQLFormData) HasValidateParams() bool {
+	if o != nil && !IsNil(o.ValidateParams) {
+		return true
+	}
+
+	return false
+}
+
+// SetValidateParams gets a reference to the given bool and assigns it to the ValidateParams field.
+func (o *ConfigureYSQLFormData) SetValidateParams(v bool) {
+	o.ValidateParams = &v
+}
+
 // GetYsqlPassword returns the YsqlPassword field value if set, zero value otherwise.
 func (o *ConfigureYSQLFormData) GetYsqlPassword() string {
 	if o == nil || IsNil(o.YsqlPassword) {
@@ -265,6 +366,15 @@ func (o ConfigureYSQLFormData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnableYSQLAuth) {
 		toSerialize["enableYSQLAuth"] = o.EnableYSQLAuth
+	}
+	if !IsNil(o.MultiTenancy) {
+		toSerialize["multiTenancy"] = o.MultiTenancy
+	}
+	if !IsNil(o.RunOnlyPrechecks) {
+		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
+	}
+	if !IsNil(o.ValidateParams) {
+		toSerialize["validateParams"] = o.ValidateParams
 	}
 	if !IsNil(o.YsqlPassword) {
 		toSerialize["ysqlPassword"] = o.YsqlPassword

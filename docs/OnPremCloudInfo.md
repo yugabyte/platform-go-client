@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**EnableMultiTenancy** | Pointer to **bool** | WARNING: This is a preview API that could change. | [optional] 
 **UseClockbound** | Pointer to **bool** | WARNING: This is a preview API that could change. | [optional] 
 **YbHomeDir** | Pointer to **string** |  | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewOnPremCloudInfoWithDefaults instantiates a new OnPremCloudInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetEnableMultiTenancy
+
+`func (o *OnPremCloudInfo) GetEnableMultiTenancy() bool`
+
+GetEnableMultiTenancy returns the EnableMultiTenancy field if non-nil, zero value otherwise.
+
+### GetEnableMultiTenancyOk
+
+`func (o *OnPremCloudInfo) GetEnableMultiTenancyOk() (*bool, bool)`
+
+GetEnableMultiTenancyOk returns a tuple with the EnableMultiTenancy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableMultiTenancy
+
+`func (o *OnPremCloudInfo) SetEnableMultiTenancy(v bool)`
+
+SetEnableMultiTenancy sets EnableMultiTenancy field to given value.
+
+### HasEnableMultiTenancy
+
+`func (o *OnPremCloudInfo) HasEnableMultiTenancy() bool`
+
+HasEnableMultiTenancy returns a boolean if a field has been set.
 
 ### GetUseClockbound
 

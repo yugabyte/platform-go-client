@@ -67,7 +67,6 @@ type FinalizeUpgradeParams struct {
 	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   string                `json:"platformUrl"`
-	PlatformVersion               *string               `json:"platformVersion,omitempty"`
 	PrevYBSoftwareConfig          *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID        *string           `json:"previousTaskUUID,omitempty"`
@@ -1257,38 +1256,6 @@ func (o *FinalizeUpgradeParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *FinalizeUpgradeParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FinalizeUpgradeParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *FinalizeUpgradeParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *FinalizeUpgradeParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
-}
-
 // GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field value if set, zero value otherwise.
 func (o *FinalizeUpgradeParams) GetPrevYBSoftwareConfig() PrevYBSoftwareConfig {
 	if o == nil || IsNil(o.PrevYBSoftwareConfig) {
@@ -2391,9 +2358,6 @@ func (o FinalizeUpgradeParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PrevYBSoftwareConfig) {
 		toSerialize["prevYBSoftwareConfig"] = o.PrevYBSoftwareConfig
 	}

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **YsqlAuditConfig** | Pointer to [**YSQLAuditConfig**](YSQLAuditConfig.md) |  | [optional] 
 **YcqlAuditConfig** | Pointer to [**YCQLAuditConfig**](YCQLAuditConfig.md) |  | [optional] 
-**Exporters** | Pointer to [**[]TelemetryExporterEntry**](TelemetryExporterEntry.md) | List of exporters. Empty &#x3D; no export. | [optional] 
+**Exporters** | Pointer to [**[]UniverseLogsExporterConfig**](UniverseLogsExporterConfig.md) | List of exporters. Empty &#x3D; no export. | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasYcqlAuditConfig returns a boolean if a field has been set.
 
 ### GetExporters
 
-`func (o *AuditLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry`
+`func (o *AuditLogsTelemetrySpec) GetExporters() []UniverseLogsExporterConfig`
 
 GetExporters returns the Exporters field if non-nil, zero value otherwise.
 
 ### GetExportersOk
 
-`func (o *AuditLogsTelemetrySpec) GetExportersOk() (*[]TelemetryExporterEntry, bool)`
+`func (o *AuditLogsTelemetrySpec) GetExportersOk() (*[]UniverseLogsExporterConfig, bool)`
 
 GetExportersOk returns a tuple with the Exporters field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExporters
 
-`func (o *AuditLogsTelemetrySpec) SetExporters(v []TelemetryExporterEntry)`
+`func (o *AuditLogsTelemetrySpec) SetExporters(v []UniverseLogsExporterConfig)`
 
 SetExporters sets Exporters field to given value.
 

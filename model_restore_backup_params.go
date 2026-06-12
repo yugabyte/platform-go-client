@@ -57,9 +57,8 @@ type RestoreBackupParams struct {
 	// Node IP
 	NodeIp *string `json:"nodeIp,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
-	Parallelism     *int32  `json:"parallelism,omitempty"`
-	PlatformUrl     string  `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	Parallelism *int32 `json:"parallelism,omitempty"`
+	PlatformUrl string `json:"platformUrl"`
 	// Prefix UUID
 	PrefixUUID *string `json:"prefixUUID,omitempty"`
 	// Previous task UUID of a retry
@@ -864,38 +863,6 @@ func (o *RestoreBackupParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *RestoreBackupParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreBackupParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *RestoreBackupParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *RestoreBackupParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
-}
-
 // GetPrefixUUID returns the PrefixUUID field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetPrefixUUID() string {
 	if o == nil || IsNil(o.PrefixUUID) {
@@ -1430,9 +1397,6 @@ func (o RestoreBackupParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PrefixUUID) {
 		toSerialize["prefixUUID"] = o.PrefixUUID
 	}

@@ -20,6 +20,8 @@ var _ MappedNullable = &OnPremCloudInfo{}
 // OnPremCloudInfo struct for OnPremCloudInfo
 type OnPremCloudInfo struct {
 	// WARNING: This is a preview API that could change.
+	EnableMultiTenancy *bool `json:"enableMultiTenancy,omitempty"`
+	// WARNING: This is a preview API that could change.
 	UseClockbound *bool   `json:"useClockbound,omitempty"`
 	YbHomeDir     *string `json:"ybHomeDir,omitempty"`
 }
@@ -39,6 +41,38 @@ func NewOnPremCloudInfo() *OnPremCloudInfo {
 func NewOnPremCloudInfoWithDefaults() *OnPremCloudInfo {
 	this := OnPremCloudInfo{}
 	return &this
+}
+
+// GetEnableMultiTenancy returns the EnableMultiTenancy field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetEnableMultiTenancy() bool {
+	if o == nil || IsNil(o.EnableMultiTenancy) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableMultiTenancy
+}
+
+// GetEnableMultiTenancyOk returns a tuple with the EnableMultiTenancy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetEnableMultiTenancyOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableMultiTenancy) {
+		return nil, false
+	}
+	return o.EnableMultiTenancy, true
+}
+
+// HasEnableMultiTenancy returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasEnableMultiTenancy() bool {
+	if o != nil && !IsNil(o.EnableMultiTenancy) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableMultiTenancy gets a reference to the given bool and assigns it to the EnableMultiTenancy field.
+func (o *OnPremCloudInfo) SetEnableMultiTenancy(v bool) {
+	o.EnableMultiTenancy = &v
 }
 
 // GetUseClockbound returns the UseClockbound field value if set, zero value otherwise.
@@ -115,6 +149,9 @@ func (o OnPremCloudInfo) MarshalJSON() ([]byte, error) {
 
 func (o OnPremCloudInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EnableMultiTenancy) {
+		toSerialize["enableMultiTenancy"] = o.EnableMultiTenancy
+	}
 	if !IsNil(o.UseClockbound) {
 		toSerialize["useClockbound"] = o.UseClockbound
 	}

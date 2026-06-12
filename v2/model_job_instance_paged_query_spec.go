@@ -20,13 +20,8 @@ var _ MappedNullable = &JobInstancePagedQuerySpec{}
 
 // JobInstancePagedQuerySpec struct for JobInstancePagedQuerySpec
 type JobInstancePagedQuerySpec struct {
-	// Start offset of the records.
-	Offset *int32 `json:"offset,omitempty"`
-	// Maximum number of records to be fetched.
-	Limit *int32 `json:"limit,omitempty"`
-	// Sort order of the records.
-	Direction *string               `json:"direction,omitempty"`
-	Filter    *JobInstanceApiFilter `json:"filter,omitempty"`
+	PaginationSpec
+	Filter *JobInstanceApiFilter `json:"filter,omitempty"`
 	// Sort fields of the records.
 	SortBy *string `json:"sort_by,omitempty"`
 }
@@ -37,6 +32,10 @@ type JobInstancePagedQuerySpec struct {
 // will change when the set of required properties is changed
 func NewJobInstancePagedQuerySpec() *JobInstancePagedQuerySpec {
 	this := JobInstancePagedQuerySpec{}
+	var offset int32 = 0
+	this.Offset = &offset
+	var limit int32 = 10
+	this.Limit = &limit
 	return &this
 }
 
@@ -46,102 +45,6 @@ func NewJobInstancePagedQuerySpec() *JobInstancePagedQuerySpec {
 func NewJobInstancePagedQuerySpecWithDefaults() *JobInstancePagedQuerySpec {
 	this := JobInstancePagedQuerySpec{}
 	return &this
-}
-
-// GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *JobInstancePagedQuerySpec) GetOffset() int32 {
-	if o == nil || IsNil(o.Offset) {
-		var ret int32
-		return ret
-	}
-	return *o.Offset
-}
-
-// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobInstancePagedQuerySpec) GetOffsetOk() (*int32, bool) {
-	if o == nil || IsNil(o.Offset) {
-		return nil, false
-	}
-	return o.Offset, true
-}
-
-// HasOffset returns a boolean if a field has been set.
-func (o *JobInstancePagedQuerySpec) HasOffset() bool {
-	if o != nil && !IsNil(o.Offset) {
-		return true
-	}
-
-	return false
-}
-
-// SetOffset gets a reference to the given int32 and assigns it to the Offset field.
-func (o *JobInstancePagedQuerySpec) SetOffset(v int32) {
-	o.Offset = &v
-}
-
-// GetLimit returns the Limit field value if set, zero value otherwise.
-func (o *JobInstancePagedQuerySpec) GetLimit() int32 {
-	if o == nil || IsNil(o.Limit) {
-		var ret int32
-		return ret
-	}
-	return *o.Limit
-}
-
-// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobInstancePagedQuerySpec) GetLimitOk() (*int32, bool) {
-	if o == nil || IsNil(o.Limit) {
-		return nil, false
-	}
-	return o.Limit, true
-}
-
-// HasLimit returns a boolean if a field has been set.
-func (o *JobInstancePagedQuerySpec) HasLimit() bool {
-	if o != nil && !IsNil(o.Limit) {
-		return true
-	}
-
-	return false
-}
-
-// SetLimit gets a reference to the given int32 and assigns it to the Limit field.
-func (o *JobInstancePagedQuerySpec) SetLimit(v int32) {
-	o.Limit = &v
-}
-
-// GetDirection returns the Direction field value if set, zero value otherwise.
-func (o *JobInstancePagedQuerySpec) GetDirection() string {
-	if o == nil || IsNil(o.Direction) {
-		var ret string
-		return ret
-	}
-	return *o.Direction
-}
-
-// GetDirectionOk returns a tuple with the Direction field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *JobInstancePagedQuerySpec) GetDirectionOk() (*string, bool) {
-	if o == nil || IsNil(o.Direction) {
-		return nil, false
-	}
-	return o.Direction, true
-}
-
-// HasDirection returns a boolean if a field has been set.
-func (o *JobInstancePagedQuerySpec) HasDirection() bool {
-	if o != nil && !IsNil(o.Direction) {
-		return true
-	}
-
-	return false
-}
-
-// SetDirection gets a reference to the given string and assigns it to the Direction field.
-func (o *JobInstancePagedQuerySpec) SetDirection(v string) {
-	o.Direction = &v
 }
 
 // GetFilter returns the Filter field value if set, zero value otherwise.
@@ -218,15 +121,6 @@ func (o JobInstancePagedQuerySpec) MarshalJSON() ([]byte, error) {
 
 func (o JobInstancePagedQuerySpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Offset) {
-		toSerialize["offset"] = o.Offset
-	}
-	if !IsNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
-	if !IsNil(o.Direction) {
-		toSerialize["direction"] = o.Direction
-	}
 	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}

@@ -20,8 +20,10 @@ var _ MappedNullable = &Cluster{}
 // Cluster struct for Cluster
 type Cluster struct {
 	ClusterType string `json:"clusterType"`
-	Index       *int32 `json:"index,omitempty"`
-	// WARNING: This is a preview API that could change. Geo partitions for cluster
+	// Property indicating that tablespaces are created for partitions.WARNING: This is a preview API that could change
+	GeoPartitioned *bool  `json:"geoPartitioned,omitempty"`
+	Index          *int32 `json:"index,omitempty"`
+	// List of current partitions. WARNING: This is a preview API that could change
 	Partitions    []PartitionInfo `json:"partitions,omitempty"`
 	PlacementInfo *PlacementInfo  `json:"placementInfo,omitempty"`
 	Regions       []Region        `json:"regions,omitempty"`
@@ -72,6 +74,38 @@ func (o *Cluster) GetClusterTypeOk() (*string, bool) {
 // SetClusterType sets field value
 func (o *Cluster) SetClusterType(v string) {
 	o.ClusterType = v
+}
+
+// GetGeoPartitioned returns the GeoPartitioned field value if set, zero value otherwise.
+func (o *Cluster) GetGeoPartitioned() bool {
+	if o == nil || IsNil(o.GeoPartitioned) {
+		var ret bool
+		return ret
+	}
+	return *o.GeoPartitioned
+}
+
+// GetGeoPartitionedOk returns a tuple with the GeoPartitioned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Cluster) GetGeoPartitionedOk() (*bool, bool) {
+	if o == nil || IsNil(o.GeoPartitioned) {
+		return nil, false
+	}
+	return o.GeoPartitioned, true
+}
+
+// HasGeoPartitioned returns a boolean if a field has been set.
+func (o *Cluster) HasGeoPartitioned() bool {
+	if o != nil && !IsNil(o.GeoPartitioned) {
+		return true
+	}
+
+	return false
+}
+
+// SetGeoPartitioned gets a reference to the given bool and assigns it to the GeoPartitioned field.
+func (o *Cluster) SetGeoPartitioned(v bool) {
+	o.GeoPartitioned = &v
 }
 
 // GetIndex returns the Index field value if set, zero value otherwise.
@@ -269,6 +303,9 @@ func (o Cluster) MarshalJSON() ([]byte, error) {
 func (o Cluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clusterType"] = o.ClusterType
+	if !IsNil(o.GeoPartitioned) {
+		toSerialize["geoPartitioned"] = o.GeoPartitioned
+	}
 	if !IsNil(o.Index) {
 		toSerialize["index"] = o.Index
 	}

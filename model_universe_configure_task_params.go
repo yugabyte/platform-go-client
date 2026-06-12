@@ -53,6 +53,7 @@ type UniverseConfigureTaskParams struct {
 	ItestS3PackagePath        *string `json:"itestS3PackagePath,omitempty"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2025.2.</b> With geo partitioning support, default region is replaced with default partition
 	MastersInDefaultRegion *bool  `json:"mastersInDefaultRegion,omitempty"`
+	NewUI                  bool   `json:"newUI"`
 	NextClusterIndex       *int32 `json:"nextClusterIndex,omitempty"`
 	// YbaApi Internal. True if a node agent for missing in any of the nodes
 	NodeAgentMissing *bool `json:"nodeAgentMissing,omitempty"`
@@ -68,7 +69,6 @@ type UniverseConfigureTaskParams struct {
 	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   string                `json:"platformUrl"`
-	PlatformVersion               *string               `json:"platformVersion,omitempty"`
 	PrevYBSoftwareConfig          *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID        *string `json:"previousTaskUUID,omitempty"`
@@ -113,10 +113,11 @@ type _UniverseConfigureTaskParams UniverseConfigureTaskParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseConfigureTaskParams {
+func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, newUI bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseConfigureTaskParams {
 	this := UniverseConfigureTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
+	this.NewUI = newUI
 	this.PlatformUrl = platformUrl
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
@@ -979,6 +980,30 @@ func (o *UniverseConfigureTaskParams) SetMastersInDefaultRegion(v bool) {
 	o.MastersInDefaultRegion = &v
 }
 
+// GetNewUI returns the NewUI field value
+func (o *UniverseConfigureTaskParams) GetNewUI() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.NewUI
+}
+
+// GetNewUIOk returns a tuple with the NewUI field value
+// and a boolean to check if the value has been set.
+func (o *UniverseConfigureTaskParams) GetNewUIOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NewUI, true
+}
+
+// SetNewUI sets field value
+func (o *UniverseConfigureTaskParams) SetNewUI(v bool) {
+	o.NewUI = v
+}
+
 // GetNextClusterIndex returns the NextClusterIndex field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetNextClusterIndex() int32 {
 	if o == nil || IsNil(o.NextClusterIndex) {
@@ -1289,38 +1314,6 @@ func (o *UniverseConfigureTaskParams) GetPlatformUrlOk() (*string, bool) {
 // SetPlatformUrl sets field value
 func (o *UniverseConfigureTaskParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *UniverseConfigureTaskParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseConfigureTaskParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *UniverseConfigureTaskParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *UniverseConfigureTaskParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
 }
 
 // GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field value if set, zero value otherwise.
@@ -2322,6 +2315,7 @@ func (o UniverseConfigureTaskParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MastersInDefaultRegion) {
 		toSerialize["mastersInDefaultRegion"] = o.MastersInDefaultRegion
 	}
+	toSerialize["newUI"] = o.NewUI
 	if !IsNil(o.NextClusterIndex) {
 		toSerialize["nextClusterIndex"] = o.NextClusterIndex
 	}
@@ -2350,9 +2344,6 @@ func (o UniverseConfigureTaskParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PrevYBSoftwareConfig) {
 		toSerialize["prevYBSoftwareConfig"] = o.PrevYBSoftwareConfig
 	}

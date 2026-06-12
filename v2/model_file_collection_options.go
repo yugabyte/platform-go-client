@@ -32,7 +32,7 @@ type FileCollectionOptions struct {
 	MaxTotalSizeBytes *int64 `json:"max_total_size_bytes,omitempty"`
 	// Timeout in seconds for file collection on each node.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
-	// Run file collection as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user.
+	// Run file collection as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user. Elevated privileges (sudo) are not supported by this API: collection commands (stat, readlink, tar) are constructed by YBA and run directly as linux_user, with no opportunity to escalate. If you need to collect files that are only readable by root or another privileged user, use the run-script API instead with a script that invokes sudo and writes the resulting archive to a path readable by linux_user.
 	LinuxUser *string `json:"linux_user,omitempty"`
 }
 

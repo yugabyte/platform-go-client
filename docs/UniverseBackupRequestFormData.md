@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorString** | Pointer to **string** | Error message | [optional] 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **StorageConfigUUID** | **string** | WARNING: This is a preview API that could change.Storage configuration UUID | 
 **TimeBeforeDelete** | Pointer to **int64** | WARNING: This is a preview API that could change.Time before deleting the backup from storage, in milliseconds | [optional] 
@@ -53,31 +52,6 @@ SetErrorString sets ErrorString field to given value.
 `func (o *UniverseBackupRequestFormData) HasErrorString() bool`
 
 HasErrorString returns a boolean if a field has been set.
-
-### GetPlatformVersion
-
-`func (o *UniverseBackupRequestFormData) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *UniverseBackupRequestFormData) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *UniverseBackupRequestFormData) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *UniverseBackupRequestFormData) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 

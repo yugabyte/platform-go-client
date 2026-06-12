@@ -82,9 +82,8 @@ type BackupRequestParams struct {
 	// Parallel DB backups
 	ParallelDBBackups *int32 `json:"parallelDBBackups,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
-	Parallelism     *int32  `json:"parallelism,omitempty"`
-	PlatformUrl     string  `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	Parallelism *int32 `json:"parallelism,omitempty"`
+	PlatformUrl string `json:"platformUrl"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
@@ -1309,38 +1308,6 @@ func (o *BackupRequestParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *BackupRequestParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupRequestParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *BackupRequestParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *BackupRequestParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
-}
-
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *BackupRequestParams) GetPreviousTaskUUID() string {
 	if o == nil || IsNil(o.PreviousTaskUUID) {
@@ -2064,9 +2031,6 @@ func (o BackupRequestParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}

@@ -23,13 +23,13 @@ type ClusterPartitionSpec struct {
 	// System generated partition uuid used to lookup corresponding GeoPartitionSpec. This is not a user input.
 	Uuid *string `json:"uuid,omitempty"`
 	// The name of geo partition
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	// Whether the partition is default (all masters are put only into this partition)
 	DefaultPartition bool `json:"default_partition"`
 	// The replication factor for the partition.
 	ReplicationFactor int32 `json:"replication_factor"`
 	// The name of corresponding tablespace.
-	TablespaceName string               `json:"tablespace_name"`
+	TablespaceName *string              `json:"tablespace_name,omitempty"`
 	Placement      ClusterPlacementSpec `json:"placement"`
 }
 
@@ -39,12 +39,10 @@ type _ClusterPartitionSpec ClusterPartitionSpec
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, tablespaceName string, placement ClusterPlacementSpec) *ClusterPartitionSpec {
+func NewClusterPartitionSpec(defaultPartition bool, replicationFactor int32, placement ClusterPlacementSpec) *ClusterPartitionSpec {
 	this := ClusterPartitionSpec{}
-	this.Name = name
 	this.DefaultPartition = defaultPartition
 	this.ReplicationFactor = replicationFactor
-	this.TablespaceName = tablespaceName
 	this.Placement = placement
 	return &this
 }
@@ -89,28 +87,36 @@ func (o *ClusterPartitionSpec) SetUuid(v string) {
 	o.Uuid = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *ClusterPartitionSpec) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ClusterPartitionSpec) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *ClusterPartitionSpec) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *ClusterPartitionSpec) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetDefaultPartition returns the DefaultPartition field value
@@ -161,28 +167,36 @@ func (o *ClusterPartitionSpec) SetReplicationFactor(v int32) {
 	o.ReplicationFactor = v
 }
 
-// GetTablespaceName returns the TablespaceName field value
+// GetTablespaceName returns the TablespaceName field value if set, zero value otherwise.
 func (o *ClusterPartitionSpec) GetTablespaceName() string {
-	if o == nil {
+	if o == nil || IsNil(o.TablespaceName) {
 		var ret string
 		return ret
 	}
-
-	return o.TablespaceName
+	return *o.TablespaceName
 }
 
-// GetTablespaceNameOk returns a tuple with the TablespaceName field value
+// GetTablespaceNameOk returns a tuple with the TablespaceName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ClusterPartitionSpec) GetTablespaceNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TablespaceName) {
 		return nil, false
 	}
-	return &o.TablespaceName, true
+	return o.TablespaceName, true
 }
 
-// SetTablespaceName sets field value
+// HasTablespaceName returns a boolean if a field has been set.
+func (o *ClusterPartitionSpec) HasTablespaceName() bool {
+	if o != nil && !IsNil(o.TablespaceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetTablespaceName gets a reference to the given string and assigns it to the TablespaceName field.
 func (o *ClusterPartitionSpec) SetTablespaceName(v string) {
-	o.TablespaceName = v
+	o.TablespaceName = &v
 }
 
 // GetPlacement returns the Placement field value
@@ -222,10 +236,14 @@ func (o ClusterPartitionSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	toSerialize["default_partition"] = o.DefaultPartition
 	toSerialize["replication_factor"] = o.ReplicationFactor
-	toSerialize["tablespace_name"] = o.TablespaceName
+	if !IsNil(o.TablespaceName) {
+		toSerialize["tablespace_name"] = o.TablespaceName
+	}
 	toSerialize["placement"] = o.Placement
 	return toSerialize, nil
 }

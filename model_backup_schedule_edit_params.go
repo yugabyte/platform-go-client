@@ -31,6 +31,12 @@ type BackupScheduleEditParams struct {
 	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
 	// Time before deleting the backup from storage, in milliseconds
 	TimeBeforeDelete *int64 `json:"timeBeforeDelete,omitempty"`
+	// Backup privileges for roles
+	UsePrivileges *bool `json:"usePrivileges,omitempty"`
+	// Backup global ysql roles
+	UseRoles *bool `json:"useRoles,omitempty"`
+	// Is tablespaces information included
+	UseTablespaces *bool `json:"useTablespaces,omitempty"`
 }
 
 // NewBackupScheduleEditParams instantiates a new BackupScheduleEditParams object
@@ -242,6 +248,102 @@ func (o *BackupScheduleEditParams) SetTimeBeforeDelete(v int64) {
 	o.TimeBeforeDelete = &v
 }
 
+// GetUsePrivileges returns the UsePrivileges field value if set, zero value otherwise.
+func (o *BackupScheduleEditParams) GetUsePrivileges() bool {
+	if o == nil || IsNil(o.UsePrivileges) {
+		var ret bool
+		return ret
+	}
+	return *o.UsePrivileges
+}
+
+// GetUsePrivilegesOk returns a tuple with the UsePrivileges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupScheduleEditParams) GetUsePrivilegesOk() (*bool, bool) {
+	if o == nil || IsNil(o.UsePrivileges) {
+		return nil, false
+	}
+	return o.UsePrivileges, true
+}
+
+// HasUsePrivileges returns a boolean if a field has been set.
+func (o *BackupScheduleEditParams) HasUsePrivileges() bool {
+	if o != nil && !IsNil(o.UsePrivileges) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsePrivileges gets a reference to the given bool and assigns it to the UsePrivileges field.
+func (o *BackupScheduleEditParams) SetUsePrivileges(v bool) {
+	o.UsePrivileges = &v
+}
+
+// GetUseRoles returns the UseRoles field value if set, zero value otherwise.
+func (o *BackupScheduleEditParams) GetUseRoles() bool {
+	if o == nil || IsNil(o.UseRoles) {
+		var ret bool
+		return ret
+	}
+	return *o.UseRoles
+}
+
+// GetUseRolesOk returns a tuple with the UseRoles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupScheduleEditParams) GetUseRolesOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseRoles) {
+		return nil, false
+	}
+	return o.UseRoles, true
+}
+
+// HasUseRoles returns a boolean if a field has been set.
+func (o *BackupScheduleEditParams) HasUseRoles() bool {
+	if o != nil && !IsNil(o.UseRoles) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseRoles gets a reference to the given bool and assigns it to the UseRoles field.
+func (o *BackupScheduleEditParams) SetUseRoles(v bool) {
+	o.UseRoles = &v
+}
+
+// GetUseTablespaces returns the UseTablespaces field value if set, zero value otherwise.
+func (o *BackupScheduleEditParams) GetUseTablespaces() bool {
+	if o == nil || IsNil(o.UseTablespaces) {
+		var ret bool
+		return ret
+	}
+	return *o.UseTablespaces
+}
+
+// GetUseTablespacesOk returns a tuple with the UseTablespaces field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupScheduleEditParams) GetUseTablespacesOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseTablespaces) {
+		return nil, false
+	}
+	return o.UseTablespaces, true
+}
+
+// HasUseTablespaces returns a boolean if a field has been set.
+func (o *BackupScheduleEditParams) HasUseTablespaces() bool {
+	if o != nil && !IsNil(o.UseTablespaces) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseTablespaces gets a reference to the given bool and assigns it to the UseTablespaces field.
+func (o *BackupScheduleEditParams) SetUseTablespaces(v bool) {
+	o.UseTablespaces = &v
+}
+
 func (o BackupScheduleEditParams) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -269,6 +371,15 @@ func (o BackupScheduleEditParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TimeBeforeDelete) {
 		toSerialize["timeBeforeDelete"] = o.TimeBeforeDelete
+	}
+	if !IsNil(o.UsePrivileges) {
+		toSerialize["usePrivileges"] = o.UsePrivileges
+	}
+	if !IsNil(o.UseRoles) {
+		toSerialize["useRoles"] = o.UseRoles
+	}
+	if !IsNil(o.UseTablespaces) {
+		toSerialize["useTablespaces"] = o.UseTablespaces
 	}
 	return toSerialize, nil
 }

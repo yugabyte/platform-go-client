@@ -28,7 +28,7 @@ type ScriptOptions struct {
 	Params []string `json:"params,omitempty"`
 	// Timeout in seconds for the script execution on each node. If elevated privileges are needed, include sudo commands directly in your script.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
-	// Run the script as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user.
+	// Run the script as a particular Linux user. Defaults to yugabyte. When using Node Agent, the command is executed as this user. When using SSH fallback, this sets the SSH user. If your script invokes sudo, the chosen linux_user must have NOPASSWD sudo configured for those commands; otherwise the script will block on the password prompt and surface as a timeout rather than an authorization error.
 	LinuxUser *string `json:"linux_user,omitempty"`
 	// Maximum size in bytes for script file content to be captured in audit logs. Script files larger than this limit will be executed, but their content will not be recorded in the audit log. This only applies when using script_file.
 	MaxScriptFileSizeBytes *int64 `json:"max_script_file_size_bytes,omitempty"`

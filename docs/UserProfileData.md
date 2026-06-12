@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConfirmPassword** | Pointer to **string** | Password confirmation | [optional] 
+**NewUniverseUiEnabled** | Pointer to **bool** | YbaApi Internal. Used to turn off new UI feature for particular user | [optional] 
 **Password** | Pointer to **string** | Password | [optional] 
 **Role** | **string** | User role | 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
@@ -52,6 +53,31 @@ SetConfirmPassword sets ConfirmPassword field to given value.
 `func (o *UserProfileData) HasConfirmPassword() bool`
 
 HasConfirmPassword returns a boolean if a field has been set.
+
+### GetNewUniverseUiEnabled
+
+`func (o *UserProfileData) GetNewUniverseUiEnabled() bool`
+
+GetNewUniverseUiEnabled returns the NewUniverseUiEnabled field if non-nil, zero value otherwise.
+
+### GetNewUniverseUiEnabledOk
+
+`func (o *UserProfileData) GetNewUniverseUiEnabledOk() (*bool, bool)`
+
+GetNewUniverseUiEnabledOk returns a tuple with the NewUniverseUiEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewUniverseUiEnabled
+
+`func (o *UserProfileData) SetNewUniverseUiEnabled(v bool)`
+
+SetNewUniverseUiEnabled sets NewUniverseUiEnabled field to given value.
+
+### HasNewUniverseUiEnabled
+
+`func (o *UserProfileData) HasNewUniverseUiEnabled() bool`
+
+HasNewUniverseUiEnabled returns a boolean if a field has been set.
 
 ### GetPassword
 

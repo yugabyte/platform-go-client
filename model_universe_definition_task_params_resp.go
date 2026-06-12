@@ -64,8 +64,7 @@ type UniverseDefinitionTaskParamsResp struct {
 	// YbaApi Internal. PA Collector UUID
 	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
-	PlatformUrl                   string                `json:"platformUrl"`
-	PlatformVersion               *string               `json:"platformVersion,omitempty"`
+	PlatformUrl                   *string               `json:"platformUrl,omitempty"`
 	PrevYBSoftwareConfig          *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID        *string `json:"previousTaskUUID,omitempty"`
@@ -109,11 +108,10 @@ type _UniverseDefinitionTaskParamsResp UniverseDefinitionTaskParamsResp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParamsResp {
+func NewUniverseDefinitionTaskParamsResp(clusters []Cluster, creatingUser Users, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseDefinitionTaskParamsResp {
 	this := UniverseDefinitionTaskParamsResp{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
-	this.PlatformUrl = platformUrl
 	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
 	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
@@ -1199,60 +1197,36 @@ func (o *UniverseDefinitionTaskParamsResp) SetPlacementModificationTaskUuid(v st
 	o.PlacementModificationTaskUuid = &v
 }
 
-// GetPlatformUrl returns the PlatformUrl field value
+// GetPlatformUrl returns the PlatformUrl field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParamsResp) GetPlatformUrl() string {
-	if o == nil {
+	if o == nil || IsNil(o.PlatformUrl) {
 		var ret string
 		return ret
 	}
-
-	return o.PlatformUrl
+	return *o.PlatformUrl
 }
 
-// GetPlatformUrlOk returns a tuple with the PlatformUrl field value
+// GetPlatformUrlOk returns a tuple with the PlatformUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseDefinitionTaskParamsResp) GetPlatformUrlOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PlatformUrl) {
 		return nil, false
 	}
-	return &o.PlatformUrl, true
+	return o.PlatformUrl, true
 }
 
-// SetPlatformUrl sets field value
-func (o *UniverseDefinitionTaskParamsResp) SetPlatformUrl(v string) {
-	o.PlatformUrl = v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *UniverseDefinitionTaskParamsResp) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseDefinitionTaskParamsResp) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *UniverseDefinitionTaskParamsResp) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
+// HasPlatformUrl returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasPlatformUrl() bool {
+	if o != nil && !IsNil(o.PlatformUrl) {
 		return true
 	}
 
 	return false
 }
 
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *UniverseDefinitionTaskParamsResp) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
+// SetPlatformUrl gets a reference to the given string and assigns it to the PlatformUrl field.
+func (o *UniverseDefinitionTaskParamsResp) SetPlatformUrl(v string) {
+	o.PlatformUrl = &v
 }
 
 // GetPrevYBSoftwareConfig returns the PrevYBSoftwareConfig field value if set, zero value otherwise.
@@ -2243,9 +2217,8 @@ func (o UniverseDefinitionTaskParamsResp) ToMap() (map[string]interface{}, error
 	if !IsNil(o.PlacementModificationTaskUuid) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
 	}
-	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
+	if !IsNil(o.PlatformUrl) {
+		toSerialize["platformUrl"] = o.PlatformUrl
 	}
 	if !IsNil(o.PrevYBSoftwareConfig) {
 		toSerialize["prevYBSoftwareConfig"] = o.PrevYBSoftwareConfig

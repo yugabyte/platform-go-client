@@ -37,9 +37,8 @@ type RestoreSnapshotScheduleParams struct {
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	// PITR Config UUID
-	PitrConfigUUID  *string `json:"pitrConfigUUID,omitempty"`
-	PlatformUrl     string  `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	PitrConfigUUID *string `json:"pitrConfigUUID,omitempty"`
+	PlatformUrl    string  `json:"platformUrl"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// Restore Time In millis
@@ -515,38 +514,6 @@ func (o *RestoreSnapshotScheduleParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *RestoreSnapshotScheduleParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RestoreSnapshotScheduleParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *RestoreSnapshotScheduleParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *RestoreSnapshotScheduleParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
-}
-
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
 func (o *RestoreSnapshotScheduleParams) GetPreviousTaskUUID() string {
 	if o == nil || IsNil(o.PreviousTaskUUID) {
@@ -931,9 +898,6 @@ func (o RestoreSnapshotScheduleParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["pitrConfigUUID"] = o.PitrConfigUUID
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID
 	}

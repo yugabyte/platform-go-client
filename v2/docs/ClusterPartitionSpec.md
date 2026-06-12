@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | Pointer to **string** | System generated partition uuid used to lookup corresponding GeoPartitionSpec. This is not a user input. | [optional] [readonly] 
-**Name** | **string** | The name of geo partition | 
+**Name** | Pointer to **string** | The name of geo partition | [optional] 
 **DefaultPartition** | **bool** | Whether the partition is default (all masters are put only into this partition) | 
 **ReplicationFactor** | **int32** | The replication factor for the partition. | 
-**TablespaceName** | **string** | The name of corresponding tablespace. | 
+**TablespaceName** | Pointer to **string** | The name of corresponding tablespace. | [optional] 
 **Placement** | [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | 
 
 ## Methods
 
 ### NewClusterPartitionSpec
 
-`func NewClusterPartitionSpec(name string, defaultPartition bool, replicationFactor int32, tablespaceName string, placement ClusterPlacementSpec, ) *ClusterPartitionSpec`
+`func NewClusterPartitionSpec(defaultPartition bool, replicationFactor int32, placement ClusterPlacementSpec, ) *ClusterPartitionSpec`
 
 NewClusterPartitionSpec instantiates a new ClusterPartitionSpec object
 This constructor will assign default values to properties that have it defined,
@@ -74,6 +74,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *ClusterPartitionSpec) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetDefaultPartition
 
@@ -134,6 +139,11 @@ and a boolean to check if the value has been set.
 
 SetTablespaceName sets TablespaceName field to given value.
 
+### HasTablespaceName
+
+`func (o *ClusterPartitionSpec) HasTablespaceName() bool`
+
+HasTablespaceName returns a boolean if a field has been set.
 
 ### GetPlacement
 

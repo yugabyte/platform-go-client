@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**EncryptionInTransitCertRotate**](UniverseAPI.md#EncryptionInTransitCertRotate) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit/rotate | Rotate TLS Certs
 [**EncryptionInTransitToggle**](UniverseAPI.md#EncryptionInTransitToggle) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit | Enable or disable encryption in transit
 [**FinalizeSoftwareUpgrade**](UniverseAPI.md#FinalizeSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
+[**GetExportTelemetryConfig**](UniverseAPI.md#GetExportTelemetryConfig) | **Get** /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs | Get configured export telemetry configs for a universe
 [**GetFinalizeSoftwareUpgradeInfo**](UniverseAPI.md#GetFinalizeSoftwareUpgradeInfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 [**GetUniverse**](UniverseAPI.md#GetUniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
 [**GetUniverseResources**](UniverseAPI.md#GetUniverseResources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
@@ -1462,6 +1463,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetExportTelemetryConfig
+
+> TelemetryConfig GetExportTelemetryConfig(ctx, cUUID, uniUUID).Execute()
+
+Get configured export telemetry configs for a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.GetExportTelemetryConfig(context.Background(), cUUID, uniUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.GetExportTelemetryConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetExportTelemetryConfig`: TelemetryConfig
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.GetExportTelemetryConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetExportTelemetryConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**TelemetryConfig**](TelemetryConfig.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

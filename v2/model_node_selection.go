@@ -22,9 +22,9 @@ var _ MappedNullable = &NodeSelection{}
 type NodeSelection struct {
 	// List of specific node names to run the script on.
 	NodeNames []string `json:"node_names,omitempty"`
-	// Run the script only on master nodes from the specified node_names (or all masters if node_names is not provided).
+	// Run the script only on master nodes from the specified node_names (or all masters if node_names is not provided). Mutually exclusive with tservers_only.
 	MastersOnly *bool `json:"masters_only,omitempty"`
-	// Run the script only on tserver nodes from the specified node_names (or all tservers if node_names is not provided).
+	// Run the script only on tserver nodes from the specified node_names (or all tservers if node_names is not provided). Mutually exclusive with masters_only.
 	TserversOnly *bool `json:"tservers_only,omitempty"`
 	// Run the script only on nodes belonging to a specific cluster (e.g., primary or read replica). If not provided, runs on nodes across all clusters in the universe.
 	ClusterUuid *string `json:"cluster_uuid,omitempty"`

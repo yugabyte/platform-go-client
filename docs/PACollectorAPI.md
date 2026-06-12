@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**EditPACollector**](PACollectorAPI.md#EditPACollector) | **Put** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Edit PA Collector
 [**GetPACollector**](PACollectorAPI.md#GetPACollector) | **Get** /api/v1/customers/{cUUID}/pa_collector/{paUUID} | Get PA Collector
 [**ListAllPACollectors**](PACollectorAPI.md#ListAllPACollectors) | **Get** /api/v1/customers/{cUUID}/pa_collector | List All PA Collectors
+[**PageRegisteredUniverses**](PACollectorAPI.md#PageRegisteredUniverses) | **Post** /api/v1/customers/{cUUID}/pa_collector/{paUUID}/universes/page | List universes registered with PA Collector (paginated)
 [**RegisterUniverse**](PACollectorAPI.md#RegisterUniverse) | **Put** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector/{paUUID} | Register universe with PA Collector
 [**UnregisterUniverse**](PACollectorAPI.md#UnregisterUniverse) | **Delete** /api/v1/customers/{cUUID}/universes/{uUUID}/pa_collector | Unregister universe from PA Collector
 
@@ -461,9 +462,86 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PageRegisteredUniverses
+
+> PaUniversePagedApiResponse PageRegisteredUniverses(ctx, cUUID, paUUID).PagePaUniverseRequest(pagePaUniverseRequest).Request(request).Execute()
+
+List universes registered with PA Collector (paginated)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v1"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	paUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	pagePaUniverseRequest := *openapiclient.NewPaUniversePagedApiQuery("Direction_example", *openapiclient.NewPaUniverseApiFilter("UniverseName_example"), int32(123), false, int32(123), "SortBy_example") // PaUniversePagedApiQuery | 
+	request := TODO // interface{} |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PACollectorAPI.PageRegisteredUniverses(context.Background(), cUUID, paUUID).PagePaUniverseRequest(pagePaUniverseRequest).Request(request).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PACollectorAPI.PageRegisteredUniverses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PageRegisteredUniverses`: PaUniversePagedApiResponse
+	fmt.Fprintf(os.Stdout, "Response from `PACollectorAPI.PageRegisteredUniverses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** |  | 
+**paUUID** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPageRegisteredUniversesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **pagePaUniverseRequest** | [**PaUniversePagedApiQuery**](PaUniversePagedApiQuery.md) |  | 
+ **request** | [**interface{}**](interface{}.md) |  | 
+
+### Return type
+
+[**PaUniversePagedApiResponse**](PaUniversePagedApiResponse.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RegisterUniverse
 
-> YBPSuccess RegisterUniverse(ctx, cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Request(request).Execute()
+> YBPTask RegisterUniverse(ctx, cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Request(request).Execute()
 
 Register universe with PA Collector
 
@@ -495,7 +573,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PACollectorAPI.RegisterUniverse``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RegisterUniverse`: YBPSuccess
+	// response from `RegisterUniverse`: YBPTask
 	fmt.Fprintf(os.Stdout, "Response from `PACollectorAPI.RegisterUniverse`: %v\n", resp)
 }
 ```
@@ -525,7 +603,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -543,7 +621,7 @@ Name | Type | Description  | Notes
 
 ## UnregisterUniverse
 
-> YBPSuccess UnregisterUniverse(ctx, cUUID, uUUID).Request(request).Execute()
+> YBPTask UnregisterUniverse(ctx, cUUID, uUUID).Request(request).Execute()
 
 Unregister universe from PA Collector
 
@@ -573,7 +651,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PACollectorAPI.UnregisterUniverse``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UnregisterUniverse`: YBPSuccess
+	// response from `UnregisterUniverse`: YBPTask
 	fmt.Fprintf(os.Stdout, "Response from `PACollectorAPI.UnregisterUniverse`: %v\n", resp)
 }
 ```
@@ -600,7 +678,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**YBPSuccess**](YBPSuccess.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 

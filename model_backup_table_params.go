@@ -85,9 +85,8 @@ type BackupTableParams struct {
 	// User name of the current tables owner
 	OldOwner *string `json:"oldOwner,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
-	Parallelism     *int32  `json:"parallelism,omitempty"`
-	PlatformUrl     string  `json:"platformUrl"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	Parallelism *int32 `json:"parallelism,omitempty"`
+	PlatformUrl string `json:"platformUrl"`
 	// Point in time restore available
 	PointInTimeRestoreEnabled *bool `json:"pointInTimeRestoreEnabled,omitempty"`
 	// Previous task UUID of a retry
@@ -1397,38 +1396,6 @@ func (o *BackupTableParams) SetPlatformUrl(v string) {
 	o.PlatformUrl = v
 }
 
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *BackupTableParams) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BackupTableParams) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *BackupTableParams) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *BackupTableParams) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
-}
-
 // GetPointInTimeRestoreEnabled returns the PointInTimeRestoreEnabled field value if set, zero value otherwise.
 func (o *BackupTableParams) GetPointInTimeRestoreEnabled() bool {
 	if o == nil || IsNil(o.PointInTimeRestoreEnabled) {
@@ -2510,9 +2477,6 @@ func (o BackupTableParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["parallelism"] = o.Parallelism
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
-	}
 	if !IsNil(o.PointInTimeRestoreEnabled) {
 		toSerialize["pointInTimeRestoreEnabled"] = o.PointInTimeRestoreEnabled
 	}

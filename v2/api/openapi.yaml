@@ -28,12 +28,22 @@ tags:
   name: Backup and Restore
 - description: CRUD operations for Continuous YBA Backups
   name: Continuous Backup
+- description: Customer configuration management
+  name: Customer Configuration
+- description: Disaster recovery configuration management
+  name: Disaster Recovery
+- description: Encryption at rest management
+  name: Encryption at rest
+- description: Image bundle management
+  name: Image Bundle
 - description: Isolated backup/restore of YBA to local filesystem
   name: Isolated Backup
 - description: Job Scheduler
   name: Job Scheduler
 - description: CRUD operations for YBA metrics
   name: Metrics
+- description: Point-in-time recovery configuration management
+  name: PITR
 - description: Operations for Telemetry Providers
   name: Telemetry Provider
 - description: CRUD operations for a Universe
@@ -212,6 +222,55 @@ paths:
           sourceType: endpoint
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/backups/page:
+    post:
+      description: |
+        Returns universe backups for the specified customer with pagination and optional filters.
+        WARNING: This is a preview API that could change.
+      operationId: pageListBackups
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/BackupPagedReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupPagedResp'
+          description: successful operation
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List universe backups.
+      tags:
+      - Backup and Restore
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
       x-accepts:
       - application/json
   /customers/{cUUID}/auto-yba-backups:
@@ -458,6 +517,162 @@ paths:
           path: customers
           sourceType: endpoint
       x-yba-api-since: 2024.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/customer-configs/page:
+    post:
+      description: |
+        Returns customer configurations for the specified customer with pagination.
+        WARNING: This is a preview API that could change.
+      operationId: pageListCustomerConfigs
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerConfigPagedReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerConfigPagedResp'
+          description: Customer configurations visible to the caller for this page
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List customer configurations (paged)
+      tags:
+      - Customer Configuration
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/kms-configs/page:
+    post:
+      description: |
+        Returns KMS configurations for the specified customer with pagination.
+        WARNING: This is a preview API that could change.
+      operationId: pageListKmsConfigs
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/KmsConfigPagedReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsConfigPagedResp'
+          description: KMS configurations visible to the caller for this page
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List KMS configurations (paged)
+      tags:
+      - Encryption at rest
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/providers/{providerUUID}/image-bundles/page:
+    post:
+      description: |
+        Returns image bundles for the specified provider with pagination.
+        WARNING: This is a preview API that could change.
+      operationId: pageListImageBundles
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Provider UUID
+        explode: false
+        in: path
+        name: providerUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/ImageBundlePagedReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageBundlePagedResp'
+          description: Image bundles for this page
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List image bundles (paged)
+      tags:
+      - Image Bundle
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
       x-accepts:
@@ -904,6 +1119,68 @@ paths:
         noAuthz: true
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/universes/{uniUUID}/pitr-configs/page:
+    post:
+      description: |
+        Returns PITR configurations for the specified universe with pagination.
+        WARNING: This is a preview API that could change.
+      operationId: pageListPitrConfigs
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/PitrConfigPagedReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PitrConfigPagedResp'
+          description: successful operation
+        "400":
+          description: Invalid input
+        "404":
+          description: Customer or universe not found
+        "429":
+          description: Another PITR list request is already in progress
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List PITR configurations (paged)
+      tags:
+      - PITR
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: READ
+        resourceLocation:
+          path: universes
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
       x-accepts:
       - application/json
   /customers/{cUUID}/telemetry-provider/types:
@@ -2538,6 +2815,62 @@ paths:
       x-accepts:
       - application/json
   /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs:
+    get:
+      description: |
+        Returns the currently configured telemetry export configs (audit logs, query logs,
+        metrics) for a universe. A null sub-config indicates that export is disabled.
+      operationId: getExportTelemetryConfig
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelemetryConfig'
+          description: Current export telemetry configs for a universe
+          x-yba-api-since: 2026.1.0.0
+          x-yba-api-visibility: internal
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Get configured export telemetry configs for a universe
+      tags:
+      - Universe
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: READ
+        resourceLocation:
+          path: universes
+          sourceType: endpoint
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.2.0
+      x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
     post:
       description: |
         Configure all telemetry export configs (audit logs, query logs, metrics) for a universe
@@ -3147,6 +3480,12 @@ components:
               $ref: '#/components/schemas/AuthGroupToRolesMapping'
             type: array
       required: true
+    BackupPagedReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BackupPagedQuerySpec'
+      required: true
     ContinuousBackupCreateReq:
       content:
         application/json:
@@ -3158,6 +3497,24 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ContinuousRestoreSpec'
+      required: true
+    CustomerConfigPagedReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerConfigPagedQuerySpec'
+      required: true
+    KmsConfigPagedReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KmsConfigPagedQuerySpec'
+      required: true
+    ImageBundlePagedReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImageBundlePagedQuerySpec'
       required: true
     IsolatedBackupCreateReq:
       content:
@@ -3194,6 +3551,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/JobScheduleSnoozeSpec'
+      required: true
+    PitrConfigPagedReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PitrConfigPagedQuerySpec'
       required: true
     UniverseEditReq:
       content:
@@ -3393,6 +3756,12 @@ components:
               $ref: '#/components/schemas/GflagMetadata'
             type: array
       description: OK
+    BackupPagedResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BackupPagedResp'
+      description: successful operation
     ContinuousBackupResp:
       content:
         application/json:
@@ -3405,6 +3774,24 @@ components:
           schema:
             $ref: '#/components/schemas/YBATask'
       description: task accepted
+    CustomerConfigPagedResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerConfigPagedResp'
+      description: Customer configurations visible to the caller for this page
+    KmsConfigPagedResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/KmsConfigPagedResp'
+      description: KMS configurations visible to the caller for this page
+    ImageBundlePagedResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ImageBundlePagedResp'
+      description: Image bundles for this page
     JobScheduleResp:
       content:
         application/json:
@@ -3430,6 +3817,12 @@ components:
             $ref: '#/components/schemas/PrometheusHostInfo'
       description: success
       x-yba-api-visibility: internal
+    PitrConfigPagedResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PitrConfigPagedResp'
+      description: successful operation
     UniverseResp:
       content:
         application/json:
@@ -3469,6 +3862,14 @@ components:
       description: Successfully detached universe.
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
+    ExportTelemetryConfigResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TelemetryConfig'
+      description: Current export telemetry configs for a universe
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: internal
     RunScriptResp:
       content:
         application/json:
@@ -3671,6 +4072,808 @@ components:
           type: string
       title: GflagMetadata
       type: object
+    PaginationSpec:
+      description: Pagination spec in page API requests.
+      properties:
+        offset:
+          default: 0
+          description: Start offset of the records.
+          format: int32
+          minimum: 0
+          type: integer
+        limit:
+          default: 10
+          description: Maximum number of records to be fetched.
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+        direction:
+          description: Sort order of the records.
+          enum:
+          - ASC
+          - DESC
+          type: string
+      title: PaginationSpec
+      type: object
+      x-parent: true
+    BackupState:
+      description: Backup lifecycle state.
+      enum:
+      - InProgress
+      - Completed
+      - Failed
+      - Deleted
+      - Skipped
+      - FailedToDelete
+      - Stopping
+      - Stopped
+      - QueuedForDeletion
+      - QueuedForForcedDeletion
+      - DeleteInProgress
+      title: BackupState
+      type: string
+      x-enum-varnames:
+      - BackupInProgress
+      - BackupCompleted
+      - BackupFailed
+      - BackupDeleted
+      - BackupSkipped
+      - BackupFailedToDelete
+      - BackupStopping
+      - BackupStopped
+      - BackupQueuedForDeletion
+      - BackupQueuedForForcedDeletion
+      - BackupDeleteInProgress
+    BackupApiFilter:
+      description: Optional filter for listing backups.
+      example:
+        date_range_end: 2000-01-23T04:56:07.000+00:00
+        universe_name_list:
+        - universe_name_list
+        - universe_name_list
+        only_show_deleted_configs: true
+        keyspace_list:
+        - keyspace_list
+        - keyspace_list
+        show_hidden: true
+        storage_config_uuid_list:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        schedule_uuid_list:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        backup_uuid_list:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        only_show_deleted_universes: true
+        universe_uuid_list:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        date_range_start: 2000-01-23T04:56:07.000+00:00
+        states:
+        - InProgress
+        - InProgress
+      properties:
+        date_range_start:
+          description: Include backups created on or after this time.
+          format: date-time
+          type: string
+        date_range_end:
+          description: Include backups created on or before this time.
+          format: date-time
+          type: string
+        states:
+          description: Backup states to include.
+          items:
+            $ref: '#/components/schemas/BackupState'
+          type: array
+        keyspace_list:
+          description: Keyspace names to include.
+          items:
+            type: string
+          type: array
+        universe_name_list:
+          description: Universe names to include.
+          items:
+            type: string
+          type: array
+        storage_config_uuid_list:
+          description: Storage config UUIDs to include.
+          items:
+            format: uuid
+            type: string
+          type: array
+        schedule_uuid_list:
+          description: Backup schedule UUIDs to include.
+          items:
+            format: uuid
+            type: string
+          type: array
+        universe_uuid_list:
+          description: Universe UUIDs to include.
+          items:
+            format: uuid
+            type: string
+          type: array
+        backup_uuid_list:
+          description: Backup UUIDs to include.
+          items:
+            format: uuid
+            type: string
+          type: array
+        only_show_deleted_universes:
+          description: "When true, include backups whose universe has been deleted."
+          type: boolean
+        only_show_deleted_configs:
+          description: "When true, include backups whose storage config has been deleted."
+          type: boolean
+        show_hidden:
+          description: "When true, include hidden backups."
+          type: boolean
+      title: BackupApiFilter
+      type: object
+    BackupPagedQuerySpec:
+      allOf:
+      - $ref: '#/components/schemas/PaginationSpec'
+      - description: |
+          Paged list of universe backups.
+          Rows are ordered by create time. The order is descending by default.
+        properties:
+          filter:
+            $ref: '#/components/schemas/BackupApiFilter'
+        title: BackupPagedQuerySpec
+        type: object
+        example: null
+      example:
+        filter:
+          date_range_end: 2000-01-23T04:56:07.000+00:00
+          universe_name_list:
+          - universe_name_list
+          - universe_name_list
+          only_show_deleted_configs: true
+          keyspace_list:
+          - keyspace_list
+          - keyspace_list
+          show_hidden: true
+          storage_config_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          schedule_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          backup_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          only_show_deleted_universes: true
+          universe_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          date_range_start: 2000-01-23T04:56:07.000+00:00
+          states:
+          - InProgress
+          - InProgress
+        offset: 0
+        limit: 301
+        direction: ASC
+      type: object
+    PaginationResp:
+      description: Pagination information in page API responses.
+      properties:
+        has_next:
+          description: There are more next records if true.
+          type: boolean
+        has_prev:
+          description: There are more previous records if true.
+          type: boolean
+        total_count:
+          description: Total number of records.
+          format: int32
+          type: integer
+      title: PaginationResp
+      type: object
+      x-parent: true
+    BackupRegionLocation:
+      description: Per-region backup storage location.
+      example:
+        location: location
+        region: region
+        host_base: host_base
+      properties:
+        region:
+          description: Cloud region name.
+          readOnly: true
+          type: string
+        location:
+          description: Backup storage location path or URI.
+          readOnly: true
+          type: string
+        host_base:
+          description: Host base path for the backup location.
+          readOnly: true
+          type: string
+      title: BackupRegionLocation
+      type: object
+    BackupPointInTimeRestoreWindow:
+      description: Point-in-time restore window for a keyspace backup.
+      example:
+        timestamp_retention_window_end_millis: 5
+        timestamp_retention_window_start_millis: 1
+      properties:
+        timestamp_retention_window_start_millis:
+          description: "Start of the PITR retention window, in milliseconds since\
+            \ epoch."
+          format: int64
+          readOnly: true
+          type: integer
+        timestamp_retention_window_end_millis:
+          description: "End of the PITR retention window, in milliseconds since epoch."
+          format: int64
+          readOnly: true
+          type: integer
+      title: BackupPointInTimeRestoreWindow
+      type: object
+    BackupKeyspaceTables:
+      description: Keyspace and table selection included in a backup.
+      example:
+        keyspace: keyspace
+        per_region_locations:
+        - location: location
+          region: region
+          host_base: host_base
+        - location: location
+          region: region
+          host_base: host_base
+        default_location: default_location
+        backup_size_in_bytes: 6
+        table_uuid_list:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        all_tables: true
+        backup_point_in_time_restore_window:
+          timestamp_retention_window_end_millis: 5
+          timestamp_retention_window_start_millis: 1
+        tables_list:
+        - tables_list
+        - tables_list
+      properties:
+        keyspace:
+          description: Keyspace or namespace name.
+          readOnly: true
+          type: string
+        all_tables:
+          description: Whether all tables in the keyspace are included.
+          readOnly: true
+          type: boolean
+        tables_list:
+          description: Table names included in the backup.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        table_uuid_list:
+          description: Table UUIDs included in the backup.
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        backup_size_in_bytes:
+          description: "Backup size for this keyspace, in bytes."
+          format: int64
+          readOnly: true
+          type: integer
+        default_location:
+          description: Default storage location for this keyspace backup.
+          readOnly: true
+          type: string
+        per_region_locations:
+          description: Per-region storage locations for this keyspace backup.
+          items:
+            $ref: '#/components/schemas/BackupRegionLocation'
+          readOnly: true
+          type: array
+        backup_point_in_time_restore_window:
+          $ref: '#/components/schemas/BackupPointInTimeRestoreWindow'
+      title: BackupKeyspaceTables
+      type: object
+    BackupSpec:
+      description: |
+        User-provided and configuration attributes for a universe backup.
+      example:
+        schedule_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_full_backup: true
+        customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universe_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        backup_type: YQL_TABLE_TYPE
+        schedule_name: schedule_name
+        on_demand: true
+        use_tablespaces: true
+        keyspace_tables:
+        - keyspace: keyspace
+          per_region_locations:
+          - location: location
+            region: region
+            host_base: host_base
+          - location: location
+            region: region
+            host_base: host_base
+          default_location: default_location
+          backup_size_in_bytes: 6
+          table_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          all_tables: true
+          backup_point_in_time_restore_window:
+            timestamp_retention_window_end_millis: 5
+            timestamp_retention_window_start_millis: 1
+          tables_list:
+          - tables_list
+          - tables_list
+        - keyspace: keyspace
+          per_region_locations:
+          - location: location
+            region: region
+            host_base: host_base
+          - location: location
+            region: region
+            host_base: host_base
+          default_location: default_location
+          backup_size_in_bytes: 6
+          table_uuid_list:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          all_tables: true
+          backup_point_in_time_restore_window:
+            timestamp_retention_window_end_millis: 5
+            timestamp_retention_window_start_millis: 1
+          tables_list:
+          - tables_list
+          - tables_list
+        storage_config_type: S3
+        expiry_time_unit: NanoSeconds
+        category: YB_BACKUP_SCRIPT
+        expiry_time: 2000-01-23T04:56:07.000+00:00
+        universe_name: universe_name
+        use_roles: true
+      properties:
+        customer_uuid:
+          description: Customer UUID that owns the backup.
+          format: uuid
+          type: string
+        universe_uuid:
+          description: Universe UUID that was backed up.
+          format: uuid
+          type: string
+        universe_name:
+          description: Universe name at backup time.
+          type: string
+        schedule_uuid:
+          description: "Backup schedule UUID, when created by a schedule."
+          format: uuid
+          type: string
+        schedule_name:
+          description: "Backup schedule name, when created by a schedule."
+          type: string
+        backup_type:
+          description: Table type for the backup.
+          enum:
+          - YQL_TABLE_TYPE
+          - REDIS_TABLE_TYPE
+          - PGSQL_TABLE_TYPE
+          - TRANSACTION_STATUS_TABLE_TYPE
+          type: string
+        category:
+          description: Backup implementation category.
+          enum:
+          - YB_BACKUP_SCRIPT
+          - YB_CONTROLLER
+          type: string
+        storage_config_type:
+          description: Storage provider type for the backup.
+          enum:
+          - S3
+          - NFS
+          - AZ
+          - GCS
+          - FILE
+          type: string
+        is_full_backup:
+          description: Whether this is a full backup rather than incremental.
+          type: boolean
+        on_demand:
+          description: True when the backup was not created by a schedule.
+          type: boolean
+        use_tablespaces:
+          description: Whether tablespaces were included in the backup.
+          type: boolean
+        use_roles:
+          description: Whether database roles were included in the backup.
+          type: boolean
+        expiry_time:
+          description: Time when the backup expires.
+          format: date-time
+          type: string
+        expiry_time_unit:
+          description: Unit used for backup expiry configuration.
+          enum:
+          - NanoSeconds
+          - MicroSeconds
+          - MilliSeconds
+          - Seconds
+          - Minutes
+          - Hours
+          - Days
+          - Months
+          - Years
+          type: string
+        keyspace_tables:
+          description: Keyspaces and tables included in the backup.
+          items:
+            $ref: '#/components/schemas/BackupKeyspaceTables'
+          type: array
+      title: BackupSpec
+      type: object
+    BackupInfo:
+      description: System-generated backup metadata and status.
+      example:
+        table_by_table_backup: true
+        has_incremental_backups: true
+        completion_time: 2000-01-23T04:56:07.000+00:00
+        create_time: 2000-01-23T04:56:07.000+00:00
+        sse: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        last_incremental_backup_time: 2000-01-23T04:56:07.000+00:00
+        last_backup_state: null
+        is_storage_config_present: true
+        full_chain_size_in_bytes: 2
+        base_backup_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        kms_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        update_time: 2000-01-23T04:56:07.000+00:00
+        is_universe_present: true
+        total_backup_size_in_bytes: 5
+        state: InProgress
+        task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        storage_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        uuid:
+          description: Backup UUID.
+          format: uuid
+          readOnly: true
+          type: string
+        base_backup_uuid:
+          description: Base backup UUID for incremental chains.
+          format: uuid
+          readOnly: true
+          type: string
+        state:
+          $ref: '#/components/schemas/BackupState'
+        storage_config_uuid:
+          description: Storage config UUID used for the backup.
+          format: uuid
+          readOnly: true
+          type: string
+        kms_config_uuid:
+          description: KMS config UUID used to encrypt the backup.
+          format: uuid
+          readOnly: true
+          type: string
+        task_uuid:
+          description: Task UUID for the backup operation.
+          format: uuid
+          readOnly: true
+          type: string
+        create_time:
+          description: Time when the backup was created.
+          format: date-time
+          readOnly: true
+          type: string
+        update_time:
+          description: Time when the backup was last updated.
+          format: date-time
+          readOnly: true
+          type: string
+        completion_time:
+          description: Time when the backup completed.
+          format: date-time
+          readOnly: true
+          type: string
+        total_backup_size_in_bytes:
+          description: "Total backup size, in bytes."
+          format: int64
+          readOnly: true
+          type: integer
+        sse:
+          description: Whether server-side encryption is enabled for the backup.
+          readOnly: true
+          type: boolean
+        table_by_table_backup:
+          description: Whether the backup was taken table by table.
+          readOnly: true
+          type: boolean
+        has_incremental_backups:
+          description: Whether incremental backups exist for this backup chain.
+          readOnly: true
+          type: boolean
+        last_incremental_backup_time:
+          description: Time of the most recent incremental backup in the chain.
+          format: date-time
+          readOnly: true
+          type: string
+        last_backup_state:
+          $ref: '#/components/schemas/BackupState'
+        is_storage_config_present:
+          description: Whether the storage config still exists.
+          readOnly: true
+          type: boolean
+        is_universe_present:
+          description: Whether the source universe still exists.
+          readOnly: true
+          type: boolean
+        full_chain_size_in_bytes:
+          description: "Total size of the full backup chain, in bytes."
+          format: int64
+          readOnly: true
+          type: integer
+      title: BackupInfo
+      type: object
+    Backup:
+      description: Universe backup resource.
+      example:
+        spec:
+          schedule_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_full_backup: true
+          customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          universe_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          backup_type: YQL_TABLE_TYPE
+          schedule_name: schedule_name
+          on_demand: true
+          use_tablespaces: true
+          keyspace_tables:
+          - keyspace: keyspace
+            per_region_locations:
+            - location: location
+              region: region
+              host_base: host_base
+            - location: location
+              region: region
+              host_base: host_base
+            default_location: default_location
+            backup_size_in_bytes: 6
+            table_uuid_list:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            all_tables: true
+            backup_point_in_time_restore_window:
+              timestamp_retention_window_end_millis: 5
+              timestamp_retention_window_start_millis: 1
+            tables_list:
+            - tables_list
+            - tables_list
+          - keyspace: keyspace
+            per_region_locations:
+            - location: location
+              region: region
+              host_base: host_base
+            - location: location
+              region: region
+              host_base: host_base
+            default_location: default_location
+            backup_size_in_bytes: 6
+            table_uuid_list:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            all_tables: true
+            backup_point_in_time_restore_window:
+              timestamp_retention_window_end_millis: 5
+              timestamp_retention_window_start_millis: 1
+            tables_list:
+            - tables_list
+            - tables_list
+          storage_config_type: S3
+          expiry_time_unit: NanoSeconds
+          category: YB_BACKUP_SCRIPT
+          expiry_time: 2000-01-23T04:56:07.000+00:00
+          universe_name: universe_name
+          use_roles: true
+        info:
+          table_by_table_backup: true
+          has_incremental_backups: true
+          completion_time: 2000-01-23T04:56:07.000+00:00
+          create_time: 2000-01-23T04:56:07.000+00:00
+          sse: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          last_incremental_backup_time: 2000-01-23T04:56:07.000+00:00
+          last_backup_state: null
+          is_storage_config_present: true
+          full_chain_size_in_bytes: 2
+          base_backup_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          kms_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          update_time: 2000-01-23T04:56:07.000+00:00
+          is_universe_present: true
+          total_backup_size_in_bytes: 5
+          state: InProgress
+          task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          storage_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        spec:
+          $ref: '#/components/schemas/BackupSpec'
+        info:
+          $ref: '#/components/schemas/BackupInfo'
+      title: Backup
+      type: object
+    BackupPagedResp:
+      allOf:
+      - $ref: '#/components/schemas/PaginationResp'
+      - description: Paged list response for universe backups.
+        properties:
+          entities:
+            description: Universe backups for this page.
+            items:
+              $ref: '#/components/schemas/Backup'
+            type: array
+        title: BackupPagedResp
+        type: object
+        example: null
+      example:
+        entities:
+        - spec:
+            schedule_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            is_full_backup: true
+            customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            universe_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            backup_type: YQL_TABLE_TYPE
+            schedule_name: schedule_name
+            on_demand: true
+            use_tablespaces: true
+            keyspace_tables:
+            - keyspace: keyspace
+              per_region_locations:
+              - location: location
+                region: region
+                host_base: host_base
+              - location: location
+                region: region
+                host_base: host_base
+              default_location: default_location
+              backup_size_in_bytes: 6
+              table_uuid_list:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              all_tables: true
+              backup_point_in_time_restore_window:
+                timestamp_retention_window_end_millis: 5
+                timestamp_retention_window_start_millis: 1
+              tables_list:
+              - tables_list
+              - tables_list
+            - keyspace: keyspace
+              per_region_locations:
+              - location: location
+                region: region
+                host_base: host_base
+              - location: location
+                region: region
+                host_base: host_base
+              default_location: default_location
+              backup_size_in_bytes: 6
+              table_uuid_list:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              all_tables: true
+              backup_point_in_time_restore_window:
+                timestamp_retention_window_end_millis: 5
+                timestamp_retention_window_start_millis: 1
+              tables_list:
+              - tables_list
+              - tables_list
+            storage_config_type: S3
+            expiry_time_unit: NanoSeconds
+            category: YB_BACKUP_SCRIPT
+            expiry_time: 2000-01-23T04:56:07.000+00:00
+            universe_name: universe_name
+            use_roles: true
+          info:
+            table_by_table_backup: true
+            has_incremental_backups: true
+            completion_time: 2000-01-23T04:56:07.000+00:00
+            create_time: 2000-01-23T04:56:07.000+00:00
+            sse: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            last_incremental_backup_time: 2000-01-23T04:56:07.000+00:00
+            last_backup_state: null
+            is_storage_config_present: true
+            full_chain_size_in_bytes: 2
+            base_backup_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            kms_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            update_time: 2000-01-23T04:56:07.000+00:00
+            is_universe_present: true
+            total_backup_size_in_bytes: 5
+            state: InProgress
+            task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            storage_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - spec:
+            schedule_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            is_full_backup: true
+            customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            universe_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            backup_type: YQL_TABLE_TYPE
+            schedule_name: schedule_name
+            on_demand: true
+            use_tablespaces: true
+            keyspace_tables:
+            - keyspace: keyspace
+              per_region_locations:
+              - location: location
+                region: region
+                host_base: host_base
+              - location: location
+                region: region
+                host_base: host_base
+              default_location: default_location
+              backup_size_in_bytes: 6
+              table_uuid_list:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              all_tables: true
+              backup_point_in_time_restore_window:
+                timestamp_retention_window_end_millis: 5
+                timestamp_retention_window_start_millis: 1
+              tables_list:
+              - tables_list
+              - tables_list
+            - keyspace: keyspace
+              per_region_locations:
+              - location: location
+                region: region
+                host_base: host_base
+              - location: location
+                region: region
+                host_base: host_base
+              default_location: default_location
+              backup_size_in_bytes: 6
+              table_uuid_list:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              all_tables: true
+              backup_point_in_time_restore_window:
+                timestamp_retention_window_end_millis: 5
+                timestamp_retention_window_start_millis: 1
+              tables_list:
+              - tables_list
+              - tables_list
+            storage_config_type: S3
+            expiry_time_unit: NanoSeconds
+            category: YB_BACKUP_SCRIPT
+            expiry_time: 2000-01-23T04:56:07.000+00:00
+            universe_name: universe_name
+            use_roles: true
+          info:
+            table_by_table_backup: true
+            has_incremental_backups: true
+            completion_time: 2000-01-23T04:56:07.000+00:00
+            create_time: 2000-01-23T04:56:07.000+00:00
+            sse: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            last_incremental_backup_time: 2000-01-23T04:56:07.000+00:00
+            last_backup_state: null
+            is_storage_config_present: true
+            full_chain_size_in_bytes: 2
+            base_backup_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            kms_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            update_time: 2000-01-23T04:56:07.000+00:00
+            is_universe_present: true
+            total_backup_size_in_bytes: 5
+            state: InProgress
+            task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            storage_config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        total_count: 0
+        has_next: true
+        has_prev: true
+      type: object
+      x-data-container: PaginationResp
+      x-data-item: Backup
+      x-data-entities-description: Universe backups for this page.
     ContinuousBackupInfo:
       description: |
         ContinuousBackupInfo
@@ -3830,6 +5033,605 @@ components:
           type: string
       title: YBATask
       type: object
+    CustomerConfigPagedQuerySpec:
+      allOf:
+      - $ref: '#/components/schemas/PaginationSpec'
+      description: |
+        Paged list of customer configurations (storage, alerts, call-home, password policy, etc.)
+        for a customer. Rows are ordered by config name (case-insensitive), then UUID. The order is ascending by default.
+      example:
+        offset: 0
+        limit: 301
+        direction: ASC
+      title: CustomerConfigPagedQuerySpec
+      type: object
+    CustomerConfigSpec:
+      description: |
+        User-provided customer configuration.
+        Payload shape depends on `type` and `name`.
+      example:
+        config_name: production-storage
+        data:
+          key: ""
+        name: preferences
+        type: STORAGE
+      properties:
+        config_name:
+          description: Configuration name.
+          example: production-storage
+          type: string
+        type:
+          description: "Configuration category (storage, alerts, call-home, password\
+            \ policy, etc.)."
+          enum:
+          - STORAGE
+          - ALERTS
+          - CALLHOME
+          - PASSWORD_POLICY
+          type: string
+        name:
+          description: Configuration key or subtype within the category.
+          example: preferences
+          type: string
+        data:
+          additionalProperties: true
+          description: Masked configuration payload (opaque structure depends on type/name).
+          type: object
+      title: CustomerConfigSpec
+      type: object
+    CustomerConfigInfo:
+      description: |
+        System-generated customer configuration metadata.
+      example:
+        customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        state: Active
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        is_kubernetes_operator_controlled: true
+      properties:
+        uuid:
+          description: Unique identifier of the customer configuration row.
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        customer_uuid:
+          description: Customer that owns this configuration.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          format: uuid
+          readOnly: true
+          type: string
+        state:
+          description: Lifecycle state of the configuration.
+          enum:
+          - Active
+          - QueuedForDeletion
+          readOnly: true
+          type: string
+        is_kubernetes_operator_controlled:
+          description: Whether this configuration is managed by the Kubernetes operator.
+          readOnly: true
+          type: boolean
+      title: CustomerConfigInfo
+      type: object
+    CustomerConfig:
+      description: |
+        Customer configuration.
+
+        Contains the user-provided `spec` and system-generated `info`.
+        Returned as response payload for customer configuration list APIs.
+      example:
+        spec:
+          config_name: production-storage
+          data:
+            key: ""
+          name: preferences
+          type: STORAGE
+        info:
+          customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          state: Active
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          is_kubernetes_operator_controlled: true
+      properties:
+        spec:
+          $ref: '#/components/schemas/CustomerConfigSpec'
+        info:
+          $ref: '#/components/schemas/CustomerConfigInfo'
+      title: CustomerConfig
+      type: object
+    CustomerConfigPagedResp:
+      allOf:
+      - $ref: '#/components/schemas/PaginationResp'
+      - description: Paged list response for customer configurations.
+        properties:
+          entities:
+            description: Customer configurations for this page.
+            items:
+              $ref: '#/components/schemas/CustomerConfig'
+            type: array
+        title: CustomerConfigPagedResp
+        type: object
+        example: null
+      example:
+        entities:
+        - spec:
+            config_name: production-storage
+            data:
+              key: ""
+            name: preferences
+            type: STORAGE
+          info:
+            customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            state: Active
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+            is_kubernetes_operator_controlled: true
+        - spec:
+            config_name: production-storage
+            data:
+              key: ""
+            name: preferences
+            type: STORAGE
+          info:
+            customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            state: Active
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+            is_kubernetes_operator_controlled: true
+        total_count: 0
+        has_next: true
+        has_prev: true
+      type: object
+      x-data-container: PaginationResp
+      x-data-item: CustomerConfig
+      x-data-entities-description: Customer configurations for this page.
+    KmsConfigPagedQuerySpec:
+      allOf:
+      - $ref: '#/components/schemas/PaginationSpec'
+      description: |
+        Paged list of KMS configurations for a customer.
+        Rows are ordered by config name (case-insensitive), then UUID. The order is ascending by default.
+      example:
+        offset: 0
+        limit: 301
+        direction: ASC
+      title: KmsConfigPagedQuerySpec
+      type: object
+    KmsConfigurationSpec:
+      description: |
+        User-provided KMS configuration.
+        Credentials are returned masked in API responses.
+      example:
+        provider: AWS
+        credentials:
+          key: ""
+        name: production-aws-kms
+      properties:
+        name:
+          description: User-defined name for the KMS configuration.
+          example: production-aws-kms
+          type: string
+        provider:
+          description: "KMS provider implementation key (AWS, GCP, etc.)."
+          example: AWS
+          type: string
+        credentials:
+          additionalProperties: true
+          description: |
+            Masked provider auth configuration (opaque structure). Empty when the row has no
+            auth configuration loaded (e.g. missing or unavailable credentials).
+          type: object
+      required:
+      - credentials
+      title: KmsConfigurationSpec
+      type: object
+    UniverseDetailSubset:
+      description: Small subset of universe information.
+      example:
+        update_succeeded: true
+        name: name
+        creation_date: 2022-12-12T13:07:18Z
+        universe_paused: true
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        update_in_progress: true
+      properties:
+        uuid:
+          description: Universe unique identifier.
+          format: uuid
+          type: string
+        name:
+          description: Universe display name.
+          type: string
+        update_in_progress:
+          description: Whether a universe update operation is currently running.
+          type: boolean
+        update_succeeded:
+          description: Whether the last universe update attempt completed successfully.
+          type: boolean
+        creation_date:
+          description: Universe creation time (RFC 3339 / ISO-8601).
+          example: 2022-12-12T13:07:18Z
+          format: date-time
+          readOnly: true
+          type: string
+        universe_paused:
+          description: Whether the universe is in a paused state.
+          type: boolean
+      title: UniverseDetailSubset
+      type: object
+    KmsConfigurationInfo:
+      description: |
+        System-generated KMS configuration metadata.
+      example:
+        in_use: true
+        universe_details:
+        - update_succeeded: true
+          name: name
+          creation_date: 2022-12-12T13:07:18Z
+          universe_paused: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          update_in_progress: true
+        - update_succeeded: true
+          name: name
+          creation_date: 2022-12-12T13:07:18Z
+          universe_paused: true
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          update_in_progress: true
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        uuid:
+          description: KMS configuration unique identifier.
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        in_use:
+          description: Whether this KMS config is attached to any universe.
+          readOnly: true
+          type: boolean
+        universe_details:
+          description: Universes using this KMS configuration (subset fields only).
+          items:
+            $ref: '#/components/schemas/UniverseDetailSubset'
+          readOnly: true
+          type: array
+      title: KmsConfigurationInfo
+      type: object
+    KmsConfiguration:
+      description: |
+        Customer KMS configuration.
+
+        Contains the user-provided `spec` and system-generated `info`.
+        Returned as response payload for KMS configuration list APIs.
+      example:
+        spec:
+          provider: AWS
+          credentials:
+            key: ""
+          name: production-aws-kms
+        info:
+          in_use: true
+          universe_details:
+          - update_succeeded: true
+            name: name
+            creation_date: 2022-12-12T13:07:18Z
+            universe_paused: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            update_in_progress: true
+          - update_succeeded: true
+            name: name
+            creation_date: 2022-12-12T13:07:18Z
+            universe_paused: true
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            update_in_progress: true
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        spec:
+          $ref: '#/components/schemas/KmsConfigurationSpec'
+        info:
+          $ref: '#/components/schemas/KmsConfigurationInfo'
+      title: KmsConfiguration
+      type: object
+    KmsConfigPagedResp:
+      allOf:
+      - $ref: '#/components/schemas/PaginationResp'
+      - description: Paged list response for KMS configurations.
+        properties:
+          entities:
+            description: KMS configurations for this page.
+            items:
+              $ref: '#/components/schemas/KmsConfiguration'
+            type: array
+        title: KmsConfigPagedResp
+        type: object
+        example: null
+      example:
+        entities:
+        - spec:
+            provider: AWS
+            credentials:
+              key: ""
+            name: production-aws-kms
+          info:
+            in_use: true
+            universe_details:
+            - update_succeeded: true
+              name: name
+              creation_date: 2022-12-12T13:07:18Z
+              universe_paused: true
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              update_in_progress: true
+            - update_succeeded: true
+              name: name
+              creation_date: 2022-12-12T13:07:18Z
+              universe_paused: true
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              update_in_progress: true
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        - spec:
+            provider: AWS
+            credentials:
+              key: ""
+            name: production-aws-kms
+          info:
+            in_use: true
+            universe_details:
+            - update_succeeded: true
+              name: name
+              creation_date: 2022-12-12T13:07:18Z
+              universe_paused: true
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              update_in_progress: true
+            - update_succeeded: true
+              name: name
+              creation_date: 2022-12-12T13:07:18Z
+              universe_paused: true
+              uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              update_in_progress: true
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        total_count: 0
+        has_next: true
+        has_prev: true
+      type: object
+      x-data-container: PaginationResp
+      x-data-item: KmsConfiguration
+      x-data-entities-description: KMS configurations for this page.
+    ImageBundleApiFilter:
+      description: Optional filter for listing image bundles for a provider.
+      example:
+        arch: arch
+      properties:
+        arch:
+          description: only include bundles whose details match this architecture
+          type: string
+      title: ImageBundleApiFilter
+      type: object
+    ImageBundlePagedQuerySpec:
+      allOf:
+      - $ref: '#/components/schemas/PaginationSpec'
+      - description: "Paged list of image bundles for a provider. \nRows are ordered\
+          \ by bundle name (case-insensitive), then UUID. The order is ascending by\
+          \ default.\n"
+        properties:
+          filter:
+            $ref: '#/components/schemas/ImageBundleApiFilter'
+        title: ImageBundlePagedQuerySpec
+        type: object
+        example: null
+      example:
+        filter:
+          arch: arch
+        offset: 0
+        limit: 301
+        direction: ASC
+      type: object
+    ImageBundleRegionInfo:
+      description: Per-region image identifiers within image bundle details.
+      example:
+        yb_image: yb_image
+      properties:
+        yb_image:
+          description: YugabyteDB image identifier for this region.
+          type: string
+      title: ImageBundleRegionInfo
+      type: object
+    ImageBundleDetails:
+      description: Image bundle details (same fields as V1 ImageBundleDetails JSON).
+      example:
+        regions:
+          key:
+            yb_image: yb_image
+        ssh_port: 6
+        use_imdsv2: true
+        global_yb_image: global_yb_image
+        arch: x86_64
+        ssh_user: ssh_user
+      properties:
+        global_yb_image:
+          description: Default YugabyteDB machine image identifier for this bundle.
+          type: string
+        arch:
+          description: CPU architecture this bundle applies to.
+          enum:
+          - x86_64
+          - aarch64
+          type: string
+        regions:
+          additionalProperties:
+            $ref: '#/components/schemas/ImageBundleRegionInfo'
+          description: Per-region YugabyteDB image identifiers keyed by region code.
+          type: object
+        ssh_user:
+          description: SSH username for nodes provisioned from this bundle.
+          type: string
+        ssh_port:
+          description: SSH port for nodes provisioned from this bundle.
+          format: int32
+          type: integer
+        use_imdsv2:
+          description: Whether to require AWS IMDSv2 on supported clouds.
+          type: boolean
+      title: ImageBundleDetails
+      type: object
+    ImageBundleSpec:
+      description: |
+        User-provided image bundle configuration for a provider.
+      example:
+        name: yb-aarch64-default
+        details:
+          regions:
+            key:
+              yb_image: yb_image
+          ssh_port: 6
+          use_imdsv2: true
+          global_yb_image: global_yb_image
+          arch: x86_64
+          ssh_user: ssh_user
+        use_as_default: true
+      properties:
+        name:
+          description: Image bundle display name.
+          example: yb-aarch64-default
+          type: string
+        details:
+          $ref: '#/components/schemas/ImageBundleDetails'
+        use_as_default:
+          description: Whether this bundle is the default for new clusters on the
+            provider.
+          type: boolean
+      title: ImageBundleSpec
+      type: object
+    ImageBundleMetadata:
+      description: Metadata for an image bundle (same shape as V1 ImageBundle metadata
+        JSON).
+      example:
+        type: YBA_ACTIVE
+        version: version
+      properties:
+        type:
+          description: Origin of the bundle (platform default vs custom).
+          enum:
+          - YBA_ACTIVE
+          - YBA_DEPRECATED
+          - CUSTOM
+          type: string
+        version:
+          description: Software or schema version string associated with this bundle
+            metadata.
+          type: string
+      title: ImageBundleMetadata
+      type: object
+    ImageBundleInfo:
+      description: |
+        System-generated image bundle metadata.
+      example:
+        metadata:
+          type: YBA_ACTIVE
+          version: version
+        active: true
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        uuid:
+          description: Image bundle unique identifier.
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        metadata:
+          $ref: '#/components/schemas/ImageBundleMetadata'
+        active:
+          description: Whether the bundle is active for use.
+          readOnly: true
+          type: boolean
+      title: ImageBundleInfo
+      type: object
+    ImageBundle:
+      description: |
+        Image bundle for a provider.
+
+        Contains the user-provided `spec` and system-generated `info`.
+        Returned as response payload for image bundle list APIs.
+      example:
+        spec:
+          name: yb-aarch64-default
+          details:
+            regions:
+              key:
+                yb_image: yb_image
+            ssh_port: 6
+            use_imdsv2: true
+            global_yb_image: global_yb_image
+            arch: x86_64
+            ssh_user: ssh_user
+          use_as_default: true
+        info:
+          metadata:
+            type: YBA_ACTIVE
+            version: version
+          active: true
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        spec:
+          $ref: '#/components/schemas/ImageBundleSpec'
+        info:
+          $ref: '#/components/schemas/ImageBundleInfo'
+      title: ImageBundle
+      type: object
+    ImageBundlePagedResp:
+      allOf:
+      - $ref: '#/components/schemas/PaginationResp'
+      - description: Paged list response for provider image bundles.
+        properties:
+          entities:
+            description: Image bundles for this page.
+            items:
+              $ref: '#/components/schemas/ImageBundle'
+            type: array
+        title: ImageBundlePagedResp
+        type: object
+        example: null
+      example:
+        entities:
+        - spec:
+            name: yb-aarch64-default
+            details:
+              regions:
+                key:
+                  yb_image: yb_image
+              ssh_port: 6
+              use_imdsv2: true
+              global_yb_image: global_yb_image
+              arch: x86_64
+              ssh_user: ssh_user
+            use_as_default: true
+          info:
+            metadata:
+              type: YBA_ACTIVE
+              version: version
+            active: true
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        - spec:
+            name: yb-aarch64-default
+            details:
+              regions:
+                key:
+                  yb_image: yb_image
+              ssh_port: 6
+              use_imdsv2: true
+              global_yb_image: global_yb_image
+              arch: x86_64
+              ssh_user: ssh_user
+            use_as_default: true
+          info:
+            metadata:
+              type: YBA_ACTIVE
+              version: version
+            active: true
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        total_count: 0
+        has_next: true
+        has_prev: true
+      type: object
+      x-data-container: PaginationResp
+      x-data-item: ImageBundle
+      x-data-entities-description: Image bundles for this page.
     YbaComponent:
       description: |
         Individual YBA components to be backed up
@@ -3837,6 +5639,7 @@ components:
       - YBA
       - PROMETHEUS
       - RELEASES
+      - PA_COLLECTOR
       title: YbaComponent
       type: string
     IsolatedBackupCreateSpec:
@@ -4092,25 +5895,6 @@ components:
         snooze_until: 2024-07-25T13:07:18Z
       title: JobScheduleUpdateSpec
       type: object
-    PaginationSpec:
-      description: Pagination spec in page API requests.
-      properties:
-        offset:
-          description: Start offset of the records.
-          format: int32
-          type: integer
-        limit:
-          description: Maximum number of records to be fetched.
-          format: int32
-          type: integer
-        direction:
-          description: Sort order of the records.
-          enum:
-          - ASC
-          - DESC
-          type: string
-      title: PaginationSpec
-      type: object
     JobScheduleApiFilter:
       description: API filter for job schedule that is a part of JobSchedulePagedQuerySpec.
       example:
@@ -4170,24 +5954,9 @@ components:
           name_regex: name_regex
           type: FIXED_DELAY
         offset: 0
-        limit: 6
+        limit: 301
         sort_by: uuid
         direction: ASC
-      type: object
-    PaginationResp:
-      description: Pagination information in page API responses.
-      properties:
-        has_next:
-          description: There are more next records if true.
-          type: boolean
-        has_prev:
-          description: There are more previous records if true.
-          type: boolean
-        total_count:
-          description: Total number of records.
-          format: int32
-          type: integer
-      title: PaginationResp
       type: object
     JobSchedulePagedResp:
       allOf:
@@ -4253,6 +6022,8 @@ components:
         has_next: true
         has_prev: true
       type: object
+      x-data-container: PaginationResp
+      x-data-item: JobSchedule
     JobInstanceState:
       description: State of a job instance that is a part of JobInstance.
       enum:
@@ -4305,7 +6076,7 @@ components:
           state: FAILED
           start_window_secs: 1
         offset: 0
-        limit: 6
+        limit: 301
         sort_by: uuid
         direction: ASC
       type: object
@@ -4381,6 +6152,8 @@ components:
         has_next: true
         has_prev: true
       type: object
+      x-data-container: PaginationResp
+      x-data-item: JobInstanceInfo
     JobScheduleSnoozeSpec:
       description: |
         JobScheduleSnoozeSpec
@@ -4423,6 +6196,250 @@ components:
       title: PrometheusHostInfo
       type: object
       x-yba-api-visibility: internal
+    PitrConfigApiFilter:
+      description: Optional filter for listing PITR configs on a universe.
+      example:
+        dr_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        dr_config_uuid:
+          description: |
+            When set, only PITR configs linked to the given disaster recovery config are returned.
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          type: string
+      title: PitrConfigApiFilter
+      type: object
+    PitrConfigPagedQuerySpec:
+      allOf:
+      - $ref: '#/components/schemas/PaginationSpec'
+      - description: |
+          Paged list of PITR configs for a universe.
+          Rows are ordered by config name (case-insensitive), then UUID. The order is ascending by default.
+        properties:
+          filter:
+            $ref: '#/components/schemas/PitrConfigApiFilter'
+        title: PitrConfigPagedQuerySpec
+        type: object
+        example: null
+      example:
+        filter:
+          dr_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        offset: 0
+        limit: 301
+        direction: ASC
+      type: object
+    PitrConfigSpec:
+      description: |
+        User-provided PITR configuration on a universe.
+        These properties are set at create time and may be updated where supported.
+      example:
+        db_name: db_name
+        intermittent_min_recover_time_in_millis: 5
+        name: name
+        schedule_interval: 6
+        retention_period: 1
+        table_type: YQL_TABLE_TYPE
+      properties:
+        name:
+          description: PITR config name
+          type: string
+        db_name:
+          description: Database or keyspace name
+          type: string
+        table_type:
+          description: Table type
+          enum:
+          - YQL_TABLE_TYPE
+          - REDIS_TABLE_TYPE
+          - PGSQL_TABLE_TYPE
+          - TRANSACTION_STATUS_TABLE_TYPE
+          type: string
+        schedule_interval:
+          description: Interval between snapshots in seconds
+          format: int64
+          type: integer
+        retention_period:
+          description: Retention period in seconds
+          format: int64
+          type: integer
+        intermittent_min_recover_time_in_millis:
+          description: "Intermittent minimum recovery time in milliseconds, used when\
+            \ the retention period is increased."
+          format: int64
+          type: integer
+      title: PitrConfigSpec
+      type: object
+    PitrConfigInfo:
+      description: |
+        System-generated PITR configuration metadata.
+        Includes identifiers, master-derived snapshot schedule state, and recovery bounds.
+      example:
+        min_recover_time_in_millis: 5
+        update_time: 2024-07-25T13:07:18Z
+        created_for_dr: true
+        create_time: 2022-12-12T13:07:18Z
+        max_recover_time_in_millis: 2
+        used_for_x_cluster: true
+        customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        disabled: true
+        state: UNKNOWN
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        uuid:
+          description: PITR config UUID
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        customer_uuid:
+          description: Customer UUID of this config
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          format: uuid
+          readOnly: true
+          type: string
+        min_recover_time_in_millis:
+          description: Earliest point in time (UTC epoch millis) that can be restored
+            to.
+          format: int64
+          readOnly: true
+          type: integer
+        max_recover_time_in_millis:
+          description: Latest point in time (UTC epoch millis) that can be restored
+            to.
+          format: int64
+          readOnly: true
+          type: integer
+        state:
+          description: Snapshot schedule state from the universe master.
+          enum:
+          - UNKNOWN
+          - CREATING
+          - COMPLETE
+          - DELETING
+          - DELETED
+          - FAILED
+          - CANCELLED
+          - RESTORING
+          - RESTORED
+          readOnly: true
+          type: string
+        create_time:
+          description: Time when the PITR config was created.
+          example: 2022-12-12T13:07:18Z
+          format: date-time
+          readOnly: true
+          type: string
+        update_time:
+          description: Time when the PITR config was last updated.
+          example: 2024-07-25T13:07:18Z
+          format: date-time
+          readOnly: true
+          type: string
+        created_for_dr:
+          description: Whether this PITR config was created for disaster recovery.
+          readOnly: true
+          type: boolean
+        used_for_x_cluster:
+          description: Whether this PITR config is used by transactional xCluster
+            replication.
+          readOnly: true
+          type: boolean
+        disabled:
+          description: Whether the PITR config is disabled.
+          readOnly: true
+          type: boolean
+      required:
+      - max_recover_time_in_millis
+      - min_recover_time_in_millis
+      - state
+      title: PitrConfigInfo
+      type: object
+    PitrConfig:
+      description: PITR configuration for a universe.
+      example:
+        spec:
+          db_name: db_name
+          intermittent_min_recover_time_in_millis: 5
+          name: name
+          schedule_interval: 6
+          retention_period: 1
+          table_type: YQL_TABLE_TYPE
+        info:
+          min_recover_time_in_millis: 5
+          update_time: 2024-07-25T13:07:18Z
+          created_for_dr: true
+          create_time: 2022-12-12T13:07:18Z
+          max_recover_time_in_millis: 2
+          used_for_x_cluster: true
+          customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          disabled: true
+          state: UNKNOWN
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        spec:
+          $ref: '#/components/schemas/PitrConfigSpec'
+        info:
+          $ref: '#/components/schemas/PitrConfigInfo'
+      title: PitrConfig
+      type: object
+    PitrConfigPagedResp:
+      allOf:
+      - $ref: '#/components/schemas/PaginationResp'
+      - description: Paged list response for PITR configurations.
+        properties:
+          entities:
+            description: PITR configurations for this page.
+            items:
+              $ref: '#/components/schemas/PitrConfig'
+            type: array
+        title: PitrConfigPagedResp
+        type: object
+        example: null
+      example:
+        entities:
+        - spec:
+            db_name: db_name
+            intermittent_min_recover_time_in_millis: 5
+            name: name
+            schedule_interval: 6
+            retention_period: 1
+            table_type: YQL_TABLE_TYPE
+          info:
+            min_recover_time_in_millis: 5
+            update_time: 2024-07-25T13:07:18Z
+            created_for_dr: true
+            create_time: 2022-12-12T13:07:18Z
+            max_recover_time_in_millis: 2
+            used_for_x_cluster: true
+            customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            disabled: true
+            state: UNKNOWN
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        - spec:
+            db_name: db_name
+            intermittent_min_recover_time_in_millis: 5
+            name: name
+            schedule_interval: 6
+            retention_period: 1
+            table_type: YQL_TABLE_TYPE
+          info:
+            min_recover_time_in_millis: 5
+            update_time: 2024-07-25T13:07:18Z
+            created_for_dr: true
+            create_time: 2022-12-12T13:07:18Z
+            max_recover_time_in_millis: 2
+            used_for_x_cluster: true
+            customer_uuid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            disabled: true
+            state: UNKNOWN
+            uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+        total_count: 0
+        has_next: true
+        has_prev: true
+      type: object
+      x-data-container: PaginationResp
+      x-data-item: PitrConfig
+      x-data-entities-description: PITR configurations for this page.
     TelemetryProviderTypeInfo:
       description: Telemetry Provider Type Information
       example:
@@ -5687,10 +7704,8 @@ components:
           $ref: '#/components/schemas/ClusterPlacementSpec'
       required:
       - default_partition
-      - name
       - placement
       - replication_factor
-      - tablespace_name
       title: ClusterPartitionSpec
       type: object
     UniverseExporterConfig:
@@ -5973,37 +7988,51 @@ components:
       - universe_logs_exporter_config
       title: AuditLogConfig
       type: object
+    BatchedExporterConfig:
+      description: |
+        BatchedExporterConfig
+        Batch processor tuning shared by exporters that batch before sending.
+      properties:
+        send_batch_max_size:
+          default: 1000
+          description: Send batch max size
+          format: int32
+          type: integer
+        send_batch_size:
+          default: 100
+          description: Send batch size
+          format: int32
+          type: integer
+        send_batch_timeout_seconds:
+          default: 10
+          description: Send batch timeout in seconds
+          format: int32
+          type: integer
+      title: BatchedExporterConfig
+      type: object
+    MemoryLimitedExporterConfig:
+      description: |
+        MemoryLimitedExporterConfig
+        Memory limiter tuning shared by exporters that bound collector memory.
+      properties:
+        memory_limit_mib:
+          default: 2048
+          description: Memory limit in MiB for the OpenTelemetry Collector process
+            in the config file.
+          example: 2048
+          type: integer
+        memory_limit_check_interval_seconds:
+          default: 10
+          description: Check interval in seconds for the MemoryLimiterProcessor.
+          example: 10
+          type: integer
+      title: MemoryLimitedExporterConfig
+      type: object
     UniverseQueryLogsExporterConfig:
       allOf:
       - $ref: '#/components/schemas/UniverseExporterConfig'
-      - properties:
-          send_batch_max_size:
-            default: 1000
-            description: Send batch max size
-            format: int32
-            type: integer
-          send_batch_size:
-            default: 100
-            description: Send batch max size
-            format: int32
-            type: integer
-          send_batch_timeout_seconds:
-            default: 10
-            description: Send batch timeout in seconds
-            format: int32
-            type: integer
-          memory_limit_mib:
-            default: 2048
-            description: Memory limit in MiB for the OpenTelemetry Collector process
-              in the config file.
-            example: 2048
-            type: integer
-          memory_limit_check_interval_seconds:
-            default: 10
-            description: Check interval in seconds for the MemoryLimiterProcessor.
-            example: 10
-            type: integer
-        type: object
+      - $ref: '#/components/schemas/BatchedExporterConfig'
+      - $ref: '#/components/schemas/MemoryLimitedExporterConfig'
       description: |
         UniverseQueryLogsExporterConfig
 
@@ -6237,42 +8266,15 @@ components:
     UniverseMetricsExporterConfig:
       allOf:
       - $ref: '#/components/schemas/UniverseExporterConfig'
+      - $ref: '#/components/schemas/BatchedExporterConfig'
+      - $ref: '#/components/schemas/MemoryLimitedExporterConfig'
       - properties:
-          send_batch_max_size:
-            default: 1000
-            description: Maximum batch size for sending metrics. Can be customised
-              to each exporter differently.
-            example: 1000
-            type: integer
-          send_batch_size:
-            default: 100
-            description: Batch size for sending metrics. Can be customised to each
-              exporter differently.
-            example: 100
-            type: integer
-          send_batch_timeout_seconds:
-            default: 10
-            description: Batch timeout in seconds for sending metrics. Can be customised
-              to each exporter differently.
-            example: 10
-            type: integer
           metrics_prefix:
             default: ""
             description: Custom prefix to be added to all the metrics. Can be customised
               to each exporter differently.
             example: ybdb.
             type: string
-          memory_limit_mib:
-            default: 2048
-            description: Memory limit in MiB for the OpenTelemetry Collector process
-              in the config file.
-            example: 2048
-            type: integer
-          memory_limit_check_interval_seconds:
-            default: 10
-            description: Check interval in seconds for the MemoryLimiterProcessor.
-            example: 10
-            type: integer
         type: object
       description: |
         UniverseMetricsExporterConfig
@@ -6283,10 +8285,10 @@ components:
         exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         metrics_prefix: ybdb.
         memory_limit_mib: 2048
-        send_batch_size: 100
+        send_batch_size: 1
         memory_limit_check_interval_seconds: 10
-        send_batch_max_size: 1000
-        send_batch_timeout_seconds: 10
+        send_batch_max_size: 1
+        send_batch_timeout_seconds: 6
       title: UniverseMetricsExporterConfig
       type: object
     MetricsExportConfig:
@@ -6314,19 +8316,19 @@ components:
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           metrics_prefix: ybdb.
           memory_limit_mib: 2048
-          send_batch_size: 100
+          send_batch_size: 1
           memory_limit_check_interval_seconds: 10
-          send_batch_max_size: 1000
-          send_batch_timeout_seconds: 10
+          send_batch_max_size: 1
+          send_batch_timeout_seconds: 6
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           metrics_prefix: ybdb.
           memory_limit_mib: 2048
-          send_batch_size: 100
+          send_batch_size: 1
           memory_limit_check_interval_seconds: 10
-          send_batch_max_size: 1000
-          send_batch_timeout_seconds: 10
+          send_batch_max_size: 1
+          send_batch_timeout_seconds: 6
         scrape_config_targets:
         - MASTER_EXPORT
         - TSERVER_EXPORT
@@ -6789,19 +8791,19 @@ components:
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
             memory_limit_mib: 2048
-            send_batch_size: 100
+            send_batch_size: 1
             memory_limit_check_interval_seconds: 10
-            send_batch_max_size: 1000
-            send_batch_timeout_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
             memory_limit_mib: 2048
-            send_batch_size: 100
+            send_batch_size: 1
             memory_limit_check_interval_seconds: 10
-            send_batch_max_size: 1000
-            send_batch_timeout_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
           scrape_config_targets:
           - MASTER_EXPORT
           - TSERVER_EXPORT
@@ -7482,19 +9484,19 @@ components:
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             scrape_config_targets:
             - MASTER_EXPORT
             - TSERVER_EXPORT
@@ -8059,19 +10061,19 @@ components:
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             scrape_config_targets:
             - MASTER_EXPORT
             - TSERVER_EXPORT
@@ -8636,19 +10638,19 @@ components:
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             scrape_config_targets:
             - MASTER_EXPORT
             - TSERVER_EXPORT
@@ -9213,19 +11215,19 @@ components:
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             scrape_config_targets:
             - MASTER_EXPORT
             - TSERVER_EXPORT
@@ -9790,19 +11792,19 @@ components:
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
               memory_limit_mib: 2048
-              send_batch_size: 100
+              send_batch_size: 1
               memory_limit_check_interval_seconds: 10
-              send_batch_max_size: 1000
-              send_batch_timeout_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             scrape_config_targets:
             - MASTER_EXPORT
             - TSERVER_EXPORT
@@ -10226,12 +12228,19 @@ components:
       example:
         spot_price: 12.3
         uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+        geo_partitioned: false
       properties:
         uuid:
           description: cluster uuid
           example: 19ebde21-d537-47dc-8fab-3edc243c6f68
           format: uuid
           type: string
+        geo_partitioned:
+          description: Whether universe is treated as geo partitioned (i.e. tablespaces
+            are created).
+          example: false
+          type: boolean
+          x-yba-api-visibility: internal
         spot_price:
           description: TBD
           example: 12.3
@@ -10255,8 +12264,8 @@ components:
         cloud: cloud
         kubernetes_namespace: kubernetes_namespace
         lun_indexes:
-        - 6
-        - 6
+        - 4
+        - 4
         az: az
         subnet_id: subnet_id
         public_dns: public_dns
@@ -10333,7 +12342,7 @@ components:
         yb_prebuilt_ami: true
         is_yql_server: true
         node_name: node_name
-        ssh_port_override: 1
+        ssh_port_override: 9
         cloud_info:
           mount_roots: mount_roots
           public_ip: public_ip
@@ -10347,8 +12356,8 @@ components:
           cloud: cloud
           kubernetes_namespace: kubernetes_namespace
           lun_indexes:
-          - 6
-          - 6
+          - 4
+          - 4
           az: az
           subnet_id: subnet_id
           public_dns: public_dns
@@ -10361,7 +12370,7 @@ components:
         is_redis_server: true
         crons_active: true
         last_volume_update_time: 2022-12-12T13:07:18Z
-        node_idx: 7
+        node_idx: 5
         master_state: ToStart
         state: Provisioned
         az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10496,18 +12505,18 @@ components:
       description: Universe resource details. Part of UniverseInfo.
       example:
         pricing_known: true
-        volume_size_gb: 3
-        mem_size_gb: 9.369310271410669
-        ebs_price_per_hour: 4.965218492984954
-        num_cores: 6.683562403749608
-        price_per_hour: 9.018348186070783
-        gp3_free_throughput: 9
-        gp3_free_piops: 5
+        volume_size_gb: 2
+        mem_size_gb: 9.018348186070783
+        ebs_price_per_hour: 9.369310271410669
+        num_cores: 6.438423552598547
+        price_per_hour: 6.965117697638846
+        gp3_free_throughput: 8
+        gp3_free_piops: 6
         az_list:
         - az_list
         - az_list
-        volume_count: 6
-        num_nodes: 8
+        volume_count: 1
+        num_nodes: 3
       properties:
         az_list:
           description: Azs
@@ -10587,7 +12596,7 @@ components:
           yb_prebuilt_ami: true
           is_yql_server: true
           node_name: node_name
-          ssh_port_override: 1
+          ssh_port_override: 9
           cloud_info:
             mount_roots: mount_roots
             public_ip: public_ip
@@ -10601,8 +12610,8 @@ components:
             cloud: cloud
             kubernetes_namespace: kubernetes_namespace
             lun_indexes:
-            - 6
-            - 6
+            - 4
+            - 4
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
@@ -10615,7 +12624,7 @@ components:
           is_redis_server: true
           crons_active: true
           last_volume_update_time: 2022-12-12T13:07:18Z
-          node_idx: 7
+          node_idx: 5
           master_state: ToStart
           state: Provisioned
           az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10628,7 +12637,7 @@ components:
           yb_prebuilt_ami: true
           is_yql_server: true
           node_name: node_name
-          ssh_port_override: 1
+          ssh_port_override: 9
           cloud_info:
             mount_roots: mount_roots
             public_ip: public_ip
@@ -10642,8 +12651,8 @@ components:
             cloud: cloud
             kubernetes_namespace: kubernetes_namespace
             lun_indexes:
-            - 6
-            - 6
+            - 4
+            - 4
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
@@ -10656,7 +12665,7 @@ components:
           is_redis_server: true
           crons_active: true
           last_volume_update_time: 2022-12-12T13:07:18Z
-          node_idx: 7
+          node_idx: 5
           master_state: ToStart
           state: Provisioned
           az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10673,14 +12682,19 @@ components:
         clusters:
         - spot_price: 12.3
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          geo_partitioned: false
         - spot_price: 12.3
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          geo_partitioned: false
         - spot_price: 12.3
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          geo_partitioned: false
         - spot_price: 12.3
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          geo_partitioned: false
         - spot_price: 12.3
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          geo_partitioned: false
         update_in_progress: false
         x_cluster_info:
           source_root_cert_dir_path: /mnt/disk0/yw-data/yugabyte-tls
@@ -10706,22 +12720,22 @@ components:
         universe_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
         resources:
           pricing_known: true
-          volume_size_gb: 3
-          mem_size_gb: 9.369310271410669
-          ebs_price_per_hour: 4.965218492984954
-          num_cores: 6.683562403749608
-          price_per_hour: 9.018348186070783
-          gp3_free_throughput: 9
-          gp3_free_piops: 5
+          volume_size_gb: 2
+          mem_size_gb: 9.018348186070783
+          ebs_price_per_hour: 9.369310271410669
+          num_cores: 6.438423552598547
+          price_per_hour: 6.965117697638846
+          gp3_free_throughput: 8
+          gp3_free_piops: 6
           az_list:
           - az_list
           - az_list
-          volume_count: 6
-          num_nodes: 8
+          volume_count: 1
+          num_nodes: 3
         encryption_at_rest_info:
           encryption_at_rest_status: true
         creation_date: 2022-12-12T13:07:18Z
-        version: 1
+        version: 7
         placement_modification_task_uuid: 18d9e569-5e01-49ef-88a3-eff0804bad4a
         otel_collector_enabled: true
         dr_config_uuids_as_target:
@@ -11354,19 +13368,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -11931,19 +13945,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -12508,19 +14522,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -13085,19 +15099,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -13662,19 +15676,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -13873,7 +15887,7 @@ components:
             yb_prebuilt_ami: true
             is_yql_server: true
             node_name: node_name
-            ssh_port_override: 1
+            ssh_port_override: 9
             cloud_info:
               mount_roots: mount_roots
               public_ip: public_ip
@@ -13887,8 +15901,8 @@ components:
               cloud: cloud
               kubernetes_namespace: kubernetes_namespace
               lun_indexes:
-              - 6
-              - 6
+              - 4
+              - 4
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
@@ -13901,7 +15915,7 @@ components:
             is_redis_server: true
             crons_active: true
             last_volume_update_time: 2022-12-12T13:07:18Z
-            node_idx: 7
+            node_idx: 5
             master_state: ToStart
             state: Provisioned
             az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13914,7 +15928,7 @@ components:
             yb_prebuilt_ami: true
             is_yql_server: true
             node_name: node_name
-            ssh_port_override: 1
+            ssh_port_override: 9
             cloud_info:
               mount_roots: mount_roots
               public_ip: public_ip
@@ -13928,8 +15942,8 @@ components:
               cloud: cloud
               kubernetes_namespace: kubernetes_namespace
               lun_indexes:
-              - 6
-              - 6
+              - 4
+              - 4
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
@@ -13942,7 +15956,7 @@ components:
             is_redis_server: true
             crons_active: true
             last_volume_update_time: 2022-12-12T13:07:18Z
-            node_idx: 7
+            node_idx: 5
             master_state: ToStart
             state: Provisioned
             az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13959,14 +15973,19 @@ components:
           clusters:
           - spot_price: 12.3
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+            geo_partitioned: false
           - spot_price: 12.3
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+            geo_partitioned: false
           - spot_price: 12.3
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+            geo_partitioned: false
           - spot_price: 12.3
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+            geo_partitioned: false
           - spot_price: 12.3
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+            geo_partitioned: false
           update_in_progress: false
           x_cluster_info:
             source_root_cert_dir_path: /mnt/disk0/yw-data/yugabyte-tls
@@ -13992,22 +16011,22 @@ components:
           universe_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
           resources:
             pricing_known: true
-            volume_size_gb: 3
-            mem_size_gb: 9.369310271410669
-            ebs_price_per_hour: 4.965218492984954
-            num_cores: 6.683562403749608
-            price_per_hour: 9.018348186070783
-            gp3_free_throughput: 9
-            gp3_free_piops: 5
+            volume_size_gb: 2
+            mem_size_gb: 9.018348186070783
+            ebs_price_per_hour: 9.369310271410669
+            num_cores: 6.438423552598547
+            price_per_hour: 6.965117697638846
+            gp3_free_throughput: 8
+            gp3_free_piops: 6
             az_list:
             - az_list
             - az_list
-            volume_count: 6
-            num_nodes: 8
+            volume_count: 1
+            num_nodes: 3
           encryption_at_rest_info:
             encryption_at_rest_status: true
           creation_date: 2022-12-12T13:07:18Z
-          version: 1
+          version: 7
           placement_modification_task_uuid: 18d9e569-5e01-49ef-88a3-eff0804bad4a
           otel_collector_enabled: true
           dr_config_uuids_as_target:
@@ -17090,19 +19109,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -17667,19 +19686,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -18244,19 +20263,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -18821,19 +20840,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -19398,19 +21417,19 @@ components:
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               - additional_tags:
                   key: additional_tags
                 exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 metrics_prefix: ybdb.
                 memory_limit_mib: 2048
-                send_batch_size: 100
+                send_batch_size: 1
                 memory_limit_check_interval_seconds: 10
-                send_batch_max_size: 1000
-                send_batch_timeout_seconds: 10
+                send_batch_max_size: 1
+                send_batch_timeout_seconds: 6
               scrape_config_targets:
               - MASTER_EXPORT
               - TSERVER_EXPORT
@@ -19615,12 +21634,7 @@ components:
       - $ref: '#/components/schemas/PaginationSpec'
       - description: |
           Paged list of universes for a customer.
-
-          Results include only universes the caller may read (same RBAC filtering as V1
-          `GET /api/customers/{id}/universes`). Pagination is applied after that filter.
-
-          Universes are ordered by name (case-insensitive), then universe UUID, for stable pages.
-          The `direction` field reverses that ordering when set to `DESC`.
+          Universes are ordered by name (case-insensitive), then universe UUID. The order is ascending by default.
         properties:
           filter:
             $ref: '#/components/schemas/UniverseListApiFilter'
@@ -19631,7 +21645,7 @@ components:
         filter:
           name: name
         offset: 0
-        limit: 6
+        limit: 301
         direction: ASC
       type: object
     UniversePagedResp:
@@ -20083,19 +22097,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -20660,19 +22674,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -21237,19 +23251,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -21814,19 +23828,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -22391,19 +24405,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -22602,7 +24616,7 @@ components:
               yb_prebuilt_ami: true
               is_yql_server: true
               node_name: node_name
-              ssh_port_override: 1
+              ssh_port_override: 9
               cloud_info:
                 mount_roots: mount_roots
                 public_ip: public_ip
@@ -22616,8 +24630,8 @@ components:
                 cloud: cloud
                 kubernetes_namespace: kubernetes_namespace
                 lun_indexes:
-                - 6
-                - 6
+                - 4
+                - 4
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
@@ -22630,7 +24644,7 @@ components:
               is_redis_server: true
               crons_active: true
               last_volume_update_time: 2022-12-12T13:07:18Z
-              node_idx: 7
+              node_idx: 5
               master_state: ToStart
               state: Provisioned
               az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -22643,7 +24657,7 @@ components:
               yb_prebuilt_ami: true
               is_yql_server: true
               node_name: node_name
-              ssh_port_override: 1
+              ssh_port_override: 9
               cloud_info:
                 mount_roots: mount_roots
                 public_ip: public_ip
@@ -22657,8 +24671,8 @@ components:
                 cloud: cloud
                 kubernetes_namespace: kubernetes_namespace
                 lun_indexes:
-                - 6
-                - 6
+                - 4
+                - 4
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
@@ -22671,7 +24685,7 @@ components:
               is_redis_server: true
               crons_active: true
               last_volume_update_time: 2022-12-12T13:07:18Z
-              node_idx: 7
+              node_idx: 5
               master_state: ToStart
               state: Provisioned
               az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -22688,14 +24702,19 @@ components:
             clusters:
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             update_in_progress: false
             x_cluster_info:
               source_root_cert_dir_path: /mnt/disk0/yw-data/yugabyte-tls
@@ -22721,22 +24740,22 @@ components:
             universe_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
             resources:
               pricing_known: true
-              volume_size_gb: 3
-              mem_size_gb: 9.369310271410669
-              ebs_price_per_hour: 4.965218492984954
-              num_cores: 6.683562403749608
-              price_per_hour: 9.018348186070783
-              gp3_free_throughput: 9
-              gp3_free_piops: 5
+              volume_size_gb: 2
+              mem_size_gb: 9.018348186070783
+              ebs_price_per_hour: 9.369310271410669
+              num_cores: 6.438423552598547
+              price_per_hour: 6.965117697638846
+              gp3_free_throughput: 8
+              gp3_free_piops: 6
               az_list:
               - az_list
               - az_list
-              volume_count: 6
-              num_nodes: 8
+              volume_count: 1
+              num_nodes: 3
             encryption_at_rest_info:
               encryption_at_rest_status: true
             creation_date: 2022-12-12T13:07:18Z
-            version: 1
+            version: 7
             placement_modification_task_uuid: 18d9e569-5e01-49ef-88a3-eff0804bad4a
             otel_collector_enabled: true
             dr_config_uuids_as_target:
@@ -23182,19 +25201,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -23759,19 +25778,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -24336,19 +26355,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -24913,19 +26932,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -25490,19 +27509,19 @@ components:
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 - additional_tags:
                     key: additional_tags
                   exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                   metrics_prefix: ybdb.
                   memory_limit_mib: 2048
-                  send_batch_size: 100
+                  send_batch_size: 1
                   memory_limit_check_interval_seconds: 10
-                  send_batch_max_size: 1000
-                  send_batch_timeout_seconds: 10
+                  send_batch_max_size: 1
+                  send_batch_timeout_seconds: 6
                 scrape_config_targets:
                 - MASTER_EXPORT
                 - TSERVER_EXPORT
@@ -25701,7 +27720,7 @@ components:
               yb_prebuilt_ami: true
               is_yql_server: true
               node_name: node_name
-              ssh_port_override: 1
+              ssh_port_override: 9
               cloud_info:
                 mount_roots: mount_roots
                 public_ip: public_ip
@@ -25715,8 +27734,8 @@ components:
                 cloud: cloud
                 kubernetes_namespace: kubernetes_namespace
                 lun_indexes:
-                - 6
-                - 6
+                - 4
+                - 4
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
@@ -25729,7 +27748,7 @@ components:
               is_redis_server: true
               crons_active: true
               last_volume_update_time: 2022-12-12T13:07:18Z
-              node_idx: 7
+              node_idx: 5
               master_state: ToStart
               state: Provisioned
               az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -25742,7 +27761,7 @@ components:
               yb_prebuilt_ami: true
               is_yql_server: true
               node_name: node_name
-              ssh_port_override: 1
+              ssh_port_override: 9
               cloud_info:
                 mount_roots: mount_roots
                 public_ip: public_ip
@@ -25756,8 +27775,8 @@ components:
                 cloud: cloud
                 kubernetes_namespace: kubernetes_namespace
                 lun_indexes:
-                - 6
-                - 6
+                - 4
+                - 4
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
@@ -25770,7 +27789,7 @@ components:
               is_redis_server: true
               crons_active: true
               last_volume_update_time: 2022-12-12T13:07:18Z
-              node_idx: 7
+              node_idx: 5
               master_state: ToStart
               state: Provisioned
               az_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -25787,14 +27806,19 @@ components:
             clusters:
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             - spot_price: 12.3
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+              geo_partitioned: false
             update_in_progress: false
             x_cluster_info:
               source_root_cert_dir_path: /mnt/disk0/yw-data/yugabyte-tls
@@ -25820,22 +27844,22 @@ components:
             universe_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
             resources:
               pricing_known: true
-              volume_size_gb: 3
-              mem_size_gb: 9.369310271410669
-              ebs_price_per_hour: 4.965218492984954
-              num_cores: 6.683562403749608
-              price_per_hour: 9.018348186070783
-              gp3_free_throughput: 9
-              gp3_free_piops: 5
+              volume_size_gb: 2
+              mem_size_gb: 9.018348186070783
+              ebs_price_per_hour: 9.369310271410669
+              num_cores: 6.438423552598547
+              price_per_hour: 6.965117697638846
+              gp3_free_throughput: 8
+              gp3_free_piops: 6
               az_list:
               - az_list
               - az_list
-              volume_count: 6
-              num_nodes: 8
+              volume_count: 1
+              num_nodes: 3
             encryption_at_rest_info:
               encryption_at_rest_status: true
             creation_date: 2022-12-12T13:07:18Z
-            version: 1
+            version: 7
             placement_modification_task_uuid: 18d9e569-5e01-49ef-88a3-eff0804bad4a
             otel_collector_enabled: true
             dr_config_uuids_as_target:
@@ -25850,6 +27874,8 @@ components:
         has_next: true
         has_prev: true
       type: object
+      x-data-container: PaginationResp
+      x-data-item: Universe
     ClusterAddSpec:
       description: |
         ClusterAddSpec
@@ -26959,19 +28985,19 @@ components:
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
             memory_limit_mib: 2048
-            send_batch_size: 100
+            send_batch_size: 1
             memory_limit_check_interval_seconds: 10
-            send_batch_max_size: 1000
-            send_batch_timeout_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
             memory_limit_mib: 2048
-            send_batch_size: 100
+            send_batch_size: 1
             memory_limit_check_interval_seconds: 10
-            send_batch_max_size: 1000
-            send_batch_timeout_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
           scrape_config_targets:
           - MASTER_EXPORT
           - TSERVER_EXPORT
@@ -26983,93 +29009,6 @@ components:
         install_otel_collector: true
       title: ConfigureMetricsExportSpec
       type: object
-    ExportTelemetryUpgradeOptions:
-      description: "Upgrade options for applying telemetry config changes (rolling\
-        \ vs non-rolling, delays)."
-      example:
-        sleep_after_tserver_restart_millis: 1
-        rolling_upgrade: true
-        delay_between_master_servers: 0
-        delay_between_tserver_servers: 6
-        sleep_after_master_restart_millis: 5
-      properties:
-        rolling_upgrade:
-          default: true
-          description: "If true, perform rolling restart; otherwise non-rolling."
-          type: boolean
-        delay_between_master_servers:
-          default: 0
-          description: Delay in seconds between restarting master servers during rolling
-            upgrade.
-          type: integer
-        delay_between_tserver_servers:
-          default: 0
-          description: Delay in seconds between restarting tserver servers during
-            rolling upgrade.
-          type: integer
-        sleep_after_tserver_restart_millis:
-          default: 180000
-          description: Sleep duration in milliseconds after each tserver restart.
-          type: integer
-        sleep_after_master_restart_millis:
-          default: 180000
-          description: Sleep duration in milliseconds after each master restart.
-          type: integer
-      title: ExportTelemetryUpgradeOptions
-      type: object
-      x-yba-api-visibility: internal
-    TelemetryExporterEntry:
-      description: Exporter reference and optional overrides for a telemetry config.
-      example:
-        additional_tags:
-          key: additional_tags
-        exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        metrics_prefix: ybdb.
-        memory_limit_mib: 9
-        send_batch_size: 2
-        memory_limit_check_interval_seconds: 3
-        send_batch_max_size: 5
-        send_batch_timeout_seconds: 7
-      properties:
-        exporter_uuid:
-          description: UUID of the telemetry provider (exporter).
-          format: uuid
-          type: string
-        additional_tags:
-          additionalProperties:
-            type: string
-          description: Key-value tags to attach to exported data.
-          type: object
-        send_batch_max_size:
-          default: 1000
-          description: Maximum number of metrics to buffer before sending.
-          type: integer
-        send_batch_size:
-          default: 100
-          description: Target batch size for sending metrics.
-          type: integer
-        send_batch_timeout_seconds:
-          default: 10
-          description: Timeout in seconds for sending a batch.
-          type: integer
-        memory_limit_mib:
-          default: 2048
-          description: Memory limit in MiB for the exporter.
-          type: integer
-        memory_limit_check_interval_seconds:
-          default: 10
-          description: Interval in seconds between memory limit checks.
-          type: integer
-        metrics_prefix:
-          default: ""
-          description: Prefix added to metric names (e.g. ybdb.).
-          example: ybdb.
-          type: string
-      required:
-      - exporter_uuid
-      title: TelemetryExporterEntry
-      type: object
-      x-yba-api-visibility: internal
     AuditLogsTelemetrySpec:
       description: Audit logs (YSQL/YCQL). Omit or set to null to disable.
       example:
@@ -27112,21 +29051,9 @@ components:
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
-          send_batch_timeout_seconds: 7
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
-          send_batch_timeout_seconds: 7
       properties:
         ysql_audit_config:
           $ref: '#/components/schemas/YSQLAuditConfig'
@@ -27135,7 +29062,7 @@ components:
         exporters:
           description: List of exporters. Empty = no export.
           items:
-            $ref: '#/components/schemas/TelemetryExporterEntry'
+            $ref: '#/components/schemas/UniverseLogsExporterConfig'
           type: array
       title: AuditLogsTelemetrySpec
       type: object
@@ -27158,20 +29085,18 @@ components:
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
+          memory_limit_mib: 2048
+          send_batch_size: 4
+          memory_limit_check_interval_seconds: 10
+          send_batch_max_size: 2
           send_batch_timeout_seconds: 7
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
+          memory_limit_mib: 2048
+          send_batch_size: 4
+          memory_limit_check_interval_seconds: 10
+          send_batch_max_size: 2
           send_batch_timeout_seconds: 7
       properties:
         ysql_query_log_config:
@@ -27179,7 +29104,7 @@ components:
         exporters:
           description: List of exporters. Empty = no export.
           items:
-            $ref: '#/components/schemas/TelemetryExporterEntry'
+            $ref: '#/components/schemas/UniverseQueryLogsExporterConfig'
           type: array
       title: QueryLogsTelemetrySpec
       type: object
@@ -27191,7 +29116,7 @@ components:
           exporters:
             description: List of exporters. Empty = no export.
             items:
-              $ref: '#/components/schemas/TelemetryExporterEntry'
+              $ref: '#/components/schemas/UniverseMetricsExporterConfig'
             type: array
         type: object
       description: Metrics export. Omit or set to null to disable.
@@ -27212,20 +29137,20 @@ components:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
-          send_batch_timeout_seconds: 7
+          memory_limit_mib: 2048
+          send_batch_size: 1
+          memory_limit_check_interval_seconds: 10
+          send_batch_max_size: 1
+          send_batch_timeout_seconds: 6
         - additional_tags:
             key: additional_tags
           exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           metrics_prefix: ybdb.
-          memory_limit_mib: 9
-          send_batch_size: 2
-          memory_limit_check_interval_seconds: 3
-          send_batch_max_size: 5
-          send_batch_timeout_seconds: 7
+          memory_limit_mib: 2048
+          send_batch_size: 1
+          memory_limit_check_interval_seconds: 10
+          send_batch_max_size: 1
+          send_batch_timeout_seconds: 6
       title: MetricsTelemetrySpec
       x-yba-api-visibility: internal
     TelemetryConfig:
@@ -27249,20 +29174,18 @@ components:
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
+            memory_limit_mib: 2048
+            send_batch_size: 4
+            memory_limit_check_interval_seconds: 10
+            send_batch_max_size: 2
             send_batch_timeout_seconds: 7
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
+            memory_limit_mib: 2048
+            send_batch_size: 4
+            memory_limit_check_interval_seconds: 10
+            send_batch_max_size: 2
             send_batch_timeout_seconds: 7
         metrics:
           collection_level: NORMAL
@@ -27281,20 +29204,20 @@ components:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
-            send_batch_timeout_seconds: 7
+            memory_limit_mib: 2048
+            send_batch_size: 1
+            memory_limit_check_interval_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
-            send_batch_timeout_seconds: 7
+            memory_limit_mib: 2048
+            send_batch_size: 1
+            memory_limit_check_interval_seconds: 10
+            send_batch_max_size: 1
+            send_batch_timeout_seconds: 6
         audit_logs:
           ysql_audit_config:
             log_rows: true
@@ -27335,21 +29258,9 @@ components:
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
-            send_batch_timeout_seconds: 7
           - additional_tags:
               key: additional_tags
             exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            metrics_prefix: ybdb.
-            memory_limit_mib: 9
-            send_batch_size: 2
-            memory_limit_check_interval_seconds: 3
-            send_batch_max_size: 5
-            send_batch_timeout_seconds: 7
       properties:
         audit_logs:
           $ref: '#/components/schemas/AuditLogsTelemetrySpec'
@@ -27358,6 +29269,41 @@ components:
         metrics:
           $ref: '#/components/schemas/MetricsTelemetrySpec'
       title: TelemetryConfig
+      type: object
+      x-yba-api-visibility: internal
+    ExportTelemetryUpgradeOptions:
+      description: "Upgrade options for applying telemetry config changes (rolling\
+        \ vs non-rolling, delays)."
+      example:
+        sleep_after_tserver_restart_millis: 1
+        rolling_upgrade: true
+        delay_between_master_servers: 0
+        delay_between_tserver_servers: 6
+        sleep_after_master_restart_millis: 5
+      properties:
+        rolling_upgrade:
+          default: true
+          description: "If true, perform rolling restart; otherwise non-rolling."
+          type: boolean
+        delay_between_master_servers:
+          default: 0
+          description: Delay in seconds between restarting master servers during rolling
+            upgrade.
+          type: integer
+        delay_between_tserver_servers:
+          default: 0
+          description: Delay in seconds between restarting tserver servers during
+            rolling upgrade.
+          type: integer
+        sleep_after_tserver_restart_millis:
+          default: 180000
+          description: Sleep duration in milliseconds after each tserver restart.
+          type: integer
+        sleep_after_master_restart_millis:
+          default: 180000
+          description: Sleep duration in milliseconds after each master restart.
+          type: integer
+      title: ExportTelemetryUpgradeOptions
       type: object
       x-yba-api-visibility: internal
     ExportTelemetryConfigSpec:
@@ -27380,20 +29326,18 @@ components:
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
+              memory_limit_mib: 2048
+              send_batch_size: 4
+              memory_limit_check_interval_seconds: 10
+              send_batch_max_size: 2
               send_batch_timeout_seconds: 7
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
+              memory_limit_mib: 2048
+              send_batch_size: 4
+              memory_limit_check_interval_seconds: 10
+              send_batch_max_size: 2
               send_batch_timeout_seconds: 7
           metrics:
             collection_level: NORMAL
@@ -27412,20 +29356,20 @@ components:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
-              send_batch_timeout_seconds: 7
+              memory_limit_mib: 2048
+              send_batch_size: 1
+              memory_limit_check_interval_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
-              send_batch_timeout_seconds: 7
+              memory_limit_mib: 2048
+              send_batch_size: 1
+              memory_limit_check_interval_seconds: 10
+              send_batch_max_size: 1
+              send_batch_timeout_seconds: 6
           audit_logs:
             ysql_audit_config:
               log_rows: true
@@ -27466,21 +29410,9 @@ components:
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
-              send_batch_timeout_seconds: 7
             - additional_tags:
                 key: additional_tags
               exporter_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              metrics_prefix: ybdb.
-              memory_limit_mib: 9
-              send_batch_size: 2
-              memory_limit_check_interval_seconds: 3
-              send_batch_max_size: 5
-              send_batch_timeout_seconds: 7
         upgrade_options:
           sleep_after_tserver_restart_millis: 1
           rolling_upgrade: true
@@ -27563,6 +29495,9 @@ components:
             Run the script as a particular Linux user.
             Defaults to yugabyte. When using Node Agent, the command is executed as this user.
             When using SSH fallback, this sets the SSH user.
+            If your script invokes sudo, the chosen linux_user must have NOPASSWD sudo
+            configured for those commands; otherwise the script will block on the password
+            prompt and surface as a timeout rather than an authorization error.
           example: yugabyte
           type: string
         max_script_file_size_bytes:
@@ -27600,13 +29535,15 @@ components:
         masters_only:
           default: false
           description: Run the script only on master nodes from the specified node_names
-            (or all masters if node_names is not provided).
+            (or all masters if node_names is not provided). Mutually exclusive with
+            tservers_only.
           example: false
           type: boolean
         tservers_only:
           default: false
           description: Run the script only on tserver nodes from the specified node_names
-            (or all tservers if node_names is not provided).
+            (or all tservers if node_names is not provided). Mutually exclusive with
+            masters_only.
           example: false
           type: boolean
         cluster_uuid:
@@ -27872,6 +29809,11 @@ components:
             Run file collection as a particular Linux user.
             Defaults to yugabyte. When using Node Agent, the command is executed as this user.
             When using SSH fallback, this sets the SSH user.
+            Elevated privileges (sudo) are not supported by this API: collection commands
+            (stat, readlink, tar) are constructed by YBA and run directly as linux_user, with
+            no opportunity to escalate. If you need to collect files that are only readable
+            by root or another privileged user, use the run-script API instead with a script
+            that invokes sudo and writes the resulting archive to a path readable by linux_user.
           example: yugabyte
           type: string
       title: FileCollectionOptions

@@ -20,8 +20,7 @@ var _ MappedNullable = &UniverseBackupRequestFormData{}
 // UniverseBackupRequestFormData Universe Backup Form Data
 type UniverseBackupRequestFormData struct {
 	// Error message
-	ErrorString     *string `json:"errorString,omitempty"`
-	PlatformVersion *string `json:"platformVersion,omitempty"`
+	ErrorString *string `json:"errorString,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// WARNING: This is a preview API that could change.Storage configuration UUID
@@ -80,38 +79,6 @@ func (o *UniverseBackupRequestFormData) HasErrorString() bool {
 // SetErrorString gets a reference to the given string and assigns it to the ErrorString field.
 func (o *UniverseBackupRequestFormData) SetErrorString(v string) {
 	o.ErrorString = &v
-}
-
-// GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
-func (o *UniverseBackupRequestFormData) GetPlatformVersion() string {
-	if o == nil || IsNil(o.PlatformVersion) {
-		var ret string
-		return ret
-	}
-	return *o.PlatformVersion
-}
-
-// GetPlatformVersionOk returns a tuple with the PlatformVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UniverseBackupRequestFormData) GetPlatformVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.PlatformVersion) {
-		return nil, false
-	}
-	return o.PlatformVersion, true
-}
-
-// HasPlatformVersion returns a boolean if a field has been set.
-func (o *UniverseBackupRequestFormData) HasPlatformVersion() bool {
-	if o != nil && !IsNil(o.PlatformVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetPlatformVersion gets a reference to the given string and assigns it to the PlatformVersion field.
-func (o *UniverseBackupRequestFormData) SetPlatformVersion(v string) {
-	o.PlatformVersion = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -214,9 +181,6 @@ func (o UniverseBackupRequestFormData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ErrorString) {
 		toSerialize["errorString"] = o.ErrorString
-	}
-	if !IsNil(o.PlatformVersion) {
-		toSerialize["platformVersion"] = o.PlatformVersion
 	}
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

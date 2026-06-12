@@ -40,6 +40,8 @@ type MetricQueryParams struct {
 	ServerType *string `json:"serverType,omitempty"`
 	// YbaApi Internal. Start time
 	Start int64 `json:"start"`
+	// YbaApi Internal. Step size in seconds
+	Step *int64 `json:"step,omitempty"`
 	// YbaApi Internal. Stream id
 	StreamId *string `json:"streamId,omitempty"`
 	// YbaApi Internal. Table id
@@ -407,6 +409,38 @@ func (o *MetricQueryParams) SetStart(v int64) {
 	o.Start = v
 }
 
+// GetStep returns the Step field value if set, zero value otherwise.
+func (o *MetricQueryParams) GetStep() int64 {
+	if o == nil || IsNil(o.Step) {
+		var ret int64
+		return ret
+	}
+	return *o.Step
+}
+
+// GetStepOk returns a tuple with the Step field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricQueryParams) GetStepOk() (*int64, bool) {
+	if o == nil || IsNil(o.Step) {
+		return nil, false
+	}
+	return o.Step, true
+}
+
+// HasStep returns a boolean if a field has been set.
+func (o *MetricQueryParams) HasStep() bool {
+	if o != nil && !IsNil(o.Step) {
+		return true
+	}
+
+	return false
+}
+
+// SetStep gets a reference to the given int64 and assigns it to the Step field.
+func (o *MetricQueryParams) SetStep(v int64) {
+	o.Step = &v
+}
+
 // GetStreamId returns the StreamId field value if set, zero value otherwise.
 func (o *MetricQueryParams) GetStreamId() string {
 	if o == nil || IsNil(o.StreamId) {
@@ -566,6 +600,9 @@ func (o MetricQueryParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["serverType"] = o.ServerType
 	}
 	toSerialize["start"] = o.Start
+	if !IsNil(o.Step) {
+		toSerialize["step"] = o.Step
+	}
 	if !IsNil(o.StreamId) {
 		toSerialize["streamId"] = o.StreamId
 	}

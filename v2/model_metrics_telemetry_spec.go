@@ -29,7 +29,7 @@ type MetricsTelemetrySpec struct {
 	// Set of target types to include in scrape configuration. If not specified, all supported target types will be included. Allowed values are:   - MASTER_EXPORT: Master server metrics   - TSERVER_EXPORT: Tserver metrics   - YSQL_EXPORT: YSQL server metrics   - CQL_EXPORT: YCQL server metrics   - NODE_EXPORT: Node exporter metrics   - NODE_AGENT_EXPORT: Node agent metrics   - OTEL_EXPORT: OpenTelemetry collector internal metrics
 	ScrapeConfigTargets []ScrapeConfigTargetType `json:"scrape_config_targets,omitempty"`
 	// List of exporters. Empty = no export.
-	Exporters []TelemetryExporterEntry `json:"exporters,omitempty"`
+	Exporters []UniverseMetricsExporterConfig `json:"exporters,omitempty"`
 }
 
 // NewMetricsTelemetrySpec instantiates a new MetricsTelemetrySpec object
@@ -190,9 +190,9 @@ func (o *MetricsTelemetrySpec) SetScrapeConfigTargets(v []ScrapeConfigTargetType
 }
 
 // GetExporters returns the Exporters field value if set, zero value otherwise.
-func (o *MetricsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
+func (o *MetricsTelemetrySpec) GetExporters() []UniverseMetricsExporterConfig {
 	if o == nil || IsNil(o.Exporters) {
-		var ret []TelemetryExporterEntry
+		var ret []UniverseMetricsExporterConfig
 		return ret
 	}
 	return o.Exporters
@@ -200,7 +200,7 @@ func (o *MetricsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
 
 // GetExportersOk returns a tuple with the Exporters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsTelemetrySpec) GetExportersOk() ([]TelemetryExporterEntry, bool) {
+func (o *MetricsTelemetrySpec) GetExportersOk() ([]UniverseMetricsExporterConfig, bool) {
 	if o == nil || IsNil(o.Exporters) {
 		return nil, false
 	}
@@ -216,8 +216,8 @@ func (o *MetricsTelemetrySpec) HasExporters() bool {
 	return false
 }
 
-// SetExporters gets a reference to the given []TelemetryExporterEntry and assigns it to the Exporters field.
-func (o *MetricsTelemetrySpec) SetExporters(v []TelemetryExporterEntry) {
+// SetExporters gets a reference to the given []UniverseMetricsExporterConfig and assigns it to the Exporters field.
+func (o *MetricsTelemetrySpec) SetExporters(v []UniverseMetricsExporterConfig) {
 	o.Exporters = v
 }
 

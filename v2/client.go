@@ -55,11 +55,19 @@ type APIClient struct {
 
 	ContinuousBackupAPI *ContinuousBackupAPIService
 
+	CustomerConfigurationAPI *CustomerConfigurationAPIService
+
+	EncryptionAtRestAPI *EncryptionAtRestAPIService
+
+	ImageBundleAPI *ImageBundleAPIService
+
 	IsolatedBackupAPI *IsolatedBackupAPIService
 
 	JobSchedulerAPI *JobSchedulerAPIService
 
 	MetricsAPI *MetricsAPIService
+
+	PITRAPI *PITRAPIService
 
 	TelemetryProviderAPI *TelemetryProviderAPIService
 
@@ -87,9 +95,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AuthenticationAPI = (*AuthenticationAPIService)(&c.common)
 	c.BackupAndRestoreAPI = (*BackupAndRestoreAPIService)(&c.common)
 	c.ContinuousBackupAPI = (*ContinuousBackupAPIService)(&c.common)
+	c.CustomerConfigurationAPI = (*CustomerConfigurationAPIService)(&c.common)
+	c.EncryptionAtRestAPI = (*EncryptionAtRestAPIService)(&c.common)
+	c.ImageBundleAPI = (*ImageBundleAPIService)(&c.common)
 	c.IsolatedBackupAPI = (*IsolatedBackupAPIService)(&c.common)
 	c.JobSchedulerAPI = (*JobSchedulerAPIService)(&c.common)
 	c.MetricsAPI = (*MetricsAPIService)(&c.common)
+	c.PITRAPI = (*PITRAPIService)(&c.common)
 	c.TelemetryProviderAPI = (*TelemetryProviderAPIService)(&c.common)
 	c.UniverseAPI = (*UniverseAPIService)(&c.common)
 	c.YBAInstanceAPI = (*YBAInstanceAPIService)(&c.common)

@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **IncrementalBackupFrequencyTimeUnit** | Pointer to **string** | TimeUnit for incremental Backup Schedule frequency | [optional] 
 **SchedulingFrequency** | Pointer to **int64** | Frequency of the schedule | [optional] 
 **TimeBeforeDelete** | Pointer to **int64** | Time before deleting the backup from storage, in milliseconds | [optional] 
+**UsePrivileges** | Pointer to **bool** | Backup privileges for roles | [optional] 
+**UseRoles** | Pointer to **bool** | Backup global ysql roles | [optional] 
+**UseTablespaces** | Pointer to **bool** | Is tablespaces information included | [optional] 
 
 ## Methods
 
@@ -179,6 +182,81 @@ SetTimeBeforeDelete sets TimeBeforeDelete field to given value.
 `func (o *BackupScheduleEditParams) HasTimeBeforeDelete() bool`
 
 HasTimeBeforeDelete returns a boolean if a field has been set.
+
+### GetUsePrivileges
+
+`func (o *BackupScheduleEditParams) GetUsePrivileges() bool`
+
+GetUsePrivileges returns the UsePrivileges field if non-nil, zero value otherwise.
+
+### GetUsePrivilegesOk
+
+`func (o *BackupScheduleEditParams) GetUsePrivilegesOk() (*bool, bool)`
+
+GetUsePrivilegesOk returns a tuple with the UsePrivileges field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsePrivileges
+
+`func (o *BackupScheduleEditParams) SetUsePrivileges(v bool)`
+
+SetUsePrivileges sets UsePrivileges field to given value.
+
+### HasUsePrivileges
+
+`func (o *BackupScheduleEditParams) HasUsePrivileges() bool`
+
+HasUsePrivileges returns a boolean if a field has been set.
+
+### GetUseRoles
+
+`func (o *BackupScheduleEditParams) GetUseRoles() bool`
+
+GetUseRoles returns the UseRoles field if non-nil, zero value otherwise.
+
+### GetUseRolesOk
+
+`func (o *BackupScheduleEditParams) GetUseRolesOk() (*bool, bool)`
+
+GetUseRolesOk returns a tuple with the UseRoles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseRoles
+
+`func (o *BackupScheduleEditParams) SetUseRoles(v bool)`
+
+SetUseRoles sets UseRoles field to given value.
+
+### HasUseRoles
+
+`func (o *BackupScheduleEditParams) HasUseRoles() bool`
+
+HasUseRoles returns a boolean if a field has been set.
+
+### GetUseTablespaces
+
+`func (o *BackupScheduleEditParams) GetUseTablespaces() bool`
+
+GetUseTablespaces returns the UseTablespaces field if non-nil, zero value otherwise.
+
+### GetUseTablespacesOk
+
+`func (o *BackupScheduleEditParams) GetUseTablespacesOk() (*bool, bool)`
+
+GetUseTablespacesOk returns a tuple with the UseTablespaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseTablespaces
+
+`func (o *BackupScheduleEditParams) SetUseTablespaces(v bool)`
+
+SetUseTablespaces sets UseTablespaces field to given value.
+
+### HasUseTablespaces
+
+`func (o *BackupScheduleEditParams) HasUseTablespaces() bool`
+
+HasUseTablespaces returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

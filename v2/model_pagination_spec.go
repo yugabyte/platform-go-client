@@ -34,6 +34,10 @@ type PaginationSpec struct {
 // will change when the set of required properties is changed
 func NewPaginationSpec() *PaginationSpec {
 	this := PaginationSpec{}
+	var offset int32 = 0
+	this.Offset = &offset
+	var limit int32 = 10
+	this.Limit = &limit
 	return &this
 }
 
@@ -42,6 +46,10 @@ func NewPaginationSpec() *PaginationSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewPaginationSpecWithDefaults() *PaginationSpec {
 	this := PaginationSpec{}
+	var offset int32 = 0
+	this.Offset = &offset
+	var limit int32 = 10
+	this.Limit = &limit
 	return &this
 }
 

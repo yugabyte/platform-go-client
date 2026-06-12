@@ -23,6 +23,7 @@ type PartitionInfo struct {
 	Name              *string        `json:"name,omitempty"`
 	Placement         *PlacementInfo `json:"placement,omitempty"`
 	ReplicationFactor *int32         `json:"replicationFactor,omitempty"`
+	TablespaceName    *string        `json:"tablespaceName,omitempty"`
 	Uuid              *string        `json:"uuid,omitempty"`
 }
 
@@ -171,6 +172,38 @@ func (o *PartitionInfo) SetReplicationFactor(v int32) {
 	o.ReplicationFactor = &v
 }
 
+// GetTablespaceName returns the TablespaceName field value if set, zero value otherwise.
+func (o *PartitionInfo) GetTablespaceName() string {
+	if o == nil || IsNil(o.TablespaceName) {
+		var ret string
+		return ret
+	}
+	return *o.TablespaceName
+}
+
+// GetTablespaceNameOk returns a tuple with the TablespaceName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PartitionInfo) GetTablespaceNameOk() (*string, bool) {
+	if o == nil || IsNil(o.TablespaceName) {
+		return nil, false
+	}
+	return o.TablespaceName, true
+}
+
+// HasTablespaceName returns a boolean if a field has been set.
+func (o *PartitionInfo) HasTablespaceName() bool {
+	if o != nil && !IsNil(o.TablespaceName) {
+		return true
+	}
+
+	return false
+}
+
+// SetTablespaceName gets a reference to the given string and assigns it to the TablespaceName field.
+func (o *PartitionInfo) SetTablespaceName(v string) {
+	o.TablespaceName = &v
+}
+
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *PartitionInfo) GetUuid() string {
 	if o == nil || IsNil(o.Uuid) {
@@ -224,6 +257,9 @@ func (o PartitionInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReplicationFactor) {
 		toSerialize["replicationFactor"] = o.ReplicationFactor
+	}
+	if !IsNil(o.TablespaceName) {
+		toSerialize["tablespaceName"] = o.TablespaceName
 	}
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid

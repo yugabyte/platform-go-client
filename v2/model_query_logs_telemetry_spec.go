@@ -22,7 +22,7 @@ var _ MappedNullable = &QueryLogsTelemetrySpec{}
 type QueryLogsTelemetrySpec struct {
 	YsqlQueryLogConfig *YSQLQueryLogConfig `json:"ysql_query_log_config,omitempty"`
 	// List of exporters. Empty = no export.
-	Exporters []TelemetryExporterEntry `json:"exporters,omitempty"`
+	Exporters []UniverseQueryLogsExporterConfig `json:"exporters,omitempty"`
 }
 
 // NewQueryLogsTelemetrySpec instantiates a new QueryLogsTelemetrySpec object
@@ -75,9 +75,9 @@ func (o *QueryLogsTelemetrySpec) SetYsqlQueryLogConfig(v YSQLQueryLogConfig) {
 }
 
 // GetExporters returns the Exporters field value if set, zero value otherwise.
-func (o *QueryLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
+func (o *QueryLogsTelemetrySpec) GetExporters() []UniverseQueryLogsExporterConfig {
 	if o == nil || IsNil(o.Exporters) {
-		var ret []TelemetryExporterEntry
+		var ret []UniverseQueryLogsExporterConfig
 		return ret
 	}
 	return o.Exporters
@@ -85,7 +85,7 @@ func (o *QueryLogsTelemetrySpec) GetExporters() []TelemetryExporterEntry {
 
 // GetExportersOk returns a tuple with the Exporters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryLogsTelemetrySpec) GetExportersOk() ([]TelemetryExporterEntry, bool) {
+func (o *QueryLogsTelemetrySpec) GetExportersOk() ([]UniverseQueryLogsExporterConfig, bool) {
 	if o == nil || IsNil(o.Exporters) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *QueryLogsTelemetrySpec) HasExporters() bool {
 	return false
 }
 
-// SetExporters gets a reference to the given []TelemetryExporterEntry and assigns it to the Exporters field.
-func (o *QueryLogsTelemetrySpec) SetExporters(v []TelemetryExporterEntry) {
+// SetExporters gets a reference to the given []UniverseQueryLogsExporterConfig and assigns it to the Exporters field.
+func (o *QueryLogsTelemetrySpec) SetExporters(v []UniverseQueryLogsExporterConfig) {
 	o.Exporters = v
 }
 

@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **IsSoftwareRollbackAllowed** | Pointer to **bool** | Available since YBA version 2.20.2.0 | [optional] [readonly] 
 **ItestS3PackagePath** | Pointer to **string** |  | [optional] 
 **MastersInDefaultRegion** | Pointer to **bool** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2025.2.&lt;/b&gt; With geo partitioning support, default region is replaced with default partition | [optional] 
+**NewUI** | **bool** |  | 
 **NextClusterIndex** | Pointer to **int32** |  | [optional] 
 **NodeAgentMissing** | Pointer to **bool** | YbaApi Internal. True if a node agent for missing in any of the nodes | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
@@ -41,7 +42,6 @@ Name | Type | Description | Notes
 **PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
-**PlatformVersion** | Pointer to **string** |  | [optional] [readonly] 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RegionsChanged** | Pointer to **bool** |  | [optional] 
@@ -76,7 +76,7 @@ Name | Type | Description | Notes
 
 ### NewUniverseConfigureTaskParams
 
-`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
+`func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, newUI bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *UniverseConfigureTaskParams`
 
 NewUniverseConfigureTaskParams instantiates a new UniverseConfigureTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -756,6 +756,26 @@ SetMastersInDefaultRegion sets MastersInDefaultRegion field to given value.
 
 HasMastersInDefaultRegion returns a boolean if a field has been set.
 
+### GetNewUI
+
+`func (o *UniverseConfigureTaskParams) GetNewUI() bool`
+
+GetNewUI returns the NewUI field if non-nil, zero value otherwise.
+
+### GetNewUIOk
+
+`func (o *UniverseConfigureTaskParams) GetNewUIOk() (*bool, bool)`
+
+GetNewUIOk returns a tuple with the NewUI field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewUI
+
+`func (o *UniverseConfigureTaskParams) SetNewUI(v bool)`
+
+SetNewUI sets NewUI field to given value.
+
+
 ### GetNextClusterIndex
 
 `func (o *UniverseConfigureTaskParams) GetNextClusterIndex() int32`
@@ -1000,31 +1020,6 @@ and a boolean to check if the value has been set.
 
 SetPlatformUrl sets PlatformUrl field to given value.
 
-
-### GetPlatformVersion
-
-`func (o *UniverseConfigureTaskParams) GetPlatformVersion() string`
-
-GetPlatformVersion returns the PlatformVersion field if non-nil, zero value otherwise.
-
-### GetPlatformVersionOk
-
-`func (o *UniverseConfigureTaskParams) GetPlatformVersionOk() (*string, bool)`
-
-GetPlatformVersionOk returns a tuple with the PlatformVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPlatformVersion
-
-`func (o *UniverseConfigureTaskParams) SetPlatformVersion(v string)`
-
-SetPlatformVersion sets PlatformVersion field to given value.
-
-### HasPlatformVersion
-
-`func (o *UniverseConfigureTaskParams) HasPlatformVersion() bool`
-
-HasPlatformVersion returns a boolean if a field has been set.
 
 ### GetPrevYBSoftwareConfig
 

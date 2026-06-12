@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RegionCodes** | Pointer to **[]string** | YbaApi Internal. Region code | [optional] 
 **ServerType** | Pointer to **string** | YbaApi Internal. Server type | [optional] 
 **Start** | **int64** | YbaApi Internal. Start time | 
+**Step** | Pointer to **int64** | YbaApi Internal. Step size in seconds | [optional] 
 **StreamId** | Pointer to **string** | YbaApi Internal. Stream id | [optional] 
 **TableId** | Pointer to **string** | YbaApi Internal. Table id | [optional] 
 **TableName** | Pointer to **string** | YbaApi Internal. Table name | [optional] 
@@ -303,6 +304,31 @@ and a boolean to check if the value has been set.
 
 SetStart sets Start field to given value.
 
+
+### GetStep
+
+`func (o *MetricQueryParams) GetStep() int64`
+
+GetStep returns the Step field if non-nil, zero value otherwise.
+
+### GetStepOk
+
+`func (o *MetricQueryParams) GetStepOk() (*int64, bool)`
+
+GetStepOk returns a tuple with the Step field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStep
+
+`func (o *MetricQueryParams) SetStep(v int64)`
+
+SetStep sets Step field to given value.
+
+### HasStep
+
+`func (o *MetricQueryParams) HasStep() bool`
+
+HasStep returns a boolean if a field has been set.
 
 ### GetStreamId
 

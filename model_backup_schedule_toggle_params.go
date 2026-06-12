@@ -19,7 +19,7 @@ var _ MappedNullable = &BackupScheduleToggleParams{}
 
 // BackupScheduleToggleParams struct for BackupScheduleToggleParams
 type BackupScheduleToggleParams struct {
-	// Run a full or incremental backup if required when resuming a stopped schedule. When false (default), the full backup will instead run at its normally scheduled time.
+	// Run a full or incremental backup if required when resuming a stopped schedule. When false, the full backup will instead run at its normally scheduled time. When true, the full backup will run immediately, and then the schedule will continue as normal. If not specified, the value is determined by the yb.backup.run_immediate_backup_on_resume runtime config.
 	RunImmediateBackupOnResume *bool `json:"runImmediateBackupOnResume,omitempty"`
 	// State of the schedule
 	Status string `json:"status"`
