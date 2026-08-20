@@ -17,10 +17,10 @@ import (
 
 // UniverseCertRotateSpecAllOf struct for UniverseCertRotateSpecAllOf
 type UniverseCertRotateSpecAllOf struct {
-	SelfSignedServerCertRotate *bool `json:"self_signed_server_cert_rotate,omitempty"`
-	SelfSignedClientCertRotate *bool `json:"self_signed_client_cert_rotate,omitempty"`
-	RootCa *string `json:"root_ca,omitempty"`
-	ClientRootCa *string `json:"client_root_ca,omitempty"`
+	SelfSignedServerCertRotate *bool   `json:"self_signed_server_cert_rotate,omitempty"`
+	SelfSignedClientCertRotate *bool   `json:"self_signed_client_cert_rotate,omitempty"`
+	RootCa                     *string `json:"root_ca,omitempty"`
+	ClientRootCa               *string `json:"client_root_ca,omitempty"`
 }
 
 // NewUniverseCertRotateSpecAllOf instantiates a new UniverseCertRotateSpecAllOf object
@@ -220,5 +220,3 @@ func (v *NullableUniverseCertRotateSpecAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

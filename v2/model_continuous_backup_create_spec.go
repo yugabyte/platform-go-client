@@ -15,12 +15,12 @@ import (
 	"encoding/json"
 )
 
-// ContinuousBackupCreateSpec ContinuousBackupCreateSpec  Continuous Backup create time properties. Used to create a continuous backup configuration. 
+// ContinuousBackupCreateSpec ContinuousBackupCreateSpec  Continuous Backup create time properties. Used to create a continuous backup configuration.
 type ContinuousBackupCreateSpec struct {
 	// UUID of the storage config to use
 	StorageConfigUuid string `json:"storage_config_uuid"`
 	// Interval between two backups.
-	Frequency int64 `json:"frequency"`
+	Frequency         int64        `json:"frequency"`
 	FrequencyTimeUnit TimeUnitType `json:"frequency_time_unit"`
 	// The number of historical backups to retain in the storage bucket.
 	NumBackups *int32 `json:"num_backups,omitempty"`
@@ -66,7 +66,7 @@ func (o *ContinuousBackupCreateSpec) GetStorageConfigUuid() string {
 // GetStorageConfigUuidOk returns a tuple with the StorageConfigUuid field value
 // and a boolean to check if the value has been set.
 func (o *ContinuousBackupCreateSpec) GetStorageConfigUuidOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.StorageConfigUuid, true
@@ -90,7 +90,7 @@ func (o *ContinuousBackupCreateSpec) GetFrequency() int64 {
 // GetFrequencyOk returns a tuple with the Frequency field value
 // and a boolean to check if the value has been set.
 func (o *ContinuousBackupCreateSpec) GetFrequencyOk() (*int64, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Frequency, true
@@ -114,7 +114,7 @@ func (o *ContinuousBackupCreateSpec) GetFrequencyTimeUnit() TimeUnitType {
 // GetFrequencyTimeUnitOk returns a tuple with the FrequencyTimeUnit field value
 // and a boolean to check if the value has been set.
 func (o *ContinuousBackupCreateSpec) GetFrequencyTimeUnitOk() (*TimeUnitType, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.FrequencyTimeUnit, true
@@ -170,7 +170,7 @@ func (o *ContinuousBackupCreateSpec) GetBackupDir() string {
 // GetBackupDirOk returns a tuple with the BackupDir field value
 // and a boolean to check if the value has been set.
 func (o *ContinuousBackupCreateSpec) GetBackupDirOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.BackupDir, true
@@ -236,5 +236,3 @@ func (v *NullableContinuousBackupCreateSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

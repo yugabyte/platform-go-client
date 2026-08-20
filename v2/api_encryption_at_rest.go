@@ -23,19 +23,19 @@ import (
 // EncryptionAtRestAPIService EncryptionAtRestAPI service
 type EncryptionAtRestAPIService service
 
-type EncryptionAtRestAPIPageListKmsConfigsRequest struct {
+type ApiPageListKmsConfigsRequest struct {
 	ctx                     context.Context
 	ApiService              *EncryptionAtRestAPIService
 	cUUID                   string
 	kmsConfigPagedQuerySpec *KmsConfigPagedQuerySpec
 }
 
-func (r EncryptionAtRestAPIPageListKmsConfigsRequest) KmsConfigPagedQuerySpec(kmsConfigPagedQuerySpec KmsConfigPagedQuerySpec) EncryptionAtRestAPIPageListKmsConfigsRequest {
+func (r ApiPageListKmsConfigsRequest) KmsConfigPagedQuerySpec(kmsConfigPagedQuerySpec KmsConfigPagedQuerySpec) ApiPageListKmsConfigsRequest {
 	r.kmsConfigPagedQuerySpec = &kmsConfigPagedQuerySpec
 	return r
 }
 
-func (r EncryptionAtRestAPIPageListKmsConfigsRequest) Execute() (*KmsConfigPagedResp, *http.Response, error) {
+func (r ApiPageListKmsConfigsRequest) Execute() (*KmsConfigPagedResp, *http.Response, error) {
 	return r.ApiService.PageListKmsConfigsExecute(r)
 }
 
@@ -47,10 +47,10 @@ WARNING: This is a preview API that could change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return EncryptionAtRestAPIPageListKmsConfigsRequest
+	@return ApiPageListKmsConfigsRequest
 */
-func (a *EncryptionAtRestAPIService) PageListKmsConfigs(ctx context.Context, cUUID string) EncryptionAtRestAPIPageListKmsConfigsRequest {
-	return EncryptionAtRestAPIPageListKmsConfigsRequest{
+func (a *EncryptionAtRestAPIService) PageListKmsConfigs(ctx context.Context, cUUID string) ApiPageListKmsConfigsRequest {
+	return ApiPageListKmsConfigsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -60,7 +60,7 @@ func (a *EncryptionAtRestAPIService) PageListKmsConfigs(ctx context.Context, cUU
 // Execute executes the request
 //
 //	@return KmsConfigPagedResp
-func (a *EncryptionAtRestAPIService) PageListKmsConfigsExecute(r EncryptionAtRestAPIPageListKmsConfigsRequest) (*KmsConfigPagedResp, *http.Response, error) {
+func (a *EncryptionAtRestAPIService) PageListKmsConfigsExecute(r ApiPageListKmsConfigsRequest) (*KmsConfigPagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

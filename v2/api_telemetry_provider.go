@@ -23,7 +23,7 @@ import (
 // TelemetryProviderAPIService TelemetryProviderAPI service
 type TelemetryProviderAPIService service
 
-type TelemetryProviderAPIListTelemetryProviderTypesRequest struct {
+type ApiListTelemetryProviderTypesRequest struct {
 	ctx        context.Context
 	ApiService *TelemetryProviderAPIService
 	cUUID      string
@@ -31,12 +31,12 @@ type TelemetryProviderAPIListTelemetryProviderTypesRequest struct {
 }
 
 // Filter by export type (logs or metrics)
-func (r TelemetryProviderAPIListTelemetryProviderTypesRequest) ExportType(exportType string) TelemetryProviderAPIListTelemetryProviderTypesRequest {
+func (r ApiListTelemetryProviderTypesRequest) ExportType(exportType string) ApiListTelemetryProviderTypesRequest {
 	r.exportType = &exportType
 	return r
 }
 
-func (r TelemetryProviderAPIListTelemetryProviderTypesRequest) Execute() ([]TelemetryProviderTypeInfo, *http.Response, error) {
+func (r ApiListTelemetryProviderTypesRequest) Execute() ([]TelemetryProviderTypeInfo, *http.Response, error) {
 	return r.ApiService.ListTelemetryProviderTypesExecute(r)
 }
 
@@ -47,10 +47,10 @@ Get list of all available telemetry provider types with their capabilities
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return TelemetryProviderAPIListTelemetryProviderTypesRequest
+	@return ApiListTelemetryProviderTypesRequest
 */
-func (a *TelemetryProviderAPIService) ListTelemetryProviderTypes(ctx context.Context, cUUID string) TelemetryProviderAPIListTelemetryProviderTypesRequest {
-	return TelemetryProviderAPIListTelemetryProviderTypesRequest{
+func (a *TelemetryProviderAPIService) ListTelemetryProviderTypes(ctx context.Context, cUUID string) ApiListTelemetryProviderTypesRequest {
+	return ApiListTelemetryProviderTypesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -60,7 +60,7 @@ func (a *TelemetryProviderAPIService) ListTelemetryProviderTypes(ctx context.Con
 // Execute executes the request
 //
 //	@return []TelemetryProviderTypeInfo
-func (a *TelemetryProviderAPIService) ListTelemetryProviderTypesExecute(r TelemetryProviderAPIListTelemetryProviderTypesRequest) ([]TelemetryProviderTypeInfo, *http.Response, error) {
+func (a *TelemetryProviderAPIService) ListTelemetryProviderTypesExecute(r ApiListTelemetryProviderTypesRequest) ([]TelemetryProviderTypeInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}

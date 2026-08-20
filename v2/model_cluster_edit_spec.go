@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ClusterEditSpec type satisfies the MappedNullable interface at compile time
@@ -23,11 +25,15 @@ type ClusterEditSpec struct {
 	// The system generated cluster uuid to edit. This can be fetched from ClusterInfo.
 	Uuid string `json:"uuid"`
 	// Set the number of nodes (tservers) to provision in this cluster
-	NumNodes       *int32                   `json:"num_nodes,omitempty"`
-	NodeSpec       *ClusterNodeSpec         `json:"node_spec,omitempty"`
-	ProviderSpec   *ClusterProviderEditSpec `json:"provider_spec,omitempty"`
-	PlacementSpec  *ClusterPlacementSpec    `json:"placement_spec,omitempty"`
-	PartitionsSpec []ClusterPartitionSpec   `json:"partitions_spec,omitempty"`
+	NumNodes *int32 `json:"num_nodes,omitempty"`
+	// Whether to run tserver and master processes in dedicated nodes in this cluster. Omit to leave the existing value unchanged.
+	DedicatedNodes *bool                      `json:"dedicated_nodes,omitempty"`
+	NodeSpec       *ClusterNodeSpec           `json:"node_spec,omitempty"`
+	NetworkingSpec *ClusterNetworkingEditSpec `json:"networking_spec,omitempty"`
+	ProviderSpec   *ClusterProviderEditSpec   `json:"provider_spec,omitempty"`
+	PlacementSpec  *ClusterPlacementSpec      `json:"placement_spec,omitempty"`
+	ProviderSpecs  []ClusterPerProviderSpec   `json:"provider_specs,omitempty"`
+	PartitionsSpec []ClusterPartitionSpec     `json:"partitions_spec,omitempty"`
 	// A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/.
 	InstanceTags *map[string]string `json:"instance_tags,omitempty"`
 }
@@ -108,6 +114,38 @@ func (o *ClusterEditSpec) SetNumNodes(v int32) {
 	o.NumNodes = &v
 }
 
+// GetDedicatedNodes returns the DedicatedNodes field value if set, zero value otherwise.
+func (o *ClusterEditSpec) GetDedicatedNodes() bool {
+	if o == nil || IsNil(o.DedicatedNodes) {
+		var ret bool
+		return ret
+	}
+	return *o.DedicatedNodes
+}
+
+// GetDedicatedNodesOk returns a tuple with the DedicatedNodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterEditSpec) GetDedicatedNodesOk() (*bool, bool) {
+	if o == nil || IsNil(o.DedicatedNodes) {
+		return nil, false
+	}
+	return o.DedicatedNodes, true
+}
+
+// HasDedicatedNodes returns a boolean if a field has been set.
+func (o *ClusterEditSpec) HasDedicatedNodes() bool {
+	if o != nil && !IsNil(o.DedicatedNodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetDedicatedNodes gets a reference to the given bool and assigns it to the DedicatedNodes field.
+func (o *ClusterEditSpec) SetDedicatedNodes(v bool) {
+	o.DedicatedNodes = &v
+}
+
 // GetNodeSpec returns the NodeSpec field value if set, zero value otherwise.
 func (o *ClusterEditSpec) GetNodeSpec() ClusterNodeSpec {
 	if o == nil || IsNil(o.NodeSpec) {
@@ -138,6 +176,38 @@ func (o *ClusterEditSpec) HasNodeSpec() bool {
 // SetNodeSpec gets a reference to the given ClusterNodeSpec and assigns it to the NodeSpec field.
 func (o *ClusterEditSpec) SetNodeSpec(v ClusterNodeSpec) {
 	o.NodeSpec = &v
+}
+
+// GetNetworkingSpec returns the NetworkingSpec field value if set, zero value otherwise.
+func (o *ClusterEditSpec) GetNetworkingSpec() ClusterNetworkingEditSpec {
+	if o == nil || IsNil(o.NetworkingSpec) {
+		var ret ClusterNetworkingEditSpec
+		return ret
+	}
+	return *o.NetworkingSpec
+}
+
+// GetNetworkingSpecOk returns a tuple with the NetworkingSpec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterEditSpec) GetNetworkingSpecOk() (*ClusterNetworkingEditSpec, bool) {
+	if o == nil || IsNil(o.NetworkingSpec) {
+		return nil, false
+	}
+	return o.NetworkingSpec, true
+}
+
+// HasNetworkingSpec returns a boolean if a field has been set.
+func (o *ClusterEditSpec) HasNetworkingSpec() bool {
+	if o != nil && !IsNil(o.NetworkingSpec) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkingSpec gets a reference to the given ClusterNetworkingEditSpec and assigns it to the NetworkingSpec field.
+func (o *ClusterEditSpec) SetNetworkingSpec(v ClusterNetworkingEditSpec) {
+	o.NetworkingSpec = &v
 }
 
 // GetProviderSpec returns the ProviderSpec field value if set, zero value otherwise.
@@ -202,6 +272,38 @@ func (o *ClusterEditSpec) HasPlacementSpec() bool {
 // SetPlacementSpec gets a reference to the given ClusterPlacementSpec and assigns it to the PlacementSpec field.
 func (o *ClusterEditSpec) SetPlacementSpec(v ClusterPlacementSpec) {
 	o.PlacementSpec = &v
+}
+
+// GetProviderSpecs returns the ProviderSpecs field value if set, zero value otherwise.
+func (o *ClusterEditSpec) GetProviderSpecs() []ClusterPerProviderSpec {
+	if o == nil || IsNil(o.ProviderSpecs) {
+		var ret []ClusterPerProviderSpec
+		return ret
+	}
+	return o.ProviderSpecs
+}
+
+// GetProviderSpecsOk returns a tuple with the ProviderSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterEditSpec) GetProviderSpecsOk() ([]ClusterPerProviderSpec, bool) {
+	if o == nil || IsNil(o.ProviderSpecs) {
+		return nil, false
+	}
+	return o.ProviderSpecs, true
+}
+
+// HasProviderSpecs returns a boolean if a field has been set.
+func (o *ClusterEditSpec) HasProviderSpecs() bool {
+	if o != nil && !IsNil(o.ProviderSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderSpecs gets a reference to the given []ClusterPerProviderSpec and assigns it to the ProviderSpecs field.
+func (o *ClusterEditSpec) SetProviderSpecs(v []ClusterPerProviderSpec) {
+	o.ProviderSpecs = v
 }
 
 // GetPartitionsSpec returns the PartitionsSpec field value if set, zero value otherwise.
@@ -282,14 +384,23 @@ func (o ClusterEditSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NumNodes) {
 		toSerialize["num_nodes"] = o.NumNodes
 	}
+	if !IsNil(o.DedicatedNodes) {
+		toSerialize["dedicated_nodes"] = o.DedicatedNodes
+	}
 	if !IsNil(o.NodeSpec) {
 		toSerialize["node_spec"] = o.NodeSpec
+	}
+	if !IsNil(o.NetworkingSpec) {
+		toSerialize["networking_spec"] = o.NetworkingSpec
 	}
 	if !IsNil(o.ProviderSpec) {
 		toSerialize["provider_spec"] = o.ProviderSpec
 	}
 	if !IsNil(o.PlacementSpec) {
 		toSerialize["placement_spec"] = o.PlacementSpec
+	}
+	if !IsNil(o.ProviderSpecs) {
+		toSerialize["provider_specs"] = o.ProviderSpecs
 	}
 	if !IsNil(o.PartitionsSpec) {
 		toSerialize["partitions_spec"] = o.PartitionsSpec
@@ -298,6 +409,43 @@ func (o ClusterEditSpec) ToMap() (map[string]interface{}, error) {
 		toSerialize["instance_tags"] = o.InstanceTags
 	}
 	return toSerialize, nil
+}
+
+func (o *ClusterEditSpec) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"uuid",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varClusterEditSpec := _ClusterEditSpec{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varClusterEditSpec)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClusterEditSpec(varClusterEditSpec)
+
+	return err
 }
 
 type NullableClusterEditSpec struct {

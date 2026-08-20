@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RunScriptResponse type satisfies the MappedNullable interface at compile time
@@ -107,6 +109,44 @@ func (o RunScriptResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["summary"] = o.Summary
 	toSerialize["results"] = o.Results
 	return toSerialize, nil
+}
+
+func (o *RunScriptResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"summary",
+		"results",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRunScriptResponse := _RunScriptResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRunScriptResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RunScriptResponse(varRunScriptResponse)
+
+	return err
 }
 
 type NullableRunScriptResponse struct {

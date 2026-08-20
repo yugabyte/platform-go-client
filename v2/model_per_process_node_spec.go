@@ -18,11 +18,11 @@ import (
 // checks if the PerProcessNodeSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PerProcessNodeSpec{}
 
-// PerProcessNodeSpec Instance settings for each node in the cluster. The instances can be onprem nodes, VMs in GCP/AWS/Azure, or pods in k8s. Part of AvailabilityZoneNodeSpec and ClusterNodeSpec.
+// PerProcessNodeSpec Instance settings for nodes, including partial overrides. Storage fields are all optional. Part of AvailabilityZoneNodeSpec.
 type PerProcessNodeSpec struct {
 	// Instance type for tserver/master nodes of cluster that determines the cpu and memory resources.
 	InstanceType *string             `json:"instance_type,omitempty"`
-	StorageSpec  *ClusterStorageSpec `json:"storage_spec,omitempty"`
+	StorageSpec  *ClusterStorageBase `json:"storage_spec,omitempty"`
 }
 
 // NewPerProcessNodeSpec instantiates a new PerProcessNodeSpec object
@@ -75,9 +75,9 @@ func (o *PerProcessNodeSpec) SetInstanceType(v string) {
 }
 
 // GetStorageSpec returns the StorageSpec field value if set, zero value otherwise.
-func (o *PerProcessNodeSpec) GetStorageSpec() ClusterStorageSpec {
+func (o *PerProcessNodeSpec) GetStorageSpec() ClusterStorageBase {
 	if o == nil || IsNil(o.StorageSpec) {
-		var ret ClusterStorageSpec
+		var ret ClusterStorageBase
 		return ret
 	}
 	return *o.StorageSpec
@@ -85,7 +85,7 @@ func (o *PerProcessNodeSpec) GetStorageSpec() ClusterStorageSpec {
 
 // GetStorageSpecOk returns a tuple with the StorageSpec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PerProcessNodeSpec) GetStorageSpecOk() (*ClusterStorageSpec, bool) {
+func (o *PerProcessNodeSpec) GetStorageSpecOk() (*ClusterStorageBase, bool) {
 	if o == nil || IsNil(o.StorageSpec) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *PerProcessNodeSpec) HasStorageSpec() bool {
 	return false
 }
 
-// SetStorageSpec gets a reference to the given ClusterStorageSpec and assigns it to the StorageSpec field.
-func (o *PerProcessNodeSpec) SetStorageSpec(v ClusterStorageSpec) {
+// SetStorageSpec gets a reference to the given ClusterStorageBase and assigns it to the StorageSpec field.
+func (o *PerProcessNodeSpec) SetStorageSpec(v ClusterStorageBase) {
 	o.StorageSpec = &v
 }
 

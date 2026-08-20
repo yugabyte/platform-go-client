@@ -22,12 +22,12 @@ import (
 // YBAInstanceAPIService YBAInstanceAPI service
 type YBAInstanceAPIService service
 
-type YBAInstanceAPIGetYBAInstanceInfoRequest struct {
+type ApiGetYBAInstanceInfoRequest struct {
 	ctx        context.Context
 	ApiService *YBAInstanceAPIService
 }
 
-func (r YBAInstanceAPIGetYBAInstanceInfoRequest) Execute() (*YBAInfo, *http.Response, error) {
+func (r ApiGetYBAInstanceInfoRequest) Execute() (*YBAInfo, *http.Response, error) {
 	return r.ApiService.GetYBAInstanceInfoExecute(r)
 }
 
@@ -37,10 +37,10 @@ GetYBAInstanceInfo Get YBAInstance info
 Get YBA Instance info
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return YBAInstanceAPIGetYBAInstanceInfoRequest
+	@return ApiGetYBAInstanceInfoRequest
 */
-func (a *YBAInstanceAPIService) GetYBAInstanceInfo(ctx context.Context) YBAInstanceAPIGetYBAInstanceInfoRequest {
-	return YBAInstanceAPIGetYBAInstanceInfoRequest{
+func (a *YBAInstanceAPIService) GetYBAInstanceInfo(ctx context.Context) ApiGetYBAInstanceInfoRequest {
+	return ApiGetYBAInstanceInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -49,7 +49,7 @@ func (a *YBAInstanceAPIService) GetYBAInstanceInfo(ctx context.Context) YBAInsta
 // Execute executes the request
 //
 //	@return YBAInfo
-func (a *YBAInstanceAPIService) GetYBAInstanceInfoExecute(r YBAInstanceAPIGetYBAInstanceInfoRequest) (*YBAInfo, *http.Response, error) {
+func (a *YBAInstanceAPIService) GetYBAInstanceInfoExecute(r ApiGetYBAInstanceInfoRequest) (*YBAInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}

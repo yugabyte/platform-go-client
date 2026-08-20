@@ -128,7 +128,7 @@ func (o *UniverseSoftwareUpgradeStartAllOf) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *UniverseSoftwareUpgradeStartAllOf) GetVersionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Version, true
@@ -188,5 +188,3 @@ func (v *NullableUniverseSoftwareUpgradeStartAllOf) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

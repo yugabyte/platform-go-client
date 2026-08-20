@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the UniverseSpec type satisfies the MappedNullable interface at compile time
@@ -35,6 +37,7 @@ type UniverseSpec struct {
 	// Override the default DB present in pre-built Ami. YBM usage.
 	OverridePrebuiltAmiDbVersion *bool                   `json:"override_prebuilt_ami_db_version,omitempty"`
 	NetworkingSpec               *UniverseNetworkingSpec `json:"networking_spec,omitempty"`
+	UniverseSettings             *UniverseSettings       `json:"universe_settings,omitempty"`
 	Clusters                     []ClusterSpec           `json:"clusters"`
 }
 
@@ -364,6 +367,38 @@ func (o *UniverseSpec) SetNetworkingSpec(v UniverseNetworkingSpec) {
 	o.NetworkingSpec = &v
 }
 
+// GetUniverseSettings returns the UniverseSettings field value if set, zero value otherwise.
+func (o *UniverseSpec) GetUniverseSettings() UniverseSettings {
+	if o == nil || IsNil(o.UniverseSettings) {
+		var ret UniverseSettings
+		return ret
+	}
+	return *o.UniverseSettings
+}
+
+// GetUniverseSettingsOk returns a tuple with the UniverseSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseSpec) GetUniverseSettingsOk() (*UniverseSettings, bool) {
+	if o == nil || IsNil(o.UniverseSettings) {
+		return nil, false
+	}
+	return o.UniverseSettings, true
+}
+
+// HasUniverseSettings returns a boolean if a field has been set.
+func (o *UniverseSpec) HasUniverseSettings() bool {
+	if o != nil && !IsNil(o.UniverseSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseSettings gets a reference to the given UniverseSettings and assigns it to the UniverseSettings field.
+func (o *UniverseSpec) SetUniverseSettings(v UniverseSettings) {
+	o.UniverseSettings = &v
+}
+
 // GetClusters returns the Clusters field value
 func (o *UniverseSpec) GetClusters() []ClusterSpec {
 	if o == nil {
@@ -424,8 +459,50 @@ func (o UniverseSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NetworkingSpec) {
 		toSerialize["networking_spec"] = o.NetworkingSpec
 	}
+	if !IsNil(o.UniverseSettings) {
+		toSerialize["universe_settings"] = o.UniverseSettings
+	}
 	toSerialize["clusters"] = o.Clusters
 	return toSerialize, nil
+}
+
+func (o *UniverseSpec) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"yb_software_version",
+		"clusters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUniverseSpec := _UniverseSpec{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUniverseSpec)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UniverseSpec(varUniverseSpec)
+
+	return err
 }
 
 type NullableUniverseSpec struct {

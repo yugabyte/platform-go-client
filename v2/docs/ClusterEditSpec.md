@@ -6,9 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uuid** | **string** | The system generated cluster uuid to edit. This can be fetched from ClusterInfo. | 
 **NumNodes** | Pointer to **int32** | Set the number of nodes (tservers) to provision in this cluster | [optional] 
+**DedicatedNodes** | Pointer to **bool** | Whether to run tserver and master processes in dedicated nodes in this cluster. Omit to leave the existing value unchanged. | [optional] 
 **NodeSpec** | Pointer to [**ClusterNodeSpec**](ClusterNodeSpec.md) |  | [optional] 
+**NetworkingSpec** | Pointer to [**ClusterNetworkingEditSpec**](ClusterNetworkingEditSpec.md) |  | [optional] 
 **ProviderSpec** | Pointer to [**ClusterProviderEditSpec**](ClusterProviderEditSpec.md) |  | [optional] 
 **PlacementSpec** | Pointer to [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | [optional] 
+**ProviderSpecs** | Pointer to [**[]ClusterPerProviderSpec**](ClusterPerProviderSpec.md) |  | [optional] 
 **PartitionsSpec** | Pointer to [**[]ClusterPartitionSpec**](ClusterPartitionSpec.md) |  | [optional] 
 **InstanceTags** | Pointer to **map[string]string** | A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/. | [optional] 
 
@@ -76,6 +79,31 @@ SetNumNodes sets NumNodes field to given value.
 
 HasNumNodes returns a boolean if a field has been set.
 
+### GetDedicatedNodes
+
+`func (o *ClusterEditSpec) GetDedicatedNodes() bool`
+
+GetDedicatedNodes returns the DedicatedNodes field if non-nil, zero value otherwise.
+
+### GetDedicatedNodesOk
+
+`func (o *ClusterEditSpec) GetDedicatedNodesOk() (*bool, bool)`
+
+GetDedicatedNodesOk returns a tuple with the DedicatedNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDedicatedNodes
+
+`func (o *ClusterEditSpec) SetDedicatedNodes(v bool)`
+
+SetDedicatedNodes sets DedicatedNodes field to given value.
+
+### HasDedicatedNodes
+
+`func (o *ClusterEditSpec) HasDedicatedNodes() bool`
+
+HasDedicatedNodes returns a boolean if a field has been set.
+
 ### GetNodeSpec
 
 `func (o *ClusterEditSpec) GetNodeSpec() ClusterNodeSpec`
@@ -100,6 +128,31 @@ SetNodeSpec sets NodeSpec field to given value.
 `func (o *ClusterEditSpec) HasNodeSpec() bool`
 
 HasNodeSpec returns a boolean if a field has been set.
+
+### GetNetworkingSpec
+
+`func (o *ClusterEditSpec) GetNetworkingSpec() ClusterNetworkingEditSpec`
+
+GetNetworkingSpec returns the NetworkingSpec field if non-nil, zero value otherwise.
+
+### GetNetworkingSpecOk
+
+`func (o *ClusterEditSpec) GetNetworkingSpecOk() (*ClusterNetworkingEditSpec, bool)`
+
+GetNetworkingSpecOk returns a tuple with the NetworkingSpec field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkingSpec
+
+`func (o *ClusterEditSpec) SetNetworkingSpec(v ClusterNetworkingEditSpec)`
+
+SetNetworkingSpec sets NetworkingSpec field to given value.
+
+### HasNetworkingSpec
+
+`func (o *ClusterEditSpec) HasNetworkingSpec() bool`
+
+HasNetworkingSpec returns a boolean if a field has been set.
 
 ### GetProviderSpec
 
@@ -150,6 +203,31 @@ SetPlacementSpec sets PlacementSpec field to given value.
 `func (o *ClusterEditSpec) HasPlacementSpec() bool`
 
 HasPlacementSpec returns a boolean if a field has been set.
+
+### GetProviderSpecs
+
+`func (o *ClusterEditSpec) GetProviderSpecs() []ClusterPerProviderSpec`
+
+GetProviderSpecs returns the ProviderSpecs field if non-nil, zero value otherwise.
+
+### GetProviderSpecsOk
+
+`func (o *ClusterEditSpec) GetProviderSpecsOk() (*[]ClusterPerProviderSpec, bool)`
+
+GetProviderSpecsOk returns a tuple with the ProviderSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderSpecs
+
+`func (o *ClusterEditSpec) SetProviderSpecs(v []ClusterPerProviderSpec)`
+
+SetProviderSpecs sets ProviderSpecs field to given value.
+
+### HasProviderSpecs
+
+`func (o *ClusterEditSpec) HasProviderSpecs() bool`
+
+HasProviderSpecs returns a boolean if a field has been set.
 
 ### GetPartitionsSpec
 

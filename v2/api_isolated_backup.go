@@ -23,19 +23,19 @@ import (
 // IsolatedBackupAPIService IsolatedBackupAPI service
 type IsolatedBackupAPIService service
 
-type IsolatedBackupAPICreateYbaBackupRequest struct {
+type ApiCreateYbaBackupRequest struct {
 	ctx                      context.Context
 	ApiService               *IsolatedBackupAPIService
 	cUUID                    string
 	isolatedBackupCreateSpec *IsolatedBackupCreateSpec
 }
 
-func (r IsolatedBackupAPICreateYbaBackupRequest) IsolatedBackupCreateSpec(isolatedBackupCreateSpec IsolatedBackupCreateSpec) IsolatedBackupAPICreateYbaBackupRequest {
+func (r ApiCreateYbaBackupRequest) IsolatedBackupCreateSpec(isolatedBackupCreateSpec IsolatedBackupCreateSpec) ApiCreateYbaBackupRequest {
 	r.isolatedBackupCreateSpec = &isolatedBackupCreateSpec
 	return r
 }
 
-func (r IsolatedBackupAPICreateYbaBackupRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiCreateYbaBackupRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.CreateYbaBackupExecute(r)
 }
 
@@ -46,10 +46,10 @@ Trigger a one time backup of YBA to the desired storage location
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return IsolatedBackupAPICreateYbaBackupRequest
+	@return ApiCreateYbaBackupRequest
 */
-func (a *IsolatedBackupAPIService) CreateYbaBackup(ctx context.Context, cUUID string) IsolatedBackupAPICreateYbaBackupRequest {
-	return IsolatedBackupAPICreateYbaBackupRequest{
+func (a *IsolatedBackupAPIService) CreateYbaBackup(ctx context.Context, cUUID string) ApiCreateYbaBackupRequest {
+	return ApiCreateYbaBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -59,7 +59,7 @@ func (a *IsolatedBackupAPIService) CreateYbaBackup(ctx context.Context, cUUID st
 // Execute executes the request
 //
 //	@return YBATask
-func (a *IsolatedBackupAPIService) CreateYbaBackupExecute(r IsolatedBackupAPICreateYbaBackupRequest) (*YBATask, *http.Response, error) {
+func (a *IsolatedBackupAPIService) CreateYbaBackupExecute(r ApiCreateYbaBackupRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -152,19 +152,19 @@ func (a *IsolatedBackupAPIService) CreateYbaBackupExecute(r IsolatedBackupAPICre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IsolatedBackupAPIRestoreYbaBackupRequest struct {
+type ApiRestoreYbaBackupRequest struct {
 	ctx                       context.Context
 	ApiService                *IsolatedBackupAPIService
 	cUUID                     string
 	isolatedBackupRestoreSpec *IsolatedBackupRestoreSpec
 }
 
-func (r IsolatedBackupAPIRestoreYbaBackupRequest) IsolatedBackupRestoreSpec(isolatedBackupRestoreSpec IsolatedBackupRestoreSpec) IsolatedBackupAPIRestoreYbaBackupRequest {
+func (r ApiRestoreYbaBackupRequest) IsolatedBackupRestoreSpec(isolatedBackupRestoreSpec IsolatedBackupRestoreSpec) ApiRestoreYbaBackupRequest {
 	r.isolatedBackupRestoreSpec = &isolatedBackupRestoreSpec
 	return r
 }
 
-func (r IsolatedBackupAPIRestoreYbaBackupRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiRestoreYbaBackupRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.RestoreYbaBackupExecute(r)
 }
 
@@ -175,10 +175,10 @@ Trigger a one time restore of YBA from the desired storage location
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return IsolatedBackupAPIRestoreYbaBackupRequest
+	@return ApiRestoreYbaBackupRequest
 */
-func (a *IsolatedBackupAPIService) RestoreYbaBackup(ctx context.Context, cUUID string) IsolatedBackupAPIRestoreYbaBackupRequest {
-	return IsolatedBackupAPIRestoreYbaBackupRequest{
+func (a *IsolatedBackupAPIService) RestoreYbaBackup(ctx context.Context, cUUID string) ApiRestoreYbaBackupRequest {
+	return ApiRestoreYbaBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -188,7 +188,7 @@ func (a *IsolatedBackupAPIService) RestoreYbaBackup(ctx context.Context, cUUID s
 // Execute executes the request
 //
 //	@return YBATask
-func (a *IsolatedBackupAPIService) RestoreYbaBackupExecute(r IsolatedBackupAPIRestoreYbaBackupRequest) (*YBATask, *http.Response, error) {
+func (a *IsolatedBackupAPIService) RestoreYbaBackupExecute(r ApiRestoreYbaBackupRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

@@ -20,9 +20,15 @@ var _ MappedNullable = &TelemetryConfig{}
 
 // TelemetryConfig Telemetry config. Each property is optional. Set to null or omit to disable that config. Empty object = disable all.
 type TelemetryConfig struct {
-	AuditLogs *AuditLogsTelemetrySpec `json:"audit_logs,omitempty"`
-	QueryLogs *QueryLogsTelemetrySpec `json:"query_logs,omitempty"`
-	Metrics   *MetricsTelemetrySpec   `json:"metrics,omitempty"`
+	AuditLogs       *AuditLogsTelemetrySpec       `json:"audit_logs,omitempty"`
+	QueryLogs       *QueryLogsTelemetrySpec       `json:"query_logs,omitempty"`
+	Metrics         *MetricsTelemetrySpec         `json:"metrics,omitempty"`
+	MasterLogs      *MasterLogsTelemetrySpec      `json:"master_logs,omitempty"`
+	TserverLogs     *TServerLogsTelemetrySpec     `json:"tserver_logs,omitempty"`
+	YsqlConnMgrLogs *YsqlConnMgrLogsTelemetrySpec `json:"ysql_conn_mgr_logs,omitempty"`
+	NodeAgentLogs   *NodeAgentLogsTelemetrySpec   `json:"node_agent_logs,omitempty"`
+	YnpLogs         *YnpLogsTelemetrySpec         `json:"ynp_logs,omitempty"`
+	ControllerLogs  *ControllerLogsTelemetrySpec  `json:"controller_logs,omitempty"`
 }
 
 // NewTelemetryConfig instantiates a new TelemetryConfig object
@@ -138,6 +144,198 @@ func (o *TelemetryConfig) SetMetrics(v MetricsTelemetrySpec) {
 	o.Metrics = &v
 }
 
+// GetMasterLogs returns the MasterLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetMasterLogs() MasterLogsTelemetrySpec {
+	if o == nil || IsNil(o.MasterLogs) {
+		var ret MasterLogsTelemetrySpec
+		return ret
+	}
+	return *o.MasterLogs
+}
+
+// GetMasterLogsOk returns a tuple with the MasterLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetMasterLogsOk() (*MasterLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.MasterLogs) {
+		return nil, false
+	}
+	return o.MasterLogs, true
+}
+
+// HasMasterLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasMasterLogs() bool {
+	if o != nil && !IsNil(o.MasterLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterLogs gets a reference to the given MasterLogsTelemetrySpec and assigns it to the MasterLogs field.
+func (o *TelemetryConfig) SetMasterLogs(v MasterLogsTelemetrySpec) {
+	o.MasterLogs = &v
+}
+
+// GetTserverLogs returns the TserverLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetTserverLogs() TServerLogsTelemetrySpec {
+	if o == nil || IsNil(o.TserverLogs) {
+		var ret TServerLogsTelemetrySpec
+		return ret
+	}
+	return *o.TserverLogs
+}
+
+// GetTserverLogsOk returns a tuple with the TserverLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetTserverLogsOk() (*TServerLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.TserverLogs) {
+		return nil, false
+	}
+	return o.TserverLogs, true
+}
+
+// HasTserverLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasTserverLogs() bool {
+	if o != nil && !IsNil(o.TserverLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetTserverLogs gets a reference to the given TServerLogsTelemetrySpec and assigns it to the TserverLogs field.
+func (o *TelemetryConfig) SetTserverLogs(v TServerLogsTelemetrySpec) {
+	o.TserverLogs = &v
+}
+
+// GetYsqlConnMgrLogs returns the YsqlConnMgrLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetYsqlConnMgrLogs() YsqlConnMgrLogsTelemetrySpec {
+	if o == nil || IsNil(o.YsqlConnMgrLogs) {
+		var ret YsqlConnMgrLogsTelemetrySpec
+		return ret
+	}
+	return *o.YsqlConnMgrLogs
+}
+
+// GetYsqlConnMgrLogsOk returns a tuple with the YsqlConnMgrLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetYsqlConnMgrLogsOk() (*YsqlConnMgrLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.YsqlConnMgrLogs) {
+		return nil, false
+	}
+	return o.YsqlConnMgrLogs, true
+}
+
+// HasYsqlConnMgrLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasYsqlConnMgrLogs() bool {
+	if o != nil && !IsNil(o.YsqlConnMgrLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlConnMgrLogs gets a reference to the given YsqlConnMgrLogsTelemetrySpec and assigns it to the YsqlConnMgrLogs field.
+func (o *TelemetryConfig) SetYsqlConnMgrLogs(v YsqlConnMgrLogsTelemetrySpec) {
+	o.YsqlConnMgrLogs = &v
+}
+
+// GetNodeAgentLogs returns the NodeAgentLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetNodeAgentLogs() NodeAgentLogsTelemetrySpec {
+	if o == nil || IsNil(o.NodeAgentLogs) {
+		var ret NodeAgentLogsTelemetrySpec
+		return ret
+	}
+	return *o.NodeAgentLogs
+}
+
+// GetNodeAgentLogsOk returns a tuple with the NodeAgentLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetNodeAgentLogsOk() (*NodeAgentLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.NodeAgentLogs) {
+		return nil, false
+	}
+	return o.NodeAgentLogs, true
+}
+
+// HasNodeAgentLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasNodeAgentLogs() bool {
+	if o != nil && !IsNil(o.NodeAgentLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeAgentLogs gets a reference to the given NodeAgentLogsTelemetrySpec and assigns it to the NodeAgentLogs field.
+func (o *TelemetryConfig) SetNodeAgentLogs(v NodeAgentLogsTelemetrySpec) {
+	o.NodeAgentLogs = &v
+}
+
+// GetYnpLogs returns the YnpLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetYnpLogs() YnpLogsTelemetrySpec {
+	if o == nil || IsNil(o.YnpLogs) {
+		var ret YnpLogsTelemetrySpec
+		return ret
+	}
+	return *o.YnpLogs
+}
+
+// GetYnpLogsOk returns a tuple with the YnpLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetYnpLogsOk() (*YnpLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.YnpLogs) {
+		return nil, false
+	}
+	return o.YnpLogs, true
+}
+
+// HasYnpLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasYnpLogs() bool {
+	if o != nil && !IsNil(o.YnpLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYnpLogs gets a reference to the given YnpLogsTelemetrySpec and assigns it to the YnpLogs field.
+func (o *TelemetryConfig) SetYnpLogs(v YnpLogsTelemetrySpec) {
+	o.YnpLogs = &v
+}
+
+// GetControllerLogs returns the ControllerLogs field value if set, zero value otherwise.
+func (o *TelemetryConfig) GetControllerLogs() ControllerLogsTelemetrySpec {
+	if o == nil || IsNil(o.ControllerLogs) {
+		var ret ControllerLogsTelemetrySpec
+		return ret
+	}
+	return *o.ControllerLogs
+}
+
+// GetControllerLogsOk returns a tuple with the ControllerLogs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TelemetryConfig) GetControllerLogsOk() (*ControllerLogsTelemetrySpec, bool) {
+	if o == nil || IsNil(o.ControllerLogs) {
+		return nil, false
+	}
+	return o.ControllerLogs, true
+}
+
+// HasControllerLogs returns a boolean if a field has been set.
+func (o *TelemetryConfig) HasControllerLogs() bool {
+	if o != nil && !IsNil(o.ControllerLogs) {
+		return true
+	}
+
+	return false
+}
+
+// SetControllerLogs gets a reference to the given ControllerLogsTelemetrySpec and assigns it to the ControllerLogs field.
+func (o *TelemetryConfig) SetControllerLogs(v ControllerLogsTelemetrySpec) {
+	o.ControllerLogs = &v
+}
+
 func (o TelemetryConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -156,6 +354,24 @@ func (o TelemetryConfig) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metrics) {
 		toSerialize["metrics"] = o.Metrics
+	}
+	if !IsNil(o.MasterLogs) {
+		toSerialize["master_logs"] = o.MasterLogs
+	}
+	if !IsNil(o.TserverLogs) {
+		toSerialize["tserver_logs"] = o.TserverLogs
+	}
+	if !IsNil(o.YsqlConnMgrLogs) {
+		toSerialize["ysql_conn_mgr_logs"] = o.YsqlConnMgrLogs
+	}
+	if !IsNil(o.NodeAgentLogs) {
+		toSerialize["node_agent_logs"] = o.NodeAgentLogs
+	}
+	if !IsNil(o.YnpLogs) {
+		toSerialize["ynp_logs"] = o.YnpLogs
+	}
+	if !IsNil(o.ControllerLogs) {
+		toSerialize["controller_logs"] = o.ControllerLogs
 	}
 	return toSerialize, nil
 }

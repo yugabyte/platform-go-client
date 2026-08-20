@@ -23,7 +23,134 @@ import (
 // ImageBundleAPIService ImageBundleAPI service
 type ImageBundleAPIService service
 
-type ImageBundleAPIPageListImageBundlesRequest struct {
+type ApiGetImageBundleRequest struct {
+	ctx          context.Context
+	ApiService   *ImageBundleAPIService
+	cUUID        string
+	providerUUID string
+	iBUUID       string
+}
+
+func (r ApiGetImageBundleRequest) Execute() (*ImageBundle, *http.Response, error) {
+	return r.ApiService.GetImageBundleExecute(r)
+}
+
+/*
+GetImageBundle Get an image bundle
+
+Returns a single image bundle for the specified provider.
+WARNING: This is a preview API that could change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param providerUUID Provider UUID
+	@param iBUUID Image Bundle UUID
+	@return ApiGetImageBundleRequest
+*/
+func (a *ImageBundleAPIService) GetImageBundle(ctx context.Context, cUUID string, providerUUID string, iBUUID string) ApiGetImageBundleRequest {
+	return ApiGetImageBundleRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		cUUID:        cUUID,
+		providerUUID: providerUUID,
+		iBUUID:       iBUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ImageBundle
+func (a *ImageBundleAPIService) GetImageBundleExecute(r ApiGetImageBundleRequest) (*ImageBundle, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ImageBundle
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ImageBundleAPIService.GetImageBundle")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/providers/{providerUUID}/image-bundles/{iBUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"providerUUID"+"}", url.PathEscape(parameterValueToString(r.providerUUID, "providerUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"iBUUID"+"}", url.PathEscape(parameterValueToString(r.iBUUID, "iBUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPageListImageBundlesRequest struct {
 	ctx                       context.Context
 	ApiService                *ImageBundleAPIService
 	cUUID                     string
@@ -31,12 +158,12 @@ type ImageBundleAPIPageListImageBundlesRequest struct {
 	imageBundlePagedQuerySpec *ImageBundlePagedQuerySpec
 }
 
-func (r ImageBundleAPIPageListImageBundlesRequest) ImageBundlePagedQuerySpec(imageBundlePagedQuerySpec ImageBundlePagedQuerySpec) ImageBundleAPIPageListImageBundlesRequest {
+func (r ApiPageListImageBundlesRequest) ImageBundlePagedQuerySpec(imageBundlePagedQuerySpec ImageBundlePagedQuerySpec) ApiPageListImageBundlesRequest {
 	r.imageBundlePagedQuerySpec = &imageBundlePagedQuerySpec
 	return r
 }
 
-func (r ImageBundleAPIPageListImageBundlesRequest) Execute() (*ImageBundlePagedResp, *http.Response, error) {
+func (r ApiPageListImageBundlesRequest) Execute() (*ImageBundlePagedResp, *http.Response, error) {
 	return r.ApiService.PageListImageBundlesExecute(r)
 }
 
@@ -49,10 +176,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param providerUUID Provider UUID
-	@return ImageBundleAPIPageListImageBundlesRequest
+	@return ApiPageListImageBundlesRequest
 */
-func (a *ImageBundleAPIService) PageListImageBundles(ctx context.Context, cUUID string, providerUUID string) ImageBundleAPIPageListImageBundlesRequest {
-	return ImageBundleAPIPageListImageBundlesRequest{
+func (a *ImageBundleAPIService) PageListImageBundles(ctx context.Context, cUUID string, providerUUID string) ApiPageListImageBundlesRequest {
+	return ApiPageListImageBundlesRequest{
 		ApiService:   a,
 		ctx:          ctx,
 		cUUID:        cUUID,
@@ -63,7 +190,7 @@ func (a *ImageBundleAPIService) PageListImageBundles(ctx context.Context, cUUID 
 // Execute executes the request
 //
 //	@return ImageBundlePagedResp
-func (a *ImageBundleAPIService) PageListImageBundlesExecute(r ImageBundleAPIPageListImageBundlesRequest) (*ImageBundlePagedResp, *http.Response, error) {
+func (a *ImageBundleAPIService) PageListImageBundlesExecute(r ApiPageListImageBundlesRequest) (*ImageBundlePagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

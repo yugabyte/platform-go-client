@@ -17,9 +17,9 @@ import (
 
 // ConfigureMetricsExportSpecAllOf struct for ConfigureMetricsExportSpecAllOf
 type ConfigureMetricsExportSpecAllOf struct {
-	// Similar to DBAL request body. Optional - default false. Requires true if \"universe_metrics_exporter_config\" is not empty and \"universeDetails.otelCollectorEnabled\" is false. 
-	InstallOtelCollector *bool `json:"install_otel_collector,omitempty"`
-	MetricsExportConfig *MetricsExportConfig `json:"metrics_export_config,omitempty"`
+	// Similar to DBAL request body. Optional - default false. Requires true if \"universe_metrics_exporter_config\" is not empty and \"universeDetails.otelCollectorEnabled\" is false.
+	InstallOtelCollector *bool                `json:"install_otel_collector,omitempty"`
+	MetricsExportConfig  *MetricsExportConfig `json:"metrics_export_config,omitempty"`
 }
 
 // NewConfigureMetricsExportSpecAllOf instantiates a new ConfigureMetricsExportSpecAllOf object
@@ -153,5 +153,3 @@ func (v *NullableConfigureMetricsExportSpecAllOf) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -18,8 +18,8 @@ import (
 // UniverseQueryLogsExportAllOf struct for UniverseQueryLogsExportAllOf
 type UniverseQueryLogsExportAllOf struct {
 	// Flag to install OpenTelemetry Collector
-	InstallOtelCollector bool `json:"install_otel_collector"`
-	QueryLogConfig QueryLogConfig `json:"query_log_config"`
+	InstallOtelCollector bool           `json:"install_otel_collector"`
+	QueryLogConfig       QueryLogConfig `json:"query_log_config"`
 }
 
 // NewUniverseQueryLogsExportAllOf instantiates a new UniverseQueryLogsExportAllOf object
@@ -54,7 +54,7 @@ func (o *UniverseQueryLogsExportAllOf) GetInstallOtelCollector() bool {
 // GetInstallOtelCollectorOk returns a tuple with the InstallOtelCollector field value
 // and a boolean to check if the value has been set.
 func (o *UniverseQueryLogsExportAllOf) GetInstallOtelCollectorOk() (*bool, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.InstallOtelCollector, true
@@ -78,7 +78,7 @@ func (o *UniverseQueryLogsExportAllOf) GetQueryLogConfig() QueryLogConfig {
 // GetQueryLogConfigOk returns a tuple with the QueryLogConfig field value
 // and a boolean to check if the value has been set.
 func (o *UniverseQueryLogsExportAllOf) GetQueryLogConfigOk() (*QueryLogConfig, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.QueryLogConfig, true
@@ -135,5 +135,3 @@ func (v *NullableUniverseQueryLogsExportAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

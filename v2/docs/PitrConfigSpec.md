@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | PITR config name | [optional] 
 **DbName** | Pointer to **string** | Database or keyspace name | [optional] 
-**TableType** | Pointer to **string** | Table type | [optional] 
+**TableType** | Pointer to [**TableType**](TableType.md) |  | [optional] 
 **ScheduleInterval** | Pointer to **int64** | Interval between snapshots in seconds | [optional] 
 **RetentionPeriod** | Pointer to **int64** | Retention period in seconds | [optional] 
 **IntermittentMinRecoverTimeInMillis** | Pointer to **int64** | Intermittent minimum recovery time in milliseconds, used when the retention period is increased. | [optional] 
@@ -82,20 +82,20 @@ HasDbName returns a boolean if a field has been set.
 
 ### GetTableType
 
-`func (o *PitrConfigSpec) GetTableType() string`
+`func (o *PitrConfigSpec) GetTableType() TableType`
 
 GetTableType returns the TableType field if non-nil, zero value otherwise.
 
 ### GetTableTypeOk
 
-`func (o *PitrConfigSpec) GetTableTypeOk() (*string, bool)`
+`func (o *PitrConfigSpec) GetTableTypeOk() (*TableType, bool)`
 
 GetTableTypeOk returns a tuple with the TableType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTableType
 
-`func (o *PitrConfigSpec) SetTableType(v string)`
+`func (o *PitrConfigSpec) SetTableType(v TableType)`
 
 SetTableType sets TableType field to given value.
 

@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the NodeFileCollectionResult type satisfies the MappedNullable interface at compile time
@@ -396,6 +398,49 @@ func (o NodeFileCollectionResult) ToMap() (map[string]interface{}, error) {
 		toSerialize["files"] = o.Files
 	}
 	return toSerialize, nil
+}
+
+func (o *NodeFileCollectionResult) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"node_name",
+		"node_address",
+		"success",
+		"files_collected",
+		"files_skipped",
+		"files_failed",
+		"execution_time_ms",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varNodeFileCollectionResult := _NodeFileCollectionResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNodeFileCollectionResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NodeFileCollectionResult(varNodeFileCollectionResult)
+
+	return err
 }
 
 type NullableNodeFileCollectionResult struct {

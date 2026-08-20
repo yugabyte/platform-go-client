@@ -19,7 +19,7 @@ import (
 type UniverseRestartAllOf struct {
 	// Perform a rolling restart of the universe. Otherwise, all nodes will be restarted at the same time.
 	RollingRestart *bool `json:"rolling_restart,omitempty"`
-	// The method to reboot the node. This is not required for kubernetes universes, as the pods  will get restarted no matter what. \"HARD\" reboots are not supported today.  OS: Restarts the node via the operating system. SERVICE: Restart the YugabyteDB Process only (master, tserver, etc). 
+	// The method to reboot the node. This is not required for kubernetes universes, as the pods  will get restarted no matter what. \"HARD\" reboots are not supported today.  OS: Restarts the node via the operating system. SERVICE: Restart the YugabyteDB Process only (master, tserver, etc).
 	RestartType *string `json:"restart_type,omitempty"`
 }
 
@@ -158,5 +158,3 @@ func (v *NullableUniverseRestartAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
