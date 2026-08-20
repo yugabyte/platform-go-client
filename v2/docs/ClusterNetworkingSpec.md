@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Tserver** | Pointer to **map[string]interface{}** | (Place holder for) Network settings that can be overridden per tserver or master process for nodes in the cluster. The node instances can be onprem nodes, VMs in GCP/AWS/Azure, or pods in k8s. Part of AvailabilityZoneNetworking. | [optional] 
 **Master** | Pointer to **map[string]interface{}** | (Place holder for) Network settings that can be overridden per tserver or master process for nodes in the cluster. The node instances can be onprem nodes, VMs in GCP/AWS/Azure, or pods in k8s. Part of AvailabilityZoneNetworking. | [optional] 
 **ProxyConfig** | Pointer to [**NodeProxyConfig**](NodeProxyConfig.md) |  | [optional] 
-**EnableExposingService** | Pointer to **string** | Whether to create a load balancer service for this cluster. Defaults to NONE. | [optional] [default to "NONE"]
+**EnableExposingService** | Pointer to [**ExposingServiceState**](ExposingServiceState.md) | Whether to create a load balancer service for this cluster. Defaults to NONE. | [optional] [default to NONE]
 **EnableLb** | Pointer to **bool** | Create target groups if enabled. Used by YBM. | [optional] 
 **AzNetworking** | Pointer to [**map[string]AvailabilityZoneNetworking**](AvailabilityZoneNetworking.md) | Granular network settings overridden per Availability Zone identified by AZ uuid. | [optional] 
 
@@ -107,20 +107,20 @@ HasProxyConfig returns a boolean if a field has been set.
 
 ### GetEnableExposingService
 
-`func (o *ClusterNetworkingSpec) GetEnableExposingService() string`
+`func (o *ClusterNetworkingSpec) GetEnableExposingService() ExposingServiceState`
 
 GetEnableExposingService returns the EnableExposingService field if non-nil, zero value otherwise.
 
 ### GetEnableExposingServiceOk
 
-`func (o *ClusterNetworkingSpec) GetEnableExposingServiceOk() (*string, bool)`
+`func (o *ClusterNetworkingSpec) GetEnableExposingServiceOk() (*ExposingServiceState, bool)`
 
 GetEnableExposingServiceOk returns a tuple with the EnableExposingService field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnableExposingService
 
-`func (o *ClusterNetworkingSpec) SetEnableExposingService(v string)`
+`func (o *ClusterNetworkingSpec) SetEnableExposingService(v ExposingServiceState)`
 
 SetEnableExposingService sets EnableExposingService field to given value.
 

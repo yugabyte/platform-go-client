@@ -24,7 +24,7 @@ import (
 // UniverseAPIService UniverseAPI service
 type UniverseAPIService service
 
-type UniverseAPIAddClusterRequest struct {
+type ApiAddClusterRequest struct {
 	ctx            context.Context
 	ApiService     *UniverseAPIService
 	cUUID          string
@@ -32,12 +32,12 @@ type UniverseAPIAddClusterRequest struct {
 	clusterAddSpec *ClusterAddSpec
 }
 
-func (r UniverseAPIAddClusterRequest) ClusterAddSpec(clusterAddSpec ClusterAddSpec) UniverseAPIAddClusterRequest {
+func (r ApiAddClusterRequest) ClusterAddSpec(clusterAddSpec ClusterAddSpec) ApiAddClusterRequest {
 	r.clusterAddSpec = &clusterAddSpec
 	return r
 }
 
-func (r UniverseAPIAddClusterRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiAddClusterRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.AddClusterExecute(r)
 }
 
@@ -49,10 +49,10 @@ Add a cluster (eg. read replica cluster) to a YugabyteDB universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIAddClusterRequest
+	@return ApiAddClusterRequest
 */
-func (a *UniverseAPIService) AddCluster(ctx context.Context, cUUID string, uniUUID string) UniverseAPIAddClusterRequest {
-	return UniverseAPIAddClusterRequest{
+func (a *UniverseAPIService) AddCluster(ctx context.Context, cUUID string, uniUUID string) ApiAddClusterRequest {
+	return ApiAddClusterRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -63,7 +63,7 @@ func (a *UniverseAPIService) AddCluster(ctx context.Context, cUUID string, uniUU
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) AddClusterExecute(r UniverseAPIAddClusterRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) AddClusterExecute(r ApiAddClusterRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -157,7 +157,7 @@ func (a *UniverseAPIService) AddClusterExecute(r UniverseAPIAddClusterRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIAttachUniverseRequest struct {
+type ApiAttachUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
@@ -165,12 +165,12 @@ type UniverseAPIAttachUniverseRequest struct {
 	attachUniverseSpec *AttachUniverseSpec
 }
 
-func (r UniverseAPIAttachUniverseRequest) AttachUniverseSpec(attachUniverseSpec AttachUniverseSpec) UniverseAPIAttachUniverseRequest {
+func (r ApiAttachUniverseRequest) AttachUniverseSpec(attachUniverseSpec AttachUniverseSpec) ApiAttachUniverseRequest {
 	r.attachUniverseSpec = &attachUniverseSpec
 	return r
 }
 
-func (r UniverseAPIAttachUniverseRequest) Execute() (*http.Response, error) {
+func (r ApiAttachUniverseRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AttachUniverseExecute(r)
 }
 
@@ -182,10 +182,10 @@ Import universe metadata to (destination) YBA using a given tgz file
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIAttachUniverseRequest
+	@return ApiAttachUniverseRequest
 */
-func (a *UniverseAPIService) AttachUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIAttachUniverseRequest {
-	return UniverseAPIAttachUniverseRequest{
+func (a *UniverseAPIService) AttachUniverse(ctx context.Context, cUUID string, uniUUID string) ApiAttachUniverseRequest {
+	return ApiAttachUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -194,7 +194,7 @@ func (a *UniverseAPIService) AttachUniverse(ctx context.Context, cUUID string, u
 }
 
 // Execute executes the request
-func (a *UniverseAPIService) AttachUniverseExecute(r UniverseAPIAttachUniverseRequest) (*http.Response, error) {
+func (a *UniverseAPIService) AttachUniverseExecute(r ApiAttachUniverseRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPost
 		localVarPostBody   interface{}
@@ -278,7 +278,143 @@ func (a *UniverseAPIService) AttachUniverseExecute(r UniverseAPIAttachUniverseRe
 	return localVarHTTPResponse, nil
 }
 
-type UniverseAPIConfigureExportTelemetryConfigRequest struct {
+type ApiCheckResizeOptionsRequest struct {
+	ctx                    context.Context
+	ApiService             *UniverseAPIService
+	cUUID                  string
+	uniUUID                string
+	checkResizeOptionsSpec *CheckResizeOptionsSpec
+}
+
+func (r ApiCheckResizeOptionsRequest) CheckResizeOptionsSpec(checkResizeOptionsSpec CheckResizeOptionsSpec) ApiCheckResizeOptionsRequest {
+	r.checkResizeOptionsSpec = &checkResizeOptionsSpec
+	return r
+}
+
+func (r ApiCheckResizeOptionsRequest) Execute() (*CheckResizeOptionsResp, *http.Response, error) {
+	return r.ApiService.CheckResizeOptionsExecute(r)
+}
+
+/*
+CheckResizeOptions Check available resize options for cluster node settings
+
+Given proposed node settings for a cluster, returns which operations can be used to apply
+them. Possible values are FULL_MOVE (edit universe with full node replacement),
+SMART_RESIZE (in-place instance resize in rolling fashion)
+and SMART_RESIZE_NON_RESTART (in-place disk update without restart).
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return ApiCheckResizeOptionsRequest
+*/
+func (a *UniverseAPIService) CheckResizeOptions(ctx context.Context, cUUID string, uniUUID string) ApiCheckResizeOptionsRequest {
+	return ApiCheckResizeOptionsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CheckResizeOptionsResp
+func (a *UniverseAPIService) CheckResizeOptionsExecute(r ApiCheckResizeOptionsRequest) (*CheckResizeOptionsResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CheckResizeOptionsResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.CheckResizeOptions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/check-resize-capabilities"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.checkResizeOptionsSpec == nil {
+		return localVarReturnValue, nil, reportError("checkResizeOptionsSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.checkResizeOptionsSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiConfigureExportTelemetryConfigRequest struct {
 	ctx                       context.Context
 	ApiService                *UniverseAPIService
 	cUUID                     string
@@ -287,12 +423,12 @@ type UniverseAPIConfigureExportTelemetryConfigRequest struct {
 }
 
 // Export telemetry config request (unified telemetry configs + upgrade options)
-func (r UniverseAPIConfigureExportTelemetryConfigRequest) ExportTelemetryConfigSpec(exportTelemetryConfigSpec ExportTelemetryConfigSpec) UniverseAPIConfigureExportTelemetryConfigRequest {
+func (r ApiConfigureExportTelemetryConfigRequest) ExportTelemetryConfigSpec(exportTelemetryConfigSpec ExportTelemetryConfigSpec) ApiConfigureExportTelemetryConfigRequest {
 	r.exportTelemetryConfigSpec = &exportTelemetryConfigSpec
 	return r
 }
 
-func (r UniverseAPIConfigureExportTelemetryConfigRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiConfigureExportTelemetryConfigRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.ConfigureExportTelemetryConfigExecute(r)
 }
 
@@ -306,10 +442,10 @@ and metrics-export-config APIs.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIConfigureExportTelemetryConfigRequest
+	@return ApiConfigureExportTelemetryConfigRequest
 */
-func (a *UniverseAPIService) ConfigureExportTelemetryConfig(ctx context.Context, cUUID string, uniUUID string) UniverseAPIConfigureExportTelemetryConfigRequest {
-	return UniverseAPIConfigureExportTelemetryConfigRequest{
+func (a *UniverseAPIService) ConfigureExportTelemetryConfig(ctx context.Context, cUUID string, uniUUID string) ApiConfigureExportTelemetryConfigRequest {
+	return ApiConfigureExportTelemetryConfigRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -320,7 +456,7 @@ func (a *UniverseAPIService) ConfigureExportTelemetryConfig(ctx context.Context,
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) ConfigureExportTelemetryConfigExecute(r UniverseAPIConfigureExportTelemetryConfigRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) ConfigureExportTelemetryConfigExecute(r ApiConfigureExportTelemetryConfigRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -411,7 +547,7 @@ func (a *UniverseAPIService) ConfigureExportTelemetryConfigExecute(r UniverseAPI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIConfigureMetricsExportRequest struct {
+type ApiConfigureMetricsExportRequest struct {
 	ctx                        context.Context
 	ApiService                 *UniverseAPIService
 	cUUID                      string
@@ -420,12 +556,12 @@ type UniverseAPIConfigureMetricsExportRequest struct {
 }
 
 // ConfigureMetricsExportReq  Payload to configure metrics export. Part of ConfigureMetricsExportReq
-func (r UniverseAPIConfigureMetricsExportRequest) ConfigureMetricsExportSpec(configureMetricsExportSpec ConfigureMetricsExportSpec) UniverseAPIConfigureMetricsExportRequest {
+func (r ApiConfigureMetricsExportRequest) ConfigureMetricsExportSpec(configureMetricsExportSpec ConfigureMetricsExportSpec) ApiConfigureMetricsExportRequest {
 	r.configureMetricsExportSpec = &configureMetricsExportSpec
 	return r
 }
 
-func (r UniverseAPIConfigureMetricsExportRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiConfigureMetricsExportRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.ConfigureMetricsExportExecute(r)
 }
 
@@ -437,10 +573,10 @@ Configure metrics export from a universe to a metrics export telemetry provider
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIConfigureMetricsExportRequest
+	@return ApiConfigureMetricsExportRequest
 */
-func (a *UniverseAPIService) ConfigureMetricsExport(ctx context.Context, cUUID string, uniUUID string) UniverseAPIConfigureMetricsExportRequest {
-	return UniverseAPIConfigureMetricsExportRequest{
+func (a *UniverseAPIService) ConfigureMetricsExport(ctx context.Context, cUUID string, uniUUID string) ApiConfigureMetricsExportRequest {
+	return ApiConfigureMetricsExportRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -451,7 +587,7 @@ func (a *UniverseAPIService) ConfigureMetricsExport(ctx context.Context, cUUID s
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) ConfigureMetricsExportExecute(r UniverseAPIConfigureMetricsExportRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) ConfigureMetricsExportExecute(r ApiConfigureMetricsExportRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -542,7 +678,7 @@ func (a *UniverseAPIService) ConfigureMetricsExportExecute(r UniverseAPIConfigur
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIConfigureQueryLoggingRequest struct {
+type ApiConfigureQueryLoggingRequest struct {
 	ctx                     context.Context
 	ApiService              *UniverseAPIService
 	cUUID                   string
@@ -551,12 +687,12 @@ type UniverseAPIConfigureQueryLoggingRequest struct {
 }
 
 // UniverseQueryLogsExportReq  Payload to configure export of query logs. Part of UniverseQueryLogsExportReq
-func (r UniverseAPIConfigureQueryLoggingRequest) UniverseQueryLogsExport(universeQueryLogsExport UniverseQueryLogsExport) UniverseAPIConfigureQueryLoggingRequest {
+func (r ApiConfigureQueryLoggingRequest) UniverseQueryLogsExport(universeQueryLogsExport UniverseQueryLogsExport) ApiConfigureQueryLoggingRequest {
 	r.universeQueryLogsExport = &universeQueryLogsExport
 	return r
 }
 
-func (r UniverseAPIConfigureQueryLoggingRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiConfigureQueryLoggingRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.ConfigureQueryLoggingExecute(r)
 }
 
@@ -568,10 +704,10 @@ Configure Query Log for a YugabyteDB Universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIConfigureQueryLoggingRequest
+	@return ApiConfigureQueryLoggingRequest
 */
-func (a *UniverseAPIService) ConfigureQueryLogging(ctx context.Context, cUUID string, uniUUID string) UniverseAPIConfigureQueryLoggingRequest {
-	return UniverseAPIConfigureQueryLoggingRequest{
+func (a *UniverseAPIService) ConfigureQueryLogging(ctx context.Context, cUUID string, uniUUID string) ApiConfigureQueryLoggingRequest {
+	return ApiConfigureQueryLoggingRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -582,7 +718,7 @@ func (a *UniverseAPIService) ConfigureQueryLogging(ctx context.Context, cUUID st
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) ConfigureQueryLoggingExecute(r UniverseAPIConfigureQueryLoggingRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) ConfigureQueryLoggingExecute(r ApiConfigureQueryLoggingRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -673,7 +809,7 @@ func (a *UniverseAPIService) ConfigureQueryLoggingExecute(r UniverseAPIConfigure
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPICreateFileCollectionRequest struct {
+type ApiCreateFileCollectionRequest struct {
 	ctx                 context.Context
 	ApiService          *UniverseAPIService
 	cUUID               string
@@ -681,12 +817,12 @@ type UniverseAPICreateFileCollectionRequest struct {
 	collectFilesRequest *CollectFilesRequest
 }
 
-func (r UniverseAPICreateFileCollectionRequest) CollectFilesRequest(collectFilesRequest CollectFilesRequest) UniverseAPICreateFileCollectionRequest {
+func (r ApiCreateFileCollectionRequest) CollectFilesRequest(collectFilesRequest CollectFilesRequest) ApiCreateFileCollectionRequest {
 	r.collectFilesRequest = &collectFilesRequest
 	return r
 }
 
-func (r UniverseAPICreateFileCollectionRequest) Execute() (*CollectFilesResponse, *http.Response, error) {
+func (r ApiCreateFileCollectionRequest) Execute() (*CollectFilesResponse, *http.Response, error) {
 	return r.ApiService.CreateFileCollectionExecute(r)
 }
 
@@ -710,10 +846,10 @@ the same machine where YugabyteDB Anywhere is running.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPICreateFileCollectionRequest
+	@return ApiCreateFileCollectionRequest
 */
-func (a *UniverseAPIService) CreateFileCollection(ctx context.Context, cUUID string, uniUUID string) UniverseAPICreateFileCollectionRequest {
-	return UniverseAPICreateFileCollectionRequest{
+func (a *UniverseAPIService) CreateFileCollection(ctx context.Context, cUUID string, uniUUID string) ApiCreateFileCollectionRequest {
+	return ApiCreateFileCollectionRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -724,7 +860,7 @@ func (a *UniverseAPIService) CreateFileCollection(ctx context.Context, cUUID str
 // Execute executes the request
 //
 //	@return CollectFilesResponse
-func (a *UniverseAPIService) CreateFileCollectionExecute(r UniverseAPICreateFileCollectionRequest) (*CollectFilesResponse, *http.Response, error) {
+func (a *UniverseAPIService) CreateFileCollectionExecute(r ApiCreateFileCollectionRequest) (*CollectFilesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -818,19 +954,19 @@ func (a *UniverseAPIService) CreateFileCollectionExecute(r UniverseAPICreateFile
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPICreateUniverseRequest struct {
+type ApiCreateUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
 	universeCreateSpec *UniverseCreateSpec
 }
 
-func (r UniverseAPICreateUniverseRequest) UniverseCreateSpec(universeCreateSpec UniverseCreateSpec) UniverseAPICreateUniverseRequest {
+func (r ApiCreateUniverseRequest) UniverseCreateSpec(universeCreateSpec UniverseCreateSpec) ApiCreateUniverseRequest {
 	r.universeCreateSpec = &universeCreateSpec
 	return r
 }
 
-func (r UniverseAPICreateUniverseRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiCreateUniverseRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.CreateUniverseExecute(r)
 }
 
@@ -841,10 +977,10 @@ Create all the clusters of a YugabyteDB universe.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return UniverseAPICreateUniverseRequest
+	@return ApiCreateUniverseRequest
 */
-func (a *UniverseAPIService) CreateUniverse(ctx context.Context, cUUID string) UniverseAPICreateUniverseRequest {
-	return UniverseAPICreateUniverseRequest{
+func (a *UniverseAPIService) CreateUniverse(ctx context.Context, cUUID string) ApiCreateUniverseRequest {
+	return ApiCreateUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -854,7 +990,7 @@ func (a *UniverseAPIService) CreateUniverse(ctx context.Context, cUUID string) U
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) CreateUniverseExecute(r UniverseAPICreateUniverseRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) CreateUniverseExecute(r ApiCreateUniverseRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -947,14 +1083,14 @@ func (a *UniverseAPIService) CreateUniverseExecute(r UniverseAPICreateUniverseRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIDeleteAttachDetachMetadataRequest struct {
+type ApiDeleteAttachDetachMetadataRequest struct {
 	ctx        context.Context
 	ApiService *UniverseAPIService
 	cUUID      string
 	uniUUID    string
 }
 
-func (r UniverseAPIDeleteAttachDetachMetadataRequest) Execute() (*http.Response, error) {
+func (r ApiDeleteAttachDetachMetadataRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAttachDetachMetadataExecute(r)
 }
 
@@ -966,10 +1102,10 @@ Delete metadata of a universe from (source) YBA
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIDeleteAttachDetachMetadataRequest
+	@return ApiDeleteAttachDetachMetadataRequest
 */
-func (a *UniverseAPIService) DeleteAttachDetachMetadata(ctx context.Context, cUUID string, uniUUID string) UniverseAPIDeleteAttachDetachMetadataRequest {
-	return UniverseAPIDeleteAttachDetachMetadataRequest{
+func (a *UniverseAPIService) DeleteAttachDetachMetadata(ctx context.Context, cUUID string, uniUUID string) ApiDeleteAttachDetachMetadataRequest {
+	return ApiDeleteAttachDetachMetadataRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -978,7 +1114,7 @@ func (a *UniverseAPIService) DeleteAttachDetachMetadata(ctx context.Context, cUU
 }
 
 // Execute executes the request
-func (a *UniverseAPIService) DeleteAttachDetachMetadataExecute(r UniverseAPIDeleteAttachDetachMetadataRequest) (*http.Response, error) {
+func (a *UniverseAPIService) DeleteAttachDetachMetadataExecute(r ApiDeleteAttachDetachMetadataRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
 		localVarPostBody   interface{}
@@ -1057,7 +1193,7 @@ func (a *UniverseAPIService) DeleteAttachDetachMetadataExecute(r UniverseAPIDele
 	return localVarHTTPResponse, nil
 }
 
-type UniverseAPIDeleteClusterRequest struct {
+type ApiDeleteClusterRequest struct {
 	ctx           context.Context
 	ApiService    *UniverseAPIService
 	cUUID         string
@@ -1067,12 +1203,12 @@ type UniverseAPIDeleteClusterRequest struct {
 }
 
 // Whether to force delete the cluster
-func (r UniverseAPIDeleteClusterRequest) IsForceDelete(isForceDelete bool) UniverseAPIDeleteClusterRequest {
+func (r ApiDeleteClusterRequest) IsForceDelete(isForceDelete bool) ApiDeleteClusterRequest {
 	r.isForceDelete = &isForceDelete
 	return r
 }
 
-func (r UniverseAPIDeleteClusterRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiDeleteClusterRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.DeleteClusterExecute(r)
 }
 
@@ -1085,10 +1221,10 @@ Delete an additional cluster (eg. read replica cluster) of a YugabyteDB universe
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
 	@param clsUUID Cluster UUID
-	@return UniverseAPIDeleteClusterRequest
+	@return ApiDeleteClusterRequest
 */
-func (a *UniverseAPIService) DeleteCluster(ctx context.Context, cUUID string, uniUUID string, clsUUID string) UniverseAPIDeleteClusterRequest {
-	return UniverseAPIDeleteClusterRequest{
+func (a *UniverseAPIService) DeleteCluster(ctx context.Context, cUUID string, uniUUID string, clsUUID string) ApiDeleteClusterRequest {
+	return ApiDeleteClusterRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -1100,7 +1236,7 @@ func (a *UniverseAPIService) DeleteCluster(ctx context.Context, cUUID string, un
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) DeleteClusterExecute(r UniverseAPIDeleteClusterRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) DeleteClusterExecute(r ApiDeleteClusterRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -1197,7 +1333,7 @@ func (a *UniverseAPIService) DeleteClusterExecute(r UniverseAPIDeleteClusterRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIDeleteFileCollectionRequest struct {
+type ApiDeleteFileCollectionRequest struct {
 	ctx               context.Context
 	ApiService        *UniverseAPIService
 	cUUID             string
@@ -1208,18 +1344,18 @@ type UniverseAPIDeleteFileCollectionRequest struct {
 }
 
 // Whether to delete tar files from database nodes
-func (r UniverseAPIDeleteFileCollectionRequest) DeleteFromDbNodes(deleteFromDbNodes bool) UniverseAPIDeleteFileCollectionRequest {
+func (r ApiDeleteFileCollectionRequest) DeleteFromDbNodes(deleteFromDbNodes bool) ApiDeleteFileCollectionRequest {
 	r.deleteFromDbNodes = &deleteFromDbNodes
 	return r
 }
 
 // Whether to delete downloaded files from YBA local storage
-func (r UniverseAPIDeleteFileCollectionRequest) DeleteFromYba(deleteFromYba bool) UniverseAPIDeleteFileCollectionRequest {
+func (r ApiDeleteFileCollectionRequest) DeleteFromYba(deleteFromYba bool) ApiDeleteFileCollectionRequest {
 	r.deleteFromYba = &deleteFromYba
 	return r
 }
 
-func (r UniverseAPIDeleteFileCollectionRequest) Execute() (*CleanupCollectionInfo, *http.Response, error) {
+func (r ApiDeleteFileCollectionRequest) Execute() (*CleanupCollectionInfo, *http.Response, error) {
 	return r.ApiService.DeleteFileCollectionExecute(r)
 }
 
@@ -1240,10 +1376,10 @@ This restriction exists because it modifies files on database nodes.
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
 	@param collectionUUID Collection UUID returned by create file collection API
-	@return UniverseAPIDeleteFileCollectionRequest
+	@return ApiDeleteFileCollectionRequest
 */
-func (a *UniverseAPIService) DeleteFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) UniverseAPIDeleteFileCollectionRequest {
-	return UniverseAPIDeleteFileCollectionRequest{
+func (a *UniverseAPIService) DeleteFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) ApiDeleteFileCollectionRequest {
+	return ApiDeleteFileCollectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		cUUID:          cUUID,
@@ -1255,7 +1391,7 @@ func (a *UniverseAPIService) DeleteFileCollection(ctx context.Context, cUUID str
 // Execute executes the request
 //
 //	@return CleanupCollectionInfo
-func (a *UniverseAPIService) DeleteFileCollectionExecute(r UniverseAPIDeleteFileCollectionRequest) (*CleanupCollectionInfo, *http.Response, error) {
+func (a *UniverseAPIService) DeleteFileCollectionExecute(r ApiDeleteFileCollectionRequest) (*CleanupCollectionInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -1359,7 +1495,7 @@ func (a *UniverseAPIService) DeleteFileCollectionExecute(r UniverseAPIDeleteFile
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIDeleteUniverseRequest struct {
+type ApiDeleteUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
@@ -1367,12 +1503,12 @@ type UniverseAPIDeleteUniverseRequest struct {
 	universeDeleteSpec *UniverseDeleteSpec
 }
 
-func (r UniverseAPIDeleteUniverseRequest) UniverseDeleteSpec(universeDeleteSpec UniverseDeleteSpec) UniverseAPIDeleteUniverseRequest {
+func (r ApiDeleteUniverseRequest) UniverseDeleteSpec(universeDeleteSpec UniverseDeleteSpec) ApiDeleteUniverseRequest {
 	r.universeDeleteSpec = &universeDeleteSpec
 	return r
 }
 
-func (r UniverseAPIDeleteUniverseRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiDeleteUniverseRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.DeleteUniverseExecute(r)
 }
 
@@ -1384,10 +1520,10 @@ Delete Universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIDeleteUniverseRequest
+	@return ApiDeleteUniverseRequest
 */
-func (a *UniverseAPIService) DeleteUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIDeleteUniverseRequest {
-	return UniverseAPIDeleteUniverseRequest{
+func (a *UniverseAPIService) DeleteUniverse(ctx context.Context, cUUID string, uniUUID string) ApiDeleteUniverseRequest {
+	return ApiDeleteUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -1398,7 +1534,7 @@ func (a *UniverseAPIService) DeleteUniverse(ctx context.Context, cUUID string, u
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) DeleteUniverseExecute(r UniverseAPIDeleteUniverseRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) DeleteUniverseExecute(r ApiDeleteUniverseRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -1489,7 +1625,7 @@ func (a *UniverseAPIService) DeleteUniverseExecute(r UniverseAPIDeleteUniverseRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIDetachUniverseRequest struct {
+type ApiDetachUniverseRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
@@ -1497,12 +1633,12 @@ type UniverseAPIDetachUniverseRequest struct {
 	detachUniverseSpec *DetachUniverseSpec
 }
 
-func (r UniverseAPIDetachUniverseRequest) DetachUniverseSpec(detachUniverseSpec DetachUniverseSpec) UniverseAPIDetachUniverseRequest {
+func (r ApiDetachUniverseRequest) DetachUniverseSpec(detachUniverseSpec DetachUniverseSpec) ApiDetachUniverseRequest {
 	r.detachUniverseSpec = &detachUniverseSpec
 	return r
 }
 
-func (r UniverseAPIDetachUniverseRequest) Execute() (*os.File, *http.Response, error) {
+func (r ApiDetachUniverseRequest) Execute() (*os.File, *http.Response, error) {
 	return r.ApiService.DetachUniverseExecute(r)
 }
 
@@ -1514,10 +1650,10 @@ Export universe metadata to a tgz file from (source) YBA
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIDetachUniverseRequest
+	@return ApiDetachUniverseRequest
 */
-func (a *UniverseAPIService) DetachUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIDetachUniverseRequest {
-	return UniverseAPIDetachUniverseRequest{
+func (a *UniverseAPIService) DetachUniverse(ctx context.Context, cUUID string, uniUUID string) ApiDetachUniverseRequest {
+	return ApiDetachUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -1528,7 +1664,7 @@ func (a *UniverseAPIService) DetachUniverse(ctx context.Context, cUUID string, u
 // Execute executes the request
 //
 //	@return *os.File
-func (a *UniverseAPIService) DetachUniverseExecute(r UniverseAPIDetachUniverseRequest) (*os.File, *http.Response, error) {
+func (a *UniverseAPIService) DetachUniverseExecute(r ApiDetachUniverseRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1622,7 +1758,7 @@ func (a *UniverseAPIService) DetachUniverseExecute(r UniverseAPIDetachUniverseRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIDownloadFileCollectionRequest struct {
+type ApiDownloadFileCollectionRequest struct {
 	ctx                 context.Context
 	ApiService          *UniverseAPIService
 	cUUID               string
@@ -1632,12 +1768,12 @@ type UniverseAPIDownloadFileCollectionRequest struct {
 }
 
 // If true, automatically delete the collected files from DB nodes after successful download. This is equivalent to calling DELETE /file-collections/{collectionUUID} with delete_from_db_nodes&#x3D;true after the download completes. Default is false (files remain on DB nodes until explicitly deleted). **Security**: When this is set to true, localhost restriction applies.
-func (r UniverseAPIDownloadFileCollectionRequest) CleanupDbNodesAfter(cleanupDbNodesAfter bool) UniverseAPIDownloadFileCollectionRequest {
+func (r ApiDownloadFileCollectionRequest) CleanupDbNodesAfter(cleanupDbNodesAfter bool) ApiDownloadFileCollectionRequest {
 	r.cleanupDbNodesAfter = &cleanupDbNodesAfter
 	return r
 }
 
-func (r UniverseAPIDownloadFileCollectionRequest) Execute() (*os.File, *http.Response, error) {
+func (r ApiDownloadFileCollectionRequest) Execute() (*os.File, *http.Response, error) {
 	return r.ApiService.DownloadFileCollectionExecute(r)
 }
 
@@ -1659,10 +1795,10 @@ localhost restriction applies since it modifies files on database nodes.
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
 	@param collectionUUID Collection UUID returned by create file collection API
-	@return UniverseAPIDownloadFileCollectionRequest
+	@return ApiDownloadFileCollectionRequest
 */
-func (a *UniverseAPIService) DownloadFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) UniverseAPIDownloadFileCollectionRequest {
-	return UniverseAPIDownloadFileCollectionRequest{
+func (a *UniverseAPIService) DownloadFileCollection(ctx context.Context, cUUID string, uniUUID string, collectionUUID string) ApiDownloadFileCollectionRequest {
+	return ApiDownloadFileCollectionRequest{
 		ApiService:     a,
 		ctx:            ctx,
 		cUUID:          cUUID,
@@ -1674,7 +1810,7 @@ func (a *UniverseAPIService) DownloadFileCollection(ctx context.Context, cUUID s
 // Execute executes the request
 //
 //	@return *os.File
-func (a *UniverseAPIService) DownloadFileCollectionExecute(r UniverseAPIDownloadFileCollectionRequest) (*os.File, *http.Response, error) {
+func (a *UniverseAPIService) DownloadFileCollectionExecute(r ApiDownloadFileCollectionRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -1771,7 +1907,7 @@ func (a *UniverseAPIService) DownloadFileCollectionExecute(r UniverseAPIDownload
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIEditGFlagsRequest struct {
+type ApiEditGFlagsRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
@@ -1779,12 +1915,12 @@ type UniverseAPIEditGFlagsRequest struct {
 	universeEditGFlags *UniverseEditGFlags
 }
 
-func (r UniverseAPIEditGFlagsRequest) UniverseEditGFlags(universeEditGFlags UniverseEditGFlags) UniverseAPIEditGFlagsRequest {
+func (r ApiEditGFlagsRequest) UniverseEditGFlags(universeEditGFlags UniverseEditGFlags) ApiEditGFlagsRequest {
 	r.universeEditGFlags = &universeEditGFlags
 	return r
 }
 
-func (r UniverseAPIEditGFlagsRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiEditGFlagsRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.EditGFlagsExecute(r)
 }
 
@@ -1796,10 +1932,10 @@ Queues a task to edit GFlags of a universe. The input set of GFlags will replace
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIEditGFlagsRequest
+	@return ApiEditGFlagsRequest
 */
-func (a *UniverseAPIService) EditGFlags(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEditGFlagsRequest {
-	return UniverseAPIEditGFlagsRequest{
+func (a *UniverseAPIService) EditGFlags(ctx context.Context, cUUID string, uniUUID string) ApiEditGFlagsRequest {
+	return ApiEditGFlagsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -1810,7 +1946,7 @@ func (a *UniverseAPIService) EditGFlags(ctx context.Context, cUUID string, uniUU
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) EditGFlagsExecute(r UniverseAPIEditGFlagsRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) EditGFlagsExecute(r ApiEditGFlagsRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1904,7 +2040,7 @@ func (a *UniverseAPIService) EditGFlagsExecute(r UniverseAPIEditGFlagsRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIEditKubernetesOverridesRequest struct {
+type ApiEditKubernetesOverridesRequest struct {
 	ctx                             context.Context
 	ApiService                      *UniverseAPIService
 	cUUID                           string
@@ -1912,12 +2048,12 @@ type UniverseAPIEditKubernetesOverridesRequest struct {
 	universeEditKubernetesOverrides *UniverseEditKubernetesOverrides
 }
 
-func (r UniverseAPIEditKubernetesOverridesRequest) UniverseEditKubernetesOverrides(universeEditKubernetesOverrides UniverseEditKubernetesOverrides) UniverseAPIEditKubernetesOverridesRequest {
+func (r ApiEditKubernetesOverridesRequest) UniverseEditKubernetesOverrides(universeEditKubernetesOverrides UniverseEditKubernetesOverrides) ApiEditKubernetesOverridesRequest {
 	r.universeEditKubernetesOverrides = &universeEditKubernetesOverrides
 	return r
 }
 
-func (r UniverseAPIEditKubernetesOverridesRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiEditKubernetesOverridesRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.EditKubernetesOverridesExecute(r)
 }
 
@@ -1934,10 +2070,10 @@ override options.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIEditKubernetesOverridesRequest
+	@return ApiEditKubernetesOverridesRequest
 */
-func (a *UniverseAPIService) EditKubernetesOverrides(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEditKubernetesOverridesRequest {
-	return UniverseAPIEditKubernetesOverridesRequest{
+func (a *UniverseAPIService) EditKubernetesOverrides(ctx context.Context, cUUID string, uniUUID string) ApiEditKubernetesOverridesRequest {
+	return ApiEditKubernetesOverridesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -1948,7 +2084,7 @@ func (a *UniverseAPIService) EditKubernetesOverrides(ctx context.Context, cUUID 
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) EditKubernetesOverridesExecute(r UniverseAPIEditKubernetesOverridesRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) EditKubernetesOverridesExecute(r ApiEditKubernetesOverridesRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2042,7 +2178,7 @@ func (a *UniverseAPIService) EditKubernetesOverridesExecute(r UniverseAPIEditKub
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIEditUniverseRequest struct {
+type ApiEditUniverseRequest struct {
 	ctx              context.Context
 	ApiService       *UniverseAPIService
 	cUUID            string
@@ -2050,12 +2186,12 @@ type UniverseAPIEditUniverseRequest struct {
 	universeEditSpec *UniverseEditSpec
 }
 
-func (r UniverseAPIEditUniverseRequest) UniverseEditSpec(universeEditSpec UniverseEditSpec) UniverseAPIEditUniverseRequest {
+func (r ApiEditUniverseRequest) UniverseEditSpec(universeEditSpec UniverseEditSpec) ApiEditUniverseRequest {
 	r.universeEditSpec = &universeEditSpec
 	return r
 }
 
-func (r UniverseAPIEditUniverseRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiEditUniverseRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.EditUniverseExecute(r)
 }
 
@@ -2067,10 +2203,10 @@ Edit the clusters of a single YugabyteDB Universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIEditUniverseRequest
+	@return ApiEditUniverseRequest
 */
-func (a *UniverseAPIService) EditUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEditUniverseRequest {
-	return UniverseAPIEditUniverseRequest{
+func (a *UniverseAPIService) EditUniverse(ctx context.Context, cUUID string, uniUUID string) ApiEditUniverseRequest {
+	return ApiEditUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2081,7 +2217,7 @@ func (a *UniverseAPIService) EditUniverse(ctx context.Context, cUUID string, uni
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) EditUniverseExecute(r UniverseAPIEditUniverseRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) EditUniverseExecute(r ApiEditUniverseRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -2175,7 +2311,7 @@ func (a *UniverseAPIService) EditUniverseExecute(r UniverseAPIEditUniverseReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIEncryptionInTransitCertRotateRequest struct {
+type ApiEncryptionInTransitCertRotateRequest struct {
 	ctx                    context.Context
 	ApiService             *UniverseAPIService
 	cUUID                  string
@@ -2183,12 +2319,12 @@ type UniverseAPIEncryptionInTransitCertRotateRequest struct {
 	universeCertRotateSpec *UniverseCertRotateSpec
 }
 
-func (r UniverseAPIEncryptionInTransitCertRotateRequest) UniverseCertRotateSpec(universeCertRotateSpec UniverseCertRotateSpec) UniverseAPIEncryptionInTransitCertRotateRequest {
+func (r ApiEncryptionInTransitCertRotateRequest) UniverseCertRotateSpec(universeCertRotateSpec UniverseCertRotateSpec) ApiEncryptionInTransitCertRotateRequest {
 	r.universeCertRotateSpec = &universeCertRotateSpec
 	return r
 }
 
-func (r UniverseAPIEncryptionInTransitCertRotateRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiEncryptionInTransitCertRotateRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.EncryptionInTransitCertRotateExecute(r)
 }
 
@@ -2200,10 +2336,10 @@ Rotate the certs used for encryption in transit.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIEncryptionInTransitCertRotateRequest
+	@return ApiEncryptionInTransitCertRotateRequest
 */
-func (a *UniverseAPIService) EncryptionInTransitCertRotate(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEncryptionInTransitCertRotateRequest {
-	return UniverseAPIEncryptionInTransitCertRotateRequest{
+func (a *UniverseAPIService) EncryptionInTransitCertRotate(ctx context.Context, cUUID string, uniUUID string) ApiEncryptionInTransitCertRotateRequest {
+	return ApiEncryptionInTransitCertRotateRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2214,7 +2350,7 @@ func (a *UniverseAPIService) EncryptionInTransitCertRotate(ctx context.Context, 
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) EncryptionInTransitCertRotateExecute(r UniverseAPIEncryptionInTransitCertRotateRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) EncryptionInTransitCertRotateExecute(r ApiEncryptionInTransitCertRotateRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2308,7 +2444,7 @@ func (a *UniverseAPIService) EncryptionInTransitCertRotateExecute(r UniverseAPIE
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIEncryptionInTransitToggleRequest struct {
+type ApiEncryptionInTransitToggleRequest struct {
 	ctx                             context.Context
 	ApiService                      *UniverseAPIService
 	cUUID                           string
@@ -2316,12 +2452,12 @@ type UniverseAPIEncryptionInTransitToggleRequest struct {
 	universeEditEncryptionInTransit *UniverseEditEncryptionInTransit
 }
 
-func (r UniverseAPIEncryptionInTransitToggleRequest) UniverseEditEncryptionInTransit(universeEditEncryptionInTransit UniverseEditEncryptionInTransit) UniverseAPIEncryptionInTransitToggleRequest {
+func (r ApiEncryptionInTransitToggleRequest) UniverseEditEncryptionInTransit(universeEditEncryptionInTransit UniverseEditEncryptionInTransit) ApiEncryptionInTransitToggleRequest {
 	r.universeEditEncryptionInTransit = &universeEditEncryptionInTransit
 	return r
 }
 
-func (r UniverseAPIEncryptionInTransitToggleRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiEncryptionInTransitToggleRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.EncryptionInTransitToggleExecute(r)
 }
 
@@ -2334,10 +2470,10 @@ node to client.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIEncryptionInTransitToggleRequest
+	@return ApiEncryptionInTransitToggleRequest
 */
-func (a *UniverseAPIService) EncryptionInTransitToggle(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEncryptionInTransitToggleRequest {
-	return UniverseAPIEncryptionInTransitToggleRequest{
+func (a *UniverseAPIService) EncryptionInTransitToggle(ctx context.Context, cUUID string, uniUUID string) ApiEncryptionInTransitToggleRequest {
+	return ApiEncryptionInTransitToggleRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2348,7 +2484,7 @@ func (a *UniverseAPIService) EncryptionInTransitToggle(ctx context.Context, cUUI
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) EncryptionInTransitToggleExecute(r UniverseAPIEncryptionInTransitToggleRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) EncryptionInTransitToggleExecute(r ApiEncryptionInTransitToggleRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2442,7 +2578,7 @@ func (a *UniverseAPIService) EncryptionInTransitToggleExecute(r UniverseAPIEncry
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIFinalizeSoftwareUpgradeRequest struct {
+type ApiFinalizeSoftwareUpgradeRequest struct {
 	ctx                             context.Context
 	ApiService                      *UniverseAPIService
 	cUUID                           string
@@ -2450,12 +2586,12 @@ type UniverseAPIFinalizeSoftwareUpgradeRequest struct {
 	universeSoftwareUpgradeFinalize *UniverseSoftwareUpgradeFinalize
 }
 
-func (r UniverseAPIFinalizeSoftwareUpgradeRequest) UniverseSoftwareUpgradeFinalize(universeSoftwareUpgradeFinalize UniverseSoftwareUpgradeFinalize) UniverseAPIFinalizeSoftwareUpgradeRequest {
+func (r ApiFinalizeSoftwareUpgradeRequest) UniverseSoftwareUpgradeFinalize(universeSoftwareUpgradeFinalize UniverseSoftwareUpgradeFinalize) ApiFinalizeSoftwareUpgradeRequest {
 	r.universeSoftwareUpgradeFinalize = &universeSoftwareUpgradeFinalize
 	return r
 }
 
-func (r UniverseAPIFinalizeSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiFinalizeSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.FinalizeSoftwareUpgradeExecute(r)
 }
 
@@ -2467,10 +2603,10 @@ Queues a task to perform finalize of a YugabyteDB Software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIFinalizeSoftwareUpgradeRequest
+	@return ApiFinalizeSoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) FinalizeSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIFinalizeSoftwareUpgradeRequest {
-	return UniverseAPIFinalizeSoftwareUpgradeRequest{
+func (a *UniverseAPIService) FinalizeSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiFinalizeSoftwareUpgradeRequest {
+	return ApiFinalizeSoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2481,7 +2617,7 @@ func (a *UniverseAPIService) FinalizeSoftwareUpgrade(ctx context.Context, cUUID 
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) FinalizeSoftwareUpgradeExecute(r UniverseAPIFinalizeSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) FinalizeSoftwareUpgradeExecute(r ApiFinalizeSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2572,14 +2708,14 @@ func (a *UniverseAPIService) FinalizeSoftwareUpgradeExecute(r UniverseAPIFinaliz
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIGetExportTelemetryConfigRequest struct {
+type ApiGetExportTelemetryConfigRequest struct {
 	ctx        context.Context
 	ApiService *UniverseAPIService
 	cUUID      string
 	uniUUID    string
 }
 
-func (r UniverseAPIGetExportTelemetryConfigRequest) Execute() (*TelemetryConfig, *http.Response, error) {
+func (r ApiGetExportTelemetryConfigRequest) Execute() (*TelemetryConfig, *http.Response, error) {
 	return r.ApiService.GetExportTelemetryConfigExecute(r)
 }
 
@@ -2592,10 +2728,10 @@ metrics) for a universe. A null sub-config indicates that export is disabled.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIGetExportTelemetryConfigRequest
+	@return ApiGetExportTelemetryConfigRequest
 */
-func (a *UniverseAPIService) GetExportTelemetryConfig(ctx context.Context, cUUID string, uniUUID string) UniverseAPIGetExportTelemetryConfigRequest {
-	return UniverseAPIGetExportTelemetryConfigRequest{
+func (a *UniverseAPIService) GetExportTelemetryConfig(ctx context.Context, cUUID string, uniUUID string) ApiGetExportTelemetryConfigRequest {
+	return ApiGetExportTelemetryConfigRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2606,7 +2742,7 @@ func (a *UniverseAPIService) GetExportTelemetryConfig(ctx context.Context, cUUID
 // Execute executes the request
 //
 //	@return TelemetryConfig
-func (a *UniverseAPIService) GetExportTelemetryConfigExecute(r UniverseAPIGetExportTelemetryConfigRequest) (*TelemetryConfig, *http.Response, error) {
+func (a *UniverseAPIService) GetExportTelemetryConfigExecute(r ApiGetExportTelemetryConfigRequest) (*TelemetryConfig, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -2695,14 +2831,14 @@ func (a *UniverseAPIService) GetExportTelemetryConfigExecute(r UniverseAPIGetExp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest struct {
+type ApiGetFinalizeSoftwareUpgradeInfoRequest struct {
 	ctx        context.Context
 	ApiService *UniverseAPIService
 	cUUID      string
 	uniUUID    string
 }
 
-func (r UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest) Execute() (*UniverseSoftwareUpgradeFinalizeInfo, *http.Response, error) {
+func (r ApiGetFinalizeSoftwareUpgradeInfoRequest) Execute() (*UniverseSoftwareUpgradeFinalizeInfo, *http.Response, error) {
 	return r.ApiService.GetFinalizeSoftwareUpgradeInfoExecute(r)
 }
 
@@ -2714,10 +2850,10 @@ Get finalize info of a YugabyteDB Software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest
+	@return ApiGetFinalizeSoftwareUpgradeInfoRequest
 */
-func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfo(ctx context.Context, cUUID string, uniUUID string) UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest {
-	return UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest{
+func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfo(ctx context.Context, cUUID string, uniUUID string) ApiGetFinalizeSoftwareUpgradeInfoRequest {
+	return ApiGetFinalizeSoftwareUpgradeInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2728,7 +2864,7 @@ func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfo(ctx context.Context,
 // Execute executes the request
 //
 //	@return UniverseSoftwareUpgradeFinalizeInfo
-func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfoExecute(r UniverseAPIGetFinalizeSoftwareUpgradeInfoRequest) (*UniverseSoftwareUpgradeFinalizeInfo, *http.Response, error) {
+func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfoExecute(r ApiGetFinalizeSoftwareUpgradeInfoRequest) (*UniverseSoftwareUpgradeFinalizeInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -2817,14 +2953,14 @@ func (a *UniverseAPIService) GetFinalizeSoftwareUpgradeInfoExecute(r UniverseAPI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIGetUniverseRequest struct {
+type ApiGetUniverseRequest struct {
 	ctx        context.Context
 	ApiService *UniverseAPIService
 	cUUID      string
 	uniUUID    string
 }
 
-func (r UniverseAPIGetUniverseRequest) Execute() (*Universe, *http.Response, error) {
+func (r ApiGetUniverseRequest) Execute() (*Universe, *http.Response, error) {
 	return r.ApiService.GetUniverseExecute(r)
 }
 
@@ -2836,10 +2972,10 @@ Get details of a single YugabyteDB Universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIGetUniverseRequest
+	@return ApiGetUniverseRequest
 */
-func (a *UniverseAPIService) GetUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIGetUniverseRequest {
-	return UniverseAPIGetUniverseRequest{
+func (a *UniverseAPIService) GetUniverse(ctx context.Context, cUUID string, uniUUID string) ApiGetUniverseRequest {
+	return ApiGetUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2850,7 +2986,7 @@ func (a *UniverseAPIService) GetUniverse(ctx context.Context, cUUID string, uniU
 // Execute executes the request
 //
 //	@return Universe
-func (a *UniverseAPIService) GetUniverseExecute(r UniverseAPIGetUniverseRequest) (*Universe, *http.Response, error) {
+func (a *UniverseAPIService) GetUniverseExecute(r ApiGetUniverseRequest) (*Universe, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -2939,19 +3075,19 @@ func (a *UniverseAPIService) GetUniverseExecute(r UniverseAPIGetUniverseRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIGetUniverseResourcesRequest struct {
+type ApiGetUniverseResourcesRequest struct {
 	ctx                context.Context
 	ApiService         *UniverseAPIService
 	cUUID              string
 	universeCreateSpec *UniverseCreateSpec
 }
 
-func (r UniverseAPIGetUniverseResourcesRequest) UniverseCreateSpec(universeCreateSpec UniverseCreateSpec) UniverseAPIGetUniverseResourcesRequest {
+func (r ApiGetUniverseResourcesRequest) UniverseCreateSpec(universeCreateSpec UniverseCreateSpec) ApiGetUniverseResourcesRequest {
 	r.universeCreateSpec = &universeCreateSpec
 	return r
 }
 
-func (r UniverseAPIGetUniverseResourcesRequest) Execute() (*UniverseResourceDetails, *http.Response, error) {
+func (r ApiGetUniverseResourcesRequest) Execute() (*UniverseResourceDetails, *http.Response, error) {
 	return r.ApiService.GetUniverseResourcesExecute(r)
 }
 
@@ -2962,10 +3098,10 @@ Fetches an estimate of pricing and cpu/memory/storage resource utilisation for t
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return UniverseAPIGetUniverseResourcesRequest
+	@return ApiGetUniverseResourcesRequest
 */
-func (a *UniverseAPIService) GetUniverseResources(ctx context.Context, cUUID string) UniverseAPIGetUniverseResourcesRequest {
-	return UniverseAPIGetUniverseResourcesRequest{
+func (a *UniverseAPIService) GetUniverseResources(ctx context.Context, cUUID string) ApiGetUniverseResourcesRequest {
+	return ApiGetUniverseResourcesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -2975,7 +3111,7 @@ func (a *UniverseAPIService) GetUniverseResources(ctx context.Context, cUUID str
 // Execute executes the request
 //
 //	@return UniverseResourceDetails
-func (a *UniverseAPIService) GetUniverseResourcesExecute(r UniverseAPIGetUniverseResourcesRequest) (*UniverseResourceDetails, *http.Response, error) {
+func (a *UniverseAPIService) GetUniverseResourcesExecute(r ApiGetUniverseResourcesRequest) (*UniverseResourceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3068,7 +3204,7 @@ func (a *UniverseAPIService) GetUniverseResourcesExecute(r UniverseAPIGetUnivers
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIOperatorImportUniverseRequest struct {
+type ApiOperatorImportUniverseRequest struct {
 	ctx                       context.Context
 	ApiService                *UniverseAPIService
 	cUUID                     string
@@ -3076,12 +3212,12 @@ type UniverseAPIOperatorImportUniverseRequest struct {
 	universeOperatorImportReq *UniverseOperatorImportReq
 }
 
-func (r UniverseAPIOperatorImportUniverseRequest) UniverseOperatorImportReq(universeOperatorImportReq UniverseOperatorImportReq) UniverseAPIOperatorImportUniverseRequest {
+func (r ApiOperatorImportUniverseRequest) UniverseOperatorImportReq(universeOperatorImportReq UniverseOperatorImportReq) ApiOperatorImportUniverseRequest {
 	r.universeOperatorImportReq = &universeOperatorImportReq
 	return r
 }
 
-func (r UniverseAPIOperatorImportUniverseRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiOperatorImportUniverseRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.OperatorImportUniverseExecute(r)
 }
 
@@ -3093,10 +3229,10 @@ Import universe to operator
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIOperatorImportUniverseRequest
+	@return ApiOperatorImportUniverseRequest
 */
-func (a *UniverseAPIService) OperatorImportUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIOperatorImportUniverseRequest {
-	return UniverseAPIOperatorImportUniverseRequest{
+func (a *UniverseAPIService) OperatorImportUniverse(ctx context.Context, cUUID string, uniUUID string) ApiOperatorImportUniverseRequest {
+	return ApiOperatorImportUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3107,7 +3243,7 @@ func (a *UniverseAPIService) OperatorImportUniverse(ctx context.Context, cUUID s
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) OperatorImportUniverseExecute(r UniverseAPIOperatorImportUniverseRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) OperatorImportUniverseExecute(r ApiOperatorImportUniverseRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3201,7 +3337,7 @@ func (a *UniverseAPIService) OperatorImportUniverseExecute(r UniverseAPIOperator
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIOperatorImportUniversePrecheckRequest struct {
+type ApiOperatorImportUniversePrecheckRequest struct {
 	ctx                       context.Context
 	ApiService                *UniverseAPIService
 	cUUID                     string
@@ -3209,12 +3345,12 @@ type UniverseAPIOperatorImportUniversePrecheckRequest struct {
 	universeOperatorImportReq *UniverseOperatorImportReq
 }
 
-func (r UniverseAPIOperatorImportUniversePrecheckRequest) UniverseOperatorImportReq(universeOperatorImportReq UniverseOperatorImportReq) UniverseAPIOperatorImportUniversePrecheckRequest {
+func (r ApiOperatorImportUniversePrecheckRequest) UniverseOperatorImportReq(universeOperatorImportReq UniverseOperatorImportReq) ApiOperatorImportUniversePrecheckRequest {
 	r.universeOperatorImportReq = &universeOperatorImportReq
 	return r
 }
 
-func (r UniverseAPIOperatorImportUniversePrecheckRequest) Execute() (*http.Response, error) {
+func (r ApiOperatorImportUniversePrecheckRequest) Execute() (*http.Response, error) {
 	return r.ApiService.OperatorImportUniversePrecheckExecute(r)
 }
 
@@ -3226,10 +3362,10 @@ Run precheck to ensure the universe can be imported to the operator
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIOperatorImportUniversePrecheckRequest
+	@return ApiOperatorImportUniversePrecheckRequest
 */
-func (a *UniverseAPIService) OperatorImportUniversePrecheck(ctx context.Context, cUUID string, uniUUID string) UniverseAPIOperatorImportUniversePrecheckRequest {
-	return UniverseAPIOperatorImportUniversePrecheckRequest{
+func (a *UniverseAPIService) OperatorImportUniversePrecheck(ctx context.Context, cUUID string, uniUUID string) ApiOperatorImportUniversePrecheckRequest {
+	return ApiOperatorImportUniversePrecheckRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3238,7 +3374,7 @@ func (a *UniverseAPIService) OperatorImportUniversePrecheck(ctx context.Context,
 }
 
 // Execute executes the request
-func (a *UniverseAPIService) OperatorImportUniversePrecheckExecute(r UniverseAPIOperatorImportUniversePrecheckRequest) (*http.Response, error) {
+func (a *UniverseAPIService) OperatorImportUniversePrecheckExecute(r ApiOperatorImportUniversePrecheckRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPost
 		localVarPostBody   interface{}
@@ -3322,19 +3458,19 @@ func (a *UniverseAPIService) OperatorImportUniversePrecheckExecute(r UniverseAPI
 	return localVarHTTPResponse, nil
 }
 
-type UniverseAPIPageListUniversesRequest struct {
+type ApiPageListUniversesRequest struct {
 	ctx                    context.Context
 	ApiService             *UniverseAPIService
 	cUUID                  string
 	universePagedQuerySpec *UniversePagedQuerySpec
 }
 
-func (r UniverseAPIPageListUniversesRequest) UniversePagedQuerySpec(universePagedQuerySpec UniversePagedQuerySpec) UniverseAPIPageListUniversesRequest {
+func (r ApiPageListUniversesRequest) UniversePagedQuerySpec(universePagedQuerySpec UniversePagedQuerySpec) ApiPageListUniversesRequest {
 	r.universePagedQuerySpec = &universePagedQuerySpec
 	return r
 }
 
-func (r UniverseAPIPageListUniversesRequest) Execute() (*UniversePagedResp, *http.Response, error) {
+func (r ApiPageListUniversesRequest) Execute() (*UniversePagedResp, *http.Response, error) {
 	return r.ApiService.PageListUniversesExecute(r)
 }
 
@@ -3346,10 +3482,10 @@ WARNING: This is a preview API that could change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return UniverseAPIPageListUniversesRequest
+	@return ApiPageListUniversesRequest
 */
-func (a *UniverseAPIService) PageListUniverses(ctx context.Context, cUUID string) UniverseAPIPageListUniversesRequest {
-	return UniverseAPIPageListUniversesRequest{
+func (a *UniverseAPIService) PageListUniverses(ctx context.Context, cUUID string) ApiPageListUniversesRequest {
+	return ApiPageListUniversesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3359,7 +3495,7 @@ func (a *UniverseAPIService) PageListUniverses(ctx context.Context, cUUID string
 // Execute executes the request
 //
 //	@return UniversePagedResp
-func (a *UniverseAPIService) PageListUniversesExecute(r UniverseAPIPageListUniversesRequest) (*UniversePagedResp, *http.Response, error) {
+func (a *UniverseAPIService) PageListUniversesExecute(r ApiPageListUniversesRequest) (*UniversePagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3452,7 +3588,7 @@ func (a *UniverseAPIService) PageListUniversesExecute(r UniverseAPIPageListUnive
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIPrecheckSoftwareUpgradeRequest struct {
+type ApiPrecheckSoftwareUpgradeRequest struct {
 	ctx                                context.Context
 	ApiService                         *UniverseAPIService
 	cUUID                              string
@@ -3460,12 +3596,12 @@ type UniverseAPIPrecheckSoftwareUpgradeRequest struct {
 	universeSoftwareUpgradePrecheckReq *UniverseSoftwareUpgradePrecheckReq
 }
 
-func (r UniverseAPIPrecheckSoftwareUpgradeRequest) UniverseSoftwareUpgradePrecheckReq(universeSoftwareUpgradePrecheckReq UniverseSoftwareUpgradePrecheckReq) UniverseAPIPrecheckSoftwareUpgradeRequest {
+func (r ApiPrecheckSoftwareUpgradeRequest) UniverseSoftwareUpgradePrecheckReq(universeSoftwareUpgradePrecheckReq UniverseSoftwareUpgradePrecheckReq) ApiPrecheckSoftwareUpgradeRequest {
 	r.universeSoftwareUpgradePrecheckReq = &universeSoftwareUpgradePrecheckReq
 	return r
 }
 
-func (r UniverseAPIPrecheckSoftwareUpgradeRequest) Execute() (*UniverseSoftwareUpgradePrecheckResp, *http.Response, error) {
+func (r ApiPrecheckSoftwareUpgradeRequest) Execute() (*UniverseSoftwareUpgradePrecheckResp, *http.Response, error) {
 	return r.ApiService.PrecheckSoftwareUpgradeExecute(r)
 }
 
@@ -3477,10 +3613,10 @@ Queues a task to perform a precheck for a YugabyteDB Software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIPrecheckSoftwareUpgradeRequest
+	@return ApiPrecheckSoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) PrecheckSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIPrecheckSoftwareUpgradeRequest {
-	return UniverseAPIPrecheckSoftwareUpgradeRequest{
+func (a *UniverseAPIService) PrecheckSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiPrecheckSoftwareUpgradeRequest {
+	return ApiPrecheckSoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3491,7 +3627,7 @@ func (a *UniverseAPIService) PrecheckSoftwareUpgrade(ctx context.Context, cUUID 
 // Execute executes the request
 //
 //	@return UniverseSoftwareUpgradePrecheckResp
-func (a *UniverseAPIService) PrecheckSoftwareUpgradeExecute(r UniverseAPIPrecheckSoftwareUpgradeRequest) (*UniverseSoftwareUpgradePrecheckResp, *http.Response, error) {
+func (a *UniverseAPIService) PrecheckSoftwareUpgradeExecute(r ApiPrecheckSoftwareUpgradeRequest) (*UniverseSoftwareUpgradePrecheckResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3585,7 +3721,7 @@ func (a *UniverseAPIService) PrecheckSoftwareUpgradeExecute(r UniverseAPIPrechec
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIResizeNodesRequest struct {
+type ApiResizeNodesRequest struct {
 	ctx                 context.Context
 	ApiService          *UniverseAPIService
 	cUUID               string
@@ -3593,12 +3729,12 @@ type UniverseAPIResizeNodesRequest struct {
 	universeResizeNodes *UniverseResizeNodes
 }
 
-func (r UniverseAPIResizeNodesRequest) UniverseResizeNodes(universeResizeNodes UniverseResizeNodes) UniverseAPIResizeNodesRequest {
+func (r ApiResizeNodesRequest) UniverseResizeNodes(universeResizeNodes UniverseResizeNodes) ApiResizeNodesRequest {
 	r.universeResizeNodes = &universeResizeNodes
 	return r
 }
 
-func (r UniverseAPIResizeNodesRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiResizeNodesRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.ResizeNodesExecute(r)
 }
 
@@ -3611,10 +3747,10 @@ addition to updating related gflags and cgroups to match the resize.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIResizeNodesRequest
+	@return ApiResizeNodesRequest
 */
-func (a *UniverseAPIService) ResizeNodes(ctx context.Context, cUUID string, uniUUID string) UniverseAPIResizeNodesRequest {
-	return UniverseAPIResizeNodesRequest{
+func (a *UniverseAPIService) ResizeNodes(ctx context.Context, cUUID string, uniUUID string) ApiResizeNodesRequest {
+	return ApiResizeNodesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3625,7 +3761,7 @@ func (a *UniverseAPIService) ResizeNodes(ctx context.Context, cUUID string, uniU
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) ResizeNodesExecute(r UniverseAPIResizeNodesRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) ResizeNodesExecute(r ApiResizeNodesRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3719,7 +3855,7 @@ func (a *UniverseAPIService) ResizeNodesExecute(r UniverseAPIResizeNodesRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIRestartUniverseRequest struct {
+type ApiRestartUniverseRequest struct {
 	ctx             context.Context
 	ApiService      *UniverseAPIService
 	cUUID           string
@@ -3727,12 +3863,12 @@ type UniverseAPIRestartUniverseRequest struct {
 	universeRestart *UniverseRestart
 }
 
-func (r UniverseAPIRestartUniverseRequest) UniverseRestart(universeRestart UniverseRestart) UniverseAPIRestartUniverseRequest {
+func (r ApiRestartUniverseRequest) UniverseRestart(universeRestart UniverseRestart) ApiRestartUniverseRequest {
 	r.universeRestart = &universeRestart
 	return r
 }
 
-func (r UniverseAPIRestartUniverseRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiRestartUniverseRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.RestartUniverseExecute(r)
 }
 
@@ -3744,10 +3880,10 @@ Restart a YugabyteDB Universe.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIRestartUniverseRequest
+	@return ApiRestartUniverseRequest
 */
-func (a *UniverseAPIService) RestartUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIRestartUniverseRequest {
-	return UniverseAPIRestartUniverseRequest{
+func (a *UniverseAPIService) RestartUniverse(ctx context.Context, cUUID string, uniUUID string) ApiRestartUniverseRequest {
+	return ApiRestartUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3758,7 +3894,7 @@ func (a *UniverseAPIService) RestartUniverse(ctx context.Context, cUUID string, 
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) RestartUniverseExecute(r UniverseAPIRestartUniverseRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) RestartUniverseExecute(r ApiRestartUniverseRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3849,7 +3985,7 @@ func (a *UniverseAPIService) RestartUniverseExecute(r UniverseAPIRestartUniverse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIResumeCanarySoftwareUpgradeRequest struct {
+type ApiResumeCanarySoftwareUpgradeRequest struct {
 	ctx                         context.Context
 	ApiService                  *UniverseAPIService
 	cUUID                       string
@@ -3857,12 +3993,12 @@ type UniverseAPIResumeCanarySoftwareUpgradeRequest struct {
 	universeResumeCanaryUpgrade *UniverseResumeCanaryUpgrade
 }
 
-func (r UniverseAPIResumeCanarySoftwareUpgradeRequest) UniverseResumeCanaryUpgrade(universeResumeCanaryUpgrade UniverseResumeCanaryUpgrade) UniverseAPIResumeCanarySoftwareUpgradeRequest {
+func (r ApiResumeCanarySoftwareUpgradeRequest) UniverseResumeCanaryUpgrade(universeResumeCanaryUpgrade UniverseResumeCanaryUpgrade) ApiResumeCanarySoftwareUpgradeRequest {
 	r.universeResumeCanaryUpgrade = &universeResumeCanaryUpgrade
 	return r
 }
 
-func (r UniverseAPIResumeCanarySoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiResumeCanarySoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.ResumeCanarySoftwareUpgradeExecute(r)
 }
 
@@ -3874,10 +4010,10 @@ Queues a task to resume a paused canary software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIResumeCanarySoftwareUpgradeRequest
+	@return ApiResumeCanarySoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) ResumeCanarySoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIResumeCanarySoftwareUpgradeRequest {
-	return UniverseAPIResumeCanarySoftwareUpgradeRequest{
+func (a *UniverseAPIService) ResumeCanarySoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiResumeCanarySoftwareUpgradeRequest {
+	return ApiResumeCanarySoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -3888,7 +4024,7 @@ func (a *UniverseAPIService) ResumeCanarySoftwareUpgrade(ctx context.Context, cU
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) ResumeCanarySoftwareUpgradeExecute(r UniverseAPIResumeCanarySoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) ResumeCanarySoftwareUpgradeExecute(r ApiResumeCanarySoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3982,7 +4118,7 @@ func (a *UniverseAPIService) ResumeCanarySoftwareUpgradeExecute(r UniverseAPIRes
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIRollbackDetachUniverseRequest struct {
+type ApiRollbackDetachUniverseRequest struct {
 	ctx             context.Context
 	ApiService      *UniverseAPIService
 	cUUID           string
@@ -3991,12 +4127,12 @@ type UniverseAPIRollbackDetachUniverseRequest struct {
 }
 
 // Force rollback without checking current owner or detached state.
-func (r UniverseAPIRollbackDetachUniverseRequest) IsForceRollback(isForceRollback bool) UniverseAPIRollbackDetachUniverseRequest {
+func (r ApiRollbackDetachUniverseRequest) IsForceRollback(isForceRollback bool) ApiRollbackDetachUniverseRequest {
 	r.isForceRollback = &isForceRollback
 	return r
 }
 
-func (r UniverseAPIRollbackDetachUniverseRequest) Execute() (*http.Response, error) {
+func (r ApiRollbackDetachUniverseRequest) Execute() (*http.Response, error) {
 	return r.ApiService.RollbackDetachUniverseExecute(r)
 }
 
@@ -4013,10 +4149,10 @@ can be used to rollback the detach operation in such case.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIRollbackDetachUniverseRequest
+	@return ApiRollbackDetachUniverseRequest
 */
-func (a *UniverseAPIService) RollbackDetachUniverse(ctx context.Context, cUUID string, uniUUID string) UniverseAPIRollbackDetachUniverseRequest {
-	return UniverseAPIRollbackDetachUniverseRequest{
+func (a *UniverseAPIService) RollbackDetachUniverse(ctx context.Context, cUUID string, uniUUID string) ApiRollbackDetachUniverseRequest {
+	return ApiRollbackDetachUniverseRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4025,7 +4161,7 @@ func (a *UniverseAPIService) RollbackDetachUniverse(ctx context.Context, cUUID s
 }
 
 // Execute executes the request
-func (a *UniverseAPIService) RollbackDetachUniverseExecute(r UniverseAPIRollbackDetachUniverseRequest) (*http.Response, error) {
+func (a *UniverseAPIService) RollbackDetachUniverseExecute(r ApiRollbackDetachUniverseRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
 		localVarPostBody   interface{}
@@ -4111,7 +4247,7 @@ func (a *UniverseAPIService) RollbackDetachUniverseExecute(r UniverseAPIRollback
 	return localVarHTTPResponse, nil
 }
 
-type UniverseAPIRollbackSoftwareUpgradeRequest struct {
+type ApiRollbackSoftwareUpgradeRequest struct {
 	ctx                        context.Context
 	ApiService                 *UniverseAPIService
 	cUUID                      string
@@ -4119,12 +4255,12 @@ type UniverseAPIRollbackSoftwareUpgradeRequest struct {
 	universeRollbackUpgradeReq *UniverseRollbackUpgradeReq
 }
 
-func (r UniverseAPIRollbackSoftwareUpgradeRequest) UniverseRollbackUpgradeReq(universeRollbackUpgradeReq UniverseRollbackUpgradeReq) UniverseAPIRollbackSoftwareUpgradeRequest {
+func (r ApiRollbackSoftwareUpgradeRequest) UniverseRollbackUpgradeReq(universeRollbackUpgradeReq UniverseRollbackUpgradeReq) ApiRollbackSoftwareUpgradeRequest {
 	r.universeRollbackUpgradeReq = &universeRollbackUpgradeReq
 	return r
 }
 
-func (r UniverseAPIRollbackSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiRollbackSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.RollbackSoftwareUpgradeExecute(r)
 }
 
@@ -4136,10 +4272,10 @@ Queues a task to rollback a YugabyteDB Software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIRollbackSoftwareUpgradeRequest
+	@return ApiRollbackSoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) RollbackSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIRollbackSoftwareUpgradeRequest {
-	return UniverseAPIRollbackSoftwareUpgradeRequest{
+func (a *UniverseAPIService) RollbackSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiRollbackSoftwareUpgradeRequest {
+	return ApiRollbackSoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4150,7 +4286,7 @@ func (a *UniverseAPIService) RollbackSoftwareUpgrade(ctx context.Context, cUUID 
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) RollbackSoftwareUpgradeExecute(r UniverseAPIRollbackSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) RollbackSoftwareUpgradeExecute(r ApiRollbackSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4241,7 +4377,7 @@ func (a *UniverseAPIService) RollbackSoftwareUpgradeExecute(r UniverseAPIRollbac
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIRunScriptRequest struct {
+type ApiRunScriptRequest struct {
 	ctx              context.Context
 	ApiService       *UniverseAPIService
 	cUUID            string
@@ -4249,12 +4385,12 @@ type UniverseAPIRunScriptRequest struct {
 	runScriptRequest *RunScriptRequest
 }
 
-func (r UniverseAPIRunScriptRequest) RunScriptRequest(runScriptRequest RunScriptRequest) UniverseAPIRunScriptRequest {
+func (r ApiRunScriptRequest) RunScriptRequest(runScriptRequest RunScriptRequest) ApiRunScriptRequest {
 	r.runScriptRequest = &runScriptRequest
 	return r
 }
 
-func (r UniverseAPIRunScriptRequest) Execute() (*RunScriptResponse, *http.Response, error) {
+func (r ApiRunScriptRequest) Execute() (*RunScriptResponse, *http.Response, error) {
 	return r.ApiService.RunScriptExecute(r)
 }
 
@@ -4279,10 +4415,10 @@ the remote nodes until completion. For this reason, scripts should ideally be:
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIRunScriptRequest
+	@return ApiRunScriptRequest
 */
-func (a *UniverseAPIService) RunScript(ctx context.Context, cUUID string, uniUUID string) UniverseAPIRunScriptRequest {
-	return UniverseAPIRunScriptRequest{
+func (a *UniverseAPIService) RunScript(ctx context.Context, cUUID string, uniUUID string) ApiRunScriptRequest {
+	return ApiRunScriptRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4293,7 +4429,7 @@ func (a *UniverseAPIService) RunScript(ctx context.Context, cUUID string, uniUUI
 // Execute executes the request
 //
 //	@return RunScriptResponse
-func (a *UniverseAPIService) RunScriptExecute(r UniverseAPIRunScriptRequest) (*RunScriptResponse, *http.Response, error) {
+func (a *UniverseAPIService) RunScriptExecute(r ApiRunScriptRequest) (*RunScriptResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4387,7 +4523,7 @@ func (a *UniverseAPIService) RunScriptExecute(r UniverseAPIRunScriptRequest) (*R
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIStartSoftwareUpgradeRequest struct {
+type ApiStartSoftwareUpgradeRequest struct {
 	ctx                          context.Context
 	ApiService                   *UniverseAPIService
 	cUUID                        string
@@ -4395,12 +4531,12 @@ type UniverseAPIStartSoftwareUpgradeRequest struct {
 	universeSoftwareUpgradeStart *UniverseSoftwareUpgradeStart
 }
 
-func (r UniverseAPIStartSoftwareUpgradeRequest) UniverseSoftwareUpgradeStart(universeSoftwareUpgradeStart UniverseSoftwareUpgradeStart) UniverseAPIStartSoftwareUpgradeRequest {
+func (r ApiStartSoftwareUpgradeRequest) UniverseSoftwareUpgradeStart(universeSoftwareUpgradeStart UniverseSoftwareUpgradeStart) ApiStartSoftwareUpgradeRequest {
 	r.universeSoftwareUpgradeStart = &universeSoftwareUpgradeStart
 	return r
 }
 
-func (r UniverseAPIStartSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiStartSoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.StartSoftwareUpgradeExecute(r)
 }
 
@@ -4412,10 +4548,10 @@ Queues a task to perform a YugabyteDB Software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIStartSoftwareUpgradeRequest
+	@return ApiStartSoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) StartSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIStartSoftwareUpgradeRequest {
-	return UniverseAPIStartSoftwareUpgradeRequest{
+func (a *UniverseAPIService) StartSoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiStartSoftwareUpgradeRequest {
+	return ApiStartSoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4426,7 +4562,7 @@ func (a *UniverseAPIService) StartSoftwareUpgrade(ctx context.Context, cUUID str
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) StartSoftwareUpgradeExecute(r UniverseAPIStartSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) StartSoftwareUpgradeExecute(r ApiStartSoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4520,7 +4656,7 @@ func (a *UniverseAPIService) StartSoftwareUpgradeExecute(r UniverseAPIStartSoftw
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPIStartThirdPartySoftwareUpgradeRequest struct {
+type ApiStartThirdPartySoftwareUpgradeRequest struct {
 	ctx                                    context.Context
 	ApiService                             *UniverseAPIService
 	cUUID                                  string
@@ -4528,12 +4664,12 @@ type UniverseAPIStartThirdPartySoftwareUpgradeRequest struct {
 	universeThirdPartySoftwareUpgradeStart *UniverseThirdPartySoftwareUpgradeStart
 }
 
-func (r UniverseAPIStartThirdPartySoftwareUpgradeRequest) UniverseThirdPartySoftwareUpgradeStart(universeThirdPartySoftwareUpgradeStart UniverseThirdPartySoftwareUpgradeStart) UniverseAPIStartThirdPartySoftwareUpgradeRequest {
+func (r ApiStartThirdPartySoftwareUpgradeRequest) UniverseThirdPartySoftwareUpgradeStart(universeThirdPartySoftwareUpgradeStart UniverseThirdPartySoftwareUpgradeStart) ApiStartThirdPartySoftwareUpgradeRequest {
 	r.universeThirdPartySoftwareUpgradeStart = &universeThirdPartySoftwareUpgradeStart
 	return r
 }
 
-func (r UniverseAPIStartThirdPartySoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiStartThirdPartySoftwareUpgradeRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.StartThirdPartySoftwareUpgradeExecute(r)
 }
 
@@ -4545,10 +4681,10 @@ Queues a task to perform a third party software upgrade.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPIStartThirdPartySoftwareUpgradeRequest
+	@return ApiStartThirdPartySoftwareUpgradeRequest
 */
-func (a *UniverseAPIService) StartThirdPartySoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) UniverseAPIStartThirdPartySoftwareUpgradeRequest {
-	return UniverseAPIStartThirdPartySoftwareUpgradeRequest{
+func (a *UniverseAPIService) StartThirdPartySoftwareUpgrade(ctx context.Context, cUUID string, uniUUID string) ApiStartThirdPartySoftwareUpgradeRequest {
+	return ApiStartThirdPartySoftwareUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4559,7 +4695,7 @@ func (a *UniverseAPIService) StartThirdPartySoftwareUpgrade(ctx context.Context,
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) StartThirdPartySoftwareUpgradeExecute(r UniverseAPIStartThirdPartySoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) StartThirdPartySoftwareUpgradeExecute(r ApiStartThirdPartySoftwareUpgradeRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4650,7 +4786,7 @@ func (a *UniverseAPIService) StartThirdPartySoftwareUpgradeExecute(r UniverseAPI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type UniverseAPISystemdEnableRequest struct {
+type ApiSystemdEnableRequest struct {
 	ctx                        context.Context
 	ApiService                 *UniverseAPIService
 	cUUID                      string
@@ -4658,12 +4794,12 @@ type UniverseAPISystemdEnableRequest struct {
 	universeSystemdEnableStart *UniverseSystemdEnableStart
 }
 
-func (r UniverseAPISystemdEnableRequest) UniverseSystemdEnableStart(universeSystemdEnableStart UniverseSystemdEnableStart) UniverseAPISystemdEnableRequest {
+func (r ApiSystemdEnableRequest) UniverseSystemdEnableStart(universeSystemdEnableStart UniverseSystemdEnableStart) ApiSystemdEnableRequest {
 	r.universeSystemdEnableStart = &universeSystemdEnableStart
 	return r
 }
 
-func (r UniverseAPISystemdEnableRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiSystemdEnableRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.SystemdEnableExecute(r)
 }
 
@@ -4678,10 +4814,10 @@ This is not supported for on prem manual provisioned universes or kubernetes uni
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return UniverseAPISystemdEnableRequest
+	@return ApiSystemdEnableRequest
 */
-func (a *UniverseAPIService) SystemdEnable(ctx context.Context, cUUID string, uniUUID string) UniverseAPISystemdEnableRequest {
-	return UniverseAPISystemdEnableRequest{
+func (a *UniverseAPIService) SystemdEnable(ctx context.Context, cUUID string, uniUUID string) ApiSystemdEnableRequest {
+	return ApiSystemdEnableRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -4692,7 +4828,7 @@ func (a *UniverseAPIService) SystemdEnable(ctx context.Context, cUUID string, un
 // Execute executes the request
 //
 //	@return YBATask
-func (a *UniverseAPIService) SystemdEnableExecute(r UniverseAPISystemdEnableRequest) (*YBATask, *http.Response, error) {
+func (a *UniverseAPIService) SystemdEnableExecute(r ApiSystemdEnableRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4732,6 +4868,272 @@ func (a *UniverseAPIService) SystemdEnableExecute(r UniverseAPISystemdEnableRequ
 	}
 	// body params
 	localVarPostBody = r.universeSystemdEnableStart
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateProxyConfigRequest struct {
+	ctx                       context.Context
+	ApiService                *UniverseAPIService
+	cUUID                     string
+	uniUUID                   string
+	universeUpdateProxyConfig *UniverseUpdateProxyConfig
+}
+
+func (r ApiUpdateProxyConfigRequest) UniverseUpdateProxyConfig(universeUpdateProxyConfig UniverseUpdateProxyConfig) ApiUpdateProxyConfigRequest {
+	r.universeUpdateProxyConfig = &universeUpdateProxyConfig
+	return r
+}
+
+func (r ApiUpdateProxyConfigRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.UpdateProxyConfigExecute(r)
+}
+
+/*
+UpdateProxyConfig Update proxy configuration
+
+Queues a task to update HTTP/HTTPS proxy settings for nodes in the universe.
+Supports universe-level proxy_config and per-availability-zone overrides via
+az_networking.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return ApiUpdateProxyConfigRequest
+*/
+func (a *UniverseAPIService) UpdateProxyConfig(ctx context.Context, cUUID string, uniUUID string) ApiUpdateProxyConfigRequest {
+	return ApiUpdateProxyConfigRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *UniverseAPIService) UpdateProxyConfigExecute(r ApiUpdateProxyConfigRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.UpdateProxyConfig")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/proxy-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeUpdateProxyConfig == nil {
+		return localVarReturnValue, nil, reportError("universeUpdateProxyConfig is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeUpdateProxyConfig
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiValidateKubernetesOverridesRequest struct {
+	ctx                                 context.Context
+	ApiService                          *UniverseAPIService
+	cUUID                               string
+	universeValidateKubernetesOverrides *UniverseValidateKubernetesOverrides
+}
+
+func (r ApiValidateKubernetesOverridesRequest) UniverseValidateKubernetesOverrides(universeValidateKubernetesOverrides UniverseValidateKubernetesOverrides) ApiValidateKubernetesOverridesRequest {
+	r.universeValidateKubernetesOverrides = &universeValidateKubernetesOverrides
+	return r
+}
+
+func (r ApiValidateKubernetesOverridesRequest) Execute() (*YBAValidationResponse, *http.Response, error) {
+	return r.ApiService.ValidateKubernetesOverridesExecute(r)
+}
+
+/*
+ValidateKubernetesOverrides Validate Kubernetes Helm Overrides
+
+Validate the kubernetes helm override values for universe.
+See https://github.com/yugabyte/charts/blob/master/stable/yugabyte/values.yaml for possible
+override options.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return ApiValidateKubernetesOverridesRequest
+*/
+func (a *UniverseAPIService) ValidateKubernetesOverrides(ctx context.Context, cUUID string) ApiValidateKubernetesOverridesRequest {
+	return ApiValidateKubernetesOverridesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBAValidationResponse
+func (a *UniverseAPIService) ValidateKubernetesOverridesExecute(r ApiValidateKubernetesOverridesRequest) (*YBAValidationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBAValidationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.ValidateKubernetesOverrides")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/validate-kubernetes-overrides"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeValidateKubernetesOverrides == nil {
+		return localVarReturnValue, nil, reportError("universeValidateKubernetesOverrides is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeValidateKubernetesOverrides
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

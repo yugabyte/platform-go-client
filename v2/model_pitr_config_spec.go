@@ -23,9 +23,8 @@ type PitrConfigSpec struct {
 	// PITR config name
 	Name *string `json:"name,omitempty"`
 	// Database or keyspace name
-	DbName *string `json:"db_name,omitempty"`
-	// Table type
-	TableType *string `json:"table_type,omitempty"`
+	DbName    *string    `json:"db_name,omitempty"`
+	TableType *TableType `json:"table_type,omitempty"`
 	// Interval between snapshots in seconds
 	ScheduleInterval *int64 `json:"schedule_interval,omitempty"`
 	// Retention period in seconds
@@ -116,9 +115,9 @@ func (o *PitrConfigSpec) SetDbName(v string) {
 }
 
 // GetTableType returns the TableType field value if set, zero value otherwise.
-func (o *PitrConfigSpec) GetTableType() string {
+func (o *PitrConfigSpec) GetTableType() TableType {
 	if o == nil || IsNil(o.TableType) {
-		var ret string
+		var ret TableType
 		return ret
 	}
 	return *o.TableType
@@ -126,7 +125,7 @@ func (o *PitrConfigSpec) GetTableType() string {
 
 // GetTableTypeOk returns a tuple with the TableType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PitrConfigSpec) GetTableTypeOk() (*string, bool) {
+func (o *PitrConfigSpec) GetTableTypeOk() (*TableType, bool) {
 	if o == nil || IsNil(o.TableType) {
 		return nil, false
 	}
@@ -142,8 +141,8 @@ func (o *PitrConfigSpec) HasTableType() bool {
 	return false
 }
 
-// SetTableType gets a reference to the given string and assigns it to the TableType field.
-func (o *PitrConfigSpec) SetTableType(v string) {
+// SetTableType gets a reference to the given TableType and assigns it to the TableType field.
+func (o *PitrConfigSpec) SetTableType(v TableType) {
 	o.TableType = &v
 }
 

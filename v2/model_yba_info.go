@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the YBAInfo type satisfies the MappedNullable interface at compile time
@@ -22,6 +24,10 @@ var _ MappedNullable = &YBAInfo{}
 type YBAInfo struct {
 	// Whether YBA instance is FIPS compliant
 	FipsEnabled bool `json:"fips_enabled"`
+	// YBA software version
+	Version *string `json:"version,omitempty"`
+	// number of customers created on this YBA instance
+	CustomerCount *int32 `json:"customer_count,omitempty"`
 }
 
 type _YBAInfo YBAInfo
@@ -68,6 +74,70 @@ func (o *YBAInfo) SetFipsEnabled(v bool) {
 	o.FipsEnabled = v
 }
 
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *YBAInfo) GetVersion() string {
+	if o == nil || IsNil(o.Version) {
+		var ret string
+		return ret
+	}
+	return *o.Version
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBAInfo) GetVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.Version) {
+		return nil, false
+	}
+	return o.Version, true
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *YBAInfo) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
+func (o *YBAInfo) SetVersion(v string) {
+	o.Version = &v
+}
+
+// GetCustomerCount returns the CustomerCount field value if set, zero value otherwise.
+func (o *YBAInfo) GetCustomerCount() int32 {
+	if o == nil || IsNil(o.CustomerCount) {
+		var ret int32
+		return ret
+	}
+	return *o.CustomerCount
+}
+
+// GetCustomerCountOk returns a tuple with the CustomerCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YBAInfo) GetCustomerCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.CustomerCount) {
+		return nil, false
+	}
+	return o.CustomerCount, true
+}
+
+// HasCustomerCount returns a boolean if a field has been set.
+func (o *YBAInfo) HasCustomerCount() bool {
+	if o != nil && !IsNil(o.CustomerCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerCount gets a reference to the given int32 and assigns it to the CustomerCount field.
+func (o *YBAInfo) SetCustomerCount(v int32) {
+	o.CustomerCount = &v
+}
+
 func (o YBAInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -79,7 +149,50 @@ func (o YBAInfo) MarshalJSON() ([]byte, error) {
 func (o YBAInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fips_enabled"] = o.FipsEnabled
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.CustomerCount) {
+		toSerialize["customer_count"] = o.CustomerCount
+	}
 	return toSerialize, nil
+}
+
+func (o *YBAInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fips_enabled",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varYBAInfo := _YBAInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varYBAInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = YBAInfo(varYBAInfo)
+
+	return err
 }
 
 type NullableYBAInfo struct {

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InstanceType** | Pointer to **string** | Instance type for tserver/master nodes of cluster that determines the cpu and memory resources. | [optional] 
-**StorageSpec** | Pointer to [**ClusterStorageSpec**](ClusterStorageSpec.md) |  | [optional] 
+**StorageSpec** | Pointer to [**ClusterStorageBase**](ClusterStorageBase.md) |  | [optional] 
 **CgroupSize** | Pointer to **int32** | Amount of memory in MB to limit the postgres process using the ysql cgroup. The value should be greater than 0. When set to 0 it results in no cgroup limits. For a read replica cluster, setting this value to null or -1 would inherit this value from the primary cluster. Applicable only for nodes running as Linux VMs on AWS/GCP/Azure Cloud Provider. Only used internally by YBM. | [optional] 
 **Tserver** | Pointer to [**PerProcessNodeSpec**](PerProcessNodeSpec.md) |  | [optional] 
 **Master** | Pointer to [**PerProcessNodeSpec**](PerProcessNodeSpec.md) |  | [optional] 
@@ -56,20 +56,20 @@ HasInstanceType returns a boolean if a field has been set.
 
 ### GetStorageSpec
 
-`func (o *AvailabilityZoneNodeSpec) GetStorageSpec() ClusterStorageSpec`
+`func (o *AvailabilityZoneNodeSpec) GetStorageSpec() ClusterStorageBase`
 
 GetStorageSpec returns the StorageSpec field if non-nil, zero value otherwise.
 
 ### GetStorageSpecOk
 
-`func (o *AvailabilityZoneNodeSpec) GetStorageSpecOk() (*ClusterStorageSpec, bool)`
+`func (o *AvailabilityZoneNodeSpec) GetStorageSpecOk() (*ClusterStorageBase, bool)`
 
 GetStorageSpecOk returns a tuple with the StorageSpec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageSpec
 
-`func (o *AvailabilityZoneNodeSpec) SetStorageSpec(v ClusterStorageSpec)`
+`func (o *AvailabilityZoneNodeSpec) SetStorageSpec(v ClusterStorageBase)`
 
 SetStorageSpec sets StorageSpec field to given value.
 

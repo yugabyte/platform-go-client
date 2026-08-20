@@ -4,23 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Classes** | **[]string** | YSQL statement classes | 
+**Classes** | Pointer to **[]string** | YSQL statement classes | [optional] 
 **Enabled** | **bool** | Enabled | [readonly] 
 **LogCatalog** | **bool** | Log catalog | 
 **LogClient** | **bool** | Log client | 
-**LogLevel** | **string** | Log level | 
+**LogLevel** | Pointer to **string** | Log level | [optional] 
 **LogParameter** | **bool** | Log parameter | 
-**LogParameterMaxSize** | **int32** | Log parameter max size | 
+**LogParameterMaxSize** | Pointer to **int32** | Log parameter max size | [optional] 
 **LogRelation** | **bool** | Log relation | 
 **LogRows** | **bool** | Log row | 
 **LogStatement** | **bool** | Log statement | 
 **LogStatementOnce** | **bool** | Log statement once | 
+**LogRetentionDays** | Pointer to **int32** | Number of days to keep extracted YSQL audit log archives on the node. 0 or unset disables the dedicated audit-log retention pipeline and keeps the default size-based postgres log purge behavior.  | [optional] 
 
 ## Methods
 
 ### NewYSQLAuditConfig
 
-`func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
+`func NewYSQLAuditConfig(enabled bool, logCatalog bool, logClient bool, logParameter bool, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
 
 NewYSQLAuditConfig instantiates a new YSQLAuditConfig object
 This constructor will assign default values to properties that have it defined,
@@ -54,6 +55,11 @@ and a boolean to check if the value has been set.
 
 SetClasses sets Classes field to given value.
 
+### HasClasses
+
+`func (o *YSQLAuditConfig) HasClasses() bool`
+
+HasClasses returns a boolean if a field has been set.
 
 ### GetEnabled
 
@@ -134,6 +140,11 @@ and a boolean to check if the value has been set.
 
 SetLogLevel sets LogLevel field to given value.
 
+### HasLogLevel
+
+`func (o *YSQLAuditConfig) HasLogLevel() bool`
+
+HasLogLevel returns a boolean if a field has been set.
 
 ### GetLogParameter
 
@@ -174,6 +185,11 @@ and a boolean to check if the value has been set.
 
 SetLogParameterMaxSize sets LogParameterMaxSize field to given value.
 
+### HasLogParameterMaxSize
+
+`func (o *YSQLAuditConfig) HasLogParameterMaxSize() bool`
+
+HasLogParameterMaxSize returns a boolean if a field has been set.
 
 ### GetLogRelation
 
@@ -254,6 +270,31 @@ and a boolean to check if the value has been set.
 
 SetLogStatementOnce sets LogStatementOnce field to given value.
 
+
+### GetLogRetentionDays
+
+`func (o *YSQLAuditConfig) GetLogRetentionDays() int32`
+
+GetLogRetentionDays returns the LogRetentionDays field if non-nil, zero value otherwise.
+
+### GetLogRetentionDaysOk
+
+`func (o *YSQLAuditConfig) GetLogRetentionDaysOk() (*int32, bool)`
+
+GetLogRetentionDaysOk returns a tuple with the LogRetentionDays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogRetentionDays
+
+`func (o *YSQLAuditConfig) SetLogRetentionDays(v int32)`
+
+SetLogRetentionDays sets LogRetentionDays field to given value.
+
+### HasLogRetentionDays
+
+`func (o *YSQLAuditConfig) HasLogRetentionDays() bool`
+
+HasLogRetentionDays returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -22,12 +22,12 @@ import (
 // MetricsAPIService MetricsAPI service
 type MetricsAPIService service
 
-type MetricsAPIGetPrometheusHostInfoRequest struct {
+type ApiGetPrometheusHostInfoRequest struct {
 	ctx        context.Context
 	ApiService *MetricsAPIService
 }
 
-func (r MetricsAPIGetPrometheusHostInfoRequest) Execute() (*PrometheusHostInfo, *http.Response, error) {
+func (r ApiGetPrometheusHostInfoRequest) Execute() (*PrometheusHostInfo, *http.Response, error) {
 	return r.ApiService.GetPrometheusHostInfoExecute(r)
 }
 
@@ -37,10 +37,10 @@ GetPrometheusHostInfo Get Prometheus host info
 Get the Url for the Prometheus instance of the current YBA
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return MetricsAPIGetPrometheusHostInfoRequest
+	@return ApiGetPrometheusHostInfoRequest
 */
-func (a *MetricsAPIService) GetPrometheusHostInfo(ctx context.Context) MetricsAPIGetPrometheusHostInfoRequest {
-	return MetricsAPIGetPrometheusHostInfoRequest{
+func (a *MetricsAPIService) GetPrometheusHostInfo(ctx context.Context) ApiGetPrometheusHostInfoRequest {
+	return ApiGetPrometheusHostInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -49,7 +49,7 @@ func (a *MetricsAPIService) GetPrometheusHostInfo(ctx context.Context) MetricsAP
 // Execute executes the request
 //
 //	@return PrometheusHostInfo
-func (a *MetricsAPIService) GetPrometheusHostInfoExecute(r MetricsAPIGetPrometheusHostInfoRequest) (*PrometheusHostInfo, *http.Response, error) {
+func (a *MetricsAPIService) GetPrometheusHostInfoExecute(r ApiGetPrometheusHostInfoRequest) (*PrometheusHostInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}

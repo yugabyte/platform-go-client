@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **UniverseName** | Pointer to **string** | Universe name at backup time. | [optional] 
 **ScheduleUuid** | Pointer to **string** | Backup schedule UUID, when created by a schedule. | [optional] 
 **ScheduleName** | Pointer to **string** | Backup schedule name, when created by a schedule. | [optional] 
-**BackupType** | Pointer to **string** | Table type for the backup. | [optional] 
+**BackupType** | Pointer to [**TableType**](TableType.md) |  | [optional] 
 **Category** | Pointer to **string** | Backup implementation category. | [optional] 
 **StorageConfigType** | Pointer to **string** | Storage provider type for the backup. | [optional] 
 **IsFullBackup** | Pointer to **bool** | Whether this is a full backup rather than incremental. | [optional] 
@@ -166,20 +166,20 @@ HasScheduleName returns a boolean if a field has been set.
 
 ### GetBackupType
 
-`func (o *BackupSpec) GetBackupType() string`
+`func (o *BackupSpec) GetBackupType() TableType`
 
 GetBackupType returns the BackupType field if non-nil, zero value otherwise.
 
 ### GetBackupTypeOk
 
-`func (o *BackupSpec) GetBackupTypeOk() (*string, bool)`
+`func (o *BackupSpec) GetBackupTypeOk() (*TableType, bool)`
 
 GetBackupTypeOk returns a tuple with the BackupType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBackupType
 
-`func (o *BackupSpec) SetBackupType(v string)`
+`func (o *BackupSpec) SetBackupType(v TableType)`
 
 SetBackupType sets BackupType field to given value.
 

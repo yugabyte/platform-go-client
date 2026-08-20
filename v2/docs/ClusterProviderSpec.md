@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Provider** | **string** | Cloud provider UUID | 
-**RegionList** | Pointer to **[]string** | The list of regions in the cloud provider to place data replicas | [optional] 
-**PreferredRegion** | Pointer to **string** | The region to nominate as the preferred region in a geo-partitioned multi-region cluster | [optional] 
+**RegionList** | Pointer to **[]string** | Deprecated: specify the placement explicitly. The list of regions in the cloud provider to place data replicas | [optional] 
+**PreferredRegion** | Pointer to **string** | Deprecated: use default partition. The region to nominate as the preferred region in a geo-partitioned multi-region cluster | [optional] 
 **AccessKeyCode** | Pointer to **string** | One of the SSH access keys defined in Cloud Provider to be configured on nodes VMs. Required for AWS, Azure and GCP Cloud Providers. | [optional] 
 **AwsInstanceProfile** | Pointer to **string** | The AWS IAM instance profile ARN to use for the nodes in this cluster. Applicable only for nodes on AWS Cloud Provider. If specified, YugabyteDB Anywhere will use this instance profile instead of the access key. | [optional] 
 **ImageBundleUuid** | Pointer to **string** | Image bundle UUID to use for node VM image. Refers to one of the image bundles defined in the cloud provider. | [optional] 

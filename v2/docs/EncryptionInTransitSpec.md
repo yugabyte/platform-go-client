@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnableNodeToNodeEncrypt** | Pointer to **bool** | Whether to enable encryption for communication among DB nodes | [optional] 
 **EnableClientToNodeEncrypt** | Pointer to **bool** | Whether to enable encryption for client connection to DB nodes | [optional] 
+**RootAndClientRootCaSame** | Pointer to **bool** | In case certificates are generated, whether to use the same certificate | [optional] 
 **RootCa** | Pointer to **string** | The UUID of the rootCA to be used to generate node certificates and facilitate TLS communication between database nodes. | [optional] 
 **ClientRootCa** | Pointer to **string** | The UUID of the clientRootCA to be used to generate client certificates and facilitate TLS communication between server and client. Can be set to same as root_CA. | [optional] 
 
@@ -77,6 +78,31 @@ SetEnableClientToNodeEncrypt sets EnableClientToNodeEncrypt field to given value
 `func (o *EncryptionInTransitSpec) HasEnableClientToNodeEncrypt() bool`
 
 HasEnableClientToNodeEncrypt returns a boolean if a field has been set.
+
+### GetRootAndClientRootCaSame
+
+`func (o *EncryptionInTransitSpec) GetRootAndClientRootCaSame() bool`
+
+GetRootAndClientRootCaSame returns the RootAndClientRootCaSame field if non-nil, zero value otherwise.
+
+### GetRootAndClientRootCaSameOk
+
+`func (o *EncryptionInTransitSpec) GetRootAndClientRootCaSameOk() (*bool, bool)`
+
+GetRootAndClientRootCaSameOk returns a tuple with the RootAndClientRootCaSame field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootAndClientRootCaSame
+
+`func (o *EncryptionInTransitSpec) SetRootAndClientRootCaSame(v bool)`
+
+SetRootAndClientRootCaSame sets RootAndClientRootCaSame field to given value.
+
+### HasRootAndClientRootCaSame
+
+`func (o *EncryptionInTransitSpec) HasRootAndClientRootCaSame() bool`
+
+HasRootAndClientRootCaSame returns a boolean if a field has been set.
 
 ### GetRootCa
 

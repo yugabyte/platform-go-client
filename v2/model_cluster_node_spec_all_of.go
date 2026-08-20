@@ -18,8 +18,8 @@ import (
 // ClusterNodeSpecAllOf struct for ClusterNodeSpecAllOf
 type ClusterNodeSpecAllOf struct {
 	// Whether to run tserver and master processes in dedicated nodes in this cluster. Defaults to false where master and tserver processes share the same node.
-	DedicatedNodes *bool `json:"dedicated_nodes,omitempty"`
-	K8sMasterResourceSpec *K8SNodeResourceSpec `json:"k8s_master_resource_spec,omitempty"`
+	DedicatedNodes         *bool                `json:"dedicated_nodes,omitempty"`
+	K8sMasterResourceSpec  *K8SNodeResourceSpec `json:"k8s_master_resource_spec,omitempty"`
 	K8sTserverResourceSpec *K8SNodeResourceSpec `json:"k8s_tserver_resource_spec,omitempty"`
 	// Granular node settings overridden per Availability Zone identified by AZ uuid.
 	AzNodeSpec *map[string]AvailabilityZoneNodeSpec `json:"az_node_spec,omitempty"`
@@ -226,5 +226,3 @@ func (v *NullableClusterNodeSpecAllOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **ClusterType** | **string** | Cluster type can be one of PRIMARY, ASYNC (for ReadOnly), ADDON | 
 **NumNodes** | **int32** | The number of nodes (tservers) to provision in this cluster | 
 **ReplicationFactor** | Pointer to **int32** | The number of copies of data to maintain in this cluster. Defaults to 3. | [optional] [default to 3]
-**NodeSpec** | [**ClusterNodeSpec**](ClusterNodeSpec.md) |  | 
+**DedicatedNodes** | Pointer to **bool** | Whether to run tserver and master processes in dedicated nodes in this cluster. Prefer this over deprecated node_spec.dedicated_nodes. If omitted, falls back to node_spec.dedicated_nodes when present; otherwise defaults to false on create and leaves the existing value unchanged on edit.  | [optional] 
+**ProviderSpecs** | Pointer to [**[]ClusterPerProviderSpec**](ClusterPerProviderSpec.md) | Per-provider specs for multicloud clusters. For single-provider clusters use provider_spec and node_spec. | [optional] 
+**NodeSpec** | Pointer to [**ClusterNodeSpec**](ClusterNodeSpec.md) |  | [optional] 
 **NetworkingSpec** | Pointer to [**ClusterNetworkingSpec**](ClusterNetworkingSpec.md) |  | [optional] 
-**ProviderSpec** | [**ClusterProviderSpec**](ClusterProviderSpec.md) |  | 
+**ProviderSpec** | Pointer to [**ClusterProviderSpec**](ClusterProviderSpec.md) |  | [optional] 
 **PlacementSpec** | Pointer to [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | [optional] 
 **PartitionsSpec** | Pointer to [**[]ClusterPartitionSpec**](ClusterPartitionSpec.md) |  | [optional] 
 **UseSpotInstance** | Pointer to **bool** | Whether to use spot instances for nodes in aws/gcp. Used in dev/test environments. | [optional] 
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewClusterSpec
 
-`func NewClusterSpec(clusterType string, numNodes int32, nodeSpec ClusterNodeSpec, providerSpec ClusterProviderSpec, ) *ClusterSpec`
+`func NewClusterSpec(clusterType string, numNodes int32, ) *ClusterSpec`
 
 NewClusterSpec instantiates a new ClusterSpec object
 This constructor will assign default values to properties that have it defined,
@@ -129,6 +131,56 @@ SetReplicationFactor sets ReplicationFactor field to given value.
 
 HasReplicationFactor returns a boolean if a field has been set.
 
+### GetDedicatedNodes
+
+`func (o *ClusterSpec) GetDedicatedNodes() bool`
+
+GetDedicatedNodes returns the DedicatedNodes field if non-nil, zero value otherwise.
+
+### GetDedicatedNodesOk
+
+`func (o *ClusterSpec) GetDedicatedNodesOk() (*bool, bool)`
+
+GetDedicatedNodesOk returns a tuple with the DedicatedNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDedicatedNodes
+
+`func (o *ClusterSpec) SetDedicatedNodes(v bool)`
+
+SetDedicatedNodes sets DedicatedNodes field to given value.
+
+### HasDedicatedNodes
+
+`func (o *ClusterSpec) HasDedicatedNodes() bool`
+
+HasDedicatedNodes returns a boolean if a field has been set.
+
+### GetProviderSpecs
+
+`func (o *ClusterSpec) GetProviderSpecs() []ClusterPerProviderSpec`
+
+GetProviderSpecs returns the ProviderSpecs field if non-nil, zero value otherwise.
+
+### GetProviderSpecsOk
+
+`func (o *ClusterSpec) GetProviderSpecsOk() (*[]ClusterPerProviderSpec, bool)`
+
+GetProviderSpecsOk returns a tuple with the ProviderSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderSpecs
+
+`func (o *ClusterSpec) SetProviderSpecs(v []ClusterPerProviderSpec)`
+
+SetProviderSpecs sets ProviderSpecs field to given value.
+
+### HasProviderSpecs
+
+`func (o *ClusterSpec) HasProviderSpecs() bool`
+
+HasProviderSpecs returns a boolean if a field has been set.
+
 ### GetNodeSpec
 
 `func (o *ClusterSpec) GetNodeSpec() ClusterNodeSpec`
@@ -148,6 +200,11 @@ and a boolean to check if the value has been set.
 
 SetNodeSpec sets NodeSpec field to given value.
 
+### HasNodeSpec
+
+`func (o *ClusterSpec) HasNodeSpec() bool`
+
+HasNodeSpec returns a boolean if a field has been set.
 
 ### GetNetworkingSpec
 
@@ -193,6 +250,11 @@ and a boolean to check if the value has been set.
 
 SetProviderSpec sets ProviderSpec field to given value.
 
+### HasProviderSpec
+
+`func (o *ClusterSpec) HasProviderSpec() bool`
+
+HasProviderSpec returns a boolean if a field has been set.
 
 ### GetPlacementSpec
 

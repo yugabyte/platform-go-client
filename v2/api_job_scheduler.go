@@ -23,14 +23,14 @@ import (
 // JobSchedulerAPIService JobSchedulerAPI service
 type JobSchedulerAPIService service
 
-type JobSchedulerAPIDeleteJobScheduleRequest struct {
+type ApiDeleteJobScheduleRequest struct {
 	ctx        context.Context
 	ApiService *JobSchedulerAPIService
 	cUUID      string
 	jUUID      string
 }
 
-func (r JobSchedulerAPIDeleteJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
+func (r ApiDeleteJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
 	return r.ApiService.DeleteJobScheduleExecute(r)
 }
 
@@ -42,10 +42,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param jUUID Job Schedule UUID
-	@return JobSchedulerAPIDeleteJobScheduleRequest
+	@return ApiDeleteJobScheduleRequest
 */
-func (a *JobSchedulerAPIService) DeleteJobSchedule(ctx context.Context, cUUID string, jUUID string) JobSchedulerAPIDeleteJobScheduleRequest {
-	return JobSchedulerAPIDeleteJobScheduleRequest{
+func (a *JobSchedulerAPIService) DeleteJobSchedule(ctx context.Context, cUUID string, jUUID string) ApiDeleteJobScheduleRequest {
+	return ApiDeleteJobScheduleRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -56,7 +56,7 @@ func (a *JobSchedulerAPIService) DeleteJobSchedule(ctx context.Context, cUUID st
 // Execute executes the request
 //
 //	@return JobSchedule
-func (a *JobSchedulerAPIService) DeleteJobScheduleExecute(r JobSchedulerAPIDeleteJobScheduleRequest) (*JobSchedule, *http.Response, error) {
+func (a *JobSchedulerAPIService) DeleteJobScheduleExecute(r ApiDeleteJobScheduleRequest) (*JobSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -145,14 +145,14 @@ func (a *JobSchedulerAPIService) DeleteJobScheduleExecute(r JobSchedulerAPIDelet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type JobSchedulerAPIGetJobScheduleRequest struct {
+type ApiGetJobScheduleRequest struct {
 	ctx        context.Context
 	ApiService *JobSchedulerAPIService
 	cUUID      string
 	jUUID      string
 }
 
-func (r JobSchedulerAPIGetJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
+func (r ApiGetJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
 	return r.ApiService.GetJobScheduleExecute(r)
 }
 
@@ -164,10 +164,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param jUUID Job Schedule UUID
-	@return JobSchedulerAPIGetJobScheduleRequest
+	@return ApiGetJobScheduleRequest
 */
-func (a *JobSchedulerAPIService) GetJobSchedule(ctx context.Context, cUUID string, jUUID string) JobSchedulerAPIGetJobScheduleRequest {
-	return JobSchedulerAPIGetJobScheduleRequest{
+func (a *JobSchedulerAPIService) GetJobSchedule(ctx context.Context, cUUID string, jUUID string) ApiGetJobScheduleRequest {
+	return ApiGetJobScheduleRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -178,7 +178,7 @@ func (a *JobSchedulerAPIService) GetJobSchedule(ctx context.Context, cUUID strin
 // Execute executes the request
 //
 //	@return JobSchedule
-func (a *JobSchedulerAPIService) GetJobScheduleExecute(r JobSchedulerAPIGetJobScheduleRequest) (*JobSchedule, *http.Response, error) {
+func (a *JobSchedulerAPIService) GetJobScheduleExecute(r ApiGetJobScheduleRequest) (*JobSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -267,7 +267,7 @@ func (a *JobSchedulerAPIService) GetJobScheduleExecute(r JobSchedulerAPIGetJobSc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type JobSchedulerAPIPageListJobInstancesRequest struct {
+type ApiPageListJobInstancesRequest struct {
 	ctx                       context.Context
 	ApiService                *JobSchedulerAPIService
 	cUUID                     string
@@ -275,12 +275,12 @@ type JobSchedulerAPIPageListJobInstancesRequest struct {
 	jobInstancePagedQuerySpec *JobInstancePagedQuerySpec
 }
 
-func (r JobSchedulerAPIPageListJobInstancesRequest) JobInstancePagedQuerySpec(jobInstancePagedQuerySpec JobInstancePagedQuerySpec) JobSchedulerAPIPageListJobInstancesRequest {
+func (r ApiPageListJobInstancesRequest) JobInstancePagedQuerySpec(jobInstancePagedQuerySpec JobInstancePagedQuerySpec) ApiPageListJobInstancesRequest {
 	r.jobInstancePagedQuerySpec = &jobInstancePagedQuerySpec
 	return r
 }
 
-func (r JobSchedulerAPIPageListJobInstancesRequest) Execute() (*JobInstancePagedResp, *http.Response, error) {
+func (r ApiPageListJobInstancesRequest) Execute() (*JobInstancePagedResp, *http.Response, error) {
 	return r.ApiService.PageListJobInstancesExecute(r)
 }
 
@@ -292,10 +292,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param jUUID Job Schedule UUID
-	@return JobSchedulerAPIPageListJobInstancesRequest
+	@return ApiPageListJobInstancesRequest
 */
-func (a *JobSchedulerAPIService) PageListJobInstances(ctx context.Context, cUUID string, jUUID string) JobSchedulerAPIPageListJobInstancesRequest {
-	return JobSchedulerAPIPageListJobInstancesRequest{
+func (a *JobSchedulerAPIService) PageListJobInstances(ctx context.Context, cUUID string, jUUID string) ApiPageListJobInstancesRequest {
+	return ApiPageListJobInstancesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -306,7 +306,7 @@ func (a *JobSchedulerAPIService) PageListJobInstances(ctx context.Context, cUUID
 // Execute executes the request
 //
 //	@return JobInstancePagedResp
-func (a *JobSchedulerAPIService) PageListJobInstancesExecute(r JobSchedulerAPIPageListJobInstancesRequest) (*JobInstancePagedResp, *http.Response, error) {
+func (a *JobSchedulerAPIService) PageListJobInstancesExecute(r ApiPageListJobInstancesRequest) (*JobInstancePagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -400,19 +400,19 @@ func (a *JobSchedulerAPIService) PageListJobInstancesExecute(r JobSchedulerAPIPa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type JobSchedulerAPIPageListJobSchedulesRequest struct {
+type ApiPageListJobSchedulesRequest struct {
 	ctx                       context.Context
 	ApiService                *JobSchedulerAPIService
 	cUUID                     string
 	jobSchedulePagedQuerySpec *JobSchedulePagedQuerySpec
 }
 
-func (r JobSchedulerAPIPageListJobSchedulesRequest) JobSchedulePagedQuerySpec(jobSchedulePagedQuerySpec JobSchedulePagedQuerySpec) JobSchedulerAPIPageListJobSchedulesRequest {
+func (r ApiPageListJobSchedulesRequest) JobSchedulePagedQuerySpec(jobSchedulePagedQuerySpec JobSchedulePagedQuerySpec) ApiPageListJobSchedulesRequest {
 	r.jobSchedulePagedQuerySpec = &jobSchedulePagedQuerySpec
 	return r
 }
 
-func (r JobSchedulerAPIPageListJobSchedulesRequest) Execute() (*JobSchedulePagedResp, *http.Response, error) {
+func (r ApiPageListJobSchedulesRequest) Execute() (*JobSchedulePagedResp, *http.Response, error) {
 	return r.ApiService.PageListJobSchedulesExecute(r)
 }
 
@@ -423,10 +423,10 @@ WARNING: This is a preview API that could change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return JobSchedulerAPIPageListJobSchedulesRequest
+	@return ApiPageListJobSchedulesRequest
 */
-func (a *JobSchedulerAPIService) PageListJobSchedules(ctx context.Context, cUUID string) JobSchedulerAPIPageListJobSchedulesRequest {
-	return JobSchedulerAPIPageListJobSchedulesRequest{
+func (a *JobSchedulerAPIService) PageListJobSchedules(ctx context.Context, cUUID string) ApiPageListJobSchedulesRequest {
+	return ApiPageListJobSchedulesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -436,7 +436,7 @@ func (a *JobSchedulerAPIService) PageListJobSchedules(ctx context.Context, cUUID
 // Execute executes the request
 //
 //	@return JobSchedulePagedResp
-func (a *JobSchedulerAPIService) PageListJobSchedulesExecute(r JobSchedulerAPIPageListJobSchedulesRequest) (*JobSchedulePagedResp, *http.Response, error) {
+func (a *JobSchedulerAPIService) PageListJobSchedulesExecute(r ApiPageListJobSchedulesRequest) (*JobSchedulePagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -529,7 +529,7 @@ func (a *JobSchedulerAPIService) PageListJobSchedulesExecute(r JobSchedulerAPIPa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type JobSchedulerAPISnoozeJobScheduleRequest struct {
+type ApiSnoozeJobScheduleRequest struct {
 	ctx                   context.Context
 	ApiService            *JobSchedulerAPIService
 	cUUID                 string
@@ -537,12 +537,12 @@ type JobSchedulerAPISnoozeJobScheduleRequest struct {
 	jobScheduleSnoozeSpec *JobScheduleSnoozeSpec
 }
 
-func (r JobSchedulerAPISnoozeJobScheduleRequest) JobScheduleSnoozeSpec(jobScheduleSnoozeSpec JobScheduleSnoozeSpec) JobSchedulerAPISnoozeJobScheduleRequest {
+func (r ApiSnoozeJobScheduleRequest) JobScheduleSnoozeSpec(jobScheduleSnoozeSpec JobScheduleSnoozeSpec) ApiSnoozeJobScheduleRequest {
 	r.jobScheduleSnoozeSpec = &jobScheduleSnoozeSpec
 	return r
 }
 
-func (r JobSchedulerAPISnoozeJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
+func (r ApiSnoozeJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
 	return r.ApiService.SnoozeJobScheduleExecute(r)
 }
 
@@ -554,10 +554,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param jUUID Job Schedule UUID
-	@return JobSchedulerAPISnoozeJobScheduleRequest
+	@return ApiSnoozeJobScheduleRequest
 */
-func (a *JobSchedulerAPIService) SnoozeJobSchedule(ctx context.Context, cUUID string, jUUID string) JobSchedulerAPISnoozeJobScheduleRequest {
-	return JobSchedulerAPISnoozeJobScheduleRequest{
+func (a *JobSchedulerAPIService) SnoozeJobSchedule(ctx context.Context, cUUID string, jUUID string) ApiSnoozeJobScheduleRequest {
+	return ApiSnoozeJobScheduleRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -568,7 +568,7 @@ func (a *JobSchedulerAPIService) SnoozeJobSchedule(ctx context.Context, cUUID st
 // Execute executes the request
 //
 //	@return JobSchedule
-func (a *JobSchedulerAPIService) SnoozeJobScheduleExecute(r JobSchedulerAPISnoozeJobScheduleRequest) (*JobSchedule, *http.Response, error) {
+func (a *JobSchedulerAPIService) SnoozeJobScheduleExecute(r ApiSnoozeJobScheduleRequest) (*JobSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -662,7 +662,7 @@ func (a *JobSchedulerAPIService) SnoozeJobScheduleExecute(r JobSchedulerAPISnooz
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type JobSchedulerAPIUpdateJobScheduleRequest struct {
+type ApiUpdateJobScheduleRequest struct {
 	ctx                   context.Context
 	ApiService            *JobSchedulerAPIService
 	cUUID                 string
@@ -670,12 +670,12 @@ type JobSchedulerAPIUpdateJobScheduleRequest struct {
 	jobScheduleUpdateSpec *JobScheduleUpdateSpec
 }
 
-func (r JobSchedulerAPIUpdateJobScheduleRequest) JobScheduleUpdateSpec(jobScheduleUpdateSpec JobScheduleUpdateSpec) JobSchedulerAPIUpdateJobScheduleRequest {
+func (r ApiUpdateJobScheduleRequest) JobScheduleUpdateSpec(jobScheduleUpdateSpec JobScheduleUpdateSpec) ApiUpdateJobScheduleRequest {
 	r.jobScheduleUpdateSpec = &jobScheduleUpdateSpec
 	return r
 }
 
-func (r JobSchedulerAPIUpdateJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
+func (r ApiUpdateJobScheduleRequest) Execute() (*JobSchedule, *http.Response, error) {
 	return r.ApiService.UpdateJobScheduleExecute(r)
 }
 
@@ -687,10 +687,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param jUUID Job Schedule UUID
-	@return JobSchedulerAPIUpdateJobScheduleRequest
+	@return ApiUpdateJobScheduleRequest
 */
-func (a *JobSchedulerAPIService) UpdateJobSchedule(ctx context.Context, cUUID string, jUUID string) JobSchedulerAPIUpdateJobScheduleRequest {
-	return JobSchedulerAPIUpdateJobScheduleRequest{
+func (a *JobSchedulerAPIService) UpdateJobSchedule(ctx context.Context, cUUID string, jUUID string) ApiUpdateJobScheduleRequest {
+	return ApiUpdateJobScheduleRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -701,7 +701,7 @@ func (a *JobSchedulerAPIService) UpdateJobSchedule(ctx context.Context, cUUID st
 // Execute executes the request
 //
 //	@return JobSchedule
-func (a *JobSchedulerAPIService) UpdateJobScheduleExecute(r JobSchedulerAPIUpdateJobScheduleRequest) (*JobSchedule, *http.Response, error) {
+func (a *JobSchedulerAPIService) UpdateJobScheduleExecute(r ApiUpdateJobScheduleRequest) (*JobSchedule, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}

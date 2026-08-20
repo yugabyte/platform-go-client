@@ -18,9 +18,9 @@ import (
 // AvailabilityZoneNodeSpecAllOf struct for AvailabilityZoneNodeSpecAllOf
 type AvailabilityZoneNodeSpecAllOf struct {
 	// Amount of memory in MB to limit the postgres process using the ysql cgroup. The value should be greater than 0. When set to 0 it results in no cgroup limits. For a read replica cluster, setting this value to null or -1 would inherit this value from the primary cluster. Applicable only for nodes running as Linux VMs on AWS/GCP/Azure Cloud Provider. Only used internally by YBM.
-	CgroupSize *int32 `json:"cgroup_size,omitempty"`
-	Tserver *PerProcessNodeSpec `json:"tserver,omitempty"`
-	Master *PerProcessNodeSpec `json:"master,omitempty"`
+	CgroupSize *int32              `json:"cgroup_size,omitempty"`
+	Tserver    *PerProcessNodeSpec `json:"tserver,omitempty"`
+	Master     *PerProcessNodeSpec `json:"master,omitempty"`
 }
 
 // NewAvailabilityZoneNodeSpecAllOf instantiates a new AvailabilityZoneNodeSpecAllOf object
@@ -185,5 +185,3 @@ func (v *NullableAvailabilityZoneNodeSpecAllOf) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -23,19 +23,19 @@ import (
 // CustomerConfigurationAPIService CustomerConfigurationAPI service
 type CustomerConfigurationAPIService service
 
-type CustomerConfigurationAPIPageListCustomerConfigsRequest struct {
+type ApiPageListCustomerConfigsRequest struct {
 	ctx                          context.Context
 	ApiService                   *CustomerConfigurationAPIService
 	cUUID                        string
 	customerConfigPagedQuerySpec *CustomerConfigPagedQuerySpec
 }
 
-func (r CustomerConfigurationAPIPageListCustomerConfigsRequest) CustomerConfigPagedQuerySpec(customerConfigPagedQuerySpec CustomerConfigPagedQuerySpec) CustomerConfigurationAPIPageListCustomerConfigsRequest {
+func (r ApiPageListCustomerConfigsRequest) CustomerConfigPagedQuerySpec(customerConfigPagedQuerySpec CustomerConfigPagedQuerySpec) ApiPageListCustomerConfigsRequest {
 	r.customerConfigPagedQuerySpec = &customerConfigPagedQuerySpec
 	return r
 }
 
-func (r CustomerConfigurationAPIPageListCustomerConfigsRequest) Execute() (*CustomerConfigPagedResp, *http.Response, error) {
+func (r ApiPageListCustomerConfigsRequest) Execute() (*CustomerConfigPagedResp, *http.Response, error) {
 	return r.ApiService.PageListCustomerConfigsExecute(r)
 }
 
@@ -47,10 +47,10 @@ WARNING: This is a preview API that could change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return CustomerConfigurationAPIPageListCustomerConfigsRequest
+	@return ApiPageListCustomerConfigsRequest
 */
-func (a *CustomerConfigurationAPIService) PageListCustomerConfigs(ctx context.Context, cUUID string) CustomerConfigurationAPIPageListCustomerConfigsRequest {
-	return CustomerConfigurationAPIPageListCustomerConfigsRequest{
+func (a *CustomerConfigurationAPIService) PageListCustomerConfigs(ctx context.Context, cUUID string) ApiPageListCustomerConfigsRequest {
+	return ApiPageListCustomerConfigsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -60,7 +60,7 @@ func (a *CustomerConfigurationAPIService) PageListCustomerConfigs(ctx context.Co
 // Execute executes the request
 //
 //	@return CustomerConfigPagedResp
-func (a *CustomerConfigurationAPIService) PageListCustomerConfigsExecute(r CustomerConfigurationAPIPageListCustomerConfigsRequest) (*CustomerConfigPagedResp, *http.Response, error) {
+func (a *CustomerConfigurationAPIService) PageListCustomerConfigsExecute(r ApiPageListCustomerConfigsRequest) (*CustomerConfigPagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

@@ -23,14 +23,14 @@ import (
 // AuthenticationAPIService AuthenticationAPI service
 type AuthenticationAPIService service
 
-type AuthenticationAPIDeleteGroupMappingsRequest struct {
+type ApiDeleteGroupMappingsRequest struct {
 	ctx        context.Context
 	ApiService *AuthenticationAPIService
 	cUUID      string
 	gUUID      string
 }
 
-func (r AuthenticationAPIDeleteGroupMappingsRequest) Execute() (*http.Response, error) {
+func (r ApiDeleteGroupMappingsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteGroupMappingsExecute(r)
 }
 
@@ -42,10 +42,10 @@ Delete LDAP and OIDC group mapping
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param gUUID Group UUID
-	@return AuthenticationAPIDeleteGroupMappingsRequest
+	@return ApiDeleteGroupMappingsRequest
 */
-func (a *AuthenticationAPIService) DeleteGroupMappings(ctx context.Context, cUUID string, gUUID string) AuthenticationAPIDeleteGroupMappingsRequest {
-	return AuthenticationAPIDeleteGroupMappingsRequest{
+func (a *AuthenticationAPIService) DeleteGroupMappings(ctx context.Context, cUUID string, gUUID string) ApiDeleteGroupMappingsRequest {
+	return ApiDeleteGroupMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -54,7 +54,7 @@ func (a *AuthenticationAPIService) DeleteGroupMappings(ctx context.Context, cUUI
 }
 
 // Execute executes the request
-func (a *AuthenticationAPIService) DeleteGroupMappingsExecute(r AuthenticationAPIDeleteGroupMappingsRequest) (*http.Response, error) {
+func (a *AuthenticationAPIService) DeleteGroupMappingsExecute(r ApiDeleteGroupMappingsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
 		localVarPostBody   interface{}
@@ -133,13 +133,13 @@ func (a *AuthenticationAPIService) DeleteGroupMappingsExecute(r AuthenticationAP
 	return localVarHTTPResponse, nil
 }
 
-type AuthenticationAPIListMappingsRequest struct {
+type ApiListMappingsRequest struct {
 	ctx        context.Context
 	ApiService *AuthenticationAPIService
 	cUUID      string
 }
 
-func (r AuthenticationAPIListMappingsRequest) Execute() ([]AuthGroupToRolesMapping, *http.Response, error) {
+func (r ApiListMappingsRequest) Execute() ([]AuthGroupToRolesMapping, *http.Response, error) {
 	return r.ApiService.ListMappingsExecute(r)
 }
 
@@ -150,10 +150,10 @@ Get list of all OIDC and LDAP Group Mappings.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return AuthenticationAPIListMappingsRequest
+	@return ApiListMappingsRequest
 */
-func (a *AuthenticationAPIService) ListMappings(ctx context.Context, cUUID string) AuthenticationAPIListMappingsRequest {
-	return AuthenticationAPIListMappingsRequest{
+func (a *AuthenticationAPIService) ListMappings(ctx context.Context, cUUID string) ApiListMappingsRequest {
+	return ApiListMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -163,7 +163,7 @@ func (a *AuthenticationAPIService) ListMappings(ctx context.Context, cUUID strin
 // Execute executes the request
 //
 //	@return []AuthGroupToRolesMapping
-func (a *AuthenticationAPIService) ListMappingsExecute(r AuthenticationAPIListMappingsRequest) ([]AuthGroupToRolesMapping, *http.Response, error) {
+func (a *AuthenticationAPIService) ListMappingsExecute(r ApiListMappingsRequest) ([]AuthGroupToRolesMapping, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -251,19 +251,19 @@ func (a *AuthenticationAPIService) ListMappingsExecute(r AuthenticationAPIListMa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type AuthenticationAPIUpdateGroupMappingsRequest struct {
+type ApiUpdateGroupMappingsRequest struct {
 	ctx                     context.Context
 	ApiService              *AuthenticationAPIService
 	cUUID                   string
 	authGroupToRolesMapping *[]AuthGroupToRolesMapping
 }
 
-func (r AuthenticationAPIUpdateGroupMappingsRequest) AuthGroupToRolesMapping(authGroupToRolesMapping []AuthGroupToRolesMapping) AuthenticationAPIUpdateGroupMappingsRequest {
+func (r ApiUpdateGroupMappingsRequest) AuthGroupToRolesMapping(authGroupToRolesMapping []AuthGroupToRolesMapping) ApiUpdateGroupMappingsRequest {
 	r.authGroupToRolesMapping = &authGroupToRolesMapping
 	return r
 }
 
-func (r AuthenticationAPIUpdateGroupMappingsRequest) Execute() (*http.Response, error) {
+func (r ApiUpdateGroupMappingsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UpdateGroupMappingsExecute(r)
 }
 
@@ -274,10 +274,10 @@ Map LDAP and OIDC groups to YBA roles
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return AuthenticationAPIUpdateGroupMappingsRequest
+	@return ApiUpdateGroupMappingsRequest
 */
-func (a *AuthenticationAPIService) UpdateGroupMappings(ctx context.Context, cUUID string) AuthenticationAPIUpdateGroupMappingsRequest {
-	return AuthenticationAPIUpdateGroupMappingsRequest{
+func (a *AuthenticationAPIService) UpdateGroupMappings(ctx context.Context, cUUID string) ApiUpdateGroupMappingsRequest {
+	return ApiUpdateGroupMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -285,7 +285,7 @@ func (a *AuthenticationAPIService) UpdateGroupMappings(ctx context.Context, cUUI
 }
 
 // Execute executes the request
-func (a *AuthenticationAPIService) UpdateGroupMappingsExecute(r AuthenticationAPIUpdateGroupMappingsRequest) (*http.Response, error) {
+func (a *AuthenticationAPIService) UpdateGroupMappingsExecute(r ApiUpdateGroupMappingsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPut
 		localVarPostBody   interface{}

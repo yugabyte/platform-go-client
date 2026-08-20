@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the PlacementCloud type satisfies the MappedNullable interface at compile time
@@ -214,6 +216,45 @@ func (o PlacementCloud) ToMap() (map[string]interface{}, error) {
 		toSerialize["masters_in_default_region"] = o.MastersInDefaultRegion
 	}
 	return toSerialize, nil
+}
+
+func (o *PlacementCloud) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"uuid",
+		"code",
+		"region_list",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPlacementCloud := _PlacementCloud{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPlacementCloud)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PlacementCloud(varPlacementCloud)
+
+	return err
 }
 
 type NullablePlacementCloud struct {

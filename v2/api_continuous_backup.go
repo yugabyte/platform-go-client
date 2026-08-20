@@ -23,19 +23,19 @@ import (
 // ContinuousBackupAPIService ContinuousBackupAPI service
 type ContinuousBackupAPIService service
 
-type ContinuousBackupAPICreateContinuousBackupRequest struct {
+type ApiCreateContinuousBackupRequest struct {
 	ctx                  context.Context
 	ApiService           *ContinuousBackupAPIService
 	cUUID                string
 	continuousBackupSpec *ContinuousBackupSpec
 }
 
-func (r ContinuousBackupAPICreateContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ContinuousBackupAPICreateContinuousBackupRequest {
+func (r ApiCreateContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ApiCreateContinuousBackupRequest {
 	r.continuousBackupSpec = &continuousBackupSpec
 	return r
 }
 
-func (r ContinuousBackupAPICreateContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
+func (r ApiCreateContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
 	return r.ApiService.CreateContinuousBackupExecute(r)
 }
 
@@ -46,10 +46,10 @@ Create a continuous backup configuration
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return ContinuousBackupAPICreateContinuousBackupRequest
+	@return ApiCreateContinuousBackupRequest
 */
-func (a *ContinuousBackupAPIService) CreateContinuousBackup(ctx context.Context, cUUID string) ContinuousBackupAPICreateContinuousBackupRequest {
-	return ContinuousBackupAPICreateContinuousBackupRequest{
+func (a *ContinuousBackupAPIService) CreateContinuousBackup(ctx context.Context, cUUID string) ApiCreateContinuousBackupRequest {
+	return ApiCreateContinuousBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -59,7 +59,7 @@ func (a *ContinuousBackupAPIService) CreateContinuousBackup(ctx context.Context,
 // Execute executes the request
 //
 //	@return ContinuousBackup
-func (a *ContinuousBackupAPIService) CreateContinuousBackupExecute(r ContinuousBackupAPICreateContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
+func (a *ContinuousBackupAPIService) CreateContinuousBackupExecute(r ApiCreateContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -152,14 +152,14 @@ func (a *ContinuousBackupAPIService) CreateContinuousBackupExecute(r ContinuousB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ContinuousBackupAPIDeleteContinuousBackupRequest struct {
+type ApiDeleteContinuousBackupRequest struct {
 	ctx        context.Context
 	ApiService *ContinuousBackupAPIService
 	cUUID      string
 	bUUID      string
 }
 
-func (r ContinuousBackupAPIDeleteContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
+func (r ApiDeleteContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
 	return r.ApiService.DeleteContinuousBackupExecute(r)
 }
 
@@ -171,10 +171,10 @@ Delete continuous backup config
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param bUUID Continuous Backup UUID
-	@return ContinuousBackupAPIDeleteContinuousBackupRequest
+	@return ApiDeleteContinuousBackupRequest
 */
-func (a *ContinuousBackupAPIService) DeleteContinuousBackup(ctx context.Context, cUUID string, bUUID string) ContinuousBackupAPIDeleteContinuousBackupRequest {
-	return ContinuousBackupAPIDeleteContinuousBackupRequest{
+func (a *ContinuousBackupAPIService) DeleteContinuousBackup(ctx context.Context, cUUID string, bUUID string) ApiDeleteContinuousBackupRequest {
+	return ApiDeleteContinuousBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -185,7 +185,7 @@ func (a *ContinuousBackupAPIService) DeleteContinuousBackup(ctx context.Context,
 // Execute executes the request
 //
 //	@return ContinuousBackup
-func (a *ContinuousBackupAPIService) DeleteContinuousBackupExecute(r ContinuousBackupAPIDeleteContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
+func (a *ContinuousBackupAPIService) DeleteContinuousBackupExecute(r ApiDeleteContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -274,7 +274,7 @@ func (a *ContinuousBackupAPIService) DeleteContinuousBackupExecute(r ContinuousB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ContinuousBackupAPIEditContinuousBackupRequest struct {
+type ApiEditContinuousBackupRequest struct {
 	ctx                  context.Context
 	ApiService           *ContinuousBackupAPIService
 	cUUID                string
@@ -282,12 +282,12 @@ type ContinuousBackupAPIEditContinuousBackupRequest struct {
 	continuousBackupSpec *ContinuousBackupSpec
 }
 
-func (r ContinuousBackupAPIEditContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ContinuousBackupAPIEditContinuousBackupRequest {
+func (r ApiEditContinuousBackupRequest) ContinuousBackupSpec(continuousBackupSpec ContinuousBackupSpec) ApiEditContinuousBackupRequest {
 	r.continuousBackupSpec = &continuousBackupSpec
 	return r
 }
 
-func (r ContinuousBackupAPIEditContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
+func (r ApiEditContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
 	return r.ApiService.EditContinuousBackupExecute(r)
 }
 
@@ -299,10 +299,10 @@ Edit continuous backup config
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param bUUID Continuous Backup UUID
-	@return ContinuousBackupAPIEditContinuousBackupRequest
+	@return ApiEditContinuousBackupRequest
 */
-func (a *ContinuousBackupAPIService) EditContinuousBackup(ctx context.Context, cUUID string, bUUID string) ContinuousBackupAPIEditContinuousBackupRequest {
-	return ContinuousBackupAPIEditContinuousBackupRequest{
+func (a *ContinuousBackupAPIService) EditContinuousBackup(ctx context.Context, cUUID string, bUUID string) ApiEditContinuousBackupRequest {
+	return ApiEditContinuousBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -313,7 +313,7 @@ func (a *ContinuousBackupAPIService) EditContinuousBackup(ctx context.Context, c
 // Execute executes the request
 //
 //	@return ContinuousBackup
-func (a *ContinuousBackupAPIService) EditContinuousBackupExecute(r ContinuousBackupAPIEditContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
+func (a *ContinuousBackupAPIService) EditContinuousBackupExecute(r ApiEditContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -407,13 +407,13 @@ func (a *ContinuousBackupAPIService) EditContinuousBackupExecute(r ContinuousBac
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ContinuousBackupAPIGetContinuousBackupRequest struct {
+type ApiGetContinuousBackupRequest struct {
 	ctx        context.Context
 	ApiService *ContinuousBackupAPIService
 	cUUID      string
 }
 
-func (r ContinuousBackupAPIGetContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
+func (r ApiGetContinuousBackupRequest) Execute() (*ContinuousBackup, *http.Response, error) {
 	return r.ApiService.GetContinuousBackupExecute(r)
 }
 
@@ -424,10 +424,10 @@ Get details of the continuous backup configuration
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return ContinuousBackupAPIGetContinuousBackupRequest
+	@return ApiGetContinuousBackupRequest
 */
-func (a *ContinuousBackupAPIService) GetContinuousBackup(ctx context.Context, cUUID string) ContinuousBackupAPIGetContinuousBackupRequest {
-	return ContinuousBackupAPIGetContinuousBackupRequest{
+func (a *ContinuousBackupAPIService) GetContinuousBackup(ctx context.Context, cUUID string) ApiGetContinuousBackupRequest {
+	return ApiGetContinuousBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -437,7 +437,7 @@ func (a *ContinuousBackupAPIService) GetContinuousBackup(ctx context.Context, cU
 // Execute executes the request
 //
 //	@return ContinuousBackup
-func (a *ContinuousBackupAPIService) GetContinuousBackupExecute(r ContinuousBackupAPIGetContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
+func (a *ContinuousBackupAPIService) GetContinuousBackupExecute(r ApiGetContinuousBackupRequest) (*ContinuousBackup, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -525,19 +525,19 @@ func (a *ContinuousBackupAPIService) GetContinuousBackupExecute(r ContinuousBack
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ContinuousBackupAPIRestoreContinuousBackupRequest struct {
+type ApiRestoreContinuousBackupRequest struct {
 	ctx                   context.Context
 	ApiService            *ContinuousBackupAPIService
 	cUUID                 string
 	continuousRestoreSpec *ContinuousRestoreSpec
 }
 
-func (r ContinuousBackupAPIRestoreContinuousBackupRequest) ContinuousRestoreSpec(continuousRestoreSpec ContinuousRestoreSpec) ContinuousBackupAPIRestoreContinuousBackupRequest {
+func (r ApiRestoreContinuousBackupRequest) ContinuousRestoreSpec(continuousRestoreSpec ContinuousRestoreSpec) ApiRestoreContinuousBackupRequest {
 	r.continuousRestoreSpec = &continuousRestoreSpec
 	return r
 }
 
-func (r ContinuousBackupAPIRestoreContinuousBackupRequest) Execute() (*YBATask, *http.Response, error) {
+func (r ApiRestoreContinuousBackupRequest) Execute() (*YBATask, *http.Response, error) {
 	return r.ApiService.RestoreContinuousBackupExecute(r)
 }
 
@@ -548,10 +548,10 @@ Restore a backup from a continuous backup configuration
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
-	@return ContinuousBackupAPIRestoreContinuousBackupRequest
+	@return ApiRestoreContinuousBackupRequest
 */
-func (a *ContinuousBackupAPIService) RestoreContinuousBackup(ctx context.Context, cUUID string) ContinuousBackupAPIRestoreContinuousBackupRequest {
-	return ContinuousBackupAPIRestoreContinuousBackupRequest{
+func (a *ContinuousBackupAPIService) RestoreContinuousBackup(ctx context.Context, cUUID string) ApiRestoreContinuousBackupRequest {
+	return ApiRestoreContinuousBackupRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -561,7 +561,7 @@ func (a *ContinuousBackupAPIService) RestoreContinuousBackup(ctx context.Context
 // Execute executes the request
 //
 //	@return YBATask
-func (a *ContinuousBackupAPIService) RestoreContinuousBackupExecute(r ContinuousBackupAPIRestoreContinuousBackupRequest) (*YBATask, *http.Response, error) {
+func (a *ContinuousBackupAPIService) RestoreContinuousBackupExecute(r ApiRestoreContinuousBackupRequest) (*YBATask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

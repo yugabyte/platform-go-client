@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **RemotePackagePath** | Pointer to **string** | Path to download thirdparty packages for itest. Only for AWS/onprem. | [optional] 
 **OverridePrebuiltAmiDbVersion** | Pointer to **bool** | Override the default DB present in pre-built Ami. YBM usage. | [optional] 
 **NetworkingSpec** | Pointer to [**UniverseNetworkingSpec**](UniverseNetworkingSpec.md) |  | [optional] 
+**UniverseSettings** | Pointer to [**UniverseSettings**](UniverseSettings.md) |  | [optional] 
 **Clusters** | [**[]ClusterSpec**](ClusterSpec.md) |  | 
 
 ## Methods
@@ -274,6 +275,31 @@ SetNetworkingSpec sets NetworkingSpec field to given value.
 `func (o *UniverseSpec) HasNetworkingSpec() bool`
 
 HasNetworkingSpec returns a boolean if a field has been set.
+
+### GetUniverseSettings
+
+`func (o *UniverseSpec) GetUniverseSettings() UniverseSettings`
+
+GetUniverseSettings returns the UniverseSettings field if non-nil, zero value otherwise.
+
+### GetUniverseSettingsOk
+
+`func (o *UniverseSpec) GetUniverseSettingsOk() (*UniverseSettings, bool)`
+
+GetUniverseSettingsOk returns a tuple with the UniverseSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseSettings
+
+`func (o *UniverseSpec) SetUniverseSettings(v UniverseSettings)`
+
+SetUniverseSettings sets UniverseSettings field to given value.
+
+### HasUniverseSettings
+
+`func (o *UniverseSpec) HasUniverseSettings() bool`
+
+HasUniverseSettings returns a boolean if a field has been set.
 
 ### GetClusters
 

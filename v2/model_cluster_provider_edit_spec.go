@@ -12,7 +12,9 @@ Contact: support@yugabyte.com
 package v2
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ClusterProviderEditSpec type satisfies the MappedNullable interface at compile time
@@ -22,6 +24,10 @@ var _ MappedNullable = &ClusterProviderEditSpec{}
 type ClusterProviderEditSpec struct {
 	// Edit the list of regions in the cloud provider to place data replicas
 	RegionList []string `json:"region_list"`
+	// The AWS IAM instance profile ARN to use for the nodes in this cluster. Applicable only for nodes on AWS Cloud Provider. If specified, YugabyteDB Anywhere will use this instance profile instead of the access key.
+	AwsInstanceProfile *string `json:"aws_instance_profile,omitempty"`
+	// Image bundle UUID to use for node VM image. Refers to one of the image bundles defined in the cloud provider.
+	ImageBundleUuid *string `json:"image_bundle_uuid,omitempty"`
 }
 
 type _ClusterProviderEditSpec ClusterProviderEditSpec
@@ -68,6 +74,70 @@ func (o *ClusterProviderEditSpec) SetRegionList(v []string) {
 	o.RegionList = v
 }
 
+// GetAwsInstanceProfile returns the AwsInstanceProfile field value if set, zero value otherwise.
+func (o *ClusterProviderEditSpec) GetAwsInstanceProfile() string {
+	if o == nil || IsNil(o.AwsInstanceProfile) {
+		var ret string
+		return ret
+	}
+	return *o.AwsInstanceProfile
+}
+
+// GetAwsInstanceProfileOk returns a tuple with the AwsInstanceProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterProviderEditSpec) GetAwsInstanceProfileOk() (*string, bool) {
+	if o == nil || IsNil(o.AwsInstanceProfile) {
+		return nil, false
+	}
+	return o.AwsInstanceProfile, true
+}
+
+// HasAwsInstanceProfile returns a boolean if a field has been set.
+func (o *ClusterProviderEditSpec) HasAwsInstanceProfile() bool {
+	if o != nil && !IsNil(o.AwsInstanceProfile) {
+		return true
+	}
+
+	return false
+}
+
+// SetAwsInstanceProfile gets a reference to the given string and assigns it to the AwsInstanceProfile field.
+func (o *ClusterProviderEditSpec) SetAwsInstanceProfile(v string) {
+	o.AwsInstanceProfile = &v
+}
+
+// GetImageBundleUuid returns the ImageBundleUuid field value if set, zero value otherwise.
+func (o *ClusterProviderEditSpec) GetImageBundleUuid() string {
+	if o == nil || IsNil(o.ImageBundleUuid) {
+		var ret string
+		return ret
+	}
+	return *o.ImageBundleUuid
+}
+
+// GetImageBundleUuidOk returns a tuple with the ImageBundleUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterProviderEditSpec) GetImageBundleUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.ImageBundleUuid) {
+		return nil, false
+	}
+	return o.ImageBundleUuid, true
+}
+
+// HasImageBundleUuid returns a boolean if a field has been set.
+func (o *ClusterProviderEditSpec) HasImageBundleUuid() bool {
+	if o != nil && !IsNil(o.ImageBundleUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetImageBundleUuid gets a reference to the given string and assigns it to the ImageBundleUuid field.
+func (o *ClusterProviderEditSpec) SetImageBundleUuid(v string) {
+	o.ImageBundleUuid = &v
+}
+
 func (o ClusterProviderEditSpec) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -79,7 +149,50 @@ func (o ClusterProviderEditSpec) MarshalJSON() ([]byte, error) {
 func (o ClusterProviderEditSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["region_list"] = o.RegionList
+	if !IsNil(o.AwsInstanceProfile) {
+		toSerialize["aws_instance_profile"] = o.AwsInstanceProfile
+	}
+	if !IsNil(o.ImageBundleUuid) {
+		toSerialize["image_bundle_uuid"] = o.ImageBundleUuid
+	}
 	return toSerialize, nil
+}
+
+func (o *ClusterProviderEditSpec) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"region_list",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varClusterProviderEditSpec := _ClusterProviderEditSpec{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varClusterProviderEditSpec)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClusterProviderEditSpec(varClusterProviderEditSpec)
+
+	return err
 }
 
 type NullableClusterProviderEditSpec struct {

@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddCluster**](UniverseAPI.md#AddCluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 [**AttachUniverse**](UniverseAPI.md#AttachUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
+[**CheckResizeOptions**](UniverseAPI.md#CheckResizeOptions) | **Post** /customers/{cUUID}/universes/{uniUUID}/check-resize-capabilities | Check available resize options for cluster node settings
 [**ConfigureExportTelemetryConfig**](UniverseAPI.md#ConfigureExportTelemetryConfig) | **Post** /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs | Configure export telemetry configs (unified API)
 [**ConfigureMetricsExport**](UniverseAPI.md#ConfigureMetricsExport) | **Post** /customers/{cUUID}/universes/{uniUUID}/metrics-export-config | Configure metrics export
 [**ConfigureQueryLogging**](UniverseAPI.md#ConfigureQueryLogging) | **Post** /customers/{cUUID}/universes/{uniUUID}/query-log-config | Configure Query Log for YugabyteDB Universe
@@ -40,6 +41,8 @@ Method | HTTP request | Description
 [**StartSoftwareUpgrade**](UniverseAPI.md#StartSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software | Upgrade YugabyteDB version
 [**StartThirdPartySoftwareUpgrade**](UniverseAPI.md#StartThirdPartySoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/third-party-software | Upgrade third party software
 [**SystemdEnable**](UniverseAPI.md#SystemdEnable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
+[**UpdateProxyConfig**](UniverseAPI.md#UpdateProxyConfig) | **Post** /customers/{cUUID}/universes/{uniUUID}/proxy-config | Update proxy configuration
+[**ValidateKubernetesOverrides**](UniverseAPI.md#ValidateKubernetesOverrides) | **Post** /customers/{cUUID}/validate-kubernetes-overrides | Validate Kubernetes Helm Overrides
 
 
 
@@ -185,6 +188,81 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CheckResizeOptions
+
+> CheckResizeOptionsResp CheckResizeOptions(ctx, cUUID, uniUUID).CheckResizeOptionsSpec(checkResizeOptionsSpec).Execute()
+
+Check available resize options for cluster node settings
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	checkResizeOptionsSpec := *openapiclient.NewCheckResizeOptionsSpec("ClusterUuid_example") // CheckResizeOptionsSpec | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.CheckResizeOptions(context.Background(), cUUID, uniUUID).CheckResizeOptionsSpec(checkResizeOptionsSpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.CheckResizeOptions``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CheckResizeOptions`: CheckResizeOptionsResp
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.CheckResizeOptions`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCheckResizeOptionsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **checkResizeOptionsSpec** | [**CheckResizeOptionsSpec**](CheckResizeOptionsSpec.md) |  | 
+
+### Return type
+
+[**CheckResizeOptionsResp**](CheckResizeOptionsResp.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -513,7 +591,7 @@ import (
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
-	universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3), *openapiclient.NewClusterNodeSpec(), *openapiclient.NewClusterProviderSpec("89a46d52-4edd-4736-922a-35177a0b990c"))}), "x86_64") // UniverseCreateSpec | 
+	universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3))}), "x86_64") // UniverseCreateSpec | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1711,7 +1789,7 @@ import (
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
-	universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3), *openapiclient.NewClusterNodeSpec(), *openapiclient.NewClusterProviderSpec("89a46d52-4edd-4736-922a-35177a0b990c"))}), "x86_64") // UniverseCreateSpec | 
+	universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3))}), "x86_64") // UniverseCreateSpec | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2714,6 +2792,153 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateProxyConfig
+
+> YBATask UpdateProxyConfig(ctx, cUUID, uniUUID).UniverseUpdateProxyConfig(universeUpdateProxyConfig).Execute()
+
+Update proxy configuration
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	universeUpdateProxyConfig := *openapiclient.NewUniverseUpdateProxyConfig([]openapiclient.UniverseUpdateProxyConfigClustersInner{*openapiclient.NewUniverseUpdateProxyConfigClustersInner("19ebde21-d537-47dc-8fab-3edc243c6f68")}) // UniverseUpdateProxyConfig | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.UpdateProxyConfig(context.Background(), cUUID, uniUUID).UniverseUpdateProxyConfig(universeUpdateProxyConfig).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.UpdateProxyConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateProxyConfig`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.UpdateProxyConfig`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateProxyConfigRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeUpdateProxyConfig** | [**UniverseUpdateProxyConfig**](UniverseUpdateProxyConfig.md) |  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ValidateKubernetesOverrides
+
+> YBAValidationResponse ValidateKubernetesOverrides(ctx, cUUID).UniverseValidateKubernetesOverrides(universeValidateKubernetesOverrides).Execute()
+
+Validate Kubernetes Helm Overrides
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	universeValidateKubernetesOverrides := *openapiclient.NewUniverseValidateKubernetesOverrides() // UniverseValidateKubernetesOverrides | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.ValidateKubernetesOverrides(context.Background(), cUUID).UniverseValidateKubernetesOverrides(universeValidateKubernetesOverrides).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.ValidateKubernetesOverrides``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ValidateKubernetesOverrides`: YBAValidationResponse
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.ValidateKubernetesOverrides`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiValidateKubernetesOverridesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **universeValidateKubernetesOverrides** | [**UniverseValidateKubernetesOverrides**](UniverseValidateKubernetesOverrides.md) |  | 
+
+### Return type
+
+[**YBAValidationResponse**](YBAValidationResponse.md)
 
 ### Authorization
 

@@ -23,7 +23,7 @@ import (
 // PITRAPIService PITRAPI service
 type PITRAPIService service
 
-type PITRAPIPageListPitrConfigsRequest struct {
+type ApiPageListPitrConfigsRequest struct {
 	ctx                      context.Context
 	ApiService               *PITRAPIService
 	cUUID                    string
@@ -31,12 +31,12 @@ type PITRAPIPageListPitrConfigsRequest struct {
 	pitrConfigPagedQuerySpec *PitrConfigPagedQuerySpec
 }
 
-func (r PITRAPIPageListPitrConfigsRequest) PitrConfigPagedQuerySpec(pitrConfigPagedQuerySpec PitrConfigPagedQuerySpec) PITRAPIPageListPitrConfigsRequest {
+func (r ApiPageListPitrConfigsRequest) PitrConfigPagedQuerySpec(pitrConfigPagedQuerySpec PitrConfigPagedQuerySpec) ApiPageListPitrConfigsRequest {
 	r.pitrConfigPagedQuerySpec = &pitrConfigPagedQuerySpec
 	return r
 }
 
-func (r PITRAPIPageListPitrConfigsRequest) Execute() (*PitrConfigPagedResp, *http.Response, error) {
+func (r ApiPageListPitrConfigsRequest) Execute() (*PitrConfigPagedResp, *http.Response, error) {
 	return r.ApiService.PageListPitrConfigsExecute(r)
 }
 
@@ -49,10 +49,10 @@ WARNING: This is a preview API that could change.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
 	@param uniUUID Universe UUID
-	@return PITRAPIPageListPitrConfigsRequest
+	@return ApiPageListPitrConfigsRequest
 */
-func (a *PITRAPIService) PageListPitrConfigs(ctx context.Context, cUUID string, uniUUID string) PITRAPIPageListPitrConfigsRequest {
-	return PITRAPIPageListPitrConfigsRequest{
+func (a *PITRAPIService) PageListPitrConfigs(ctx context.Context, cUUID string, uniUUID string) ApiPageListPitrConfigsRequest {
+	return ApiPageListPitrConfigsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		cUUID:      cUUID,
@@ -63,7 +63,7 @@ func (a *PITRAPIService) PageListPitrConfigs(ctx context.Context, cUUID string, 
 // Execute executes the request
 //
 //	@return PitrConfigPagedResp
-func (a *PITRAPIService) PageListPitrConfigsExecute(r PITRAPIPageListPitrConfigsRequest) (*PitrConfigPagedResp, *http.Response, error) {
+func (a *PITRAPIService) PageListPitrConfigsExecute(r ApiPageListPitrConfigsRequest) (*PitrConfigPagedResp, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
