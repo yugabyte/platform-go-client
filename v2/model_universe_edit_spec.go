@@ -20,9 +20,11 @@ var _ MappedNullable = &UniverseEditSpec{}
 
 // UniverseEditSpec UniverseEditSpec  Request payload to edit an existing Universe. Not all properties of a UniverseSpec can be updated. This is a partial update. Only the fields that are provided will be updated.
 type UniverseEditSpec struct {
-	Clusters []ClusterEditSpec `json:"clusters"`
+	Clusters       []ClusterEditSpec       `json:"clusters"`
+	NetworkingSpec *UniverseNetworkingSpec `json:"networking_spec,omitempty"`
 	// Expected universe version. Set to -1 to ignore version checking.
-	ExpectedUniverseVersion int32 `json:"expected_universe_version"`
+	ExpectedUniverseVersion int32             `json:"expected_universe_version"`
+	UniverseSettings        *UniverseSettings `json:"universe_settings,omitempty"`
 }
 
 type _UniverseEditSpec UniverseEditSpec
@@ -70,6 +72,38 @@ func (o *UniverseEditSpec) SetClusters(v []ClusterEditSpec) {
 	o.Clusters = v
 }
 
+// GetNetworkingSpec returns the NetworkingSpec field value if set, zero value otherwise.
+func (o *UniverseEditSpec) GetNetworkingSpec() UniverseNetworkingSpec {
+	if o == nil || IsNil(o.NetworkingSpec) {
+		var ret UniverseNetworkingSpec
+		return ret
+	}
+	return *o.NetworkingSpec
+}
+
+// GetNetworkingSpecOk returns a tuple with the NetworkingSpec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditSpec) GetNetworkingSpecOk() (*UniverseNetworkingSpec, bool) {
+	if o == nil || IsNil(o.NetworkingSpec) {
+		return nil, false
+	}
+	return o.NetworkingSpec, true
+}
+
+// HasNetworkingSpec returns a boolean if a field has been set.
+func (o *UniverseEditSpec) HasNetworkingSpec() bool {
+	if o != nil && !IsNil(o.NetworkingSpec) {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkingSpec gets a reference to the given UniverseNetworkingSpec and assigns it to the NetworkingSpec field.
+func (o *UniverseEditSpec) SetNetworkingSpec(v UniverseNetworkingSpec) {
+	o.NetworkingSpec = &v
+}
+
 // GetExpectedUniverseVersion returns the ExpectedUniverseVersion field value
 func (o *UniverseEditSpec) GetExpectedUniverseVersion() int32 {
 	if o == nil {
@@ -94,6 +128,38 @@ func (o *UniverseEditSpec) SetExpectedUniverseVersion(v int32) {
 	o.ExpectedUniverseVersion = v
 }
 
+// GetUniverseSettings returns the UniverseSettings field value if set, zero value otherwise.
+func (o *UniverseEditSpec) GetUniverseSettings() UniverseSettings {
+	if o == nil || IsNil(o.UniverseSettings) {
+		var ret UniverseSettings
+		return ret
+	}
+	return *o.UniverseSettings
+}
+
+// GetUniverseSettingsOk returns a tuple with the UniverseSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditSpec) GetUniverseSettingsOk() (*UniverseSettings, bool) {
+	if o == nil || IsNil(o.UniverseSettings) {
+		return nil, false
+	}
+	return o.UniverseSettings, true
+}
+
+// HasUniverseSettings returns a boolean if a field has been set.
+func (o *UniverseEditSpec) HasUniverseSettings() bool {
+	if o != nil && !IsNil(o.UniverseSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseSettings gets a reference to the given UniverseSettings and assigns it to the UniverseSettings field.
+func (o *UniverseEditSpec) SetUniverseSettings(v UniverseSettings) {
+	o.UniverseSettings = &v
+}
+
 func (o UniverseEditSpec) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -105,7 +171,13 @@ func (o UniverseEditSpec) MarshalJSON() ([]byte, error) {
 func (o UniverseEditSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clusters"] = o.Clusters
+	if !IsNil(o.NetworkingSpec) {
+		toSerialize["networking_spec"] = o.NetworkingSpec
+	}
 	toSerialize["expected_universe_version"] = o.ExpectedUniverseVersion
+	if !IsNil(o.UniverseSettings) {
+		toSerialize["universe_settings"] = o.UniverseSettings
+	}
 	return toSerialize, nil
 }
 

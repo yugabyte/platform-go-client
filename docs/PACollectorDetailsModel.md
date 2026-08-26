@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiToken** | **string** | YBA API Token | 
 **CustomerUUID** | **string** | Customer UUID | [readonly] 
+**Embedded** | Pointer to **bool** | True when this collector is the embedded PA managed by EmbeddedCollectorInitializer | [optional] [readonly] 
 **InUseStatus** | Pointer to **string** | In Use Status | [optional] 
 **MetricsPassword** | Pointer to **string** | Metrics API Password | [optional] 
 **MetricsScrapePeriodSecs** | **int64** | Metrics Scrape Period Seconds | 
@@ -74,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetCustomerUUID sets CustomerUUID field to given value.
 
+
+### GetEmbedded
+
+`func (o *PACollectorDetailsModel) GetEmbedded() bool`
+
+GetEmbedded returns the Embedded field if non-nil, zero value otherwise.
+
+### GetEmbeddedOk
+
+`func (o *PACollectorDetailsModel) GetEmbeddedOk() (*bool, bool)`
+
+GetEmbeddedOk returns a tuple with the Embedded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmbedded
+
+`func (o *PACollectorDetailsModel) SetEmbedded(v bool)`
+
+SetEmbedded sets Embedded field to given value.
+
+### HasEmbedded
+
+`func (o *PACollectorDetailsModel) HasEmbedded() bool`
+
+HasEmbedded returns a boolean if a field has been set.
 
 ### GetInUseStatus
 

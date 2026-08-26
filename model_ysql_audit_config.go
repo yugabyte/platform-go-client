@@ -20,7 +20,7 @@ var _ MappedNullable = &YSQLAuditConfig{}
 // YSQLAuditConfig YSQL Audit Logging Configuration
 type YSQLAuditConfig struct {
 	// YSQL statement classes
-	Classes []string `json:"classes"`
+	Classes []string `json:"classes,omitempty"`
 	// Enabled
 	Enabled bool `json:"enabled"`
 	// Log catalog
@@ -28,13 +28,15 @@ type YSQLAuditConfig struct {
 	// Log client
 	LogClient bool `json:"logClient"`
 	// Log level. For NOTICE, INFO, DEBUG levels, user also needs to set 'log_min_messages' to the required level for the audit logs to be exported. Default 'log_min_messages' is WARNING.
-	LogLevel string `json:"logLevel"`
+	LogLevel *string `json:"logLevel,omitempty"`
 	// Log parameter
 	LogParameter bool `json:"logParameter"`
 	// Log parameter max size
-	LogParameterMaxSize int32 `json:"logParameterMaxSize"`
+	LogParameterMaxSize *int32 `json:"logParameterMaxSize,omitempty"`
 	// Log relation
 	LogRelation bool `json:"logRelation"`
+	// Number of days to keep extracted YSQL audit log archives on the node. 0 or unset disables the dedicated audit-log retention pipeline and keeps the default size-based postgres log purge behavior.
+	LogRetentionDays *int32 `json:"logRetentionDays,omitempty"`
 	// Log rows
 	LogRows bool `json:"logRows"`
 	// Log statement
@@ -49,15 +51,12 @@ type _YSQLAuditConfig YSQLAuditConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool) *YSQLAuditConfig {
+func NewYSQLAuditConfig(enabled bool, logCatalog bool, logClient bool, logParameter bool, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool) *YSQLAuditConfig {
 	this := YSQLAuditConfig{}
-	this.Classes = classes
 	this.Enabled = enabled
 	this.LogCatalog = logCatalog
 	this.LogClient = logClient
-	this.LogLevel = logLevel
 	this.LogParameter = logParameter
-	this.LogParameterMaxSize = logParameterMaxSize
 	this.LogRelation = logRelation
 	this.LogRows = logRows
 	this.LogStatement = logStatement
@@ -73,26 +72,34 @@ func NewYSQLAuditConfigWithDefaults() *YSQLAuditConfig {
 	return &this
 }
 
-// GetClasses returns the Classes field value
+// GetClasses returns the Classes field value if set, zero value otherwise.
 func (o *YSQLAuditConfig) GetClasses() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Classes) {
 		var ret []string
 		return ret
 	}
-
 	return o.Classes
 }
 
-// GetClassesOk returns a tuple with the Classes field value
+// GetClassesOk returns a tuple with the Classes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YSQLAuditConfig) GetClassesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Classes) {
 		return nil, false
 	}
 	return o.Classes, true
 }
 
-// SetClasses sets field value
+// HasClasses returns a boolean if a field has been set.
+func (o *YSQLAuditConfig) HasClasses() bool {
+	if o != nil && !IsNil(o.Classes) {
+		return true
+	}
+
+	return false
+}
+
+// SetClasses gets a reference to the given []string and assigns it to the Classes field.
 func (o *YSQLAuditConfig) SetClasses(v []string) {
 	o.Classes = v
 }
@@ -169,28 +176,36 @@ func (o *YSQLAuditConfig) SetLogClient(v bool) {
 	o.LogClient = v
 }
 
-// GetLogLevel returns the LogLevel field value
+// GetLogLevel returns the LogLevel field value if set, zero value otherwise.
 func (o *YSQLAuditConfig) GetLogLevel() string {
-	if o == nil {
+	if o == nil || IsNil(o.LogLevel) {
 		var ret string
 		return ret
 	}
-
-	return o.LogLevel
+	return *o.LogLevel
 }
 
-// GetLogLevelOk returns a tuple with the LogLevel field value
+// GetLogLevelOk returns a tuple with the LogLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YSQLAuditConfig) GetLogLevelOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LogLevel) {
 		return nil, false
 	}
-	return &o.LogLevel, true
+	return o.LogLevel, true
 }
 
-// SetLogLevel sets field value
+// HasLogLevel returns a boolean if a field has been set.
+func (o *YSQLAuditConfig) HasLogLevel() bool {
+	if o != nil && !IsNil(o.LogLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogLevel gets a reference to the given string and assigns it to the LogLevel field.
 func (o *YSQLAuditConfig) SetLogLevel(v string) {
-	o.LogLevel = v
+	o.LogLevel = &v
 }
 
 // GetLogParameter returns the LogParameter field value
@@ -217,28 +232,36 @@ func (o *YSQLAuditConfig) SetLogParameter(v bool) {
 	o.LogParameter = v
 }
 
-// GetLogParameterMaxSize returns the LogParameterMaxSize field value
+// GetLogParameterMaxSize returns the LogParameterMaxSize field value if set, zero value otherwise.
 func (o *YSQLAuditConfig) GetLogParameterMaxSize() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.LogParameterMaxSize) {
 		var ret int32
 		return ret
 	}
-
-	return o.LogParameterMaxSize
+	return *o.LogParameterMaxSize
 }
 
-// GetLogParameterMaxSizeOk returns a tuple with the LogParameterMaxSize field value
+// GetLogParameterMaxSizeOk returns a tuple with the LogParameterMaxSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YSQLAuditConfig) GetLogParameterMaxSizeOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LogParameterMaxSize) {
 		return nil, false
 	}
-	return &o.LogParameterMaxSize, true
+	return o.LogParameterMaxSize, true
 }
 
-// SetLogParameterMaxSize sets field value
+// HasLogParameterMaxSize returns a boolean if a field has been set.
+func (o *YSQLAuditConfig) HasLogParameterMaxSize() bool {
+	if o != nil && !IsNil(o.LogParameterMaxSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogParameterMaxSize gets a reference to the given int32 and assigns it to the LogParameterMaxSize field.
 func (o *YSQLAuditConfig) SetLogParameterMaxSize(v int32) {
-	o.LogParameterMaxSize = v
+	o.LogParameterMaxSize = &v
 }
 
 // GetLogRelation returns the LogRelation field value
@@ -263,6 +286,38 @@ func (o *YSQLAuditConfig) GetLogRelationOk() (*bool, bool) {
 // SetLogRelation sets field value
 func (o *YSQLAuditConfig) SetLogRelation(v bool) {
 	o.LogRelation = v
+}
+
+// GetLogRetentionDays returns the LogRetentionDays field value if set, zero value otherwise.
+func (o *YSQLAuditConfig) GetLogRetentionDays() int32 {
+	if o == nil || IsNil(o.LogRetentionDays) {
+		var ret int32
+		return ret
+	}
+	return *o.LogRetentionDays
+}
+
+// GetLogRetentionDaysOk returns a tuple with the LogRetentionDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YSQLAuditConfig) GetLogRetentionDaysOk() (*int32, bool) {
+	if o == nil || IsNil(o.LogRetentionDays) {
+		return nil, false
+	}
+	return o.LogRetentionDays, true
+}
+
+// HasLogRetentionDays returns a boolean if a field has been set.
+func (o *YSQLAuditConfig) HasLogRetentionDays() bool {
+	if o != nil && !IsNil(o.LogRetentionDays) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogRetentionDays gets a reference to the given int32 and assigns it to the LogRetentionDays field.
+func (o *YSQLAuditConfig) SetLogRetentionDays(v int32) {
+	o.LogRetentionDays = &v
 }
 
 // GetLogRows returns the LogRows field value
@@ -347,14 +402,23 @@ func (o YSQLAuditConfig) MarshalJSON() ([]byte, error) {
 
 func (o YSQLAuditConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["classes"] = o.Classes
+	if !IsNil(o.Classes) {
+		toSerialize["classes"] = o.Classes
+	}
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["logCatalog"] = o.LogCatalog
 	toSerialize["logClient"] = o.LogClient
-	toSerialize["logLevel"] = o.LogLevel
+	if !IsNil(o.LogLevel) {
+		toSerialize["logLevel"] = o.LogLevel
+	}
 	toSerialize["logParameter"] = o.LogParameter
-	toSerialize["logParameterMaxSize"] = o.LogParameterMaxSize
+	if !IsNil(o.LogParameterMaxSize) {
+		toSerialize["logParameterMaxSize"] = o.LogParameterMaxSize
+	}
 	toSerialize["logRelation"] = o.LogRelation
+	if !IsNil(o.LogRetentionDays) {
+		toSerialize["logRetentionDays"] = o.LogRetentionDays
+	}
 	toSerialize["logRows"] = o.LogRows
 	toSerialize["logStatement"] = o.LogStatement
 	toSerialize["logStatementOnce"] = o.LogStatementOnce

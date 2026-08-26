@@ -278,6 +278,142 @@ func (a *UniverseAPIService) AttachUniverseExecute(r UniverseAPIAttachUniverseRe
 	return localVarHTTPResponse, nil
 }
 
+type UniverseAPICheckResizeOptionsRequest struct {
+	ctx                    context.Context
+	ApiService             *UniverseAPIService
+	cUUID                  string
+	uniUUID                string
+	checkResizeOptionsSpec *CheckResizeOptionsSpec
+}
+
+func (r UniverseAPICheckResizeOptionsRequest) CheckResizeOptionsSpec(checkResizeOptionsSpec CheckResizeOptionsSpec) UniverseAPICheckResizeOptionsRequest {
+	r.checkResizeOptionsSpec = &checkResizeOptionsSpec
+	return r
+}
+
+func (r UniverseAPICheckResizeOptionsRequest) Execute() (*CheckResizeOptionsResp, *http.Response, error) {
+	return r.ApiService.CheckResizeOptionsExecute(r)
+}
+
+/*
+CheckResizeOptions Check available resize options for cluster node settings
+
+Given proposed node settings for a cluster, returns which operations can be used to apply
+them. Possible values are FULL_MOVE (edit universe with full node replacement),
+SMART_RESIZE (in-place instance resize in rolling fashion)
+and SMART_RESIZE_NON_RESTART (in-place disk update without restart).
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPICheckResizeOptionsRequest
+*/
+func (a *UniverseAPIService) CheckResizeOptions(ctx context.Context, cUUID string, uniUUID string) UniverseAPICheckResizeOptionsRequest {
+	return UniverseAPICheckResizeOptionsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CheckResizeOptionsResp
+func (a *UniverseAPIService) CheckResizeOptionsExecute(r UniverseAPICheckResizeOptionsRequest) (*CheckResizeOptionsResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CheckResizeOptionsResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.CheckResizeOptions")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/check-resize-capabilities"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.checkResizeOptionsSpec == nil {
+		return localVarReturnValue, nil, reportError("checkResizeOptionsSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.checkResizeOptionsSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseAPIConfigureExportTelemetryConfigRequest struct {
 	ctx                       context.Context
 	ApiService                *UniverseAPIService
@@ -430,9 +566,10 @@ func (r UniverseAPIConfigureMetricsExportRequest) Execute() (*YBATask, *http.Res
 }
 
 /*
-ConfigureMetricsExport Configure metrics export
+ConfigureMetricsExport Configure metrics export - deprecated
 
-Configure metrics export from a universe to a metrics export telemetry provider
+Use the POST /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs API instead.
+Configure metrics export from a universe to a metrics export telemetry provider.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
@@ -563,6 +700,7 @@ func (r UniverseAPIConfigureQueryLoggingRequest) Execute() (*YBATask, *http.Resp
 /*
 ConfigureQueryLogging Configure Query Log for YugabyteDB Universe
 
+Use the POST /customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs API instead.
 Configure Query Log for a YugabyteDB Universe.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4732,6 +4870,272 @@ func (a *UniverseAPIService) SystemdEnableExecute(r UniverseAPISystemdEnableRequ
 	}
 	// body params
 	localVarPostBody = r.universeSystemdEnableStart
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIUpdateProxyConfigRequest struct {
+	ctx                       context.Context
+	ApiService                *UniverseAPIService
+	cUUID                     string
+	uniUUID                   string
+	universeUpdateProxyConfig *UniverseUpdateProxyConfig
+}
+
+func (r UniverseAPIUpdateProxyConfigRequest) UniverseUpdateProxyConfig(universeUpdateProxyConfig UniverseUpdateProxyConfig) UniverseAPIUpdateProxyConfigRequest {
+	r.universeUpdateProxyConfig = &universeUpdateProxyConfig
+	return r
+}
+
+func (r UniverseAPIUpdateProxyConfigRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.UpdateProxyConfigExecute(r)
+}
+
+/*
+UpdateProxyConfig Update proxy configuration
+
+Queues a task to update HTTP/HTTPS proxy settings for nodes in the universe.
+Supports universe-level proxy_config and per-availability-zone overrides via
+az_networking.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPIUpdateProxyConfigRequest
+*/
+func (a *UniverseAPIService) UpdateProxyConfig(ctx context.Context, cUUID string, uniUUID string) UniverseAPIUpdateProxyConfigRequest {
+	return UniverseAPIUpdateProxyConfigRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *UniverseAPIService) UpdateProxyConfigExecute(r UniverseAPIUpdateProxyConfigRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.UpdateProxyConfig")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/proxy-config"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeUpdateProxyConfig == nil {
+		return localVarReturnValue, nil, reportError("universeUpdateProxyConfig is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeUpdateProxyConfig
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIValidateKubernetesOverridesRequest struct {
+	ctx                                 context.Context
+	ApiService                          *UniverseAPIService
+	cUUID                               string
+	universeValidateKubernetesOverrides *UniverseValidateKubernetesOverrides
+}
+
+func (r UniverseAPIValidateKubernetesOverridesRequest) UniverseValidateKubernetesOverrides(universeValidateKubernetesOverrides UniverseValidateKubernetesOverrides) UniverseAPIValidateKubernetesOverridesRequest {
+	r.universeValidateKubernetesOverrides = &universeValidateKubernetesOverrides
+	return r
+}
+
+func (r UniverseAPIValidateKubernetesOverridesRequest) Execute() (*YBAValidationResponse, *http.Response, error) {
+	return r.ApiService.ValidateKubernetesOverridesExecute(r)
+}
+
+/*
+ValidateKubernetesOverrides Validate Kubernetes Helm Overrides
+
+Validate the kubernetes helm override values for universe.
+See https://github.com/yugabyte/charts/blob/master/stable/yugabyte/values.yaml for possible
+override options.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return UniverseAPIValidateKubernetesOverridesRequest
+*/
+func (a *UniverseAPIService) ValidateKubernetesOverrides(ctx context.Context, cUUID string) UniverseAPIValidateKubernetesOverridesRequest {
+	return UniverseAPIValidateKubernetesOverridesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBAValidationResponse
+func (a *UniverseAPIService) ValidateKubernetesOverridesExecute(r UniverseAPIValidateKubernetesOverridesRequest) (*YBAValidationResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBAValidationResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.ValidateKubernetesOverrides")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/validate-kubernetes-overrides"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeValidateKubernetesOverrides == nil {
+		return localVarReturnValue, nil, reportError("universeValidateKubernetesOverrides is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeValidateKubernetesOverrides
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

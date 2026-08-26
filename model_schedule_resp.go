@@ -30,6 +30,8 @@ type ScheduleResp struct {
 	IncrementBacklogStatus             bool       `json:"incrementBacklogStatus"`
 	IncrementalBackupFrequency         int64      `json:"incrementalBackupFrequency"`
 	IncrementalBackupFrequencyTimeUnit string     `json:"incrementalBackupFrequencyTimeUnit"`
+	// True if this schedule is controlled by the Kubernetes operator
+	IsKubernetesOperatorControlled *bool `json:"isKubernetesOperatorControlled,omitempty"`
 	// Next expected task time
 	NextExpectedTask *time.Time `json:"nextExpectedTask,omitempty"`
 	// Previous completed task time
@@ -319,6 +321,38 @@ func (o *ScheduleResp) SetIncrementalBackupFrequencyTimeUnit(v string) {
 	o.IncrementalBackupFrequencyTimeUnit = v
 }
 
+// GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field value if set, zero value otherwise.
+func (o *ScheduleResp) GetIsKubernetesOperatorControlled() bool {
+	if o == nil || IsNil(o.IsKubernetesOperatorControlled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsKubernetesOperatorControlled
+}
+
+// GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ScheduleResp) GetIsKubernetesOperatorControlledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsKubernetesOperatorControlled) {
+		return nil, false
+	}
+	return o.IsKubernetesOperatorControlled, true
+}
+
+// HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
+func (o *ScheduleResp) HasIsKubernetesOperatorControlled() bool {
+	if o != nil && !IsNil(o.IsKubernetesOperatorControlled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsKubernetesOperatorControlled gets a reference to the given bool and assigns it to the IsKubernetesOperatorControlled field.
+func (o *ScheduleResp) SetIsKubernetesOperatorControlled(v bool) {
+	o.IsKubernetesOperatorControlled = &v
+}
+
 // GetNextExpectedTask returns the NextExpectedTask field value if set, zero value otherwise.
 func (o *ScheduleResp) GetNextExpectedTask() time.Time {
 	if o == nil || IsNil(o.NextExpectedTask) {
@@ -571,6 +605,9 @@ func (o ScheduleResp) ToMap() (map[string]interface{}, error) {
 	toSerialize["incrementBacklogStatus"] = o.IncrementBacklogStatus
 	toSerialize["incrementalBackupFrequency"] = o.IncrementalBackupFrequency
 	toSerialize["incrementalBackupFrequencyTimeUnit"] = o.IncrementalBackupFrequencyTimeUnit
+	if !IsNil(o.IsKubernetesOperatorControlled) {
+		toSerialize["isKubernetesOperatorControlled"] = o.IsKubernetesOperatorControlled
+	}
 	if !IsNil(o.NextExpectedTask) {
 		toSerialize["nextExpectedTask"] = o.NextExpectedTask
 	}

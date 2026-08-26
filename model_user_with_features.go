@@ -32,9 +32,11 @@ type UserWithFeatures struct {
 	// LDAP Specified Role
 	LdapSpecifiedRole *bool `json:"ldapSpecifiedRole,omitempty"`
 	// YbaApi Internal. Used to turn off new UI feature for particular user
-	NewUniverseUiEnabled *bool   `json:"newUniverseUiEnabled,omitempty"`
-	OidcJwtAuthToken     *string `json:"oidcJwtAuthToken,omitempty"`
-	Primary              bool    `json:"primary"`
+	NewUniverseUiEnabled *bool `json:"newUniverseUiEnabled,omitempty"`
+	// YbaApi Internal. Whether the new UI tour was shown to particular user
+	NewUniverseUiTourCompleted *bool   `json:"newUniverseUiTourCompleted,omitempty"`
+	OidcJwtAuthToken           *string `json:"oidcJwtAuthToken,omitempty"`
+	Primary                    bool    `json:"primary"`
 	// <b style=\"color:#ff0000\">Deprecated since YBA version 2.19.3.0.</b> Use  getRoleBindings instead.
 	Role *string `json:"role,omitempty"`
 	// User timezone
@@ -275,6 +277,38 @@ func (o *UserWithFeatures) SetNewUniverseUiEnabled(v bool) {
 	o.NewUniverseUiEnabled = &v
 }
 
+// GetNewUniverseUiTourCompleted returns the NewUniverseUiTourCompleted field value if set, zero value otherwise.
+func (o *UserWithFeatures) GetNewUniverseUiTourCompleted() bool {
+	if o == nil || IsNil(o.NewUniverseUiTourCompleted) {
+		var ret bool
+		return ret
+	}
+	return *o.NewUniverseUiTourCompleted
+}
+
+// GetNewUniverseUiTourCompletedOk returns a tuple with the NewUniverseUiTourCompleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserWithFeatures) GetNewUniverseUiTourCompletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.NewUniverseUiTourCompleted) {
+		return nil, false
+	}
+	return o.NewUniverseUiTourCompleted, true
+}
+
+// HasNewUniverseUiTourCompleted returns a boolean if a field has been set.
+func (o *UserWithFeatures) HasNewUniverseUiTourCompleted() bool {
+	if o != nil && !IsNil(o.NewUniverseUiTourCompleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetNewUniverseUiTourCompleted gets a reference to the given bool and assigns it to the NewUniverseUiTourCompleted field.
+func (o *UserWithFeatures) SetNewUniverseUiTourCompleted(v bool) {
+	o.NewUniverseUiTourCompleted = &v
+}
+
 // GetOidcJwtAuthToken returns the OidcJwtAuthToken field value if set, zero value otherwise.
 func (o *UserWithFeatures) GetOidcJwtAuthToken() string {
 	if o == nil || IsNil(o.OidcJwtAuthToken) {
@@ -485,6 +519,9 @@ func (o UserWithFeatures) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NewUniverseUiEnabled) {
 		toSerialize["newUniverseUiEnabled"] = o.NewUniverseUiEnabled
+	}
+	if !IsNil(o.NewUniverseUiTourCompleted) {
+		toSerialize["newUniverseUiTourCompleted"] = o.NewUniverseUiTourCompleted
 	}
 	if !IsNil(o.OidcJwtAuthToken) {
 		toSerialize["oidcJwtAuthToken"] = o.OidcJwtAuthToken

@@ -22,9 +22,11 @@ var _ MappedNullable = &ClusterProviderSpec{}
 type ClusterProviderSpec struct {
 	// Cloud provider UUID
 	Provider string `json:"provider"`
-	// The list of regions in the cloud provider to place data replicas
+	// Deprecated: specify the placement explicitly. The list of regions in the cloud provider to place data replicas
+	// Deprecated
 	RegionList []string `json:"region_list,omitempty"`
-	// The region to nominate as the preferred region in a geo-partitioned multi-region cluster
+	// Deprecated: use default partition. The region to nominate as the preferred region in a geo-partitioned multi-region cluster
+	// Deprecated
 	PreferredRegion *string `json:"preferred_region,omitempty"`
 	// One of the SSH access keys defined in Cloud Provider to be configured on nodes VMs. Required for AWS, Azure and GCP Cloud Providers.
 	AccessKeyCode *string `json:"access_key_code,omitempty"`
@@ -83,6 +85,7 @@ func (o *ClusterProviderSpec) SetProvider(v string) {
 }
 
 // GetRegionList returns the RegionList field value if set, zero value otherwise.
+// Deprecated
 func (o *ClusterProviderSpec) GetRegionList() []string {
 	if o == nil || IsNil(o.RegionList) {
 		var ret []string
@@ -93,6 +96,7 @@ func (o *ClusterProviderSpec) GetRegionList() []string {
 
 // GetRegionListOk returns a tuple with the RegionList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ClusterProviderSpec) GetRegionListOk() ([]string, bool) {
 	if o == nil || IsNil(o.RegionList) {
 		return nil, false
@@ -110,11 +114,13 @@ func (o *ClusterProviderSpec) HasRegionList() bool {
 }
 
 // SetRegionList gets a reference to the given []string and assigns it to the RegionList field.
+// Deprecated
 func (o *ClusterProviderSpec) SetRegionList(v []string) {
 	o.RegionList = v
 }
 
 // GetPreferredRegion returns the PreferredRegion field value if set, zero value otherwise.
+// Deprecated
 func (o *ClusterProviderSpec) GetPreferredRegion() string {
 	if o == nil || IsNil(o.PreferredRegion) {
 		var ret string
@@ -125,6 +131,7 @@ func (o *ClusterProviderSpec) GetPreferredRegion() string {
 
 // GetPreferredRegionOk returns a tuple with the PreferredRegion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ClusterProviderSpec) GetPreferredRegionOk() (*string, bool) {
 	if o == nil || IsNil(o.PreferredRegion) {
 		return nil, false
@@ -142,6 +149,7 @@ func (o *ClusterProviderSpec) HasPreferredRegion() bool {
 }
 
 // SetPreferredRegion gets a reference to the given string and assigns it to the PreferredRegion field.
+// Deprecated
 func (o *ClusterProviderSpec) SetPreferredRegion(v string) {
 	o.PreferredRegion = &v
 }

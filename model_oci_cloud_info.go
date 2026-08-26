@@ -19,6 +19,8 @@ var _ MappedNullable = &OCICloudInfo{}
 
 // OCICloudInfo struct for OCICloudInfo
 type OCICloudInfo struct {
+	// OCI authentication type (API_KEY or INSTANCE_PRINCIPAL)
+	OciAuthType *string `json:"ociAuthType,omitempty"`
 	// OCI Compartment OCID
 	OciCompartmentId *string `json:"ociCompartmentId,omitempty"`
 	// OCI API Key Fingerprint
@@ -52,6 +54,38 @@ func NewOCICloudInfo() *OCICloudInfo {
 func NewOCICloudInfoWithDefaults() *OCICloudInfo {
 	this := OCICloudInfo{}
 	return &this
+}
+
+// GetOciAuthType returns the OciAuthType field value if set, zero value otherwise.
+func (o *OCICloudInfo) GetOciAuthType() string {
+	if o == nil || IsNil(o.OciAuthType) {
+		var ret string
+		return ret
+	}
+	return *o.OciAuthType
+}
+
+// GetOciAuthTypeOk returns a tuple with the OciAuthType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OCICloudInfo) GetOciAuthTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.OciAuthType) {
+		return nil, false
+	}
+	return o.OciAuthType, true
+}
+
+// HasOciAuthType returns a boolean if a field has been set.
+func (o *OCICloudInfo) HasOciAuthType() bool {
+	if o != nil && !IsNil(o.OciAuthType) {
+		return true
+	}
+
+	return false
+}
+
+// SetOciAuthType gets a reference to the given string and assigns it to the OciAuthType field.
+func (o *OCICloudInfo) SetOciAuthType(v string) {
+	o.OciAuthType = &v
 }
 
 // GetOciCompartmentId returns the OciCompartmentId field value if set, zero value otherwise.
@@ -320,6 +354,9 @@ func (o OCICloudInfo) MarshalJSON() ([]byte, error) {
 
 func (o OCICloudInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.OciAuthType) {
+		toSerialize["ociAuthType"] = o.OciAuthType
+	}
 	if !IsNil(o.OciCompartmentId) {
 		toSerialize["ociCompartmentId"] = o.OciCompartmentId
 	}

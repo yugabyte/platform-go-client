@@ -4,8 +4,85 @@ All URIs are relative to *http://localhost:9000/api/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**GetImageBundle**](ImageBundleAPI.md#GetImageBundle) | **Get** /customers/{cUUID}/providers/{providerUUID}/image-bundles/{iBUUID} | Get an image bundle
 [**PageListImageBundles**](ImageBundleAPI.md#PageListImageBundles) | **Post** /customers/{cUUID}/providers/{providerUUID}/image-bundles/page | List image bundles (paged)
 
+
+
+## GetImageBundle
+
+> ImageBundle GetImageBundle(ctx, cUUID, providerUUID, iBUUID).Execute()
+
+Get an image bundle
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	providerUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Provider UUID
+	iBUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Image Bundle UUID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ImageBundleAPI.GetImageBundle(context.Background(), cUUID, providerUUID, iBUUID).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ImageBundleAPI.GetImageBundle``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetImageBundle`: ImageBundle
+	fmt.Fprintf(os.Stdout, "Response from `ImageBundleAPI.GetImageBundle`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**providerUUID** | **string** | Provider UUID | 
+**iBUUID** | **string** | Image Bundle UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetImageBundleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**ImageBundle**](ImageBundle.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## PageListImageBundles

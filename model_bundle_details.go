@@ -20,11 +20,17 @@ var _ MappedNullable = &BundleDetails{}
 
 // BundleDetails struct for BundleDetails
 type BundleDetails struct {
-	Components []string `json:"components"`
+	// Specs that drive the node-level BashComponent (if requested).
+	BashComponentSpecs []BashComponentSpec `json:"bashComponentSpecs,omitempty"`
+	Components         []string            `json:"components"`
+	// Specs that drive the generic node-level FilesComponent (if requested).
+	FilesComponentSpecs []FilesComponentSpec `json:"filesComponentSpecs,omitempty"`
 	// Max size of the collected cores (if any)
 	MaxCoreFileSize *int64 `json:"maxCoreFileSize,omitempty"`
 	// Max number of most recent cores to collect (if any)
 	MaxNumRecentCores *int32 `json:"maxNumRecentCores,omitempty"`
+	// Names of the universe nodes node-level components were collected from. Empty or null means every node in the universe was considered.
+	NodeNames []string `json:"nodeNames,omitempty"`
 	// End date to filter Perf Advisor data
 	PaDumpEndDate *time.Time `json:"paDumpEndDate,omitempty"`
 	// Start date to filter Perf Advisor data
@@ -41,6 +47,14 @@ type BundleDetails struct {
 	PromMetricsStepSec *int32 `json:"promMetricsStepSec,omitempty"`
 	// List of exports to be included in the prometheus dump
 	PrometheusMetricsTypes []string `json:"prometheusMetricsTypes,omitempty"`
+	// Specs that drive the node-level YbAdminComponent (if requested).
+	YbAdminComponentSpecs []YbAdminComponentSpec `json:"ybAdminComponentSpecs,omitempty"`
+	// Specs that drive the global-level YBAComponent (if requested).
+	YbaComponentSpecs []YbaComponentSpec `json:"ybaComponentSpecs,omitempty"`
+	// Specs that drive the node-level YCQLComponent (if requested).
+	YcqlComponentSpecs []YCQLComponentSpec `json:"ycqlComponentSpecs,omitempty"`
+	// Specs that drive the node-level YSQLComponent (if requested).
+	YsqlComponentSpecs []YSQLComponentSpec `json:"ysqlComponentSpecs,omitempty"`
 }
 
 type _BundleDetails BundleDetails
@@ -61,6 +75,38 @@ func NewBundleDetails(components []string) *BundleDetails {
 func NewBundleDetailsWithDefaults() *BundleDetails {
 	this := BundleDetails{}
 	return &this
+}
+
+// GetBashComponentSpecs returns the BashComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetBashComponentSpecs() []BashComponentSpec {
+	if o == nil || IsNil(o.BashComponentSpecs) {
+		var ret []BashComponentSpec
+		return ret
+	}
+	return o.BashComponentSpecs
+}
+
+// GetBashComponentSpecsOk returns a tuple with the BashComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetBashComponentSpecsOk() ([]BashComponentSpec, bool) {
+	if o == nil || IsNil(o.BashComponentSpecs) {
+		return nil, false
+	}
+	return o.BashComponentSpecs, true
+}
+
+// HasBashComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasBashComponentSpecs() bool {
+	if o != nil && !IsNil(o.BashComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetBashComponentSpecs gets a reference to the given []BashComponentSpec and assigns it to the BashComponentSpecs field.
+func (o *BundleDetails) SetBashComponentSpecs(v []BashComponentSpec) {
+	o.BashComponentSpecs = v
 }
 
 // GetComponents returns the Components field value
@@ -85,6 +131,38 @@ func (o *BundleDetails) GetComponentsOk() ([]string, bool) {
 // SetComponents sets field value
 func (o *BundleDetails) SetComponents(v []string) {
 	o.Components = v
+}
+
+// GetFilesComponentSpecs returns the FilesComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetFilesComponentSpecs() []FilesComponentSpec {
+	if o == nil || IsNil(o.FilesComponentSpecs) {
+		var ret []FilesComponentSpec
+		return ret
+	}
+	return o.FilesComponentSpecs
+}
+
+// GetFilesComponentSpecsOk returns a tuple with the FilesComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetFilesComponentSpecsOk() ([]FilesComponentSpec, bool) {
+	if o == nil || IsNil(o.FilesComponentSpecs) {
+		return nil, false
+	}
+	return o.FilesComponentSpecs, true
+}
+
+// HasFilesComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasFilesComponentSpecs() bool {
+	if o != nil && !IsNil(o.FilesComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilesComponentSpecs gets a reference to the given []FilesComponentSpec and assigns it to the FilesComponentSpecs field.
+func (o *BundleDetails) SetFilesComponentSpecs(v []FilesComponentSpec) {
+	o.FilesComponentSpecs = v
 }
 
 // GetMaxCoreFileSize returns the MaxCoreFileSize field value if set, zero value otherwise.
@@ -149,6 +227,38 @@ func (o *BundleDetails) HasMaxNumRecentCores() bool {
 // SetMaxNumRecentCores gets a reference to the given int32 and assigns it to the MaxNumRecentCores field.
 func (o *BundleDetails) SetMaxNumRecentCores(v int32) {
 	o.MaxNumRecentCores = &v
+}
+
+// GetNodeNames returns the NodeNames field value if set, zero value otherwise.
+func (o *BundleDetails) GetNodeNames() []string {
+	if o == nil || IsNil(o.NodeNames) {
+		var ret []string
+		return ret
+	}
+	return o.NodeNames
+}
+
+// GetNodeNamesOk returns a tuple with the NodeNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetNodeNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.NodeNames) {
+		return nil, false
+	}
+	return o.NodeNames, true
+}
+
+// HasNodeNames returns a boolean if a field has been set.
+func (o *BundleDetails) HasNodeNames() bool {
+	if o != nil && !IsNil(o.NodeNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeNames gets a reference to the given []string and assigns it to the NodeNames field.
+func (o *BundleDetails) SetNodeNames(v []string) {
+	o.NodeNames = v
 }
 
 // GetPaDumpEndDate returns the PaDumpEndDate field value if set, zero value otherwise.
@@ -407,6 +517,134 @@ func (o *BundleDetails) SetPrometheusMetricsTypes(v []string) {
 	o.PrometheusMetricsTypes = v
 }
 
+// GetYbAdminComponentSpecs returns the YbAdminComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetYbAdminComponentSpecs() []YbAdminComponentSpec {
+	if o == nil || IsNil(o.YbAdminComponentSpecs) {
+		var ret []YbAdminComponentSpec
+		return ret
+	}
+	return o.YbAdminComponentSpecs
+}
+
+// GetYbAdminComponentSpecsOk returns a tuple with the YbAdminComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetYbAdminComponentSpecsOk() ([]YbAdminComponentSpec, bool) {
+	if o == nil || IsNil(o.YbAdminComponentSpecs) {
+		return nil, false
+	}
+	return o.YbAdminComponentSpecs, true
+}
+
+// HasYbAdminComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasYbAdminComponentSpecs() bool {
+	if o != nil && !IsNil(o.YbAdminComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYbAdminComponentSpecs gets a reference to the given []YbAdminComponentSpec and assigns it to the YbAdminComponentSpecs field.
+func (o *BundleDetails) SetYbAdminComponentSpecs(v []YbAdminComponentSpec) {
+	o.YbAdminComponentSpecs = v
+}
+
+// GetYbaComponentSpecs returns the YbaComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetYbaComponentSpecs() []YbaComponentSpec {
+	if o == nil || IsNil(o.YbaComponentSpecs) {
+		var ret []YbaComponentSpec
+		return ret
+	}
+	return o.YbaComponentSpecs
+}
+
+// GetYbaComponentSpecsOk returns a tuple with the YbaComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetYbaComponentSpecsOk() ([]YbaComponentSpec, bool) {
+	if o == nil || IsNil(o.YbaComponentSpecs) {
+		return nil, false
+	}
+	return o.YbaComponentSpecs, true
+}
+
+// HasYbaComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasYbaComponentSpecs() bool {
+	if o != nil && !IsNil(o.YbaComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYbaComponentSpecs gets a reference to the given []YbaComponentSpec and assigns it to the YbaComponentSpecs field.
+func (o *BundleDetails) SetYbaComponentSpecs(v []YbaComponentSpec) {
+	o.YbaComponentSpecs = v
+}
+
+// GetYcqlComponentSpecs returns the YcqlComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetYcqlComponentSpecs() []YCQLComponentSpec {
+	if o == nil || IsNil(o.YcqlComponentSpecs) {
+		var ret []YCQLComponentSpec
+		return ret
+	}
+	return o.YcqlComponentSpecs
+}
+
+// GetYcqlComponentSpecsOk returns a tuple with the YcqlComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetYcqlComponentSpecsOk() ([]YCQLComponentSpec, bool) {
+	if o == nil || IsNil(o.YcqlComponentSpecs) {
+		return nil, false
+	}
+	return o.YcqlComponentSpecs, true
+}
+
+// HasYcqlComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasYcqlComponentSpecs() bool {
+	if o != nil && !IsNil(o.YcqlComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYcqlComponentSpecs gets a reference to the given []YCQLComponentSpec and assigns it to the YcqlComponentSpecs field.
+func (o *BundleDetails) SetYcqlComponentSpecs(v []YCQLComponentSpec) {
+	o.YcqlComponentSpecs = v
+}
+
+// GetYsqlComponentSpecs returns the YsqlComponentSpecs field value if set, zero value otherwise.
+func (o *BundleDetails) GetYsqlComponentSpecs() []YSQLComponentSpec {
+	if o == nil || IsNil(o.YsqlComponentSpecs) {
+		var ret []YSQLComponentSpec
+		return ret
+	}
+	return o.YsqlComponentSpecs
+}
+
+// GetYsqlComponentSpecsOk returns a tuple with the YsqlComponentSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleDetails) GetYsqlComponentSpecsOk() ([]YSQLComponentSpec, bool) {
+	if o == nil || IsNil(o.YsqlComponentSpecs) {
+		return nil, false
+	}
+	return o.YsqlComponentSpecs, true
+}
+
+// HasYsqlComponentSpecs returns a boolean if a field has been set.
+func (o *BundleDetails) HasYsqlComponentSpecs() bool {
+	if o != nil && !IsNil(o.YsqlComponentSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetYsqlComponentSpecs gets a reference to the given []YSQLComponentSpec and assigns it to the YsqlComponentSpecs field.
+func (o *BundleDetails) SetYsqlComponentSpecs(v []YSQLComponentSpec) {
+	o.YsqlComponentSpecs = v
+}
+
 func (o BundleDetails) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -417,12 +655,21 @@ func (o BundleDetails) MarshalJSON() ([]byte, error) {
 
 func (o BundleDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BashComponentSpecs) {
+		toSerialize["bashComponentSpecs"] = o.BashComponentSpecs
+	}
 	toSerialize["components"] = o.Components
+	if !IsNil(o.FilesComponentSpecs) {
+		toSerialize["filesComponentSpecs"] = o.FilesComponentSpecs
+	}
 	if !IsNil(o.MaxCoreFileSize) {
 		toSerialize["maxCoreFileSize"] = o.MaxCoreFileSize
 	}
 	if !IsNil(o.MaxNumRecentCores) {
 		toSerialize["maxNumRecentCores"] = o.MaxNumRecentCores
+	}
+	if !IsNil(o.NodeNames) {
+		toSerialize["nodeNames"] = o.NodeNames
 	}
 	if !IsNil(o.PaDumpEndDate) {
 		toSerialize["paDumpEndDate"] = o.PaDumpEndDate
@@ -447,6 +694,18 @@ func (o BundleDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PrometheusMetricsTypes) {
 		toSerialize["prometheusMetricsTypes"] = o.PrometheusMetricsTypes
+	}
+	if !IsNil(o.YbAdminComponentSpecs) {
+		toSerialize["ybAdminComponentSpecs"] = o.YbAdminComponentSpecs
+	}
+	if !IsNil(o.YbaComponentSpecs) {
+		toSerialize["ybaComponentSpecs"] = o.YbaComponentSpecs
+	}
+	if !IsNil(o.YcqlComponentSpecs) {
+		toSerialize["ycqlComponentSpecs"] = o.YcqlComponentSpecs
+	}
+	if !IsNil(o.YsqlComponentSpecs) {
+		toSerialize["ysqlComponentSpecs"] = o.YsqlComponentSpecs
 	}
 	return toSerialize, nil
 }

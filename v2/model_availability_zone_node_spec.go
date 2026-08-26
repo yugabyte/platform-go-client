@@ -18,11 +18,11 @@ import (
 // checks if the AvailabilityZoneNodeSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AvailabilityZoneNodeSpec{}
 
-// AvailabilityZoneNodeSpec Properties for each node in the cluster. The settings can be configured at top-level for uniform node settings for both tserver and master nodes. Granular settings for tserver and master will be honored if provided (and dedicated_nodes is true or this is k8s cluster). Part of ClusterNodeSpec.
+// AvailabilityZoneNodeSpec Properties for each node in the cluster, including per-AZ overrides where storage may be partial. The settings can be configured at top-level for uniform node settings for both tserver and master nodes. Granular settings for tserver and master will be honored if provided (and dedicated_nodes is true or this is k8s cluster). Part of ClusterNodeSpec.
 type AvailabilityZoneNodeSpec struct {
 	// Instance type for tserver/master nodes of cluster that determines the cpu and memory resources.
 	InstanceType *string             `json:"instance_type,omitempty"`
-	StorageSpec  *ClusterStorageSpec `json:"storage_spec,omitempty"`
+	StorageSpec  *ClusterStorageBase `json:"storage_spec,omitempty"`
 	// Amount of memory in MB to limit the postgres process using the ysql cgroup. The value should be greater than 0. When set to 0 it results in no cgroup limits. For a read replica cluster, setting this value to null or -1 would inherit this value from the primary cluster. Applicable only for nodes running as Linux VMs on AWS/GCP/Azure Cloud Provider. Only used internally by YBM.
 	CgroupSize *int32              `json:"cgroup_size,omitempty"`
 	Tserver    *PerProcessNodeSpec `json:"tserver,omitempty"`
@@ -79,9 +79,9 @@ func (o *AvailabilityZoneNodeSpec) SetInstanceType(v string) {
 }
 
 // GetStorageSpec returns the StorageSpec field value if set, zero value otherwise.
-func (o *AvailabilityZoneNodeSpec) GetStorageSpec() ClusterStorageSpec {
+func (o *AvailabilityZoneNodeSpec) GetStorageSpec() ClusterStorageBase {
 	if o == nil || IsNil(o.StorageSpec) {
-		var ret ClusterStorageSpec
+		var ret ClusterStorageBase
 		return ret
 	}
 	return *o.StorageSpec
@@ -89,7 +89,7 @@ func (o *AvailabilityZoneNodeSpec) GetStorageSpec() ClusterStorageSpec {
 
 // GetStorageSpecOk returns a tuple with the StorageSpec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AvailabilityZoneNodeSpec) GetStorageSpecOk() (*ClusterStorageSpec, bool) {
+func (o *AvailabilityZoneNodeSpec) GetStorageSpecOk() (*ClusterStorageBase, bool) {
 	if o == nil || IsNil(o.StorageSpec) {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *AvailabilityZoneNodeSpec) HasStorageSpec() bool {
 	return false
 }
 
-// SetStorageSpec gets a reference to the given ClusterStorageSpec and assigns it to the StorageSpec field.
-func (o *AvailabilityZoneNodeSpec) SetStorageSpec(v ClusterStorageSpec) {
+// SetStorageSpec gets a reference to the given ClusterStorageBase and assigns it to the StorageSpec field.
+func (o *AvailabilityZoneNodeSpec) SetStorageSpec(v ClusterStorageBase) {
 	o.StorageSpec = &v
 }
 

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**FinalizeUpgrade**](UniverseUpgradesManagementAPI.md#FinalizeUpgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
 [**KubernetesToggleImmutableYbc**](UniverseUpgradesManagementAPI.md#KubernetesToggleImmutableYbc) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/k8s_immutable_ybc | Upgrade Kubernetes universe to toggle immutable YBC
-[**ModifyAuditLogging**](UniverseUpgradesManagementAPI.md#ModifyAuditLogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration
+[**ModifyAuditLogging**](UniverseUpgradesManagementAPI.md#ModifyAuditLogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration - deprecated
 [**PreFinalizeSoftwareUpgradeInfo**](UniverseUpgradesManagementAPI.md#PreFinalizeSoftwareUpgradeInfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
 [**ProvisionUniverseNodes**](UniverseUpgradesManagementAPI.md#ProvisionUniverseNodes) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/provision_nodes | Provision universe nodes
 [**RebootUniverse**](UniverseUpgradesManagementAPI.md#RebootUniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 > YBPTask ModifyAuditLogging(ctx, cUUID, uniUUID).AuditLoggingConfig(auditLoggingConfig).Request(request).Execute()
 
-Modify Audit Logging Configuration
+Modify Audit Logging Configuration - deprecated
 
 
 

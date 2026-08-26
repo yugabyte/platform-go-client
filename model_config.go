@@ -19,11 +19,14 @@ var _ MappedNullable = &Config{}
 
 // Config struct for Config
 type Config struct {
-	CertPath    string `json:"certPath"`
-	Compressor  string `json:"compressor"`
-	Offloadable bool   `json:"offloadable"`
-	ServerCert  string `json:"serverCert"`
-	ServerKey   string `json:"serverKey"`
+	CertPath             string `json:"certPath"`
+	Compressor           string `json:"compressor"`
+	Offloadable          bool   `json:"offloadable"`
+	ServerCert           string `json:"serverCert"`
+	ServerCertExpirySecs int64  `json:"serverCertExpirySecs"`
+	ServerKey            string `json:"serverKey"`
+	SignerPrivateKey     string `json:"signerPrivateKey"`
+	SignerPublicKey      string `json:"signerPublicKey"`
 }
 
 type _Config Config
@@ -32,13 +35,16 @@ type _Config Config
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverKey string) *Config {
+func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverCertExpirySecs int64, serverKey string, signerPrivateKey string, signerPublicKey string) *Config {
 	this := Config{}
 	this.CertPath = certPath
 	this.Compressor = compressor
 	this.Offloadable = offloadable
 	this.ServerCert = serverCert
+	this.ServerCertExpirySecs = serverCertExpirySecs
 	this.ServerKey = serverKey
+	this.SignerPrivateKey = signerPrivateKey
+	this.SignerPublicKey = signerPublicKey
 	return &this
 }
 
@@ -146,6 +152,30 @@ func (o *Config) SetServerCert(v string) {
 	o.ServerCert = v
 }
 
+// GetServerCertExpirySecs returns the ServerCertExpirySecs field value
+func (o *Config) GetServerCertExpirySecs() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.ServerCertExpirySecs
+}
+
+// GetServerCertExpirySecsOk returns a tuple with the ServerCertExpirySecs field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetServerCertExpirySecsOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServerCertExpirySecs, true
+}
+
+// SetServerCertExpirySecs sets field value
+func (o *Config) SetServerCertExpirySecs(v int64) {
+	o.ServerCertExpirySecs = v
+}
+
 // GetServerKey returns the ServerKey field value
 func (o *Config) GetServerKey() string {
 	if o == nil {
@@ -170,6 +200,54 @@ func (o *Config) SetServerKey(v string) {
 	o.ServerKey = v
 }
 
+// GetSignerPrivateKey returns the SignerPrivateKey field value
+func (o *Config) GetSignerPrivateKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SignerPrivateKey
+}
+
+// GetSignerPrivateKeyOk returns a tuple with the SignerPrivateKey field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetSignerPrivateKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SignerPrivateKey, true
+}
+
+// SetSignerPrivateKey sets field value
+func (o *Config) SetSignerPrivateKey(v string) {
+	o.SignerPrivateKey = v
+}
+
+// GetSignerPublicKey returns the SignerPublicKey field value
+func (o *Config) GetSignerPublicKey() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.SignerPublicKey
+}
+
+// GetSignerPublicKeyOk returns a tuple with the SignerPublicKey field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetSignerPublicKeyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SignerPublicKey, true
+}
+
+// SetSignerPublicKey sets field value
+func (o *Config) SetSignerPublicKey(v string) {
+	o.SignerPublicKey = v
+}
+
 func (o Config) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -184,7 +262,10 @@ func (o Config) ToMap() (map[string]interface{}, error) {
 	toSerialize["compressor"] = o.Compressor
 	toSerialize["offloadable"] = o.Offloadable
 	toSerialize["serverCert"] = o.ServerCert
+	toSerialize["serverCertExpirySecs"] = o.ServerCertExpirySecs
 	toSerialize["serverKey"] = o.ServerKey
+	toSerialize["signerPrivateKey"] = o.SignerPrivateKey
+	toSerialize["signerPublicKey"] = o.SignerPublicKey
 	return toSerialize, nil
 }
 

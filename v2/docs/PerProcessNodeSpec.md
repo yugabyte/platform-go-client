@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InstanceType** | Pointer to **string** | Instance type for tserver/master nodes of cluster that determines the cpu and memory resources. | [optional] 
-**StorageSpec** | Pointer to [**ClusterStorageSpec**](ClusterStorageSpec.md) |  | [optional] 
+**StorageSpec** | Pointer to [**ClusterStorageBase**](ClusterStorageBase.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasInstanceType returns a boolean if a field has been set.
 
 ### GetStorageSpec
 
-`func (o *PerProcessNodeSpec) GetStorageSpec() ClusterStorageSpec`
+`func (o *PerProcessNodeSpec) GetStorageSpec() ClusterStorageBase`
 
 GetStorageSpec returns the StorageSpec field if non-nil, zero value otherwise.
 
 ### GetStorageSpecOk
 
-`func (o *PerProcessNodeSpec) GetStorageSpecOk() (*ClusterStorageSpec, bool)`
+`func (o *PerProcessNodeSpec) GetStorageSpecOk() (*ClusterStorageBase, bool)`
 
 GetStorageSpecOk returns a tuple with the StorageSpec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageSpec
 
-`func (o *PerProcessNodeSpec) SetStorageSpec(v ClusterStorageSpec)`
+`func (o *PerProcessNodeSpec) SetStorageSpec(v ClusterStorageBase)`
 
 SetStorageSpec sets StorageSpec field to given value.
 

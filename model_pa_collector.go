@@ -23,6 +23,8 @@ type PACollector struct {
 	ApiToken string `json:"apiToken"`
 	// Customer UUID
 	CustomerUUID string `json:"customerUUID"`
+	// True when this collector is the embedded PA managed by EmbeddedCollectorInitializer
+	Embedded *bool `json:"embedded,omitempty"`
 	// Metrics API Password
 	MetricsPassword *string `json:"metricsPassword,omitempty"`
 	// Metrics Scrape Period Seconds
@@ -113,6 +115,38 @@ func (o *PACollector) GetCustomerUUIDOk() (*string, bool) {
 // SetCustomerUUID sets field value
 func (o *PACollector) SetCustomerUUID(v string) {
 	o.CustomerUUID = v
+}
+
+// GetEmbedded returns the Embedded field value if set, zero value otherwise.
+func (o *PACollector) GetEmbedded() bool {
+	if o == nil || IsNil(o.Embedded) {
+		var ret bool
+		return ret
+	}
+	return *o.Embedded
+}
+
+// GetEmbeddedOk returns a tuple with the Embedded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollector) GetEmbeddedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Embedded) {
+		return nil, false
+	}
+	return o.Embedded, true
+}
+
+// HasEmbedded returns a boolean if a field has been set.
+func (o *PACollector) HasEmbedded() bool {
+	if o != nil && !IsNil(o.Embedded) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbedded gets a reference to the given bool and assigns it to the Embedded field.
+func (o *PACollector) SetEmbedded(v bool) {
+	o.Embedded = &v
 }
 
 // GetMetricsPassword returns the MetricsPassword field value if set, zero value otherwise.
@@ -343,6 +377,9 @@ func (o PACollector) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["apiToken"] = o.ApiToken
 	toSerialize["customerUUID"] = o.CustomerUUID
+	if !IsNil(o.Embedded) {
+		toSerialize["embedded"] = o.Embedded
+	}
 	if !IsNil(o.MetricsPassword) {
 		toSerialize["metricsPassword"] = o.MetricsPassword
 	}

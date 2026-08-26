@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **InstanceType** | Pointer to **string** | Instance type for tserver/master nodes of cluster that determines the cpu and memory resources. | [optional] 
 **StorageSpec** | Pointer to [**ClusterStorageSpec**](ClusterStorageSpec.md) |  | [optional] 
 **CgroupSize** | Pointer to **int32** | Amount of memory in MB to limit the postgres process using the ysql cgroup. The value should be greater than 0. When set to 0 it results in no cgroup limits. For a read replica cluster, setting this value to null or -1 would inherit this value from the primary cluster. Applicable only for nodes running as Linux VMs on AWS/GCP/Azure Cloud Provider. Only used internally by YBM. | [optional] 
-**Tserver** | Pointer to [**PerProcessNodeSpec**](PerProcessNodeSpec.md) |  | [optional] 
-**Master** | Pointer to [**PerProcessNodeSpec**](PerProcessNodeSpec.md) |  | [optional] 
-**DedicatedNodes** | Pointer to **bool** | Whether to run tserver and master processes in dedicated nodes in this cluster. Defaults to false where master and tserver processes share the same node. | [optional] [default to false]
+**Tserver** | Pointer to [**ClusterPerProcessNodeSpec**](ClusterPerProcessNodeSpec.md) |  | [optional] 
+**Master** | Pointer to [**ClusterPerProcessNodeSpec**](ClusterPerProcessNodeSpec.md) |  | [optional] 
+**DedicatedNodes** | Pointer to **bool** | Deprecated: use dedicated_nodes on ClusterSpec / ClusterEditSpec / ClusterAddSpec. Whether to run tserver and master processes in dedicated nodes in this cluster. | [optional] 
 **K8sMasterResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
 **K8sTserverResourceSpec** | Pointer to [**K8SNodeResourceSpec**](K8SNodeResourceSpec.md) |  | [optional] 
-**AzNodeSpec** | Pointer to [**map[string]AvailabilityZoneNodeSpec**](AvailabilityZoneNodeSpec.md) | Granular node settings overridden per Availability Zone identified by AZ uuid. | [optional] 
+**AzNodeSpec** | Pointer to [**map[string]AvailabilityZoneNodeSpec**](AvailabilityZoneNodeSpec.md) | Granular node settings overridden per Availability Zone identified by AZ uuid. When provided, this map fully replaces existing AZ node overrides; omit the field to leave them unchanged. An empty map clears all AZ node overrides.  | [optional] 
 
 ## Methods
 
@@ -110,20 +110,20 @@ HasCgroupSize returns a boolean if a field has been set.
 
 ### GetTserver
 
-`func (o *ClusterNodeSpec) GetTserver() PerProcessNodeSpec`
+`func (o *ClusterNodeSpec) GetTserver() ClusterPerProcessNodeSpec`
 
 GetTserver returns the Tserver field if non-nil, zero value otherwise.
 
 ### GetTserverOk
 
-`func (o *ClusterNodeSpec) GetTserverOk() (*PerProcessNodeSpec, bool)`
+`func (o *ClusterNodeSpec) GetTserverOk() (*ClusterPerProcessNodeSpec, bool)`
 
 GetTserverOk returns a tuple with the Tserver field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTserver
 
-`func (o *ClusterNodeSpec) SetTserver(v PerProcessNodeSpec)`
+`func (o *ClusterNodeSpec) SetTserver(v ClusterPerProcessNodeSpec)`
 
 SetTserver sets Tserver field to given value.
 
@@ -135,20 +135,20 @@ HasTserver returns a boolean if a field has been set.
 
 ### GetMaster
 
-`func (o *ClusterNodeSpec) GetMaster() PerProcessNodeSpec`
+`func (o *ClusterNodeSpec) GetMaster() ClusterPerProcessNodeSpec`
 
 GetMaster returns the Master field if non-nil, zero value otherwise.
 
 ### GetMasterOk
 
-`func (o *ClusterNodeSpec) GetMasterOk() (*PerProcessNodeSpec, bool)`
+`func (o *ClusterNodeSpec) GetMasterOk() (*ClusterPerProcessNodeSpec, bool)`
 
 GetMasterOk returns a tuple with the Master field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMaster
 
-`func (o *ClusterNodeSpec) SetMaster(v PerProcessNodeSpec)`
+`func (o *ClusterNodeSpec) SetMaster(v ClusterPerProcessNodeSpec)`
 
 SetMaster sets Master field to given value.
 

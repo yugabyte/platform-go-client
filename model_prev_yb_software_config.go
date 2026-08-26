@@ -26,9 +26,11 @@ type PrevYBSoftwareConfig struct {
 	CanaryPauseState *string `json:"canaryPauseState,omitempty"`
 	CanaryUpgrade    bool    `json:"canaryUpgrade"`
 	// WARNING: This is a preview API that could change. Per-AZ master upgrade progress (standard and canary)
-	MasterAZUpgradeStatesList    []AZUpgradeState `json:"masterAZUpgradeStatesList,omitempty"`
-	SoftwareVersion              *string          `json:"softwareVersion,omitempty"`
-	TargetUpgradeSoftwareVersion *string          `json:"targetUpgradeSoftwareVersion,omitempty"`
+	MasterAZUpgradeStatesList []AZUpgradeState `json:"masterAZUpgradeStatesList,omitempty"`
+	// WARNING: This is a preview API that could change. True once the canary pauseAfterMasters checkpoint has been reached and resumed, so it is not re-emitted on a subsequent abort+retry of the upgrade.
+	MasterPauseCompleted         *bool   `json:"masterPauseCompleted,omitempty"`
+	SoftwareVersion              *string `json:"softwareVersion,omitempty"`
+	TargetUpgradeSoftwareVersion *string `json:"targetUpgradeSoftwareVersion,omitempty"`
 	// WARNING: This is a preview API that could change. Per-AZ tserver upgrade progress (standard and canary)
 	TserverAZUpgradeStatesList []AZUpgradeState `json:"tserverAZUpgradeStatesList,omitempty"`
 }
@@ -237,6 +239,38 @@ func (o *PrevYBSoftwareConfig) SetMasterAZUpgradeStatesList(v []AZUpgradeState) 
 	o.MasterAZUpgradeStatesList = v
 }
 
+// GetMasterPauseCompleted returns the MasterPauseCompleted field value if set, zero value otherwise.
+func (o *PrevYBSoftwareConfig) GetMasterPauseCompleted() bool {
+	if o == nil || IsNil(o.MasterPauseCompleted) {
+		var ret bool
+		return ret
+	}
+	return *o.MasterPauseCompleted
+}
+
+// GetMasterPauseCompletedOk returns a tuple with the MasterPauseCompleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrevYBSoftwareConfig) GetMasterPauseCompletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.MasterPauseCompleted) {
+		return nil, false
+	}
+	return o.MasterPauseCompleted, true
+}
+
+// HasMasterPauseCompleted returns a boolean if a field has been set.
+func (o *PrevYBSoftwareConfig) HasMasterPauseCompleted() bool {
+	if o != nil && !IsNil(o.MasterPauseCompleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetMasterPauseCompleted gets a reference to the given bool and assigns it to the MasterPauseCompleted field.
+func (o *PrevYBSoftwareConfig) SetMasterPauseCompleted(v bool) {
+	o.MasterPauseCompleted = &v
+}
+
 // GetSoftwareVersion returns the SoftwareVersion field value if set, zero value otherwise.
 func (o *PrevYBSoftwareConfig) GetSoftwareVersion() string {
 	if o == nil || IsNil(o.SoftwareVersion) {
@@ -358,6 +392,9 @@ func (o PrevYBSoftwareConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize["canaryUpgrade"] = o.CanaryUpgrade
 	if !IsNil(o.MasterAZUpgradeStatesList) {
 		toSerialize["masterAZUpgradeStatesList"] = o.MasterAZUpgradeStatesList
+	}
+	if !IsNil(o.MasterPauseCompleted) {
+		toSerialize["masterPauseCompleted"] = o.MasterPauseCompleted
 	}
 	if !IsNil(o.SoftwareVersion) {
 		toSerialize["softwareVersion"] = o.SoftwareVersion

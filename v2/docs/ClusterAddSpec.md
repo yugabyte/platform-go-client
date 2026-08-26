@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClusterType** | **string** | Cluster type can be one of READ_REPLICA, ADDON | 
 **NumNodes** | **int32** | Set the number of nodes (tservers) to provision in this cluster | 
+**DedicatedNodes** | Pointer to **bool** | Whether to run tserver and master processes in dedicated nodes in this cluster. Defaults to false where master and tserver processes share the same node. | [optional] 
+**ProviderSpecs** | Pointer to [**[]ClusterPerProviderSpec**](ClusterPerProviderSpec.md) |  | [optional] 
 **NodeSpec** | [**ClusterNodeSpec**](ClusterNodeSpec.md) |  | 
 **ProviderSpec** | [**ClusterProviderEditSpec**](ClusterProviderEditSpec.md) |  | 
 **PlacementSpec** | Pointer to [**ClusterPlacementSpec**](ClusterPlacementSpec.md) |  | [optional] 
@@ -71,6 +73,56 @@ and a boolean to check if the value has been set.
 
 SetNumNodes sets NumNodes field to given value.
 
+
+### GetDedicatedNodes
+
+`func (o *ClusterAddSpec) GetDedicatedNodes() bool`
+
+GetDedicatedNodes returns the DedicatedNodes field if non-nil, zero value otherwise.
+
+### GetDedicatedNodesOk
+
+`func (o *ClusterAddSpec) GetDedicatedNodesOk() (*bool, bool)`
+
+GetDedicatedNodesOk returns a tuple with the DedicatedNodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDedicatedNodes
+
+`func (o *ClusterAddSpec) SetDedicatedNodes(v bool)`
+
+SetDedicatedNodes sets DedicatedNodes field to given value.
+
+### HasDedicatedNodes
+
+`func (o *ClusterAddSpec) HasDedicatedNodes() bool`
+
+HasDedicatedNodes returns a boolean if a field has been set.
+
+### GetProviderSpecs
+
+`func (o *ClusterAddSpec) GetProviderSpecs() []ClusterPerProviderSpec`
+
+GetProviderSpecs returns the ProviderSpecs field if non-nil, zero value otherwise.
+
+### GetProviderSpecsOk
+
+`func (o *ClusterAddSpec) GetProviderSpecsOk() (*[]ClusterPerProviderSpec, bool)`
+
+GetProviderSpecsOk returns a tuple with the ProviderSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderSpecs
+
+`func (o *ClusterAddSpec) SetProviderSpecs(v []ClusterPerProviderSpec)`
+
+SetProviderSpecs sets ProviderSpecs field to given value.
+
+### HasProviderSpecs
+
+`func (o *ClusterAddSpec) HasProviderSpecs() bool`
+
+HasProviderSpecs returns a boolean if a field has been set.
 
 ### GetNodeSpec
 

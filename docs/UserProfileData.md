@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ConfirmPassword** | Pointer to **string** | Password confirmation | [optional] 
 **NewUniverseUiEnabled** | Pointer to **bool** | YbaApi Internal. Used to turn off new UI feature for particular user | [optional] 
+**NewUniverseUiTourCompleted** | Pointer to **bool** | YbaApi Internal. Whether the new UI tour was completed by particular user | [optional] 
 **Password** | Pointer to **string** | Password | [optional] 
 **Role** | **string** | User role | 
 **Timezone** | Pointer to **string** | User timezone | [optional] 
@@ -78,6 +79,31 @@ SetNewUniverseUiEnabled sets NewUniverseUiEnabled field to given value.
 `func (o *UserProfileData) HasNewUniverseUiEnabled() bool`
 
 HasNewUniverseUiEnabled returns a boolean if a field has been set.
+
+### GetNewUniverseUiTourCompleted
+
+`func (o *UserProfileData) GetNewUniverseUiTourCompleted() bool`
+
+GetNewUniverseUiTourCompleted returns the NewUniverseUiTourCompleted field if non-nil, zero value otherwise.
+
+### GetNewUniverseUiTourCompletedOk
+
+`func (o *UserProfileData) GetNewUniverseUiTourCompletedOk() (*bool, bool)`
+
+GetNewUniverseUiTourCompletedOk returns a tuple with the NewUniverseUiTourCompleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewUniverseUiTourCompleted
+
+`func (o *UserProfileData) SetNewUniverseUiTourCompleted(v bool)`
+
+SetNewUniverseUiTourCompleted sets NewUniverseUiTourCompleted field to given value.
+
+### HasNewUniverseUiTourCompleted
+
+`func (o *UserProfileData) HasNewUniverseUiTourCompleted() bool`
+
+HasNewUniverseUiTourCompleted returns a boolean if a field has been set.
 
 ### GetPassword
 
