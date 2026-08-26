@@ -38,6 +38,7 @@ Name | Type | Description | Notes
 **NumNodes** | Pointer to **int32** |  | [optional] 
 **PreferredRegion** | Pointer to **string** |  | [optional] 
 **Provider** | Pointer to **string** |  | [optional] 
+**ProviderSpecifications** | Pointer to [**[]ProviderSpecification**](ProviderSpecification.md) |  | [optional] 
 **ProviderType** | Pointer to **string** |  | [optional] 
 **ProxyConfig** | Pointer to [**ProxyConfig**](ProxyConfig.md) |  | [optional] 
 **QueryLogConfig** | Pointer to [**QueryLogConfig**](QueryLogConfig.md) |  | [optional] 
@@ -929,6 +930,31 @@ SetProvider sets Provider field to given value.
 `func (o *UserIntent) HasProvider() bool`
 
 HasProvider returns a boolean if a field has been set.
+
+### GetProviderSpecifications
+
+`func (o *UserIntent) GetProviderSpecifications() []ProviderSpecification`
+
+GetProviderSpecifications returns the ProviderSpecifications field if non-nil, zero value otherwise.
+
+### GetProviderSpecificationsOk
+
+`func (o *UserIntent) GetProviderSpecificationsOk() (*[]ProviderSpecification, bool)`
+
+GetProviderSpecificationsOk returns a tuple with the ProviderSpecifications field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderSpecifications
+
+`func (o *UserIntent) SetProviderSpecifications(v []ProviderSpecification)`
+
+SetProviderSpecifications sets ProviderSpecifications field to given value.
+
+### HasProviderSpecifications
+
+`func (o *UserIntent) HasProviderSpecifications() bool`
+
+HasProviderSpecifications returns a boolean if a field has been set.
 
 ### GetProviderType
 

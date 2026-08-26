@@ -455,7 +455,7 @@ Class | Method | HTTP request | Description
 *UniversePerformanceSuggestionsAPI* | [**GetUnusedIndexes**](docs/UniversePerformanceSuggestionsAPI.md#getunusedindexes) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/unused_indexes | Return list of each unused index across the universe
 *UniverseUpgradesManagementAPI* | [**FinalizeUpgrade**](docs/UniverseUpgradesManagementAPI.md#finalizeupgrade) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize | Finalize Upgrade
 *UniverseUpgradesManagementAPI* | [**KubernetesToggleImmutableYbc**](docs/UniverseUpgradesManagementAPI.md#kubernetestoggleimmutableybc) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/k8s_immutable_ybc | Upgrade Kubernetes universe to toggle immutable YBC
-*UniverseUpgradesManagementAPI* | [**ModifyAuditLogging**](docs/UniverseUpgradesManagementAPI.md#modifyauditlogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration
+*UniverseUpgradesManagementAPI* | [**ModifyAuditLogging**](docs/UniverseUpgradesManagementAPI.md#modifyauditlogging) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/audit_log_config | Modify Audit Logging Configuration - deprecated
 *UniverseUpgradesManagementAPI* | [**PreFinalizeSoftwareUpgradeInfo**](docs/UniverseUpgradesManagementAPI.md#prefinalizesoftwareupgradeinfo) | **Get** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/finalize/info | Finalize Software Upgrade info
 *UniverseUpgradesManagementAPI* | [**ProvisionUniverseNodes**](docs/UniverseUpgradesManagementAPI.md#provisionuniversenodes) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/provision_nodes | Provision universe nodes
 *UniverseUpgradesManagementAPI* | [**RebootUniverse**](docs/UniverseUpgradesManagementAPI.md#rebootuniverse) | **Post** /api/v1/customers/{cUUID}/universes/{uniUUID}/upgrade/reboot | Reboot universe
@@ -547,6 +547,7 @@ Class | Method | HTTP request | Description
  - [AvailabilityZoneData](docs/AvailabilityZoneData.md)
  - [AvailabilityZoneDetails](docs/AvailabilityZoneDetails.md)
  - [AvailabilityZoneFormData](docs/AvailabilityZoneFormData.md)
+ - [AzNodesSpec](docs/AzNodesSpec.md)
  - [AzureCloudInfo](docs/AzureCloudInfo.md)
  - [AzureRegionCloudInfo](docs/AzureRegionCloudInfo.md)
  - [Backup](docs/Backup.md)
@@ -561,6 +562,7 @@ Class | Method | HTTP request | Description
  - [BackupScheduleToggleParams](docs/BackupScheduleToggleParams.md)
  - [BackupStorageInfo](docs/BackupStorageInfo.md)
  - [BackupTableParams](docs/BackupTableParams.md)
+ - [BashComponentSpec](docs/BashComponentSpec.md)
  - [BasicAuthCredentials](docs/BasicAuthCredentials.md)
  - [BasicAuthInformation](docs/BasicAuthInformation.md)
  - [BearerToken](docs/BearerToken.md)
@@ -637,6 +639,7 @@ Class | Method | HTTP request | Description
  - [ExtraDependencies](docs/ExtraDependencies.md)
  - [ExtractMetadata](docs/ExtractMetadata.md)
  - [FailedSubtasks](docs/FailedSubtasks.md)
+ - [FilesComponentSpec](docs/FilesComponentSpec.md)
  - [FinalizeUpgradeInfoResponse](docs/FinalizeUpgradeInfoResponse.md)
  - [FinalizeUpgradeParams](docs/FinalizeUpgradeParams.md)
  - [GCPCloudInfo](docs/GCPCloudInfo.md)
@@ -718,7 +721,9 @@ Class | Method | HTTP request | Description
  - [NodeInstanceFormData](docs/NodeInstanceFormData.md)
  - [NodeInstanceStateFormData](docs/NodeInstanceStateFormData.md)
  - [NodeQueryDistributionDetails](docs/NodeQueryDistributionDetails.md)
+ - [NodeSpec](docs/NodeSpec.md)
  - [OCICloudInfo](docs/OCICloudInfo.md)
+ - [OCIRegionCloudInfo](docs/OCIRegionCloudInfo.md)
  - [OTLPConfig](docs/OTLPConfig.md)
  - [OidcGroupToYbaRolesData](docs/OidcGroupToYbaRolesData.md)
  - [OidcGroupToYbaRolesPair](docs/OidcGroupToYbaRolesPair.md)
@@ -741,6 +746,7 @@ Class | Method | HTTP request | Description
  - [PerLocationBackupInfo](docs/PerLocationBackupInfo.md)
  - [PerProcessDetails](docs/PerProcessDetails.md)
  - [PerProcessFlags](docs/PerProcessFlags.md)
+ - [PerProviderState](docs/PerProviderState.md)
  - [PerfAdvisorManualRunStatus](docs/PerfAdvisorManualRunStatus.md)
  - [PerfAdvisorSettingsFormData](docs/PerfAdvisorSettingsFormData.md)
  - [PerfAdvisorSettingsWithDefaults](docs/PerfAdvisorSettingsWithDefaults.md)
@@ -767,6 +773,7 @@ Class | Method | HTTP request | Description
  - [Principal](docs/Principal.md)
  - [Provider](docs/Provider.md)
  - [ProviderDetails](docs/ProviderDetails.md)
+ - [ProviderSpecification](docs/ProviderSpecification.md)
  - [ProvisionUniverseNodesParams](docs/ProvisionUniverseNodesParams.md)
  - [ProxyConfig](docs/ProxyConfig.md)
  - [ProxyConfigUpdateParams](docs/ProxyConfigUpdateParams.md)
@@ -779,6 +786,7 @@ Class | Method | HTTP request | Description
  - [RegionLocations](docs/RegionLocations.md)
  - [RegionMetadata](docs/RegionMetadata.md)
  - [RegionMetadataInfo](docs/RegionMetadataInfo.md)
+ - [RegionNodesSpec](docs/RegionNodesSpec.md)
  - [ReinstallNodeAgentForm](docs/ReinstallNodeAgentForm.md)
  - [ReleaseFormData](docs/ReleaseFormData.md)
  - [ReleaseMetadata](docs/ReleaseMetadata.md)
@@ -808,6 +816,7 @@ Class | Method | HTTP request | Description
  - [RoleResourceDefinition](docs/RoleResourceDefinition.md)
  - [RollMaxBatchSize](docs/RollMaxBatchSize.md)
  - [RollbackUpgradeParams](docs/RollbackUpgradeParams.md)
+ - [RootNodesSpec](docs/RootNodesSpec.md)
  - [RunQueryFormData](docs/RunQueryFormData.md)
  - [RuntimeConfigData](docs/RuntimeConfigData.md)
  - [S3Config](docs/S3Config.md)
@@ -863,6 +872,7 @@ Class | Method | HTTP request | Description
  - [UniverseQueryLogsExporterConfig](docs/UniverseQueryLogsExporterConfig.md)
  - [UniverseResourceDetails](docs/UniverseResourceDetails.md)
  - [UniverseResp](docs/UniverseResp.md)
+ - [UniverseSettings](docs/UniverseSettings.md)
  - [UnusedIndexFinderResponse](docs/UnusedIndexFinderResponse.md)
  - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpdatePitrConfigParams](docs/UpdatePitrConfigParams.md)
@@ -894,8 +904,12 @@ Class | Method | HTTP request | Description
  - [YBPSuccess](docs/YBPSuccess.md)
  - [YBPTask](docs/YBPTask.md)
  - [YCQLAuditConfig](docs/YCQLAuditConfig.md)
+ - [YCQLComponentSpec](docs/YCQLComponentSpec.md)
  - [YSQLAuditConfig](docs/YSQLAuditConfig.md)
+ - [YSQLComponentSpec](docs/YSQLComponentSpec.md)
  - [YSQLQueryLogConfig](docs/YSQLQueryLogConfig.md)
+ - [YbAdminComponentSpec](docs/YbAdminComponentSpec.md)
+ - [YbaComponentSpec](docs/YbaComponentSpec.md)
  - [YbcThrottleParameters](docs/YbcThrottleParameters.md)
  - [YbcThrottleParametersResponse](docs/YbcThrottleParametersResponse.md)
 

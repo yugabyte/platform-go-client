@@ -23,6 +23,8 @@ type UserProfileData struct {
 	ConfirmPassword *string `json:"confirmPassword,omitempty"`
 	// YbaApi Internal. Used to turn off new UI feature for particular user
 	NewUniverseUiEnabled *bool `json:"newUniverseUiEnabled,omitempty"`
+	// YbaApi Internal. Whether the new UI tour was completed by particular user
+	NewUniverseUiTourCompleted *bool `json:"newUniverseUiTourCompleted,omitempty"`
 	// Password
 	Password *string `json:"password,omitempty"`
 	// User role
@@ -113,6 +115,38 @@ func (o *UserProfileData) HasNewUniverseUiEnabled() bool {
 // SetNewUniverseUiEnabled gets a reference to the given bool and assigns it to the NewUniverseUiEnabled field.
 func (o *UserProfileData) SetNewUniverseUiEnabled(v bool) {
 	o.NewUniverseUiEnabled = &v
+}
+
+// GetNewUniverseUiTourCompleted returns the NewUniverseUiTourCompleted field value if set, zero value otherwise.
+func (o *UserProfileData) GetNewUniverseUiTourCompleted() bool {
+	if o == nil || IsNil(o.NewUniverseUiTourCompleted) {
+		var ret bool
+		return ret
+	}
+	return *o.NewUniverseUiTourCompleted
+}
+
+// GetNewUniverseUiTourCompletedOk returns a tuple with the NewUniverseUiTourCompleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserProfileData) GetNewUniverseUiTourCompletedOk() (*bool, bool) {
+	if o == nil || IsNil(o.NewUniverseUiTourCompleted) {
+		return nil, false
+	}
+	return o.NewUniverseUiTourCompleted, true
+}
+
+// HasNewUniverseUiTourCompleted returns a boolean if a field has been set.
+func (o *UserProfileData) HasNewUniverseUiTourCompleted() bool {
+	if o != nil && !IsNil(o.NewUniverseUiTourCompleted) {
+		return true
+	}
+
+	return false
+}
+
+// SetNewUniverseUiTourCompleted gets a reference to the given bool and assigns it to the NewUniverseUiTourCompleted field.
+func (o *UserProfileData) SetNewUniverseUiTourCompleted(v bool) {
+	o.NewUniverseUiTourCompleted = &v
 }
 
 // GetPassword returns the Password field value if set, zero value otherwise.
@@ -218,6 +252,9 @@ func (o UserProfileData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NewUniverseUiEnabled) {
 		toSerialize["newUniverseUiEnabled"] = o.NewUniverseUiEnabled
+	}
+	if !IsNil(o.NewUniverseUiTourCompleted) {
+		toSerialize["newUniverseUiTourCompleted"] = o.NewUniverseUiTourCompleted
 	}
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password

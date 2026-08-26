@@ -23,6 +23,8 @@ type PACollectorDetailsModel struct {
 	ApiToken string `json:"apiToken"`
 	// Customer UUID
 	CustomerUUID string `json:"customerUUID"`
+	// True when this collector is the embedded PA managed by EmbeddedCollectorInitializer
+	Embedded *bool `json:"embedded,omitempty"`
 	// In Use Status
 	InUseStatus *string `json:"inUseStatus,omitempty"`
 	// Metrics API Password
@@ -115,6 +117,38 @@ func (o *PACollectorDetailsModel) GetCustomerUUIDOk() (*string, bool) {
 // SetCustomerUUID sets field value
 func (o *PACollectorDetailsModel) SetCustomerUUID(v string) {
 	o.CustomerUUID = v
+}
+
+// GetEmbedded returns the Embedded field value if set, zero value otherwise.
+func (o *PACollectorDetailsModel) GetEmbedded() bool {
+	if o == nil || IsNil(o.Embedded) {
+		var ret bool
+		return ret
+	}
+	return *o.Embedded
+}
+
+// GetEmbeddedOk returns a tuple with the Embedded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorDetailsModel) GetEmbeddedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Embedded) {
+		return nil, false
+	}
+	return o.Embedded, true
+}
+
+// HasEmbedded returns a boolean if a field has been set.
+func (o *PACollectorDetailsModel) HasEmbedded() bool {
+	if o != nil && !IsNil(o.Embedded) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbedded gets a reference to the given bool and assigns it to the Embedded field.
+func (o *PACollectorDetailsModel) SetEmbedded(v bool) {
+	o.Embedded = &v
 }
 
 // GetInUseStatus returns the InUseStatus field value if set, zero value otherwise.
@@ -377,6 +411,9 @@ func (o PACollectorDetailsModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["apiToken"] = o.ApiToken
 	toSerialize["customerUUID"] = o.CustomerUUID
+	if !IsNil(o.Embedded) {
+		toSerialize["embedded"] = o.Embedded
+	}
 	if !IsNil(o.InUseStatus) {
 		toSerialize["inUseStatus"] = o.InUseStatus
 	}

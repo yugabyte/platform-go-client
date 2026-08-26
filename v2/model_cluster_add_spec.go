@@ -23,11 +23,14 @@ type ClusterAddSpec struct {
 	// Cluster type can be one of READ_REPLICA, ADDON
 	ClusterType string `json:"cluster_type"`
 	// Set the number of nodes (tservers) to provision in this cluster
-	NumNodes       int32                   `json:"num_nodes"`
-	NodeSpec       ClusterNodeSpec         `json:"node_spec"`
-	ProviderSpec   ClusterProviderEditSpec `json:"provider_spec"`
-	PlacementSpec  *ClusterPlacementSpec   `json:"placement_spec,omitempty"`
-	PartitionsSpec []ClusterPartitionSpec  `json:"partitions_spec,omitempty"`
+	NumNodes int32 `json:"num_nodes"`
+	// Whether to run tserver and master processes in dedicated nodes in this cluster. Defaults to false where master and tserver processes share the same node.
+	DedicatedNodes *bool                    `json:"dedicated_nodes,omitempty"`
+	ProviderSpecs  []ClusterPerProviderSpec `json:"provider_specs,omitempty"`
+	NodeSpec       ClusterNodeSpec          `json:"node_spec"`
+	ProviderSpec   ClusterProviderEditSpec  `json:"provider_spec"`
+	PlacementSpec  *ClusterPlacementSpec    `json:"placement_spec,omitempty"`
+	PartitionsSpec []ClusterPartitionSpec   `json:"partitions_spec,omitempty"`
 	// A map of strings representing a set of Tags and Values to apply on nodes in the aws/gcp/azu cloud. See https://docs.yugabyte.com/preview/yugabyte-platform/manage-deployments/instance-tags/.
 	InstanceTags *map[string]string `json:"instance_tags,omitempty"`
 	Gflags       *ClusterGFlags     `json:"gflags,omitempty"`
@@ -102,6 +105,70 @@ func (o *ClusterAddSpec) GetNumNodesOk() (*int32, bool) {
 // SetNumNodes sets field value
 func (o *ClusterAddSpec) SetNumNodes(v int32) {
 	o.NumNodes = v
+}
+
+// GetDedicatedNodes returns the DedicatedNodes field value if set, zero value otherwise.
+func (o *ClusterAddSpec) GetDedicatedNodes() bool {
+	if o == nil || IsNil(o.DedicatedNodes) {
+		var ret bool
+		return ret
+	}
+	return *o.DedicatedNodes
+}
+
+// GetDedicatedNodesOk returns a tuple with the DedicatedNodes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterAddSpec) GetDedicatedNodesOk() (*bool, bool) {
+	if o == nil || IsNil(o.DedicatedNodes) {
+		return nil, false
+	}
+	return o.DedicatedNodes, true
+}
+
+// HasDedicatedNodes returns a boolean if a field has been set.
+func (o *ClusterAddSpec) HasDedicatedNodes() bool {
+	if o != nil && !IsNil(o.DedicatedNodes) {
+		return true
+	}
+
+	return false
+}
+
+// SetDedicatedNodes gets a reference to the given bool and assigns it to the DedicatedNodes field.
+func (o *ClusterAddSpec) SetDedicatedNodes(v bool) {
+	o.DedicatedNodes = &v
+}
+
+// GetProviderSpecs returns the ProviderSpecs field value if set, zero value otherwise.
+func (o *ClusterAddSpec) GetProviderSpecs() []ClusterPerProviderSpec {
+	if o == nil || IsNil(o.ProviderSpecs) {
+		var ret []ClusterPerProviderSpec
+		return ret
+	}
+	return o.ProviderSpecs
+}
+
+// GetProviderSpecsOk returns a tuple with the ProviderSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterAddSpec) GetProviderSpecsOk() ([]ClusterPerProviderSpec, bool) {
+	if o == nil || IsNil(o.ProviderSpecs) {
+		return nil, false
+	}
+	return o.ProviderSpecs, true
+}
+
+// HasProviderSpecs returns a boolean if a field has been set.
+func (o *ClusterAddSpec) HasProviderSpecs() bool {
+	if o != nil && !IsNil(o.ProviderSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderSpecs gets a reference to the given []ClusterPerProviderSpec and assigns it to the ProviderSpecs field.
+func (o *ClusterAddSpec) SetProviderSpecs(v []ClusterPerProviderSpec) {
+	o.ProviderSpecs = v
 }
 
 // GetNodeSpec returns the NodeSpec field value
@@ -292,6 +359,12 @@ func (o ClusterAddSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cluster_type"] = o.ClusterType
 	toSerialize["num_nodes"] = o.NumNodes
+	if !IsNil(o.DedicatedNodes) {
+		toSerialize["dedicated_nodes"] = o.DedicatedNodes
+	}
+	if !IsNil(o.ProviderSpecs) {
+		toSerialize["provider_specs"] = o.ProviderSpecs
+	}
 	toSerialize["node_spec"] = o.NodeSpec
 	toSerialize["provider_spec"] = o.ProviderSpec
 	if !IsNil(o.PlacementSpec) {

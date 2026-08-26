@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **CmkArn** | Pointer to **string** | Amazon Resource Name (ARN) of the CMK | [optional] 
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
+**CreationSucceeded** | Pointer to **bool** |  | [optional] 
 **CurrentClusterType** | Pointer to **string** |  | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **EnableYbc** | Pointer to **bool** |  | [optional] 
@@ -55,6 +56,7 @@ Name | Type | Description | Notes
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **UniverseDetached** | Pointer to **bool** | YbaApi Internal. True if a universe has been detached | [optional] 
 **UniversePaused** | Pointer to **bool** |  | [optional] 
+**UniverseSettings** | Pointer to [**UniverseSettings**](UniverseSettings.md) |  | [optional] 
 **UniverseUUID** | Pointer to **string** | Associated universe UUID | [optional] 
 **UpdateInProgress** | Pointer to **bool** |  | [optional] 
 **UpdateOptions** | Pointer to **[]string** |  | [optional] 
@@ -326,6 +328,31 @@ and a boolean to check if the value has been set.
 
 SetCreatingUser sets CreatingUser field to given value.
 
+
+### GetCreationSucceeded
+
+`func (o *UniverseDefinitionTaskParamsResp) GetCreationSucceeded() bool`
+
+GetCreationSucceeded returns the CreationSucceeded field if non-nil, zero value otherwise.
+
+### GetCreationSucceededOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetCreationSucceededOk() (*bool, bool)`
+
+GetCreationSucceededOk returns a tuple with the CreationSucceeded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreationSucceeded
+
+`func (o *UniverseDefinitionTaskParamsResp) SetCreationSucceeded(v bool)`
+
+SetCreationSucceeded sets CreationSucceeded field to given value.
+
+### HasCreationSucceeded
+
+`func (o *UniverseDefinitionTaskParamsResp) HasCreationSucceeded() bool`
+
+HasCreationSucceeded returns a boolean if a field has been set.
 
 ### GetCurrentClusterType
 
@@ -1341,6 +1368,31 @@ SetUniversePaused sets UniversePaused field to given value.
 `func (o *UniverseDefinitionTaskParamsResp) HasUniversePaused() bool`
 
 HasUniversePaused returns a boolean if a field has been set.
+
+### GetUniverseSettings
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUniverseSettings() UniverseSettings`
+
+GetUniverseSettings returns the UniverseSettings field if non-nil, zero value otherwise.
+
+### GetUniverseSettingsOk
+
+`func (o *UniverseDefinitionTaskParamsResp) GetUniverseSettingsOk() (*UniverseSettings, bool)`
+
+GetUniverseSettingsOk returns a tuple with the UniverseSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniverseSettings
+
+`func (o *UniverseDefinitionTaskParamsResp) SetUniverseSettings(v UniverseSettings)`
+
+SetUniverseSettings sets UniverseSettings field to given value.
+
+### HasUniverseSettings
+
+`func (o *UniverseDefinitionTaskParamsResp) HasUniverseSettings() bool`
+
+HasUniverseSettings returns a boolean if a field has been set.
 
 ### GetUniverseUUID
 

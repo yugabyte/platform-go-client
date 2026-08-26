@@ -8,13 +8,16 @@ Name | Type | Description | Notes
 **Compressor** | **string** |  | 
 **Offloadable** | **bool** |  | 
 **ServerCert** | **string** |  | 
+**ServerCertExpirySecs** | **int64** |  | 
 **ServerKey** | **string** |  | 
+**SignerPrivateKey** | **string** |  | 
+**SignerPublicKey** | **string** |  | 
 
 ## Methods
 
 ### NewConfig
 
-`func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverKey string, ) *Config`
+`func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverCertExpirySecs int64, serverKey string, signerPrivateKey string, signerPublicKey string, ) *Config`
 
 NewConfig instantiates a new Config object
 This constructor will assign default values to properties that have it defined,
@@ -109,6 +112,26 @@ and a boolean to check if the value has been set.
 SetServerCert sets ServerCert field to given value.
 
 
+### GetServerCertExpirySecs
+
+`func (o *Config) GetServerCertExpirySecs() int64`
+
+GetServerCertExpirySecs returns the ServerCertExpirySecs field if non-nil, zero value otherwise.
+
+### GetServerCertExpirySecsOk
+
+`func (o *Config) GetServerCertExpirySecsOk() (*int64, bool)`
+
+GetServerCertExpirySecsOk returns a tuple with the ServerCertExpirySecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerCertExpirySecs
+
+`func (o *Config) SetServerCertExpirySecs(v int64)`
+
+SetServerCertExpirySecs sets ServerCertExpirySecs field to given value.
+
+
 ### GetServerKey
 
 `func (o *Config) GetServerKey() string`
@@ -127,6 +150,46 @@ and a boolean to check if the value has been set.
 `func (o *Config) SetServerKey(v string)`
 
 SetServerKey sets ServerKey field to given value.
+
+
+### GetSignerPrivateKey
+
+`func (o *Config) GetSignerPrivateKey() string`
+
+GetSignerPrivateKey returns the SignerPrivateKey field if non-nil, zero value otherwise.
+
+### GetSignerPrivateKeyOk
+
+`func (o *Config) GetSignerPrivateKeyOk() (*string, bool)`
+
+GetSignerPrivateKeyOk returns a tuple with the SignerPrivateKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignerPrivateKey
+
+`func (o *Config) SetSignerPrivateKey(v string)`
+
+SetSignerPrivateKey sets SignerPrivateKey field to given value.
+
+
+### GetSignerPublicKey
+
+`func (o *Config) GetSignerPublicKey() string`
+
+GetSignerPublicKey returns the SignerPublicKey field if non-nil, zero value otherwise.
+
+### GetSignerPublicKeyOk
+
+`func (o *Config) GetSignerPublicKeyOk() (*string, bool)`
+
+GetSignerPublicKeyOk returns a tuple with the SignerPublicKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignerPublicKey
+
+`func (o *Config) SetSignerPublicKey(v string)`
+
+SetSignerPublicKey sets SignerPublicKey field to given value.
 
 
 

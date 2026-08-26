@@ -57,6 +57,8 @@ type APIClient struct {
 
 	CustomerConfigurationAPI *CustomerConfigurationAPIService
 
+	DisasterRecoveryAPI *DisasterRecoveryAPIService
+
 	EncryptionAtRestAPI *EncryptionAtRestAPIService
 
 	ImageBundleAPI *ImageBundleAPIService
@@ -67,7 +69,13 @@ type APIClient struct {
 
 	MetricsAPI *MetricsAPIService
 
+	NodeAgentAPI *NodeAgentAPIService
+
 	PITRAPI *PITRAPIService
+
+	SupportBundleAPI *SupportBundleAPIService
+
+	TaskAPI *TaskAPIService
 
 	TelemetryProviderAPI *TelemetryProviderAPIService
 
@@ -96,12 +104,16 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.BackupAndRestoreAPI = (*BackupAndRestoreAPIService)(&c.common)
 	c.ContinuousBackupAPI = (*ContinuousBackupAPIService)(&c.common)
 	c.CustomerConfigurationAPI = (*CustomerConfigurationAPIService)(&c.common)
+	c.DisasterRecoveryAPI = (*DisasterRecoveryAPIService)(&c.common)
 	c.EncryptionAtRestAPI = (*EncryptionAtRestAPIService)(&c.common)
 	c.ImageBundleAPI = (*ImageBundleAPIService)(&c.common)
 	c.IsolatedBackupAPI = (*IsolatedBackupAPIService)(&c.common)
 	c.JobSchedulerAPI = (*JobSchedulerAPIService)(&c.common)
 	c.MetricsAPI = (*MetricsAPIService)(&c.common)
+	c.NodeAgentAPI = (*NodeAgentAPIService)(&c.common)
 	c.PITRAPI = (*PITRAPIService)(&c.common)
+	c.SupportBundleAPI = (*SupportBundleAPIService)(&c.common)
+	c.TaskAPI = (*TaskAPIService)(&c.common)
 	c.TelemetryProviderAPI = (*TelemetryProviderAPIService)(&c.common)
 	c.UniverseAPI = (*UniverseAPIService)(&c.common)
 	c.YBAInstanceAPI = (*YBAInstanceAPIService)(&c.common)

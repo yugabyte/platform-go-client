@@ -18,7 +18,7 @@ import (
 // checks if the ImageBundle type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ImageBundle{}
 
-// ImageBundle Image bundle for a provider.  Contains the user-provided `spec` and system-generated `info`. Returned as response payload for image bundle list APIs.
+// ImageBundle Image bundle for a provider.  Contains the user-provided `spec` and system-generated `info`. Returned as response payload for image bundle APIs.
 type ImageBundle struct {
 	Spec *ImageBundleSpec `json:"spec,omitempty"`
 	Info *ImageBundleInfo `json:"info,omitempty"`

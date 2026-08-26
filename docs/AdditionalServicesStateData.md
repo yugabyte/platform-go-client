@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EarlyoomConfig** | Pointer to [**EarlyoomConfig**](EarlyoomConfig.md) |  | [optional] 
 **EarlyoomEnabled** | Pointer to **bool** |  | [optional] 
+**PerProviderConfig** | Pointer to [**map[string]PerProviderState**](PerProviderState.md) | Configuration per provider | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetEarlyoomEnabled sets EarlyoomEnabled field to given value.
 `func (o *AdditionalServicesStateData) HasEarlyoomEnabled() bool`
 
 HasEarlyoomEnabled returns a boolean if a field has been set.
+
+### GetPerProviderConfig
+
+`func (o *AdditionalServicesStateData) GetPerProviderConfig() map[string]PerProviderState`
+
+GetPerProviderConfig returns the PerProviderConfig field if non-nil, zero value otherwise.
+
+### GetPerProviderConfigOk
+
+`func (o *AdditionalServicesStateData) GetPerProviderConfigOk() (*map[string]PerProviderState, bool)`
+
+GetPerProviderConfigOk returns a tuple with the PerProviderConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPerProviderConfig
+
+`func (o *AdditionalServicesStateData) SetPerProviderConfig(v map[string]PerProviderState)`
+
+SetPerProviderConfig sets PerProviderConfig field to given value.
+
+### HasPerProviderConfig
+
+`func (o *AdditionalServicesStateData) HasPerProviderConfig() bool`
+
+HasPerProviderConfig returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -605,7 +605,7 @@ Name | Type | Description  | Notes
 
 ## HealthCheckUniverse
 
-> []Details HealthCheckUniverse(ctx, cUUID, uniUUID).Execute()
+> []Details HealthCheckUniverse(ctx, cUUID, uniUUID).Limit(limit).Execute()
 
 Return results for the last health check
 
@@ -626,10 +626,11 @@ import (
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	limit := int32(56) // int32 | Maximum number of most recent health check entries to return. Defaults to 10. (optional) (default to 10)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UniverseInformationAPI.HealthCheckUniverse(context.Background(), cUUID, uniUUID).Execute()
+	resp, r, err := apiClient.UniverseInformationAPI.HealthCheckUniverse(context.Background(), cUUID, uniUUID).Limit(limit).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UniverseInformationAPI.HealthCheckUniverse``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -657,6 +658,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **limit** | **int32** | Maximum number of most recent health check entries to return. Defaults to 10. | [default to 10]
 
 ### Return type
 

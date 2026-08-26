@@ -20,10 +20,12 @@ var _ MappedNullable = &UniverseResizeNodesCluster{}
 
 // UniverseResizeNodesCluster UniverseResizeNodesCluster  A single cluster for UniverseResizeNodes.
 type UniverseResizeNodesCluster struct {
-	NodeSpec ClusterResizeNodeSpec `json:"node_spec"`
-	Gflags   *ClusterGFlags        `json:"gflags,omitempty"`
 	// Cluster UUID
-	Uuid string `json:"uuid"`
+	Uuid     string                 `json:"uuid"`
+	NodeSpec *ClusterResizeNodeSpec `json:"node_spec,omitempty"`
+	// Proposed resize node settings per provider for multicloud clusters.
+	ProviderNodesSpecs []PerProviderResizeNodesSpec `json:"provider_nodes_specs,omitempty"`
+	Gflags             *ClusterGFlags               `json:"gflags,omitempty"`
 }
 
 type _UniverseResizeNodesCluster UniverseResizeNodesCluster
@@ -32,9 +34,8 @@ type _UniverseResizeNodesCluster UniverseResizeNodesCluster
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseResizeNodesCluster(nodeSpec ClusterResizeNodeSpec, uuid string) *UniverseResizeNodesCluster {
+func NewUniverseResizeNodesCluster(uuid string) *UniverseResizeNodesCluster {
 	this := UniverseResizeNodesCluster{}
-	this.NodeSpec = nodeSpec
 	this.Uuid = uuid
 	return &this
 }
@@ -47,28 +48,92 @@ func NewUniverseResizeNodesClusterWithDefaults() *UniverseResizeNodesCluster {
 	return &this
 }
 
-// GetNodeSpec returns the NodeSpec field value
-func (o *UniverseResizeNodesCluster) GetNodeSpec() ClusterResizeNodeSpec {
+// GetUuid returns the Uuid field value
+func (o *UniverseResizeNodesCluster) GetUuid() string {
 	if o == nil {
-		var ret ClusterResizeNodeSpec
+		var ret string
 		return ret
 	}
 
-	return o.NodeSpec
+	return o.Uuid
 }
 
-// GetNodeSpecOk returns a tuple with the NodeSpec field value
+// GetUuidOk returns a tuple with the Uuid field value
 // and a boolean to check if the value has been set.
-func (o *UniverseResizeNodesCluster) GetNodeSpecOk() (*ClusterResizeNodeSpec, bool) {
+func (o *UniverseResizeNodesCluster) GetUuidOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.NodeSpec, true
+	return &o.Uuid, true
 }
 
-// SetNodeSpec sets field value
+// SetUuid sets field value
+func (o *UniverseResizeNodesCluster) SetUuid(v string) {
+	o.Uuid = v
+}
+
+// GetNodeSpec returns the NodeSpec field value if set, zero value otherwise.
+func (o *UniverseResizeNodesCluster) GetNodeSpec() ClusterResizeNodeSpec {
+	if o == nil || IsNil(o.NodeSpec) {
+		var ret ClusterResizeNodeSpec
+		return ret
+	}
+	return *o.NodeSpec
+}
+
+// GetNodeSpecOk returns a tuple with the NodeSpec field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResizeNodesCluster) GetNodeSpecOk() (*ClusterResizeNodeSpec, bool) {
+	if o == nil || IsNil(o.NodeSpec) {
+		return nil, false
+	}
+	return o.NodeSpec, true
+}
+
+// HasNodeSpec returns a boolean if a field has been set.
+func (o *UniverseResizeNodesCluster) HasNodeSpec() bool {
+	if o != nil && !IsNil(o.NodeSpec) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeSpec gets a reference to the given ClusterResizeNodeSpec and assigns it to the NodeSpec field.
 func (o *UniverseResizeNodesCluster) SetNodeSpec(v ClusterResizeNodeSpec) {
-	o.NodeSpec = v
+	o.NodeSpec = &v
+}
+
+// GetProviderNodesSpecs returns the ProviderNodesSpecs field value if set, zero value otherwise.
+func (o *UniverseResizeNodesCluster) GetProviderNodesSpecs() []PerProviderResizeNodesSpec {
+	if o == nil || IsNil(o.ProviderNodesSpecs) {
+		var ret []PerProviderResizeNodesSpec
+		return ret
+	}
+	return o.ProviderNodesSpecs
+}
+
+// GetProviderNodesSpecsOk returns a tuple with the ProviderNodesSpecs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResizeNodesCluster) GetProviderNodesSpecsOk() ([]PerProviderResizeNodesSpec, bool) {
+	if o == nil || IsNil(o.ProviderNodesSpecs) {
+		return nil, false
+	}
+	return o.ProviderNodesSpecs, true
+}
+
+// HasProviderNodesSpecs returns a boolean if a field has been set.
+func (o *UniverseResizeNodesCluster) HasProviderNodesSpecs() bool {
+	if o != nil && !IsNil(o.ProviderNodesSpecs) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderNodesSpecs gets a reference to the given []PerProviderResizeNodesSpec and assigns it to the ProviderNodesSpecs field.
+func (o *UniverseResizeNodesCluster) SetProviderNodesSpecs(v []PerProviderResizeNodesSpec) {
+	o.ProviderNodesSpecs = v
 }
 
 // GetGflags returns the Gflags field value if set, zero value otherwise.
@@ -103,30 +168,6 @@ func (o *UniverseResizeNodesCluster) SetGflags(v ClusterGFlags) {
 	o.Gflags = &v
 }
 
-// GetUuid returns the Uuid field value
-func (o *UniverseResizeNodesCluster) GetUuid() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Uuid
-}
-
-// GetUuidOk returns a tuple with the Uuid field value
-// and a boolean to check if the value has been set.
-func (o *UniverseResizeNodesCluster) GetUuidOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Uuid, true
-}
-
-// SetUuid sets field value
-func (o *UniverseResizeNodesCluster) SetUuid(v string) {
-	o.Uuid = v
-}
-
 func (o UniverseResizeNodesCluster) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -137,11 +178,16 @@ func (o UniverseResizeNodesCluster) MarshalJSON() ([]byte, error) {
 
 func (o UniverseResizeNodesCluster) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["node_spec"] = o.NodeSpec
+	toSerialize["uuid"] = o.Uuid
+	if !IsNil(o.NodeSpec) {
+		toSerialize["node_spec"] = o.NodeSpec
+	}
+	if !IsNil(o.ProviderNodesSpecs) {
+		toSerialize["provider_nodes_specs"] = o.ProviderNodesSpecs
+	}
 	if !IsNil(o.Gflags) {
 		toSerialize["gflags"] = o.Gflags
 	}
-	toSerialize["uuid"] = o.Uuid
 	return toSerialize, nil
 }
 

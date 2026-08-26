@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **IncrementBacklogStatus** | **bool** |  | 
 **IncrementalBackupFrequency** | **int64** |  | 
 **IncrementalBackupFrequencyTimeUnit** | **string** |  | 
+**IsKubernetesOperatorControlled** | Pointer to **bool** | True if this schedule is controlled by the Kubernetes operator | [optional] [readonly] 
 **NextExpectedTask** | Pointer to **time.Time** | Next expected task time | [optional] 
 **PrevCompletedTask** | Pointer to **time.Time** | Previous completed task time | [optional] 
 **RunningState** | **bool** |  | 
@@ -242,6 +243,31 @@ and a boolean to check if the value has been set.
 
 SetIncrementalBackupFrequencyTimeUnit sets IncrementalBackupFrequencyTimeUnit field to given value.
 
+
+### GetIsKubernetesOperatorControlled
+
+`func (o *ScheduleResp) GetIsKubernetesOperatorControlled() bool`
+
+GetIsKubernetesOperatorControlled returns the IsKubernetesOperatorControlled field if non-nil, zero value otherwise.
+
+### GetIsKubernetesOperatorControlledOk
+
+`func (o *ScheduleResp) GetIsKubernetesOperatorControlledOk() (*bool, bool)`
+
+GetIsKubernetesOperatorControlledOk returns a tuple with the IsKubernetesOperatorControlled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsKubernetesOperatorControlled
+
+`func (o *ScheduleResp) SetIsKubernetesOperatorControlled(v bool)`
+
+SetIsKubernetesOperatorControlled sets IsKubernetesOperatorControlled field to given value.
+
+### HasIsKubernetesOperatorControlled
+
+`func (o *ScheduleResp) HasIsKubernetesOperatorControlled() bool`
+
+HasIsKubernetesOperatorControlled returns a boolean if a field has been set.
 
 ### GetNextExpectedTask
 

@@ -157,6 +157,8 @@ func (r BackupAndRestoreAPIPageListBackupsRequest) Execute() (*BackupPagedResp, 
 PageListBackups List universe backups.
 
 Returns universe backups for the specified customer with pagination and optional filters.
+Only full (base) backups are returned. Use `pageListIncrementalBackups` to list incrementals
+in a backup chain.
 WARNING: This is a preview API that could change.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -216,6 +218,407 @@ func (a *BackupAndRestoreAPIService) PageListBackupsExecute(r BackupAndRestoreAP
 	}
 	// body params
 	localVarPostBody = r.backupPagedQuerySpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupAndRestoreAPIPageListIncrementalBackupsRequest struct {
+	ctx                             context.Context
+	ApiService                      *BackupAndRestoreAPIService
+	cUUID                           string
+	bUUID                           string
+	incrementalBackupPagedQuerySpec *IncrementalBackupPagedQuerySpec
+}
+
+func (r BackupAndRestoreAPIPageListIncrementalBackupsRequest) IncrementalBackupPagedQuerySpec(incrementalBackupPagedQuerySpec IncrementalBackupPagedQuerySpec) BackupAndRestoreAPIPageListIncrementalBackupsRequest {
+	r.incrementalBackupPagedQuerySpec = &incrementalBackupPagedQuerySpec
+	return r
+}
+
+func (r BackupAndRestoreAPIPageListIncrementalBackupsRequest) Execute() (*IncrementalBackupPagedResp, *http.Response, error) {
+	return r.ApiService.PageListIncrementalBackupsExecute(r)
+}
+
+/*
+PageListIncrementalBackups List incremental backups for a backup chain.
+
+Returns backups in the incremental chain for the specified backup, including the full
+(base) backup. Pass either the full backup UUID or any incremental backup UUID in the chain.
+`pageListBackups` returns only full backups; use this API to retrieve incrementals.
+Rows are ordered by create time. The order is descending by default.
+WARNING: This is a preview API that could change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param bUUID Backup UUID of any backup in the incremental chain
+	@return BackupAndRestoreAPIPageListIncrementalBackupsRequest
+*/
+func (a *BackupAndRestoreAPIService) PageListIncrementalBackups(ctx context.Context, cUUID string, bUUID string) BackupAndRestoreAPIPageListIncrementalBackupsRequest {
+	return BackupAndRestoreAPIPageListIncrementalBackupsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		bUUID:      bUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return IncrementalBackupPagedResp
+func (a *BackupAndRestoreAPIService) PageListIncrementalBackupsExecute(r BackupAndRestoreAPIPageListIncrementalBackupsRequest) (*IncrementalBackupPagedResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IncrementalBackupPagedResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupAndRestoreAPIService.PageListIncrementalBackups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/backups/{bUUID}/increments/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"bUUID"+"}", url.PathEscape(parameterValueToString(r.bUUID, "bUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.incrementalBackupPagedQuerySpec == nil {
+		return localVarReturnValue, nil, reportError("incrementalBackupPagedQuerySpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.incrementalBackupPagedQuerySpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupAndRestoreAPIPageListRestoreKeyspacesRequest struct {
+	ctx                           context.Context
+	ApiService                    *BackupAndRestoreAPIService
+	cUUID                         string
+	rUUID                         string
+	restoreKeyspacePagedQuerySpec *RestoreKeyspacePagedQuerySpec
+}
+
+func (r BackupAndRestoreAPIPageListRestoreKeyspacesRequest) RestoreKeyspacePagedQuerySpec(restoreKeyspacePagedQuerySpec RestoreKeyspacePagedQuerySpec) BackupAndRestoreAPIPageListRestoreKeyspacesRequest {
+	r.restoreKeyspacePagedQuerySpec = &restoreKeyspacePagedQuerySpec
+	return r
+}
+
+func (r BackupAndRestoreAPIPageListRestoreKeyspacesRequest) Execute() (*RestoreKeyspacePagedResp, *http.Response, error) {
+	return r.ApiService.PageListRestoreKeyspacesExecute(r)
+}
+
+/*
+PageListRestoreKeyspaces List keyspaces for a universe restore.
+
+Returns the keyspaces for the specified restore with pagination.
+WARNING: This is a preview API that could change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param rUUID Restore UUID
+	@return BackupAndRestoreAPIPageListRestoreKeyspacesRequest
+*/
+func (a *BackupAndRestoreAPIService) PageListRestoreKeyspaces(ctx context.Context, cUUID string, rUUID string) BackupAndRestoreAPIPageListRestoreKeyspacesRequest {
+	return BackupAndRestoreAPIPageListRestoreKeyspacesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		rUUID:      rUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return RestoreKeyspacePagedResp
+func (a *BackupAndRestoreAPIService) PageListRestoreKeyspacesExecute(r BackupAndRestoreAPIPageListRestoreKeyspacesRequest) (*RestoreKeyspacePagedResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RestoreKeyspacePagedResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupAndRestoreAPIService.PageListRestoreKeyspaces")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/restores/{rUUID}/keyspaces/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"rUUID"+"}", url.PathEscape(parameterValueToString(r.rUUID, "rUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restoreKeyspacePagedQuerySpec == nil {
+		return localVarReturnValue, nil, reportError("restoreKeyspacePagedQuerySpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restoreKeyspacePagedQuerySpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type BackupAndRestoreAPIPageListRestoresRequest struct {
+	ctx                   context.Context
+	ApiService            *BackupAndRestoreAPIService
+	cUUID                 string
+	restorePagedQuerySpec *RestorePagedQuerySpec
+}
+
+func (r BackupAndRestoreAPIPageListRestoresRequest) RestorePagedQuerySpec(restorePagedQuerySpec RestorePagedQuerySpec) BackupAndRestoreAPIPageListRestoresRequest {
+	r.restorePagedQuerySpec = &restorePagedQuerySpec
+	return r
+}
+
+func (r BackupAndRestoreAPIPageListRestoresRequest) Execute() (*RestorePagedResp, *http.Response, error) {
+	return r.ApiService.PageListRestoresExecute(r)
+}
+
+/*
+PageListRestores List universe restores.
+
+Returns universe backup restore events for the specified customer with pagination and optional filters.
+WARNING: This is a preview API that could change.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return BackupAndRestoreAPIPageListRestoresRequest
+*/
+func (a *BackupAndRestoreAPIService) PageListRestores(ctx context.Context, cUUID string) BackupAndRestoreAPIPageListRestoresRequest {
+	return BackupAndRestoreAPIPageListRestoresRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return RestorePagedResp
+func (a *BackupAndRestoreAPIService) PageListRestoresExecute(r BackupAndRestoreAPIPageListRestoresRequest) (*RestorePagedResp, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RestorePagedResp
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BackupAndRestoreAPIService.PageListRestores")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/restores/page"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.restorePagedQuerySpec == nil {
+		return localVarReturnValue, nil, reportError("restorePagedQuerySpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.restorePagedQuerySpec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

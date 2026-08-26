@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CanaryPauseState** | Pointer to **string** | WARNING: This is a preview API that could change. Canary pause state when upgrade is paused at a canary point | [optional] 
 **CanaryUpgrade** | **bool** |  | 
 **MasterAZUpgradeStatesList** | Pointer to [**[]AZUpgradeState**](AZUpgradeState.md) | WARNING: This is a preview API that could change. Per-AZ master upgrade progress (standard and canary) | [optional] 
+**MasterPauseCompleted** | Pointer to **bool** | WARNING: This is a preview API that could change. True once the canary pauseAfterMasters checkpoint has been reached and resumed, so it is not re-emitted on a subsequent abort+retry of the upgrade. | [optional] 
 **SoftwareVersion** | Pointer to **string** |  | [optional] 
 **TargetUpgradeSoftwareVersion** | Pointer to **string** |  | [optional] 
 **TserverAZUpgradeStatesList** | Pointer to [**[]AZUpgradeState**](AZUpgradeState.md) | WARNING: This is a preview API that could change. Per-AZ tserver upgrade progress (standard and canary) | [optional] 
@@ -177,6 +178,31 @@ SetMasterAZUpgradeStatesList sets MasterAZUpgradeStatesList field to given value
 `func (o *PrevYBSoftwareConfig) HasMasterAZUpgradeStatesList() bool`
 
 HasMasterAZUpgradeStatesList returns a boolean if a field has been set.
+
+### GetMasterPauseCompleted
+
+`func (o *PrevYBSoftwareConfig) GetMasterPauseCompleted() bool`
+
+GetMasterPauseCompleted returns the MasterPauseCompleted field if non-nil, zero value otherwise.
+
+### GetMasterPauseCompletedOk
+
+`func (o *PrevYBSoftwareConfig) GetMasterPauseCompletedOk() (*bool, bool)`
+
+GetMasterPauseCompletedOk returns a tuple with the MasterPauseCompleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMasterPauseCompleted
+
+`func (o *PrevYBSoftwareConfig) SetMasterPauseCompleted(v bool)`
+
+SetMasterPauseCompleted sets MasterPauseCompleted field to given value.
+
+### HasMasterPauseCompleted
+
+`func (o *PrevYBSoftwareConfig) HasMasterPauseCompleted() bool`
+
+HasMasterPauseCompleted returns a boolean if a field has been set.
 
 ### GetSoftwareVersion
 

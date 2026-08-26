@@ -23,6 +23,7 @@ type RegionCloudInfo struct {
 	Azu        *AzureRegionCloudInfo `json:"azu,omitempty"`
 	Gcp        *GCPRegionCloudInfo   `json:"gcp,omitempty"`
 	Kubernetes *KubernetesRegionInfo `json:"kubernetes,omitempty"`
+	Oci        *OCIRegionCloudInfo   `json:"oci,omitempty"`
 }
 
 // NewRegionCloudInfo instantiates a new RegionCloudInfo object
@@ -170,6 +171,38 @@ func (o *RegionCloudInfo) SetKubernetes(v KubernetesRegionInfo) {
 	o.Kubernetes = &v
 }
 
+// GetOci returns the Oci field value if set, zero value otherwise.
+func (o *RegionCloudInfo) GetOci() OCIRegionCloudInfo {
+	if o == nil || IsNil(o.Oci) {
+		var ret OCIRegionCloudInfo
+		return ret
+	}
+	return *o.Oci
+}
+
+// GetOciOk returns a tuple with the Oci field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RegionCloudInfo) GetOciOk() (*OCIRegionCloudInfo, bool) {
+	if o == nil || IsNil(o.Oci) {
+		return nil, false
+	}
+	return o.Oci, true
+}
+
+// HasOci returns a boolean if a field has been set.
+func (o *RegionCloudInfo) HasOci() bool {
+	if o != nil && !IsNil(o.Oci) {
+		return true
+	}
+
+	return false
+}
+
+// SetOci gets a reference to the given OCIRegionCloudInfo and assigns it to the Oci field.
+func (o *RegionCloudInfo) SetOci(v OCIRegionCloudInfo) {
+	o.Oci = &v
+}
+
 func (o RegionCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -191,6 +224,9 @@ func (o RegionCloudInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Kubernetes) {
 		toSerialize["kubernetes"] = o.Kubernetes
+	}
+	if !IsNil(o.Oci) {
+		toSerialize["oci"] = o.Oci
 	}
 	return toSerialize, nil
 }

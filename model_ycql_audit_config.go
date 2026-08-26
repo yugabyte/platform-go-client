@@ -22,19 +22,21 @@ type YCQLAuditConfig struct {
 	// Enabled
 	Enabled bool `json:"enabled"`
 	// Excluded Categories
-	ExcludedCategories []string `json:"excludedCategories"`
+	ExcludedCategories []string `json:"excludedCategories,omitempty"`
 	// Excluded Keyspaces
-	ExcludedKeyspaces []string `json:"excludedKeyspaces"`
+	ExcludedKeyspaces []string `json:"excludedKeyspaces,omitempty"`
 	// Excluded Users
-	ExcludedUsers []string `json:"excludedUsers"`
+	ExcludedUsers []string `json:"excludedUsers,omitempty"`
 	// Included categories
-	IncludedCategories []string `json:"includedCategories"`
+	IncludedCategories []string `json:"includedCategories,omitempty"`
 	// Included Keyspaces
-	IncludedKeyspaces []string `json:"includedKeyspaces"`
+	IncludedKeyspaces []string `json:"includedKeyspaces,omitempty"`
 	// Included Users
-	IncludedUsers []string `json:"includedUsers"`
+	IncludedUsers []string `json:"includedUsers,omitempty"`
 	// Log Level
-	LogLevel string `json:"logLevel"`
+	LogLevel *string `json:"logLevel,omitempty"`
+	// Number of days to keep gzipped YCQL audit log archives on the node. 0 or unset disables the dedicated audit-log retention pipeline and keeps the default size-based tserver log purge behavior.
+	LogRetentionDays *int32 `json:"logRetentionDays,omitempty"`
 }
 
 type _YCQLAuditConfig YCQLAuditConfig
@@ -43,16 +45,9 @@ type _YCQLAuditConfig YCQLAuditConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewYCQLAuditConfig(enabled bool, excludedCategories []string, excludedKeyspaces []string, excludedUsers []string, includedCategories []string, includedKeyspaces []string, includedUsers []string, logLevel string) *YCQLAuditConfig {
+func NewYCQLAuditConfig(enabled bool) *YCQLAuditConfig {
 	this := YCQLAuditConfig{}
 	this.Enabled = enabled
-	this.ExcludedCategories = excludedCategories
-	this.ExcludedKeyspaces = excludedKeyspaces
-	this.ExcludedUsers = excludedUsers
-	this.IncludedCategories = includedCategories
-	this.IncludedKeyspaces = includedKeyspaces
-	this.IncludedUsers = includedUsers
-	this.LogLevel = logLevel
 	return &this
 }
 
@@ -88,172 +83,260 @@ func (o *YCQLAuditConfig) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetExcludedCategories returns the ExcludedCategories field value
+// GetExcludedCategories returns the ExcludedCategories field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetExcludedCategories() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedCategories) {
 		var ret []string
 		return ret
 	}
-
 	return o.ExcludedCategories
 }
 
-// GetExcludedCategoriesOk returns a tuple with the ExcludedCategories field value
+// GetExcludedCategoriesOk returns a tuple with the ExcludedCategories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetExcludedCategoriesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedCategories) {
 		return nil, false
 	}
 	return o.ExcludedCategories, true
 }
 
-// SetExcludedCategories sets field value
+// HasExcludedCategories returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasExcludedCategories() bool {
+	if o != nil && !IsNil(o.ExcludedCategories) {
+		return true
+	}
+
+	return false
+}
+
+// SetExcludedCategories gets a reference to the given []string and assigns it to the ExcludedCategories field.
 func (o *YCQLAuditConfig) SetExcludedCategories(v []string) {
 	o.ExcludedCategories = v
 }
 
-// GetExcludedKeyspaces returns the ExcludedKeyspaces field value
+// GetExcludedKeyspaces returns the ExcludedKeyspaces field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetExcludedKeyspaces() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedKeyspaces) {
 		var ret []string
 		return ret
 	}
-
 	return o.ExcludedKeyspaces
 }
 
-// GetExcludedKeyspacesOk returns a tuple with the ExcludedKeyspaces field value
+// GetExcludedKeyspacesOk returns a tuple with the ExcludedKeyspaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetExcludedKeyspacesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedKeyspaces) {
 		return nil, false
 	}
 	return o.ExcludedKeyspaces, true
 }
 
-// SetExcludedKeyspaces sets field value
+// HasExcludedKeyspaces returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasExcludedKeyspaces() bool {
+	if o != nil && !IsNil(o.ExcludedKeyspaces) {
+		return true
+	}
+
+	return false
+}
+
+// SetExcludedKeyspaces gets a reference to the given []string and assigns it to the ExcludedKeyspaces field.
 func (o *YCQLAuditConfig) SetExcludedKeyspaces(v []string) {
 	o.ExcludedKeyspaces = v
 }
 
-// GetExcludedUsers returns the ExcludedUsers field value
+// GetExcludedUsers returns the ExcludedUsers field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetExcludedUsers() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedUsers) {
 		var ret []string
 		return ret
 	}
-
 	return o.ExcludedUsers
 }
 
-// GetExcludedUsersOk returns a tuple with the ExcludedUsers field value
+// GetExcludedUsersOk returns a tuple with the ExcludedUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetExcludedUsersOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExcludedUsers) {
 		return nil, false
 	}
 	return o.ExcludedUsers, true
 }
 
-// SetExcludedUsers sets field value
+// HasExcludedUsers returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasExcludedUsers() bool {
+	if o != nil && !IsNil(o.ExcludedUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetExcludedUsers gets a reference to the given []string and assigns it to the ExcludedUsers field.
 func (o *YCQLAuditConfig) SetExcludedUsers(v []string) {
 	o.ExcludedUsers = v
 }
 
-// GetIncludedCategories returns the IncludedCategories field value
+// GetIncludedCategories returns the IncludedCategories field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetIncludedCategories() []string {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedCategories) {
 		var ret []string
 		return ret
 	}
-
 	return o.IncludedCategories
 }
 
-// GetIncludedCategoriesOk returns a tuple with the IncludedCategories field value
+// GetIncludedCategoriesOk returns a tuple with the IncludedCategories field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetIncludedCategoriesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedCategories) {
 		return nil, false
 	}
 	return o.IncludedCategories, true
 }
 
-// SetIncludedCategories sets field value
+// HasIncludedCategories returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasIncludedCategories() bool {
+	if o != nil && !IsNil(o.IncludedCategories) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludedCategories gets a reference to the given []string and assigns it to the IncludedCategories field.
 func (o *YCQLAuditConfig) SetIncludedCategories(v []string) {
 	o.IncludedCategories = v
 }
 
-// GetIncludedKeyspaces returns the IncludedKeyspaces field value
+// GetIncludedKeyspaces returns the IncludedKeyspaces field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetIncludedKeyspaces() []string {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedKeyspaces) {
 		var ret []string
 		return ret
 	}
-
 	return o.IncludedKeyspaces
 }
 
-// GetIncludedKeyspacesOk returns a tuple with the IncludedKeyspaces field value
+// GetIncludedKeyspacesOk returns a tuple with the IncludedKeyspaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetIncludedKeyspacesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedKeyspaces) {
 		return nil, false
 	}
 	return o.IncludedKeyspaces, true
 }
 
-// SetIncludedKeyspaces sets field value
+// HasIncludedKeyspaces returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasIncludedKeyspaces() bool {
+	if o != nil && !IsNil(o.IncludedKeyspaces) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludedKeyspaces gets a reference to the given []string and assigns it to the IncludedKeyspaces field.
 func (o *YCQLAuditConfig) SetIncludedKeyspaces(v []string) {
 	o.IncludedKeyspaces = v
 }
 
-// GetIncludedUsers returns the IncludedUsers field value
+// GetIncludedUsers returns the IncludedUsers field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetIncludedUsers() []string {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedUsers) {
 		var ret []string
 		return ret
 	}
-
 	return o.IncludedUsers
 }
 
-// GetIncludedUsersOk returns a tuple with the IncludedUsers field value
+// GetIncludedUsersOk returns a tuple with the IncludedUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetIncludedUsersOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IncludedUsers) {
 		return nil, false
 	}
 	return o.IncludedUsers, true
 }
 
-// SetIncludedUsers sets field value
+// HasIncludedUsers returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasIncludedUsers() bool {
+	if o != nil && !IsNil(o.IncludedUsers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludedUsers gets a reference to the given []string and assigns it to the IncludedUsers field.
 func (o *YCQLAuditConfig) SetIncludedUsers(v []string) {
 	o.IncludedUsers = v
 }
 
-// GetLogLevel returns the LogLevel field value
+// GetLogLevel returns the LogLevel field value if set, zero value otherwise.
 func (o *YCQLAuditConfig) GetLogLevel() string {
-	if o == nil {
+	if o == nil || IsNil(o.LogLevel) {
 		var ret string
 		return ret
 	}
-
-	return o.LogLevel
+	return *o.LogLevel
 }
 
-// GetLogLevelOk returns a tuple with the LogLevel field value
+// GetLogLevelOk returns a tuple with the LogLevel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *YCQLAuditConfig) GetLogLevelOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LogLevel) {
 		return nil, false
 	}
-	return &o.LogLevel, true
+	return o.LogLevel, true
 }
 
-// SetLogLevel sets field value
+// HasLogLevel returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasLogLevel() bool {
+	if o != nil && !IsNil(o.LogLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogLevel gets a reference to the given string and assigns it to the LogLevel field.
 func (o *YCQLAuditConfig) SetLogLevel(v string) {
-	o.LogLevel = v
+	o.LogLevel = &v
+}
+
+// GetLogRetentionDays returns the LogRetentionDays field value if set, zero value otherwise.
+func (o *YCQLAuditConfig) GetLogRetentionDays() int32 {
+	if o == nil || IsNil(o.LogRetentionDays) {
+		var ret int32
+		return ret
+	}
+	return *o.LogRetentionDays
+}
+
+// GetLogRetentionDaysOk returns a tuple with the LogRetentionDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *YCQLAuditConfig) GetLogRetentionDaysOk() (*int32, bool) {
+	if o == nil || IsNil(o.LogRetentionDays) {
+		return nil, false
+	}
+	return o.LogRetentionDays, true
+}
+
+// HasLogRetentionDays returns a boolean if a field has been set.
+func (o *YCQLAuditConfig) HasLogRetentionDays() bool {
+	if o != nil && !IsNil(o.LogRetentionDays) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogRetentionDays gets a reference to the given int32 and assigns it to the LogRetentionDays field.
+func (o *YCQLAuditConfig) SetLogRetentionDays(v int32) {
+	o.LogRetentionDays = &v
 }
 
 func (o YCQLAuditConfig) MarshalJSON() ([]byte, error) {
@@ -267,13 +350,30 @@ func (o YCQLAuditConfig) MarshalJSON() ([]byte, error) {
 func (o YCQLAuditConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["enabled"] = o.Enabled
-	toSerialize["excludedCategories"] = o.ExcludedCategories
-	toSerialize["excludedKeyspaces"] = o.ExcludedKeyspaces
-	toSerialize["excludedUsers"] = o.ExcludedUsers
-	toSerialize["includedCategories"] = o.IncludedCategories
-	toSerialize["includedKeyspaces"] = o.IncludedKeyspaces
-	toSerialize["includedUsers"] = o.IncludedUsers
-	toSerialize["logLevel"] = o.LogLevel
+	if !IsNil(o.ExcludedCategories) {
+		toSerialize["excludedCategories"] = o.ExcludedCategories
+	}
+	if !IsNil(o.ExcludedKeyspaces) {
+		toSerialize["excludedKeyspaces"] = o.ExcludedKeyspaces
+	}
+	if !IsNil(o.ExcludedUsers) {
+		toSerialize["excludedUsers"] = o.ExcludedUsers
+	}
+	if !IsNil(o.IncludedCategories) {
+		toSerialize["includedCategories"] = o.IncludedCategories
+	}
+	if !IsNil(o.IncludedKeyspaces) {
+		toSerialize["includedKeyspaces"] = o.IncludedKeyspaces
+	}
+	if !IsNil(o.IncludedUsers) {
+		toSerialize["includedUsers"] = o.IncludedUsers
+	}
+	if !IsNil(o.LogLevel) {
+		toSerialize["logLevel"] = o.LogLevel
+	}
+	if !IsNil(o.LogRetentionDays) {
+		toSerialize["logRetentionDays"] = o.LogRetentionDays
+	}
 	return toSerialize, nil
 }
 

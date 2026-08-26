@@ -21,6 +21,8 @@ var _ MappedNullable = &AdditionalServicesStateData{}
 type AdditionalServicesStateData struct {
 	EarlyoomConfig  *EarlyoomConfig `json:"earlyoomConfig,omitempty"`
 	EarlyoomEnabled *bool           `json:"earlyoomEnabled,omitempty"`
+	// Configuration per provider
+	PerProviderConfig *map[string]PerProviderState `json:"perProviderConfig,omitempty"`
 }
 
 // NewAdditionalServicesStateData instantiates a new AdditionalServicesStateData object
@@ -104,6 +106,38 @@ func (o *AdditionalServicesStateData) SetEarlyoomEnabled(v bool) {
 	o.EarlyoomEnabled = &v
 }
 
+// GetPerProviderConfig returns the PerProviderConfig field value if set, zero value otherwise.
+func (o *AdditionalServicesStateData) GetPerProviderConfig() map[string]PerProviderState {
+	if o == nil || IsNil(o.PerProviderConfig) {
+		var ret map[string]PerProviderState
+		return ret
+	}
+	return *o.PerProviderConfig
+}
+
+// GetPerProviderConfigOk returns a tuple with the PerProviderConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AdditionalServicesStateData) GetPerProviderConfigOk() (*map[string]PerProviderState, bool) {
+	if o == nil || IsNil(o.PerProviderConfig) {
+		return nil, false
+	}
+	return o.PerProviderConfig, true
+}
+
+// HasPerProviderConfig returns a boolean if a field has been set.
+func (o *AdditionalServicesStateData) HasPerProviderConfig() bool {
+	if o != nil && !IsNil(o.PerProviderConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetPerProviderConfig gets a reference to the given map[string]PerProviderState and assigns it to the PerProviderConfig field.
+func (o *AdditionalServicesStateData) SetPerProviderConfig(v map[string]PerProviderState) {
+	o.PerProviderConfig = &v
+}
+
 func (o AdditionalServicesStateData) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,6 +153,9 @@ func (o AdditionalServicesStateData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EarlyoomEnabled) {
 		toSerialize["earlyoomEnabled"] = o.EarlyoomEnabled
+	}
+	if !IsNil(o.PerProviderConfig) {
+		toSerialize["perProviderConfig"] = o.PerProviderConfig
 	}
 	return toSerialize, nil
 }

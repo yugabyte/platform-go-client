@@ -27,11 +27,11 @@ type UniverseQueryLogsExporterConfig struct {
 	MemoryLimitCheckIntervalSeconds *int32 `json:"memoryLimitCheckIntervalSeconds,omitempty"`
 	// Memory limit in MiB for the OpenTelemetry Collector process in the config file.
 	MemoryLimitMib *int32 `json:"memoryLimitMib,omitempty"`
-	// Maximum batch size for query logs exporter
+	// Maximum batch size for logs exporter
 	SendBatchMaxSize *int32 `json:"sendBatchMaxSize,omitempty"`
-	// Batch size for query logs exporter
+	// Batch size for logs exporter
 	SendBatchSize *int32 `json:"sendBatchSize,omitempty"`
-	// Maximum batch timeout for query logs exporter in seconds
+	// Maximum batch timeout for logs exporter in seconds
 	SendBatchTimeoutSeconds *int32 `json:"sendBatchTimeoutSeconds,omitempty"`
 }
 

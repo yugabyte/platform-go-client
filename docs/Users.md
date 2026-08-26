@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **GroupMemberships** | **[]string** |  | 
 **LdapSpecifiedRole** | Pointer to **bool** | LDAP Specified Role | [optional] 
 **NewUniverseUiEnabled** | Pointer to **bool** | YbaApi Internal. Used to turn off new UI feature for particular user | [optional] 
+**NewUniverseUiTourCompleted** | Pointer to **bool** | YbaApi Internal. Whether the new UI tour was shown to particular user | [optional] 
 **OidcJwtAuthToken** | Pointer to **string** |  | [optional] [readonly] 
 **Primary** | **bool** |  | 
 **Role** | Pointer to **string** | &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.19.3.0.&lt;/b&gt; Use  getRoleBindings instead. | [optional] 
@@ -201,6 +202,31 @@ SetNewUniverseUiEnabled sets NewUniverseUiEnabled field to given value.
 `func (o *Users) HasNewUniverseUiEnabled() bool`
 
 HasNewUniverseUiEnabled returns a boolean if a field has been set.
+
+### GetNewUniverseUiTourCompleted
+
+`func (o *Users) GetNewUniverseUiTourCompleted() bool`
+
+GetNewUniverseUiTourCompleted returns the NewUniverseUiTourCompleted field if non-nil, zero value otherwise.
+
+### GetNewUniverseUiTourCompletedOk
+
+`func (o *Users) GetNewUniverseUiTourCompletedOk() (*bool, bool)`
+
+GetNewUniverseUiTourCompletedOk returns a tuple with the NewUniverseUiTourCompleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewUniverseUiTourCompleted
+
+`func (o *Users) SetNewUniverseUiTourCompleted(v bool)`
+
+SetNewUniverseUiTourCompleted sets NewUniverseUiTourCompleted field to given value.
+
+### HasNewUniverseUiTourCompleted
+
+`func (o *Users) HasNewUniverseUiTourCompleted() bool`
+
+HasNewUniverseUiTourCompleted returns a boolean if a field has been set.
 
 ### GetOidcJwtAuthToken
 

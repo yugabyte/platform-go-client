@@ -24,6 +24,8 @@ type EncryptionInTransitSpec struct {
 	EnableNodeToNodeEncrypt *bool `json:"enable_node_to_node_encrypt,omitempty"`
 	// Whether to enable encryption for client connection to DB nodes
 	EnableClientToNodeEncrypt *bool `json:"enable_client_to_node_encrypt,omitempty"`
+	// In case certificates are generated, whether to use the same certificate
+	RootAndClientRootCaSame *bool `json:"root_and_client_root_ca_same,omitempty"`
 	// The UUID of the rootCA to be used to generate node certificates and facilitate TLS communication between database nodes.
 	RootCa *string `json:"root_ca,omitempty"`
 	// The UUID of the clientRootCA to be used to generate client certificates and facilitate TLS communication between server and client. Can be set to same as root_CA.
@@ -111,6 +113,38 @@ func (o *EncryptionInTransitSpec) SetEnableClientToNodeEncrypt(v bool) {
 	o.EnableClientToNodeEncrypt = &v
 }
 
+// GetRootAndClientRootCaSame returns the RootAndClientRootCaSame field value if set, zero value otherwise.
+func (o *EncryptionInTransitSpec) GetRootAndClientRootCaSame() bool {
+	if o == nil || IsNil(o.RootAndClientRootCaSame) {
+		var ret bool
+		return ret
+	}
+	return *o.RootAndClientRootCaSame
+}
+
+// GetRootAndClientRootCaSameOk returns a tuple with the RootAndClientRootCaSame field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EncryptionInTransitSpec) GetRootAndClientRootCaSameOk() (*bool, bool) {
+	if o == nil || IsNil(o.RootAndClientRootCaSame) {
+		return nil, false
+	}
+	return o.RootAndClientRootCaSame, true
+}
+
+// HasRootAndClientRootCaSame returns a boolean if a field has been set.
+func (o *EncryptionInTransitSpec) HasRootAndClientRootCaSame() bool {
+	if o != nil && !IsNil(o.RootAndClientRootCaSame) {
+		return true
+	}
+
+	return false
+}
+
+// SetRootAndClientRootCaSame gets a reference to the given bool and assigns it to the RootAndClientRootCaSame field.
+func (o *EncryptionInTransitSpec) SetRootAndClientRootCaSame(v bool) {
+	o.RootAndClientRootCaSame = &v
+}
+
 // GetRootCa returns the RootCa field value if set, zero value otherwise.
 func (o *EncryptionInTransitSpec) GetRootCa() string {
 	if o == nil || IsNil(o.RootCa) {
@@ -190,6 +224,9 @@ func (o EncryptionInTransitSpec) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnableClientToNodeEncrypt) {
 		toSerialize["enable_client_to_node_encrypt"] = o.EnableClientToNodeEncrypt
+	}
+	if !IsNil(o.RootAndClientRootCaSame) {
+		toSerialize["root_and_client_root_ca_same"] = o.RootAndClientRootCaSame
 	}
 	if !IsNil(o.RootCa) {
 		toSerialize["root_ca"] = o.RootCa

@@ -30,6 +30,7 @@ type FinalizeUpgradeParams struct {
 	CmkArn                 *string                 `json:"cmkArn,omitempty"`
 	CommunicationPorts     *CommunicationPorts     `json:"communicationPorts,omitempty"`
 	CreatingUser           Users                   `json:"creatingUser"`
+	CreationSucceeded      *bool                   `json:"creationSucceeded,omitempty"`
 	CurrentClusterType     *string                 `json:"currentClusterType,omitempty"`
 	DeviceInfo             *DeviceInfo             `json:"deviceInfo,omitempty"`
 	EnableYbc              *bool                   `json:"enableYbc,omitempty"`
@@ -89,8 +90,9 @@ type FinalizeUpgradeParams struct {
 	// The target universe's xcluster replication relationships
 	TargetXClusterConfigs []string `json:"targetXClusterConfigs,omitempty"`
 	// YbaApi Internal. True if a universe has been detached
-	UniverseDetached *bool `json:"universeDetached,omitempty"`
-	UniversePaused   *bool `json:"universePaused,omitempty"`
+	UniverseDetached *bool             `json:"universeDetached,omitempty"`
+	UniversePaused   *bool             `json:"universePaused,omitempty"`
+	UniverseSettings *UniverseSettings `json:"universeSettings,omitempty"`
 	// Associated universe UUID
 	UniverseUUID          *string       `json:"universeUUID,omitempty"`
 	UpdateInProgress      *bool         `json:"updateInProgress,omitempty"`
@@ -438,6 +440,38 @@ func (o *FinalizeUpgradeParams) GetCreatingUserOk() (*Users, bool) {
 // SetCreatingUser sets field value
 func (o *FinalizeUpgradeParams) SetCreatingUser(v Users) {
 	o.CreatingUser = v
+}
+
+// GetCreationSucceeded returns the CreationSucceeded field value if set, zero value otherwise.
+func (o *FinalizeUpgradeParams) GetCreationSucceeded() bool {
+	if o == nil || IsNil(o.CreationSucceeded) {
+		var ret bool
+		return ret
+	}
+	return *o.CreationSucceeded
+}
+
+// GetCreationSucceededOk returns a tuple with the CreationSucceeded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FinalizeUpgradeParams) GetCreationSucceededOk() (*bool, bool) {
+	if o == nil || IsNil(o.CreationSucceeded) {
+		return nil, false
+	}
+	return o.CreationSucceeded, true
+}
+
+// HasCreationSucceeded returns a boolean if a field has been set.
+func (o *FinalizeUpgradeParams) HasCreationSucceeded() bool {
+	if o != nil && !IsNil(o.CreationSucceeded) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreationSucceeded gets a reference to the given bool and assigns it to the CreationSucceeded field.
+func (o *FinalizeUpgradeParams) SetCreationSucceeded(v bool) {
+	o.CreationSucceeded = &v
 }
 
 // GetCurrentClusterType returns the CurrentClusterType field value if set, zero value otherwise.
@@ -1816,6 +1850,38 @@ func (o *FinalizeUpgradeParams) SetUniversePaused(v bool) {
 	o.UniversePaused = &v
 }
 
+// GetUniverseSettings returns the UniverseSettings field value if set, zero value otherwise.
+func (o *FinalizeUpgradeParams) GetUniverseSettings() UniverseSettings {
+	if o == nil || IsNil(o.UniverseSettings) {
+		var ret UniverseSettings
+		return ret
+	}
+	return *o.UniverseSettings
+}
+
+// GetUniverseSettingsOk returns a tuple with the UniverseSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FinalizeUpgradeParams) GetUniverseSettingsOk() (*UniverseSettings, bool) {
+	if o == nil || IsNil(o.UniverseSettings) {
+		return nil, false
+	}
+	return o.UniverseSettings, true
+}
+
+// HasUniverseSettings returns a boolean if a field has been set.
+func (o *FinalizeUpgradeParams) HasUniverseSettings() bool {
+	if o != nil && !IsNil(o.UniverseSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniverseSettings gets a reference to the given UniverseSettings and assigns it to the UniverseSettings field.
+func (o *FinalizeUpgradeParams) SetUniverseSettings(v UniverseSettings) {
+	o.UniverseSettings = &v
+}
+
 // GetUniverseUUID returns the UniverseUUID field value if set, zero value otherwise.
 func (o *FinalizeUpgradeParams) GetUniverseUUID() string {
 	if o == nil || IsNil(o.UniverseUUID) {
@@ -2284,6 +2350,9 @@ func (o FinalizeUpgradeParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["communicationPorts"] = o.CommunicationPorts
 	}
 	toSerialize["creatingUser"] = o.CreatingUser
+	if !IsNil(o.CreationSucceeded) {
+		toSerialize["creationSucceeded"] = o.CreationSucceeded
+	}
 	if !IsNil(o.CurrentClusterType) {
 		toSerialize["currentClusterType"] = o.CurrentClusterType
 	}
@@ -2407,6 +2476,9 @@ func (o FinalizeUpgradeParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UniversePaused) {
 		toSerialize["universePaused"] = o.UniversePaused
+	}
+	if !IsNil(o.UniverseSettings) {
+		toSerialize["universeSettings"] = o.UniverseSettings
 	}
 	if !IsNil(o.UniverseUUID) {
 		toSerialize["universeUUID"] = o.UniverseUUID

@@ -51,20 +51,21 @@ type UserIntent struct {
 	// User-defined gflags for master. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	// Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call
-	MasterInstanceType        *string              `json:"masterInstanceType,omitempty"`
-	MasterK8SNodeResourceSpec *K8SNodeResourceSpec `json:"masterK8SNodeResourceSpec,omitempty"`
-	MetricsExportConfig       *MetricsExportConfig `json:"metricsExportConfig,omitempty"`
-	MultiTenancy              *MultiTenancyConfig  `json:"multiTenancy,omitempty"`
-	NumNodes                  *int32               `json:"numNodes,omitempty"`
-	PreferredRegion           *string              `json:"preferredRegion,omitempty"`
-	Provider                  *string              `json:"provider,omitempty"`
-	ProviderType              *string              `json:"providerType,omitempty"`
-	ProxyConfig               *ProxyConfig         `json:"proxyConfig,omitempty"`
-	QueryLogConfig            *QueryLogConfig      `json:"queryLogConfig,omitempty"`
-	RegionList                []string             `json:"regionList,omitempty"`
-	ReplicationFactor         *int32               `json:"replicationFactor,omitempty"`
-	SpecificGFlags            *SpecificGFlags      `json:"specificGFlags,omitempty"`
-	SpotPrice                 *float64             `json:"spotPrice,omitempty"`
+	MasterInstanceType        *string                 `json:"masterInstanceType,omitempty"`
+	MasterK8SNodeResourceSpec *K8SNodeResourceSpec    `json:"masterK8SNodeResourceSpec,omitempty"`
+	MetricsExportConfig       *MetricsExportConfig    `json:"metricsExportConfig,omitempty"`
+	MultiTenancy              *MultiTenancyConfig     `json:"multiTenancy,omitempty"`
+	NumNodes                  *int32                  `json:"numNodes,omitempty"`
+	PreferredRegion           *string                 `json:"preferredRegion,omitempty"`
+	Provider                  *string                 `json:"provider,omitempty"`
+	ProviderSpecifications    []ProviderSpecification `json:"providerSpecifications,omitempty"`
+	ProviderType              *string                 `json:"providerType,omitempty"`
+	ProxyConfig               *ProxyConfig            `json:"proxyConfig,omitempty"`
+	QueryLogConfig            *QueryLogConfig         `json:"queryLogConfig,omitempty"`
+	RegionList                []string                `json:"regionList,omitempty"`
+	ReplicationFactor         *int32                  `json:"replicationFactor,omitempty"`
+	SpecificGFlags            *SpecificGFlags         `json:"specificGFlags,omitempty"`
+	SpotPrice                 *float64                `json:"spotPrice,omitempty"`
 	// User-defined gflags for tserver. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	TserverGFlags              *map[string]string   `json:"tserverGFlags,omitempty"`
 	TserverK8SNodeResourceSpec *K8SNodeResourceSpec `json:"tserverK8SNodeResourceSpec,omitempty"`
@@ -1190,6 +1191,38 @@ func (o *UserIntent) SetProvider(v string) {
 	o.Provider = &v
 }
 
+// GetProviderSpecifications returns the ProviderSpecifications field value if set, zero value otherwise.
+func (o *UserIntent) GetProviderSpecifications() []ProviderSpecification {
+	if o == nil || IsNil(o.ProviderSpecifications) {
+		var ret []ProviderSpecification
+		return ret
+	}
+	return o.ProviderSpecifications
+}
+
+// GetProviderSpecificationsOk returns a tuple with the ProviderSpecifications field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetProviderSpecificationsOk() ([]ProviderSpecification, bool) {
+	if o == nil || IsNil(o.ProviderSpecifications) {
+		return nil, false
+	}
+	return o.ProviderSpecifications, true
+}
+
+// HasProviderSpecifications returns a boolean if a field has been set.
+func (o *UserIntent) HasProviderSpecifications() bool {
+	if o != nil && !IsNil(o.ProviderSpecifications) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderSpecifications gets a reference to the given []ProviderSpecification and assigns it to the ProviderSpecifications field.
+func (o *UserIntent) SetProviderSpecifications(v []ProviderSpecification) {
+	o.ProviderSpecifications = v
+}
+
 // GetProviderType returns the ProviderType field value if set, zero value otherwise.
 func (o *UserIntent) GetProviderType() string {
 	if o == nil || IsNil(o.ProviderType) {
@@ -2005,6 +2038,9 @@ func (o UserIntent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Provider) {
 		toSerialize["provider"] = o.Provider
+	}
+	if !IsNil(o.ProviderSpecifications) {
+		toSerialize["providerSpecifications"] = o.ProviderSpecifications
 	}
 	if !IsNil(o.ProviderType) {
 		toSerialize["providerType"] = o.ProviderType

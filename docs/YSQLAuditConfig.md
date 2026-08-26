@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Classes** | **[]string** | YSQL statement classes | 
+**Classes** | Pointer to **[]string** | YSQL statement classes | [optional] 
 **Enabled** | **bool** | Enabled | [readonly] 
 **LogCatalog** | **bool** | Log catalog | 
 **LogClient** | **bool** | Log client | 
-**LogLevel** | **string** | Log level. For NOTICE, INFO, DEBUG levels, user also needs to set &#39;log_min_messages&#39; to the required level for the audit logs to be exported. Default &#39;log_min_messages&#39; is WARNING. | 
+**LogLevel** | Pointer to **string** | Log level. For NOTICE, INFO, DEBUG levels, user also needs to set &#39;log_min_messages&#39; to the required level for the audit logs to be exported. Default &#39;log_min_messages&#39; is WARNING. | [optional] 
 **LogParameter** | **bool** | Log parameter | 
-**LogParameterMaxSize** | **int32** | Log parameter max size | 
+**LogParameterMaxSize** | Pointer to **int32** | Log parameter max size | [optional] 
 **LogRelation** | **bool** | Log relation | 
+**LogRetentionDays** | Pointer to **int32** | Number of days to keep extracted YSQL audit log archives on the node. 0 or unset disables the dedicated audit-log retention pipeline and keeps the default size-based postgres log purge behavior. | [optional] 
 **LogRows** | **bool** | Log rows | 
 **LogStatement** | **bool** | Log statement | 
 **LogStatementOnce** | **bool** | Log statement once | 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewYSQLAuditConfig
 
-`func NewYSQLAuditConfig(classes []string, enabled bool, logCatalog bool, logClient bool, logLevel string, logParameter bool, logParameterMaxSize int32, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
+`func NewYSQLAuditConfig(enabled bool, logCatalog bool, logClient bool, logParameter bool, logRelation bool, logRows bool, logStatement bool, logStatementOnce bool, ) *YSQLAuditConfig`
 
 NewYSQLAuditConfig instantiates a new YSQLAuditConfig object
 This constructor will assign default values to properties that have it defined,
@@ -54,6 +55,11 @@ and a boolean to check if the value has been set.
 
 SetClasses sets Classes field to given value.
 
+### HasClasses
+
+`func (o *YSQLAuditConfig) HasClasses() bool`
+
+HasClasses returns a boolean if a field has been set.
 
 ### GetEnabled
 
@@ -134,6 +140,11 @@ and a boolean to check if the value has been set.
 
 SetLogLevel sets LogLevel field to given value.
 
+### HasLogLevel
+
+`func (o *YSQLAuditConfig) HasLogLevel() bool`
+
+HasLogLevel returns a boolean if a field has been set.
 
 ### GetLogParameter
 
@@ -174,6 +185,11 @@ and a boolean to check if the value has been set.
 
 SetLogParameterMaxSize sets LogParameterMaxSize field to given value.
 
+### HasLogParameterMaxSize
+
+`func (o *YSQLAuditConfig) HasLogParameterMaxSize() bool`
+
+HasLogParameterMaxSize returns a boolean if a field has been set.
 
 ### GetLogRelation
 
@@ -194,6 +210,31 @@ and a boolean to check if the value has been set.
 
 SetLogRelation sets LogRelation field to given value.
 
+
+### GetLogRetentionDays
+
+`func (o *YSQLAuditConfig) GetLogRetentionDays() int32`
+
+GetLogRetentionDays returns the LogRetentionDays field if non-nil, zero value otherwise.
+
+### GetLogRetentionDaysOk
+
+`func (o *YSQLAuditConfig) GetLogRetentionDaysOk() (*int32, bool)`
+
+GetLogRetentionDaysOk returns a tuple with the LogRetentionDays field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLogRetentionDays
+
+`func (o *YSQLAuditConfig) SetLogRetentionDays(v int32)`
+
+SetLogRetentionDays sets LogRetentionDays field to given value.
+
+### HasLogRetentionDays
+
+`func (o *YSQLAuditConfig) HasLogRetentionDays() bool`
+
+HasLogRetentionDays returns a boolean if a field has been set.
 
 ### GetLogRows
 

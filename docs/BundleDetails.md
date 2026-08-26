@@ -4,9 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BashComponentSpecs** | Pointer to [**[]BashComponentSpec**](BashComponentSpec.md) | Specs that drive the node-level BashComponent (if requested). | [optional] 
 **Components** | **[]string** |  | 
+**FilesComponentSpecs** | Pointer to [**[]FilesComponentSpec**](FilesComponentSpec.md) | Specs that drive the generic node-level FilesComponent (if requested). | [optional] 
 **MaxCoreFileSize** | Pointer to **int64** | Max size of the collected cores (if any) | [optional] 
 **MaxNumRecentCores** | Pointer to **int32** | Max number of most recent cores to collect (if any) | [optional] 
+**NodeNames** | Pointer to **[]string** | Names of the universe nodes node-level components were collected from. Empty or null means every node in the universe was considered. | [optional] 
 **PaDumpEndDate** | Pointer to **time.Time** | End date to filter Perf Advisor data | [optional] 
 **PaDumpStartDate** | Pointer to **time.Time** | Start date to filter Perf Advisor data | [optional] 
 **PaMetricsFormat** | Pointer to **string** | Specifies PA Dump metrics format. | [optional] 
@@ -15,6 +18,10 @@ Name | Type | Description | Notes
 **PromMetricsFormat** | Pointer to **string** | Specifies Prom Dump metrics format. | [optional] 
 **PromMetricsStepSec** | Pointer to **int32** | Specifies Prom Dump metrics step in seconds. | [optional] 
 **PrometheusMetricsTypes** | Pointer to **[]string** | List of exports to be included in the prometheus dump | [optional] 
+**YbAdminComponentSpecs** | Pointer to [**[]YbAdminComponentSpec**](YbAdminComponentSpec.md) | Specs that drive the node-level YbAdminComponent (if requested). | [optional] 
+**YbaComponentSpecs** | Pointer to [**[]YbaComponentSpec**](YbaComponentSpec.md) | Specs that drive the global-level YBAComponent (if requested). | [optional] 
+**YcqlComponentSpecs** | Pointer to [**[]YCQLComponentSpec**](YCQLComponentSpec.md) | Specs that drive the node-level YCQLComponent (if requested). | [optional] 
+**YsqlComponentSpecs** | Pointer to [**[]YSQLComponentSpec**](YSQLComponentSpec.md) | Specs that drive the node-level YSQLComponent (if requested). | [optional] 
 
 ## Methods
 
@@ -35,6 +42,31 @@ NewBundleDetailsWithDefaults instantiates a new BundleDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetBashComponentSpecs
+
+`func (o *BundleDetails) GetBashComponentSpecs() []BashComponentSpec`
+
+GetBashComponentSpecs returns the BashComponentSpecs field if non-nil, zero value otherwise.
+
+### GetBashComponentSpecsOk
+
+`func (o *BundleDetails) GetBashComponentSpecsOk() (*[]BashComponentSpec, bool)`
+
+GetBashComponentSpecsOk returns a tuple with the BashComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBashComponentSpecs
+
+`func (o *BundleDetails) SetBashComponentSpecs(v []BashComponentSpec)`
+
+SetBashComponentSpecs sets BashComponentSpecs field to given value.
+
+### HasBashComponentSpecs
+
+`func (o *BundleDetails) HasBashComponentSpecs() bool`
+
+HasBashComponentSpecs returns a boolean if a field has been set.
+
 ### GetComponents
 
 `func (o *BundleDetails) GetComponents() []string`
@@ -54,6 +86,31 @@ and a boolean to check if the value has been set.
 
 SetComponents sets Components field to given value.
 
+
+### GetFilesComponentSpecs
+
+`func (o *BundleDetails) GetFilesComponentSpecs() []FilesComponentSpec`
+
+GetFilesComponentSpecs returns the FilesComponentSpecs field if non-nil, zero value otherwise.
+
+### GetFilesComponentSpecsOk
+
+`func (o *BundleDetails) GetFilesComponentSpecsOk() (*[]FilesComponentSpec, bool)`
+
+GetFilesComponentSpecsOk returns a tuple with the FilesComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilesComponentSpecs
+
+`func (o *BundleDetails) SetFilesComponentSpecs(v []FilesComponentSpec)`
+
+SetFilesComponentSpecs sets FilesComponentSpecs field to given value.
+
+### HasFilesComponentSpecs
+
+`func (o *BundleDetails) HasFilesComponentSpecs() bool`
+
+HasFilesComponentSpecs returns a boolean if a field has been set.
 
 ### GetMaxCoreFileSize
 
@@ -104,6 +161,31 @@ SetMaxNumRecentCores sets MaxNumRecentCores field to given value.
 `func (o *BundleDetails) HasMaxNumRecentCores() bool`
 
 HasMaxNumRecentCores returns a boolean if a field has been set.
+
+### GetNodeNames
+
+`func (o *BundleDetails) GetNodeNames() []string`
+
+GetNodeNames returns the NodeNames field if non-nil, zero value otherwise.
+
+### GetNodeNamesOk
+
+`func (o *BundleDetails) GetNodeNamesOk() (*[]string, bool)`
+
+GetNodeNamesOk returns a tuple with the NodeNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeNames
+
+`func (o *BundleDetails) SetNodeNames(v []string)`
+
+SetNodeNames sets NodeNames field to given value.
+
+### HasNodeNames
+
+`func (o *BundleDetails) HasNodeNames() bool`
+
+HasNodeNames returns a boolean if a field has been set.
 
 ### GetPaDumpEndDate
 
@@ -304,6 +386,106 @@ SetPrometheusMetricsTypes sets PrometheusMetricsTypes field to given value.
 `func (o *BundleDetails) HasPrometheusMetricsTypes() bool`
 
 HasPrometheusMetricsTypes returns a boolean if a field has been set.
+
+### GetYbAdminComponentSpecs
+
+`func (o *BundleDetails) GetYbAdminComponentSpecs() []YbAdminComponentSpec`
+
+GetYbAdminComponentSpecs returns the YbAdminComponentSpecs field if non-nil, zero value otherwise.
+
+### GetYbAdminComponentSpecsOk
+
+`func (o *BundleDetails) GetYbAdminComponentSpecsOk() (*[]YbAdminComponentSpec, bool)`
+
+GetYbAdminComponentSpecsOk returns a tuple with the YbAdminComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbAdminComponentSpecs
+
+`func (o *BundleDetails) SetYbAdminComponentSpecs(v []YbAdminComponentSpec)`
+
+SetYbAdminComponentSpecs sets YbAdminComponentSpecs field to given value.
+
+### HasYbAdminComponentSpecs
+
+`func (o *BundleDetails) HasYbAdminComponentSpecs() bool`
+
+HasYbAdminComponentSpecs returns a boolean if a field has been set.
+
+### GetYbaComponentSpecs
+
+`func (o *BundleDetails) GetYbaComponentSpecs() []YbaComponentSpec`
+
+GetYbaComponentSpecs returns the YbaComponentSpecs field if non-nil, zero value otherwise.
+
+### GetYbaComponentSpecsOk
+
+`func (o *BundleDetails) GetYbaComponentSpecsOk() (*[]YbaComponentSpec, bool)`
+
+GetYbaComponentSpecsOk returns a tuple with the YbaComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYbaComponentSpecs
+
+`func (o *BundleDetails) SetYbaComponentSpecs(v []YbaComponentSpec)`
+
+SetYbaComponentSpecs sets YbaComponentSpecs field to given value.
+
+### HasYbaComponentSpecs
+
+`func (o *BundleDetails) HasYbaComponentSpecs() bool`
+
+HasYbaComponentSpecs returns a boolean if a field has been set.
+
+### GetYcqlComponentSpecs
+
+`func (o *BundleDetails) GetYcqlComponentSpecs() []YCQLComponentSpec`
+
+GetYcqlComponentSpecs returns the YcqlComponentSpecs field if non-nil, zero value otherwise.
+
+### GetYcqlComponentSpecsOk
+
+`func (o *BundleDetails) GetYcqlComponentSpecsOk() (*[]YCQLComponentSpec, bool)`
+
+GetYcqlComponentSpecsOk returns a tuple with the YcqlComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYcqlComponentSpecs
+
+`func (o *BundleDetails) SetYcqlComponentSpecs(v []YCQLComponentSpec)`
+
+SetYcqlComponentSpecs sets YcqlComponentSpecs field to given value.
+
+### HasYcqlComponentSpecs
+
+`func (o *BundleDetails) HasYcqlComponentSpecs() bool`
+
+HasYcqlComponentSpecs returns a boolean if a field has been set.
+
+### GetYsqlComponentSpecs
+
+`func (o *BundleDetails) GetYsqlComponentSpecs() []YSQLComponentSpec`
+
+GetYsqlComponentSpecs returns the YsqlComponentSpecs field if non-nil, zero value otherwise.
+
+### GetYsqlComponentSpecsOk
+
+`func (o *BundleDetails) GetYsqlComponentSpecsOk() (*[]YSQLComponentSpec, bool)`
+
+GetYsqlComponentSpecsOk returns a tuple with the YsqlComponentSpecs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetYsqlComponentSpecs
+
+`func (o *BundleDetails) SetYsqlComponentSpecs(v []YSQLComponentSpec)`
+
+SetYsqlComponentSpecs sets YsqlComponentSpecs field to given value.
+
+### HasYsqlComponentSpecs
+
+`func (o *BundleDetails) HasYsqlComponentSpecs() bool`
+
+HasYsqlComponentSpecs returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

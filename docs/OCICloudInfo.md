@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**OciAuthType** | Pointer to **string** | OCI authentication type (API_KEY or INSTANCE_PRINCIPAL) | [optional] 
 **OciCompartmentId** | Pointer to **string** | OCI Compartment OCID | [optional] 
 **OciFingerprint** | Pointer to **string** | OCI API Key Fingerprint | [optional] 
 **OciHostedZoneId** | Pointer to **string** | OCI DNS Zone OCID for hosted zone | [optional] 
@@ -31,6 +32,31 @@ will change when the set of required properties is changed
 NewOCICloudInfoWithDefaults instantiates a new OCICloudInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetOciAuthType
+
+`func (o *OCICloudInfo) GetOciAuthType() string`
+
+GetOciAuthType returns the OciAuthType field if non-nil, zero value otherwise.
+
+### GetOciAuthTypeOk
+
+`func (o *OCICloudInfo) GetOciAuthTypeOk() (*string, bool)`
+
+GetOciAuthTypeOk returns a tuple with the OciAuthType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOciAuthType
+
+`func (o *OCICloudInfo) SetOciAuthType(v string)`
+
+SetOciAuthType sets OciAuthType field to given value.
+
+### HasOciAuthType
+
+`func (o *OCICloudInfo) HasOciAuthType() bool`
+
+HasOciAuthType returns a boolean if a field has been set.
 
 ### GetOciCompartmentId
 

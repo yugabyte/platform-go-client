@@ -30,9 +30,8 @@ type BackupSpec struct {
 	// Backup schedule UUID, when created by a schedule.
 	ScheduleUuid *string `json:"schedule_uuid,omitempty"`
 	// Backup schedule name, when created by a schedule.
-	ScheduleName *string `json:"schedule_name,omitempty"`
-	// Table type for the backup.
-	BackupType *string `json:"backup_type,omitempty"`
+	ScheduleName *string    `json:"schedule_name,omitempty"`
+	BackupType   *TableType `json:"backup_type,omitempty"`
 	// Backup implementation category.
 	Category *string `json:"category,omitempty"`
 	// Storage provider type for the backup.
@@ -231,9 +230,9 @@ func (o *BackupSpec) SetScheduleName(v string) {
 }
 
 // GetBackupType returns the BackupType field value if set, zero value otherwise.
-func (o *BackupSpec) GetBackupType() string {
+func (o *BackupSpec) GetBackupType() TableType {
 	if o == nil || IsNil(o.BackupType) {
-		var ret string
+		var ret TableType
 		return ret
 	}
 	return *o.BackupType
@@ -241,7 +240,7 @@ func (o *BackupSpec) GetBackupType() string {
 
 // GetBackupTypeOk returns a tuple with the BackupType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BackupSpec) GetBackupTypeOk() (*string, bool) {
+func (o *BackupSpec) GetBackupTypeOk() (*TableType, bool) {
 	if o == nil || IsNil(o.BackupType) {
 		return nil, false
 	}
@@ -257,8 +256,8 @@ func (o *BackupSpec) HasBackupType() bool {
 	return false
 }
 
-// SetBackupType gets a reference to the given string and assigns it to the BackupType field.
-func (o *BackupSpec) SetBackupType(v string) {
+// SetBackupType gets a reference to the given TableType and assigns it to the BackupType field.
+func (o *BackupSpec) SetBackupType(v TableType) {
 	o.BackupType = &v
 }
 

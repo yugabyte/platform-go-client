@@ -4,14 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ApiKey** | **string** | API key | 
 **RoutingKey** | **string** | Routing key | 
 
 ## Methods
 
 ### NewAlertChannelPagerDutyParams
 
-`func NewAlertChannelPagerDutyParams(apiKey string, routingKey string, ) *AlertChannelPagerDutyParams`
+`func NewAlertChannelPagerDutyParams(routingKey string, ) *AlertChannelPagerDutyParams`
 
 NewAlertChannelPagerDutyParams instantiates a new AlertChannelPagerDutyParams object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +24,6 @@ will change when the set of required properties is changed
 NewAlertChannelPagerDutyParamsWithDefaults instantiates a new AlertChannelPagerDutyParams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetApiKey
-
-`func (o *AlertChannelPagerDutyParams) GetApiKey() string`
-
-GetApiKey returns the ApiKey field if non-nil, zero value otherwise.
-
-### GetApiKeyOk
-
-`func (o *AlertChannelPagerDutyParams) GetApiKeyOk() (*string, bool)`
-
-GetApiKeyOk returns a tuple with the ApiKey field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetApiKey
-
-`func (o *AlertChannelPagerDutyParams) SetApiKey(v string)`
-
-SetApiKey sets ApiKey field to given value.
-
 
 ### GetRoutingKey
 

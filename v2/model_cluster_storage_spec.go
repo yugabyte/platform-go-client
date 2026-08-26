@@ -18,7 +18,7 @@ import (
 // checks if the ClusterStorageSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClusterStorageSpec{}
 
-// ClusterStorageSpec Storage volume specification that is used for tserver nodes in this cluster. Part of ClusterSpec, ClusterAddSpec and ClusterEditSpec.
+// ClusterStorageSpec Complete storage volume specification used at the cluster (non-override) node level. Requires volume_size and num_volumes. Part of ClusterNodeSpec.
 type ClusterStorageSpec struct {
 	// The size of each volume in each instance. Could be modified in payload for /resize_node API call
 	VolumeSize int32 `json:"volume_size"`
@@ -27,9 +27,8 @@ type ClusterStorageSpec struct {
 	// Comma-separated list of mount points for the volumes in each instance. Required for an onprem cluster.
 	MountPoints *string `json:"mount_points,omitempty"`
 	// Name of the storage class, if this is a kubernetes cluster
-	StorageClass *string `json:"storage_class,omitempty"`
-	// Storage type used for this instance, if this is a aws (IO1, GP2, GP3), gcp (Scratch, Persistent, Hyperdisk_Balanced, Hyperdisk_Extreme) or azu (StandardSSD_LRS, Premium_LRS, PremiumV2_LRS, UltraSSD_LRS) cluster.
-	StorageType *string `json:"storage_type,omitempty"`
+	StorageClass *string             `json:"storage_class,omitempty"`
+	StorageType  *ClusterStorageType `json:"storage_type,omitempty"`
 	// Desired IOPS for the volumes mounted on this aws, gcp or azu instance
 	DiskIops *int32 `json:"disk_iops,omitempty"`
 	// Desired throughput for the volumes mounted on this aws, gcp or azu instance
@@ -171,9 +170,9 @@ func (o *ClusterStorageSpec) SetStorageClass(v string) {
 }
 
 // GetStorageType returns the StorageType field value if set, zero value otherwise.
-func (o *ClusterStorageSpec) GetStorageType() string {
+func (o *ClusterStorageSpec) GetStorageType() ClusterStorageType {
 	if o == nil || IsNil(o.StorageType) {
-		var ret string
+		var ret ClusterStorageType
 		return ret
 	}
 	return *o.StorageType
@@ -181,7 +180,7 @@ func (o *ClusterStorageSpec) GetStorageType() string {
 
 // GetStorageTypeOk returns a tuple with the StorageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ClusterStorageSpec) GetStorageTypeOk() (*string, bool) {
+func (o *ClusterStorageSpec) GetStorageTypeOk() (*ClusterStorageType, bool) {
 	if o == nil || IsNil(o.StorageType) {
 		return nil, false
 	}
@@ -197,8 +196,8 @@ func (o *ClusterStorageSpec) HasStorageType() bool {
 	return false
 }
 
-// SetStorageType gets a reference to the given string and assigns it to the StorageType field.
-func (o *ClusterStorageSpec) SetStorageType(v string) {
+// SetStorageType gets a reference to the given ClusterStorageType and assigns it to the StorageType field.
+func (o *ClusterStorageSpec) SetStorageType(v ClusterStorageType) {
 	o.StorageType = &v
 }
 

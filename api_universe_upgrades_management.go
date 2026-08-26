@@ -333,14 +333,16 @@ func (r UniverseUpgradesManagementAPIModifyAuditLoggingRequest) Execute() (*YBPT
 }
 
 /*
-ModifyAuditLogging Modify Audit Logging Configuration
+ModifyAuditLogging Modify Audit Logging Configuration - deprecated
 
-WARNING: This is a preview API that could change. Modifies the audit logging configuration for a universe.
+<b style="color:#ff0000">Deprecated since YBA version 2026.1.2.0.</b></p> Use the v2 POST /api/v2/customers/{cUUID}/universes/{uniUUID}/export-telemetry-configs API instead. Modifies the audit logging configuration for a universe.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID
 	@param uniUUID
 	@return UniverseUpgradesManagementAPIModifyAuditLoggingRequest
+
+Deprecated
 */
 func (a *UniverseUpgradesManagementAPIService) ModifyAuditLogging(ctx context.Context, cUUID string, uniUUID string) UniverseUpgradesManagementAPIModifyAuditLoggingRequest {
 	return UniverseUpgradesManagementAPIModifyAuditLoggingRequest{
@@ -354,6 +356,8 @@ func (a *UniverseUpgradesManagementAPIService) ModifyAuditLogging(ctx context.Co
 // Execute executes the request
 //
 //	@return YBPTask
+//
+// Deprecated
 func (a *UniverseUpgradesManagementAPIService) ModifyAuditLoggingExecute(r UniverseUpgradesManagementAPIModifyAuditLoggingRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

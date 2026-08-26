@@ -18,20 +18,21 @@ import (
 // checks if the ClusterNodeSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClusterNodeSpec{}
 
-// ClusterNodeSpec Node settings (like CPU / memory) for each node in the cluster. The node settings configured at top-level are uniform settings for both tserver and master nodes. Granular settings for tserver and master (honoured if dedicated_nodes is true or this is k8s cluster) are available for certain node properties. Granular settings can also be overridden per Availability Zone. This is part of ClusterSpec.
+// ClusterNodeSpec Node settings (like CPU / memory) for each node in the cluster. The node settings configured at top-level are uniform settings for both tserver and master nodes and require complete storage_spec (volume_size and num_volumes). Granular settings for tserver and master (honoured if dedicated_nodes is true or this is k8s cluster) are available for certain node properties. Granular settings can also be overridden per Availability Zone with partial storage. This is part of ClusterSpec.
 type ClusterNodeSpec struct {
 	// Instance type for tserver/master nodes of cluster that determines the cpu and memory resources.
 	InstanceType *string             `json:"instance_type,omitempty"`
 	StorageSpec  *ClusterStorageSpec `json:"storage_spec,omitempty"`
 	// Amount of memory in MB to limit the postgres process using the ysql cgroup. The value should be greater than 0. When set to 0 it results in no cgroup limits. For a read replica cluster, setting this value to null or -1 would inherit this value from the primary cluster. Applicable only for nodes running as Linux VMs on AWS/GCP/Azure Cloud Provider. Only used internally by YBM.
-	CgroupSize *int32              `json:"cgroup_size,omitempty"`
-	Tserver    *PerProcessNodeSpec `json:"tserver,omitempty"`
-	Master     *PerProcessNodeSpec `json:"master,omitempty"`
-	// Whether to run tserver and master processes in dedicated nodes in this cluster. Defaults to false where master and tserver processes share the same node.
+	CgroupSize *int32                     `json:"cgroup_size,omitempty"`
+	Tserver    *ClusterPerProcessNodeSpec `json:"tserver,omitempty"`
+	Master     *ClusterPerProcessNodeSpec `json:"master,omitempty"`
+	// Deprecated: use dedicated_nodes on ClusterSpec / ClusterEditSpec / ClusterAddSpec. Whether to run tserver and master processes in dedicated nodes in this cluster.
+	// Deprecated
 	DedicatedNodes         *bool                `json:"dedicated_nodes,omitempty"`
 	K8sMasterResourceSpec  *K8SNodeResourceSpec `json:"k8s_master_resource_spec,omitempty"`
 	K8sTserverResourceSpec *K8SNodeResourceSpec `json:"k8s_tserver_resource_spec,omitempty"`
-	// Granular node settings overridden per Availability Zone identified by AZ uuid.
+	// Granular node settings overridden per Availability Zone identified by AZ uuid. When provided, this map fully replaces existing AZ node overrides; omit the field to leave them unchanged. An empty map clears all AZ node overrides.
 	AzNodeSpec *map[string]AvailabilityZoneNodeSpec `json:"az_node_spec,omitempty"`
 }
 
@@ -41,8 +42,6 @@ type ClusterNodeSpec struct {
 // will change when the set of required properties is changed
 func NewClusterNodeSpec() *ClusterNodeSpec {
 	this := ClusterNodeSpec{}
-	var dedicatedNodes bool = false
-	this.DedicatedNodes = &dedicatedNodes
 	return &this
 }
 
@@ -51,8 +50,6 @@ func NewClusterNodeSpec() *ClusterNodeSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewClusterNodeSpecWithDefaults() *ClusterNodeSpec {
 	this := ClusterNodeSpec{}
-	var dedicatedNodes bool = false
-	this.DedicatedNodes = &dedicatedNodes
 	return &this
 }
 
@@ -153,9 +150,9 @@ func (o *ClusterNodeSpec) SetCgroupSize(v int32) {
 }
 
 // GetTserver returns the Tserver field value if set, zero value otherwise.
-func (o *ClusterNodeSpec) GetTserver() PerProcessNodeSpec {
+func (o *ClusterNodeSpec) GetTserver() ClusterPerProcessNodeSpec {
 	if o == nil || IsNil(o.Tserver) {
-		var ret PerProcessNodeSpec
+		var ret ClusterPerProcessNodeSpec
 		return ret
 	}
 	return *o.Tserver
@@ -163,7 +160,7 @@ func (o *ClusterNodeSpec) GetTserver() PerProcessNodeSpec {
 
 // GetTserverOk returns a tuple with the Tserver field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ClusterNodeSpec) GetTserverOk() (*PerProcessNodeSpec, bool) {
+func (o *ClusterNodeSpec) GetTserverOk() (*ClusterPerProcessNodeSpec, bool) {
 	if o == nil || IsNil(o.Tserver) {
 		return nil, false
 	}
@@ -179,15 +176,15 @@ func (o *ClusterNodeSpec) HasTserver() bool {
 	return false
 }
 
-// SetTserver gets a reference to the given PerProcessNodeSpec and assigns it to the Tserver field.
-func (o *ClusterNodeSpec) SetTserver(v PerProcessNodeSpec) {
+// SetTserver gets a reference to the given ClusterPerProcessNodeSpec and assigns it to the Tserver field.
+func (o *ClusterNodeSpec) SetTserver(v ClusterPerProcessNodeSpec) {
 	o.Tserver = &v
 }
 
 // GetMaster returns the Master field value if set, zero value otherwise.
-func (o *ClusterNodeSpec) GetMaster() PerProcessNodeSpec {
+func (o *ClusterNodeSpec) GetMaster() ClusterPerProcessNodeSpec {
 	if o == nil || IsNil(o.Master) {
-		var ret PerProcessNodeSpec
+		var ret ClusterPerProcessNodeSpec
 		return ret
 	}
 	return *o.Master
@@ -195,7 +192,7 @@ func (o *ClusterNodeSpec) GetMaster() PerProcessNodeSpec {
 
 // GetMasterOk returns a tuple with the Master field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ClusterNodeSpec) GetMasterOk() (*PerProcessNodeSpec, bool) {
+func (o *ClusterNodeSpec) GetMasterOk() (*ClusterPerProcessNodeSpec, bool) {
 	if o == nil || IsNil(o.Master) {
 		return nil, false
 	}
@@ -211,12 +208,13 @@ func (o *ClusterNodeSpec) HasMaster() bool {
 	return false
 }
 
-// SetMaster gets a reference to the given PerProcessNodeSpec and assigns it to the Master field.
-func (o *ClusterNodeSpec) SetMaster(v PerProcessNodeSpec) {
+// SetMaster gets a reference to the given ClusterPerProcessNodeSpec and assigns it to the Master field.
+func (o *ClusterNodeSpec) SetMaster(v ClusterPerProcessNodeSpec) {
 	o.Master = &v
 }
 
 // GetDedicatedNodes returns the DedicatedNodes field value if set, zero value otherwise.
+// Deprecated
 func (o *ClusterNodeSpec) GetDedicatedNodes() bool {
 	if o == nil || IsNil(o.DedicatedNodes) {
 		var ret bool
@@ -227,6 +225,7 @@ func (o *ClusterNodeSpec) GetDedicatedNodes() bool {
 
 // GetDedicatedNodesOk returns a tuple with the DedicatedNodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ClusterNodeSpec) GetDedicatedNodesOk() (*bool, bool) {
 	if o == nil || IsNil(o.DedicatedNodes) {
 		return nil, false
@@ -244,6 +243,7 @@ func (o *ClusterNodeSpec) HasDedicatedNodes() bool {
 }
 
 // SetDedicatedNodes gets a reference to the given bool and assigns it to the DedicatedNodes field.
+// Deprecated
 func (o *ClusterNodeSpec) SetDedicatedNodes(v bool) {
 	o.DedicatedNodes = &v
 }

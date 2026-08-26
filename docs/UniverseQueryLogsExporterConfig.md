@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ExporterUuid** | **string** | Exporter uuid | [readonly] 
 **MemoryLimitCheckIntervalSeconds** | Pointer to **int32** | Check interval in seconds for the MemoryLimiterProcessor. | [optional] 
 **MemoryLimitMib** | Pointer to **int32** | Memory limit in MiB for the OpenTelemetry Collector process in the config file. | [optional] 
-**SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for query logs exporter | [optional] 
-**SendBatchSize** | Pointer to **int32** | Batch size for query logs exporter | [optional] 
-**SendBatchTimeoutSeconds** | Pointer to **int32** | Maximum batch timeout for query logs exporter in seconds | [optional] 
+**SendBatchMaxSize** | Pointer to **int32** | Maximum batch size for logs exporter | [optional] 
+**SendBatchSize** | Pointer to **int32** | Batch size for logs exporter | [optional] 
+**SendBatchTimeoutSeconds** | Pointer to **int32** | Maximum batch timeout for logs exporter in seconds | [optional] 
 
 ## Methods
 

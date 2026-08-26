@@ -26,7 +26,7 @@ type ClusterNetworkingSpec struct {
 	Master      map[string]interface{} `json:"master,omitempty"`
 	ProxyConfig *NodeProxyConfig       `json:"proxy_config,omitempty"`
 	// Whether to create a load balancer service for this cluster. Defaults to NONE.
-	EnableExposingService *string `json:"enable_exposing_service,omitempty"`
+	EnableExposingService *ExposingServiceState `json:"enable_exposing_service,omitempty"`
 	// Create target groups if enabled. Used by YBM.
 	EnableLb *bool `json:"enable_lb,omitempty"`
 	// Granular network settings overridden per Availability Zone identified by AZ uuid.
@@ -39,7 +39,7 @@ type ClusterNetworkingSpec struct {
 // will change when the set of required properties is changed
 func NewClusterNetworkingSpec() *ClusterNetworkingSpec {
 	this := ClusterNetworkingSpec{}
-	var enableExposingService string = "NONE"
+	var enableExposingService ExposingServiceState = NONE
 	this.EnableExposingService = &enableExposingService
 	return &this
 }
@@ -49,7 +49,7 @@ func NewClusterNetworkingSpec() *ClusterNetworkingSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewClusterNetworkingSpecWithDefaults() *ClusterNetworkingSpec {
 	this := ClusterNetworkingSpec{}
-	var enableExposingService string = "NONE"
+	var enableExposingService ExposingServiceState = NONE
 	this.EnableExposingService = &enableExposingService
 	return &this
 }
@@ -151,9 +151,9 @@ func (o *ClusterNetworkingSpec) SetProxyConfig(v NodeProxyConfig) {
 }
 
 // GetEnableExposingService returns the EnableExposingService field value if set, zero value otherwise.
-func (o *ClusterNetworkingSpec) GetEnableExposingService() string {
+func (o *ClusterNetworkingSpec) GetEnableExposingService() ExposingServiceState {
 	if o == nil || IsNil(o.EnableExposingService) {
-		var ret string
+		var ret ExposingServiceState
 		return ret
 	}
 	return *o.EnableExposingService
@@ -161,7 +161,7 @@ func (o *ClusterNetworkingSpec) GetEnableExposingService() string {
 
 // GetEnableExposingServiceOk returns a tuple with the EnableExposingService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ClusterNetworkingSpec) GetEnableExposingServiceOk() (*string, bool) {
+func (o *ClusterNetworkingSpec) GetEnableExposingServiceOk() (*ExposingServiceState, bool) {
 	if o == nil || IsNil(o.EnableExposingService) {
 		return nil, false
 	}
@@ -177,8 +177,8 @@ func (o *ClusterNetworkingSpec) HasEnableExposingService() bool {
 	return false
 }
 
-// SetEnableExposingService gets a reference to the given string and assigns it to the EnableExposingService field.
-func (o *ClusterNetworkingSpec) SetEnableExposingService(v string) {
+// SetEnableExposingService gets a reference to the given ExposingServiceState and assigns it to the EnableExposingService field.
+func (o *ClusterNetworkingSpec) SetEnableExposingService(v ExposingServiceState) {
 	o.EnableExposingService = &v
 }
 

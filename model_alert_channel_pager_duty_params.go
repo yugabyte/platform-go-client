@@ -20,8 +20,6 @@ var _ MappedNullable = &AlertChannelPagerDutyParams{}
 // AlertChannelPagerDutyParams struct for AlertChannelPagerDutyParams
 type AlertChannelPagerDutyParams struct {
 	AlertChannelParams
-	// API key
-	ApiKey string `json:"apiKey"`
 	// Routing key
 	RoutingKey string `json:"routingKey"`
 }
@@ -32,9 +30,8 @@ type _AlertChannelPagerDutyParams AlertChannelPagerDutyParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertChannelPagerDutyParams(apiKey string, routingKey string) *AlertChannelPagerDutyParams {
+func NewAlertChannelPagerDutyParams(routingKey string) *AlertChannelPagerDutyParams {
 	this := AlertChannelPagerDutyParams{}
-	this.ApiKey = apiKey
 	this.RoutingKey = routingKey
 	return &this
 }
@@ -45,30 +42,6 @@ func NewAlertChannelPagerDutyParams(apiKey string, routingKey string) *AlertChan
 func NewAlertChannelPagerDutyParamsWithDefaults() *AlertChannelPagerDutyParams {
 	this := AlertChannelPagerDutyParams{}
 	return &this
-}
-
-// GetApiKey returns the ApiKey field value
-func (o *AlertChannelPagerDutyParams) GetApiKey() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ApiKey
-}
-
-// GetApiKeyOk returns a tuple with the ApiKey field value
-// and a boolean to check if the value has been set.
-func (o *AlertChannelPagerDutyParams) GetApiKeyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ApiKey, true
-}
-
-// SetApiKey sets field value
-func (o *AlertChannelPagerDutyParams) SetApiKey(v string) {
-	o.ApiKey = v
 }
 
 // GetRoutingKey returns the RoutingKey field value
@@ -113,7 +86,6 @@ func (o AlertChannelPagerDutyParams) ToMap() (map[string]interface{}, error) {
 	if errAlertChannelParams != nil {
 		return map[string]interface{}{}, errAlertChannelParams
 	}
-	toSerialize["apiKey"] = o.ApiKey
 	toSerialize["routingKey"] = o.RoutingKey
 	return toSerialize, nil
 }

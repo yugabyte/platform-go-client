@@ -1011,6 +1011,13 @@ type UniverseInformationAPIHealthCheckUniverseRequest struct {
 	ApiService *UniverseInformationAPIService
 	cUUID      string
 	uniUUID    string
+	limit      *int32
+}
+
+// Maximum number of most recent health check entries to return. Defaults to 10.
+func (r UniverseInformationAPIHealthCheckUniverseRequest) Limit(limit int32) UniverseInformationAPIHealthCheckUniverseRequest {
+	r.limit = &limit
+	return r
 }
 
 func (r UniverseInformationAPIHealthCheckUniverseRequest) Execute() ([]Details, *http.Response, error) {
@@ -1060,6 +1067,13 @@ func (a *UniverseInformationAPIService) HealthCheckUniverseExecute(r UniverseInf
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 10
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
