@@ -6,10 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CertPath** | **string** |  | 
 **Compressor** | **string** |  | 
-**Offloadable** | **bool** |  | 
 **ServerCert** | **string** |  | 
 **ServerCertExpirySecs** | **int64** |  | 
+**ServerCertLocalPath** | **string** |  | 
 **ServerKey** | **string** |  | 
+**ServerKeyLocalPath** | **string** |  | 
 **SignerPrivateKey** | **string** |  | 
 **SignerPublicKey** | **string** |  | 
 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewConfig
 
-`func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverCertExpirySecs int64, serverKey string, signerPrivateKey string, signerPublicKey string, ) *Config`
+`func NewConfig(certPath string, compressor string, serverCert string, serverCertExpirySecs int64, serverCertLocalPath string, serverKey string, serverKeyLocalPath string, signerPrivateKey string, signerPublicKey string, ) *Config`
 
 NewConfig instantiates a new Config object
 This constructor will assign default values to properties that have it defined,
@@ -72,26 +73,6 @@ and a boolean to check if the value has been set.
 SetCompressor sets Compressor field to given value.
 
 
-### GetOffloadable
-
-`func (o *Config) GetOffloadable() bool`
-
-GetOffloadable returns the Offloadable field if non-nil, zero value otherwise.
-
-### GetOffloadableOk
-
-`func (o *Config) GetOffloadableOk() (*bool, bool)`
-
-GetOffloadableOk returns a tuple with the Offloadable field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOffloadable
-
-`func (o *Config) SetOffloadable(v bool)`
-
-SetOffloadable sets Offloadable field to given value.
-
-
 ### GetServerCert
 
 `func (o *Config) GetServerCert() string`
@@ -132,6 +113,26 @@ and a boolean to check if the value has been set.
 SetServerCertExpirySecs sets ServerCertExpirySecs field to given value.
 
 
+### GetServerCertLocalPath
+
+`func (o *Config) GetServerCertLocalPath() string`
+
+GetServerCertLocalPath returns the ServerCertLocalPath field if non-nil, zero value otherwise.
+
+### GetServerCertLocalPathOk
+
+`func (o *Config) GetServerCertLocalPathOk() (*string, bool)`
+
+GetServerCertLocalPathOk returns a tuple with the ServerCertLocalPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerCertLocalPath
+
+`func (o *Config) SetServerCertLocalPath(v string)`
+
+SetServerCertLocalPath sets ServerCertLocalPath field to given value.
+
+
 ### GetServerKey
 
 `func (o *Config) GetServerKey() string`
@@ -150,6 +151,26 @@ and a boolean to check if the value has been set.
 `func (o *Config) SetServerKey(v string)`
 
 SetServerKey sets ServerKey field to given value.
+
+
+### GetServerKeyLocalPath
+
+`func (o *Config) GetServerKeyLocalPath() string`
+
+GetServerKeyLocalPath returns the ServerKeyLocalPath field if non-nil, zero value otherwise.
+
+### GetServerKeyLocalPathOk
+
+`func (o *Config) GetServerKeyLocalPathOk() (*string, bool)`
+
+GetServerKeyLocalPathOk returns a tuple with the ServerKeyLocalPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerKeyLocalPath
+
+`func (o *Config) SetServerKeyLocalPath(v string)`
+
+SetServerKeyLocalPath sets ServerKeyLocalPath field to given value.
 
 
 ### GetSignerPrivateKey

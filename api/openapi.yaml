@@ -7705,6 +7705,16 @@ paths:
           default: false
           type: boolean
       - in: query
+        name: mode
+        schema:
+          default: "null"
+          type: string
+      - in: query
+        name: paEndpointUUID
+        schema:
+          format: uuid
+          type: string
+      - in: query
         name: request
         schema: {}
       responses:
@@ -16249,6 +16259,9 @@ components:
           - DeletePACollectorConfig
           - PACollectorRegister
           - PACollectorUnregister
+          - CreatePerfAdvisorEndpoint
+          - EditPerfAdvisorEndpoint
+          - DeletePerfAdvisorEndpoint
           - UpgradeKubernetesOverrides
           - UpgradeCerts
           - UpgradeTLS
@@ -16429,6 +16442,7 @@ components:
           - SupportBundle
           - TelemetryProvider
           - PACollector
+          - PerfAdvisorEndpoint
           - GFlags
           - Hook
           - HookScope
@@ -16814,6 +16828,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -24314,6 +24329,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -24553,6 +24572,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -24599,6 +24619,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -24800,6 +24821,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -28697,6 +28719,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -36193,6 +36216,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -36436,6 +36463,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -36482,6 +36510,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -36683,6 +36712,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -39080,27 +39110,30 @@ components:
       type: object
     Config:
       example:
+        serverKeyLocalPath: serverKeyLocalPath
         certPath: certPath
         serverCert: serverCert
-        offloadable: true
         serverKey: serverKey
         signerPublicKey: signerPublicKey
         serverCertExpirySecs: 0
         signerPrivateKey: signerPrivateKey
+        serverCertLocalPath: serverCertLocalPath
         compressor: compressor
       properties:
         certPath:
           type: string
         compressor:
           type: string
-        offloadable:
-          type: boolean
         serverCert:
           type: string
         serverCertExpirySecs:
           format: int64
           type: integer
+        serverCertLocalPath:
+          type: string
         serverKey:
+          type: string
+        serverKeyLocalPath:
           type: string
         signerPrivateKey:
           type: string
@@ -39109,10 +39142,11 @@ components:
       required:
       - certPath
       - compressor
-      - offloadable
       - serverCert
       - serverCertExpirySecs
+      - serverCertLocalPath
       - serverKey
+      - serverKeyLocalPath
       - signerPrivateKey
       - signerPublicKey
       type: object
@@ -41776,6 +41810,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -49272,6 +49307,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -49511,6 +49550,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -49557,6 +49597,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -49758,6 +49799,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -50173,6 +50215,7 @@ components:
         masterGFlags:
           key: masterGFlags
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -57675,6 +57718,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -57918,6 +57965,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -57964,6 +58012,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -58165,6 +58214,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -59342,6 +59392,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -66842,6 +66893,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -67083,6 +67138,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -67129,6 +67185,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -67330,6 +67387,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -67673,6 +67731,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -75170,6 +75229,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -75409,6 +75472,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -75455,6 +75519,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -75656,6 +75721,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -77968,14 +78034,16 @@ components:
         osType: DARWIN
         archType: ARM64
         state: REGISTERING
+        certificateUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         config:
+          serverKeyLocalPath: serverKeyLocalPath
           certPath: certPath
           serverCert: serverCert
-          offloadable: true
           serverKey: serverKey
           signerPublicKey: signerPublicKey
           serverCertExpirySecs: 0
           signerPrivateKey: signerPrivateKey
+          serverCertLocalPath: serverCertLocalPath
           compressor: compressor
         updatedAt: 2022-12-21T13:07:18Z
       properties:
@@ -77984,6 +78052,12 @@ components:
           enum:
           - ARM64
           - AMD64
+          readOnly: true
+          type: string
+        certificateUuid:
+          description: "WARNING: This is a preview API that could change. Custom certificate\
+            \ UUID."
+          format: uuid
           readOnly: true
           type: string
         config:
@@ -78164,14 +78238,16 @@ components:
           osType: DARWIN
           archType: ARM64
           state: REGISTERING
+          certificateUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           config:
+            serverKeyLocalPath: serverKeyLocalPath
             certPath: certPath
             serverCert: serverCert
-            offloadable: true
             serverKey: serverKey
             signerPublicKey: signerPublicKey
             serverCertExpirySecs: 0
             signerPrivateKey: signerPrivateKey
+            serverCertLocalPath: serverCertLocalPath
             compressor: compressor
           providerName: providerName
           universeName: universeName
@@ -78194,14 +78270,16 @@ components:
           osType: DARWIN
           archType: ARM64
           state: REGISTERING
+          certificateUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           config:
+            serverKeyLocalPath: serverKeyLocalPath
             certPath: certPath
             serverCert: serverCert
-            offloadable: true
             serverKey: serverKey
             signerPublicKey: signerPublicKey
             serverCertExpirySecs: 0
             signerPrivateKey: signerPrivateKey
+            serverCertLocalPath: serverCertLocalPath
             compressor: compressor
           providerName: providerName
           universeName: universeName
@@ -78248,14 +78326,16 @@ components:
         osType: DARWIN
         archType: ARM64
         state: REGISTERING
+        certificateUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         config:
+          serverKeyLocalPath: serverKeyLocalPath
           certPath: certPath
           serverCert: serverCert
-          offloadable: true
           serverKey: serverKey
           signerPublicKey: signerPublicKey
           serverCertExpirySecs: 0
           signerPrivateKey: signerPrivateKey
+          serverCertLocalPath: serverCertLocalPath
           compressor: compressor
         providerName: providerName
         universeName: universeName
@@ -78266,6 +78346,12 @@ components:
           enum:
           - ARM64
           - AMD64
+          readOnly: true
+          type: string
+        certificateUuid:
+          description: "WARNING: This is a preview API that could change. Custom certificate\
+            \ UUID."
+          format: uuid
           readOnly: true
           type: string
         config:
@@ -79401,7 +79487,7 @@ components:
           readOnly: true
           type: string
         embedded:
-          description: True when this collector is the embedded PA managed by EmbeddedCollectorInitializer
+          description: True when this collector is the embedded PA managed by PACollectorSync
           readOnly: true
           type: boolean
         inUseStatus:
@@ -79449,7 +79535,10 @@ components:
       type: object
     PA Collector registered universe info:
       example:
+        mode: BASIC
         universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        paEndpointName: paEndpointName
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         dataMountPoints:
         - dataMountPoints
         - dataMountPoints
@@ -79467,11 +79556,25 @@ components:
           items:
             type: string
           type: array
+        mode:
+          description: How the universe is registered with the collector
+          enum:
+          - BASIC
+          - ADVANCED
+          - ONLINE
+          type: string
         otherMountPoints:
           description: Other mount points
           items:
             type: string
           type: array
+        paEndpointName:
+          description: "Perf Advisor Endpoint name, set for ONLINE mode only"
+          type: string
+        paEndpointUuid:
+          description: "Perf Advisor Endpoint UUID, set for ONLINE mode only"
+          format: uuid
+          type: string
         universeName:
           description: "Universe name (from YBA, or null if universe was deleted)"
           type: string
@@ -79482,6 +79585,9 @@ components:
       type: object
     PA Collector universe registration status:
       example:
+        mode: BASIC
+        paEndpointName: paEndpointName
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         success: true
         advancedObservability: true
       properties:
@@ -79489,6 +79595,20 @@ components:
           description: Whether advanced observability (metrics export to Prometheus)
             is enabled
           type: boolean
+        mode:
+          description: How the universe is registered with the collector
+          enum:
+          - BASIC
+          - ADVANCED
+          - ONLINE
+          type: string
+        paEndpointName:
+          description: "Perf Advisor Endpoint name, set for ONLINE mode only"
+          type: string
+        paEndpointUuid:
+          description: "Perf Advisor Endpoint UUID, set for ONLINE mode only"
+          format: uuid
+          type: string
         success:
           description: Whether the universe is registered with PA Collector
           type: boolean
@@ -79517,7 +79637,7 @@ components:
           readOnly: true
           type: string
         embedded:
-          description: True when this collector is the embedded PA managed by EmbeddedCollectorInitializer
+          description: True when this collector is the embedded PA managed by PACollectorSync
           readOnly: true
           type: boolean
         metricsPassword:
@@ -79606,7 +79726,10 @@ components:
     PaUniversePagedApiResponse:
       example:
         entities:
-        - universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - mode: BASIC
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          paEndpointName: paEndpointName
+          paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           dataMountPoints:
           - dataMountPoints
           - dataMountPoints
@@ -79615,7 +79738,10 @@ components:
           - otherMountPoints
           advancedObservability: true
           universeName: universeName
-        - universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - mode: BASIC
+          universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          paEndpointName: paEndpointName
+          paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           dataMountPoints:
           - dataMountPoints
           - dataMountPoints
@@ -82553,6 +82679,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -90055,6 +90182,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -90294,6 +90425,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -90340,6 +90472,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -90541,6 +90674,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -90823,6 +90957,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -98319,6 +98454,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -98558,6 +98697,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -98604,6 +98744,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -98805,6 +98946,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -99862,6 +100004,7 @@ components:
         masterGFlags:
           key: masterGFlags
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -107367,6 +107510,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -107610,6 +107757,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -107656,6 +107804,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -107857,6 +108006,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -108308,6 +108458,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -115804,6 +115955,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -116043,6 +116198,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -116089,6 +116245,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -116290,6 +116447,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -117988,6 +118146,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -125484,6 +125643,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -125723,6 +125886,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -125769,6 +125933,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -125970,6 +126135,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -126711,6 +126877,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -126757,6 +126924,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -126958,6 +127126,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         useLocalTimezone:
           description: Whether to use local timezone with cron expression for the
@@ -127144,6 +127313,7 @@ components:
             - OperatorImportUniverse
             - RegisterUniverseWithPACollector
             - UnregisterUniverseFromPACollector
+            - UpgradeNodeAgent
             - KubernetesCheckVolumeExpansion
             - KubernetesPostExpansionCheckVolume
             - NodeCertReloadTask
@@ -127190,6 +127360,7 @@ components:
             - SwamperTargetsFileUpdate
             - UniverseUpdateSucceeded
             - RegisterUniverseWithPaCollector
+            - PushPaExportConfig
             - UnregisterUniverseFromPaCollector
             - UpdateAndPersistGFlags
             - UpdateAndPersistKubernetesOverrides
@@ -127391,6 +127562,7 @@ components:
             - UpdateParentTaskParams
             - SaveSoftwareUpgradeProgress
             - CheckDuplicateInstance
+            - RunUpgradeNodeAgent
             type: string
           type: array
           uniqueItems: true
@@ -127917,6 +128089,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -127963,6 +128136,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -128164,6 +128338,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         useLocalTimezone:
           type: boolean
@@ -128555,6 +128730,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -136053,6 +136229,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -136292,6 +136472,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -136338,6 +136519,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -136539,6 +136721,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -137429,6 +137612,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -144925,6 +145109,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -145164,6 +145352,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -145210,6 +145399,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -145411,6 +145601,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -146621,6 +146812,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -154119,6 +154311,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -154358,6 +154554,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -154404,6 +154601,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -154605,6 +154803,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -154885,6 +155084,7 @@ components:
         sleepAfterMasterRestartMillis: 1
         enableNodeToNodeEncrypt: true
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -162385,6 +162585,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -162624,6 +162828,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -162670,6 +162875,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -162871,6 +163077,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -163267,6 +163474,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -170769,6 +170977,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -171004,6 +171216,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -171050,6 +171263,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -171251,6 +171465,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -171502,6 +171717,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -178992,6 +179208,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -179225,6 +179445,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -179271,6 +179492,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -179472,6 +179694,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -179730,6 +179953,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 6
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -187220,6 +187444,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -187454,6 +187682,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -187500,6 +187729,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -187701,6 +187931,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -188218,6 +188449,7 @@ components:
           rootAndClientRootCASame: true
           sleepAfterMasterRestartMillis: 6
           resetAZConfig: true
+          paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           userAZSelected: true
           fipsEnabled: true
           creationSucceeded: true
@@ -196257,6 +196489,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -203753,6 +203986,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -203992,6 +204229,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -204038,6 +204276,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -204239,6 +204478,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid
@@ -205966,6 +206206,7 @@ components:
         rootAndClientRootCASame: true
         sleepAfterMasterRestartMillis: 1
         resetAZConfig: true
+        paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userAZSelected: true
         fipsEnabled: true
         creationSucceeded: true
@@ -213499,6 +213740,10 @@ components:
           description: YbaApi Internal. PA Collector UUID
           format: uuid
           type: string
+        paEndpointUuid:
+          description: YbaApi Internal. Perf Advisor Endpoint UUID
+          format: uuid
+          type: string
         placementModificationTaskUuid:
           format: uuid
           type: string
@@ -213748,6 +213993,7 @@ components:
           - OperatorImportUniverse
           - RegisterUniverseWithPACollector
           - UnregisterUniverseFromPACollector
+          - UpgradeNodeAgent
           - KubernetesCheckVolumeExpansion
           - KubernetesPostExpansionCheckVolume
           - NodeCertReloadTask
@@ -213794,6 +214040,7 @@ components:
           - SwamperTargetsFileUpdate
           - UniverseUpdateSucceeded
           - RegisterUniverseWithPaCollector
+          - PushPaExportConfig
           - UnregisterUniverseFromPaCollector
           - UpdateAndPersistGFlags
           - UpdateAndPersistKubernetesOverrides
@@ -213995,6 +214242,7 @@ components:
           - UpdateParentTaskParams
           - SaveSoftwareUpgradeProgress
           - CheckDuplicateInstance
+          - RunUpgradeNodeAgent
           type: string
         updatingTaskUUID:
           format: uuid

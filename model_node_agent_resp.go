@@ -22,7 +22,9 @@ var _ MappedNullable = &NodeAgentResp{}
 type NodeAgentResp struct {
 	// Node agent host machine arch
 	ArchType *string `json:"archType,omitempty"`
-	Config   *Config `json:"config,omitempty"`
+	// WARNING: This is a preview API that could change. Custom certificate UUID.
+	CertificateUuid *string `json:"certificateUuid,omitempty"`
+	Config          *Config `json:"config,omitempty"`
 	// Customer UUID
 	CustomerUuid *string `json:"customerUuid,omitempty"`
 	// Node agent installation directory
@@ -99,6 +101,38 @@ func (o *NodeAgentResp) HasArchType() bool {
 // SetArchType gets a reference to the given string and assigns it to the ArchType field.
 func (o *NodeAgentResp) SetArchType(v string) {
 	o.ArchType = &v
+}
+
+// GetCertificateUuid returns the CertificateUuid field value if set, zero value otherwise.
+func (o *NodeAgentResp) GetCertificateUuid() string {
+	if o == nil || IsNil(o.CertificateUuid) {
+		var ret string
+		return ret
+	}
+	return *o.CertificateUuid
+}
+
+// GetCertificateUuidOk returns a tuple with the CertificateUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeAgentResp) GetCertificateUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.CertificateUuid) {
+		return nil, false
+	}
+	return o.CertificateUuid, true
+}
+
+// HasCertificateUuid returns a boolean if a field has been set.
+func (o *NodeAgentResp) HasCertificateUuid() bool {
+	if o != nil && !IsNil(o.CertificateUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificateUuid gets a reference to the given string and assigns it to the CertificateUuid field.
+func (o *NodeAgentResp) SetCertificateUuid(v string) {
+	o.CertificateUuid = &v
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise.
@@ -689,6 +723,9 @@ func (o NodeAgentResp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ArchType) {
 		toSerialize["archType"] = o.ArchType
+	}
+	if !IsNil(o.CertificateUuid) {
+		toSerialize["certificateUuid"] = o.CertificateUuid
 	}
 	if !IsNil(o.Config) {
 		toSerialize["config"] = o.Config

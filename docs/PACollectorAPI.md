@@ -541,7 +541,7 @@ Name | Type | Description  | Notes
 
 ## RegisterUniverse
 
-> YBPTask RegisterUniverse(ctx, cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Request(request).Execute()
+> YBPTask RegisterUniverse(ctx, cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Mode(mode).PaEndpointUUID(paEndpointUUID).Request(request).Execute()
 
 Register universe with PA Collector
 
@@ -564,11 +564,13 @@ func main() {
 	uUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	paUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	advancedObservability := true // bool |  (optional) (default to false)
+	mode := "mode_example" // string |  (optional) (default to "null")
+	paEndpointUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PACollectorAPI.RegisterUniverse(context.Background(), cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Request(request).Execute()
+	resp, r, err := apiClient.PACollectorAPI.RegisterUniverse(context.Background(), cUUID, uUUID, paUUID).AdvancedObservability(advancedObservability).Mode(mode).PaEndpointUUID(paEndpointUUID).Request(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PACollectorAPI.RegisterUniverse``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -599,6 +601,8 @@ Name | Type | Description  | Notes
 
 
  **advancedObservability** | **bool** |  | [default to false]
+ **mode** | **string** |  | [default to &quot;null&quot;]
+ **paEndpointUUID** | **string** |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type

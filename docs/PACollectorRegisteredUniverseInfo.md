@@ -6,7 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdvancedObservability** | Pointer to **bool** | Whether advanced observability (metrics export) is enabled | [optional] 
 **DataMountPoints** | Pointer to **[]string** | Data mount points | [optional] 
+**Mode** | Pointer to **string** | How the universe is registered with the collector | [optional] 
 **OtherMountPoints** | Pointer to **[]string** | Other mount points | [optional] 
+**PaEndpointName** | Pointer to **string** | Perf Advisor Endpoint name, set for ONLINE mode only | [optional] 
+**PaEndpointUuid** | Pointer to **string** | Perf Advisor Endpoint UUID, set for ONLINE mode only | [optional] 
 **UniverseName** | Pointer to **string** | Universe name (from YBA, or null if universe was deleted) | [optional] 
 **UniverseUuid** | Pointer to **string** | Universe UUID | [optional] 
 
@@ -79,6 +82,31 @@ SetDataMountPoints sets DataMountPoints field to given value.
 
 HasDataMountPoints returns a boolean if a field has been set.
 
+### GetMode
+
+`func (o *PACollectorRegisteredUniverseInfo) GetMode() string`
+
+GetMode returns the Mode field if non-nil, zero value otherwise.
+
+### GetModeOk
+
+`func (o *PACollectorRegisteredUniverseInfo) GetModeOk() (*string, bool)`
+
+GetModeOk returns a tuple with the Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMode
+
+`func (o *PACollectorRegisteredUniverseInfo) SetMode(v string)`
+
+SetMode sets Mode field to given value.
+
+### HasMode
+
+`func (o *PACollectorRegisteredUniverseInfo) HasMode() bool`
+
+HasMode returns a boolean if a field has been set.
+
 ### GetOtherMountPoints
 
 `func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPoints() []string`
@@ -103,6 +131,56 @@ SetOtherMountPoints sets OtherMountPoints field to given value.
 `func (o *PACollectorRegisteredUniverseInfo) HasOtherMountPoints() bool`
 
 HasOtherMountPoints returns a boolean if a field has been set.
+
+### GetPaEndpointName
+
+`func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointName() string`
+
+GetPaEndpointName returns the PaEndpointName field if non-nil, zero value otherwise.
+
+### GetPaEndpointNameOk
+
+`func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointNameOk() (*string, bool)`
+
+GetPaEndpointNameOk returns a tuple with the PaEndpointName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaEndpointName
+
+`func (o *PACollectorRegisteredUniverseInfo) SetPaEndpointName(v string)`
+
+SetPaEndpointName sets PaEndpointName field to given value.
+
+### HasPaEndpointName
+
+`func (o *PACollectorRegisteredUniverseInfo) HasPaEndpointName() bool`
+
+HasPaEndpointName returns a boolean if a field has been set.
+
+### GetPaEndpointUuid
+
+`func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointUuid() string`
+
+GetPaEndpointUuid returns the PaEndpointUuid field if non-nil, zero value otherwise.
+
+### GetPaEndpointUuidOk
+
+`func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointUuidOk() (*string, bool)`
+
+GetPaEndpointUuidOk returns a tuple with the PaEndpointUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaEndpointUuid
+
+`func (o *PACollectorRegisteredUniverseInfo) SetPaEndpointUuid(v string)`
+
+SetPaEndpointUuid sets PaEndpointUuid field to given value.
+
+### HasPaEndpointUuid
+
+`func (o *PACollectorRegisteredUniverseInfo) HasPaEndpointUuid() bool`
+
+HasPaEndpointUuid returns a boolean if a field has been set.
 
 ### GetUniverseName
 

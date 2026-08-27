@@ -23,8 +23,14 @@ type PACollectorRegisteredUniverseInfo struct {
 	AdvancedObservability *bool `json:"advancedObservability,omitempty"`
 	// Data mount points
 	DataMountPoints []string `json:"dataMountPoints,omitempty"`
+	// How the universe is registered with the collector
+	Mode *string `json:"mode,omitempty"`
 	// Other mount points
 	OtherMountPoints []string `json:"otherMountPoints,omitempty"`
+	// Perf Advisor Endpoint name, set for ONLINE mode only
+	PaEndpointName *string `json:"paEndpointName,omitempty"`
+	// Perf Advisor Endpoint UUID, set for ONLINE mode only
+	PaEndpointUuid *string `json:"paEndpointUuid,omitempty"`
 	// Universe name (from YBA, or null if universe was deleted)
 	UniverseName *string `json:"universeName,omitempty"`
 	// Universe UUID
@@ -112,6 +118,38 @@ func (o *PACollectorRegisteredUniverseInfo) SetDataMountPoints(v []string) {
 	o.DataMountPoints = v
 }
 
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *PACollectorRegisteredUniverseInfo) GetMode() string {
+	if o == nil || IsNil(o.Mode) {
+		var ret string
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorRegisteredUniverseInfo) GetModeOk() (*string, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *PACollectorRegisteredUniverseInfo) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given string and assigns it to the Mode field.
+func (o *PACollectorRegisteredUniverseInfo) SetMode(v string) {
+	o.Mode = &v
+}
+
 // GetOtherMountPoints returns the OtherMountPoints field value if set, zero value otherwise.
 func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPoints() []string {
 	if o == nil || IsNil(o.OtherMountPoints) {
@@ -142,6 +180,70 @@ func (o *PACollectorRegisteredUniverseInfo) HasOtherMountPoints() bool {
 // SetOtherMountPoints gets a reference to the given []string and assigns it to the OtherMountPoints field.
 func (o *PACollectorRegisteredUniverseInfo) SetOtherMountPoints(v []string) {
 	o.OtherMountPoints = v
+}
+
+// GetPaEndpointName returns the PaEndpointName field value if set, zero value otherwise.
+func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointName() string {
+	if o == nil || IsNil(o.PaEndpointName) {
+		var ret string
+		return ret
+	}
+	return *o.PaEndpointName
+}
+
+// GetPaEndpointNameOk returns a tuple with the PaEndpointName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointNameOk() (*string, bool) {
+	if o == nil || IsNil(o.PaEndpointName) {
+		return nil, false
+	}
+	return o.PaEndpointName, true
+}
+
+// HasPaEndpointName returns a boolean if a field has been set.
+func (o *PACollectorRegisteredUniverseInfo) HasPaEndpointName() bool {
+	if o != nil && !IsNil(o.PaEndpointName) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaEndpointName gets a reference to the given string and assigns it to the PaEndpointName field.
+func (o *PACollectorRegisteredUniverseInfo) SetPaEndpointName(v string) {
+	o.PaEndpointName = &v
+}
+
+// GetPaEndpointUuid returns the PaEndpointUuid field value if set, zero value otherwise.
+func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointUuid() string {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaEndpointUuid
+}
+
+// GetPaEndpointUuidOk returns a tuple with the PaEndpointUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorRegisteredUniverseInfo) GetPaEndpointUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		return nil, false
+	}
+	return o.PaEndpointUuid, true
+}
+
+// HasPaEndpointUuid returns a boolean if a field has been set.
+func (o *PACollectorRegisteredUniverseInfo) HasPaEndpointUuid() bool {
+	if o != nil && !IsNil(o.PaEndpointUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaEndpointUuid gets a reference to the given string and assigns it to the PaEndpointUuid field.
+func (o *PACollectorRegisteredUniverseInfo) SetPaEndpointUuid(v string) {
+	o.PaEndpointUuid = &v
 }
 
 // GetUniverseName returns the UniverseName field value if set, zero value otherwise.
@@ -224,8 +326,17 @@ func (o PACollectorRegisteredUniverseInfo) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.DataMountPoints) {
 		toSerialize["dataMountPoints"] = o.DataMountPoints
 	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
 	if !IsNil(o.OtherMountPoints) {
 		toSerialize["otherMountPoints"] = o.OtherMountPoints
+	}
+	if !IsNil(o.PaEndpointName) {
+		toSerialize["paEndpointName"] = o.PaEndpointName
+	}
+	if !IsNil(o.PaEndpointUuid) {
+		toSerialize["paEndpointUuid"] = o.PaEndpointUuid
 	}
 	if !IsNil(o.UniverseName) {
 		toSerialize["universeName"] = o.UniverseName

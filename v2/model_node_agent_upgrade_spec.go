@@ -20,11 +20,11 @@ var _ MappedNullable = &NodeAgentUpgradeSpec{}
 
 // NodeAgentUpgradeSpec NodeAgentUpgradeSpec  Request payload to upgrade node agents in a universe. Part of NodeAgentUpgradeReq. If node_names is omitted or empty, all live nodes in the universe are upgraded.
 type NodeAgentUpgradeSpec struct {
-	// Optional UUID of the certificate to use for the node agent upgrade. If omitted, existing certificates are used.
-	CertificateUuid *string `json:"certificate_uuid,omitempty"`
+	// Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, existing certificates are used.
+	CertificateName *string `json:"certificate_name,omitempty"`
 	// Optional list of node names whose node agents should be upgraded. If omitted or empty, all live nodes in the universe are upgraded.
 	NodeNames []string `json:"node_names,omitempty"`
-	// If true, only replace node agent certificates without upgrading the node agent package.
+	// If true, replace node agent certificates without upgrading the package when the node agent version already matches YBA. If the version does not match, a full upgrade is performed so RPC stays compatible.
 	CertsOnly *bool `json:"certs_only,omitempty"`
 }
 
@@ -49,36 +49,36 @@ func NewNodeAgentUpgradeSpecWithDefaults() *NodeAgentUpgradeSpec {
 	return &this
 }
 
-// GetCertificateUuid returns the CertificateUuid field value if set, zero value otherwise.
-func (o *NodeAgentUpgradeSpec) GetCertificateUuid() string {
-	if o == nil || IsNil(o.CertificateUuid) {
+// GetCertificateName returns the CertificateName field value if set, zero value otherwise.
+func (o *NodeAgentUpgradeSpec) GetCertificateName() string {
+	if o == nil || IsNil(o.CertificateName) {
 		var ret string
 		return ret
 	}
-	return *o.CertificateUuid
+	return *o.CertificateName
 }
 
-// GetCertificateUuidOk returns a tuple with the CertificateUuid field value if set, nil otherwise
+// GetCertificateNameOk returns a tuple with the CertificateName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NodeAgentUpgradeSpec) GetCertificateUuidOk() (*string, bool) {
-	if o == nil || IsNil(o.CertificateUuid) {
+func (o *NodeAgentUpgradeSpec) GetCertificateNameOk() (*string, bool) {
+	if o == nil || IsNil(o.CertificateName) {
 		return nil, false
 	}
-	return o.CertificateUuid, true
+	return o.CertificateName, true
 }
 
-// HasCertificateUuid returns a boolean if a field has been set.
-func (o *NodeAgentUpgradeSpec) HasCertificateUuid() bool {
-	if o != nil && !IsNil(o.CertificateUuid) {
+// HasCertificateName returns a boolean if a field has been set.
+func (o *NodeAgentUpgradeSpec) HasCertificateName() bool {
+	if o != nil && !IsNil(o.CertificateName) {
 		return true
 	}
 
 	return false
 }
 
-// SetCertificateUuid gets a reference to the given string and assigns it to the CertificateUuid field.
-func (o *NodeAgentUpgradeSpec) SetCertificateUuid(v string) {
-	o.CertificateUuid = &v
+// SetCertificateName gets a reference to the given string and assigns it to the CertificateName field.
+func (o *NodeAgentUpgradeSpec) SetCertificateName(v string) {
+	o.CertificateName = &v
 }
 
 // GetNodeNames returns the NodeNames field value if set, zero value otherwise.
@@ -155,8 +155,8 @@ func (o NodeAgentUpgradeSpec) MarshalJSON() ([]byte, error) {
 
 func (o NodeAgentUpgradeSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CertificateUuid) {
-		toSerialize["certificate_uuid"] = o.CertificateUuid
+	if !IsNil(o.CertificateName) {
+		toSerialize["certificate_name"] = o.CertificateName
 	}
 	if !IsNil(o.NodeNames) {
 		toSerialize["node_names"] = o.NodeNames

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ApiToken** | **string** | YBA API Token | 
 **CustomerUUID** | **string** | Customer UUID | [readonly] 
-**Embedded** | Pointer to **bool** | True when this collector is the embedded PA managed by EmbeddedCollectorInitializer | [optional] [readonly] 
+**Embedded** | Pointer to **bool** | True when this collector is the embedded PA managed by PACollectorSync | [optional] [readonly] 
 **MetricsPassword** | Pointer to **string** | Metrics API Password | [optional] 
 **MetricsScrapePeriodSecs** | **int64** | Metrics Scrape Period Seconds | 
 **MetricsUrl** | **string** | Metrics URL | 

@@ -970,11 +970,23 @@ type PACollectorAPIRegisterUniverseRequest struct {
 	uUUID                 string
 	paUUID                string
 	advancedObservability *bool
+	mode                  *string
+	paEndpointUUID        *string
 	request               *interface{}
 }
 
 func (r PACollectorAPIRegisterUniverseRequest) AdvancedObservability(advancedObservability bool) PACollectorAPIRegisterUniverseRequest {
 	r.advancedObservability = &advancedObservability
+	return r
+}
+
+func (r PACollectorAPIRegisterUniverseRequest) Mode(mode string) PACollectorAPIRegisterUniverseRequest {
+	r.mode = &mode
+	return r
+}
+
+func (r PACollectorAPIRegisterUniverseRequest) PaEndpointUUID(paEndpointUUID string) PACollectorAPIRegisterUniverseRequest {
+	r.paEndpointUUID = &paEndpointUUID
 	return r
 }
 
@@ -1039,6 +1051,13 @@ func (a *PACollectorAPIService) RegisterUniverseExecute(r PACollectorAPIRegister
 		var defaultValue bool = false
 		parameterAddToHeaderOrQuery(localVarQueryParams, "advancedObservability", defaultValue, "", "")
 		r.advancedObservability = &defaultValue
+	}
+	if r.mode != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "mode", r.mode, "", "")
+	} else {
+	}
+	if r.paEndpointUUID != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "paEndpointUUID", r.paEndpointUUID, "", "")
 	}
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
