@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
+**PaEndpointUuid** | Pointer to **string** | YbaApi Internal. Perf Advisor Endpoint UUID | [optional] 
 **PlacementModificationTaskUuid** | Pointer to **string** |  | [optional] 
 **PlatformUrl** | **string** |  | 
 **PrevYBSoftwareConfig** | Pointer to [**PrevYBSoftwareConfig**](PrevYBSoftwareConfig.md) |  | [optional] 
@@ -973,6 +974,31 @@ SetPaCollectorUuid sets PaCollectorUuid field to given value.
 `func (o *ThirdpartySoftwareUpgradeParams) HasPaCollectorUuid() bool`
 
 HasPaCollectorUuid returns a boolean if a field has been set.
+
+### GetPaEndpointUuid
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPaEndpointUuid() string`
+
+GetPaEndpointUuid returns the PaEndpointUuid field if non-nil, zero value otherwise.
+
+### GetPaEndpointUuidOk
+
+`func (o *ThirdpartySoftwareUpgradeParams) GetPaEndpointUuidOk() (*string, bool)`
+
+GetPaEndpointUuidOk returns a tuple with the PaEndpointUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaEndpointUuid
+
+`func (o *ThirdpartySoftwareUpgradeParams) SetPaEndpointUuid(v string)`
+
+SetPaEndpointUuid sets PaEndpointUuid field to given value.
+
+### HasPaEndpointUuid
+
+`func (o *ThirdpartySoftwareUpgradeParams) HasPaEndpointUuid() bool`
+
+HasPaEndpointUuid returns a boolean if a field has been set.
 
 ### GetPlacementModificationTaskUuid
 

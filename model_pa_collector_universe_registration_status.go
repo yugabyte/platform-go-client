@@ -21,6 +21,12 @@ var _ MappedNullable = &PACollectorUniverseRegistrationStatus{}
 type PACollectorUniverseRegistrationStatus struct {
 	// Whether advanced observability (metrics export to Prometheus) is enabled
 	AdvancedObservability *bool `json:"advancedObservability,omitempty"`
+	// How the universe is registered with the collector
+	Mode *string `json:"mode,omitempty"`
+	// Perf Advisor Endpoint name, set for ONLINE mode only
+	PaEndpointName *string `json:"paEndpointName,omitempty"`
+	// Perf Advisor Endpoint UUID, set for ONLINE mode only
+	PaEndpointUuid *string `json:"paEndpointUuid,omitempty"`
 	// Whether the universe is registered with PA Collector
 	Success *bool `json:"success,omitempty"`
 }
@@ -74,6 +80,102 @@ func (o *PACollectorUniverseRegistrationStatus) SetAdvancedObservability(v bool)
 	o.AdvancedObservability = &v
 }
 
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *PACollectorUniverseRegistrationStatus) GetMode() string {
+	if o == nil || IsNil(o.Mode) {
+		var ret string
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorUniverseRegistrationStatus) GetModeOk() (*string, bool) {
+	if o == nil || IsNil(o.Mode) {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *PACollectorUniverseRegistrationStatus) HasMode() bool {
+	if o != nil && !IsNil(o.Mode) {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given string and assigns it to the Mode field.
+func (o *PACollectorUniverseRegistrationStatus) SetMode(v string) {
+	o.Mode = &v
+}
+
+// GetPaEndpointName returns the PaEndpointName field value if set, zero value otherwise.
+func (o *PACollectorUniverseRegistrationStatus) GetPaEndpointName() string {
+	if o == nil || IsNil(o.PaEndpointName) {
+		var ret string
+		return ret
+	}
+	return *o.PaEndpointName
+}
+
+// GetPaEndpointNameOk returns a tuple with the PaEndpointName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorUniverseRegistrationStatus) GetPaEndpointNameOk() (*string, bool) {
+	if o == nil || IsNil(o.PaEndpointName) {
+		return nil, false
+	}
+	return o.PaEndpointName, true
+}
+
+// HasPaEndpointName returns a boolean if a field has been set.
+func (o *PACollectorUniverseRegistrationStatus) HasPaEndpointName() bool {
+	if o != nil && !IsNil(o.PaEndpointName) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaEndpointName gets a reference to the given string and assigns it to the PaEndpointName field.
+func (o *PACollectorUniverseRegistrationStatus) SetPaEndpointName(v string) {
+	o.PaEndpointName = &v
+}
+
+// GetPaEndpointUuid returns the PaEndpointUuid field value if set, zero value otherwise.
+func (o *PACollectorUniverseRegistrationStatus) GetPaEndpointUuid() string {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaEndpointUuid
+}
+
+// GetPaEndpointUuidOk returns a tuple with the PaEndpointUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PACollectorUniverseRegistrationStatus) GetPaEndpointUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		return nil, false
+	}
+	return o.PaEndpointUuid, true
+}
+
+// HasPaEndpointUuid returns a boolean if a field has been set.
+func (o *PACollectorUniverseRegistrationStatus) HasPaEndpointUuid() bool {
+	if o != nil && !IsNil(o.PaEndpointUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaEndpointUuid gets a reference to the given string and assigns it to the PaEndpointUuid field.
+func (o *PACollectorUniverseRegistrationStatus) SetPaEndpointUuid(v string) {
+	o.PaEndpointUuid = &v
+}
+
 // GetSuccess returns the Success field value if set, zero value otherwise.
 func (o *PACollectorUniverseRegistrationStatus) GetSuccess() bool {
 	if o == nil || IsNil(o.Success) {
@@ -118,6 +220,15 @@ func (o PACollectorUniverseRegistrationStatus) ToMap() (map[string]interface{}, 
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.AdvancedObservability) {
 		toSerialize["advancedObservability"] = o.AdvancedObservability
+	}
+	if !IsNil(o.Mode) {
+		toSerialize["mode"] = o.Mode
+	}
+	if !IsNil(o.PaEndpointName) {
+		toSerialize["paEndpointName"] = o.PaEndpointName
+	}
+	if !IsNil(o.PaEndpointUuid) {
+		toSerialize["paEndpointUuid"] = o.PaEndpointUuid
 	}
 	if !IsNil(o.Success) {
 		toSerialize["success"] = o.Success

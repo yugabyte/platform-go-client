@@ -110,6 +110,12 @@ Class | Method | HTTP request | Description
 *MetricsAPI* | [**GetPrometheusHostInfo**](docs/MetricsAPI.md#getprometheushostinfo) | **Get** /host-info | Get Prometheus host info
 *NodeAgentAPI* | [**UpgradeNodeAgent**](docs/NodeAgentAPI.md#upgradenodeagent) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/node-agent | Upgrade node agents
 *PITRAPI* | [**PageListPitrConfigs**](docs/PITRAPI.md#pagelistpitrconfigs) | **Post** /customers/{cUUID}/universes/{uniUUID}/pitr-configs/page | List PITR configurations (paged)
+*PerfAdvisorEndpointAPI* | [**CreatePerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#createperfadvisorendpoint) | **Post** /customers/{cUUID}/perf-advisor-endpoints | Create Perf Advisor Endpoint
+*PerfAdvisorEndpointAPI* | [**DeletePerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#deleteperfadvisorendpoint) | **Delete** /customers/{cUUID}/perf-advisor-endpoints/{peUUID} | Delete a Perf Advisor Endpoint
+*PerfAdvisorEndpointAPI* | [**EditPerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#editperfadvisorendpoint) | **Put** /customers/{cUUID}/perf-advisor-endpoints/{peUUID} | Edit a Perf Advisor Endpoint
+*PerfAdvisorEndpointAPI* | [**GetPerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#getperfadvisorendpoint) | **Get** /customers/{cUUID}/perf-advisor-endpoints/{peUUID} | Get a Perf Advisor Endpoint
+*PerfAdvisorEndpointAPI* | [**ListPerfAdvisorEndpoints**](docs/PerfAdvisorEndpointAPI.md#listperfadvisorendpoints) | **Get** /customers/{cUUID}/perf-advisor-endpoints | List Perf Advisor Endpoints
+*PerfAdvisorEndpointAPI* | [**ValidatePerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#validateperfadvisorendpoint) | **Post** /customers/{cUUID}/perf-advisor-endpoints/validate | Validate a Perf Advisor Endpoint
 *SupportBundleAPI* | [**CreateSupportBundle**](docs/SupportBundleAPI.md#createsupportbundle) | **Post** /customers/{cUUID}/universes/{uniUUID}/support-bundles | Create support bundle
 *SupportBundleAPI* | [**CreateYbaSupportBundle**](docs/SupportBundleAPI.md#createybasupportbundle) | **Post** /customers/{cUUID}/support-bundles/yba | Create YBA-only support bundle
 *SupportBundleAPI* | [**DeleteSupportBundle**](docs/SupportBundleAPI.md#deletesupportbundle) | **Delete** /customers/{cUUID}/universes/{uniUUID}/support-bundles/{sbUUID} | Delete support bundle
@@ -317,6 +323,14 @@ Class | Method | HTTP request | Description
  - [PerProcessResizeNodeSpec](docs/PerProcessResizeNodeSpec.md)
  - [PerProviderResizeNodesSpec](docs/PerProviderResizeNodesSpec.md)
  - [PerProviderUpdateProxyConfigSpec](docs/PerProviderUpdateProxyConfigSpec.md)
+ - [PerfAdvisorEndpoint](docs/PerfAdvisorEndpoint.md)
+ - [PerfAdvisorEndpointAuth](docs/PerfAdvisorEndpointAuth.md)
+ - [PerfAdvisorEndpointInfo](docs/PerfAdvisorEndpointInfo.md)
+ - [PerfAdvisorEndpointMetricsType](docs/PerfAdvisorEndpointMetricsType.md)
+ - [PerfAdvisorEndpointSpec](docs/PerfAdvisorEndpointSpec.md)
+ - [PerfAdvisorEndpointType](docs/PerfAdvisorEndpointType.md)
+ - [PerfAdvisorEndpointValidationResult](docs/PerfAdvisorEndpointValidationResult.md)
+ - [PerfAdvisorEndpointValidationResultChecksInner](docs/PerfAdvisorEndpointValidationResultChecksInner.md)
  - [PitrConfig](docs/PitrConfig.md)
  - [PitrConfigApiFilter](docs/PitrConfigApiFilter.md)
  - [PitrConfigInfo](docs/PitrConfigInfo.md)

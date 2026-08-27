@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ArchType** | Pointer to **string** | Node agent host machine arch | [optional] [readonly] 
+**CertificateUuid** | Pointer to **string** | WARNING: This is a preview API that could change. Custom certificate UUID. | [optional] [readonly] 
 **Config** | Pointer to [**Config**](Config.md) |  | [optional] 
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] [readonly] 
 **Home** | Pointer to **string** | Node agent installation directory | [optional] [readonly] 
@@ -61,6 +62,31 @@ SetArchType sets ArchType field to given value.
 `func (o *NodeAgent) HasArchType() bool`
 
 HasArchType returns a boolean if a field has been set.
+
+### GetCertificateUuid
+
+`func (o *NodeAgent) GetCertificateUuid() string`
+
+GetCertificateUuid returns the CertificateUuid field if non-nil, zero value otherwise.
+
+### GetCertificateUuidOk
+
+`func (o *NodeAgent) GetCertificateUuidOk() (*string, bool)`
+
+GetCertificateUuidOk returns a tuple with the CertificateUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificateUuid
+
+`func (o *NodeAgent) SetCertificateUuid(v string)`
+
+SetCertificateUuid sets CertificateUuid field to given value.
+
+### HasCertificateUuid
+
+`func (o *NodeAgent) HasCertificateUuid() bool`
+
+HasCertificateUuid returns a boolean if a field has been set.
 
 ### GetConfig
 

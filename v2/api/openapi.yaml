@@ -46,6 +46,8 @@ tags:
   name: Node Agent
 - description: Point-in-time recovery configuration management
   name: PITR
+- description: CRUD operations for external Perf Advisor destinations
+  name: Perf Advisor Endpoint
 - description: Support bundle management for universes
   name: Support Bundle
 - description: Customer task management
@@ -1453,6 +1455,319 @@ paths:
         noAuthz: true
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/perf-advisor-endpoints:
+    get:
+      description: List the external Perf Advisor destinations configured for this
+        customer
+      operationId: listPerfAdvisorEndpoints
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PerfAdvisorEndpoint'
+                type: array
+          description: List of Perf Advisor Endpoints
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: List Perf Advisor Endpoints
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+    post:
+      description: |
+        Create an external Perf Advisor destination. Both of its endpoints are probed from a
+        collector before the endpoint is stored, so a destination that cannot be reached or that
+        rejects these credentials is an error here rather than a registration that can only fail.
+      operationId: createPerfAdvisorEndpoint
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/PerfAdvisorEndpointReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfAdvisorEndpoint'
+          description: Perf Advisor Endpoint
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Create Perf Advisor Endpoint
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        auditTargetType: PerfAdvisorEndpoint
+        auditTargetId: "null"
+        auditActionType: CreatePerfAdvisorEndpoint
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: create
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/perf-advisor-endpoints/validate:
+    post:
+      description: |
+        Probe a destination's metrics and collection endpoints from a collector without storing
+        anything. Returns a result per endpoint so a caller can show each problem against the input
+        that caused it.
+      operationId: validatePerfAdvisorEndpoint
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/PerfAdvisorEndpointReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfAdvisorEndpointValidationResult'
+          description: Perf Advisor Endpoint validation result
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Validate a Perf Advisor Endpoint
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/perf-advisor-endpoints/{peUUID}:
+    delete:
+      description: |
+        Delete an external Perf Advisor destination. Refused while any universe is still registered
+        against it, and the universes are named in the error.
+      operationId: deletePerfAdvisorEndpoint
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Perf Advisor Endpoint UUID
+        explode: false
+        in: path
+        name: peUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid input
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Delete a Perf Advisor Endpoint
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        auditTargetType: PerfAdvisorEndpoint
+        auditTargetId: peUUID.toString()
+        auditActionType: DeletePerfAdvisorEndpoint
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: delete
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+    get:
+      description: Get one external Perf Advisor destination
+      operationId: getPerfAdvisorEndpoint
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Perf Advisor Endpoint UUID
+        explode: false
+        in: path
+        name: peUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfAdvisorEndpoint'
+          description: Perf Advisor Endpoint
+        "400":
+          description: Invalid input
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Get a Perf Advisor Endpoint
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
+    put:
+      description: |
+        Edit an external Perf Advisor destination. The new settings are probed before they are
+        stored, and then pushed to every collector already holding this endpoint, so a universe
+        already sending here picks them up without waiting for the next sync.
+      operationId: editPerfAdvisorEndpoint
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Perf Advisor Endpoint UUID
+        explode: false
+        in: path
+        name: peUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/PerfAdvisorEndpointReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfAdvisorEndpoint'
+          description: Perf Advisor Endpoint
+        "400":
+          description: Invalid input
+        "404":
+          description: Not found
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Edit a Perf Advisor Endpoint
+      tags:
+      - Perf Advisor Endpoint
+      x-yba-api-audit:
+        auditTargetType: PerfAdvisorEndpoint
+        auditTargetId: peUUID.toString()
+        auditActionType: EditPerfAdvisorEndpoint
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: update
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
       x-accepts:
       - application/json
   /customers/{cUUID}/universes/{uniUUID}/pitr-configs/page:
@@ -5131,6 +5446,12 @@ components:
           schema:
             $ref: '#/components/schemas/JobScheduleSnoozeSpec'
       required: true
+    PerfAdvisorEndpointReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PerfAdvisorEndpointSpec'
+      required: true
     PitrConfigPagedReq:
       content:
         application/json:
@@ -5489,6 +5810,26 @@ components:
             $ref: '#/components/schemas/PrometheusHostInfo'
       description: success
       x-yba-api-visibility: internal
+    PerfAdvisorEndpointListResp:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/PerfAdvisorEndpoint'
+            type: array
+      description: List of Perf Advisor Endpoints
+    PerfAdvisorEndpointResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PerfAdvisorEndpoint'
+      description: Perf Advisor Endpoint
+    PerfAdvisorEndpointValidationResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PerfAdvisorEndpointValidationResult'
+      description: Perf Advisor Endpoint validation result
     PitrConfigPagedResp:
       content:
         application/json:
@@ -8937,6 +9278,245 @@ components:
       title: PrometheusHostInfo
       type: object
       x-yba-api-visibility: internal
+    PerfAdvisorEndpointInfo:
+      description: |
+        PerfAdvisorEndpointInfo
+
+        System generated, read-only properties of a Perf Advisor Endpoint. Returned as part of the Perf
+        Advisor Endpoint resource.
+      example:
+        update_time: 2026-08-25T13:07:18Z
+        create_time: 2026-08-25T13:07:18Z
+        customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        universe_uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        uuid:
+          description: |
+            UUID of the endpoint. Also the id the configuration carries on every collector it is pushed
+            to, so it is stable and meaningful on both sides.
+          example: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+          format: uuid
+          readOnly: true
+          type: string
+        customer_uuid:
+          description: UUID of the customer that owns the endpoint.
+          format: uuid
+          readOnly: true
+          type: string
+        universe_uuids:
+          description: Universes currently registered in online mode against this
+            endpoint.
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        create_time:
+          description: Creation time.
+          example: 2026-08-25T13:07:18Z
+          format: date-time
+          readOnly: true
+          type: string
+        update_time:
+          description: Time of the last edit.
+          example: 2026-08-25T13:07:18Z
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - uuid
+      title: PerfAdvisorEndpointInfo
+      type: object
+    PerfAdvisorEndpointType:
+      description: |
+        PerfAdvisorEndpointType
+
+        What kind of destination a Perf Advisor Endpoint points at. The kinds carry the same fields and
+        differ only in which values are valid, so this selects validation rather than the shape of the
+        configuration. PA_ONLINE is reserved for the Yugabyte-hosted service and is rejected until that
+        exists.
+      enum:
+      - BYOC
+      - PA_ONLINE
+      example: BYOC
+      title: PerfAdvisorEndpointType
+      type: string
+    PerfAdvisorEndpointMetricsType:
+      description: |
+        PerfAdvisorEndpointMetricsType
+
+        The protocol the collector uses to send metrics to this destination.
+      enum:
+      - otlphttp
+      - remotewrite
+      example: otlphttp
+      title: PerfAdvisorEndpointMetricsType
+      type: string
+    PerfAdvisorEndpointAuth:
+      description: |
+        PerfAdvisorEndpointAuth
+
+        Credentials for one endpoint of a Perf Advisor Endpoint.
+      example:
+        password: password
+        type: BASIC
+        username: byoc-metrics-writer
+      properties:
+        type:
+          description: Authentication type.
+          enum:
+          - NONE
+          - BASIC
+          example: BASIC
+          type: string
+        username:
+          description: Username. Required for BASIC.
+          example: byoc-metrics-writer
+          type: string
+        password:
+          description: |
+            Password. Required for BASIC. Read back masked, and a masked value sent on an edit keeps the
+            stored password rather than overwriting it.
+          format: password
+          type: string
+      required:
+      - type
+      title: PerfAdvisorEndpointAuth
+      type: object
+    PerfAdvisorEndpointSpec:
+      description: |
+        PerfAdvisorEndpointSpec
+
+        User specification for a Perf Advisor Endpoint - an external Perf Advisor that a universe
+        registered in online mode forwards its collected data to. All these properties can be edited.
+      example:
+        collection_auth:
+          password: password
+          type: BASIC
+          username: byoc-metrics-writer
+        ybm_account_id: 6f4d2c1e-9b3a-4f77-8c21-0a5e7d3b9c14
+        metrics_type: otlphttp
+        name: byoc-prod
+        collection_endpoint: https://byoc.cloud.yugabyte.com
+        type: BYOC
+        metrics_auth:
+          password: password
+          type: BASIC
+          username: byoc-metrics-writer
+        metrics_endpoint: https://byoc.cloud.yugabyte.com/api/v1/otlp/metrics
+        ybm_project_id: 3a1c8e52-77bd-4e19-9f60-2b8d41c7a905
+      properties:
+        name:
+          description: Name of the endpoint. Unique per customer.
+          example: byoc-prod
+          type: string
+        type:
+          $ref: '#/components/schemas/PerfAdvisorEndpointType'
+        metrics_endpoint:
+          description: URL the collector sends metrics to.
+          example: https://byoc.cloud.yugabyte.com/api/v1/otlp/metrics
+          type: string
+        metrics_type:
+          $ref: '#/components/schemas/PerfAdvisorEndpointMetricsType'
+        metrics_auth:
+          $ref: '#/components/schemas/PerfAdvisorEndpointAuth'
+        collection_endpoint:
+          description: "URL of the destination's Collection API, where everything\
+            \ other than metrics goes."
+          example: https://byoc.cloud.yugabyte.com
+          type: string
+        collection_auth:
+          $ref: '#/components/schemas/PerfAdvisorEndpointAuth'
+        ybm_account_id:
+          description: |
+            YugabyteDB Managed account ID. Sent as the YBM-Account-ID header on both endpoints, which is
+            how a BYOC ingest gateway identifies the sender. Leave unset for a plain Perf Advisor.
+          example: 6f4d2c1e-9b3a-4f77-8c21-0a5e7d3b9c14
+          type: string
+        ybm_project_id:
+          description: |
+            YugabyteDB Managed project ID. Sent as the YBM-Project-ID header on both endpoints.
+          example: 3a1c8e52-77bd-4e19-9f60-2b8d41c7a905
+          type: string
+      required:
+      - collection_endpoint
+      - metrics_endpoint
+      - metrics_type
+      - name
+      - type
+      title: PerfAdvisorEndpointSpec
+      type: object
+    PerfAdvisorEndpoint:
+      description: |
+        PerfAdvisorEndpoint
+
+        An external Perf Advisor that a universe registered in online mode forwards its collected data to.
+      example:
+        spec:
+          collection_auth:
+            password: password
+            type: BASIC
+            username: byoc-metrics-writer
+          ybm_account_id: 6f4d2c1e-9b3a-4f77-8c21-0a5e7d3b9c14
+          metrics_type: otlphttp
+          name: byoc-prod
+          collection_endpoint: https://byoc.cloud.yugabyte.com
+          type: BYOC
+          metrics_auth:
+            password: password
+            type: BASIC
+            username: byoc-metrics-writer
+          metrics_endpoint: https://byoc.cloud.yugabyte.com/api/v1/otlp/metrics
+          ybm_project_id: 3a1c8e52-77bd-4e19-9f60-2b8d41c7a905
+        info:
+          update_time: 2026-08-25T13:07:18Z
+          create_time: 2026-08-25T13:07:18Z
+          customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          universe_uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
+      properties:
+        info:
+          $ref: '#/components/schemas/PerfAdvisorEndpointInfo'
+        spec:
+          $ref: '#/components/schemas/PerfAdvisorEndpointSpec'
+      title: PerfAdvisorEndpoint
+      type: object
+    PerfAdvisorEndpointValidationResult:
+      description: |
+        PerfAdvisorEndpointValidationResult
+
+        The result of probing both of an endpoint's destinations from a collector. Reported whole rather
+        than failing on the first problem, because a new destination usually has both endpoints wrong and
+        one round trip per mistake is a poor way to find that out.
+      example:
+        valid: true
+        checks:
+        - field: collectionEndpoint
+          ok: true
+          message: The Collection API at https://byoc.cloud.yugabyte.com rejected
+            these credentials
+        - field: collectionEndpoint
+          ok: true
+          message: The Collection API at https://byoc.cloud.yugabyte.com rejected
+            these credentials
+      properties:
+        valid:
+          description: True when every check passed.
+          readOnly: true
+          type: boolean
+        checks:
+          description: One entry per probed endpoint.
+          items:
+            $ref: '#/components/schemas/PerfAdvisorEndpointValidationResult_checks_inner'
+          readOnly: true
+          type: array
+      title: PerfAdvisorEndpointValidationResult
+      type: object
     PitrConfigApiFilter:
       description: Optional filter for listing PITR configs on a universe.
       example:
@@ -60475,14 +61055,13 @@ components:
         - yb-15-universe-n1
         - yb-15-universe-n2
         certs_only: false
-        certificate_uuid: fce99806-03f0-4b17-9483-297ccfaa368d
+        certificate_name: my-custom-ca
       properties:
-        certificate_uuid:
+        certificate_name:
           description: |
-            Optional UUID of the certificate to use for the node agent upgrade.
+            Optional name (label) of the YBA certificate config to use for the node agent upgrade.
             If omitted, existing certificates are used.
-          example: fce99806-03f0-4b17-9483-297ccfaa368d
-          format: uuid
+          example: my-custom-ca
           type: string
         node_names:
           description: |
@@ -60497,7 +61076,9 @@ components:
         certs_only:
           default: false
           description: |
-            If true, only replace node agent certificates without upgrading the node agent package.
+            If true, replace node agent certificates without upgrading the package when
+            the node agent version already matches YBA. If the version does not match,
+            a full upgrade is performed so RPC stays compatible.
           type: boolean
       title: NodeAgentUpgradeSpec
       type: object
@@ -65063,6 +65644,28 @@ components:
       title: YBAInfo
       type: object
       x-yba-api-visibility: internal
+    PerfAdvisorEndpointValidationResult_checks_inner:
+      example:
+        field: collectionEndpoint
+        ok: true
+        message: The Collection API at https://byoc.cloud.yugabyte.com rejected these
+          credentials
+      properties:
+        field:
+          description: |
+            The property the operator has to fix, so a caller can attach the message to the right
+            input.
+          example: collectionEndpoint
+          type: string
+        ok:
+          type: boolean
+        message:
+          description: "What went wrong, written for the operator. Unset when the\
+            \ check passed."
+          example: The Collection API at https://byoc.cloud.yugabyte.com rejected
+            these credentials
+          type: string
+      type: object
     UniverseUpdateProxyConfig_clusters_inner:
       example:
         provider_proxy_specs:

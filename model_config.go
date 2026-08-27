@@ -21,10 +21,11 @@ var _ MappedNullable = &Config{}
 type Config struct {
 	CertPath             string `json:"certPath"`
 	Compressor           string `json:"compressor"`
-	Offloadable          bool   `json:"offloadable"`
 	ServerCert           string `json:"serverCert"`
 	ServerCertExpirySecs int64  `json:"serverCertExpirySecs"`
+	ServerCertLocalPath  string `json:"serverCertLocalPath"`
 	ServerKey            string `json:"serverKey"`
+	ServerKeyLocalPath   string `json:"serverKeyLocalPath"`
 	SignerPrivateKey     string `json:"signerPrivateKey"`
 	SignerPublicKey      string `json:"signerPublicKey"`
 }
@@ -35,14 +36,15 @@ type _Config Config
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(certPath string, compressor string, offloadable bool, serverCert string, serverCertExpirySecs int64, serverKey string, signerPrivateKey string, signerPublicKey string) *Config {
+func NewConfig(certPath string, compressor string, serverCert string, serverCertExpirySecs int64, serverCertLocalPath string, serverKey string, serverKeyLocalPath string, signerPrivateKey string, signerPublicKey string) *Config {
 	this := Config{}
 	this.CertPath = certPath
 	this.Compressor = compressor
-	this.Offloadable = offloadable
 	this.ServerCert = serverCert
 	this.ServerCertExpirySecs = serverCertExpirySecs
+	this.ServerCertLocalPath = serverCertLocalPath
 	this.ServerKey = serverKey
+	this.ServerKeyLocalPath = serverKeyLocalPath
 	this.SignerPrivateKey = signerPrivateKey
 	this.SignerPublicKey = signerPublicKey
 	return &this
@@ -104,30 +106,6 @@ func (o *Config) SetCompressor(v string) {
 	o.Compressor = v
 }
 
-// GetOffloadable returns the Offloadable field value
-func (o *Config) GetOffloadable() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Offloadable
-}
-
-// GetOffloadableOk returns a tuple with the Offloadable field value
-// and a boolean to check if the value has been set.
-func (o *Config) GetOffloadableOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Offloadable, true
-}
-
-// SetOffloadable sets field value
-func (o *Config) SetOffloadable(v bool) {
-	o.Offloadable = v
-}
-
 // GetServerCert returns the ServerCert field value
 func (o *Config) GetServerCert() string {
 	if o == nil {
@@ -176,6 +154,30 @@ func (o *Config) SetServerCertExpirySecs(v int64) {
 	o.ServerCertExpirySecs = v
 }
 
+// GetServerCertLocalPath returns the ServerCertLocalPath field value
+func (o *Config) GetServerCertLocalPath() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ServerCertLocalPath
+}
+
+// GetServerCertLocalPathOk returns a tuple with the ServerCertLocalPath field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetServerCertLocalPathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServerCertLocalPath, true
+}
+
+// SetServerCertLocalPath sets field value
+func (o *Config) SetServerCertLocalPath(v string) {
+	o.ServerCertLocalPath = v
+}
+
 // GetServerKey returns the ServerKey field value
 func (o *Config) GetServerKey() string {
 	if o == nil {
@@ -198,6 +200,30 @@ func (o *Config) GetServerKeyOk() (*string, bool) {
 // SetServerKey sets field value
 func (o *Config) SetServerKey(v string) {
 	o.ServerKey = v
+}
+
+// GetServerKeyLocalPath returns the ServerKeyLocalPath field value
+func (o *Config) GetServerKeyLocalPath() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ServerKeyLocalPath
+}
+
+// GetServerKeyLocalPathOk returns a tuple with the ServerKeyLocalPath field value
+// and a boolean to check if the value has been set.
+func (o *Config) GetServerKeyLocalPathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ServerKeyLocalPath, true
+}
+
+// SetServerKeyLocalPath sets field value
+func (o *Config) SetServerKeyLocalPath(v string) {
+	o.ServerKeyLocalPath = v
 }
 
 // GetSignerPrivateKey returns the SignerPrivateKey field value
@@ -260,10 +286,11 @@ func (o Config) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["certPath"] = o.CertPath
 	toSerialize["compressor"] = o.Compressor
-	toSerialize["offloadable"] = o.Offloadable
 	toSerialize["serverCert"] = o.ServerCert
 	toSerialize["serverCertExpirySecs"] = o.ServerCertExpirySecs
+	toSerialize["serverCertLocalPath"] = o.ServerCertLocalPath
 	toSerialize["serverKey"] = o.ServerKey
+	toSerialize["serverKeyLocalPath"] = o.ServerKeyLocalPath
 	toSerialize["signerPrivateKey"] = o.SignerPrivateKey
 	toSerialize["signerPublicKey"] = o.SignerPublicKey
 	return toSerialize, nil

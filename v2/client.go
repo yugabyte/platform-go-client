@@ -73,6 +73,8 @@ type APIClient struct {
 
 	PITRAPI *PITRAPIService
 
+	PerfAdvisorEndpointAPI *PerfAdvisorEndpointAPIService
+
 	SupportBundleAPI *SupportBundleAPIService
 
 	TaskAPI *TaskAPIService
@@ -112,6 +114,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MetricsAPI = (*MetricsAPIService)(&c.common)
 	c.NodeAgentAPI = (*NodeAgentAPIService)(&c.common)
 	c.PITRAPI = (*PITRAPIService)(&c.common)
+	c.PerfAdvisorEndpointAPI = (*PerfAdvisorEndpointAPIService)(&c.common)
 	c.SupportBundleAPI = (*SupportBundleAPIService)(&c.common)
 	c.TaskAPI = (*TaskAPIService)(&c.common)
 	c.TelemetryProviderAPI = (*TelemetryProviderAPIService)(&c.common)

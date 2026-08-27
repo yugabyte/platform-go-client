@@ -23,7 +23,7 @@ type PACollectorDetailsModel struct {
 	ApiToken string `json:"apiToken"`
 	// Customer UUID
 	CustomerUUID string `json:"customerUUID"`
-	// True when this collector is the embedded PA managed by EmbeddedCollectorInitializer
+	// True when this collector is the embedded PA managed by PACollectorSync
 	Embedded *bool `json:"embedded,omitempty"`
 	// In Use Status
 	InUseStatus *string `json:"inUseStatus,omitempty"`

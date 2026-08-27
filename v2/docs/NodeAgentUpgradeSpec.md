@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CertificateUuid** | Pointer to **string** | Optional UUID of the certificate to use for the node agent upgrade. If omitted, existing certificates are used.  | [optional] 
+**CertificateName** | Pointer to **string** | Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, existing certificates are used.  | [optional] 
 **NodeNames** | Pointer to **[]string** | Optional list of node names whose node agents should be upgraded. If omitted or empty, all live nodes in the universe are upgraded.  | [optional] 
-**CertsOnly** | Pointer to **bool** | If true, only replace node agent certificates without upgrading the node agent package.  | [optional] [default to false]
+**CertsOnly** | Pointer to **bool** | If true, replace node agent certificates without upgrading the package when the node agent version already matches YBA. If the version does not match, a full upgrade is performed so RPC stays compatible.  | [optional] [default to false]
 
 ## Methods
 
@@ -27,30 +27,30 @@ NewNodeAgentUpgradeSpecWithDefaults instantiates a new NodeAgentUpgradeSpec obje
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCertificateUuid
+### GetCertificateName
 
-`func (o *NodeAgentUpgradeSpec) GetCertificateUuid() string`
+`func (o *NodeAgentUpgradeSpec) GetCertificateName() string`
 
-GetCertificateUuid returns the CertificateUuid field if non-nil, zero value otherwise.
+GetCertificateName returns the CertificateName field if non-nil, zero value otherwise.
 
-### GetCertificateUuidOk
+### GetCertificateNameOk
 
-`func (o *NodeAgentUpgradeSpec) GetCertificateUuidOk() (*string, bool)`
+`func (o *NodeAgentUpgradeSpec) GetCertificateNameOk() (*string, bool)`
 
-GetCertificateUuidOk returns a tuple with the CertificateUuid field if it's non-nil, zero value otherwise
+GetCertificateNameOk returns a tuple with the CertificateName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCertificateUuid
+### SetCertificateName
 
-`func (o *NodeAgentUpgradeSpec) SetCertificateUuid(v string)`
+`func (o *NodeAgentUpgradeSpec) SetCertificateName(v string)`
 
-SetCertificateUuid sets CertificateUuid field to given value.
+SetCertificateName sets CertificateName field to given value.
 
-### HasCertificateUuid
+### HasCertificateName
 
-`func (o *NodeAgentUpgradeSpec) HasCertificateUuid() bool`
+`func (o *NodeAgentUpgradeSpec) HasCertificateName() bool`
 
-HasCertificateUuid returns a boolean if a field has been set.
+HasCertificateName returns a boolean if a field has been set.
 
 ### GetNodeNames
 

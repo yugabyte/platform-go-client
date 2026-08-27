@@ -63,7 +63,9 @@ type UniverseDefinitionTaskParamsResp struct {
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
 	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
 	// YbaApi Internal. PA Collector UUID
-	PaCollectorUuid               *string               `json:"paCollectorUuid,omitempty"`
+	PaCollectorUuid *string `json:"paCollectorUuid,omitempty"`
+	// YbaApi Internal. Perf Advisor Endpoint UUID
+	PaEndpointUuid                *string               `json:"paEndpointUuid,omitempty"`
 	PlacementModificationTaskUuid *string               `json:"placementModificationTaskUuid,omitempty"`
 	PlatformUrl                   *string               `json:"platformUrl,omitempty"`
 	PrevYBSoftwareConfig          *PrevYBSoftwareConfig `json:"prevYBSoftwareConfig,omitempty"`
@@ -1199,6 +1201,38 @@ func (o *UniverseDefinitionTaskParamsResp) SetPaCollectorUuid(v string) {
 	o.PaCollectorUuid = &v
 }
 
+// GetPaEndpointUuid returns the PaEndpointUuid field value if set, zero value otherwise.
+func (o *UniverseDefinitionTaskParamsResp) GetPaEndpointUuid() string {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		var ret string
+		return ret
+	}
+	return *o.PaEndpointUuid
+}
+
+// GetPaEndpointUuidOk returns a tuple with the PaEndpointUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseDefinitionTaskParamsResp) GetPaEndpointUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.PaEndpointUuid) {
+		return nil, false
+	}
+	return o.PaEndpointUuid, true
+}
+
+// HasPaEndpointUuid returns a boolean if a field has been set.
+func (o *UniverseDefinitionTaskParamsResp) HasPaEndpointUuid() bool {
+	if o != nil && !IsNil(o.PaEndpointUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaEndpointUuid gets a reference to the given string and assigns it to the PaEndpointUuid field.
+func (o *UniverseDefinitionTaskParamsResp) SetPaEndpointUuid(v string) {
+	o.PaEndpointUuid = &v
+}
+
 // GetPlacementModificationTaskUuid returns the PlacementModificationTaskUuid field value if set, zero value otherwise.
 func (o *UniverseDefinitionTaskParamsResp) GetPlacementModificationTaskUuid() string {
 	if o == nil || IsNil(o.PlacementModificationTaskUuid) {
@@ -2282,6 +2316,9 @@ func (o UniverseDefinitionTaskParamsResp) ToMap() (map[string]interface{}, error
 	}
 	if !IsNil(o.PaCollectorUuid) {
 		toSerialize["paCollectorUuid"] = o.PaCollectorUuid
+	}
+	if !IsNil(o.PaEndpointUuid) {
+		toSerialize["paEndpointUuid"] = o.PaEndpointUuid
 	}
 	if !IsNil(o.PlacementModificationTaskUuid) {
 		toSerialize["placementModificationTaskUuid"] = o.PlacementModificationTaskUuid
