@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 )
 
@@ -518,7 +517,7 @@ type SupportBundleAPIDownloadSupportBundleRequest struct {
 	sbUUID     string
 }
 
-func (r SupportBundleAPIDownloadSupportBundleRequest) Execute() (*os.File, *http.Response, error) {
+func (r SupportBundleAPIDownloadSupportBundleRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DownloadSupportBundleExecute(r)
 }
 
@@ -526,6 +525,10 @@ func (r SupportBundleAPIDownloadSupportBundleRequest) Execute() (*os.File, *http
 DownloadSupportBundle Download support bundle
 
 Download a completed support bundle archive.
+
+The archive can be large, so generated clients hand back the raw HTTP response
+instead of buffering it. Callers read the archive from the response body and are
+responsible for closing it once done.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
@@ -544,19 +547,16 @@ func (a *SupportBundleAPIService) DownloadSupportBundle(ctx context.Context, cUU
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *SupportBundleAPIService) DownloadSupportBundleExecute(r SupportBundleAPIDownloadSupportBundleRequest) (*os.File, *http.Response, error) {
+func (a *SupportBundleAPIService) DownloadSupportBundleExecute(r SupportBundleAPIDownloadSupportBundleRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *os.File
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleAPIService.DownloadSupportBundle")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/support-bundles/{sbUUID}/download"
@@ -601,19 +601,24 @@ func (a *SupportBundleAPIService) DownloadSupportBundleExecute(r SupportBundleAP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+	// The success body is deliberately left unread so the caller can stream it. Only error
+	// responses are buffered here, to populate GenericOpenAPIError below.
+	var localVarBody []byte
+	if localVarHTTPResponse.StatusCode >= 300 {
+		localVarBody, err = io.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarHTTPResponse, err
+		}
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -621,19 +626,10 @@ func (a *SupportBundleAPIService) DownloadSupportBundleExecute(r SupportBundleAP
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type SupportBundleAPIDownloadYbaSupportBundleRequest struct {
@@ -643,7 +639,7 @@ type SupportBundleAPIDownloadYbaSupportBundleRequest struct {
 	sbUUID     string
 }
 
-func (r SupportBundleAPIDownloadYbaSupportBundleRequest) Execute() (*os.File, *http.Response, error) {
+func (r SupportBundleAPIDownloadYbaSupportBundleRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DownloadYbaSupportBundleExecute(r)
 }
 
@@ -651,6 +647,10 @@ func (r SupportBundleAPIDownloadYbaSupportBundleRequest) Execute() (*os.File, *h
 DownloadYbaSupportBundle Download YBA-only support bundle
 
 Download a completed YBA-only support bundle archive.
+
+The archive can be large, so generated clients hand back the raw HTTP response
+instead of buffering it. Callers read the archive from the response body and are
+responsible for closing it once done.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
@@ -667,19 +667,16 @@ func (a *SupportBundleAPIService) DownloadYbaSupportBundle(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *SupportBundleAPIService) DownloadYbaSupportBundleExecute(r SupportBundleAPIDownloadYbaSupportBundleRequest) (*os.File, *http.Response, error) {
+func (a *SupportBundleAPIService) DownloadYbaSupportBundleExecute(r SupportBundleAPIDownloadYbaSupportBundleRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *os.File
+		localVarHTTPMethod = http.MethodGet
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SupportBundleAPIService.DownloadYbaSupportBundle")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/customers/{cUUID}/support-bundles/yba/{sbUUID}/download"
@@ -723,19 +720,24 @@ func (a *SupportBundleAPIService) DownloadYbaSupportBundleExecute(r SupportBundl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+	// The success body is deliberately left unread so the caller can stream it. Only error
+	// responses are buffered here, to populate GenericOpenAPIError below.
+	var localVarBody []byte
+	if localVarHTTPResponse.StatusCode >= 300 {
+		localVarBody, err = io.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarHTTPResponse, err
+		}
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -743,19 +745,10 @@ func (a *SupportBundleAPIService) DownloadYbaSupportBundleExecute(r SupportBundl
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type SupportBundleAPIEstimateSupportBundleSizeRequest struct {

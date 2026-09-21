@@ -2313,6 +2313,139 @@ func (a *UniverseAPIService) EditUniverseExecute(r UniverseAPIEditUniverseReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type UniverseAPIEditVMImageRequest struct {
+	ctx                        context.Context
+	ApiService                 *UniverseAPIService
+	cUUID                      string
+	uniUUID                    string
+	universeVMImageUpgradeSpec *UniverseVMImageUpgradeSpec
+}
+
+func (r UniverseAPIEditVMImageRequest) UniverseVMImageUpgradeSpec(universeVMImageUpgradeSpec UniverseVMImageUpgradeSpec) UniverseAPIEditVMImageRequest {
+	r.universeVMImageUpgradeSpec = &universeVMImageUpgradeSpec
+	return r
+}
+
+func (r UniverseAPIEditVMImageRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.EditVMImageExecute(r)
+}
+
+/*
+EditVMImage Edit VM images for nodes.
+
+Queues a task to edit VM images of a universe nodes
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPIEditVMImageRequest
+*/
+func (a *UniverseAPIService) EditVMImage(ctx context.Context, cUUID string, uniUUID string) UniverseAPIEditVMImageRequest {
+	return UniverseAPIEditVMImageRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *UniverseAPIService) EditVMImageExecute(r UniverseAPIEditVMImageRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.EditVMImage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/vm-image"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeVMImageUpgradeSpec == nil {
+		return localVarReturnValue, nil, reportError("universeVMImageUpgradeSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeVMImageUpgradeSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type UniverseAPIEncryptionInTransitCertRotateRequest struct {
 	ctx                    context.Context
 	ApiService             *UniverseAPIService
@@ -3155,6 +3288,139 @@ func (a *UniverseAPIService) GetUniverseResourcesExecute(r UniverseAPIGetUnivers
 	}
 	// body params
 	localVarPostBody = r.universeCreateSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIManageCrossCloudFederationRequest struct {
+	ctx                              context.Context
+	ApiService                       *UniverseAPIService
+	cUUID                            string
+	uniUUID                          string
+	universeCrossCloudFederationSpec *UniverseCrossCloudFederationSpec
+}
+
+func (r UniverseAPIManageCrossCloudFederationRequest) UniverseCrossCloudFederationSpec(universeCrossCloudFederationSpec UniverseCrossCloudFederationSpec) UniverseAPIManageCrossCloudFederationRequest {
+	r.universeCrossCloudFederationSpec = &universeCrossCloudFederationSpec
+	return r
+}
+
+func (r UniverseAPIManageCrossCloudFederationRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.ManageCrossCloudFederationExecute(r)
+}
+
+/*
+ManageCrossCloudFederation Enable or disable cross-cloud federated IAM on a universe
+
+Configures (enable) or tears down (disable) cross-cloud federated IAM on all nodes of an existing universe. On enable, the universe's provider must have federated IAM enabled with an audience set.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param uniUUID Universe UUID
+	@return UniverseAPIManageCrossCloudFederationRequest
+*/
+func (a *UniverseAPIService) ManageCrossCloudFederation(ctx context.Context, cUUID string, uniUUID string) UniverseAPIManageCrossCloudFederationRequest {
+	return UniverseAPIManageCrossCloudFederationRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		uniUUID:    uniUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *UniverseAPIService) ManageCrossCloudFederationExecute(r UniverseAPIManageCrossCloudFederationRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.ManageCrossCloudFederation")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/universes/{uniUUID}/cross-cloud-federation"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"uniUUID"+"}", url.PathEscape(parameterValueToString(r.uniUUID, "uniUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeCrossCloudFederationSpec == nil {
+		return localVarReturnValue, nil, reportError("universeCrossCloudFederationSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeCrossCloudFederationSpec
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

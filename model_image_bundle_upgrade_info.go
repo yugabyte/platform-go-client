@@ -21,6 +21,7 @@ var _ MappedNullable = &ImageBundleUpgradeInfo{}
 type ImageBundleUpgradeInfo struct {
 	ClusterUuid     string `json:"clusterUuid"`
 	ImageBundleUuid string `json:"imageBundleUuid"`
+	ProviderUuid    string `json:"providerUuid"`
 }
 
 type _ImageBundleUpgradeInfo ImageBundleUpgradeInfo
@@ -29,10 +30,11 @@ type _ImageBundleUpgradeInfo ImageBundleUpgradeInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string) *ImageBundleUpgradeInfo {
+func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, providerUuid string) *ImageBundleUpgradeInfo {
 	this := ImageBundleUpgradeInfo{}
 	this.ClusterUuid = clusterUuid
 	this.ImageBundleUuid = imageBundleUuid
+	this.ProviderUuid = providerUuid
 	return &this
 }
 
@@ -92,6 +94,30 @@ func (o *ImageBundleUpgradeInfo) SetImageBundleUuid(v string) {
 	o.ImageBundleUuid = v
 }
 
+// GetProviderUuid returns the ProviderUuid field value
+func (o *ImageBundleUpgradeInfo) GetProviderUuid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ProviderUuid
+}
+
+// GetProviderUuidOk returns a tuple with the ProviderUuid field value
+// and a boolean to check if the value has been set.
+func (o *ImageBundleUpgradeInfo) GetProviderUuidOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProviderUuid, true
+}
+
+// SetProviderUuid sets field value
+func (o *ImageBundleUpgradeInfo) SetProviderUuid(v string) {
+	o.ProviderUuid = v
+}
+
 func (o ImageBundleUpgradeInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -104,6 +130,7 @@ func (o ImageBundleUpgradeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clusterUuid"] = o.ClusterUuid
 	toSerialize["imageBundleUuid"] = o.ImageBundleUuid
+	toSerialize["providerUuid"] = o.ProviderUuid
 	return toSerialize, nil
 }
 

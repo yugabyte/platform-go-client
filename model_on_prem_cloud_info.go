@@ -19,11 +19,17 @@ var _ MappedNullable = &OnPremCloudInfo{}
 
 // OnPremCloudInfo struct for OnPremCloudInfo
 type OnPremCloudInfo struct {
+	// WARNING: This is a preview API that could change. Enable GCS-on-AWS cross-cloud federated IAM on this provider's DB nodes (nodes must be AWS VMs).
+	EnableFederatedIam *bool `json:"enableFederatedIam,omitempty"`
 	// WARNING: This is a preview API that could change.
 	EnableMultiTenancy *bool `json:"enableMultiTenancy,omitempty"`
+	// WARNING: This is a preview API that could change. GCP Workload Identity Federation audience used when federated IAM is enabled.
+	FederatedIamAudience *string `json:"federatedIamAudience,omitempty"`
 	// WARNING: This is a preview API that could change.
 	UseClockbound *bool   `json:"useClockbound,omitempty"`
 	YbHomeDir     *string `json:"ybHomeDir,omitempty"`
+	// YbaApi Internal. Provider is created and managed by YNP
+	YnpManaged *bool `json:"ynpManaged,omitempty"`
 }
 
 // NewOnPremCloudInfo instantiates a new OnPremCloudInfo object
@@ -41,6 +47,38 @@ func NewOnPremCloudInfo() *OnPremCloudInfo {
 func NewOnPremCloudInfoWithDefaults() *OnPremCloudInfo {
 	this := OnPremCloudInfo{}
 	return &this
+}
+
+// GetEnableFederatedIam returns the EnableFederatedIam field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetEnableFederatedIam() bool {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableFederatedIam
+}
+
+// GetEnableFederatedIamOk returns a tuple with the EnableFederatedIam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetEnableFederatedIamOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		return nil, false
+	}
+	return o.EnableFederatedIam, true
+}
+
+// HasEnableFederatedIam returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasEnableFederatedIam() bool {
+	if o != nil && !IsNil(o.EnableFederatedIam) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableFederatedIam gets a reference to the given bool and assigns it to the EnableFederatedIam field.
+func (o *OnPremCloudInfo) SetEnableFederatedIam(v bool) {
+	o.EnableFederatedIam = &v
 }
 
 // GetEnableMultiTenancy returns the EnableMultiTenancy field value if set, zero value otherwise.
@@ -73,6 +111,38 @@ func (o *OnPremCloudInfo) HasEnableMultiTenancy() bool {
 // SetEnableMultiTenancy gets a reference to the given bool and assigns it to the EnableMultiTenancy field.
 func (o *OnPremCloudInfo) SetEnableMultiTenancy(v bool) {
 	o.EnableMultiTenancy = &v
+}
+
+// GetFederatedIamAudience returns the FederatedIamAudience field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetFederatedIamAudience() string {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		var ret string
+		return ret
+	}
+	return *o.FederatedIamAudience
+}
+
+// GetFederatedIamAudienceOk returns a tuple with the FederatedIamAudience field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetFederatedIamAudienceOk() (*string, bool) {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		return nil, false
+	}
+	return o.FederatedIamAudience, true
+}
+
+// HasFederatedIamAudience returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasFederatedIamAudience() bool {
+	if o != nil && !IsNil(o.FederatedIamAudience) {
+		return true
+	}
+
+	return false
+}
+
+// SetFederatedIamAudience gets a reference to the given string and assigns it to the FederatedIamAudience field.
+func (o *OnPremCloudInfo) SetFederatedIamAudience(v string) {
+	o.FederatedIamAudience = &v
 }
 
 // GetUseClockbound returns the UseClockbound field value if set, zero value otherwise.
@@ -139,6 +209,38 @@ func (o *OnPremCloudInfo) SetYbHomeDir(v string) {
 	o.YbHomeDir = &v
 }
 
+// GetYnpManaged returns the YnpManaged field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetYnpManaged() bool {
+	if o == nil || IsNil(o.YnpManaged) {
+		var ret bool
+		return ret
+	}
+	return *o.YnpManaged
+}
+
+// GetYnpManagedOk returns a tuple with the YnpManaged field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetYnpManagedOk() (*bool, bool) {
+	if o == nil || IsNil(o.YnpManaged) {
+		return nil, false
+	}
+	return o.YnpManaged, true
+}
+
+// HasYnpManaged returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasYnpManaged() bool {
+	if o != nil && !IsNil(o.YnpManaged) {
+		return true
+	}
+
+	return false
+}
+
+// SetYnpManaged gets a reference to the given bool and assigns it to the YnpManaged field.
+func (o *OnPremCloudInfo) SetYnpManaged(v bool) {
+	o.YnpManaged = &v
+}
+
 func (o OnPremCloudInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -149,14 +251,23 @@ func (o OnPremCloudInfo) MarshalJSON() ([]byte, error) {
 
 func (o OnPremCloudInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EnableFederatedIam) {
+		toSerialize["enableFederatedIam"] = o.EnableFederatedIam
+	}
 	if !IsNil(o.EnableMultiTenancy) {
 		toSerialize["enableMultiTenancy"] = o.EnableMultiTenancy
+	}
+	if !IsNil(o.FederatedIamAudience) {
+		toSerialize["federatedIamAudience"] = o.FederatedIamAudience
 	}
 	if !IsNil(o.UseClockbound) {
 		toSerialize["useClockbound"] = o.UseClockbound
 	}
 	if !IsNil(o.YbHomeDir) {
 		toSerialize["ybHomeDir"] = o.YbHomeDir
+	}
+	if !IsNil(o.YnpManaged) {
+		toSerialize["ynpManaged"] = o.YnpManaged
 	}
 	return toSerialize, nil
 }

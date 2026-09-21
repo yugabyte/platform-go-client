@@ -69,6 +69,8 @@ type VMImageUpgradeParams struct {
 	NodeExporterUser     *string `json:"nodeExporterUser,omitempty"`
 	NodePrefix           *string `json:"nodePrefix,omitempty"`
 	NodesResizeAvailable *bool   `json:"nodesResizeAvailable,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// YbaApi Internal. OpenTelemetry Collector enabled for universe
 	OtelCollectorEnabled *bool `json:"otelCollectorEnabled,omitempty"`
 	// YbaApi Internal. PA Collector UUID
@@ -1300,6 +1302,38 @@ func (o *VMImageUpgradeParams) HasNodesResizeAvailable() bool {
 // SetNodesResizeAvailable gets a reference to the given bool and assigns it to the NodesResizeAvailable field.
 func (o *VMImageUpgradeParams) SetNodesResizeAvailable(v bool) {
 	o.NodesResizeAvailable = &v
+}
+
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *VMImageUpgradeParams) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VMImageUpgradeParams) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *VMImageUpgradeParams) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *VMImageUpgradeParams) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
 }
 
 // GetOtelCollectorEnabled returns the OtelCollectorEnabled field value if set, zero value otherwise.
@@ -2622,6 +2656,9 @@ func (o VMImageUpgradeParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NodesResizeAvailable) {
 		toSerialize["nodesResizeAvailable"] = o.NodesResizeAvailable
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.OtelCollectorEnabled) {
 		toSerialize["otelCollectorEnabled"] = o.OtelCollectorEnabled

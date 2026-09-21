@@ -21,10 +21,14 @@ var _ MappedNullable = &TaskApiFilter{}
 
 // TaskApiFilter Optional filter for listing customer tasks.
 type TaskApiFilter struct {
-	// Include tasks created on or after this time.
+	// Include tasks created on or after this time (filters `create_time`). May be set alone (open-ended upper bound) or together with `date_range_end`.
 	DateRangeStart *time.Time `json:"date_range_start,omitempty"`
-	// Include tasks created on or before this time.
+	// Include tasks created on or before this time (filters `create_time`). May be set alone (open-ended lower bound) or together with `date_range_start`.
 	DateRangeEnd *time.Time `json:"date_range_end,omitempty"`
+	// Include tasks that completed on or after this time. May be set alone (open-ended upper bound) or together with `completion_date_range_end`. In-progress tasks don't have a completion time yet and are always excluded when either completion bound is set (SQL comparisons do not match nulls).
+	CompletionDateRangeStart *time.Time `json:"completion_date_range_start,omitempty"`
+	// Include tasks that completed on or before this time. May be set alone (open-ended lower bound) or together with `completion_date_range_start`. In-progress tasks don't have a completion time yet and are always excluded when either completion bound is set (SQL comparisons do not match nulls).
+	CompletionDateRangeEnd *time.Time `json:"completion_date_range_end,omitempty"`
 	// Filter by target resource types.
 	TargetList []string `json:"target_list,omitempty"`
 	// Filter by target resource UUIDs.
@@ -116,6 +120,70 @@ func (o *TaskApiFilter) HasDateRangeEnd() bool {
 // SetDateRangeEnd gets a reference to the given time.Time and assigns it to the DateRangeEnd field.
 func (o *TaskApiFilter) SetDateRangeEnd(v time.Time) {
 	o.DateRangeEnd = &v
+}
+
+// GetCompletionDateRangeStart returns the CompletionDateRangeStart field value if set, zero value otherwise.
+func (o *TaskApiFilter) GetCompletionDateRangeStart() time.Time {
+	if o == nil || IsNil(o.CompletionDateRangeStart) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletionDateRangeStart
+}
+
+// GetCompletionDateRangeStartOk returns a tuple with the CompletionDateRangeStart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TaskApiFilter) GetCompletionDateRangeStartOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletionDateRangeStart) {
+		return nil, false
+	}
+	return o.CompletionDateRangeStart, true
+}
+
+// HasCompletionDateRangeStart returns a boolean if a field has been set.
+func (o *TaskApiFilter) HasCompletionDateRangeStart() bool {
+	if o != nil && !IsNil(o.CompletionDateRangeStart) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionDateRangeStart gets a reference to the given time.Time and assigns it to the CompletionDateRangeStart field.
+func (o *TaskApiFilter) SetCompletionDateRangeStart(v time.Time) {
+	o.CompletionDateRangeStart = &v
+}
+
+// GetCompletionDateRangeEnd returns the CompletionDateRangeEnd field value if set, zero value otherwise.
+func (o *TaskApiFilter) GetCompletionDateRangeEnd() time.Time {
+	if o == nil || IsNil(o.CompletionDateRangeEnd) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletionDateRangeEnd
+}
+
+// GetCompletionDateRangeEndOk returns a tuple with the CompletionDateRangeEnd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TaskApiFilter) GetCompletionDateRangeEndOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletionDateRangeEnd) {
+		return nil, false
+	}
+	return o.CompletionDateRangeEnd, true
+}
+
+// HasCompletionDateRangeEnd returns a boolean if a field has been set.
+func (o *TaskApiFilter) HasCompletionDateRangeEnd() bool {
+	if o != nil && !IsNil(o.CompletionDateRangeEnd) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionDateRangeEnd gets a reference to the given time.Time and assigns it to the CompletionDateRangeEnd field.
+func (o *TaskApiFilter) SetCompletionDateRangeEnd(v time.Time) {
+	o.CompletionDateRangeEnd = &v
 }
 
 // GetTargetList returns the TargetList field value if set, zero value otherwise.
@@ -293,6 +361,12 @@ func (o TaskApiFilter) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DateRangeEnd) {
 		toSerialize["date_range_end"] = o.DateRangeEnd
+	}
+	if !IsNil(o.CompletionDateRangeStart) {
+		toSerialize["completion_date_range_start"] = o.CompletionDateRangeStart
+	}
+	if !IsNil(o.CompletionDateRangeEnd) {
+		toSerialize["completion_date_range_end"] = o.CompletionDateRangeEnd
 	}
 	if !IsNil(o.TargetList) {
 		toSerialize["target_list"] = o.TargetList

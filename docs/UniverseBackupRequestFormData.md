@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ErrorString** | Pointer to **string** | Error message | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit. | [optional] 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **StorageConfigUUID** | **string** | WARNING: This is a preview API that could change.Storage configuration UUID | 
 **TimeBeforeDelete** | Pointer to **int64** | WARNING: This is a preview API that could change.Time before deleting the backup from storage, in milliseconds | [optional] 
@@ -52,6 +53,31 @@ SetErrorString sets ErrorString field to given value.
 `func (o *UniverseBackupRequestFormData) HasErrorString() bool`
 
 HasErrorString returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *UniverseBackupRequestFormData) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *UniverseBackupRequestFormData) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *UniverseBackupRequestFormData) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *UniverseBackupRequestFormData) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetPreviousTaskUUID
 

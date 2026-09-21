@@ -129,8 +129,11 @@ Class | Method | HTTP request | Description
 *SupportBundleAPI* | [**ListSupportBundleComponents**](docs/SupportBundleAPI.md#listsupportbundlecomponents) | **Get** /customers/{cUUID}/support-bundle/components | List support bundle components
 *SupportBundleAPI* | [**PageListSupportBundles**](docs/SupportBundleAPI.md#pagelistsupportbundles) | **Post** /customers/{cUUID}/universes/{uniUUID}/support-bundles/page | List support bundles (paged)
 *SupportBundleAPI* | [**PageListYbaSupportBundles**](docs/SupportBundleAPI.md#pagelistybasupportbundles) | **Post** /customers/{cUUID}/support-bundles/yba/page | List YBA-only support bundles (paged)
+*TaskAPI* | [**GetShutdownStatus**](docs/TaskAPI.md#getshutdownstatus) | **Get** /task-executor/shutdown | Get task executor shutdown status
 *TaskAPI* | [**PageListTasks**](docs/TaskAPI.md#pagelisttasks) | **Post** /customers/{cUUID}/tasks/page | List customer tasks (paged)
+*TaskAPI* | [**RetryTask**](docs/TaskAPI.md#retrytask) | **Post** /customers/{cUUID}/tasks/{tUUID}/retry | Retry a failed task
 *TaskAPI* | [**RollbackTask**](docs/TaskAPI.md#rollbacktask) | **Post** /customers/{cUUID}/tasks/{tUUID}/rollback | Rollback a failed task
+*TaskAPI* | [**ShutdownTaskExecutor**](docs/TaskAPI.md#shutdowntaskexecutor) | **Post** /task-executor/shutdown | Shut down the task executor
 *TelemetryProviderAPI* | [**ListTelemetryProviderTypes**](docs/TelemetryProviderAPI.md#listtelemetryprovidertypes) | **Get** /customers/{cUUID}/telemetry-provider/types | List Available Telemetry Provider Types
 *UniverseAPI* | [**AddCluster**](docs/UniverseAPI.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseAPI* | [**AttachUniverse**](docs/UniverseAPI.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
@@ -149,6 +152,7 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**EditGFlags**](docs/UniverseAPI.md#editgflags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 *UniverseAPI* | [**EditKubernetesOverrides**](docs/UniverseAPI.md#editkubernetesoverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 *UniverseAPI* | [**EditUniverse**](docs/UniverseAPI.md#edituniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
+*UniverseAPI* | [**EditVMImage**](docs/UniverseAPI.md#editvmimage) | **Post** /customers/{cUUID}/universes/{uniUUID}/vm-image | Edit VM images for nodes.
 *UniverseAPI* | [**EncryptionInTransitCertRotate**](docs/UniverseAPI.md#encryptionintransitcertrotate) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit/rotate | Rotate TLS Certs
 *UniverseAPI* | [**EncryptionInTransitToggle**](docs/UniverseAPI.md#encryptionintransittoggle) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit | Enable or disable encryption in transit
 *UniverseAPI* | [**FinalizeSoftwareUpgrade**](docs/UniverseAPI.md#finalizesoftwareupgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
@@ -156,6 +160,7 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**GetFinalizeSoftwareUpgradeInfo**](docs/UniverseAPI.md#getfinalizesoftwareupgradeinfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 *UniverseAPI* | [**GetUniverse**](docs/UniverseAPI.md#getuniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
 *UniverseAPI* | [**GetUniverseResources**](docs/UniverseAPI.md#getuniverseresources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
+*UniverseAPI* | [**ManageCrossCloudFederation**](docs/UniverseAPI.md#managecrosscloudfederation) | **Post** /customers/{cUUID}/universes/{uniUUID}/cross-cloud-federation | Enable or disable cross-cloud federated IAM on a universe
 *UniverseAPI* | [**OperatorImportUniverse**](docs/UniverseAPI.md#operatorimportuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import | Import universe to operator
 *UniverseAPI* | [**OperatorImportUniversePrecheck**](docs/UniverseAPI.md#operatorimportuniverseprecheck) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck | Precheck universe import to operator
 *UniverseAPI* | [**PageListUniverses**](docs/UniverseAPI.md#pagelistuniverses) | **Post** /customers/{cUUID}/universes/page | List universes
@@ -393,9 +398,13 @@ Class | Method | HTTP request | Description
  - [Task](docs/Task.md)
  - [TaskApiFilter](docs/TaskApiFilter.md)
  - [TaskDetails](docs/TaskDetails.md)
+ - [TaskExecutorShutdownResp](docs/TaskExecutorShutdownResp.md)
+ - [TaskExecutorShutdownSpec](docs/TaskExecutorShutdownSpec.md)
+ - [TaskExecutorShutdownStatus](docs/TaskExecutorShutdownStatus.md)
  - [TaskInfo](docs/TaskInfo.md)
  - [TaskPagedQuerySpec](docs/TaskPagedQuerySpec.md)
  - [TaskPagedResp](docs/TaskPagedResp.md)
+ - [TaskRetrySpec](docs/TaskRetrySpec.md)
  - [TaskRollbackSpec](docs/TaskRollbackSpec.md)
  - [TaskSubtaskGroupDetails](docs/TaskSubtaskGroupDetails.md)
  - [TaskVersionNumbers](docs/TaskVersionNumbers.md)
@@ -405,6 +414,7 @@ Class | Method | HTTP request | Description
  - [Universe](docs/Universe.md)
  - [UniverseCertRotateSpec](docs/UniverseCertRotateSpec.md)
  - [UniverseCreateSpec](docs/UniverseCreateSpec.md)
+ - [UniverseCrossCloudFederationSpec](docs/UniverseCrossCloudFederationSpec.md)
  - [UniverseDeleteSpec](docs/UniverseDeleteSpec.md)
  - [UniverseDetailSubset](docs/UniverseDetailSubset.md)
  - [UniverseEditEncryptionInTransit](docs/UniverseEditEncryptionInTransit.md)
@@ -443,11 +453,13 @@ Class | Method | HTTP request | Description
  - [UniverseUpdateProxyConfigClustersInner](docs/UniverseUpdateProxyConfigClustersInner.md)
  - [UniverseUpgradeOptionRolling](docs/UniverseUpgradeOptionRolling.md)
  - [UniverseUpgradeOptionsAll](docs/UniverseUpgradeOptionsAll.md)
+ - [UniverseVMImageUpgradeSpec](docs/UniverseVMImageUpgradeSpec.md)
  - [UniverseValidateKubernetesOverrides](docs/UniverseValidateKubernetesOverrides.md)
  - [UpdateProxyConfigSpec](docs/UpdateProxyConfigSpec.md)
  - [User](docs/User.md)
  - [UserInfo](docs/UserInfo.md)
  - [UserSpec](docs/UserSpec.md)
+ - [VMImageClusterSpec](docs/VMImageClusterSpec.md)
  - [XClusterInfo](docs/XClusterInfo.md)
  - [XClusterTableType](docs/XClusterTableType.md)
  - [YBAInfo](docs/YBAInfo.md)

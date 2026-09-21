@@ -27,8 +27,8 @@ type YbAdminComponentSpec struct {
 	TimeoutSecs *int64 `json:"timeoutSecs,omitempty"`
 	// Additional arguments after the subcommand.
 	YbAdminArgs []string `json:"ybAdminArgs,omitempty"`
-	// yb-admin subcommand (e.g. list_tables).
-	YbAdminCommand *string `json:"ybAdminCommand,omitempty"`
+	// yb-admin subcommands to run (each executed separately in one batch).
+	YbAdminCommands []string `json:"ybAdminCommands,omitempty"`
 }
 
 // NewYbAdminComponentSpec instantiates a new YbAdminComponentSpec object
@@ -176,36 +176,36 @@ func (o *YbAdminComponentSpec) SetYbAdminArgs(v []string) {
 	o.YbAdminArgs = v
 }
 
-// GetYbAdminCommand returns the YbAdminCommand field value if set, zero value otherwise.
-func (o *YbAdminComponentSpec) GetYbAdminCommand() string {
-	if o == nil || IsNil(o.YbAdminCommand) {
-		var ret string
+// GetYbAdminCommands returns the YbAdminCommands field value if set, zero value otherwise.
+func (o *YbAdminComponentSpec) GetYbAdminCommands() []string {
+	if o == nil || IsNil(o.YbAdminCommands) {
+		var ret []string
 		return ret
 	}
-	return *o.YbAdminCommand
+	return o.YbAdminCommands
 }
 
-// GetYbAdminCommandOk returns a tuple with the YbAdminCommand field value if set, nil otherwise
+// GetYbAdminCommandsOk returns a tuple with the YbAdminCommands field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbAdminComponentSpec) GetYbAdminCommandOk() (*string, bool) {
-	if o == nil || IsNil(o.YbAdminCommand) {
+func (o *YbAdminComponentSpec) GetYbAdminCommandsOk() ([]string, bool) {
+	if o == nil || IsNil(o.YbAdminCommands) {
 		return nil, false
 	}
-	return o.YbAdminCommand, true
+	return o.YbAdminCommands, true
 }
 
-// HasYbAdminCommand returns a boolean if a field has been set.
-func (o *YbAdminComponentSpec) HasYbAdminCommand() bool {
-	if o != nil && !IsNil(o.YbAdminCommand) {
+// HasYbAdminCommands returns a boolean if a field has been set.
+func (o *YbAdminComponentSpec) HasYbAdminCommands() bool {
+	if o != nil && !IsNil(o.YbAdminCommands) {
 		return true
 	}
 
 	return false
 }
 
-// SetYbAdminCommand gets a reference to the given string and assigns it to the YbAdminCommand field.
-func (o *YbAdminComponentSpec) SetYbAdminCommand(v string) {
-	o.YbAdminCommand = &v
+// SetYbAdminCommands gets a reference to the given []string and assigns it to the YbAdminCommands field.
+func (o *YbAdminComponentSpec) SetYbAdminCommands(v []string) {
+	o.YbAdminCommands = v
 }
 
 func (o YbAdminComponentSpec) MarshalJSON() ([]byte, error) {
@@ -230,8 +230,8 @@ func (o YbAdminComponentSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YbAdminArgs) {
 		toSerialize["ybAdminArgs"] = o.YbAdminArgs
 	}
-	if !IsNil(o.YbAdminCommand) {
-		toSerialize["ybAdminCommand"] = o.YbAdminCommand
+	if !IsNil(o.YbAdminCommands) {
+		toSerialize["ybAdminCommands"] = o.YbAdminCommands
 	}
 	return toSerialize, nil
 }

@@ -32,6 +32,8 @@ type CustomerTaskData struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Customer task UUID
 	Id *string `json:"id,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state), if any
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// Customer task percentage completed
 	PercentComplete *int32 `json:"percentComplete,omitempty"`
 	// Customer task retryable
@@ -259,6 +261,38 @@ func (o *CustomerTaskData) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *CustomerTaskData) SetId(v string) {
 	o.Id = &v
+}
+
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *CustomerTaskData) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerTaskData) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *CustomerTaskData) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *CustomerTaskData) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
 }
 
 // GetPercentComplete returns the PercentComplete field value if set, zero value otherwise.
@@ -576,6 +610,9 @@ func (o CustomerTaskData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.PercentComplete) {
 		toSerialize["percentComplete"] = o.PercentComplete

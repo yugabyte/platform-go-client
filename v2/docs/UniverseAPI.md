@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**EditGFlags**](UniverseAPI.md#EditGFlags) | **Post** /customers/{cUUID}/universes/{uniUUID}/gflags | Edit GFlags
 [**EditKubernetesOverrides**](UniverseAPI.md#EditKubernetesOverrides) | **Post** /customers/{cUUID}/universes/{uniUUID}/kubernetes-overrides | Edit Kubernetes Helm Overrides
 [**EditUniverse**](UniverseAPI.md#EditUniverse) | **Put** /customers/{cUUID}/universes/{uniUUID} | Edit a YugabyteDB Universe
+[**EditVMImage**](UniverseAPI.md#EditVMImage) | **Post** /customers/{cUUID}/universes/{uniUUID}/vm-image | Edit VM images for nodes.
 [**EncryptionInTransitCertRotate**](UniverseAPI.md#EncryptionInTransitCertRotate) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit/rotate | Rotate TLS Certs
 [**EncryptionInTransitToggle**](UniverseAPI.md#EncryptionInTransitToggle) | **Post** /customers/{cUUID}/universes/{uniUUID}/encryption/in-transit | Enable or disable encryption in transit
 [**FinalizeSoftwareUpgrade**](UniverseAPI.md#FinalizeSoftwareUpgrade) | **Post** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Finalize the Upgrade YugabyteDB
@@ -28,6 +29,7 @@ Method | HTTP request | Description
 [**GetFinalizeSoftwareUpgradeInfo**](UniverseAPI.md#GetFinalizeSoftwareUpgradeInfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 [**GetUniverse**](UniverseAPI.md#GetUniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
 [**GetUniverseResources**](UniverseAPI.md#GetUniverseResources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
+[**ManageCrossCloudFederation**](UniverseAPI.md#ManageCrossCloudFederation) | **Post** /customers/{cUUID}/universes/{uniUUID}/cross-cloud-federation | Enable or disable cross-cloud federated IAM on a universe
 [**OperatorImportUniverse**](UniverseAPI.md#OperatorImportUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import | Import universe to operator
 [**OperatorImportUniversePrecheck**](UniverseAPI.md#OperatorImportUniversePrecheck) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck | Precheck universe import to operator
 [**PageListUniverses**](UniverseAPI.md#PageListUniverses) | **Post** /customers/{cUUID}/universes/page | List universes
@@ -1323,6 +1325,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## EditVMImage
+
+> YBATask EditVMImage(ctx, cUUID, uniUUID).UniverseVMImageUpgradeSpec(universeVMImageUpgradeSpec).Execute()
+
+Edit VM images for nodes.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	universeVMImageUpgradeSpec := *openapiclient.NewUniverseVMImageUpgradeSpec() // UniverseVMImageUpgradeSpec | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.EditVMImage(context.Background(), cUUID, uniUUID).UniverseVMImageUpgradeSpec(universeVMImageUpgradeSpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.EditVMImage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EditVMImage`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.EditVMImage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEditVMImageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeVMImageUpgradeSpec** | [**UniverseVMImageUpgradeSpec**](UniverseVMImageUpgradeSpec.md) |  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## EncryptionInTransitCertRotate
 
 > YBATask EncryptionInTransitCertRotate(ctx, cUUID, uniUUID).UniverseCertRotateSpec(universeCertRotateSpec).Execute()
@@ -1824,6 +1901,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ManageCrossCloudFederation
+
+> YBATask ManageCrossCloudFederation(ctx, cUUID, uniUUID).UniverseCrossCloudFederationSpec(universeCrossCloudFederationSpec).Execute()
+
+Enable or disable cross-cloud federated IAM on a universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Universe UUID
+	universeCrossCloudFederationSpec := *openapiclient.NewUniverseCrossCloudFederationSpec(false) // UniverseCrossCloudFederationSpec | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.ManageCrossCloudFederation(context.Background(), cUUID, uniUUID).UniverseCrossCloudFederationSpec(universeCrossCloudFederationSpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.ManageCrossCloudFederation``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ManageCrossCloudFederation`: YBATask
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.ManageCrossCloudFederation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+**uniUUID** | **string** | Universe UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiManageCrossCloudFederationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **universeCrossCloudFederationSpec** | [**UniverseCrossCloudFederationSpec**](UniverseCrossCloudFederationSpec.md) |  | 
+
+### Return type
+
+[**YBATask**](YBATask.md)
 
 ### Authorization
 

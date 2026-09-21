@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentName** | Pointer to **string** | Logical component name; used as output file label. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
-**YbAdminCommand** | Pointer to **string** | yb-admin subcommand (e.g. list_tables). Support bundles only run read-only subcommands, so anything that mutates cluster state is rejected. Operators can add to the allowed set through the yb.support_bundle.extra_yb_admin_commands runtime config.  | [optional] 
+**YbAdminCommands** | Pointer to **[]string** | yb-admin subcommands to run, each executed separately (e.g. list_tables). Support bundles only run read-only subcommands, so anything that mutates cluster state is rejected. Operators can add to the allowed set through the yb.support_bundle.extra_yb_admin_commands runtime config.  | [optional] 
 **YbAdminArgs** | Pointer to **[]string** | Additional arguments after the subcommand. | [optional] 
 **OutputFileName** | Pointer to **string** | Output file name written under the per-node bundle directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
 **TimeoutSecs** | Pointer to **int64** | Command timeout in seconds. | [optional] 
@@ -54,30 +54,30 @@ SetComponentName sets ComponentName field to given value.
 
 HasComponentName returns a boolean if a field has been set.
 
-### GetYbAdminCommand
+### GetYbAdminCommands
 
-`func (o *YbAdminComponentSpec) GetYbAdminCommand() string`
+`func (o *YbAdminComponentSpec) GetYbAdminCommands() []string`
 
-GetYbAdminCommand returns the YbAdminCommand field if non-nil, zero value otherwise.
+GetYbAdminCommands returns the YbAdminCommands field if non-nil, zero value otherwise.
 
-### GetYbAdminCommandOk
+### GetYbAdminCommandsOk
 
-`func (o *YbAdminComponentSpec) GetYbAdminCommandOk() (*string, bool)`
+`func (o *YbAdminComponentSpec) GetYbAdminCommandsOk() (*[]string, bool)`
 
-GetYbAdminCommandOk returns a tuple with the YbAdminCommand field if it's non-nil, zero value otherwise
+GetYbAdminCommandsOk returns a tuple with the YbAdminCommands field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetYbAdminCommand
+### SetYbAdminCommands
 
-`func (o *YbAdminComponentSpec) SetYbAdminCommand(v string)`
+`func (o *YbAdminComponentSpec) SetYbAdminCommands(v []string)`
 
-SetYbAdminCommand sets YbAdminCommand field to given value.
+SetYbAdminCommands sets YbAdminCommands field to given value.
 
-### HasYbAdminCommand
+### HasYbAdminCommands
 
-`func (o *YbAdminComponentSpec) HasYbAdminCommand() bool`
+`func (o *YbAdminComponentSpec) HasYbAdminCommands() bool`
 
-HasYbAdminCommand returns a boolean if a field has been set.
+HasYbAdminCommands returns a boolean if a field has been set.
 
 ### GetYbAdminArgs
 

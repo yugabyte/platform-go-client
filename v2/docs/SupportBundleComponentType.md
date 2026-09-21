@@ -33,9 +33,13 @@
 
 * `NodeAgent` (value: `"NodeAgent"`)
 
+* `NodeHealthLogs` (value: `"NodeHealthLogs"`)
+
 * `SystemLogs` (value: `"SystemLogs"`)
 
 * `TabletReport` (value: `"TabletReport"`)
+
+* `ClusterConfig` (value: `"ClusterConfig"`)
 
 * `K8sInfo` (value: `"K8sInfo"`)
 

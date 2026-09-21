@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AutomaticDdlMode** | Pointer to **bool** |  | [optional] [readonly] 
+**AutomaticDdlMode** | Pointer to **bool** |  | [optional] 
 **CreateTime** | Pointer to **time.Time** | Create time of the xCluster config | [optional] 
 **Dbs** | Pointer to **[]string** |  | [optional] [readonly] 
 **Imported** | Pointer to **bool** | YbaApi Internal. Whether this xCluster replication config was imported | [optional] 

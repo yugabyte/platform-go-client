@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClusterUuid** | **string** |  | 
 **ImageBundleUuid** | **string** |  | 
+**ProviderUuid** | **string** |  | 
 
 ## Methods
 
 ### NewImageBundleUpgradeInfo
 
-`func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, ) *ImageBundleUpgradeInfo`
+`func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, providerUuid string, ) *ImageBundleUpgradeInfo`
 
 NewImageBundleUpgradeInfo instantiates a new ImageBundleUpgradeInfo object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *ImageBundleUpgradeInfo) SetImageBundleUuid(v string)`
 
 SetImageBundleUuid sets ImageBundleUuid field to given value.
+
+
+### GetProviderUuid
+
+`func (o *ImageBundleUpgradeInfo) GetProviderUuid() string`
+
+GetProviderUuid returns the ProviderUuid field if non-nil, zero value otherwise.
+
+### GetProviderUuidOk
+
+`func (o *ImageBundleUpgradeInfo) GetProviderUuidOk() (*string, bool)`
+
+GetProviderUuidOk returns a tuple with the ProviderUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderUuid
+
+`func (o *ImageBundleUpgradeInfo) SetProviderUuid(v string)`
+
+SetProviderUuid sets ProviderUuid field to given value.
 
 
 

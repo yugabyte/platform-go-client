@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **AssignPublicIP** | Pointer to **bool** | True if the node has a public IP address assigned | [optional] 
 **Az** | Pointer to **string** | The node&#39;s availability zone | [optional] 
 **Cloud** | Pointer to **string** | The node&#39;s cloud provider | [optional] 
+**Id** | Pointer to **string** | The cloud provider&#39;s instance identifier | [optional] 
 **InstanceType** | Pointer to **string** | The node&#39;s instance type | [optional] 
 **KubernetesNamespace** | Pointer to **string** | Kubernetes namespace | [optional] 
 **KubernetesPodName** | Pointer to **string** | Pod name in Kubernetes | [optional] 
@@ -116,6 +117,31 @@ SetCloud sets Cloud field to given value.
 `func (o *CloudSpecificInfo) HasCloud() bool`
 
 HasCloud returns a boolean if a field has been set.
+
+### GetId
+
+`func (o *CloudSpecificInfo) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *CloudSpecificInfo) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *CloudSpecificInfo) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *CloudSpecificInfo) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetInstanceType
 

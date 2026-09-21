@@ -40,6 +40,8 @@ type CreatePitrConfigParams struct {
 	NodeDetailsSet []NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	PlatformUrl      string  `json:"platformUrl"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
@@ -522,6 +524,38 @@ func (o *CreatePitrConfigParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
 }
 
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *CreatePitrConfigParams) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreatePitrConfigParams) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *CreatePitrConfigParams) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *CreatePitrConfigParams) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
+}
+
 // GetPlatformUrl returns the PlatformUrl field value
 func (o *CreatePitrConfigParams) GetPlatformUrl() string {
 	if o == nil {
@@ -899,6 +933,9 @@ func (o CreatePitrConfigParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NodeExporterUser) {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	toSerialize["platformUrl"] = o.PlatformUrl
 	if !IsNil(o.PreviousTaskUUID) {

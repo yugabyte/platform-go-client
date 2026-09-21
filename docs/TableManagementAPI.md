@@ -633,7 +633,7 @@ Name | Type | Description  | Notes
 
 ## GetAllTables
 
-> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).XClusterSupportedOnly(xClusterSupportedOnly).Execute()
+> []TableInfoResp GetAllTables(ctx, cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).XClusterSupportedOnly(xClusterSupportedOnly).IncludeMatviewTables(includeMatviewTables).Execute()
 
 Get a list of all tables in the specified universe
 
@@ -658,10 +658,11 @@ func main() {
 	excludeColocatedTables := true // bool |  (optional) (default to false)
 	includeColocatedParentTables := true // bool |  (optional) (default to true)
 	xClusterSupportedOnly := true // bool |  (optional) (default to false)
+	includeMatviewTables := true // bool |  (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TableManagementAPI.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).XClusterSupportedOnly(xClusterSupportedOnly).Execute()
+	resp, r, err := apiClient.TableManagementAPI.GetAllTables(context.Background(), cUUID, uniUUID).IncludeParentTableInfo(includeParentTableInfo).ExcludeColocatedTables(excludeColocatedTables).IncludeColocatedParentTables(includeColocatedParentTables).XClusterSupportedOnly(xClusterSupportedOnly).IncludeMatviewTables(includeMatviewTables).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TableManagementAPI.GetAllTables``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -693,6 +694,7 @@ Name | Type | Description  | Notes
  **excludeColocatedTables** | **bool** |  | [default to false]
  **includeColocatedParentTables** | **bool** |  | [default to true]
  **xClusterSupportedOnly** | **bool** |  | [default to false]
+ **includeMatviewTables** | **bool** |  | [default to false]
 
 ### Return type
 

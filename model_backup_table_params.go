@@ -42,6 +42,8 @@ type BackupTableParams struct {
 	CreatingUser       Users               `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
+	// Cross-cloud federation GCP audience captured at backup time
+	CrossCloudFederationAudience *string `json:"crossCloudFederationAudience,omitempty"`
 	// Customer UUID
 	CustomerUuid *string     `json:"customerUuid,omitempty"`
 	DeviceInfo   *DeviceInfo `json:"deviceInfo,omitempty"`
@@ -84,6 +86,8 @@ type BackupTableParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	// User name of the current tables owner
 	OldOwner *string `json:"oldOwner,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
@@ -578,6 +582,38 @@ func (o *BackupTableParams) HasCronExpression() bool {
 // SetCronExpression gets a reference to the given string and assigns it to the CronExpression field.
 func (o *BackupTableParams) SetCronExpression(v string) {
 	o.CronExpression = &v
+}
+
+// GetCrossCloudFederationAudience returns the CrossCloudFederationAudience field value if set, zero value otherwise.
+func (o *BackupTableParams) GetCrossCloudFederationAudience() string {
+	if o == nil || IsNil(o.CrossCloudFederationAudience) {
+		var ret string
+		return ret
+	}
+	return *o.CrossCloudFederationAudience
+}
+
+// GetCrossCloudFederationAudienceOk returns a tuple with the CrossCloudFederationAudience field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetCrossCloudFederationAudienceOk() (*string, bool) {
+	if o == nil || IsNil(o.CrossCloudFederationAudience) {
+		return nil, false
+	}
+	return o.CrossCloudFederationAudience, true
+}
+
+// HasCrossCloudFederationAudience returns a boolean if a field has been set.
+func (o *BackupTableParams) HasCrossCloudFederationAudience() bool {
+	if o != nil && !IsNil(o.CrossCloudFederationAudience) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossCloudFederationAudience gets a reference to the given string and assigns it to the CrossCloudFederationAudience field.
+func (o *BackupTableParams) SetCrossCloudFederationAudience(v string) {
+	o.CrossCloudFederationAudience = &v
 }
 
 // GetCustomerUuid returns the CustomerUuid field value if set, zero value otherwise.
@@ -1338,6 +1374,38 @@ func (o *BackupTableParams) HasOldOwner() bool {
 // SetOldOwner gets a reference to the given string and assigns it to the OldOwner field.
 func (o *BackupTableParams) SetOldOwner(v string) {
 	o.OldOwner = &v
+}
+
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *BackupTableParams) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BackupTableParams) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *BackupTableParams) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *BackupTableParams) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
 }
 
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
@@ -2403,6 +2471,9 @@ func (o BackupTableParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CronExpression) {
 		toSerialize["cronExpression"] = o.CronExpression
 	}
+	if !IsNil(o.CrossCloudFederationAudience) {
+		toSerialize["crossCloudFederationAudience"] = o.CrossCloudFederationAudience
+	}
 	if !IsNil(o.CustomerUuid) {
 		toSerialize["customerUuid"] = o.CustomerUuid
 	}
@@ -2472,6 +2543,9 @@ func (o BackupTableParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.OldOwner) {
 		toSerialize["oldOwner"] = o.OldOwner
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.Parallelism) {
 		toSerialize["parallelism"] = o.Parallelism

@@ -50,6 +50,8 @@ type TaskInfo struct {
 	Retryable *bool `json:"retryable,omitempty"`
 	// Whether the task can be rolled back.
 	CanRollback *bool `json:"can_rollback,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state), if any. Carried forward on retries and rollbacks. Distinct from previousTaskUUID inherit linkage.
+	OriginalTaskUuid *string `json:"original_task_uuid,omitempty"`
 	// Email of the user who started the task.
 	UserEmail *string `json:"user_email,omitempty"`
 }
@@ -551,6 +553,38 @@ func (o *TaskInfo) SetCanRollback(v bool) {
 	o.CanRollback = &v
 }
 
+// GetOriginalTaskUuid returns the OriginalTaskUuid field value if set, zero value otherwise.
+func (o *TaskInfo) GetOriginalTaskUuid() string {
+	if o == nil || IsNil(o.OriginalTaskUuid) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUuid
+}
+
+// GetOriginalTaskUuidOk returns a tuple with the OriginalTaskUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TaskInfo) GetOriginalTaskUuidOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUuid) {
+		return nil, false
+	}
+	return o.OriginalTaskUuid, true
+}
+
+// HasOriginalTaskUuid returns a boolean if a field has been set.
+func (o *TaskInfo) HasOriginalTaskUuid() bool {
+	if o != nil && !IsNil(o.OriginalTaskUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUuid gets a reference to the given string and assigns it to the OriginalTaskUuid field.
+func (o *TaskInfo) SetOriginalTaskUuid(v string) {
+	o.OriginalTaskUuid = &v
+}
+
 // GetUserEmail returns the UserEmail field value if set, zero value otherwise.
 func (o *TaskInfo) GetUserEmail() string {
 	if o == nil || IsNil(o.UserEmail) {
@@ -637,6 +671,9 @@ func (o TaskInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CanRollback) {
 		toSerialize["can_rollback"] = o.CanRollback
+	}
+	if !IsNil(o.OriginalTaskUuid) {
+		toSerialize["original_task_uuid"] = o.OriginalTaskUuid
 	}
 	if !IsNil(o.UserEmail) {
 		toSerialize["user_email"] = o.UserEmail

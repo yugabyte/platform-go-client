@@ -2317,7 +2317,12 @@ paths:
       - application/json
   /customers/{cUUID}/universes/{uniUUID}/support-bundles/{sbUUID}/download:
     get:
-      description: Download a completed support bundle archive.
+      description: |
+        Download a completed support bundle archive.
+
+        The archive can be large, so generated clients hand back the raw HTTP response
+        instead of buffering it. Callers read the archive from the response body and are
+        responsible for closing it once done.
       operationId: downloadSupportBundle
       parameters:
       - description: Customer UUID
@@ -2382,6 +2387,7 @@ paths:
           sourceType: endpoint
         checkOnlyPermission: true
       x-yba-api-since: 2026.2.0.0
+      x-yba-api-stream-response: true
       x-yba-api-visibility: preview
       x-accepts:
       - application/x-compressed
@@ -2650,7 +2656,12 @@ paths:
       - application/json
   /customers/{cUUID}/support-bundles/yba/{sbUUID}/download:
     get:
-      description: Download a completed YBA-only support bundle archive.
+      description: |
+        Download a completed YBA-only support bundle archive.
+
+        The archive can be large, so generated clients hand back the raw HTTP response
+        instead of buffering it. Callers read the archive from the response body and are
+        responsible for closing it once done.
       operationId: downloadYbaSupportBundle
       parameters:
       - description: Customer UUID
@@ -2699,6 +2710,7 @@ paths:
           sourceType: endpoint
         checkOnlyPermission: true
       x-yba-api-since: 2026.2.0.0
+      x-yba-api-stream-response: true
       x-yba-api-visibility: preview
       x-accepts:
       - application/x-compressed
@@ -2746,6 +2758,142 @@ paths:
           path: customers
           sourceType: endpoint
         checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /task-executor/shutdown:
+    get:
+      description: |
+        Returns whether task-executor shutdown has been initiated, whether
+        application shutdown has completed after draining, and how many parent
+        tasks are still running.
+      operationId: getShutdownStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskExecutorShutdownStatus'
+          description: Task executor shutdown status
+          x-yba-api-visibility: internal
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Get task executor shutdown status
+      tags:
+      - Task
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: internal
+      x-accepts:
+      - application/json
+    post:
+      description: |
+        Signals the commissioner task executor to shut down. In-flight tasks are
+        aborted after abort_time_seconds. This call does not wait for tasks to
+        finish.
+      operationId: shutdownTaskExecutor
+      requestBody:
+        $ref: '#/components/requestBodies/TaskExecutorShutdownReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskExecutorShutdownResp'
+          description: Task executor shutdown result
+          x-yba-api-visibility: internal
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Shut down the task executor
+      tags:
+      - Task
+      x-yba-api-audit:
+        auditTargetType: PlatformInstance
+        auditTargetId: "null"
+        auditActionType: Stop
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: SUPER_ADMIN_ACTIONS
+        resourceLocation:
+          path: customers
+          sourceType: REQUEST_CONTEXT
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: internal
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/tasks/{tUUID}/retry:
+    post:
+      description: |
+        Queues a retry of a previously failed, retry-capable Universe or Provider task.
+        WARNING: This is a preview API that could change.
+      operationId: retryTask
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Task UUID
+        explode: false
+        in: path
+        name: tUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/TaskRetryReq'
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBATask'
+          description: task accepted
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Retry a failed task
+      tags:
+      - Task
+      x-yba-api-audit:
+        auditTargetType: CustomerTask
+        auditTargetId: tUUID.toString()
+        auditActionType: Retry
+        taskUuid: obj.getTaskUuid()
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: UPDATE
+        resourceLocation:
+          path: task_params_universe_uuid
+          sourceType: db
+          dbClass: com.yugabyte.yw.models.TaskInfo.class
+          identifier: tasks
+          columnName: uuid
       x-yba-api-since: 2026.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4688,6 +4836,67 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /customers/{cUUID}/universes/{uniUUID}/cross-cloud-federation:
+    post:
+      description: "Configures (enable) or tears down (disable) cross-cloud federated\
+        \ IAM on all nodes of an existing universe. On enable, the universe's provider\
+        \ must have federated IAM enabled with an audience set."
+      operationId: manageCrossCloudFederation
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/UniverseCrossCloudFederationReq'
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBATask'
+          description: task accepted
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Enable or disable cross-cloud federated IAM on a universe
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Universe
+        auditTargetId: uniUUID.toString()
+        auditActionType: ManageCrossCloudFederation
+        taskUuid: obj.getTaskUuid()
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: UPDATE
+        resourceLocation:
+          path: UNIVERSES
+          sourceType: ENDPOINT
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.1.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck:
     post:
       description: Run precheck to ensure the universe can be imported to the operator
@@ -5311,6 +5520,65 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /customers/{cUUID}/universes/{uniUUID}/vm-image:
+    post:
+      description: Queues a task to edit VM images of a universe nodes
+      operationId: editVMImage
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universe UUID
+        explode: false
+        in: path
+        name: uniUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/UniverseVMImageUpgradeReq'
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YBATask'
+          description: task accepted
+        "400":
+          description: Invalid input
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Edit VM images for nodes.
+      tags:
+      - Universe
+      x-yba-api-audit:
+        auditTargetType: Universe
+        auditTargetId: uniUUID.toString()
+        auditActionType: UpgradeVmImage
+        taskUuid: obj.getTaskUuid()
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: universe
+          action: UPDATE
+        resourceLocation:
+          path: universes
+          sourceType: endpoint
+        checkOnlyPermission: false
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /yba-info:
     get:
       description: Get YBA Instance info
@@ -5488,6 +5756,19 @@ components:
           schema:
             $ref: '#/components/schemas/TaskPagedQuerySpec'
       required: true
+    TaskExecutorShutdownReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskExecutorShutdownSpec'
+      required: true
+      x-yba-api-visibility: internal
+    TaskRetryReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskRetrySpec'
+      required: false
     TaskRollbackReq:
       content:
         application/json:
@@ -5663,6 +5944,12 @@ components:
           schema:
             $ref: '#/components/schemas/UniverseOperatorImportReq'
       required: true
+    UniverseCrossCloudFederationReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UniverseCrossCloudFederationSpec'
+      required: true
     RunScriptReq:
       content:
         application/json:
@@ -5701,6 +5988,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CheckResizeOptionsSpec'
+      required: true
+    UniverseVMImageUpgradeReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UniverseVMImageUpgradeSpec'
       required: true
   responses:
     AuthGroupToRolesMappingResp:
@@ -5881,6 +6174,20 @@ components:
           schema:
             $ref: '#/components/schemas/TaskPagedResp'
       description: Paged list of customer tasks.
+    TaskExecutorShutdownStatusResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskExecutorShutdownStatus'
+      description: Task executor shutdown status
+      x-yba-api-visibility: internal
+    TaskExecutorShutdownResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskExecutorShutdownResp'
+      description: Task executor shutdown result
+      x-yba-api-visibility: internal
     UniverseResp:
       content:
         application/json:
@@ -10166,8 +10473,10 @@ components:
       - TabletMeta
       - YbcLogs
       - NodeAgent
+      - NodeHealthLogs
       - SystemLogs
       - TabletReport
+      - ClusterConfig
       - K8sInfo
       - YbaMetadata
       - PrometheusMetrics
@@ -10192,8 +10501,10 @@ components:
       - TabletMeta
       - YbcLogs
       - NodeAgent
+      - NodeHealthLogs
       - SystemLogs
       - TabletReport
+      - ClusterConfig
       - K8sInfo
       - YbaMetadata
       - PrometheusMetrics
@@ -10325,6 +10636,7 @@ components:
             additionally runs with default_transaction_read_only=on.
           items:
             type: string
+          minItems: 1
           type: array
         output_file_name:
           description: |
@@ -10364,6 +10676,7 @@ components:
             than one statement are rejected.
           items:
             type: string
+          minItems: 1
           type: array
         output_file_name:
           description: |
@@ -10379,7 +10692,9 @@ components:
     YbAdminComponentSpec:
       description: Spec driving the node-level YbAdminComponent.
       example:
-        yb_admin_command: yb_admin_command
+        yb_admin_commands:
+        - yb_admin_commands
+        - yb_admin_commands
         output_file_name: output_file_name
         component_name: component_name
         yb_admin_args:
@@ -10392,13 +10707,16 @@ components:
             Logical component name; used as output file label.
             Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
           type: string
-        yb_admin_command:
+        yb_admin_commands:
           description: |
-            yb-admin subcommand (e.g. list_tables).
+            yb-admin subcommands to run, each executed separately (e.g. list_tables).
             Support bundles only run read-only subcommands, so anything that mutates cluster
             state is rejected. Operators can add to the allowed set through the
             yb.support_bundle.extra_yb_admin_commands runtime config.
-          type: string
+          items:
+            type: string
+          minItems: 1
+          type: array
         yb_admin_args:
           description: Additional arguments after the subcommand.
           items:
@@ -10486,6 +10804,7 @@ components:
       - TSERVER_EXPORT
       - CQL_EXPORT
       - YSQL_EXPORT
+      - KUBERNETES
       title: PrometheusMetricsType
       type: string
       x-enum-varnames:
@@ -10496,6 +10815,7 @@ components:
       - PROMETHEUS_METRICS_TSERVER_EXPORT
       - PROMETHEUS_METRICS_CQL_EXPORT
       - PROMETHEUS_METRICS_YSQL_EXPORT
+      - PROMETHEUS_METRICS_KUBERNETES
     SupportBundleCreateSpec:
       description: |
         Support bundle collection request.
@@ -10530,14 +10850,18 @@ components:
           timeout_secs: 6
         prom_export_type: PROMQL
         yb_admin_component_specs:
-        - yb_admin_command: yb_admin_command
+        - yb_admin_commands:
+          - yb_admin_commands
+          - yb_admin_commands
           output_file_name: output_file_name
           component_name: component_name
           yb_admin_args:
           - yb_admin_args
           - yb_admin_args
           timeout_secs: 5
-        - yb_admin_command: yb_admin_command
+        - yb_admin_commands:
+          - yb_admin_commands
+          - yb_admin_commands
           output_file_name: output_file_name
           component_name: component_name
           yb_admin_args:
@@ -10651,7 +10975,7 @@ components:
           description: |
             Names of the universe nodes to collect node-level components from. When omitted or empty,
             every node in the universe is considered. Global-level components (PrometheusMetrics,
-            YbaMetadata, TabletReport, PerfAdvisor, K8sInfo, ApplicationLogs) are collected once for the
+            YbaMetadata, TabletReport, ClusterConfig, PerfAdvisor, K8sInfo, ApplicationLogs) are collected once for the
             universe and are not scoped by this list. Rejected with a 400 when none of the given names
             exist in the universe; names that do not exist are ignored when at least one matches. Not
             applicable to YBA-only support bundles.
@@ -10834,14 +11158,18 @@ components:
           - params
           timeout_secs: 6
         yb_admin_component_specs:
-        - yb_admin_command: yb_admin_command
+        - yb_admin_commands:
+          - yb_admin_commands
+          - yb_admin_commands
           output_file_name: output_file_name
           component_name: component_name
           yb_admin_args:
           - yb_admin_args
           - yb_admin_args
           timeout_secs: 5
-        - yb_admin_command: yb_admin_command
+        - yb_admin_commands:
+          - yb_admin_commands
+          - yb_admin_commands
           output_file_name: output_file_name
           component_name: component_name
           yb_admin_args:
@@ -11131,14 +11459,18 @@ components:
             - params
             timeout_secs: 6
           yb_admin_component_specs:
-          - yb_admin_command: yb_admin_command
+          - yb_admin_commands:
+            - yb_admin_commands
+            - yb_admin_commands
             output_file_name: output_file_name
             component_name: component_name
             yb_admin_args:
             - yb_admin_args
             - yb_admin_args
             timeout_secs: 5
-          - yb_admin_command: yb_admin_command
+          - yb_admin_commands:
+            - yb_admin_commands
+            - yb_admin_commands
             output_file_name: output_file_name
             component_name: component_name
             yb_admin_args:
@@ -11278,14 +11610,18 @@ components:
               - params
               timeout_secs: 6
             yb_admin_component_specs:
-            - yb_admin_command: yb_admin_command
+            - yb_admin_commands:
+              - yb_admin_commands
+              - yb_admin_commands
               output_file_name: output_file_name
               component_name: component_name
               yb_admin_args:
               - yb_admin_args
               - yb_admin_args
               timeout_secs: 5
-            - yb_admin_command: yb_admin_command
+            - yb_admin_commands:
+              - yb_admin_commands
+              - yb_admin_commands
               output_file_name: output_file_name
               component_name: component_name
               yb_admin_args:
@@ -11403,14 +11739,18 @@ components:
               - params
               timeout_secs: 6
             yb_admin_component_specs:
-            - yb_admin_command: yb_admin_command
+            - yb_admin_commands:
+              - yb_admin_commands
+              - yb_admin_commands
               output_file_name: output_file_name
               component_name: component_name
               yb_admin_args:
               - yb_admin_args
               - yb_admin_args
               timeout_secs: 5
-            - yb_admin_command: yb_admin_command
+            - yb_admin_commands:
+              - yb_admin_commands
+              - yb_admin_commands
               output_file_name: output_file_name
               component_name: component_name
               yb_admin_args:
@@ -11515,12 +11855,14 @@ components:
         - target_list
         - target_list
         date_range_end: 2000-01-23T04:56:07.000+00:00
+        completion_date_range_start: 2000-01-23T04:56:07.000+00:00
         type_list:
         - type_list
         - type_list
         type_name_list:
         - type_name_list
         - type_name_list
+        completion_date_range_end: 2000-01-23T04:56:07.000+00:00
         target_uuid_list:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11530,11 +11872,31 @@ components:
         - status
       properties:
         date_range_start:
-          description: Include tasks created on or after this time.
+          description: |
+            Include tasks created on or after this time (filters `create_time`).
+            May be set alone (open-ended upper bound) or together with `date_range_end`.
           format: date-time
           type: string
         date_range_end:
-          description: Include tasks created on or before this time.
+          description: |
+            Include tasks created on or before this time (filters `create_time`).
+            May be set alone (open-ended lower bound) or together with `date_range_start`.
+          format: date-time
+          type: string
+        completion_date_range_start:
+          description: |
+            Include tasks that completed on or after this time.
+            May be set alone (open-ended upper bound) or together with `completion_date_range_end`.
+            In-progress tasks don't have a completion time yet and are always excluded when either
+            completion bound is set (SQL comparisons do not match nulls).
+          format: date-time
+          type: string
+        completion_date_range_end:
+          description: |
+            Include tasks that completed on or before this time.
+            May be set alone (open-ended lower bound) or together with `completion_date_range_start`.
+            In-progress tasks don't have a completion time yet and are always excluded when either
+            completion bound is set (SQL comparisons do not match nulls).
           format: date-time
           type: string
         target_list:
@@ -11583,12 +11945,14 @@ components:
           - target_list
           - target_list
           date_range_end: 2000-01-23T04:56:07.000+00:00
+          completion_date_range_start: 2000-01-23T04:56:07.000+00:00
           type_list:
           - type_list
           - type_list
           type_name_list:
           - type_name_list
           - type_name_list
+          completion_date_range_end: 2000-01-23T04:56:07.000+00:00
           target_uuid_list:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -12780,6 +13144,7 @@ components:
             description: description
             state: Created
             title: title
+        original_task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         status: Success
       properties:
         uuid:
@@ -12850,6 +13215,13 @@ components:
           description: Whether the task can be rolled back.
           readOnly: true
           type: boolean
+        original_task_uuid:
+          description: |
+            UUID of the first task in the retry/rollback chain (clean universe state), if any.
+            Carried forward on retries and rollbacks. Distinct from previousTaskUUID inherit linkage.
+          format: uuid
+          readOnly: true
+          type: string
         user_email:
           description: Email of the user who started the task.
           readOnly: true
@@ -13026,6 +13398,7 @@ components:
               description: description
               state: Created
               title: title
+          original_task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           status: Success
       properties:
         info:
@@ -13214,6 +13587,7 @@ components:
                 description: description
                 state: Created
                 title: title
+            original_task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: Success
         - info:
             retryable: true
@@ -13382,6 +13756,7 @@ components:
                 description: description
                 state: Created
                 title: title
+            original_task_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             status: Success
         total_count: 0
         has_next: true
@@ -13390,6 +13765,86 @@ components:
       x-data-container: PaginationResp
       x-data-item: Task
       x-data-entities-description: Customer tasks for this page.
+    TaskExecutorShutdownStatus:
+      description: |
+        Current shutdown status of the YBA task executor.
+      example:
+        num_running_tasks: 0
+        is_shutdown_initiated: false
+        is_shutdown_complete: false
+      properties:
+        is_shutdown_initiated:
+          description: |
+            True if the task executor has been signaled to shut down.
+          example: false
+          readOnly: true
+          type: boolean
+        is_shutdown_complete:
+          description: |
+            True if application shutdown hooks have finished after the task
+            executor drained.
+          example: false
+          readOnly: true
+          type: boolean
+        num_running_tasks:
+          description: |
+            Number of parent tasks still registered with the executor.
+          example: 0
+          format: int32
+          readOnly: true
+          type: integer
+      title: TaskExecutorShutdownStatus
+      type: object
+      x-yba-api-visibility: internal
+    TaskExecutorShutdownSpec:
+      description: |
+        Parameters for shutting down the YBA task executor.
+      example:
+        abort_time_seconds: 300
+      properties:
+        abort_time_seconds:
+          description: |
+            Grace period in seconds before in-flight tasks are aborted.
+          example: 300
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - abort_time_seconds
+      title: TaskExecutorShutdownSpec
+      type: object
+      x-yba-api-visibility: internal
+    TaskExecutorShutdownResp:
+      description: |
+        Result of a task executor shutdown request.
+      example:
+        success: true
+      properties:
+        success:
+          description: |
+            True if task executor shutdown was initiated by this call.
+          example: true
+          type: boolean
+      title: TaskExecutorShutdownResp
+      type: object
+      x-yba-api-visibility: internal
+    TaskRetrySpec:
+      description: |
+        TaskRetrySpec
+
+        Options for retrying a failed task. The retry parameters themselves are reconstructed
+        by YBA from the failed task; this payload only carries optional metadata for the retry
+        request.
+      example:
+        reason: Retrying failed edit universe operation
+      properties:
+        reason:
+          description: "Optional human-readable reason for the retry, recorded in\
+            \ the audit log."
+          example: Retrying failed edit universe operation
+          type: string
+      title: TaskRetrySpec
+      type: object
     TaskRollbackSpec:
       description: |
         TaskRollbackSpec
@@ -24252,6 +24707,7 @@ components:
         az: az
         subnet_id: subnet_id
         public_dns: public_dns
+        id: id
         region: region
         instance_type: instance_type
         assign_public_ip: true
@@ -24264,6 +24720,9 @@ components:
           type: string
         cloud:
           description: The node's Cloud Provider
+          type: string
+        id:
+          description: The cloud provider's instance identifier
           type: string
         instance_type:
           description: The node's instance type
@@ -24344,6 +24803,7 @@ components:
           az: az
           subnet_id: subnet_id
           public_dns: public_dns
+          id: id
           region: region
           instance_type: instance_type
           assign_public_ip: true
@@ -24598,6 +25058,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
             assign_public_ip: true
@@ -24639,6 +25100,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
             assign_public_ip: true
@@ -31652,6 +32114,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
               assign_public_ip: true
@@ -31693,6 +32156,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
               assign_public_ip: true
@@ -52492,6 +52956,7 @@ components:
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
+                id: id
                 region: region
                 instance_type: instance_type
                 assign_public_ip: true
@@ -52533,6 +52998,7 @@ components:
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
+                id: id
                 region: region
                 instance_type: instance_type
                 assign_public_ip: true
@@ -59359,6 +59825,7 @@ components:
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
+                id: id
                 region: region
                 instance_type: instance_type
                 assign_public_ip: true
@@ -59400,6 +59867,7 @@ components:
                 az: az
                 subnet_id: subnet_id
                 public_dns: public_dns
+                id: id
                 region: region
                 instance_type: instance_type
                 assign_public_ip: true
@@ -62330,6 +62798,23 @@ components:
             created in.
           type: string
       title: UniverseOperatorImportReq
+      type: object
+    UniverseCrossCloudFederationSpec:
+      description: |
+        UniverseCrossCloudFederationSpec
+
+        Payload to enable or disable cross-cloud federated IAM on an existing universe.
+      example:
+        enabled: true
+      properties:
+        enabled:
+          description: "When true, configure cross-cloud federated IAM on all nodes\
+            \ of the universe (the provider must have federated IAM enabled with an\
+            \ audience set). When false, tear it down on all nodes."
+          type: boolean
+      required:
+      - enabled
+      title: UniverseCrossCloudFederationSpec
       type: object
     ScriptOptions:
       description: Configuration options for the script to be executed
@@ -65619,6 +66104,69 @@ components:
       required:
       - options
       title: CheckResizeOptionsResp
+      type: object
+    VMImageClusterSpec:
+      description: Information about the VM image for particular provider in particular
+        cluster.
+      example:
+        provider_uuid: 36ebde21-ab14-47dc-8fab-3edc243c6f68
+        cluster_uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+        image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
+      properties:
+        cluster_uuid:
+          description: cluster uuid
+          example: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          format: uuid
+          type: string
+        provider_uuid:
+          description: provider uuid
+          example: 36ebde21-ab14-47dc-8fab-3edc243c6f68
+          format: uuid
+          type: string
+        image_bundle_uuid:
+          description: image bundle uuid
+          example: 914aa5a8-febc-44ba-9b60-ea3e22127218
+          format: uuid
+          type: string
+      required:
+      - cluster_uuid
+      - image_bundle_uuid
+      - provider_uuid
+      title: VMImageClusterSpec
+      type: object
+    UniverseVMImageUpgradeSpec:
+      allOf:
+      - $ref: '#/components/schemas/SleepAfterRestartSchema'
+      - properties:
+          image_bundles:
+            items:
+              $ref: '#/components/schemas/VMImageClusterSpec'
+            type: array
+          force_upgrade:
+            description: Whether to skip checking current OS for each node.
+            type: boolean
+          yb_software_version:
+            description: The YugabyteDB software version to install during os upgrade.
+            example: 2024.2.0.0-b600
+            type: string
+        type: object
+      description: |
+        VMImageUpgradeSpec
+
+        Request payload to edit vm images of a Universe nodes.
+      example:
+        sleep_after_tserver_restart_millis: 6
+        yb_software_version: 2024.2.0.0-b600
+        image_bundles:
+        - provider_uuid: 36ebde21-ab14-47dc-8fab-3edc243c6f68
+          cluster_uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
+        - provider_uuid: 36ebde21-ab14-47dc-8fab-3edc243c6f68
+          cluster_uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
+          image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
+        force_upgrade: true
+        sleep_after_master_restart_millis: 0
+      title: VMImageUpgradeSpec
       type: object
     YBAInfo:
       description: Describes YBA instance info

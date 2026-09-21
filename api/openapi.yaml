@@ -7082,8 +7082,10 @@ paths:
                   - TabletMeta
                   - YbcLogs
                   - NodeAgent
+                  - NodeHealthLogs
                   - SystemLogs
                   - TabletReport
+                  - ClusterConfig
                   - K8sInfo
                   - YbaMetadata
                   - PrometheusMetrics
@@ -9979,6 +9981,11 @@ paths:
           type: boolean
       - in: query
         name: xClusterSupportedOnly
+        schema:
+          default: false
+          type: boolean
+      - in: query
+        name: includeMatviewTables
         schema:
           default: false
           type: boolean
@@ -13933,8 +13940,10 @@ components:
       example:
         awsAccessKeySecret: awsAccessKeySecret
         hostVpcId: hostVpcId
+        federatedIamAudience: federatedIamAudience
         useIMDSv2: true
         awsAccessKeyID: awsAccessKeyID
+        enableFederatedIam: true
         awsHostedZoneId: awsHostedZoneId
         vpcType: EXISTING
         awsHostedZoneName: awsHostedZoneName
@@ -13947,6 +13956,16 @@ components:
         awsHostedZoneId:
           type: string
         awsHostedZoneName:
+          type: string
+        enableFederatedIam:
+          description: Enable GCS-on-AWS cross-cloud federated IAM on this provider's
+            DB nodes (GCP Workload Identity Federation). Requires the federated IAM
+            audience below.
+          type: boolean
+        federatedIamAudience:
+          description: "GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...),\
+            \ used when federated IAM is enabled. The DB node renders the external_account\
+            \ credential from it."
           type: string
         hostVpcId:
           readOnly: true
@@ -16365,6 +16384,7 @@ components:
           - UpdateAdditionalServicesState
           - KubernetesToggleImmutableYbc
           - OperatorImportUniverse
+          - ManageCrossCloudFederation
           - RunScript
           - CreateFileCollection
           - DownloadFileCollection
@@ -16726,6 +16746,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -16783,6 +16804,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -16842,6 +16864,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -24322,6 +24345,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -24455,6 +24485,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -24561,6 +24592,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -24708,6 +24740,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -24759,6 +24792,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -25208,6 +25242,7 @@ components:
           backupPointInTimeRestoreWindow:
             timestampRetentionWindowEndMillis: 0
             timestampRetentionWindowStartMillis: 6
+          crossCloudFederationAudience: crossCloudFederationAudience
           tableUUIDList:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -25263,6 +25298,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -25320,6 +25356,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -25382,6 +25419,7 @@ components:
           - null
           backupType: YQL_TABLE_TYPE
           disableParallelism: true
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regionLocations:
           - LOCATION: LOCATION
@@ -26168,6 +26206,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -26225,6 +26264,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -26279,6 +26319,7 @@ components:
           type: CMK
         backupType: PGSQL_TABLE_TYPE
         disableParallelism: true
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         incrementalBackupFrequencyTimeUnit: NANOSECONDS
@@ -26470,6 +26511,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         parallelDBBackups:
           description: Parallel DB backups
@@ -26936,6 +26984,7 @@ components:
         backupPointInTimeRestoreWindow:
           timestampRetentionWindowEndMillis: 0
           timestampRetentionWindowStartMillis: 6
+        crossCloudFederationAudience: crossCloudFederationAudience
         tableUUIDList:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -26991,6 +27040,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -27048,6 +27098,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -27110,6 +27161,7 @@ components:
         - null
         backupType: YQL_TABLE_TYPE
         disableParallelism: true
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         regionLocations:
         - LOCATION: LOCATION
@@ -27271,6 +27323,9 @@ components:
         cronExpression:
           description: Cron expression for a recurring backup
           type: string
+        crossCloudFederationAudience:
+          description: Cross-cloud federation GCP audience captured at backup time
+          type: string
         customerUuid:
           description: Customer UUID
           format: uuid
@@ -27355,6 +27410,13 @@ components:
           type: string
         oldOwner:
           description: User name of the current tables owner
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         parallelism:
           description: Number of concurrent commands to run on nodes over SSH
@@ -27619,6 +27681,7 @@ components:
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
         tableName: tableName
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
           newUniverseUiTourCompleted: true
@@ -27698,6 +27761,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -27755,6 +27819,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -27840,6 +27905,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         platformUrl:
           type: string
@@ -27964,14 +28036,18 @@ components:
           - queries
           timeoutSecs: 3
         ybAdminComponentSpecs:
-        - ybAdminCommand: ybAdminCommand
+        - ybAdminCommands:
+          - ybAdminCommands
+          - ybAdminCommands
           outputFileName: outputFileName
           componentName: componentName
           timeoutSecs: 2
           ybAdminArgs:
           - ybAdminArgs
           - ybAdminArgs
-        - ybAdminCommand: ybAdminCommand
+        - ybAdminCommands:
+          - ybAdminCommands
+          - ybAdminCommands
           outputFileName: outputFileName
           componentName: componentName
           timeoutSecs: 2
@@ -28041,8 +28117,10 @@ components:
             - TabletMeta
             - YbcLogs
             - NodeAgent
+            - NodeHealthLogs
             - SystemLogs
             - TabletReport
+            - ClusterConfig
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -28118,6 +28196,7 @@ components:
             - TSERVER_EXPORT
             - CQL_EXPORT
             - YSQL_EXPORT
+            - KUBERNETES
             type: string
           type: array
         ybAdminComponentSpecs:
@@ -28617,6 +28696,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -28674,6 +28754,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -28733,6 +28814,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -36209,6 +36291,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -36346,6 +36435,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -36452,6 +36542,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -36599,6 +36690,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -36650,6 +36742,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -36780,6 +36873,7 @@ components:
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
         cloneTimeInMillis: 0
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetKeyspaceName: targetKeyspaceName
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -36857,6 +36951,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -36914,6 +37009,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -36996,6 +37092,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         pitrConfigUUID:
           description: PITR Config UUID
@@ -37085,13 +37188,18 @@ components:
           ybFirewallTags: ybFirewallTags
         onprem:
           ybHomeDir: ybHomeDir
+          federatedIamAudience: federatedIamAudience
+          enableFederatedIam: true
+          ynpManaged: true
           enableMultiTenancy: true
           useClockbound: true
         aws:
           awsAccessKeySecret: awsAccessKeySecret
           hostVpcId: hostVpcId
+          federatedIamAudience: federatedIamAudience
           useIMDSv2: true
           awsAccessKeyID: awsAccessKeyID
+          enableFederatedIam: true
           awsHostedZoneId: awsHostedZoneId
           vpcType: EXISTING
           awsHostedZoneName: awsHostedZoneName
@@ -37150,6 +37258,7 @@ components:
         az: az
         subnet_id: subnet_id
         public_dns: public_dns
+        id: id
         region: region
         instance_type: instance_type
       properties:
@@ -37161,6 +37270,9 @@ components:
           type: string
         cloud:
           description: The node's cloud provider
+          type: string
+        id:
+          description: The cloud provider's instance identifier
           type: string
         instance_type:
           description: The node's instance type
@@ -39291,6 +39403,7 @@ components:
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
           newUniverseUiTourCompleted: true
@@ -39368,6 +39481,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -39425,6 +39539,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -39510,6 +39625,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         platformUrl:
           type: string
@@ -40301,6 +40423,7 @@ components:
         targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         target: Universe
         completionTime: 2022-12-12T13:07:18Z
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         createTime: 2022-12-12T13:07:18Z
         canRollback: true
         correlationId: correlationId
@@ -40330,6 +40453,12 @@ components:
         id:
           description: Customer task UUID
           format: uuid
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state), if any"
+          format: uuid
+          readOnly: true
           type: string
         percentComplete:
           description: Customer task percentage completed
@@ -41708,6 +41837,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -41765,6 +41895,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -41824,6 +41955,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -49300,6 +49432,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -49433,6 +49572,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -49539,6 +49679,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -49686,6 +49827,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -49737,6 +49879,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -50111,6 +50254,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -50168,6 +50312,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -50231,6 +50376,7 @@ components:
         itestS3PackagePath: itestS3PackagePath
         tserverGFlags:
           key: tserverGFlags
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -57711,6 +57857,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -57848,6 +58001,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -57954,6 +58108,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -58101,6 +58256,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -58152,6 +58308,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -58382,6 +58539,7 @@ components:
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_leader: true
           last_backup: 2022-12-12T13:07:18Z
+          local: true
         - address: address
           config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           instance_state: Awaiting Connection to Replicas
@@ -58391,6 +58549,7 @@ components:
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_leader: true
           last_backup: 2022-12-12T13:07:18Z
+          local: true
         accept_any_certificate: true
         global_state: Unknown
         last_failover: 2022-12-12T13:07:18Z
@@ -58518,6 +58677,7 @@ components:
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_leader: true
           last_backup: 2022-12-12T13:07:18Z
+          local: true
         - address: address
           config_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           instance_state: Awaiting Connection to Replicas
@@ -58527,6 +58687,7 @@ components:
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           is_leader: true
           last_backup: 2022-12-12T13:07:18Z
+          local: true
         accept_any_certificate: true
         last_failover: 2022-12-12T13:07:18Z
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -58642,6 +58803,7 @@ components:
       example:
         clusterUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         imageBundleUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         clusterUuid:
           format: uuid
@@ -58649,9 +58811,13 @@ components:
         imageBundleUuid:
           format: uuid
           type: string
+        providerUuid:
+          format: uuid
+          type: string
       required:
       - clusterUuid
       - imageBundleUuid
+      - providerUuid
       type: object
     ImpactedXClusterConnectedUniverse:
       example:
@@ -59290,6 +59456,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -59347,6 +59514,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -59406,6 +59574,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -66886,6 +67055,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -67021,6 +67197,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -67127,6 +67304,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -67274,6 +67452,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -67325,6 +67504,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -67629,6 +67809,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -67686,6 +67867,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -67746,6 +67928,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -75222,6 +75405,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -75355,6 +75545,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -75461,6 +75652,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -75608,6 +75800,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -75659,6 +75852,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -76284,6 +76478,7 @@ components:
           az: az
           subnet_id: subnet_id
           public_dns: public_dns
+          id: id
           region: region
           instance_type: instance_type
         masterRpcPort: 0
@@ -76319,6 +76514,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           masterRpcPort: 0
@@ -76341,6 +76537,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           masterRpcPort: 0
@@ -76736,6 +76933,7 @@ components:
         backupPointInTimeRestoreWindow:
           timestampRetentionWindowEndMillis: 0
           timestampRetentionWindowStartMillis: 6
+        crossCloudFederationAudience: crossCloudFederationAudience
         tableUUIDList:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -76791,6 +76989,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -76848,6 +77047,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -76929,6 +77129,7 @@ components:
           backupPointInTimeRestoreWindow:
             timestampRetentionWindowEndMillis: 0
             timestampRetentionWindowStartMillis: 6
+          crossCloudFederationAudience: crossCloudFederationAudience
           tableUUIDList:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -76984,6 +77185,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -77041,6 +77243,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -77103,6 +77306,7 @@ components:
           - null
           backupType: YQL_TABLE_TYPE
           disableParallelism: true
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regionLocations:
           - LOCATION: LOCATION
@@ -77235,6 +77439,7 @@ components:
           backupPointInTimeRestoreWindow:
             timestampRetentionWindowEndMillis: 0
             timestampRetentionWindowStartMillis: 6
+          crossCloudFederationAudience: crossCloudFederationAudience
           tableUUIDList:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -77290,6 +77495,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -77347,6 +77553,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 6
@@ -77409,6 +77616,7 @@ components:
           - null
           backupType: YQL_TABLE_TYPE
           disableParallelism: true
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           regionLocations:
           - LOCATION: LOCATION
@@ -77520,6 +77728,7 @@ components:
           storageConfigType: S3
         backupType: YQL_TABLE_TYPE
         disableParallelism: true
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         regionLocations:
         - LOCATION: LOCATION
@@ -77681,6 +77890,9 @@ components:
         cronExpression:
           description: Cron expression for a recurring backup
           type: string
+        crossCloudFederationAudience:
+          description: Cross-cloud federation GCP audience captured at backup time
+          type: string
         customerUuid:
           description: Customer UUID
           format: uuid
@@ -77765,6 +77977,13 @@ components:
           type: string
         oldOwner:
           description: User name of the current tables owner
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         parallelism:
           description: Number of concurrent commands to run on nodes over SSH
@@ -78557,6 +78776,7 @@ components:
           az: az
           subnet_id: subnet_id
           public_dns: public_dns
+          id: id
           region: region
           instance_type: instance_type
         sshPortOverride: 6
@@ -78808,6 +79028,7 @@ components:
           az: az
           subnet_id: subnet_id
           public_dns: public_dns
+          id: id
           region: region
           instance_type: instance_type
         sshPortOverride: 4
@@ -79451,17 +79672,33 @@ components:
     OnPremCloudInfo:
       example:
         ybHomeDir: ybHomeDir
+        federatedIamAudience: federatedIamAudience
+        enableFederatedIam: true
+        ynpManaged: true
         enableMultiTenancy: true
         useClockbound: true
       properties:
+        enableFederatedIam:
+          description: "WARNING: This is a preview API that could change. Enable GCS-on-AWS\
+            \ cross-cloud federated IAM on this provider's DB nodes (nodes must be\
+            \ AWS VMs)."
+          type: boolean
         enableMultiTenancy:
           description: "WARNING: This is a preview API that could change."
           type: boolean
+        federatedIamAudience:
+          description: "WARNING: This is a preview API that could change. GCP Workload\
+            \ Identity Federation audience used when federated IAM is enabled."
+          type: string
         useClockbound:
           description: "WARNING: This is a preview API that could change."
           type: boolean
         ybHomeDir:
           type: string
+        ynpManaged:
+          description: YbaApi Internal. Provider is created and managed by YNP
+          readOnly: true
+          type: boolean
       type: object
     PA Collector Details Model:
       example:
@@ -79539,23 +79776,12 @@ components:
         universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         paEndpointName: paEndpointName
         paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        dataMountPoints:
-        - dataMountPoints
-        - dataMountPoints
-        otherMountPoints:
-        - otherMountPoints
-        - otherMountPoints
         advancedObservability: true
         universeName: universeName
       properties:
         advancedObservability:
           description: Whether advanced observability (metrics export) is enabled
           type: boolean
-        dataMountPoints:
-          description: Data mount points
-          items:
-            type: string
-          type: array
         mode:
           description: How the universe is registered with the collector
           enum:
@@ -79563,11 +79789,6 @@ components:
           - ADVANCED
           - ONLINE
           type: string
-        otherMountPoints:
-          description: Other mount points
-          items:
-            type: string
-          type: array
         paEndpointName:
           description: "Perf Advisor Endpoint name, set for ONLINE mode only"
           type: string
@@ -79730,24 +79951,12 @@ components:
           universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           paEndpointName: paEndpointName
           paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          dataMountPoints:
-          - dataMountPoints
-          - dataMountPoints
-          otherMountPoints:
-          - otherMountPoints
-          - otherMountPoints
           advancedObservability: true
           universeName: universeName
         - mode: BASIC
           universeUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           paEndpointName: paEndpointName
           paEndpointUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          dataMountPoints:
-          - dataMountPoints
-          - dataMountPoints
-          otherMountPoints:
-          - otherMountPoints
-          - otherMountPoints
           advancedObservability: true
           universeName: universeName
         hasPrev: true
@@ -81191,6 +81400,7 @@ components:
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         is_leader: true
         last_backup: 2022-12-12T13:07:18Z
+        local: true
       properties:
         address:
           type: string
@@ -81212,6 +81422,8 @@ components:
           example: 2022-12-12T13:07:18Z
           format: date-time
           type: string
+        local:
+          type: boolean
         state:
           enum:
           - LEADER
@@ -81226,6 +81438,7 @@ components:
       - address
       - instance_state
       - is_leader
+      - local
       - state
       - uuid
       - ybaVersion
@@ -81817,13 +82030,18 @@ components:
               ybFirewallTags: ybFirewallTags
             onprem:
               ybHomeDir: ybHomeDir
+              federatedIamAudience: federatedIamAudience
+              enableFederatedIam: true
+              ynpManaged: true
               enableMultiTenancy: true
               useClockbound: true
             aws:
               awsAccessKeySecret: awsAccessKeySecret
               hostVpcId: hostVpcId
+              federatedIamAudience: federatedIamAudience
               useIMDSv2: true
               awsAccessKeyID: awsAccessKeyID
+              enableFederatedIam: true
               awsHostedZoneId: awsHostedZoneId
               vpcType: EXISTING
               awsHostedZoneName: awsHostedZoneName
@@ -82009,13 +82227,18 @@ components:
             ybFirewallTags: ybFirewallTags
           onprem:
             ybHomeDir: ybHomeDir
+            federatedIamAudience: federatedIamAudience
+            enableFederatedIam: true
+            ynpManaged: true
             enableMultiTenancy: true
             useClockbound: true
           aws:
             awsAccessKeySecret: awsAccessKeySecret
             hostVpcId: hostVpcId
+            federatedIamAudience: federatedIamAudience
             useIMDSv2: true
             awsAccessKeyID: awsAccessKeyID
+            enableFederatedIam: true
             awsHostedZoneId: awsHostedZoneId
             vpcType: EXISTING
             awsHostedZoneName: awsHostedZoneName
@@ -82577,6 +82800,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -82634,6 +82858,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -82693,6 +82918,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -90175,6 +90401,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -90308,6 +90541,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -90414,6 +90648,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -90561,6 +90796,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -90612,6 +90848,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -90855,6 +91092,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -90912,6 +91150,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -90971,6 +91210,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -98447,6 +98687,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -98580,6 +98827,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -98686,6 +98934,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -98833,6 +99082,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -98884,6 +99134,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -99900,6 +100151,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -99957,6 +100209,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -100020,6 +100273,7 @@ components:
         itestS3PackagePath: itestS3PackagePath
         tserverGFlags:
           key: tserverGFlags
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -107503,6 +107757,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -107640,6 +107901,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -107746,6 +108008,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -107893,6 +108156,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -107944,6 +108208,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -108356,6 +108621,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -108413,6 +108679,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -108472,6 +108739,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -115948,6 +116216,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -116081,6 +116356,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -116187,6 +116463,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -116334,6 +116611,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -116385,6 +116663,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -116614,6 +116893,7 @@ components:
           type: CMK
         nodeIp: nodeIp
         prefixUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         alterLoadBalancer: true
@@ -116699,6 +116979,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -116756,6 +117037,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -116876,6 +117158,13 @@ components:
           type: string
         nodeIp:
           description: Node IP
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         parallelism:
           description: Number of concurrent commands to run on nodes over SSH
@@ -117357,6 +117646,7 @@ components:
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
           newUniverseUiTourCompleted: true
@@ -117435,6 +117725,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -117492,6 +117783,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -117569,6 +117861,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         pitrConfigUUID:
           description: PITR Config UUID
@@ -118044,6 +118343,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -118101,6 +118401,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -118160,6 +118461,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -125636,6 +125938,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -125769,6 +126078,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -125875,6 +126185,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -126022,6 +126333,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -126073,6 +126385,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -126760,6 +127073,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -126866,6 +127180,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -127013,6 +127328,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -127064,6 +127380,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -127196,6 +127513,7 @@ components:
             - EditUniverse
             - RollbackEditUniverse
             - EditKubernetesUniverse
+            - RollbackEditKubernetesUniverse
             - ExternalScript
             - ImportIntoTable
             - RunApiTriggeredHooks
@@ -127302,6 +127620,7 @@ components:
             - RestoreYbaBackup
             - RestoreContinuousBackup
             - EnableNodeAgentInUniverse
+            - ManageCrossCloudFederationUniverse
             - DecommissionNode
             - CloneNamespace
             - TlsToggleKubernetes
@@ -127449,6 +127768,7 @@ components:
             - SetRestoreHiddenState
             - RestorePreflightValidate
             - BackupPreflightValidate
+            - BackupStorageConfigValidate
             - WaitForLeadersOnPreferredOnly
             - EnableEncryptionAtRest
             - DisableEncryptionAtRest
@@ -127500,6 +127820,7 @@ components:
             - TransferXClusterCerts
             - CreateTableSpaces
             - ManageOtelCollector
+            - ManageCloudFederation
             - UpdateAndPersistAuditLoggingConfig
             - UpdateAndPersistQueryLoggingConfig
             - UpdateAndPersistMetricsExportConfig
@@ -127972,6 +128293,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -128078,6 +128400,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -128225,6 +128548,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -128276,6 +128600,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -128628,6 +128953,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -128685,6 +129011,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -128744,6 +129071,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -136222,6 +136550,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -136355,6 +136690,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -136461,6 +136797,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -136608,6 +136945,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -136659,6 +136997,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -137081,14 +137420,18 @@ components:
             - queries
             timeoutSecs: 3
           ybAdminComponentSpecs:
-          - ybAdminCommand: ybAdminCommand
+          - ybAdminCommands:
+            - ybAdminCommands
+            - ybAdminCommands
             outputFileName: outputFileName
             componentName: componentName
             timeoutSecs: 2
             ybAdminArgs:
             - ybAdminArgs
             - ybAdminArgs
-          - ybAdminCommand: ybAdminCommand
+          - ybAdminCommands:
+            - ybAdminCommands
+            - ybAdminCommands
             outputFileName: outputFileName
             componentName: componentName
             timeoutSecs: 2
@@ -137241,8 +137584,10 @@ components:
             - TabletMeta
             - YbcLogs
             - NodeAgent
+            - NodeHealthLogs
             - SystemLogs
             - TabletReport
+            - ClusterConfig
             - K8sInfo
             - YbaMetadata
             - PrometheusMetrics
@@ -137330,6 +137675,7 @@ components:
             - TSERVER_EXPORT
             - CQL_EXPORT
             - YSQL_EXPORT
+            - KUBERNETES
             type: string
           type: array
         startDate:
@@ -137510,6 +137856,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -137567,6 +137914,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -137626,6 +137974,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -145102,6 +145451,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -145235,6 +145591,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -145341,6 +145698,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -145488,6 +145846,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -145539,6 +145898,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -145646,6 +146006,7 @@ components:
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         tableType: YQL_TABLE_TYPE
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -145748,6 +146109,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -145805,6 +146167,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -145882,6 +146245,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         platformUrl:
           type: string
@@ -146223,17 +146593,36 @@ components:
         - typeNameList
         - typeNameList
         dateRangeStart: 2022-12-12T13:07:18Z
+        completionDateRangeStart: 2022-12-12T13:07:18Z
+        completionDateRangeEnd: 2022-12-12T13:07:18Z
         status:
         - Created
         - Created
       properties:
+        completionDateRangeEnd:
+          description: Include tasks completed on or before this time (completion_time).
+            May be set alone or with completion_date_range_start. Tasks with null
+            completion_time (still in progress) are excluded when either completion
+            bound is set.
+          example: 2022-12-12T13:07:18Z
+          format: date-time
+          type: string
+        completionDateRangeStart:
+          description: Include tasks completed on or after this time (completion_time).
+            May be set alone or with completion_date_range_end. Tasks with null completion_time
+            (still in progress) are excluded when either completion bound is set.
+          example: 2022-12-12T13:07:18Z
+          format: date-time
+          type: string
         dateRangeEnd:
-          description: The end date to filter paged query.
+          description: Include tasks created on or before this time (create_time).
+            May be set alone or with date_range_start.
           example: 2022-12-12T13:07:18Z
           format: date-time
           type: string
         dateRangeStart:
-          description: The start date to filter paged query.
+          description: Include tasks created on or after this time (create_time).
+            May be set alone or with date_range_end.
           example: 2022-12-12T13:07:18Z
           format: date-time
           type: string
@@ -146309,6 +146698,7 @@ components:
             - GFlagsUpgrade
             - KubernetesOverridesUpgrade
             - EditKubernetesUniverse
+            - RollbackEditKubernetesUniverse
             - CertsRotate
             - TlsToggle
             - VMImageUpgrade
@@ -146378,6 +146768,7 @@ components:
             - RestoreYbaBackup
             - RestoreContinuousBackup
             - EnableNodeAgent
+            - ManageCrossCloudFederation
             - Decommission
             - CloneNamespace
             - UpdateOOMServiceState
@@ -146421,6 +146812,8 @@ components:
           - typeNameList
           - typeNameList
           dateRangeStart: 2022-12-12T13:07:18Z
+          completionDateRangeStart: 2022-12-12T13:07:18Z
+          completionDateRangeEnd: 2022-12-12T13:07:18Z
           status:
           - Created
           - Created
@@ -146469,6 +146862,7 @@ components:
           targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           target: Universe
           completionTime: 2022-12-12T13:07:18Z
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
           canRollback: true
           correlationId: correlationId
@@ -146484,6 +146878,7 @@ components:
           targetUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           target: Universe
           completionTime: 2022-12-12T13:07:18Z
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           createTime: 2022-12-12T13:07:18Z
           canRollback: true
           correlationId: correlationId
@@ -146710,6 +147105,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -146767,6 +147163,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -146826,6 +147223,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -154304,6 +154702,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -154437,6 +154842,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -154543,6 +154949,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -154690,6 +155097,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -154741,6 +155149,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -154980,6 +155389,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -155037,6 +155447,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -155098,6 +155509,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -162578,6 +162990,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -162711,6 +163130,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -162817,6 +163237,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -162964,6 +163385,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -163015,6 +163437,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -163221,6 +163644,7 @@ components:
     UniverseBackupRequestFormData:
       description: Universe Backup Form Data
       example:
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         storageConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         errorString: errorString
         timeBeforeDelete: 0
@@ -163228,6 +163652,13 @@ components:
       properties:
         errorString:
           description: Error message
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         previousTaskUUID:
           description: Previous task UUID of a retry
@@ -163372,6 +163803,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -163429,6 +163861,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -163489,6 +163922,7 @@ components:
         nodePrefix: nodePrefix
         allowGeoPartitioning: true
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         regionsChanged: true
         ybcSoftwareVersion: ybcSoftwareVersion
@@ -170970,6 +171404,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -171099,6 +171540,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -171205,6 +171647,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -171352,6 +171795,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -171403,6 +171847,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -171615,6 +172060,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -171672,6 +172118,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -171731,6 +172178,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -179201,6 +179649,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -179328,6 +179783,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -179434,6 +179890,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -179581,6 +180038,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -179632,6 +180090,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -179846,6 +180305,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 4
@@ -179907,6 +180367,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 4
@@ -179967,6 +180428,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -187437,6 +187899,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -187565,6 +188034,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -187671,6 +188141,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -187818,6 +188289,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -187869,6 +188341,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -188342,6 +188815,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 4
@@ -188403,6 +188877,7 @@ components:
               az: az
               subnet_id: subnet_id
               public_dns: public_dns
+              id: id
               region: region
               instance_type: instance_type
             sshPortOverride: 4
@@ -188463,6 +188938,7 @@ components:
           - UPDATE
           nodePrefix: nodePrefix
           itestS3PackagePath: itestS3PackagePath
+          originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           capability: READ_ONLY
           ybcSoftwareVersion: ybcSoftwareVersion
           creatingUser:
@@ -195951,8 +196427,6 @@ components:
       description: Update PITR config parameters
       example:
         expectedUniverseVersion: 0
-        runOnlyPrechecks: true
-        platformUrl: platformUrl
         sourceXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -195962,6 +196436,31 @@ components:
           opType: ENABLE
           kmsConfigUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: CMK
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ybcSoftwareVersion: ybcSoftwareVersion
+        creatingUser:
+          newUniverseUiTourCompleted: true
+          ldapSpecifiedRole: true
+          role: Admin
+          authTokenIssueDate: 2021-06-17T15:00:05Z
+          timezone: timezone
+          oidcJwtAuthToken: oidcJwtAuthToken
+          creationDate: 2022-12-12T13:07:18Z
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          newUniverseUiEnabled: true
+          groupMemberships:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userType: local
+          email: username1@example.com
+          primary: true
+        extraDependencies:
+          installNodeExporter: true
+        intervalInSeconds: 6
+        sleepAfterTServerRestartMillis: 5
+        runOnlyPrechecks: true
+        platformUrl: platformUrl
         targetXClusterConfigs:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -195980,7 +196479,6 @@ components:
         enableYbc: true
         errorString: errorString
         retentionPeriodInSeconds: 1
-        ybcSoftwareVersion: ybcSoftwareVersion
         installYbc: true
         nodeDetailsSet:
         - nodeName: nodeName
@@ -196016,6 +196514,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -196073,6 +196572,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -196097,27 +196597,7 @@ components:
           ysqlServerRpcPort: 6
           autoSyncMasterAddrs: true
           yqlServerHttpPort: 7
-        creatingUser:
-          newUniverseUiTourCompleted: true
-          ldapSpecifiedRole: true
-          role: Admin
-          authTokenIssueDate: 2021-06-17T15:00:05Z
-          timezone: timezone
-          oidcJwtAuthToken: oidcJwtAuthToken
-          creationDate: 2022-12-12T13:07:18Z
-          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          customerUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          newUniverseUiEnabled: true
-          groupMemberships:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userType: local
-          email: username1@example.com
-          primary: true
-        extraDependencies:
-          installNodeExporter: true
         ybcInstalled: true
-        intervalInSeconds: 6
         communicationPorts:
           nodeExporterPort: 5
           tserverHttpPort: 9
@@ -196137,7 +196617,6 @@ components:
         cmkArn: cmkArn
         sleepAfterMasterRestartMillis: 5
         previousTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        sleepAfterTServerRestartMillis: 5
       properties:
         cmkArn:
           description: Amazon Resource Name (ARN) of the CMK
@@ -196175,6 +196654,13 @@ components:
           uniqueItems: true
         nodeExporterUser:
           description: Node exporter user
+          type: string
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
           type: string
         platformUrl:
           type: string
@@ -196387,6 +196873,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -196444,6 +196931,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -196503,6 +196991,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -203979,6 +204468,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -204112,6 +204608,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -204218,6 +204715,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -204365,6 +204863,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -204416,6 +204915,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -206104,6 +206604,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -206161,6 +206662,7 @@ components:
             az: az
             subnet_id: subnet_id
             public_dns: public_dns
+            id: id
             region: region
             instance_type: instance_type
           sshPortOverride: 6
@@ -206220,6 +206722,7 @@ components:
         - UPDATE
         nodePrefix: nodePrefix
         itestS3PackagePath: itestS3PackagePath
+        originalTaskUUID: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         capability: READ_ONLY
         ybcSoftwareVersion: ybcSoftwareVersion
         creatingUser:
@@ -213591,8 +214094,10 @@ components:
         imageBundles:
         - clusterUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           imageBundleUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - clusterUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           imageBundleUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          providerUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         rollMaxBatchSize:
           primaryBatchSize: 6
           readReplicaBatchSize: 1
@@ -213733,6 +214238,13 @@ components:
           type: string
         nodesResizeAvailable:
           type: boolean
+        originalTaskUUID:
+          description: "UUID of the first task in the retry/rollback chain (clean\
+            \ universe state). Carried forward on retries and rollbacks. Distinct\
+            \ from previousTaskUUID, which is the immediate predecessor used for runtimeInfo\
+            \ inherit."
+          format: uuid
+          type: string
         otelCollectorEnabled:
           description: YbaApi Internal. OpenTelemetry Collector enabled for universe
           type: boolean
@@ -213876,6 +214388,7 @@ components:
           - EditUniverse
           - RollbackEditUniverse
           - EditKubernetesUniverse
+          - RollbackEditKubernetesUniverse
           - ExternalScript
           - ImportIntoTable
           - RunApiTriggeredHooks
@@ -213982,6 +214495,7 @@ components:
           - RestoreYbaBackup
           - RestoreContinuousBackup
           - EnableNodeAgentInUniverse
+          - ManageCrossCloudFederationUniverse
           - DecommissionNode
           - CloneNamespace
           - TlsToggleKubernetes
@@ -214129,6 +214643,7 @@ components:
           - SetRestoreHiddenState
           - RestorePreflightValidate
           - BackupPreflightValidate
+          - BackupStorageConfigValidate
           - WaitForLeadersOnPreferredOnly
           - EnableEncryptionAtRest
           - DisableEncryptionAtRest
@@ -214180,6 +214695,7 @@ components:
           - TransferXClusterCerts
           - CreateTableSpaces
           - ManageOtelCollector
+          - ManageCloudFederation
           - UpdateAndPersistAuditLoggingConfig
           - UpdateAndPersistQueryLoggingConfig
           - UpdateAndPersistMetricsExportConfig
@@ -214382,7 +214898,6 @@ components:
       description: xcluster config object
       properties:
         automaticDdlMode:
-          readOnly: true
           type: boolean
         createTime:
           description: Create time of the xCluster config
@@ -214875,7 +215390,6 @@ components:
         status: Initialized
       properties:
         automaticDdlMode:
-          readOnly: true
           type: boolean
         createTime:
           description: Create time of the xCluster config
@@ -215699,7 +216213,9 @@ components:
       type: object
     YbAdminComponentSpec:
       example:
-        ybAdminCommand: ybAdminCommand
+        ybAdminCommands:
+        - ybAdminCommands
+        - ybAdminCommands
         outputFileName: outputFileName
         componentName: componentName
         timeoutSecs: 2
@@ -215722,9 +216238,12 @@ components:
           items:
             type: string
           type: array
-        ybAdminCommand:
-          description: yb-admin subcommand (e.g. list_tables).
-          type: string
+        ybAdminCommands:
+          description: yb-admin subcommands to run (each executed separately in one
+            batch).
+          items:
+            type: string
+          type: array
       type: object
     YbaComponentSpec:
       example:

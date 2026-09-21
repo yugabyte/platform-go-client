@@ -36,6 +36,8 @@ type RestoreSnapshotScheduleParams struct {
 	NodeDetailsSet []NodeDetails `json:"nodeDetailsSet,omitempty"`
 	// Node exporter user
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// PITR Config UUID
 	PitrConfigUUID *string `json:"pitrConfigUUID,omitempty"`
 	PlatformUrl    string  `json:"platformUrl"`
@@ -456,6 +458,38 @@ func (o *RestoreSnapshotScheduleParams) HasNodeExporterUser() bool {
 // SetNodeExporterUser gets a reference to the given string and assigns it to the NodeExporterUser field.
 func (o *RestoreSnapshotScheduleParams) SetNodeExporterUser(v string) {
 	o.NodeExporterUser = &v
+}
+
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *RestoreSnapshotScheduleParams) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreSnapshotScheduleParams) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *RestoreSnapshotScheduleParams) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *RestoreSnapshotScheduleParams) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
 }
 
 // GetPitrConfigUUID returns the PitrConfigUUID field value if set, zero value otherwise.
@@ -893,6 +927,9 @@ func (o RestoreSnapshotScheduleParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NodeExporterUser) {
 		toSerialize["nodeExporterUser"] = o.NodeExporterUser
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.PitrConfigUUID) {
 		toSerialize["pitrConfigUUID"] = o.PitrConfigUUID

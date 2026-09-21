@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CronExpression** | Pointer to **string** | Cron expression for a recurring backup | [optional] 
+**CrossCloudFederationAudience** | Pointer to **string** | Cross-cloud federation GCP audience captured at backup time | [optional] 
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -41,6 +42,7 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **OldOwner** | Pointer to **string** | User name of the current tables owner | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit. | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
 **PointInTimeRestoreEnabled** | Pointer to **bool** | Point in time restore available | [optional] 
@@ -413,6 +415,31 @@ SetCronExpression sets CronExpression field to given value.
 `func (o *MultiTableBackupRequestParams) HasCronExpression() bool`
 
 HasCronExpression returns a boolean if a field has been set.
+
+### GetCrossCloudFederationAudience
+
+`func (o *MultiTableBackupRequestParams) GetCrossCloudFederationAudience() string`
+
+GetCrossCloudFederationAudience returns the CrossCloudFederationAudience field if non-nil, zero value otherwise.
+
+### GetCrossCloudFederationAudienceOk
+
+`func (o *MultiTableBackupRequestParams) GetCrossCloudFederationAudienceOk() (*string, bool)`
+
+GetCrossCloudFederationAudienceOk returns a tuple with the CrossCloudFederationAudience field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrossCloudFederationAudience
+
+`func (o *MultiTableBackupRequestParams) SetCrossCloudFederationAudience(v string)`
+
+SetCrossCloudFederationAudience sets CrossCloudFederationAudience field to given value.
+
+### HasCrossCloudFederationAudience
+
+`func (o *MultiTableBackupRequestParams) HasCrossCloudFederationAudience() bool`
+
+HasCrossCloudFederationAudience returns a boolean if a field has been set.
 
 ### GetCustomerUuid
 
@@ -1008,6 +1035,31 @@ SetOldOwner sets OldOwner field to given value.
 `func (o *MultiTableBackupRequestParams) HasOldOwner() bool`
 
 HasOldOwner returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *MultiTableBackupRequestParams) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *MultiTableBackupRequestParams) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *MultiTableBackupRequestParams) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *MultiTableBackupRequestParams) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetParallelism
 

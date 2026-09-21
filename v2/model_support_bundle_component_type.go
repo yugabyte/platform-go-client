@@ -36,8 +36,10 @@ const (
 	TabletMeta        SupportBundleComponentType = "TabletMeta"
 	YbcLogs           SupportBundleComponentType = "YbcLogs"
 	NodeAgent         SupportBundleComponentType = "NodeAgent"
+	NodeHealthLogs    SupportBundleComponentType = "NodeHealthLogs"
 	SystemLogs        SupportBundleComponentType = "SystemLogs"
 	TabletReport      SupportBundleComponentType = "TabletReport"
+	ClusterConfig     SupportBundleComponentType = "ClusterConfig"
 	K8sInfo           SupportBundleComponentType = "K8sInfo"
 	YbaMetadata       SupportBundleComponentType = "YbaMetadata"
 	PrometheusMetrics SupportBundleComponentType = "PrometheusMetrics"
@@ -63,8 +65,10 @@ var AllowedSupportBundleComponentTypeEnumValues = []SupportBundleComponentType{
 	"TabletMeta",
 	"YbcLogs",
 	"NodeAgent",
+	"NodeHealthLogs",
 	"SystemLogs",
 	"TabletReport",
+	"ClusterConfig",
 	"K8sInfo",
 	"YbaMetadata",
 	"PrometheusMetrics",

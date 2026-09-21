@@ -20,9 +20,13 @@ var _ MappedNullable = &TaskApiFilter{}
 
 // TaskApiFilter struct for TaskApiFilter
 type TaskApiFilter struct {
-	// The end date to filter paged query.
+	// Include tasks completed on or before this time (completion_time). May be set alone or with completion_date_range_start. Tasks with null completion_time (still in progress) are excluded when either completion bound is set.
+	CompletionDateRangeEnd *time.Time `json:"completionDateRangeEnd,omitempty"`
+	// Include tasks completed on or after this time (completion_time). May be set alone or with completion_date_range_end. Tasks with null completion_time (still in progress) are excluded when either completion bound is set.
+	CompletionDateRangeStart *time.Time `json:"completionDateRangeStart,omitempty"`
+	// Include tasks created on or before this time (create_time). May be set alone or with date_range_start.
 	DateRangeEnd *time.Time `json:"dateRangeEnd,omitempty"`
-	// The start date to filter paged query.
+	// Include tasks created on or after this time (create_time). May be set alone or with date_range_end.
 	DateRangeStart *time.Time `json:"dateRangeStart,omitempty"`
 	Status         []string   `json:"status"`
 	TargetList     []string   `json:"targetList"`
@@ -53,6 +57,70 @@ func NewTaskApiFilter(status []string, targetList []string, targetUUIDList []str
 func NewTaskApiFilterWithDefaults() *TaskApiFilter {
 	this := TaskApiFilter{}
 	return &this
+}
+
+// GetCompletionDateRangeEnd returns the CompletionDateRangeEnd field value if set, zero value otherwise.
+func (o *TaskApiFilter) GetCompletionDateRangeEnd() time.Time {
+	if o == nil || IsNil(o.CompletionDateRangeEnd) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletionDateRangeEnd
+}
+
+// GetCompletionDateRangeEndOk returns a tuple with the CompletionDateRangeEnd field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TaskApiFilter) GetCompletionDateRangeEndOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletionDateRangeEnd) {
+		return nil, false
+	}
+	return o.CompletionDateRangeEnd, true
+}
+
+// HasCompletionDateRangeEnd returns a boolean if a field has been set.
+func (o *TaskApiFilter) HasCompletionDateRangeEnd() bool {
+	if o != nil && !IsNil(o.CompletionDateRangeEnd) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionDateRangeEnd gets a reference to the given time.Time and assigns it to the CompletionDateRangeEnd field.
+func (o *TaskApiFilter) SetCompletionDateRangeEnd(v time.Time) {
+	o.CompletionDateRangeEnd = &v
+}
+
+// GetCompletionDateRangeStart returns the CompletionDateRangeStart field value if set, zero value otherwise.
+func (o *TaskApiFilter) GetCompletionDateRangeStart() time.Time {
+	if o == nil || IsNil(o.CompletionDateRangeStart) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CompletionDateRangeStart
+}
+
+// GetCompletionDateRangeStartOk returns a tuple with the CompletionDateRangeStart field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TaskApiFilter) GetCompletionDateRangeStartOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CompletionDateRangeStart) {
+		return nil, false
+	}
+	return o.CompletionDateRangeStart, true
+}
+
+// HasCompletionDateRangeStart returns a boolean if a field has been set.
+func (o *TaskApiFilter) HasCompletionDateRangeStart() bool {
+	if o != nil && !IsNil(o.CompletionDateRangeStart) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompletionDateRangeStart gets a reference to the given time.Time and assigns it to the CompletionDateRangeStart field.
+func (o *TaskApiFilter) SetCompletionDateRangeStart(v time.Time) {
+	o.CompletionDateRangeStart = &v
 }
 
 // GetDateRangeEnd returns the DateRangeEnd field value if set, zero value otherwise.
@@ -249,6 +317,12 @@ func (o TaskApiFilter) MarshalJSON() ([]byte, error) {
 
 func (o TaskApiFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CompletionDateRangeEnd) {
+		toSerialize["completionDateRangeEnd"] = o.CompletionDateRangeEnd
+	}
+	if !IsNil(o.CompletionDateRangeStart) {
+		toSerialize["completionDateRangeStart"] = o.CompletionDateRangeStart
+	}
 	if !IsNil(o.DateRangeEnd) {
 		toSerialize["dateRangeEnd"] = o.DateRangeEnd
 	}

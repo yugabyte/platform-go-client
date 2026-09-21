@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **Abortable** | Pointer to **bool** | Whether the task can be aborted. | [optional] [readonly] 
 **Retryable** | Pointer to **bool** | Whether the task can be retried. | [optional] [readonly] 
 **CanRollback** | Pointer to **bool** | Whether the task can be rolled back. | [optional] [readonly] 
+**OriginalTaskUuid** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state), if any. Carried forward on retries and rollbacks. Distinct from previousTaskUUID inherit linkage.  | [optional] [readonly] 
 **UserEmail** | Pointer to **string** | Email of the user who started the task. | [optional] [readonly] 
 
 ## Methods
@@ -414,6 +415,31 @@ SetCanRollback sets CanRollback field to given value.
 `func (o *TaskInfo) HasCanRollback() bool`
 
 HasCanRollback returns a boolean if a field has been set.
+
+### GetOriginalTaskUuid
+
+`func (o *TaskInfo) GetOriginalTaskUuid() string`
+
+GetOriginalTaskUuid returns the OriginalTaskUuid field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUuidOk
+
+`func (o *TaskInfo) GetOriginalTaskUuidOk() (*string, bool)`
+
+GetOriginalTaskUuidOk returns a tuple with the OriginalTaskUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUuid
+
+`func (o *TaskInfo) SetOriginalTaskUuid(v string)`
+
+SetOriginalTaskUuid sets OriginalTaskUuid field to given value.
+
+### HasOriginalTaskUuid
+
+`func (o *TaskInfo) HasOriginalTaskUuid() bool`
+
+HasOriginalTaskUuid returns a boolean if a field has been set.
 
 ### GetUserEmail
 

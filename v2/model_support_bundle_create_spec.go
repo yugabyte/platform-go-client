@@ -27,7 +27,7 @@ type SupportBundleCreateSpec struct {
 	StartDate *time.Time `json:"start_date,omitempty"`
 	// End date to filter logs till. Defaults to now.
 	EndDate *time.Time `json:"end_date,omitempty"`
-	// Names of the universe nodes to collect node-level components from. When omitted or empty, every node in the universe is considered. Global-level components (PrometheusMetrics, YbaMetadata, TabletReport, PerfAdvisor, K8sInfo, ApplicationLogs) are collected once for the universe and are not scoped by this list. Rejected with a 400 when none of the given names exist in the universe; names that do not exist are ignored when at least one matches. Not applicable to YBA-only support bundles.
+	// Names of the universe nodes to collect node-level components from. When omitted or empty, every node in the universe is considered. Global-level components (PrometheusMetrics, YbaMetadata, TabletReport, ClusterConfig, PerfAdvisor, K8sInfo, ApplicationLogs) are collected once for the universe and are not scoped by this list. Rejected with a 400 when none of the given names exist in the universe; names that do not exist are ignored when at least one matches. Not applicable to YBA-only support bundles.
 	NodeNames []string `json:"node_names,omitempty"`
 	// Specs driving the generic node-level FilesComponent. Required when components contains FilesComponent. On Kubernetes universes the SystemLogs and NodeAgent specs are dropped, since a pod has neither the host's /var/log nor a node agent, and the YbcLogs spec is collected from tserver pods only.
 	FilesComponentSpecs []FilesComponentSpec `json:"files_component_specs,omitempty"`
