@@ -56,6 +56,8 @@ type RestoreBackupParams struct {
 	NodeExporterUser *string `json:"nodeExporterUser,omitempty"`
 	// Node IP
 	NodeIp *string `json:"nodeIp,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// Number of concurrent commands to run on nodes over SSH
 	Parallelism *int32 `json:"parallelism,omitempty"`
 	PlatformUrl string `json:"platformUrl"`
@@ -807,6 +809,38 @@ func (o *RestoreBackupParams) SetNodeIp(v string) {
 	o.NodeIp = &v
 }
 
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *RestoreBackupParams) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestoreBackupParams) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *RestoreBackupParams) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *RestoreBackupParams) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
+}
+
 // GetParallelism returns the Parallelism field value if set, zero value otherwise.
 func (o *RestoreBackupParams) GetParallelism() int32 {
 	if o == nil || IsNil(o.Parallelism) {
@@ -1392,6 +1426,9 @@ func (o RestoreBackupParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NodeIp) {
 		toSerialize["nodeIp"] = o.NodeIp
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.Parallelism) {
 		toSerialize["parallelism"] = o.Parallelism

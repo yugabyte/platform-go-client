@@ -21,12 +21,8 @@ var _ MappedNullable = &PACollectorRegisteredUniverseInfo{}
 type PACollectorRegisteredUniverseInfo struct {
 	// Whether advanced observability (metrics export) is enabled
 	AdvancedObservability *bool `json:"advancedObservability,omitempty"`
-	// Data mount points
-	DataMountPoints []string `json:"dataMountPoints,omitempty"`
 	// How the universe is registered with the collector
 	Mode *string `json:"mode,omitempty"`
-	// Other mount points
-	OtherMountPoints []string `json:"otherMountPoints,omitempty"`
 	// Perf Advisor Endpoint name, set for ONLINE mode only
 	PaEndpointName *string `json:"paEndpointName,omitempty"`
 	// Perf Advisor Endpoint UUID, set for ONLINE mode only
@@ -86,38 +82,6 @@ func (o *PACollectorRegisteredUniverseInfo) SetAdvancedObservability(v bool) {
 	o.AdvancedObservability = &v
 }
 
-// GetDataMountPoints returns the DataMountPoints field value if set, zero value otherwise.
-func (o *PACollectorRegisteredUniverseInfo) GetDataMountPoints() []string {
-	if o == nil || IsNil(o.DataMountPoints) {
-		var ret []string
-		return ret
-	}
-	return o.DataMountPoints
-}
-
-// GetDataMountPointsOk returns a tuple with the DataMountPoints field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PACollectorRegisteredUniverseInfo) GetDataMountPointsOk() ([]string, bool) {
-	if o == nil || IsNil(o.DataMountPoints) {
-		return nil, false
-	}
-	return o.DataMountPoints, true
-}
-
-// HasDataMountPoints returns a boolean if a field has been set.
-func (o *PACollectorRegisteredUniverseInfo) HasDataMountPoints() bool {
-	if o != nil && !IsNil(o.DataMountPoints) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataMountPoints gets a reference to the given []string and assigns it to the DataMountPoints field.
-func (o *PACollectorRegisteredUniverseInfo) SetDataMountPoints(v []string) {
-	o.DataMountPoints = v
-}
-
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *PACollectorRegisteredUniverseInfo) GetMode() string {
 	if o == nil || IsNil(o.Mode) {
@@ -148,38 +112,6 @@ func (o *PACollectorRegisteredUniverseInfo) HasMode() bool {
 // SetMode gets a reference to the given string and assigns it to the Mode field.
 func (o *PACollectorRegisteredUniverseInfo) SetMode(v string) {
 	o.Mode = &v
-}
-
-// GetOtherMountPoints returns the OtherMountPoints field value if set, zero value otherwise.
-func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPoints() []string {
-	if o == nil || IsNil(o.OtherMountPoints) {
-		var ret []string
-		return ret
-	}
-	return o.OtherMountPoints
-}
-
-// GetOtherMountPointsOk returns a tuple with the OtherMountPoints field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPointsOk() ([]string, bool) {
-	if o == nil || IsNil(o.OtherMountPoints) {
-		return nil, false
-	}
-	return o.OtherMountPoints, true
-}
-
-// HasOtherMountPoints returns a boolean if a field has been set.
-func (o *PACollectorRegisteredUniverseInfo) HasOtherMountPoints() bool {
-	if o != nil && !IsNil(o.OtherMountPoints) {
-		return true
-	}
-
-	return false
-}
-
-// SetOtherMountPoints gets a reference to the given []string and assigns it to the OtherMountPoints field.
-func (o *PACollectorRegisteredUniverseInfo) SetOtherMountPoints(v []string) {
-	o.OtherMountPoints = v
 }
 
 // GetPaEndpointName returns the PaEndpointName field value if set, zero value otherwise.
@@ -323,14 +255,8 @@ func (o PACollectorRegisteredUniverseInfo) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.AdvancedObservability) {
 		toSerialize["advancedObservability"] = o.AdvancedObservability
 	}
-	if !IsNil(o.DataMountPoints) {
-		toSerialize["dataMountPoints"] = o.DataMountPoints
-	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
-	}
-	if !IsNil(o.OtherMountPoints) {
-		toSerialize["otherMountPoints"] = o.OtherMountPoints
 	}
 	if !IsNil(o.PaEndpointName) {
 		toSerialize["paEndpointName"] = o.PaEndpointName

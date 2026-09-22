@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodePrefix** | Pointer to **string** |  | [optional] 
 **NodesResizeAvailable** | Pointer to **bool** |  | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit. | [optional] 
 **OtelCollectorEnabled** | Pointer to **bool** | YbaApi Internal. OpenTelemetry Collector enabled for universe | [optional] 
 **PaCollectorUuid** | Pointer to **string** | YbaApi Internal. PA Collector UUID | [optional] 
 **PaEndpointUuid** | Pointer to **string** | YbaApi Internal. Perf Advisor Endpoint UUID | [optional] 
@@ -903,6 +904,31 @@ SetNodesResizeAvailable sets NodesResizeAvailable field to given value.
 `func (o *UpgradeTaskParams) HasNodesResizeAvailable() bool`
 
 HasNodesResizeAvailable returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *UpgradeTaskParams) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *UpgradeTaskParams) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *UpgradeTaskParams) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *UpgradeTaskParams) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetOtelCollectorEnabled
 

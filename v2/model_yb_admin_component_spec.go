@@ -22,8 +22,8 @@ var _ MappedNullable = &YbAdminComponentSpec{}
 type YbAdminComponentSpec struct {
 	// Logical component name; used as output file label. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
 	ComponentName *string `json:"component_name,omitempty"`
-	// yb-admin subcommand (e.g. list_tables). Support bundles only run read-only subcommands, so anything that mutates cluster state is rejected. Operators can add to the allowed set through the yb.support_bundle.extra_yb_admin_commands runtime config.
-	YbAdminCommand *string `json:"yb_admin_command,omitempty"`
+	// yb-admin subcommands to run, each executed separately (e.g. list_tables). Support bundles only run read-only subcommands, so anything that mutates cluster state is rejected. Operators can add to the allowed set through the yb.support_bundle.extra_yb_admin_commands runtime config.
+	YbAdminCommands []string `json:"yb_admin_commands,omitempty"`
 	// Additional arguments after the subcommand.
 	YbAdminArgs []string `json:"yb_admin_args,omitempty"`
 	// Output file name written under the per-node bundle directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
@@ -81,36 +81,36 @@ func (o *YbAdminComponentSpec) SetComponentName(v string) {
 	o.ComponentName = &v
 }
 
-// GetYbAdminCommand returns the YbAdminCommand field value if set, zero value otherwise.
-func (o *YbAdminComponentSpec) GetYbAdminCommand() string {
-	if o == nil || IsNil(o.YbAdminCommand) {
-		var ret string
+// GetYbAdminCommands returns the YbAdminCommands field value if set, zero value otherwise.
+func (o *YbAdminComponentSpec) GetYbAdminCommands() []string {
+	if o == nil || IsNil(o.YbAdminCommands) {
+		var ret []string
 		return ret
 	}
-	return *o.YbAdminCommand
+	return o.YbAdminCommands
 }
 
-// GetYbAdminCommandOk returns a tuple with the YbAdminCommand field value if set, nil otherwise
+// GetYbAdminCommandsOk returns a tuple with the YbAdminCommands field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *YbAdminComponentSpec) GetYbAdminCommandOk() (*string, bool) {
-	if o == nil || IsNil(o.YbAdminCommand) {
+func (o *YbAdminComponentSpec) GetYbAdminCommandsOk() ([]string, bool) {
+	if o == nil || IsNil(o.YbAdminCommands) {
 		return nil, false
 	}
-	return o.YbAdminCommand, true
+	return o.YbAdminCommands, true
 }
 
-// HasYbAdminCommand returns a boolean if a field has been set.
-func (o *YbAdminComponentSpec) HasYbAdminCommand() bool {
-	if o != nil && !IsNil(o.YbAdminCommand) {
+// HasYbAdminCommands returns a boolean if a field has been set.
+func (o *YbAdminComponentSpec) HasYbAdminCommands() bool {
+	if o != nil && !IsNil(o.YbAdminCommands) {
 		return true
 	}
 
 	return false
 }
 
-// SetYbAdminCommand gets a reference to the given string and assigns it to the YbAdminCommand field.
-func (o *YbAdminComponentSpec) SetYbAdminCommand(v string) {
-	o.YbAdminCommand = &v
+// SetYbAdminCommands gets a reference to the given []string and assigns it to the YbAdminCommands field.
+func (o *YbAdminComponentSpec) SetYbAdminCommands(v []string) {
+	o.YbAdminCommands = v
 }
 
 // GetYbAdminArgs returns the YbAdminArgs field value if set, zero value otherwise.
@@ -222,8 +222,8 @@ func (o YbAdminComponentSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ComponentName) {
 		toSerialize["component_name"] = o.ComponentName
 	}
-	if !IsNil(o.YbAdminCommand) {
-		toSerialize["yb_admin_command"] = o.YbAdminCommand
+	if !IsNil(o.YbAdminCommands) {
+		toSerialize["yb_admin_commands"] = o.YbAdminCommands
 	}
 	if !IsNil(o.YbAdminArgs) {
 		toSerialize["yb_admin_args"] = o.YbAdminArgs

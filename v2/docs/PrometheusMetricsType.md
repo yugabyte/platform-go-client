@@ -17,6 +17,8 @@
 
 * `PROMETHEUS_METRICS_YSQL_EXPORT` (value: `"YSQL_EXPORT"`)
 
+* `PROMETHEUS_METRICS_KUBERNETES` (value: `"KUBERNETES"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **OutputFileName** | Pointer to **string** | Output file name written under the per-node bundle directory. | [optional] 
 **TimeoutSecs** | Pointer to **int64** | Command timeout in seconds. | [optional] 
 **YbAdminArgs** | Pointer to **[]string** | Additional arguments after the subcommand. | [optional] 
-**YbAdminCommand** | Pointer to **string** | yb-admin subcommand (e.g. list_tables). | [optional] 
+**YbAdminCommands** | Pointer to **[]string** | yb-admin subcommands to run (each executed separately in one batch). | [optional] 
 
 ## Methods
 
@@ -129,30 +129,30 @@ SetYbAdminArgs sets YbAdminArgs field to given value.
 
 HasYbAdminArgs returns a boolean if a field has been set.
 
-### GetYbAdminCommand
+### GetYbAdminCommands
 
-`func (o *YbAdminComponentSpec) GetYbAdminCommand() string`
+`func (o *YbAdminComponentSpec) GetYbAdminCommands() []string`
 
-GetYbAdminCommand returns the YbAdminCommand field if non-nil, zero value otherwise.
+GetYbAdminCommands returns the YbAdminCommands field if non-nil, zero value otherwise.
 
-### GetYbAdminCommandOk
+### GetYbAdminCommandsOk
 
-`func (o *YbAdminComponentSpec) GetYbAdminCommandOk() (*string, bool)`
+`func (o *YbAdminComponentSpec) GetYbAdminCommandsOk() (*[]string, bool)`
 
-GetYbAdminCommandOk returns a tuple with the YbAdminCommand field if it's non-nil, zero value otherwise
+GetYbAdminCommandsOk returns a tuple with the YbAdminCommands field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetYbAdminCommand
+### SetYbAdminCommands
 
-`func (o *YbAdminComponentSpec) SetYbAdminCommand(v string)`
+`func (o *YbAdminComponentSpec) SetYbAdminCommands(v []string)`
 
-SetYbAdminCommand sets YbAdminCommand field to given value.
+SetYbAdminCommands sets YbAdminCommands field to given value.
 
-### HasYbAdminCommand
+### HasYbAdminCommands
 
-`func (o *YbAdminComponentSpec) HasYbAdminCommand() bool`
+`func (o *YbAdminComponentSpec) HasYbAdminCommands() bool`
 
-HasYbAdminCommand returns a boolean if a field has been set.
+HasYbAdminCommands returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

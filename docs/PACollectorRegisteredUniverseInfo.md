@@ -5,9 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AdvancedObservability** | Pointer to **bool** | Whether advanced observability (metrics export) is enabled | [optional] 
-**DataMountPoints** | Pointer to **[]string** | Data mount points | [optional] 
 **Mode** | Pointer to **string** | How the universe is registered with the collector | [optional] 
-**OtherMountPoints** | Pointer to **[]string** | Other mount points | [optional] 
 **PaEndpointName** | Pointer to **string** | Perf Advisor Endpoint name, set for ONLINE mode only | [optional] 
 **PaEndpointUuid** | Pointer to **string** | Perf Advisor Endpoint UUID, set for ONLINE mode only | [optional] 
 **UniverseName** | Pointer to **string** | Universe name (from YBA, or null if universe was deleted) | [optional] 
@@ -57,31 +55,6 @@ SetAdvancedObservability sets AdvancedObservability field to given value.
 
 HasAdvancedObservability returns a boolean if a field has been set.
 
-### GetDataMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) GetDataMountPoints() []string`
-
-GetDataMountPoints returns the DataMountPoints field if non-nil, zero value otherwise.
-
-### GetDataMountPointsOk
-
-`func (o *PACollectorRegisteredUniverseInfo) GetDataMountPointsOk() (*[]string, bool)`
-
-GetDataMountPointsOk returns a tuple with the DataMountPoints field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDataMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) SetDataMountPoints(v []string)`
-
-SetDataMountPoints sets DataMountPoints field to given value.
-
-### HasDataMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) HasDataMountPoints() bool`
-
-HasDataMountPoints returns a boolean if a field has been set.
-
 ### GetMode
 
 `func (o *PACollectorRegisteredUniverseInfo) GetMode() string`
@@ -106,31 +79,6 @@ SetMode sets Mode field to given value.
 `func (o *PACollectorRegisteredUniverseInfo) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
-
-### GetOtherMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPoints() []string`
-
-GetOtherMountPoints returns the OtherMountPoints field if non-nil, zero value otherwise.
-
-### GetOtherMountPointsOk
-
-`func (o *PACollectorRegisteredUniverseInfo) GetOtherMountPointsOk() (*[]string, bool)`
-
-GetOtherMountPointsOk returns a tuple with the OtherMountPoints field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOtherMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) SetOtherMountPoints(v []string)`
-
-SetOtherMountPoints sets OtherMountPoints field to given value.
-
-### HasOtherMountPoints
-
-`func (o *PACollectorRegisteredUniverseInfo) HasOtherMountPoints() bool`
-
-HasOtherMountPoints returns a boolean if a field has been set.
 
 ### GetPaEndpointName
 

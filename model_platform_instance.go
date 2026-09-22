@@ -27,6 +27,7 @@ type PlatformInstance struct {
 	IsLocal       *bool   `json:"is_local,omitempty"`
 	// Last backup time
 	LastBackup *time.Time `json:"last_backup,omitempty"`
+	Local      bool       `json:"local"`
 	State      string     `json:"state"`
 	Uuid       string     `json:"uuid"`
 	YbaVersion string     `json:"ybaVersion"`
@@ -38,11 +39,12 @@ type _PlatformInstance PlatformInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlatformInstance(address string, instanceState string, isLeader bool, state string, uuid string, ybaVersion string) *PlatformInstance {
+func NewPlatformInstance(address string, instanceState string, isLeader bool, local bool, state string, uuid string, ybaVersion string) *PlatformInstance {
 	this := PlatformInstance{}
 	this.Address = address
 	this.InstanceState = instanceState
 	this.IsLeader = isLeader
+	this.Local = local
 	this.State = state
 	this.Uuid = uuid
 	this.YbaVersion = ybaVersion
@@ -225,6 +227,30 @@ func (o *PlatformInstance) SetLastBackup(v time.Time) {
 	o.LastBackup = &v
 }
 
+// GetLocal returns the Local field value
+func (o *PlatformInstance) GetLocal() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Local
+}
+
+// GetLocalOk returns a tuple with the Local field value
+// and a boolean to check if the value has been set.
+func (o *PlatformInstance) GetLocalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Local, true
+}
+
+// SetLocal sets field value
+func (o *PlatformInstance) SetLocal(v bool) {
+	o.Local = v
+}
+
 // GetState returns the State field value
 func (o *PlatformInstance) GetState() string {
 	if o == nil {
@@ -319,6 +345,7 @@ func (o PlatformInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastBackup) {
 		toSerialize["last_backup"] = o.LastBackup
 	}
+	toSerialize["local"] = o.Local
 	toSerialize["state"] = o.State
 	toSerialize["uuid"] = o.Uuid
 	toSerialize["ybaVersion"] = o.YbaVersion

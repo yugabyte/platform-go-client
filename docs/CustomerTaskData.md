@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CorrelationId** | Pointer to **string** | Correlation id | [optional] 
 **CreateTime** | Pointer to **time.Time** | Customer task creation time | [optional] 
 **Id** | Pointer to **string** | Customer task UUID | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state), if any | [optional] [readonly] 
 **PercentComplete** | Pointer to **int32** | Customer task percentage completed | [optional] 
 **Retryable** | Pointer to **bool** | Customer task retryable | [optional] 
 **Status** | Pointer to **string** | Customer task status | [optional] 
@@ -188,6 +189,31 @@ SetId sets Id field to given value.
 `func (o *CustomerTaskData) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *CustomerTaskData) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *CustomerTaskData) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *CustomerTaskData) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *CustomerTaskData) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetPercentComplete
 

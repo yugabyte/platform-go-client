@@ -1116,6 +1116,7 @@ type TableManagementAPIGetAllTablesRequest struct {
 	excludeColocatedTables       *bool
 	includeColocatedParentTables *bool
 	xClusterSupportedOnly        *bool
+	includeMatviewTables         *bool
 }
 
 func (r TableManagementAPIGetAllTablesRequest) IncludeParentTableInfo(includeParentTableInfo bool) TableManagementAPIGetAllTablesRequest {
@@ -1135,6 +1136,11 @@ func (r TableManagementAPIGetAllTablesRequest) IncludeColocatedParentTables(incl
 
 func (r TableManagementAPIGetAllTablesRequest) XClusterSupportedOnly(xClusterSupportedOnly bool) TableManagementAPIGetAllTablesRequest {
 	r.xClusterSupportedOnly = &xClusterSupportedOnly
+	return r
+}
+
+func (r TableManagementAPIGetAllTablesRequest) IncludeMatviewTables(includeMatviewTables bool) TableManagementAPIGetAllTablesRequest {
+	r.includeMatviewTables = &includeMatviewTables
 	return r
 }
 
@@ -1212,6 +1218,13 @@ func (a *TableManagementAPIService) GetAllTablesExecute(r TableManagementAPIGetA
 		var defaultValue bool = false
 		parameterAddToHeaderOrQuery(localVarQueryParams, "xClusterSupportedOnly", defaultValue, "", "")
 		r.xClusterSupportedOnly = &defaultValue
+	}
+	if r.includeMatviewTables != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMatviewTables", r.includeMatviewTables, "", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "includeMatviewTables", defaultValue, "", "")
+		r.includeMatviewTables = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

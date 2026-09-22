@@ -28,6 +28,7 @@ const (
 	PROMETHEUS_METRICS_TSERVER_EXPORT PrometheusMetricsType = "TSERVER_EXPORT"
 	PROMETHEUS_METRICS_CQL_EXPORT     PrometheusMetricsType = "CQL_EXPORT"
 	PROMETHEUS_METRICS_YSQL_EXPORT    PrometheusMetricsType = "YSQL_EXPORT"
+	PROMETHEUS_METRICS_KUBERNETES     PrometheusMetricsType = "KUBERNETES"
 )
 
 // All allowed values of PrometheusMetricsType enum
@@ -39,6 +40,7 @@ var AllowedPrometheusMetricsTypeEnumValues = []PrometheusMetricsType{
 	"TSERVER_EXPORT",
 	"CQL_EXPORT",
 	"YSQL_EXPORT",
+	"KUBERNETES",
 }
 
 func (v *PrometheusMetricsType) UnmarshalJSON(src []byte) error {

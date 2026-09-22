@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **InstallYbc** | Pointer to **bool** |  | [optional] 
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit. | [optional] 
 **PitrConfigUUID** | Pointer to **string** | PITR Config UUID | [optional] 
 **PlatformUrl** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
@@ -368,6 +369,31 @@ SetNodeExporterUser sets NodeExporterUser field to given value.
 `func (o *CloneNamespaceParams) HasNodeExporterUser() bool`
 
 HasNodeExporterUser returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *CloneNamespaceParams) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *CloneNamespaceParams) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *CloneNamespaceParams) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *CloneNamespaceParams) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetPitrConfigUUID
 

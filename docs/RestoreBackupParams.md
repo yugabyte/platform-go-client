@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **NodeDetailsSet** | Pointer to [**[]NodeDetails**](NodeDetails.md) | Node details | [optional] 
 **NodeExporterUser** | Pointer to **string** | Node exporter user | [optional] 
 **NodeIp** | Pointer to **string** | Node IP | [optional] 
+**OriginalTaskUUID** | Pointer to **string** | UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit. | [optional] 
 **Parallelism** | Pointer to **int32** | Number of concurrent commands to run on nodes over SSH | [optional] 
 **PlatformUrl** | **string** |  | 
 **PrefixUUID** | Pointer to **string** | Prefix UUID | [optional] 
@@ -607,6 +608,31 @@ SetNodeIp sets NodeIp field to given value.
 `func (o *RestoreBackupParams) HasNodeIp() bool`
 
 HasNodeIp returns a boolean if a field has been set.
+
+### GetOriginalTaskUUID
+
+`func (o *RestoreBackupParams) GetOriginalTaskUUID() string`
+
+GetOriginalTaskUUID returns the OriginalTaskUUID field if non-nil, zero value otherwise.
+
+### GetOriginalTaskUUIDOk
+
+`func (o *RestoreBackupParams) GetOriginalTaskUUIDOk() (*string, bool)`
+
+GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOriginalTaskUUID
+
+`func (o *RestoreBackupParams) SetOriginalTaskUUID(v string)`
+
+SetOriginalTaskUUID sets OriginalTaskUUID field to given value.
+
+### HasOriginalTaskUUID
+
+`func (o *RestoreBackupParams) HasOriginalTaskUUID() bool`
+
+HasOriginalTaskUUID returns a boolean if a field has been set.
 
 ### GetParallelism
 

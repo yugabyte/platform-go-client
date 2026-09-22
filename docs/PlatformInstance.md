@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IsLeader** | **bool** |  | 
 **IsLocal** | Pointer to **bool** |  | [optional] 
 **LastBackup** | Pointer to **time.Time** | Last backup time | [optional] 
+**Local** | **bool** |  | 
 **State** | **string** |  | 
 **Uuid** | **string** |  | 
 **YbaVersion** | **string** |  | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewPlatformInstance
 
-`func NewPlatformInstance(address string, instanceState string, isLeader bool, state string, uuid string, ybaVersion string, ) *PlatformInstance`
+`func NewPlatformInstance(address string, instanceState string, isLeader bool, local bool, state string, uuid string, ybaVersion string, ) *PlatformInstance`
 
 NewPlatformInstance instantiates a new PlatformInstance object
 This constructor will assign default values to properties that have it defined,
@@ -167,6 +168,26 @@ SetLastBackup sets LastBackup field to given value.
 `func (o *PlatformInstance) HasLastBackup() bool`
 
 HasLastBackup returns a boolean if a field has been set.
+
+### GetLocal
+
+`func (o *PlatformInstance) GetLocal() bool`
+
+GetLocal returns the Local field if non-nil, zero value otherwise.
+
+### GetLocalOk
+
+`func (o *PlatformInstance) GetLocalOk() (*bool, bool)`
+
+GetLocalOk returns a tuple with the Local field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocal
+
+`func (o *PlatformInstance) SetLocal(v bool)`
+
+SetLocal sets Local field to given value.
+
 
 ### GetState
 

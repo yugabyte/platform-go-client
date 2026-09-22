@@ -23,9 +23,13 @@ type AWSCloudInfo struct {
 	AwsAccessKeySecret *string `json:"awsAccessKeySecret,omitempty"`
 	AwsHostedZoneId    *string `json:"awsHostedZoneId,omitempty"`
 	AwsHostedZoneName  *string `json:"awsHostedZoneName,omitempty"`
-	HostVpcId          *string `json:"hostVpcId,omitempty"`
-	HostVpcRegion      *string `json:"hostVpcRegion,omitempty"`
-	UseIMDSv2          *bool   `json:"useIMDSv2,omitempty"`
+	// Enable GCS-on-AWS cross-cloud federated IAM on this provider's DB nodes (GCP Workload Identity Federation). Requires the federated IAM audience below.
+	EnableFederatedIam *bool `json:"enableFederatedIam,omitempty"`
+	// GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it.
+	FederatedIamAudience *string `json:"federatedIamAudience,omitempty"`
+	HostVpcId            *string `json:"hostVpcId,omitempty"`
+	HostVpcRegion        *string `json:"hostVpcRegion,omitempty"`
+	UseIMDSv2            *bool   `json:"useIMDSv2,omitempty"`
 	// New/Existing VPC for provider creation
 	VpcType *string `json:"vpcType,omitempty"`
 }
@@ -173,6 +177,70 @@ func (o *AWSCloudInfo) HasAwsHostedZoneName() bool {
 // SetAwsHostedZoneName gets a reference to the given string and assigns it to the AwsHostedZoneName field.
 func (o *AWSCloudInfo) SetAwsHostedZoneName(v string) {
 	o.AwsHostedZoneName = &v
+}
+
+// GetEnableFederatedIam returns the EnableFederatedIam field value if set, zero value otherwise.
+func (o *AWSCloudInfo) GetEnableFederatedIam() bool {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableFederatedIam
+}
+
+// GetEnableFederatedIamOk returns a tuple with the EnableFederatedIam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AWSCloudInfo) GetEnableFederatedIamOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		return nil, false
+	}
+	return o.EnableFederatedIam, true
+}
+
+// HasEnableFederatedIam returns a boolean if a field has been set.
+func (o *AWSCloudInfo) HasEnableFederatedIam() bool {
+	if o != nil && !IsNil(o.EnableFederatedIam) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableFederatedIam gets a reference to the given bool and assigns it to the EnableFederatedIam field.
+func (o *AWSCloudInfo) SetEnableFederatedIam(v bool) {
+	o.EnableFederatedIam = &v
+}
+
+// GetFederatedIamAudience returns the FederatedIamAudience field value if set, zero value otherwise.
+func (o *AWSCloudInfo) GetFederatedIamAudience() string {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		var ret string
+		return ret
+	}
+	return *o.FederatedIamAudience
+}
+
+// GetFederatedIamAudienceOk returns a tuple with the FederatedIamAudience field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AWSCloudInfo) GetFederatedIamAudienceOk() (*string, bool) {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		return nil, false
+	}
+	return o.FederatedIamAudience, true
+}
+
+// HasFederatedIamAudience returns a boolean if a field has been set.
+func (o *AWSCloudInfo) HasFederatedIamAudience() bool {
+	if o != nil && !IsNil(o.FederatedIamAudience) {
+		return true
+	}
+
+	return false
+}
+
+// SetFederatedIamAudience gets a reference to the given string and assigns it to the FederatedIamAudience field.
+func (o *AWSCloudInfo) SetFederatedIamAudience(v string) {
+	o.FederatedIamAudience = &v
 }
 
 // GetHostVpcId returns the HostVpcId field value if set, zero value otherwise.
@@ -324,6 +392,12 @@ func (o AWSCloudInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AwsHostedZoneName) {
 		toSerialize["awsHostedZoneName"] = o.AwsHostedZoneName
+	}
+	if !IsNil(o.EnableFederatedIam) {
+		toSerialize["enableFederatedIam"] = o.EnableFederatedIam
+	}
+	if !IsNil(o.FederatedIamAudience) {
+		toSerialize["federatedIamAudience"] = o.FederatedIamAudience
 	}
 	if !IsNil(o.HostVpcId) {
 		toSerialize["hostVpcId"] = o.HostVpcId

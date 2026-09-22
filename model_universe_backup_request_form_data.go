@@ -21,6 +21,8 @@ var _ MappedNullable = &UniverseBackupRequestFormData{}
 type UniverseBackupRequestFormData struct {
 	// Error message
 	ErrorString *string `json:"errorString,omitempty"`
+	// UUID of the first task in the retry/rollback chain (clean universe state). Carried forward on retries and rollbacks. Distinct from previousTaskUUID, which is the immediate predecessor used for runtimeInfo inherit.
+	OriginalTaskUUID *string `json:"originalTaskUUID,omitempty"`
 	// Previous task UUID of a retry
 	PreviousTaskUUID *string `json:"previousTaskUUID,omitempty"`
 	// WARNING: This is a preview API that could change.Storage configuration UUID
@@ -79,6 +81,38 @@ func (o *UniverseBackupRequestFormData) HasErrorString() bool {
 // SetErrorString gets a reference to the given string and assigns it to the ErrorString field.
 func (o *UniverseBackupRequestFormData) SetErrorString(v string) {
 	o.ErrorString = &v
+}
+
+// GetOriginalTaskUUID returns the OriginalTaskUUID field value if set, zero value otherwise.
+func (o *UniverseBackupRequestFormData) GetOriginalTaskUUID() string {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		var ret string
+		return ret
+	}
+	return *o.OriginalTaskUUID
+}
+
+// GetOriginalTaskUUIDOk returns a tuple with the OriginalTaskUUID field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseBackupRequestFormData) GetOriginalTaskUUIDOk() (*string, bool) {
+	if o == nil || IsNil(o.OriginalTaskUUID) {
+		return nil, false
+	}
+	return o.OriginalTaskUUID, true
+}
+
+// HasOriginalTaskUUID returns a boolean if a field has been set.
+func (o *UniverseBackupRequestFormData) HasOriginalTaskUUID() bool {
+	if o != nil && !IsNil(o.OriginalTaskUUID) {
+		return true
+	}
+
+	return false
+}
+
+// SetOriginalTaskUUID gets a reference to the given string and assigns it to the OriginalTaskUUID field.
+func (o *UniverseBackupRequestFormData) SetOriginalTaskUUID(v string) {
+	o.OriginalTaskUUID = &v
 }
 
 // GetPreviousTaskUUID returns the PreviousTaskUUID field value if set, zero value otherwise.
@@ -181,6 +215,9 @@ func (o UniverseBackupRequestFormData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ErrorString) {
 		toSerialize["errorString"] = o.ErrorString
+	}
+	if !IsNil(o.OriginalTaskUUID) {
+		toSerialize["originalTaskUUID"] = o.OriginalTaskUUID
 	}
 	if !IsNil(o.PreviousTaskUUID) {
 		toSerialize["previousTaskUUID"] = o.PreviousTaskUUID

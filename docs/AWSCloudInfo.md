@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **AwsAccessKeySecret** | Pointer to **string** |  | [optional] 
 **AwsHostedZoneId** | Pointer to **string** |  | [optional] 
 **AwsHostedZoneName** | Pointer to **string** |  | [optional] 
+**EnableFederatedIam** | Pointer to **bool** | Enable GCS-on-AWS cross-cloud federated IAM on this provider&#39;s DB nodes (GCP Workload Identity Federation). Requires the federated IAM audience below. | [optional] 
+**FederatedIamAudience** | Pointer to **string** | GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it. | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] [readonly] 
 **UseIMDSv2** | Pointer to **bool** |  | [optional] 
@@ -131,6 +133,56 @@ SetAwsHostedZoneName sets AwsHostedZoneName field to given value.
 `func (o *AWSCloudInfo) HasAwsHostedZoneName() bool`
 
 HasAwsHostedZoneName returns a boolean if a field has been set.
+
+### GetEnableFederatedIam
+
+`func (o *AWSCloudInfo) GetEnableFederatedIam() bool`
+
+GetEnableFederatedIam returns the EnableFederatedIam field if non-nil, zero value otherwise.
+
+### GetEnableFederatedIamOk
+
+`func (o *AWSCloudInfo) GetEnableFederatedIamOk() (*bool, bool)`
+
+GetEnableFederatedIamOk returns a tuple with the EnableFederatedIam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableFederatedIam
+
+`func (o *AWSCloudInfo) SetEnableFederatedIam(v bool)`
+
+SetEnableFederatedIam sets EnableFederatedIam field to given value.
+
+### HasEnableFederatedIam
+
+`func (o *AWSCloudInfo) HasEnableFederatedIam() bool`
+
+HasEnableFederatedIam returns a boolean if a field has been set.
+
+### GetFederatedIamAudience
+
+`func (o *AWSCloudInfo) GetFederatedIamAudience() string`
+
+GetFederatedIamAudience returns the FederatedIamAudience field if non-nil, zero value otherwise.
+
+### GetFederatedIamAudienceOk
+
+`func (o *AWSCloudInfo) GetFederatedIamAudienceOk() (*string, bool)`
+
+GetFederatedIamAudienceOk returns a tuple with the FederatedIamAudience field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFederatedIamAudience
+
+`func (o *AWSCloudInfo) SetFederatedIamAudience(v string)`
+
+SetFederatedIamAudience sets FederatedIamAudience field to given value.
+
+### HasFederatedIamAudience
+
+`func (o *AWSCloudInfo) HasFederatedIamAudience() bool`
+
+HasFederatedIamAudience returns a boolean if a field has been set.
 
 ### GetHostVpcId
 
