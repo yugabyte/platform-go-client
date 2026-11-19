@@ -24,6 +24,8 @@ type EncryptionInTransitSpec struct {
 	EnableNodeToNodeEncrypt *bool `json:"enable_node_to_node_encrypt,omitempty"`
 	// Whether to enable encryption for client connection to DB nodes
 	EnableClientToNodeEncrypt *bool `json:"enable_client_to_node_encrypt,omitempty"`
+	// Whether DB nodes require a client certificate on RPC (node_to_node_encryption_use_client_certificates). Supported only on Kubernetes universes whose node-to-node encryption uses a cert-manager (K8SCertManager) root CA; VM universes and Kubernetes universes with other root CA types are not supported. Can only be set at universe creation.
+	UseNodeToNodeClientCerts *bool `json:"use_node_to_node_client_certs,omitempty"`
 	// In case certificates are generated, whether to use the same certificate
 	RootAndClientRootCaSame *bool `json:"root_and_client_root_ca_same,omitempty"`
 	// The UUID of the rootCA to be used to generate node certificates and facilitate TLS communication between database nodes.
@@ -111,6 +113,38 @@ func (o *EncryptionInTransitSpec) HasEnableClientToNodeEncrypt() bool {
 // SetEnableClientToNodeEncrypt gets a reference to the given bool and assigns it to the EnableClientToNodeEncrypt field.
 func (o *EncryptionInTransitSpec) SetEnableClientToNodeEncrypt(v bool) {
 	o.EnableClientToNodeEncrypt = &v
+}
+
+// GetUseNodeToNodeClientCerts returns the UseNodeToNodeClientCerts field value if set, zero value otherwise.
+func (o *EncryptionInTransitSpec) GetUseNodeToNodeClientCerts() bool {
+	if o == nil || IsNil(o.UseNodeToNodeClientCerts) {
+		var ret bool
+		return ret
+	}
+	return *o.UseNodeToNodeClientCerts
+}
+
+// GetUseNodeToNodeClientCertsOk returns a tuple with the UseNodeToNodeClientCerts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EncryptionInTransitSpec) GetUseNodeToNodeClientCertsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseNodeToNodeClientCerts) {
+		return nil, false
+	}
+	return o.UseNodeToNodeClientCerts, true
+}
+
+// HasUseNodeToNodeClientCerts returns a boolean if a field has been set.
+func (o *EncryptionInTransitSpec) HasUseNodeToNodeClientCerts() bool {
+	if o != nil && !IsNil(o.UseNodeToNodeClientCerts) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNodeToNodeClientCerts gets a reference to the given bool and assigns it to the UseNodeToNodeClientCerts field.
+func (o *EncryptionInTransitSpec) SetUseNodeToNodeClientCerts(v bool) {
+	o.UseNodeToNodeClientCerts = &v
 }
 
 // GetRootAndClientRootCaSame returns the RootAndClientRootCaSame field value if set, zero value otherwise.
@@ -224,6 +258,9 @@ func (o EncryptionInTransitSpec) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnableClientToNodeEncrypt) {
 		toSerialize["enable_client_to_node_encrypt"] = o.EnableClientToNodeEncrypt
+	}
+	if !IsNil(o.UseNodeToNodeClientCerts) {
+		toSerialize["use_node_to_node_client_certs"] = o.UseNodeToNodeClientCerts
 	}
 	if !IsNil(o.RootAndClientRootCaSame) {
 		toSerialize["root_and_client_root_ca_same"] = o.RootAndClientRootCaSame

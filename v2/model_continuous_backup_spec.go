@@ -23,7 +23,8 @@ type ContinuousBackupSpec struct {
 	// UUID of the storage config to use
 	StorageConfigUuid string `json:"storage_config_uuid"`
 	// Interval between two backups.
-	Frequency         int64        `json:"frequency"`
+	Frequency int64 `json:"frequency"`
+	// The time unit for the interval between backups. Must be SECONDS or larger; NANOSECONDS, MICROSECONDS, and MILLISECONDS are rejected.
 	FrequencyTimeUnit TimeUnitType `json:"frequency_time_unit"`
 	// The number of historical backups to retain in the storage bucket.
 	NumBackups *int32 `json:"num_backups,omitempty"`

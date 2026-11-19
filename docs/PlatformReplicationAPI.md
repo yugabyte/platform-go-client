@@ -26,7 +26,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -94,7 +94,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -166,7 +166,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -236,7 +236,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FileNamePrefix** | Pointer to **string** | WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \&quot;\&quot;. For example, setting this to \&quot;yb-platform-\&quot; will generate application log files as \&quot;yb-platform-application.log\&quot; instead of \&quot;application.log\&quot;. | [optional] 
 **Level** | **string** |  | 
+**MaxFileSize** | Pointer to **string** | WARNING: This is a preview API that could change. Maximum size of the active application log file before it is rolled over, for example \&quot;1024MB\&quot; or \&quot;1GB\&quot;. Minimum 256MB. | [optional] 
 **MaxHistory** | **int32** |  | 
 **RolloverPattern** | **string** |  | 
+**TotalSizeCap** | Pointer to **string** | WARNING: This is a preview API that could change. Total size of retained application log archives, for example \&quot;20GB\&quot;. Archives are deleted oldest first once this is exceeded, so on a high volume node this binds before maxHistory and retains fewer days than maxHistory allows. Minimum 5GB. | [optional] 
 
 ## Methods
 
@@ -73,6 +75,31 @@ and a boolean to check if the value has been set.
 SetLevel sets Level field to given value.
 
 
+### GetMaxFileSize
+
+`func (o *PlatformLoggingConfig) GetMaxFileSize() string`
+
+GetMaxFileSize returns the MaxFileSize field if non-nil, zero value otherwise.
+
+### GetMaxFileSizeOk
+
+`func (o *PlatformLoggingConfig) GetMaxFileSizeOk() (*string, bool)`
+
+GetMaxFileSizeOk returns a tuple with the MaxFileSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxFileSize
+
+`func (o *PlatformLoggingConfig) SetMaxFileSize(v string)`
+
+SetMaxFileSize sets MaxFileSize field to given value.
+
+### HasMaxFileSize
+
+`func (o *PlatformLoggingConfig) HasMaxFileSize() bool`
+
+HasMaxFileSize returns a boolean if a field has been set.
+
 ### GetMaxHistory
 
 `func (o *PlatformLoggingConfig) GetMaxHistory() int32`
@@ -112,6 +139,31 @@ and a boolean to check if the value has been set.
 
 SetRolloverPattern sets RolloverPattern field to given value.
 
+
+### GetTotalSizeCap
+
+`func (o *PlatformLoggingConfig) GetTotalSizeCap() string`
+
+GetTotalSizeCap returns the TotalSizeCap field if non-nil, zero value otherwise.
+
+### GetTotalSizeCapOk
+
+`func (o *PlatformLoggingConfig) GetTotalSizeCapOk() (*string, bool)`
+
+GetTotalSizeCapOk returns a tuple with the TotalSizeCap field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalSizeCap
+
+`func (o *PlatformLoggingConfig) SetTotalSizeCap(v string)`
+
+SetTotalSizeCap sets TotalSizeCap field to given value.
+
+### HasTotalSizeCap
+
+`func (o *PlatformLoggingConfig) HasTotalSizeCap() bool`
+
+HasTotalSizeCap returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

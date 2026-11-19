@@ -22,7 +22,7 @@ var _ MappedNullable = &YbaComponentSpec{}
 type YbaComponentSpec struct {
 	// Logical component name; used as a label/sub-directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
 	ComponentName *string `json:"component_name,omitempty"`
-	// Path on the YBA host to the script file to execute locally. Must resolve to one of the shipped support bundle scripts, node_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.
+	// Path on the YBA host to the script file to execute locally. Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.
 	ScriptPath *string `json:"script_path,omitempty"`
 	// Arguments appended after the script (entrypoint + flags).
 	Params []string `json:"params,omitempty"`
@@ -30,7 +30,7 @@ type YbaComponentSpec struct {
 	RemoteTarPath *string `json:"remote_tar_path,omitempty"`
 	// Ignored for local YBA execution; accepted for API parity with node-level specs. It is still validated, so only yugabyte is accepted when set.
 	LinuxUser *string `json:"linux_user,omitempty"`
-	// Script execution timeout in seconds.
+	// Script execution timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
 }
 

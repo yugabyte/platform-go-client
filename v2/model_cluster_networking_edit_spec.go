@@ -20,7 +20,8 @@ var _ MappedNullable = &ClusterNetworkingEditSpec{}
 
 // ClusterNetworkingEditSpec Edit network settings for the cluster. Part of ClusterEditSpec.
 type ClusterNetworkingEditSpec struct {
-	EnableExposingService *ExposingServiceState `json:"enable_exposing_service,omitempty"`
+	EnableExposingService *ExposingServiceState    `json:"enable_exposing_service,omitempty"`
+	ManagedLoadBalancer   *ManagedLoadBalancerSpec `json:"managed_load_balancer,omitempty"`
 }
 
 // NewClusterNetworkingEditSpec instantiates a new ClusterNetworkingEditSpec object
@@ -72,6 +73,38 @@ func (o *ClusterNetworkingEditSpec) SetEnableExposingService(v ExposingServiceSt
 	o.EnableExposingService = &v
 }
 
+// GetManagedLoadBalancer returns the ManagedLoadBalancer field value if set, zero value otherwise.
+func (o *ClusterNetworkingEditSpec) GetManagedLoadBalancer() ManagedLoadBalancerSpec {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		var ret ManagedLoadBalancerSpec
+		return ret
+	}
+	return *o.ManagedLoadBalancer
+}
+
+// GetManagedLoadBalancerOk returns a tuple with the ManagedLoadBalancer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterNetworkingEditSpec) GetManagedLoadBalancerOk() (*ManagedLoadBalancerSpec, bool) {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		return nil, false
+	}
+	return o.ManagedLoadBalancer, true
+}
+
+// HasManagedLoadBalancer returns a boolean if a field has been set.
+func (o *ClusterNetworkingEditSpec) HasManagedLoadBalancer() bool {
+	if o != nil && !IsNil(o.ManagedLoadBalancer) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedLoadBalancer gets a reference to the given ManagedLoadBalancerSpec and assigns it to the ManagedLoadBalancer field.
+func (o *ClusterNetworkingEditSpec) SetManagedLoadBalancer(v ManagedLoadBalancerSpec) {
+	o.ManagedLoadBalancer = &v
+}
+
 func (o ClusterNetworkingEditSpec) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -84,6 +117,9 @@ func (o ClusterNetworkingEditSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.EnableExposingService) {
 		toSerialize["enable_exposing_service"] = o.EnableExposingService
+	}
+	if !IsNil(o.ManagedLoadBalancer) {
+		toSerialize["managed_load_balancer"] = o.ManagedLoadBalancer
 	}
 	return toSerialize, nil
 }

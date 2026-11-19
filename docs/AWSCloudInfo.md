@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **AwsAccessKeySecret** | Pointer to **string** |  | [optional] 
 **AwsHostedZoneId** | Pointer to **string** |  | [optional] 
 **AwsHostedZoneName** | Pointer to **string** |  | [optional] 
+**CrossCloudFederationTargets** | Pointer to [**[]CrossCloudFederationTarget**](CrossCloudFederationTarget.md) | WARNING: This is a preview API that could change. Storage clouds this provider&#39;s DB nodes can be given federated access to, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on. | [optional] 
 **EnableFederatedIam** | Pointer to **bool** | Enable GCS-on-AWS cross-cloud federated IAM on this provider&#39;s DB nodes (GCP Workload Identity Federation). Requires the federated IAM audience below. | [optional] 
-**FederatedIamAudience** | Pointer to **string** | GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it. | [optional] 
+**FederatedIamAudience** | Pointer to **string** | Deprecated: use crossCloudFederationTargets. GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it. | [optional] 
 **HostVpcId** | Pointer to **string** |  | [optional] [readonly] 
 **HostVpcRegion** | Pointer to **string** |  | [optional] [readonly] 
 **UseIMDSv2** | Pointer to **bool** |  | [optional] 
@@ -133,6 +134,31 @@ SetAwsHostedZoneName sets AwsHostedZoneName field to given value.
 `func (o *AWSCloudInfo) HasAwsHostedZoneName() bool`
 
 HasAwsHostedZoneName returns a boolean if a field has been set.
+
+### GetCrossCloudFederationTargets
+
+`func (o *AWSCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget`
+
+GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field if non-nil, zero value otherwise.
+
+### GetCrossCloudFederationTargetsOk
+
+`func (o *AWSCloudInfo) GetCrossCloudFederationTargetsOk() (*[]CrossCloudFederationTarget, bool)`
+
+GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrossCloudFederationTargets
+
+`func (o *AWSCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget)`
+
+SetCrossCloudFederationTargets sets CrossCloudFederationTargets field to given value.
+
+### HasCrossCloudFederationTargets
+
+`func (o *AWSCloudInfo) HasCrossCloudFederationTargets() bool`
+
+HasCrossCloudFederationTargets returns a boolean if a field has been set.
 
 ### GetEnableFederatedIam
 

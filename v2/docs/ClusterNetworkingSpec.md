@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ProxyConfig** | Pointer to [**NodeProxyConfig**](NodeProxyConfig.md) |  | [optional] 
 **EnableExposingService** | Pointer to [**ExposingServiceState**](ExposingServiceState.md) | Whether to create a load balancer service for this cluster. Defaults to NONE. | [optional] [default to NONE]
 **EnableLb** | Pointer to **bool** | Create target groups if enabled. Used by YBM. | [optional] 
+**ManagedLoadBalancer** | Pointer to [**ManagedLoadBalancerSpec**](ManagedLoadBalancerSpec.md) |  | [optional] 
 **AzNetworking** | Pointer to [**map[string]AvailabilityZoneNetworking**](AvailabilityZoneNetworking.md) | Granular network settings overridden per Availability Zone identified by AZ uuid. | [optional] 
 
 ## Methods
@@ -154,6 +155,31 @@ SetEnableLb sets EnableLb field to given value.
 `func (o *ClusterNetworkingSpec) HasEnableLb() bool`
 
 HasEnableLb returns a boolean if a field has been set.
+
+### GetManagedLoadBalancer
+
+`func (o *ClusterNetworkingSpec) GetManagedLoadBalancer() ManagedLoadBalancerSpec`
+
+GetManagedLoadBalancer returns the ManagedLoadBalancer field if non-nil, zero value otherwise.
+
+### GetManagedLoadBalancerOk
+
+`func (o *ClusterNetworkingSpec) GetManagedLoadBalancerOk() (*ManagedLoadBalancerSpec, bool)`
+
+GetManagedLoadBalancerOk returns a tuple with the ManagedLoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedLoadBalancer
+
+`func (o *ClusterNetworkingSpec) SetManagedLoadBalancer(v ManagedLoadBalancerSpec)`
+
+SetManagedLoadBalancer sets ManagedLoadBalancer field to given value.
+
+### HasManagedLoadBalancer
+
+`func (o *ClusterNetworkingSpec) HasManagedLoadBalancer() bool`
+
+HasManagedLoadBalancer returns a boolean if a field has been set.
 
 ### GetAzNetworking
 

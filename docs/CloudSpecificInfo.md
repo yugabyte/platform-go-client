@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **KubernetesPodName** | Pointer to **string** | Pod name in Kubernetes | [optional] 
 **LunIndexes** | Pointer to **[]int32** | Mounted disks LUN indexes | [optional] 
 **MountRoots** | Pointer to **string** | Mount roots | [optional] 
+**PhysicalCloud** | Pointer to **string** | For an on-prem node, the cloud the node physically runs on | [optional] 
 **PrivateDns** | Pointer to **string** | The node&#39;s private DNS | [optional] 
 **PrivateIp** | Pointer to **string** | The node&#39;s private IP address | [optional] 
 **PublicDns** | Pointer to **string** | The node&#39;s public DNS name | [optional] 
@@ -267,6 +268,31 @@ SetMountRoots sets MountRoots field to given value.
 `func (o *CloudSpecificInfo) HasMountRoots() bool`
 
 HasMountRoots returns a boolean if a field has been set.
+
+### GetPhysicalCloud
+
+`func (o *CloudSpecificInfo) GetPhysicalCloud() string`
+
+GetPhysicalCloud returns the PhysicalCloud field if non-nil, zero value otherwise.
+
+### GetPhysicalCloudOk
+
+`func (o *CloudSpecificInfo) GetPhysicalCloudOk() (*string, bool)`
+
+GetPhysicalCloudOk returns a tuple with the PhysicalCloud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhysicalCloud
+
+`func (o *CloudSpecificInfo) SetPhysicalCloud(v string)`
+
+SetPhysicalCloud sets PhysicalCloud field to given value.
+
+### HasPhysicalCloud
+
+`func (o *CloudSpecificInfo) HasPhysicalCloud() bool`
+
+HasPhysicalCloud returns a boolean if a field has been set.
 
 ### GetPrivateDns
 

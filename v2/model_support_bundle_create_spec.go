@@ -19,7 +19,7 @@ import (
 // checks if the SupportBundleCreateSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SupportBundleCreateSpec{}
 
-// SupportBundleCreateSpec Support bundle collection request.  Differs from `SupportBundleSpec` in that it carries input-only knobs that are resolved server side and not persisted with the bundle.
+// SupportBundleCreateSpec Support bundle collection request.  Differs from `SupportBundleSpec` in that it carries input-only knobs that are resolved server side and not persisted with the bundle.  Leaving every `*_component_specs` list empty makes the server build them from the support bundle manifest shipped with YBA, keeping the entries named in `components`. Populating any one list turns the fill off for all of them, and each spec is then checked against the same manifest: a component it doesn't list, a different script or entrypoint, or a `linux_user` other than yugabyte is rejected with 400. Either way, each spec runs with the manifest's Files and Bash arguments, YSQL and YCQL queries, yb-admin arguments, timeout and tar path, whatever the request carries; the request still chooses the components, `db_name` and `keyspace`, and the yb-admin commands within the allowed set. Scalars the request does send, such as `filter_pg_audit_logs`, `max_num_recent_cores`, `max_core_file_size` and the `prom_*` fields, override what the manifest carries. The fill applies to the universe create and estimate-size endpoints; the YBA-only endpoints don't fill, but check their specs and set the tar path the same way.
 type SupportBundleCreateSpec struct {
 	// List of components to be included in the support bundle. On Kubernetes universes the server drops what a yb-master / yb-tserver pod cannot produce (see the component spec fields below), and a component type is dropped once every one of its sub-components has been dropped. The persisted `SupportBundleSpec` and the bundle's manifest name only what was kept. Rejected with a 400 when nothing collectable remains. K8sInfo is dropped on non-Kubernetes universes.
 	Components []SupportBundleComponentType `json:"components"`
@@ -29,17 +29,17 @@ type SupportBundleCreateSpec struct {
 	EndDate *time.Time `json:"end_date,omitempty"`
 	// Names of the universe nodes to collect node-level components from. When omitted or empty, every node in the universe is considered. Global-level components (PrometheusMetrics, YbaMetadata, TabletReport, ClusterConfig, PerfAdvisor, K8sInfo, ApplicationLogs) are collected once for the universe and are not scoped by this list. Rejected with a 400 when none of the given names exist in the universe; names that do not exist are ignored when at least one matches. Not applicable to YBA-only support bundles.
 	NodeNames []string `json:"node_names,omitempty"`
-	// Specs driving the generic node-level FilesComponent. Required when components contains FilesComponent. On Kubernetes universes the SystemLogs and NodeAgent specs are dropped, since a pod has neither the host's /var/log nor a node agent, and the YbcLogs spec is collected from tserver pods only.
+	// Specs driving the generic node-level FilesComponent. Required when components contains FilesComponent, unless the manifest fill applies. On Kubernetes universes the SystemLogs and NodeAgent specs are dropped, since a pod has neither the host's /var/log nor a node agent, and the YbcLogs spec is collected from tserver pods only.
 	FilesComponentSpecs []FilesComponentSpec `json:"files_component_specs,omitempty"`
-	// Specs driving the node-level BashComponent. Required when components contains BashComponent. On Kubernetes universes the collect_cdc_state and collect_threadz_memz_rpcz_stats specs are collected from tserver pods only, and collect_heap_snapshot skips its tserver endpoints on a master pod.
+	// Specs driving the node-level BashComponent. Required when components contains BashComponent, unless the manifest fill applies. On Kubernetes universes the collect_cdc_state and collect_threadz_memz_rpcz_stats specs are collected from tserver pods only, and collect_heap_snapshot skips its tserver endpoints on a master pod.
 	BashComponentSpecs []BashComponentSpec `json:"bash_component_specs,omitempty"`
-	// Specs driving the node-level YSQLComponent. Required when components contains YSQLComponent. Collected from tserver pods only on Kubernetes universes.
+	// Specs driving the node-level YSQLComponent. Required when components contains YSQLComponent, unless the manifest fill applies. Collected from tserver pods only on Kubernetes universes.
 	YsqlComponentSpecs []YSQLComponentSpec `json:"ysql_component_specs,omitempty"`
-	// Specs driving the node-level YCQLComponent. Required when components contains YCQLComponent. Collected from tserver pods only on Kubernetes universes.
+	// Specs driving the node-level YCQLComponent. Required when components contains YCQLComponent, unless the manifest fill applies. Collected from tserver pods only on Kubernetes universes.
 	YcqlComponentSpecs []YCQLComponentSpec `json:"ycql_component_specs,omitempty"`
-	// Specs driving the node-level YbAdminComponent. Required when components contains YbAdminComponent.
+	// Specs driving the node-level YbAdminComponent. Required when components contains YbAdminComponent, unless the manifest fill applies.
 	YbAdminComponentSpecs []YbAdminComponentSpec `json:"yb_admin_component_specs,omitempty"`
-	// Specs driving the global-level YBAComponent. Required when components contains YBAComponent.
+	// Specs driving the global-level YBAComponent. Required when components contains YBAComponent, unless the manifest fill applies.
 	YbaComponentSpecs []YbaComponentSpec `json:"yba_component_specs,omitempty"`
 	// Specifies if Postgres audit logs should be filtered out when collecting universe logs.
 	FilterPgAuditLogs *bool `json:"filter_pg_audit_logs,omitempty"`
@@ -62,7 +62,7 @@ type SupportBundleCreateSpec struct {
 	PromMetricsFormat *PrometheusMetricsFormat `json:"prom_metrics_format,omitempty"`
 	// Map of query names to custom PromQL queries to collect in promdump.
 	PromQueries *map[string]string `json:"prom_queries,omitempty"`
-	// List of exports to be included in the prometheus dump. NODE_EXPORT is dropped on Kubernetes universes, where node_exporter is not scraped.
+	// List of exports to be included in the prometheus dump. On Kubernetes universes NODE_EXPORT is collected only where the node_exporter sidecar is monitored, and dropped otherwise.
 	PrometheusMetricsTypes []PrometheusMetricsType `json:"prometheus_metrics_types,omitempty"`
 	// Batch duration for the prometheus dump (in minutes).
 	BatchDurationPromDumpMins *int32 `json:"batch_duration_prom_dump_mins,omitempty"`

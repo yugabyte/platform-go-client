@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Uuid** | Pointer to **string** | cluster uuid | [optional] 
 **GeoPartitioned** | Pointer to **bool** | Whether universe is treated as geo partitioned (i.e. tablespaces are created). | [optional] 
 **SpotPrice** | Pointer to **float64** | TBD | [optional] 
+**LoadBalancers** | Pointer to [**[]ManagedLoadBalancerInfo**](ManagedLoadBalancerInfo.md) | The load balancers that YBA manages for this cluster. | [optional] [readonly] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetSpotPrice sets SpotPrice field to given value.
 `func (o *ClusterInfo) HasSpotPrice() bool`
 
 HasSpotPrice returns a boolean if a field has been set.
+
+### GetLoadBalancers
+
+`func (o *ClusterInfo) GetLoadBalancers() []ManagedLoadBalancerInfo`
+
+GetLoadBalancers returns the LoadBalancers field if non-nil, zero value otherwise.
+
+### GetLoadBalancersOk
+
+`func (o *ClusterInfo) GetLoadBalancersOk() (*[]ManagedLoadBalancerInfo, bool)`
+
+GetLoadBalancersOk returns a tuple with the LoadBalancers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoadBalancers
+
+`func (o *ClusterInfo) SetLoadBalancers(v []ManagedLoadBalancerInfo)`
+
+SetLoadBalancers sets LoadBalancers field to given value.
+
+### HasLoadBalancers
+
+`func (o *ClusterInfo) HasLoadBalancers() bool`
+
+HasLoadBalancers returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

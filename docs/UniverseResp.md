@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **DrConfigUuidsAsSource** | Pointer to **[]string** | UUIDs of DR configs where this universe is the source (primary) | [optional] 
 **DrConfigUuidsAsTarget** | Pointer to **[]string** | UUIDs of DR configs where this universe is the target (secondary) | [optional] 
 **Name** | Pointer to **string** | Universe name | [optional] 
+**NodeExporterSidecarScraped** | Pointer to **bool** | YbaApi Internal. Whether YBA scrapes the node_exporter sidecar on this Kubernetes universe | [optional] 
 **PlatformVersion** | Pointer to **string** | YugabyteDB Anywhere platform software version for this YBA instance | [optional] 
 **PricePerHour** | Pointer to **float64** | Price | [optional] 
 **Resources** | Pointer to [**UniverseResourceDetails**](UniverseResourceDetails.md) |  | [optional] 
@@ -189,6 +190,31 @@ SetName sets Name field to given value.
 `func (o *UniverseResp) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetNodeExporterSidecarScraped
+
+`func (o *UniverseResp) GetNodeExporterSidecarScraped() bool`
+
+GetNodeExporterSidecarScraped returns the NodeExporterSidecarScraped field if non-nil, zero value otherwise.
+
+### GetNodeExporterSidecarScrapedOk
+
+`func (o *UniverseResp) GetNodeExporterSidecarScrapedOk() (*bool, bool)`
+
+GetNodeExporterSidecarScrapedOk returns a tuple with the NodeExporterSidecarScraped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeExporterSidecarScraped
+
+`func (o *UniverseResp) SetNodeExporterSidecarScraped(v bool)`
+
+SetNodeExporterSidecarScraped sets NodeExporterSidecarScraped field to given value.
+
+### HasNodeExporterSidecarScraped
+
+`func (o *UniverseResp) HasNodeExporterSidecarScraped() bool`
+
+HasNodeExporterSidecarScraped returns a boolean if a field has been set.
 
 ### GetPlatformVersion
 

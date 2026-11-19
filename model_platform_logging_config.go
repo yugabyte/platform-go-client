@@ -20,10 +20,14 @@ var _ MappedNullable = &PlatformLoggingConfig{}
 // PlatformLoggingConfig struct for PlatformLoggingConfig
 type PlatformLoggingConfig struct {
 	// WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \"\". For example, setting this to \"yb-platform-\" will generate application log files as \"yb-platform-application.log\" instead of \"application.log\".
-	FileNamePrefix  *string `json:"fileNamePrefix,omitempty"`
-	Level           string  `json:"level"`
+	FileNamePrefix *string `json:"fileNamePrefix,omitempty"`
+	Level          string  `json:"level"`
+	// WARNING: This is a preview API that could change. Maximum size of the active application log file before it is rolled over, for example \"1024MB\" or \"1GB\". Minimum 256MB.
+	MaxFileSize     *string `json:"maxFileSize,omitempty"`
 	MaxHistory      int32   `json:"maxHistory"`
 	RolloverPattern string  `json:"rolloverPattern"`
+	// WARNING: This is a preview API that could change. Total size of retained application log archives, for example \"20GB\". Archives are deleted oldest first once this is exceeded, so on a high volume node this binds before maxHistory and retains fewer days than maxHistory allows. Minimum 5GB.
+	TotalSizeCap *string `json:"totalSizeCap,omitempty"`
 }
 
 type _PlatformLoggingConfig PlatformLoggingConfig
@@ -104,6 +108,38 @@ func (o *PlatformLoggingConfig) SetLevel(v string) {
 	o.Level = v
 }
 
+// GetMaxFileSize returns the MaxFileSize field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetMaxFileSize() string {
+	if o == nil || IsNil(o.MaxFileSize) {
+		var ret string
+		return ret
+	}
+	return *o.MaxFileSize
+}
+
+// GetMaxFileSizeOk returns a tuple with the MaxFileSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetMaxFileSizeOk() (*string, bool) {
+	if o == nil || IsNil(o.MaxFileSize) {
+		return nil, false
+	}
+	return o.MaxFileSize, true
+}
+
+// HasMaxFileSize returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasMaxFileSize() bool {
+	if o != nil && !IsNil(o.MaxFileSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxFileSize gets a reference to the given string and assigns it to the MaxFileSize field.
+func (o *PlatformLoggingConfig) SetMaxFileSize(v string) {
+	o.MaxFileSize = &v
+}
+
 // GetMaxHistory returns the MaxHistory field value
 func (o *PlatformLoggingConfig) GetMaxHistory() int32 {
 	if o == nil {
@@ -152,6 +188,38 @@ func (o *PlatformLoggingConfig) SetRolloverPattern(v string) {
 	o.RolloverPattern = v
 }
 
+// GetTotalSizeCap returns the TotalSizeCap field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetTotalSizeCap() string {
+	if o == nil || IsNil(o.TotalSizeCap) {
+		var ret string
+		return ret
+	}
+	return *o.TotalSizeCap
+}
+
+// GetTotalSizeCapOk returns a tuple with the TotalSizeCap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetTotalSizeCapOk() (*string, bool) {
+	if o == nil || IsNil(o.TotalSizeCap) {
+		return nil, false
+	}
+	return o.TotalSizeCap, true
+}
+
+// HasTotalSizeCap returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasTotalSizeCap() bool {
+	if o != nil && !IsNil(o.TotalSizeCap) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalSizeCap gets a reference to the given string and assigns it to the TotalSizeCap field.
+func (o *PlatformLoggingConfig) SetTotalSizeCap(v string) {
+	o.TotalSizeCap = &v
+}
+
 func (o PlatformLoggingConfig) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -166,8 +234,14 @@ func (o PlatformLoggingConfig) ToMap() (map[string]interface{}, error) {
 		toSerialize["fileNamePrefix"] = o.FileNamePrefix
 	}
 	toSerialize["level"] = o.Level
+	if !IsNil(o.MaxFileSize) {
+		toSerialize["maxFileSize"] = o.MaxFileSize
+	}
 	toSerialize["maxHistory"] = o.MaxHistory
 	toSerialize["rolloverPattern"] = o.RolloverPattern
+	if !IsNil(o.TotalSizeCap) {
+		toSerialize["totalSizeCap"] = o.TotalSizeCap
+	}
 	return toSerialize, nil
 }
 

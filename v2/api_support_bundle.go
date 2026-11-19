@@ -771,7 +771,7 @@ func (r SupportBundleAPIEstimateSupportBundleSizeRequest) Execute() (*SupportBun
 /*
 EstimateSupportBundleSize Estimate support bundle size
 
-Estimate support bundle size for the given payload on a universe.
+Estimate support bundle size for the given payload on a universe. V2 responses use logical component names from specs (e.g. UniverseLogs) as inner map keys.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
