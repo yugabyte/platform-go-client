@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentName** | Pointer to **string** | Logical component name; used as a label/sub-directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
-**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute locally. Must resolve to one of the shipped support bundle scripts, node_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.  | [optional] 
+**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute locally. Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.  | [optional] 
 **Params** | Pointer to **[]string** | Arguments appended after the script (entrypoint + flags). | [optional] 
 **RemoteTarPath** | Pointer to **string** | Path on the YBA host where the script writes the tar before it is untarred. Must be an absolute path without &#39;..&#39;, built only from letters, digits, &#39;.&#39;, &#39;_&#39;, &#39;-&#39;, &#39;/&#39; and the ${nodeName} / ${bundleUuid} tokens.  | [optional] 
 **LinuxUser** | Pointer to **string** | Ignored for local YBA execution; accepted for API parity with node-level specs. It is still validated, so only yugabyte is accepted when set.  | [optional] 
-**TimeoutSecs** | Pointer to **int64** | Script execution timeout in seconds. | [optional] 
+**TimeoutSecs** | Pointer to **int64** | Script execution timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.  | [optional] 
 
 ## Methods
 

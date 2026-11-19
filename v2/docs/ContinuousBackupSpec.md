@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StorageConfigUuid** | **string** | UUID of the storage config to use | 
 **Frequency** | **int64** | Interval between two backups. | 
-**FrequencyTimeUnit** | [**TimeUnitType**](TimeUnitType.md) |  | 
+**FrequencyTimeUnit** | [**TimeUnitType**](TimeUnitType.md) | The time unit for the interval between backups. Must be SECONDS or larger; NANOSECONDS, MICROSECONDS, and MILLISECONDS are rejected.  | 
 **NumBackups** | Pointer to **int32** | The number of historical backups to retain in the storage bucket. | [optional] [default to 5]
 **BackupDir** | **string** | The name of the directory in the storage config to use for YBA backups. | 
 

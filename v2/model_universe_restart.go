@@ -25,7 +25,8 @@ type UniverseRestart struct {
 	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
 	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
 	// Perform a rolling restart of the universe. Otherwise, all nodes will be restarted at the same time.
-	RollingRestart *bool `json:"rolling_restart,omitempty"`
+	RollingRestart   *bool             `json:"rolling_restart,omitempty"`
+	RollMaxBatchSize *RollMaxBatchSize `json:"roll_max_batch_size,omitempty"`
 	// The method to reboot the node. This is not required for kubernetes universes, as the pods  will get restarted no matter what. \"HARD\" reboots are not supported today.  OS: Restarts the node via the operating system. SERVICE: Restart the YugabyteDB Process only (master, tserver, etc).
 	RestartType *string `json:"restart_type,omitempty"`
 }
@@ -151,6 +152,38 @@ func (o *UniverseRestart) SetRollingRestart(v bool) {
 	o.RollingRestart = &v
 }
 
+// GetRollMaxBatchSize returns the RollMaxBatchSize field value if set, zero value otherwise.
+func (o *UniverseRestart) GetRollMaxBatchSize() RollMaxBatchSize {
+	if o == nil || IsNil(o.RollMaxBatchSize) {
+		var ret RollMaxBatchSize
+		return ret
+	}
+	return *o.RollMaxBatchSize
+}
+
+// GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseRestart) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool) {
+	if o == nil || IsNil(o.RollMaxBatchSize) {
+		return nil, false
+	}
+	return o.RollMaxBatchSize, true
+}
+
+// HasRollMaxBatchSize returns a boolean if a field has been set.
+func (o *UniverseRestart) HasRollMaxBatchSize() bool {
+	if o != nil && !IsNil(o.RollMaxBatchSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetRollMaxBatchSize gets a reference to the given RollMaxBatchSize and assigns it to the RollMaxBatchSize field.
+func (o *UniverseRestart) SetRollMaxBatchSize(v RollMaxBatchSize) {
+	o.RollMaxBatchSize = &v
+}
+
 // GetRestartType returns the RestartType field value if set, zero value otherwise.
 func (o *UniverseRestart) GetRestartType() string {
 	if o == nil || IsNil(o.RestartType) {
@@ -201,6 +234,9 @@ func (o UniverseRestart) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RollingRestart) {
 		toSerialize["rolling_restart"] = o.RollingRestart
+	}
+	if !IsNil(o.RollMaxBatchSize) {
+		toSerialize["roll_max_batch_size"] = o.RollMaxBatchSize
 	}
 	if !IsNil(o.RestartType) {
 		toSerialize["restart_type"] = o.RestartType

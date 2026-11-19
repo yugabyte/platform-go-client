@@ -17,7 +17,8 @@ Name | Type | Description | Notes
 **CommunicationPorts** | Pointer to [**CommunicationPorts**](CommunicationPorts.md) |  | [optional] 
 **CreatingUser** | [**Users**](Users.md) |  | 
 **CronExpression** | Pointer to **string** | Cron expression for a recurring backup | [optional] 
-**CrossCloudFederationAudience** | Pointer to **string** | Cross-cloud federation GCP audience captured at backup time | [optional] 
+**CrossCloudFederationAudience** | Pointer to **string** | Cross-cloud federation audience captured at backup time | [optional] 
+**CrossCloudFederationRoleArn** | Pointer to **string** | Cross-cloud federation AWS role ARN captured at backup time | [optional] 
 **CustomerUuid** | Pointer to **string** | Customer UUID | [optional] 
 **DeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **DisableChecksum** | Pointer to **bool** | Disable checksum | [optional] 
@@ -30,6 +31,7 @@ Name | Type | Description | Notes
 **ExpectedUniverseVersion** | Pointer to **int32** | Expected universe version | [optional] 
 **ExpiryTimeUnit** | Pointer to **string** | Time unit for backup expiry time | [optional] 
 **ExtraDependencies** | Pointer to [**ExtraDependencies**](ExtraDependencies.md) |  | [optional] 
+**FipsEnabled** | Pointer to **bool** | YbaApi Internal. Whether the source universe was FIPS-enabled | [optional] 
 **FullBackup** | **bool** |  | 
 **FullChainSizeInBytes** | Pointer to **int64** | Incremental backups chain size | [optional] 
 **IgnoreErrors** | Pointer to **bool** | Should table backup errors be ignored | [optional] 
@@ -441,6 +443,31 @@ SetCrossCloudFederationAudience sets CrossCloudFederationAudience field to given
 
 HasCrossCloudFederationAudience returns a boolean if a field has been set.
 
+### GetCrossCloudFederationRoleArn
+
+`func (o *BackupTableParams) GetCrossCloudFederationRoleArn() string`
+
+GetCrossCloudFederationRoleArn returns the CrossCloudFederationRoleArn field if non-nil, zero value otherwise.
+
+### GetCrossCloudFederationRoleArnOk
+
+`func (o *BackupTableParams) GetCrossCloudFederationRoleArnOk() (*string, bool)`
+
+GetCrossCloudFederationRoleArnOk returns a tuple with the CrossCloudFederationRoleArn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrossCloudFederationRoleArn
+
+`func (o *BackupTableParams) SetCrossCloudFederationRoleArn(v string)`
+
+SetCrossCloudFederationRoleArn sets CrossCloudFederationRoleArn field to given value.
+
+### HasCrossCloudFederationRoleArn
+
+`func (o *BackupTableParams) HasCrossCloudFederationRoleArn() bool`
+
+HasCrossCloudFederationRoleArn returns a boolean if a field has been set.
+
 ### GetCustomerUuid
 
 `func (o *BackupTableParams) GetCustomerUuid() string`
@@ -740,6 +767,31 @@ SetExtraDependencies sets ExtraDependencies field to given value.
 `func (o *BackupTableParams) HasExtraDependencies() bool`
 
 HasExtraDependencies returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *BackupTableParams) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *BackupTableParams) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *BackupTableParams) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *BackupTableParams) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetFullBackup
 

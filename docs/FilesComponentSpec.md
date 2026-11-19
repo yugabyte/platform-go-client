@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **LinuxUser** | Pointer to **string** | Linux user to run the script as on the node. | [optional] 
 **Params** | Pointer to **[]string** | Arguments appended after the script (entrypoint + flags), e.g. [create_universe_logs_bundle, --mount_path, /mnt/d0, ...]. | [optional] 
 **RemoteTarPath** | Pointer to **string** | Path on the node where the script writes the tar. May contain ${nodeName} which is substituted per node. | [optional] 
-**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute on the node (e.g. bin/node_utils.sh). May be relative to yb.devops.home. | [optional] 
+**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute on the node (e.g. bin/support_bundle_utils.sh). May be relative to yb.devops.home. | [optional] 
 **TimeoutSecs** | Pointer to **int64** | Script execution timeout in seconds. | [optional] 
 
 ## Methods

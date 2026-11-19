@@ -30,6 +30,8 @@ type UniverseResp struct {
 	DrConfigUuidsAsTarget []string `json:"drConfigUuidsAsTarget,omitempty"`
 	// Universe name
 	Name *string `json:"name,omitempty"`
+	// YbaApi Internal. Whether YBA scrapes the node_exporter sidecar on this Kubernetes universe
+	NodeExporterSidecarScraped *bool `json:"nodeExporterSidecarScraped,omitempty"`
 	// YugabyteDB Anywhere platform software version for this YBA instance
 	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Price
@@ -256,6 +258,38 @@ func (o *UniverseResp) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *UniverseResp) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNodeExporterSidecarScraped returns the NodeExporterSidecarScraped field value if set, zero value otherwise.
+func (o *UniverseResp) GetNodeExporterSidecarScraped() bool {
+	if o == nil || IsNil(o.NodeExporterSidecarScraped) {
+		var ret bool
+		return ret
+	}
+	return *o.NodeExporterSidecarScraped
+}
+
+// GetNodeExporterSidecarScrapedOk returns a tuple with the NodeExporterSidecarScraped field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetNodeExporterSidecarScrapedOk() (*bool, bool) {
+	if o == nil || IsNil(o.NodeExporterSidecarScraped) {
+		return nil, false
+	}
+	return o.NodeExporterSidecarScraped, true
+}
+
+// HasNodeExporterSidecarScraped returns a boolean if a field has been set.
+func (o *UniverseResp) HasNodeExporterSidecarScraped() bool {
+	if o != nil && !IsNil(o.NodeExporterSidecarScraped) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeExporterSidecarScraped gets a reference to the given bool and assigns it to the NodeExporterSidecarScraped field.
+func (o *UniverseResp) SetNodeExporterSidecarScraped(v bool) {
+	o.NodeExporterSidecarScraped = &v
 }
 
 // GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
@@ -605,6 +639,9 @@ func (o UniverseResp) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.NodeExporterSidecarScraped) {
+		toSerialize["nodeExporterSidecarScraped"] = o.NodeExporterSidecarScraped
 	}
 	if !IsNil(o.PlatformVersion) {
 		toSerialize["platformVersion"] = o.PlatformVersion

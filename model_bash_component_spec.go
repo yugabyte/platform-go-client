@@ -23,11 +23,11 @@ type BashComponentSpec struct {
 	ComponentName *string `json:"componentName,omitempty"`
 	// Linux user to run the script as on the node.
 	LinuxUser *string `json:"linuxUser,omitempty"`
-	// Arguments appended after the script (entrypoint + flags), e.g. [collect_top_stats, --remote_tar_path, /tmp/top.tar.gz, ...].
+	// Arguments appended after the script (entrypoint + flags), e.g. [collect_top_ps_pmap_stats, --remote_tar_path, /tmp/top.tar.gz, ...].
 	Params []string `json:"params,omitempty"`
 	// Path on the node where the script writes the tar. May contain ${nodeName} which is substituted per node.
 	RemoteTarPath *string `json:"remoteTarPath,omitempty"`
-	// Path on the YBA host to the script file to execute on the node (e.g. bin/node_utils.sh). May be relative to yb.devops.home.
+	// Path on the YBA host to the script file to execute on the node (e.g. bin/support_bundle_utils.sh). May be relative to yb.devops.home.
 	ScriptPath *string `json:"scriptPath,omitempty"`
 	// Script execution timeout in seconds.
 	TimeoutSecs *int64 `json:"timeoutSecs,omitempty"`

@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **MasterRpcPort** | Pointer to **int32** | Master RPC port | [optional] 
 **MasterState** | Pointer to **string** | Master state | [optional] 
 **NodeExporterPort** | Pointer to **int32** | Node exporter port | [optional] 
+**NodeExporterSystemdLevel** | Pointer to **string** | YbaApi Internal. Systemd scope of node_exporter on this node: ROOT or USER. Unset if not known. | [optional] 
 **NodeIdx** | Pointer to **int32** | Node ID | [optional] 
 **NodeName** | Pointer to **string** | Node name | [optional] 
 **NodeUuid** | Pointer to **string** | Node UUID | [optional] 
@@ -510,6 +511,31 @@ SetNodeExporterPort sets NodeExporterPort field to given value.
 `func (o *NodeDetails) HasNodeExporterPort() bool`
 
 HasNodeExporterPort returns a boolean if a field has been set.
+
+### GetNodeExporterSystemdLevel
+
+`func (o *NodeDetails) GetNodeExporterSystemdLevel() string`
+
+GetNodeExporterSystemdLevel returns the NodeExporterSystemdLevel field if non-nil, zero value otherwise.
+
+### GetNodeExporterSystemdLevelOk
+
+`func (o *NodeDetails) GetNodeExporterSystemdLevelOk() (*string, bool)`
+
+GetNodeExporterSystemdLevelOk returns a tuple with the NodeExporterSystemdLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeExporterSystemdLevel
+
+`func (o *NodeDetails) SetNodeExporterSystemdLevel(v string)`
+
+SetNodeExporterSystemdLevel sets NodeExporterSystemdLevel field to given value.
+
+### HasNodeExporterSystemdLevel
+
+`func (o *NodeDetails) HasNodeExporterSystemdLevel() bool`
+
+HasNodeExporterSystemdLevel returns a boolean if a field has been set.
 
 ### GetNodeIdx
 

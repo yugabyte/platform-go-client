@@ -37,6 +37,8 @@ type CloudSpecificInfo struct {
 	LunIndexes []int32 `json:"lun_indexes,omitempty"`
 	// Mount roots
 	MountRoots *string `json:"mount_roots,omitempty"`
+	// For an on-prem node, the cloud the node physically runs on
+	PhysicalCloud *string `json:"physicalCloud,omitempty"`
 	// The node's private DNS
 	PrivateDns *string `json:"private_dns,omitempty"`
 	// The node's private IP address
@@ -362,6 +364,38 @@ func (o *CloudSpecificInfo) HasMountRoots() bool {
 // SetMountRoots gets a reference to the given string and assigns it to the MountRoots field.
 func (o *CloudSpecificInfo) SetMountRoots(v string) {
 	o.MountRoots = &v
+}
+
+// GetPhysicalCloud returns the PhysicalCloud field value if set, zero value otherwise.
+func (o *CloudSpecificInfo) GetPhysicalCloud() string {
+	if o == nil || IsNil(o.PhysicalCloud) {
+		var ret string
+		return ret
+	}
+	return *o.PhysicalCloud
+}
+
+// GetPhysicalCloudOk returns a tuple with the PhysicalCloud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CloudSpecificInfo) GetPhysicalCloudOk() (*string, bool) {
+	if o == nil || IsNil(o.PhysicalCloud) {
+		return nil, false
+	}
+	return o.PhysicalCloud, true
+}
+
+// HasPhysicalCloud returns a boolean if a field has been set.
+func (o *CloudSpecificInfo) HasPhysicalCloud() bool {
+	if o != nil && !IsNil(o.PhysicalCloud) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhysicalCloud gets a reference to the given string and assigns it to the PhysicalCloud field.
+func (o *CloudSpecificInfo) SetPhysicalCloud(v string) {
+	o.PhysicalCloud = &v
 }
 
 // GetPrivateDns returns the PrivateDns field value if set, zero value otherwise.
@@ -720,6 +754,9 @@ func (o CloudSpecificInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MountRoots) {
 		toSerialize["mount_roots"] = o.MountRoots
+	}
+	if !IsNil(o.PhysicalCloud) {
+		toSerialize["physicalCloud"] = o.PhysicalCloud
 	}
 	if !IsNil(o.PrivateDns) {
 		toSerialize["private_dns"] = o.PrivateDns

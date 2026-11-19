@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **InstanceTags** | Pointer to **map[string]string** |  | [optional] 
 **InstanceType** | Pointer to **string** | Instance type that is used for tserver nodes in current cluster. Could be modified in payload for /resize_node API call | [optional] 
 **KubernetesOperatorVersion** | Pointer to **int64** |  | [optional] 
+**ManagedLoadBalancer** | Pointer to [**ManagedLoadBalancerConfig**](ManagedLoadBalancerConfig.md) |  | [optional] 
 **MasterDeviceInfo** | Pointer to [**DeviceInfo**](DeviceInfo.md) |  | [optional] 
 **MasterGFlags** | Pointer to **map[string]string** | User-defined gflags for master. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.18.6.0.&lt;/b&gt; Use specificGFlags | [optional] 
 **MasterInstanceType** | Pointer to **string** | Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call | [optional] 
@@ -52,6 +53,7 @@ Name | Type | Description | Notes
 **UniverseOverrides** | Pointer to **string** |  | [optional] 
 **UseClockbound** | Pointer to **bool** | YbaApi Internal. Use clockbound as time source | [optional] 
 **UseHostname** | Pointer to **bool** |  | [optional] 
+**UseNodeToNodeClientCerts** | Pointer to **bool** | WARNING: This is a preview API that could change. Servers require a client cert on RPC (node_to_node_encryption_use_client_certificates). Supported only on Kubernetes universes whose node-to-node encryption uses a cert-manager (K8SCertManager) root CA; VM universes and Kubernetes universes with other root CA types are not supported. Can only be set at universe creation. | [optional] 
 **UseSpotInstance** | Pointer to **bool** |  | [optional] 
 **UseSystemd** | Pointer to **bool** |  | [optional] 
 **UseTimeSync** | Pointer to **bool** |  | [optional] 
@@ -706,6 +708,31 @@ SetKubernetesOperatorVersion sets KubernetesOperatorVersion field to given value
 
 HasKubernetesOperatorVersion returns a boolean if a field has been set.
 
+### GetManagedLoadBalancer
+
+`func (o *UserIntent) GetManagedLoadBalancer() ManagedLoadBalancerConfig`
+
+GetManagedLoadBalancer returns the ManagedLoadBalancer field if non-nil, zero value otherwise.
+
+### GetManagedLoadBalancerOk
+
+`func (o *UserIntent) GetManagedLoadBalancerOk() (*ManagedLoadBalancerConfig, bool)`
+
+GetManagedLoadBalancerOk returns a tuple with the ManagedLoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagedLoadBalancer
+
+`func (o *UserIntent) SetManagedLoadBalancer(v ManagedLoadBalancerConfig)`
+
+SetManagedLoadBalancer sets ManagedLoadBalancer field to given value.
+
+### HasManagedLoadBalancer
+
+`func (o *UserIntent) HasManagedLoadBalancer() bool`
+
+HasManagedLoadBalancer returns a boolean if a field has been set.
+
 ### GetMasterDeviceInfo
 
 `func (o *UserIntent) GetMasterDeviceInfo() DeviceInfo`
@@ -1280,6 +1307,31 @@ SetUseHostname sets UseHostname field to given value.
 `func (o *UserIntent) HasUseHostname() bool`
 
 HasUseHostname returns a boolean if a field has been set.
+
+### GetUseNodeToNodeClientCerts
+
+`func (o *UserIntent) GetUseNodeToNodeClientCerts() bool`
+
+GetUseNodeToNodeClientCerts returns the UseNodeToNodeClientCerts field if non-nil, zero value otherwise.
+
+### GetUseNodeToNodeClientCertsOk
+
+`func (o *UserIntent) GetUseNodeToNodeClientCertsOk() (*bool, bool)`
+
+GetUseNodeToNodeClientCertsOk returns a tuple with the UseNodeToNodeClientCerts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseNodeToNodeClientCerts
+
+`func (o *UserIntent) SetUseNodeToNodeClientCerts(v bool)`
+
+SetUseNodeToNodeClientCerts sets UseNodeToNodeClientCerts field to given value.
+
+### HasUseNodeToNodeClientCerts
+
+`func (o *UserIntent) HasUseNodeToNodeClientCerts() bool`
+
+HasUseNodeToNodeClientCerts returns a boolean if a field has been set.
 
 ### GetUseSpotInstance
 

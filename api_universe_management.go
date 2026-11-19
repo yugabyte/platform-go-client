@@ -341,7 +341,7 @@ func (r UniverseManagementAPIGetUniverseRequest) Execute() (*UniverseResp, *http
 /*
 GetUniverse Get a universe
 
-Available since YBA version 2.2.0.0.
+Available since YBA version 2.2.0.0. Early access: when the runtime flag yb.api.conditional_get.enabled is set, this endpoint supports conditional requests. Send a previously returned ETag in If-None-Match to get 304 Not Modified if the universe is unchanged. Fields derived from related resources (for example DR configs or pricing) may be stale in that case.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID

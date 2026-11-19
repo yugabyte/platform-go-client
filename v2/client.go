@@ -53,7 +53,11 @@ type APIClient struct {
 
 	BackupAndRestoreAPI *BackupAndRestoreAPIService
 
+	CertificateAPI *CertificateAPIService
+
 	ContinuousBackupAPI *ContinuousBackupAPIService
+
+	CustomerAPI *CustomerAPIService
 
 	CustomerConfigurationAPI *CustomerConfigurationAPIService
 
@@ -75,6 +79,10 @@ type APIClient struct {
 
 	PerfAdvisorEndpointAPI *PerfAdvisorEndpointAPIService
 
+	SessionAPI *SessionAPIService
+
+	StorageConfigAPI *StorageConfigAPIService
+
 	SupportBundleAPI *SupportBundleAPIService
 
 	TaskAPI *TaskAPIService
@@ -82,6 +90,8 @@ type APIClient struct {
 	TelemetryProviderAPI *TelemetryProviderAPIService
 
 	UniverseAPI *UniverseAPIService
+
+	UserAPI *UserAPIService
 
 	YBAInstanceAPI *YBAInstanceAPIService
 }
@@ -104,7 +114,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AuthenticationAPI = (*AuthenticationAPIService)(&c.common)
 	c.BackupAndRestoreAPI = (*BackupAndRestoreAPIService)(&c.common)
+	c.CertificateAPI = (*CertificateAPIService)(&c.common)
 	c.ContinuousBackupAPI = (*ContinuousBackupAPIService)(&c.common)
+	c.CustomerAPI = (*CustomerAPIService)(&c.common)
 	c.CustomerConfigurationAPI = (*CustomerConfigurationAPIService)(&c.common)
 	c.DisasterRecoveryAPI = (*DisasterRecoveryAPIService)(&c.common)
 	c.EncryptionAtRestAPI = (*EncryptionAtRestAPIService)(&c.common)
@@ -115,10 +127,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.NodeAgentAPI = (*NodeAgentAPIService)(&c.common)
 	c.PITRAPI = (*PITRAPIService)(&c.common)
 	c.PerfAdvisorEndpointAPI = (*PerfAdvisorEndpointAPIService)(&c.common)
+	c.SessionAPI = (*SessionAPIService)(&c.common)
+	c.StorageConfigAPI = (*StorageConfigAPIService)(&c.common)
 	c.SupportBundleAPI = (*SupportBundleAPIService)(&c.common)
 	c.TaskAPI = (*TaskAPIService)(&c.common)
 	c.TelemetryProviderAPI = (*TelemetryProviderAPIService)(&c.common)
 	c.UniverseAPI = (*UniverseAPIService)(&c.common)
+	c.UserAPI = (*UserAPIService)(&c.common)
 	c.YBAInstanceAPI = (*YBAInstanceAPIService)(&c.common)
 
 	return c

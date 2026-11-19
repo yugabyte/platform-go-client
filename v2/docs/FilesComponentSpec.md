@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentName** | Pointer to **string** | Logical component name; used as a label/sub-directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
-**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute on the node. Must resolve to one of the shipped support bundle scripts, node_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.  | [optional] 
-**Params** | Pointer to **[]string** | Arguments appended after the script (entrypoint + flags). | [optional] 
+**ScriptPath** | Pointer to **string** | Path on the YBA host to the script file to execute on the node. Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.  | [optional] 
+**Params** | Pointer to **[]string** | Arguments appended after the script (entrypoint + flags). YBA replaces them with the arguments its support bundle manifest gives component_name; the request&#39;s collection window and options such as filter_pg_audit_logs still apply.  | [optional] 
 **RemoteTarPath** | Pointer to **string** | Path on the node where the script writes the tar. May contain ${nodeName}. Must be an absolute path without &#39;..&#39;, built only from letters, digits, &#39;.&#39;, &#39;_&#39;, &#39;-&#39;, &#39;/&#39; and the ${nodeName} / ${bundleUuid} tokens.  | [optional] 
 **LinuxUser** | Pointer to **string** | Linux user to run the script as on the node. Only yugabyte is accepted; leave it unset to get the same result. The SystemLogs component is the one exception, as it needs the provider SSH user and sudo to read /var/log.  | [optional] 
-**TimeoutSecs** | Pointer to **int64** | Script execution timeout in seconds. | [optional] 
+**TimeoutSecs** | Pointer to **int64** | Script execution timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.  | [optional] 
 
 ## Methods
 

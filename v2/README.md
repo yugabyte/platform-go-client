@@ -87,11 +87,15 @@ Class | Method | HTTP request | Description
 *BackupAndRestoreAPI* | [**PageListIncrementalBackups**](docs/BackupAndRestoreAPI.md#pagelistincrementalbackups) | **Post** /customers/{cUUID}/backups/{bUUID}/increments/page | List incremental backups for a backup chain.
 *BackupAndRestoreAPI* | [**PageListRestoreKeyspaces**](docs/BackupAndRestoreAPI.md#pagelistrestorekeyspaces) | **Post** /customers/{cUUID}/restores/{rUUID}/keyspaces/page | List keyspaces for a universe restore.
 *BackupAndRestoreAPI* | [**PageListRestores**](docs/BackupAndRestoreAPI.md#pagelistrestores) | **Post** /customers/{cUUID}/restores/page | List universe restores.
+*CertificateAPI* | [**CreateCertificate**](docs/CertificateAPI.md#createcertificate) | **Post** /customers/{cUUID}/certificates | Add a certificate
 *ContinuousBackupAPI* | [**CreateContinuousBackup**](docs/ContinuousBackupAPI.md#createcontinuousbackup) | **Post** /customers/{cUUID}/auto-yba-backups | Create Continous Backup
 *ContinuousBackupAPI* | [**DeleteContinuousBackup**](docs/ContinuousBackupAPI.md#deletecontinuousbackup) | **Delete** /customers/{cUUID}/auto-yba-backups/{bUUID} | Delete Continuous Backup config
 *ContinuousBackupAPI* | [**EditContinuousBackup**](docs/ContinuousBackupAPI.md#editcontinuousbackup) | **Put** /customers/{cUUID}/auto-yba-backups/{bUUID} | Edit Continuous Backup config
 *ContinuousBackupAPI* | [**GetContinuousBackup**](docs/ContinuousBackupAPI.md#getcontinuousbackup) | **Get** /customers/{cUUID}/auto-yba-backups | Get Continuous Backup
 *ContinuousBackupAPI* | [**RestoreContinuousBackup**](docs/ContinuousBackupAPI.md#restorecontinuousbackup) | **Post** /customers/{cUUID}/auto-yba-backups/restore | Restore Continuous Backup
+*CustomerAPI* | [**GenerateApiToken**](docs/CustomerAPI.md#generateapitoken) | **Put** /customers/{cUUID}/api-token | Generate an API token
+*CustomerAPI* | [**GetHostCloudInfo**](docs/CustomerAPI.md#gethostcloudinfo) | **Get** /customers/{cUUID}/host-cloud-info | Get the YBA host&#39;s cloud info
+*CustomerAPI* | [**RegisterCustomer**](docs/CustomerAPI.md#registercustomer) | **Post** /customers | Register a customer
 *CustomerConfigurationAPI* | [**PageListCustomerConfigs**](docs/CustomerConfigurationAPI.md#pagelistcustomerconfigs) | **Post** /customers/{cUUID}/customer-configs/page | List customer configurations (paged)
 *DisasterRecoveryAPI* | [**PageListDrConfigDatabases**](docs/DisasterRecoveryAPI.md#pagelistdrconfigdatabases) | **Post** /customers/{cUUID}/dr-configs/{drUUID}/databases/page | List DR config database replication details.
 *DisasterRecoveryAPI* | [**PageListDrConfigTables**](docs/DisasterRecoveryAPI.md#pagelistdrconfigtables) | **Post** /customers/{cUUID}/dr-configs/{drUUID}/tables/page | List DR config table replication details.
@@ -116,6 +120,10 @@ Class | Method | HTTP request | Description
 *PerfAdvisorEndpointAPI* | [**GetPerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#getperfadvisorendpoint) | **Get** /customers/{cUUID}/perf-advisor-endpoints/{peUUID} | Get a Perf Advisor Endpoint
 *PerfAdvisorEndpointAPI* | [**ListPerfAdvisorEndpoints**](docs/PerfAdvisorEndpointAPI.md#listperfadvisorendpoints) | **Get** /customers/{cUUID}/perf-advisor-endpoints | List Perf Advisor Endpoints
 *PerfAdvisorEndpointAPI* | [**ValidatePerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#validateperfadvisorendpoint) | **Post** /customers/{cUUID}/perf-advisor-endpoints/validate | Validate a Perf Advisor Endpoint
+*SessionAPI* | [**Login**](docs/SessionAPI.md#login) | **Post** /login | Log in
+*StorageConfigAPI* | [**CreateStorageConfig**](docs/StorageConfigAPI.md#createstorageconfig) | **Post** /customers/{cUUID}/storage-configs | Create a storage configuration
+*StorageConfigAPI* | [**GetStorageConfig**](docs/StorageConfigAPI.md#getstorageconfig) | **Get** /customers/{cUUID}/storage-configs/{scUUID} | Get a storage configuration
+*StorageConfigAPI* | [**ValidateStorageConfig**](docs/StorageConfigAPI.md#validatestorageconfig) | **Post** /customers/{cUUID}/storage-configs/validate | Validate a storage configuration
 *SupportBundleAPI* | [**CreateSupportBundle**](docs/SupportBundleAPI.md#createsupportbundle) | **Post** /customers/{cUUID}/universes/{uniUUID}/support-bundles | Create support bundle
 *SupportBundleAPI* | [**CreateYbaSupportBundle**](docs/SupportBundleAPI.md#createybasupportbundle) | **Post** /customers/{cUUID}/support-bundles/yba | Create YBA-only support bundle
 *SupportBundleAPI* | [**DeleteSupportBundle**](docs/SupportBundleAPI.md#deletesupportbundle) | **Delete** /customers/{cUUID}/universes/{uniUUID}/support-bundles/{sbUUID} | Delete support bundle
@@ -129,11 +137,9 @@ Class | Method | HTTP request | Description
 *SupportBundleAPI* | [**ListSupportBundleComponents**](docs/SupportBundleAPI.md#listsupportbundlecomponents) | **Get** /customers/{cUUID}/support-bundle/components | List support bundle components
 *SupportBundleAPI* | [**PageListSupportBundles**](docs/SupportBundleAPI.md#pagelistsupportbundles) | **Post** /customers/{cUUID}/universes/{uniUUID}/support-bundles/page | List support bundles (paged)
 *SupportBundleAPI* | [**PageListYbaSupportBundles**](docs/SupportBundleAPI.md#pagelistybasupportbundles) | **Post** /customers/{cUUID}/support-bundles/yba/page | List YBA-only support bundles (paged)
-*TaskAPI* | [**GetShutdownStatus**](docs/TaskAPI.md#getshutdownstatus) | **Get** /task-executor/shutdown | Get task executor shutdown status
 *TaskAPI* | [**PageListTasks**](docs/TaskAPI.md#pagelisttasks) | **Post** /customers/{cUUID}/tasks/page | List customer tasks (paged)
 *TaskAPI* | [**RetryTask**](docs/TaskAPI.md#retrytask) | **Post** /customers/{cUUID}/tasks/{tUUID}/retry | Retry a failed task
 *TaskAPI* | [**RollbackTask**](docs/TaskAPI.md#rollbacktask) | **Post** /customers/{cUUID}/tasks/{tUUID}/rollback | Rollback a failed task
-*TaskAPI* | [**ShutdownTaskExecutor**](docs/TaskAPI.md#shutdowntaskexecutor) | **Post** /task-executor/shutdown | Shut down the task executor
 *TelemetryProviderAPI* | [**ListTelemetryProviderTypes**](docs/TelemetryProviderAPI.md#listtelemetryprovidertypes) | **Get** /customers/{cUUID}/telemetry-provider/types | List Available Telemetry Provider Types
 *UniverseAPI* | [**AddCluster**](docs/UniverseAPI.md#addcluster) | **Post** /customers/{cUUID}/universes/{uniUUID}/clusters | Add a cluster to a YugabyteDB Universe
 *UniverseAPI* | [**AttachUniverse**](docs/UniverseAPI.md#attachuniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/attach | Attach universe
@@ -176,6 +182,7 @@ Class | Method | HTTP request | Description
 *UniverseAPI* | [**SystemdEnable**](docs/UniverseAPI.md#systemdenable) | **Post** /customers/{cUUID}/universes/{uniUUID}/systemd | Migrate to Systemd controlled services
 *UniverseAPI* | [**UpdateProxyConfig**](docs/UniverseAPI.md#updateproxyconfig) | **Post** /customers/{cUUID}/universes/{uniUUID}/proxy-config | Update proxy configuration
 *UniverseAPI* | [**ValidateKubernetesOverrides**](docs/UniverseAPI.md#validatekubernetesoverrides) | **Post** /customers/{cUUID}/validate-kubernetes-overrides | Validate Kubernetes Helm Overrides
+*UserAPI* | [**CreateUser**](docs/UserAPI.md#createuser) | **Post** /customers/{cUUID}/users | Add a user
 *YBAInstanceAPI* | [**GetYBAInstanceInfo**](docs/YBAInstanceAPI.md#getybainstanceinfo) | **Get** /yba-info | Get YBAInstance info
 
 
@@ -183,6 +190,7 @@ Class | Method | HTTP request | Description
 
  - [AZUpgradeState](docs/AZUpgradeState.md)
  - [AllowedTasksOnFailure](docs/AllowedTasksOnFailure.md)
+ - [ApiTokenSpec](docs/ApiTokenSpec.md)
  - [AttachUniverseSpec](docs/AttachUniverseSpec.md)
  - [AuditLogConfig](docs/AuditLogConfig.md)
  - [AuditLogsTelemetrySpec](docs/AuditLogsTelemetrySpec.md)
@@ -191,6 +199,14 @@ Class | Method | HTTP request | Description
  - [AvailabilityZoneNetworking](docs/AvailabilityZoneNetworking.md)
  - [AvailabilityZoneNodeSpec](docs/AvailabilityZoneNodeSpec.md)
  - [AvailabilityZoneResizeNodeSpec](docs/AvailabilityZoneResizeNodeSpec.md)
+ - [AwsHostInfo](docs/AwsHostInfo.md)
+ - [AzuHostInfo](docs/AzuHostInfo.md)
+ - [AzureCredentialType](docs/AzureCredentialType.md)
+ - [AzureCredentials](docs/AzureCredentials.md)
+ - [AzureManagedIdentityCredentials](docs/AzureManagedIdentityCredentials.md)
+ - [AzureRegionLocation](docs/AzureRegionLocation.md)
+ - [AzureSasTokenCredentials](docs/AzureSasTokenCredentials.md)
+ - [AzureStorageSpec](docs/AzureStorageSpec.md)
  - [Backup](docs/Backup.md)
  - [BackupApiFilter](docs/BackupApiFilter.md)
  - [BackupInfo](docs/BackupInfo.md)
@@ -204,6 +220,9 @@ Class | Method | HTTP request | Description
  - [BashComponentSpec](docs/BashComponentSpec.md)
  - [BatchedExporterConfig](docs/BatchedExporterConfig.md)
  - [CanaryUpgradeConfigSpec](docs/CanaryUpgradeConfigSpec.md)
+ - [Certificate](docs/Certificate.md)
+ - [CertificateSpec](docs/CertificateSpec.md)
+ - [CertificateType](docs/CertificateType.md)
  - [CheckResizeOptionsResp](docs/CheckResizeOptionsResp.md)
  - [CheckResizeOptionsSpec](docs/CheckResizeOptionsSpec.md)
  - [CleanupCollectionInfo](docs/CleanupCollectionInfo.md)
@@ -243,6 +262,8 @@ Class | Method | HTTP request | Description
  - [CustomerConfigPagedQuerySpec](docs/CustomerConfigPagedQuerySpec.md)
  - [CustomerConfigPagedResp](docs/CustomerConfigPagedResp.md)
  - [CustomerConfigSpec](docs/CustomerConfigSpec.md)
+ - [CustomerRegistration](docs/CustomerRegistration.md)
+ - [CustomerRegistrationSpec](docs/CustomerRegistrationSpec.md)
  - [DetachUniverseSpec](docs/DetachUniverseSpec.md)
  - [DrConfig](docs/DrConfig.md)
  - [DrConfigBootstrapBackupParams](docs/DrConfigBootstrapBackupParams.md)
@@ -271,7 +292,17 @@ Class | Method | HTTP request | Description
  - [FileCollectionOptions](docs/FileCollectionOptions.md)
  - [FileCollectionSummary](docs/FileCollectionSummary.md)
  - [FilesComponentSpec](docs/FilesComponentSpec.md)
+ - [GcpHostInfo](docs/GcpHostInfo.md)
+ - [GcsCredentialType](docs/GcsCredentialType.md)
+ - [GcsCredentials](docs/GcsCredentials.md)
+ - [GcsCrossCloudFederationCredentials](docs/GcsCrossCloudFederationCredentials.md)
+ - [GcsIamCredentials](docs/GcsIamCredentials.md)
+ - [GcsRegionLocation](docs/GcsRegionLocation.md)
+ - [GcsServiceAccountKeyCredentials](docs/GcsServiceAccountKeyCredentials.md)
+ - [GcsStorageSpec](docs/GcsStorageSpec.md)
  - [GflagMetadata](docs/GflagMetadata.md)
+ - [HostCloud](docs/HostCloud.md)
+ - [HostCloudInfo](docs/HostCloudInfo.md)
  - [ImageBundle](docs/ImageBundle.md)
  - [ImageBundleApiFilter](docs/ImageBundleApiFilter.md)
  - [ImageBundleDetails](docs/ImageBundleDetails.md)
@@ -309,12 +340,18 @@ Class | Method | HTTP request | Description
  - [KmsConfigurationInfo](docs/KmsConfigurationInfo.md)
  - [KmsConfigurationSpec](docs/KmsConfigurationSpec.md)
  - [KubernetesResourceDetails](docs/KubernetesResourceDetails.md)
+ - [LoginSpec](docs/LoginSpec.md)
+ - [ManagedLoadBalancerInfo](docs/ManagedLoadBalancerInfo.md)
+ - [ManagedLoadBalancerScheme](docs/ManagedLoadBalancerScheme.md)
+ - [ManagedLoadBalancerSpec](docs/ManagedLoadBalancerSpec.md)
  - [MasterLogsTelemetrySpec](docs/MasterLogsTelemetrySpec.md)
  - [MemoryLimitedExporterConfig](docs/MemoryLimitedExporterConfig.md)
  - [MetricsExportConfig](docs/MetricsExportConfig.md)
  - [MetricsExportConfigBase](docs/MetricsExportConfigBase.md)
  - [MetricsTelemetrySpec](docs/MetricsTelemetrySpec.md)
  - [NamespaceInfo](docs/NamespaceInfo.md)
+ - [NfsRegionLocation](docs/NfsRegionLocation.md)
+ - [NfsStorageSpec](docs/NfsStorageSpec.md)
  - [NodeAgentLogsTelemetrySpec](docs/NodeAgentLogsTelemetrySpec.md)
  - [NodeAgentUpgradeSpec](docs/NodeAgentUpgradeSpec.md)
  - [NodeDetails](docs/NodeDetails.md)
@@ -322,6 +359,12 @@ Class | Method | HTTP request | Description
  - [NodeProxyConfig](docs/NodeProxyConfig.md)
  - [NodeScriptResult](docs/NodeScriptResult.md)
  - [NodeSelection](docs/NodeSelection.md)
+ - [OciCredentialType](docs/OciCredentialType.md)
+ - [OciCredentials](docs/OciCredentials.md)
+ - [OciIamCredentials](docs/OciIamCredentials.md)
+ - [OciRegionLocation](docs/OciRegionLocation.md)
+ - [OciS3CompatibleCredentials](docs/OciS3CompatibleCredentials.md)
+ - [OciStorageSpec](docs/OciStorageSpec.md)
  - [PaginationResp](docs/PaginationResp.md)
  - [PaginationSpec](docs/PaginationSpec.md)
  - [PerProcessNodeSpec](docs/PerProcessNodeSpec.md)
@@ -377,11 +420,26 @@ Class | Method | HTTP request | Description
  - [RollMaxBatchSize](docs/RollMaxBatchSize.md)
  - [RunScriptRequest](docs/RunScriptRequest.md)
  - [RunScriptResponse](docs/RunScriptResponse.md)
+ - [S3AccessKeyCredentials](docs/S3AccessKeyCredentials.md)
+ - [S3CredentialType](docs/S3CredentialType.md)
+ - [S3Credentials](docs/S3Credentials.md)
+ - [S3CrossCloudFederationCredentials](docs/S3CrossCloudFederationCredentials.md)
+ - [S3IamCredentialSource](docs/S3IamCredentialSource.md)
+ - [S3IamCredentials](docs/S3IamCredentials.md)
+ - [S3RegionLocation](docs/S3RegionLocation.md)
+ - [S3StorageSpec](docs/S3StorageSpec.md)
  - [ScrapeConfigTargetType](docs/ScrapeConfigTargetType.md)
  - [ScriptOptions](docs/ScriptOptions.md)
+ - [Session](docs/Session.md)
  - [SleepAfterRestartSchema](docs/SleepAfterRestartSchema.md)
  - [SoftwareUpgradeAZStep](docs/SoftwareUpgradeAZStep.md)
  - [SoftwareUpgradeProgress](docs/SoftwareUpgradeProgress.md)
+ - [StorageConfig](docs/StorageConfig.md)
+ - [StorageConfigInfo](docs/StorageConfigInfo.md)
+ - [StorageConfigSpec](docs/StorageConfigSpec.md)
+ - [StorageConfigState](docs/StorageConfigState.md)
+ - [StorageSpec](docs/StorageSpec.md)
+ - [StorageType](docs/StorageType.md)
  - [SupportBundle](docs/SupportBundle.md)
  - [SupportBundleComponentType](docs/SupportBundleComponentType.md)
  - [SupportBundleCreateSpec](docs/SupportBundleCreateSpec.md)
@@ -398,9 +456,6 @@ Class | Method | HTTP request | Description
  - [Task](docs/Task.md)
  - [TaskApiFilter](docs/TaskApiFilter.md)
  - [TaskDetails](docs/TaskDetails.md)
- - [TaskExecutorShutdownResp](docs/TaskExecutorShutdownResp.md)
- - [TaskExecutorShutdownSpec](docs/TaskExecutorShutdownSpec.md)
- - [TaskExecutorShutdownStatus](docs/TaskExecutorShutdownStatus.md)
  - [TaskInfo](docs/TaskInfo.md)
  - [TaskPagedQuerySpec](docs/TaskPagedQuerySpec.md)
  - [TaskPagedResp](docs/TaskPagedResp.md)
@@ -457,6 +512,9 @@ Class | Method | HTTP request | Description
  - [UniverseValidateKubernetesOverrides](docs/UniverseValidateKubernetesOverrides.md)
  - [UpdateProxyConfigSpec](docs/UpdateProxyConfigSpec.md)
  - [User](docs/User.md)
+ - [UserApiToken](docs/UserApiToken.md)
+ - [UserCreateSpec](docs/UserCreateSpec.md)
+ - [UserCreation](docs/UserCreation.md)
  - [UserInfo](docs/UserInfo.md)
  - [UserSpec](docs/UserSpec.md)
  - [VMImageClusterSpec](docs/VMImageClusterSpec.md)
@@ -500,6 +558,27 @@ auth := context.WithValue(
 		v2.ContextAPIKeys,
 		map[string]v2.APIKey{
 			"apiKeyAuth": {Key: "API_KEY_STRING"},
+		},
+	)
+r, err := client.Service.Operation(auth, args)
+```
+
+### authTokenAuth
+
+- **Type**: API key
+- **API key parameter name**: X-AUTH-TOKEN
+- **Location**: HTTP header
+
+Note, each API key must be added to a map of `map[string]APIKey` where the key is: authTokenAuth and passed in as the auth context for each request.
+
+Example
+
+```go
+auth := context.WithValue(
+		context.Background(),
+		v2.ContextAPIKeys,
+		map[string]v2.APIKey{
+			"authTokenAuth": {Key: "API_KEY_STRING"},
 		},
 	)
 r, err := client.Service.Operation(auth, args)

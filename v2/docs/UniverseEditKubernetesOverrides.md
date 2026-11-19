@@ -4,6 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used. | [optional] 
+**SleepAfterTserverRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used. | [optional] 
+**RollingUpgrade** | Pointer to **bool** | Perform a rolling upgrade where only one node is upgraded at a time. This is the default behavior. False will perform a non-rolling upgrade where all nodes are upgraded at the same  | [optional] [default to true]
+**RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **Overrides** | Pointer to **string** | Global kubernetes overrides to apply across the entire universe. | [optional] 
 **AzOverrides** | Pointer to **map[string]string** | Granular kubernetes overrides per Availability Zone identified by AZ uuid. | [optional] 
 
@@ -25,6 +29,106 @@ will change when the set of required properties is changed
 NewUniverseEditKubernetesOverridesWithDefaults instantiates a new UniverseEditKubernetesOverrides object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSleepAfterMasterRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) GetSleepAfterMasterRestartMillis() int32`
+
+GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterMasterRestartMillisOk
+
+`func (o *UniverseEditKubernetesOverrides) GetSleepAfterMasterRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterMasterRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) SetSleepAfterMasterRestartMillis(v int32)`
+
+SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
+
+### HasSleepAfterMasterRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) HasSleepAfterMasterRestartMillis() bool`
+
+HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
+
+### GetSleepAfterTserverRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) GetSleepAfterTserverRestartMillis() int32`
+
+GetSleepAfterTserverRestartMillis returns the SleepAfterTserverRestartMillis field if non-nil, zero value otherwise.
+
+### GetSleepAfterTserverRestartMillisOk
+
+`func (o *UniverseEditKubernetesOverrides) GetSleepAfterTserverRestartMillisOk() (*int32, bool)`
+
+GetSleepAfterTserverRestartMillisOk returns a tuple with the SleepAfterTserverRestartMillis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSleepAfterTserverRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) SetSleepAfterTserverRestartMillis(v int32)`
+
+SetSleepAfterTserverRestartMillis sets SleepAfterTserverRestartMillis field to given value.
+
+### HasSleepAfterTserverRestartMillis
+
+`func (o *UniverseEditKubernetesOverrides) HasSleepAfterTserverRestartMillis() bool`
+
+HasSleepAfterTserverRestartMillis returns a boolean if a field has been set.
+
+### GetRollingUpgrade
+
+`func (o *UniverseEditKubernetesOverrides) GetRollingUpgrade() bool`
+
+GetRollingUpgrade returns the RollingUpgrade field if non-nil, zero value otherwise.
+
+### GetRollingUpgradeOk
+
+`func (o *UniverseEditKubernetesOverrides) GetRollingUpgradeOk() (*bool, bool)`
+
+GetRollingUpgradeOk returns a tuple with the RollingUpgrade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollingUpgrade
+
+`func (o *UniverseEditKubernetesOverrides) SetRollingUpgrade(v bool)`
+
+SetRollingUpgrade sets RollingUpgrade field to given value.
+
+### HasRollingUpgrade
+
+`func (o *UniverseEditKubernetesOverrides) HasRollingUpgrade() bool`
+
+HasRollingUpgrade returns a boolean if a field has been set.
+
+### GetRollMaxBatchSize
+
+`func (o *UniverseEditKubernetesOverrides) GetRollMaxBatchSize() RollMaxBatchSize`
+
+GetRollMaxBatchSize returns the RollMaxBatchSize field if non-nil, zero value otherwise.
+
+### GetRollMaxBatchSizeOk
+
+`func (o *UniverseEditKubernetesOverrides) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool)`
+
+GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollMaxBatchSize
+
+`func (o *UniverseEditKubernetesOverrides) SetRollMaxBatchSize(v RollMaxBatchSize)`
+
+SetRollMaxBatchSize sets RollMaxBatchSize field to given value.
+
+### HasRollMaxBatchSize
+
+`func (o *UniverseEditKubernetesOverrides) HasRollMaxBatchSize() bool`
+
+HasRollMaxBatchSize returns a boolean if a field has been set.
 
 ### GetOverrides
 

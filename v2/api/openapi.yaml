@@ -26,8 +26,12 @@ tags:
   name: Authentication
 - description: Operations related to universe backup and restore
   name: Backup and Restore
+- description: Certificate management
+  name: Certificate
 - description: CRUD operations for Continuous YBA Backups
   name: Continuous Backup
+- description: Customer management
+  name: Customer
 - description: Customer configuration management
   name: Customer Configuration
 - description: Disaster recovery configuration management
@@ -48,6 +52,10 @@ tags:
   name: PITR
 - description: CRUD operations for external Perf Advisor destinations
   name: Perf Advisor Endpoint
+- description: Session management
+  name: Session
+- description: Backup storage configuration management
+  name: Storage Config
 - description: Support bundle management for universes
   name: Support Bundle
 - description: Customer task management
@@ -56,6 +64,8 @@ tags:
   name: Telemetry Provider
 - description: CRUD operations for a Universe
   name: Universe
+- description: User management
+  name: User
 - description: YBA Instance operations
   name: YBA Instance
 paths:
@@ -346,6 +356,104 @@ paths:
       x-yba-api-visibility: preview
       x-accepts:
       - application/json
+  /customers/{cUUID}/certificates:
+    post:
+      description: "Adds a certificate to the customer, such as the root CA for node-to-node\
+        \ and client-to-node encryption in transit. A SelfSigned certificate is a\
+        \ CA certificate with its private key; YBA uses it to sign node and client\
+        \ certificates. The caller either uploads the CA and its key, or omits both\
+        \ and YBA generates them, so that the key never leaves YBA."
+      operationId: createCertificate
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          Makes the request safe to retry. A unique client-generated value, such as a UUID, for this request.
+
+          The first request with a key runs the operation. If it succeeds, its response is kept for 24 hours
+          (yb.api.idempotency.retention), and a retry with the same key and the same request returns that
+          response with an X-IDEMPOTENT-REPLAYED: true header, without running the operation again. A retry
+          while the first request is still running gets 409; the same key with a different request gets 422.
+          A failed request does not keep the key, so it can be retried with the same one.
+
+          Keys are scoped to the caller's customer.
+
+          If the operation starts a task, that task's UUID is derived from the key: the version 5 UUID of
+          "<customer UUID>:<key>" in the namespace 3bf373dd-d374-4df5-bdea-c3cd942ae7f4. A client can
+          follow the task even if it lost the response. If that task was started, for example before YBA
+          restarted and lost the response, a retry gets 409 instead of starting the operation again, with
+          the task's UUID in error.task_uuid, and in error.latest_task_uuid the UUID of its newest retry if
+          YBA retried it (a restart fails or aborts running tasks, and may retry them under a new UUID).
+          If the task failed while being submitted, the retry runs the operation again under a new task
+          UUID.
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+        style: simple
+        x-yba-api-idempotency-key: true
+      requestBody:
+        $ref: '#/components/requestBodies/CertificateCreateReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Certificate'
+          description: The added certificate
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "400":
+          description: "Invalid input, such as content that isn't PEM, only one of\
+            \ cert_content and key_content, lifetime_years with an uploaded CA or\
+            \ outside 1-100, or (unless yb.tls.enable_config_validation is off) a\
+            \ certificate that isn't a valid CA or a key that doesn't match it"
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer (including a customer that doesn't exist), or\
+            \ the caller's role has no create permission on the customer"
+        "409":
+          description: The customer already has a certificate with this label. Also
+            returned while a request with the same Idempotency-Key is still in progress.
+        "500":
+          description: Server error
+        "422":
+          description: The Idempotency-Key was already used for a different request
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Add a certificate
+      tags:
+      - Certificate
+      x-yba-api-audit:
+        auditTargetType: Certificate
+        auditTargetId: obj.getUuid().toString()
+        auditActionType: Create
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: create
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-idempotent: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /customers/{cUUID}/auto-yba-backups:
     get:
       description: Get details of the continuous backup configuration
@@ -592,6 +700,158 @@ paths:
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers:
+    post:
+      description: "Creates a customer and its primary user, and returns an API token\
+        \ for that user. The first customer on a YBA instance can be registered without\
+        \ authentication, and its user becomes a SuperAdmin. Further customers can\
+        \ only be registered by a SuperAdmin on a multi-tenant YBA instance (yb.multiTenant),\
+        \ and their users are Admins."
+      operationId: registerCustomer
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerRegistrationReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerRegistration'
+          description: Registered customer
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "400":
+          description: "Invalid input, such as a password that violates the password\
+            \ policy"
+        "401":
+          description: Customers already exist and the request has no valid API token
+        "403":
+          description: Customers already exist and the caller is not a SuperAdmin
+        "409":
+          description: "A customer already exists on a single-tenant or SSO-enabled\
+            \ YBA instance, or a user with this email already exists"
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      summary: Register a customer
+      tags:
+      - Customer
+      x-yba-api-audit:
+        auditTargetType: Customer
+        auditTargetId: obj.getCustomerUuid().toString()
+        auditActionType: Register
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/api-token:
+    put:
+      description: "Generates a new API token for the calling user and returns it.\
+        \ The previous token stops working. The caller authenticates with an API token\
+        \ or a session token (from login), and must belong to the customer."
+      operationId: generateApiToken
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/ApiTokenReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserApiToken'
+          description: Generated API token
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "401":
+          description: The request has no valid API or session token
+        "403":
+          description: The caller does not belong to this customer
+        "404":
+          description: Customer not found
+        "409":
+          description: "api_token_version is not the caller's current API token version,\
+            \ e.g. because the token was rotated concurrently"
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Generate an API token
+      tags:
+      - Customer
+      x-yba-api-audit:
+        auditTargetType: Customer
+        auditTargetId: cUUID.toString()
+        auditActionType: GenerateApiToken
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/host-cloud-info:
+    get:
+      description: "Returns the public cloud and region that YBA runs on, and the\
+        \ instance metadata used to create a provider in the host's VPC. Replaces\
+        \ the v1 host_info."
+      operationId: getHostCloudInfo
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostCloudInfo'
+          description: Cloud and instance metadata of the YBA host
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer (including a customer that doesn't exist), or\
+            \ the caller's role has no read permission on the customer"
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Get the YBA host's cloud info
+      tags:
+      - Customer
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
       x-accepts:
       - application/json
   /customers/{cUUID}/customer-configs/page:
@@ -1939,6 +2199,288 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /login:
+    post:
+      description: "Logs a user in with email and password and returns a session token,\
+        \ to be sent in the X-AUTH-TOKEN header. LDAP users log in the same way when\
+        \ LDAP is enabled. With SSO enabled and yb.security.allow_local_login_with_sso\
+        \ off, only local SuperAdmins can log in; other local users and LDAP users\
+        \ are refused. Does not set cookies."
+      operationId: login
+      requestBody:
+        $ref: '#/components/requestBodies/LoginReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+          description: Session of the logged-in user
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "400":
+          description: "Invalid input, or an error from the LDAP server"
+        "401":
+          description: "Invalid credentials, or local login is not permitted while\
+            \ SSO is enabled"
+        "500":
+          description: Server error
+      security: []
+      summary: Log in
+      tags:
+      - Session
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+        noAuthz: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/storage-configs:
+    post:
+      description: |
+        Creates a backup storage configuration. Unless yb.storage_config.skip_validation is set,
+        YBA first checks the locations and that it can reach the storage with the given
+        credentials, as validateStorageConfig does, and creates nothing if it can't. Retry with the same
+        Idempotency-Key to get the configuration created by a request whose response was lost.
+      operationId: createStorageConfig
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: |
+          Makes the request safe to retry. A unique client-generated value, such as a UUID, for this request.
+
+          The first request with a key runs the operation. If it succeeds, its response is kept for 24 hours
+          (yb.api.idempotency.retention), and a retry with the same key and the same request returns that
+          response with an X-IDEMPOTENT-REPLAYED: true header, without running the operation again. A retry
+          while the first request is still running gets 409; the same key with a different request gets 422.
+          A failed request does not keep the key, so it can be retried with the same one.
+
+          Keys are scoped to the caller's customer.
+
+          If the operation starts a task, that task's UUID is derived from the key: the version 5 UUID of
+          "<customer UUID>:<key>" in the namespace 3bf373dd-d374-4df5-bdea-c3cd942ae7f4. A client can
+          follow the task even if it lost the response. If that task was started, for example before YBA
+          restarted and lost the response, a retry gets 409 instead of starting the operation again, with
+          the task's UUID in error.task_uuid, and in error.latest_task_uuid the UUID of its newest retry if
+          YBA retried it (a restart fails or aborts running tasks, and may retry them under a new UUID).
+          If the task failed while being submitted, the retry runs the operation again under a new task
+          UUID.
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+        style: simple
+        x-yba-api-idempotency-key: true
+      requestBody:
+        $ref: '#/components/requestBodies/StorageConfigCreateReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageConfig'
+          description: The storage configuration
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "400":
+          description: "Invalid input, such as a missing secret, a blank name or a\
+            \ region listed twice. A malformed location or host found by the storage\
+            \ check has error.code STORAGE_CONFIG_INVALID, with error.errors listing\
+            \ the failures by field."
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer, or the caller's role has no create permission\
+            \ on the customer"
+        "409":
+          description: The customer already has a storage configuration with this
+            name. error.code is STORAGE_CONFIG_NAME_CONFLICT and error.storage_config_uuid
+            names the existing configuration. Also returned while a request with the
+            same Idempotency-Key is still in progress.
+        "422":
+          description: "The storage check failed: YBA reached the storage, or tried\
+            \ to, and it refused the configuration, e.g. with access denied or no\
+            \ such bucket. error.code is STORAGE_VALIDATION_FAILED, with error.errors\
+            \ listing the failures by field and, when the provider answered, error.provider_status\
+            \ (its HTTP status) and error.provider_error_code. error.code is STORAGE_VALIDATION_TIMEOUT\
+            \ if the check took longer than yb.storage_config.validation_timeout.\
+            \ An error with no error.code means the Idempotency-Key was already used\
+            \ for a different request."
+        "500":
+          description: Server error
+        "503":
+          description: "Retry later: error.code is STORAGE_PROVIDER_UNAVAILABLE if\
+            \ the provider throttled or failed the check (HTTP 429 or 5xx, with error.provider_status)\
+            \ or a request to it timed out, or STORAGE_VALIDATION_BUSY if every storage\
+            \ check thread (yb.storage_config_validation.max_threads) is busy."
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Create a storage configuration
+      tags:
+      - Storage Config
+      x-yba-api-audit:
+        auditTargetType: CustomerConfig
+        auditTargetId: obj.getInfo().getUuid().toString()
+        auditActionType: Create
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: create
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-idempotent: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/storage-configs/validate:
+    post:
+      description: |
+        Checks a storage configuration without creating it: the same checks as
+        createStorageConfig, including that the name is free and, unless
+        yb.storage_config.skip_validation is set, that YBA can write, read, list and delete a test
+        object at each location with the given credentials. Returns 200 with no body if the
+        configuration can be created.
+      operationId: validateStorageConfig
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/StorageConfigValidateReq'
+      responses:
+        "200":
+          description: The storage configuration can be created
+        "400":
+          description: "Invalid input, such as a missing secret, a blank name or a\
+            \ region listed twice. A malformed location or host found by the storage\
+            \ check has error.code STORAGE_CONFIG_INVALID, with error.errors listing\
+            \ the failures by field."
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer, or the caller's role has no create permission\
+            \ on the customer"
+        "409":
+          description: The customer already has a storage configuration with this
+            name. error.code is STORAGE_CONFIG_NAME_CONFLICT and error.storage_config_uuid
+            names the existing configuration.
+        "422":
+          description: "The storage check failed: YBA reached the storage, or tried\
+            \ to, and it refused the configuration, e.g. with access denied or no\
+            \ such bucket. error.code is STORAGE_VALIDATION_FAILED, with error.errors\
+            \ listing the failures by field and, when the provider answered, error.provider_status\
+            \ (its HTTP status) and error.provider_error_code. error.code is STORAGE_VALIDATION_TIMEOUT\
+            \ if the check took longer than yb.storage_config.validation_timeout."
+        "500":
+          description: Server error
+        "503":
+          description: "Retry later: error.code is STORAGE_PROVIDER_UNAVAILABLE if\
+            \ the provider throttled or failed the check (HTTP 429 or 5xx, with error.provider_status)\
+            \ or a request to it timed out, or STORAGE_VALIDATION_BUSY if every storage\
+            \ check thread (yb.storage_config_validation.max_threads) is busy."
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Validate a storage configuration
+      tags:
+      - Storage Config
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: create
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/storage-configs/{scUUID}:
+    get:
+      description: "Returns a storage configuration, without its secrets."
+      operationId: getStorageConfig
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Storage configuration UUID
+        explode: false
+        in: path
+        name: scUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageConfig'
+          description: The storage configuration
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer, or the caller's role has no read permission on\
+            \ the customer"
+        "404":
+          description: The customer has no storage configuration with this UUID
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Get a storage configuration
+      tags:
+      - Storage Config
+      x-yba-api-audit:
+        noAudit: true
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: other
+          action: read
+        resourceLocation:
+          path: customers
+          sourceType: endpoint
+        checkOnlyPermission: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-accepts:
+      - application/json
   /customers/{cUUID}/support-bundle/components:
     get:
       description: List all component types available for support bundle collection.
@@ -2118,6 +2660,8 @@ paths:
   /customers/{cUUID}/universes/{uniUUID}/support-bundles/estimate-size:
     post:
       description: Estimate support bundle size for the given payload on a universe.
+        V2 responses use logical component names from specs (e.g. UniverseLogs) as
+        inner map keys.
       operationId: estimateSupportBundleSize
       parameters:
       - description: Customer UUID
@@ -2763,79 +3307,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /task-executor/shutdown:
-    get:
-      description: |
-        Returns whether task-executor shutdown has been initiated, whether
-        application shutdown has completed after draining, and how many parent
-        tasks are still running.
-      operationId: getShutdownStatus
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskExecutorShutdownStatus'
-          description: Task executor shutdown status
-          x-yba-api-visibility: internal
-        "400":
-          description: Invalid input
-        "500":
-          description: Server error
-      security:
-      - apiKeyAuth: []
-      summary: Get task executor shutdown status
-      tags:
-      - Task
-      x-yba-api-audit:
-        noAudit: true
-      x-yba-api-authz:
-        noAuthz: true
-      x-yba-api-since: 2026.2.0.0
-      x-yba-api-visibility: internal
-      x-accepts:
-      - application/json
-    post:
-      description: |
-        Signals the commissioner task executor to shut down. In-flight tasks are
-        aborted after abort_time_seconds. This call does not wait for tasks to
-        finish.
-      operationId: shutdownTaskExecutor
-      requestBody:
-        $ref: '#/components/requestBodies/TaskExecutorShutdownReq'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskExecutorShutdownResp'
-          description: Task executor shutdown result
-          x-yba-api-visibility: internal
-        "400":
-          description: Invalid input
-        "500":
-          description: Server error
-      security:
-      - apiKeyAuth: []
-      summary: Shut down the task executor
-      tags:
-      - Task
-      x-yba-api-audit:
-        auditTargetType: PlatformInstance
-        auditTargetId: "null"
-        auditActionType: Stop
-      x-yba-api-authz:
-      - requiredPermission:
-          resourceType: other
-          action: SUPER_ADMIN_ACTIONS
-        resourceLocation:
-          path: customers
-          sourceType: REQUEST_CONTEXT
-      x-yba-api-since: 2026.2.0.0
-      x-yba-api-visibility: internal
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /customers/{cUUID}/tasks/{tUUID}/retry:
     post:
       description: |
@@ -2936,6 +3407,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: "The task cannot be rolled back, or the operator owns the resource"
         "500":
           description: Server error
       security:
@@ -3053,6 +3526,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3073,13 +3548,16 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
       x-accepts:
       - application/json
     get:
-      description: Get details of a single YugabyteDB Universe.
+      description: |-
+        Get details of a single YugabyteDB Universe.
+        Early access: when the runtime flag yb.api.conditional_get.enabled is set, this endpoint supports conditional requests. Send a previously returned ETag in If-None-Match to get 304 Not Modified if the universe is unchanged. Fields derived from related resources (for example DR configs or pricing) may be stale in that case.
       operationId: getUniverse
       parameters:
       - description: Customer UUID
@@ -3126,6 +3604,9 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-conditional-get:
+        provider: com.yugabyte.yw.common.http.conditional.UniverseRevisionProvider
+        resourcePathSegment: universes
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-accepts:
@@ -3163,6 +3644,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3183,6 +3666,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3321,6 +3805,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3341,6 +3827,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3397,6 +3884,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3417,6 +3906,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-accepts:
@@ -3509,6 +3999,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3530,6 +4022,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2.20.2.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3569,6 +4062,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3589,6 +4084,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3680,6 +4176,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3700,6 +4198,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3739,6 +4238,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3759,6 +4260,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3801,6 +4303,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3821,6 +4325,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2025.2.7.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3860,6 +4365,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3880,6 +4387,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3919,6 +4427,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3939,6 +4449,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -3978,6 +4489,8 @@ paths:
           description: Software Upgrade Precheck success
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -3995,6 +4508,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4034,6 +4548,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4054,6 +4570,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4098,6 +4615,8 @@ paths:
         "400":
           description: Invalid input or the universe is already is already using systemd
             services
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4118,6 +4637,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4159,6 +4679,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4179,6 +4701,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4218,6 +4741,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4238,6 +4763,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4283,6 +4809,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4303,6 +4831,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4351,6 +4880,8 @@ paths:
           description: Successfully rolled back detach universe operation
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4369,6 +4900,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
       x-accepts:
@@ -4409,6 +4941,8 @@ paths:
           x-yba-api-visibility: preview
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4427,6 +4961,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4463,6 +4998,8 @@ paths:
           description: Successfully attached universe.
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4481,6 +5018,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
+      x-yba-api-block-operator-resource: universe
       x-yba-api-multipart: true
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
@@ -4515,6 +5053,8 @@ paths:
           description: Successfully deleted attach/detach metadata of universe
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4533,6 +5073,7 @@ paths:
         resourceLocation:
           path: universes
           sourceType: endpoint
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: preview
       x-accepts:
@@ -4573,6 +5114,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4593,6 +5136,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2025.2.0.0
       x-yba-api-visibility: internal
       x-content-type: application/json
@@ -4634,6 +5178,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4654,6 +5200,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.2.0
       x-yba-api-visibility: deprecated
       x-content-type: application/json
@@ -4752,6 +5299,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4772,6 +5321,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.2.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -4872,6 +5422,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -4892,6 +5444,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -5000,7 +5553,8 @@ paths:
         "400":
           description: Invalid input or feature not enabled
         "403":
-          description: Feature not enabled for this universe
+          description: "Feature not enabled for this universe, or resource is controlled\
+            \ by the Kubernetes operator"
         "500":
           description: Server error
       security:
@@ -5016,6 +5570,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: internal
       x-content-type: application/json
@@ -5070,8 +5625,8 @@ paths:
         "400":
           description: Invalid input or feature not enabled
         "403":
-          description: Feature not enabled for this universe or not accessed from
-            localhost
+          description: "Feature not enabled for this universe or not accessed from\
+            \ localhost, or resource is controlled by the Kubernetes operator"
         "500":
           description: Server error
       security:
@@ -5091,6 +5646,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: internal
       x-content-type: application/json
@@ -5164,7 +5720,8 @@ paths:
           description: Collection not found or already cleaned up
         "403":
           description: "Feature not enabled for this universe, or cleanup_db_nodes_after=true\
-            \ but not accessed from localhost"
+            \ but not accessed from localhost, or resource is controlled by the Kubernetes\
+            \ operator"
         "404":
           description: Collection not found
         "500":
@@ -5186,6 +5743,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: internal
       x-accepts:
@@ -5260,7 +5818,8 @@ paths:
         "400":
           description: Collection not found or already cleaned up
         "403":
-          description: API not called from localhost or feature not enabled
+          description: "API not called from localhost or feature not enabled, or resource\
+            \ is controlled by the Kubernetes operator"
         "404":
           description: Collection not found
         "500":
@@ -5282,6 +5841,7 @@ paths:
           path: UNIVERSES
           sourceType: ENDPOINT
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.0.0
       x-yba-api-visibility: internal
       x-accepts:
@@ -5323,6 +5883,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "404":
           description: Customer or Universe or Cluster not found
         "500":
@@ -5345,6 +5907,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2026.1.2.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -5386,6 +5949,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -5406,6 +5971,7 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
       x-yba-api-since: 2024.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -5554,6 +6120,8 @@ paths:
           description: task accepted
         "400":
           description: Invalid input
+        "403":
+          description: Resource is controlled by the Kubernetes operator
         "500":
           description: Server error
       security:
@@ -5574,6 +6142,68 @@ paths:
           path: universes
           sourceType: endpoint
         checkOnlyPermission: false
+      x-yba-api-block-operator-resource: universe
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /customers/{cUUID}/users:
+    post:
+      description: "Adds a local user with a system role to the customer. SuperAdmin\
+        \ users can't be created this way. With generate_api_token, the response also\
+        \ carries an API token for the new user."
+      operationId: createUser
+      parameters:
+      - description: Customer UUID
+        explode: false
+        in: path
+        name: cUUID
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/UserCreateReq'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreation'
+          description: The created user
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
+        "400":
+          description: "Invalid input, such as an invalid email, a missing role, the\
+            \ SuperAdmin role, or a password that violates the password policy"
+        "401":
+          description: "The request has no valid API or session token, cUUID is not\
+            \ the caller's customer (including a customer that doesn't exist), or\
+            \ the caller's role has no create permission on users"
+        "409":
+          description: "A user with this email already exists, or OIDC SSO creates\
+            \ users automatically on this YBA"
+        "500":
+          description: Server error
+      security:
+      - apiKeyAuth: []
+      - authTokenAuth: []
+      summary: Add a user
+      tags:
+      - User
+      x-yba-api-audit:
+        auditTargetType: User
+        auditTargetId: obj.getUser().getInfo().getUuid().toString()
+        auditActionType: Create
+      x-yba-api-authz:
+      - requiredPermission:
+          resourceType: user
+          action: create
+        resourceLocation:
+          path: users
+          sourceType: endpoint
       x-yba-api-since: 2026.2.0.0
       x-yba-api-visibility: preview
       x-content-type: application/json
@@ -5609,6 +6239,38 @@ paths:
       x-accepts:
       - application/json
 components:
+  parameters:
+    IdempotencyKey:
+      description: |
+        Makes the request safe to retry. A unique client-generated value, such as a UUID, for this request.
+
+        The first request with a key runs the operation. If it succeeds, its response is kept for 24 hours
+        (yb.api.idempotency.retention), and a retry with the same key and the same request returns that
+        response with an X-IDEMPOTENT-REPLAYED: true header, without running the operation again. A retry
+        while the first request is still running gets 409; the same key with a different request gets 422.
+        A failed request does not keep the key, so it can be retried with the same one.
+
+        Keys are scoped to the caller's customer.
+
+        If the operation starts a task, that task's UUID is derived from the key: the version 5 UUID of
+        "<customer UUID>:<key>" in the namespace 3bf373dd-d374-4df5-bdea-c3cd942ae7f4. A client can
+        follow the task even if it lost the response. If that task was started, for example before YBA
+        restarted and lost the response, a retry gets 409 instead of starting the operation again, with
+        the task's UUID in error.task_uuid, and in error.latest_task_uuid the UUID of its newest retry if
+        YBA retried it (a restart fails or aborts running tasks, and may retry them under a new UUID).
+        If the task failed while being submitted, the retry runs the operation again under a new task
+        UUID.
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      explode: false
+      in: header
+      name: Idempotency-Key
+      required: false
+      schema:
+        maxLength: 255
+        minLength: 1
+        type: string
+      style: simple
+      x-yba-api-idempotency-key: true
   requestBodies:
     AuthGroupToRolesMappingReq:
       content:
@@ -5630,6 +6292,14 @@ components:
           schema:
             $ref: '#/components/schemas/IncrementalBackupPagedQuerySpec'
       required: true
+    CertificateCreateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CertificateSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     ContinuousBackupCreateReq:
       content:
         application/json:
@@ -5642,6 +6312,22 @@ components:
           schema:
             $ref: '#/components/schemas/ContinuousRestoreSpec'
       required: true
+    CustomerRegistrationReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerRegistrationSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    ApiTokenReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiTokenSpec'
+      required: false
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     CustomerConfigPagedReq:
       content:
         application/json:
@@ -5738,6 +6424,30 @@ components:
           schema:
             $ref: '#/components/schemas/RestoreKeyspacePagedQuerySpec'
       required: true
+    LoginReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfigCreateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StorageConfigSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfigValidateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StorageConfigSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     SupportBundleCreateReq:
       content:
         application/json:
@@ -5756,13 +6466,6 @@ components:
           schema:
             $ref: '#/components/schemas/TaskPagedQuerySpec'
       required: true
-    TaskExecutorShutdownReq:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TaskExecutorShutdownSpec'
-      required: true
-      x-yba-api-visibility: internal
     TaskRetryReq:
       content:
         application/json:
@@ -5995,6 +6698,14 @@ components:
           schema:
             $ref: '#/components/schemas/UniverseVMImageUpgradeSpec'
       required: true
+    UserCreateReq:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreateSpec'
+      required: true
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
   responses:
     AuthGroupToRolesMappingResp:
       content:
@@ -6024,6 +6735,14 @@ components:
               $ref: '#/components/schemas/GflagMetadata'
             type: array
       description: OK
+    CertificateResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Certificate'
+      description: The added certificate
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     ContinuousBackupResp:
       content:
         application/json:
@@ -6036,6 +6755,30 @@ components:
           schema:
             $ref: '#/components/schemas/YBATask'
       description: task accepted
+    CustomerRegistrationResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerRegistration'
+      description: Registered customer
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    UserApiTokenResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserApiToken'
+      description: Generated API token
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    HostCloudInfoResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HostCloudInfo'
+      description: Cloud and instance metadata of the YBA host
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     CustomerConfigPagedResp:
       content:
         application/json:
@@ -6141,6 +6884,22 @@ components:
           schema:
             $ref: '#/components/schemas/RestoreKeyspacePagedResp'
       description: successful operation
+    SessionResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Session'
+      description: Session of the logged-in user
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfigResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StorageConfig'
+      description: The storage configuration
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     SupportBundleComponentsResp:
       content:
         application/json:
@@ -6174,20 +6933,6 @@ components:
           schema:
             $ref: '#/components/schemas/TaskPagedResp'
       description: Paged list of customer tasks.
-    TaskExecutorShutdownStatusResp:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TaskExecutorShutdownStatus'
-      description: Task executor shutdown status
-      x-yba-api-visibility: internal
-    TaskExecutorShutdownResp:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TaskExecutorShutdownResp'
-      description: Task executor shutdown result
-      x-yba-api-visibility: internal
     UniverseResp:
       content:
         application/json:
@@ -6269,6 +7014,14 @@ components:
           schema:
             $ref: '#/components/schemas/CheckResizeOptionsResp'
       description: Resize options check success
+    UserCreationResp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserCreation'
+      description: The created user
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     YBAInfoResp:
       content:
         application/json:
@@ -7440,6 +8193,99 @@ components:
           type: string
       title: GflagMetadata
       type: object
+    CertificateType:
+      description: "Kind of certificate. SelfSigned: a root CA whose certificate and\
+        \ private key YBA holds and uses to sign node and client certificates."
+      enum:
+      - SelfSigned
+      title: CertificateType
+      type: string
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    CertificateSpec:
+      description: "A certificate to add to the customer. Give cert_content and key_content\
+        \ to upload a CA, or omit both to have YBA generate the CA and its key. Part\
+        \ of CertificateCreateReq."
+      example:
+        cert_type: SelfSigned
+        lifetime_years: 8
+        cert_content: cert_content
+        key_content: key_content
+        label: label
+      properties:
+        label:
+          description: "Name of the certificate, unique within the customer. A generated\
+            \ CA also uses it as its subject CN."
+          minLength: 1
+          type: string
+        cert_type:
+          $ref: '#/components/schemas/CertificateType'
+        cert_content:
+          description: "PEM-encoded CA certificate, optionally followed by the rest\
+            \ of its chain. Omit, together with key_content, to have YBA generate\
+            \ the CA."
+          minLength: 1
+          type: string
+        key_content:
+          description: "PEM-encoded private key of the CA certificate. Omit, together\
+            \ with cert_content, to have YBA generate the CA."
+          minLength: 1
+          type: string
+          writeOnly: true
+        lifetime_years:
+          description: "Validity of a CA that YBA generates, in years. Defaults to\
+            \ yb.tlsCertificate.root.expiryInYears. Only for a generated CA."
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+      required:
+      - cert_type
+      - label
+      title: CertificateSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    Certificate:
+      description: A customer's certificate. Part of CertificateResp.
+      example:
+        cert_type: SelfSigned
+        expiry_date: 2000-01-23T04:56:07.000+00:00
+        label: label
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        start_date: 2000-01-23T04:56:07.000+00:00
+      properties:
+        uuid:
+          description: UUID of the certificate
+          format: uuid
+          readOnly: true
+          type: string
+        label:
+          description: Name of the certificate
+          readOnly: true
+          type: string
+        cert_type:
+          $ref: '#/components/schemas/CertificateType'
+        start_date:
+          description: Start of the certificate's validity
+          format: date-time
+          readOnly: true
+          type: string
+        expiry_date:
+          description: End of the certificate's validity
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+      - cert_type
+      - expiry_date
+      - label
+      - start_date
+      - uuid
+      title: Certificate
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     ContinuousBackupInfo:
       description: |
         ContinuousBackupInfo
@@ -7494,7 +8340,7 @@ components:
 
         User specification for a continuous backup of YBA. All these properties can be edited.
       example:
-        frequency_time_unit: NANOSECONDS
+        frequency_time_unit: ""
         backup_dir: yba_backups
         storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
         num_backups: 6
@@ -7511,7 +8357,10 @@ components:
           format: int64
           type: integer
         frequency_time_unit:
-          $ref: '#/components/schemas/TimeUnitType'
+          allOf:
+          - $ref: '#/components/schemas/TimeUnitType'
+          description: |
+            The time unit for the interval between backups. Must be SECONDS or larger; NANOSECONDS, MICROSECONDS, and MILLISECONDS are rejected.
         num_backups:
           default: 5
           description: The number of historical backups to retain in the storage bucket.
@@ -7536,7 +8385,7 @@ components:
         Continuous Backup object which contains the info for a configuration.
       example:
         spec:
-          frequency_time_unit: NANOSECONDS
+          frequency_time_unit: ""
           backup_dir: yba_backups
           storage_config_uuid: f33e3c9b-75ab-4c30-80ad-cba85646ea39
           num_backups: 6
@@ -7599,6 +8448,285 @@ components:
           type: string
       title: YBATask
       type: object
+    CustomerRegistrationSpec:
+      description: |
+        CustomerRegistrationSpec
+
+        Customer to register and its primary user. Part of CustomerRegistrationReq.
+      example:
+        password: password
+        code: admin
+        name: Example Customer
+        email: admin@example.com
+      properties:
+        code:
+          description: Customer code
+          example: admin
+          maxLength: 15
+          minLength: 1
+          type: string
+        name:
+          description: Customer name
+          example: Example Customer
+          minLength: 3
+          type: string
+        email:
+          description: Email of the primary user. Must be unique on the YBA instance.
+          example: admin@example.com
+          format: email
+          type: string
+        password:
+          description: Password of the primary user. Must satisfy the YBA password
+            policy.
+          format: password
+          type: string
+          writeOnly: true
+      required:
+      - code
+      - email
+      - name
+      - password
+      title: CustomerRegistrationSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    CustomerRegistration:
+      description: |
+        CustomerRegistration
+
+        Registered customer and the API token of its primary user. Part of CustomerRegistrationResp.
+      example:
+        api_token_version: 0
+        user_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        api_token: api_token
+      properties:
+        customer_uuid:
+          description: UUID of the registered customer
+          format: uuid
+          readOnly: true
+          type: string
+        user_uuid:
+          description: UUID of the primary user
+          format: uuid
+          readOnly: true
+          type: string
+        api_token:
+          description: "API token of the primary user, to be sent in the X-AUTH-YW-API-TOKEN\
+            \ header"
+          readOnly: true
+          type: string
+        api_token_version:
+          description: Version of the API token
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - api_token
+      - api_token_version
+      - customer_uuid
+      - user_uuid
+      title: CustomerRegistration
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    ApiTokenSpec:
+      description: Optional condition for generating an API token. Part of ApiTokenReq.
+      example:
+        api_token_version: 0
+      properties:
+        api_token_version:
+          description: "The caller's current API token version. When set, a new token\
+            \ is generated only if it still matches, so that two concurrent rotations\
+            \ do not silently replace each other."
+          format: int64
+          type: integer
+      title: ApiTokenSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    UserApiToken:
+      description: A user's newly generated API token. Part of UserApiTokenResp.
+      example:
+        api_token_version: 0
+        user_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        api_token: api_token
+      properties:
+        customer_uuid:
+          description: UUID of the user's customer
+          format: uuid
+          readOnly: true
+          type: string
+        user_uuid:
+          description: UUID of the user
+          format: uuid
+          readOnly: true
+          type: string
+        api_token:
+          description: "The new API token, to be sent in the X-AUTH-YW-API-TOKEN header"
+          readOnly: true
+          type: string
+        api_token_version:
+          description: Version of the new API token
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - api_token
+      - api_token_version
+      - customer_uuid
+      - user_uuid
+      title: UserApiToken
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    HostCloud:
+      description: Public cloud that YBA runs on.
+      enum:
+      - aws
+      - gcp
+      - azu
+      title: HostCloud
+      type: string
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AwsHostInfo:
+      description: EC2 instance metadata of the YBA host. Part of HostCloudInfo.
+      example:
+        instance_id: instance_id
+        vpc_id: vpc_id
+        region: region
+        private_ip: private_ip
+      properties:
+        instance_id:
+          description: EC2 instance ID
+          readOnly: true
+          type: string
+        vpc_id:
+          description: VPC of the instance's primary network interface
+          readOnly: true
+          type: string
+        private_ip:
+          description: Private IP address of the instance
+          readOnly: true
+          type: string
+        region:
+          description: AWS region
+          readOnly: true
+          type: string
+      title: AwsHostInfo
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcpHostInfo:
+      description: GCE instance metadata of the YBA host. Part of HostCloudInfo.
+      example:
+        zone: zone
+        project: project
+        shared_vpc_project: shared_vpc_project
+        region: region
+        network: network
+      properties:
+        project:
+          description: ID of the project that the instance belongs to
+          readOnly: true
+          type: string
+        network:
+          description: Name of the VPC network of the instance's first network interface
+          readOnly: true
+          type: string
+        shared_vpc_project:
+          description: "Number of the project that owns that network: the host project\
+            \ for a Shared VPC, otherwise the instance's own project"
+          readOnly: true
+          type: string
+        zone:
+          description: GCP zone
+          readOnly: true
+          type: string
+        region:
+          description: GCP region
+          readOnly: true
+          type: string
+      title: GcpHostInfo
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzuHostInfo:
+      description: Azure VM metadata of the YBA host. Part of HostCloudInfo.
+      example:
+        subscription_id: subscription_id
+        vm_id: vm_id
+        resource_group: resource_group
+        region: region
+        private_ip: private_ip
+      properties:
+        subscription_id:
+          description: Azure subscription of the VM
+          readOnly: true
+          type: string
+        resource_group:
+          description: Resource group of the VM
+          readOnly: true
+          type: string
+        vm_id:
+          description: Azure VM ID
+          readOnly: true
+          type: string
+        private_ip:
+          description: Private IP address of the VM's first network interface
+          readOnly: true
+          type: string
+        region:
+          description: Azure region (location) of the VM
+          readOnly: true
+          type: string
+      title: AzuHostInfo
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    HostCloudInfo:
+      description: The public cloud that YBA runs on and its instance metadata. Part
+        of HostCloudInfoResp. Only the object for the host cloud is set.
+      example:
+        cloud: aws
+        gcp:
+          zone: zone
+          project: project
+          shared_vpc_project: shared_vpc_project
+          region: region
+          network: network
+        region: region
+        aws:
+          instance_id: instance_id
+          vpc_id: vpc_id
+          region: region
+          private_ip: private_ip
+        azu:
+          subscription_id: subscription_id
+          vm_id: vm_id
+          resource_group: resource_group
+          region: region
+          private_ip: private_ip
+      properties:
+        cloud:
+          $ref: '#/components/schemas/HostCloud'
+        region:
+          description: Cloud region of the YBA host. Absent when the cloud is unknown
+            or its metadata service is unreachable.
+          readOnly: true
+          type: string
+        aws:
+          $ref: '#/components/schemas/AwsHostInfo'
+        gcp:
+          $ref: '#/components/schemas/GcpHostInfo'
+        azu:
+          $ref: '#/components/schemas/AzuHostInfo'
+      title: HostCloudInfo
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     CustomerConfigPagedQuerySpec:
       allOf:
       - $ref: '#/components/schemas/PaginationSpec'
@@ -10455,6 +11583,1021 @@ components:
       x-data-container: PaginationResp
       x-data-item: RestoreKeyspaceInfo
       x-data-entities-description: Restore keyspaces for this page.
+    LoginSpec:
+      description: Credentials of the user logging in. Part of LoginReq.
+      example:
+        password: password
+        email: admin@example.com
+      properties:
+        email:
+          description: Email of the user
+          example: admin@example.com
+          minLength: 5
+          type: string
+        password:
+          description: Password of the user
+          format: password
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+      title: LoginSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    Session:
+      description: Session of a logged-in user. Part of SessionResp.
+      example:
+        user_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        auth_token: auth_token
+      properties:
+        auth_token:
+          description: "Session token, to be sent in the X-AUTH-TOKEN header. It expires\
+            \ after yb.authtoken.token_expiry (12 hours by default)"
+          readOnly: true
+          type: string
+        customer_uuid:
+          description: UUID of the user's customer
+          format: uuid
+          readOnly: true
+          type: string
+        user_uuid:
+          description: UUID of the user
+          format: uuid
+          readOnly: true
+          type: string
+      required:
+      - auth_token
+      - customer_uuid
+      - user_uuid
+      title: Session
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageType:
+      description: |
+        StorageType
+
+        Kind of storage a storage configuration points at: AWS S3 or an S3-compatible store, Google
+        Cloud Storage, Azure Blob Storage, an NFS mount on the database nodes, or OCI Object Storage.
+        Part of StorageSpec.
+      enum:
+      - S3
+      - GCS
+      - AZURE
+      - NFS
+      - OCI
+      title: StorageType
+      type: string
+      x-enum-varnames:
+      - StorageTypeS3
+      - StorageTypeGCS
+      - StorageTypeAzure
+      - StorageTypeNFS
+      - StorageTypeOCI
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3CredentialType:
+      description: |
+        S3CredentialType
+
+        Kind of S3 credentials: a static access key, the IAM identity of YBA and the nodes, or
+        cross-cloud federation for database nodes on GCP. Part of S3Credentials.
+      enum:
+      - ACCESS_KEY
+      - IAM
+      - CROSS_CLOUD_FEDERATION
+      title: S3CredentialType
+      type: string
+      x-enum-varnames:
+      - S3CredentialAccessKey
+      - S3CredentialIam
+      - S3CredentialCrossCloudFederation
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3AccessKeyCredentials:
+      description: |
+        S3AccessKeyCredentials
+
+        A static AWS (or S3-compatible) access key. Part of S3Credentials.
+      example:
+        access_key_id: access_key_id
+        credential_type: ACCESS_KEY
+        secret_access_key: secret_access_key
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/S3CredentialType'
+        access_key_id:
+          description: Access key ID. Required on create; never returned.
+          minLength: 1
+          type: string
+          writeOnly: true
+        secret_access_key:
+          description: Secret access key. Required on create; never returned.
+          minLength: 1
+          type: string
+          writeOnly: true
+      required:
+      - credential_type
+      title: S3AccessKeyCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3IamCredentialSource:
+      default: DEFAULT
+      description: |
+        S3IamCredentialSource
+
+        Where YBA gets IAM credentials from. DEFAULT tries, in order, a web identity token, an IAM
+        user profile, an assumed instance role and the EC2 instance profile. Part of S3IamCredentials.
+      enum:
+      - DEFAULT
+      - IAM_USER
+      - WEB_TOKEN
+      - ASSUME_INSTANCE_ROLE
+      - EC2_INSTANCE
+      title: S3IamCredentialSource
+      type: string
+      x-enum-varnames:
+      - S3IamSourceDefault
+      - S3IamSourceIamUser
+      - S3IamSourceWebToken
+      - S3IamSourceAssumeInstanceRole
+      - S3IamSourceEc2Instance
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3IamCredentials:
+      description: |
+        S3IamCredentials
+
+        The IAM identity of YBA and of the database nodes, such as an instance profile or a
+        Kubernetes service account role. Part of S3Credentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/S3CredentialType'
+        credential_source:
+          $ref: '#/components/schemas/S3IamCredentialSource'
+        iam_user_profile:
+          description: AWS profile to use with credential_source IAM_USER. Defaults
+            to "default".
+          type: string
+        session_duration_secs:
+          description: "Duration of assumed-role sessions, in seconds, when the role's\
+            \ maximum can't be read (no iam:GetRole permission). Defaults to 3600."
+          format: int32
+          maximum: 43200
+          minimum: 900
+          type: integer
+        regional_sts:
+          description: Whether to use the regional STS endpoint rather than the global
+            one. Defaults to true.
+          type: boolean
+        sts_region:
+          description: "Region of the STS endpoint, with regional_sts"
+          type: string
+      required:
+      - credential_type
+      title: S3IamCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3CrossCloudFederationCredentials:
+      description: |
+        S3CrossCloudFederationCredentials
+
+        Cross-cloud federated IAM, for database nodes on GCP that write to S3: they exchange their
+        GCP identity for AWS credentials of the role configured on the universe's provider. YBA can't
+        check this access when the configuration is created, since only a node of such a universe can
+        use it. Part of S3Credentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/S3CredentialType'
+      required:
+      - credential_type
+      title: S3CrossCloudFederationCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3Credentials:
+      description: |
+        S3Credentials
+
+        How YBA and the database nodes authenticate to S3. credential_type selects the variant.
+        Part of S3StorageSpec.
+      discriminator:
+        mapping:
+          ACCESS_KEY: '#/components/schemas/S3AccessKeyCredentials'
+          IAM: '#/components/schemas/S3IamCredentials'
+          CROSS_CLOUD_FEDERATION: '#/components/schemas/S3CrossCloudFederationCredentials'
+        propertyName: credential_type
+      oneOf:
+      - $ref: '#/components/schemas/S3AccessKeyCredentials'
+      - $ref: '#/components/schemas/S3IamCredentials'
+      - $ref: '#/components/schemas/S3CrossCloudFederationCredentials'
+      title: S3Credentials
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-one-of-name: S3Credentials
+    S3RegionLocation:
+      description: |
+        S3RegionLocation
+
+        Backup location of one region of an S3 storage configuration. Part of S3StorageSpec.
+      example:
+        location: s3://backups-us-west-2.example.com/yba
+        signing_region: signing_region
+        global_bucket_access: true
+        region: us-west-2
+        host_base: host_base
+      properties:
+        region:
+          description: Region of the universe whose backups go to this location
+          example: us-west-2
+          minLength: 1
+          type: string
+        location:
+          description: "Location of the region's backups, as s3://<bucket>[/<path>]"
+          example: s3://backups-us-west-2.example.com/yba
+          minLength: 6
+          type: string
+        host_base:
+          description: Host of the S3 endpoint for this region. Defaults to the configuration's
+            host_base.
+          type: string
+        signing_region:
+          description: AWS region to sign this region's requests for
+          type: string
+        global_bucket_access:
+          default: true
+          description: Whether this region's bucket is reachable from every region
+          type: boolean
+      required:
+      - location
+      - region
+      title: S3RegionLocation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    S3StorageSpec:
+      description: |
+        S3StorageSpec
+
+        AWS S3 or S3-compatible storage. Part of StorageSpec.
+      example:
+        storage_type: S3
+        path_style_access: false
+        use_chunked_encoding: true
+        region_locations:
+        - location: s3://backups-us-west-2.example.com/yba
+          signing_region: signing_region
+          global_bucket_access: true
+          region: us-west-2
+          host_base: host_base
+        - location: s3://backups-us-west-2.example.com/yba
+          signing_region: signing_region
+          global_bucket_access: true
+          region: us-west-2
+          host_base: host_base
+        credentials:
+          access_key_id: access_key_id
+          credential_type: ACCESS_KEY
+          secret_access_key: secret_access_key
+        immutable_storage: false
+        signing_region: signing_region
+        global_bucket_access: true
+        backup_location: s3://backups.example.com/yba
+        host_base: s3.amazonaws.com
+      properties:
+        storage_type:
+          $ref: '#/components/schemas/StorageType'
+        backup_location:
+          description: "Default location of backups, as s3://<bucket>[/<path>]. Can't\
+            \ be changed after creation."
+          example: s3://backups.example.com/yba
+          minLength: 6
+          type: string
+        immutable_storage:
+          default: false
+          description: "Whether the bucket keeps objects immutable (object lock).\
+            \ If true, deleting a backup removes only its YBA metadata, not its files."
+          type: boolean
+        host_base:
+          description: "Host of the S3 endpoint, for S3-compatible storage. Defaults\
+            \ to s3.amazonaws.com."
+          example: s3.amazonaws.com
+          type: string
+        signing_region:
+          description: "AWS region to sign requests for, when it can't be derived\
+            \ from the bucket, as with some S3-compatible stores"
+          type: string
+        path_style_access:
+          default: false
+          description: "Whether to address the bucket in the path (https://host/bucket)\
+            \ rather than in the host name (https://bucket.host), as some S3-compatible\
+            \ stores require"
+          type: boolean
+        use_chunked_encoding:
+          default: true
+          description: Whether to use chunked transfer encoding for uploads
+          type: boolean
+        global_bucket_access:
+          default: true
+          description: "Whether the bucket is reachable from every region. If false,\
+            \ YBA addresses it through its own region."
+          type: boolean
+        credentials:
+          $ref: '#/components/schemas/S3Credentials'
+        region_locations:
+          description: "Per-region backup locations, for universes that store each\
+            \ region's backup in that region"
+          items:
+            $ref: '#/components/schemas/S3RegionLocation'
+          type: array
+      required:
+      - backup_location
+      - credentials
+      - storage_type
+      title: S3StorageSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsCredentialType:
+      description: |
+        GcsCredentialType
+
+        Kind of GCS credentials: a service account key, the GCP identity of YBA and the nodes, or
+        cross-cloud federation for YBA on AWS. Part of GcsCredentials.
+      enum:
+      - SERVICE_ACCOUNT_KEY
+      - IAM
+      - CROSS_CLOUD_FEDERATION
+      title: GcsCredentialType
+      type: string
+      x-enum-varnames:
+      - GcsCredentialServiceAccountKey
+      - GcsCredentialIam
+      - GcsCredentialCrossCloudFederation
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsServiceAccountKeyCredentials:
+      description: |
+        GcsServiceAccountKeyCredentials
+
+        A GCP service account key. Part of GcsCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/GcsCredentialType'
+        credentials_json:
+          description: "The service account key file, as JSON. Required on create;\
+            \ never returned."
+          minLength: 2
+          type: string
+          writeOnly: true
+      required:
+      - credential_type
+      title: GcsServiceAccountKeyCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsIamCredentials:
+      description: |
+        GcsIamCredentials
+
+        The service account attached to YBA's and the database nodes' VMs or Kubernetes pods
+        (workload identity). Part of GcsCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/GcsCredentialType'
+      required:
+      - credential_type
+      title: GcsIamCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsCrossCloudFederationCredentials:
+      description: |
+        GcsCrossCloudFederationCredentials
+
+        Cross-cloud federated IAM, for YBA running on AWS: YBA exchanges its AWS identity for GCP
+        credentials through the workload identity federation audience configured on the universe's
+        provider. YBA can't check this access when the configuration is created, since it needs a
+        universe's provider. Part of GcsCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/GcsCredentialType'
+      required:
+      - credential_type
+      title: GcsCrossCloudFederationCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsCredentials:
+      description: |
+        GcsCredentials
+
+        How YBA and the database nodes authenticate to GCS. credential_type selects the variant.
+        Part of GcsStorageSpec.
+      discriminator:
+        mapping:
+          SERVICE_ACCOUNT_KEY: '#/components/schemas/GcsServiceAccountKeyCredentials'
+          IAM: '#/components/schemas/GcsIamCredentials'
+          CROSS_CLOUD_FEDERATION: '#/components/schemas/GcsCrossCloudFederationCredentials'
+        propertyName: credential_type
+      oneOf:
+      - $ref: '#/components/schemas/GcsServiceAccountKeyCredentials'
+      - $ref: '#/components/schemas/GcsIamCredentials'
+      - $ref: '#/components/schemas/GcsCrossCloudFederationCredentials'
+      title: GcsCredentials
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-one-of-name: GcsCredentials
+    GcsRegionLocation:
+      description: |
+        GcsRegionLocation
+
+        Backup location of one region of a GCS storage configuration. Part of GcsStorageSpec.
+      properties:
+        region:
+          description: Region of the universe whose backups go to this location
+          example: us-west1
+          minLength: 1
+          type: string
+        location:
+          description: "Location of the region's backups, as gs://<bucket>[/<path>]"
+          example: gs://backups-example-us-west1/yba
+          minLength: 6
+          type: string
+      required:
+      - location
+      - region
+      title: GcsRegionLocation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    GcsStorageSpec:
+      description: |
+        GcsStorageSpec
+
+        Google Cloud Storage. Part of StorageSpec.
+      properties:
+        storage_type:
+          $ref: '#/components/schemas/StorageType'
+        backup_location:
+          description: "Default location of backups, as gs://<bucket>[/<path>]. Can't\
+            \ be changed after creation."
+          example: gs://backups-example/yba
+          minLength: 6
+          type: string
+        immutable_storage:
+          default: false
+          description: "Whether the bucket keeps objects immutable (retention policy).\
+            \ If true, deleting a backup removes only its YBA metadata, not its files."
+          type: boolean
+        credentials:
+          $ref: '#/components/schemas/GcsCredentials'
+        region_locations:
+          description: "Per-region backup locations, for universes that store each\
+            \ region's backup in that region"
+          items:
+            $ref: '#/components/schemas/GcsRegionLocation'
+          type: array
+      required:
+      - backup_location
+      - credentials
+      - storage_type
+      title: GcsStorageSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzureCredentialType:
+      description: |
+        AzureCredentialType
+
+        Kind of Azure credentials: a SAS token per container, or the managed identity of YBA and the
+        nodes. Part of AzureCredentials.
+      enum:
+      - SAS_TOKEN
+      - MANAGED_IDENTITY
+      title: AzureCredentialType
+      type: string
+      x-enum-varnames:
+      - AzureCredentialSasToken
+      - AzureCredentialManagedIdentity
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzureSasTokenCredentials:
+      description: |
+        AzureSasTokenCredentials
+
+        A shared access signature for the backup_location container. Each region location carries the
+        token of its own container. Part of AzureCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/AzureCredentialType'
+        sas_token:
+          description: SAS token of the backup_location container. Required on create;
+            never returned.
+          minLength: 4
+          type: string
+          writeOnly: true
+      required:
+      - credential_type
+      title: AzureSasTokenCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzureManagedIdentityCredentials:
+      description: |
+        AzureManagedIdentityCredentials
+
+        The managed identity of YBA's and the database nodes' VMs. Part of AzureCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/AzureCredentialType'
+        client_id:
+          description: Client ID of the user-assigned managed identity to use. Omit
+            to use the system-assigned identity.
+          type: string
+      required:
+      - credential_type
+      title: AzureManagedIdentityCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzureCredentials:
+      description: |
+        AzureCredentials
+
+        How YBA and the database nodes authenticate to Azure Blob Storage. credential_type selects
+        the variant. Part of AzureStorageSpec.
+      discriminator:
+        mapping:
+          SAS_TOKEN: '#/components/schemas/AzureSasTokenCredentials'
+          MANAGED_IDENTITY: '#/components/schemas/AzureManagedIdentityCredentials'
+        propertyName: credential_type
+      oneOf:
+      - $ref: '#/components/schemas/AzureSasTokenCredentials'
+      - $ref: '#/components/schemas/AzureManagedIdentityCredentials'
+      title: AzureCredentials
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-one-of-name: AzureCredentials
+    AzureRegionLocation:
+      description: |
+        AzureRegionLocation
+
+        Backup location of one region of an Azure storage configuration. Part of AzureStorageSpec.
+      properties:
+        region:
+          description: Region of the universe whose backups go to this location
+          example: westus2
+          minLength: 1
+          type: string
+        location:
+          description: "Location of the region's backups, as https://<account>.blob.core.windows.net/<container>[/<path>]"
+          example: https://examplewestus2.blob.core.windows.net/backups
+          minLength: 1
+          type: string
+        sas_token:
+          description: "SAS token of this region's container, with SAS_TOKEN credentials.\
+            \ Required on create with those credentials; never returned."
+          minLength: 4
+          type: string
+          writeOnly: true
+      required:
+      - location
+      - region
+      title: AzureRegionLocation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    AzureStorageSpec:
+      description: |
+        AzureStorageSpec
+
+        Azure Blob Storage. Part of StorageSpec.
+      properties:
+        storage_type:
+          $ref: '#/components/schemas/StorageType'
+        backup_location:
+          description: "Default location of backups, as https://<account>.blob.core.windows.net/<container>[/<path>].\
+            \ Can't be changed after creation."
+          example: https://example.blob.core.windows.net/backups
+          minLength: 1
+          type: string
+        immutable_storage:
+          default: false
+          description: "Whether the container keeps blobs immutable. If true, deleting\
+            \ a backup removes only its YBA metadata, not its files."
+          type: boolean
+        credentials:
+          $ref: '#/components/schemas/AzureCredentials'
+        region_locations:
+          description: "Per-region backup locations, for universes that store each\
+            \ region's backup in that region"
+          items:
+            $ref: '#/components/schemas/AzureRegionLocation'
+          type: array
+      required:
+      - backup_location
+      - credentials
+      - storage_type
+      title: AzureStorageSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    NfsRegionLocation:
+      description: |
+        NfsRegionLocation
+
+        Backup location of one region of an NFS storage configuration. Part of NfsStorageSpec.
+      properties:
+        region:
+          description: Region of the universe whose backups go to this location
+          minLength: 1
+          type: string
+        location:
+          description: Absolute path of the region's NFS mount on the database nodes
+          minLength: 1
+          type: string
+        bucket:
+          description: Directory under location that holds the backups. Defaults to
+            yugabyte_backup.
+          minLength: 1
+          type: string
+        volumes:
+          description: "NFS volumes to check, in the backup prechecks, for being mounted\
+            \ on the region's nodes"
+          items:
+            type: string
+          type: array
+      required:
+      - location
+      - region
+      title: NfsRegionLocation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    NfsStorageSpec:
+      description: |
+        NfsStorageSpec
+
+        An NFS share mounted at the same path on every database node. Part of StorageSpec.
+      properties:
+        storage_type:
+          $ref: '#/components/schemas/StorageType'
+        backup_location:
+          description: Absolute path of the NFS mount on the database nodes. Can't
+            be changed after creation.
+          example: /mnt/nfs
+          minLength: 1
+          type: string
+        bucket:
+          description: Directory under backup_location that holds the backups. Defaults
+            to yugabyte_backup.
+          minLength: 1
+          type: string
+        volumes:
+          description: "NFS volumes to check, in the backup prechecks, for being mounted\
+            \ on the nodes"
+          items:
+            type: string
+          type: array
+        region_locations:
+          description: "Per-region backup locations, for universes that store each\
+            \ region's backup in that region"
+          items:
+            $ref: '#/components/schemas/NfsRegionLocation'
+          type: array
+      required:
+      - backup_location
+      - storage_type
+      title: NfsStorageSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    OciCredentialType:
+      description: |
+        OciCredentialType
+
+        Kind of OCI credentials: the OCI IAM identity of YBA and the nodes with the native API, or a
+        customer secret key with the S3-compatible API. Part of OciCredentials.
+      enum:
+      - IAM
+      - S3_COMPATIBLE
+      title: OciCredentialType
+      type: string
+      x-enum-varnames:
+      - OciCredentialIam
+      - OciCredentialS3Compatible
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    OciIamCredentials:
+      description: |
+        OciIamCredentials
+
+        The OCI IAM identity (instance principal) of YBA and the database nodes, with the native
+        Object Storage API. Part of OciCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/OciCredentialType'
+      required:
+      - credential_type
+      title: OciIamCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    OciS3CompatibleCredentials:
+      description: |
+        OciS3CompatibleCredentials
+
+        A customer secret key, with the S3-compatible Object Storage API. Part of OciCredentials.
+      properties:
+        credential_type:
+          $ref: '#/components/schemas/OciCredentialType'
+        access_key_id:
+          description: Access key of the customer secret key. Required on create;
+            never returned.
+          minLength: 1
+          type: string
+          writeOnly: true
+        secret_access_key:
+          description: Secret of the customer secret key. Required on create; never
+            returned.
+          minLength: 1
+          type: string
+          writeOnly: true
+        host_base:
+          description: Host of the S3-compatible endpoint
+          example: example.compat.objectstorage.us-sanjose-1.oraclecloud.com
+          minLength: 1
+          type: string
+      required:
+      - credential_type
+      - host_base
+      title: OciS3CompatibleCredentials
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    OciCredentials:
+      description: |
+        OciCredentials
+
+        How YBA and the database nodes authenticate to OCI Object Storage. credential_type selects
+        the variant. Part of OciStorageSpec.
+      discriminator:
+        mapping:
+          IAM: '#/components/schemas/OciIamCredentials'
+          S3_COMPATIBLE: '#/components/schemas/OciS3CompatibleCredentials'
+        propertyName: credential_type
+      oneOf:
+      - $ref: '#/components/schemas/OciIamCredentials'
+      - $ref: '#/components/schemas/OciS3CompatibleCredentials'
+      title: OciCredentials
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-one-of-name: OciCredentials
+    OciRegionLocation:
+      description: |
+        OciRegionLocation
+
+        Backup location of one region of an OCI storage configuration. Part of OciStorageSpec.
+      properties:
+        region:
+          description: Region of the universe whose backups go to this location
+          minLength: 1
+          type: string
+        location:
+          description: "Location of the region's backups, in the format of backup_location"
+          minLength: 1
+          type: string
+        host_base:
+          description: "Host of the S3-compatible endpoint for this region, with S3_COMPATIBLE\
+            \ credentials"
+          type: string
+      required:
+      - location
+      - region
+      title: OciRegionLocation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    OciStorageSpec:
+      description: |
+        OciStorageSpec
+
+        OCI Object Storage, through its native API or its S3-compatible API. Part of StorageSpec.
+      properties:
+        storage_type:
+          $ref: '#/components/schemas/StorageType'
+        backup_location:
+          description: "Default location of backups: an Object Storage URL, https://objectstorage.<region>.oraclecloud.com/n/<namespace>/b/<bucket>/o[/<path>],\
+            \ with IAM credentials, or s3://<bucket>[/<path>] with S3_COMPATIBLE credentials.\
+            \ Can't be changed after creation."
+          minLength: 1
+          type: string
+        immutable_storage:
+          default: false
+          description: "Whether the bucket keeps objects immutable (retention rules).\
+            \ If true, deleting a backup removes only its YBA metadata, not its files."
+          type: boolean
+        region:
+          description: "OCI region of Object Storage. With S3_COMPATIBLE credentials,\
+            \ also the signing region."
+          example: us-sanjose-1
+          minLength: 1
+          type: string
+        namespace:
+          description: Object Storage namespace. Required with IAM credentials; must
+            match the namespace in an Object Storage URL.
+          type: string
+        credentials:
+          $ref: '#/components/schemas/OciCredentials'
+        region_locations:
+          description: "Per-region backup locations, for universes that store each\
+            \ region's backup in that region"
+          items:
+            $ref: '#/components/schemas/OciRegionLocation'
+          type: array
+      required:
+      - backup_location
+      - credentials
+      - region
+      - storage_type
+      title: OciStorageSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageSpec:
+      description: |
+        StorageSpec
+
+        Where backups are stored and how YBA reaches the storage. storage_type selects the variant.
+        Part of StorageConfigSpec.
+      discriminator:
+        mapping:
+          S3: '#/components/schemas/S3StorageSpec'
+          GCS: '#/components/schemas/GcsStorageSpec'
+          AZURE: '#/components/schemas/AzureStorageSpec'
+          NFS: '#/components/schemas/NfsStorageSpec'
+          OCI: '#/components/schemas/OciStorageSpec'
+        propertyName: storage_type
+      oneOf:
+      - $ref: '#/components/schemas/S3StorageSpec'
+      - $ref: '#/components/schemas/GcsStorageSpec'
+      - $ref: '#/components/schemas/AzureStorageSpec'
+      - $ref: '#/components/schemas/NfsStorageSpec'
+      - $ref: '#/components/schemas/OciStorageSpec'
+      title: StorageSpec
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+      x-one-of-name: StorageSpec
+    StorageConfigSpec:
+      description: |
+        StorageConfigSpec
+
+        The client-settable part of a storage configuration. Secrets are accepted here and never
+        returned. Part of StorageConfig, StorageConfigCreateReq and StorageConfigValidateReq.
+      example:
+        name: name
+        storage:
+          storage_type: S3
+          path_style_access: false
+          use_chunked_encoding: true
+          region_locations:
+          - location: s3://backups-us-west-2.example.com/yba
+            signing_region: signing_region
+            global_bucket_access: true
+            region: us-west-2
+            host_base: host_base
+          - location: s3://backups-us-west-2.example.com/yba
+            signing_region: signing_region
+            global_bucket_access: true
+            region: us-west-2
+            host_base: host_base
+          credentials:
+            access_key_id: access_key_id
+            credential_type: ACCESS_KEY
+            secret_access_key: secret_access_key
+          immutable_storage: false
+          signing_region: signing_region
+          global_bucket_access: true
+          backup_location: s3://backups.example.com/yba
+          host_base: s3.amazonaws.com
+      properties:
+        name:
+          description: "Name of the storage configuration, unique within the customer"
+          maxLength: 100
+          minLength: 1
+          type: string
+        storage:
+          $ref: '#/components/schemas/StorageSpec'
+      required:
+      - name
+      - storage
+      title: StorageConfigSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfigState:
+      description: |
+        StorageConfigState
+
+        State of a storage configuration. QUEUED_FOR_DELETION means a delete was accepted and YBA
+        removes the configuration once no backup stored with it is still being deleted. Part of
+        StorageConfigInfo.
+      enum:
+      - ACTIVE
+      - QUEUED_FOR_DELETION
+      readOnly: true
+      title: StorageConfigState
+      type: string
+      x-enum-varnames:
+      - StorageConfigActive
+      - StorageConfigQueuedForDeletion
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfigInfo:
+      description: |
+        StorageConfigInfo
+
+        The part of a storage configuration that YBA sets. Part of StorageConfig.
+      example:
+        state: ACTIVE
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        is_kubernetes_operator_controlled: true
+      properties:
+        uuid:
+          description: UUID of the storage configuration
+          format: uuid
+          readOnly: true
+          type: string
+        state:
+          $ref: '#/components/schemas/StorageConfigState'
+        is_kubernetes_operator_controlled:
+          description: Whether the YBA Kubernetes operator manages this configuration
+            through a StorageConfig resource. Change such a configuration through
+            its resource instead.
+          readOnly: true
+          type: boolean
+      required:
+      - state
+      - uuid
+      title: StorageConfigInfo
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    StorageConfig:
+      description: |
+        StorageConfig
+
+        A backup storage configuration: where YBA stores backups and the credentials it uses to reach
+        that storage. Part of StorageConfigResp.
+      example:
+        spec:
+          name: name
+          storage:
+            storage_type: S3
+            path_style_access: false
+            use_chunked_encoding: true
+            region_locations:
+            - location: s3://backups-us-west-2.example.com/yba
+              signing_region: signing_region
+              global_bucket_access: true
+              region: us-west-2
+              host_base: host_base
+            - location: s3://backups-us-west-2.example.com/yba
+              signing_region: signing_region
+              global_bucket_access: true
+              region: us-west-2
+              host_base: host_base
+            credentials:
+              access_key_id: access_key_id
+              credential_type: ACCESS_KEY
+              secret_access_key: secret_access_key
+            immutable_storage: false
+            signing_region: signing_region
+            global_bucket_access: true
+            backup_location: s3://backups.example.com/yba
+            host_base: s3.amazonaws.com
+        info:
+          state: ACTIVE
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          is_kubernetes_operator_controlled: true
+      properties:
+        spec:
+          $ref: '#/components/schemas/StorageConfigSpec'
+        info:
+          $ref: '#/components/schemas/StorageConfigInfo'
+      required:
+      - info
+      - spec
+      title: StorageConfig
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     SupportBundleComponentType:
       description: Support bundle component type (same values as V1 BundleDetails.ComponentType).
       enum:
@@ -10531,12 +12674,16 @@ components:
         script_path:
           description: |
             Path on the YBA host to the script file to execute on the node.
-            Must resolve to one of the shipped support bundle scripts, node_utils.sh or
-            yba_utils.sh, under the platform devops directory. A relative path is resolved
+            Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh
+            or yba_utils.sh, under the platform devops directory. A relative path is resolved
             against that directory. Any other path is rejected.
           type: string
         params:
-          description: Arguments appended after the script (entrypoint + flags).
+          description: |
+            Arguments appended after the script (entrypoint + flags).
+            YBA replaces them with the arguments its support bundle manifest
+            gives component_name; the request's collection window and options
+            such as filter_pg_audit_logs still apply.
           items:
             type: string
           type: array
@@ -10554,7 +12701,10 @@ components:
             /var/log.
           type: string
         timeout_secs:
-          description: Script execution timeout in seconds.
+          description: |
+            Script execution timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: FilesComponentSpec
@@ -10579,12 +12729,15 @@ components:
         script_path:
           description: |
             Path on the YBA host to the script file to execute on the node.
-            Must resolve to one of the shipped support bundle scripts, node_utils.sh or
-            yba_utils.sh, under the platform devops directory. A relative path is resolved
+            Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh
+            or yba_utils.sh, under the platform devops directory. A relative path is resolved
             against that directory. Any other path is rejected.
           type: string
         params:
-          description: Arguments appended after the script (entrypoint + flags).
+          description: |
+            Arguments appended after the script (entrypoint + flags).
+            YBA replaces them with the arguments its support bundle manifest
+            gives component_name.
           items:
             type: string
           type: array
@@ -10602,7 +12755,10 @@ components:
             /var/log.
           type: string
         timeout_secs:
-          description: Script execution timeout in seconds.
+          description: |
+            Script execution timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: BashComponentSpec
@@ -10634,6 +12790,9 @@ components:
             holding more than one statement are rejected, as are constructs that reach outside
             the database such as COPY ... TO PROGRAM or the pg_read_file family. The session
             additionally runs with default_transaction_read_only=on.
+            After these checks YBA runs the queries its support bundle manifest
+            lists for component_name instead, and rejects a component_name the
+            manifest doesn't list.
           items:
             type: string
           minItems: 1
@@ -10644,7 +12803,10 @@ components:
             Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
           type: string
         timeout_secs:
-          description: Command timeout in seconds.
+          description: |
+            Command timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: YSQLComponentSpec
@@ -10674,6 +12836,9 @@ components:
             Support bundles are read-only, so each entry must be a single statement beginning
             with SELECT, DESCRIBE, DESC, SHOW or LIST (case-insensitive). Entries holding more
             than one statement are rejected.
+            After these checks YBA runs the queries its support bundle manifest
+            lists for component_name instead, and rejects a component_name the
+            manifest doesn't list.
           items:
             type: string
           minItems: 1
@@ -10684,7 +12849,10 @@ components:
             Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
           type: string
         timeout_secs:
-          description: Command timeout in seconds.
+          description: |
+            Command timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: YCQLComponentSpec
@@ -10718,7 +12886,11 @@ components:
           minItems: 1
           type: array
         yb_admin_args:
-          description: Additional arguments after the subcommand.
+          description: |
+            Additional arguments after the subcommand. YBA replaces
+            them with the arguments its support bundle manifest lists for
+            component_name, and rejects a component_name the manifest doesn't
+            list.
           items:
             type: string
           type: array
@@ -10728,7 +12900,10 @@ components:
             Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
           type: string
         timeout_secs:
-          description: Command timeout in seconds.
+          description: |
+            Command timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: YbAdminComponentSpec
@@ -10754,8 +12929,8 @@ components:
         script_path:
           description: |
             Path on the YBA host to the script file to execute locally.
-            Must resolve to one of the shipped support bundle scripts, node_utils.sh or
-            yba_utils.sh, under the platform devops directory. A relative path is resolved
+            Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh
+            or yba_utils.sh, under the platform devops directory. A relative path is resolved
             against that directory. Any other path is rejected.
           type: string
         params:
@@ -10775,7 +12950,10 @@ components:
             It is still validated, so only yugabyte is accepted when set.
           type: string
         timeout_secs:
-          description: Script execution timeout in seconds.
+          description: |
+            Script execution timeout in seconds.
+            YBA uses the timeout its support bundle manifest gives
+            component_name instead.
           format: int64
           type: integer
       title: YbaComponentSpec
@@ -10822,6 +13000,23 @@ components:
 
         Differs from `SupportBundleSpec` in that it carries input-only knobs that are resolved
         server side and not persisted with the bundle.
+
+        Leaving every `*_component_specs` list empty makes the server build
+        them from the support bundle manifest shipped with YBA, keeping the
+        entries named in `components`. Populating any one list turns the
+        fill off for all of them, and
+        each spec is then checked against the same manifest: a component it
+        doesn't list, a different script or entrypoint, or a `linux_user` other
+        than yugabyte is rejected with 400. Either way, each spec runs with the
+        manifest's Files and Bash arguments, YSQL and YCQL queries, yb-admin
+        arguments, timeout and tar path, whatever the request carries; the
+        request still chooses the components, `db_name` and `keyspace`, and the
+        yb-admin commands within the allowed set. Scalars the request does
+        send, such as `filter_pg_audit_logs`, `max_num_recent_cores`,
+        `max_core_file_size` and the `prom_*` fields, override what the manifest
+        carries. The fill applies to the universe create and estimate-size
+        endpoints; the YBA-only endpoints don't fill, but check their specs and
+        set the tar path the same way.
       example:
         end_date: 2022-12-12T13:07:18Z
         components:
@@ -10988,44 +13183,44 @@ components:
         files_component_specs:
           description: |
             Specs driving the generic node-level FilesComponent. Required when components contains
-            FilesComponent. On Kubernetes universes the SystemLogs and NodeAgent specs are dropped, since
-            a pod has neither the host's /var/log nor a node agent, and the YbcLogs spec is collected from
-            tserver pods only.
+            FilesComponent, unless the manifest fill applies. On Kubernetes universes the SystemLogs and
+            NodeAgent specs are dropped, since a pod has neither the host's /var/log nor a node agent, and
+            the YbcLogs spec is collected from tserver pods only.
           items:
             $ref: '#/components/schemas/FilesComponentSpec'
           type: array
         bash_component_specs:
           description: |
-            Specs driving the node-level BashComponent. Required when components contains BashComponent.
-            On Kubernetes universes the collect_cdc_state and collect_threadz_memz_rpcz_stats specs are
-            collected from tserver pods only, and collect_heap_snapshot skips its tserver endpoints on a
-            master pod.
+            Specs driving the node-level BashComponent. Required when components contains BashComponent,
+            unless the manifest fill applies. On Kubernetes universes the collect_cdc_state and
+            collect_threadz_memz_rpcz_stats specs are collected from tserver pods only, and
+            collect_heap_snapshot skips its tserver endpoints on a master pod.
           items:
             $ref: '#/components/schemas/BashComponentSpec'
           type: array
         ysql_component_specs:
           description: |
-            Specs driving the node-level YSQLComponent. Required when components contains YSQLComponent.
-            Collected from tserver pods only on Kubernetes universes.
+            Specs driving the node-level YSQLComponent. Required when components contains YSQLComponent,
+            unless the manifest fill applies. Collected from tserver pods only on Kubernetes universes.
           items:
             $ref: '#/components/schemas/YSQLComponentSpec'
           type: array
         ycql_component_specs:
           description: |
-            Specs driving the node-level YCQLComponent. Required when components contains YCQLComponent.
-            Collected from tserver pods only on Kubernetes universes.
+            Specs driving the node-level YCQLComponent. Required when components contains YCQLComponent,
+            unless the manifest fill applies. Collected from tserver pods only on Kubernetes universes.
           items:
             $ref: '#/components/schemas/YCQLComponentSpec'
           type: array
         yb_admin_component_specs:
-          description: Specs driving the node-level YbAdminComponent. Required when
-            components contains YbAdminComponent.
+          description: "Specs driving the node-level YbAdminComponent. Required when\
+            \ components contains YbAdminComponent, unless the manifest fill applies."
           items:
             $ref: '#/components/schemas/YbAdminComponentSpec'
           type: array
         yba_component_specs:
-          description: Specs driving the global-level YBAComponent. Required when
-            components contains YBAComponent.
+          description: "Specs driving the global-level YBAComponent. Required when\
+            \ components contains YBAComponent, unless the manifest fill applies."
           items:
             $ref: '#/components/schemas/YbaComponentSpec'
           type: array
@@ -11077,8 +13272,8 @@ components:
           type: object
         prometheus_metrics_types:
           description: |
-            List of exports to be included in the prometheus dump. NODE_EXPORT is dropped on Kubernetes
-            universes, where node_exporter is not scraped.
+            List of exports to be included in the prometheus dump. On Kubernetes universes NODE_EXPORT is
+            collected only where the node_exporter sidecar is monitored, and dropped otherwise.
           items:
             $ref: '#/components/schemas/PrometheusMetricsType'
           type: array
@@ -11830,7 +14025,10 @@ components:
       x-data-item: SupportBundle
       x-data-entities-description: Support bundles for this page.
     SupportBundleSizeEstimateResponse:
-      description: Support bundle size estimate per node and component (same as V1).
+      description: "Support bundle size estimate per node and component. V2 responses\
+        \ use logical component names from specs (e.g. UniverseLogs, ysql_yugabyte_queries)\
+        \ rather than bucket enum names (FilesComponent). Global component sizes are\
+        \ mapped to the YBA node key."
       example:
         data:
           key:
@@ -13765,69 +15963,6 @@ components:
       x-data-container: PaginationResp
       x-data-item: Task
       x-data-entities-description: Customer tasks for this page.
-    TaskExecutorShutdownStatus:
-      description: |
-        Current shutdown status of the YBA task executor.
-      example:
-        num_running_tasks: 0
-        is_shutdown_initiated: false
-        is_shutdown_complete: false
-      properties:
-        is_shutdown_initiated:
-          description: |
-            True if the task executor has been signaled to shut down.
-          example: false
-          readOnly: true
-          type: boolean
-        is_shutdown_complete:
-          description: |
-            True if application shutdown hooks have finished after the task
-            executor drained.
-          example: false
-          readOnly: true
-          type: boolean
-        num_running_tasks:
-          description: |
-            Number of parent tasks still registered with the executor.
-          example: 0
-          format: int32
-          readOnly: true
-          type: integer
-      title: TaskExecutorShutdownStatus
-      type: object
-      x-yba-api-visibility: internal
-    TaskExecutorShutdownSpec:
-      description: |
-        Parameters for shutting down the YBA task executor.
-      example:
-        abort_time_seconds: 300
-      properties:
-        abort_time_seconds:
-          description: |
-            Grace period in seconds before in-flight tasks are aborted.
-          example: 300
-          format: int64
-          minimum: 0
-          type: integer
-      required:
-      - abort_time_seconds
-      title: TaskExecutorShutdownSpec
-      type: object
-      x-yba-api-visibility: internal
-    TaskExecutorShutdownResp:
-      description: |
-        Result of a task executor shutdown request.
-      example:
-        success: true
-      properties:
-        success:
-          description: |
-            True if task executor shutdown was initiated by this call.
-          example: true
-          type: boolean
-      title: TaskExecutorShutdownResp
-      type: object
-      x-yba-api-visibility: internal
     TaskRetrySpec:
       description: |
         TaskRetrySpec
@@ -13912,6 +16047,7 @@ components:
       example:
         client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
         enable_node_to_node_encrypt: false
+        use_node_to_node_client_certs: false
         root_and_client_root_ca_same: false
         enable_client_to_node_encrypt: false
         root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -13924,6 +16060,13 @@ components:
           description: Whether to enable encryption for client connection to DB nodes
           example: false
           type: boolean
+        use_node_to_node_client_certs:
+          description: |
+            Whether DB nodes require a client certificate on RPC (node_to_node_encryption_use_client_certificates). Supported only on Kubernetes universes whose node-to-node encryption uses a cert-manager (K8SCertManager) root CA; VM universes and Kubernetes universes with other root CA types are not supported. Can only be set at universe creation.
+          example: false
+          type: boolean
+          x-yba-api-since: 2026.2.0.0
+          x-yba-api-visibility: preview
         root_and_client_root_ca_same:
           description: "In case certificates are generated, whether to use the same\
             \ certificate"
@@ -15094,6 +17237,36 @@ components:
       - UNEXPOSED
       title: ExposingServiceState
       type: string
+    ManagedLoadBalancerSpec:
+      description: "Load balancers that YBA creates, manages and deletes for the cluster.\
+        \ Each enabled kind gives one L4 load balancer in every region of the cluster,\
+        \ serving all zones of the region. At create, this object must enable at least\
+        \ one load balancer. ClusterInfo.load_balancers lists them with their scheme\
+        \ and address. An edit of the universe can turn them on or off; in an edit,\
+        \ an object that enables none turns them off. Part of ClusterNetworkingSpec\
+        \ and ClusterNetworkingEditSpec."
+      example:
+        enable_private: true
+        enable_public: false
+      properties:
+        enable_private:
+          default: false
+          description: "Whether YBA creates a private load balancer in each region.\
+            \ Clients in the VPC of the universe, or in a network peered with it,\
+            \ can reach it."
+          example: true
+          type: boolean
+        enable_public:
+          default: false
+          description: "Whether YBA creates a public load balancer in each region,\
+            \ which clients on the internet can reach. Not supported yet. YBA rejects\
+            \ true."
+          example: false
+          type: boolean
+      title: ManagedLoadBalancerSpec
+      type: object
+      x-yba-api-visibility: preview
+      x-yba-api-since: 2.31.0.0
     ClusterNetworkingSpec:
       allOf:
       - $ref: '#/components/schemas/AvailabilityZoneNetworking'
@@ -15109,6 +17282,8 @@ components:
             example: false
             type: boolean
             x-yba-api-visibility: internal
+          managed_load_balancer:
+            $ref: '#/components/schemas/ManagedLoadBalancerSpec'
           az_networking:
             additionalProperties:
               $ref: '#/components/schemas/AvailabilityZoneNetworking'
@@ -15132,6 +17307,9 @@ components:
               - .amazonaws.com
             master: "{}"
         tserver: "{}"
+        managed_load_balancer:
+          enable_private: true
+          enable_public: false
         proxy_config:
           http_proxy: http://10.9.131.7:3128
           https_proxy: http://10.9.131.7:3128
@@ -15175,6 +17353,9 @@ components:
                 - .amazonaws.com
               master: "{}"
           tserver: "{}"
+          managed_load_balancer:
+            enable_private: true
+            enable_public: false
           proxy_config:
             http_proxy: http://10.9.131.7:3128
             https_proxy: http://10.9.131.7:3128
@@ -16326,6 +18507,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -16700,6 +18884,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -17431,6 +19618,9 @@ components:
                 - .amazonaws.com
               master: "{}"
           tserver: "{}"
+          managed_load_balancer:
+            enable_private: true
+            enable_public: false
           proxy_config:
             http_proxy: http://10.9.131.7:3128
             https_proxy: http://10.9.131.7:3128
@@ -17749,6 +19939,7 @@ components:
         encryption_in_transit_spec:
           client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
           enable_node_to_node_encrypt: false
+          use_node_to_node_client_certs: false
           root_and_client_root_ca_same: false
           enable_client_to_node_encrypt: false
           root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -17786,6 +19977,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -18160,6 +20354,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -18891,6 +21088,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -19115,6 +21315,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -19489,6 +21692,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -20220,6 +22426,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -20444,6 +22653,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -20818,6 +23030,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -21549,6 +23764,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -21773,6 +23991,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -22147,6 +24368,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -22878,6 +25102,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -23102,6 +25329,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -23476,6 +25706,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -24207,6 +26440,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -24660,11 +26896,88 @@ components:
       title: RollMaxBatchSize
       type: object
       x-yba-api-visibility: internal
+    ManagedLoadBalancerScheme:
+      description: |
+        Who can reach a load balancer that YBA manages.
+          - PRIVATE: clients in the VPC of the universe, or in a network peered with it.
+          - PUBLIC: clients on the internet. YBA does not create public load balancers yet and rejects ManagedLoadBalancerSpec.enable_public.
+      enum:
+      - PRIVATE
+      - PUBLIC
+      example: PRIVATE
+      title: ManagedLoadBalancerScheme
+      type: string
+      x-yba-api-visibility: preview
+      x-yba-api-since: 2.31.0.0
+    ManagedLoadBalancerInfo:
+      description: "A load balancer that YBA manages for the cluster, because YBA\
+        \ created it or took it over. It serves a set of availability zones in one\
+        \ region. Part of ClusterInfo."
+      example:
+        address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+        scheme: ""
+        name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+        az_uuids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        region_code: us-west-2
+      properties:
+        scheme:
+          allOf:
+          - $ref: '#/components/schemas/ManagedLoadBalancerScheme'
+          description: Who can reach the load balancer. Today always PRIVATE.
+          readOnly: true
+        region_code:
+          description: The region of the load balancer.
+          example: us-west-2
+          readOnly: true
+          type: string
+        az_uuids:
+          description: "The availability zones that the load balancer serves, as the\
+            \ UUIDs of the provider zones. Today every zone of the region. A later\
+            \ release can give a region several load balancers that each serve some\
+            \ of its zones."
+          items:
+            format: uuid
+            type: string
+          readOnly: true
+          type: array
+        name:
+          description: The name of the load balancer in the cloud.
+          example: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+          readOnly: true
+          type: string
+        address:
+          description: "The address that the cloud gives the load balancer. A DNS\
+            \ name on AWS, an IP address on GCP and Azure. Empty until the load balancer\
+            \ is created."
+          example: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+          readOnly: true
+          type: string
+      title: ManagedLoadBalancerInfo
+      type: object
+      x-yba-api-visibility: preview
+      x-yba-api-since: 2.31.0.0
     ClusterInfo:
       description: Universe Cluster Info. Part of the Response payload UniverseInfo
         that describes system generated properties of a Cluster.
       example:
         spot_price: 12.3
+        load_balancers:
+        - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+          scheme: ""
+          name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+          az_uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          region_code: us-west-2
+        - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+          scheme: ""
+          name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+          az_uuids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          region_code: us-west-2
         uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
         geo_partitioned: false
       properties:
@@ -24685,6 +26998,14 @@ components:
           format: double
           type: number
           x-yba-api-visibility: internal
+        load_balancers:
+          description: The load balancers that YBA manages for this cluster.
+          items:
+            $ref: '#/components/schemas/ManagedLoadBalancerInfo'
+          readOnly: true
+          type: array
+          x-yba-api-since: 2.31.0.0
+          x-yba-api-visibility: preview
       title: ClusterInfo
       type: object
     CloudSpecificInfo:
@@ -25126,18 +27447,93 @@ components:
           primary_batch_size: 1
         clusters:
         - spot_price: 12.3
+          load_balancers:
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
           geo_partitioned: false
         - spot_price: 12.3
+          load_balancers:
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
           geo_partitioned: false
         - spot_price: 12.3
+          load_balancers:
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
           geo_partitioned: false
         - spot_price: 12.3
+          load_balancers:
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
           geo_partitioned: false
         - spot_price: 12.3
+          load_balancers:
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
+          - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+            scheme: ""
+            name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+            az_uuids:
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            region_code: us-west-2
           uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
           geo_partitioned: false
         update_in_progress: false
@@ -25405,6 +27801,7 @@ components:
           encryption_in_transit_spec:
             client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
             enable_node_to_node_encrypt: false
+            use_node_to_node_client_certs: false
             root_and_client_root_ca_same: false
             enable_client_to_node_encrypt: false
             root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -25442,6 +27839,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -25816,6 +28216,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -26547,6 +28950,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -26771,6 +29177,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -27145,6 +29554,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -27876,6 +30288,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -28100,6 +30515,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -28474,6 +30892,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -29205,6 +31626,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -29429,6 +31853,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -29803,6 +32230,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -30534,6 +32964,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -30758,6 +33191,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -31132,6 +33568,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -31863,6 +34302,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -32182,18 +34624,93 @@ components:
             primary_batch_size: 1
           clusters:
           - spot_price: 12.3
+            load_balancers:
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
             geo_partitioned: false
           - spot_price: 12.3
+            load_balancers:
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
             geo_partitioned: false
           - spot_price: 12.3
+            load_balancers:
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
             geo_partitioned: false
           - spot_price: 12.3
+            load_balancers:
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
             geo_partitioned: false
           - spot_price: 12.3
+            load_balancers:
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
+            - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+              scheme: ""
+              name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+              az_uuids:
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              region_code: us-west-2
             uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
             geo_partitioned: false
           update_in_progress: false
@@ -32257,10 +34774,15 @@ components:
     ClusterNetworkingEditSpec:
       description: Edit network settings for the cluster. Part of ClusterEditSpec.
       example:
+        managed_load_balancer:
+          enable_private: true
+          enable_public: false
         enable_exposing_service: NONE
       properties:
         enable_exposing_service:
           $ref: '#/components/schemas/ExposingServiceState'
+        managed_load_balancer:
+          $ref: '#/components/schemas/ManagedLoadBalancerSpec'
       title: ClusterNetworkingEditSpec
       type: object
     ClusterProviderEditSpec:
@@ -32536,6 +35058,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -32910,6 +35435,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -33269,6 +35797,9 @@ components:
                   memory: 2Gi
           image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
         networking_spec:
+          managed_load_balancer:
+            enable_private: true
+            enable_public: false
           enable_exposing_service: NONE
         placement_spec:
           cloud_list:
@@ -33786,6 +36317,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -34160,6 +36694,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -34519,6 +37056,9 @@ components:
                     memory: 2Gi
             image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
           networking_spec:
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             enable_exposing_service: NONE
           placement_spec:
             cloud_list:
@@ -34959,6 +37499,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -35333,6 +37876,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -35692,6 +38238,9 @@ components:
                     memory: 2Gi
             image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
           networking_spec:
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             enable_exposing_service: NONE
           placement_spec:
             cloud_list:
@@ -36132,6 +38681,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -36506,6 +39058,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -36865,6 +39420,9 @@ components:
                     memory: 2Gi
             image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
           networking_spec:
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             enable_exposing_service: NONE
           placement_spec:
             cloud_list:
@@ -37305,6 +39863,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -37679,6 +40240,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -38038,6 +40602,9 @@ components:
                     memory: 2Gi
             image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
           networking_spec:
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             enable_exposing_service: NONE
           placement_spec:
             cloud_list:
@@ -38478,6 +41045,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -38852,6 +41422,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -39211,6 +41784,9 @@ components:
                     memory: 2Gi
             image_bundle_uuid: 914aa5a8-febc-44ba-9b60-ea3e22127218
           networking_spec:
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             enable_exposing_service: NONE
           placement_spec:
             cloud_list:
@@ -39496,6 +42072,7 @@ components:
           encryption_in_transit_spec:
             client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
             enable_node_to_node_encrypt: false
+            use_node_to_node_client_certs: false
             root_and_client_root_ca_same: false
             enable_client_to_node_encrypt: false
             root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -39533,6 +42110,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -39907,6 +42487,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -40638,6 +43221,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -40862,6 +43448,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -41236,6 +43825,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -41967,6 +44559,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -42191,6 +44786,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -42565,6 +45163,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -43296,6 +45897,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -43520,6 +46124,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -43894,6 +46501,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -44625,6 +47235,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -44849,6 +47462,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -45223,6 +47839,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -45954,6 +48573,9 @@ components:
                     - .amazonaws.com
                   master: "{}"
               tserver: "{}"
+              managed_load_balancer:
+                enable_private: true
+                enable_public: false
               proxy_config:
                 http_proxy: http://10.9.131.7:3128
                 https_proxy: http://10.9.131.7:3128
@@ -46247,6 +48869,7 @@ components:
             encryption_in_transit_spec:
               client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
               enable_node_to_node_encrypt: false
+              use_node_to_node_client_certs: false
               root_and_client_root_ca_same: false
               enable_client_to_node_encrypt: false
               root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -46284,6 +48907,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -46658,6 +49284,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -47389,6 +50018,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -47613,6 +50245,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -47987,6 +50622,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -48718,6 +51356,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -48942,6 +51583,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -49316,6 +51960,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -50047,6 +52694,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -50271,6 +52921,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -50645,6 +53298,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -51376,6 +54032,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -51600,6 +54259,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -51974,6 +54636,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -52705,6 +55370,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -53024,18 +55692,93 @@ components:
               primary_batch_size: 1
             clusters:
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             update_in_progress: false
@@ -53116,6 +55859,7 @@ components:
             encryption_in_transit_spec:
               client_root_ca: 1711b83b-af74-416b-84b9-e9f66b532c82
               enable_node_to_node_encrypt: false
+              use_node_to_node_client_certs: false
               root_and_client_root_ca_same: false
               enable_client_to_node_encrypt: false
               root_ca: fce99806-03f0-4b17-9483-297ccfaa368d
@@ -53153,6 +55897,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -53527,6 +56274,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -54258,6 +57008,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -54482,6 +57235,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -54856,6 +57612,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -55587,6 +58346,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -55811,6 +58573,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -56185,6 +58950,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -56916,6 +59684,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -57140,6 +59911,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -57514,6 +60288,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -58245,6 +61022,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -58469,6 +61249,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -58843,6 +61626,9 @@ components:
                         - .amazonaws.com
                       master: "{}"
                   tserver: "{}"
+                  managed_load_balancer:
+                    enable_private: true
+                    enable_public: false
                   proxy_config:
                     http_proxy: http://10.9.131.7:3128
                     https_proxy: http://10.9.131.7:3128
@@ -59574,6 +62360,9 @@ components:
                       - .amazonaws.com
                     master: "{}"
                 tserver: "{}"
+                managed_load_balancer:
+                  enable_private: true
+                  enable_public: false
                 proxy_config:
                   http_proxy: http://10.9.131.7:3128
                   https_proxy: http://10.9.131.7:3128
@@ -59893,18 +62682,93 @@ components:
               primary_batch_size: 1
             clusters:
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             - spot_price: 12.3
+              load_balancers:
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
+              - address: lbi-h6uf6zcxc5cwfm74fsld6zvpuy-0123456789abcdef.elb.us-west-2.amazonaws.com
+                scheme: ""
+                name: lbi-h6uf6zcxc5cwfm74fsld6zvpuy
+                az_uuids:
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                region_code: us-west-2
               uuid: 19ebde21-d537-47dc-8fab-3edc243c6f68
               geo_partitioned: false
             update_in_progress: false
@@ -60219,6 +63083,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -60593,6 +63460,9 @@ components:
                   - .amazonaws.com
                 master: "{}"
             tserver: "{}"
+            managed_load_balancer:
+              enable_private: true
+              enable_public: false
             proxy_config:
               http_proxy: http://10.9.131.7:3128
               https_proxy: http://10.9.131.7:3128
@@ -61528,7 +64398,7 @@ components:
         certificate_name:
           description: |
             Optional name (label) of the YBA certificate config to use for the node agent upgrade.
-            If omitted, existing certificates are used.
+            If omitted, generated self-signed certificates are used.
           example: my-custom-ca
           type: string
         node_names:
@@ -61625,6 +64495,8 @@ components:
             description: "Perform a rolling restart of the universe. Otherwise, all\
               \ nodes will be restarted at the same time."
             type: boolean
+          roll_max_batch_size:
+            $ref: '#/components/schemas/RollMaxBatchSize'
           restart_type:
             default: SERVICE
             description: "The method to reboot the node. This is not required for\
@@ -61645,6 +64517,9 @@ components:
         rolling_restart: true
         restart_type: SERVICE
         sleep_after_master_restart_millis: 0
+        roll_max_batch_size:
+          read_replica_batch_size: 1
+          primary_batch_size: 1
       title: UniverseRestart
       type: object
     UniverseSystemdEnableStart:
@@ -61733,29 +64608,39 @@ components:
       title: UniverseCertRotateSpec
       type: object
     UniverseEditKubernetesOverrides:
+      allOf:
+      - $ref: '#/components/schemas/SleepAfterRestartSchema'
+      - $ref: '#/components/schemas/UniverseUpgradeOptionRolling'
+      - properties:
+          overrides:
+            description: Global kubernetes overrides to apply across the entire universe.
+            example: |-
+              tserver:
+                podLabels:
+                  env: test
+            type: string
+          az_overrides:
+            additionalProperties:
+              type: string
+            description: Granular kubernetes overrides per Availability Zone identified
+              by AZ uuid.
+            example: "az_uuid: \"tserver:\\n  podLabels:\\n    env: test\""
+            type: object
+        type: object
       description: "UniverseEditKubernetesOverrides\n\nUpdate all kubernetes overrides\
         \ on the universe. Part of UniverseKubernetesOverridesReq \n"
       example:
+        sleep_after_tserver_restart_millis: 6
+        rolling_upgrade: true
         overrides: |-
           tserver:
             podLabels:
               env: test
         az_overrides: "az_uuid: \"tserver:\\n  podLabels:\\n    env: test\""
-      properties:
-        overrides:
-          description: Global kubernetes overrides to apply across the entire universe.
-          example: |-
-            tserver:
-              podLabels:
-                env: test
-          type: string
-        az_overrides:
-          additionalProperties:
-            type: string
-          description: Granular kubernetes overrides per Availability Zone identified
-            by AZ uuid.
-          example: "az_uuid: \"tserver:\\n  podLabels:\\n    env: test\""
-          type: object
+        sleep_after_master_restart_millis: 0
+        roll_max_batch_size:
+          read_replica_batch_size: 1
+          primary_batch_size: 1
       title: UniverseEditKubernetesOverrides
       type: object
     DetachUniverseSpec:
@@ -66168,6 +69053,74 @@ components:
         sleep_after_master_restart_millis: 0
       title: VMImageUpgradeSpec
       type: object
+    UserCreateSpec:
+      description: A user to add to the customer. Part of UserCreateReq.
+      example:
+        generate_api_token: false
+        password: password
+        spec:
+          role: ConnectOnly
+          email: username1@example.com
+      properties:
+        spec:
+          $ref: '#/components/schemas/UserSpec'
+        password:
+          description: "Password of the user, which must satisfy the customer's password\
+            \ policy. Ignored when OIDC SSO is enabled."
+          format: password
+          type: string
+          writeOnly: true
+        generate_api_token:
+          default: false
+          description: "Also generate an API token for the new user and return it,\
+            \ so that the caller doesn't have to log in as that user to get one. Refused\
+            \ when OIDC SSO is enabled, because such users log in only through OIDC."
+          type: boolean
+      required:
+      - password
+      - spec
+      title: UserCreateSpec
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
+    UserCreation:
+      description: "A newly created user, with its API token if one was requested.\
+        \ Part of UserCreationResp."
+      example:
+        api_token_version: 0
+        api_token: api_token
+        user:
+          spec:
+            role: ConnectOnly
+            email: username1@example.com
+          info:
+            ldap_specified_role: true
+            user_type: local
+            is_primary: true
+            timezone: timezone
+            customer_uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            creation_date: 2022-12-12T13:07:18Z
+            uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        api_token:
+          description: "API token of the new user, to be sent in the X-AUTH-YW-API-TOKEN\
+            \ header. Only set when generate_api_token was true."
+          readOnly: true
+          type: string
+        api_token_version:
+          description: Version of that API token. Only set when generate_api_token
+            was true.
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - user
+      title: UserCreation
+      type: object
+      x-yba-api-since: 2026.2.0.0
+      x-yba-api-visibility: preview
     YBAInfo:
       description: Describes YBA instance info
       example:
@@ -66295,4 +69248,9 @@ components:
     apiKeyAuth:
       in: header
       name: X-AUTH-YW-API-TOKEN
+      type: apiKey
+    authTokenAuth:
+      description: Session token returned by login
+      in: header
+      name: X-AUTH-TOKEN
       type: apiKey
