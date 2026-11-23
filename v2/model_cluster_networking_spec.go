@@ -28,7 +28,8 @@ type ClusterNetworkingSpec struct {
 	// Whether to create a load balancer service for this cluster. Defaults to NONE.
 	EnableExposingService *ExposingServiceState `json:"enable_exposing_service,omitempty"`
 	// Create target groups if enabled. Used by YBM.
-	EnableLb *bool `json:"enable_lb,omitempty"`
+	EnableLb            *bool                    `json:"enable_lb,omitempty"`
+	ManagedLoadBalancer *ManagedLoadBalancerSpec `json:"managed_load_balancer,omitempty"`
 	// Granular network settings overridden per Availability Zone identified by AZ uuid.
 	AzNetworking *map[string]AvailabilityZoneNetworking `json:"az_networking,omitempty"`
 }
@@ -214,6 +215,38 @@ func (o *ClusterNetworkingSpec) SetEnableLb(v bool) {
 	o.EnableLb = &v
 }
 
+// GetManagedLoadBalancer returns the ManagedLoadBalancer field value if set, zero value otherwise.
+func (o *ClusterNetworkingSpec) GetManagedLoadBalancer() ManagedLoadBalancerSpec {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		var ret ManagedLoadBalancerSpec
+		return ret
+	}
+	return *o.ManagedLoadBalancer
+}
+
+// GetManagedLoadBalancerOk returns a tuple with the ManagedLoadBalancer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterNetworkingSpec) GetManagedLoadBalancerOk() (*ManagedLoadBalancerSpec, bool) {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		return nil, false
+	}
+	return o.ManagedLoadBalancer, true
+}
+
+// HasManagedLoadBalancer returns a boolean if a field has been set.
+func (o *ClusterNetworkingSpec) HasManagedLoadBalancer() bool {
+	if o != nil && !IsNil(o.ManagedLoadBalancer) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedLoadBalancer gets a reference to the given ManagedLoadBalancerSpec and assigns it to the ManagedLoadBalancer field.
+func (o *ClusterNetworkingSpec) SetManagedLoadBalancer(v ManagedLoadBalancerSpec) {
+	o.ManagedLoadBalancer = &v
+}
+
 // GetAzNetworking returns the AzNetworking field value if set, zero value otherwise.
 func (o *ClusterNetworkingSpec) GetAzNetworking() map[string]AvailabilityZoneNetworking {
 	if o == nil || IsNil(o.AzNetworking) {
@@ -270,6 +303,9 @@ func (o ClusterNetworkingSpec) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnableLb) {
 		toSerialize["enable_lb"] = o.EnableLb
+	}
+	if !IsNil(o.ManagedLoadBalancer) {
+		toSerialize["managed_load_balancer"] = o.ManagedLoadBalancer
 	}
 	if !IsNil(o.AzNetworking) {
 		toSerialize["az_networking"] = o.AzNetworking

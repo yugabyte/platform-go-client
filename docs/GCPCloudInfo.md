@@ -4,7 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CrossCloudFederationTargets** | Pointer to [**[]CrossCloudFederationTarget**](CrossCloudFederationTarget.md) | WARNING: This is a preview API that could change. Storage clouds this provider&#39;s DB nodes can be given federated access to, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on. | [optional] 
 **DestVpcId** | Pointer to **string** |  | [optional] 
+**EnableFederatedIam** | Pointer to **bool** | Enable S3-on-GCP cross-cloud federated IAM on this provider&#39;s DB nodes (AWS AssumeRoleWithWebIdentity). Requires the federated IAM role ARN and audience below. | [optional] 
+**FederatedIamAudience** | Pointer to **string** | Deprecated: use crossCloudFederationTargets. Audience requested from GCP for the web-identity token, used when federated IAM is enabled. | [optional] 
+**FederatedIamRoleArn** | Pointer to **string** | AWS role ARN assumed via AssumeRoleWithWebIdentity when federated IAM is enabled (GCP DB node -&gt; S3). | [optional] 
 **GceApplicationCredentials** | Pointer to **string** |  | [optional] 
 **GceApplicationCredentialsPath** | Pointer to **string** |  | [optional] [readonly] 
 **GceProject** | Pointer to **string** |  | [optional] 
@@ -34,6 +38,31 @@ NewGCPCloudInfoWithDefaults instantiates a new GCPCloudInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetCrossCloudFederationTargets
+
+`func (o *GCPCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget`
+
+GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field if non-nil, zero value otherwise.
+
+### GetCrossCloudFederationTargetsOk
+
+`func (o *GCPCloudInfo) GetCrossCloudFederationTargetsOk() (*[]CrossCloudFederationTarget, bool)`
+
+GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrossCloudFederationTargets
+
+`func (o *GCPCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget)`
+
+SetCrossCloudFederationTargets sets CrossCloudFederationTargets field to given value.
+
+### HasCrossCloudFederationTargets
+
+`func (o *GCPCloudInfo) HasCrossCloudFederationTargets() bool`
+
+HasCrossCloudFederationTargets returns a boolean if a field has been set.
+
 ### GetDestVpcId
 
 `func (o *GCPCloudInfo) GetDestVpcId() string`
@@ -58,6 +87,81 @@ SetDestVpcId sets DestVpcId field to given value.
 `func (o *GCPCloudInfo) HasDestVpcId() bool`
 
 HasDestVpcId returns a boolean if a field has been set.
+
+### GetEnableFederatedIam
+
+`func (o *GCPCloudInfo) GetEnableFederatedIam() bool`
+
+GetEnableFederatedIam returns the EnableFederatedIam field if non-nil, zero value otherwise.
+
+### GetEnableFederatedIamOk
+
+`func (o *GCPCloudInfo) GetEnableFederatedIamOk() (*bool, bool)`
+
+GetEnableFederatedIamOk returns a tuple with the EnableFederatedIam field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableFederatedIam
+
+`func (o *GCPCloudInfo) SetEnableFederatedIam(v bool)`
+
+SetEnableFederatedIam sets EnableFederatedIam field to given value.
+
+### HasEnableFederatedIam
+
+`func (o *GCPCloudInfo) HasEnableFederatedIam() bool`
+
+HasEnableFederatedIam returns a boolean if a field has been set.
+
+### GetFederatedIamAudience
+
+`func (o *GCPCloudInfo) GetFederatedIamAudience() string`
+
+GetFederatedIamAudience returns the FederatedIamAudience field if non-nil, zero value otherwise.
+
+### GetFederatedIamAudienceOk
+
+`func (o *GCPCloudInfo) GetFederatedIamAudienceOk() (*string, bool)`
+
+GetFederatedIamAudienceOk returns a tuple with the FederatedIamAudience field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFederatedIamAudience
+
+`func (o *GCPCloudInfo) SetFederatedIamAudience(v string)`
+
+SetFederatedIamAudience sets FederatedIamAudience field to given value.
+
+### HasFederatedIamAudience
+
+`func (o *GCPCloudInfo) HasFederatedIamAudience() bool`
+
+HasFederatedIamAudience returns a boolean if a field has been set.
+
+### GetFederatedIamRoleArn
+
+`func (o *GCPCloudInfo) GetFederatedIamRoleArn() string`
+
+GetFederatedIamRoleArn returns the FederatedIamRoleArn field if non-nil, zero value otherwise.
+
+### GetFederatedIamRoleArnOk
+
+`func (o *GCPCloudInfo) GetFederatedIamRoleArnOk() (*string, bool)`
+
+GetFederatedIamRoleArnOk returns a tuple with the FederatedIamRoleArn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFederatedIamRoleArn
+
+`func (o *GCPCloudInfo) SetFederatedIamRoleArn(v string)`
+
+SetFederatedIamRoleArn sets FederatedIamRoleArn field to given value.
+
+### HasFederatedIamRoleArn
+
+`func (o *GCPCloudInfo) HasFederatedIamRoleArn() bool`
+
+HasFederatedIamRoleArn returns a boolean if a field has been set.
 
 ### GetGceApplicationCredentials
 

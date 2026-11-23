@@ -1,4 +1,4 @@
-# Go API client for v1
+# Go API client for ywclient
 
 ALPHA - NOT FOR EXTERNAL USE
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import v1 "github.com/yugabyte/platform-go-client"
+import ywclient "github.com/yugabyte/platform-go-client"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -37,18 +37,18 @@ Default configuration comes with `Servers` field that contains server objects as
 
 ### Select Server Configuration
 
-For using other server than the one defined on index 0 set context value `v1.ContextServerIndex` of type `int`.
+For using other server than the one defined on index 0 set context value `ywclient.ContextServerIndex` of type `int`.
 
 ```go
-ctx := context.WithValue(context.Background(), v1.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), ywclient.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
 
-Templated server URL is formatted using default variables from configuration or from context value `v1.ContextServerVariables` of type `map[string]string`.
+Templated server URL is formatted using default variables from configuration or from context value `ywclient.ContextServerVariables` of type `map[string]string`.
 
 ```go
-ctx := context.WithValue(context.Background(), v1.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), ywclient.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -59,13 +59,13 @@ Note, enum values are always validated and all unused variables are silently ign
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
 An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `v1.ContextOperationServerIndices` and `v1.ContextOperationServerVariables` context maps.
+Similar rules for overriding default operation server index and variables applies by using `ywclient.ContextOperationServerIndices` and `ywclient.ContextOperationServerVariables` context maps.
 
 ```go
-ctx := context.WithValue(context.Background(), v1.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), ywclient.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), v1.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), ywclient.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -596,6 +596,7 @@ Class | Method | HTTP request | Description
  - [CreatePitrConfigParams](docs/CreatePitrConfigParams.md)
  - [CreateRelease](docs/CreateRelease.md)
  - [CreateTablespaceParams](docs/CreateTablespaceParams.md)
+ - [CrossCloudFederationTarget](docs/CrossCloudFederationTarget.md)
  - [CurrentAdminNotificationMessages](docs/CurrentAdminNotificationMessages.md)
  - [CustomCACertParams](docs/CustomCACertParams.md)
  - [CustomCaCertificateInfo](docs/CustomCaCertificateInfo.md)
@@ -691,6 +692,7 @@ Class | Method | HTTP request | Description
  - [MaintenanceWindowApiFilter](docs/MaintenanceWindowApiFilter.md)
  - [MaintenanceWindowPagedApiQuery](docs/MaintenanceWindowPagedApiQuery.md)
  - [MaintenanceWindowPagedResponse](docs/MaintenanceWindowPagedResponse.md)
+ - [ManagedLoadBalancerConfig](docs/ManagedLoadBalancerConfig.md)
  - [MasterInfo](docs/MasterInfo.md)
  - [MasterLBStateResponse](docs/MasterLBStateResponse.md)
  - [MasterNode](docs/MasterNode.md)
@@ -874,7 +876,6 @@ Class | Method | HTTP request | Description
  - [UniverseResp](docs/UniverseResp.md)
  - [UniverseSettings](docs/UniverseSettings.md)
  - [UnusedIndexFinderResponse](docs/UnusedIndexFinderResponse.md)
- - [UpdateLoadBalancerConfig](docs/UpdateLoadBalancerConfig.md)
  - [UpdatePitrConfigParams](docs/UpdatePitrConfigParams.md)
  - [UpdateRelease](docs/UpdateRelease.md)
  - [UpgradeTaskParams](docs/UpgradeTaskParams.md)
@@ -931,8 +932,8 @@ Example
 ```go
 auth := context.WithValue(
 		context.Background(),
-		v1.ContextAPIKeys,
-		map[string]v1.APIKey{
+		ywclient.ContextAPIKeys,
+		map[string]ywclient.APIKey{
 			"apiKeyAuth": {Key: "API_KEY_STRING"},
 		},
 	)

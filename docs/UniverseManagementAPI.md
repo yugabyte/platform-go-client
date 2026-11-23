@@ -35,7 +35,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -110,7 +110,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -191,7 +191,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -264,7 +264,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -336,7 +336,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -411,7 +411,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -486,7 +486,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -561,7 +561,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -638,7 +638,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -713,7 +713,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -775,7 +775,7 @@ Name | Type | Description  | Notes
 
 ## UpdateLoadBalancerConfig
 
-> UpdateLoadBalancerConfig UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).Request(request).Execute()
+> YBPTask UpdateLoadBalancerConfig(ctx, cUUID, uniUUID).UpdateLoadBalancerConfigRequest(updateLoadBalancerConfigRequest).Request(request).Execute()
 
 Update load balancer config
 
@@ -790,22 +790,23 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	updateLoadBalancerConfigRequest := *openapiclient.NewUniverseDefinitionTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123)) // UniverseDefinitionTaskParams | 
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.UniverseManagementAPI.UpdateLoadBalancerConfig(context.Background(), cUUID, uniUUID).Request(request).Execute()
+	resp, r, err := apiClient.UniverseManagementAPI.UpdateLoadBalancerConfig(context.Background(), cUUID, uniUUID).UpdateLoadBalancerConfigRequest(updateLoadBalancerConfigRequest).Request(request).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `UniverseManagementAPI.UpdateLoadBalancerConfig``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateLoadBalancerConfig`: UpdateLoadBalancerConfig
+	// response from `UpdateLoadBalancerConfig`: YBPTask
 	fmt.Fprintf(os.Stdout, "Response from `UniverseManagementAPI.UpdateLoadBalancerConfig`: %v\n", resp)
 }
 ```
@@ -828,11 +829,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **updateLoadBalancerConfigRequest** | [**UniverseDefinitionTaskParams**](UniverseDefinitionTaskParams.md) |  | 
  **request** | [**interface{}**](interface{}.md) |  | 
 
 ### Return type
 
-[**UpdateLoadBalancerConfig**](UpdateLoadBalancerConfig.md)
+[**YBPTask**](YBPTask.md)
 
 ### Authorization
 
@@ -840,7 +842,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

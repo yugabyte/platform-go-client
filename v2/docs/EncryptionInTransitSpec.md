@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnableNodeToNodeEncrypt** | Pointer to **bool** | Whether to enable encryption for communication among DB nodes | [optional] 
 **EnableClientToNodeEncrypt** | Pointer to **bool** | Whether to enable encryption for client connection to DB nodes | [optional] 
+**UseNodeToNodeClientCerts** | Pointer to **bool** | Whether DB nodes require a client certificate on RPC (node_to_node_encryption_use_client_certificates). Supported only on Kubernetes universes whose node-to-node encryption uses a cert-manager (K8SCertManager) root CA; VM universes and Kubernetes universes with other root CA types are not supported. Can only be set at universe creation.  | [optional] 
 **RootAndClientRootCaSame** | Pointer to **bool** | In case certificates are generated, whether to use the same certificate | [optional] 
 **RootCa** | Pointer to **string** | The UUID of the rootCA to be used to generate node certificates and facilitate TLS communication between database nodes. | [optional] 
 **ClientRootCa** | Pointer to **string** | The UUID of the clientRootCA to be used to generate client certificates and facilitate TLS communication between server and client. Can be set to same as root_CA. | [optional] 
@@ -78,6 +79,31 @@ SetEnableClientToNodeEncrypt sets EnableClientToNodeEncrypt field to given value
 `func (o *EncryptionInTransitSpec) HasEnableClientToNodeEncrypt() bool`
 
 HasEnableClientToNodeEncrypt returns a boolean if a field has been set.
+
+### GetUseNodeToNodeClientCerts
+
+`func (o *EncryptionInTransitSpec) GetUseNodeToNodeClientCerts() bool`
+
+GetUseNodeToNodeClientCerts returns the UseNodeToNodeClientCerts field if non-nil, zero value otherwise.
+
+### GetUseNodeToNodeClientCertsOk
+
+`func (o *EncryptionInTransitSpec) GetUseNodeToNodeClientCertsOk() (*bool, bool)`
+
+GetUseNodeToNodeClientCertsOk returns a tuple with the UseNodeToNodeClientCerts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseNodeToNodeClientCerts
+
+`func (o *EncryptionInTransitSpec) SetUseNodeToNodeClientCerts(v bool)`
+
+SetUseNodeToNodeClientCerts sets UseNodeToNodeClientCerts field to given value.
+
+### HasUseNodeToNodeClientCerts
+
+`func (o *EncryptionInTransitSpec) HasUseNodeToNodeClientCerts() bool`
+
+HasUseNodeToNodeClientCerts returns a boolean if a field has been set.
 
 ### GetRootAndClientRootCaSame
 

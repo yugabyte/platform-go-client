@@ -19,7 +19,15 @@ var _ MappedNullable = &GCPCloudInfo{}
 
 // GCPCloudInfo struct for GCPCloudInfo
 type GCPCloudInfo struct {
-	DestVpcId                     *string `json:"destVpcId,omitempty"`
+	// WARNING: This is a preview API that could change. Storage clouds this provider's DB nodes can be given federated access to, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on.
+	CrossCloudFederationTargets []CrossCloudFederationTarget `json:"crossCloudFederationTargets,omitempty"`
+	DestVpcId                   *string                      `json:"destVpcId,omitempty"`
+	// Enable S3-on-GCP cross-cloud federated IAM on this provider's DB nodes (AWS AssumeRoleWithWebIdentity). Requires the federated IAM role ARN and audience below.
+	EnableFederatedIam *bool `json:"enableFederatedIam,omitempty"`
+	// Deprecated: use crossCloudFederationTargets. Audience requested from GCP for the web-identity token, used when federated IAM is enabled.
+	FederatedIamAudience *string `json:"federatedIamAudience,omitempty"`
+	// AWS role ARN assumed via AssumeRoleWithWebIdentity when federated IAM is enabled (GCP DB node -> S3).
+	FederatedIamRoleArn           *string `json:"federatedIamRoleArn,omitempty"`
 	GceApplicationCredentials     *string `json:"gceApplicationCredentials,omitempty"`
 	GceApplicationCredentialsPath *string `json:"gceApplicationCredentialsPath,omitempty"`
 	GceProject                    *string `json:"gceProject,omitempty"`
@@ -47,6 +55,38 @@ func NewGCPCloudInfo() *GCPCloudInfo {
 func NewGCPCloudInfoWithDefaults() *GCPCloudInfo {
 	this := GCPCloudInfo{}
 	return &this
+}
+
+// GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		var ret []CrossCloudFederationTarget
+		return ret
+	}
+	return o.CrossCloudFederationTargets
+}
+
+// GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetCrossCloudFederationTargetsOk() ([]CrossCloudFederationTarget, bool) {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		return nil, false
+	}
+	return o.CrossCloudFederationTargets, true
+}
+
+// HasCrossCloudFederationTargets returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasCrossCloudFederationTargets() bool {
+	if o != nil && !IsNil(o.CrossCloudFederationTargets) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossCloudFederationTargets gets a reference to the given []CrossCloudFederationTarget and assigns it to the CrossCloudFederationTargets field.
+func (o *GCPCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget) {
+	o.CrossCloudFederationTargets = v
 }
 
 // GetDestVpcId returns the DestVpcId field value if set, zero value otherwise.
@@ -79,6 +119,102 @@ func (o *GCPCloudInfo) HasDestVpcId() bool {
 // SetDestVpcId gets a reference to the given string and assigns it to the DestVpcId field.
 func (o *GCPCloudInfo) SetDestVpcId(v string) {
 	o.DestVpcId = &v
+}
+
+// GetEnableFederatedIam returns the EnableFederatedIam field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetEnableFederatedIam() bool {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		var ret bool
+		return ret
+	}
+	return *o.EnableFederatedIam
+}
+
+// GetEnableFederatedIamOk returns a tuple with the EnableFederatedIam field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetEnableFederatedIamOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnableFederatedIam) {
+		return nil, false
+	}
+	return o.EnableFederatedIam, true
+}
+
+// HasEnableFederatedIam returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasEnableFederatedIam() bool {
+	if o != nil && !IsNil(o.EnableFederatedIam) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableFederatedIam gets a reference to the given bool and assigns it to the EnableFederatedIam field.
+func (o *GCPCloudInfo) SetEnableFederatedIam(v bool) {
+	o.EnableFederatedIam = &v
+}
+
+// GetFederatedIamAudience returns the FederatedIamAudience field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetFederatedIamAudience() string {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		var ret string
+		return ret
+	}
+	return *o.FederatedIamAudience
+}
+
+// GetFederatedIamAudienceOk returns a tuple with the FederatedIamAudience field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetFederatedIamAudienceOk() (*string, bool) {
+	if o == nil || IsNil(o.FederatedIamAudience) {
+		return nil, false
+	}
+	return o.FederatedIamAudience, true
+}
+
+// HasFederatedIamAudience returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasFederatedIamAudience() bool {
+	if o != nil && !IsNil(o.FederatedIamAudience) {
+		return true
+	}
+
+	return false
+}
+
+// SetFederatedIamAudience gets a reference to the given string and assigns it to the FederatedIamAudience field.
+func (o *GCPCloudInfo) SetFederatedIamAudience(v string) {
+	o.FederatedIamAudience = &v
+}
+
+// GetFederatedIamRoleArn returns the FederatedIamRoleArn field value if set, zero value otherwise.
+func (o *GCPCloudInfo) GetFederatedIamRoleArn() string {
+	if o == nil || IsNil(o.FederatedIamRoleArn) {
+		var ret string
+		return ret
+	}
+	return *o.FederatedIamRoleArn
+}
+
+// GetFederatedIamRoleArnOk returns a tuple with the FederatedIamRoleArn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GCPCloudInfo) GetFederatedIamRoleArnOk() (*string, bool) {
+	if o == nil || IsNil(o.FederatedIamRoleArn) {
+		return nil, false
+	}
+	return o.FederatedIamRoleArn, true
+}
+
+// HasFederatedIamRoleArn returns a boolean if a field has been set.
+func (o *GCPCloudInfo) HasFederatedIamRoleArn() bool {
+	if o != nil && !IsNil(o.FederatedIamRoleArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetFederatedIamRoleArn gets a reference to the given string and assigns it to the FederatedIamRoleArn field.
+func (o *GCPCloudInfo) SetFederatedIamRoleArn(v string) {
+	o.FederatedIamRoleArn = &v
 }
 
 // GetGceApplicationCredentials returns the GceApplicationCredentials field value if set, zero value otherwise.
@@ -379,8 +515,20 @@ func (o GCPCloudInfo) MarshalJSON() ([]byte, error) {
 
 func (o GCPCloudInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CrossCloudFederationTargets) {
+		toSerialize["crossCloudFederationTargets"] = o.CrossCloudFederationTargets
+	}
 	if !IsNil(o.DestVpcId) {
 		toSerialize["destVpcId"] = o.DestVpcId
+	}
+	if !IsNil(o.EnableFederatedIam) {
+		toSerialize["enableFederatedIam"] = o.EnableFederatedIam
+	}
+	if !IsNil(o.FederatedIamAudience) {
+		toSerialize["federatedIamAudience"] = o.FederatedIamAudience
+	}
+	if !IsNil(o.FederatedIamRoleArn) {
+		toSerialize["federatedIamRoleArn"] = o.FederatedIamRoleArn
 	}
 	if !IsNil(o.GceApplicationCredentials) {
 		toSerialize["gceApplicationCredentials"] = o.GceApplicationCredentials

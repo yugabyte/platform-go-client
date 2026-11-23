@@ -31,7 +31,7 @@ type YSQLQueryLogConfig struct {
 	LogDuration bool `json:"logDuration"`
 	// Log error verbosity, controls the amount of detail written in the server log for each message that is logged.
 	LogErrorVerbosity string `json:"logErrorVerbosity"`
-	// YbaApi Internal. Log line prefix format for PostgreSQL logs. User-configured log_line_prefix in gflags takes precedence over this value when specified.
+	// YbaApi Internal. Log line prefix format for PostgreSQL logs. When query logging is enabled, this value takes precedence over a log_line_prefix set in gflags.
 	LogLinePrefix *string `json:"logLinePrefix,omitempty"`
 	// Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time.
 	LogMinDurationStatement int32 `json:"logMinDurationStatement"`

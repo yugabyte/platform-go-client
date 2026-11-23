@@ -24,11 +24,11 @@ type YCQLComponentSpec struct {
 	ComponentName *string `json:"component_name,omitempty"`
 	// Optional keyspace for ycqlsh -k.
 	Keyspace *string `json:"keyspace,omitempty"`
-	// YCQL statements to execute (each runs as ycqlsh -e). Support bundles are read-only, so each entry must be a single statement beginning with SELECT, DESCRIBE, DESC, SHOW or LIST (case-insensitive). Entries holding more than one statement are rejected.
+	// YCQL statements to execute (each runs as ycqlsh -e). Support bundles are read-only, so each entry must be a single statement beginning with SELECT, DESCRIBE, DESC, SHOW or LIST (case-insensitive). Entries holding more than one statement are rejected. After these checks YBA runs the queries its support bundle manifest lists for component_name instead, and rejects a component_name the manifest doesn't list.
 	Queries []string `json:"queries,omitempty"`
 	// Output file name written under the per-node bundle directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
 	OutputFileName *string `json:"output_file_name,omitempty"`
-	// Command timeout in seconds.
+	// Command timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
 }
 
