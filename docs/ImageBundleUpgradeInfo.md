@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClusterUuid** | **string** |  | 
 **ImageBundleUuid** | **string** |  | 
-**ProviderUuid** | **string** |  | 
+**ProviderUuid** | Pointer to **string** | Provider of the cluster, for multi-provider clusters. | [optional] 
 
 ## Methods
 
 ### NewImageBundleUpgradeInfo
 
-`func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, providerUuid string, ) *ImageBundleUpgradeInfo`
+`func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, ) *ImageBundleUpgradeInfo`
 
 NewImageBundleUpgradeInfo instantiates a new ImageBundleUpgradeInfo object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +86,11 @@ and a boolean to check if the value has been set.
 
 SetProviderUuid sets ProviderUuid field to given value.
 
+### HasProviderUuid
+
+`func (o *ImageBundleUpgradeInfo) HasProviderUuid() bool`
+
+HasProviderUuid returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

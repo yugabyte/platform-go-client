@@ -30,12 +30,16 @@ type UniverseResp struct {
 	DrConfigUuidsAsTarget []string `json:"drConfigUuidsAsTarget,omitempty"`
 	// Universe name
 	Name *string `json:"name,omitempty"`
+	// YbaApi Internal. Whether YBA scrapes the node_exporter sidecar on this Kubernetes universe
+	NodeExporterSidecarScraped *bool `json:"nodeExporterSidecarScraped,omitempty"`
 	// YugabyteDB Anywhere platform software version for this YBA instance
 	PlatformVersion *string `json:"platformVersion,omitempty"`
 	// Price
-	PricePerHour     *float64                 `json:"pricePerHour,omitempty"`
-	Resources        *UniverseResourceDetails `json:"resources,omitempty"`
-	RollMaxBatchSize *RollMaxBatchSize        `json:"rollMaxBatchSize,omitempty"`
+	PricePerHour *float64                 `json:"pricePerHour,omitempty"`
+	Resources    *UniverseResourceDetails `json:"resources,omitempty"`
+	// WARNING: This is a preview API that could change.  Universe resource details per provider
+	ResourcesPerProvider *map[string]UniverseResourceDetails `json:"resourcesPerProvider,omitempty"`
+	RollMaxBatchSize     *RollMaxBatchSize                   `json:"rollMaxBatchSize,omitempty"`
 	// Sample command
 	SampleAppCommandTxt *string `json:"sampleAppCommandTxt,omitempty"`
 	// Task UUID
@@ -258,6 +262,38 @@ func (o *UniverseResp) SetName(v string) {
 	o.Name = &v
 }
 
+// GetNodeExporterSidecarScraped returns the NodeExporterSidecarScraped field value if set, zero value otherwise.
+func (o *UniverseResp) GetNodeExporterSidecarScraped() bool {
+	if o == nil || IsNil(o.NodeExporterSidecarScraped) {
+		var ret bool
+		return ret
+	}
+	return *o.NodeExporterSidecarScraped
+}
+
+// GetNodeExporterSidecarScrapedOk returns a tuple with the NodeExporterSidecarScraped field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetNodeExporterSidecarScrapedOk() (*bool, bool) {
+	if o == nil || IsNil(o.NodeExporterSidecarScraped) {
+		return nil, false
+	}
+	return o.NodeExporterSidecarScraped, true
+}
+
+// HasNodeExporterSidecarScraped returns a boolean if a field has been set.
+func (o *UniverseResp) HasNodeExporterSidecarScraped() bool {
+	if o != nil && !IsNil(o.NodeExporterSidecarScraped) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeExporterSidecarScraped gets a reference to the given bool and assigns it to the NodeExporterSidecarScraped field.
+func (o *UniverseResp) SetNodeExporterSidecarScraped(v bool) {
+	o.NodeExporterSidecarScraped = &v
+}
+
 // GetPlatformVersion returns the PlatformVersion field value if set, zero value otherwise.
 func (o *UniverseResp) GetPlatformVersion() string {
 	if o == nil || IsNil(o.PlatformVersion) {
@@ -352,6 +388,38 @@ func (o *UniverseResp) HasResources() bool {
 // SetResources gets a reference to the given UniverseResourceDetails and assigns it to the Resources field.
 func (o *UniverseResp) SetResources(v UniverseResourceDetails) {
 	o.Resources = &v
+}
+
+// GetResourcesPerProvider returns the ResourcesPerProvider field value if set, zero value otherwise.
+func (o *UniverseResp) GetResourcesPerProvider() map[string]UniverseResourceDetails {
+	if o == nil || IsNil(o.ResourcesPerProvider) {
+		var ret map[string]UniverseResourceDetails
+		return ret
+	}
+	return *o.ResourcesPerProvider
+}
+
+// GetResourcesPerProviderOk returns a tuple with the ResourcesPerProvider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseResp) GetResourcesPerProviderOk() (*map[string]UniverseResourceDetails, bool) {
+	if o == nil || IsNil(o.ResourcesPerProvider) {
+		return nil, false
+	}
+	return o.ResourcesPerProvider, true
+}
+
+// HasResourcesPerProvider returns a boolean if a field has been set.
+func (o *UniverseResp) HasResourcesPerProvider() bool {
+	if o != nil && !IsNil(o.ResourcesPerProvider) {
+		return true
+	}
+
+	return false
+}
+
+// SetResourcesPerProvider gets a reference to the given map[string]UniverseResourceDetails and assigns it to the ResourcesPerProvider field.
+func (o *UniverseResp) SetResourcesPerProvider(v map[string]UniverseResourceDetails) {
+	o.ResourcesPerProvider = &v
 }
 
 // GetRollMaxBatchSize returns the RollMaxBatchSize field value if set, zero value otherwise.
@@ -606,6 +674,9 @@ func (o UniverseResp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.NodeExporterSidecarScraped) {
+		toSerialize["nodeExporterSidecarScraped"] = o.NodeExporterSidecarScraped
+	}
 	if !IsNil(o.PlatformVersion) {
 		toSerialize["platformVersion"] = o.PlatformVersion
 	}
@@ -614,6 +685,9 @@ func (o UniverseResp) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Resources) {
 		toSerialize["resources"] = o.Resources
+	}
+	if !IsNil(o.ResourcesPerProvider) {
+		toSerialize["resourcesPerProvider"] = o.ResourcesPerProvider
 	}
 	if !IsNil(o.RollMaxBatchSize) {
 		toSerialize["rollMaxBatchSize"] = o.RollMaxBatchSize

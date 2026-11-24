@@ -25,12 +25,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123)) // UniverseConfigureTaskParams | 
+	universeConfigureTaskParams := *openapiclient.NewUniverseConfigureTaskParams([]openapiclient.Cluster{*openapiclient.NewCluster("ClusterType_example", *openapiclient.NewUserIntent())}, *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example") // UniverseConfigureTaskParams | 
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()

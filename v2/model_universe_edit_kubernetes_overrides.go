@@ -20,6 +20,13 @@ var _ MappedNullable = &UniverseEditKubernetesOverrides{}
 
 // UniverseEditKubernetesOverrides UniverseEditKubernetesOverrides  Update all kubernetes overrides on the universe. Part of UniverseKubernetesOverridesReq
 type UniverseEditKubernetesOverrides struct {
+	// Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used.
+	SleepAfterMasterRestartMillis *int32 `json:"sleep_after_master_restart_millis,omitempty"`
+	// Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used.
+	SleepAfterTserverRestartMillis *int32 `json:"sleep_after_tserver_restart_millis,omitempty"`
+	// Perform a rolling upgrade where only one node is upgraded at a time. This is the default behavior. False will perform a non-rolling upgrade where all nodes are upgraded at the same
+	RollingUpgrade   *bool             `json:"rolling_upgrade,omitempty"`
+	RollMaxBatchSize *RollMaxBatchSize `json:"roll_max_batch_size,omitempty"`
 	// Global kubernetes overrides to apply across the entire universe.
 	Overrides *string `json:"overrides,omitempty"`
 	// Granular kubernetes overrides per Availability Zone identified by AZ uuid.
@@ -32,6 +39,8 @@ type UniverseEditKubernetesOverrides struct {
 // will change when the set of required properties is changed
 func NewUniverseEditKubernetesOverrides() *UniverseEditKubernetesOverrides {
 	this := UniverseEditKubernetesOverrides{}
+	var rollingUpgrade bool = true
+	this.RollingUpgrade = &rollingUpgrade
 	return &this
 }
 
@@ -40,7 +49,137 @@ func NewUniverseEditKubernetesOverrides() *UniverseEditKubernetesOverrides {
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseEditKubernetesOverridesWithDefaults() *UniverseEditKubernetesOverrides {
 	this := UniverseEditKubernetesOverrides{}
+	var rollingUpgrade bool = true
+	this.RollingUpgrade = &rollingUpgrade
 	return &this
+}
+
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value if set, zero value otherwise.
+func (o *UniverseEditKubernetesOverrides) GetSleepAfterMasterRestartMillis() int32 {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
+		var ret int32
+		return ret
+	}
+	return *o.SleepAfterMasterRestartMillis
+}
+
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditKubernetesOverrides) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
+		return nil, false
+	}
+	return o.SleepAfterMasterRestartMillis, true
+}
+
+// HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
+func (o *UniverseEditKubernetesOverrides) HasSleepAfterMasterRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterMasterRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterMasterRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterMasterRestartMillis field.
+func (o *UniverseEditKubernetesOverrides) SetSleepAfterMasterRestartMillis(v int32) {
+	o.SleepAfterMasterRestartMillis = &v
+}
+
+// GetSleepAfterTserverRestartMillis returns the SleepAfterTserverRestartMillis field value if set, zero value otherwise.
+func (o *UniverseEditKubernetesOverrides) GetSleepAfterTserverRestartMillis() int32 {
+	if o == nil || IsNil(o.SleepAfterTserverRestartMillis) {
+		var ret int32
+		return ret
+	}
+	return *o.SleepAfterTserverRestartMillis
+}
+
+// GetSleepAfterTserverRestartMillisOk returns a tuple with the SleepAfterTserverRestartMillis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditKubernetesOverrides) GetSleepAfterTserverRestartMillisOk() (*int32, bool) {
+	if o == nil || IsNil(o.SleepAfterTserverRestartMillis) {
+		return nil, false
+	}
+	return o.SleepAfterTserverRestartMillis, true
+}
+
+// HasSleepAfterTserverRestartMillis returns a boolean if a field has been set.
+func (o *UniverseEditKubernetesOverrides) HasSleepAfterTserverRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterTserverRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterTserverRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterTserverRestartMillis field.
+func (o *UniverseEditKubernetesOverrides) SetSleepAfterTserverRestartMillis(v int32) {
+	o.SleepAfterTserverRestartMillis = &v
+}
+
+// GetRollingUpgrade returns the RollingUpgrade field value if set, zero value otherwise.
+func (o *UniverseEditKubernetesOverrides) GetRollingUpgrade() bool {
+	if o == nil || IsNil(o.RollingUpgrade) {
+		var ret bool
+		return ret
+	}
+	return *o.RollingUpgrade
+}
+
+// GetRollingUpgradeOk returns a tuple with the RollingUpgrade field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditKubernetesOverrides) GetRollingUpgradeOk() (*bool, bool) {
+	if o == nil || IsNil(o.RollingUpgrade) {
+		return nil, false
+	}
+	return o.RollingUpgrade, true
+}
+
+// HasRollingUpgrade returns a boolean if a field has been set.
+func (o *UniverseEditKubernetesOverrides) HasRollingUpgrade() bool {
+	if o != nil && !IsNil(o.RollingUpgrade) {
+		return true
+	}
+
+	return false
+}
+
+// SetRollingUpgrade gets a reference to the given bool and assigns it to the RollingUpgrade field.
+func (o *UniverseEditKubernetesOverrides) SetRollingUpgrade(v bool) {
+	o.RollingUpgrade = &v
+}
+
+// GetRollMaxBatchSize returns the RollMaxBatchSize field value if set, zero value otherwise.
+func (o *UniverseEditKubernetesOverrides) GetRollMaxBatchSize() RollMaxBatchSize {
+	if o == nil || IsNil(o.RollMaxBatchSize) {
+		var ret RollMaxBatchSize
+		return ret
+	}
+	return *o.RollMaxBatchSize
+}
+
+// GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UniverseEditKubernetesOverrides) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool) {
+	if o == nil || IsNil(o.RollMaxBatchSize) {
+		return nil, false
+	}
+	return o.RollMaxBatchSize, true
+}
+
+// HasRollMaxBatchSize returns a boolean if a field has been set.
+func (o *UniverseEditKubernetesOverrides) HasRollMaxBatchSize() bool {
+	if o != nil && !IsNil(o.RollMaxBatchSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetRollMaxBatchSize gets a reference to the given RollMaxBatchSize and assigns it to the RollMaxBatchSize field.
+func (o *UniverseEditKubernetesOverrides) SetRollMaxBatchSize(v RollMaxBatchSize) {
+	o.RollMaxBatchSize = &v
 }
 
 // GetOverrides returns the Overrides field value if set, zero value otherwise.
@@ -117,6 +256,18 @@ func (o UniverseEditKubernetesOverrides) MarshalJSON() ([]byte, error) {
 
 func (o UniverseEditKubernetesOverrides) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.SleepAfterMasterRestartMillis) {
+		toSerialize["sleep_after_master_restart_millis"] = o.SleepAfterMasterRestartMillis
+	}
+	if !IsNil(o.SleepAfterTserverRestartMillis) {
+		toSerialize["sleep_after_tserver_restart_millis"] = o.SleepAfterTserverRestartMillis
+	}
+	if !IsNil(o.RollingUpgrade) {
+		toSerialize["rolling_upgrade"] = o.RollingUpgrade
+	}
+	if !IsNil(o.RollMaxBatchSize) {
+		toSerialize["roll_max_batch_size"] = o.RollMaxBatchSize
+	}
 	if !IsNil(o.Overrides) {
 		toSerialize["overrides"] = o.Overrides
 	}

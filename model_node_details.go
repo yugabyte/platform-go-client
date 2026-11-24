@@ -55,6 +55,8 @@ type NodeDetails struct {
 	MasterState *string `json:"masterState,omitempty"`
 	// Node exporter port
 	NodeExporterPort *int32 `json:"nodeExporterPort,omitempty"`
+	// YbaApi Internal. Systemd scope of node_exporter on this node: ROOT or USER. Unset if not known.
+	NodeExporterSystemdLevel *string `json:"nodeExporterSystemdLevel,omitempty"`
 	// Node ID
 	NodeIdx *int32 `json:"nodeIdx,omitempty"`
 	// Node name
@@ -686,6 +688,38 @@ func (o *NodeDetails) HasNodeExporterPort() bool {
 // SetNodeExporterPort gets a reference to the given int32 and assigns it to the NodeExporterPort field.
 func (o *NodeDetails) SetNodeExporterPort(v int32) {
 	o.NodeExporterPort = &v
+}
+
+// GetNodeExporterSystemdLevel returns the NodeExporterSystemdLevel field value if set, zero value otherwise.
+func (o *NodeDetails) GetNodeExporterSystemdLevel() string {
+	if o == nil || IsNil(o.NodeExporterSystemdLevel) {
+		var ret string
+		return ret
+	}
+	return *o.NodeExporterSystemdLevel
+}
+
+// GetNodeExporterSystemdLevelOk returns a tuple with the NodeExporterSystemdLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NodeDetails) GetNodeExporterSystemdLevelOk() (*string, bool) {
+	if o == nil || IsNil(o.NodeExporterSystemdLevel) {
+		return nil, false
+	}
+	return o.NodeExporterSystemdLevel, true
+}
+
+// HasNodeExporterSystemdLevel returns a boolean if a field has been set.
+func (o *NodeDetails) HasNodeExporterSystemdLevel() bool {
+	if o != nil && !IsNil(o.NodeExporterSystemdLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeExporterSystemdLevel gets a reference to the given string and assigns it to the NodeExporterSystemdLevel field.
+func (o *NodeDetails) SetNodeExporterSystemdLevel(v string) {
+	o.NodeExporterSystemdLevel = &v
 }
 
 // GetNodeIdx returns the NodeIdx field value if set, zero value otherwise.
@@ -1359,6 +1393,9 @@ func (o NodeDetails) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NodeExporterPort) {
 		toSerialize["nodeExporterPort"] = o.NodeExporterPort
+	}
+	if !IsNil(o.NodeExporterSystemdLevel) {
+		toSerialize["nodeExporterSystemdLevel"] = o.NodeExporterSystemdLevel
 	}
 	if !IsNil(o.NodeIdx) {
 		toSerialize["nodeIdx"] = o.NodeIdx

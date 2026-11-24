@@ -19,11 +19,13 @@ var _ MappedNullable = &OnPremCloudInfo{}
 
 // OnPremCloudInfo struct for OnPremCloudInfo
 type OnPremCloudInfo struct {
-	// WARNING: This is a preview API that could change. Enable GCS-on-AWS cross-cloud federated IAM on this provider's DB nodes (nodes must be AWS VMs).
+	// WARNING: This is a preview API that could change. Storage clouds this provider's DB nodes can reach with federated IAM, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on, and is left alone when there is none - so add an entry per storage cloud the nodes must actually reach.
+	CrossCloudFederationTargets []CrossCloudFederationTarget `json:"crossCloudFederationTargets,omitempty"`
+	// WARNING: This is a preview API that could change. Enable cross-cloud federated IAM on this provider's DB nodes. Each node is given access to the storage clouds it is not running on, per crossCloudFederationTargets.
 	EnableFederatedIam *bool `json:"enableFederatedIam,omitempty"`
 	// WARNING: This is a preview API that could change.
 	EnableMultiTenancy *bool `json:"enableMultiTenancy,omitempty"`
-	// WARNING: This is a preview API that could change. GCP Workload Identity Federation audience used when federated IAM is enabled.
+	// WARNING: This is a preview API that could change. Deprecated: use crossCloudFederationTargets. GCP Workload Identity Federation audience used when federated IAM is enabled.
 	FederatedIamAudience *string `json:"federatedIamAudience,omitempty"`
 	// WARNING: This is a preview API that could change.
 	UseClockbound *bool   `json:"useClockbound,omitempty"`
@@ -47,6 +49,38 @@ func NewOnPremCloudInfo() *OnPremCloudInfo {
 func NewOnPremCloudInfoWithDefaults() *OnPremCloudInfo {
 	this := OnPremCloudInfo{}
 	return &this
+}
+
+// GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field value if set, zero value otherwise.
+func (o *OnPremCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		var ret []CrossCloudFederationTarget
+		return ret
+	}
+	return o.CrossCloudFederationTargets
+}
+
+// GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OnPremCloudInfo) GetCrossCloudFederationTargetsOk() ([]CrossCloudFederationTarget, bool) {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		return nil, false
+	}
+	return o.CrossCloudFederationTargets, true
+}
+
+// HasCrossCloudFederationTargets returns a boolean if a field has been set.
+func (o *OnPremCloudInfo) HasCrossCloudFederationTargets() bool {
+	if o != nil && !IsNil(o.CrossCloudFederationTargets) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossCloudFederationTargets gets a reference to the given []CrossCloudFederationTarget and assigns it to the CrossCloudFederationTargets field.
+func (o *OnPremCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget) {
+	o.CrossCloudFederationTargets = v
 }
 
 // GetEnableFederatedIam returns the EnableFederatedIam field value if set, zero value otherwise.
@@ -251,6 +285,9 @@ func (o OnPremCloudInfo) MarshalJSON() ([]byte, error) {
 
 func (o OnPremCloudInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CrossCloudFederationTargets) {
+		toSerialize["crossCloudFederationTargets"] = o.CrossCloudFederationTargets
+	}
 	if !IsNil(o.EnableFederatedIam) {
 		toSerialize["enableFederatedIam"] = o.EnableFederatedIam
 	}

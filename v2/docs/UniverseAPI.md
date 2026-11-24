@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**GetFinalizeSoftwareUpgradeInfo**](UniverseAPI.md#GetFinalizeSoftwareUpgradeInfo) | **Get** /customers/{cUUID}/universes/{uniUUID}/upgrade/software/finalize | Get finalize information on the YugabyteDB upgrade
 [**GetUniverse**](UniverseAPI.md#GetUniverse) | **Get** /customers/{cUUID}/universes/{uniUUID} | Get a YugabyteDB Universe
 [**GetUniverseResources**](UniverseAPI.md#GetUniverseResources) | **Post** /customers/{cUUID}/fetch-universe-resources | Get resource utilisation of a YugabyteDB Universe
+[**GetUniverseResourcesPerProvider**](UniverseAPI.md#GetUniverseResourcesPerProvider) | **Post** /customers/{cUUID}/fetch-universe-resources-per-provider | Get per-provider resource utilisation of a YugabyteDB Universe
 [**ManageCrossCloudFederation**](UniverseAPI.md#ManageCrossCloudFederation) | **Post** /customers/{cUUID}/universes/{uniUUID}/cross-cloud-federation | Enable or disable cross-cloud federated IAM on a universe
 [**OperatorImportUniverse**](UniverseAPI.md#OperatorImportUniverse) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import | Import universe to operator
 [**OperatorImportUniversePrecheck**](UniverseAPI.md#OperatorImportUniversePrecheck) | **Post** /customers/{cUUID}/universes/{uniUUID}/operator-import/precheck | Precheck universe import to operator
@@ -1901,6 +1902,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UniverseResourceDetails**](UniverseResourceDetails.md)
+
+### Authorization
+
+[apiKeyAuth](../README.md#apiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUniverseResourcesPerProvider
+
+> UniverseResourcesPerProvider GetUniverseResourcesPerProvider(ctx, cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
+
+Get per-provider resource utilisation of a YugabyteDB Universe
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/yugabyte/platform-go-client/v2"
+)
+
+func main() {
+	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Customer UUID
+	universeCreateSpec := *openapiclient.NewUniverseCreateSpec(*openapiclient.NewUniverseSpec("my-yb-universe", "2024.2.0.0-b600", []openapiclient.ClusterSpec{*openapiclient.NewClusterSpec("PRIMARY", int32(3))}), "x86_64") // UniverseCreateSpec | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UniverseAPI.GetUniverseResourcesPerProvider(context.Background(), cUUID).UniverseCreateSpec(universeCreateSpec).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UniverseAPI.GetUniverseResourcesPerProvider``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetUniverseResourcesPerProvider`: UniverseResourcesPerProvider
+	fmt.Fprintf(os.Stdout, "Response from `UniverseAPI.GetUniverseResourcesPerProvider`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**cUUID** | **string** | Customer UUID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUniverseResourcesPerProviderRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **universeCreateSpec** | [**UniverseCreateSpec**](UniverseCreateSpec.md) |  | 
+
+### Return type
+
+[**UniverseResourcesPerProvider**](UniverseResourcesPerProvider.md)
 
 ### Authorization
 

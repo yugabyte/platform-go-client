@@ -32,7 +32,7 @@ type CustomerConfigUI struct {
 	KubernetesOperatorControlled bool  `json:"kubernetesOperatorControlled"`
 	// Name
 	Name string `json:"name"`
-	// state of the customerConfig. Possible values are Active, QueuedForDeletion.
+	// state of the customerConfig. Possible values are Active, QueuedForDeletion, Validating.
 	State *string `json:"state,omitempty"`
 	// Config type
 	Type string `json:"type"`

@@ -3103,6 +3103,7 @@ func (r UniverseAPIGetUniverseRequest) Execute() (*Universe, *http.Response, err
 GetUniverse Get a YugabyteDB Universe
 
 Get details of a single YugabyteDB Universe.
+Early access: when the runtime flag yb.api.conditional_get.enabled is set, this endpoint supports conditional requests. Send a previously returned ETag in If-None-Match to get 304 Not Modified if the universe is unchanged. Fields derived from related resources (for example DR configs or pricing) may be stale in that case.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID
@@ -3260,6 +3261,135 @@ func (a *UniverseAPIService) GetUniverseResourcesExecute(r UniverseAPIGetUnivers
 	}
 
 	localVarPath := localBasePath + "/customers/{cUUID}/fetch-universe-resources"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.universeCreateSpec == nil {
+		return localVarReturnValue, nil, reportError("universeCreateSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.universeCreateSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type UniverseAPIGetUniverseResourcesPerProviderRequest struct {
+	ctx                context.Context
+	ApiService         *UniverseAPIService
+	cUUID              string
+	universeCreateSpec *UniverseCreateSpec
+}
+
+func (r UniverseAPIGetUniverseResourcesPerProviderRequest) UniverseCreateSpec(universeCreateSpec UniverseCreateSpec) UniverseAPIGetUniverseResourcesPerProviderRequest {
+	r.universeCreateSpec = &universeCreateSpec
+	return r
+}
+
+func (r UniverseAPIGetUniverseResourcesPerProviderRequest) Execute() (*UniverseResourcesPerProvider, *http.Response, error) {
+	return r.ApiService.GetUniverseResourcesPerProviderExecute(r)
+}
+
+/*
+GetUniverseResourcesPerProvider Get per-provider resource utilisation of a YugabyteDB Universe
+
+Fetches an estimate of pricing and cpu/memory/storage resource utilisation for each provider in the Universe. This is meant to be used before creating the Universe.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@return UniverseAPIGetUniverseResourcesPerProviderRequest
+*/
+func (a *UniverseAPIService) GetUniverseResourcesPerProvider(ctx context.Context, cUUID string) UniverseAPIGetUniverseResourcesPerProviderRequest {
+	return UniverseAPIGetUniverseResourcesPerProviderRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UniverseResourcesPerProvider
+func (a *UniverseAPIService) GetUniverseResourcesPerProviderExecute(r UniverseAPIGetUniverseResourcesPerProviderRequest) (*UniverseResourcesPerProvider, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UniverseResourcesPerProvider
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseAPIService.GetUniverseResourcesPerProvider")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/fetch-universe-resources-per-provider"
 	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
 
 	localVarHeaderParams := make(map[string]string)

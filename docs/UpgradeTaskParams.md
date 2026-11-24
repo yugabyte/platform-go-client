@@ -53,8 +53,8 @@ Name | Type | Description | Notes
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SkipNodeChecks** | Pointer to **bool** | YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade | [optional] 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. Uses the runtime config when not set. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. Uses the runtime config when not set. | [optional] 
 **SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 
@@ -80,7 +80,7 @@ Name | Type | Description | Notes
 
 ### NewUpgradeTaskParams
 
-`func NewUpgradeTaskParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, upgradeOption string, ) *UpgradeTaskParams`
+`func NewUpgradeTaskParams(clusters []Cluster, creatingUser Users, kubernetesUpgradeSupported bool, platformUrl string, upgradeOption string, ) *UpgradeTaskParams`
 
 NewUpgradeTaskParams instantiates a new UpgradeTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -1319,6 +1319,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
 
+### HasSleepAfterMasterRestartMillis
+
+`func (o *UpgradeTaskParams) HasSleepAfterMasterRestartMillis() bool`
+
+HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
 
 ### GetSleepAfterTServerRestartMillis
 
@@ -1339,6 +1344,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+### HasSleepAfterTServerRestartMillis
+
+`func (o *UpgradeTaskParams) HasSleepAfterTServerRestartMillis() bool`
+
+HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
 
 ### GetSoftwareUpgradeState
 

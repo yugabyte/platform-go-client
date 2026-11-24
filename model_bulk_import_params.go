@@ -48,9 +48,11 @@ type BulkImportParams struct {
 	// YbaApi Internal. Run only prechecks during task run
 	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
 	// S3 bucket URL
-	S3Bucket                       string `json:"s3Bucket"`
-	SleepAfterMasterRestartMillis  int32  `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32  `json:"sleepAfterTServerRestartMillis"`
+	S3Bucket string `json:"s3Bucket"`
+	// Wait after each master restart, in ms. Uses the runtime config when not set.
+	SleepAfterMasterRestartMillis *int32 `json:"sleepAfterMasterRestartMillis,omitempty"`
+	// Wait after each tserver restart, in ms. Uses the runtime config when not set.
+	SleepAfterTServerRestartMillis *int32 `json:"sleepAfterTServerRestartMillis,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -75,13 +77,11 @@ type _BulkImportParams BulkImportParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *BulkImportParams {
+func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string) *BulkImportParams {
 	this := BulkImportParams{}
 	this.CreatingUser = creatingUser
 	this.PlatformUrl = platformUrl
 	this.S3Bucket = s3Bucket
-	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
-	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
 }
 
@@ -677,52 +677,68 @@ func (o *BulkImportParams) SetS3Bucket(v string) {
 	o.S3Bucket = v
 }
 
-// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value if set, zero value otherwise.
 func (o *BulkImportParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterMasterRestartMillis
+	return *o.SleepAfterMasterRestartMillis
 }
 
-// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkImportParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterMasterRestartMillis, true
+	return o.SleepAfterMasterRestartMillis, true
 }
 
-// SetSleepAfterMasterRestartMillis sets field value
+// HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
+func (o *BulkImportParams) HasSleepAfterMasterRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterMasterRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterMasterRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterMasterRestartMillis field.
 func (o *BulkImportParams) SetSleepAfterMasterRestartMillis(v int32) {
-	o.SleepAfterMasterRestartMillis = v
+	o.SleepAfterMasterRestartMillis = &v
 }
 
-// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value if set, zero value otherwise.
 func (o *BulkImportParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterTServerRestartMillis
+	return *o.SleepAfterTServerRestartMillis
 }
 
-// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BulkImportParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterTServerRestartMillis, true
+	return o.SleepAfterTServerRestartMillis, true
 }
 
-// SetSleepAfterTServerRestartMillis sets field value
+// HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
+func (o *BulkImportParams) HasSleepAfterTServerRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterTServerRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterTServerRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterTServerRestartMillis field.
 func (o *BulkImportParams) SetSleepAfterTServerRestartMillis(v int32) {
-	o.SleepAfterTServerRestartMillis = v
+	o.SleepAfterTServerRestartMillis = &v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -1074,8 +1090,12 @@ func (o BulkImportParams) ToMap() (map[string]interface{}, error) {
 		toSerialize["runOnlyPrechecks"] = o.RunOnlyPrechecks
 	}
 	toSerialize["s3Bucket"] = o.S3Bucket
-	toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
-	toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	if !IsNil(o.SleepAfterMasterRestartMillis) {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if !IsNil(o.SleepAfterTServerRestartMillis) {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
 	if !IsNil(o.SourceXClusterConfigs) {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}

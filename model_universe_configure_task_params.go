@@ -83,10 +83,12 @@ type UniverseConfigureTaskParams struct {
 	RootAndClientRootCASame *bool   `json:"rootAndClientRootCASame,omitempty"`
 	RootCA                  *string `json:"rootCA,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
-	RunOnlyPrechecks               *bool   `json:"runOnlyPrechecks,omitempty"`
-	SetTxnTableWaitCountFlag       *bool   `json:"setTxnTableWaitCountFlag,omitempty"`
-	SleepAfterMasterRestartMillis  int32   `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32   `json:"sleepAfterTServerRestartMillis"`
+	RunOnlyPrechecks         *bool `json:"runOnlyPrechecks,omitempty"`
+	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
+	// Wait after each master restart, in ms. Uses the runtime config when not set.
+	SleepAfterMasterRestartMillis *int32 `json:"sleepAfterMasterRestartMillis,omitempty"`
+	// Wait after each tserver restart, in ms. Uses the runtime config when not set.
+	SleepAfterTServerRestartMillis *int32  `json:"sleepAfterTServerRestartMillis,omitempty"`
 	SoftwareUpgradeState           *string `json:"softwareUpgradeState,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
@@ -119,14 +121,12 @@ type _UniverseConfigureTaskParams UniverseConfigureTaskParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, newUI bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32) *UniverseConfigureTaskParams {
+func NewUniverseConfigureTaskParams(clusters []Cluster, creatingUser Users, newUI bool, platformUrl string) *UniverseConfigureTaskParams {
 	this := UniverseConfigureTaskParams{}
 	this.Clusters = clusters
 	this.CreatingUser = creatingUser
 	this.NewUI = newUI
 	this.PlatformUrl = platformUrl
-	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
-	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	return &this
 }
 
@@ -1706,52 +1706,68 @@ func (o *UniverseConfigureTaskParams) SetSetTxnTableWaitCountFlag(v bool) {
 	o.SetTxnTableWaitCountFlag = &v
 }
 
-// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterMasterRestartMillis
+	return *o.SleepAfterMasterRestartMillis
 }
 
-// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseConfigureTaskParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterMasterRestartMillis, true
+	return o.SleepAfterMasterRestartMillis, true
 }
 
-// SetSleepAfterMasterRestartMillis sets field value
+// HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasSleepAfterMasterRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterMasterRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterMasterRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterMasterRestartMillis field.
 func (o *UniverseConfigureTaskParams) SetSleepAfterMasterRestartMillis(v int32) {
-	o.SleepAfterMasterRestartMillis = v
+	o.SleepAfterMasterRestartMillis = &v
 }
 
-// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value if set, zero value otherwise.
 func (o *UniverseConfigureTaskParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterTServerRestartMillis
+	return *o.SleepAfterTServerRestartMillis
 }
 
-// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UniverseConfigureTaskParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterTServerRestartMillis, true
+	return o.SleepAfterTServerRestartMillis, true
 }
 
-// SetSleepAfterTServerRestartMillis sets field value
+// HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
+func (o *UniverseConfigureTaskParams) HasSleepAfterTServerRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterTServerRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterTServerRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterTServerRestartMillis field.
 func (o *UniverseConfigureTaskParams) SetSleepAfterTServerRestartMillis(v int32) {
-	o.SleepAfterTServerRestartMillis = v
+	o.SleepAfterTServerRestartMillis = &v
 }
 
 // GetSoftwareUpgradeState returns the SoftwareUpgradeState field value if set, zero value otherwise.
@@ -2514,8 +2530,12 @@ func (o UniverseConfigureTaskParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SetTxnTableWaitCountFlag) {
 		toSerialize["setTxnTableWaitCountFlag"] = o.SetTxnTableWaitCountFlag
 	}
-	toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
-	toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	if !IsNil(o.SleepAfterMasterRestartMillis) {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if !IsNil(o.SleepAfterTServerRestartMillis) {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
 	if !IsNil(o.SoftwareUpgradeState) {
 		toSerialize["softwareUpgradeState"] = o.SoftwareUpgradeState
 	}

@@ -21,7 +21,8 @@ var _ MappedNullable = &ImageBundleUpgradeInfo{}
 type ImageBundleUpgradeInfo struct {
 	ClusterUuid     string `json:"clusterUuid"`
 	ImageBundleUuid string `json:"imageBundleUuid"`
-	ProviderUuid    string `json:"providerUuid"`
+	// Provider of the cluster, for multi-provider clusters.
+	ProviderUuid *string `json:"providerUuid,omitempty"`
 }
 
 type _ImageBundleUpgradeInfo ImageBundleUpgradeInfo
@@ -30,11 +31,10 @@ type _ImageBundleUpgradeInfo ImageBundleUpgradeInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string, providerUuid string) *ImageBundleUpgradeInfo {
+func NewImageBundleUpgradeInfo(clusterUuid string, imageBundleUuid string) *ImageBundleUpgradeInfo {
 	this := ImageBundleUpgradeInfo{}
 	this.ClusterUuid = clusterUuid
 	this.ImageBundleUuid = imageBundleUuid
-	this.ProviderUuid = providerUuid
 	return &this
 }
 
@@ -94,28 +94,36 @@ func (o *ImageBundleUpgradeInfo) SetImageBundleUuid(v string) {
 	o.ImageBundleUuid = v
 }
 
-// GetProviderUuid returns the ProviderUuid field value
+// GetProviderUuid returns the ProviderUuid field value if set, zero value otherwise.
 func (o *ImageBundleUpgradeInfo) GetProviderUuid() string {
-	if o == nil {
+	if o == nil || IsNil(o.ProviderUuid) {
 		var ret string
 		return ret
 	}
-
-	return o.ProviderUuid
+	return *o.ProviderUuid
 }
 
-// GetProviderUuidOk returns a tuple with the ProviderUuid field value
+// GetProviderUuidOk returns a tuple with the ProviderUuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ImageBundleUpgradeInfo) GetProviderUuidOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ProviderUuid) {
 		return nil, false
 	}
-	return &o.ProviderUuid, true
+	return o.ProviderUuid, true
 }
 
-// SetProviderUuid sets field value
+// HasProviderUuid returns a boolean if a field has been set.
+func (o *ImageBundleUpgradeInfo) HasProviderUuid() bool {
+	if o != nil && !IsNil(o.ProviderUuid) {
+		return true
+	}
+
+	return false
+}
+
+// SetProviderUuid gets a reference to the given string and assigns it to the ProviderUuid field.
 func (o *ImageBundleUpgradeInfo) SetProviderUuid(v string) {
-	o.ProviderUuid = v
+	o.ProviderUuid = &v
 }
 
 func (o ImageBundleUpgradeInfo) MarshalJSON() ([]byte, error) {
@@ -130,7 +138,9 @@ func (o ImageBundleUpgradeInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["clusterUuid"] = o.ClusterUuid
 	toSerialize["imageBundleUuid"] = o.ImageBundleUuid
-	toSerialize["providerUuid"] = o.ProviderUuid
+	if !IsNil(o.ProviderUuid) {
+		toSerialize["providerUuid"] = o.ProviderUuid
+	}
 	return toSerialize, nil
 }
 

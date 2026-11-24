@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BackupCategory** | Pointer to **string** | Backup Category | [optional] 
+**FipsEnabled** | Pointer to **bool** | YbaApi Internal. Whether the backup was taken on a FIPS-enabled universe, if known | [optional] 
 **HasKMSHistory** | Pointer to **bool** | Whether backup was KMS encrypted | [optional] 
 **PerLocationBackupInfoMap** | Pointer to [**map[string]PerLocationBackupInfo**](PerLocationBackupInfo.md) | Map of backup location and backup-info object | [optional] 
 
@@ -51,6 +52,31 @@ SetBackupCategory sets BackupCategory field to given value.
 `func (o *RestorePreflightResponse) HasBackupCategory() bool`
 
 HasBackupCategory returns a boolean if a field has been set.
+
+### GetFipsEnabled
+
+`func (o *RestorePreflightResponse) GetFipsEnabled() bool`
+
+GetFipsEnabled returns the FipsEnabled field if non-nil, zero value otherwise.
+
+### GetFipsEnabledOk
+
+`func (o *RestorePreflightResponse) GetFipsEnabledOk() (*bool, bool)`
+
+GetFipsEnabledOk returns a tuple with the FipsEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFipsEnabled
+
+`func (o *RestorePreflightResponse) SetFipsEnabled(v bool)`
+
+SetFipsEnabled sets FipsEnabled field to given value.
+
+### HasFipsEnabled
+
+`func (o *RestorePreflightResponse) HasFipsEnabled() bool`
+
+HasFipsEnabled returns a boolean if a field has been set.
 
 ### GetHasKMSHistory
 

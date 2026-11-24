@@ -20,8 +20,8 @@ Name | Type | Description | Notes
 **PlatformUrl** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. Uses the runtime config when not set. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. Uses the runtime config when not set. | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TableDetails** | [**TableDetails**](TableDetails.md) |  | 
 **TableType** | **string** |  | 
@@ -36,7 +36,7 @@ Name | Type | Description | Notes
 
 ### NewTableDefinitionTaskParams
 
-`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
+`func NewTableDefinitionTaskParams(creatingUser Users, platformUrl string, tableDetails TableDetails, tableType string, tableUUID string, ) *TableDefinitionTaskParams`
 
 NewTableDefinitionTaskParams instantiates a new TableDefinitionTaskParams object
 This constructor will assign default values to properties that have it defined,
@@ -460,6 +460,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
 
+### HasSleepAfterMasterRestartMillis
+
+`func (o *TableDefinitionTaskParams) HasSleepAfterMasterRestartMillis() bool`
+
+HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
 
 ### GetSleepAfterTServerRestartMillis
 
@@ -480,6 +485,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+### HasSleepAfterTServerRestartMillis
+
+`func (o *TableDefinitionTaskParams) HasSleepAfterTServerRestartMillis() bool`
+
+HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

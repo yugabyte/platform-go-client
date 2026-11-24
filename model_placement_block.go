@@ -23,6 +23,8 @@ type PlacementBlock struct {
 	Cloud string `json:"cloud"`
 	// Leader preference
 	LeaderPreference *int32 `json:"leader_preference,omitempty"`
+	// Maximum replicas
+	MaxNumReplicas *int32 `json:"max_num_replicas,omitempty"`
 	// Minimum replicas
 	MinNumReplicas *int32 `json:"min_num_replicas,omitempty"`
 	// Region
@@ -107,6 +109,38 @@ func (o *PlacementBlock) HasLeaderPreference() bool {
 // SetLeaderPreference gets a reference to the given int32 and assigns it to the LeaderPreference field.
 func (o *PlacementBlock) SetLeaderPreference(v int32) {
 	o.LeaderPreference = &v
+}
+
+// GetMaxNumReplicas returns the MaxNumReplicas field value if set, zero value otherwise.
+func (o *PlacementBlock) GetMaxNumReplicas() int32 {
+	if o == nil || IsNil(o.MaxNumReplicas) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxNumReplicas
+}
+
+// GetMaxNumReplicasOk returns a tuple with the MaxNumReplicas field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlacementBlock) GetMaxNumReplicasOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxNumReplicas) {
+		return nil, false
+	}
+	return o.MaxNumReplicas, true
+}
+
+// HasMaxNumReplicas returns a boolean if a field has been set.
+func (o *PlacementBlock) HasMaxNumReplicas() bool {
+	if o != nil && !IsNil(o.MaxNumReplicas) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxNumReplicas gets a reference to the given int32 and assigns it to the MaxNumReplicas field.
+func (o *PlacementBlock) SetMaxNumReplicas(v int32) {
+	o.MaxNumReplicas = &v
 }
 
 // GetMinNumReplicas returns the MinNumReplicas field value if set, zero value otherwise.
@@ -202,6 +236,9 @@ func (o PlacementBlock) ToMap() (map[string]interface{}, error) {
 	toSerialize["cloud"] = o.Cloud
 	if !IsNil(o.LeaderPreference) {
 		toSerialize["leader_preference"] = o.LeaderPreference
+	}
+	if !IsNil(o.MaxNumReplicas) {
+		toSerialize["max_num_replicas"] = o.MaxNumReplicas
 	}
 	if !IsNil(o.MinNumReplicas) {
 		toSerialize["min_num_replicas"] = o.MinNumReplicas

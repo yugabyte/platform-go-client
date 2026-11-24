@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **SleepAfterMasterRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between master restarts. If unset, runtime config is used. | [optional] 
 **SleepAfterTserverRestartMillis** | Pointer to **int32** | Applicable for rolling restarts. Time to wait between tserver restarts. If unset, runtime config is used. | [optional] 
 **RollingRestart** | Pointer to **bool** | Perform a rolling restart of the universe. Otherwise, all nodes will be restarted at the same time. | [optional] [default to true]
+**RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **RestartType** | Pointer to **string** | The method to reboot the node. This is not required for kubernetes universes, as the pods  will get restarted no matter what. \&quot;HARD\&quot; reboots are not supported today.  OS: Restarts the node via the operating system. SERVICE: Restart the YugabyteDB Process only (master, tserver, etc).  | [optional] [default to "SERVICE"]
 
 ## Methods
@@ -102,6 +103,31 @@ SetRollingRestart sets RollingRestart field to given value.
 `func (o *UniverseRestart) HasRollingRestart() bool`
 
 HasRollingRestart returns a boolean if a field has been set.
+
+### GetRollMaxBatchSize
+
+`func (o *UniverseRestart) GetRollMaxBatchSize() RollMaxBatchSize`
+
+GetRollMaxBatchSize returns the RollMaxBatchSize field if non-nil, zero value otherwise.
+
+### GetRollMaxBatchSizeOk
+
+`func (o *UniverseRestart) GetRollMaxBatchSizeOk() (*RollMaxBatchSize, bool)`
+
+GetRollMaxBatchSizeOk returns a tuple with the RollMaxBatchSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollMaxBatchSize
+
+`func (o *UniverseRestart) SetRollMaxBatchSize(v RollMaxBatchSize)`
+
+SetRollMaxBatchSize sets RollMaxBatchSize field to given value.
+
+### HasRollMaxBatchSize
+
+`func (o *UniverseRestart) HasRollMaxBatchSize() bool`
+
+HasRollMaxBatchSize returns a boolean if a field has been set.
 
 ### GetRestartType
 

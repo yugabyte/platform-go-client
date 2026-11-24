@@ -22,15 +22,15 @@ var _ MappedNullable = &BashComponentSpec{}
 type BashComponentSpec struct {
 	// Logical component name; used as a label/sub-directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
 	ComponentName *string `json:"component_name,omitempty"`
-	// Path on the YBA host to the script file to execute on the node. Must resolve to one of the shipped support bundle scripts, node_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.
+	// Path on the YBA host to the script file to execute on the node. Must resolve to one of the shipped support bundle scripts, support_bundle_utils.sh or yba_utils.sh, under the platform devops directory. A relative path is resolved against that directory. Any other path is rejected.
 	ScriptPath *string `json:"script_path,omitempty"`
-	// Arguments appended after the script (entrypoint + flags).
+	// Arguments appended after the script (entrypoint + flags). YBA replaces them with the arguments its support bundle manifest gives component_name.
 	Params []string `json:"params,omitempty"`
 	// Path on the node where the script writes the tar. May contain ${nodeName}. Must be an absolute path without '..', built only from letters, digits, '.', '_', '-', '/' and the ${nodeName} / ${bundleUuid} tokens.
 	RemoteTarPath *string `json:"remote_tar_path,omitempty"`
 	// Linux user to run the script as on the node. Only yugabyte is accepted; leave it unset to get the same result. The SystemLogs component is the one exception, as it needs the provider SSH user and sudo to read /var/log.
 	LinuxUser *string `json:"linux_user,omitempty"`
-	// Script execution timeout in seconds.
+	// Script execution timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
 }
 

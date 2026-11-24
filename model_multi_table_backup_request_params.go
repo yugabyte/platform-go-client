@@ -42,8 +42,10 @@ type MultiTableBackupRequestParams struct {
 	CreatingUser       Users               `json:"creatingUser"`
 	// Cron expression for a recurring backup
 	CronExpression *string `json:"cronExpression,omitempty"`
-	// Cross-cloud federation GCP audience captured at backup time
+	// Cross-cloud federation audience captured at backup time
 	CrossCloudFederationAudience *string `json:"crossCloudFederationAudience,omitempty"`
+	// Cross-cloud federation AWS role ARN captured at backup time
+	CrossCloudFederationRoleArn *string `json:"crossCloudFederationRoleArn,omitempty"`
 	// Customer UUID
 	CustomerUuid *string     `json:"customerUuid,omitempty"`
 	DeviceInfo   *DeviceInfo `json:"deviceInfo,omitempty"`
@@ -64,7 +66,9 @@ type MultiTableBackupRequestParams struct {
 	// Time unit for backup expiry time
 	ExpiryTimeUnit    *string            `json:"expiryTimeUnit,omitempty"`
 	ExtraDependencies *ExtraDependencies `json:"extraDependencies,omitempty"`
-	FullBackup        bool               `json:"fullBackup"`
+	// YbaApi Internal. Whether the source universe was FIPS-enabled
+	FipsEnabled *bool `json:"fipsEnabled,omitempty"`
+	FullBackup  bool  `json:"fullBackup"`
 	// Incremental backups chain size
 	FullChainSizeInBytes *int64 `json:"fullChainSizeInBytes,omitempty"`
 	// Should table backup errors be ignored
@@ -106,9 +110,11 @@ type MultiTableBackupRequestParams struct {
 	// Schedule UUID
 	ScheduleUUID *string `json:"scheduleUUID,omitempty"`
 	// Frequency to run the backup, in milliseconds
-	SchedulingFrequency            *int64 `json:"schedulingFrequency,omitempty"`
-	SleepAfterMasterRestartMillis  int32  `json:"sleepAfterMasterRestartMillis"`
-	SleepAfterTServerRestartMillis int32  `json:"sleepAfterTServerRestartMillis"`
+	SchedulingFrequency *int64 `json:"schedulingFrequency,omitempty"`
+	// Wait after each master restart, in ms. Uses the runtime config when not set.
+	SleepAfterMasterRestartMillis *int32 `json:"sleepAfterMasterRestartMillis,omitempty"`
+	// Wait after each tserver restart, in ms. Uses the runtime config when not set.
+	SleepAfterTServerRestartMillis *int32 `json:"sleepAfterTServerRestartMillis,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`
 	// Is SSE
@@ -156,13 +162,11 @@ type _MultiTableBackupRequestParams MultiTableBackupRequestParams
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, storageConfigUUID string, timeTakenPartial int64) *MultiTableBackupRequestParams {
+func NewMultiTableBackupRequestParams(creatingUser Users, fullBackup bool, platformUrl string, storageConfigUUID string, timeTakenPartial int64) *MultiTableBackupRequestParams {
 	this := MultiTableBackupRequestParams{}
 	this.CreatingUser = creatingUser
 	this.FullBackup = fullBackup
 	this.PlatformUrl = platformUrl
-	this.SleepAfterMasterRestartMillis = sleepAfterMasterRestartMillis
-	this.SleepAfterTServerRestartMillis = sleepAfterTServerRestartMillis
 	this.StorageConfigUUID = storageConfigUUID
 	this.TimeTakenPartial = timeTakenPartial
 	return &this
@@ -616,6 +620,38 @@ func (o *MultiTableBackupRequestParams) SetCrossCloudFederationAudience(v string
 	o.CrossCloudFederationAudience = &v
 }
 
+// GetCrossCloudFederationRoleArn returns the CrossCloudFederationRoleArn field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetCrossCloudFederationRoleArn() string {
+	if o == nil || IsNil(o.CrossCloudFederationRoleArn) {
+		var ret string
+		return ret
+	}
+	return *o.CrossCloudFederationRoleArn
+}
+
+// GetCrossCloudFederationRoleArnOk returns a tuple with the CrossCloudFederationRoleArn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetCrossCloudFederationRoleArnOk() (*string, bool) {
+	if o == nil || IsNil(o.CrossCloudFederationRoleArn) {
+		return nil, false
+	}
+	return o.CrossCloudFederationRoleArn, true
+}
+
+// HasCrossCloudFederationRoleArn returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasCrossCloudFederationRoleArn() bool {
+	if o != nil && !IsNil(o.CrossCloudFederationRoleArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossCloudFederationRoleArn gets a reference to the given string and assigns it to the CrossCloudFederationRoleArn field.
+func (o *MultiTableBackupRequestParams) SetCrossCloudFederationRoleArn(v string) {
+	o.CrossCloudFederationRoleArn = &v
+}
+
 // GetCustomerUuid returns the CustomerUuid field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetCustomerUuid() string {
 	if o == nil || IsNil(o.CustomerUuid) {
@@ -998,6 +1034,38 @@ func (o *MultiTableBackupRequestParams) HasExtraDependencies() bool {
 // SetExtraDependencies gets a reference to the given ExtraDependencies and assigns it to the ExtraDependencies field.
 func (o *MultiTableBackupRequestParams) SetExtraDependencies(v ExtraDependencies) {
 	o.ExtraDependencies = &v
+}
+
+// GetFipsEnabled returns the FipsEnabled field value if set, zero value otherwise.
+func (o *MultiTableBackupRequestParams) GetFipsEnabled() bool {
+	if o == nil || IsNil(o.FipsEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.FipsEnabled
+}
+
+// GetFipsEnabledOk returns a tuple with the FipsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MultiTableBackupRequestParams) GetFipsEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.FipsEnabled) {
+		return nil, false
+	}
+	return o.FipsEnabled, true
+}
+
+// HasFipsEnabled returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasFipsEnabled() bool {
+	if o != nil && !IsNil(o.FipsEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetFipsEnabled gets a reference to the given bool and assigns it to the FipsEnabled field.
+func (o *MultiTableBackupRequestParams) SetFipsEnabled(v bool) {
+	o.FipsEnabled = &v
 }
 
 // GetFullBackup returns the FullBackup field value
@@ -1720,52 +1788,68 @@ func (o *MultiTableBackupRequestParams) SetSchedulingFrequency(v int64) {
 	o.SchedulingFrequency = &v
 }
 
-// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillis returns the SleepAfterMasterRestartMillis field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterMasterRestartMillis
+	return *o.SleepAfterMasterRestartMillis
 }
 
-// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value
+// GetSleepAfterMasterRestartMillisOk returns a tuple with the SleepAfterMasterRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MultiTableBackupRequestParams) GetSleepAfterMasterRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterMasterRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterMasterRestartMillis, true
+	return o.SleepAfterMasterRestartMillis, true
 }
 
-// SetSleepAfterMasterRestartMillis sets field value
+// HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasSleepAfterMasterRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterMasterRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterMasterRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterMasterRestartMillis field.
 func (o *MultiTableBackupRequestParams) SetSleepAfterMasterRestartMillis(v int32) {
-	o.SleepAfterMasterRestartMillis = v
+	o.SleepAfterMasterRestartMillis = &v
 }
 
-// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillis returns the SleepAfterTServerRestartMillis field value if set, zero value otherwise.
 func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillis() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		var ret int32
 		return ret
 	}
-
-	return o.SleepAfterTServerRestartMillis
+	return *o.SleepAfterTServerRestartMillis
 }
 
-// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value
+// GetSleepAfterTServerRestartMillisOk returns a tuple with the SleepAfterTServerRestartMillis field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MultiTableBackupRequestParams) GetSleepAfterTServerRestartMillisOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SleepAfterTServerRestartMillis) {
 		return nil, false
 	}
-	return &o.SleepAfterTServerRestartMillis, true
+	return o.SleepAfterTServerRestartMillis, true
 }
 
-// SetSleepAfterTServerRestartMillis sets field value
+// HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
+func (o *MultiTableBackupRequestParams) HasSleepAfterTServerRestartMillis() bool {
+	if o != nil && !IsNil(o.SleepAfterTServerRestartMillis) {
+		return true
+	}
+
+	return false
+}
+
+// SetSleepAfterTServerRestartMillis gets a reference to the given int32 and assigns it to the SleepAfterTServerRestartMillis field.
 func (o *MultiTableBackupRequestParams) SetSleepAfterTServerRestartMillis(v int32) {
-	o.SleepAfterTServerRestartMillis = v
+	o.SleepAfterTServerRestartMillis = &v
 }
 
 // GetSourceXClusterConfigs returns the SourceXClusterConfigs field value if set, zero value otherwise.
@@ -2474,6 +2558,9 @@ func (o MultiTableBackupRequestParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CrossCloudFederationAudience) {
 		toSerialize["crossCloudFederationAudience"] = o.CrossCloudFederationAudience
 	}
+	if !IsNil(o.CrossCloudFederationRoleArn) {
+		toSerialize["crossCloudFederationRoleArn"] = o.CrossCloudFederationRoleArn
+	}
 	if !IsNil(o.CustomerUuid) {
 		toSerialize["customerUuid"] = o.CustomerUuid
 	}
@@ -2509,6 +2596,9 @@ func (o MultiTableBackupRequestParams) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ExtraDependencies) {
 		toSerialize["extraDependencies"] = o.ExtraDependencies
+	}
+	if !IsNil(o.FipsEnabled) {
+		toSerialize["fipsEnabled"] = o.FipsEnabled
 	}
 	toSerialize["fullBackup"] = o.FullBackup
 	if !IsNil(o.FullChainSizeInBytes) {
@@ -2575,8 +2665,12 @@ func (o MultiTableBackupRequestParams) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SchedulingFrequency) {
 		toSerialize["schedulingFrequency"] = o.SchedulingFrequency
 	}
-	toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
-	toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	if !IsNil(o.SleepAfterMasterRestartMillis) {
+		toSerialize["sleepAfterMasterRestartMillis"] = o.SleepAfterMasterRestartMillis
+	}
+	if !IsNil(o.SleepAfterTServerRestartMillis) {
+		toSerialize["sleepAfterTServerRestartMillis"] = o.SleepAfterTServerRestartMillis
+	}
 	if !IsNil(o.SourceXClusterConfigs) {
 		toSerialize["sourceXClusterConfigs"] = o.SourceXClusterConfigs
 	}

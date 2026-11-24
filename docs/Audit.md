@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Payload** | Pointer to **map[string]interface{}** | Audit UUID | [optional] [readonly] 
 **Target** | Pointer to **string** | Target | [optional] [readonly] 
 **TargetID** | Pointer to **string** | Target ID | [optional] [readonly] 
+**TaskDiff** | Pointer to **map[string]interface{}** | Task Diff | [optional] [readonly] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] [readonly] 
 **Timestamp** | Pointer to **time.Time** | The task creation time. | [optional] [readonly] 
 **UserAddress** | Pointer to **string** | User IP Address | [optional] [readonly] 
@@ -262,6 +263,31 @@ SetTargetID sets TargetID field to given value.
 `func (o *Audit) HasTargetID() bool`
 
 HasTargetID returns a boolean if a field has been set.
+
+### GetTaskDiff
+
+`func (o *Audit) GetTaskDiff() map[string]interface{}`
+
+GetTaskDiff returns the TaskDiff field if non-nil, zero value otherwise.
+
+### GetTaskDiffOk
+
+`func (o *Audit) GetTaskDiffOk() (*map[string]interface{}, bool)`
+
+GetTaskDiffOk returns a tuple with the TaskDiff field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskDiff
+
+`func (o *Audit) SetTaskDiff(v map[string]interface{})`
+
+SetTaskDiff sets TaskDiff field to given value.
+
+### HasTaskDiff
+
+`func (o *Audit) HasTaskDiff() bool`
+
+HasTaskDiff returns a boolean if a field has been set.
 
 ### GetTaskUUID
 

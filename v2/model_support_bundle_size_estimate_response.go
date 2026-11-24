@@ -18,7 +18,7 @@ import (
 // checks if the SupportBundleSizeEstimateResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SupportBundleSizeEstimateResponse{}
 
-// SupportBundleSizeEstimateResponse Support bundle size estimate per node and component (same as V1).
+// SupportBundleSizeEstimateResponse Support bundle size estimate per node and component. V2 responses use logical component names from specs (e.g. UniverseLogs, ysql_yugabyte_queries) rather than bucket enum names (FilesComponent). Global component sizes are mapped to the YBA node key.
 type SupportBundleSizeEstimateResponse struct {
 	// Map of universe node names to component sizes. Global component sizes are mapped to YBA.
 	Data *map[string]map[string]int64 `json:"data,omitempty"`

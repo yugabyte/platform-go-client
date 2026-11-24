@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnableFederatedIam** | Pointer to **bool** | WARNING: This is a preview API that could change. Enable GCS-on-AWS cross-cloud federated IAM on this provider&#39;s DB nodes (nodes must be AWS VMs). | [optional] 
+**CrossCloudFederationTargets** | Pointer to [**[]CrossCloudFederationTarget**](CrossCloudFederationTarget.md) | WARNING: This is a preview API that could change. Storage clouds this provider&#39;s DB nodes can reach with federated IAM, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on, and is left alone when there is none - so add an entry per storage cloud the nodes must actually reach. | [optional] 
+**EnableFederatedIam** | Pointer to **bool** | WARNING: This is a preview API that could change. Enable cross-cloud federated IAM on this provider&#39;s DB nodes. Each node is given access to the storage clouds it is not running on, per crossCloudFederationTargets. | [optional] 
 **EnableMultiTenancy** | Pointer to **bool** | WARNING: This is a preview API that could change. | [optional] 
-**FederatedIamAudience** | Pointer to **string** | WARNING: This is a preview API that could change. GCP Workload Identity Federation audience used when federated IAM is enabled. | [optional] 
+**FederatedIamAudience** | Pointer to **string** | WARNING: This is a preview API that could change. Deprecated: use crossCloudFederationTargets. GCP Workload Identity Federation audience used when federated IAM is enabled. | [optional] 
 **UseClockbound** | Pointer to **bool** | WARNING: This is a preview API that could change. | [optional] 
 **YbHomeDir** | Pointer to **string** |  | [optional] 
 **YnpManaged** | Pointer to **bool** | YbaApi Internal. Provider is created and managed by YNP | [optional] [readonly] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewOnPremCloudInfoWithDefaults instantiates a new OnPremCloudInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCrossCloudFederationTargets
+
+`func (o *OnPremCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget`
+
+GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field if non-nil, zero value otherwise.
+
+### GetCrossCloudFederationTargetsOk
+
+`func (o *OnPremCloudInfo) GetCrossCloudFederationTargetsOk() (*[]CrossCloudFederationTarget, bool)`
+
+GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCrossCloudFederationTargets
+
+`func (o *OnPremCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget)`
+
+SetCrossCloudFederationTargets sets CrossCloudFederationTargets field to given value.
+
+### HasCrossCloudFederationTargets
+
+`func (o *OnPremCloudInfo) HasCrossCloudFederationTargets() bool`
+
+HasCrossCloudFederationTargets returns a boolean if a field has been set.
 
 ### GetEnableFederatedIam
 

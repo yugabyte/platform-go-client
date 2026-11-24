@@ -49,7 +49,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -123,12 +123,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -195,12 +195,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
+	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Parameters of the backup to be restored
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -269,13 +269,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
+	tableBackup := *openapiclient.NewMultiTableBackupRequestParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "StorageConfigUUID_example", int64(123)) // MultiTableBackupRequestParams | Table backup data to be created
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -346,14 +346,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	tableUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
+	backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "StorageConfigUUID_example", int64(123)) // BackupTableParams | Backup data to be created
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -424,12 +424,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
+	backup := *openapiclient.NewBackupRequestParams("BackupUUID_example", *openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "StorageConfigUUID_example", "UniverseUUID_example") // BackupRequestParams | Backup data to be created
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -498,7 +498,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -568,7 +568,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -642,7 +642,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -717,7 +717,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -791,7 +791,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -862,7 +862,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -933,7 +933,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1005,7 +1005,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1077,7 +1077,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1150,7 +1150,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1223,7 +1223,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1296,13 +1296,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", int32(123), int32(123), "StorageConfigUUID_example", int64(123)) // BackupTableParams | Parameters of the backup to be restored
+	backup := *openapiclient.NewBackupTableParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), false, "PlatformUrl_example", "StorageConfigUUID_example", int64(123)) // BackupTableParams | Parameters of the backup to be restored
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1373,12 +1373,12 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
+	backup := *openapiclient.NewRestoreBackupParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "UniverseUUID_example") // RestoreBackupParams | Parameters of the backup to be restored
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1447,7 +1447,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1521,7 +1521,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1598,7 +1598,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1675,7 +1675,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1750,7 +1750,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -1827,7 +1827,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
