@@ -21,7 +21,7 @@ var _ MappedNullable = &AzureSasTokenCredentials{}
 // AzureSasTokenCredentials AzureSasTokenCredentials  A shared access signature for the backup_location container. Each region location carries the token of its own container. Part of AzureCredentials.
 type AzureSasTokenCredentials struct {
 	CredentialType AzureCredentialType `json:"credential_type"`
-	// SAS token of the backup_location container. Required on create; never returned.
+	// SAS token of the backup_location container. Required on create; on edit, omit it to keep the stored one. Never returned.
 	SasToken *string `json:"sas_token,omitempty"`
 }
 

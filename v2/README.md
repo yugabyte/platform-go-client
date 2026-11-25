@@ -122,6 +122,8 @@ Class | Method | HTTP request | Description
 *PerfAdvisorEndpointAPI* | [**ValidatePerfAdvisorEndpoint**](docs/PerfAdvisorEndpointAPI.md#validateperfadvisorendpoint) | **Post** /customers/{cUUID}/perf-advisor-endpoints/validate | Validate a Perf Advisor Endpoint
 *SessionAPI* | [**Login**](docs/SessionAPI.md#login) | **Post** /login | Log in
 *StorageConfigAPI* | [**CreateStorageConfig**](docs/StorageConfigAPI.md#createstorageconfig) | **Post** /customers/{cUUID}/storage-configs | Create a storage configuration
+*StorageConfigAPI* | [**DeleteStorageConfig**](docs/StorageConfigAPI.md#deletestorageconfig) | **Delete** /customers/{cUUID}/storage-configs/{scUUID} | Delete a storage configuration
+*StorageConfigAPI* | [**EditStorageConfig**](docs/StorageConfigAPI.md#editstorageconfig) | **Put** /customers/{cUUID}/storage-configs/{scUUID} | Edit a storage configuration
 *StorageConfigAPI* | [**GetStorageConfig**](docs/StorageConfigAPI.md#getstorageconfig) | **Get** /customers/{cUUID}/storage-configs/{scUUID} | Get a storage configuration
 *StorageConfigAPI* | [**PageListStorageConfigs**](docs/StorageConfigAPI.md#pageliststorageconfigs) | **Post** /customers/{cUUID}/storage-configs/page | List storage configurations (paged)
 *StorageConfigAPI* | [**ValidateStorageConfig**](docs/StorageConfigAPI.md#validatestorageconfig) | **Post** /customers/{cUUID}/storage-configs/validate | Validate a storage configuration

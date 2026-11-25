@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DnsNames** | Pointer to **[]string** | DNS names that clients use to reach the load balancers, for example db.example.com or *.db.example.com. YBA adds them, and the load balancer address, to the server certs that its self-signed CA signs for the nodes behind the load balancers. IP addresses are rejected. In an edit, leaving this out keeps the current names, and an empty list clears them. To change the names, the setting must also set enablePrivate to true. | [optional] 
 **EnablePrivate** | Pointer to **bool** | Create a private L4 load balancer in each region of the cluster | [optional] 
 **EnablePublic** | Pointer to **bool** | Create a public L4 load balancer in each region of the cluster. Not supported yet. Must be false. | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewManagedLoadBalancerConfigWithDefaults instantiates a new ManagedLoadBalancerConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDnsNames
+
+`func (o *ManagedLoadBalancerConfig) GetDnsNames() []string`
+
+GetDnsNames returns the DnsNames field if non-nil, zero value otherwise.
+
+### GetDnsNamesOk
+
+`func (o *ManagedLoadBalancerConfig) GetDnsNamesOk() (*[]string, bool)`
+
+GetDnsNamesOk returns a tuple with the DnsNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsNames
+
+`func (o *ManagedLoadBalancerConfig) SetDnsNames(v []string)`
+
+SetDnsNames sets DnsNames field to given value.
+
+### HasDnsNames
+
+`func (o *ManagedLoadBalancerConfig) HasDnsNames() bool`
+
+HasDnsNames returns a boolean if a field has been set.
 
 ### GetEnablePrivate
 

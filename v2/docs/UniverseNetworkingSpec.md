@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CommunicationPorts** | Pointer to [**CommunicationPortsSpec**](CommunicationPortsSpec.md) |  | [optional] 
-**AssignPublicIp** | Pointer to **bool** | Whether to assign a public IP for nodes in this Universe. | [optional] [default to true]
-**AssignStaticPublicIp** | Pointer to **bool** | Whether to assign a static public IP for nodes in this Universe. | [optional] [default to false]
-**EnableIpv6** | Pointer to **bool** | Whether to enable IPv6 on nodes in this cluster. Defaults to false. | [optional] 
+**AssignPublicIp** | Pointer to **bool** | Whether to assign a public IP for nodes in this Universe. Defaults to true on create. On edit, omit to leave unchanged. | [optional] 
+**AssignStaticPublicIp** | Pointer to **bool** | Whether to assign a static public IP for nodes in this Universe. Defaults to false on create. On edit, omit to leave unchanged. | [optional] 
+**EnableIpv6** | Pointer to **bool** | Whether to enable IPv6 on nodes in this cluster. Defaults to false on create. On edit, omit to leave unchanged. | [optional] 
 
 ## Methods
 

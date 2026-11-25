@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region of the universe whose backups go to this location | 
 **Location** | **string** | Location of the region&#39;s backups, as https://&lt;account&gt;.blob.core.windows.net/&lt;container&gt;[/&lt;path&gt;] | 
-**SasToken** | Pointer to **string** | SAS token of this region&#39;s container, with SAS_TOKEN credentials. Required on create with those credentials; never returned. | [optional] 
+**SasToken** | Pointer to **string** | SAS token of this region&#39;s container, with SAS_TOKEN credentials. Required on create with those credentials; on edit, omit it to keep the stored one for the same region. Never returned. | [optional] 
 
 ## Methods
 

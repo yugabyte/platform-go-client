@@ -18420,6 +18420,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -19888,6 +19891,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -21356,6 +21362,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -22824,6 +22833,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -24292,6 +24304,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -24639,6 +24654,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -30466,6 +30483,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -31934,6 +31954,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -33402,6 +33425,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -34870,6 +34896,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -36338,6 +36367,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -36685,6 +36717,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -39032,6 +39066,9 @@ components:
           ycqlPassword: ycqlPassword
           managedLoadBalancer:
             enablePublic: true
+            dnsNames:
+            - dnsNames
+            - dnsNames
             enablePrivate: true
         index: 3
         uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -43744,6 +43781,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -45212,6 +45252,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -46680,6 +46723,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -48148,6 +48194,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -49616,6 +49665,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -49959,6 +50011,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -52231,6 +52285,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -53699,6 +53756,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -55167,6 +55227,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -56635,6 +56698,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -58103,6 +58169,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -58454,6 +58523,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -61466,6 +61537,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -62934,6 +63008,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -64402,6 +64479,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -65870,6 +65950,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -67338,6 +67421,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -67687,6 +67773,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -69855,6 +69943,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -71323,6 +71414,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -72791,6 +72885,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -74259,6 +74356,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -75727,6 +75827,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -76070,6 +76173,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -76874,8 +76979,22 @@ components:
       description: Load balancers that YBA creates and manages for a cluster
       example:
         enablePublic: true
+        dnsNames:
+        - dnsNames
+        - dnsNames
         enablePrivate: true
       properties:
+        dnsNames:
+          description: "DNS names that clients use to reach the load balancers, for\
+            \ example db.example.com or *.db.example.com. YBA adds them, and the load\
+            \ balancer address, to the server certs that its self-signed CA signs\
+            \ for the nodes behind the load balancers. IP addresses are rejected.\
+            \ In an edit, leaving this out keeps the current names, and an empty list\
+            \ clears them. To change the names, the setting must also set enablePrivate\
+            \ to true."
+          items:
+            type: string
+          type: array
         enablePrivate:
           description: Create a private L4 load balancer in each region of the cluster
           type: boolean
@@ -85060,6 +85179,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -86528,6 +86650,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -87996,6 +88121,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -89464,6 +89592,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -90932,6 +91063,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -91281,6 +91415,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -93387,6 +93523,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -94855,6 +94994,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -96323,6 +96465,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -97791,6 +97936,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -99259,6 +99407,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -99602,6 +99753,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -102490,6 +102643,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -103958,6 +104114,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -105426,6 +105585,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -106894,6 +107056,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -108362,6 +108527,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -108716,6 +108884,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -110991,6 +111161,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -112459,6 +112632,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -113927,6 +114103,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -115395,6 +115574,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -116863,6 +117045,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -117206,6 +117391,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -120765,6 +120952,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -122233,6 +122423,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -123701,6 +123894,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -125169,6 +125365,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -126637,6 +126836,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -126980,6 +127182,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -127982,6 +128186,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -128431,6 +128637,8 @@ components:
             - ProvisionUniverseNodes
             - DeleteCustomerConfig
             - DeleteCustomerStorageConfig
+            - DeleteStorageConfig
+            - EditStorageConfig
             - ValidateStorageConfig
             - ResizeNode
             - RollbackResizeNode
@@ -129220,6 +129428,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -131437,6 +131647,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -132905,6 +133118,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -134373,6 +134589,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -135841,6 +136060,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -137309,6 +137531,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -137654,6 +137879,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -140375,6 +140602,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -141843,6 +142073,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -143311,6 +143544,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -144779,6 +145015,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -146247,6 +146486,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -146590,6 +146832,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -149678,6 +149922,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -151146,6 +151393,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -152614,6 +152864,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -154082,6 +154335,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -155550,6 +155806,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -155895,6 +156154,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -157999,6 +158260,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -159467,6 +159731,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -160935,6 +161202,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -162403,6 +162673,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -163871,6 +164144,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -164218,6 +164494,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -166448,6 +166726,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -167916,6 +168197,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -169384,6 +169668,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -170852,6 +171139,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -172320,6 +172610,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -172663,6 +172956,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -174738,6 +175033,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -176206,6 +176504,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -177674,6 +177975,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -179142,6 +179446,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -180610,6 +180917,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -180941,6 +181251,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -183023,6 +183335,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -184491,6 +184806,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -185959,6 +186277,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -187427,6 +187748,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -188895,6 +189219,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -189227,6 +189554,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -191584,6 +191913,9 @@ components:
               ycqlPassword: ycqlPassword
               managedLoadBalancer:
                 enablePublic: true
+                dnsNames:
+                - dnsNames
+                - dnsNames
                 enablePrivate: true
             index: 3
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -193052,6 +193384,9 @@ components:
               ycqlPassword: ycqlPassword
               managedLoadBalancer:
                 enablePublic: true
+                dnsNames:
+                - dnsNames
+                - dnsNames
                 enablePrivate: true
             index: 3
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -194520,6 +194855,9 @@ components:
               ycqlPassword: ycqlPassword
               managedLoadBalancer:
                 enablePublic: true
+                dnsNames:
+                - dnsNames
+                - dnsNames
                 enablePrivate: true
             index: 3
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -195988,6 +196326,9 @@ components:
               ycqlPassword: ycqlPassword
               managedLoadBalancer:
                 enablePublic: true
+                dnsNames:
+                - dnsNames
+                - dnsNames
                 enablePrivate: true
             index: 3
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -197456,6 +197797,9 @@ components:
               ycqlPassword: ycqlPassword
               managedLoadBalancer:
                 enablePublic: true
+                dnsNames:
+                - dnsNames
+                - dnsNames
                 enablePrivate: true
             index: 3
             uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -199650,6 +199994,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -201118,6 +201465,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -202586,6 +202936,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -204054,6 +204407,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -205522,6 +205878,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -205865,6 +206224,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode
@@ -207112,6 +207473,9 @@ components:
         ycqlPassword: ycqlPassword
         managedLoadBalancer:
           enablePublic: true
+          dnsNames:
+          - dnsNames
+          - dnsNames
           enablePrivate: true
       properties:
         accessKeyCode:
@@ -209437,6 +209801,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -210905,6 +211272,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -212373,6 +212743,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -213841,6 +214214,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -215309,6 +215685,9 @@ components:
             ycqlPassword: ycqlPassword
             managedLoadBalancer:
               enablePublic: true
+              dnsNames:
+              - dnsNames
+              - dnsNames
               enablePrivate: true
           index: 3
           uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -215694,6 +216073,8 @@ components:
           - ProvisionUniverseNodes
           - DeleteCustomerConfig
           - DeleteCustomerStorageConfig
+          - DeleteStorageConfig
+          - EditStorageConfig
           - ValidateStorageConfig
           - ResizeNode
           - RollbackResizeNode

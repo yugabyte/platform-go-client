@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CredentialType** | [**S3CredentialType**](S3CredentialType.md) |  | 
-**AccessKeyId** | Pointer to **string** | Access key ID. Required on create; never returned. | [optional] 
-**SecretAccessKey** | Pointer to **string** | Secret access key. Required on create; never returned. | [optional] 
+**AccessKeyId** | Pointer to **string** | Access key ID. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
+**SecretAccessKey** | Pointer to **string** | Secret access key. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
 **CredentialSource** | Pointer to [**S3IamCredentialSource**](S3IamCredentialSource.md) |  | [optional] [default to S3IamSourceDefault]
 **IamUserProfile** | Pointer to **string** | AWS profile to use with credential_source IAM_USER. Defaults to \&quot;default\&quot;. | [optional] 
 **SessionDurationSecs** | Pointer to **int32** | Duration of assumed-role sessions, in seconds, when the role&#39;s maximum can&#39;t be read (no iam:GetRole permission). Defaults to 3600. | [optional] 

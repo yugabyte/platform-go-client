@@ -21,9 +21,9 @@ var _ MappedNullable = &S3AccessKeyCredentials{}
 // S3AccessKeyCredentials S3AccessKeyCredentials  A static AWS (or S3-compatible) access key. Part of S3Credentials.
 type S3AccessKeyCredentials struct {
 	CredentialType S3CredentialType `json:"credential_type"`
-	// Access key ID. Required on create; never returned.
+	// Access key ID. Required on create; on edit, omit it to keep the stored one. Never returned.
 	AccessKeyId *string `json:"access_key_id,omitempty"`
-	// Secret access key. Required on create; never returned.
+	// Secret access key. Required on create; on edit, omit it to keep the stored one. Never returned.
 	SecretAccessKey *string `json:"secret_access_key,omitempty"`
 }
 

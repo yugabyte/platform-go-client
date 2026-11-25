@@ -18,37 +18,37 @@ import (
 // checks if the CommunicationPortsSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommunicationPortsSpec{}
 
-// CommunicationPortsSpec Communication Ports used by nodes of this Universe. Part of UniverseNetworkingSpec.
+// CommunicationPortsSpec Communication Ports used by nodes of this Universe. Part of UniverseNetworkingSpec. Omitted ports use the platform defaults on create and are left unchanged on edit.
 type CommunicationPortsSpec struct {
-	// Master table HTTP port
+	// Master table HTTP port. Defaults to 7000 on create.
 	MasterHttpPort *int32 `json:"master_http_port,omitempty"`
-	// Master table RCP port
+	// Master table RCP port. Defaults to 7100 on create.
 	MasterRpcPort *int32 `json:"master_rpc_port,omitempty"`
-	// Node exporter port
+	// Node exporter port. Defaults to 9300 on create.
 	NodeExporterPort *int32 `json:"node_exporter_port,omitempty"`
-	// Otel Collector metrics port
+	// Otel Collector metrics port. Defaults to 8889 on create.
 	OtelCollectorMetricsPort *int32 `json:"otel_collector_metrics_port,omitempty"`
-	// Redis HTTP port
+	// Redis HTTP port. Defaults to 11000 on create.
 	RedisServerHttpPort *int32 `json:"redis_server_http_port,omitempty"`
-	// Redis RPC port
+	// Redis RPC port. Defaults to 6379 on create.
 	RedisServerRpcPort *int32 `json:"redis_server_rpc_port,omitempty"`
-	// Tablet server HTTP port
+	// Tablet server HTTP port. Defaults to 9000 on create.
 	TserverHttpPort *int32 `json:"tserver_http_port,omitempty"`
-	// Tablet server RPC port
+	// Tablet server RPC port. Defaults to 9100 on create.
 	TserverRpcPort *int32 `json:"tserver_rpc_port,omitempty"`
-	// Yb controller HTTP port
+	// Yb controller HTTP port. Defaults to 14000 on create.
 	YbControllerHttpPort *int32 `json:"yb_controller_http_port,omitempty"`
-	// Yb controller RPC port
+	// Yb controller RPC port. Defaults to 18018 on create.
 	YbControllerRpcPort *int32 `json:"yb_controller_rpc_port,omitempty"`
-	// YQL HTTP port
+	// YQL HTTP port. Defaults to 12000 on create.
 	YqlServerHttpPort *int32 `json:"yql_server_http_port,omitempty"`
-	// YQL RPC port
+	// YQL RPC port. Defaults to 9042 on create.
 	YqlServerRpcPort *int32 `json:"yql_server_rpc_port,omitempty"`
-	// YSQL HTTP port
+	// YSQL HTTP port. Defaults to 13000 on create.
 	YsqlServerHttpPort *int32 `json:"ysql_server_http_port,omitempty"`
-	// YSQL RPC port
+	// YSQL RPC port. Defaults to 5433 on create.
 	YsqlServerRpcPort *int32 `json:"ysql_server_rpc_port,omitempty"`
-	// Internal YSQL RPC port used when connection pooling is enabled
+	// Internal YSQL RPC port used when connection pooling is enabled. Defaults to 6433 on create.
 	InternalYsqlServerRpcPort *int32 `json:"internal_ysql_server_rpc_port,omitempty"`
 }
 
@@ -58,36 +58,6 @@ type CommunicationPortsSpec struct {
 // will change when the set of required properties is changed
 func NewCommunicationPortsSpec() *CommunicationPortsSpec {
 	this := CommunicationPortsSpec{}
-	var masterHttpPort int32 = 7000
-	this.MasterHttpPort = &masterHttpPort
-	var masterRpcPort int32 = 7100
-	this.MasterRpcPort = &masterRpcPort
-	var nodeExporterPort int32 = 9300
-	this.NodeExporterPort = &nodeExporterPort
-	var otelCollectorMetricsPort int32 = 8889
-	this.OtelCollectorMetricsPort = &otelCollectorMetricsPort
-	var redisServerHttpPort int32 = 11000
-	this.RedisServerHttpPort = &redisServerHttpPort
-	var redisServerRpcPort int32 = 6379
-	this.RedisServerRpcPort = &redisServerRpcPort
-	var tserverHttpPort int32 = 9000
-	this.TserverHttpPort = &tserverHttpPort
-	var tserverRpcPort int32 = 9100
-	this.TserverRpcPort = &tserverRpcPort
-	var ybControllerHttpPort int32 = 14000
-	this.YbControllerHttpPort = &ybControllerHttpPort
-	var ybControllerRpcPort int32 = 18018
-	this.YbControllerRpcPort = &ybControllerRpcPort
-	var yqlServerHttpPort int32 = 12000
-	this.YqlServerHttpPort = &yqlServerHttpPort
-	var yqlServerRpcPort int32 = 9042
-	this.YqlServerRpcPort = &yqlServerRpcPort
-	var ysqlServerHttpPort int32 = 13000
-	this.YsqlServerHttpPort = &ysqlServerHttpPort
-	var ysqlServerRpcPort int32 = 5433
-	this.YsqlServerRpcPort = &ysqlServerRpcPort
-	var internalYsqlServerRpcPort int32 = 6433
-	this.InternalYsqlServerRpcPort = &internalYsqlServerRpcPort
 	return &this
 }
 
@@ -96,36 +66,6 @@ func NewCommunicationPortsSpec() *CommunicationPortsSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewCommunicationPortsSpecWithDefaults() *CommunicationPortsSpec {
 	this := CommunicationPortsSpec{}
-	var masterHttpPort int32 = 7000
-	this.MasterHttpPort = &masterHttpPort
-	var masterRpcPort int32 = 7100
-	this.MasterRpcPort = &masterRpcPort
-	var nodeExporterPort int32 = 9300
-	this.NodeExporterPort = &nodeExporterPort
-	var otelCollectorMetricsPort int32 = 8889
-	this.OtelCollectorMetricsPort = &otelCollectorMetricsPort
-	var redisServerHttpPort int32 = 11000
-	this.RedisServerHttpPort = &redisServerHttpPort
-	var redisServerRpcPort int32 = 6379
-	this.RedisServerRpcPort = &redisServerRpcPort
-	var tserverHttpPort int32 = 9000
-	this.TserverHttpPort = &tserverHttpPort
-	var tserverRpcPort int32 = 9100
-	this.TserverRpcPort = &tserverRpcPort
-	var ybControllerHttpPort int32 = 14000
-	this.YbControllerHttpPort = &ybControllerHttpPort
-	var ybControllerRpcPort int32 = 18018
-	this.YbControllerRpcPort = &ybControllerRpcPort
-	var yqlServerHttpPort int32 = 12000
-	this.YqlServerHttpPort = &yqlServerHttpPort
-	var yqlServerRpcPort int32 = 9042
-	this.YqlServerRpcPort = &yqlServerRpcPort
-	var ysqlServerHttpPort int32 = 13000
-	this.YsqlServerHttpPort = &ysqlServerHttpPort
-	var ysqlServerRpcPort int32 = 5433
-	this.YsqlServerRpcPort = &ysqlServerRpcPort
-	var internalYsqlServerRpcPort int32 = 6433
-	this.InternalYsqlServerRpcPort = &internalYsqlServerRpcPort
 	return &this
 }
 

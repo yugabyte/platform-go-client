@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnablePrivate** | Pointer to **bool** | Whether YBA creates a private load balancer in each region. Clients in the VPC of the universe, or in a network peered with it, can reach it. | [optional] [default to false]
+**EnablePrivate** | **bool** | Whether YBA creates a private load balancer in each region. Clients in the VPC of the universe, or in a network peered with it, can reach it. | 
 **EnablePublic** | Pointer to **bool** | Whether YBA creates a public load balancer in each region, which clients on the internet can reach. Not supported yet. YBA rejects true. | [optional] [default to false]
+**DnsNames** | Pointer to **[]string** | DNS names that clients use to reach the load balancers, for example db.example.com or *.db.example.com. YBA adds them, and the load balancer address, to the server certs that its self-signed CA signs for the nodes behind the load balancers. IP addresses are rejected. In an edit, leaving this out keeps the current names, and an empty list clears them. | [optional] 
 
 ## Methods
 
 ### NewManagedLoadBalancerSpec
 
-`func NewManagedLoadBalancerSpec() *ManagedLoadBalancerSpec`
+`func NewManagedLoadBalancerSpec(enablePrivate bool, ) *ManagedLoadBalancerSpec`
 
 NewManagedLoadBalancerSpec instantiates a new ManagedLoadBalancerSpec object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetEnablePrivate sets EnablePrivate field to given value.
 
-### HasEnablePrivate
-
-`func (o *ManagedLoadBalancerSpec) HasEnablePrivate() bool`
-
-HasEnablePrivate returns a boolean if a field has been set.
 
 ### GetEnablePublic
 
@@ -75,6 +71,31 @@ SetEnablePublic sets EnablePublic field to given value.
 `func (o *ManagedLoadBalancerSpec) HasEnablePublic() bool`
 
 HasEnablePublic returns a boolean if a field has been set.
+
+### GetDnsNames
+
+`func (o *ManagedLoadBalancerSpec) GetDnsNames() []string`
+
+GetDnsNames returns the DnsNames field if non-nil, zero value otherwise.
+
+### GetDnsNamesOk
+
+`func (o *ManagedLoadBalancerSpec) GetDnsNamesOk() (*[]string, bool)`
+
+GetDnsNamesOk returns a tuple with the DnsNames field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsNames
+
+`func (o *ManagedLoadBalancerSpec) SetDnsNames(v []string)`
+
+SetDnsNames sets DnsNames field to given value.
+
+### HasDnsNames
+
+`func (o *ManagedLoadBalancerSpec) HasDnsNames() bool`
+
+HasDnsNames returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

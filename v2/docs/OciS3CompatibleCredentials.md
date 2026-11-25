@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CredentialType** | [**OciCredentialType**](OciCredentialType.md) |  | 
-**AccessKeyId** | Pointer to **string** | Access key of the customer secret key. Required on create; never returned. | [optional] 
-**SecretAccessKey** | Pointer to **string** | Secret of the customer secret key. Required on create; never returned. | [optional] 
+**AccessKeyId** | Pointer to **string** | Access key of the customer secret key. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
+**SecretAccessKey** | Pointer to **string** | Secret of the customer secret key. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
 **HostBase** | **string** | Host of the S3-compatible endpoint | 
 
 ## Methods

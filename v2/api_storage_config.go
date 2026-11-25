@@ -191,6 +191,367 @@ func (a *StorageConfigAPIService) CreateStorageConfigExecute(r StorageConfigAPIC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type StorageConfigAPIDeleteStorageConfigRequest struct {
+	ctx            context.Context
+	ApiService     *StorageConfigAPIService
+	cUUID          string
+	scUUID         string
+	deleteBackups  *bool
+	idempotencyKey *string
+}
+
+// Also delete the backups stored with the configuration, from YBA and from the storage. Without it, a configuration with completed backups, or backups whose delete failed, can&#39;t be deleted.
+func (r StorageConfigAPIDeleteStorageConfigRequest) DeleteBackups(deleteBackups bool) StorageConfigAPIDeleteStorageConfigRequest {
+	r.deleteBackups = &deleteBackups
+	return r
+}
+
+// Makes the request safe to retry. A unique client-generated value, such as a UUID, for this request.  The first request with a key runs the operation. If it succeeds, its response is kept for 24 hours (yb.api.idempotency.retention), and a retry with the same key and the same request returns that response with an X-IDEMPOTENT-REPLAYED: true header, without running the operation again. A retry while the first request is still running gets 409; the same key with a different request gets 422. A failed request does not keep the key, so it can be retried with the same one.  Keys are scoped to the caller&#39;s customer.  If the operation starts a task, that task&#39;s UUID is derived from the key: the version 5 UUID of \&quot;&lt;customer UUID&gt;:&lt;key&gt;\&quot; in the namespace 3bf373dd-d374-4df5-bdea-c3cd942ae7f4. A client can follow the task even if it lost the response. If that task was started, for example before YBA restarted and lost the response, a retry gets 409 instead of starting the operation again, with the task&#39;s UUID in error.task_uuid, and in error.latest_task_uuid the UUID of its newest retry if YBA retried it (a restart fails or aborts running tasks, and may retry them under a new UUID). If the task failed while being submitted, the retry runs the operation again under a new task UUID.
+func (r StorageConfigAPIDeleteStorageConfigRequest) IdempotencyKey(idempotencyKey string) StorageConfigAPIDeleteStorageConfigRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r StorageConfigAPIDeleteStorageConfigRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.DeleteStorageConfigExecute(r)
+}
+
+/*
+DeleteStorageConfig Delete a storage configuration
+
+Deletes a storage configuration and returns the task that does it (resource_uuid is the
+configuration's UUID). The request is refused (409 STORAGE_CONFIG_IN_USE) while a backup
+stored with the configuration runs or is being stopped, while a backup schedule, a DR configuration or YBA's
+continuous backup uses it, and, unless delete_backups is set, while completed backups, or
+backups whose delete failed, are stored with it; the task
+checks again before it deletes anything, and fails with the same error code if the
+configuration came into use meanwhile. Without delete_backups, the task removes the
+configuration, so when it succeeds the configuration is gone (404), unless backups stored
+with it are still being deleted: then it stays QUEUED_FOR_DELETION until they're done. Its
+failed and stopped backups stay in YBA's list without a configuration, as with the v1
+delete. With delete_backups, the task queues the
+configuration's backups for deletion and the configuration as QUEUED_FOR_DELETION; YBA's
+backup garbage collector then deletes the backups, from YBA and from the storage, and removes
+the configuration once none of them is still being deleted, so the task's success means
+queued, not removed. Deleting a configuration that a delete already queued, or that a delete
+task is already deleting, returns that delete's task, whatever delete_backups is. A backup
+that a request accepted just before the delete task ran, and whose task hasn't started
+writing yet, isn't seen by the checks; that backup then fails, as with the v1 delete.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param scUUID Storage configuration UUID
+	@return StorageConfigAPIDeleteStorageConfigRequest
+*/
+func (a *StorageConfigAPIService) DeleteStorageConfig(ctx context.Context, cUUID string, scUUID string) StorageConfigAPIDeleteStorageConfigRequest {
+	return StorageConfigAPIDeleteStorageConfigRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scUUID:     scUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *StorageConfigAPIService) DeleteStorageConfigExecute(r StorageConfigAPIDeleteStorageConfigRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageConfigAPIService.DeleteStorageConfig")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/storage-configs/{scUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scUUID"+"}", url.PathEscape(parameterValueToString(r.scUUID, "scUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.deleteBackups != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_backups", r.deleteBackups, "form", "")
+	} else {
+		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "delete_backups", defaultValue, "form", "")
+		r.deleteBackups = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["authTokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type StorageConfigAPIEditStorageConfigRequest struct {
+	ctx               context.Context
+	ApiService        *StorageConfigAPIService
+	cUUID             string
+	scUUID            string
+	storageConfigSpec *StorageConfigSpec
+	ifMatch           *string
+	idempotencyKey    *string
+}
+
+func (r StorageConfigAPIEditStorageConfigRequest) StorageConfigSpec(storageConfigSpec StorageConfigSpec) StorageConfigAPIEditStorageConfigRequest {
+	r.storageConfigSpec = &storageConfigSpec
+	return r
+}
+
+// ETag of getStorageConfig: edit only if the configuration is unchanged since. Honoured only when the runtime flag yb.api.conditional_get.enabled is set.
+func (r StorageConfigAPIEditStorageConfigRequest) IfMatch(ifMatch string) StorageConfigAPIEditStorageConfigRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+// Makes the request safe to retry. A unique client-generated value, such as a UUID, for this request.  The first request with a key runs the operation. If it succeeds, its response is kept for 24 hours (yb.api.idempotency.retention), and a retry with the same key and the same request returns that response with an X-IDEMPOTENT-REPLAYED: true header, without running the operation again. A retry while the first request is still running gets 409; the same key with a different request gets 422. A failed request does not keep the key, so it can be retried with the same one.  Keys are scoped to the caller&#39;s customer.  If the operation starts a task, that task&#39;s UUID is derived from the key: the version 5 UUID of \&quot;&lt;customer UUID&gt;:&lt;key&gt;\&quot; in the namespace 3bf373dd-d374-4df5-bdea-c3cd942ae7f4. A client can follow the task even if it lost the response. If that task was started, for example before YBA restarted and lost the response, a retry gets 409 instead of starting the operation again, with the task&#39;s UUID in error.task_uuid, and in error.latest_task_uuid the UUID of its newest retry if YBA retried it (a restart fails or aborts running tasks, and may retry them under a new UUID). If the task failed while being submitted, the retry runs the operation again under a new task UUID.
+func (r StorageConfigAPIEditStorageConfigRequest) IdempotencyKey(idempotencyKey string) StorageConfigAPIEditStorageConfigRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+
+func (r StorageConfigAPIEditStorageConfigRequest) Execute() (*YBATask, *http.Response, error) {
+	return r.ApiService.EditStorageConfigExecute(r)
+}
+
+/*
+EditStorageConfig Edit a storage configuration
+
+Edits a storage configuration and returns the task that applies the edit (resource_uuid is
+the configuration's UUID). The spec replaces the stored one, except that a secret left out
+keeps the stored value, as long as the credential type stays the same; an Azure region's SAS
+token is kept by region. The storage type and backup location can't change. The request runs
+only the checks that need no storage, as createStorageConfig does. The configuration stays
+ACTIVE, and in use with its stored settings, while the task checks the edited one: unless
+only the name changed, or yb.storage_config.skip_validation is set, the task checks the
+locations and that YBA can write, read, list and delete a test object at each location with
+the edited credentials, within yb.storage_config.validation_timeout. When the check passes,
+the task applies the edit; when it fails, nothing changes and the task fails with the same
+error codes as the createStorageConfig task. It also fails with STORAGE_CONFIG_CHANGED when
+the configuration was changed or deleted after the request, and with
+STORAGE_CONFIG_NAME_CONFLICT when another configuration took the new name meanwhile. The
+edited configuration waits for the task in memory, as its secrets aren't stored in the task:
+a task interrupted by a YBA restart fails, and the configuration keeps its stored settings.
+Early access: when yb.api.conditional_get.enabled is set, If-Match takes the ETag of
+getStorageConfig, and a configuration changed since then, or whose usage changed, is answered
+412.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param cUUID Customer UUID
+	@param scUUID Storage configuration UUID
+	@return StorageConfigAPIEditStorageConfigRequest
+*/
+func (a *StorageConfigAPIService) EditStorageConfig(ctx context.Context, cUUID string, scUUID string) StorageConfigAPIEditStorageConfigRequest {
+	return StorageConfigAPIEditStorageConfigRequest{
+		ApiService: a,
+		ctx:        ctx,
+		cUUID:      cUUID,
+		scUUID:     scUUID,
+	}
+}
+
+// Execute executes the request
+//
+//	@return YBATask
+func (a *StorageConfigAPIService) EditStorageConfigExecute(r StorageConfigAPIEditStorageConfigRequest) (*YBATask, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *YBATask
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageConfigAPIService.EditStorageConfig")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/customers/{cUUID}/storage-configs/{scUUID}"
+	localVarPath = strings.Replace(localVarPath, "{"+"cUUID"+"}", url.PathEscape(parameterValueToString(r.cUUID, "cUUID")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scUUID"+"}", url.PathEscape(parameterValueToString(r.scUUID, "scUUID")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.storageConfigSpec == nil {
+		return localVarReturnValue, nil, reportError("storageConfigSpec is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "If-Match", r.ifMatch, "simple", "")
+	}
+	if r.idempotencyKey != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Idempotency-Key", r.idempotencyKey, "simple", "")
+	}
+	// body params
+	localVarPostBody = r.storageConfigSpec
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-YW-API-TOKEN"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["authTokenAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-AUTH-TOKEN"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type StorageConfigAPIGetStorageConfigRequest struct {
 	ctx        context.Context
 	ApiService *StorageConfigAPIService
@@ -205,7 +566,10 @@ func (r StorageConfigAPIGetStorageConfigRequest) Execute() (*StorageConfig, *htt
 /*
 GetStorageConfig Get a storage configuration
 
-Returns a storage configuration, without its secrets, with what uses it (info.usage).
+Returns a storage configuration, without its secrets, with what uses it (info.usage). Early
+access: when the runtime flag yb.api.conditional_get.enabled is set, the response carries an
+ETag, to send in If-None-Match (304 Not Modified while the configuration and what uses it are
+unchanged) or in the If-Match of editStorageConfig.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID Customer UUID

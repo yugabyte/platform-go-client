@@ -21,9 +21,9 @@ var _ MappedNullable = &OciS3CompatibleCredentials{}
 // OciS3CompatibleCredentials OciS3CompatibleCredentials  A customer secret key, with the S3-compatible Object Storage API. Part of OciCredentials.
 type OciS3CompatibleCredentials struct {
 	CredentialType OciCredentialType `json:"credential_type"`
-	// Access key of the customer secret key. Required on create; never returned.
+	// Access key of the customer secret key. Required on create; on edit, omit it to keep the stored one. Never returned.
 	AccessKeyId *string `json:"access_key_id,omitempty"`
-	// Secret of the customer secret key. Required on create; never returned.
+	// Secret of the customer secret key. Required on create; on edit, omit it to keep the stored one. Never returned.
 	SecretAccessKey *string `json:"secret_access_key,omitempty"`
 	// Host of the S3-compatible endpoint
 	HostBase string `json:"host_base"`

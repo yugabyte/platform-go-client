@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MasterHttpPort** | Pointer to **int32** | Master table HTTP port | [optional] [default to 7000]
-**MasterRpcPort** | Pointer to **int32** | Master table RCP port | [optional] [default to 7100]
-**NodeExporterPort** | Pointer to **int32** | Node exporter port | [optional] [default to 9300]
-**OtelCollectorMetricsPort** | Pointer to **int32** | Otel Collector metrics port | [optional] [default to 8889]
-**RedisServerHttpPort** | Pointer to **int32** | Redis HTTP port | [optional] [default to 11000]
-**RedisServerRpcPort** | Pointer to **int32** | Redis RPC port | [optional] [default to 6379]
-**TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port | [optional] [default to 9000]
-**TserverRpcPort** | Pointer to **int32** | Tablet server RPC port | [optional] [default to 9100]
-**YbControllerHttpPort** | Pointer to **int32** | Yb controller HTTP port | [optional] [default to 14000]
-**YbControllerRpcPort** | Pointer to **int32** | Yb controller RPC port | [optional] [default to 18018]
-**YqlServerHttpPort** | Pointer to **int32** | YQL HTTP port | [optional] [default to 12000]
-**YqlServerRpcPort** | Pointer to **int32** | YQL RPC port | [optional] [default to 9042]
-**YsqlServerHttpPort** | Pointer to **int32** | YSQL HTTP port | [optional] [default to 13000]
-**YsqlServerRpcPort** | Pointer to **int32** | YSQL RPC port | [optional] [default to 5433]
-**InternalYsqlServerRpcPort** | Pointer to **int32** | Internal YSQL RPC port used when connection pooling is enabled | [optional] [default to 6433]
+**MasterHttpPort** | Pointer to **int32** | Master table HTTP port. Defaults to 7000 on create. | [optional] 
+**MasterRpcPort** | Pointer to **int32** | Master table RCP port. Defaults to 7100 on create. | [optional] 
+**NodeExporterPort** | Pointer to **int32** | Node exporter port. Defaults to 9300 on create. | [optional] 
+**OtelCollectorMetricsPort** | Pointer to **int32** | Otel Collector metrics port. Defaults to 8889 on create. | [optional] 
+**RedisServerHttpPort** | Pointer to **int32** | Redis HTTP port. Defaults to 11000 on create. | [optional] 
+**RedisServerRpcPort** | Pointer to **int32** | Redis RPC port. Defaults to 6379 on create. | [optional] 
+**TserverHttpPort** | Pointer to **int32** | Tablet server HTTP port. Defaults to 9000 on create. | [optional] 
+**TserverRpcPort** | Pointer to **int32** | Tablet server RPC port. Defaults to 9100 on create. | [optional] 
+**YbControllerHttpPort** | Pointer to **int32** | Yb controller HTTP port. Defaults to 14000 on create. | [optional] 
+**YbControllerRpcPort** | Pointer to **int32** | Yb controller RPC port. Defaults to 18018 on create. | [optional] 
+**YqlServerHttpPort** | Pointer to **int32** | YQL HTTP port. Defaults to 12000 on create. | [optional] 
+**YqlServerRpcPort** | Pointer to **int32** | YQL RPC port. Defaults to 9042 on create. | [optional] 
+**YsqlServerHttpPort** | Pointer to **int32** | YSQL HTTP port. Defaults to 13000 on create. | [optional] 
+**YsqlServerRpcPort** | Pointer to **int32** | YSQL RPC port. Defaults to 5433 on create. | [optional] 
+**InternalYsqlServerRpcPort** | Pointer to **int32** | Internal YSQL RPC port used when connection pooling is enabled. Defaults to 6433 on create. | [optional] 
 
 ## Methods
 

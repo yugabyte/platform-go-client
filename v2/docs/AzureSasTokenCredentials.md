@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CredentialType** | [**AzureCredentialType**](AzureCredentialType.md) |  | 
-**SasToken** | Pointer to **string** | SAS token of the backup_location container. Required on create; never returned. | [optional] 
+**SasToken** | Pointer to **string** | SAS token of the backup_location container. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
 
 ## Methods
 

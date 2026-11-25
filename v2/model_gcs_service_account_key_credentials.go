@@ -21,7 +21,7 @@ var _ MappedNullable = &GcsServiceAccountKeyCredentials{}
 // GcsServiceAccountKeyCredentials GcsServiceAccountKeyCredentials  A GCP service account key. Part of GcsCredentials.
 type GcsServiceAccountKeyCredentials struct {
 	CredentialType GcsCredentialType `json:"credential_type"`
-	// The service account key file, as JSON. Required on create; never returned.
+	// The service account key file, as JSON. Required on create; on edit, omit it to keep the stored one. Never returned.
 	CredentialsJson *string `json:"credentials_json,omitempty"`
 }
 

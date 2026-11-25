@@ -19,6 +19,8 @@ var _ MappedNullable = &ManagedLoadBalancerConfig{}
 
 // ManagedLoadBalancerConfig Load balancers that YBA creates and manages for a cluster
 type ManagedLoadBalancerConfig struct {
+	// DNS names that clients use to reach the load balancers, for example db.example.com or *.db.example.com. YBA adds them, and the load balancer address, to the server certs that its self-signed CA signs for the nodes behind the load balancers. IP addresses are rejected. In an edit, leaving this out keeps the current names, and an empty list clears them. To change the names, the setting must also set enablePrivate to true.
+	DnsNames []string `json:"dnsNames,omitempty"`
 	// Create a private L4 load balancer in each region of the cluster
 	EnablePrivate *bool `json:"enablePrivate,omitempty"`
 	// Create a public L4 load balancer in each region of the cluster. Not supported yet. Must be false.
@@ -40,6 +42,38 @@ func NewManagedLoadBalancerConfig() *ManagedLoadBalancerConfig {
 func NewManagedLoadBalancerConfigWithDefaults() *ManagedLoadBalancerConfig {
 	this := ManagedLoadBalancerConfig{}
 	return &this
+}
+
+// GetDnsNames returns the DnsNames field value if set, zero value otherwise.
+func (o *ManagedLoadBalancerConfig) GetDnsNames() []string {
+	if o == nil || IsNil(o.DnsNames) {
+		var ret []string
+		return ret
+	}
+	return o.DnsNames
+}
+
+// GetDnsNamesOk returns a tuple with the DnsNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManagedLoadBalancerConfig) GetDnsNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.DnsNames) {
+		return nil, false
+	}
+	return o.DnsNames, true
+}
+
+// HasDnsNames returns a boolean if a field has been set.
+func (o *ManagedLoadBalancerConfig) HasDnsNames() bool {
+	if o != nil && !IsNil(o.DnsNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsNames gets a reference to the given []string and assigns it to the DnsNames field.
+func (o *ManagedLoadBalancerConfig) SetDnsNames(v []string) {
+	o.DnsNames = v
 }
 
 // GetEnablePrivate returns the EnablePrivate field value if set, zero value otherwise.
@@ -116,6 +150,9 @@ func (o ManagedLoadBalancerConfig) MarshalJSON() ([]byte, error) {
 
 func (o ManagedLoadBalancerConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DnsNames) {
+		toSerialize["dnsNames"] = o.DnsNames
+	}
 	if !IsNil(o.EnablePrivate) {
 		toSerialize["enablePrivate"] = o.EnablePrivate
 	}

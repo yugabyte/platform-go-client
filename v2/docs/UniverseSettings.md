@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExpertMode** | Pointer to **bool** | Whether expert mode was used when configuring this Universe. | [optional] [default to false]
+**ExpertMode** | Pointer to **bool** | Whether expert mode was used when configuring this Universe. Defaults to false on create. On edit, omit to leave unchanged. | [optional] 
 
 ## Methods
 

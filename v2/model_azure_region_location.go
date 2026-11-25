@@ -24,7 +24,7 @@ type AzureRegionLocation struct {
 	Region string `json:"region"`
 	// Location of the region's backups, as https://<account>.blob.core.windows.net/<container>[/<path>]
 	Location string `json:"location"`
-	// SAS token of this region's container, with SAS_TOKEN credentials. Required on create with those credentials; never returned.
+	// SAS token of this region's container, with SAS_TOKEN credentials. Required on create with those credentials; on edit, omit it to keep the stored one for the same region. Never returned.
 	SasToken *string `json:"sas_token,omitempty"`
 }
 

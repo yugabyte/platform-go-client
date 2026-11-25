@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CredentialType** | [**S3CredentialType**](S3CredentialType.md) |  | 
-**AccessKeyId** | Pointer to **string** | Access key ID. Required on create; never returned. | [optional] 
-**SecretAccessKey** | Pointer to **string** | Secret access key. Required on create; never returned. | [optional] 
+**AccessKeyId** | Pointer to **string** | Access key ID. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
+**SecretAccessKey** | Pointer to **string** | Secret access key. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
 
 ## Methods
 

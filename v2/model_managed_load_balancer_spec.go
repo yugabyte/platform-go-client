@@ -18,22 +18,25 @@ import (
 // checks if the ManagedLoadBalancerSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManagedLoadBalancerSpec{}
 
-// ManagedLoadBalancerSpec Load balancers that YBA creates, manages and deletes for the cluster. Each enabled kind gives one L4 load balancer in every region of the cluster, serving all zones of the region. At create, this object must enable at least one load balancer. ClusterInfo.load_balancers lists them with their scheme and address. An edit of the universe can turn them on or off; in an edit, an object that enables none turns them off. Part of ClusterNetworkingSpec and ClusterNetworkingEditSpec.
+// ManagedLoadBalancerSpec Load balancers that YBA creates, manages and deletes for the cluster. Each enabled kind gives one L4 load balancer in every region of the cluster, serving all zones of the region. At create, this object must enable at least one load balancer. ClusterInfo.load_balancers lists them with their scheme and address. An edit of the universe can turn them on or off: enable_private false turns them off. enable_private is required whenever this object is given, so that an edit that only changes dns_names cannot turn them off. Part of ClusterNetworkingSpec and ClusterNetworkingEditSpec.
 type ManagedLoadBalancerSpec struct {
 	// Whether YBA creates a private load balancer in each region. Clients in the VPC of the universe, or in a network peered with it, can reach it.
-	EnablePrivate *bool `json:"enable_private,omitempty"`
+	EnablePrivate bool `json:"enable_private"`
 	// Whether YBA creates a public load balancer in each region, which clients on the internet can reach. Not supported yet. YBA rejects true.
 	EnablePublic *bool `json:"enable_public,omitempty"`
+	// DNS names that clients use to reach the load balancers, for example db.example.com or *.db.example.com. YBA adds them, and the load balancer address, to the server certs that its self-signed CA signs for the nodes behind the load balancers. IP addresses are rejected. In an edit, leaving this out keeps the current names, and an empty list clears them.
+	DnsNames []string `json:"dns_names,omitempty"`
 }
+
+type _ManagedLoadBalancerSpec ManagedLoadBalancerSpec
 
 // NewManagedLoadBalancerSpec instantiates a new ManagedLoadBalancerSpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManagedLoadBalancerSpec() *ManagedLoadBalancerSpec {
+func NewManagedLoadBalancerSpec(enablePrivate bool) *ManagedLoadBalancerSpec {
 	this := ManagedLoadBalancerSpec{}
-	var enablePrivate bool = false
-	this.EnablePrivate = &enablePrivate
+	this.EnablePrivate = enablePrivate
 	var enablePublic bool = false
 	this.EnablePublic = &enablePublic
 	return &this
@@ -44,43 +47,33 @@ func NewManagedLoadBalancerSpec() *ManagedLoadBalancerSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewManagedLoadBalancerSpecWithDefaults() *ManagedLoadBalancerSpec {
 	this := ManagedLoadBalancerSpec{}
-	var enablePrivate bool = false
-	this.EnablePrivate = &enablePrivate
 	var enablePublic bool = false
 	this.EnablePublic = &enablePublic
 	return &this
 }
 
-// GetEnablePrivate returns the EnablePrivate field value if set, zero value otherwise.
+// GetEnablePrivate returns the EnablePrivate field value
 func (o *ManagedLoadBalancerSpec) GetEnablePrivate() bool {
-	if o == nil || IsNil(o.EnablePrivate) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.EnablePrivate
+
+	return o.EnablePrivate
 }
 
-// GetEnablePrivateOk returns a tuple with the EnablePrivate field value if set, nil otherwise
+// GetEnablePrivateOk returns a tuple with the EnablePrivate field value
 // and a boolean to check if the value has been set.
 func (o *ManagedLoadBalancerSpec) GetEnablePrivateOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnablePrivate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnablePrivate, true
+	return &o.EnablePrivate, true
 }
 
-// HasEnablePrivate returns a boolean if a field has been set.
-func (o *ManagedLoadBalancerSpec) HasEnablePrivate() bool {
-	if o != nil && !IsNil(o.EnablePrivate) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnablePrivate gets a reference to the given bool and assigns it to the EnablePrivate field.
+// SetEnablePrivate sets field value
 func (o *ManagedLoadBalancerSpec) SetEnablePrivate(v bool) {
-	o.EnablePrivate = &v
+	o.EnablePrivate = v
 }
 
 // GetEnablePublic returns the EnablePublic field value if set, zero value otherwise.
@@ -115,6 +108,38 @@ func (o *ManagedLoadBalancerSpec) SetEnablePublic(v bool) {
 	o.EnablePublic = &v
 }
 
+// GetDnsNames returns the DnsNames field value if set, zero value otherwise.
+func (o *ManagedLoadBalancerSpec) GetDnsNames() []string {
+	if o == nil || IsNil(o.DnsNames) {
+		var ret []string
+		return ret
+	}
+	return o.DnsNames
+}
+
+// GetDnsNamesOk returns a tuple with the DnsNames field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManagedLoadBalancerSpec) GetDnsNamesOk() ([]string, bool) {
+	if o == nil || IsNil(o.DnsNames) {
+		return nil, false
+	}
+	return o.DnsNames, true
+}
+
+// HasDnsNames returns a boolean if a field has been set.
+func (o *ManagedLoadBalancerSpec) HasDnsNames() bool {
+	if o != nil && !IsNil(o.DnsNames) {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsNames gets a reference to the given []string and assigns it to the DnsNames field.
+func (o *ManagedLoadBalancerSpec) SetDnsNames(v []string) {
+	o.DnsNames = v
+}
+
 func (o ManagedLoadBalancerSpec) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -125,11 +150,12 @@ func (o ManagedLoadBalancerSpec) MarshalJSON() ([]byte, error) {
 
 func (o ManagedLoadBalancerSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EnablePrivate) {
-		toSerialize["enable_private"] = o.EnablePrivate
-	}
+	toSerialize["enable_private"] = o.EnablePrivate
 	if !IsNil(o.EnablePublic) {
 		toSerialize["enable_public"] = o.EnablePublic
+	}
+	if !IsNil(o.DnsNames) {
+		toSerialize["dns_names"] = o.DnsNames
 	}
 	return toSerialize, nil
 }

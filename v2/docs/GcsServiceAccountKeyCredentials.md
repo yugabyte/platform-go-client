@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CredentialType** | [**GcsCredentialType**](GcsCredentialType.md) |  | 
-**CredentialsJson** | Pointer to **string** | The service account key file, as JSON. Required on create; never returned. | [optional] 
+**CredentialsJson** | Pointer to **string** | The service account key file, as JSON. Required on create; on edit, omit it to keep the stored one. Never returned. | [optional] 
 
 ## Methods
 

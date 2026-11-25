@@ -21,11 +21,11 @@ var _ MappedNullable = &UniverseNetworkingSpec{}
 // UniverseNetworkingSpec Networking specification that is used for nodes in this Universe. Part of UniverseSpec.
 type UniverseNetworkingSpec struct {
 	CommunicationPorts *CommunicationPortsSpec `json:"communication_ports,omitempty"`
-	// Whether to assign a public IP for nodes in this Universe.
+	// Whether to assign a public IP for nodes in this Universe. Defaults to true on create. On edit, omit to leave unchanged.
 	AssignPublicIp *bool `json:"assign_public_ip,omitempty"`
-	// Whether to assign a static public IP for nodes in this Universe.
+	// Whether to assign a static public IP for nodes in this Universe. Defaults to false on create. On edit, omit to leave unchanged.
 	AssignStaticPublicIp *bool `json:"assign_static_public_ip,omitempty"`
-	// Whether to enable IPv6 on nodes in this cluster. Defaults to false.
+	// Whether to enable IPv6 on nodes in this cluster. Defaults to false on create. On edit, omit to leave unchanged.
 	EnableIpv6 *bool `json:"enable_ipv6,omitempty"`
 }
 
@@ -35,10 +35,6 @@ type UniverseNetworkingSpec struct {
 // will change when the set of required properties is changed
 func NewUniverseNetworkingSpec() *UniverseNetworkingSpec {
 	this := UniverseNetworkingSpec{}
-	var assignPublicIp bool = true
-	this.AssignPublicIp = &assignPublicIp
-	var assignStaticPublicIp bool = false
-	this.AssignStaticPublicIp = &assignStaticPublicIp
 	return &this
 }
 
@@ -47,10 +43,6 @@ func NewUniverseNetworkingSpec() *UniverseNetworkingSpec {
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseNetworkingSpecWithDefaults() *UniverseNetworkingSpec {
 	this := UniverseNetworkingSpec{}
-	var assignPublicIp bool = true
-	this.AssignPublicIp = &assignPublicIp
-	var assignStaticPublicIp bool = false
-	this.AssignStaticPublicIp = &assignStaticPublicIp
 	return &this
 }
 
