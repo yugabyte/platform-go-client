@@ -45,9 +45,10 @@ type UserIntent struct {
 	ImageBundleUUID        *string            `json:"imageBundleUUID,omitempty"`
 	InstanceTags           *map[string]string `json:"instanceTags,omitempty"`
 	// Instance type that is used for tserver nodes in current cluster. Could be modified in payload for /resize_node API call
-	InstanceType              *string     `json:"instanceType,omitempty"`
-	KubernetesOperatorVersion *int64      `json:"kubernetesOperatorVersion,omitempty"`
-	MasterDeviceInfo          *DeviceInfo `json:"masterDeviceInfo,omitempty"`
+	InstanceType              *string                    `json:"instanceType,omitempty"`
+	KubernetesOperatorVersion *int64                     `json:"kubernetesOperatorVersion,omitempty"`
+	ManagedLoadBalancer       *ManagedLoadBalancerConfig `json:"managedLoadBalancer,omitempty"`
+	MasterDeviceInfo          *DeviceInfo                `json:"masterDeviceInfo,omitempty"`
 	// User-defined gflags for master. <b style=\"color:#ff0000\">Deprecated since YBA version 2.18.6.0.</b> Use specificGFlags
 	MasterGFlags *map[string]string `json:"masterGFlags,omitempty"`
 	// Instance type that is used for master nodes in current cluster (in dedicated masters mode). Could be modified in payload for /resize_node API call
@@ -72,11 +73,13 @@ type UserIntent struct {
 	UniverseName               *string              `json:"universeName,omitempty"`
 	UniverseOverrides          *string              `json:"universeOverrides,omitempty"`
 	// YbaApi Internal. Use clockbound as time source
-	UseClockbound   *bool `json:"useClockbound,omitempty"`
-	UseHostname     *bool `json:"useHostname,omitempty"`
-	UseSpotInstance *bool `json:"useSpotInstance,omitempty"`
-	UseSystemd      *bool `json:"useSystemd,omitempty"`
-	UseTimeSync     *bool `json:"useTimeSync,omitempty"`
+	UseClockbound *bool `json:"useClockbound,omitempty"`
+	UseHostname   *bool `json:"useHostname,omitempty"`
+	// WARNING: This is a preview API that could change. Servers require a client cert on RPC (node_to_node_encryption_use_client_certificates). Supported only on Kubernetes universes whose node-to-node encryption uses a cert-manager (K8SCertManager) root CA; VM universes and Kubernetes universes with other root CA types are not supported. Can only be set at universe creation.
+	UseNodeToNodeClientCerts *bool `json:"useNodeToNodeClientCerts,omitempty"`
+	UseSpotInstance          *bool `json:"useSpotInstance,omitempty"`
+	UseSystemd               *bool `json:"useSystemd,omitempty"`
+	UseTimeSync              *bool `json:"useTimeSync,omitempty"`
 	// WARNING: This is a preview API that could change. Use YBDB inbuilt YBC for K8s universe
 	UseYbdbInbuiltYbc   *bool                `json:"useYbdbInbuiltYbc,omitempty"`
 	UserIntentOverrides *UserIntentOverrides `json:"userIntentOverrides,omitempty"`
@@ -903,6 +906,38 @@ func (o *UserIntent) SetKubernetesOperatorVersion(v int64) {
 	o.KubernetesOperatorVersion = &v
 }
 
+// GetManagedLoadBalancer returns the ManagedLoadBalancer field value if set, zero value otherwise.
+func (o *UserIntent) GetManagedLoadBalancer() ManagedLoadBalancerConfig {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		var ret ManagedLoadBalancerConfig
+		return ret
+	}
+	return *o.ManagedLoadBalancer
+}
+
+// GetManagedLoadBalancerOk returns a tuple with the ManagedLoadBalancer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetManagedLoadBalancerOk() (*ManagedLoadBalancerConfig, bool) {
+	if o == nil || IsNil(o.ManagedLoadBalancer) {
+		return nil, false
+	}
+	return o.ManagedLoadBalancer, true
+}
+
+// HasManagedLoadBalancer returns a boolean if a field has been set.
+func (o *UserIntent) HasManagedLoadBalancer() bool {
+	if o != nil && !IsNil(o.ManagedLoadBalancer) {
+		return true
+	}
+
+	return false
+}
+
+// SetManagedLoadBalancer gets a reference to the given ManagedLoadBalancerConfig and assigns it to the ManagedLoadBalancer field.
+func (o *UserIntent) SetManagedLoadBalancer(v ManagedLoadBalancerConfig) {
+	o.ManagedLoadBalancer = &v
+}
+
 // GetMasterDeviceInfo returns the MasterDeviceInfo field value if set, zero value otherwise.
 func (o *UserIntent) GetMasterDeviceInfo() DeviceInfo {
 	if o == nil || IsNil(o.MasterDeviceInfo) {
@@ -1639,6 +1674,38 @@ func (o *UserIntent) SetUseHostname(v bool) {
 	o.UseHostname = &v
 }
 
+// GetUseNodeToNodeClientCerts returns the UseNodeToNodeClientCerts field value if set, zero value otherwise.
+func (o *UserIntent) GetUseNodeToNodeClientCerts() bool {
+	if o == nil || IsNil(o.UseNodeToNodeClientCerts) {
+		var ret bool
+		return ret
+	}
+	return *o.UseNodeToNodeClientCerts
+}
+
+// GetUseNodeToNodeClientCertsOk returns a tuple with the UseNodeToNodeClientCerts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserIntent) GetUseNodeToNodeClientCertsOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseNodeToNodeClientCerts) {
+		return nil, false
+	}
+	return o.UseNodeToNodeClientCerts, true
+}
+
+// HasUseNodeToNodeClientCerts returns a boolean if a field has been set.
+func (o *UserIntent) HasUseNodeToNodeClientCerts() bool {
+	if o != nil && !IsNil(o.UseNodeToNodeClientCerts) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNodeToNodeClientCerts gets a reference to the given bool and assigns it to the UseNodeToNodeClientCerts field.
+func (o *UserIntent) SetUseNodeToNodeClientCerts(v bool) {
+	o.UseNodeToNodeClientCerts = &v
+}
+
 // GetUseSpotInstance returns the UseSpotInstance field value if set, zero value otherwise.
 func (o *UserIntent) GetUseSpotInstance() bool {
 	if o == nil || IsNil(o.UseSpotInstance) {
@@ -2012,6 +2079,9 @@ func (o UserIntent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.KubernetesOperatorVersion) {
 		toSerialize["kubernetesOperatorVersion"] = o.KubernetesOperatorVersion
 	}
+	if !IsNil(o.ManagedLoadBalancer) {
+		toSerialize["managedLoadBalancer"] = o.ManagedLoadBalancer
+	}
 	if !IsNil(o.MasterDeviceInfo) {
 		toSerialize["masterDeviceInfo"] = o.MasterDeviceInfo
 	}
@@ -2080,6 +2150,9 @@ func (o UserIntent) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UseHostname) {
 		toSerialize["useHostname"] = o.UseHostname
+	}
+	if !IsNil(o.UseNodeToNodeClientCerts) {
+		toSerialize["useNodeToNodeClientCerts"] = o.UseNodeToNodeClientCerts
 	}
 	if !IsNil(o.UseSpotInstance) {
 		toSerialize["useSpotInstance"] = o.UseSpotInstance

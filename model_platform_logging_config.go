@@ -20,10 +20,16 @@ var _ MappedNullable = &PlatformLoggingConfig{}
 // PlatformLoggingConfig struct for PlatformLoggingConfig
 type PlatformLoggingConfig struct {
 	// WARNING: This is a preview API that could change. Application log file name prefix. Defaults to \"\". For example, setting this to \"yb-platform-\" will generate application log files as \"yb-platform-application.log\" instead of \"application.log\".
-	FileNamePrefix  *string `json:"fileNamePrefix,omitempty"`
-	Level           string  `json:"level"`
-	MaxHistory      int32   `json:"maxHistory"`
-	RolloverPattern string  `json:"rolloverPattern"`
+	FileNamePrefix *string `json:"fileNamePrefix,omitempty"`
+	Level          string  `json:"level"`
+	// WARNING: This is a preview API that could change. Maximum size of the active application log file before it is rolled over, for example \"1024MB\" or \"1GB\". Minimum 256MB.
+	MaxFileSize *string `json:"maxFileSize,omitempty"`
+	// Number of rolled-over log files to keep.
+	MaxHistory *int32 `json:"maxHistory,omitempty"`
+	// Rollover pattern of the application log file.
+	RolloverPattern *string `json:"rolloverPattern,omitempty"`
+	// WARNING: This is a preview API that could change. Total size of retained application log archives, for example \"20GB\". Archives are deleted oldest first once this is exceeded, so on a high volume node this binds before maxHistory and retains fewer days than maxHistory allows. Minimum 5GB.
+	TotalSizeCap *string `json:"totalSizeCap,omitempty"`
 }
 
 type _PlatformLoggingConfig PlatformLoggingConfig
@@ -32,11 +38,9 @@ type _PlatformLoggingConfig PlatformLoggingConfig
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlatformLoggingConfig(level string, maxHistory int32, rolloverPattern string) *PlatformLoggingConfig {
+func NewPlatformLoggingConfig(level string) *PlatformLoggingConfig {
 	this := PlatformLoggingConfig{}
 	this.Level = level
-	this.MaxHistory = maxHistory
-	this.RolloverPattern = rolloverPattern
 	return &this
 }
 
@@ -104,52 +108,132 @@ func (o *PlatformLoggingConfig) SetLevel(v string) {
 	o.Level = v
 }
 
-// GetMaxHistory returns the MaxHistory field value
-func (o *PlatformLoggingConfig) GetMaxHistory() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.MaxHistory
-}
-
-// GetMaxHistoryOk returns a tuple with the MaxHistory field value
-// and a boolean to check if the value has been set.
-func (o *PlatformLoggingConfig) GetMaxHistoryOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.MaxHistory, true
-}
-
-// SetMaxHistory sets field value
-func (o *PlatformLoggingConfig) SetMaxHistory(v int32) {
-	o.MaxHistory = v
-}
-
-// GetRolloverPattern returns the RolloverPattern field value
-func (o *PlatformLoggingConfig) GetRolloverPattern() string {
-	if o == nil {
+// GetMaxFileSize returns the MaxFileSize field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetMaxFileSize() string {
+	if o == nil || IsNil(o.MaxFileSize) {
 		var ret string
 		return ret
 	}
-
-	return o.RolloverPattern
+	return *o.MaxFileSize
 }
 
-// GetRolloverPatternOk returns a tuple with the RolloverPattern field value
+// GetMaxFileSizeOk returns a tuple with the MaxFileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlatformLoggingConfig) GetRolloverPatternOk() (*string, bool) {
-	if o == nil {
+func (o *PlatformLoggingConfig) GetMaxFileSizeOk() (*string, bool) {
+	if o == nil || IsNil(o.MaxFileSize) {
 		return nil, false
 	}
-	return &o.RolloverPattern, true
+	return o.MaxFileSize, true
 }
 
-// SetRolloverPattern sets field value
+// HasMaxFileSize returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasMaxFileSize() bool {
+	if o != nil && !IsNil(o.MaxFileSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxFileSize gets a reference to the given string and assigns it to the MaxFileSize field.
+func (o *PlatformLoggingConfig) SetMaxFileSize(v string) {
+	o.MaxFileSize = &v
+}
+
+// GetMaxHistory returns the MaxHistory field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetMaxHistory() int32 {
+	if o == nil || IsNil(o.MaxHistory) {
+		var ret int32
+		return ret
+	}
+	return *o.MaxHistory
+}
+
+// GetMaxHistoryOk returns a tuple with the MaxHistory field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetMaxHistoryOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaxHistory) {
+		return nil, false
+	}
+	return o.MaxHistory, true
+}
+
+// HasMaxHistory returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasMaxHistory() bool {
+	if o != nil && !IsNil(o.MaxHistory) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxHistory gets a reference to the given int32 and assigns it to the MaxHistory field.
+func (o *PlatformLoggingConfig) SetMaxHistory(v int32) {
+	o.MaxHistory = &v
+}
+
+// GetRolloverPattern returns the RolloverPattern field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetRolloverPattern() string {
+	if o == nil || IsNil(o.RolloverPattern) {
+		var ret string
+		return ret
+	}
+	return *o.RolloverPattern
+}
+
+// GetRolloverPatternOk returns a tuple with the RolloverPattern field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetRolloverPatternOk() (*string, bool) {
+	if o == nil || IsNil(o.RolloverPattern) {
+		return nil, false
+	}
+	return o.RolloverPattern, true
+}
+
+// HasRolloverPattern returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasRolloverPattern() bool {
+	if o != nil && !IsNil(o.RolloverPattern) {
+		return true
+	}
+
+	return false
+}
+
+// SetRolloverPattern gets a reference to the given string and assigns it to the RolloverPattern field.
 func (o *PlatformLoggingConfig) SetRolloverPattern(v string) {
-	o.RolloverPattern = v
+	o.RolloverPattern = &v
+}
+
+// GetTotalSizeCap returns the TotalSizeCap field value if set, zero value otherwise.
+func (o *PlatformLoggingConfig) GetTotalSizeCap() string {
+	if o == nil || IsNil(o.TotalSizeCap) {
+		var ret string
+		return ret
+	}
+	return *o.TotalSizeCap
+}
+
+// GetTotalSizeCapOk returns a tuple with the TotalSizeCap field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlatformLoggingConfig) GetTotalSizeCapOk() (*string, bool) {
+	if o == nil || IsNil(o.TotalSizeCap) {
+		return nil, false
+	}
+	return o.TotalSizeCap, true
+}
+
+// HasTotalSizeCap returns a boolean if a field has been set.
+func (o *PlatformLoggingConfig) HasTotalSizeCap() bool {
+	if o != nil && !IsNil(o.TotalSizeCap) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalSizeCap gets a reference to the given string and assigns it to the TotalSizeCap field.
+func (o *PlatformLoggingConfig) SetTotalSizeCap(v string) {
+	o.TotalSizeCap = &v
 }
 
 func (o PlatformLoggingConfig) MarshalJSON() ([]byte, error) {
@@ -166,8 +250,18 @@ func (o PlatformLoggingConfig) ToMap() (map[string]interface{}, error) {
 		toSerialize["fileNamePrefix"] = o.FileNamePrefix
 	}
 	toSerialize["level"] = o.Level
-	toSerialize["maxHistory"] = o.MaxHistory
-	toSerialize["rolloverPattern"] = o.RolloverPattern
+	if !IsNil(o.MaxFileSize) {
+		toSerialize["maxFileSize"] = o.MaxFileSize
+	}
+	if !IsNil(o.MaxHistory) {
+		toSerialize["maxHistory"] = o.MaxHistory
+	}
+	if !IsNil(o.RolloverPattern) {
+		toSerialize["rolloverPattern"] = o.RolloverPattern
+	}
+	if !IsNil(o.TotalSizeCap) {
+		toSerialize["totalSizeCap"] = o.TotalSizeCap
+	}
 	return toSerialize, nil
 }
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &UniverseSettings{}
 
 // UniverseSettings Universe-level settings stored on UniverseDefinitionTaskParams. Part of UniverseSpec.
 type UniverseSettings struct {
-	// Whether expert mode was used when configuring this Universe.
+	// Whether expert mode was used when configuring this Universe. Defaults to false on create. On edit, omit to leave unchanged.
 	ExpertMode *bool `json:"expert_mode,omitempty"`
 }
 
@@ -30,8 +30,6 @@ type UniverseSettings struct {
 // will change when the set of required properties is changed
 func NewUniverseSettings() *UniverseSettings {
 	this := UniverseSettings{}
-	var expertMode bool = false
-	this.ExpertMode = &expertMode
 	return &this
 }
 
@@ -40,8 +38,6 @@ func NewUniverseSettings() *UniverseSettings {
 // but it doesn't guarantee that properties required by API are set
 func NewUniverseSettingsWithDefaults() *UniverseSettings {
 	this := UniverseSettings{}
-	var expertMode bool = false
-	this.ExpertMode = &expertMode
 	return &this
 }
 

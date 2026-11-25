@@ -19,15 +19,15 @@ var _ MappedNullable = &Config{}
 
 // Config struct for Config
 type Config struct {
-	CertPath             string `json:"certPath"`
-	Compressor           string `json:"compressor"`
-	ServerCert           string `json:"serverCert"`
-	ServerCertExpirySecs int64  `json:"serverCertExpirySecs"`
-	ServerCertLocalPath  string `json:"serverCertLocalPath"`
-	ServerKey            string `json:"serverKey"`
-	ServerKeyLocalPath   string `json:"serverKeyLocalPath"`
-	SignerPrivateKey     string `json:"signerPrivateKey"`
-	SignerPublicKey      string `json:"signerPublicKey"`
+	CertPath             string  `json:"certPath"`
+	Compressor           *string `json:"compressor,omitempty"`
+	ServerCert           *string `json:"serverCert,omitempty"`
+	ServerCertExpirySecs int64   `json:"serverCertExpirySecs"`
+	ServerCertLocalPath  *string `json:"serverCertLocalPath,omitempty"`
+	ServerKey            *string `json:"serverKey,omitempty"`
+	ServerKeyLocalPath   *string `json:"serverKeyLocalPath,omitempty"`
+	SignerPrivateKey     *string `json:"signerPrivateKey,omitempty"`
+	SignerPublicKey      *string `json:"signerPublicKey,omitempty"`
 }
 
 type _Config Config
@@ -36,17 +36,10 @@ type _Config Config
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfig(certPath string, compressor string, serverCert string, serverCertExpirySecs int64, serverCertLocalPath string, serverKey string, serverKeyLocalPath string, signerPrivateKey string, signerPublicKey string) *Config {
+func NewConfig(certPath string, serverCertExpirySecs int64) *Config {
 	this := Config{}
 	this.CertPath = certPath
-	this.Compressor = compressor
-	this.ServerCert = serverCert
 	this.ServerCertExpirySecs = serverCertExpirySecs
-	this.ServerCertLocalPath = serverCertLocalPath
-	this.ServerKey = serverKey
-	this.ServerKeyLocalPath = serverKeyLocalPath
-	this.SignerPrivateKey = signerPrivateKey
-	this.SignerPublicKey = signerPublicKey
 	return &this
 }
 
@@ -82,52 +75,68 @@ func (o *Config) SetCertPath(v string) {
 	o.CertPath = v
 }
 
-// GetCompressor returns the Compressor field value
+// GetCompressor returns the Compressor field value if set, zero value otherwise.
 func (o *Config) GetCompressor() string {
-	if o == nil {
+	if o == nil || IsNil(o.Compressor) {
 		var ret string
 		return ret
 	}
-
-	return o.Compressor
+	return *o.Compressor
 }
 
-// GetCompressorOk returns a tuple with the Compressor field value
+// GetCompressorOk returns a tuple with the Compressor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetCompressorOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Compressor) {
 		return nil, false
 	}
-	return &o.Compressor, true
+	return o.Compressor, true
 }
 
-// SetCompressor sets field value
+// HasCompressor returns a boolean if a field has been set.
+func (o *Config) HasCompressor() bool {
+	if o != nil && !IsNil(o.Compressor) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompressor gets a reference to the given string and assigns it to the Compressor field.
 func (o *Config) SetCompressor(v string) {
-	o.Compressor = v
+	o.Compressor = &v
 }
 
-// GetServerCert returns the ServerCert field value
+// GetServerCert returns the ServerCert field value if set, zero value otherwise.
 func (o *Config) GetServerCert() string {
-	if o == nil {
+	if o == nil || IsNil(o.ServerCert) {
 		var ret string
 		return ret
 	}
-
-	return o.ServerCert
+	return *o.ServerCert
 }
 
-// GetServerCertOk returns a tuple with the ServerCert field value
+// GetServerCertOk returns a tuple with the ServerCert field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetServerCertOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServerCert) {
 		return nil, false
 	}
-	return &o.ServerCert, true
+	return o.ServerCert, true
 }
 
-// SetServerCert sets field value
+// HasServerCert returns a boolean if a field has been set.
+func (o *Config) HasServerCert() bool {
+	if o != nil && !IsNil(o.ServerCert) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerCert gets a reference to the given string and assigns it to the ServerCert field.
 func (o *Config) SetServerCert(v string) {
-	o.ServerCert = v
+	o.ServerCert = &v
 }
 
 // GetServerCertExpirySecs returns the ServerCertExpirySecs field value
@@ -154,124 +163,164 @@ func (o *Config) SetServerCertExpirySecs(v int64) {
 	o.ServerCertExpirySecs = v
 }
 
-// GetServerCertLocalPath returns the ServerCertLocalPath field value
+// GetServerCertLocalPath returns the ServerCertLocalPath field value if set, zero value otherwise.
 func (o *Config) GetServerCertLocalPath() string {
-	if o == nil {
+	if o == nil || IsNil(o.ServerCertLocalPath) {
 		var ret string
 		return ret
 	}
-
-	return o.ServerCertLocalPath
+	return *o.ServerCertLocalPath
 }
 
-// GetServerCertLocalPathOk returns a tuple with the ServerCertLocalPath field value
+// GetServerCertLocalPathOk returns a tuple with the ServerCertLocalPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetServerCertLocalPathOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServerCertLocalPath) {
 		return nil, false
 	}
-	return &o.ServerCertLocalPath, true
+	return o.ServerCertLocalPath, true
 }
 
-// SetServerCertLocalPath sets field value
+// HasServerCertLocalPath returns a boolean if a field has been set.
+func (o *Config) HasServerCertLocalPath() bool {
+	if o != nil && !IsNil(o.ServerCertLocalPath) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerCertLocalPath gets a reference to the given string and assigns it to the ServerCertLocalPath field.
 func (o *Config) SetServerCertLocalPath(v string) {
-	o.ServerCertLocalPath = v
+	o.ServerCertLocalPath = &v
 }
 
-// GetServerKey returns the ServerKey field value
+// GetServerKey returns the ServerKey field value if set, zero value otherwise.
 func (o *Config) GetServerKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.ServerKey) {
 		var ret string
 		return ret
 	}
-
-	return o.ServerKey
+	return *o.ServerKey
 }
 
-// GetServerKeyOk returns a tuple with the ServerKey field value
+// GetServerKeyOk returns a tuple with the ServerKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetServerKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServerKey) {
 		return nil, false
 	}
-	return &o.ServerKey, true
+	return o.ServerKey, true
 }
 
-// SetServerKey sets field value
+// HasServerKey returns a boolean if a field has been set.
+func (o *Config) HasServerKey() bool {
+	if o != nil && !IsNil(o.ServerKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerKey gets a reference to the given string and assigns it to the ServerKey field.
 func (o *Config) SetServerKey(v string) {
-	o.ServerKey = v
+	o.ServerKey = &v
 }
 
-// GetServerKeyLocalPath returns the ServerKeyLocalPath field value
+// GetServerKeyLocalPath returns the ServerKeyLocalPath field value if set, zero value otherwise.
 func (o *Config) GetServerKeyLocalPath() string {
-	if o == nil {
+	if o == nil || IsNil(o.ServerKeyLocalPath) {
 		var ret string
 		return ret
 	}
-
-	return o.ServerKeyLocalPath
+	return *o.ServerKeyLocalPath
 }
 
-// GetServerKeyLocalPathOk returns a tuple with the ServerKeyLocalPath field value
+// GetServerKeyLocalPathOk returns a tuple with the ServerKeyLocalPath field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetServerKeyLocalPathOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServerKeyLocalPath) {
 		return nil, false
 	}
-	return &o.ServerKeyLocalPath, true
+	return o.ServerKeyLocalPath, true
 }
 
-// SetServerKeyLocalPath sets field value
+// HasServerKeyLocalPath returns a boolean if a field has been set.
+func (o *Config) HasServerKeyLocalPath() bool {
+	if o != nil && !IsNil(o.ServerKeyLocalPath) {
+		return true
+	}
+
+	return false
+}
+
+// SetServerKeyLocalPath gets a reference to the given string and assigns it to the ServerKeyLocalPath field.
 func (o *Config) SetServerKeyLocalPath(v string) {
-	o.ServerKeyLocalPath = v
+	o.ServerKeyLocalPath = &v
 }
 
-// GetSignerPrivateKey returns the SignerPrivateKey field value
+// GetSignerPrivateKey returns the SignerPrivateKey field value if set, zero value otherwise.
 func (o *Config) GetSignerPrivateKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.SignerPrivateKey) {
 		var ret string
 		return ret
 	}
-
-	return o.SignerPrivateKey
+	return *o.SignerPrivateKey
 }
 
-// GetSignerPrivateKeyOk returns a tuple with the SignerPrivateKey field value
+// GetSignerPrivateKeyOk returns a tuple with the SignerPrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetSignerPrivateKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SignerPrivateKey) {
 		return nil, false
 	}
-	return &o.SignerPrivateKey, true
+	return o.SignerPrivateKey, true
 }
 
-// SetSignerPrivateKey sets field value
+// HasSignerPrivateKey returns a boolean if a field has been set.
+func (o *Config) HasSignerPrivateKey() bool {
+	if o != nil && !IsNil(o.SignerPrivateKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetSignerPrivateKey gets a reference to the given string and assigns it to the SignerPrivateKey field.
 func (o *Config) SetSignerPrivateKey(v string) {
-	o.SignerPrivateKey = v
+	o.SignerPrivateKey = &v
 }
 
-// GetSignerPublicKey returns the SignerPublicKey field value
+// GetSignerPublicKey returns the SignerPublicKey field value if set, zero value otherwise.
 func (o *Config) GetSignerPublicKey() string {
-	if o == nil {
+	if o == nil || IsNil(o.SignerPublicKey) {
 		var ret string
 		return ret
 	}
-
-	return o.SignerPublicKey
+	return *o.SignerPublicKey
 }
 
-// GetSignerPublicKeyOk returns a tuple with the SignerPublicKey field value
+// GetSignerPublicKeyOk returns a tuple with the SignerPublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Config) GetSignerPublicKeyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SignerPublicKey) {
 		return nil, false
 	}
-	return &o.SignerPublicKey, true
+	return o.SignerPublicKey, true
 }
 
-// SetSignerPublicKey sets field value
+// HasSignerPublicKey returns a boolean if a field has been set.
+func (o *Config) HasSignerPublicKey() bool {
+	if o != nil && !IsNil(o.SignerPublicKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetSignerPublicKey gets a reference to the given string and assigns it to the SignerPublicKey field.
 func (o *Config) SetSignerPublicKey(v string) {
-	o.SignerPublicKey = v
+	o.SignerPublicKey = &v
 }
 
 func (o Config) MarshalJSON() ([]byte, error) {
@@ -285,14 +334,28 @@ func (o Config) MarshalJSON() ([]byte, error) {
 func (o Config) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["certPath"] = o.CertPath
-	toSerialize["compressor"] = o.Compressor
-	toSerialize["serverCert"] = o.ServerCert
+	if !IsNil(o.Compressor) {
+		toSerialize["compressor"] = o.Compressor
+	}
+	if !IsNil(o.ServerCert) {
+		toSerialize["serverCert"] = o.ServerCert
+	}
 	toSerialize["serverCertExpirySecs"] = o.ServerCertExpirySecs
-	toSerialize["serverCertLocalPath"] = o.ServerCertLocalPath
-	toSerialize["serverKey"] = o.ServerKey
-	toSerialize["serverKeyLocalPath"] = o.ServerKeyLocalPath
-	toSerialize["signerPrivateKey"] = o.SignerPrivateKey
-	toSerialize["signerPublicKey"] = o.SignerPublicKey
+	if !IsNil(o.ServerCertLocalPath) {
+		toSerialize["serverCertLocalPath"] = o.ServerCertLocalPath
+	}
+	if !IsNil(o.ServerKey) {
+		toSerialize["serverKey"] = o.ServerKey
+	}
+	if !IsNil(o.ServerKeyLocalPath) {
+		toSerialize["serverKeyLocalPath"] = o.ServerKeyLocalPath
+	}
+	if !IsNil(o.SignerPrivateKey) {
+		toSerialize["signerPrivateKey"] = o.SignerPrivateKey
+	}
+	if !IsNil(o.SignerPublicKey) {
+		toSerialize["signerPublicKey"] = o.SignerPublicKey
+	}
 	return toSerialize, nil
 }
 

@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComponentName** | Pointer to **string** | Logical component name; used as output file label. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
 **DbName** | Pointer to **string** | Database name for ysqlsh -d. | [optional] 
-**Queries** | Pointer to **[]string** | YSQL statements to execute (each runs as ysqlsh -c). Support bundles are read-only, so each entry must be a single statement beginning with SELECT, WITH, EXPLAIN, SHOW, TABLE or VALUES (case-insensitive). Entries holding more than one statement are rejected, as are constructs that reach outside the database such as COPY ... TO PROGRAM or the pg_read_file family. The session additionally runs with default_transaction_read_only&#x3D;on.  | [optional] 
+**Queries** | Pointer to **[]string** | YSQL statements to execute (each runs as ysqlsh -c). Support bundles are read-only, so each entry must be a single statement beginning with SELECT, WITH, EXPLAIN, SHOW, TABLE or VALUES (case-insensitive). Entries holding more than one statement are rejected, as are constructs that reach outside the database such as COPY ... TO PROGRAM or the pg_read_file family. The session additionally runs with default_transaction_read_only&#x3D;on. After these checks YBA runs the queries its support bundle manifest lists for component_name instead, and rejects a component_name the manifest doesn&#39;t list.  | [optional] 
 **OutputFileName** | Pointer to **string** | Output file name written under the per-node bundle directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].  | [optional] 
-**TimeoutSecs** | Pointer to **int64** | Command timeout in seconds. | [optional] 
+**TimeoutSecs** | Pointer to **int64** | Command timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.  | [optional] 
 
 ## Methods
 

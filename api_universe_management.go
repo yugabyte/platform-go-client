@@ -341,7 +341,7 @@ func (r UniverseManagementAPIGetUniverseRequest) Execute() (*UniverseResp, *http
 /*
 GetUniverse Get a universe
 
-Available since YBA version 2.2.0.0.
+Available since YBA version 2.2.0.0. Early access: when the runtime flag yb.api.conditional_get.enabled is set, this endpoint supports conditional requests. Send a previously returned ETag in If-None-Match to get 304 Not Modified if the universe is unchanged. Fields derived from related resources (for example DR configs or pricing) may be stale in that case.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID
@@ -1384,11 +1384,17 @@ func (a *UniverseManagementAPIService) SetUniverseKeyExecute(r UniverseManagemen
 }
 
 type UniverseManagementAPIUpdateLoadBalancerConfigRequest struct {
-	ctx        context.Context
-	ApiService *UniverseManagementAPIService
-	cUUID      string
-	uniUUID    string
-	request    *interface{}
+	ctx                             context.Context
+	ApiService                      *UniverseManagementAPIService
+	cUUID                           string
+	uniUUID                         string
+	updateLoadBalancerConfigRequest *UniverseDefinitionTaskParams
+	request                         *interface{}
+}
+
+func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) UpdateLoadBalancerConfigRequest(updateLoadBalancerConfigRequest UniverseDefinitionTaskParams) UniverseManagementAPIUpdateLoadBalancerConfigRequest {
+	r.updateLoadBalancerConfigRequest = &updateLoadBalancerConfigRequest
+	return r
 }
 
 func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) Request(request interface{}) UniverseManagementAPIUpdateLoadBalancerConfigRequest {
@@ -1396,14 +1402,14 @@ func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) Request(request in
 	return r
 }
 
-func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) Execute() (*UpdateLoadBalancerConfig, *http.Response, error) {
+func (r UniverseManagementAPIUpdateLoadBalancerConfigRequest) Execute() (*YBPTask, *http.Response, error) {
 	return r.ApiService.UpdateLoadBalancerConfigExecute(r)
 }
 
 /*
 UpdateLoadBalancerConfig Update load balancer config
 
-WARNING: This is a preview API that could change.
+WARNING: This is a preview API that could change. Queues a task that updates the load balancers a universe uses. YBA does not create these load balancers. Send the current universe definition with `universeUUID` set to the universe in the path. For each existing cluster, YBA saves `userIntent.enableLB`, each region's `lbFQDN` and each zone's `lbName`. YBA registers the nodes in `nodeDetailsSet` on those load balancers and removes them from load balancers no longer named.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param cUUID
@@ -1421,13 +1427,13 @@ func (a *UniverseManagementAPIService) UpdateLoadBalancerConfig(ctx context.Cont
 
 // Execute executes the request
 //
-//	@return UpdateLoadBalancerConfig
-func (a *UniverseManagementAPIService) UpdateLoadBalancerConfigExecute(r UniverseManagementAPIUpdateLoadBalancerConfigRequest) (*UpdateLoadBalancerConfig, *http.Response, error) {
+//	@return YBPTask
+func (a *UniverseManagementAPIService) UpdateLoadBalancerConfigExecute(r UniverseManagementAPIUpdateLoadBalancerConfigRequest) (*YBPTask, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UpdateLoadBalancerConfig
+		localVarReturnValue *YBPTask
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UniverseManagementAPIService.UpdateLoadBalancerConfig")
@@ -1442,12 +1448,15 @@ func (a *UniverseManagementAPIService) UpdateLoadBalancerConfigExecute(r Univers
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateLoadBalancerConfigRequest == nil {
+		return localVarReturnValue, nil, reportError("updateLoadBalancerConfigRequest is required and must be specified")
+	}
 
 	if r.request != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request", r.request, "", "")
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1463,6 +1472,8 @@ func (a *UniverseManagementAPIService) UpdateLoadBalancerConfigExecute(r Univers
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.updateLoadBalancerConfigRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

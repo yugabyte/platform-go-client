@@ -26,6 +26,8 @@ type ClusterInfo struct {
 	GeoPartitioned *bool `json:"geo_partitioned,omitempty"`
 	// TBD
 	SpotPrice *float64 `json:"spot_price,omitempty"`
+	// The load balancers that YBA manages for this cluster.
+	LoadBalancers []ManagedLoadBalancerInfo `json:"load_balancers,omitempty"`
 }
 
 // NewClusterInfo instantiates a new ClusterInfo object
@@ -141,6 +143,38 @@ func (o *ClusterInfo) SetSpotPrice(v float64) {
 	o.SpotPrice = &v
 }
 
+// GetLoadBalancers returns the LoadBalancers field value if set, zero value otherwise.
+func (o *ClusterInfo) GetLoadBalancers() []ManagedLoadBalancerInfo {
+	if o == nil || IsNil(o.LoadBalancers) {
+		var ret []ManagedLoadBalancerInfo
+		return ret
+	}
+	return o.LoadBalancers
+}
+
+// GetLoadBalancersOk returns a tuple with the LoadBalancers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ClusterInfo) GetLoadBalancersOk() ([]ManagedLoadBalancerInfo, bool) {
+	if o == nil || IsNil(o.LoadBalancers) {
+		return nil, false
+	}
+	return o.LoadBalancers, true
+}
+
+// HasLoadBalancers returns a boolean if a field has been set.
+func (o *ClusterInfo) HasLoadBalancers() bool {
+	if o != nil && !IsNil(o.LoadBalancers) {
+		return true
+	}
+
+	return false
+}
+
+// SetLoadBalancers gets a reference to the given []ManagedLoadBalancerInfo and assigns it to the LoadBalancers field.
+func (o *ClusterInfo) SetLoadBalancers(v []ManagedLoadBalancerInfo) {
+	o.LoadBalancers = v
+}
+
 func (o ClusterInfo) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -159,6 +193,9 @@ func (o ClusterInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SpotPrice) {
 		toSerialize["spot_price"] = o.SpotPrice
+	}
+	if !IsNil(o.LoadBalancers) {
+		toSerialize["load_balancers"] = o.LoadBalancers
 	}
 	return toSerialize, nil
 }

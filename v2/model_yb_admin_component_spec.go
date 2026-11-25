@@ -24,11 +24,11 @@ type YbAdminComponentSpec struct {
 	ComponentName *string `json:"component_name,omitempty"`
 	// yb-admin subcommands to run, each executed separately (e.g. list_tables). Support bundles only run read-only subcommands, so anything that mutates cluster state is rejected. Operators can add to the allowed set through the yb.support_bundle.extra_yb_admin_commands runtime config.
 	YbAdminCommands []string `json:"yb_admin_commands,omitempty"`
-	// Additional arguments after the subcommand.
+	// Additional arguments after the subcommand. YBA replaces them with the arguments its support bundle manifest lists for component_name, and rejects a component_name the manifest doesn't list.
 	YbAdminArgs []string `json:"yb_admin_args,omitempty"`
 	// Output file name written under the per-node bundle directory. Must be a single file name of up to 128 characters from [A-Za-z0-9._-].
 	OutputFileName *string `json:"output_file_name,omitempty"`
-	// Command timeout in seconds.
+	// Command timeout in seconds. YBA uses the timeout its support bundle manifest gives component_name instead.
 	TimeoutSecs *int64 `json:"timeout_secs,omitempty"`
 }
 

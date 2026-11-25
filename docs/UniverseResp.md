@@ -10,9 +10,11 @@ Name | Type | Description | Notes
 **DrConfigUuidsAsSource** | Pointer to **[]string** | UUIDs of DR configs where this universe is the source (primary) | [optional] 
 **DrConfigUuidsAsTarget** | Pointer to **[]string** | UUIDs of DR configs where this universe is the target (secondary) | [optional] 
 **Name** | Pointer to **string** | Universe name | [optional] 
+**NodeExporterSidecarScraped** | Pointer to **bool** | YbaApi Internal. Whether YBA scrapes the node_exporter sidecar on this Kubernetes universe | [optional] 
 **PlatformVersion** | Pointer to **string** | YugabyteDB Anywhere platform software version for this YBA instance | [optional] 
 **PricePerHour** | Pointer to **float64** | Price | [optional] 
 **Resources** | Pointer to [**UniverseResourceDetails**](UniverseResourceDetails.md) |  | [optional] 
+**ResourcesPerProvider** | Pointer to [**map[string]UniverseResourceDetails**](UniverseResourceDetails.md) | WARNING: This is a preview API that could change.  Universe resource details per provider | [optional] 
 **RollMaxBatchSize** | Pointer to [**RollMaxBatchSize**](RollMaxBatchSize.md) |  | [optional] 
 **SampleAppCommandTxt** | Pointer to **string** | Sample command | [optional] 
 **TaskUUID** | Pointer to **string** | Task UUID | [optional] 
@@ -190,6 +192,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetNodeExporterSidecarScraped
+
+`func (o *UniverseResp) GetNodeExporterSidecarScraped() bool`
+
+GetNodeExporterSidecarScraped returns the NodeExporterSidecarScraped field if non-nil, zero value otherwise.
+
+### GetNodeExporterSidecarScrapedOk
+
+`func (o *UniverseResp) GetNodeExporterSidecarScrapedOk() (*bool, bool)`
+
+GetNodeExporterSidecarScrapedOk returns a tuple with the NodeExporterSidecarScraped field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeExporterSidecarScraped
+
+`func (o *UniverseResp) SetNodeExporterSidecarScraped(v bool)`
+
+SetNodeExporterSidecarScraped sets NodeExporterSidecarScraped field to given value.
+
+### HasNodeExporterSidecarScraped
+
+`func (o *UniverseResp) HasNodeExporterSidecarScraped() bool`
+
+HasNodeExporterSidecarScraped returns a boolean if a field has been set.
+
 ### GetPlatformVersion
 
 `func (o *UniverseResp) GetPlatformVersion() string`
@@ -264,6 +291,31 @@ SetResources sets Resources field to given value.
 `func (o *UniverseResp) HasResources() bool`
 
 HasResources returns a boolean if a field has been set.
+
+### GetResourcesPerProvider
+
+`func (o *UniverseResp) GetResourcesPerProvider() map[string]UniverseResourceDetails`
+
+GetResourcesPerProvider returns the ResourcesPerProvider field if non-nil, zero value otherwise.
+
+### GetResourcesPerProviderOk
+
+`func (o *UniverseResp) GetResourcesPerProviderOk() (*map[string]UniverseResourceDetails, bool)`
+
+GetResourcesPerProviderOk returns a tuple with the ResourcesPerProvider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourcesPerProvider
+
+`func (o *UniverseResp) SetResourcesPerProvider(v map[string]UniverseResourceDetails)`
+
+SetResourcesPerProvider sets ResourcesPerProvider field to given value.
+
+### HasResourcesPerProvider
+
+`func (o *UniverseResp) HasResourcesPerProvider() bool`
+
+HasResourcesPerProvider returns a boolean if a field has been set.
 
 ### GetRollMaxBatchSize
 

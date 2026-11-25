@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **InUse** | Pointer to **bool** | True if there is an in use reference to the object | [optional] [readonly] 
 **KubernetesOperatorControlled** | **bool** |  | 
 **Name** | **string** | Name | 
-**State** | Pointer to **string** | state of the customerConfig. Possible values are Active, QueuedForDeletion. | [optional] [readonly] 
+**State** | Pointer to **string** | state of the customerConfig. Possible values are Active, QueuedForDeletion, Validating. | [optional] [readonly] 
 **Type** | **string** | Config type | 
 **UniverseDetails** | Pointer to [**[]UniverseDetailSubset**](UniverseDetailSubset.md) | Universe details | [optional] 
 

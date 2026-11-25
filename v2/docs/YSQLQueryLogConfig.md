@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **LogConnections** | **bool** | Log connections, causes each attempted connection to the server to be logged, as well as successful completion of both client authentication (if necessary) and authorization | [default to false]
 **LogDisconnections** | **bool** | Log disconnections, causes session terminations to be logged. The log output provides information similar to log_connections, plus the duration of the session. | [default to false]
 **LogMinDurationStatement** | **int32** | Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time. | [default to -1]
-**LogLinePrefix** | Pointer to **string** | YbaApi Internal. Log line prefix format for PostgreSQL logs. User-configured log_line_prefix in gflags takes precedence over this value when specified. | [optional] 
+**LogLinePrefix** | Pointer to **string** | YbaApi Internal. Log line prefix format for PostgreSQL logs. When query logging is enabled, this value takes precedence over a log_line_prefix set in gflags. | [optional] 
 
 ## Methods
 

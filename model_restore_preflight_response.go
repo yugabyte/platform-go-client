@@ -21,6 +21,8 @@ var _ MappedNullable = &RestorePreflightResponse{}
 type RestorePreflightResponse struct {
 	// Backup Category
 	BackupCategory *string `json:"backupCategory,omitempty"`
+	// YbaApi Internal. Whether the backup was taken on a FIPS-enabled universe, if known
+	FipsEnabled *bool `json:"fipsEnabled,omitempty"`
 	// Whether backup was KMS encrypted
 	HasKMSHistory *bool `json:"hasKMSHistory,omitempty"`
 	// Map of backup location and backup-info object
@@ -74,6 +76,38 @@ func (o *RestorePreflightResponse) HasBackupCategory() bool {
 // SetBackupCategory gets a reference to the given string and assigns it to the BackupCategory field.
 func (o *RestorePreflightResponse) SetBackupCategory(v string) {
 	o.BackupCategory = &v
+}
+
+// GetFipsEnabled returns the FipsEnabled field value if set, zero value otherwise.
+func (o *RestorePreflightResponse) GetFipsEnabled() bool {
+	if o == nil || IsNil(o.FipsEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.FipsEnabled
+}
+
+// GetFipsEnabledOk returns a tuple with the FipsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RestorePreflightResponse) GetFipsEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.FipsEnabled) {
+		return nil, false
+	}
+	return o.FipsEnabled, true
+}
+
+// HasFipsEnabled returns a boolean if a field has been set.
+func (o *RestorePreflightResponse) HasFipsEnabled() bool {
+	if o != nil && !IsNil(o.FipsEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetFipsEnabled gets a reference to the given bool and assigns it to the FipsEnabled field.
+func (o *RestorePreflightResponse) SetFipsEnabled(v bool) {
+	o.FipsEnabled = &v
 }
 
 // GetHasKMSHistory returns the HasKMSHistory field value if set, zero value otherwise.
@@ -152,6 +186,9 @@ func (o RestorePreflightResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.BackupCategory) {
 		toSerialize["backupCategory"] = o.BackupCategory
+	}
+	if !IsNil(o.FipsEnabled) {
+		toSerialize["fipsEnabled"] = o.FipsEnabled
 	}
 	if !IsNil(o.HasKMSHistory) {
 		toSerialize["hasKMSHistory"] = o.HasKMSHistory

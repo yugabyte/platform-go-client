@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CertificateName** | Pointer to **string** | Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, existing certificates are used.  | [optional] 
+**CertificateName** | Pointer to **string** | Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, generated self-signed certificates are used.  | [optional] 
 **NodeNames** | Pointer to **[]string** | Optional list of node names whose node agents should be upgraded. If omitted or empty, all live nodes in the universe are upgraded.  | [optional] 
 **CertsOnly** | Pointer to **bool** | If true, replace node agent certificates without upgrading the package when the node agent version already matches YBA. If the version does not match, a full upgrade is performed so RPC stays compatible.  | [optional] [default to false]
 

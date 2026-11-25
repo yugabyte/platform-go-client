@@ -23,8 +23,8 @@ Name | Type | Description | Notes
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **S3Bucket** | **string** | S3 bucket URL | 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 
@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewBulkImportParams
 
-`func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *BulkImportParams`
+`func NewBulkImportParams(creatingUser Users, platformUrl string, s3Bucket string, ) *BulkImportParams`
 
 NewBulkImportParams instantiates a new BulkImportParams object
 This constructor will assign default values to properties that have it defined,
@@ -533,6 +533,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
 
+### HasSleepAfterMasterRestartMillis
+
+`func (o *BulkImportParams) HasSleepAfterMasterRestartMillis() bool`
+
+HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
 
 ### GetSleepAfterTServerRestartMillis
 
@@ -553,6 +558,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+### HasSleepAfterTServerRestartMillis
+
+`func (o *BulkImportParams) HasSleepAfterTServerRestartMillis() bool`
+
+HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

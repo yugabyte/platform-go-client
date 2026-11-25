@@ -34,7 +34,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -112,14 +112,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	tableUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "S3Bucket_example", int32(123), int32(123)) // BulkImportParams | Bulk data to be imported
+	bulkImport := *openapiclient.NewBulkImportParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", "S3Bucket_example") // BulkImportParams | Bulk data to be imported
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -192,13 +192,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123), *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
+	table := *openapiclient.NewTableDefinitionTaskParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", *openapiclient.NewTableDetails(), "TableType_example", "TableUUID_example") // TableDefinitionTaskParams | Table definition to be created
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -269,7 +269,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -346,7 +346,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -422,7 +422,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -500,7 +500,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -575,7 +575,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -648,7 +648,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -731,7 +731,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {

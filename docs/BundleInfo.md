@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**IsImageMarketplaceBased** | Pointer to **bool** | WARNING: This is a preview API that could change. Whether ybImage is an OCI Marketplace image or a custom image built from one. Set by YBA for OCI bundles, and left unset when YBA cannot tell; any value in a request is ignored. | [optional] [readonly] 
 **SshPortOverride** | Pointer to **int32** | sshPortOverride for the bundle. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.3.0.&lt;/b&gt; Use imageBundles.details.sshUser instead. | [optional] 
 **SshUserOverride** | Pointer to **string** | sshUserOverride for the bundle. &lt;b style&#x3D;\&quot;color:#ff0000\&quot;&gt;Deprecated since YBA version 2.20.3.0.&lt;/b&gt; Use imageBundles.details.sshUser instead. | [optional] 
 **YbImage** | Pointer to **string** |  | [optional] 
@@ -26,6 +27,31 @@ will change when the set of required properties is changed
 NewBundleInfoWithDefaults instantiates a new BundleInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetIsImageMarketplaceBased
+
+`func (o *BundleInfo) GetIsImageMarketplaceBased() bool`
+
+GetIsImageMarketplaceBased returns the IsImageMarketplaceBased field if non-nil, zero value otherwise.
+
+### GetIsImageMarketplaceBasedOk
+
+`func (o *BundleInfo) GetIsImageMarketplaceBasedOk() (*bool, bool)`
+
+GetIsImageMarketplaceBasedOk returns a tuple with the IsImageMarketplaceBased field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsImageMarketplaceBased
+
+`func (o *BundleInfo) SetIsImageMarketplaceBased(v bool)`
+
+SetIsImageMarketplaceBased sets IsImageMarketplaceBased field to given value.
+
+### HasIsImageMarketplaceBased
+
+`func (o *BundleInfo) HasIsImageMarketplaceBased() bool`
+
+HasIsImageMarketplaceBased returns a boolean if a field has been set.
 
 ### GetSshPortOverride
 

@@ -30,13 +30,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	namespaceClone := *openapiclient.NewCloneNamespaceParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123)) // CloneNamespaceParams | perform clone via PITR
+	namespaceClone := *openapiclient.NewCloneNamespaceParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example") // CloneNamespaceParams | perform clone via PITR
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -105,7 +105,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -113,7 +113,7 @@ func main() {
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	tableType := "tableType_example" // string | 
 	keyspaceName := "keyspaceName_example" // string | 
-	pitrConfig := *openapiclient.NewCreatePitrConfigParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123)) // CreatePitrConfigParams | post pitr config
+	pitrConfig := *openapiclient.NewCreatePitrConfigParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example") // CreatePitrConfigParams | post pitr config
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -186,7 +186,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -262,7 +262,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -333,13 +333,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	performPitr := *openapiclient.NewRestoreSnapshotScheduleParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123)) // RestoreSnapshotScheduleParams | perform PITR
+	performPitr := *openapiclient.NewRestoreSnapshotScheduleParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example") // RestoreSnapshotScheduleParams | perform PITR
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -410,14 +410,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
 	cUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	uniUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 	pUUID := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	pitrConfig := *openapiclient.NewUpdatePitrConfigParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example", int32(123), int32(123)) // UpdatePitrConfigParams | put pitr config
+	pitrConfig := *openapiclient.NewUpdatePitrConfigParams(*openapiclient.NewUsers("username1@example.com", []string{"GroupMemberships_example"}, false), "PlatformUrl_example") // UpdatePitrConfigParams | put pitr config
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()

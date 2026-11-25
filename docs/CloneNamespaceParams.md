@@ -22,8 +22,8 @@ Name | Type | Description | Notes
 **PlatformUrl** | **string** |  | 
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
-**SleepAfterMasterRestartMillis** | **int32** |  | 
-**SleepAfterTServerRestartMillis** | **int32** |  | 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **TargetKeyspaceName** | Pointer to **string** | Clone namespace name | [optional] 
 **TargetXClusterConfigs** | Pointer to **[]string** | The target universe&#39;s xcluster replication relationships | [optional] [readonly] 
@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewCloneNamespaceParams
 
-`func NewCloneNamespaceParams(creatingUser Users, platformUrl string, sleepAfterMasterRestartMillis int32, sleepAfterTServerRestartMillis int32, ) *CloneNamespaceParams`
+`func NewCloneNamespaceParams(creatingUser Users, platformUrl string, ) *CloneNamespaceParams`
 
 NewCloneNamespaceParams instantiates a new CloneNamespaceParams object
 This constructor will assign default values to properties that have it defined,
@@ -509,6 +509,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterMasterRestartMillis sets SleepAfterMasterRestartMillis field to given value.
 
+### HasSleepAfterMasterRestartMillis
+
+`func (o *CloneNamespaceParams) HasSleepAfterMasterRestartMillis() bool`
+
+HasSleepAfterMasterRestartMillis returns a boolean if a field has been set.
 
 ### GetSleepAfterTServerRestartMillis
 
@@ -529,6 +534,11 @@ and a boolean to check if the value has been set.
 
 SetSleepAfterTServerRestartMillis sets SleepAfterTServerRestartMillis field to given value.
 
+### HasSleepAfterTServerRestartMillis
+
+`func (o *CloneNamespaceParams) HasSleepAfterTServerRestartMillis() bool`
+
+HasSleepAfterTServerRestartMillis returns a boolean if a field has been set.
 
 ### GetSourceXClusterConfigs
 

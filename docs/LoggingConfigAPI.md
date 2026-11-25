@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
@@ -90,11 +90,11 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/yugabyte/platform-go-client/v1"
+	openapiclient "github.com/yugabyte/platform-go-client"
 )
 
 func main() {
-	loggingConfig := *openapiclient.NewPlatformLoggingConfig("Level_example", int32(123), "RolloverPattern_example") // PlatformLoggingConfig | Logging config to be updated
+	loggingConfig := *openapiclient.NewPlatformLoggingConfig("Level_example") // PlatformLoggingConfig | Logging config to be updated
 	request := TODO // interface{} |  (optional)
 
 	configuration := openapiclient.NewConfiguration()

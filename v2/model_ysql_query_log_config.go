@@ -38,7 +38,7 @@ type YSQLQueryLogConfig struct {
 	LogDisconnections bool `json:"log_disconnections"`
 	// Log min duration statement, causes the duration of each completed statement to be logged if the statement ran for at least the specified amount of time.
 	LogMinDurationStatement int32 `json:"log_min_duration_statement"`
-	// YbaApi Internal. Log line prefix format for PostgreSQL logs. User-configured log_line_prefix in gflags takes precedence over this value when specified.
+	// YbaApi Internal. Log line prefix format for PostgreSQL logs. When query logging is enabled, this value takes precedence over a log_line_prefix set in gflags.
 	LogLinePrefix *string `json:"log_line_prefix,omitempty"`
 }
 

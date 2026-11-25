@@ -23,9 +23,11 @@ type AWSCloudInfo struct {
 	AwsAccessKeySecret *string `json:"awsAccessKeySecret,omitempty"`
 	AwsHostedZoneId    *string `json:"awsHostedZoneId,omitempty"`
 	AwsHostedZoneName  *string `json:"awsHostedZoneName,omitempty"`
+	// WARNING: This is a preview API that could change. Storage clouds this provider's DB nodes can be given federated access to, at most one entry per cloud. A node uses the entry for a cloud it is not itself running on.
+	CrossCloudFederationTargets []CrossCloudFederationTarget `json:"crossCloudFederationTargets,omitempty"`
 	// Enable GCS-on-AWS cross-cloud federated IAM on this provider's DB nodes (GCP Workload Identity Federation). Requires the federated IAM audience below.
 	EnableFederatedIam *bool `json:"enableFederatedIam,omitempty"`
-	// GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it.
+	// Deprecated: use crossCloudFederationTargets. GCP Workload Identity Federation audience (//iam.googleapis.com/projects/.../providers/...), used when federated IAM is enabled. The DB node renders the external_account credential from it.
 	FederatedIamAudience *string `json:"federatedIamAudience,omitempty"`
 	HostVpcId            *string `json:"hostVpcId,omitempty"`
 	HostVpcRegion        *string `json:"hostVpcRegion,omitempty"`
@@ -177,6 +179,38 @@ func (o *AWSCloudInfo) HasAwsHostedZoneName() bool {
 // SetAwsHostedZoneName gets a reference to the given string and assigns it to the AwsHostedZoneName field.
 func (o *AWSCloudInfo) SetAwsHostedZoneName(v string) {
 	o.AwsHostedZoneName = &v
+}
+
+// GetCrossCloudFederationTargets returns the CrossCloudFederationTargets field value if set, zero value otherwise.
+func (o *AWSCloudInfo) GetCrossCloudFederationTargets() []CrossCloudFederationTarget {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		var ret []CrossCloudFederationTarget
+		return ret
+	}
+	return o.CrossCloudFederationTargets
+}
+
+// GetCrossCloudFederationTargetsOk returns a tuple with the CrossCloudFederationTargets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AWSCloudInfo) GetCrossCloudFederationTargetsOk() ([]CrossCloudFederationTarget, bool) {
+	if o == nil || IsNil(o.CrossCloudFederationTargets) {
+		return nil, false
+	}
+	return o.CrossCloudFederationTargets, true
+}
+
+// HasCrossCloudFederationTargets returns a boolean if a field has been set.
+func (o *AWSCloudInfo) HasCrossCloudFederationTargets() bool {
+	if o != nil && !IsNil(o.CrossCloudFederationTargets) {
+		return true
+	}
+
+	return false
+}
+
+// SetCrossCloudFederationTargets gets a reference to the given []CrossCloudFederationTarget and assigns it to the CrossCloudFederationTargets field.
+func (o *AWSCloudInfo) SetCrossCloudFederationTargets(v []CrossCloudFederationTarget) {
+	o.CrossCloudFederationTargets = v
 }
 
 // GetEnableFederatedIam returns the EnableFederatedIam field value if set, zero value otherwise.
@@ -392,6 +426,9 @@ func (o AWSCloudInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AwsHostedZoneName) {
 		toSerialize["awsHostedZoneName"] = o.AwsHostedZoneName
+	}
+	if !IsNil(o.CrossCloudFederationTargets) {
+		toSerialize["crossCloudFederationTargets"] = o.CrossCloudFederationTargets
 	}
 	if !IsNil(o.EnableFederatedIam) {
 		toSerialize["enableFederatedIam"] = o.EnableFederatedIam

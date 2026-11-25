@@ -38,6 +38,8 @@ type Audit struct {
 	Target *string `json:"target,omitempty"`
 	// Target ID
 	TargetID *string `json:"targetID,omitempty"`
+	// Task Diff
+	TaskDiff map[string]interface{} `json:"taskDiff,omitempty"`
 	// Task UUID
 	TaskUUID *string `json:"taskUUID,omitempty"`
 	// The task creation time.
@@ -355,6 +357,38 @@ func (o *Audit) SetTargetID(v string) {
 	o.TargetID = &v
 }
 
+// GetTaskDiff returns the TaskDiff field value if set, zero value otherwise.
+func (o *Audit) GetTaskDiff() map[string]interface{} {
+	if o == nil || IsNil(o.TaskDiff) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.TaskDiff
+}
+
+// GetTaskDiffOk returns a tuple with the TaskDiff field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Audit) GetTaskDiffOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.TaskDiff) {
+		return map[string]interface{}{}, false
+	}
+	return o.TaskDiff, true
+}
+
+// HasTaskDiff returns a boolean if a field has been set.
+func (o *Audit) HasTaskDiff() bool {
+	if o != nil && !IsNil(o.TaskDiff) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaskDiff gets a reference to the given map[string]interface{} and assigns it to the TaskDiff field.
+func (o *Audit) SetTaskDiff(v map[string]interface{}) {
+	o.TaskDiff = v
+}
+
 // GetTaskUUID returns the TaskUUID field value if set, zero value otherwise.
 func (o *Audit) GetTaskUUID() string {
 	if o == nil || IsNil(o.TaskUUID) {
@@ -551,6 +585,9 @@ func (o Audit) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.TargetID) {
 		toSerialize["targetID"] = o.TargetID
+	}
+	if !IsNil(o.TaskDiff) {
+		toSerialize["taskDiff"] = o.TaskDiff
 	}
 	if !IsNil(o.TaskUUID) {
 		toSerialize["taskUUID"] = o.TaskUUID

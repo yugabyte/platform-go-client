@@ -19,6 +19,8 @@ var _ MappedNullable = &BundleInfo{}
 
 // BundleInfo struct for BundleInfo
 type BundleInfo struct {
+	// WARNING: This is a preview API that could change. Whether ybImage is an OCI Marketplace image or a custom image built from one. Set by YBA for OCI bundles, and left unset when YBA cannot tell; any value in a request is ignored.
+	IsImageMarketplaceBased *bool `json:"isImageMarketplaceBased,omitempty"`
 	// sshPortOverride for the bundle. <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
 	SshPortOverride *int32 `json:"sshPortOverride,omitempty"`
 	// sshUserOverride for the bundle. <b style=\"color:#ff0000\">Deprecated since YBA version 2.20.3.0.</b> Use imageBundles.details.sshUser instead.
@@ -41,6 +43,38 @@ func NewBundleInfo() *BundleInfo {
 func NewBundleInfoWithDefaults() *BundleInfo {
 	this := BundleInfo{}
 	return &this
+}
+
+// GetIsImageMarketplaceBased returns the IsImageMarketplaceBased field value if set, zero value otherwise.
+func (o *BundleInfo) GetIsImageMarketplaceBased() bool {
+	if o == nil || IsNil(o.IsImageMarketplaceBased) {
+		var ret bool
+		return ret
+	}
+	return *o.IsImageMarketplaceBased
+}
+
+// GetIsImageMarketplaceBasedOk returns a tuple with the IsImageMarketplaceBased field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BundleInfo) GetIsImageMarketplaceBasedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsImageMarketplaceBased) {
+		return nil, false
+	}
+	return o.IsImageMarketplaceBased, true
+}
+
+// HasIsImageMarketplaceBased returns a boolean if a field has been set.
+func (o *BundleInfo) HasIsImageMarketplaceBased() bool {
+	if o != nil && !IsNil(o.IsImageMarketplaceBased) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsImageMarketplaceBased gets a reference to the given bool and assigns it to the IsImageMarketplaceBased field.
+func (o *BundleInfo) SetIsImageMarketplaceBased(v bool) {
+	o.IsImageMarketplaceBased = &v
 }
 
 // GetSshPortOverride returns the SshPortOverride field value if set, zero value otherwise.
@@ -149,6 +183,9 @@ func (o BundleInfo) MarshalJSON() ([]byte, error) {
 
 func (o BundleInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.IsImageMarketplaceBased) {
+		toSerialize["isImageMarketplaceBased"] = o.IsImageMarketplaceBased
+	}
 	if !IsNil(o.SshPortOverride) {
 		toSerialize["sshPortOverride"] = o.SshPortOverride
 	}

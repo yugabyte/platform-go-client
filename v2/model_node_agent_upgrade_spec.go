@@ -20,7 +20,7 @@ var _ MappedNullable = &NodeAgentUpgradeSpec{}
 
 // NodeAgentUpgradeSpec NodeAgentUpgradeSpec  Request payload to upgrade node agents in a universe. Part of NodeAgentUpgradeReq. If node_names is omitted or empty, all live nodes in the universe are upgraded.
 type NodeAgentUpgradeSpec struct {
-	// Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, existing certificates are used.
+	// Optional name (label) of the YBA certificate config to use for the node agent upgrade. If omitted, generated self-signed certificates are used.
 	CertificateName *string `json:"certificate_name,omitempty"`
 	// Optional list of node names whose node agents should be upgraded. If omitted or empty, all live nodes in the universe are upgraded.
 	NodeNames []string `json:"node_names,omitempty"`

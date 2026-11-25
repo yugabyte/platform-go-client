@@ -5,20 +5,20 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CertPath** | **string** |  | 
-**Compressor** | **string** |  | 
-**ServerCert** | **string** |  | 
+**Compressor** | Pointer to **string** |  | [optional] 
+**ServerCert** | Pointer to **string** |  | [optional] 
 **ServerCertExpirySecs** | **int64** |  | 
-**ServerCertLocalPath** | **string** |  | 
-**ServerKey** | **string** |  | 
-**ServerKeyLocalPath** | **string** |  | 
-**SignerPrivateKey** | **string** |  | 
-**SignerPublicKey** | **string** |  | 
+**ServerCertLocalPath** | Pointer to **string** |  | [optional] 
+**ServerKey** | Pointer to **string** |  | [optional] 
+**ServerKeyLocalPath** | Pointer to **string** |  | [optional] 
+**SignerPrivateKey** | Pointer to **string** |  | [optional] 
+**SignerPublicKey** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewConfig
 
-`func NewConfig(certPath string, compressor string, serverCert string, serverCertExpirySecs int64, serverCertLocalPath string, serverKey string, serverKeyLocalPath string, signerPrivateKey string, signerPublicKey string, ) *Config`
+`func NewConfig(certPath string, serverCertExpirySecs int64, ) *Config`
 
 NewConfig instantiates a new Config object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +72,11 @@ and a boolean to check if the value has been set.
 
 SetCompressor sets Compressor field to given value.
 
+### HasCompressor
+
+`func (o *Config) HasCompressor() bool`
+
+HasCompressor returns a boolean if a field has been set.
 
 ### GetServerCert
 
@@ -92,6 +97,11 @@ and a boolean to check if the value has been set.
 
 SetServerCert sets ServerCert field to given value.
 
+### HasServerCert
+
+`func (o *Config) HasServerCert() bool`
+
+HasServerCert returns a boolean if a field has been set.
 
 ### GetServerCertExpirySecs
 
@@ -132,6 +142,11 @@ and a boolean to check if the value has been set.
 
 SetServerCertLocalPath sets ServerCertLocalPath field to given value.
 
+### HasServerCertLocalPath
+
+`func (o *Config) HasServerCertLocalPath() bool`
+
+HasServerCertLocalPath returns a boolean if a field has been set.
 
 ### GetServerKey
 
@@ -152,6 +167,11 @@ and a boolean to check if the value has been set.
 
 SetServerKey sets ServerKey field to given value.
 
+### HasServerKey
+
+`func (o *Config) HasServerKey() bool`
+
+HasServerKey returns a boolean if a field has been set.
 
 ### GetServerKeyLocalPath
 
@@ -172,6 +192,11 @@ and a boolean to check if the value has been set.
 
 SetServerKeyLocalPath sets ServerKeyLocalPath field to given value.
 
+### HasServerKeyLocalPath
+
+`func (o *Config) HasServerKeyLocalPath() bool`
+
+HasServerKeyLocalPath returns a boolean if a field has been set.
 
 ### GetSignerPrivateKey
 
@@ -192,6 +217,11 @@ and a boolean to check if the value has been set.
 
 SetSignerPrivateKey sets SignerPrivateKey field to given value.
 
+### HasSignerPrivateKey
+
+`func (o *Config) HasSignerPrivateKey() bool`
+
+HasSignerPrivateKey returns a boolean if a field has been set.
 
 ### GetSignerPublicKey
 
@@ -212,6 +242,11 @@ and a boolean to check if the value has been set.
 
 SetSignerPublicKey sets SignerPublicKey field to given value.
 
+### HasSignerPublicKey
+
+`func (o *Config) HasSignerPublicKey() bool`
+
+HasSignerPublicKey returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cloud** | **string** | Cloud | 
 **LeaderPreference** | Pointer to **int32** | Leader preference | [optional] 
+**MaxNumReplicas** | Pointer to **int32** | Maximum replicas | [optional] 
 **MinNumReplicas** | Pointer to **int32** | Minimum replicas | [optional] 
 **Region** | **string** | Region | 
 **Zone** | **string** | Zone | 
@@ -73,6 +74,31 @@ SetLeaderPreference sets LeaderPreference field to given value.
 `func (o *PlacementBlock) HasLeaderPreference() bool`
 
 HasLeaderPreference returns a boolean if a field has been set.
+
+### GetMaxNumReplicas
+
+`func (o *PlacementBlock) GetMaxNumReplicas() int32`
+
+GetMaxNumReplicas returns the MaxNumReplicas field if non-nil, zero value otherwise.
+
+### GetMaxNumReplicasOk
+
+`func (o *PlacementBlock) GetMaxNumReplicasOk() (*int32, bool)`
+
+GetMaxNumReplicasOk returns a tuple with the MaxNumReplicas field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxNumReplicas
+
+`func (o *PlacementBlock) SetMaxNumReplicas(v int32)`
+
+SetMaxNumReplicas sets MaxNumReplicas field to given value.
+
+### HasMaxNumReplicas
+
+`func (o *PlacementBlock) HasMaxNumReplicas() bool`
+
+HasMaxNumReplicas returns a boolean if a field has been set.
 
 ### GetMinNumReplicas
 
