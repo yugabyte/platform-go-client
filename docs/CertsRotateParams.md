@@ -55,8 +55,8 @@ Name | Type | Description | Notes
 **SelfSignedServerCertRotate** | **bool** |  | 
 **SetTxnTableWaitCountFlag** | Pointer to **bool** |  | [optional] 
 **SkipNodeChecks** | Pointer to **bool** | YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade | [optional] 
-**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. Uses the runtime config when not set. | [optional] 
-**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. Uses the runtime config when not set. | [optional] 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
 **SoftwareUpgradeState** | Pointer to **string** |  | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **SshUserOverride** | Pointer to **string** |  | [optional] 

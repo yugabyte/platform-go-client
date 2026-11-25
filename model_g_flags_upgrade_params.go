@@ -86,9 +86,9 @@ type GFlagsUpgradeParams struct {
 	SetTxnTableWaitCountFlag *bool `json:"setTxnTableWaitCountFlag,omitempty"`
 	// YbaApi Internal. Whether to skip node prechecks while performing rolling upgrade
 	SkipNodeChecks *bool `json:"skipNodeChecks,omitempty"`
-	// Wait after each master restart, in ms. Uses the runtime config when not set.
+	// Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored.
 	SleepAfterMasterRestartMillis *int32 `json:"sleepAfterMasterRestartMillis,omitempty"`
-	// Wait after each tserver restart, in ms. Uses the runtime config when not set.
+	// Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored.
 	SleepAfterTServerRestartMillis *int32  `json:"sleepAfterTServerRestartMillis,omitempty"`
 	SoftwareUpgradeState           *string `json:"softwareUpgradeState,omitempty"`
 	// The source universe's xcluster replication relationships

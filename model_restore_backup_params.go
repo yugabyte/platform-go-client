@@ -71,9 +71,9 @@ type RestoreBackupParams struct {
 	RestoreToPointInTimeMillis *int64 `json:"restoreToPointInTimeMillis,omitempty"`
 	// YbaApi Internal. Run only prechecks during task run
 	RunOnlyPrechecks *bool `json:"runOnlyPrechecks,omitempty"`
-	// Wait after each master restart, in ms. Uses the runtime config when not set.
+	// Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored.
 	SleepAfterMasterRestartMillis *int32 `json:"sleepAfterMasterRestartMillis,omitempty"`
-	// Wait after each tserver restart, in ms. Uses the runtime config when not set.
+	// Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored.
 	SleepAfterTServerRestartMillis *int32 `json:"sleepAfterTServerRestartMillis,omitempty"`
 	// The source universe's xcluster replication relationships
 	SourceXClusterConfigs []string `json:"sourceXClusterConfigs,omitempty"`

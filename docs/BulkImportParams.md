@@ -23,8 +23,8 @@ Name | Type | Description | Notes
 **PreviousTaskUUID** | Pointer to **string** | Previous task UUID of a retry | [optional] 
 **RunOnlyPrechecks** | Pointer to **bool** | YbaApi Internal. Run only prechecks during task run | [optional] 
 **S3Bucket** | **string** | S3 bucket URL | 
-**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. Uses the runtime config when not set. | [optional] 
-**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. Uses the runtime config when not set. | [optional] 
+**SleepAfterMasterRestartMillis** | Pointer to **int32** | Wait after each master restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
+**SleepAfterTServerRestartMillis** | Pointer to **int32** | Wait after each tserver restart, in ms. When not set, YBA uses the value stored with the universe, or the runtime config when none is stored. | [optional] 
 **SourceXClusterConfigs** | Pointer to **[]string** | The source universe&#39;s xcluster replication relationships | [optional] [readonly] 
 **Sse** | Pointer to **bool** | Is SSE | [optional] 
 **TableName** | Pointer to **string** | Table name | [optional] 

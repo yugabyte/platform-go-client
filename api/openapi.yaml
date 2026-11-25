@@ -24497,13 +24497,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -26683,13 +26685,15 @@ components:
           format: int64
           type: integer
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -27613,13 +27617,15 @@ components:
           format: int64
           type: integer
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -28092,13 +28098,15 @@ components:
           description: S3 bucket URL
           type: string
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -36560,13 +36568,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -37346,13 +37356,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -39913,13 +39925,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -49854,13 +49868,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -58362,13 +58378,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -67614,13 +67632,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -76016,13 +76036,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -78680,13 +78702,15 @@ components:
           format: int64
           type: integer
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -91258,13 +91282,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -99596,13 +99622,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -108723,13 +108751,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -117234,13 +117264,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -118176,13 +118208,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -118883,13 +118917,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -127025,13 +127061,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -137722,13 +137760,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -146675,13 +146715,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -147454,13 +147496,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -155997,13 +156041,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -164337,13 +164383,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -172799,13 +172847,15 @@ components:
         setTxnTableWaitCountFlag:
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -181094,13 +181144,15 @@ components:
         setTxnTableWaitCountFlag:
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -189397,13 +189449,15 @@ components:
         setTxnTableWaitCountFlag:
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -198184,13 +198238,15 @@ components:
           description: YbaApi Internal. Run only prechecks during task run
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         sourceXClusterConfigs:
@@ -206067,13 +206123,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
@@ -215906,13 +215964,15 @@ components:
             rolling upgrade
           type: boolean
         sleepAfterMasterRestartMillis:
-          description: "Wait after each master restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each master restart, in ms. When not set, YBA uses\
+            \ the value stored with the universe, or the runtime config when none\
+            \ is stored."
           format: int32
           type: integer
         sleepAfterTServerRestartMillis:
-          description: "Wait after each tserver restart, in ms. Uses the runtime config\
-            \ when not set."
+          description: "Wait after each tserver restart, in ms. When not set, YBA\
+            \ uses the value stored with the universe, or the runtime config when\
+            \ none is stored."
           format: int32
           type: integer
         softwareUpgradeState:
